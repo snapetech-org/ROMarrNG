@@ -5,7 +5,7 @@ name: docker
 
 on:
   push:
-    branches: [main]
+    branches: ["**"]
     tags: ["v*"]
   pull_request:
   workflow_dispatch:
@@ -56,9 +56,8 @@ jobs:
           python scripts/release_notes.py check-changelog-tags
 
   test:
-    # Only main pushes and manual runs on main use the local runner. PRs, tags,
-    # and manual runs targeting other refs stay on GitHub-hosted runners.
-    runs-on: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && fromJSON('["self-hosted","Linux","X64","host"]') || fromJSON('["ubuntu-latest"]') }}
+    # Trusted branch pushes and manual runs on main use the local runner; PRs and tags stay hosted.
+    runs-on: ${{ ((github.event_name == 'push' && startsWith(github.ref, 'refs/heads/')) || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')) && fromJSON('["self-hosted","Linux","X64","host"]') || fromJSON('["ubuntu-latest"]') }}
     steps:
       - name: Configure private runner temporary storage
         if: runner.environment == 'self-hosted'

@@ -270,3 +270,18 @@ def test_the_install_guide_exists_and_the_readme_sends_people_to_it():
     assert INSTALL.is_file()
     assert "docs/INSTALL.md" in README.read_text(encoding="utf-8"), (
         "the full install guide is unreachable from the README")
+
+def test_trusted_branch_pushes_use_local_validation_and_prs_stay_hosted():
+    workflow = (ROOT / ".github" / "workflows" / "docker.yml").read_text(
+        encoding="utf-8"
+    )
+    assert 'branches: ["**"]' in workflow
+    assert 'tags: ["v*"]' in workflow
+
+    test_job = workflow.split("  test:\n", 1)[1].split(
+        "\n  validation-environment-portability:", 1
+    )[0]
+    assert "github.event_name == 'push' && startsWith(github.ref, 'refs/heads/')" in test_job
+    assert "github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'" in test_job
+    assert "fromJSON('[\"self-hosted\",\"Linux\",\"X64\",\"host\"]')" in test_job
+    assert "|| fromJSON('[\"ubuntu-latest\"]')" in test_job
