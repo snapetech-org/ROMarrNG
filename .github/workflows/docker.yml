@@ -5,7 +5,7 @@ name: docker
 
 on:
   push:
-    branches: [main]
+    branches: ['**']
     tags: ["v*"]
   pull_request:
   workflow_dispatch:
@@ -56,8 +56,13 @@ jobs:
           python scripts/release_notes.py check-changelog-tags
 
   test:
-    runs-on: ubuntu-latest
+    # Trusted pushes and manual runs use the local runner; public pull requests remain hosted.
+    runs-on: ${{ (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && fromJSON('["self-hosted","Linux","X64","host"]') || fromJSON('["ubuntu-latest"]') }}
     steps:
+      - name: Use runner temp for local temporary files
+        if: runner.environment == 'self-hosted'
+        run: echo "TMPDIR=$RUNNER_TEMP" >> "$GITHUB_ENV"
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
@@ -122,7 +127,7 @@ jobs:
 
   image:
     needs: [test, release-notes, acquisition-proof]
-    if: always() && needs.test.result == 'success' && needs.acquisition-proof.result == 'success' && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped')
+    if: always() && needs.test.result == 'success' && needs.acquisition-proof.result == 'success' && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped') && (github.event_name != 'push' || github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
     runs-on: ubuntu-latest
     permissions:
       contents: read
