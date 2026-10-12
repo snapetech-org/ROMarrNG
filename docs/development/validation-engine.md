@@ -40,8 +40,9 @@ marker, so tests that reach the public internet remain deselected. The engine
 counts passed, skipped, failed, and deselected tests from pytest's summary and
 does not call an empty run successful.
 
-Pull-request image jobs build and smoke-test the Alpine and browser images with
-read-only repository permissions. Separate publishing jobs receive registry
+Pull-request image jobs smoke-test the Alpine image and build the browser
+image for its supported platforms, all with read-only repository permissions.
+Separate publishing jobs receive registry
 write and OIDC attestation permissions only for pushes to `main`, version
 tags, or manual runs targeting `main`. The release job runs only for version
 tags after both published images succeed.
