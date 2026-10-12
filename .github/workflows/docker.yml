@@ -56,18 +56,30 @@ jobs:
           python scripts/release_notes.py check-changelog-tags
 
   test:
-    # Trusted pushes and manual runs use the local runner; public pull requests remain hosted.
-    runs-on: ${{ (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && fromJSON('["self-hosted","Linux","X64","host"]') || fromJSON('["ubuntu-latest"]') }}
+    # Branch pushes and main-ref manual runs use the local runner. PRs, tags,
+    # and manual runs targeting other refs stay on an isolated hosted runner.
+    runs-on: ${{ ((github.event_name == 'push' && github.ref_type == 'branch') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')) && fromJSON('["self-hosted","Linux","X64","host"]') || fromJSON('["ubuntu-latest"]') }}
     steps:
       - name: Use runner temp for local temporary files
         if: runner.environment == 'self-hosted'
         run: echo "TMPDIR=$RUNNER_TEMP" >> "$GITHUB_ENV"
+
+      - name: Add local Python install to PATH
+        if: runner.environment == 'self-hosted'
+        run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: Verify preinstalled Python 3.13
+        if: runner.environment == 'self-hosted'
+        run: |
+          command -v python3.13
+          python3.13 --version
 
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
 
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        if: runner.environment != 'self-hosted'
         with:
           python-version: "3.13"
 
@@ -75,7 +87,7 @@ jobs:
         env:
           VALIDATION_NODE_ID: romarrng-pytest-linux
           VALIDATION_RECEIPT_EXPORT: ${{ runner.temp }}/romarr-validation/pytest.json
-        run: python -m scripts.validation_engine.engine --tests-only
+        run: python3.13 -m scripts.validation_engine.engine --tests-only
 
       - name: Retain pytest validation receipt
         if: always()
