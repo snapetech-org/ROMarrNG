@@ -285,3 +285,4 @@ def test_trusted_branch_pushes_use_local_validation_and_prs_stay_hosted():
     assert "github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'" in test_job
     assert "fromJSON('[\"self-hosted\",\"Linux\",\"X64\",\"host\"]')" in test_job
     assert "|| fromJSON('[\"ubuntu-latest\"]')" in test_job
+    assert 'chmod 700 -- "$runner_temp_resolved"' in test_job

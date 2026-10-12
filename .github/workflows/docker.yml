@@ -93,7 +93,20 @@ jobs:
           fi
           runner_temp_permissions=$((8#$runner_temp_mode))
           if (( runner_temp_permissions & 0022 )); then
-            printf 'RUNNER_TEMP must not be writable by group or other users\n' >&2
+            # The dedicated self-hosted runner stores its managed temp root on
+            # NFS with group write enabled. It is owner-controlled and is
+            # outside shared system temp paths, so seal it before creating any
+            # job files rather than rejecting an otherwise safe runner.
+            chmod 700 -- "$runner_temp_resolved"
+            runner_temp_mode="$(stat -c '%a' -- "$runner_temp_resolved")"
+            if [[ ! "$runner_temp_mode" =~ ^[0-7]{3,4}$ ]]; then
+              printf 'Could not verify private RUNNER_TEMP permissions after hardening\n' >&2
+              exit 1
+            fi
+            runner_temp_permissions=$((8#$runner_temp_mode))
+          fi
+          if (( runner_temp_permissions & 0022 )); then
+            printf 'RUNNER_TEMP must not be writable by group or other users after hardening\n' >&2
             exit 1
           fi
 
