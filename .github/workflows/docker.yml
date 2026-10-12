@@ -56,64 +56,23 @@ jobs:
           python scripts/release_notes.py check-changelog-tags
 
   test:
-    # Trusted branch pushes and manual runs on main use the local runner; PRs and tags stay hosted.
-    runs-on: ${{ ((github.event_name == 'push' && startsWith(github.ref, 'refs/heads/')) || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')) && fromJSON('["self-hosted","Linux","X64","host"]') || fromJSON('["ubuntu-latest"]') }}
+    # Main pushes and manual runs on main use the local runner; other refs stay hosted.
+    runs-on: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && fromJSON('["self-hosted","Linux","X64","host"]') || fromJSON('["ubuntu-latest"]') }}
     steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Test private runner temporary storage setup
+        if: runner.os == 'Linux'
+        run: ./scripts/test-private-runner-temp.sh
+
       - name: Configure private runner temporary storage
-        if: runner.environment == 'self-hosted'
-        shell: bash
-        run: |
-          set -euo pipefail
-
-          if [[ -z "${RUNNER_TEMP:-}" || "$RUNNER_TEMP" != /* || "$RUNNER_TEMP" == *$'\n'* || "$RUNNER_TEMP" == *$'\r'* || ! -d "$RUNNER_TEMP" || ! -r "$RUNNER_TEMP" || ! -w "$RUNNER_TEMP" || ! -x "$RUNNER_TEMP" ]]; then
-            printf 'RUNNER_TEMP must be an absolute, readable, writable directory without line breaks\n' >&2
-            exit 1
-          fi
-
-          runner_temp_resolved="$(cd -- "$RUNNER_TEMP" && pwd -P)"
-          if [[ "$runner_temp_resolved" == *$'\n'* || "$runner_temp_resolved" == *$'\r'* ]]; then
-            printf 'RUNNER_TEMP must not resolve to a path containing line breaks\n' >&2
-            exit 1
-          fi
-          case "$runner_temp_resolved" in
-            /|/tmp|/tmp/*|/var/tmp|/var/tmp/*|/dev/shm|/dev/shm/*)
-              printf 'RUNNER_TEMP must not resolve to a shared or root temporary directory\n' >&2
-              exit 1
-              ;;
-          esac
-
-          if [[ ! -O "$runner_temp_resolved" ]]; then
-            printf 'RUNNER_TEMP must be owned by the workflow runner user\n' >&2
-            exit 1
-          fi
-          runner_temp_mode="$(stat -c '%a' -- "$runner_temp_resolved")"
-          if [[ ! "$runner_temp_mode" =~ ^[0-7]{3,4}$ ]]; then
-            printf 'Could not determine RUNNER_TEMP directory permissions\n' >&2
-            exit 1
-          fi
-          runner_temp_permissions=$((8#$runner_temp_mode))
-          if (( runner_temp_permissions & 0022 )); then
-            # The dedicated self-hosted runner stores its managed temp root on
-            # NFS with group write enabled. It is owner-controlled and is
-            # outside shared system temp paths, so seal it before creating any
-            # job files rather than rejecting an otherwise safe runner.
-            chmod 700 -- "$runner_temp_resolved"
-            runner_temp_mode="$(stat -c '%a' -- "$runner_temp_resolved")"
-            if [[ ! "$runner_temp_mode" =~ ^[0-7]{3,4}$ ]]; then
-              printf 'Could not verify private RUNNER_TEMP permissions after hardening\n' >&2
-              exit 1
-            fi
-            runner_temp_permissions=$((8#$runner_temp_mode))
-          fi
-          if (( runner_temp_permissions & 0022 )); then
-            printf 'RUNNER_TEMP must not be writable by group or other users after hardening\n' >&2
-            exit 1
-          fi
-
-          : "${GITHUB_ENV:?GITHUB_ENV is required}"
-          umask 077
-          job_temp="$(mktemp -d -- "$runner_temp_resolved/romarrng-job.XXXXXX")"
-          printf 'TMPDIR=%s\nTMP=%s\nTEMP=%s\n' "$job_temp" "$job_temp" "$job_temp" >> "$GITHUB_ENV"
+        id: private-runner-temp
+        if: runner.os == 'Linux'
+        env:
+          PRIVATE_RUNNER_TEMP_PREFIX: romarr
+        run: ./scripts/prepare-private-runner-temp.sh
 
       - name: Set up Python 3.13 on the local runner
         if: runner.environment == 'self-hosted'
@@ -122,13 +81,9 @@ jobs:
           version: "0.13.0"
           python-version: "3.13"
           activate-environment: true
-          venv-path: ${{ runner.temp }}/romarr-python
+          venv-path: ${{ steps.private-runner-temp.outputs.path || runner.temp }}/romarr-python
           no-project: true
           enable-cache: false
-
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
 
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         if: runner.environment != 'self-hosted'
@@ -138,7 +93,7 @@ jobs:
       - name: Run source-bound pytest validation
         env:
           VALIDATION_NODE_ID: romarrng-pytest-linux
-          VALIDATION_RECEIPT_EXPORT: ${{ runner.temp }}/romarr-validation/pytest.json
+          VALIDATION_RECEIPT_EXPORT: ${{ steps.private-runner-temp.outputs.path || runner.temp }}/romarr-validation/pytest.json
         run: python3.13 -m scripts.validation_engine.engine --tests-only
 
       - name: Retain pytest validation receipt
@@ -146,10 +101,9 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: romarrng-validation-receipt
-          path: ${{ runner.temp }}/romarr-validation/pytest.json
+          path: ${{ steps.private-runner-temp.outputs.path || runner.temp }}/romarr-validation/pytest.json
           if-no-files-found: warn
           retention-days: 7
-
   validation-environment-portability:
     name: Validation child environment (${{ matrix.os }})
     if: github.event_name != 'push' || github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
