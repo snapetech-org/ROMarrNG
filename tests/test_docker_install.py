@@ -161,9 +161,54 @@ def test_browser_image_has_a_commit_tag_for_manual_nondefault_builds():
     workflow = (ROOT / ".github" / "workflows" / "docker.yml").read_text(
         encoding="utf-8"
     )
-    browser_job = workflow.split("  image-browser:", 1)[1].split("\n  release:", 1)[0]
+    browser_publish_job = workflow.split(
+        "  image_browser_publish:", 1
+    )[1].split("\n  release:", 1)[0]
     assert "workflow_dispatch:" in workflow
-    assert "type=sha,format=short,suffix=-browser" in browser_job
+    assert "type=sha,format=short,suffix=-browser" in browser_publish_job
+
+
+def test_pull_request_image_validation_has_no_publish_permissions():
+    workflow = (ROOT / ".github" / "workflows" / "docker.yml").read_text(
+        encoding="utf-8"
+    )
+    image_validation = workflow.split("  image:\n", 1)[1].split(
+        "\n  image_publish:", 1
+    )[0]
+    browser_validation = workflow.split("  image-browser:\n", 1)[1].split(
+        "\n  image_browser_publish:", 1
+    )[0]
+    publish_jobs = (
+        workflow.split("  image_publish:", 1)[1].split(
+            "\n  # Debian variant", 1
+        )[0],
+        workflow.split("  image_browser_publish:", 1)[1].split(
+            "\n  release:", 1
+        )[0],
+    )
+
+    for job in (image_validation, browser_validation):
+        assert "contents: read" in job
+        for permission in (
+            "packages: write",
+            "id-token: write",
+            "attestations: write",
+            "artifact-metadata: write",
+        ):
+            assert permission not in job
+
+    for job in publish_jobs:
+        assert "github.event_name != 'pull_request'" in job
+        assert "refs/heads/main" in job
+        assert "refs/tags/v" in job
+        assert "github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main'" in job
+        assert "packages: write" in job
+        assert "id-token: write" in job
+        assert "attestations: write" in job
+        assert "artifact-metadata: write" in job
+
+    release_job = workflow.split("\n  release:\n", 1)[1]
+    assert "needs: [image_publish, image_browser_publish]" in release_job
 
 
 def test_the_entrypoint_refuses_rather_than_letting_state_be_overwritten():
