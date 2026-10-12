@@ -284,7 +284,7 @@ def test_only_main_uses_local_validation_and_other_branch_pushes_stay_hosted():
     assert "github.ref == 'refs/heads/main'" in test_job
     assert "github.event_name == 'push' || github.event_name == 'workflow_dispatch'" in test_job
     assert "startsWith(github.ref, 'refs/heads/')" not in test_job
-    assert "fromJSON('[\"self-hosted\",\"Linux\",\"X64\",\"host\"]')" in test_job
+    assert "fromJSON('[\"self-hosted\",\"Linux\",\"X64\",\"host\",\"kspls0\"]')" in test_job
     assert "|| fromJSON('[\"ubuntu-latest\"]')" in test_job
     assert "prepare-private-runner-temp.sh" in test_job
     assert "PRIVATE_RUNNER_TEMP_PREFIX: romarr" in test_job
