@@ -5,7 +5,7 @@ name: docker
 
 on:
   push:
-    branches: ['**']
+    branches: [main]
     tags: ["v*"]
   pull_request:
   workflow_dispatch:
@@ -56,13 +56,52 @@ jobs:
           python scripts/release_notes.py check-changelog-tags
 
   test:
-    # Branch pushes and main-ref manual runs use the local runner. PRs, tags,
-    # and manual runs targeting other refs stay on an isolated hosted runner.
-    runs-on: ${{ ((github.event_name == 'push' && github.ref_type == 'branch') || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')) && fromJSON('["self-hosted","Linux","X64","host"]') || fromJSON('["ubuntu-latest"]') }}
+    # Only main pushes and manual runs on main use the local runner. PRs, tags,
+    # and manual runs targeting other refs stay on GitHub-hosted runners.
+    runs-on: ${{ github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && fromJSON('["self-hosted","Linux","X64","host"]') || fromJSON('["ubuntu-latest"]') }}
     steps:
-      - name: Use runner temp for local temporary files
+      - name: Configure private runner temporary storage
         if: runner.environment == 'self-hosted'
-        run: echo "TMPDIR=$RUNNER_TEMP" >> "$GITHUB_ENV"
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ -z "${RUNNER_TEMP:-}" || "$RUNNER_TEMP" != /* || "$RUNNER_TEMP" == *$'\n'* || "$RUNNER_TEMP" == *$'\r'* || ! -d "$RUNNER_TEMP" || ! -r "$RUNNER_TEMP" || ! -w "$RUNNER_TEMP" || ! -x "$RUNNER_TEMP" ]]; then
+            printf 'RUNNER_TEMP must be an absolute, readable, writable directory without line breaks\n' >&2
+            exit 1
+          fi
+
+          runner_temp_resolved="$(cd -- "$RUNNER_TEMP" && pwd -P)"
+          if [[ "$runner_temp_resolved" == *$'\n'* || "$runner_temp_resolved" == *$'\r'* ]]; then
+            printf 'RUNNER_TEMP must not resolve to a path containing line breaks\n' >&2
+            exit 1
+          fi
+          case "$runner_temp_resolved" in
+            /|/tmp|/tmp/*|/var/tmp|/var/tmp/*|/dev/shm|/dev/shm/*)
+              printf 'RUNNER_TEMP must not resolve to a shared or root temporary directory\n' >&2
+              exit 1
+              ;;
+          esac
+
+          if [[ ! -O "$runner_temp_resolved" ]]; then
+            printf 'RUNNER_TEMP must be owned by the workflow runner user\n' >&2
+            exit 1
+          fi
+          runner_temp_mode="$(stat -c '%a' -- "$runner_temp_resolved")"
+          if [[ ! "$runner_temp_mode" =~ ^[0-7]{3,4}$ ]]; then
+            printf 'Could not determine RUNNER_TEMP directory permissions\n' >&2
+            exit 1
+          fi
+          runner_temp_permissions=$((8#$runner_temp_mode))
+          if (( runner_temp_permissions & 0022 )); then
+            printf 'RUNNER_TEMP must not be writable by group or other users\n' >&2
+            exit 1
+          fi
+
+          : "${GITHUB_ENV:?GITHUB_ENV is required}"
+          umask 077
+          job_temp="$(mktemp -d -- "$runner_temp_resolved/romarrng-job.XXXXXX")"
+          printf 'TMPDIR=%s\nTMP=%s\nTEMP=%s\n' "$job_temp" "$job_temp" "$job_temp" >> "$GITHUB_ENV"
 
       - name: Set up Python 3.13 on the local runner
         if: runner.environment == 'self-hosted'
@@ -142,7 +181,7 @@ jobs:
 
   image:
     needs: [test, release-notes, acquisition-proof]
-    if: always() && needs.test.result == 'success' && needs.acquisition-proof.result == 'success' && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped') && (github.event_name != 'push' || github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))
+    if: always() && needs.test.result == 'success' && needs.acquisition-proof.result == 'success' && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped') && (github.event_name != 'push' || github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')) && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')
     runs-on: ubuntu-latest
     permissions:
       contents: read
