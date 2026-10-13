@@ -3,23 +3,24 @@
 ## Communication and authority
 
 - Be direct, accurate, and explicit about what is unknown.
-- Use confidence levels high, moderate, low, or unknown for claims and estimates.
+- For material claims or estimates with meaningful uncertainty, state confidence as high, moderate, low, or unknown. Skip labels for routine facts.
 - Distinguish code changes, automated checks, visual inspection, and live service evidence.
 - Preserve upstream attribution and follow the repository license and pull request template.
 - Do not publish, merge, deploy, or create a release without maintainer authorization.
 
 ## Required project reading
 
-- Read README.md, docs/UPSTREAM-PARITY.md, docs/SEERRNG-INTEGRATION.md, and docs/PROOF.md for work touching product behavior or claims.
-- Read docs/development/validation-engine.md before selecting or reporting tests.
-- Read release-notes/README.md before preparing user-facing, security, operational, or user-facing documentation changes.
+- Consult relevant sections of README.md, docs/UPSTREAM-PARITY.md, docs/SEERRNG-INTEGRATION.md, and docs/PROOF.md when changing product behavior or documenting project claims.
+- Consult docs/development/validation-engine.md before selecting or reporting tests.
+- Read release-notes/README.md before preparing release notes or changing user-facing, security, or operational behavior and documentation.
 - ROM Hub is the plugin factory. Plugin source belongs there; do not duplicate a plugin implementation in ROMarrNG.
 
 ## ROMarrNG behavior and safety boundaries
 
+- These describe current contracts, not a ban on requested changes. When an authorized task deliberately changes a contract, update its docs and tests together while preserving security boundaries.
 - ROMarrNG is a standalone game-library and acquisition application and a maintained fork of BlizzHacker/romarr. Treat upstream as a read-only reference and preserve its attribution.
-- Keep the versioned SeerrNG catalog, request lifecycle, and scoped file-delivery contract stable. Preserve external game identity and request correlation; do not broaden a request into an unrelated library or filesystem operation.
-- Search, RSS, replacement grabs, and interactive selection must use the same release scoring rules and retain readable reasons for rejection. Preserve conservative per-title backoff and bounded replacement attempts so scheduled jobs do not overwhelm indexers or trackers.
+- Keep the versioned SeerrNG catalog, request lifecycle, and scoped file-delivery contract aligned. Preserve external game identity and request correlation; do not broaden a request into an unrelated library or filesystem operation.
+- Search, RSS, replacement grabs, and interactive selection use the same release scoring rules and retain readable reasons for rejection. Keep per-title backoff conservative and replacement attempts bounded so scheduled jobs do not overwhelm indexers or trackers.
 - Platform aliases must resolve deterministically. Prefer the longest known alias, refuse unknown platforms, and do not guess a platform from a partial match.
 - Preserve the DAT verdicts: verified means a match, bad dump means a known-size hash mismatch, and unknown is not a bad dump. Do not reject unknown homebrew, translations, or hacks as bad dumps. Only a verified dump may use the documented verification-based upgrade path.
 - Archive extraction and import must remain path-safe. Tests use disposable libraries and download fixtures; never let a test write to live ROM libraries, real download folders, or user databases.
@@ -36,4 +37,4 @@
 
 ## Release notes
 
-Changes to user-facing behavior, security, operations, or user-facing documentation require a validated fragment under release-notes/. Fragments are append-only after release. Preview with python scripts/release_notes.py preview --base origin/main --head HEAD. For an internal-only PR, use release-note: none in both the PR description and the squash-merge commit body.
+Changes to user-facing behavior, security, operations, or documentation users rely on require a validated fragment under release-notes/. Fragments are append-only after release. Preview with python scripts/release_notes.py preview --base origin/main --head HEAD. For an internal-only PR, use release-note: none in both the PR description and the squash-merge commit body.
