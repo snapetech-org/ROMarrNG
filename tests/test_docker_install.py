@@ -282,14 +282,22 @@ def test_public_workflow_uses_org_pool_only_for_trusted_main():
     test_job = workflow.split("  test:\n", 1)[1].split(
         "\n  validation-environment-portability:", 1
     )[0]
-    expected_runner = (
-        "$" + "{{ ((github.event_name == 'push' && github.ref == 'refs/heads/main') "
-        "|| (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')) "
-        "&& fromJSON('["
-        '"self-hosted","Linux","X64","host"'
-        "]') || 'ubuntu-latest' }}"
+    trusted_condition = (
+        "((github.event_name == 'push' && github.ref == 'refs/heads/main') "
+        "|| (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'))"
     )
-    assert f"runs-on: {expected_runner}" in test_job
+    expected_group = (
+        "group: " + "$" + "{{ " + trusted_condition + " && 'trusted-main' || '' }}"
+    )
+    expected_labels = (
+        "labels: " + "$" + "{{ " + trusted_condition
+        + " && fromJSON('["
+        + '"self-hosted","Linux","X64","host"'
+        + "]') || fromJSON('[\"ubuntu-latest\"]') }}"
+    )
+    assert (
+        "    runs-on:\n      " + expected_group + "\n      " + expected_labels
+    ) in test_job
 
     assert "prepare-private-runner-temp.sh" in test_job
     assert "PRIVATE_RUNNER_TEMP_PREFIX: romarr" in test_job

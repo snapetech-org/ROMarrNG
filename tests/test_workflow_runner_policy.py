@@ -9,13 +9,20 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW_DIR = ROOT / ".github" / "workflows"
 HOSTED_RUNNERS = {"ubuntu-latest", "macos-latest", "windows-latest"}
-TRUSTED_MAIN_RUNNER = (
-    "$" + "{{ ((github.event_name == 'push' && github.ref == 'refs/heads/main') "
-    "|| (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')) "
-    "&& fromJSON('"
-    + json.dumps(["self-hosted", "Linux", "X64", "host"], separators=(",", ":"))
-    + "') || 'ubuntu-latest' }}"
+TRUSTED_MAIN_CONDITION = (
+    "((github.event_name == 'push' && github.ref == 'refs/heads/main') "
+    "|| (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'))"
 )
+TRUSTED_MAIN_RUNNER = {
+    "group": (
+        "$" + "{{ " + TRUSTED_MAIN_CONDITION + " && 'trusted-main' || '' }}"
+    ),
+    "labels": (
+        "$" + "{{ " + TRUSTED_MAIN_CONDITION + " && fromJSON('"
+        + json.dumps(["self-hosted", "Linux", "X64", "host"], separators=(",", ":"))
+        + "') || fromJSON('[\"ubuntu-latest\"]') }}"
+    ),
+}
 
 
 def _runner_policy_violations(workflow_dir: Path) -> list[str]:
