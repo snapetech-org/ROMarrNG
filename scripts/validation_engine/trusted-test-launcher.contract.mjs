@@ -100,6 +100,8 @@ test('preserves tracked token-named source while excluding credential files', ()
   assert.equal(isSensitiveCandidatePath('credentials/local.json'), true);
   assert.equal(isSensitiveCandidatePath('tokens/session.txt'), true);
   assert.equal(isSensitiveCandidatePath('secrets/loader.ts'), false);
+  assert.equal(isSensitiveCandidatePath('secrets/passwords.sqlite'), true);
+  assert.equal(isSensitiveCandidatePath('credentials/custom.vault'), true);
   assert.equal(isSensitiveCandidatePath('.env.local'), true);
   assert.equal(isSensitiveCandidatePath('tokens.env'), true);
   assert.equal(isSensitiveCandidatePath('nested/credentials/private-key'), true);
@@ -193,6 +195,7 @@ test(
     writeFileSync(path.join(source, 'src/tokens/index.ts'), 'export const source = "token directory source";\n');
     writeFileSync(path.join(source, 'credentials'), 'private credential\n');
     writeFileSync(path.join(source, 'secrets/production.yaml'), 'private configuration\n');
+    writeFileSync(path.join(source, 'secrets/passwords.sqlite'), 'private database\n');
     writeFileSync(path.join(source, 'secrets/loader.ts'), 'export const loader = true;\n');
     writeFileSync(path.join(source, 'auth.py'), 'AUTH_MODULE = True\n');
     writeFileSync(path.join(source, 'credentials.py'), 'CREDENTIALS_MODULE = True\n');
@@ -232,6 +235,7 @@ assert.equal(existsSync('/mnt/workspace/nested/credentials/private-key'), false)
 assert.match(readFileSync('/mnt/workspace/src/tokens/index.ts', 'utf8'), /token directory source/u);
 assert.equal(existsSync('/mnt/workspace/credentials'), false);
 assert.equal(existsSync('/mnt/workspace/secrets/production.yaml'), false);
+assert.equal(existsSync('/mnt/workspace/secrets/passwords.sqlite'), false);
 assert.match(readFileSync('/mnt/workspace/secrets/loader.ts', 'utf8'), /loader/u);
 assert.match(readFileSync('/mnt/workspace/web/src/lib/token.js', 'utf8'), /source code/u);
 assert.match(readFileSync('/mnt/workspace/vendor/mainline/src/rpc/server/tokens.rs', 'utf8'), /pub fn tokens/u);
@@ -241,6 +245,7 @@ assert.equal(existsSync('/etc/os-release'), false);
 const originalCheckout = ${JSON.stringify(source)};
 assert.throws(() => readFileSync(path.join(originalCheckout, 'auth.json')), { code: 'ENOENT' });
 assert.throws(() => readFileSync(path.join(originalCheckout, 'secrets/production.yaml')), { code: 'ENOENT' });
+assert.throws(() => readFileSync(path.join(originalCheckout, 'secrets/passwords.sqlite')), { code: 'ENOENT' });
 assert.equal(existsSync('/mnt/workspace/nested/.env.local'), false);
 assert.equal(existsSync('/mnt/workspace/nested/config/secrets.json'), false);
 assert.throws(() => writeFileSync(hostFile, 'escaped'));
