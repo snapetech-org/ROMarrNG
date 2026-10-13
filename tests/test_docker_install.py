@@ -271,7 +271,7 @@ def test_the_install_guide_exists_and_the_readme_sends_people_to_it():
     assert "docs/INSTALL.md" in README.read_text(encoding="utf-8"), (
         "the full install guide is unreachable from the README")
 
-def test_public_workflow_routes_only_trusted_prs_and_main_to_local_runners():
+def test_public_workflow_uses_hosted_runners_for_contributor_controlled_code():
     workflow = (ROOT / ".github" / "workflows" / "docker.yml").read_text(
         encoding="utf-8"
     )
@@ -282,19 +282,9 @@ def test_public_workflow_routes_only_trusted_prs_and_main_to_local_runners():
     test_job = workflow.split("  test:\n", 1)[1].split(
         "\n  validation-environment-portability:", 1
     )[0]
-    local_runners = [
-        line.strip()
-        for line in workflow.splitlines()
-        if line.lstrip().startswith("runs-on:") and "self-hosted" in line
-    ]
-    assert len(local_runners) == 2
-    for runner in local_runners:
-        assert "github.event.pull_request.user.login == 'snapetech'" in runner
-        assert "github.event_name == 'push'" in runner
-        assert "github.event_name == 'workflow_dispatch'" in runner
-        assert "github.ref == 'refs/heads/main'" in runner
-        assert 'fromJSON(\'["self-hosted","Linux","X64","host","romarrng"]\')' in runner
-        assert "|| 'ubuntu-latest'" in runner
+    assert "runs-on: ubuntu-latest" in test_job
+    assert "fromJSON(" not in test_job
+    assert 'fromJSON(\'["self-hosted"' not in workflow
 
     workflow_dir = ROOT / ".github" / "workflows"
     runner_assignments = []
@@ -331,16 +321,9 @@ def test_public_workflow_routes_only_trusted_prs_and_main_to_local_runners():
                 continue
             runner = runner_match.group(1)
             runner_assignments.append((workflow_file.name, job_name, runner))
-            if "self-hosted" in runner:
-                assert workflow_file.name == "docker.yml"
-                assert job_name in {"test", "acquisition-proof"}
-                assert "github.event.pull_request.user.login == 'snapetech'" in runner
-                assert "github.ref == 'refs/heads/main'" in runner
-                assert "|| 'ubuntu-latest'" in runner
-            else:
-                assert runner in {"ubuntu-latest", "${{ matrix.os }}"}, (
-                    f"{workflow_file.name}/{job_name} must use a hosted runner: {runner}"
-                )
+            assert runner in {"ubuntu-latest", "${{ matrix.os }}"}, (
+                f"{workflow_file.name}/{job_name} must use a hosted runner: {runner}"
+            )
 
             if runner == "${{ matrix.os }}":
                 matrix_values = re.findall(
