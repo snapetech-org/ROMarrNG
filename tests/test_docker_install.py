@@ -271,7 +271,7 @@ def test_the_install_guide_exists_and_the_readme_sends_people_to_it():
     assert "docs/INSTALL.md" in README.read_text(encoding="utf-8"), (
         "the full install guide is unreachable from the README")
 
-def test_public_workflow_uses_hosted_runners_for_contributor_controlled_code():
+def test_public_workflow_uses_org_pool_only_for_trusted_main():
     workflow = (ROOT / ".github" / "workflows" / "docker.yml").read_text(
         encoding="utf-8"
     )
@@ -282,9 +282,14 @@ def test_public_workflow_uses_hosted_runners_for_contributor_controlled_code():
     test_job = workflow.split("  test:\n", 1)[1].split(
         "\n  validation-environment-portability:", 1
     )[0]
-    assert "runs-on: ubuntu-latest" in test_job
-    assert "fromJSON(" not in test_job
-    assert 'fromJSON(\'["self-hosted"' not in workflow
+    expected_runner = (
+        "$" + "{{ ((github.event_name == 'push' && github.ref == 'refs/heads/main') "
+        "|| (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')) "
+        "&& fromJSON('["
+        '"self-hosted","Linux","X64","host"'
+        "]') || 'ubuntu-latest' }}"
+    )
+    assert f"runs-on: {expected_runner}" in test_job
 
     assert "prepare-private-runner-temp.sh" in test_job
     assert "PRIVATE_RUNNER_TEMP_PREFIX: romarr" in test_job

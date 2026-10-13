@@ -1,6 +1,7 @@
-from pathlib import Path
+import json
 import tempfile
 import unittest
+from pathlib import Path
 
 import yaml
 
@@ -8,6 +9,13 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW_DIR = ROOT / ".github" / "workflows"
 HOSTED_RUNNERS = {"ubuntu-latest", "macos-latest", "windows-latest"}
+TRUSTED_MAIN_RUNNER = (
+    "$" + "{{ ((github.event_name == 'push' && github.ref == 'refs/heads/main') "
+    "|| (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')) "
+    "&& fromJSON('"
+    + json.dumps(["self-hosted", "Linux", "X64", "host"], separators=(",", ":"))
+    + "') || 'ubuntu-latest' }}"
+)
 
 
 def _runner_policy_violations(workflow_dir: Path) -> list[str]:
@@ -49,6 +57,12 @@ def _runner_policy_violations(workflow_dir: Path) -> list[str]:
             runner = job.get("runs-on")
             runner_count += 1
             location = f"{workflow.name}/{job_name}"
+            if (
+                workflow.name == "docker.yml"
+                and job_name == "test"
+                and runner == TRUSTED_MAIN_RUNNER
+            ):
+                continue
             if runner == "ubuntu-latest":
                 continue
             if runner == "${{ matrix.os }}":
@@ -72,7 +86,7 @@ def _runner_policy_violations(workflow_dir: Path) -> list[str]:
 
             violations.append(
                 f"{location}: unsupported runner assignment {runner!r}; "
-                "public workflows must use hosted runners"
+                "public workflows must use hosted runners except for the exact trusted-main job"
             )
 
     if runner_count == 0:
@@ -81,11 +95,11 @@ def _runner_policy_violations(workflow_dir: Path) -> list[str]:
 
 
 class WorkflowRunnerPolicyTests(unittest.TestCase):
-    def test_public_workflows_use_only_hosted_runners(self) -> None:
+    def test_public_workflows_use_hosted_runners_except_trusted_main_job(self) -> None:
         self.assertEqual(
             _runner_policy_violations(WORKFLOW_DIR),
             [],
-            "public validation must use approved hosted runners",
+            "only docker.yml/test on trusted main may select the organization pool",
         )
 
     def test_quoted_runner_key_in_yaml_file_is_checked(self) -> None:
