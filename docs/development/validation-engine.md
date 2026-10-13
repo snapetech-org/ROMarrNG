@@ -70,7 +70,11 @@ Each run uses a new private temporary directory for its receipt and hashed
 pytest log. The candidate fingerprint includes the Git commit/tree and diff,
 untracked files, the discovered `tests/test_*.py` file hashes, and the test
 workflow, pytest configuration, and requirements input digests. A change during
-execution blocks the result. No result cache is reused.
+execution blocks the result. No result cache is reused. The engine drains child
+output in a background reader, retains only the bounded diagnostic tail in
+memory, and caps the private log at 16 MiB with an explicit truncation marker.
+Sandbox mounts are pinned through inherited file descriptors before the
+launcher masks host paths.
 
 Runtime probes and child commands receive only an inherited allowlist for
 executable paths, platform process variables, locale, and timezone, plus child

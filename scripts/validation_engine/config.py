@@ -10,6 +10,7 @@ INPUTS = (
     "release-notes/20261012-validation-environment-isolation.md",
     "release-notes/20261012-trusted-test-sandbox.md",
     "release-notes/20261012-validation-security-review.md",
+    "release-notes/20261012-validation-sandbox-hardening.md",
     "docs/development/validation-engine.md",
     "scripts/validation_engine/__init__.py",
     "scripts/validation_engine/config.py",
