@@ -680,7 +680,23 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>
   ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 // Library counts here run to six figures; grouped, they are readable at a
 // glance instead of a digit-counting exercise.
-const fmt=n=>Number(n||0).toLocaleString();
+const REGIONAL_FORMAT_KEY='romarrng.regional-format';
+const REGIONAL_FORMATS=[["system", "Use browser settings"], ["es", "Español — Spanish"], ["zh-CN", "简体中文 — Chinese (Simplified)"], ["hi-IN", "हिन्दी — Hindi"], ["de", "Deutsch — German"], ["ja", "日本語 — Japanese"], ["fr", "Français — French"], ["pt-BR", "Português (Brasil) — Brazilian Portuguese"], ["ar", "العربية — Arabic"], ["ko", "한국어 — Korean"], ["zh-TW", "繁體中文 — Chinese (Traditional)"], ["vi", "Tiếng Việt — Vietnamese"], ["id", "Bahasa Indonesia — Indonesian"]];
+const getRegionalLocale=()=>{
+  try{
+    const value=localStorage.getItem(REGIONAL_FORMAT_KEY);
+    return REGIONAL_FORMATS.some(([code])=>code===value)&&value!=='system'?value:undefined;
+  }catch(_){return undefined;}
+};
+const regionalFormatField=()=>{
+  let current='system';
+  try{current=localStorage.getItem(REGIONAL_FORMAT_KEY)||'system';}catch(_){}
+  const options=REGIONAL_FORMATS.map(([code,label])=>'<option value="'+esc(code)+'"'+(code===current?' selected':'')+'>'+esc(label)+'</option>').join('');
+  return '<div class="field"><label for="g-regional-format">Date, time, and number format</label>'+
+    '<select id="g-regional-format">'+options+'</select>'+
+    '<div style="color:var(--dim);font-size:11.5px;margin-top:4px">Choose how dates and numbers are shown in this browser. Interface text remains English.</div></div>';
+};
+const fmt=n=>Number(n||0).toLocaleString(getRegionalLocale());
 let PLATFORMS=[], SETTINGS={};
 
 function toast(msg){
@@ -915,7 +931,7 @@ const SOURCE_LABEL={
   archive:'Archive.org (streams)',
   flashpoint:'Flashpoint (streams)',
   cloud:'Catalogued, source unknown'};
-const num=n=>(n===null||n===undefined)?'—':Number(n).toLocaleString();
+const num=n=>(n===null||n===undefined)?'—':Number(n).toLocaleString(getRegionalLocale());
 RENDER.library=async()=>{
   const p=$('#page');
   if(!p.querySelector('#lib-grid')) p.innerHTML='<div class="empty">Loading library…</div>';
@@ -1704,7 +1720,7 @@ RENDER.peers=async()=>{
         within seconds in a way that reads as lag. ROMarr can only match games
         whose hash it knows.</p>
       ${hx.count
-        ? `<div class="panel"><b>${hx.count.toLocaleString()}</b> dump(s) can be
+        ? `<div class="panel"><b>${hx.count.toLocaleString(getRegionalLocale())}</b> dump(s) can be
              matched, across ${Object.keys(hx.platforms||{}).length} platform(s).</div>`
         : `<div class="panel panel-warn">No hashes yet, so every netplay offer
              will come back <i>missing</i>. ROMarr reads these from your library
@@ -1909,8 +1925,8 @@ RENDER.peers=async()=>{
     if(!live) return;
     if(st.running){
       live.innerHTML=`<div class="panel" style="margin-top:10px">
-        Reading your library — <b>${(st.seen||0).toLocaleString()}</b> entries
-        checked, <b>${(st.added||0).toLocaleString()}</b> with a hash so far.
+        Reading your library — <b>${(st.seen||0).toLocaleString(getRegionalLocale())}</b> entries
+        checked, <b>${(st.added||0).toLocaleString(getRegionalLocale())}</b> with a hash so far.
         You can leave this page.</div>`;
       setTimeout(seedPoll,2000);
     } else if(st.status==='done'&&st.seen){
@@ -2774,7 +2790,7 @@ RENDER.general=()=>settingsPage('General',
      <input type="text" value="${esc(SETTINGS._qbit_url||'')}" disabled></div>
    <div class="field"><label>RomM</label>
      <input type="text" value="${esc(SETTINGS._romm_url||'')}" disabled></div>
-   <div class="field"><label>Your public URL (for Friends)</label>
+   ${regionalFormatField()}\n   <div class="field"><label>Your public URL (for Friends)</label>
      <input type="text" data-k="public_url"
        value="${esc(SETTINGS.public_url||'')}"
        placeholder="https://romarr.example.com">
@@ -2821,6 +2837,10 @@ RENDER.general=()=>settingsPage('General',
         already a high-entropy secret and is not gated.</span></div>
     <pre id="g-totpout" style="display:none;font:12px/1.6 ui-monospace,Menlo,monospace;color:var(--dim);white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px"></pre>`,
   ()=>{
+    const regionalFormat=$('#g-regional-format');
+    if(regionalFormat) regionalFormat.onchange=()=>{
+      try{localStorage.setItem(REGIONAL_FORMAT_KEY,regionalFormat.value);}catch(_){}
+    };
     $('#g-key').onclick=async()=>{
       const d=await j('/api/v1/system/apikey').catch(()=>({}));
       $('#g-keyout').textContent=d.api_key||'could not read it';
@@ -3233,7 +3253,7 @@ RENDER.platforms=async()=>{
 RENDER.blocklist=async()=>{
   const d=await j('/api/v1/blocklist').catch(()=>({items:[]}));
   const items=d.items||[];
-  const when=t=>t?new Date(t*1000).toLocaleString():'—';
+  const when=t=>t?new Date(t*1000).toLocaleString(getRegionalLocale()):'—';
   $('#page').innerHTML='<div class="card"><h3>Blocklist '
     +'<span class="help" style="margin-left:8px">'+items.length+'</span></h3>'
     +'<p class="help">Releases ROMarr will never take again. Each carries the '
