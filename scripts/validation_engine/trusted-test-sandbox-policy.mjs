@@ -136,7 +136,7 @@ const sensitiveCredentialName =
 const sensitiveCredentialConfigFile =
   /^(?:auth(?:entication)?|tokens?|credentials?|secrets?)[.](?:json|ya?ml|toml|ini|cfg|conf|env|properties|xml|txt)$/iu;
 const sourceCodeFile =
-  /[.](?:c|cc|cpp|cs|css|go|h|hpp|java|js|jsx|mjs|php|py|rb|rs|sql|swift|ts|tsx|vue)$/iu;
+  /[.](?:asm|bash|bat|c|cc|cjs|clj|cljs|cljc|cmd|cpp|cs|css|cxx|dart|ex|exs|go|h|hpp|hs|hxx|java|js|jsx|kt|kts|lua|m|mm|mjs|nix|php|pl|ps1|py|r|razor|rb|rs|scala|sh|sol|sql|swift|ts|tsx|vue|zsh)$/iu;
 
 export function isSensitiveCandidatePath(relativePath) {
   const segments = relativePath.replaceAll(String.fromCharCode(92), '/').split('/');
