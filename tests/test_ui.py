@@ -118,16 +118,33 @@ def test_browser_regional_formatting_helpers_and_settings_markup():
     helpers = script[start:end]
     harness = r"""
 const memory = new Map();
+let storageAvailable = true;
+let storageWritable = true;
 globalThis.localStorage = {
-  getItem: key => memory.has(key) ? memory.get(key) : null,
-  setItem: (key, value) => memory.set(key, String(value)),
-  removeItem: key => memory.delete(key)
+  getItem: key => {
+    if (!storageAvailable) throw new Error("storage unavailable");
+    return memory.has(key) ? memory.get(key) : null;
+  },
+  setItem: (key, value) => {
+    if (!storageAvailable || !storageWritable) throw new Error("storage unavailable");
+    memory.set(key, String(value));
+  },
+  removeItem: key => {
+    if (!storageAvailable) throw new Error("storage unavailable");
+    memory.delete(key);
+  }
 };
 let refreshCountCalls = 0;
 const refreshCounts = () => { refreshCountCalls += 1; };
 """ + helpers + r"""
 const saved = applyRegionalFormat("de");
 const refreshAfterSave = refreshCountCalls;
+const failedWriteControl = {value: "ja"};
+storageWritable = false;
+const writeFailureHandled = !applyRegionalFormat(failedWriteControl.value, failedWriteControl)
+  && failedWriteControl.value === "de" && getRegionalLocale() === "de"
+  && refreshCountCalls === refreshAfterSave;
+storageWritable = true;
 const number = fmt(1234567.89);
 const date = regionalDate("2026-10-12");
 const anniversary = regionalDate("10-12");
@@ -140,6 +157,12 @@ const selectedMarkup = regionalFormatField();
 const invalidRejected = !applyRegionalFormat("not-a-locale")
   && getRegionalLocale() === "de" && refreshCountCalls === refreshAfterSave;
 const resetSaved = applyRegionalFormat("system");
+const failedControl = {value: "ja"};
+storageAvailable = false;
+const storageFailureHandled = !applyRegionalFormat(failedControl.value, failedControl)
+  && failedControl.value === "system" && getRegionalLocale() === undefined
+  && refreshCountCalls === 2;
+storageAvailable = true;
 const systemLocale = getRegionalLocale() ?? null;
 const systemMarkup = regionalFormatField();
 const expectedDate = new Intl.DateTimeFormat("de", {
@@ -155,6 +178,8 @@ const expectedMonth = new Intl.DateTimeFormat("de", {
 console.log(JSON.stringify({
   saved,
   resetSaved,
+  writeFailureHandled,
+  storageFailureHandled,
   refreshAfterSave,
   refreshCountCalls,
   locale: "de",
@@ -183,6 +208,8 @@ console.log(JSON.stringify({
     result = json.loads(checked.stdout)
     assert result["saved"] is True
     assert result["resetSaved"] is True
+    assert result["writeFailureHandled"]
+    assert result["storageFailureHandled"]
     assert result["refreshAfterSave"] == 1
     assert result["refreshCountCalls"] == 2
     assert result["locale"] == "de"
@@ -204,14 +231,14 @@ console.log(JSON.stringify({
     # A JavaScript escape here used to render the two characters "\\n"
     # between the selector and the next setting.
     assert "regionalFormatField()}" + chr(92) + "n   <div" not in html
-    assert "applyRegionalFormat(regionalFormat.value);" in html
+    assert "applyRegionalFormat(regionalFormat.value,regionalFormat);" in html
 
 
 def test_regional_formatting_is_applied_at_dashboard_count_call_sites():
     """Formatting helpers must reach the visible values that claim to use them."""
     html = page()
     assert "if(setRegionalLocale(regionalFormat.value)) refreshCounts();" not in html
-    assert "regionalFormat.onchange=()=>{\n      applyRegionalFormat(regionalFormat.value);" in html
+    assert "regionalFormat.onchange=()=>{\n      applyRegionalFormat(regionalFormat.value,regionalFormat);" in html
     assert "if(setRegionalLocale(regionalFormat.value)) go('general')" not in html
     assert "★ ${num(x.rating)}" in html
     assert "Clear ${fmt(failed)} failed" in html
@@ -229,3 +256,4 @@ def test_regional_formatting_is_applied_at_dashboard_count_call_sites():
     assert "${fmt(Math.max(0,Math.round((r.code_expires_in||0)/60)))} min" in html
     assert "fmt(p.max_size_mb/1024)+' GB' : fmt(p.max_size_mb)+' MB'" in html
     assert "${fmt(s/60)} min" in html and "${fmt(s)} s" in html
+    assert "Disabled until ${esc(regionalDateTime(item.disabledUntil))}" in html

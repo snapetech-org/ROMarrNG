@@ -696,8 +696,11 @@ const setRegionalLocale=value=>{
     return true;
   }catch(_){return false;}
 };
-const applyRegionalFormat=value=>{
-  if(!setRegionalLocale(value)) return false;
+const applyRegionalFormat=(value,control)=>{
+  if(!setRegionalLocale(value)){
+    if(control) control.value=getRegionalLocale()||'system';
+    return false;
+  }
   refreshCounts();
   return true;
 };
@@ -2823,7 +2826,7 @@ RENDER.indexers=async()=>{
             <td><span class="dot ${item.success?'up':'down'}"></span>
               ${item.success?'connected':'failed'}${item.status?' · HTTP '+esc(item.status):''}</td>
             <td style="color:var(--dim)">${esc(item.error||item.recentFailure||'—')}
-              ${item.disabledUntil?`<br>Disabled until ${esc(item.disabledUntil)}`:''}</td>
+              ${item.disabledUntil?`<br>Disabled until ${esc(regionalDateTime(item.disabledUntil))}`:''}</td>
             </tr>`).join('')}</tbody></table>`
           :'<p class="help">No enabled torrent or usenet indexers were found.</p>'}
         </div>`;
@@ -2894,7 +2897,7 @@ RENDER.general=()=>settingsPage('General',
   ()=>{
     const regionalFormat=$('#g-regional-format');
     if(regionalFormat) regionalFormat.onchange=()=>{
-      applyRegionalFormat(regionalFormat.value);
+      applyRegionalFormat(regionalFormat.value,regionalFormat);
     };
     $('#g-key').onclick=async()=>{
       const d=await j('/api/v1/system/apikey').catch(()=>({}));
