@@ -41,9 +41,19 @@ class _RenderedTextParser(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
         self.parts: list[str] = []
+        self._inside_hidden_tag = 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag.lower() in {"script", "style"}:
+            self._inside_hidden_tag += 1
+
+    def handle_endtag(self, tag):
+        if tag.lower() in {"script", "style"} and self._inside_hidden_tag:
+            self._inside_hidden_tag -= 1
 
     def handle_data(self, data):
-        self.parts.append(data)
+        if not self._inside_hidden_tag:
+            self.parts.append(data)
 
 
 def _text(html: str) -> str:
@@ -487,7 +497,8 @@ def test_regional_formatting_is_applied_at_dashboard_count_call_sites():
     assert "${fmt(r.stream||0)}" in html
     assert "${fmt(r.archive||0)}" in html
     assert "${fmt(r.download_only||0)}" in html
-    assert "${fmt(Math.max(0,Math.round((r.code_expires_in||0)/60)))} min" in html
+    assert "minutes:fmt(Math.max(0,Math.round((r.code_expires_in||0)/60)))" in html
+    assert "Math.max(1,Math.round(left/60))" in html
     assert "fmt(p.max_size_mb/1024)+' GB' : fmt(p.max_size_mb)+' MB'" in html
     assert "interfaceTemplateMarkup('Interval: {count} min'" in html
     assert "interfaceTemplateMarkup('Interval: {count} s'" in html

@@ -1499,9 +1499,7 @@ RENDER.search=async()=>{
       return;
     }
     $('#s-out').innerHTML=`
-      <p class="help"><b>${fmt(d.found)}</b> releases, <b>${fmt(d.accepted)}</b> of them
-        acceptable. Rejected rows are shown too, because why a release was
-        refused is usually the answer you came for.</p>
+      <p class="help">${interfaceTemplateMarkup('Found {found} releases; {accepted} match your selection. Rejected results are also shown with the reason for each rejection.',{found:fmt(d.found),accepted:fmt(d.accepted)})}</p>
       <table><thead><tr><th data-i18n="Score">Score</th><th data-i18n="Release">Release</th><th data-i18n="Size">Size</th>
         <th data-i18n="Seeders">Seeders</th><th data-i18n="Indexer">Indexer</th><th data-i18n="Why">Why</th><th></th></tr></thead><tbody>
       ${d.items.map((r,i)=>`<tr style="${r.accepted?'':'opacity:.62'}">
@@ -2045,6 +2043,7 @@ RENDER.peers=async()=>{
   $('#p-invite').onclick=async()=>{
     const r=await j('/api/v1/peer/invite',{method:'POST',
       headers:{'content-type':'application/json'},body:'{}'});
+    const claimCodeMessage='This claim code is a secret. Send it separately from the link, for example by saying it aloud, texting it, or using another app. It works once and expires in {minutes} minutes.';
     $('#p-out').innerHTML=`<div class="card" style="margin:0">
       <h3>Send your friend two things</h3>
       <p class="help">${esc(r.note||'')}</p>
@@ -2058,10 +2057,7 @@ RENDER.peers=async()=>{
       <div class="field"><label>2. The claim code — send it separately</label>
         <div id="p-code" style="font:700 26px/1.2 ui-monospace,Menlo,monospace;
           letter-spacing:.12em;padding:12px 0">${esc(r.code||'')}</div>
-        <p class="help">This one <b>is</b> the secret. Say it out loud, text
-          it, use a different app — anything that is not the same message as
-          the link. It works once and expires in
-        <b id="p-codeleft">${fmt(Math.max(0,Math.round((r.code_expires_in||0)/60)))} min</b>.</p></div>
+        <p id="p-code-help" class="help">${interfaceTemplateMarkup(claimCodeMessage,{minutes:fmt(Math.max(0,Math.round((r.code_expires_in||0)/60)))})}</p></div>
       <div class="row" style="gap:8px">
         <button class="btn ghost" id="p-copy">Copy the link</button>
         <button class="btn ghost" id="p-copycode">Copy the code</button></div>
@@ -2083,15 +2079,15 @@ RENDER.peers=async()=>{
     //: 19:42" makes them do arithmetic.
     let left=r.code_expires_in||0;
     const tick=setInterval(()=>{
-      const el=$('#p-codeleft');
-      if(!el){ clearInterval(tick); return; }
+      const help=$('#p-code-help');
+      if(!help){ clearInterval(tick); return; }
       left-=10;
       if(left<=0){
         clearInterval(tick);
-        el.textContent='— expired';
+        help.innerHTML=interfaceMarkup('— expired');
         const code=$('#p-code');
         if(code) code.style.opacity='.35';
-      } else el.textContent=Math.max(1,Math.round(left/60))+' min';
+      } else help.innerHTML=interfaceTemplateMarkup(claimCodeMessage,{minutes:fmt(Math.max(1,Math.round(left/60)))});
     },10000);
   };
 
@@ -3353,9 +3349,7 @@ const moonlightCard=m=>{
   if(!m.ok) return `<div class="card"><h3>${esc(m.kind_label||'Moonlight')}</h3>
     <p class="testline bad">No answer from ${esc(m.host||'')}:${esc(String(m.port||''))}
     &mdash; ${esc(m.problem||'unreachable')}</p>
-    <p class="help">ROMarr probes <code>/serverinfo</code> on the Moonlight
-    port, which needs no credential and no pairing. If that does not answer,
-    the host is down, firewalled, or on another port.</p></div>`;
+    <p class="help">${interfaceTemplateMarkup('ROMarr checks {path} on the Moonlight port. This check needs no credentials or pairing. If there is no response, the host may be down, blocked by a firewall, or listening on a different port.',{path:'/serverinfo'})}</p></div>`;
 
   const slugs=Object.keys(m.platforms||{});
   const pend=(m.pairing||{}).pending||[];

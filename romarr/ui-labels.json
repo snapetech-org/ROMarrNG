@@ -5879,19 +5879,19 @@
     "vi": "Mã thông báo NPSSO",
     "id": "Token NPSSO"
   },
-  "of them acceptable. Rejected rows are shown too, because why a release was refused is usually the answer you came for.": {
-    "es": "de ellos aceptables. Las filas rechazadas también se muestran, porque por qué una liberación fue rechazada es generalmente la respuesta que vino para.",
-    "zh-Hans": "他们中可以接受。 被拒绝的行也被显示,因为为什么拒绝释放通常是你想要的答案.",
-    "hi": "उनमें से स्वीकार्य है। Rejected पंक्तियों को भी दिखाया गया है, क्योंकि क्यों एक रिलीज मना कर दिया गया है आम तौर पर जवाब आप के लिए आया है।",
-    "de": "von ihnen akzeptabel. Abgelehnte Zeilen werden ebenfalls angezeigt, denn warum eine Freigabe abgelehnt wurde, ist normalerweise die Antwort, für die Sie gekommen sind.",
-    "ja": "それらは受け入れられます。 リリースが拒否された理由は、通常、あなたが来た答えであるので、拒否された行があまりにも表示されます。",
-    "fr": "d'entre eux acceptables. Les lignes rejetées sont montrées aussi, parce que pourquoi une libération a été refusée est généralement la réponse que vous êtes venu pour.",
-    "pt-BR": "São aceitáveis. As fileiras rejeitadas são mostradas também, porque o motivo pelo qual uma liberação foi recusada é geralmente a resposta que você veio buscar.",
-    "ar": "مقبول منهم تُظهر الصفوف المُحقّقة أيضاً، لأنّ سبب رفض الإفراج عادة هو الجواب الذي جئت لأجله.",
-    "ko": "그들에 의하여 수락가능한. 거절된 행은 너무 보였다, 왜 릴리스가 거부되었는지 일반적으로 당신이 와서 대답.",
-    "zh-Hant": "他們中可以接受。 被拒絕的行也被顯示,因為為什麼拒絕釋放通常是你想要的答案.",
-    "vi": "họ chấp nhận được. Cũng có những hàng bị từ chối, vì lý do tại sao bạn thường bị từ chối.",
-    "id": "dari mereka dapat diterima. Baris ditolak juga ditunjukkan, karena mengapa rilis ditolak biasanya jawaban yang Anda datang untuk."
+  "Found {found} releases; {accepted} match your selection. Rejected results are also shown with the reason for each rejection.": {
+    "es": "Se encontraron {found} lanzamientos; {accepted} cumplen tus criterios. También se muestran los resultados rechazados, junto con el motivo de cada rechazo.",
+    "zh-Hans": "共找到 {found} 个发布版本，其中 {accepted} 个符合你的条件。被拒绝的结果也会显示，并附上各自的拒绝原因。",
+    "hi": "कुल {found} रिलीज़ मिलीं; उनमें से {accepted} आपकी चुनी हुई शर्तों से मेल खाती हैं। अस्वीकार की गई रिलीज़ भी दिखाई जाती हैं, साथ में अस्वीकृति का कारण भी।",
+    "de": "{found} Releases gefunden; {accepted} entsprechen Ihren Kriterien. Abgelehnte Ergebnisse werden ebenfalls mit dem jeweiligen Ablehnungsgrund angezeigt.",
+    "ja": "{found} 件のリリースが見つかり、そのうち {accepted} 件が条件に一致します。拒否された結果も、それぞれの理由とともに表示されます。",
+    "fr": "{found} versions trouvées ; {accepted} correspondent à vos critères. Les résultats refusés sont également affichés avec le motif de chaque refus.",
+    "pt-BR": "Foram encontrados {found} lançamentos; {accepted} atendem aos seus critérios. Os resultados recusados também são exibidos, com o motivo de cada recusa.",
+    "ar": "عُثر على {found} إصدارًا، ويتوافق {accepted} منها مع معاييرك. تظهر النتائج المرفوضة أيضًا مع سبب رفض كل نتيجة.",
+    "ko": "릴리스 {found}개를 찾았고, 그중 {accepted}개가 선택한 조건에 맞습니다. 거부된 결과도 각 거부 사유와 함께 표시됩니다.",
+    "zh-Hant": "共找到 {found} 個發行版本，其中 {accepted} 個符合你的條件。遭拒的結果也會顯示，並附上各自的拒絕原因。",
+    "vi": "Tìm thấy {found} bản phát hành; {accepted} bản phù hợp với tiêu chí của bạn. Các kết quả bị từ chối cũng được hiển thị kèm lý do.",
+    "id": "Ditemukan {found} rilis; {accepted} sesuai dengan kriteria Anda. Hasil yang ditolak juga ditampilkan beserta alasan penolakannya."
   },
   "on a desktop.": {
     "es": "en un escritorio.",
@@ -5921,19 +5921,19 @@
     "vi": "Vào Archive.org",
     "id": "Hidup Archive.org"
   },
-  "on the Moonlight port, which needs no credential and no pairing. If that does not answer, the host is down, firewalled, or on another port.": {
-    "es": "en el puerto de Moonlight, que no necesita fidediencia ni pares. Si eso no responde, el host está abajo, cortafuegos o en otro puerto.",
-    "zh-Hans": "编辑 Moonlight 端口,不需要证书和配对。 如果答案不成立,则主机会倒下,防火墙,或者在另一个端口.",
-    "hi": "पर Moonlight पोर्ट, जिसे कोई क्रेडेंशियल और कोई जोड़ी की आवश्यकता नहीं है। यदि वह जवाब नहीं देता है, तो मेजबान नीचे है, फ़ायरवॉल्ड, या किसी अन्य बंदरगाह पर।",
-    "de": "auf dem Moonlight-Port, der keine Anmeldeinformationen und keine Paarung benötigt. Wenn das nicht antwortet, ist der Host down, firewalled oder auf einem anderen Port.",
-    "ja": "Moonlightポートでは、クレデンシャルとペアリングを必要としません。 応答しない場合は、ホストはダウン、ファイアウォール、または別のポートで行います。",
-    "fr": "sur la Moonlight port, qui n'a pas besoin de justificatifs ni d'appariement. Si cela ne répond pas, l'hôte est en panne, pare-feu ou sur un autre port.",
-    "pt-BR": "no porto Moonlight, que não precisa de credencial e nem de pares. Se isso não responder, o hospedeiro está em baixo, firewall ou em outro porto.",
-    "ar": "على Moonlight المرفأ الذي لا يحتاج إلى إبداع ولا أزواج إن لم يجيب ذلك، فإنّ المضيف مطرود أو مطرود أو في ميناء آخر.",
-    "ko": "Moonlight 포트에, 이는 credential 및 쌍이 필요하지 않습니다. 응답하지 않는 경우, 호스트는 다운, 방화벽, 또는 다른 포트에 있습니다.",
-    "zh-Hant": "編輯 Moonlight 埠,不需要證書和配對。 如果答案不成立,則主機會倒下,防火牆,或者在另一個埠.",
-    "vi": "ở cảng Moonlight, nơi không cần giấy tờ và không có cặp. Nếu không trả lời, máy chủ sẽ bị hạ, tường lửa hoặc ở cảng khác.",
-    "id": "pada Moonlight Port, yang tidak perlu kredensial dan tidak ada pasangan. Jika itu tidak menjawab, inangnya mati, firewall, atau di pelabuhan lain."
+  "ROMarr checks {path} on the Moonlight port. This check needs no credentials or pairing. If there is no response, the host may be down, blocked by a firewall, or listening on a different port.": {
+    "es": "ROMarr consulta {path} en el puerto de Moonlight. Esta comprobación no requiere credenciales ni emparejamiento. Si no hay respuesta, el servidor puede estar apagado, bloqueado por un cortafuegos o escuchando en otro puerto.",
+    "zh-Hans": "ROMarr 会在 Moonlight 端口上检查 {path}。此检查无需凭据或配对。如果没有响应，主机可能已关闭、被防火墙拦截，或正在使用其他端口。",
+    "hi": "ROMarr Moonlight पोर्ट पर {path} की जाँच करता है। इस जाँच के लिए क्रेडेंशियल या पेयरिंग की ज़रूरत नहीं है। जवाब न मिले, तो होस्ट बंद हो सकता है, फ़ायरवॉल से अवरुद्ध हो सकता है, या किसी दूसरे पोर्ट पर सुन रहा हो सकता है।",
+    "de": "ROMarr prüft {path} über den Moonlight-Port. Dafür sind weder Zugangsdaten noch eine Kopplung erforderlich. Bleibt eine Antwort aus, ist der Host möglicherweise ausgeschaltet, durch eine Firewall blockiert oder über einen anderen Port erreichbar.",
+    "ja": "ROMarr は Moonlight ポートで {path} を確認します。この確認に認証情報やペアリングは必要ありません。応答がない場合、ホストが停止している、ファイアウォールで遮断されている、または別のポートを使っている可能性があります。",
+    "fr": "ROMarr vérifie {path} sur le port Moonlight. Ce contrôle ne nécessite ni identifiants ni appairage. Sans réponse, l’hôte est peut-être arrêté, bloqué par un pare-feu ou à l’écoute sur un autre port.",
+    "pt-BR": "O ROMarr verifica {path} na porta do Moonlight. Essa verificação não exige credenciais nem pareamento. Se não houver resposta, o host pode estar desligado, bloqueado por um firewall ou ouvindo em outra porta.",
+    "ar": "يتحقق ROMarr من {path} عبر منفذ Moonlight. لا يحتاج هذا الفحص إلى بيانات اعتماد أو اقتران. إذا لم يصل رد، فقد يكون المضيف متوقفًا أو محجوبًا بجدار حماية أو يستمع على منفذ آخر.",
+    "ko": "ROMarr는 Moonlight 포트에서 {path}를 확인합니다. 이 확인에는 자격 증명이나 페어링이 필요하지 않습니다. 응답이 없다면 호스트가 꺼져 있거나 방화벽에 차단되었거나 다른 포트를 사용 중일 수 있습니다.",
+    "zh-Hant": "ROMarr 會在 Moonlight 連接埠上檢查 {path}。此檢查不需要憑證或配對。如果沒有回應，主機可能已關閉、遭防火牆封鎖，或正在使用其他連接埠。",
+    "vi": "ROMarr kiểm tra {path} qua cổng Moonlight. Việc kiểm tra này không cần thông tin đăng nhập hay ghép đôi. Nếu không có phản hồi, máy chủ có thể đang tắt, bị tường lửa chặn hoặc đang dùng cổng khác.",
+    "id": "ROMarr memeriksa {path} melalui port Moonlight. Pemeriksaan ini tidak memerlukan kredensial atau proses penyandingan. Jika tidak ada respons, host mungkin mati, diblokir firewall, atau menggunakan port lain."
   },
   "on the PC you play on": {
     "es": "en el PC donde juegas",
@@ -5978,18 +5978,18 @@
     "id": "Pada instalasi ini"
   },
   "Only useful if ROMarr runs on the machine you play on — it scans wherever ROMarr itself lives, which is usually a server with no launchers.": {
-    "es": "Únicamente útil si ROMarr se ejecuta en la máquina en la que se juega, escanea dondequiera que viva ROMarr, que suele ser un servidor sin lanzadores.",
-    "zh-Hans": "只有在 ROMarr 在你玩的机器上运行——它扫描任何地方 ROMarr 它通常是一个没有发射器的服务器。",
-    "hi": "केवल उपयोगी ROMarr जिस मशीन पर आप खेलते हैं - यह जहां भी स्कैन करता है ROMarr खुद ही रहता है, जो आमतौर पर लॉन्चर्स के साथ सर्वर होता है।",
-    "de": "Nur nützlich, wenn ROMarr auf dem Computer läuft, auf dem Sie spielen - es scannt überall, wo ROMarr selbst lebt, was normalerweise ein Server ohne Launcher ist.",
-    "ja": "ROMarrが再生するマシン上で実行する場合にのみ便利です。ROMarr自体がどこに住んでいるかをスキャンします。これは、通常、ランチャーなしでサーバーです。",
-    "fr": "Seulement utile si ROMarr fonctionne sur la machine sur laquelle vous jouez — il scanne partout où ROMarr elle-même vit, qui est généralement un serveur sans lanceur.",
-    "pt-BR": "Só é útil se ROMarr for executado na máquina que você joga, ele verifica onde quer que ROMarr viva, que geralmente é um servidor sem lançadores.",
-    "ar": "فقط مفيد ROMarr تجري على الآلة التي تعزف عليها تمسح المكان ROMarr يعيش نفسه، وهو عادة خادم لا يحمل أي قاذفات.",
-    "ko": "ROMarr이 기계에서 실행되는 경우에만 유용합니다. 즉, ROMarr 자체가 살아있는 곳을 검사합니다. 일반적으로 발사기가 없습니다.",
-    "zh-Hant": "只有在 ROMarr 在你玩的機器上執行——它掃描任何地方 ROMarr 它通常是一個沒有發射器的伺服器。",
-    "vi": "Chỉ hữu ích khi sử dụng máy ROMarr — nó quét bất cứ nơi nào mà ROMarr sống, thường là một máy phục vụ không có bệ phóng.",
-    "id": "Hanya berguna jika ROMarr berjalan di mesin Anda bermain pada - scan di mana pun ROMarr itu sendiri hidup, yang biasanya server tanpa peluncur."
+    "es": "Solo es útil si ROMarr se ejecuta en el equipo donde juegas. El escaneo revisa dónde está instalado ROMarr, que suele ser un servidor sin lanzadores de juegos.",
+    "zh-Hans": "只有当 ROMarr 运行在你用来玩游戏的电脑上时，此功能才有用。它会扫描 ROMarr 所在的位置，而那里通常是没有游戏启动器的服务器。",
+    "hi": "यह तभी उपयोगी है जब ROMarr उसी मशीन पर चलता हो जिस पर आप खेलते हैं। यह ROMarr के अपने स्थान को स्कैन करता है, जो आमतौर पर ऐसा सर्वर होता है जहाँ गेम लॉन्चर नहीं होते।",
+    "de": "Das ist nur sinnvoll, wenn ROMarr auf dem Rechner läuft, auf dem Sie spielen. Gescannt wird der Installationsort von ROMarr, der meist ein Server ohne Spiele-Launcher ist.",
+    "ja": "この機能が役立つのは、ROMarr がゲームをプレイするマシン上で動いている場合だけです。スキャン対象は ROMarr 自体が置かれている場所で、通常はゲームランチャーのないサーバーです。",
+    "fr": "Cette fonction n’est utile que si ROMarr tourne sur la machine utilisée pour jouer. Elle analyse l’emplacement de ROMarr, qui est généralement un serveur sans lanceur de jeux.",
+    "pt-BR": "Isso só é útil se o ROMarr estiver rodando na máquina em que você joga. A varredura é feita onde o ROMarr está instalado, geralmente em um servidor sem launchers de jogos.",
+    "ar": "هذا مفيد فقط إذا كان ROMarr يعمل على الجهاز الذي تلعب عليه. فهو يفحص موقع تثبيت ROMarr، وغالبًا ما يكون خادمًا لا يحتوي على مشغّلات الألعاب.",
+    "ko": "이 기능은 ROMarr가 게임을 플레이하는 컴퓨터에서 실행 중일 때만 유용합니다. 이 스캔은 ROMarr가 설치된 위치를 확인하며, 보통 게임 런처가 없는 서버입니다.",
+    "zh-Hant": "只有 ROMarr 執行在你用來玩遊戲的電腦上時，這項功能才有用。掃描範圍是 ROMarr 所在的位置，而它通常位於沒有遊戲啟動器的伺服器上。",
+    "vi": "Tính năng này chỉ hữu ích khi ROMarr chạy trên máy bạn dùng để chơi game. Nó quét vị trí cài ROMarr, thường là một máy chủ không có trình khởi chạy game.",
+    "id": "Fitur ini hanya berguna jika ROMarr berjalan di komputer yang Anda gunakan untuk bermain. Pemindaian dilakukan di lokasi ROMarr terpasang, yang biasanya merupakan server tanpa launcher game."
   },
   "OpenXBL API key": {
     "es": "Clave de API de OpenXBL",
@@ -7993,19 +7993,19 @@
     "vi": "Liên kết mà bạn anh đã gửi.",
     "id": "Link teman Anda dikirim"
   },
-  "the secret. Say it out loud, text it, use a different app — anything that is not the same message as the link. It works once and expires in": {
-    "es": "el secreto. Dilo en voz alta, escríbelo, usa una aplicación diferente, cualquier cosa que no sea el mismo mensaje que el enlace. Funciona una vez y expira en",
-    "zh-Hans": "那个秘密 大声说出来,发短信,使用不同的应用程序——任何与链接不同的信息. 它工作一次,并在",
-    "hi": "रहस्य। इसे ज़ोर से देखें, इसे टेक्स्ट करें, एक अलग ऐप का उपयोग करें - कुछ भी जो लिंक के समान संदेश नहीं है। यह एक बार काम करता है और में समाप्त होता है",
-    "de": "Das Geheimnis. Sagen sie es laut, texten sie es, verwenden sie eine andere app - alles, was nicht die gleiche nachricht wie der link ist. Es funktioniert einmal und läuft ab in",
-    "ja": "秘密。 それを大声で言うと、それをテキスト化し、異なるアプリを使用して、リンクと同じメッセージではないもの。 一度に動作し、期限が切れる",
-    "fr": "le secret. Dites-le à haute voix, textez-le, utilisez une application différente — tout ce qui n'est pas le même message que le lien. Il fonctionne une fois et expire en",
-    "pt-BR": "O segredo. Diga em voz alta, escreva, use um aplicativo diferente, qualquer coisa que não seja a mesma mensagem que o link. Funciona uma vez e expira em",
-    "ar": "السر قلها بصوت عال، راسلها، استخدم تطبيقاً مختلفاً أي شيء ليس نفس رسالة الرابط يعمل مرة وينتهي في",
-    "ko": "비밀. 크게 말하고, 그것을 텍스트, 다른 응용 프로그램을 사용 - 링크와 같은 메시지가 아닙니다. 한 번 작동하고 만료됩니다.",
-    "zh-Hant": "那個秘密 大聲說出來,發簡訊,使用不同的應用程式——任何與連結不同的資訊. 它工作一次,並在",
-    "vi": "bí mật. Hãy nói lớn tiếng, nhắn tin, sử dụng một ứng dụng khác — bất cứ thứ gì không giống thông điệp liên kết. Nó hoạt động một lần và hết hạn",
-    "id": "rahasia. Katakan keras-keras, teks itu, gunakan aplikasi yang berbeda - apa pun yang tidak pesan yang sama sebagai link. Ini bekerja sekali dan berakhir di"
+  "This claim code is a secret. Send it separately from the link, for example by saying it aloud, texting it, or using another app. It works once and expires in {minutes} minutes.": {
+    "es": "Este código de acceso es secreto. Envíalo por separado del enlace, por ejemplo, diciéndolo en voz alta, por mensaje de texto o mediante otra aplicación. Solo se puede usar una vez y vence en {minutes} min.",
+    "zh-Hans": "这是一段机密的申领码。请将它与链接分开发送，例如口头告知、发短信或使用其他应用。它只能使用一次，并会在 {minutes} 分钟后过期。",
+    "hi": "यह दावा कोड गोपनीय है। इसे लिंक से अलग भेजें—जैसे बोलकर, टेक्स्ट संदेश से या किसी दूसरे ऐप से। इसका उपयोग केवल एक बार किया जा सकता है और यह {minutes} मिनट में समाप्त हो जाएगा।",
+    "de": "Dieser Bestätigungscode ist geheim. Senden Sie ihn getrennt vom Link, zum Beispiel mündlich, per SMS oder über eine andere App. Er kann nur einmal verwendet werden und läuft in {minutes} Min. ab.",
+    "ja": "この申請コードは秘密です。リンクとは別に、口頭やメッセージ、別のアプリなどで伝えてください。コードは一度だけ使用でき、有効期限はあと {minutes} 分です。",
+    "fr": "Ce code de validation est secret. Envoyez-le séparément du lien, par exemple à l’oral, par SMS ou dans une autre application. Il ne peut servir qu’une fois et expire dans {minutes} min.",
+    "pt-BR": "Este código de confirmação é secreto. Envie-o separado do link, por exemplo, falando-o em voz alta, por mensagem de texto ou por outro aplicativo. Ele só pode ser usado uma vez e expira em {minutes} min.",
+    "ar": "رمز المطالبة هذا سري. أرسله منفصلًا عن الرابط، مثلًا شفهيًا أو برسالة نصية أو عبر تطبيق آخر. يمكن استخدامه مرة واحدة فقط وتنتهي صلاحيته خلال {minutes} دقيقة.",
+    "ko": "이 확인 코드는 비밀입니다. 링크와 따로 보내세요. 직접 말하거나 문자 메시지 또는 다른 앱을 이용할 수 있습니다. 한 번만 사용할 수 있으며 {minutes}분 후 만료됩니다.",
+    "zh-Hant": "這組領取碼是機密。請與連結分開傳送，例如口頭告知、傳簡訊或使用其他應用程式。此代碼只能使用一次，並會在 {minutes} 分鐘後到期。",
+    "vi": "Mã xác nhận này là bí mật. Hãy gửi riêng với liên kết, chẳng hạn đọc trực tiếp, nhắn tin hoặc dùng ứng dụng khác. Mã chỉ dùng được một lần và hết hạn sau {minutes} phút.",
+    "id": "Kode klaim ini bersifat rahasia. Kirim secara terpisah dari tautan, misalnya dengan mengucapkannya, mengirim pesan teks, atau memakai aplikasi lain. Kode hanya dapat digunakan sekali dan kedaluwarsa dalam {minutes} menit."
   },
   "Their own web players and clients": {
     "es": "Sus propios jugadores web y clientes",
