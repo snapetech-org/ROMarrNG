@@ -35,13 +35,17 @@ planning imports candidate validation configuration.
 GitHub Actions remains responsible for receipt-backed hosted validation.
 
 In CI, `--plan` discovers files and required commands without installing
-packages or running pytest. Pull requests, main-branch pushes, version-tag
-pushes, and manual runs use GitHub-hosted runners. Pushes to other branches do
-not trigger this workflow. Because this is a public repository, no workflow
-job uses a persistent self-hosted runner; the workflow definition itself can
-be changed by a pull request, so runner selection cannot be treated as a
-security boundary inside contributor-controlled YAML. The Linux validation
-job uses `setup-python` and creates its temporary workspace beneath
+packages or running pytest. Pull requests authored by `snapetech`, main-branch
+pushes, and manual runs on `main` may use the local Linux runner pool for the
+pytest and acquisition-proof jobs. Pull requests from other contributors,
+version-tag pushes, and manual runs on other refs use GitHub-hosted runners.
+Pushes to other branches do not trigger this workflow. The local runner rule is
+workflow routing, not a hard trust boundary: a public pull request can propose
+workflow edits. GitHub approval is required for external contributors before
+their workflow runs; review workflow changes before approving one. Moving these
+repositories to an organization with runner groups restricted to trusted
+workflow refs is the planned stronger enforcement. The Linux validation job
+uses `setup-python` and creates its temporary workspace beneath
 `RUNNER_TEMP`. It uses the validation engine to install repository
 requirements and pytest in a task environment before running the native
 suite. The test task uses
