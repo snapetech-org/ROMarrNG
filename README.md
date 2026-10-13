@@ -1054,8 +1054,9 @@ The supporting documents are the [complete issue/PR audit](docs/UPSTREAM_AUDIT.m
 An honest map of what is solid, what is thin, and where a contribution
 lands hardest. CI validates pull requests, same-repository branch pushes, and version tags.
 Trusted branch pushes and manual runs targeting `main` run Linux validation on
-the `kspld0`-labelled local runner; pull requests, version-tag pushes, and
-manual runs on other refs use GitHub-hosted runners. PR image builds use
+whichever local runner is available (`kspld0` or `kspls0`); pull requests,
+version-tag pushes, and manual runs on other refs use GitHub-hosted runners.
+PR image builds use
 read-only permissions; only main and version-tag workflows, plus manual runs on
 main, can publish images. In the
 2026-10-12 local full-suite run, 2,319 tests passed, 3 were skipped, and 1
