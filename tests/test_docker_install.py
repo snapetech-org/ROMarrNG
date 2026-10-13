@@ -291,25 +291,59 @@ def test_public_workflow_uses_hosted_runners_and_only_main_pushes_trigger():
     for workflow_file in sorted(workflow_dir.iterdir()):
         if workflow_file.suffix not in {".yml", ".yaml"}:
             continue
+        in_jobs = False
+        current_job = None
+        current_job_lines = []
+        job_blocks = []
         for line in workflow_file.read_text(encoding="utf-8").splitlines():
-            stripped = line.strip()
-            if stripped.startswith("runs-on:"):
-                runner_assignments.append(
-                    (workflow_file.name, stripped.partition(":")[2].strip())
+            if line == "jobs:":
+                in_jobs = True
+                continue
+            if not in_jobs:
+                continue
+            if line and not line.startswith(" "):
+                break
+            job_match = re.match(r"^  ([A-Za-z0-9_-]+):\s*$", line)
+            if job_match:
+                if current_job is not None:
+                    job_blocks.append((current_job, current_job_lines))
+                current_job = job_match.group(1)
+                current_job_lines = []
+            elif current_job is not None:
+                current_job_lines.append(line)
+        if current_job is not None:
+            job_blocks.append((current_job, current_job_lines))
+
+        for job_name, job_lines in job_blocks:
+            job_text = "\n".join(job_lines)
+            runner_match = re.search(r"(?m)^\s+runs-on:\s*(.*?)\s*$", job_text)
+            if runner_match is None:
+                continue
+            runner = runner_match.group(1)
+            runner_assignments.append((workflow_file.name, job_name, runner))
+            assert runner in {"ubuntu-latest", "${{ matrix.os }}"}, (
+                f"{workflow_file.name}/{job_name} must use a hosted runner: {runner}"
+            )
+
+            if runner == "${{ matrix.os }}":
+                matrix_values = re.findall(
+                    r"(?m)^\s+os:\s*\[(.*?)\]\s*$", job_text
+                )
+                assert len(matrix_values) == 1, (
+                    f"{workflow_file.name}/{job_name} must declare one literal OS matrix"
+                )
+                labels = {
+                    item.strip().strip("\"'")
+                    for item in matrix_values[0].split(",")
+                    if item.strip()
+                }
+                assert labels and labels <= {
+                    "ubuntu-latest", "macos-latest", "windows-latest"
+                }, (
+                    f"{workflow_file.name}/{job_name} matrix must use hosted OS labels: {labels}"
                 )
 
-    allowed_runners = {"ubuntu-latest", "${{ matrix.os }}"}
-    unsupported = [
-        (name, runner)
-        for name, runner in runner_assignments
-        if runner not in allowed_runners
-    ]
     assert runner_assignments, "no checked-in workflow runner assignments were found"
-    assert not unsupported, f"workflows must use hosted runners: {unsupported}"
-    if any(runner == "${{ matrix.os }}" for _, runner in runner_assignments):
-        assert "os: [ubuntu-latest, macos-latest, windows-latest]" in workflow, (
-            "the validation matrix must use GitHub-hosted operating systems"
-        )
 
     assert "prepare-private-runner-temp.sh" in test_job
     assert "PRIVATE_RUNNER_TEMP_PREFIX: romarr" in test_job
