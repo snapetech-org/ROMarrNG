@@ -285,6 +285,32 @@ def test_public_workflow_uses_hosted_runners_and_only_main_pushes_trigger():
     assert "runs-on: ubuntu-latest" in test_job
     assert "fromJSON(" not in test_job
     assert "fromJSON('[\"self-hosted\"" not in workflow
+
+    workflow_dir = ROOT / ".github" / "workflows"
+    runner_assignments = []
+    for workflow_file in sorted(workflow_dir.iterdir()):
+        if workflow_file.suffix not in {".yml", ".yaml"}:
+            continue
+        for line in workflow_file.read_text(encoding="utf-8").splitlines():
+            stripped = line.strip()
+            if stripped.startswith("runs-on:"):
+                runner_assignments.append(
+                    (workflow_file.name, stripped.partition(":")[2].strip())
+                )
+
+    allowed_runners = {"ubuntu-latest", "${{ matrix.os }}"}
+    unsupported = [
+        (name, runner)
+        for name, runner in runner_assignments
+        if runner not in allowed_runners
+    ]
+    assert runner_assignments, "no checked-in workflow runner assignments were found"
+    assert not unsupported, f"workflows must use hosted runners: {unsupported}"
+    if any(runner == "${{ matrix.os }}" for _, runner in runner_assignments):
+        assert "os: [ubuntu-latest, macos-latest, windows-latest]" in workflow, (
+            "the validation matrix must use GitHub-hosted operating systems"
+        )
+
     assert "prepare-private-runner-temp.sh" in test_job
     assert "PRIVATE_RUNNER_TEMP_PREFIX: romarr" in test_job
     helper = (ROOT / "scripts" / "prepare-private-runner-temp.sh").read_text(
