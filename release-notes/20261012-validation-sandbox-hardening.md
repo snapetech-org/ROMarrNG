@@ -6,4 +6,4 @@ action: none
 breaking: false
 ---
 
-Validation snapshots omit extensionless authentication, token, credential, and secret files while retaining source code with those names. The trusted validation launcher pins sandbox mount sources through inherited file descriptors before masking host paths. Task output streams to a bounded log with a visible truncation marker, and validation receipt artifacts are scoped to their workflow attempt.
+Local validation snapshots exclude extensionless credentials and files in credential-named folders while retaining token-named source code. The trusted launcher pins sandbox mounts before hiding host paths; task logs are capped at 16 MiB, and receipts stay tied to the workflow attempt that produced them.
