@@ -37,4 +37,6 @@ Translate interface labels, help, empty states, validation, notifications, and e
 
 ## Implemented in this PR
 
-Settings > General now offers browser-local date, time, and number formats for Spanish, Simplified Chinese, Hindi, German, Japanese, French, Brazilian Portuguese, Arabic, Korean, Traditional Chinese, Vietnamese, and Indonesian. Existing numeric and timestamp output uses the selected region. ROMarr's fan-translation and ROM-language settings remain separate; this preference does not translate the interface.
+Settings > General offers a **Date, time, and number format** selector. It defaults to the browser's regional settings and can be set to Spanish, Simplified Chinese, Hindi, German, Japanese, French, Brazilian Portuguese, Arabic, Korean, Traditional Chinese, Vietnamese, or Indonesian. The preference is stored in that browser's local storage; it is not sent to the ROMarr server or shared with other browsers.
+
+The selected region formats visible counts, ratings, scores, file sizes, calendar days and months, and date/time values across the Library, search, wanted list, import lists, sync status, History, live logs, blocklist, tasks, Statistics, collections, friends, and calendar views. Date-only values stay on their original calendar day. Interface labels and messages remain English. This display preference does not change ROMarr's fan-translation or ROM-language settings, and it does not translate titles, platform names, paths, or other user data.

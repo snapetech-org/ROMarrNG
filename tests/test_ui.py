@@ -97,3 +97,89 @@ def test_every_rendered_inline_script_parses_as_javascript():
         checked = subprocess.run([node, "--check"], input=script, text=True,
                                  capture_output=True, timeout=15)
         assert checked.returncode == 0, checked.stderr
+
+
+def test_browser_regional_formatting_helpers_and_settings_markup():
+    """Locale selection persists in this browser and drives Intl formatting."""
+    import json
+    import shutil
+    import subprocess
+    import pytest
+
+    node = shutil.which("node")
+    if not node:
+        pytest.skip("Node.js is required to exercise browser formatting helpers")
+
+    html = page()
+    scripts = re.findall(r"<script[^>]*>(.*?)</script>", html, re.S)
+    script = next(x for x in scripts if "const REGIONAL_FORMAT_KEY" in x)
+    start = script.index("const esc=")
+    end = script.index("\nlet PLATFORMS=", start)
+    helpers = script[start:end]
+    harness = r"""
+const memory = new Map();
+globalThis.localStorage = {
+  getItem: key => memory.has(key) ? memory.get(key) : null,
+  setItem: (key, value) => memory.set(key, String(value)),
+  removeItem: key => memory.delete(key)
+};
+""" + helpers + r"""
+const saved = setRegionalLocale("de");
+const number = fmt(1234567.89);
+const date = regionalDate("2026-10-12");
+const timestamp = regionalDateTime("2026-10-12T00:00:00Z");
+const month = regionalMonth("2026-10");
+const year = regionalYear(2026);
+const selectedMarkup = regionalFormatField();
+const invalidRejected = !setRegionalLocale("not-a-locale")
+  && getRegionalLocale() === "de";
+setRegionalLocale("system");
+const systemLocale = getRegionalLocale() ?? null;
+const systemMarkup = regionalFormatField();
+const expectedDate = new Intl.DateTimeFormat("de", {
+  timeZone: "UTC"
+}).format(new Date(Date.UTC(2026, 9, 12)));
+const expectedTimestamp = new Date("2026-10-12T00:00:00Z").toLocaleString("de");
+const expectedMonth = new Intl.DateTimeFormat("de", {
+  month: "long", year: "numeric", timeZone: "UTC"
+}).format(new Date(Date.UTC(2026, 9, 1)));
+console.log(JSON.stringify({
+  saved,
+  locale: "de",
+  numberMatches: number === new Intl.NumberFormat("de").format(1234567.89),
+  dateMatches: date === expectedDate,
+  timestampMatches: timestamp === expectedTimestamp,
+  monthMatches: month === expectedMonth,
+  yearMatches: year === new Intl.NumberFormat("de", {useGrouping: false}).format(2026),
+  invalidRejected,
+  systemLocale,
+  storedAfterSystemReset: memory.get(REGIONAL_FORMAT_KEY) ?? null,
+  accessible: selectedMarkup.includes('aria-describedby="g-regional-format-help"')
+    && selectedMarkup.includes('id="g-regional-format-help"'),
+  germanOptionSelected: selectedMarkup.includes('value="de" selected'),
+  systemOptionSelected: systemMarkup.includes('value="system" selected')
+}));
+"""
+    checked = subprocess.run(
+        [node, "-e", harness], text=True, capture_output=True, timeout=15
+    )
+    assert checked.returncode == 0, checked.stderr
+    result = json.loads(checked.stdout)
+    assert result["saved"] is True
+    assert result["locale"] == "de"
+    assert result["numberMatches"]
+    assert result["dateMatches"]
+    assert result["timestampMatches"]
+    assert result["monthMatches"]
+    assert result["yearMatches"]
+    assert result["invalidRejected"]
+    assert result["systemLocale"] is None
+    assert result["storedAfterSystemReset"] is None
+    assert result["accessible"]
+    assert result["germanOptionSelected"]
+    assert result["systemOptionSelected"]
+
+    # A JavaScript escape here used to render the two characters "\\n"
+    # between the selector and the next setting.
+    assert "regionalFormatField()}" + chr(92) + "n   <div" not in html
+    assert "setRegionalLocale(regionalFormat.value)" in html
