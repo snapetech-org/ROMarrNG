@@ -283,7 +283,7 @@ def test_trusted_branch_pushes_use_the_private_local_validation_runner():
     )[0]
     assert "github.event_name == 'push' && startsWith(github.ref, 'refs/heads/')" in test_job
     assert "github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'" in test_job
-    assert "fromJSON('[\"self-hosted\",\"Linux\",\"X64\",\"host\",\"kspls0\"]')" in test_job
+    assert "fromJSON('[\"self-hosted\",\"Linux\",\"X64\",\"host\",\"kspld0\"]')" in test_job
     assert "|| fromJSON('[\"ubuntu-latest\"]')" in test_job
     assert "prepare-private-runner-temp.sh" in test_job
     assert "PRIVATE_RUNNER_TEMP_PREFIX: romarr" in test_job
