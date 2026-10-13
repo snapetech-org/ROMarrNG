@@ -24,8 +24,18 @@ unsafe_temp="$unsafe_parent/runner-temp"
 outside_env="$scratch_root/outside-env"
 outside_output="$scratch_root/outside-output"
 
+remove_private_temp_if_contained() {
+  [[ -n "$private_temp" && -d "$private_temp" && ! -L "$private_temp" \
+    && -d "$runner_temp" && ! -L "$runner_temp" ]] || return 0
+
+  local private_temp_real runner_temp_real
+  private_temp_real="$(cd -- "$private_temp" 2>/dev/null && pwd -P)" || return 0
+  runner_temp_real="$(cd -- "$runner_temp" 2>/dev/null && pwd -P)" || return 0
+  [[ "$private_temp_real" == "$runner_temp_real/"* ]] || return 0
+  rmdir -- "$private_temp_real" 2>/dev/null || true
+}
+
 cleanup() {
-  [[ -n "$private_temp" && -d "$private_temp" ]] && rmdir -- "$private_temp" 2>/dev/null || true
   [[ -L "$unsafe_link" ]] && unlink -- "$unsafe_link" 2>/dev/null || true
   [[ -f "$outside_env" ]] && unlink -- "$outside_env" 2>/dev/null || true
   [[ -f "$outside_output" ]] && unlink -- "$outside_output" 2>/dev/null || true
@@ -36,7 +46,7 @@ cleanup() {
   [[ -f "$unsafe_temp/github-output" ]] && unlink -- "$unsafe_temp/github-output" 2>/dev/null || true
   [[ -d "$unsafe_temp" ]] && rmdir -- "$unsafe_temp" 2>/dev/null || true
   [[ -d "$unsafe_parent" ]] && rmdir -- "$unsafe_parent" 2>/dev/null || true
-  [[ -d "$private_temp" ]] && rmdir -- "$private_temp" 2>/dev/null || true
+  remove_private_temp_if_contained
   [[ -d "$runner_temp" ]] && rmdir -- "$runner_temp" 2>/dev/null || true
   [[ -d "$scratch_root" ]] && rmdir -- "$scratch_root" 2>/dev/null || true
 }
