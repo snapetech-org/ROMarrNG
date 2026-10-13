@@ -45,6 +45,7 @@ trap cleanup EXIT
 mkdir -m 700 -- "$runner_temp"
 chmod 775 -- "$runner_temp"
 mkdir -m 700 -- "$command_file_dir"
+chmod 777 -- "$command_file_dir"
 : > "$github_env"
 : > "$github_output"
 chmod 600 -- "$github_env" "$github_output"
@@ -66,6 +67,8 @@ private_temp="$(sed -n 's/^path=//p' "$github_output")"
   || { printf 'Private job directory is not mode 0700.\n' >&2; exit 1; }
 [[ "$(stat -c '%a' -- "$github_env")" == 600 && "$(stat -c '%a' -- "$github_output")" == 600 ]] \
   || { printf 'GitHub command files are not private.\n' >&2; exit 1; }
+[[ "$(stat -c '%a' -- "$command_file_dir")" == 700 ]] \
+  || { printf 'GitHub command-file directory is not private.\n' >&2; exit 1; }
 for name in PRIVATE_RUNNER_TEMP TMPDIR TMP TEMP; do
   grep -Fxq "$name=$private_temp" "$github_env" \
     || { printf '%s was not pointed at the private job directory.\n' "$name" >&2; exit 1; }
