@@ -715,26 +715,37 @@ const regionalFormatField=()=>{
 };
 const fmt=n=>Number(n??0).toLocaleString(getRegionalLocale());
 const num=n=>n===null||n===undefined?'—':fmt(n);
+const utcCalendarDate=(year,month,day)=>{
+  const date=new Date(0);
+  date.setUTCFullYear(year,month-1,day);
+  return date.getUTCFullYear()===year&&date.getUTCMonth()===month-1
+    &&date.getUTCDate()===day?date:null;
+};
 const regionalDate=value=>{
   if(value===null||value===undefined||value==='') return '—';
   const source=String(value);
   const monthDay=/^(\d{2})-(\d{2})$/.exec(source);
   if(monthDay){
     const month=Number(monthDay[1]),day=Number(monthDay[2]);
-    const date=new Date(Date.UTC(2000,month-1,day));
-    if(date.getUTCMonth()!==month-1||date.getUTCDate()!==day) return source;
+    const date=utcCalendarDate(2000,month,day);
+    if(!date) return source;
     return new Intl.DateTimeFormat(getRegionalLocale(),{
       month:'short',day:'numeric',timeZone:'UTC'}).format(date);
   }
   const dayOnly=/^(\d{4})-(\d{2})-(\d{2})$/.exec(source);
-  const date=dayOnly
-    ?new Date(Date.UTC(Number(dayOnly[1]),Number(dayOnly[2])-1,Number(dayOnly[3])))
-    :new Date(source);
-  return Number.isNaN(date.getTime())?source:date.toLocaleDateString(
-    getRegionalLocale(),dayOnly?{timeZone:'UTC'}:undefined);
+  if(dayOnly){
+    const date=utcCalendarDate(Number(dayOnly[1]),Number(dayOnly[2]),Number(dayOnly[3]));
+    return date?date.toLocaleDateString(getRegionalLocale(),{timeZone:'UTC'}):source;
+  }
+  const date=new Date(source);
+  return Number.isNaN(date.getTime())?source:date.toLocaleDateString(getRegionalLocale());
 };
 const regionalDateTime=value=>{
   if(value===null||value===undefined||value==='') return '—';
+  const source=String(value);
+  const dayOnly=/^(\d{4})-(\d{2})-(\d{2})(?:T|$)/.exec(source);
+  if(dayOnly&&!utcCalendarDate(Number(dayOnly[1]),Number(dayOnly[2]),Number(dayOnly[3])))
+    return source;
   const date=value instanceof Date?value:new Date(value);
   return Number.isNaN(date.getTime())?String(value)
     :date.toLocaleString(getRegionalLocale());
@@ -746,7 +757,8 @@ const regionalEpochDateTime=value=>{
 const regionalMonth=value=>{
   const match=/^(\d{4})-(\d{2})$/.exec(String(value||''));
   if(!match) return String(value||'');
-  const date=new Date(Date.UTC(Number(match[1]),Number(match[2])-1,1));
+  const date=utcCalendarDate(Number(match[1]),Number(match[2]),1);
+  if(!date) return String(value||'');
   return new Intl.DateTimeFormat(getRegionalLocale(),{
     month:'long',year:'numeric',timeZone:'UTC'}).format(date);
 };
