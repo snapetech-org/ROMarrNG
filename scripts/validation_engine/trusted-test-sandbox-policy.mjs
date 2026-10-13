@@ -132,9 +132,11 @@ export function sandboxMountOperations({
 const sensitiveName =
   /^(?:[.]env(?:$|[.](?!example$)[^/]+)|[.]ssh|[.]aws|[.]gnupg|id_(?:rsa|ed25519)|[.]git-credentials|[.]npmrc|[.]pypirc|[.]netrc|[^/]+[.](?:pem|key))$/iu;
 const sensitiveCredentialName =
-  /^\.?(?:auth(?:entication)?|tokens?|credentials?|secrets?)$/iu;
+  /^[.]?(?:auth(?:entication)?|tokens?|credentials?|secrets?|private[-_]?keys?|api[-_]?keys?|access[-_]?tokens?|refresh[-_]?tokens?|client[-_]?secrets?)$/iu;
 const sensitiveCredentialConfigFile =
-  /^\.?(?:auth(?:entication)?|tokens?|credentials?|secrets?)[.](?:json|ya?ml|toml|ini|cfg|conf|env|properties|xml|txt)$/iu;
+  /^[.]?(?:auth(?:entication)?|tokens?|credentials?|secrets?|private[-_]?keys?|api[-_]?keys?|access[-_]?tokens?|refresh[-_]?tokens?|client[-_]?secrets?)[.](?:json|ya?ml|toml|ini|cfg|conf|env|properties|xml|txt)$/iu;
+const sensitiveCredentialMaterialFile =
+  /^[.]?(?:private[-_]?keys?|api[-_]?keys?|access[-_]?tokens?|refresh[-_]?tokens?|client[-_]?secrets?)[.][^/]+$/iu;
 const sourceCodeFile =
   /[.](?:asm|bash|bat|c|cc|cjs|clj|cljs|cljc|cmd|cpp|cs|css|cxx|dart|ex|exs|go|h|hpp|hs|hxx|java|js|jsx|kt|kts|lua|m|mm|mjs|nix|php|pl|ps1|py|r|razor|rb|rs|scala|sh|sol|sql|swift|ts|tsx|vue|zsh)$/iu;
 
@@ -148,7 +150,8 @@ export function isSensitiveCandidatePath(relativePath) {
   const filename = segments.at(-1) ?? '';
   if (
     sensitiveCredentialName.test(filename) ||
-    sensitiveCredentialConfigFile.test(filename)
+    sensitiveCredentialConfigFile.test(filename) ||
+    sensitiveCredentialMaterialFile.test(filename)
   )
     return true;
 

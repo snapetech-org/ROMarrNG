@@ -25,8 +25,10 @@ node /path/to/trusted-test-launcher.mjs "$PWD"
 
 The launcher has no network access. It copies only Git-index paths into a
 temporary workspace, so untracked and ignored local files never enter the
-snapshot. Credential files are excluded even when extensionless or stored
-in credential-named folders, while token-like source files remain available.
+snapshot. Dotted and extensionless credentials, private/API keys,
+access/refresh-token names, client-secret names, and credential material with
+source-like extensions are excluded. Source files under credential-named
+folders remain available unless their own names identify credential material.
 Stage new candidate files before launching it. The sandbox hides the
 canonical checkout parent and common host configuration and data roots,
 including `/etc`, `/home`, `/run`, `/srv`, and `/tmp`. Standard program roots

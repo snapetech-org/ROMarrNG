@@ -6,4 +6,4 @@ action: none
 breaking: false
 ---
 
-Local validation snapshots exclude extensionless credentials and files in credential-named folders while retaining token-named source code. The trusted launcher pins sandbox mounts before hiding host paths; task logs are capped at 16 MiB, and receipts stay tied to the workflow attempt that produced them.
+Validation runs keep app source and runtime assets needed for tests while excluding credential files from isolated workspaces. This closes accidental credential exposure without breaking application checks.
