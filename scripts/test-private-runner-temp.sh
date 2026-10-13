@@ -23,6 +23,7 @@ unsafe_parent="$scratch_root/unsafe-parent"
 unsafe_temp="$unsafe_parent/runner-temp"
 outside_env="$scratch_root/outside-env"
 outside_output="$scratch_root/outside-output"
+outside_private_temp="$scratch_root/outside-private-temp"
 
 remove_private_temp_if_contained() {
   [[ -n "$private_temp" && -d "$private_temp" && ! -L "$private_temp" \
@@ -37,6 +38,8 @@ remove_private_temp_if_contained() {
 
 cleanup() {
   [[ -L "$unsafe_link" ]] && unlink -- "$unsafe_link" 2>/dev/null || true
+  [[ -d "$outside_private_temp" && ! -L "$outside_private_temp" ]] \
+    && rmdir -- "$outside_private_temp" 2>/dev/null || true
   [[ -f "$outside_env" ]] && unlink -- "$outside_env" 2>/dev/null || true
   [[ -f "$outside_output" ]] && unlink -- "$outside_output" 2>/dev/null || true
   [[ -f "$github_env" ]] && unlink -- "$github_env" 2>/dev/null || true
@@ -67,6 +70,14 @@ GITHUB_OUTPUT="$github_output" \
 bash "$helper"
 
 private_temp="$(sed -n 's/^path=//p' "$github_output")"
+helper_private_temp="$private_temp"
+mkdir -m 700 -- "$outside_private_temp"
+private_temp="$outside_private_temp"
+remove_private_temp_if_contained
+[[ -d "$outside_private_temp" ]] \
+  || { printf 'Cleanup removed a directory outside RUNNER_TEMP.\n' >&2; exit 1; }
+rmdir -- "$outside_private_temp"
+private_temp="$helper_private_temp"
 [[ -n "$private_temp" && -d "$private_temp" && ! -L "$private_temp" ]] \
   || { printf 'Private job directory was not exported safely.\n' >&2; exit 1; }
 [[ "$private_temp" == "$runner_temp"/* ]] \
