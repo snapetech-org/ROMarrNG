@@ -6,4 +6,4 @@ action: none
 breaking: false
 ---
 
-Validation runs keep app source and runtime assets needed for tests while excluding credential files from isolated workspaces. This closes accidental credential exposure without breaking application checks.
+Validation snapshots exclude dotted and extensionless credentials, private/API keys, access/refresh-token and client-secret material, suffixed dotenv credentials, and non-source files under credential folders. Source modules and safe templates such as tokens.env.example remain available to tests.
