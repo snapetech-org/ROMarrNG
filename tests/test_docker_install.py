@@ -271,7 +271,7 @@ def test_the_install_guide_exists_and_the_readme_sends_people_to_it():
     assert "docs/INSTALL.md" in README.read_text(encoding="utf-8"), (
         "the full install guide is unreachable from the README")
 
-def test_only_main_pushes_use_the_server_local_validation_runner():
+def test_public_workflow_uses_hosted_runners_and_only_main_pushes_trigger():
     workflow = (ROOT / ".github" / "workflows" / "docker.yml").read_text(
         encoding="utf-8"
     )
@@ -282,14 +282,9 @@ def test_only_main_pushes_use_the_server_local_validation_runner():
     test_job = workflow.split("  test:\n", 1)[1].split(
         "\n  validation-environment-portability:", 1
     )[0]
-    assert "github.event_name == 'push' && github.ref == 'refs/heads/main'" in test_job
-    assert "github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'" in test_job
-    assert "startsWith(github.ref, 'refs/heads/')" not in test_job
-    assert (
-        "fromJSON('[\"self-hosted\",\"Linux\",\"X64\",\"host\",\"linux-build\",\"linux-amd64\",\"kspls0\"]')"
-        in test_job
-    )
-    assert "|| fromJSON('[\"ubuntu-latest\"]')" in test_job
+    assert "runs-on: ubuntu-latest" in test_job
+    assert "fromJSON(" not in test_job
+    assert "fromJSON('[\"self-hosted\"" not in workflow
     assert "prepare-private-runner-temp.sh" in test_job
     assert "PRIVATE_RUNNER_TEMP_PREFIX: romarr" in test_job
     helper = (ROOT / "scripts" / "prepare-private-runner-temp.sh").read_text(
