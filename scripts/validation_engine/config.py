@@ -43,7 +43,10 @@ TASKS = (
         "name": "Install pytest dependencies into disposable environment",
         "stage": "prepare",
         "kind": "setup",
-        "command": ["{PYTHON}", "-m", "pip", "install", "--disable-pip-version-check", "--no-cache-dir", "-r", "requirements.txt", "pytest"],
+        "command": [
+            "{PYTHON}", "-m", "pip", "install", "--disable-pip-version-check",
+            "--no-cache-dir", "-r", "requirements.txt", "pytest", "PyYAML",
+        ],
         "pass_env": [
             "HTTP_PROXY", "HTTPS_PROXY", "ALL_PROXY", "NO_PROXY",
             "http_proxy", "https_proxy", "all_proxy", "no_proxy",

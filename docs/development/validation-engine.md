@@ -10,9 +10,10 @@ node /path/to/trusted-test-launcher.mjs "$PWD" -- python3.13 -m pytest tests/ -q
 ```
 
 The local command runs an already-configured Python 3.13 environment inside the
-trusted, offline Linux bubblewrap launcher. Have pytest and `requirements.txt`
-dependencies installed in that environment before running it; the launcher
-does not install candidate dependencies or inherit package-index credentials.
+trusted, offline Linux bubblewrap launcher. Have pytest, test-only PyYAML, and
+`requirements.txt` dependencies installed in that environment before running
+it; the launcher does not install candidate dependencies or inherit
+package-index credentials.
 When evaluating an unreviewed branch, copy `trusted-test-launcher.mjs` and
 `trusted-test-sandbox-policy.mjs` from the same reviewed revision to a location
 outside the checkout, keeping them together. Its default command is the same
@@ -45,8 +46,8 @@ organization with runner groups restricted to trusted workflow refs, that
 enforcement can be reconsidered. The Linux validation job uses `setup-python`
 with Python 3.13 and creates its temporary workspace beneath
 `RUNNER_TEMP`. It uses the validation engine to install repository
-requirements and pytest in a task environment before running the native
-suite. The test task uses
+requirements, pytest, and test-only PyYAML in a task environment before
+running the native suite. The test task uses
 `pytest.ini` as configured, including its default `not network`
 marker, so tests that reach the public internet remain deselected. The engine
 counts passed, skipped, failed, and deselected tests from pytest's summary and
@@ -93,7 +94,7 @@ source snapshot; it does not replace the local test evidence.
 The `install-test-dependencies` task runs only in hosted CI. Running the engine's
 `--tests-only` selection locally is intentionally refused because it includes
 that package-install task; use the trusted launcher with the preconfigured
-Python environment instead. The workflow currently installs `requirements.txt`
-and pytest without a Python dependency lockfile. The engine binds those
-manifests and the Python 3.13 runtime, but dependency versions are not yet
-reproducible from a lockfile.
+Python environment instead. The workflow currently installs `requirements.txt`,
+pytest, and test-only PyYAML without a Python dependency lockfile. The engine
+binds those manifests and the Python 3.13 runtime, but dependency versions are
+not yet reproducible from a lockfile.
