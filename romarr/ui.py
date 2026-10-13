@@ -617,34 +617,37 @@ def _theme_control_html() -> str:
     """The mode switch and the accent swatches, for the rail's footer."""
     swatches = "".join(
         f'<button class="sw" type="button" data-accent="{value}" '
-        f'style="--sw:{value}" title="{name}" '
+        f'style="--sw:{value}" data-i18n-title="{name} accent" '
+        f'data-i18n-aria-label="{name} accent" title="{name} accent" '
         f'aria-label="{name} accent"></button>'
         for value, name in ACCENTS
     )
     language_options = ''.join(
-        f'<option value="{code}">{label}</option>'
-        for code, label in [
-            ('en', 'English'), ('es', 'Español — Spanish'), ('zh-Hans', '简体中文 — Simplified Chinese'), ('hi', 'हिन्दी — Hindi'),
-            ('de', 'Deutsch — German'), ('ja', '日本語 — Japanese'), ('fr', 'Français — French'), ('pt-BR', 'Português (Brasil) — Brazilian Portuguese'),
-            ('ko', '한국어 — Korean'), ('zh-Hant', '繁體中文 — Traditional Chinese'), ('vi', 'Tiếng Việt — Vietnamese'), ('id', 'Bahasa Indonesia — Indonesian'),
+        f'<option value="{code}"{direction}>{label}</option>'
+        for code, label, direction in [
+            ('en', 'English', ''), ('es', 'Español', ''), ('zh-Hans', '简体中文', ''), ('hi', 'हिन्दी', ''),
+            ('de', 'Deutsch', ''), ('ja', '日本語', ''), ('fr', 'Français', ''), ('pt-BR', 'Português (Brasil)', ''),
+            ('ar', 'العربية', ' dir="rtl"'), ('ko', '한국어', ''), ('zh-Hant', '繁體中文', ''), ('vi', 'Tiếng Việt', ''), ('id', 'Bahasa Indonesia', ''),
         ]
     )
     return (
         '<div id="railfoot">'
         '<label class="thm-lbl" for="interface-language" data-i18n="Interface language">Interface language</label>'
         f'<select id="interface-language" style="width:100%;margin:0 0 10px;padding:7px 8px;background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:7px">{language_options}</select>'
-        '<div class="thm-lbl">Theme</div>'
-        '<div class="thm-modes" role="group" aria-label="Colour mode">'
+        '<div class="thm-lbl" data-i18n="Theme">Theme</div>'
+        '<div class="thm-modes" role="group" data-i18n-aria-label="Colour mode" aria-label="Colour mode">'
         '<button class="thm" type="button" data-theme-set="dark" '
-        'title="Dark">Dark</button>'
+        'data-i18n="Dark" data-i18n-title="Dark" title="Dark">Dark</button>'
         '<button class="thm" type="button" data-theme-set="light" '
-        'title="Light">Light</button>'
+        'data-i18n="Light" data-i18n-title="Light" title="Light">Light</button>'
         '<button class="thm" type="button" data-theme-set="sepia" '
-        'title="Easy on the eyes — warm, low contrast, less blue light">'
-        'Easy</button></div>'
+        'data-i18n="Sepia" data-i18n-title="Warm sepia theme with low contrast and less blue light" '
+        'title="Warm sepia theme with low contrast and less blue light">'
+        'Sepia</button></div>'
         f'<div class="thm-accents">{swatches}'
-        '<label class="sw pick" title="Any colour you like">'
+        '<label class="sw pick" data-i18n-title="Custom accent colour" title="Custom accent colour">'
         f'<input type="color" id="accent-pick" value="{ACCENTS[0][0]}" '
+        'data-i18n-aria-label="Custom accent colour" '
         'aria-label="Custom accent colour"></label>'
         '</div></div>'
     )
@@ -692,12 +695,18 @@ JS = r"""
 const UI_LABELS=__UI_LABELS__;
 const $=s=>document.querySelector(s);
 const INTERFACE_LANGUAGE_KEY='romarrng.interface-language';
-const INTERFACE_LANGUAGES=['en','es','zh-Hans','hi','de','ja','fr','pt-BR','ko','zh-Hant','vi','id'];
+const INTERFACE_LANGUAGES=['en','es','zh-Hans','hi','de','ja','fr','pt-BR','ar','ko','zh-Hant','vi','id'];
 let activeInterfaceLanguage=null;
 const browserInterfaceLanguage=()=>{
   for(const candidate of (navigator.languages&&navigator.languages.length?navigator.languages:[navigator.language])){
     const normalized=String(candidate||'').toLowerCase(), base=normalized.split(/[-_]/)[0];
-    if(base==='zh') return /(?:hant|tw|hk|mo)/.test(normalized)?'zh-Hant':'zh-Hans';
+    if(base==='zh'){
+      const subtags=normalized.replace(/_/g,'-').split('-').slice(1);
+      const script=subtags.find(part=>/^(hans|hant)$/.test(part));
+      if(script) return script==='hant'?'zh-Hant':'zh-Hans';
+      const region=subtags.find(part=>/^[a-z]{2}$/.test(part));
+      return region&&/^(tw|hk|mo)$/.test(region)?'zh-Hant':'zh-Hans';
+    }
     if(base==='pt') return 'pt-BR';
     if(INTERFACE_LANGUAGES.includes(base)) return base;
   }
@@ -709,22 +718,140 @@ const readInterfaceLanguage=()=>{
   catch(_){return browserInterfaceLanguage();}
 };
 const translateLabel=(source,language)=>UI_LABELS[source]?.[language]||source;
+const translateTemplate=(source,values,language=readInterfaceLanguage())=>
+  translateLabel(source,language).replace(/\{([A-Za-z][A-Za-z0-9_]*)\}/g,(placeholder,name)=>
+    Object.hasOwn(values,name)?'\u2068'+String(values[name]??'')+'\u2069':placeholder);
+const ACCOUNT_IMPORT_HELP=`Steam is a true one-click: Steam's own "Sign in through Steam", no key, no app registration — it comes straight back with your library connected. Epic, EA and Battle.net pull your owned library through the same web APIs Playnite uses — none of them issues an application key, so each opens the page your signed-in browser already has and takes one paste. GOG needs only your public profile name.`;
+const GGR_WEBHOOK_HELP=`Restart GG Requestz after changing its environment. In GG Requestz 1.5+, the webhook fires when a request becomes approved; enable request.auto_approve or approve it manually. A successful delivery now receives HTTP 202. Rejected payloads receive HTTP 422 and are named in both applications' logs.`;
+const ROMM_FRIEND_HELP=`Your friend does not need to run ROMarr. If they use RomM, ask them for an account and choose Add a RomM server. RomM publishes a hash for every ROM, so browsing and netplay matching work without installing anything on their server. The account gets the access their RomM grants; ROMarr cannot narrow it.`;
+const NETPLAY_HELP=`Netplay matches each ROM by its SHA1, not by its title. “Super Mario Kart” can refer to four different ROMs; two incorrect matches may desync within seconds and look like lag. ROMarr can match only games whose hashes it knows.`;
+const NO_HASHES_HELP=`No hashes have been recorded yet, so all netplay offers will show as missing. ROMarr reads each ROM's SHA1 from the library server automatically.`;
+const GG_ADDRESS_HELP=`Use {url} on the same Docker network. Otherwise use ROMarr's LAN or HTTPS URL, reachable from GG Requestz.`;
+const ROM_SITE_HELP=`ROM sites use plain HTTP through the Direct HTTP client. Some sites require a form that their own page submits, so those need the Headless Browser client to load the page and submit the form. Sites that require a CAPTCHA or bot-detection challenge are reported as unavailable instead of being bypassed.`;
+const DOWNLOAD_STATE_LABELS={queued:'Queued',grabbed:'Grabbed',imported:'Imported',
+  failed:'Failed','import-failed':'Import failed',cancelled:'Cancelled',
+  available:'Available',downloading:'Downloading',importing:'Importing',done:'Done'};
+const interfaceMarkup=source=>'<span data-i18n="'+esc(source)+'">'
+  +esc(translateLabel(source,readInterfaceLanguage()))+'</span>';
+const interfaceTemplateMarkup=(source,values)=>'<span data-i18n-template="'+esc(source)
+  +'" data-i18n-values="'+esc(JSON.stringify(values))+'">'
+  +esc(translateTemplate(source,values))+'</span>';
+const statusMarkup=value=>{
+  const raw=String(value??''),source=DOWNLOAD_STATE_LABELS[raw];
+  return source
+    ? interfaceMarkup(source)
+    : '<span lang="und" dir="auto">'+esc(raw)+'</span>';
+};
 const applyTranslatedLabel=(el,language)=>{
   const source=el.dataset.i18n, translated=UI_LABELS[source]?.[language];
   el.textContent=translateLabel(source,language);
   el.lang=translated?language:'en';
   el.dir=translated&&language==='ar'?'rtl':'ltr';
 };
+const applyTranslatedLabels=(root,language)=>{
+  const elements=[];
+  if(root.nodeType===Node.ELEMENT_NODE&&root.matches?.('[data-i18n]'))elements.push(root);
+  if(root.querySelectorAll)elements.push(...root.querySelectorAll('[data-i18n]'));
+  for(const el of elements)applyTranslatedLabel(el,language);
+};
+const applyTranslatedTemplates=(root,language)=>{
+  const elements=[];
+  if(root.nodeType===Node.ELEMENT_NODE&&root.matches?.('[data-i18n-template]'))elements.push(root);
+  if(root.querySelectorAll)elements.push(...root.querySelectorAll('[data-i18n-template]'));
+  for(const el of elements){
+    let values={};
+    try{values=JSON.parse(el.dataset.i18nValues||'{}')}catch(_){continue}
+    const translated=Boolean(UI_LABELS[el.dataset.i18nTemplate]?.[language]);
+    el.textContent=translateTemplate(el.dataset.i18nTemplate,values,language);
+    el.lang=translated?language:'en';
+    el.dir=translated&&language==='ar'?'rtl':'ltr';
+  }
+};
+const applyTranslatedAttribute=(el,source,attribute,language)=>{
+  const translated=UI_LABELS[source]?.[language];
+  el.setAttribute(attribute,translateLabel(source,language));
+  el.lang=translated?language:'en';
+  el.dir=translated&&language==='ar'?'rtl':'ltr';
+};
+const translatedTextSources=new WeakMap();
+const translatedAttributeSources=new WeakMap();
+const applyTranslatedTextNode=(node,language)=>{
+  const parent=node.parentElement;
+  if(!parent||parent.closest('script,style,textarea,input,select,[contenteditable="true"],[lang="und"],[data-i18n]'))return;
+  const original=translatedTextSources.get(node)||node.data.trim().replace(/\s+/g,' ');
+  if(!Object.hasOwn(UI_LABELS,original))return;
+  translatedTextSources.set(node,original);
+  const leading=node.data.match(/^\s*/)?.[0]||'',trailing=node.data.match(/\s*$/)?.[0]||'';
+  const value=leading+translateLabel(original,language)+trailing;
+  if(node.data!==value)node.data=value;
+  const translated=Boolean(UI_LABELS[original]?.[language]);
+  parent.lang=translated?language:'en';
+  parent.dir=translated&&language==='ar'?'rtl':'ltr';
+};
+const applyTranslatedTextTree=(root,language)=>{
+  if(root.nodeType===Node.TEXT_NODE){applyTranslatedTextNode(root,language);return;}
+  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
+  while(walker.nextNode())applyTranslatedTextNode(walker.currentNode,language);
+};
+const keepPlaceholderLiteral=source=>/^(?:https?:\/\/|[a-z]+\.[a-z.]+\/|[A-Z0-9_-]{5,}$|[a-z0-9_-]+(?:,\s*[a-z0-9_-]+)+$)/i.test(source)
+  ||['Dave\'s RomM','K7RM-9TFQ','Phantasy Star IV','Super Mario World','Your Plugin','your-plugin','search, importer','snes, n64'].includes(source);
+const applyTranslatedAttributes=(root,language)=>{
+  const elements=[];
+  if(root.nodeType===Node.ELEMENT_NODE)elements.push(root);
+  if(root.querySelectorAll)elements.push(...root.querySelectorAll('[title],[aria-label],[placeholder],[data-i18n-title],[data-i18n-aria-label],[data-i18n-placeholder]'));
+  for(const el of elements){
+    for(const [attribute,marker] of [['title','data-i18n-title'],['aria-label','data-i18n-aria-label'],['placeholder','data-i18n-placeholder']]){
+      const explicit=el.getAttribute(marker),current=el.getAttribute(attribute);
+      if(explicit===null&&current===null)continue;
+      if(explicit===null&&el.closest('[lang="und"]'))continue;
+      let source=explicit;
+      if(source===null){
+        if(attribute==='placeholder'&&keepPlaceholderLiteral(current))continue;
+        let tracked=translatedAttributeSources.get(el);
+        if(!tracked){tracked=new Map();translatedAttributeSources.set(el,tracked)}
+        source=tracked.get(attribute)||current;
+        tracked.set(attribute,source);
+      }
+      if(!Object.hasOwn(UI_LABELS,source))continue;
+      const localized=Boolean(UI_LABELS[source]?.[language]);
+      el.setAttribute(attribute,translateLabel(source,language));
+      el.lang=localized?language:'en';
+      el.dir=localized&&language==='ar'?'rtl':'ltr';
+    }
+  }
+};
+let interfaceTextObserver=null;
+const observeInterfaceText=()=>{
+  if(interfaceTextObserver||!document.body)return;
+  interfaceTextObserver=new MutationObserver(records=>{
+    for(const record of records){
+      if(record.type==='characterData')applyTranslatedTextNode(record.target,readInterfaceLanguage());
+      for(const node of record.addedNodes){
+        applyTranslatedLabels(node,readInterfaceLanguage());
+        applyTranslatedTemplates(node,readInterfaceLanguage());
+        applyTranslatedTextTree(node,readInterfaceLanguage());
+        applyTranslatedAttributes(node,readInterfaceLanguage());
+      }
+    }
+  });
+  interfaceTextObserver.observe(document.body,{subtree:true,childList:true,characterData:true});
+};
 const applyInterfaceLanguage=(language=readInterfaceLanguage())=>{
-  document.documentElement.lang='en';
-  document.documentElement.dir='ltr';
-  document.querySelectorAll('[data-i18n]').forEach(el=>applyTranslatedLabel(el,language));
+  document.documentElement.lang=language;
+  document.documentElement.dir=language==='ar'?'rtl':'ltr';
+  applyTranslatedLabels(document,language);
+  applyTranslatedTemplates(document,language);
+  document.querySelectorAll('[data-i18n-aria-label]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nAriaLabel,'aria-label',language));
+  document.querySelectorAll('[data-i18n-title]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nTitle,'title',language));
   document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{
     const source=el.dataset.i18nPlaceholder, translated=UI_LABELS[source]?.[language];
     el.placeholder=translateLabel(source,language);
     el.lang=translated?language:'en';
     el.dir=translated&&language==='ar'?'rtl':'ltr';
   });
+  applyTranslatedTextTree(document.body,language);
+  applyTranslatedAttributes(document.body,language);
+  observeInterfaceText();
   const selector=$('#interface-language'); if(selector) selector.value=language;
 };
 const j=(u,o)=>fetch(u,o).then(r=>r.json());
@@ -734,6 +861,7 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>
 // glance instead of a digit-counting exercise.
 const REGIONAL_FORMAT_KEY='romarrng.regional-format';
 const REGIONAL_FORMATS=[["system", "Use browser settings"], ["es", "Español — Spanish"], ["zh-CN", "简体中文 — Chinese (Simplified)"], ["hi-IN", "हिन्दी — Hindi"], ["de", "Deutsch — German"], ["ja", "日本語 — Japanese"], ["fr", "Français — French"], ["pt-BR", "Português (Brasil) — Brazilian Portuguese"], ["ar", "العربية — Arabic"], ["ko", "한국어 — Korean"], ["zh-TW", "繁體中文 — Chinese (Traditional)"], ["vi", "Tiếng Việt — Vietnamese"], ["id", "Bahasa Indonesia — Indonesian"]];
+const REGIONAL_LANGUAGE_TAGS={es:'es','zh-CN':'zh-Hans','hi-IN':'hi',de:'de',ja:'ja',fr:'fr','pt-BR':'pt-BR',ar:'ar',ko:'ko','zh-TW':'zh-Hant',vi:'vi',id:'id'};
 const readRegionalPreference=()=>{
   try{
     const value=localStorage.getItem(REGIONAL_FORMAT_KEY);
@@ -780,7 +908,9 @@ const regionalFormatField=()=>{
     const translation=code==='system'
       ? ' data-i18n="'+esc(label)+'"'+metadata(label)
       : '';
-    return '<option value="'+esc(code)+'"'+translation+(code===current?' selected':'')+'>'+esc(text)+'</option>';
+    const optionLanguage=REGIONAL_LANGUAGE_TAGS[code]||'en';
+    const optionDirection=code==='ar'?'rtl':'ltr';
+    return '<option value="'+esc(code)+'" lang="'+optionLanguage+'" dir="'+optionDirection+'"'+translation+(code===current?' selected':'')+'>'+esc(text)+'</option>';
   }).join('');
   const formatLabel='Date, time, and number format';
   const formatHelp='This changes date and number formats only; it is separate from interface language.';
@@ -844,10 +974,29 @@ const regionalYear=value=>{
 };
 let PLATFORMS=[], SETTINGS={};
 
-function toast(msg){
+function toast(msg,language='en',direction='ltr'){
   const t=document.createElement('div');
-  t.className='toast'; t.textContent=msg; document.body.append(t);
+  t.className='toast'; t.lang=language; t.dir=direction; t.textContent=msg; document.body.append(t);
   setTimeout(()=>t.remove(),4200);
+}
+function toastLabel(source){
+  const language=readInterfaceLanguage(), translated=UI_LABELS[source]?.[language];
+  toast(translateLabel(source,language),translated?language:'en',translated&&language==='ar'?'rtl':'ltr');
+}
+function toastMessage(source,values={}){
+  const language=readInterfaceLanguage(), translated=Boolean(UI_LABELS[source]?.[language]);
+  toast(translateTemplate(source,values,language),translated?language:'en',translated&&language==='ar'?'rtl':'ltr');
+}
+function toastAppMessage(message){
+  const source=String(message??'');
+  if(Object.hasOwn(UI_LABELS,source))toastLabel(source);
+  else if(source)toast(source);
+}
+function confirmMessage(source,values={}){
+  return window.confirm(translateTemplate(source,values,readInterfaceLanguage()));
+}
+function promptMessage(source,values={},defaultValue=''){
+  return window.prompt(translateTemplate(source,values,readInterfaceLanguage()),defaultValue);
 }
 
 /* ---------------- routing ---------------- */
@@ -1080,7 +1229,10 @@ const SOURCE_LABEL={
   cloud:'Catalogued, source unknown'};
 RENDER.library=async()=>{
   const p=$('#page');
-  if(!p.querySelector('#lib-grid')) p.innerHTML='<div class="empty">Loading library…</div>';
+  if(!p.querySelector('#lib-grid')){
+    p.innerHTML='<div class="empty" data-i18n="Reading the library">Reading the library</div>';
+    applyInterfaceLanguage();
+  }
   const q=($('#search').value||'').trim();
   const d=await j(`/api/v1/game?platform=${encodeURIComponent(LIB.platform)}`
     +`&q=${encodeURIComponent(q)}&offset=${LIB.offset}&limit=${LIB.limit}`
@@ -1095,9 +1247,10 @@ RENDER.library=async()=>{
   if(d.loading){
     // The first fetch has not landed yet. Say so, rather than showing an
     // empty grid that reads as "your library is empty".
-    p.innerHTML=`<div class="card"><h3>Reading the library</h3>
-      <p class="help">${esc(d.message||'Fetching from RomM…')}
-      ${d.error?` Last attempt: <b>${esc(d.error)}</b>. Retrying with backoff.`:''}</p></div>`;
+    p.innerHTML=`<div class="card"><h3 data-i18n="Reading the library">Reading the library</h3>
+      <p class="help">${d.message?`<span lang="und" dir="auto">${esc(d.message)}</span>`:'<span data-i18n="Fetching from RomM…">Fetching from RomM…</span>'}
+      ${d.error?` <span data-i18n="Last attempt:">Last attempt:</span> <b lang="und" dir="auto">${esc(d.error)}</b>. <span data-i18n="Retrying with backoff.">Retrying with backoff.</span>`:''}</p></div>`;
+    applyInterfaceLanguage();
     return;
   }
 
@@ -1155,12 +1308,9 @@ RENDER.library=async()=>{
       so anything ROMarr cannot place stays “source unknown” rather than
       being filed under a guess.</p>`:''}
     ${T.counted_from==='cached rows'
-      ?`<p class="help" style="margin:6px 0 0">Counted from the ${num(d.cached_total)}
-        rows read so far — this library server does not report the split
-        itself${d.partial?', and the read is still running':''}.</p>`
+      ?`<p class="help" style="margin:6px 0 0">${interfaceTemplateMarkup('Read {count} rows so far. The library server does not report how many are on disk versus catalogued.',{count:num(d.cached_total)})}${d.partial?' '+interfaceMarkup('The read is still in progress.'):''}</p>`
       :((T.total!==null&&T.total!==undefined&&d.cached_total<T.total)
-        ?`<p class="help" style="margin:6px 0 0">${num(d.cached_total)} of those
-          are loaded and browsable here${d.partial?' — still reading':''}.</p>`:'')}
+        ?`<p class="help" style="margin:6px 0 0">${interfaceTemplateMarkup('{count} rows are loaded and browsable here.',{count:num(d.cached_total)})}${d.partial?' '+interfaceMarkup('The read is still in progress.'):''}</p>`:'')}
   </div>`;
   const head=banner+`<div class="row" style="flex-wrap:wrap;gap:6px;margin-bottom:10px">
       <button class="btn ${LIB.platform?'ghost':''}" data-plat=""
@@ -1182,16 +1332,15 @@ RENDER.library=async()=>{
       </select>
       ${(LIB.genre||LIB.region||LIB.decade||LIB.origin||LIB.source||LIB.sort)
         ?'<button class="btn ghost" id="lf-clear" data-i18n="Clear filters" style="padding:4px 10px;font-size:12px">Clear filters</button>':''}
-      ${(f.genres||[]).length?`<span class="help" style="margin:0;font-size:11.5px">
-        genre/year known for ${fmt(f.identified)} of ${fmt(d.grand_total)} (${fmt(coverage)}%) —
-        run a metadata scan in your library server to raise it</span>`:''}
+      ${(f.genres||[]).length?`<span class="help" style="margin:0;font-size:11.5px" data-i18n-template="genre/year known for {identified} of {total} ({coverage}%) — run a metadata scan in your library server to raise it"
+        data-i18n-values="${esc(JSON.stringify({identified:fmt(f.identified),total:fmt(d.grand_total),coverage:fmt(coverage)}))}">${esc(translateTemplate('genre/year known for {identified} of {total} ({coverage}%) — run a metadata scan in your library server to raise it',{identified:fmt(f.identified),total:fmt(d.grand_total),coverage:fmt(coverage)}))}</span>`:''}
     </div>
     <p class="help" style="margin-bottom:10px">
-      Showing ${fmt(d.total?LIB.offset+1:0)}–${fmt(Math.min(LIB.offset+items.length,d.total))}
-      of ${fmt(d.total)}${LIB.platform?` on ${esc(LIB.platform)}`:''}${q?` matching “${esc(q)}”`:''}
-      · ${fmt(d.grand_total)} cached across ${fmt((d.platforms||[]).length)} platforms
-      ${d.partial?' · <b>still loading from the library server…</b>':''}
-      ${d.error?` · <span style="color:var(--warn)">last refresh: ${esc(d.error)}</span>`:''}</p>`;
+      ${interfaceTemplateMarkup('Showing {start}–{end} of {total}',{start:fmt(d.total?LIB.offset+1:0),end:fmt(Math.min(LIB.offset+items.length,d.total)),total:fmt(d.total)})}
+      ${LIB.platform?` ${interfaceTemplateMarkup('on {platform}',{platform:LIB.platform})}`:''}${q?` ${interfaceTemplateMarkup('matching “{query}”',{query:q})}`:''}
+      · ${interfaceTemplateMarkup('{cached} cached across {platformCount} platforms',{cached:fmt(d.grand_total),platformCount:fmt((d.platforms||[]).length)})}
+      ${d.partial?` · <b>${interfaceMarkup('still loading from the library server…')}</b>`:''}
+      ${d.error?` · <span style="color:var(--warn)">${interfaceTemplateMarkup('Last refresh: {error}',{error:d.error})}</span>`:''}</p>`;
 
   if(!items.length){
     p.innerHTML=head+`<div class="empty">
@@ -1215,8 +1364,8 @@ RENDER.library=async()=>{
   const grid=`<div class="grid" id="lib-grid">${items.map((g,i)=>`<div class="tile"
       data-shelf="${i}" style="cursor:pointer" title="Click to set status, rating, notes">
     <div class="art" style="background-image:url('${esc(g.cover||'')}')"></div>
-    <div class="nm">${esc(g.name)}</div>
-    <div class="pf">${esc(g.platform||'')}</div>${mark(g)}</div>`).join('')}</div>`;
+    <div class="nm" lang="und" dir="auto">${esc(g.name)}</div>
+    <div class="pf" lang="und" dir="auto">${esc(g.platform||'')}</div>${mark(g)}</div>`).join('')}</div>`;
   const more=LIB.offset+items.length<d.total
     ?`<div class="row" style="justify-content:center;margin:16px 0">
        <button class="btn" id="lib-more"><span data-i18n="Show more">Show more</span>
@@ -1253,7 +1402,7 @@ function shelfEditor(g, meta){
   m.className='modal';
   const opt=(v,label)=>`<option value="${v}"${(meta.status||'')===v?' selected':''}>${label}</option>`;
   m.innerHTML=`<div class="box">
-    <h3>${esc(g.name)}</h3>
+    <h3 lang="und" dir="auto">${esc(g.name)}</h3>
     <div class="sub">${esc(g.platform||'')} &mdash; the shelf: what you are
       doing with this game, and what you thought of it.</div>
     <div class="field"><label>Status</label>
@@ -1280,18 +1429,17 @@ function shelfEditor(g, meta){
       body:JSON.stringify({platform:g.platform||'',game:g.name,
         status:f.status,rating:Number(f.rating)||0,notes:f.notes})});
     closeModal();
-    toast(r.error?r.error:'Saved'); if(!r.error) go('library');
+    if(r.error)toastAppMessage(r.error);else toastLabel('Saved'); if(!r.error) go('library');
   };
 }
 
 RENDER.add=async()=>{
   $('#page').innerHTML=`<div class="card">
     <h3 data-i18n="Request a game">Request a game</h3>
-    <p class="help">ROMarr searches your indexers, picks the healthiest release
-      for the platform, hands it to the download client and files the ROM into RomM.</p>
+    <p class="help" data-i18n="ROMarr searches your indexers, picks the healthiest release for the platform, hands it to the download client and files the ROM into RomM.">ROMarr searches your indexers, picks the healthiest release for the platform, hands it to the download client and files the ROM into RomM.</p>
     <div class="row">
       <div class="field" style="flex:1;margin:0"><label data-i18n="Game">Game</label>
-        <input type="text" id="g-name" placeholder="Super Mario World"></div>
+        <input type="text" id="g-name" placeholder="Super Mario World" lang="und" dir="auto"></div>
       <div class="field" style="width:230px;margin:0"><label data-i18n="Platform">Platform</label>
         <select id="g-plat">${PLATFORMS.map(p=>
           `<option value="${esc(p.slug)}">${esc(p.name)}</option>`).join('')}</select></div>
@@ -1301,16 +1449,16 @@ RENDER.add=async()=>{
   applyInterfaceLanguage();
   $('#g-go').onclick=async()=>{
     const game=$('#g-name').value.trim(), platform=$('#g-plat').value;
-    if(!game){toast(translateLabel('Enter a game name',readInterfaceLanguage()));return;}
+    if(!game){toastLabel('Enter a game name');return;}
     $('#g-out').innerHTML='<div class="empty" data-i18n="Searching indexers…">Searching indexers…</div>'; applyInterfaceLanguage();
     const r=await j('/api/request',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({game,platform})});
     $('#g-out').innerHTML=r.ok
       ? `<div class="card" style="margin:0"><h3 data-i18n="Grabbed">Grabbed</h3>
-         <p class="help">${esc(r.release)} — ${num(r.seeders)} seeders</p></div>`
+         <p class="help"><span lang="und" dir="auto">${esc(r.release)}</span> — ${num(r.seeders)} seeders</p></div>`
        : `<div class="card" style="margin:0"><h3 data-i18n="Not grabbed">Not grabbed</h3>
-         <p class="help">${esc(r.error||'no usable release')}</p></div>`;
+         <p class="help" lang="und" dir="auto">${esc(r.error||'no usable release')}</p></div>`;
     applyInterfaceLanguage();
     refreshCounts();
   };
@@ -1319,22 +1467,16 @@ RENDER.add=async()=>{
 RENDER.search=async()=>{
   $('#page').innerHTML=`<div class="card">
     <h3 data-i18n="Interactive search">Interactive search</h3>
-    <p class="help">Every release your indexers returned, scored, with the
-      reasoning shown &mdash; and a Grab button, so you can overrule the ranking
-      when you disagree with it. This is the page to reach for when a request
-      took the wrong release: the reason it outranked the one you wanted is
-      written next to it.</p>
+    <p class="help" data-i18n="Every release your indexers returned, scored, with the reasoning shown — and a Grab button, so you can overrule the ranking when you disagree with it. This is the page to reach for when a request took the wrong release: the reason it outranked the one you wanted is written next to it.">Every release your indexers returned, scored, with the reasoning shown &mdash; and a Grab button, so you can overrule the ranking when you disagree with it. This is the page to reach for when a request took the wrong release: the reason it outranked the one you wanted is written next to it.</p>
     <div class="row">
       <div class="field" style="flex:1;margin:0"><label data-i18n="Game">Game</label>
-        <input type="text" id="s-name" placeholder="Phantasy Star IV"></div>
+        <input type="text" id="s-name" placeholder="Phantasy Star IV" lang="und" dir="auto"></div>
       <div class="field" style="width:230px;margin:0"><label data-i18n="Platform">Platform</label>
         <select id="s-plat"><option value="" data-i18n="Any platform">Any platform</option>${PLATFORMS.map(p=>
           `<option value="${esc(p.slug)}">${esc(p.name)}</option>`).join('')}</select></div>
       <button class="btn" id="s-go" data-i18n="Search" style="margin-top:20px">Search</button>
     </div>
-    <p class="help" style="margin-top:10px">Without a platform there is no
-      platform evidence to score on, so the ranking means less. Pick one when
-      you can.</p>
+    <p class="help" style="margin-top:10px" data-i18n="Without a platform there is no platform evidence to score on, so the ranking means less. Pick one when you can.">Without a platform there is no platform evidence to score on, so the ranking means less. Pick one when you can.</p>
     <div id="s-out" style="margin-top:16px"></div></div>`;
   applyInterfaceLanguage();
 
@@ -1343,18 +1485,17 @@ RENDER.search=async()=>{
 
   const run=async()=>{
     const game=$('#s-name').value.trim(), platform=$('#s-plat').value;
-    if(!game){toast(translateLabel('Enter a game name',readInterfaceLanguage()));return;}
+    if(!game){toastLabel('Enter a game name');return;}
     $('#s-out').innerHTML='<div class="empty" data-i18n="Searching indexers…">Searching indexers…</div>'; applyInterfaceLanguage();
     const d=await j(`/api/v1/release?game=${encodeURIComponent(game)}`
       +`&platform=${encodeURIComponent(platform)}`);
     if(d.error){
-      $('#s-out').innerHTML=`<p class="help" style="color:var(--warn)">${esc(d.error)}</p>`;
+      $('#s-out').innerHTML=`<p class="help" style="color:var(--warn)" lang="und" dir="auto">${esc(d.error)}</p>`;
       return;
     }
     if(!d.items.length){
-      $('#s-out').innerHTML='<div class="empty">Nothing found. A search where '
-        +'every indexer fails looks exactly like one that found nothing &mdash; '
-        +'check Indexers if this is unexpected.</div>';
+      $('#s-out').innerHTML='<div class="empty" data-i18n="Nothing found. A search where every indexer fails looks exactly like one that found nothing — check Indexers if this is unexpected.">Nothing found. A search where every indexer fails looks exactly like one that found nothing — check Indexers if this is unexpected.</div>';
+      applyInterfaceLanguage();
       return;
     }
     $('#s-out').innerHTML=`
@@ -1365,15 +1506,15 @@ RENDER.search=async()=>{
         <th data-i18n="Seeders">Seeders</th><th data-i18n="Indexer">Indexer</th><th data-i18n="Why">Why</th><th></th></tr></thead><tbody>
       ${d.items.map((r,i)=>`<tr style="${r.accepted?'':'opacity:.62'}">
         <td><span class="pill ${r.accepted?'imported':'failed'}">${num(r.score)}</span></td>
-        <td>${esc(r.title)}${r.info_url?` <a href="${esc(r.info_url)}" target="_blank"
-            rel="noopener noreferrer" title="Open on ${esc(r.indexer||'the indexer')}"
+        <td><span lang="und" dir="auto">${esc(r.title)}</span>${r.info_url?` <a href="${esc(r.info_url)}" target="_blank"
+            rel="noopener noreferrer" title="Open on ${esc(r.indexer||'the indexer')}" lang="und" dir="auto"
             style="text-decoration:none">&#8599;</a>`:''}
           ${r.private?' <span class="pill">private</span>':''}
           ${r.protocol==='usenet'?' <span class="pill">usenet</span>':''}</td>
         <td style="white-space:nowrap">${mb(r.size)}</td>
         <td>${num(r.seeders)}</td>
-        <td style="color:var(--dim)">${esc(r.indexer||'—')}</td>
-        <td style="color:var(--dim);font-size:12px">${r.reasons.map(esc).join('<br>')}</td>
+        <td style="color:var(--dim)" lang="und" dir="auto">${esc(r.indexer||'—')}</td>
+        <td style="color:var(--dim);font-size:12px" lang="und" dir="auto">${r.reasons.map(esc).join('<br>')}</td>
         <td><div class="rowact">${r.grabbable
           ? `<button data-grab="${esc(r.id)}" data-i18n="Grab">Grab</button>`
           : '<span style="color:var(--dim);font-size:12px">no link</span>'}</div></td>
@@ -1386,7 +1527,8 @@ RENDER.search=async()=>{
         headers:{'content-type':'application/json'},
         body:JSON.stringify({id:b.dataset.grab})});
       b.dataset.i18n=r.ok?'Grabbed':'Failed'; applyTranslatedLabel(b,readInterfaceLanguage());
-      toast(r.ok?`Grabbed ${r.release}`:(r.error||'Could not grab that release'));
+      if(r.ok)toastMessage('Grabbed {release}',{release:r.release});
+      else if(r.error)toastAppMessage(r.error);else toastLabel('Could not grab that release');
       refreshCounts();
     });
   };
@@ -1397,88 +1539,85 @@ RENDER.search=async()=>{
 RENDER.missing=async()=>{
   const d=await j('/api/v1/wanted/missing');
   $('#page').innerHTML=`<div class="row" style="margin-bottom:14px">
-      <button class="btn" id="w-all">Search All</button>
+      <button class="btn" id="w-all" data-i18n="Search All">Search All</button>
       <span style="color:var(--dim);font-size:12.5px">
         ${fmt(d.items.length)} game(s) requested but not yet imported</span></div>
-    ${d.items.length?`<table><thead><tr><th>Game</th><th>Platform</th>
-      <th>Added</th><th>Attempts</th><th>Last error</th><th></th></tr></thead><tbody>
-      ${d.items.map(w=>`<tr><td>${esc(w.game)}</td><td>${esc(w.platform)}</td>
+    ${d.items.length?`<table><thead><tr><th data-i18n="Game">Game</th><th data-i18n="Platform">Platform</th>
+      <th data-i18n="Added">Added</th><th data-i18n="Attempts">Attempts</th><th data-i18n="Last error">Last error</th><th></th></tr></thead><tbody>
+      ${d.items.map(w=>`<tr><td lang="und" dir="auto">${esc(w.game)}</td><td lang="und" dir="auto">${esc(w.platform)}</td>
         <td>${esc(regionalDate(w.added))}</td><td>${fmt(w.attempts)}</td>
-        <td style="color:var(--dim)">${esc(w.last_error||'—')}</td>
+        <td style="color:var(--dim)" lang="und" dir="auto">${esc(w.last_error||'—')}</td>
         <td><button class="mini" data-drop-game="${esc(w.game)}"
           data-drop-platform="${esc(w.platform)}"
+          data-i18n-title="Stop looking for this. It stays out of Wanted until you ask for it again."
           title="Stop looking for this. It stays out of Wanted until you ask for it again."
-          >Remove</button></td></tr>`).join('')}
-      </tbody></table>`:'<div class="empty">Nothing missing.</div>'}`;
+          data-i18n="Remove">Remove</button></td></tr>`).join('')}
+      </tbody></table>`:'<div class="empty" data-i18n="Nothing missing.">Nothing missing.</div>'}`;
+  applyInterfaceLanguage();
   const b=$('#w-all'); if(b) b.onclick=async()=>{
-    b.disabled=true; b.textContent='Searching…';
+    b.disabled=true; b.dataset.i18n='Searching…'; applyTranslatedLabel(b,readInterfaceLanguage());
     const r=await j('/api/v1/command',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({name:'MissingGameSearch'})});
-    toast(`Searched ${fmt(r.searched??0)}, grabbed ${fmt(r.grabbed??0)}`);
+    toastMessage('Searched {searched} releases, grabbed {grabbed}',{
+      searched:fmt(r.searched??0),grabbed:fmt(r.grabbed??0)});
     go('missing'); refreshCounts();
   };
   // Dropping a request, which Wanted could not do at all: the list was only
   // ever emptied by an import, so a typo went on being searched for forever.
   $('#page').querySelectorAll('button[data-drop-game]').forEach(x=>x.onclick=async()=>{
     const game=x.dataset.dropGame, platform=x.dataset.dropPlatform;
-    if(!confirm(`Stop looking for "${game}" on ${platform}?`)) return;
+    if(!confirmMessage('Stop looking for {game} on {platform}?',{game,platform})) return;
     x.disabled=true;
     const r=await fetch('/api/v1/wanted/missing?game='+encodeURIComponent(game)
       +'&platform='+encodeURIComponent(platform),{method:'DELETE'});
-    if(r.ok){ toast(`Removed ${game}`); go('missing'); refreshCounts(); }
-    else { x.disabled=false; toast('Could not remove that request'); }
+    if(r.ok){ toastMessage('Removed {game}',{game}); go('missing'); refreshCounts(); }
+    else { x.disabled=false; toastLabel('Could not remove that request'); }
   });
 };
 
 RENDER.lists=async()=>{
   const d=await j('/api/v1/importlist').catch(()=>({items:[]}));
   $('#page').innerHTML=`<div class="row" style="margin-bottom:14px">
-      <button class="btn" id="l-add">Add List</button>
-      <button class="btn ghost" id="l-sync">Sync Now</button>
+      <button class="btn" id="l-add" data-i18n="Add List">Add List</button>
+      <button class="btn ghost" id="l-sync" data-i18n="Sync Now">Sync Now</button>
       <span style="color:var(--dim);font-size:12.5px">Feed Wanted from a
         list &mdash; a top-100 article, a homebrew catalogue, a friend's
         spreadsheet. Each title is added once, ever; full sets and 1G1R live
         under Collections.</span></div>
-    ${d.items.length?`<table><thead><tr><th>Name</th><th>Type</th>
-      <th>Platform</th><th>Added so far</th><th>Enabled</th><th></th></tr></thead><tbody>
-      ${d.items.map((l,i)=>`<tr><td><b>${esc(l.name||'—')}</b>${
+    ${d.items.length?`<table><thead><tr><th data-i18n="Name">Name</th><th data-i18n="Type">Type</th>
+      <th data-i18n="Platform">Platform</th><th data-i18n="Added so far">Added so far</th><th data-i18n="Enabled">Enabled</th><th></th></tr></thead><tbody>
+      ${d.items.map((l,i)=>`<tr><td><b lang="und" dir="auto">${esc(l.name||'—')}</b>${
           l.type==='url'?`<div style="color:var(--dim);font-size:11.5px">${esc(l.url||'')}</div>`:''}</td>
-        <td>${esc(l.type)}</td><td>${esc(l.platform||'per line')}</td>
+        <td lang="und" dir="auto">${esc(l.type)}</td><td lang="und" dir="auto">${esc(l.platform||'per line')}</td>
         <td>${fmt(l.added_count||0)}${l.unmatched_count
           ?` <span class="pill" title="Titles with no ROM platform — modern store games. Open Edit to see them.">${fmt(l.unmatched_count)} kept aside</span>`:''}
           ${l.last_sync?`<div style="font-size:11px;color:${l.last_sync.error?'var(--warn)':'var(--dim)'}">
-            ${l.last_sync.error?esc(l.last_sync.error.slice(0,90))
+            ${l.last_sync.error?`<span lang="und" dir="auto">${esc(l.last_sync.error.slice(0,90))}</span>`
               :`fetched ${fmt(l.last_sync.fetched)} at ${esc(regionalDateTime(l.last_sync.at))}`}</div>`:''}</td>
         <td><span class="dot ${l.enable!==false?'up':'down'}"></span></td>
         <td style="text-align:end"><div class="rowact">
-          <button data-ledit="${i}">Edit</button></div></td></tr>`).join('')}
+          <button data-ledit="${i}" data-i18n="Edit">Edit</button></div></td></tr>`).join('')}
       </tbody></table>`
-      :'<div class="empty">No lists yet. Paste one, or connect an account, and let the clock do the asking.</div>'}
-    <div class="card" style="margin-top:14px"><h3>Connect an account</h3>
-      <p class="help">One click each. You are already signed in to these in
-        your browser &mdash; that is what makes it one click.</p>
+      :'<div class="empty" data-i18n="No lists yet. Paste one, or connect an account, and let the clock do the asking.">No lists yet. Paste one, or connect an account, and let the clock do the asking.</div>'}
+    <div class="card" style="margin-top:14px"><h3 data-i18n="Connect an account">Connect an account</h3>
+      <p class="help">You are already signed in to these services in your browser, so each
+        connection takes one click.</p>
       <div class="row" style="flex-wrap:wrap;gap:10px;margin:10px 0">
         <a class="btn" href="/api/v1/connect/steam"
-           style="text-decoration:none">Sign in through Steam</a>
-        <button class="btn ghost" data-token="gog">Connect GOG</button>
-        <button class="btn ghost" data-token="epic">Connect Epic</button>
-        <button class="btn ghost" data-token="ea">Connect EA</button>
-        <button class="btn ghost" data-token="battlenet">Connect Battle.net</button>
-        <button class="btn ghost" data-token="psn">Connect PlayStation</button>
-        <button class="btn ghost" data-token="xbox">Connect Xbox</button>
-        <button class="btn ghost" data-token="itchio">Connect itch.io</button>
-        <button class="btn ghost" data-token="humble">Connect Humble</button>
+           style="text-decoration:none" data-i18n="Sign in through Steam">Sign in through Steam</a>
+        <button class="btn ghost" data-token="gog" data-i18n="Connect GOG">Connect GOG</button>
+        <button class="btn ghost" data-token="epic" data-i18n="Connect Epic">Connect Epic</button>
+        <button class="btn ghost" data-token="ea" data-i18n="Connect EA">Connect EA</button>
+        <button class="btn ghost" data-token="battlenet" data-i18n="Connect Battle.net">Connect Battle.net</button>
+        <button class="btn ghost" data-token="psn" data-i18n="Connect PlayStation">Connect PlayStation</button>
+        <button class="btn ghost" data-token="xbox" data-i18n="Connect Xbox">Connect Xbox</button>
+        <button class="btn ghost" data-token="itchio" data-i18n="Connect itch.io">Connect itch.io</button>
+        <button class="btn ghost" data-token="humble" data-i18n="Connect Humble">Connect Humble</button>
         <button class="btn ghost" data-paste="amazon">Amazon / Prime</button>
         <button class="btn ghost" data-paste="ubisoft">Ubisoft</button>
       </div>
-      <p class="help"><b>Steam</b> is a true one-click: Steam's own
-        "Sign in through Steam", no key, no app registration &mdash; it comes
-        straight back with your library connected. <b>Epic, EA and
-        Battle.net</b> pull your <i>owned</i> library through the same web
-        APIs Playnite uses &mdash; none of them issues an application key,
-        so each opens the page your signed-in browser already has and takes
-        one paste. <b>GOG</b> needs only your public profile name.</p>
+      <p class="help">${interfaceTemplateMarkup(ACCOUNT_IMPORT_HELP,{})}</p>
       <div id="l-token"></div>
       <h3 style="margin-top:18px">Games installed on your gaming PC</h3>
       <p class="help">A second route, useful alongside the above: every
@@ -1495,18 +1634,19 @@ RENDER.lists=async()=>{
           lives, which is usually a server with no launchers.</span></div>
       <div id="l-noapi" style="color:var(--dim);font-size:12.5px"></div></div>`;
 
+  applyInterfaceLanguage();
   document.querySelectorAll('[data-paste]').forEach(b=>b.onclick=async()=>{
     const s=await j('/api/v1/connect/sources').catch(()=>({paste_sources:{}}));
     const spec=(s.paste_sources||{})[b.dataset.paste];
-    if(!spec){toast('Unknown store');return;}
+    if(!spec){toastLabel('Unknown store');return;}
     window.open(spec.open,'_blank','noopener');
-    toast(spec.how);
+    toastAppMessage(spec.how);
     editList({type:'paste',name:spec.label+' library'});
   });
   document.querySelectorAll('[data-token]').forEach(b=>b.onclick=async()=>{
     const s=await j('/api/v1/connect/sources').catch(()=>({token_sources:{}}));
     const spec=(s.token_sources||{})[b.dataset.token];
-    if(!spec){toast('Unknown store');return;}
+    if(!spec){toastLabel('Unknown store');return;}
     window.open(spec.open,'_blank','noopener');
     // A modal, not an inline panel: window.open moves the person to another
     // tab, and when they come back a box further down the page is a box
@@ -1534,7 +1674,7 @@ RENDER.lists=async()=>{
     setTimeout(()=>m.querySelector('#tok-v')?.focus(),50);
     $('#tok-save').onclick=async()=>{
       const value=$('#tok-v').value.trim();
-      if(!value){toast('Paste the value first');return;}
+      if(!value){toastLabel('Paste the value first');return;}
       const body={name:spec.label+' library',type:b.dataset.token,
                   platform:'',enable:true};
       body[spec.field]=value;
@@ -1553,7 +1693,7 @@ RENDER.lists=async()=>{
       // pasted, not in a toast that vanishes.
       const failed=(r.failures||[]).find(f=>f.id===saved.id);
       if(failed){ line(false,failed.reason); return; }
-      closeModal(); toast(r.message||'Connected'); go('lists');
+      closeModal(); if(r.message)toastAppMessage(r.message);else toastLabel('Connected'); go('lists');
     };
   });
   j('/api/v1/importlist/schema').then(s=>{
@@ -1568,7 +1708,7 @@ RENDER.lists=async()=>{
     const r=await j('/api/v1/launchers/connect',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({name:'Local launchers'})}).catch(()=>({error:'scan failed'}));
-    toast(r.error||r.message||'Done');
+    if(r.error)toastAppMessage(r.error);else if(r.message)toastAppMessage(r.message);else toastLabel('Done');
     if(r.ok) go('lists'); else { scanBtn.disabled=false; scanBtn.textContent='Scan this machine'; }
   };
   $('#l-add').onclick=()=>editList({type:'paste'});
@@ -1577,7 +1717,7 @@ RENDER.lists=async()=>{
     const r=await j('/api/v1/command',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({name:'ListSync'})});
-    toast(r.message||'Synced'); go('lists'); refreshCounts();
+    if(r.message)toastAppMessage(r.message);else toastLabel('Synced'); go('lists'); refreshCounts();
   };
   document.querySelectorAll('[data-ledit]').forEach(b=>b.onclick=()=>
     editList(d.items[Number(b.dataset.ledit)]));
@@ -1585,31 +1725,32 @@ RENDER.lists=async()=>{
 
 function editList(item){
   const isNew=!item.id;
+  const modalTitle=isNew?'Add Import List':'Edit Import List';
   const m=document.createElement('div');
   m.className='modal';
   m.innerHTML=`<div class="box">
-    <h3>${isNew?'Add':'Edit'} Import List</h3>
-    <div class="sub">One title per line. '# comments', ranking numbers and
+    <h3 data-i18n="${modalTitle}">${modalTitle}</h3>
+    <div class="sub" data-i18n="One title per line. '# comments', ranking numbers and 'Title →tab← platform' lines are understood.">One title per line. '# comments', ranking numbers and
       'Title&nbsp;&rarr;tab&larr;&nbsp;platform' lines are understood.</div>
-    <div class="field"><label>Name</label>
-      <input type="text" data-f="name" value="${esc(item.name||'')}"></div>
-    <div class="field"><label>Type</label>
+    <div class="field"><label data-i18n="Name">Name</label>
+      <input type="text" data-f="name" value="${esc(item.name||'')}" lang="und" dir="auto"></div>
+    <div class="field"><label data-i18n="Type">Type</label>
       <select data-f="type">
-        <option value="paste"${!['url','steam','gog'].includes(item.type)?' selected':''}>Pasted list</option>
-        <option value="url"${item.type==='url'?' selected':''}>List at a URL</option>
-        <option value="steam"${item.type==='steam'?' selected':''}>Steam library / wishlist</option>
-        <option value="gog"${item.type==='gog'?' selected':''}>GOG profile</option>
-        <option value="xbox"${item.type==='xbox'?' selected':''}>Xbox (OpenXBL)</option>
-        <option value="psn"${item.type==='psn'?' selected':''}>PlayStation (NPSSO)</option>
-        <option value="itchio"${item.type==='itchio'?' selected':''}>itch.io purchases</option>
+        <option value="paste" data-i18n="Pasted list"${!['url','steam','gog'].includes(item.type)?' selected':''}>Pasted list</option>
+        <option value="url" data-i18n="List at a URL"${item.type==='url'?' selected':''}>List at a URL</option>
+        <option value="steam" data-i18n="Steam library / wishlist"${item.type==='steam'?' selected':''}>Steam library / wishlist</option>
+        <option value="gog" data-i18n="GOG profile"${item.type==='gog'?' selected':''}>GOG profile</option>
+        <option value="xbox" data-i18n="Xbox (OpenXBL)"${item.type==='xbox'?' selected':''}>Xbox (OpenXBL)</option>
+        <option value="psn" data-i18n="PlayStation (NPSSO)"${item.type==='psn'?' selected':''}>PlayStation (NPSSO)</option>
+        <option value="itchio" data-i18n="itch.io purchases"${item.type==='itchio'?' selected':''}>itch.io purchases</option>
       </select></div>
-    <div class="field"><label>Default platform</label>
-      <select data-f="platform"><option value="">Named per line</option>
+    <div class="field"><label data-i18n="Default platform">Default platform</label>
+      <select data-f="platform"><option value="" data-i18n="Named per line">Named per line</option>
         ${PLATFORMS.map(p=>`<option value="${esc(p.slug)}"${
           item.platform===p.slug?' selected':''}>${esc(p.name)}</option>`).join('')}
       </select></div>
     <div class="field" data-lt="url" style="${item.type==='url'?'':'display:none'}">
-      <label>URL</label>
+      <label data-i18n="URL">URL</label>
       <input type="text" data-f="url" value="${esc(item.url||'')}"
         placeholder="https://example.org/top-100.txt"></div>
     <div data-lt="steam" style="${item.type==='steam'?'':'display:none'}">
@@ -1620,14 +1761,13 @@ function editList(item){
         <input type="password" data-f="api_key" autocomplete="new-password"
           value="${esc(item.api_key||'')}"
           placeholder="steamcommunity.com/dev/apikey"></div>
-      <div class="field"><label>Source</label>
+      <div class="field"><label data-i18n="Source">Source</label>
         <select data-f="source">
-          <option value="owned"${item.source!=='wishlist'?' selected':''}>Owned games</option>
-          <option value="wishlist"${item.source==='wishlist'?' selected':''}>Wishlist</option>
+          <option value="owned" data-i18n="Owned games"${item.source!=='wishlist'?' selected':''}>Owned games</option>
+          <option value="wishlist" data-i18n="Wishlist"${item.source==='wishlist'?' selected':''}>Wishlist</option>
         </select></div>
-      <p class="help">The profile's game details must be public. Titles land
-        against the default platform above &mdash; the scorer decides what each
-        title means there.</p></div>
+      <p class="help">The profile's game details must be public. Imported titles are matched
+        to the default platform above, which helps ROMarr identify each game.</p></div>
     <div class="field" data-lt="gog" style="${item.type==='gog'?'':'display:none'}">
       <label>GOG username</label>
       <input type="text" data-f="gog_username" value="${esc(item.gog_username||'')}"
@@ -1636,9 +1776,7 @@ function editList(item){
       <div class="field"><label>OpenXBL API key</label>
         <input type="password" data-f="openxbl_key" autocomplete="new-password"
           value="${esc(item.openxbl_key||'')}" placeholder="sign in once at xbl.io"></div>
-      <p class="help">Pulls your title history &mdash; every game the account
-        has played. Microsoft exposes no purchase list to anyone, so played
-        IS the practical library.</p></div>
+      <p class="help" data-i18n="Imports your play history — every game the account has played. Microsoft does not provide a purchase list, so play history is the practical way to build a library.">Imports your play history — every game the account has played. Microsoft does not provide a purchase list, so play history is the practical way to build a library.</p></div>
     <div data-lt="psn" style="${item.type==='psn'?'':'display:none'}">
       <div class="field"><label>NPSSO token</label>
         <input type="password" data-f="npsso" autocomplete="new-password"
@@ -1653,11 +1791,11 @@ function editList(item){
         value="${esc(item.itchio_key||'')}"
         placeholder="itch.io/user/settings/api-keys"></div>
     <div class="field" data-lt="paste" style="${['url','steam','gog'].includes(item.type)?'display:none':''}">
-      <label>Titles</label>
+      <label data-i18n="Titles">Titles</label>
       <textarea data-f="content" rows="10"
         style="width:100%;resize:vertical">${esc(item.content||'')}</textarea></div>
     <label class="check"><input type="checkbox" data-f="enable"
-      ${item.enable!==false?'checked':''}><span>Enabled</span></label>
+      ${item.enable!==false?'checked':''}><span data-i18n="Enabled">Enabled</span></label>
     ${(item.unmatched||[]).length?`<details style="margin-top:10px">
       <summary class="help" style="margin:0;cursor:pointer">
         ${fmt(item.unmatched.length)} title(s) kept aside — no ROM platform.
@@ -1668,12 +1806,13 @@ function editList(item){
       </div></details>`:''}
     <div id="testline"></div>
     <div class="foot">
-      <button class="btn ghost" id="l-preview">Preview</button>
-      ${isNew?'':'<button class="btn danger" id="l-del">Delete</button>'}
-      <button class="btn ghost sp" data-close>Cancel</button>
-      <button class="btn" id="l-save">Save</button>
+      <button class="btn ghost" id="l-preview" data-i18n="Preview">Preview</button>
+      ${isNew?'':'<button class="btn danger" id="l-del" data-i18n="Delete">Delete</button>'}
+      <button class="btn ghost sp" data-close data-i18n="Cancel">Cancel</button>
+      <button class="btn" id="l-save" data-i18n="Save">Save</button>
     </div></div>`;
   document.body.append(m);
+  applyInterfaceLanguage();
   m.onclick=e=>{ if(e.target===m||e.target.dataset.close!==undefined) closeModal(); };
   m.querySelector('[data-f=type]').onchange=e=>{
     const kind=['url','steam','gog','xbox','psn','itchio'].includes(e.target.value)
@@ -1702,13 +1841,13 @@ function editList(item){
   m.querySelector('#l-save').onclick=async()=>{
     await j('/api/v1/importlist',{method:'POST',
       headers:{'content-type':'application/json'},body:JSON.stringify(payload())});
-    closeModal(); toast('Saved'); go('lists');
+    closeModal(); toastLabel('Saved'); go('lists');
   };
   const del=m.querySelector('#l-del');
   if(del) del.onclick=async()=>{
-    if(!confirm(`Remove ${item.name||'this list'}?`)) return;
+    if(!confirmMessage('Remove {name}?',{name:item.name||'this list'})) return;
     await fetch(`/api/v1/importlist/${item.id}`,{method:'DELETE'});
-    closeModal(); toast('Removed'); go('lists');
+    closeModal(); toastLabel('Removed'); go('lists');
   };
 }
 
@@ -1823,17 +1962,18 @@ RENDER.discover=async()=>{
     const g=d.items[Number(b.dataset.dreq)];
     const plats=requestable(g);
     const pick=plats.length===1?plats[0]
-      :prompt('Which platform?\n'+plats.join(', '), plats[0]);
+      :promptMessage('Which platform? Available: {platforms}',{platforms:plats.join(', ')},plats[0]);
     if(!pick) return;
     const match=PLATFORMS.find(x=>x.name.toLowerCase()===String(pick).toLowerCase()
       ||x.slug===String(pick).toLowerCase());
-    if(!match){toast('Unknown platform');return;}
+    if(!match){toastLabel('Unknown platform');return;}
     b.disabled=true; b.textContent='Requesting…';
     const r=await j('/api/request',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({game:g.title,platform:match.slug})});
     b.textContent=r.ok?'Grabbed':'Wanted';
-    toast(r.ok?`Grabbed ${r.release}`:(r.error||'Added to Wanted'));
+    if(r.ok)toastMessage('Grabbed {release}',{release:r.release});
+    else if(r.error)toastAppMessage(r.error);else toastLabel('Added to Wanted');
     refreshCounts();
   });
 };
@@ -1858,25 +1998,14 @@ RENDER.peers=async()=>{
         <button class="btn ghost" id="p-redeem">I have an invitation</button>
         <button class="btn ghost" id="p-romm">Add a RomM server</button>
       </div>
-      <p class="help" style="margin-top:10px">Your friend does not have to run
-        ROMarr. If they run <b>RomM</b>, ask them for an account on it and use
-        <b>Add a RomM server</b> — RomM already publishes a hash for every ROM,
-        so browsing and netplay matching both work with nothing installed on
-        their side. The trade is honest: an account on their RomM grants
-        whatever their RomM grants it, and no setting here can narrow that.</p>
+      <p class="help" style="margin-top:10px">${interfaceMarkup(ROMM_FRIEND_HELP)}</p>
       <div id="p-out" style="margin-top:12px"></div></div>
     <div class="card"><h3>What netplay can prove</h3>
-      <p class="help">Netplay is settled on the ROM's SHA1, never its title —
-        “Super Mario Kart” is four different ROMs, and two of them desync
-        within seconds in a way that reads as lag. ROMarr can only match games
-        whose hash it knows.</p>
+      <p class="help">${interfaceMarkup(NETPLAY_HELP)}</p>
       ${hx.count
         ? `<div class="panel"><b>${fmt(hx.count)}</b> dump(s) can be
              matched, across ${fmt(Object.keys(hx.platforms||{}).length)} platform(s).</div>`
-        : `<div class="panel panel-warn">No hashes yet, so every netplay offer
-             will come back <i>missing</i>. ROMarr reads these from your library
-             server automatically — it already stores a hash for every ROM it
-             has scanned.</div>`}
+        : `<div class="panel panel-warn">${interfaceMarkup(NO_HASHES_HELP)}</div>`}
       <div id="p-seedlive"></div>
       <div class="row" style="gap:8px;margin-top:10px">
         <button class="btn ghost" id="p-seed">Read them again now</button>
@@ -1939,15 +2068,13 @@ RENDER.peers=async()=>{
       <details style="margin-top:14px"><summary class="help"
         style="cursor:pointer">Your friend's ROMarr is older than invitation
         links</summary>
-        <p class="help">The one-piece form. It contains the long secret, so
-          send it the way you would send a password — and prefer the link and
-          code above, which exist because this was easy to mishandle.</p>
+        <p class="help" data-i18n="The full invitation contains a long secret. Treat it like a password. Use the link and code above instead; they are shorter-lived and easier to share.">The full invitation contains a long secret. Treat it like a password. Use the link and code above instead; they are shorter-lived and easier to share.</p>
         <textarea rows="4" readonly style="width:100%;font:12px/1.5
           ui-monospace,Menlo,monospace">${esc(JSON.stringify(r.invite||{}))}</textarea>
       </details></div>`;
     const copy=async(text,said)=>{
-      try{await navigator.clipboard.writeText(text); toast(said);}
-      catch{toast('Select it and copy it');}
+      try{await navigator.clipboard.writeText(text); toastLabel(said);}
+      catch{toastLabel('Select it and copy it');}
     };
     $('#p-copy').onclick=()=>copy(r.link||'','Link copied');
     $('#p-copycode').onclick=()=>copy(r.code||'','Code copied');
@@ -1983,8 +2110,7 @@ RENDER.peers=async()=>{
         <input type="text" id="p-code-in" autocomplete="off" maxlength="12"
           placeholder="K7RM-9TFQ" style="max-width:220px;
           font:700 18px/1.2 ui-monospace,Menlo,monospace;letter-spacing:.1em">
-        <p class="help" style="margin-top:6px">Eight characters. Case, spaces
-          and the dash do not matter.</p></div>
+        <p class="help" style="margin-top:6px">The code has eight characters. Letter case, spaces, and hyphens are ignored.</p></div>
       <div id="p-claim-target"></div>
       <button class="btn" id="p-claim-go">Become friends</button>
       <details style="margin-top:14px"><summary class="help"
@@ -2018,20 +2144,20 @@ RENDER.peers=async()=>{
         body:JSON.stringify({link:$('#p-link-in').value.trim(),
                              code:$('#p-code-in').value.trim()})});
       b.disabled=false; b.textContent='Become friends';
-      if(!r.ok){ toast(r.error||'That invitation was refused'); return; }
-      if(r.warning) toast(r.warning);
-      toast(r.detail||'Friend added — they confirm on their side');
+      if(!r.ok){ if(r.error)toastAppMessage(r.error);else toastLabel('That invitation was refused'); return; }
+      if(r.warning) toastAppMessage(r.warning);
+      if(r.detail)toastAppMessage(r.detail);else toastLabel('Your friend request was sent. They still need to accept it.');
       go('peers');
     };
     $('#p-go').onclick=async()=>{
       let blob;
       try{ blob=JSON.parse($('#p-blob').value); }
-      catch{ toast('That is not a valid invitation'); return; }
+      catch{ toastLabel('That is not a valid invitation'); return; }
       const r=await j('/api/v1/peer/redeem',{method:'POST',
         headers:{'content-type':'application/json'},
         body:JSON.stringify({invite:blob})});
-      if(r.error){toast(r.error);return;}
-      toast('Friend added — they confirm on their side');
+      if(r.error){toastAppMessage(r.error);return;}
+      toastLabel('Your friend request was sent. They still need to accept it.');
       go('peers');
     };
   };
@@ -2052,13 +2178,12 @@ RENDER.peers=async()=>{
     await j('/api/v1/peer/confirm',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({peer_id:b.dataset.pconfirm})});
-    toast('Confirmed'); go('peers');
+    toastLabel('Confirmed'); go('peers');
   });
   document.querySelectorAll('[data-prevoke]').forEach(b=>b.onclick=async()=>{
-    if(!confirm('Remove this friend? They lose access immediately and do '
-      +'not have to agree.')) return;
+    if(!confirmMessage('Remove this friend? They lose access immediately and do not have to agree.')) return;
     await fetch('/api/v1/peer/'+b.dataset.prevoke,{method:'DELETE'});
-    toast('Removed'); go('peers');
+    toastLabel('Removed'); go('peers');
   });
   document.querySelectorAll('[data-pedit]').forEach(b=>b.onclick=()=>
     sharingEditor(list[Number(b.dataset.pedit)]));
@@ -2096,7 +2221,7 @@ RENDER.peers=async()=>{
     const r=await j('/api/v1/hashes/seed',{method:'POST',
       headers:{'content-type':'application/json'},body:'{}'});
     b.disabled=false; b.textContent='Read them again now';
-    toast(r.detail||r.error||'');
+    toastAppMessage(r.detail||r.error||'');
     seedPoll();
   };
 
@@ -2115,11 +2240,8 @@ RENDER.peers=async()=>{
       <div class="field"><label>Password</label>
         <input type="password" data-f="password" autocomplete="off"></div>
       <div class="field"><label>Call them (optional)</label>
-        <input type="text" data-f="name" placeholder="Dave's RomM"></div>
-      <div class="panel">ROMarr reads their library through RomM's own API,
-        including the SHA1 RomM stores for every ROM — which is what lets
-        netplay agree on the bytes with a server that has never heard of this
-        protocol.</div>
+        <input type="text" data-f="name"></div>
+      <div class="panel" data-i18n="ROMarr reads the library through RomM’s API, including the SHA1 hash RomM stores for each ROM. Netplay uses that hash to match the same file across servers, even if the other server does not know this protocol.">ROMarr reads the library through RomM’s API, including the SHA1 hash RomM stores for each ROM. Netplay uses that hash to match the same file across servers, even if the other server does not know this protocol.</div>
       <div class="row" style="justify-content:flex-end;gap:8px;margin-top:14px">
         <button class="btn ghost" data-close="1">Cancel</button>
         <button class="btn" id="rm-go">Connect</button></div></div>`;
@@ -2136,8 +2258,8 @@ RENDER.peers=async()=>{
         body:JSON.stringify({url:val('url'),username:val('username'),
           password:val('password'),name:val('name')})});
       btn.disabled=false; btn.textContent='Connect';
-      if(r.error){ toast(r.error); return; }
-      close(); toast(r.detail||'Connected'); go('peers');
+      if(r.error){ toastAppMessage(r.error); return; }
+      close(); if(r.detail)toastAppMessage(r.detail);else toastLabel('Connected'); go('peers');
     };
   };
 };
@@ -2219,7 +2341,8 @@ async function friendShelf(peerId, opts){
       headers:{'content-type':'application/json'},
       body:JSON.stringify({peer_id:FSHELF.peer,title:b.dataset.fwant,
         platform:b.dataset.fplat})});
-    toast(r.ok?('Added — '+(r.detail||'')):(r.error||'Could not add'));
+    if(r.ok)toastMessage('Added — {detail}',{detail:r.detail||''});
+    else if(r.error)toastAppMessage(r.error);else toastLabel('Could not add');
   });
   document.querySelectorAll('[data-fplay]').forEach(b=>b.onclick=async()=>{
     $('#fs-out').innerHTML='<div class="empty">Comparing dumps…</div>';
@@ -2265,7 +2388,7 @@ function sharingEditor(peer){
   const opt=(v,cur,label)=>`<option value="${v}"${v===cur?' selected':''}>${label}</option>`;
   m.innerHTML=`<div class="box">
     <h3>What ${esc(peer.name)} can see</h3>
-    <div class="sub">Seeing and fetching are separate on purpose.</div>
+    <div class="sub">Visibility and downloading are separate permissions.</div>
     <div class="field"><label>They see</label>
       <select data-f="scope">
         ${opt('none',peer.scope,'Nothing (peered for netplay only)')}
@@ -2283,8 +2406,8 @@ function sharingEditor(peer){
         ${opt('fetch',peer.access,'Download the file from me')}
       </select>
       <div style="color:var(--dim);font-size:11.5px;margin-top:4px">
-        Download makes your server a source for this person. Choose it
-        deliberately.</div></div>
+        Allowing downloads lets this person fetch files from your server.
+        Enable it only if you intend to share those files.</div></div>
     <label class="check"><input type="checkbox" data-f="delegate_users"
       ${peer.delegate_users?'checked':''}><span>Their users get this too,
       not just them</span></label>
@@ -2300,7 +2423,7 @@ function sharingEditor(peer){
       body:JSON.stringify({peer_id:peer.peer_id,scope:f.scope,
         access:f.access,platforms:f.platforms,
         delegate_users:f.delegate_users})});
-    closeModal(); toast(r.error||'Saved'); go('peers');
+    closeModal(); if(r.error)toastAppMessage(r.error);else toastLabel('Saved'); go('peers');
   };
 }
 
@@ -2330,8 +2453,8 @@ RENDER.ecosystem=async()=>{
         <div class="pgrid">${projects.map(card).join('')}</div></div>`).join('');
   document.querySelectorAll('[data-copy]').forEach(b=>b.onclick=async()=>{
     try{ await navigator.clipboard.writeText(b.dataset.copy);
-      toast('Copied: '+b.dataset.copy); }
-    catch{ toast(b.dataset.copy); }
+      toastMessage('Copied: {value}',{value:b.dataset.copy}); }
+    catch{ toastAppMessage(b.dataset.copy); }
   });
 };
 
@@ -2361,31 +2484,22 @@ RENDER.stats=async()=>{
       <div><b>${num(s.library_games)}</b><span>Total known</span></div>
       <div><b>${fmt(s.wanted)}</b><span>Wanted</span></div>
       <div><b>${fmt(hours)}h</b><span>Uptime</span></div>
-      <div><b>${fmt((s.events||{}).grabbed||0)}</b><span>Grabbed, ever</span></div>
-      <div><b>${fmt((s.events||{}).imported||0)}</b><span>Imported, ever</span></div>
+      <div><b>${fmt((s.events||{}).grabbed||0)}</b><span>Total grabs</span></div>
+      <div><b>${fmt((s.events||{}).imported||0)}</b><span>Total imports</span></div>
       <div><b>${fmt((s.events||{}).failed||0)}</b><span>Failures</span></div>
       <div><b>${num(s.average_rating)}</b><span>Avg rating (${fmt(s.rated||0)} rated)</span></div>
     </div>
-    <p class="help" style="margin:10px 0 0">“Total known” is the other two
-      added together — every row your library server holds. Only the first
-      number is bytes you have; the second is a catalogue of things that
-      would have to stream or be fetched first.</p></div>
+    <p class="help" style="margin:10px 0 0">“Total known” is the sum of the other two values and includes every row stored by your library server. Only the first number is bytes you already have; the second counts items that would need to be streamed or fetched first.</p></div>
     ${Object.keys(s.library_sources||{}).length>1?`<div class="card">
       <h3>Where the library comes from</h3>
       ${bar(Object.fromEntries(Object.entries(s.library_sources)
         .sort((a,b)=>b[1]-a[1])
         .map(([k,v])=>[SOURCE_LABEL[k]||k,v])))}
-      <p class="help">Counted from the rows ROMarr has read. Each catalogue is
-        identified by the filename its indexer writes; anything that matches
-        neither is left as “source unknown” rather than assigned to whichever
-        catalogue is larger.</p></div>`:''}
+      <p class="help">These counts come from rows ROMarr read. Each catalogue is identified by the filename written by its indexer. Rows that match neither are labeled “source unknown” instead of being assigned to the larger catalogue.</p></div>`:''}
     <div class="card"><h3>Imports by platform</h3>${bar(s.imported_by_platform)}</div>
     <div class="card"><h3>Grabs by indexer</h3>${bar(s.grabbed_by_indexer)}</div>
     <div class="card"><h3>Library audit</h3>
-      <p class="help">Verify what is already on the shelf: every file hashed
-        against your DATs — <b>bad dump</b> means right size, wrong bytes
-        (bit rot or tampering) — and byte-identical duplicates found by
-        hash. One platform per run; it works in the background.</p>
+      <p class="help" data-i18n="This audit compares file hashes with your DATs to find bad dumps (the right size but wrong bytes, from bit rot or tampering) and byte-identical duplicates. Run one platform at a time; it works in the background.">This audit compares file hashes with your DATs to find bad dumps (the right size but wrong bytes, from bit rot or tampering) and byte-identical duplicates. Run one platform at a time; it works in the background.</p>
       <div class="row">
         <select id="au-plat">${PLATFORMS.map(p=>
           `<option value="${esc(p.slug)}">${esc(p.name)}</option>`).join('')}</select>
@@ -2424,7 +2538,7 @@ RENDER.stats=async()=>{
     const a=await j('/api/v1/audit',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({platform:$('#au-plat').value})});
-    if(a.error){toast(a.error);return;}
+    if(a.error){toastAppMessage(a.error);return;}
     paintAudit(a);
     clearInterval(auditTimer);
     auditTimer=setInterval(async()=>{
@@ -2447,20 +2561,20 @@ RENDER.queue=async()=>{
     <th>Platform</th><th>Release</th><th>Seeders</th><th>State</th><th></th></tr></thead><tbody>
     ${d.items.map((i,n)=>`<tr><td>${esc(i.game)}</td><td>${esc(i.platform)}</td>
       <td>${esc(i.release||'—')}</td><td>${num(i.seeders)}</td>
-      <td><span class="pill ${esc(i.state)}">${esc(i.state)}</span>
+      <td><span class="pill ${esc(i.state)}">${statusMarkup(i.state)}</span>
       ${i.detail?`<div style="color:var(--dim);font-size:11.5px">${esc(i.detail)}</div>`:''}
       </td><td style="text-align:end"><div class="rowact">
         ${i.state==='failed'?`<button data-qretry="${n}">Retry</button>`:''}
         <button data-qremove="${n}">Remove</button></div></td></tr>`).join('')}
       </tbody></table>`
-    :'<div class="empty">Queue is empty. Requests in flight show up here.</div>');
+    :'<div class="empty">The queue is empty. Active requests will appear here.</div>');
 
   $('#q-import').onclick=async e=>{
     e.target.disabled=true; e.target.textContent='Importing…';
     const r=await j('/api/v1/command',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({name:'ImportCompleted'})});
-    toast(r.message||'Done'); go('queue'); refreshCounts();
+    if(r.message)toastAppMessage(r.message);else toastLabel('Done'); go('queue'); refreshCounts();
   };
   const cf=$('#q-clearfail');
   if(cf) cf.onclick=async()=>{
@@ -2473,7 +2587,8 @@ RENDER.queue=async()=>{
     const r=await j('/api/v1/queue/action',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({index:Number(index),action})});
-    toast(r.error||(action==='retry'?(r.ok?'Grabbed':'Still no luck'):'Removed'));
+    if(r.error)toastAppMessage(r.error);
+    else toastLabel(action==='retry'?(r.ok?'Grabbed':'Still no luck'):'Removed');
     go('queue'); refreshCounts();
   };
   document.querySelectorAll('[data-qretry]').forEach(b=>b.onclick=()=>act(b.dataset.qretry,'retry'));
@@ -2575,7 +2690,7 @@ async function addItem(kind){
 async function editItem(kind, item){
   const types = await loadSchema(kind);
   const spec = types[item.type];
-  if(!spec){ toast('Unknown type: ' + item.type); return; }
+  if(!spec){ toastMessage('Unknown type: {type}',{type:item.type}); return; }
   const isNew = !item.id;
   // A new entry gets the type's sensible defaults rather than an empty form.
   if(isNew){
@@ -2619,14 +2734,14 @@ async function editItem(kind, item){
     await j(`/api/v1/${kind}`, {
       method: 'POST', headers: { 'content-type': 'application/json' },
       body: JSON.stringify(payload()) });
-    closeModal(); toast('Saved'); go((KINDS[kind] || {}).page || 'clients');
+    closeModal(); toastLabel('Saved'); go((KINDS[kind] || {}).page || 'clients');
   };
 
   const del = m.querySelector('#m-del');
   if(del) del.onclick = async () => {
-    if(!confirm(`Remove ${item.name || spec.label}?`)) return;
+    if(!confirmMessage('Remove {name}?',{name:item.name||spec.label})) return;
     await fetch(`/api/v1/${kind}/${item.id}`, { method: 'DELETE' });
-    closeModal(); toast('Removed'); go((KINDS[kind] || {}).page || 'clients');
+    closeModal(); toastLabel('Removed'); go((KINDS[kind] || {}).page || 'clients');
   };
 }
 
@@ -2653,7 +2768,7 @@ function settingsPage(title, help, body, after){
       })).filter(m=>m.remote&&m.local);
     SETTINGS=await j('/api/v1/config',{method:'PUT',
       headers:{'content-type':'application/json'},body:JSON.stringify(patch)});
-    toast('Saved');
+    toastLabel('Saved');
   };
 }
 const fld=(k,label,val,type='text',extra='')=>`<div class="field"><label>${label}</label>
@@ -2767,23 +2882,14 @@ RENDER.clients=async()=>{
       <h3 style="margin:0">Download Clients</h3>
       <button class="btn sp" id="c-add" style="margin-inline-start:auto">Add</button>
     </div>
-    <p class="help">A release is routed by its protocol, so an indexer type
-      with no client configured cannot be grabbed at all &mdash; which is why
-      unconfigured clients are listed rather than hidden.</p>
+    <p class="help">ROMarr sends each release to a download client based on its protocol. An indexer type cannot be downloaded until a client for that protocol is configured, so unconfigured clients are listed instead of hidden.</p>
     ${gaps.length?`<p class="help" style="color:var(--warn)">
       No client configured for: <b>${gaps.join(', ')}</b>.
       Those results will be found and then refused.</p>`:''}
-    ${br?`<p class="help">ROM sites are fetched over plain HTTP by the
-      <b>Direct HTTP</b> client. A handful put the file behind a form the
-      site's own page submits &mdash; those need the <b>Headless Browser</b>
-      client, which loads the real page and clicks the real control.
+    ${br?`<p class="help">${interfaceMarkup(ROM_SITE_HELP)}
       ${br.available
-        ?`<span style="color:var(--ok)">Browser mode is available (${esc(br.reason)}, ${esc(br.where)}).</span>`
-        :`<span style="color:var(--warn)">Browser mode is not configured:
-           ${esc(br.reason)}.</span> Direct downloads are unaffected.`}
-      A site that can only be downloaded from by answering a CAPTCHA or a
-      bot-detection challenge is reported as unavailable rather than worked
-      around.</p>`:''}
+        ?`<span style="color:var(--ok)">${interfaceTemplateMarkup('Browser mode is available ({reason}, {where}).',{reason:br.reason,where:br.where})}</span>`
+        :`<span style="color:var(--warn)">${interfaceTemplateMarkup('Browser mode is not configured: {reason}. Direct downloads are unaffected.',{reason:br.reason})}</span>`}</p>`:''}
     ${d.items.length?`<table><thead><tr><th>Client</th><th>Protocol</th><th>Address</th>
       <th>Category</th><th>Status</th><th></th></tr></thead><tbody>
       ${d.items.map((c,i)=>`<tr><td>${esc(c.name)}
@@ -2794,7 +2900,7 @@ RENDER.clients=async()=>{
         <td>${state(c)}</td>
         <td><div class="rowact"><button data-edit="${i}">Edit</button></div></td>
         </tr>`).join('')}</tbody></table>`
-    :'<div class="empty">No download clients yet. Add one to start grabbing.</div>'}
+    :'<div class="empty">No download clients are configured yet. Add one to start downloading.</div>'}
   </div>`;
   $('#c-add').onclick=()=>addItem('downloadclient');
   document.querySelectorAll('[data-edit]').forEach(b=>b.onclick=async()=>{
@@ -2803,7 +2909,7 @@ RENDER.clients=async()=>{
     const all=await j('/api/v1/config');
     const cfg=(all.download_clients||[]).find(x=>x.id===row.id);
     if(cfg) editItem('downloadclient', cfg);
-    else toast('That client has no stored configuration to edit');
+    else toastLabel('That client has no stored configuration to edit');
   });
 };
 
@@ -2812,10 +2918,11 @@ RENDER.libraries=async()=>{
   // Answering is not the same as usable. A RomM whose credentials had
   // expired answered its heartbeat and rejected every read, so this said
   // "connected" while nothing could be read out of it.
-  const state=l=>!l.ok?'<span class="dot down"></span>unreachable'
-    :l.readable===false?'<span class="dot down"></span>cannot read'
-    :!l.path_exists?'<span class="dot warn"></span>path missing'
-    :'<span class="dot up"></span>connected';
+  const stateLabel=l=>!l.ok?'Unreachable'
+    :l.readable===false?'Cannot read'
+    :!l.path_exists?'Path missing':'Connected';
+  const state=l=>'<span class="dot '+(!l.ok||l.readable===false?'down':!l.path_exists?'warn':'up')
+    +'"></span>'+interfaceMarkup(stateLabel(l));
   const rules=l=>(l.platforms&&l.platforms.length)
     ? l.platforms.map(p=>`<span class="pill">${esc(p)}</span>`).join(' ')
     : (l.is_default?'<span style="color:var(--dim)">any platform</span>'
@@ -2859,7 +2966,7 @@ RENDER.libraries=async()=>{
     const all=await j('/api/v1/library/config');
     const cfg=(all.items||[]).find(x=>x.id===row.id);
     if(cfg) editItem('library', cfg);
-    else toast('That library has no stored configuration to edit');
+    else toastLabel('That library has no stored configuration to edit');
   });
 };
 
@@ -2946,10 +3053,7 @@ RENDER.general=()=>settingsPage('General',
      <input type="text" data-k="public_url"
        value="${esc(SETTINGS.public_url||'')}"
        placeholder="https://romarr.example.com">
-     <div style="color:var(--dim);font-size:11.5px;margin-top:4px">
-       How a friend’s server reaches yours. An invitation carries this — without
-       it, whoever redeems your invitation has nowhere to call back to. Peering
-       is the only feature that needs ROMarr to know its own address.</div></div>`
+     <div data-i18n="This is how a friend’s server reaches yours. Invitations include this address. Without it, the person redeeming an invitation has nowhere to connect. Peering is the only feature that needs ROMarr to know its own address." style="color:var(--dim);font-size:11.5px;margin-top:4px">This is how a friend’s server reaches yours. Invitations include this address. Without it, the person redeeming an invitation has nowhere to connect. Peering is the only feature that needs ROMarr to know its own address.</div></div>`
   +chk('auto_import','Import completed downloads automatically',SETTINGS.auto_import)
   +`<div class="field"><label>Protocol</label>
      <select data-k="protocol">
@@ -2985,8 +3089,7 @@ RENDER.general=()=>settingsPage('General',
     <div class="row" style="gap:8px;align-items:center;margin:8px 0">
       <button class="btn ghost" id="g-totp" type="button">Enable two-factor (TOTP)</button>
       <button class="btn ghost" id="g-totpoff" type="button">Disable</button>
-      <span class="help" style="margin:0">Gates sign-in; the API key is
-        already a high-entropy secret and is not gated.</span></div>
+      <span class="help" style="margin:0">Two-factor authentication protects sign-in only. The API key is already a high-entropy secret, so it does not require two-factor authentication.</span></div>
     <pre id="g-totpout" style="display:none;font:12px/1.6 ui-monospace,Menlo,monospace;color:var(--dim);white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px"></pre>`,
   ()=>{
     const regionalFormat=$('#g-regional-format');
@@ -3000,20 +3103,19 @@ RENDER.general=()=>settingsPage('General',
     $('#g-seerrng-key').onclick=async()=>{
       const d=await j('/api/v1/system/seerrng-key').catch(()=>({}));
       $('#g-seerrng-keyout').textContent=d.api_key||'could not read it';
-      if(d.managed_by_env) toast('This key is managed by ROMARR_SEERRNG_API_KEY');
+      if(d.managed_by_env) toastLabel('This key is managed by ROMARR_SEERRNG_API_KEY');
     };
     $('#g-seerrng-rotate').onclick=async()=>{
-      if(!confirm('Rotate the SeerrNG provider key? SeerrNG will need the new key immediately.')) return;
+      if(!confirmMessage('Rotate the SeerrNG provider key? SeerrNG will need the new key immediately.')) return;
       const d=await j('/api/v1/system/seerrng-key/rotate',{method:'POST',
         headers:{'content-type':'application/json'},body:'{}'}).catch(()=>({}));
       if(d.api_key){
         $('#g-seerrng-keyout').textContent=d.api_key;
-        toast('Provider key rotated');
-      }else toast(d.error||'Could not rotate provider key');
+        toastLabel('Provider key rotated');
+      }else if(d.error)toastAppMessage(d.error);else toastLabel('Could not rotate provider key');
     };
     $('#g-totp').onclick=async()=>{
-      if(!confirm('Enable two-factor sign-in? You will need a TOTP app '
-        +'(Aegis, Google Authenticator…) from the next sign-in on.')) return;
+      if(!confirmMessage('Enable two-factor sign-in? You will need a TOTP app (Aegis, Google Authenticator…) from the next sign-in on.')) return;
       const d=await j('/api/v1/totp/enroll',{method:'POST',
         headers:{'content-type':'application/json'},body:'{}'}).catch(()=>({}));
       const out=$('#g-totpout'); out.style.display='block';
@@ -3026,7 +3128,7 @@ RENDER.general=()=>settingsPage('General',
     $('#g-totpoff').onclick=async()=>{
       const d=await j('/api/v1/totp/disable',{method:'POST',
         headers:{'content-type':'application/json'},body:'{}'}).catch(()=>({}));
-      toast(d.ok?'Two-factor disabled':'Failed');
+      toastLabel(d.ok?'Two-factor disabled':'Failed');
       $('#g-totpout').style.display='none';
     };
   });
@@ -3123,9 +3225,9 @@ RENDER.status=async()=>{
 
   $('#bk-dl').onclick=()=>save('/api/v1/backup','romarr-backup.json');
   $('#bk-dle').onclick=async()=>{
-    const pass=prompt('Choose a passphrase with at least 16 non-whitespace characters. Keep it separately; ROMarr cannot recover it.');
+    const pass=promptMessage('Choose a passphrase with at least 16 non-whitespace characters. Keep it separately; ROMarr cannot recover it.');
     if(pass===null) return;
-    const confirmPass=prompt('Re-enter the backup passphrase.');
+    const confirmPass=promptMessage('Re-enter the backup passphrase.');
     if(confirmPass===null) return;
     if(pass!==confirmPass){ msg(false,'The passphrases do not match.'); return; }
     if([...pass].filter(c=>!(/\\s/.test(c))).length<16){ msg(false,'Use at least 16 non-whitespace characters.'); return; }
@@ -3139,21 +3241,19 @@ RENDER.status=async()=>{
     }catch(err){ msg(false,err.message||'Could not encrypt backup.'); }
   };
   $('#bk-dls').onclick=()=>{
-    if(confirm('This file will contain your API key and every stored password '
-      +'in plain text.\n\nDownload it?'))
+    if(confirmMessage('This file will contain your API key and every stored password in plain text. Download it?'))
       save('/api/v1/backup?secrets=1','romarr-backup-with-credentials.json');
   };
   $('#bk-rs').onclick=()=>$('#bk-file').click();
   $('#bk-file').onchange=async e=>{
     const file=e.target.files[0]; if(!file) return;
-    if(!confirm('Restore from '+file.name+'?\n\nThis replaces your current '
-      +'settings, libraries, indexers and clients.')) { e.target.value=''; return; }
+    if(!confirmMessage('Restore from {filename}? This replaces your current settings, libraries, indexers and clients.',{filename:file.name})) { e.target.value=''; return; }
     msg(true,'Restoring…');
     try{
       const backup=JSON.parse(await file.text());
       const headers={'Content-Type':'application/json'};
       if(backup.kind==='romarr-encrypted-backup'){
-        const pass=prompt('Enter the passphrase used to encrypt this backup.');
+        const pass=promptMessage('Enter the passphrase used to encrypt this backup.');
         if(pass===null){ e.target.value=''; return; }
         headers['X-ROMarr-Backup-Passphrase']=pass;
       }
@@ -3183,15 +3283,10 @@ RENDER.status=async()=>{
 // deliberate click, just like Settings -> General, because the finished URL
 // is itself a credential and should not sit in the page by default.
 const ggrequestzCard=g=>`<div class="card"><h3>GG Requestz requests</h3>
-  <p class="help"><b>Configure this in GG Requestz, not ROM Hub.</b>
-  Set <code>REQUEST_WEBHOOK_URL</code> in the GG Requestz container to ROMarr's
-  authenticated receiver. <code>GGREQUESTZ_URL</code> in ROMarr only creates
-  the page link and reachability check above.</p>
+  <p class="help">${interfaceMarkup('Configure the webhook in GG Requestz, not ROM Hub. Set REQUEST_WEBHOOK_URL in the GG Requestz container to ROMarr’s authenticated receiver. GGREQUESTZ_URL in ROMarr only creates the setup link and reachability check.')}</p>
   <label>ROMarr URL as the GG Requestz container reaches it</label>
   <input id="ggr-base" placeholder="http://romarr:6868">
-  <p class="help">On the same Docker network this is normally
-  <code>http://romarr:6868</code>. On Unraid or separate networks, use ROMarr's
-  LAN or HTTPS URL. The value must be reachable from inside GG Requestz.</p>
+  <p class="help">${interfaceTemplateMarkup(GG_ADDRESS_HELP,{url:'http://romarr:6868'})}</p>
   <div class="row" style="flex-wrap:wrap;gap:8px;align-items:center">
     <button class="btn" id="ggr-build" type="button">Reveal setup value</button>
     <button class="btn ghost" id="ggr-copy" type="button" disabled>Copy</button>
@@ -3199,14 +3294,8 @@ const ggrequestzCard=g=>`<div class="card"><h3>GG Requestz requests</h3>
   <pre id="ggr-value" style="display:none;font:12px/1.6 ui-monospace,Menlo,monospace;
     color:var(--dim);white-space:pre-wrap;overflow-wrap:anywhere;background:var(--bg);
     border:1px solid var(--line);border-radius:6px;padding:10px"></pre>
-  <p class="help">Restart GG Requestz after changing its environment. In GG
-  Requestz 1.5+, the webhook fires when a request becomes <b>approved</b>;
-  enable <code>request.auto_approve</code> or approve it manually. A successful
-  delivery now receives HTTP 202. Rejected payloads receive HTTP 422 and are
-  named in both applications' logs.</p>
-  <p class="help">Treat the finished URL like a password: it contains ROMarr's
-  API key. Keep it on a trusted Docker network or HTTPS and do not paste it in
-  public logs.</p></div>`;
+  <p class="help">${interfaceTemplateMarkup(GGR_WEBHOOK_HELP,{})}</p>
+  <p class="help" data-i18n="Treat the finished URL like a password: it contains ROMarr’s API key. Keep it on a trusted Docker network or HTTPS and do not paste it in public logs.">Treat the finished URL like a password: it contains ROMarr’s API key. Keep it on a trusted Docker network or HTTPS and do not paste it in public logs.</p></div>`;
 
 const wireGGRequestz=()=>{
   const base=$('#ggr-base'), build=$('#ggr-build'), copy=$('#ggr-copy');
@@ -3234,8 +3323,8 @@ const wireGGRequestz=()=>{
     }finally{build.disabled=false;}
   };
   copy.onclick=async()=>{
-    try{await navigator.clipboard.writeText(value.textContent); toast('Copied');}
-    catch(_){toast('Copy failed — select the value manually');}
+    try{await navigator.clipboard.writeText(value.textContent); toastLabel('Copied');}
+    catch(_){toastLabel('Copy failed — select the value manually');}
   };
 };
 
@@ -3307,9 +3396,7 @@ const moonlightCard=m=>{
       ? (pend.length
           ? `<p class="help">${fmt(pend.length)} client${pend.length===1?'':'s'}
              waiting:</p>`
-          : `<p class="help">No client is waiting to pair right now. Open
-             Moonlight, add <code>${esc(m.host||'')}</code>, and select it
-             &mdash; then come back here with the PIN it shows you.</p>`)
+          : `<p class="help">${interfaceTemplateMarkup('No Moonlight client is waiting to pair right now. Open Moonlight, add {host}, and select it. Then come back here and enter the PIN shown in Moonlight.',{host:m.host||''})}</p>`)
       : `<p class="help">${esc((m.pairing||{}).detail||'')}</p>`}
     <div class="row" style="flex-wrap:wrap;gap:8px;align-items:center">
       ${canList&&pend.length
@@ -3324,12 +3411,8 @@ const moonlightCard=m=>{
     <div id="ml-msg" class="testline"></div>
 
     <h4 style="margin:18px 0 6px">Connecting</h4>
-    <p class="help">ROMarr cannot start the stream for you. Launching is
-    behind the same paired client certificate as the app list, on the host's
-    HTTPS port, and there is no <code>moonlight://</code> link a browser can
-    hand off &mdash; Moonlight registers no URL scheme. What does work:</p>
-    <p class="help">Add <code>${esc(m.host||'')}</code> in the Moonlight app,
-    or run <code>${esc(m.connect_hint||'')}</code> on a desktop.</p>
+    <p class="help">${interfaceMarkup('ROMarr cannot launch Moonlight sessions for you. The browser cannot open moonlight:// links because Moonlight does not register a URL scheme. Launching requires a paired client certificate on the host’s HTTPS port, the same as the app list.')}</p>
+    <p class="help">${interfaceTemplateMarkup('Add {host} in Moonlight, or run {command} on a desktop.',{host:m.host||'',command:m.connect_hint||''})}</p>
     ${m.desktop_url?`<p class="help">This host also serves a browser desktop:
       <a href="${esc(m.desktop_url)}" target="_blank" rel="noreferrer noopener"
       >${esc(m.desktop_url)}</a></p>`:''}
@@ -3383,9 +3466,7 @@ RENDER.platforms=async()=>{
   const rows=await j('/api/platforms').catch(()=>[]);
   const badge=k=>`<span class="pill">${esc(k)}</span>`;
   $('#page').innerHTML=`<div class="card"><h3>Platforms</h3>
-    <p class="help">What ROMarr can request, and how each one plays on this
-      install. Disc platforms are included: nine of them run in the browser on
-      a stock RomM, and the rest stream from a stream server.</p>
+    <p class="help" data-i18n="The table shows what ROMarr can request and how you can play each platform on this install. Nine disc-based platforms run in a standard RomM browser; the rest stream from a streaming server.">The table shows what ROMarr can request and how you can play each platform on this install. Nine disc-based platforms run in a standard RomM browser; the rest stream from a streaming server.</p>
     <table><thead><tr><th>Platform</th><th>Media</th><th>Plays</th>
       <th>Ceiling</th><th>Extensions</th></tr></thead><tbody>
     ${rows.map(p=>`<tr>
@@ -3679,17 +3760,18 @@ async function requestGame(g){
     p.name.toLowerCase()===String(n).toLowerCase()||p.slug===String(n).toLowerCase()));
   let slug=match?match.slug:'';
   if(!slug){
-    const pick=prompt('Platform for "'+g.title+'"?\n'
-      +PLATFORMS.map(p=>p.slug).join(', '),'');
+    const pick=promptMessage('Platform for {game}? Available: {platforms}',{
+      game:g.title,platforms:PLATFORMS.map(p=>p.slug).join(', ')});
     const m=PLATFORMS.find(p=>p.slug===(pick||'').toLowerCase()
       ||p.name.toLowerCase()===(pick||'').toLowerCase());
-    if(!m){toast('Need a known platform');return;}
+    if(!m){toastLabel('Need a known platform');return;}
     slug=m.slug;
   }
   const r=await j('/api/request',{method:'POST',
     headers:{'content-type':'application/json'},
     body:JSON.stringify({game:g.title,platform:slug})});
-  toast(r.ok?('Grabbed '+(r.release||g.title)):(r.error||'Added to Wanted'));
+  if(r.ok)toastMessage('Grabbed {release}',{release:r.release||g.title});
+  else if(r.error)toastAppMessage(r.error);else toastLabel('Added to Wanted');
   refreshCounts();
 }
 
@@ -3892,7 +3974,7 @@ RENDER.collections=async()=>{
     });
     cb.querySelectorAll('.cact').forEach(el=>el.onclick=async e=>{
       const id=e.target.closest('tr').dataset.id, action=e.target.dataset.a;
-      if(action==='cancel'&&!confirm('Cancel this set? Titles already requested are unaffected.')) return;
+      if(action==='cancel'&&!confirmMessage('Cancel this set? Titles already requested are unaffected.')) return;
       await j('/api/v1/collection/control',{method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({id:id,action:action})});
@@ -3980,15 +4062,14 @@ RENDER.collections=async()=>{
           +'</td><td>'+pill+'</td><td class="help" style="margin:0">'+esc(t.why)
           +clones+'</td></tr>';
       }).join('')+'</tbody></table>'
-      +(d.titles.length>300?'<p class="help">Showing the first '+fmt(300)+' of '
-        +fmt(d.titles.length)+'.</p>':'');
+      +(d.titles.length>300?'<p class="help">'+interfaceTemplateMarkup('Showing the first {limit} of {count}.',{limit:fmt(300),count:fmt(d.titles.length)})+'</p>':'');
 
     $('#cstart').onclick=async e=>{
       e.target.disabled=true; e.target.textContent='Queueing…';
       const r=await j('/api/v1/collection/start',{method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({...planned, per_pass:parseInt($('#cpp').value,10)||5})});
-      toast(r.error?r.error:('Queued '+fmt(r.queued||0)+' titles'));
+      if(r.error)toastAppMessage(r.error);else toastMessage('Queued {count} titles',{count:fmt(r.queued||0)});
       e.target.disabled=false; e.target.textContent='Request missing';
       drawBatches();
     };
@@ -4046,9 +4127,7 @@ RENDER.manualimport=async()=>{
       btn.textContent='Import anyway';
       btn.style.background='var(--bad)';
       btn.onclick=()=>{
-        if(confirm('This file did not match a known dump.\n\n'
-          +'Import it anyway? It will be recorded as a forced import, and '
-          +'ROMarr will not claim it is verified.')) adopt(row,true);
+        if(confirmMessage('This file did not match a known dump. Import it anyway? It will be recorded as a forced import, and ROMarr will not claim it is verified.')) adopt(row,true);
       };
     }
   }
@@ -4098,9 +4177,10 @@ RENDER.manualimport=async()=>{
 
 RENDER.tasks=async()=>{
   const d=await j('/api/v1/system/tasks').catch(()=>({items:[]}));
-  const every=s=>!s?'off'
-    :s%3600===0?`every ${fmt(s/3600)} h`
-    :s%60===0?`every ${fmt(s/60)} min`:`every ${fmt(s)} s`;
+  const every=s=>!s?interfaceMarkup('Off')
+    :s%3600===0?interfaceTemplateMarkup('Interval: {count} h',{count:fmt(s/3600)})
+    :s%60===0?interfaceTemplateMarkup('Interval: {count} min',{count:fmt(s/60)})
+    :interfaceTemplateMarkup('Interval: {count} s',{count:fmt(s)});
   const scheduled=(d.items||[]).map(t=>[t.name,t.label,t]);
   const manualOnly=[['RefreshLibrary','Re-read the library from RomM',null],
     ['Decompress','Batch decompress the library: extract via Compressatorium, '
@@ -4108,22 +4188,27 @@ RENDER.tasks=async()=>{
      +'they verified AND the API call asked for deletion — this button never '
      +'deletes. Needs COMPRESSATORIUM_URL and decompress_path set in '
      +'settings.',null]];
-  $('#page').innerHTML=`<div class="card"><h3>Tasks</h3>
-    <p class="help">The service runs these on its own clock &mdash; intervals live
+  $('#page').innerHTML=`<div class="card"><h3 data-i18n="Tasks">Tasks</h3>
+    <p class="help" data-i18n="The service runs these on its own clock — intervals live under Settings → General. Run starts one now regardless.">The service runs these on its own clock &mdash; intervals live
       under Settings &rarr; General. Run starts one now regardless.</p>
-    <table><thead><tr><th>Task</th><th>Schedule</th><th>Last ran</th>
-      <th>Result</th><th></th></tr></thead><tbody>
-    ${scheduled.concat(manualOnly).map(([n,label,t])=>`<tr><td><b>${n}</b>
-      <div style="color:var(--dim);font-size:12px">${esc(label)}</div></td>
-      <td>${t?every(t.interval_seconds):'manual only'}</td>
+    <table><thead><tr><th data-i18n="Task">Task</th><th data-i18n="Schedule">Schedule</th><th data-i18n="Last ran">Last ran</th>
+      <th data-i18n="Result">Result</th><th></th></tr></thead><tbody>
+    ${scheduled.concat(manualOnly).map(([n,label,t])=>{
+      const source=n==='RefreshLibrary'?'Refresh library':n==='Decompress'?'Decompress':null;
+      const nameMarkup=source?interfaceMarkup(source):'<span lang="und" dir="auto">'+esc(n)+'</span>';
+      const detailMarkup=label?(Object.hasOwn(UI_LABELS,label)?interfaceMarkup(label):'<span lang="und" dir="auto">'+esc(label)+'</span>'):'';
+      const result=t&&t.last_error?`<span lang="und" dir="auto" style="color:var(--warn)">${esc(t.last_error)}</span>`
+        :t&&t.last_result?statusMarkup(t.last_result):'—';
+      return `<tr><td><b>${nameMarkup}</b>
+      <div style="color:var(--dim);font-size:12px">${detailMarkup}</div></td>
+      <td>${t?every(t.interval_seconds):interfaceMarkup('Manual only')}</td>
       <td style="color:var(--dim)">${t&&t.last_run?esc(regionalDateTime(t.last_run)):'—'}</td>
-      <td style="color:var(--dim);font-size:12px">${
-        t&&t.last_error?`<span style="color:var(--warn)">${esc(t.last_error)}</span>`
-        :esc((t&&t.last_result)||'—')}</td>
-      <td style="text-align:end"><button class="btn ghost" data-task="${n}">Run</button></td>
-      </tr>`).join('')}</tbody></table></div>`;
+      <td style="color:var(--dim);font-size:12px">${result}</td>
+      <td style="text-align:end"><button class="btn ghost" data-task="${esc(n)}" data-i18n="Run">Run</button></td>
+      </tr>`;
+    }).join('')}</tbody></table></div>`;
   document.querySelectorAll('[data-task]').forEach(b=>b.onclick=async()=>{
-    b.disabled=true; b.textContent='Running…';
+    b.disabled=true; b.innerHTML=interfaceMarkup('Running…');
     // Decompress from the Tasks page is always a dry run: extraction is
     // minutes-to-hours of service work and a mis-click must not start it on
     // the whole library. The real run is an API call with an explicit
@@ -4133,7 +4218,9 @@ RENDER.tasks=async()=>{
     const r=await j('/api/v1/command',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify(body)});
-    toast(r.message||(r.scanned!==undefined?`Scanned ${fmt(r.scanned)} (dry run)`:'Done'));
+    if(r.message)toastAppMessage(r.message);
+    else if(r.scanned!==undefined)toastMessage('Scanned {count} (dry run)',{count:fmt(r.scanned)});
+    else toastLabel('Done');
     go('tasks'); refreshCounts();
   });
 };
@@ -4141,19 +4228,19 @@ RENDER.tasks=async()=>{
 let LOG_TIMER=null;
 RENDER.logs=async()=>{
   clearInterval(LOG_TIMER);
-  $('#page').innerHTML=`<div class="card"><h3>Live log</h3>
-    <p class="help">The process log, tailed live — the same lines journalctl
+  $('#page').innerHTML=`<div class="card"><h3 data-i18n="Live log">Live log</h3>
+    <p class="help" data-i18n="The process log, tailed live — the same lines journalctl or docker logs would show. Events (grabs, imports) stay under Activity → History.">The process log, tailed live — the same lines journalctl
       or docker logs would show. Events (grabs, imports) stay under
       Activity &rarr; History.</p>
     <div class="row" style="margin-bottom:10px">
       <select id="lg-level">
-        <option value="">Everything</option>
-        <option value="INFO" selected>Info and up</option>
-        <option value="WARNING">Warnings and up</option>
-        <option value="ERROR">Errors only</option>
+        <option value="" data-i18n="Everything">Everything</option>
+        <option value="INFO" selected data-i18n="Info and up">Info and up</option>
+        <option value="WARNING" data-i18n="Warnings and up">Warnings and up</option>
+        <option value="ERROR" data-i18n="Errors only">Errors only</option>
       </select>
       <label class="check" style="margin:0"><input type="checkbox" id="lg-follow"
-        checked><span>Follow</span></label>
+        checked><span data-i18n="Follow">Follow</span></label>
     </div>
     <pre id="lg-out" style="font:12px/1.6 ui-monospace,Menlo,monospace;
       color:var(--dim);white-space:pre-wrap;max-height:70vh;overflow:auto"></pre></div>`;
@@ -4263,7 +4350,7 @@ def page() -> str:
 <div id="navwrap">{_nav_html()}</div>
 {_theme_control_html()}</nav>
 <div id="main">
-  <div id="top"><h1 data-i18n="Games">Games</h1><input id="search" data-i18n-placeholder="Filter…" placeholder="Filter…" autocomplete="off"></div>
+  <div id="top"><h1 data-i18n="Games">Games</h1><input id="search" data-i18n-placeholder="Filter…" placeholder="Filter…" autocomplete="off" lang="und" dir="auto"></div>
   <div class="page" id="page"></div>
 </div>
 <script>{JS}</script></body></html>"""
@@ -4324,8 +4411,42 @@ body{display:flex;align-items:center;justify-content:center;min-height:100vh;
 .err.on{display:block}
 .alt{margin-top:16px;text-align:center;font-size:12px;color:var(--dim)}
 .alt a{cursor:pointer}
+.public-language{position:fixed;top:14px;inset-inline-end:14px;z-index:5;
+  display:flex;align-items:center;gap:8px;padding:8px 10px;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);
+  color:var(--dim);font-size:12px}
+.public-language select{max-width:190px;padding:5px;background:var(--bg);
+  color:var(--fg);border:1px solid var(--line);border-radius:4px}
 @media(max-width:420px){.box{padding:24px 20px}}
 """
+
+PUBLIC_I18N_JS = r"""
+(()=>{
+const labels=__UI_LABELS__,key='romarrng.interface-language';
+const languages=[['en','English'],['es','Español'],['zh-Hans','简体中文'],['hi','हिन्दी'],['de','Deutsch'],['ja','日本語'],['fr','Français'],['pt-BR','Português (Brasil)'],['ar','العربية'],['ko','한국어'],['zh-Hant','繁體中文'],['vi','Tiếng Việt'],['id','Bahasa Indonesia']];
+const detect=()=>{for(const candidate of (navigator.languages?.length?navigator.languages:[navigator.language])){const value=String(candidate||'').toLowerCase().replace(/_/g,'-'),parts=value.split('-'),base=parts[0];if(base==='zh'){const script=parts.find(x=>x==='hans'||x==='hant');return script==='hant'||(!script&&['tw','hk','mo'].includes(parts.at(-1)))?'zh-Hant':'zh-Hans'}if(base==='pt')return'pt-BR';if(languages.some(x=>x[0]===base))return base}return'en'};
+let active='en';
+try{const saved=localStorage.getItem(key);active=languages.some(x=>x[0]===saved)?saved:detect()}catch(_){active=detect()}
+const translate=source=>labels[source]?.[active]||source;
+const message=(source,values={})=>translate(source).replace(/\{([A-Za-z][A-Za-z0-9_]*)\}/g,(token,name)=>Object.hasOwn(values,name)?'\u2068'+String(values[name]??'')+'\u2069':token);
+const sources=new WeakMap();
+const text=(node)=>{const parent=node.parentElement;if(!parent||parent.closest('script,style,textarea,input,select,code,[contenteditable="true"],[lang="und"],[data-i18n]'))return;const source=sources.get(node)||node.data.replace(/\s+/g,' ').trim();if(!Object.hasOwn(labels,source))return;sources.set(node,source);const left=node.data.match(/^\s*/)?.[0]||'',right=node.data.match(/\s*$/)?.[0]||'',value=left+translate(source)+right;if(value!==node.data)node.data=value;const localized=Boolean(labels[source]?.[active]);parent.lang=localized?active:'en';parent.dir=localized&&active==='ar'?'rtl':'ltr'};
+const tree=root=>{if(root.nodeType===Node.TEXT_NODE){text(root);return}const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);while(walker.nextNode())text(walker.currentNode)};
+const apply=()=>{document.documentElement.lang=active;document.documentElement.dir=active==='ar'?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(el=>{const source=el.dataset.i18n,localized=Boolean(labels[source]?.[active]);el.textContent=translate(source);el.lang=localized?active:'en';el.dir=localized&&active==='ar'?'rtl':'ltr'});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const source=el.dataset.i18nPlaceholder;el.placeholder=translate(source);el.lang=labels[source]?.[active]?active:'en';el.dir=labels[source]?.[active]&&active==='ar'?'rtl':'ltr'});for(const [marker,attribute] of [['data-i18n-aria-label','aria-label'],['data-i18n-title','title']])document.querySelectorAll('['+marker+']').forEach(el=>{const source=el.getAttribute(marker);el.setAttribute(attribute,translate(source))});tree(document.body);const selector=document.querySelector('#public-language-select');if(selector)selector.value=active;document.title=translate(document.body.dataset.title||'ROMarr')+' · ROMarr'};
+const picker=document.querySelector('#public-language-select');if(picker){picker.innerHTML=languages.map(([code,name])=>'<option value="'+code+'">'+name+'</option>').join('');picker.value=active;picker.addEventListener('change',()=>{active=picker.value;try{localStorage.setItem(key,active)}catch(_){}apply()})}
+window.ROMarrI18n={translate,message,has:source=>Object.hasOwn(labels,source),apply,get language(){return active}};
+apply();
+new MutationObserver(records=>{for(const record of records){if(record.type==='characterData')text(record.target);for(const node of record.addedNodes)tree(node)}}).observe(document.body,{subtree:true,childList:true,characterData:true});
+window.addEventListener('storage',event=>{if(event.key!==key&&event.key!==null)return;active=languages.some(x=>x[0]===event.newValue)?event.newValue:detect();apply()});
+})()
+""".replace("__UI_LABELS__", json.dumps(UI_LABELS, ensure_ascii=False))
+
+
+def _public_language_picker() -> str:
+    return ('<div class="public-language"><label for="public-language-select" '
+            'data-i18n="Interface language">Interface language</label>'
+            '<select id="public-language-select" aria-label="Interface language" '
+            'data-i18n-aria-label="Interface language"></select></div>')
 
 
 def login_page(*, claimed: bool, totp: bool = False) -> str:
@@ -4350,8 +4471,8 @@ def login_page(*, claimed: bool, totp: bool = False) -> str:
     <input id="apikey" type="password" autocomplete="off">
   </div>
 """
-        note = ("Lost the password? Set <code>ROMARR_API_KEY</code> in the "
-                "container's environment and restart, then sign in with it.")
+        note = ("Lost the password? Set ROMARR_API_KEY in the container’s "
+                "environment and restart, then sign in with it.")
     else:
         title, action = "Set your password", "Create password"
         fields = """
@@ -4363,21 +4484,22 @@ def login_page(*, claimed: bool, totp: bool = False) -> str:
 """
         note = ("Nobody has claimed this ROMarr yet, so this screen is open. "
                 "Set the password now. To skip this step on future installs, "
-                "put <code>ROMARR_PASSWORD</code> in your container "
-                "environment.")
+                "put ROMARR_PASSWORD in your container environment.")
 
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <title>{title} &middot; ROMarr</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<style>{CSS}{LOGIN_CSS}</style><script>{THEME_BOOT}</script></head><body>
+<style>{CSS}{LOGIN_CSS}</style><script>{THEME_BOOT}</script></head><body data-title="{title}">
+{_public_language_picker()}
 <form class="box" id="f" autocomplete="on">
   <h1>ROM<span>arr</span></h1>
-  <div class="sub">{title}</div>
+  <div class="sub" data-i18n="{title}">{title}</div>
   {fields}
   <button type="submit" id="go">{action}</button>
   <div class="err" id="err"></div>
-  <div class="note">{note}</div>
+  <div class="note" data-i18n="{note}">{note}</div>
 </form>
+<script>{PUBLIC_I18N_JS}</script>
 <script>
 var claimed = {str(bool(claimed)).lower()};
 var f = document.getElementById('f'), err = document.getElementById('err'),
@@ -4388,9 +4510,13 @@ if (keylink) keylink.onclick = function() {{
   keylink.parentNode.style.display = 'none';
   document.getElementById('apikey').focus();
 }};
-function fail(m) {{ err.textContent = m; err.className = 'err on';
-                    go.disabled = false; go.textContent = claimed ?
-                    'Sign in' : 'Create password'; }}
+function fail(m, raw) {{
+  err.textContent = raw ? String(m) : window.ROMarrI18n.translate(m);
+  err.lang = raw ? 'und' : window.ROMarrI18n.language;
+  err.dir = raw ? 'auto' : (window.ROMarrI18n.language === 'ar' ? 'rtl' : 'ltr');
+  err.className = 'err on'; go.disabled = false;
+  go.textContent = window.ROMarrI18n.translate(claimed ? 'Sign in' : 'Create password');
+}}
 f.onsubmit = async function(e) {{
   e.preventDefault();
   err.className = 'err';
@@ -4417,7 +4543,9 @@ f.onsubmit = async function(e) {{
     if (r.ok) {{ location.href = '/'; return; }}
     var d = {{}};
     try {{ d = await r.json(); }} catch (_) {{}}
-    fail(d.detail || d.error || ('Refused (HTTP ' + r.status + ').'));
+    var detail = d.detail || d.error;
+    if (detail) fail(detail, !window.ROMarrI18n.has(detail));
+    else fail(window.ROMarrI18n.message('Refused (HTTP {{status}}).', {{status:r.status}}));
   }} catch (_) {{ fail('Could not reach ROMarr.'); }}
 }};
 </script></body></html>"""
@@ -4517,8 +4645,8 @@ function away() {
     + (f.n ? '&n=' + encodeURIComponent(f.n) : '');
   box.innerHTML = '<h1>ROM<span>arr</span></h1>'
     + '<div class="sub">You have been invited to peer</div>'
-    + '<div class="who">' + esc(f.n || here) + '</div>'
-    + '<div class="id">' + esc(here) + '</div>'
+    + '<div class="who" lang="und" dir="auto">' + esc(f.n || here) + '</div>'
+    + '<div class="id" lang="und" dir="auto">' + esc(here) + '</div>'
     + '<div class="step"><b>1</b><span>Tell ROMarr where your own server '
     + 'lives. This page is on your friend&rsquo;s server, so it has to send '
     + 'you home.</span></div>'
@@ -4526,10 +4654,7 @@ function away() {
     + '<input id="home" type="url" placeholder="http://192.168.1.20:7878" '
     + 'value="' + esc(mine) + '" autofocus>'
     + '<button id="go">Open this invitation on my ROMarr</button>'
-    + '<div class="step"><b>2</b><span>Your ROMarr will ask for the '
-    + '<b>claim code</b> &mdash; eight characters your friend sends you '
-    + 'separately. It is deliberately not in this link, and it expires in '
-    + '15 minutes.</span></div>'
+    + '<div class="step"><b>2</b><span data-i18n="Your ROMarr asks for a claim code: eight characters your friend sends separately. It is not in this link and expires after 15 minutes.">Your ROMarr asks for a claim code: eight characters your friend sends separately. It is not in this link and expires after 15 minutes.</span></div>'
     + '<div class="note">No ROMarr on this device? Copy the link and paste it '
     + 'into <b>Friends &rarr; I have an invitation</b> on your own server.'
     + '<br><br><code>' + esc(link) + '</code>'
@@ -4575,9 +4700,11 @@ def link_page() -> str:
 <title>Invitation &middot; ROMarr</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="no-referrer">
-<style>{CSS}{LOGIN_CSS}{LINK_CSS}</style></head><body>
+<style>{CSS}{LOGIN_CSS}{LINK_CSS}</style></head><body data-title="Invitation">
+{_public_language_picker()}
 <div class="box" id="box">
   <h1>ROM<span>arr</span></h1>
-  <div class="sub">Checking this invitation&hellip;</div>
+  <div class="sub" data-i18n="Checking this invitation…">Checking this invitation&hellip;</div>
 </div>
+<script>{PUBLIC_I18N_JS}</script>
 <script>{LINK_JS}</script></body></html>"""

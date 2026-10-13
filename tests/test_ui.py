@@ -35,9 +35,23 @@ def _inline_scripts(html: str) -> list[str]:
     return parser.scripts
 
 
+class _RenderedTextParser(HTMLParser):
+    """Collect rendered text without treating tag-like content as markup."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.parts: list[str] = []
+
+    def handle_data(self, data):
+        self.parts.append(data)
+
+
 def _text(html: str) -> str:
     """Tags stripped -- what a reader actually sees."""
-    return re.sub(r"<[^>]+>", "", html)
+    parser = _RenderedTextParser()
+    parser.feed(html)
+    parser.close()
+    return "".join(parser.parts)
 
 
 def test_inline_script_extraction_handles_browser_tolerated_end_tags():
@@ -79,9 +93,10 @@ def test_interface_language_name_is_localized_and_fallback_content_stays_english
     )
     assert selector, "the language picker needs its visible associated label"
     assert 'aria-label="Interface language"' not in selector.group(1)
-    assert 'value="ar"' not in selector.group(1)
+    assert 'value="ar"' in selector.group(1)
     assert '<html lang="en">' in html
-    assert "document.documentElement.lang='en'" in html
+    assert "document.documentElement.lang=language;" in html
+    assert "document.documentElement.dir=language==='ar'?'rtl':'ltr';" in html
     assert "el.lang=translated?language:'en'" in html
 
 
@@ -94,7 +109,35 @@ def test_library_and_search_labels_cover_selectable_interface_languages():
     selectable = set(re.findall(r'<option value="([^"]+)"', selector.group(1))) - {"en"}
     for label in ("On disk & catalogued", "Any source", "Enter a game name"):
         assert selectable <= UI_LABELS[label].keys(), f"{label} is missing translations"
-    assert "if(!game){toast(translateLabel('Enter a game name',readInterfaceLanguage()));return;}" in html
+    assert "if(!game){toastLabel('Enter a game name');return;}" in html
+
+
+def test_interface_catalog_covers_every_locale_and_placeholder():
+    from romarr.ui import UI_LABELS
+
+    html = page()
+    selector = re.search(r'<select id="interface-language"[^>]*>(.*?)</select>', html, re.S)
+    assert selector
+    locales = set(re.findall(r'<option value="([^"]+)"', selector.group(1))) - {"en"}
+    assert locales == {
+        "es", "zh-Hans", "hi", "de", "ja", "fr", "pt-BR", "ar",
+        "ko", "zh-Hant", "vi", "id",
+    }
+    assert "UI_LABELS[source]?.[language]||source" in html
+
+    for source, translations in UI_LABELS.items():
+        assert set(translations) == locales, f"{source} has incomplete locale coverage"
+        source_placeholders = sorted(re.findall(r"\{([A-Za-z][A-Za-z0-9_]*)\}", source))
+        for locale, translated in translations.items():
+            assert isinstance(translated, str) and translated.strip(), (
+                f"{source} is empty in {locale}"
+            )
+            translated_placeholders = sorted(
+                re.findall(r"\{([A-Za-z][A-Za-z0-9_]*)\}", translated)
+            )
+            assert translated_placeholders == source_placeholders, (
+                f"{source} has placeholder mismatch in {locale}"
+            )
 
 
 def test_interface_language_choice_survives_storage_failure_for_current_tab():
@@ -135,10 +178,25 @@ globalThis.localStorage = {
 globalThis.window = {
   addEventListener: (_name, handler) => { syncLanguage = handler; }
 };
+globalThis.Node = {ELEMENT_NODE: 1, TEXT_NODE: 3};
+globalThis.NodeFilter = {SHOW_TEXT: 4};
+globalThis.MutationObserver = class {
+  observe() {}
+};
+const emptyElement = {
+  nodeType: Node.ELEMENT_NODE,
+  matches: () => false,
+  closest: () => null,
+  getAttribute: () => null,
+  querySelectorAll: () => []
+};
 globalThis.document = {
   documentElement: {},
+  nodeType: 9,
+  body: emptyElement,
   querySelector: name => name === "#interface-language" ? selector : null,
-  querySelectorAll: () => []
+  querySelectorAll: () => [],
+  createTreeWalker: () => ({nextNode: () => false})
 };
 """ + language_helpers + change_handler + r"""
 selector.value = "de";
@@ -292,7 +350,7 @@ const writeFailureResult = applyRegionalFormat(failedWriteControl.value, failedW
 const failedWriteMarkup = regionalFormatField();
 const writeFailureHandled = writeFailureResult
   && failedWriteControl.value === "ja" && getRegionalLocale() === "ja"
-  && failedWriteMarkup.includes('value="ja" selected')
+  && /value="ja"[^>]* selected/.test(failedWriteMarkup)
   && refreshCountCalls === refreshAfterSave + 1;
 storageWritable = true;
 applyRegionalFormat("de");
@@ -324,7 +382,7 @@ const storageFailureResult = applyRegionalFormat(failedControl.value, failedCont
 const failedStorageMarkup = regionalFormatField();
 const storageFailureHandled = storageFailureResult
   && failedControl.value === "ja" && getRegionalLocale() === "ja"
-  && failedStorageMarkup.includes('value="ja" selected')
+  && /value="ja"[^>]* selected/.test(failedStorageMarkup)
   && refreshCountCalls === refreshBeforeStorageFailure + 1;
 storageAvailable = true;
 const expectedDate = new Intl.DateTimeFormat("de", {
@@ -367,7 +425,7 @@ console.log(JSON.stringify({
   storedAfterSystemReset,
   accessible: selectedMarkup.includes('aria-describedby="g-regional-format-help"')
     && selectedMarkup.includes('id="g-regional-format-help"'),
-  germanOptionSelected: selectedMarkup.includes('value="de" selected'),
+  germanOptionSelected: /<option value="de"[^>]* selected>/.test(selectedMarkup),
   systemOptionSelected: /<option value="system"[^>]* selected>/.test(systemMarkup)
     && systemMarkup.includes('data-i18n="Use browser settings"')
 }));
@@ -431,5 +489,6 @@ def test_regional_formatting_is_applied_at_dashboard_count_call_sites():
     assert "${fmt(r.download_only||0)}" in html
     assert "${fmt(Math.max(0,Math.round((r.code_expires_in||0)/60)))} min" in html
     assert "fmt(p.max_size_mb/1024)+' GB' : fmt(p.max_size_mb)+' MB'" in html
-    assert "${fmt(s/60)} min" in html and "${fmt(s)} s" in html
+    assert "interfaceTemplateMarkup('Interval: {count} min'" in html
+    assert "interfaceTemplateMarkup('Interval: {count} s'" in html
     assert "Disabled until ${esc(regionalDateTime(item.disabledUntil))}" in html
