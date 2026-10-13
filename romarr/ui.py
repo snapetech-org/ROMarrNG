@@ -696,6 +696,11 @@ const setRegionalLocale=value=>{
     return true;
   }catch(_){return false;}
 };
+const applyRegionalFormat=value=>{
+  if(!setRegionalLocale(value)) return false;
+  refreshCounts();
+  return true;
+};
 const regionalFormatField=()=>{
   let current='system';
   try{current=localStorage.getItem(REGIONAL_FORMAT_KEY)||'system';}catch(_){}
@@ -710,6 +715,14 @@ const num=n=>n===null||n===undefined?'—':fmt(n);
 const regionalDate=value=>{
   if(value===null||value===undefined||value==='') return '—';
   const source=String(value);
+  const monthDay=/^(\d{2})-(\d{2})$/.exec(source);
+  if(monthDay){
+    const month=Number(monthDay[1]),day=Number(monthDay[2]);
+    const date=new Date(Date.UTC(2000,month-1,day));
+    if(date.getUTCMonth()!==month-1||date.getUTCDate()!==day) return source;
+    return new Intl.DateTimeFormat(getRegionalLocale(),{
+      month:'short',day:'numeric',timeZone:'UTC'}).format(date);
+  }
   const dayOnly=/^(\d{4})-(\d{2})-(\d{2})$/.exec(source);
   const date=dayOnly
     ?new Date(Date.UTC(Number(dayOnly[1]),Number(dayOnly[2])-1,Number(dayOnly[3])))
@@ -734,8 +747,11 @@ const regionalMonth=value=>{
   return new Intl.DateTimeFormat(getRegionalLocale(),{
     month:'long',year:'numeric',timeZone:'UTC'}).format(date);
 };
-const regionalYear=value=>Number(value).toLocaleString(getRegionalLocale(),{
-  useGrouping:false});
+const regionalYear=value=>{
+  const year=Number(value);
+  return Number.isFinite(year)?year.toLocaleString(getRegionalLocale(),{
+    useGrouping:false}):String(value??'');
+};
 let PLATFORMS=[], SETTINGS={};
 
 function toast(msg){
@@ -1101,7 +1117,7 @@ RENDER.library=async()=>{
     if(!x) return '';
     const bits=[];
     if(x.status) bits.push(`<span class="pill">${esc(x.status)}</span>`);
-    if(x.rating) bits.push(`<span class="pill">★ ${x.rating}</span>`);
+    if(x.rating) bits.push(`<span class="pill">★ ${num(x.rating)}</span>`);
     return bits.length?`<div style="margin-top:2px">${bits.join(' ')}</div>`:'';
   };
   const grid=`<div class="grid" id="lib-grid">${items.map((g,i)=>`<div class="tile"
@@ -1153,7 +1169,7 @@ function shelfEditor(g, meta){
     <div class="field"><label>Rating</label>
       <select data-f="rating"><option value="0">unrated</option>
         ${[1,2,3,4,5,6,7,8,9,10].map(n=>`<option value="${n}"${
-          meta.rating===n?' selected':''}>${'★'.repeat(Math.ceil(n/2))} ${n}/10</option>`).join('')}
+          meta.rating===n?' selected':''}>${'★'.repeat(Math.ceil(n/2))} ${fmt(n)}/10</option>`).join('')}
       </select></div>
     <div class="field"><label>Notes</label>
       <textarea data-f="notes" rows="4"
@@ -1819,7 +1835,7 @@ RENDER.peers=async()=>{
         <p class="help">This one <b>is</b> the secret. Say it out loud, text
           it, use a different app — anything that is not the same message as
           the link. It works once and expires in
-          <b id="p-codeleft">${Math.max(0,Math.round((r.code_expires_in||0)/60))} min</b>.</p></div>
+        <b id="p-codeleft">${fmt(Math.max(0,Math.round((r.code_expires_in||0)/60)))} min</b>.</p></div>
       <div class="row" style="gap:8px">
         <button class="btn ghost" id="p-copy">Copy the link</button>
         <button class="btn ghost" id="p-copycode">Copy the code</button></div>
@@ -2073,7 +2089,7 @@ async function friendShelf(peerId, opts){
       ${rows.map(g=>`<tr>
         <td>${esc(g.title||'')}</td>
         <td>${esc(g.platform||'')}</td>
-        <td>${g.year||''}</td>
+        <td>${g.year?regionalYear(g.year):''}</td>
         <td>${g.verified?'<span class="pill imported">verified</span>':''}</td>
         <td style="text-align:right"><div class="rowact">
           <button data-fwant="${esc(g.title||'')}"
@@ -2084,7 +2100,7 @@ async function friendShelf(peerId, opts){
       ${pages>1?`<div class="row" style="gap:8px;margin-top:10px">
         <button class="btn ghost" id="fs-prev"${page<=1?' disabled':''}>Previous</button>
         <span style="color:var(--dim);font-size:12px;align-self:center"
-          >Page ${page} of ${pages}</span>
+          >Page ${fmt(page)} of ${fmt(pages)}</span>
         <button class="btn ghost" id="fs-next"${page>=pages?' disabled':''}>Next</button>
       </div>`:''}`
       :'<div class="empty">Nothing matches. They may not share this platform.</div>'}
@@ -2328,7 +2344,7 @@ RENDER.queue=async()=>{
   const failed=(d.items||[]).filter(i=>i.state==='failed').length;
   $('#page').innerHTML=`<div class="row" style="margin-bottom:12px">
       <button class="btn ghost" id="q-import">Import completed now</button>
-      ${failed?`<button class="btn ghost" id="q-clearfail">Clear ${failed} failed</button>`:''}
+      ${failed?`<button class="btn ghost" id="q-clearfail">Clear ${fmt(failed)} failed</button>`:''}
       <span class="help" style="margin:0">${fmt((d.items||[]).length)} in flight</span>
     </div>`+(d.items.length?`<table><thead><tr><th>Game</th>
     <th>Platform</th><th>Release</th><th>Seeders</th><th>State</th><th></th></tr></thead><tbody>
@@ -2878,7 +2894,7 @@ RENDER.general=()=>settingsPage('General',
   ()=>{
     const regionalFormat=$('#g-regional-format');
     if(regionalFormat) regionalFormat.onchange=()=>{
-      if(setRegionalLocale(regionalFormat.value)) go('general');
+      applyRegionalFormat(regionalFormat.value);
     };
     $('#g-key').onclick=async()=>{
       const d=await j('/api/v1/system/apikey').catch(()=>({}));
@@ -2963,10 +2979,10 @@ RENDER.status=async()=>{
     ${moonlightCard(h.moonlight||{})}
     <div class="card"><h3>About</h3><div class="st">
       <div><b>${esc(h.version)}</b><span>Version</span></div>
-      <div><b>${h.platforms}</b><span>Platforms</span></div>
-      <div><b>${h.dats||0}</b><span>DATs loaded</span></div>
-      <div><b>${h.dat_games||0}</b><span>Known dumps</span></div>
-      <div><b>${h.events}</b><span>History events</span></div>
+      <div><b>${fmt(h.platforms)}</b><span>Platforms</span></div>
+      <div><b>${fmt(h.dats||0)}</b><span>DATs loaded</span></div>
+      <div><b>${fmt(h.dat_games||0)}</b><span>Known dumps</span></div>
+      <div><b>${fmt(h.events)}</b><span>History events</span></div>
       <div><b>${esc(h.uptime)}</b><span>Uptime</span></div>
       <div><b><a href="https://ko-fi.com/snapetech" target="_blank" rel="noopener noreferrer">Support ROMarrNG</a></b><span>Ko-fi</span></div>
     </div></div>
@@ -3254,14 +3270,14 @@ const wireMoonlight=m=>{
 // that it had worked.
 const playCard=r=>`<div class="card"><h3>How platforms play here</h3>
   <div class="st">
-    <div><b>${r.local||0}</b><span>In the browser (EmulatorJS)</span></div>
-    <div><b>${r.stream||0}</b><span>Streamed server-side</span></div>
-    <div><b>${r.archive||0}</b><span>On Archive.org</span></div>
-    <div><b>${r.download_only||0}</b><span>Download only</span></div>
+    <div><b>${fmt(r.local||0)}</b><span>In the browser (EmulatorJS)</span></div>
+    <div><b>${fmt(r.stream||0)}</b><span>Streamed server-side</span></div>
+    <div><b>${fmt(r.archive||0)}</b><span>On Archive.org</span></div>
+    <div><b>${fmt(r.download_only||0)}</b><span>Download only</span></div>
   </div>
   <p class="help">Every platform can be downloaded. ${
     (r.download_only||0)>0
-      ? `${r.download_only} have no player on this install &mdash; a stream
+      ? `${fmt(r.download_only)} have no player on this install &mdash; a stream
          server is what plays PS2, GameCube, Wii, Dreamcast and 3DS.`
       : 'Every supported platform also plays here without downloading.'}
     See <a href="#platforms">Platforms</a> for the per-platform answer.</p></div>`;
@@ -3280,7 +3296,7 @@ RENDER.platforms=async()=>{
       <td>${badge(p.media)}</td>
       <td>${(p.play_routes||[]).map(badge).join(' ')}</td>
       <td style="white-space:nowrap">${p.max_size_mb>=1024
-          ? (p.max_size_mb/1024).toFixed(0)+' GB' : p.max_size_mb+' MB'}</td>
+          ? fmt(p.max_size_mb/1024)+' GB' : fmt(p.max_size_mb)+' MB'}</td>
       <td style="color:var(--dim);font-size:12px">${esc((p.extensions||[]).join(' '))}</td>
     </tr>`).join('')}
     </tbody></table></div>`;
@@ -3759,8 +3775,8 @@ RENDER.collections=async()=>{
          +'<td style="min-width:150px"><div style="background:var(--bg);'
          +'border:1px solid var(--line);border-radius:4px;height:16px;overflow:hidden">'
          +'<div style="height:100%;width:'+x.percent+'%;background:var(--accent)"></div>'
-         +'</div><span class="help" style="margin:0">'+x.percent+'% — '+esc(x.status)+'</span></td>'
-         +'<td>'+x.done+'</td><td>'+x.failed+'</td><td>'+x.remaining+'</td>'
+         +'</div><span class="help" style="margin:0">'+fmt(x.percent)+'% — '+esc(x.status)+'</span></td>'
+         +'<td>'+fmt(x.done)+'</td><td>'+fmt(x.failed)+'</td><td>'+fmt(x.remaining)+'</td>'
          +'<td class="row" style="gap:6px">'
          +'<button class="btn ghost cstep">Run next</button>'
          +'<button class="btn ghost cact" data-a="'+(x.status==='paused'?'resume':'pause')+'">'
@@ -3986,8 +4002,8 @@ RENDER.manualimport=async()=>{
 RENDER.tasks=async()=>{
   const d=await j('/api/v1/system/tasks').catch(()=>({items:[]}));
   const every=s=>!s?'off'
-    :s%3600===0?`every ${s/3600} h`
-    :s%60===0?`every ${s/60} min`:`every ${s} s`;
+    :s%3600===0?`every ${fmt(s/3600)} h`
+    :s%60===0?`every ${fmt(s/60)} min`:`every ${fmt(s)} s`;
   const scheduled=(d.items||[]).map(t=>[t.name,t.label,t]);
   const manualOnly=[['RefreshLibrary','Re-read the library from RomM',null],
     ['Decompress','Batch decompress the library: extract via Compressatorium, '

@@ -123,34 +123,50 @@ globalThis.localStorage = {
   setItem: (key, value) => memory.set(key, String(value)),
   removeItem: key => memory.delete(key)
 };
+let refreshCountCalls = 0;
+const refreshCounts = () => { refreshCountCalls += 1; };
 """ + helpers + r"""
-const saved = setRegionalLocale("de");
+const saved = applyRegionalFormat("de");
+const refreshAfterSave = refreshCountCalls;
 const number = fmt(1234567.89);
 const date = regionalDate("2026-10-12");
+const anniversary = regionalDate("10-12");
+const invalidAnniversary = regionalDate("02-31");
 const timestamp = regionalDateTime("2026-10-12T00:00:00Z");
 const month = regionalMonth("2026-10");
 const year = regionalYear(2026);
+const unknownYear = regionalYear("not-a-year");
 const selectedMarkup = regionalFormatField();
-const invalidRejected = !setRegionalLocale("not-a-locale")
-  && getRegionalLocale() === "de";
-setRegionalLocale("system");
+const invalidRejected = !applyRegionalFormat("not-a-locale")
+  && getRegionalLocale() === "de" && refreshCountCalls === refreshAfterSave;
+const resetSaved = applyRegionalFormat("system");
 const systemLocale = getRegionalLocale() ?? null;
 const systemMarkup = regionalFormatField();
 const expectedDate = new Intl.DateTimeFormat("de", {
   timeZone: "UTC"
 }).format(new Date(Date.UTC(2026, 9, 12)));
+const expectedAnniversary = new Intl.DateTimeFormat("de", {
+  month: "short", day: "numeric", timeZone: "UTC"
+}).format(new Date(Date.UTC(2000, 9, 12)));
 const expectedTimestamp = new Date("2026-10-12T00:00:00Z").toLocaleString("de");
 const expectedMonth = new Intl.DateTimeFormat("de", {
   month: "long", year: "numeric", timeZone: "UTC"
 }).format(new Date(Date.UTC(2026, 9, 1)));
 console.log(JSON.stringify({
   saved,
+  resetSaved,
+  refreshAfterSave,
+  refreshCountCalls,
   locale: "de",
   numberMatches: number === new Intl.NumberFormat("de").format(1234567.89),
   dateMatches: date === expectedDate,
+  anniversaryMatches: anniversary === expectedAnniversary
+    && !/\b\d{4}\b/.test(anniversary),
+  invalidAnniversaryPreserved: invalidAnniversary === "02-31",
   timestampMatches: timestamp === expectedTimestamp,
   monthMatches: month === expectedMonth,
   yearMatches: year === new Intl.NumberFormat("de", {useGrouping: false}).format(2026),
+  unknownYearPreserved: unknownYear === "not-a-year",
   invalidRejected,
   systemLocale,
   storedAfterSystemReset: memory.get(REGIONAL_FORMAT_KEY) ?? null,
@@ -166,12 +182,18 @@ console.log(JSON.stringify({
     assert checked.returncode == 0, checked.stderr
     result = json.loads(checked.stdout)
     assert result["saved"] is True
+    assert result["resetSaved"] is True
+    assert result["refreshAfterSave"] == 1
+    assert result["refreshCountCalls"] == 2
     assert result["locale"] == "de"
     assert result["numberMatches"]
     assert result["dateMatches"]
+    assert result["anniversaryMatches"]
+    assert result["invalidAnniversaryPreserved"]
     assert result["timestampMatches"]
     assert result["monthMatches"]
     assert result["yearMatches"]
+    assert result["unknownYearPreserved"]
     assert result["invalidRejected"]
     assert result["systemLocale"] is None
     assert result["storedAfterSystemReset"] is None
@@ -182,4 +204,28 @@ console.log(JSON.stringify({
     # A JavaScript escape here used to render the two characters "\\n"
     # between the selector and the next setting.
     assert "regionalFormatField()}" + chr(92) + "n   <div" not in html
-    assert "setRegionalLocale(regionalFormat.value)" in html
+    assert "applyRegionalFormat(regionalFormat.value);" in html
+
+
+def test_regional_formatting_is_applied_at_dashboard_count_call_sites():
+    """Formatting helpers must reach the visible values that claim to use them."""
+    html = page()
+    assert "if(setRegionalLocale(regionalFormat.value)) refreshCounts();" not in html
+    assert "regionalFormat.onchange=()=>{\n      applyRegionalFormat(regionalFormat.value);" in html
+    assert "if(setRegionalLocale(regionalFormat.value)) go('general')" not in html
+    assert "★ ${num(x.rating)}" in html
+    assert "Clear ${fmt(failed)} failed" in html
+    assert "<div><b>${fmt(h.platforms)}</b><span>Platforms</span></div>" in html
+    assert "<div><b>${fmt(h.dats||0)}</b><span>DATs loaded</span></div>" in html
+    assert "<div><b>${fmt(h.dat_games||0)}</b><span>Known dumps</span></div>" in html
+    assert "<div><b>${fmt(h.events)}</b><span>History events</span></div>" in html
+    assert "+fmt(x.percent)+'% — '+esc(x.status)" in html
+    assert "+fmt(x.done)+'</td><td>'+fmt(x.failed)+'</td><td>'+fmt(x.remaining)" in html
+    assert ">Page ${fmt(page)} of ${fmt(pages)}</span>" in html
+    assert "${fmt(r.local||0)}" in html
+    assert "${fmt(r.stream||0)}" in html
+    assert "${fmt(r.archive||0)}" in html
+    assert "${fmt(r.download_only||0)}" in html
+    assert "${fmt(Math.max(0,Math.round((r.code_expires_in||0)/60)))} min" in html
+    assert "fmt(p.max_size_mb/1024)+' GB' : fmt(p.max_size_mb)+' MB'" in html
+    assert "${fmt(s/60)} min" in html and "${fmt(s)} s" in html
