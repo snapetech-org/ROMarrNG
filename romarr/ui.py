@@ -1436,7 +1436,11 @@ function bindLibraryChips(p){
 function shelfEditor(g, meta){
   const m=document.createElement('div');
   m.className='modal';
-  const opt=(v,label)=>`<option value="${v}"${(meta.status||'')===v?' selected':''}>${label}</option>`;
+  const opt=(v,label)=>{
+    const source=String(label??'');
+    const marker=Object.hasOwn(UI_LABELS,source)?` data-i18n="${esc(source)}"`:'';
+    return `<option value="${esc(v)}"${(meta.status||'')===v?' selected':''}${marker}>${esc(translateLabel(source,readInterfaceLanguage()))}</option>`;
+  };
   m.innerHTML=`<div class="box">
     <h3 lang="und" dir="auto">${esc(g.name)}</h3>
     <div class="sub">${esc(g.platform||'')} &mdash; ${interfaceMarkup(
@@ -1445,7 +1449,7 @@ function shelfEditor(g, meta){
       <select data-f="status">${opt('','—')}${opt('playing','Playing')}
         ${opt('completed','Completed')}${opt('shelved','Shelved')}</select></div>
     <div class="field"><label>Rating</label>
-      <select data-f="rating"><option value="0">unrated</option>
+      <select data-f="rating"><option value="0" data-i18n="unrated">unrated</option>
         ${[1,2,3,4,5,6,7,8,9,10].map(n=>`<option value="${n}"${
           meta.rating===n?' selected':''}>${'★'.repeat(Math.ceil(n/2))} ${fmt(n)}/10</option>`).join('')}
       </select></div>
@@ -2378,7 +2382,7 @@ async function friendShelf(peerId, opts){
     <div class="row" style="flex-wrap:wrap;gap:8px;margin-bottom:10px">
       <input type="text" id="fs-q" placeholder="Search their library"
         value="${esc(FSHELF.q)}" style="flex:1;min-width:200px">
-      <select id="fs-plat"><option value="">All platforms</option>
+      <select id="fs-plat"><option value="" data-i18n="All platforms">All platforms</option>
         ${(r.platforms||[]).map(pl=>`<option value="${esc(pl)}"${
           pl===FSHELF.platform?' selected':''}>${esc(pl)}</option>`).join('')}
       </select>
@@ -3144,8 +3148,8 @@ RENDER.general=()=>settingsPage('General',
   +chk('auto_import','Import completed downloads automatically',SETTINGS.auto_import)
   +`<div class="field"><label>Protocol</label>
      <select data-k="protocol">
-       <option value="torrent"${SETTINGS.protocol==='torrent'?' selected':''}>Torrent</option>
-       <option value="usenet"${SETTINGS.protocol==='usenet'?' selected':''}>Usenet</option>
+       <option value="torrent" data-i18n="Torrent"${SETTINGS.protocol==='torrent'?' selected':''}>Torrent</option>
+       <option value="usenet" data-i18n="Usenet"${SETTINGS.protocol==='usenet'?' selected':''}>Usenet</option>
      </select></div>
    <h3 style="margin-top:18px">The clock</h3>
    <p class="help">How often the scheduled jobs run. Zero turns a job off;
@@ -3294,9 +3298,9 @@ RENDER.status=async()=>{
     spreadsheet or another tool:</p>
     <div class="row" style="flex-wrap:wrap;gap:8px">
       <select id="ex-what">
-        <option value="library">Library</option>
-        <option value="wanted">Wanted</option>
-        <option value="blocklist">Blocklist</option>
+        <option value="library" data-i18n="Library">Library</option>
+        <option value="wanted" data-i18n="Wanted">Wanted</option>
+        <option value="blocklist" data-i18n="Blocklist">Blocklist</option>
       </select>
       <select id="ex-fmt"><option value="json">JSON</option>
         <option value="csv">CSV</option></select>
@@ -3999,7 +4003,7 @@ RENDER.collections=async()=>{
        +'requested until you say so.</p>'
        +'<div class="row" style="flex-wrap:wrap;gap:10px">'
        +'<select id="cdat">'+dats.map(d=>'<option>'+esc(d)+'</option>').join('')+'</select>'
-       +'<select id="cplat"><option value="">platform (match on disk)</option>'
+       +'<select id="cplat"><option value="" data-i18n="platform (match on disk)">platform (match on disk)</option>'
        +PLATFORMS.map(p=>'<option value="'+esc(p.slug)+'">'+esc(p.name)+'</option>').join('')
        +'</select>'
        +'<label class="help" style="margin:0"><input type="checkbox" id="c1g1r" checked> '
@@ -4039,7 +4043,7 @@ RENDER.collections=async()=>{
        +'there is no list of what a complete set contains.</div>')
     +'<div id="cswitch" hidden><p class="help">Switch uses catalogue IDs and filename versions, not checksum verification. DAT region and translation controls do not apply. Name searches need TITLED_NAMES=1.</p>'
     +'<label>Switch title name or ID <input id="csquery" placeholder="Title name or ID"></label>'
-    +'<label> Include <select id="cskinds"><option value="base">Base games</option><option value="update">Updates</option><option value="dlc">DLC</option><option value="base,update,dlc">All three</option></select></label>'
+    +'<label> Include <select id="cskinds"><option value="base" data-i18n="Base games">Base games</option><option value="update" data-i18n="Updates">Updates</option><option value="dlc">DLC</option><option value="base,update,dlc" data-i18n="All three">All three</option></select></label>'
     +'<label><input type="checkbox" id="cslatest" checked> Latest listed version only</label></div>'
     +'<div id="cres" style="margin-top:16px"></div></div>'
     +'<div class="card" style="margin-top:16px"><h3>Batches</h3>'

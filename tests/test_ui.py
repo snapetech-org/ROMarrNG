@@ -215,6 +215,32 @@ def test_runtime_status_fallbacks_and_generated_hub_errors_have_catalog_coverage
     assert generated_errors <= UI_LABELS.keys()
 
 
+def test_static_select_labels_use_interface_catalog_markers():
+    source = (Path(__file__).parents[1] / "romarr" / "ui.py").read_text(
+        encoding="utf-8"
+    )
+    for label in (
+        "unrated",
+        "All platforms",
+        "Torrent",
+        "Usenet",
+        "Library",
+        "Wanted",
+        "Blocklist",
+        "platform (match on disk)",
+        "Base games",
+        "Updates",
+        "All three",
+    ):
+        assert f'data-i18n="{label}"' in source, (
+            f"static select option is missing its translation marker: {label}"
+        )
+    assert (
+        "const marker=Object.hasOwn(UI_LABELS,source)?` data-i18n=\"${esc(source)}\"`:'';"
+        in source
+    )
+
+
 def test_public_auth_and_invitation_messages_have_catalog_coverage():
     from romarr.ui import UI_LABELS, link_page, login_page
 
