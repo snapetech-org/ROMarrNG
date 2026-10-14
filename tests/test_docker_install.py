@@ -286,18 +286,12 @@ def test_public_workflow_uses_org_pool_only_for_trusted_main():
         "((github.event_name == 'push' && github.ref == 'refs/heads/main') "
         "|| (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'))"
     )
-    expected_group = (
-        "group: " + "$" + "{{ " + trusted_condition + " && 'trusted-main' || '' }}"
+    expected_runner = (
+        "runs-on: " + "$" + "{{ (" + trusted_condition
+        + " && vars.TRUSTED_MAIN_RUNNERS_ENABLED == 'true' "
+        + "&& 'trusted-main') || 'ubuntu-latest' }}"
     )
-    expected_labels = (
-        "labels: " + "$" + "{{ " + trusted_condition
-        + " && fromJSON('["
-        + '"self-hosted","Linux","X64","host"'
-        + "]') || fromJSON('[\"ubuntu-latest\"]') }}"
-    )
-    assert (
-        "    runs-on:\n      " + expected_group + "\n      " + expected_labels
-    ) in test_job
+    assert expected_runner in test_job
 
     assert "prepare-private-runner-temp.sh" in test_job
     assert "PRIVATE_RUNNER_TEMP_PREFIX: romarr" in test_job
