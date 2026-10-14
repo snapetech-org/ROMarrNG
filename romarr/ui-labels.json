@@ -3446,7 +3446,7 @@
   "bad dump": {
     "es": "Volcado defectuoso",
     "zh-Hans": "错误的 ROM 转储",
-    "hi": "बुरा डंप",
+    "hi": "खराब ROM डंप",
     "de": "Fehlerhafter Dump",
     "ja": "不正なダンプ",
     "fr": "Dump défectueux",
@@ -4887,17 +4887,17 @@
   },
   "Import anyway": {
     "es": "Importar de todos modos",
-    "zh-Hans": "无论如何导入",
-    "hi": "किसी भी तरह से आयात करें",
+    "zh-Hans": "仍要导入",
+    "hi": "फिर भी आयात करें",
     "de": "Trotzdem importieren",
     "ja": "とにかくインポート",
-    "fr": "Importer de toute façon",
-    "pt-BR": "Importar mesmo assim.",
+    "fr": "Importer quand même",
+    "pt-BR": "Importar mesmo assim",
     "ar": "استيراد على أي حال",
     "ko": "그래도 가져오기",
-    "zh-Hant": "無論如何匯入",
+    "zh-Hant": "仍要匯入",
     "vi": "Dù sao vẫn nhập",
-    "id": "Impor pula"
+    "id": "Tetap impor"
   },
   "Import completed now": {
     "es": "Importación terminada ahora",
@@ -5796,16 +5796,16 @@
     "id": "Tidak ada yang diblokir"
   },
   "Nothing importable there": {
-    "es": "Nada importable allí",
-    "zh-Hans": "没有可导入的",
-    "hi": "वहाँ आयात करने योग्य नहीं",
+    "es": "No hay nada que importar allí",
+    "zh-Hans": "此处没有可导入的内容",
+    "hi": "वहाँ आयात करने योग्य कुछ भी नहीं है",
     "de": "Dort ist nichts zu importieren",
     "ja": "インポートできる項目はありません",
-    "fr": "Rien d'importable.",
+    "fr": "Rien à importer ici.",
     "pt-BR": "Nada pode ser importado de lá.",
     "ar": "لا يوجد ما يمكن استيراده هناك",
-    "ko": "어떤 수입도",
-    "zh-Hant": "沒有可匯入的",
+    "ko": "가져올 수 있는 항목이 없습니다",
+    "zh-Hant": "此處沒有可匯入的內容",
     "vi": "Không có mục nào có thể nhập tại đó",
     "id": "Tidak ada yang dapat diimpor di sana"
   },
@@ -7252,13 +7252,13 @@
     "id": "Tersimpan"
   },
   "Scan": {
-    "es": "Escaneo",
+    "es": "Escanear",
     "zh-Hans": "扫描",
-    "hi": "स्कैन",
+    "hi": "स्कैन करें",
     "de": "Scannen",
     "ja": "スキャン",
-    "fr": "Analyse",
-    "pt-BR": "Varredura",
+    "fr": "Analyser",
+    "pt-BR": "Escanear",
     "ar": "فحص",
     "ko": "스캔",
     "zh-Hant": "掃描",
