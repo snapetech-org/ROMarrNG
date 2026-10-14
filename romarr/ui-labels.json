@@ -16924,5 +16924,19 @@
     "zh-Hant": "ROMarr 尚未為你的副本計算雜湊值。",
     "vi": "ROMarr chưa tính mã băm cho bản sao của bạn.",
     "id": "ROMarr belum menghitung hash salinan Anda."
+  },
+  "Header says": {
+    "es": "El encabezado indica",
+    "zh-Hans": "标头显示",
+    "hi": "हेडर में लिखा है",
+    "de": "Header sagt",
+    "ja": "ヘッダーの内容：",
+    "fr": "L’en-tête indique",
+    "pt-BR": "O cabeçalho informa",
+    "ar": "تشير الترويسة إلى",
+    "ko": "헤더 내용:",
+    "zh-Hant": "標頭顯示",
+    "vi": "Tiêu đề tệp ghi",
+    "id": "Header menyatakan"
   }
 }

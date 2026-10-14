@@ -166,6 +166,15 @@ def test_static_localization_helper_sources_exist_in_every_catalog():
     assert referenced <= UI_LABELS.keys(), sorted(referenced - UI_LABELS.keys())
 
 
+def test_manual_import_localizes_header_label_but_preserves_dat_value():
+    source = (Path(__file__).parents[1] / "romarr" / "ui.py").read_text(
+        encoding="utf-8"
+    )
+    assert "interfaceMarkup('Header says')" in source
+    assert """lang="und" dir="auto">'+esc(x.header_says)""" in source
+    assert """+'header says '+esc(x.header_says)""" not in source
+
+
 def test_runtime_status_fallbacks_and_generated_hub_errors_have_catalog_coverage():
     from romarr.ui import UI_LABELS
 

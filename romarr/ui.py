@@ -4267,7 +4267,7 @@ RENDER.manualimport=async()=>{
            +'<td>'+esc(x.filename)+'</td>'
            +'<td><select class="mi-pf">'+opts(x.platform)+'</select></td>'
            +'<td class="help" style="margin:0">'+esc(x.reason)+'</td>'
-           +'<td>'+(x.hollow?'<span class="pill" style="background:var(--bad);color:#2a0b0b" title="'+esc(x.hollow)+'">EMPTY FILE</span><br>':'')+verdict(x.verdict)+(x.header_says?'<br><span class="pill" style="background:var(--warn);color:#2a1c05" title="'+esc(x.header_detail||'')+'">header says '+esc(x.header_says)+'</span>':'')+'</td>'
+           +'<td>'+(x.hollow?'<span class="pill" style="background:var(--bad);color:#2a0b0b" title="'+esc(x.hollow)+'">EMPTY FILE</span><br>':'')+verdict(x.verdict)+(x.header_says?'<br><span class="pill" style="background:var(--warn);color:#2a1c05" title="'+esc(x.header_detail||'')+'">'+interfaceMarkup('Header says')+' <span lang="und" dir="auto">'+esc(x.header_says)+'</span></span>':'')+'</td>'
            +'<td><button class="btn mi-go">Import</button></td>'
            +'<td class="mi-st help" style="margin:0"></td></tr>').join('')
          +'</tbody></table>'
