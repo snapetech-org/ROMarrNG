@@ -107,7 +107,8 @@ def test_interface_language_name_is_localized_and_fallback_content_stays_english
     assert 'value="ar"' in selector.group(1)
     assert '<html lang="en">' in html
     assert "document.documentElement.lang=language;" in html
-    assert "document.documentElement.dir=language==='ar'?'rtl':'ltr';" in html
+    assert "document.documentElement.dir='ltr';" in html
+    assert "el.dir=translated&&language==='ar'?'rtl':'ltr'" in html
     assert "el.lang=translated?language:'en'" in html
 
 
