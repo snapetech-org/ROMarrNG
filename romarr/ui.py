@@ -19,6 +19,7 @@ One file, no build step, no framework. This runs in a 512MB container beside a
 download client and a database.
 """
 
+import html
 import json
 from pathlib import Path
 
@@ -730,12 +731,21 @@ const GG_ADDRESS_HELP=`Use {url} on the same Docker network. Otherwise use ROMar
 const ROM_SITE_HELP=`ROM sites use plain HTTP through the Direct HTTP client. Some sites require a form that their own page submits, so those need the Headless Browser client to load the page and submit the form. Sites that require a CAPTCHA or bot-detection challenge are reported as unavailable instead of being bypassed.`;
 const DOWNLOAD_STATE_LABELS={queued:'Queued',grabbed:'Grabbed',imported:'Imported',
   failed:'Failed','import-failed':'Import failed',cancelled:'Cancelled',
-  available:'Available',downloading:'Downloading',importing:'Importing',done:'Done'};
+  available:'Available',downloading:'Downloading',importing:'Importing',done:'Done',
+  pending:'Pending',running:'Running',paused:'Paused',ignored:'Ignored',
+  wanted:'Wanted',decompress:'Decompress',playing:'Playing',completed:'Completed',
+  shelved:'Shelved',verified:'Verified',bad:'Bad',unknown:'Unknown'};
 const interfaceMarkup=source=>'<span data-i18n="'+esc(source)+'">'
   +esc(translateLabel(source,readInterfaceLanguage()))+'</span>';
 const interfaceTemplateMarkup=(source,values)=>'<span data-i18n-template="'+esc(source)
   +'" data-i18n-values="'+esc(JSON.stringify(values))+'">'
   +esc(translateTemplate(source,values))+'</span>';
+const appMessageMarkup=value=>{
+  const source=String(value??'');
+  return Object.hasOwn(UI_LABELS,source)
+    ? interfaceMarkup(source)
+    : '<span lang="und" dir="auto">'+esc(source)+'</span>';
+};
 const statusMarkup=value=>{
   const raw=String(value??''),source=DOWNLOAD_STATE_LABELS[raw];
   return source
@@ -798,9 +808,16 @@ const keepPlaceholderLiteral=source=>/^(?:https?:\/\/|[a-z]+\.[a-z.]+\/|[A-Z0-9_
 const applyTranslatedAttributes=(root,language)=>{
   const elements=[];
   if(root.nodeType===Node.ELEMENT_NODE)elements.push(root);
-  if(root.querySelectorAll)elements.push(...root.querySelectorAll('[title],[aria-label],[placeholder],[data-i18n-title],[data-i18n-aria-label],[data-i18n-placeholder]'));
+  if(root.querySelectorAll)elements.push(...root.querySelectorAll('[title],[aria-label],[placeholder],[data-i18n-title],[data-i18n-aria-label],[data-i18n-placeholder],[data-i18n-title-template]'));
   for(const el of elements){
     for(const [attribute,marker] of [['title','data-i18n-title'],['aria-label','data-i18n-aria-label'],['placeholder','data-i18n-placeholder']]){
+      const template=el.getAttribute(marker+'-template');
+      if(template!==null){
+        let values={};
+        try{values=JSON.parse(el.getAttribute(marker+'-values')||'{}')}catch(_){continue}
+        el.setAttribute(attribute,translateTemplate(template,values,language));
+        continue;
+      }
       const explicit=el.getAttribute(marker),current=el.getAttribute(attribute);
       if(explicit===null&&current===null)continue;
       if(explicit===null&&el.closest('[lang="und"]'))continue;
@@ -990,7 +1007,7 @@ function toastMessage(source,values={}){
 function toastAppMessage(message){
   const source=String(message??'');
   if(Object.hasOwn(UI_LABELS,source))toastLabel(source);
-  else if(source)toast(source);
+  else if(source)toast(source,'und','auto');
 }
 function confirmMessage(source,values={}){
   return window.confirm(translateTemplate(source,values,readInterfaceLanguage()));
@@ -1042,7 +1059,7 @@ RENDER.hub=async()=>{
         +'processes. Network requests go through ROMarr and can reach only '
         +'declared hosts.</div>'
       : '<div class="panel-note panel-warn"><b>Plugins run with no '
-        +'confinement.</b> '+esc(hs.sandbox_detail||'')+' A plugin you install '
+        +'confinement.</b> '+appMessageMarkup(hs.sandbox_detail||'')+' A plugin you install '
         +'may run without one or both boundaries if you explicitly override '
         +'this check; check the missing capability before allowing it.</div>');
   // What enabling a searchable plugin actually does now, said out loud:
@@ -1052,17 +1069,15 @@ RENDER.hub=async()=>{
   const acqNote=hs.available===false ? '' :
     (acq==='ready'
       ? '<div class="panel-note" style="border-inline-start:3px solid var(--ok)">'
-        +'<b>Enabled plugins join search.</b> Every enabled plugin that '
-        +'declares <span class="pill">search</span> answers Interactive '
-        +'Search alongside your indexers ('
-        +esc((hs.searchable_plugins||[]).join(', '))+'). Grabbing one stages '
-        +'the fetch through the ROM Hub client, then imports it like any '
-        +'other download &mdash; DAT verification and naming included.</div>'
+        +'<b>Enabled plugins join search.</b> '
+        +interfaceTemplateMarkup('Every enabled plugin that declares {capability} answers Interactive Search alongside your indexers ({plugins}). Grabbing one stages the fetch through the ROM Hub client, then imports it like any other download — DAT verification and naming included.',
+          {capability:'search',plugins:(hs.searchable_plugins||[]).join(', ')})
+        +'</div>'
       : '<div class="panel-note panel-warn"><b>Plugins are installed but not '
-        +'part of search yet.</b> '+esc(acq)
-        +'. Add a <b>ROM Hub</b> download client (Download Clients page) to '
-        +'stage plugin fetches; until then an enabled plugin is only usable '
-        +'through <code>rom-hub search</code> / <code>rom-hub import</code> '
+        +'part of search yet.</b> '+appMessageMarkup(acq)
+        +'. '+interfaceMarkup('Add a ROM Hub download client (Download Clients page) to stage plugin fetches; until then an enabled plugin is only usable through')
+        +' '
+        +'<code>rom-hub search</code> / <code>rom-hub import</code> '
         +'inside the container.</div>');
 
   const p=$('#page');
@@ -1070,7 +1085,7 @@ RENDER.hub=async()=>{
 
   // State lives here rather than in the DOM: a filter that has to be read
   // back out of the markup drifts from what is actually displayed.
-  let q='', cap='', inst='', actionError='';
+  let q='', cap='', inst='', actionError=null;
 
   const load=async()=>{
     const qs=new URLSearchParams();
@@ -1086,17 +1101,18 @@ RENDER.hub=async()=>{
     const net=(pl.network||[]).slice(0,2).join(', ');
     const action = pl.installed
       ? '<span class="'+(pl.enabled?'dot-ok':'dot-off')+'"></span>'
-        +'<span class="help" style="margin:0">'+(pl.enabled?'Enabled':'Disabled')+'</span>'
+        +'<span class="help" style="margin:0">'+interfaceMarkup(pl.enabled?'Enabled':'Disabled')+'</span>'
         +'<button class="mini" data-act="'+(pl.enabled?'disable':'enable')+'" '
-        +'data-slug="'+esc(pl.slug)+'">'+(pl.enabled?'Disable':'Enable')+'</button>'
-      : '<button class="mini accent" data-act="install" data-slug="'+esc(pl.slug)+'">Install'
-        +(pl.key_required?' · key needed':'')+'</button>';
+        +'data-slug="'+esc(pl.slug)+'">'+interfaceMarkup(pl.enabled?'Disable':'Enable')+'</button>'
+      : '<button class="mini accent" data-act="install" data-slug="'+esc(pl.slug)+'">'+interfaceMarkup('Install')
+        +(pl.key_required?' · '+interfaceMarkup('key needed'):'')+'</button>';
     return '<div class="pcard'+(pl.installed?' installed':'')+'">'
-      +'<h4>'+esc(pl.name)+(pl.author?'<span class="by">by '+esc(pl.author)+'</span>':'')+'</h4>'
+      +'<h4>'+esc(pl.name)+(pl.author?'<span class="by">'
+        +interfaceTemplateMarkup('By {author}',{author:pl.author})+'</span>':'')+'</h4>'
       +'<div class="desc">'+esc(pl.description||'No description supplied.')+'</div>'
       +'<div class="meta">'+(caps||'<span class="help" style="margin:0">no capabilities declared</span>')+'</div>'
       +'<div class="foot">'+action
-      +(net?'<span class="net">reaches '+esc(net)+'</span>':'')+'</div></div>';
+      +(net?'<span class="net">'+interfaceTemplateMarkup('reaches {hosts}',{hosts:net})+'</span>':'')+'</div></div>';
   };
 
   const render=d=>{
@@ -1107,14 +1123,18 @@ RENDER.hub=async()=>{
       +esc(name)+'<span class="n">'+fmt(n)+'</span></span>').join('');
 
     p.innerHTML=sandboxNote+acqNote+'<div class="card"><h3>Plugins'
-      +'<span class="help" style="margin-inline-start:10px">'+fmt(items.length)+' of '+fmt(d.total||0)+'</span></h3>'
+      +'<span class="help" style="margin-inline-start:10px">'
+      +interfaceTemplateMarkup('Showing {shown} of {total} plugins',
+        {shown:fmt(items.length),total:fmt(d.total||0)})+'</span></h3>'
       +'<div class="cat-bar">'
       +'<input id="pq" placeholder="Search plugins by name, author or description…" value="'+esc(q)+'">'
       +'<span class="chip'+(inst==='1'?' on':'')+'" data-inst="1">Installed</span>'
       +'<span class="chip'+(inst==='0'?' on':'')+'" data-inst="0">Available</span>'
       +chips+'</div>'
-      +(d.error?'<div class="panel-note panel-warn">'+esc(d.error)+'</div>':'')
-      +(actionError?'<div class="panel-note panel-warn">'+esc(actionError)+'</div>':'')
+      +(d.error?'<div class="panel-note panel-warn">'+appMessageMarkup(d.error)+'</div>':'')
+      +(actionError?'<div class="panel-note panel-warn">'+(actionError.source
+        ?interfaceTemplateMarkup(actionError.source,actionError.values)
+        :'<span lang="und" dir="auto">'+esc(actionError.raw)+'</span>')+'</div>':'')
       +'<div class="cat-scroll">'
       +(items.length?'<div class="pgrid">'+items.map(card).join('')+'</div>'
         :'<div class="empty-cat"><b>Nothing matches</b>'
@@ -1164,7 +1184,7 @@ RENDER.hub=async()=>{
 
     p.querySelectorAll('button[data-act]').forEach(b=>b.onclick=async()=>{
       const slug=b.dataset.slug, action=b.dataset.act;
-      b.disabled=true; b.textContent='Working…'; actionError='';
+      b.disabled=true; b.textContent='Working…'; actionError=null;
       try{
         const r=await fetch('/api/v1/hub/plugin',{method:'POST',
           headers:{'Content-Type':'application/json'},
@@ -1172,12 +1192,15 @@ RENDER.hub=async()=>{
         let result={};
         try{result=await r.json();}catch(_){result={};}
         if(!r.ok||result.ok!==true){
-          actionError=result.error||result.reason
-            ||('Could not '+action+' '+slug+' (HTTP '+r.status+').');
+          const detail=result.error||result.reason;
+          actionError=detail?{raw:detail}:{
+            source:`Could not ${action} {slug} (HTTP {status}).`,
+            values:{slug,status:r.status}};
         }
       }catch(e){
-        actionError='Could not '+action+' '+slug+': '
-          +(e&&e.message?e.message:'ROMarr did not answer.');
+        actionError={source:`Could not ${action} {slug}: {error}`,values:{
+          slug,error:e&&e.message?e.message:
+            translateLabel('ROMarr did not answer.',readInterfaceLanguage())}};
       }
       render(await load());
     });
@@ -1189,7 +1212,8 @@ RENDER.hub=async()=>{
         body:JSON.stringify({url:$('#ownurl').value.trim()})});
       const d=await r.json();
       msg.innerHTML='<div class="panel-note'+(d.ok?'':' panel-warn')+'">'
-        +esc(d.ok?('Source accepted: '+d.host+'. Installing…'):d.reason)+'</div>';
+        +(d.ok?interfaceTemplateMarkup('Source accepted: {host}. Installing…',{host:d.host})
+          :appMessageMarkup(d.reason))+'</div>';
     };
 
     $('#ssubmit').onclick=async()=>{
@@ -1206,9 +1230,10 @@ RENDER.hub=async()=>{
         msg.innerHTML='<div class="panel-note panel-warn"><b>Fix these:</b><br>'
           +d.problems.map(esc).join('<br>')+'</div>';
       }else{
-        msg.innerHTML='<div class="panel-note">Ready. '
+        msg.innerHTML='<div class="panel-note">'+interfaceMarkup('Ready.')+' '
           +'<a href="'+esc(d.submit_url)+'" target="_blank" rel="noopener">'
-          +'Open the submission</a> to review and post it yourself.</div>';
+          +interfaceMarkup('Open the submission')+'</a> '
+          +interfaceMarkup('to review and post it yourself.')+'</div>';
       }
     };
   };
@@ -1242,14 +1267,14 @@ RENDER.library=async()=>{
     +`&origin=${encodeURIComponent(LIB.origin)}`
     +`&source=${encodeURIComponent(LIB.source)}`
     +`&sort=${encodeURIComponent(LIB.sort)}`)
-    .catch(()=>({items:[],error:'unreachable'}));
+    .catch(()=>({items:[],error:'Unreachable'}));
 
   if(d.loading){
     // The first fetch has not landed yet. Say so, rather than showing an
     // empty grid that reads as "your library is empty".
     p.innerHTML=`<div class="card"><h3 data-i18n="Reading the library">Reading the library</h3>
-      <p class="help">${d.message?`<span lang="und" dir="auto">${esc(d.message)}</span>`:'<span data-i18n="Fetching from RomM…">Fetching from RomM…</span>'}
-      ${d.error?` <span data-i18n="Last attempt:">Last attempt:</span> <b lang="und" dir="auto">${esc(d.error)}</b>. <span data-i18n="Retrying with backoff.">Retrying with backoff.</span>`:''}</p></div>`;
+      <p class="help">${d.message?appMessageMarkup(d.message):'<span data-i18n="Fetching from RomM…">Fetching from RomM…</span>'}
+      ${d.error?` <span data-i18n="Last attempt:">Last attempt:</span> <b>${appMessageMarkup(d.error)}</b>. <span data-i18n="Retrying with backoff.">Retrying with backoff.</span>`:''}</p></div>`;
     applyInterfaceLanguage();
     return;
   }
@@ -1269,14 +1294,25 @@ RENDER.library=async()=>{
     const part=x.cached!==undefined&&x.cached<x.count;
     const cat=x.catalogued||0, disk=x.on_disk||0;
     const mixed=cat>0;
-    const tip=[part?`${fmt(x.cached)} of ${fmt(x.count)} loaded so far`:'',
-               mixed?`${fmt(disk)} on disk · ${fmt(cat)} catalogued elsewhere`:'']
-              .filter(Boolean).join(' — ');
+    const tip=part&&mixed
+      ? ['Loaded {cached} of {total} so far — on disk: {disk} · catalogued elsewhere: {catalogued}',
+         {cached:fmt(x.cached),total:fmt(x.count),disk:fmt(disk),catalogued:fmt(cat)}]
+      : part
+        ? ['Loaded {cached} of {total} so far',{cached:fmt(x.cached),total:fmt(x.count)}]
+        : mixed
+          ? ['On disk: {disk} · Catalogued elsewhere: {catalogued}',
+             {disk:fmt(disk),catalogued:fmt(cat)}]
+          : null;
+    const tipAttrs=tip
+      ? ` title="${esc(translateTemplate(tip[0],tip[1],readInterfaceLanguage()))}"
+          data-i18n-title-template="${esc(tip[0])}"
+          data-i18n-title-values="${esc(JSON.stringify(tip[1]))}"`
+      : '';
     return `<button class="btn ${LIB.platform===x.platform?'':'ghost'}" data-plat="${esc(x.platform)}"
-      style="padding:4px 10px;font-size:12px"
-      title="${esc(tip)}">${esc(x.platform)}
+      style="padding:4px 10px;font-size:12px"${tipAttrs}>${esc(x.platform)}
       <span style="opacity:.7">${part?fmt(x.cached)+'/'+fmt(x.count):fmt(x.count)}</span>
-      ${mixed?`<span style="opacity:.55;font-size:11px">(${fmt(disk)}&nbsp;here)</span>`:''}</button>`;
+      ${mixed?`<span style="opacity:.55;font-size:11px">${interfaceTemplateMarkup(
+        '({count} here)',{count:fmt(disk)})}</span>`:''}</button>`;
   }).join('');
   const f=d.facets||{};
   const sel=(key,label,list,fmt)=>{
@@ -1340,7 +1376,7 @@ RENDER.library=async()=>{
       ${LIB.platform?` ${interfaceTemplateMarkup('on {platform}',{platform:LIB.platform})}`:''}${q?` ${interfaceTemplateMarkup('matching “{query}”',{query:q})}`:''}
       · ${interfaceTemplateMarkup('{cached} cached across {platformCount} platforms',{cached:fmt(d.grand_total),platformCount:fmt((d.platforms||[]).length)})}
       ${d.partial?` · <b>${interfaceMarkup('still loading from the library server…')}</b>`:''}
-      ${d.error?` · <span style="color:var(--warn)">${interfaceTemplateMarkup('Last refresh: {error}',{error:d.error})}</span>`:''}</p>`;
+      ${d.error?` · ${interfaceMarkup('Last refresh:')} ${appMessageMarkup(d.error)}`:''}</p>`;
 
   if(!items.length){
     p.innerHTML=head+`<div class="empty">
@@ -1357,19 +1393,19 @@ RENDER.library=async()=>{
     const x=shelf[`${g.platform||''}/${(g.name||'').toLowerCase()}`];
     if(!x) return '';
     const bits=[];
-    if(x.status) bits.push(`<span class="pill">${esc(x.status)}</span>`);
+    if(x.status) bits.push(`<span class="pill">${statusMarkup(x.status)}</span>`);
     if(x.rating) bits.push(`<span class="pill">★ ${num(x.rating)}</span>`);
     return bits.length?`<div style="margin-top:2px">${bits.join(' ')}</div>`:'';
   };
   const grid=`<div class="grid" id="lib-grid">${items.map((g,i)=>`<div class="tile"
       data-shelf="${i}" style="cursor:pointer" title="Click to set status, rating, notes">
-    <div class="art" style="background-image:url('${esc(g.cover||'')}')"></div>
+      <div class="art" style="background-image:url('${esc(g.cover||'')}')"></div>
     <div class="nm" lang="und" dir="auto">${esc(g.name)}</div>
     <div class="pf" lang="und" dir="auto">${esc(g.platform||'')}</div>${mark(g)}</div>`).join('')}</div>`;
   const more=LIB.offset+items.length<d.total
     ?`<div class="row" style="justify-content:center;margin:16px 0">
-       <button class="btn" id="lib-more"><span data-i18n="Show more">Show more</span>
-         (${fmt(d.total-LIB.offset-items.length)} left)</button></div>`:'';
+       <button class="btn" id="lib-more">${interfaceTemplateMarkup(
+         'Show more ({count} left)',{count:fmt(d.total-LIB.offset-items.length)})}</button></div>`:'';
   p.innerHTML=head+grid+more;
   applyInterfaceLanguage();
   bindLibraryChips(p);
@@ -1403,8 +1439,8 @@ function shelfEditor(g, meta){
   const opt=(v,label)=>`<option value="${v}"${(meta.status||'')===v?' selected':''}>${label}</option>`;
   m.innerHTML=`<div class="box">
     <h3 lang="und" dir="auto">${esc(g.name)}</h3>
-    <div class="sub">${esc(g.platform||'')} &mdash; the shelf: what you are
-      doing with this game, and what you thought of it.</div>
+    <div class="sub">${esc(g.platform||'')} &mdash; ${interfaceMarkup(
+      'Your shelf status, rating, and notes for this game.')}</div>
     <div class="field"><label>Status</label>
       <select data-f="status">${opt('','—')}${opt('playing','Playing')}
         ${opt('completed','Completed')}${opt('shelved','Shelved')}</select></div>
@@ -1456,9 +1492,10 @@ RENDER.add=async()=>{
       body:JSON.stringify({game,platform})});
     $('#g-out').innerHTML=r.ok
       ? `<div class="card" style="margin:0"><h3 data-i18n="Grabbed">Grabbed</h3>
-         <p class="help"><span lang="und" dir="auto">${esc(r.release)}</span> — ${num(r.seeders)} seeders</p></div>`
+         <p class="help"><span lang="und" dir="auto">${esc(r.release)}</span> — ${interfaceTemplateMarkup(
+           'Seeders: {count}',{count:num(r.seeders)})}</p></div>`
        : `<div class="card" style="margin:0"><h3 data-i18n="Not grabbed">Not grabbed</h3>
-         <p class="help" lang="und" dir="auto">${esc(r.error||'no usable release')}</p></div>`;
+         <p class="help">${appMessageMarkup(r.error||'no usable release')}</p></div>`;
     applyInterfaceLanguage();
     refreshCounts();
   };
@@ -1490,7 +1527,7 @@ RENDER.search=async()=>{
     const d=await j(`/api/v1/release?game=${encodeURIComponent(game)}`
       +`&platform=${encodeURIComponent(platform)}`);
     if(d.error){
-      $('#s-out').innerHTML=`<p class="help" style="color:var(--warn)" lang="und" dir="auto">${esc(d.error)}</p>`;
+      $('#s-out').innerHTML=`<p class="help" style="color:var(--warn)">${appMessageMarkup(d.error)}</p>`;
       return;
     }
     if(!d.items.length){
@@ -1498,6 +1535,12 @@ RENDER.search=async()=>{
       applyInterfaceLanguage();
       return;
     }
+  const indexerTitle=r=>r.indexer
+    ? `title="${esc(translateTemplate('Open on {indexer}',{indexer:r.indexer}))}"
+       data-i18n-title-template="Open on {indexer}"
+       data-i18n-title-values="${esc(JSON.stringify({indexer:r.indexer}))}"`
+    : `title="${esc(translateLabel('Open on the indexer',readInterfaceLanguage()))}"
+       data-i18n-title="Open on the indexer"`;
     $('#s-out').innerHTML=`
       <p class="help">${interfaceTemplateMarkup('Found {found} releases; {accepted} match your selection. Rejected results are also shown with the reason for each rejection.',{found:fmt(d.found),accepted:fmt(d.accepted)})}</p>
       <table><thead><tr><th data-i18n="Score">Score</th><th data-i18n="Release">Release</th><th data-i18n="Size">Size</th>
@@ -1505,7 +1548,8 @@ RENDER.search=async()=>{
       ${d.items.map((r,i)=>`<tr style="${r.accepted?'':'opacity:.62'}">
         <td><span class="pill ${r.accepted?'imported':'failed'}">${num(r.score)}</span></td>
         <td><span lang="und" dir="auto">${esc(r.title)}</span>${r.info_url?` <a href="${esc(r.info_url)}" target="_blank"
-            rel="noopener noreferrer" title="Open on ${esc(r.indexer||'the indexer')}" lang="und" dir="auto"
+            rel="noopener noreferrer"
+            ${indexerTitle(r)} lang="und" dir="auto"
             style="text-decoration:none">&#8599;</a>`:''}
           ${r.private?' <span class="pill">private</span>':''}
           ${r.protocol==='usenet'?' <span class="pill">usenet</span>':''}</td>
@@ -1515,7 +1559,7 @@ RENDER.search=async()=>{
         <td style="color:var(--dim);font-size:12px" lang="und" dir="auto">${r.reasons.map(esc).join('<br>')}</td>
         <td><div class="rowact">${r.grabbable
           ? `<button data-grab="${esc(r.id)}" data-i18n="Grab">Grab</button>`
-          : '<span style="color:var(--dim);font-size:12px">no link</span>'}</div></td>
+          : '<span style="color:var(--dim);font-size:12px">'+interfaceMarkup('No link')+'</span>'}</div></td>
         </tr>`).join('')}</tbody></table>`;
 
     applyInterfaceLanguage();
@@ -1539,7 +1583,8 @@ RENDER.missing=async()=>{
   $('#page').innerHTML=`<div class="row" style="margin-bottom:14px">
       <button class="btn" id="w-all" data-i18n="Search All">Search All</button>
       <span style="color:var(--dim);font-size:12.5px">
-        ${fmt(d.items.length)} game(s) requested but not yet imported</span></div>
+        ${interfaceTemplateMarkup('Requested, not yet imported: {count}',
+          {count:fmt(d.items.length)})}</span></div>
     ${d.items.length?`<table><thead><tr><th data-i18n="Game">Game</th><th data-i18n="Platform">Platform</th>
       <th data-i18n="Added">Added</th><th data-i18n="Attempts">Attempts</th><th data-i18n="Last error">Last error</th><th></th></tr></thead><tbody>
       ${d.items.map(w=>`<tr><td lang="und" dir="auto">${esc(w.game)}</td><td lang="und" dir="auto">${esc(w.platform)}</td>
@@ -1587,12 +1632,16 @@ RENDER.lists=async()=>{
       <th data-i18n="Platform">Platform</th><th data-i18n="Added so far">Added so far</th><th data-i18n="Enabled">Enabled</th><th></th></tr></thead><tbody>
       ${d.items.map((l,i)=>`<tr><td><b lang="und" dir="auto">${esc(l.name||'—')}</b>${
           l.type==='url'?`<div style="color:var(--dim);font-size:11.5px">${esc(l.url||'')}</div>`:''}</td>
-        <td lang="und" dir="auto">${esc(l.type)}</td><td lang="und" dir="auto">${esc(l.platform||'per line')}</td>
+        <td lang="und" dir="auto">${esc(l.type)}</td><td>${l.platform
+          ?`<span lang="und" dir="auto">${esc(l.platform)}</span>`
+          :interfaceMarkup('Per line')}</td>
         <td>${fmt(l.added_count||0)}${l.unmatched_count
-          ?` <span class="pill" title="Titles with no ROM platform — modern store games. Open Edit to see them.">${fmt(l.unmatched_count)} kept aside</span>`:''}
+          ?` <span class="pill" title="Titles with no ROM platform — modern store games. Open Edit to see them.">${interfaceTemplateMarkup(
+            '{count} kept aside',{count:fmt(l.unmatched_count)})}</span>`:''}
           ${l.last_sync?`<div style="font-size:11px;color:${l.last_sync.error?'var(--warn)':'var(--dim)'}">
             ${l.last_sync.error?`<span lang="und" dir="auto">${esc(l.last_sync.error.slice(0,90))}</span>`
-              :`fetched ${fmt(l.last_sync.fetched)} at ${esc(regionalDateTime(l.last_sync.at))}`}</div>`:''}</td>
+              :interfaceTemplateMarkup('Fetched {count} at {date}',
+                {count:fmt(l.last_sync.fetched),date:regionalDateTime(l.last_sync.at)})}</div>`:''}</td>
         <td><span class="dot ${l.enable!==false?'up':'down'}"></span></td>
         <td style="text-align:end"><div class="rowact">
           <button data-ledit="${i}" data-i18n="Edit">Edit</button></div></td></tr>`).join('')}
@@ -1652,8 +1701,9 @@ RENDER.lists=async()=>{
     const m=document.createElement('div');
     m.className='modal';
     m.innerHTML=`<div class="box">
-      <h3>Connect ${esc(spec.label)}</h3>
-      <div class="sub">A tab just opened. ${esc(spec.how)}</div>
+      <h3>${interfaceTemplateMarkup('Connect to {service}',{service:spec.label})}</h3>
+      <div class="sub">${interfaceTemplateMarkup('A tab just opened. {how}',
+        {how:spec.how||''})}</div>
       <div class="field"><label>Paste it here</label>
         <textarea id="tok-v" rows="4" autocomplete="off" spellcheck="false"
           placeholder='paste the whole thing — {"npsso":"..."} is fine'
@@ -1678,7 +1728,7 @@ RENDER.lists=async()=>{
       body[spec.field]=value;
       const line=(ok,msg)=>{
         const el=m.querySelector('#testline');
-        el.className='testline '+(ok?'ok':'bad'); el.textContent=msg;
+        el.className='testline '+(ok?'ok':'bad'); el.innerHTML=appMessageMarkup(msg);
       };
       line(true,'Connecting…');
       const saved=await j('/api/v1/importlist',{method:'POST',
@@ -1796,7 +1846,8 @@ function editList(item){
       ${item.enable!==false?'checked':''}><span data-i18n="Enabled">Enabled</span></label>
     ${(item.unmatched||[]).length?`<details style="margin-top:10px">
       <summary class="help" style="margin:0;cursor:pointer">
-        ${fmt(item.unmatched.length)} title(s) kept aside — no ROM platform.
+        ${interfaceTemplateMarkup('{count} titles kept aside — no ROM platform.',
+          {count:fmt(item.unmatched.length)})}
         These are your modern store games; ROMarr acquires ROMs, so they
         wait here rather than pretending to be cartridges.</summary>
       <div style="color:var(--dim);font-size:12px;max-height:180px;
@@ -1819,20 +1870,25 @@ function editList(item){
       el.style.display=el.dataset.lt===kind?'':'none');
   };
   const payload=()=>({...readForm(), id:item.id});
-  const line=(ok,msg)=>{
+  const line=(ok,markup)=>{
     m.querySelector('#testline').className='testline '+(ok?'ok':'bad');
-    m.querySelector('#testline').textContent=msg;
+    m.querySelector('#testline').innerHTML=markup;
   };
   m.querySelector('#l-preview').onclick=async e=>{
-    e.target.disabled=true; line(true,'Reading…');
+    e.target.disabled=true; line(true,interfaceMarkup('Reading…'));
     const r=await j('/api/v1/importlist/preview',{method:'POST',
       headers:{'content-type':'application/json'},body:JSON.stringify(payload())});
-    if(r.error){ line(false,r.error); }
+    if(r.error){ line(false,appMessageMarkup(r.error)); }
     else{
       const unresolved=r.items.filter(x=>x.unresolved).length;
-      line(!unresolved,`${fmt(r.total)} title(s)`
-        +(unresolved?`, ${fmt(unresolved)} with no resolvable platform`:'')
-        +(r.total?` — first: ${r.items[0].game}`:''));
+      const summary=unresolved
+        ?interfaceTemplateMarkup('Found {count} titles; {unresolved} have no resolvable platform.',
+          {count:fmt(r.total),unresolved:fmt(unresolved)})
+        :interfaceTemplateMarkup('Found {count} titles.',{count:fmt(r.total)});
+      const first=r.total&&r.items[0]?.game
+        ?' '+interfaceMarkup('First:')+' <span lang="und" dir="auto">'
+          +esc(r.items[0].game)+'</span>':'';
+      line(!unresolved,summary+first);
     }
     e.target.disabled=false;
   };
@@ -1843,7 +1899,8 @@ function editList(item){
   };
   const del=m.querySelector('#l-del');
   if(del) del.onclick=async()=>{
-    if(!confirmMessage('Remove {name}?',{name:item.name||'this list'})) return;
+    if(!confirmMessage('Remove {name}?',{name:item.name
+      ||translateLabel('this list',readInterfaceLanguage())})) return;
     await fetch(`/api/v1/importlist/${item.id}`,{method:'DELETE'});
     closeModal(); toastLabel('Removed'); go('lists');
   };
@@ -1891,16 +1948,19 @@ RENDER.discover=async()=>{
       $('#d-genres').innerHTML=(d.facet||[]).map(g=>
         `<button class="btn ${DISC.genre===g?'':'ghost'}" data-dgenre="${esc(g)}"
           style="padding:3px 9px;font-size:12px;margin:0 4px 4px 0">${esc(g)}</button>`).join('')
-        ||`<span class="help" style="margin:0">No ${facet[0]} known yet — your
-            library server fills these in when it identifies a game.</span>`;
+        ||`<span class="help" style="margin:0">${interfaceMarkup(
+            'No results yet. Your library server fills this in when it identifies a game.')}</span>`;
       document.querySelectorAll('[data-dgenre]').forEach(b=>b.onclick=()=>{
         DISC.genre=b.dataset.dgenre; go('discover');});
     }
     const items=d.items||[];
     if(!items.length){
-      $('#d-out').innerHTML=`<div class="empty">${esc(d.error
-        ||(facet&&!DISC.genre?`Pick a ${facet[0]} above.`
-           :'Nothing on this shelf yet.'))}</div>`;
+      const facetNames={genre:'Genre',franchise:'Franchise',company:'Company'};
+      const emptyCopy=d.error?appMessageMarkup(d.error)
+        :facet&&!DISC.genre?interfaceTemplateMarkup('Pick a {facet} above.',{
+          facet:translateLabel(facetNames[facet[0]]||facet[0],readInterfaceLanguage())})
+        :interfaceMarkup('Nothing on this shelf yet.');
+      $('#d-out').innerHTML=`<div class="empty">${emptyCopy}</div>`;
       return;
     }
     // Whatever the shelf is sorted on is what the subtitle leads with, so a
@@ -1908,8 +1968,9 @@ RENDER.discover=async()=>{
     const sub=g=>DISC.shelf==='recently-added'?regionalDate(g.added)
       :DISC.shelf==='anniversary'?regionalDate(g.released)
       :(g.year?regionalYear(g.year):'');
-    $('#d-out').innerHTML=`<p class="help">${fmt(d.total)} game(s) on this
-        shelf, from your own library's metadata — no API key involved.</p>
+    $('#d-out').innerHTML=`<p class="help">${interfaceTemplateMarkup(
+        'This shelf has {count} games from your library metadata — no API key involved.',
+        {count:fmt(d.total)})}</p>
       <div class="grid">${items.map(g=>`<div class="tile">
         <div class="art" style="background-image:url('${esc(g.cover_url||'')}')"></div>
         <div class="nm">${esc(g.title)}</div>
@@ -1929,29 +1990,36 @@ RENDER.discover=async()=>{
     // providers are configured and which credential is blank; a fixed line
     // here naming one provider is how somebody with a working IGDB setup
     // gets told to go and register for RAWG.
-    $('#d-out').innerHTML=`<div class="empty">${esc(d.error||'Nothing to show.')}</div>`;
+    $('#d-out').innerHTML=`<div class="empty">${appMessageMarkup(d.error||'Nothing to show.')}</div>`;
     return;
   }
-  const src=d.provider_label||'a metadata provider';
+  const src=d.provider_label||'';
   const requestable=g=>(g.platforms||[]).filter(p=>
     PLATFORMS.some(x=>x.name.toLowerCase()===String(p).toLowerCase()
       ||x.slug===String(p).toLowerCase()));
   // Every tile carries where it came from. These sit one button away from
   // the library grid, which looks identical, and a shelf that lets a
   // catalogue entry pass for a game you own is worse than an empty page.
-  $('#d-out').innerHTML=`<p class="help">${fmt(d.items.length)} title(s) from
-      ${esc(src)}'s catalogue — not rows in your library. Request adds one to
-      Wanted.</p>
+  const catalogueLine=src
+    ?interfaceTemplateMarkup(
+      '{count} titles from {provider}’s catalogue — none are in your library. Request adds one to Wanted.',
+      {count:fmt(d.items.length),provider:src})
+    :interfaceTemplateMarkup(
+      '{count} titles from the metadata provider catalogue — none are in your library. Request adds one to Wanted.',
+      {count:fmt(d.items.length)});
+  $('#d-out').innerHTML=`<p class="help">${catalogueLine}</p>
     <div class="grid">${d.items.map((g,i)=>{
     const plats=requestable(g);
     return `<div class="tile">
       <div class="art" style="background-image:url('${esc(g.cover_url||'')}')"></div>
       <div class="nm">${esc(g.title)}</div>
       <div class="pf">${esc(regionalDate(g.released))}${g.rating?' · ★'+num(g.rating):''}</div>
-      <div class="pf" style="padding-top:0;opacity:.7">via ${esc(g.source||src)}</div>
+      <div class="pf" style="padding-top:0;opacity:.7">${g.source||src
+        ?interfaceTemplateMarkup('Source: {source}',{source:g.source||src})
+        :interfaceMarkup('Source: metadata provider')}</div>
       ${plats.length?`<div class="rowact" style="margin-top:4px">
         <button data-dreq="${i}">Request</button></div>`
-        :`<div class="pf" style="opacity:.6">no retro platform</div>`}</div>`;
+        :`<div class="pf" style="opacity:.6">${interfaceMarkup('No ROM platform')}</div>`}</div>`;
   }).join('')}</div>
   <p class="help" style="margin-top:10px">Request shows only for games on a
     platform ROMarr models — the scorer takes it from there, DAT
@@ -1985,12 +2053,9 @@ RENDER.peers=async()=>{
   const accessLabel={catalogue:'See titles only',stream:'Play here',
     fetch:'Download from me'};
   $('#page').innerHTML=`<div class="card"><h3>Friends</h3>
-      <p class="help">Share a library with someone running their own server —
-        RomM, Gaseous, Retrom, it does not matter, because ROMarr speaks all
-        of them. Peering is by invitation and confirmed on both sides: there
-        is no directory, and nobody finds you.
-        <b>Peering shares nothing by itself</b> — you choose what each friend
-        sees, and separately what they may do with it.</p>
+      <p class="help">${interfaceMarkup('Share a library with someone running their own server — RomM, Gaseous, Retrom, it does not matter, because ROMarr speaks all of them. Peering is by invitation and confirmed on both sides: there is no directory, and nobody finds you.')}
+        <b>Peering shares nothing by itself</b> — ${interfaceMarkup(
+          'you choose what each friend sees, and separately what they may do with it.')}</p>
       <div class="row" style="flex-wrap:wrap;gap:8px">
         <button class="btn" id="p-invite">Invite a friend</button>
         <button class="btn ghost" id="p-redeem">I have an invitation</button>
@@ -2024,7 +2089,9 @@ RENDER.peers=async()=>{
           :'<span class="pill failed">awaiting your confirmation</span>'}</td>
         <td style="text-align:end"><div class="rowact">
           ${p.confirmed?`<button data-pbrowse="${esc(p.peer_id)}"${
-             p.url?'':' disabled title="Their invitation carried no address, '
+             p.url?'':' disabled data-i18n-title="Their invitation carried no address, '
+                     +'so there is nowhere to call. Ask them to set their '
+                     +'public URL and send a fresh invitation." title="Their invitation carried no address, '
                      +'so there is nowhere to call. Ask them to set their '
                      +'public URL and send a fresh invitation."'}
              >Browse library</button>
@@ -2046,8 +2113,8 @@ RENDER.peers=async()=>{
     const claimCodeMessage='This claim code is a secret. Send it separately from the link, for example by saying it aloud, texting it, or using another app. It works once and expires in {minutes} minutes.';
     $('#p-out').innerHTML=`<div class="card" style="margin:0">
       <h3>Send your friend two things</h3>
-      <p class="help">${esc(r.note||'')}</p>
-      ${r.warning?`<div class="panel panel-warn">${esc(r.warning)}</div>`:''}
+      ${r.note?`<p class="help">${appMessageMarkup(r.note)}</p>`:''}
+      ${r.warning?`<div class="panel panel-warn">${appMessageMarkup(r.warning)}</div>`:''}
       ${r.link?`<div class="field"><label>1. The link — send it anywhere</label>
         <input type="text" id="p-link" readonly value="${esc(r.link)}"
           style="width:100%;font:12px/1.5 ui-monospace,Menlo,monospace">
@@ -2128,8 +2195,8 @@ RENDER.peers=async()=>{
       try{ host=new URL($('#p-link-in').value.trim()).origin; }catch{}
       const frag=($('#p-link-in').value.match(/[#&]u=([^&]*)/)||[])[1];
       if(frag){ try{ host=new URL(decodeURIComponent(frag)).origin; }catch{} }
-      el.innerHTML=host?`<div class="panel" style="margin-bottom:12px">ROMarr
-        will send this code to <b>${esc(host)}</b>.</div>`:'';
+      el.innerHTML=host?`<div class="panel" style="margin-bottom:12px">${interfaceTemplateMarkup(
+        'ROMarr will send this code to {host}.',{host})}</div>`:'';
     };
     $('#p-link-in').oninput=showTarget; showTarget();
     $('#p-claim-go').onclick=async()=>{
@@ -2142,7 +2209,11 @@ RENDER.peers=async()=>{
       b.disabled=false; b.textContent='Become friends';
       if(!r.ok){ if(r.error)toastAppMessage(r.error);else toastLabel('That invitation was refused'); return; }
       if(r.warning) toastAppMessage(r.warning);
-      if(r.detail)toastAppMessage(r.detail);else toastLabel('Your friend request was sent. They still need to accept it.');
+      if(r.name&&r.detail)toastMessage(
+        'Connected to {friend}. They confirm you on their side before you can see anything.',
+        {friend:r.name});
+      else if(r.detail)toastAppMessage(r.detail);
+      else toastLabel('Your friend request was sent. They still need to accept it.');
       go('peers');
     };
     $('#p-go').onclick=async()=>{
@@ -2196,17 +2267,16 @@ RENDER.peers=async()=>{
     const live=$('#p-seedlive');
     if(!live) return;
     if(st.running){
-      live.innerHTML=`<div class="panel" style="margin-top:10px">
-        Reading your library — <b>${fmt(st.seen||0)}</b> entries
-        checked, <b>${fmt(st.added||0)}</b> with a hash so far.
-        You can leave this page.</div>`;
+      live.innerHTML=`<div class="panel" style="margin-top:10px">${interfaceTemplateMarkup(
+        'Reading your library — {seen} entries checked, {added} with a hash so far. You can leave this page.',
+        {seen:fmt(st.seen||0),added:fmt(st.added||0)})}</div>`;
       setTimeout(seedPoll,2000);
     } else if(st.status==='done'&&st.seen){
       live.innerHTML=`<div class="panel" style="margin-top:10px">${
-        esc(st.detail||'')}</div>`;
+      appMessageMarkup(st.detail||'')}</div>`;
     } else if(st.status==='failed'){
       live.innerHTML=`<div class="panel panel-warn" style="margin-top:10px">${
-        esc(st.error||'The library read failed.')}</div>`;
+        appMessageMarkup(st.error||'The library read failed.')}</div>`;
     }
   };
   seedPoll();
@@ -2255,7 +2325,15 @@ RENDER.peers=async()=>{
           password:val('password'),name:val('name')})});
       btn.disabled=false; btn.textContent='Connect';
       if(r.error){ toastAppMessage(r.error); return; }
-      close(); if(r.detail)toastAppMessage(r.detail);else toastLabel('Connected'); go('peers');
+      close();
+      if(r.name&&Number.isFinite(Number(r.titles))){
+        const source=Number(r.titles)===1
+          ?'Connected to {friend}: {count} title with hashes ROMarr can match on.'
+          :'Connected to {friend}: {count} titles with hashes ROMarr can match on.';
+        toastMessage(source,{friend:r.name,count:fmt(r.titles)});
+      } else if(r.detail)toastAppMessage(r.detail);
+      else toastLabel('Connected');
+      go('peers');
     };
   };
 };
@@ -2275,21 +2353,28 @@ async function friendShelf(peerId, opts){
   const r=await j('/api/v1/friends/shelf?'+p.toString()).catch(()=>({}));
   if(!r.ok){
     out.innerHTML=`<div class="panel panel-warn" style="margin-top:14px">${
-      esc(r.error||'Could not reach that friend.')}</div>`;
+      appMessageMarkup(r.error||'Could not reach that friend.')}</div>`;
     return;
   }
   const rows=r.items||[];
   const pages=Math.ceil((r.total||0)/100);
   const page=Math.floor(FSHELF.offset/100)+1;
+  const friendName=String(r.friend||'');
+  const friendTitle=friendName
+    ?interfaceTemplateMarkup('{friend}’s library',{friend:friendName})
+    :interfaceMarkup('Your friend’s library');
+  const accessLabels={catalogue:'See titles only',stream:'Play here',fetch:'Download from me'};
+  const accessMarkup=r.access==='catalogue'
+    ?interfaceMarkup('You can add anything here to your own Wanted list — your indexers fetch it, not your friend.')
+    :interfaceMarkup('They allow:')+' '+(accessLabels[r.access]
+      ?interfaceMarkup(accessLabels[r.access]):appMessageMarkup(r.access||'—'));
   out.innerHTML=`<div style="margin-top:18px;border-top:1px solid var(--line);
       padding-top:16px">
-    <h3 style="margin:0 0 4px">${esc(r.friend||'Your friend')}’s library</h3>
-    <p class="help">${fmt(r.total||0)} of ${fmt(r.shelf_total||0)} shared title(s).
-      ${r.access==='catalogue'
-        ? 'You can add anything here to your own Wanted list — your '
-          +'indexers fetch it, not your friend.'
-        : 'They allow: '+esc(r.access||'')}
-      ${r.stale?'<b>Showing the last copy — their server did not answer.</b>':''}</p>
+    <h3 style="margin:0 0 4px">${friendTitle}</h3>
+    <p class="help">${interfaceTemplateMarkup('{count} of {total} shared titles.',
+      {count:fmt(r.total||0),total:fmt(r.shelf_total||0)})}
+      ${accessMarkup}
+      ${r.stale?`<b>${interfaceMarkup('Showing the last copy — their server did not answer.')}</b>`:''}</p>
     <div class="row" style="flex-wrap:wrap;gap:8px;margin-bottom:10px">
       <input type="text" id="fs-q" placeholder="Search their library"
         value="${esc(FSHELF.q)}" style="flex:1;min-width:200px">
@@ -2315,7 +2400,8 @@ async function friendShelf(peerId, opts){
       ${pages>1?`<div class="row" style="gap:8px;margin-top:10px">
         <button class="btn ghost" id="fs-prev"${page<=1?' disabled':''}>Previous</button>
         <span style="color:var(--dim);font-size:12px;align-self:center"
-          >Page ${fmt(page)} of ${fmt(pages)}</span>
+          >${interfaceTemplateMarkup('Page {page} of {pages}',
+            {page:fmt(page),pages:fmt(pages)})}</span>
         <button class="btn ghost" id="fs-next"${page>=pages?' disabled':''}>Next</button>
       </div>`:''}`
       :'<div class="empty">Nothing matches. They may not share this platform.</div>'}
@@ -2363,18 +2449,19 @@ function netplayVerdict(r){
     unhashed:'ROMarr has not hashed your copy yet',
     error:'Could not ask'
   }[r.status]||r.status||'No answer';
+  const headMarkup=appMessageMarkup(head);
   let extra='';
   if(r.room){
-    extra=`<div style="margin-top:8px">Room <code>${esc(r.room)}</code>
-      — both servers derive this independently, so you and
-      ${esc(r.friend||'your friend')} can join it without a lobby.</div>`;
+    extra=`<div style="margin-top:8px">${interfaceMarkup('Room')} <code>${esc(r.room)}</code>
+      — ${interfaceTemplateMarkup('Both servers derive this independently, so you and {friend} can join it without a lobby.',
+        {friend:r.friend||translateLabel('your friend',readInterfaceLanguage())})}</div>`;
   }
   if(r.sha1){
     extra+=`<div style="margin-top:6px;color:var(--dim);font-size:11.5px">
-      Compared on SHA1 <code>${esc(r.sha1)}</code>, not the title.</div>`;
+      ${interfaceTemplateMarkup('Compared on SHA1 {sha1}, not the title.',{sha1:r.sha1})}</div>`;
   }
-  return `<div class="${cls}" style="margin-top:12px"><b>${esc(head)}</b>
-    ${r.detail?`<div style="margin-top:6px">${esc(r.detail)}</div>`:''}
+  return `<div class="${cls}" style="margin-top:12px"><b>${headMarkup}</b>
+    ${r.detail?`<div style="margin-top:6px">${appMessageMarkup(r.detail)}</div>`:''}
     ${extra}</div>`;
 }
 
@@ -2383,7 +2470,7 @@ function sharingEditor(peer){
   m.className='modal';
   const opt=(v,cur,label)=>`<option value="${v}"${v===cur?' selected':''}>${label}</option>`;
   m.innerHTML=`<div class="box">
-    <h3>What ${esc(peer.name)} can see</h3>
+    <h3>${interfaceTemplateMarkup('What {friend} can see',{friend:peer.name})}</h3>
     <div class="sub">Visibility and downloading are separate permissions.</div>
     <div class="field"><label>They see</label>
       <select data-f="scope">
@@ -2438,12 +2525,7 @@ RENDER.ecosystem=async()=>{
         title="${esc(p.install)}">Copy install</button>`:''}
     </div></div>`;
   $('#page').innerHTML=`<div class="card"><h3>The ecosystem ROMarr stands on</h3>
-      <p class="help">ROMarr acquires ROMs and files them — nothing more. It
-        stores no library, serves no player, publishes no DAT, indexes no
-        tracker. Every one of those is somebody else's work, and without them
-        there is nothing here to automate. These are the projects that make
-        ROMarr possible; each links to its own home, and installable ones
-        carry their command. Go support them.</p></div>`
+      <p class="help">${interfaceMarkup("ROMarr acquires ROMs and files them — nothing more. It stores no library, serves no player, publishes no DAT, indexes no tracker. Every one of those is somebody else's work, and without them there is nothing here to automate. These are the projects that make ROMarr possible; each links to its own home, and installable ones carry their command. Go support them.")}</p></div>`
     +Object.entries(cats).map(([name,projects])=>
       `<div class="card"><h3>${esc(name)}</h3>
         <div class="pgrid">${projects.map(card).join('')}</div></div>`).join('');
@@ -2470,9 +2552,9 @@ RENDER.stats=async()=>{
   };
   $('#page').innerHTML=`
     ${s.update_available?`<div class="card" style="border-color:var(--warn)">
-      <h3>Update available</h3><p class="help">ROMarr ${esc(s.latest_version)} is out;
-      this install is running ${esc(s.version)}. Nothing updates itself &mdash;
-      pull the new image when it suits you.</p></div>`:''}
+      <h3>Update available</h3><p class="help">${interfaceTemplateMarkup(
+        'ROMarr {latest} is out; this install is running {current}. Nothing updates itself — pull the new image when it suits you.',
+        {latest:s.latest_version,current:s.version})}</p></div>`:''}
     <div class="card"><h3>This install</h3><div class="st">
       <div><b>${esc(s.version)}</b><span>Version</span></div>
       <div><b>${num(s.library_on_disk)}</b><span>On disk here</span></div>
@@ -2483,7 +2565,8 @@ RENDER.stats=async()=>{
       <div><b>${fmt((s.events||{}).grabbed||0)}</b><span>Total grabs</span></div>
       <div><b>${fmt((s.events||{}).imported||0)}</b><span>Total imports</span></div>
       <div><b>${fmt((s.events||{}).failed||0)}</b><span>Failures</span></div>
-      <div><b>${num(s.average_rating)}</b><span>Avg rating (${fmt(s.rated||0)} rated)</span></div>
+      <div><b>${num(s.average_rating)}</b><span>${interfaceTemplateMarkup(
+        'Avg rating ({count} rated)',{count:fmt(s.rated||0)})}</span></div>
     </div>
     <p class="help" style="margin:10px 0 0">“Total known” is the sum of the other two values and includes every row stored by your library server. Only the first number is bytes you already have; the second counts items that would need to be streamed or fetched first.</p></div>
     ${Object.keys(s.library_sources||{}).length>1?`<div class="card">
@@ -2515,10 +2598,10 @@ RENDER.stats=async()=>{
     const out=$('#au-out'); if(!out) return;
     if(!a||!a.status||a.status==='never run'){out.innerHTML='';return;}
     out.innerHTML=`<p class="help">
-      <b>${esc(a.platform||'')}</b> — ${esc(a.status)} ·
-      ${fmt(a.scanned||0)} scanned · ${fmt(a.verified||0)} verified ·
-      <b style="color:${a.bad?'var(--bad)':'inherit'}">${fmt(a.bad||0)} bad</b> ·
-      ${fmt(a.unknown||0)} unknown · ${fmt((a.duplicates||[]).length)} duplicate(s)</p>
+      <b>${esc(a.platform||'')}</b> — ${statusMarkup(a.status)} ·
+      ${interfaceTemplateMarkup('Scanned: {scanned} · Verified: {verified} · Bad dumps: {bad} · Unknown: {unknown} · Duplicates: {duplicates}',
+        {scanned:fmt(a.scanned||0),verified:fmt(a.verified||0),bad:fmt(a.bad||0),
+         unknown:fmt(a.unknown||0),duplicates:fmt((a.duplicates||[]).length)})}</p>
       ${(a.bad_files||[]).length?`<details><summary class="help"
         style="cursor:pointer;margin:0">Bad dumps</summary>
         <div style="color:var(--dim);font-size:12px">${a.bad_files.map(f=>
@@ -2551,8 +2634,10 @@ RENDER.queue=async()=>{
   const failed=(d.items||[]).filter(i=>i.state==='failed').length;
   $('#page').innerHTML=`<div class="row" style="margin-bottom:12px">
       <button class="btn ghost" id="q-import">Import completed now</button>
-      ${failed?`<button class="btn ghost" id="q-clearfail">Clear ${fmt(failed)} failed</button>`:''}
-      <span class="help" style="margin:0">${fmt((d.items||[]).length)} in flight</span>
+      ${failed?`<button class="btn ghost" id="q-clearfail">${interfaceTemplateMarkup(
+        'Clear {count} failed',{count:fmt(failed)})}</button>`:''}
+      <span class="help" style="margin:0">${interfaceTemplateMarkup(
+        'In queue: {count}', {count:fmt((d.items||[]).length)})}</span>
     </div>`+(d.items.length?`<table><thead><tr><th>Game</th>
     <th>Platform</th><th>Release</th><th>Seeders</th><th>State</th><th></th></tr></thead><tbody>
     ${d.items.map((i,n)=>`<tr><td>${esc(i.game)}</td><td>${esc(i.platform)}</td>
@@ -2563,7 +2648,8 @@ RENDER.queue=async()=>{
         ${i.state==='failed'?`<button data-qretry="${n}">Retry</button>`:''}
         <button data-qremove="${n}">Remove</button></div></td></tr>`).join('')}
       </tbody></table>`
-    :'<div class="empty">The queue is empty. Active requests will appear here.</div>');
+    :`<div class="empty">${interfaceMarkup(
+      'The queue is empty. Active requests will appear here.')}</div>`);
 
   $('#q-import').onclick=async e=>{
     e.target.disabled=true; e.target.textContent='Importing…';
@@ -2596,7 +2682,7 @@ RENDER.history=async()=>{
   $('#page').innerHTML=d.items.length?`<table><thead><tr><th>When</th><th>Event</th>
     <th>Game</th><th>Platform</th><th>Release</th><th>Indexer</th></tr></thead><tbody>
     ${d.items.map(e=>`<tr><td style="color:var(--dim)">${esc(regionalDateTime(e.at))}</td>
-      <td><span class="pill ${esc(e.kind)}">${esc(e.kind)}</span></td>
+      <td><span class="pill ${esc(e.kind)}">${statusMarkup(e.kind)}</span></td>
       <td>${esc(e.game)}</td><td>${esc(e.platform)}</td>
       <td style="color:var(--dim)">${esc(e.release||'—')}</td>
       <td style="color:var(--dim)">${esc(e.indexer||'—')}</td></tr>`).join('')}</tbody></table>`
@@ -2634,7 +2720,9 @@ function fieldHtml(f, value){
     return `<div class="field"><label>${esc(f.label)}</label>
       <select data-f="${f.name}">${(f.options||[]).map(o=>{
         const [ov,ot]=Array.isArray(o)?o:[o,o];
-        return `<option value="${esc(ov)}"${String(v ?? '')===String(ov)?' selected':''}>${esc(ot)}</option>`;
+        const source=String(ot??'');
+        const marker=Object.hasOwn(UI_LABELS,source)?` data-i18n="${esc(source)}"`:'';
+        return `<option value="${esc(ov)}"${String(v ?? '')===String(ov)?' selected':''}${marker}>${esc(translateLabel(source,readInterfaceLanguage()))}</option>`;
       }).join('')}</select>${help}</div>`;
   const t = f.type === 'int' ? 'number' : (f.type === 'secret' ? 'password' : 'text');
   return `<div class="field"><label>${esc(f.label)}</label>
@@ -2713,7 +2801,7 @@ async function editItem(kind, item){
   const payload = () => ({ ...readForm(), type: item.type, id: item.id });
   const line = (ok, msg) => {
     m.querySelector('#testline').className = 'testline ' + (ok ? 'ok' : 'bad');
-    m.querySelector('#testline').textContent = msg;
+    m.querySelector('#testline').innerHTML = appMessageMarkup(msg);
   };
 
   m.querySelector('#m-test').onclick = async (e) => {
@@ -2773,8 +2861,10 @@ const chk=(k,label,val)=>`<label class="check"><input type="checkbox" data-k="${
   ${val?'checked':''}><span>${label}</span></label>`;
 
 const sel=(k,label,options,val,help='')=>`<div class="field"><label>${label}</label>
-  <select data-k="${k}">${options.map(([v,t])=>
-    `<option value="${v}"${String(val)===v?' selected':''}>${t}</option>`).join('')}</select>
+  <select data-k="${k}">${options.map(([v,t])=>{
+    const source=String(t??''),marker=Object.hasOwn(UI_LABELS,source)?` data-i18n="${esc(source)}"`:'';
+    return `<option value="${esc(v)}"${String(val)===v?' selected':''}${marker}>${esc(translateLabel(source,readInterfaceLanguage()))}</option>`;
+  }).join('')}</select>
   ${help?`<div style="color:var(--dim);font-size:11.5px;margin-top:4px">${help}</div>`:''}</div>`;
 
 const pathMappingRow=m=>{
@@ -2786,8 +2876,14 @@ const pathMappingRow=m=>{
   if(clientId&&!clients.some(c=>String(c.id||'')===clientId))
     options.push([clientId,`Unavailable download client · ${clientId}`]);
   return `<div data-mapping-row style="display:grid;grid-template-columns:minmax(160px,1fr) minmax(160px,1fr) minmax(160px,1fr) auto;gap:8px;margin:8px 0">
-    <select data-map-client aria-label="Download client">${options.map(([value,label])=>
-      `<option value="${esc(value)}"${value===clientId?' selected':''}>${esc(label)}</option>`).join('')}</select>
+    <select data-map-client aria-label="Download client">${options.map(([value,label])=>{
+      const unavailable=value===clientId&&!clients.some(c=>String(c.id||'')===clientId);
+      const marker=value===''?' data-i18n="All download clients"'
+        :unavailable?' data-i18n-template="Unavailable download client · {id}" data-i18n-values="'+esc(JSON.stringify({id:clientId}))+'"':'';
+      const text=value===''?translateLabel('All download clients',readInterfaceLanguage())
+        :unavailable?translateTemplate('Unavailable download client · {id}',{id:clientId}):label;
+      return `<option value="${esc(value)}"${value===clientId?' selected':''}${marker}>${esc(text)}</option>`;
+    }).join('')}</select>
     <input data-map-remote aria-label="Remote path" value="${esc(m.remote||'')}" placeholder="Path reported by client">
     <input data-map-local aria-label="Local path" value="${esc(m.local||'')}" placeholder="Path visible to ROMarr">
     <button type="button" data-mapping-remove aria-label="Remove mapping">Remove</button>
@@ -2868,9 +2964,9 @@ RENDER.clients=async()=>{
   // this line a site plugin needing a click fails with nothing on screen
   // saying the browser lane was never set up.
   const br=await j('/api/v1/downloadclient/browser').catch(()=>null);
-  const state=c=>!c.configured?'<span class="dot"></span>not configured'
-    :c.ok?'<span class="dot up"></span>connected'
-    :'<span class="dot down"></span>unreachable';
+  const state=c=>!c.configured?'<span class="dot"></span>'+interfaceMarkup('not configured')
+    :c.ok?'<span class="dot up"></span>'+interfaceMarkup('Connected')
+    :'<span class="dot down"></span>'+interfaceMarkup('Unreachable');
   const gaps=['torrent','usenet'].filter(p=>
     !d.items.some(c=>c.protocol===p&&c.configured));
   $('#page').innerHTML=`<div class="card">
@@ -2879,9 +2975,9 @@ RENDER.clients=async()=>{
       <button class="btn sp" id="c-add" style="margin-inline-start:auto">Add</button>
     </div>
     <p class="help">ROMarr sends each release to a download client based on its protocol. An indexer type cannot be downloaded until a client for that protocol is configured, so unconfigured clients are listed instead of hidden.</p>
-    ${gaps.length?`<p class="help" style="color:var(--warn)">
-      No client configured for: <b>${gaps.join(', ')}</b>.
-      Those results will be found and then refused.</p>`:''}
+    ${gaps.length?`<p class="help" style="color:var(--warn)">${interfaceTemplateMarkup(
+      'No client configured for: {protocols}. Those results will be found and then refused.',
+      {protocols:gaps.join(', ')})}</p>`:''}
     ${br?`<p class="help">${interfaceMarkup(ROM_SITE_HELP)}
       ${br.available
         ?`<span style="color:var(--ok)">${interfaceTemplateMarkup('Browser mode is available ({reason}, {where}).',{reason:br.reason,where:br.where})}</span>`
@@ -2930,16 +3026,11 @@ RENDER.libraries=async()=>{
       <h3 style="margin:0">Libraries</h3>
       <button class="btn sp" id="l-add" style="margin-inline-start:auto">Add</button>
     </div>
-    <p class="help">Where finished ROMs are filed. Add more than one to send
-      some platforms elsewhere &mdash; a platform rule wins over the default,
-      so &ldquo;N64 goes to Retrom&rdquo; is one row here rather than a second
-      ROMarr. Each server needs its own path, as <b>ROMarr</b> sees it.</p>
-    ${noDefault?`<p class="help" style="color:var(--warn)">
-      No library is marked default, so anything without a matching platform rule
-      goes to the first one listed. Mark one to make that a decision.</p>`:''}
+    <p class="help">${interfaceMarkup('Where finished ROMs are filed. Add more than one to send some platforms elsewhere — a platform rule wins over the default, so “N64 goes to Retrom” is one row here rather than a second ROMarr. Each server needs its own path, as ROMarr sees it.')}</p>
+    ${noDefault?`<p class="help" style="color:var(--warn)">${interfaceMarkup('No library is marked default, so anything without a matching platform rule goes to the first one listed. Mark one to make that a decision.')}</p>`:''}
     ${unmounted.map(l=>`<p class="help" style="color:var(--warn)">
-      <b>${esc(l.name)}</b> answers, but nothing can be imported into it yet.
-      ${esc(l.path_hint||'')}</p>
+      ${interfaceTemplateMarkup('{name} answers, but nothing can be imported into it yet.',
+        {name:l.name||''})} ${esc(l.path_hint||'')}</p>
       ${l.readable===false?`<p class="panel-note panel-warn">${esc(l.detail||'')}</p>`:''}`).join('')}
     ${d.items.length?`<table><thead><tr><th>Library</th><th>Type</th>
       <th>Address</th><th>Path</th><th>Platforms</th><th>Status</th><th></th></tr>
@@ -2997,14 +3088,14 @@ RENDER.indexers=async()=>{
         <td><span class="dot ${i.enable?'up':'down'}"></span>${i.enable?'yes':'no'}</td>
         </tr>`).join('')}</tbody></table></div><div id="i-diagnostics"></div>`
     :(d.error?`<div class="card"><h3>Via Prowlarr</h3>
-        <p class="help" style="color:var(--warn)">${esc(d.error)}</p>
+        <p class="help" style="color:var(--warn)">${appMessageMarkup(d.error)}</p>
         <div class="row" style="justify-content:flex-end">
           <button class="btn ghost" id="i-diagnose">Test indexers</button></div>
         </div><div id="i-diagnostics"></div>`:'')}`;
   $('#i-add').onclick=()=>addItem('indexer');
   const test=$('#i-diagnose');
   if(test)test.onclick=async()=>{
-    test.disabled=true;test.textContent='Testing...';
+    test.disabled=true;test.textContent='Testing…';
     try{
       const report=await j('/api/v1/indexer/diagnose',{method:'POST',
         headers:{'Content-Type':'application/json'},body:'{}'});
@@ -3013,22 +3104,22 @@ RENDER.indexers=async()=>{
       $('#i-diagnostics').innerHTML=`<div class="card"><h3>Prowlarr diagnostics</h3>
         <p class="help">Management API and indexer feeds are checked separately.</p>
         <p><span class="dot ${management.success?'up':'down'}"></span>
-          <b>Management API</b> — ${management.success?'connected':'failed'}
+          <b>Management API</b> — ${interfaceMarkup(management.success?'Connected':'Failed')}
           ${management.status?' · HTTP '+esc(management.status):''}
           ${management.version?' · '+esc(management.version):''}</p>
-        ${management.error?`<p class="help" style="color:var(--warn)">${esc(management.error)}</p>`:''}
+    ${management.error?`<p class="help" style="color:var(--warn)">${appMessageMarkup(management.error)}</p>`:''}
         ${rows.length?`<table><thead><tr><th>Indexer</th><th>Feed</th><th>Details</th>
           </tr></thead><tbody>${rows.map(item=>`<tr>
             <td>${esc(item.name||'Indexer')}</td>
             <td><span class="dot ${item.success?'up':'down'}"></span>
-              ${item.success?'connected':'failed'}${item.status?' · HTTP '+esc(item.status):''}</td>
-            <td style="color:var(--dim)">${esc(item.error||item.recentFailure||'—')}
-              ${item.disabledUntil?`<br>Disabled until ${esc(regionalDateTime(item.disabledUntil))}`:''}</td>
+              ${interfaceMarkup(item.success?'Connected':'Failed')}${item.status?' · HTTP '+esc(item.status):''}</td>
+            <td style="color:var(--dim)">${appMessageMarkup(item.error||item.recentFailure||'—')}
+              ${item.disabledUntil?`<br>${interfaceTemplateMarkup('Disabled until {date}',{date:regionalDateTime(item.disabledUntil)})}`:''}</td>
             </tr>`).join('')}</tbody></table>`
           :'<p class="help">No enabled torrent or usenet indexers were found.</p>'}
         </div>`;
     }catch(e){
-      $('#i-diagnostics').innerHTML=`<div class="card"><p class="help" style="color:var(--warn)">${esc(e.message||'Diagnostics failed')}</p></div>`;
+      $('#i-diagnostics').innerHTML=`<div class="card"><p class="help" style="color:var(--warn)">${appMessageMarkup(e.message||'Diagnostics failed')}</p></div>`;
     }finally{test.disabled=false;test.textContent='Test indexers';}
   };
   document.querySelectorAll('[data-iedit]').forEach(b=>b.onclick=()=>
@@ -3094,11 +3185,15 @@ RENDER.general=()=>settingsPage('General',
     };
     $('#g-key').onclick=async()=>{
       const d=await j('/api/v1/system/apikey').catch(()=>({}));
-      $('#g-keyout').textContent=d.api_key||'could not read it';
+      $('#g-keyout').innerHTML=d.api_key
+        ?'<span lang="und" dir="auto">'+esc(d.api_key)+'</span>'
+        :interfaceMarkup('Could not read it.');
     };
     $('#g-seerrng-key').onclick=async()=>{
       const d=await j('/api/v1/system/seerrng-key').catch(()=>({}));
-      $('#g-seerrng-keyout').textContent=d.api_key||'could not read it';
+      $('#g-seerrng-keyout').innerHTML=d.api_key
+        ?'<span lang="und" dir="auto">'+esc(d.api_key)+'</span>'
+        :interfaceMarkup('Could not read it.');
       if(d.managed_by_env) toastLabel('This key is managed by ROMARR_SEERRNG_API_KEY');
     };
     $('#g-seerrng-rotate').onclick=async()=>{
@@ -3214,8 +3309,8 @@ RENDER.status=async()=>{
   wireGGRequestz();
   wireMoonlight(h.moonlight||{});
 
-  const msg=(ok,text)=>{const m=$('#bk-msg');
-    m.className='testline '+(ok?'ok':'bad'); m.textContent=text;};
+  const msg=(ok,markup)=>{const m=$('#bk-msg');
+    m.className='testline '+(ok?'ok':'bad'); m.innerHTML=markup;};
   const save=(url,name)=>{const a=document.createElement('a');
     a.href=url; a.download=name; document.body.append(a); a.click(); a.remove();};
 
@@ -3225,16 +3320,16 @@ RENDER.status=async()=>{
     if(pass===null) return;
     const confirmPass=promptMessage('Re-enter the backup passphrase.');
     if(confirmPass===null) return;
-    if(pass!==confirmPass){ msg(false,'The passphrases do not match.'); return; }
-    if([...pass].filter(c=>!(/\\s/.test(c))).length<16){ msg(false,'Use at least 16 non-whitespace characters.'); return; }
-    msg(true,'Encrypting backup…');
+    if(pass!==confirmPass){ msg(false,interfaceMarkup('The passphrases do not match.')); return; }
+    if([...pass].filter(c=>!(/\\s/.test(c))).length<16){ msg(false,interfaceMarkup('Use at least 16 non-whitespace characters.')); return; }
+    msg(true,interfaceMarkup('Encrypting backup…'));
     try{
       const encrypted=await j('/api/v1/backup/encrypted',{headers:{'X-ROMarr-Backup-Passphrase':pass}});
       if(encrypted.error) throw new Error(encrypted.error);
       const blob=new Blob([JSON.stringify(encrypted,null,2)],{type:'application/json'});
       const url=URL.createObjectURL(blob); save(url,'romarr-backup-encrypted.json');
-      setTimeout(()=>URL.revokeObjectURL(url),1000); msg(true,'Encrypted backup downloaded.');
-    }catch(err){ msg(false,err.message||'Could not encrypt backup.'); }
+      setTimeout(()=>URL.revokeObjectURL(url),1000); msg(true,interfaceMarkup('Encrypted backup downloaded.'));
+    }catch(err){ msg(false,appMessageMarkup(err.message||'Could not encrypt backup.')); }
   };
   $('#bk-dls').onclick=()=>{
     if(confirmMessage('This file will contain your API key and every stored password in plain text. Download it?'))
@@ -3244,7 +3339,7 @@ RENDER.status=async()=>{
   $('#bk-file').onchange=async e=>{
     const file=e.target.files[0]; if(!file) return;
     if(!confirmMessage('Restore from {filename}? This replaces your current settings, libraries, indexers and clients.',{filename:file.name})) { e.target.value=''; return; }
-    msg(true,'Restoring…');
+    msg(true,interfaceMarkup('Restoring…'));
     try{
       const backup=JSON.parse(await file.text());
       const headers={'Content-Type':'application/json'};
@@ -3254,9 +3349,11 @@ RENDER.status=async()=>{
         headers['X-ROMarr-Backup-Passphrase']=pass;
       }
       const r=await j('/api/v1/restore',{method:'POST',headers,body:JSON.stringify(backup)});
-      msg(!r.error, r.error||(r.warning||'Restored.')+' Reloading…');
+      msg(!r.error,r.error?appMessageMarkup(r.error)
+        :(r.warning?appMessageMarkup(r.warning):interfaceMarkup('Restored.'))
+          +' '+interfaceMarkup('Reloading…'));
       if(!r.error) setTimeout(()=>location.reload(),1200);
-    }catch(_){ msg(false,'That file is not a ROMarr backup.'); }
+    }catch(_){ msg(false,interfaceMarkup('That file is not a ROMarr backup.')); }
     e.target.value='';
   };
   $('#ex-go').onclick=()=>save('/api/v1/export?what='+$('#ex-what').value
@@ -3314,7 +3411,8 @@ const wireGGRequestz=()=>{
       value.textContent='REQUEST_WEBHOOK_URL='+target.href;
       value.style.display='block'; copy.disabled=false;
     }catch(e){
-      value.textContent='Could not build the URL: '+(e.message||e);
+      value.innerHTML=interfaceTemplateMarkup('Could not build the URL: {error}',
+        {error:String(e.message||e)});
       value.style.display='block'; copy.disabled=true;
     }finally{build.disabled=false;}
   };
@@ -3347,8 +3445,9 @@ const moonlightCard=m=>{
     <p class="help">${esc(m.manual||'')}</p></div>`;
 
   if(!m.ok) return `<div class="card"><h3>${esc(m.kind_label||'Moonlight')}</h3>
-    <p class="testline bad">No answer from ${esc(m.host||'')}:${esc(String(m.port||''))}
-    &mdash; ${esc(m.problem||'unreachable')}</p>
+    <p class="testline bad">${interfaceTemplateMarkup('No answer from {host}:{port}',
+      {host:m.host||'',port:String(m.port||'')})}
+    &mdash; ${m.problem?appMessageMarkup(m.problem):interfaceMarkup('Unreachable')}</p>
     <p class="help">${interfaceTemplateMarkup('ROMarr checks {path} on the Moonlight port. This check needs no credentials or pairing. If there is no response, the host may be down, blocked by a firewall, or listening on a different port.',{path:'/serverinfo'})}</p></div>`;
 
   const slugs=Object.keys(m.platforms||{});
@@ -3366,18 +3465,19 @@ const moonlightCard=m=>{
     <h4 style="margin:18px 0 6px">What this host adds</h4>
     ${m.apps_read
       ? (slugs.length
-          ? `<p class="help">${fmt(slugs.length)} platform${slugs.length===1?'':'s'}
-             gain a stream route here, each because a named single-machine
-             emulator is on this host's app list:</p>
+          ? `<p class="help">${interfaceTemplateMarkup(
+              slugs.length===1
+                ? '{count} platform gains a stream route here, each because a named single-machine emulator is on this host’s app list:'
+                : '{count} platforms gain a stream route here, each because a named single-machine emulator is on this host’s app list:',
+              {count:fmt(slugs.length)})}</p>
              <table><tbody>${slugs.map(s=>`<tr><td>${esc(s)}</td>
                <td style="color:var(--dim)">${esc(m.platforms[s])}</td></tr>`).join('')}
              </tbody></table>`
-          : `<p class="help">Its app list was read (${fmt((m.apps||[]).length)}
-             app${(m.apps||[]).length===1?'':'s'}) and <b>no platform gains a
-             route from it</b>. ROMarr only counts an app whose name is an
-             emulator for exactly one machine &mdash; PCSX2, Dolphin, flycast.
-             A RetroArch or a Steam proves nothing, because nothing in the API
-             says which cores or games are inside it.</p>`)
+          : `<p class="help">${interfaceTemplateMarkup(
+              (m.apps||[]).length===1
+                ? 'Its app list was read ({count} app) and no platform gains a route from it. ROMarr only counts an app whose name is an emulator for exactly one machine — PCSX2, Dolphin, flycast. A RetroArch or a Steam proves nothing, because nothing in the API says which cores or games are inside it.'
+                : 'Its app list was read ({count} apps) and no platform gains a route from it. ROMarr only counts an app whose name is an emulator for exactly one machine — PCSX2, Dolphin, flycast. A RetroArch or a Steam proves nothing, because nothing in the API says which cores or games are inside it.',
+              {count:fmt((m.apps||[]).length)})}</p>`)
       : `<p class="help"><b>Reachable, but its app list could not be read</b>,
          so ROMarr cannot say which platforms it plays and does not guess.
          ${esc(m.apps_problem||'')}</p>`}
@@ -3388,8 +3488,9 @@ const moonlightCard=m=>{
     <p class="help">${esc((m.pairing||{}).manual||'')}</p>
     ${canList
       ? (pend.length
-          ? `<p class="help">${fmt(pend.length)} client${pend.length===1?'':'s'}
-             waiting:</p>`
+          ? `<p class="help">${interfaceTemplateMarkup(
+              pend.length===1?'{count} client waiting:':'{count} clients waiting:',
+              {count:fmt(pend.length)})}</p>`
           : `<p class="help">${interfaceTemplateMarkup('No Moonlight client is waiting to pair right now. Open Moonlight, add {host}, and select it. Then come back here and enter the PIN shown in Moonlight.',{host:m.host||''})}</p>`)
       : `<p class="help">${esc((m.pairing||{}).detail||'')}</p>`}
     <div class="row" style="flex-wrap:wrap;gap:8px;align-items:center">
@@ -3407,7 +3508,7 @@ const moonlightCard=m=>{
     <h4 style="margin:18px 0 6px">Connecting</h4>
     <p class="help">${interfaceMarkup('ROMarr cannot launch Moonlight sessions for you. The browser cannot open moonlight:// links because Moonlight does not register a URL scheme. Launching requires a paired client certificate on the host’s HTTPS port, the same as the app list.')}</p>
     <p class="help">${interfaceTemplateMarkup('Add {host} in Moonlight, or run {command} on a desktop.',{host:m.host||'',command:m.connect_hint||''})}</p>
-    ${m.desktop_url?`<p class="help">This host also serves a browser desktop:
+    ${m.desktop_url?`<p class="help">${interfaceMarkup('This host also serves a browser desktop:')}
       <a href="${esc(m.desktop_url)}" target="_blank" rel="noreferrer noopener"
       >${esc(m.desktop_url)}</a></p>`:''}
     </div>`;
@@ -3421,7 +3522,7 @@ const wireMoonlight=m=>{
     const out=$('#ml-msg');
     const pin=($('#ml-pin')||{}).value||'';
     const sec=($('#ml-secret')||{}).value||'';
-    out.className='testline'; out.textContent='Sending…';
+    out.className='testline'; out.innerHTML=interfaceMarkup('Sending…');
     const r=await j('/api/v1/moonlight/pin',{method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({pin:pin,pair_secret:sec})}).catch(()=>({ok:false,
@@ -3431,7 +3532,7 @@ const wireMoonlight=m=>{
     // request is outstanding (LizardByte/Sunshine#3944) -- so the strongest
     // honest word is "accepted", and the check is the paired-client count.
     out.className='testline '+(r.ok?'ok':'bad');
-    out.textContent=r.detail||(r.ok?'Accepted.':'Refused.');
+    out.innerHTML=appMessageMarkup(r.detail||(r.ok?'Accepted.':'Refused.'));
     if(r.ok) setTimeout(()=>RENDER.status(),1500);
   };
 };
@@ -3496,7 +3597,7 @@ RENDER.blocklist=async()=>{
          +'<td><button class="mini" data-un="'+esc(i.id)+'">Unblock</button></td></tr>').join('')
        +'</tbody></table>'
       :'<div class="empty-cat"><b>Nothing blocked</b>'
-       +'A release lands here when a download fails or you reject it.</div>')
+       +interfaceMarkup('A release lands here when a download fails or you reject it.')+'</div>')
     +'</div>';
   $('#page').querySelectorAll('button[data-un]').forEach(b=>b.onclick=async()=>{
     await fetch('/api/v1/blocklist/'+encodeURIComponent(b.dataset.un),{method:'DELETE'});
@@ -3546,9 +3647,10 @@ RENDER.connections=async()=>{
       headers:{'Content-Type':'application/json'},body:'{}'});
     const d=await r.json();
     const res=d.results||[];
-    m.textContent = res.length
-      ? res.map(x=>x.name+': '+(x.ok?'delivered':'failed')).join(' · ')
-      : 'No connections configured.';
+    m.innerHTML = res.length
+      ? res.map(x=>'<span lang="und" dir="auto">'+esc(x.name)+':</span> '
+          +interfaceMarkup(x.ok?'Delivered':'Failed')).join(' · ')
+      : interfaceMarkup('No connections configured.');
   };
 };
 
@@ -3629,7 +3731,7 @@ RENDER.calendar=async()=>{
   if(CAL.month) q.set('month',CAL.month);
   if(CAL.day) q.set('day',CAL.day);
   const d=await j('/api/v1/calendar/library?'+q)
-    .catch(()=>({items:[],days:[],error:'the library could not be read'}));
+    .catch(()=>({items:[],days:[],error:'The library read failed.'}));
   const views=[['releases','Anniversaries'],['added','Added'],
                ['updated','Updated'],['upcoming','Upcoming']];
   const items=d.items||[], days=d.days||[];
@@ -3637,11 +3739,13 @@ RENDER.calendar=async()=>{
   // The share of the shelf this view can place at all. A calendar drawn over
   // 39% of a library that presents itself as the whole library is how
   // somebody concludes they own nothing from 1993.
+  const coverageSource={
+    released:'{dated} of {total} games have a release date — the rest were never identified, so they cannot be placed on a day.',
+    added:'{dated} of {total} games have a date added — the rest were never identified, so they cannot be placed on a day.',
+    updated:'{dated} of {total} games have a date updated — the rest were never identified, so they cannot be placed on a day.',
+  }[cov.field]||'{dated} of {total} games have a date — the rest were never identified, so they cannot be placed on a day.';
   const covLine=cov.total
-    ? fmt(cov.dated)+' of '+fmt(cov.total)+' games carry a '
-      +({released:'release date',added:'date added',
-         updated:'date updated'}[cov.field]||'date')
-      +' — the rest were never identified, so they cannot be placed on a day.'
+    ? interfaceTemplateMarkup(coverageSource,{dated:fmt(cov.dated),total:fmt(cov.total)})
     :'';
   const step=n=>{
     const [y,m]=(d.month||'').split('-').map(Number);
@@ -3657,7 +3761,7 @@ RENDER.calendar=async()=>{
       +' data-calview="'+k+'" style="padding:4px 10px;font-size:12px">'
       +l+'</button>').join('')
     +'</div>'
-    +(d.error?'<div class="panel-note panel-warn">'+esc(d.error)+'</div>':'')
+      +(d.error?'<div class="panel-note panel-warn">'+appMessageMarkup(d.error)+'</div>':'')
     +(d.note?'<p class="help">'+esc(d.note)+'</p>':'')
     +(d.view!=='upcoming'&&d.month
       ?'<div class="row" style="align-items:center;gap:8px;margin:4px 0 8px">'
@@ -3665,7 +3769,7 @@ RENDER.calendar=async()=>{
         +'<b style="font-size:14px">'+esc(regionalMonth(d.month))+'</b>'
         +'<button class="btn ghost" data-calmonth="'+step(1)+'">›</button>'
         +'<span style="flex:1"></span>'
-        +'<span class="help" style="margin:0">'+esc(covLine)+'</span></div>'
+        +'<span class="help" style="margin:0">'+covLine+'</span></div>'
       +'<div class="cal">'
       +['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
         .map(n=>'<div class="dow">'+n+'</div>').join('')
@@ -3682,12 +3786,14 @@ RENDER.calendar=async()=>{
         +'library imported in one batch has its dates where the imports were.</p>')
       :'')
     +'<h3 style="margin-top:14px">'
-    +esc(d.view==='upcoming'?'Releasing soon'
-        :d.view==='releases'?('Released on '+regionalDate(d.day))
-        :((d.view==='added'?'Added ':'Updated ')+regionalDate(d.day)))
+    +(d.view==='upcoming'?interfaceMarkup('Releasing soon')
+        :interfaceTemplateMarkup(d.view==='releases'?'Released on {date}'
+          :d.view==='added'?'Added {date}':'Updated {date}',
+          {date:regionalDate(d.day)}))
     +'</h3>'
     +(items.length
-      ?'<p class="help">'+fmt(d.items.length)+' from your own library.</p>'
+      ?'<p class="help">'+interfaceTemplateMarkup('{count} from your own library.',
+          {count:fmt(d.items.length)})+'</p>'
        +'<div class="grid">'+items.map(g=>'<div class="tile">'
         +'<div class="art" style="background-image:url(\''+esc(g.cover_url||'')+'\')"></div>'
         +'<div class="nm">'+esc(g.title)+'</div>'
@@ -3724,24 +3830,35 @@ RENDER.calendar=async()=>{
   // today's releases — forty of them on a busy day, every one of them
   // already out, filling a shelf headed "still to come".
   const w=await j('/api/v1/calendar'+(d.view==='upcoming'?'?back=-1':''))
-    .catch(()=>({items:[],error:'unavailable'}));
+    .catch(()=>({items:[],error:'Unreachable'}));
   const web=w.items||[];
-  const wsrc=w.provider_label||'a metadata provider';
-  if(web.length) $('#cal-web-note').textContent=fmt(web.length)+' title(s) from '
-    +wsrc+"'s catalogue, "+(d.view==='upcoming'?'still to come':'either side of today')
-    +' — none of these are rows in your library, which is why they have a '
-    +'Request button and nothing above does.';
+  const wsrc=w.provider_label||'';
+  if(web.length){
+    const upcoming=d.view==='upcoming';
+    const source=wsrc
+      ?(upcoming
+        ?'{count} titles from {provider}\'s catalogue, still to come — none are in your library, so they have a Request button.'
+        :'{count} titles from {provider}\'s catalogue, either side of today — none are in your library, so they have a Request button.')
+      :(upcoming
+        ?'{count} titles from the metadata provider catalogue, still to come — none are in your library, so they have a Request button.'
+        :'{count} titles from the metadata provider catalogue, either side of today — none are in your library, so they have a Request button.');
+    const values={count:fmt(web.length)};
+    if(wsrc) values.provider=wsrc;
+    $('#cal-web-note').innerHTML=interfaceTemplateMarkup(source,values);
+  }
   $('#cal-web').innerHTML=web.length
     ?'<div class="pgrid">'+web.map((g,n)=>'<div class="pcard">'
       +'<h4>'+esc(g.title)+'</h4>'
-      +'<div class="meta"><span class="pill">'+esc(regionalDate(g.released||'TBA'))+'</span>'
+      +'<div class="meta"><span class="pill">'+(g.released
+        ?esc(regionalDate(g.released)):interfaceMarkup('Not announced'))+'</span>'
       +(g.upcoming?'<span class="pill" style="background:var(--info);color:#06131f">upcoming</span>':'')
-      +'<span class="pill">'+esc(g.source||wsrc)+'</span>'
+      +(g.source||wsrc?'<span class="pill">'+esc(g.source||wsrc)+'</span>'
+        :interfaceMarkup('Metadata provider'))
       +'</div>'
       +'<div class="desc">'+esc((g.platforms||[]).slice(0,4).join(', '))+'</div>'
       +'<div class="rowact" style="margin-top:6px"><button data-calreq="'+n+'">Request</button></div>'
       +'</div>').join('')+'</div>'
-    :'<div class="empty">'+esc(w.error||'No provider configured.')+'</div>';
+    :'<div class="empty">'+appMessageMarkup(w.error||'No provider configured.')+'</div>';
   document.querySelectorAll('[data-calreq]').forEach(b=>b.onclick=()=>
     requestGame(web[Number(b.dataset.calreq)]));
 };
@@ -3809,78 +3926,67 @@ RENDER.getstarted=async()=>{
   platforms.forEach(p=>{const r=(p.play&&p.play.route)||'unknown';
     counts[r]=(counts[r]||0)+1;});
   const routeRow=(k,label,what)=>counts[k]
-    ?'<tr><td><b>'+fmt(counts[k])+'</b> platforms</td><td>'+esc(label)+'</td>'
+    ?'<tr><td>'+interfaceTemplateMarkup('{count} platforms',{count:fmt(counts[k])})+'</td><td>'+esc(label)+'</td>'
      +'<td class="help" style="margin:0">'+what+'</td></tr>':'';
 
   $('#page').innerHTML=
     '<div class="card"><h3>What ROMarr is</h3>'
-    +'<p class="help">ROMarr is the acquisition and automation layer: it '
-    +'searches your indexers, grabs the best release, checks it against a '
-    +'No-Intro or Redump DAT, and files it into your library. '
-    +'<b>It is not an emulator and not a game launcher.</b> Something else '
-    +'plays the ROM — ROMarr makes sure the right file is in the right place '
-    +'for it.</p>'
+    +'<p class="help">'+interfaceMarkup('ROMarr is the acquisition and automation layer: it searches your indexers, grabs the best release, checks it against a No-Intro or Redump DAT, and files it into your library.')
+    +' <b>'+interfaceMarkup('It is not an emulator and not a game launcher.')+'</b> '
+    +interfaceMarkup('Something else plays the ROM — ROMarr makes sure the right file is in the right place for it.')+'</p>'
     +'<div style="font-family:ui-monospace,monospace;font-size:12.5px;'
     +'background:var(--bg);border:1px solid var(--line);border-radius:6px;'
     +'padding:14px;overflow-x:auto;line-height:1.9">'
     +'<b>Acquire</b> → <b>Verify</b> → <b>File</b> → <b>Scan</b> → <b>Play</b><br>'
-    +'<span style="color:var(--dim)">indexers &nbsp; DAT hashes &nbsp; '
-    +'library root &nbsp; library server &nbsp; a frontend</span><br>'
-    +'<span style="color:var(--dim)">└─ ROMarr does the first four ─┘ &nbsp; '
-    +'└ you choose this ┘</span>'
+    +'<span style="color:var(--dim)">'+interfaceMarkup('indexers DAT hashes library root library server a frontend')+'</span><br>'
+    +'<span style="color:var(--dim)">'+interfaceMarkup('└─ ROMarr does the first four ─┘ └ you choose this ┘')+'</span>'
     +'</div></div>'
 
     +'<div class="card" style="margin-top:16px"><h3>Your setup</h3>'
     +step(1,'An indexer',indexerOk,
-       'Prowlarr, or Torznab/Newznab indexers added directly under '
-       +'<a href="#indexers">Indexers</a>. This is where releases are found.')
+       interfaceMarkup('Prowlarr, or Torznab/Newznab indexers added directly under')
+       +' <a href="#indexers">'+interfaceMarkup('Indexers')+'</a>'
+       +interfaceMarkup('. This is where releases are found.'))
     +step(2,'A download client',clientOk,
-       'qBittorrent for torrents, SABnzbd or NZBGet for usenet. Set under '
-       +'<a href="#clients">Download Clients</a>.')
+       interfaceMarkup('qBittorrent for torrents, SABnzbd or NZBGet for usenet. Set under')
+       +' <a href="#clients">'+interfaceMarkup('Download Clients')+'</a>.')
     +step(3,'A library',libOk,
-       'Where ROMs are filed and what serves them. RomM, Gaseous, Retrom, or '
-       +'a plain folder that Batocera, ES-DE, EmuDeck or LaunchBox reads. '
-       +'Set under <a href="#libraries">Libraries</a>.')
+       interfaceMarkup('Where ROMs are filed and what serves them. RomM, Gaseous, Retrom, or a plain folder that Batocera, ES-DE, EmuDeck or LaunchBox reads. Set under')
+       +' <a href="#libraries">'+interfaceMarkup('Libraries')+'</a>.')
     +step(4,'DATs (optional, recommended)',datOk,
-       'No-Intro and Redump checksums. With them ROMarr can say a file is the '
-       +'exact known-good dump rather than merely the right size — and '
-       +'<a href="#collections">Collections</a> can tell you what a complete '
-       +'set is missing.')
+       interfaceMarkup('No-Intro and Redump checksums. With them ROMarr can say a file is the exact known-good dump rather than merely the right size — and')
+       +' <a href="#collections">'+interfaceMarkup('Collections')+'</a> '
+       +interfaceMarkup('can tell you what a complete set is missing.'))
     +'</div>'
 
     +'<div class="card" style="margin-top:16px"><h3>Where you actually play</h3>'
-    +'<p class="help">ROMarr files the ROM; one of these runs it. You do not '
-    +'need all of them — one is enough.</p>'
+    +'<p class="help">'+interfaceMarkup('ROMarr files the ROM; one of these runs it. You do not need all of them — one is enough.')+'</p>'
     +'<table><thead><tr><th>If your library is</th><th>You play in</th></tr></thead><tbody>'
     +'<tr><td>RomM</td><td>RomM\'s built-in EmulatorJS, in the browser</td></tr>'
     +'<tr><td>Gaseous or Retrom</td><td>Their own web players and clients</td></tr>'
-    +'<tr><td>A folder</td><td>Batocera, RetroPie, Recalbox, ES-DE, EmuDeck, '
-    +'Lakka, muOS, LaunchBox or Playnite — they all read a per-platform '
-    +'directory, which is exactly what ROMarr writes</td></tr>'
+    +'<tr><td>'+interfaceMarkup('A folder')+'</td><td>'+interfaceMarkup('Batocera, RetroPie, Recalbox, ES-DE, EmuDeck, Lakka, muOS, LaunchBox or Playnite — they all read a per-platform directory, which is exactly what ROMarr writes')+'</td></tr>'
     +'</tbody></table>'
-    +'<p class="help">ROMarr can also export your library as LaunchBox XML, an '
-    +'ES-DE <code>gamelist.xml</code> or Playnite JSON — see '
-    +'<a href="#status">System</a>.</p>'
+    +'<p class="help">'+interfaceMarkup('ROMarr can also export your library as LaunchBox XML, an ES-DE gamelist.xml or Playnite JSON — see')
+    +' <a href="#status">'+interfaceMarkup('System')+'</a>.</p>'
     +(Object.keys(counts).length
       ?'<h3 style="margin-top:18px">On this install</h3>'
        +'<table><thead><tr><th></th><th>Route</th><th>What that means</th>'
        +'</tr></thead><tbody>'
        +routeRow('browser','Browser emulator',
-          'Playable in the browser through your library server.')
+          interfaceMarkup('Playable in the browser through your library server.'))
        +routeRow('stream','Streamed',
-          'Too heavy for the browser; rendered by a headless RetroArch and '
-          +'streamed to you.')
+          interfaceMarkup('Too heavy for the browser; rendered by a headless RetroArch and streamed to you.'))
        +routeRow('download','Download only',
-          'ROMarr fetches and verifies it; you play it in a native emulator.')
+          interfaceMarkup('ROMarr fetches and verifies it; you play it in a native emulator.'))
        +'</tbody></table>':'')
     +'</div>'
 
     +'<div class="card" style="margin-top:16px"><h3>Next</h3>'
     +'<p class="help">'
-    +'<a href="#add">Request a game</a> to watch the whole chain run once, or '
-    +'<a href="#manualimport">Manual Import</a> to adopt ROMs you already have. '
-    +'If you want a whole system at once, <a href="#collections">Collections</a> '
-    +'compares a DAT against your shelf and requests only what is missing.'
+    +'<a href="#add">'+interfaceMarkup('Request a game')+'</a> '+interfaceMarkup('to watch the whole chain run once, or')+' '
+    +'<a href="#manualimport">'+interfaceMarkup('Manual Import')+'</a> '+interfaceMarkup('to adopt ROMs you already have. If you want a whole system at once,')+' '
+    +'<a href="#collections">'+interfaceMarkup('Collections')+'</a> '
+    +interfaceMarkup('compares a DAT against your shelf and requests only what is missing.')
     +'</p></div>';
 };
 
@@ -3897,28 +4003,30 @@ RENDER.collections=async()=>{
        +PLATFORMS.map(p=>'<option value="'+esc(p.slug)+'">'+esc(p.name)+'</option>').join('')
        +'</select>'
        +'<label class="help" style="margin:0"><input type="checkbox" id="c1g1r" checked> '
-       +'One game, one ROM</label>'
+       +interfaceMarkup('One game, one ROM')+'</label>'
        +'<input id="cregions" placeholder="usa,world,europe,japan" '
        +'style="flex:1;min-width:180px;padding:7px 10px;background:var(--bg);'
        +'color:var(--fg);border:1px solid var(--line);border-radius:6px">'
        +'<label class="help" style="margin:0" title="Treat the region list as an allowlist: omit a title when no dump matches one of your regions">'
        +'<input type="checkbox" id="cstrict"'+((SETTINGS.region_mode||'prefer')==='strict'?' checked':'')+'> '
-       +'Only selected regions</label>'
+       +interfaceMarkup('Only selected regions')+'</label>'
        +'<button class="btn" id="cplan">Preview plan</button></div>'
        +'<div class="row" style="flex-wrap:wrap;gap:14px;margin-top:10px">'
-       +['proto','beta','demo','hack','unlicensed'].map(k=>
+       +[['proto','Exclude prototypes'],['beta','Exclude beta versions'],
+         ['demo','Exclude demos'],['hack','Exclude ROM hacks'],
+         ['unlicensed','Exclude unlicensed ROMs']].map(([kind,label])=>
           '<label class="help" style="margin:0"><input type="checkbox" class="cex" '
-          +'value="'+k+'" checked> exclude '+k+'</label>').join('')
+          +'value="'+kind+'" checked> '+interfaceMarkup(label)+'</label>').join('')
        +'</div>'
        +'<div class="row" style="gap:8px;margin-top:10px;align-items:center">'
        +'<label class="help" style="margin:0">Fan translations</label>'
        +'<select id="ctrans">'
-       +[['exclude','exclude (published dumps only)'],
-         ['fill','fill gaps (a selected-language translation only where no preferred region exists)'],
-         ['prefer','prefer (a selected-language translation over the region winner)'],
-         ['keep_both','keep both (original + translation under Translations/)']].map(o=>
-          '<option value="'+o[0]+'"'+((SETTINGS.translation_policy||'exclude')===o[0]?' selected':'')
-          +'>'+o[1]+'</option>').join('')
+       +[['exclude','Exclude — published dumps only'],
+         ['fill','Fill gaps — use a translation only when no preferred-region dump exists'],
+         ['prefer','Prefer — take a translation over the region winner when one exists'],
+         ['keep_both','Keep both — original plus the translation in a Translations subfolder']].map(o=>
+          '<option value="'+o[0]+'" data-i18n="'+esc(o[1])+'"'+((SETTINGS.translation_policy||'exclude')===o[0]?' selected':'')
+          +'>'+esc(o[1])+'</option>').join('')
        +'</select>'
        +'<label class="help" style="margin:0">languages</label>'
        +'<input id="ctranslangs" placeholder="'+esc((SETTINGS.translation_langs||['en']).join(', '))+'" '
@@ -3948,7 +4056,7 @@ RENDER.collections=async()=>{
          +'<td style="min-width:150px"><div style="background:var(--bg);'
          +'border:1px solid var(--line);border-radius:4px;height:16px;overflow:hidden">'
          +'<div style="height:100%;width:'+x.percent+'%;background:var(--accent)"></div>'
-         +'</div><span class="help" style="margin:0">'+fmt(x.percent)+'% — '+esc(x.status)+'</span></td>'
+         +'</div><span class="help" style="margin:0">'+fmt(x.percent)+'% — '+statusMarkup(x.status)+'</span></td>'
          +'<td>'+fmt(x.done)+'</td><td>'+fmt(x.failed)+'</td><td>'+fmt(x.remaining)+'</td>'
          +'<td class="row" style="gap:6px">'
          +'<button class="btn ghost cstep">Run next</button>'
@@ -4013,25 +4121,33 @@ RENDER.collections=async()=>{
           translation_langs:($('#ctranslangs').value.trim()||'').split(',').map(s=>s.trim()).filter(Boolean),
           exclude:ex.split(',').filter(Boolean)};
     const d=await j('/api/v1/collection/plan?'+q).catch(()=>({error:'plan failed'}));
-    if(d.error){out.innerHTML='<div class="panel-note panel-warn">'+esc(d.error)+'</div>';return;}
+    if(d.error){out.innerHTML='<div class="panel-note panel-warn">'+appMessageMarkup(d.error)+'</div>';return;}
     const c=d.counts;
     const tile=(n,label,colour)=>'<div style="flex:1;min-width:110px;padding:10px 12px;'
       +'background:var(--bg);border:1px solid var(--line);border-radius:6px">'
       +'<div style="font-size:22px;font-weight:600;color:'+colour+'">'+fmt(n)+'</div>'
       +'<div class="help" style="margin:0">'+label+'</div></div>';
+    const datMarkup='<span lang="und" dir="auto">'+esc(d.dat)
+      +(d.dat_version?' ('+esc(d.dat_version)+')':'')+'</span>';
+    const policyMarkup=d.dat==='TitleDB (Switch)'
+      ? '<span lang="und" dir="auto">'+esc((d.policy.kinds||[]).join(', '))+'</span> — '
+        +interfaceMarkup(d.policy.latest_only?'Latest listed versions':'All listed versions')
+      : interfaceTemplateMarkup('Region order: {regions}',
+          {regions:(d.policy.regions||[]).join(' → ')});
+    const strictMarkup=d.policy.region_mode==='strict'
+      ? ' '+interfaceMarkup('Strict: titles without a matching-region dump are omitted.')
+      : '';
     out.innerHTML='<div class="row" style="gap:10px;flex-wrap:wrap">'
-      +tile(c.expected,'in the set','var(--fg)')
-      +tile(c.have,'you have','var(--ok)')
-      +tile(c.missing,'missing','var(--warn)')
-      +tile(c.bad,'bad dumps','var(--bad)')
-      +tile(c.excluded,'excluded by policy','var(--dim)')
-      +((c.region_omitted||0)?tile(c.region_omitted,'omitted — no dump in your regions','var(--dim)'):'')
+      +tile(c.expected,interfaceMarkup('In the set'),'var(--fg)')
+      +tile(c.have,interfaceMarkup('You have'),'var(--ok)')
+      +tile(c.missing,interfaceMarkup('Missing'),'var(--warn)')
+      +tile(c.bad,interfaceMarkup('Bad dumps'),'var(--bad)')
+      +tile(c.excluded,interfaceMarkup('Excluded by policy'),'var(--dim)')
+      +((c.region_omitted||0)?tile(c.region_omitted,interfaceMarkup('Omitted — no dump in your regions'),'var(--dim)'):'')
       +'</div>'
-      +'<p class="help">'+esc(d.dat)+(d.dat_version?' ('+esc(d.dat_version)+')':'')
-      +(d.dat==='TitleDB (Switch)' ? ' — '+esc((d.policy.kinds||[]).join(', '))+(d.policy.latest_only?' · latest listed versions':' · all listed versions') : ' — region order '+esc((d.policy.regions||[]).join(' → ')))
-      +(d.policy.region_mode==='strict'?' (strict: titles without a matching-region dump are omitted)':'')+'.</p>'
-      +'<div class="row"><button class="btn" id="cstart">Request '+fmt(c.missing)
-      +' missing</button>'
+      +'<p class="help">'+datMarkup+' — '+policyMarkup+strictMarkup+'.</p>'
+      +'<div class="row"><button class="btn" id="cstart">'
+      +interfaceTemplateMarkup('Request {count} missing',{count:fmt(c.missing)})+'</button>'
       +'<label class="help" style="margin:0">at <input id="cpp" type="number" '
       +'min="1" max="50" value="5" style="width:60px;padding:5px;background:var(--bg);'
       +'color:var(--fg);border:1px solid var(--line);border-radius:4px"> per pass</label></div>'
@@ -4047,7 +4163,8 @@ RENDER.collections=async()=>{
               :'<span class="pill">present</span>';
         const clones=(t.discarded||[]).length
           ?'<details><summary class="help" style="margin:0;cursor:pointer">'
-           +fmt(t.discarded.length)+' other dump'+(t.discarded.length>1?'s':'')+'</summary>'
+           +interfaceTemplateMarkup(t.discarded.length===1
+             ?'One other dump':'{count} other dumps',{count:fmt(t.discarded.length)})+'</summary>'
            +'<ul style="margin:6px 0 0 16px">'+t.discarded.map(x=>
              '<li class="help" style="margin:0">'+esc(x.name)+' — '+esc(x.why)+'</li>').join('')
            +'</ul></details>':'';
@@ -4064,7 +4181,7 @@ RENDER.collections=async()=>{
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({...planned, per_pass:parseInt($('#cpp').value,10)||5})});
       if(r.error)toastAppMessage(r.error);else toastMessage('Queued {count} titles',{count:fmt(r.queued||0)});
-      e.target.disabled=false; e.target.textContent='Request missing';
+      e.target.disabled=false; e.target.innerHTML=interfaceMarkup('Request missing');
       drawBatches();
     };
   };
@@ -4113,7 +4230,7 @@ RENDER.manualimport=async()=>{
       return;
     }
     const bad=(d.refused||[])[0]||{};
-    st.innerHTML='<span style="color:var(--bad)">'+esc(bad.reason||'refused')+'</span>';
+    st.innerHTML='<span style="color:var(--bad)">'+appMessageMarkup(bad.reason||'refused')+'</span>';
     btn.disabled=false;
     if(bad.needs_force){
       // Never a silent reinterpretation: forcing is a second, separate act,
@@ -4131,9 +4248,11 @@ RENDER.manualimport=async()=>{
     out.innerHTML='<div class="empty">Scanning…</div>';
     const d=await j('/api/v1/manualimport?path='
       +encodeURIComponent($('#mipath').value)).catch(()=>({error:'scan failed'}));
-    if(d.error){out.innerHTML='<div class="panel-note panel-warn">'+esc(d.error)+'</div>';return;}
+    if(d.error){out.innerHTML='<div class="panel-note panel-warn">'+appMessageMarkup(d.error)+'</div>';return;}
     const c=d.candidates||[];
-    out.innerHTML='<p class="help">'+fmt(c.length)+' importable, '+fmt(d.skipped||0)+' skipped.</p>'
+    out.innerHTML='<p class="help">'+interfaceTemplateMarkup(
+      '{importable} importable, {skipped} skipped.',
+      {importable:fmt(c.length),skipped:fmt(d.skipped||0)})+'</p>'
       +(c.length
         ?'<div class="row" style="margin-bottom:10px">'
          +'<button class="btn ghost" id="miall">Import everything verified</button></div>'
@@ -4296,9 +4415,13 @@ async function refreshCounts(){
     // catalogues entries it does not hold. It stays a sum -- a badge that
     // renumbered itself would read as data loss -- but it no longer keeps
     // that to itself.
-    if(b.dataset.ct === 'games' && s.games_catalogued)
-      b.title = `${fmt(s.games_on_disk)} on disk here · `
-              + `${fmt(s.games_catalogued)} catalogued elsewhere`;
+    if(b.dataset.ct === 'games' && s.games_catalogued){
+      const source='On disk: {disk} · Catalogued elsewhere: {catalogued}';
+      const values={disk:fmt(s.games_on_disk),catalogued:fmt(s.games_catalogued)};
+      b.dataset.i18nTitleTemplate=source;
+      b.dataset.i18nTitleValues=JSON.stringify(values);
+      b.title=translateTemplate(source,values,readInterfaceLanguage());
+    }
   });
 }
 (async()=>{
@@ -4538,7 +4661,11 @@ f.onsubmit = async function(e) {{
     var d = {{}};
     try {{ d = await r.json(); }} catch (_) {{}}
     var detail = d.detail || d.error;
-    if (detail) fail(detail, !window.ROMarrI18n.has(detail));
+    if (d.error === 'weak password') {{
+      var minimum = (String(detail || '').match(/\\d+/) || [])[0] || '8';
+      fail(window.ROMarrI18n.message('Use at least {{count}} characters.',
+        {{count:minimum}}));
+    }} else if (detail) fail(detail, !window.ROMarrI18n.has(detail));
     else fail(window.ROMarrI18n.message('Refused (HTTP {{status}}).', {{status:r.status}}));
   }} catch (_) {{ fail('Could not reach ROMarr.'); }}
 }};
@@ -4612,7 +4739,7 @@ var f = frag(), here = location.origin;
 function bad(msg) {
   box.innerHTML = '<h1>ROM<span>arr</span></h1>'
     + '<div class="sub">Not an invitation</div>'
-    + '<div class="note">' + esc(msg) + '</div>';
+    + '<div class="note">' + esc(window.ROMarrI18n.translate(msg)) + '</div>';
 }
 
 /* Home. The fragment was rehomed onto this host, so this IS the recipient's
@@ -4649,8 +4776,7 @@ function away() {
     + 'value="' + esc(mine) + '" autofocus>'
     + '<button id="go">Open this invitation on my ROMarr</button>'
     + '<div class="step"><b>2</b><span data-i18n="Your ROMarr asks for a claim code: eight characters your friend sends separately. It is not in this link and expires after 15 minutes.">Your ROMarr asks for a claim code: eight characters your friend sends separately. It is not in this link and expires after 15 minutes.</span></div>'
-    + '<div class="note">No ROMarr on this device? Copy the link and paste it '
-    + 'into <b>Friends &rarr; I have an invitation</b> on your own server.'
+    + '<div class="note"><span data-i18n="No ROMarr on this device? Copy the link and paste it into Friends → I have an invitation on your own server.">No ROMarr on this device? Copy the link and paste it into Friends &rarr; I have an invitation on your own server.</span>'
     + '<br><br><code>' + esc(link) + '</code>'
     + '<button class="copy" id="copy">Copy the link</button></div>';
   document.getElementById('copy').onclick = function () {
@@ -4702,3 +4828,26 @@ def link_page() -> str:
 </div>
 <script>{PUBLIC_I18N_JS}</script>
 <script>{LINK_JS}</script></body></html>"""
+
+
+def steam_result_page(kind: str, message: str = "") -> str:
+    """Render the Steam return screen in the visitor's interface language."""
+    copy = {
+        "expired": ("That sign-in link has expired", "Start again from Lists.", "Back"),
+        "unverified": ("Steam sign-in could not be verified", "Nothing was connected.", "Back to Lists"),
+        "connected": ("Steam connected", "", "Back to Lists"),
+    }.get(kind)
+    if copy is None:
+        raise ValueError("unknown Steam result page")
+    heading, detail, back = copy
+    dynamic = (f'<p lang="und" dir="auto">{html.escape(str(message))}</p>'
+               if message else "")
+    detail_markup = (f'<p data-i18n="{detail}">{detail}</p>' if detail else "")
+    return f'''<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{heading} · ROMarr</title><style>{CSS}{LOGIN_CSS}</style></head>
+<body data-title="{heading}"><main class="box">
+  <h2 data-i18n="{heading}">{heading}</h2>
+  {detail_markup}{dynamic}
+  <p><a href="/#lists" data-i18n="{back}">{back}</a></p>
+</main><script>{PUBLIC_I18N_JS}</script></body></html>'''

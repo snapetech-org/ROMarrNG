@@ -2,8 +2,9 @@
 
 import re
 from html.parser import HTMLParser
+from pathlib import Path
 
-from romarr.ui import page
+from romarr.ui import page, steam_result_page
 
 
 class _InlineScriptParser(HTMLParser):
@@ -150,6 +151,55 @@ def test_interface_catalog_covers_every_locale_and_placeholder():
             )
 
 
+def test_static_localization_helper_sources_exist_in_every_catalog():
+    from romarr.ui import UI_LABELS
+
+    source = (Path(__file__).parents[1] / "romarr" / "ui.py").read_text(
+        encoding="utf-8"
+    )
+    call = re.compile(
+        r"\b(?:interfaceMarkup|interfaceTemplateMarkup|toastLabel|toastMessage|"
+        r"confirmMessage|promptMessage)\(\s*(['\"`])((?:\\\\.|(?!\1).)*?)\1",
+        re.S,
+    )
+    referenced = {match.group(2) for match in call.finditer(source)}
+    assert referenced <= UI_LABELS.keys(), sorted(referenced - UI_LABELS.keys())
+
+
+def test_public_auth_and_invitation_messages_have_catalog_coverage():
+    from romarr.ui import UI_LABELS, link_page, login_page
+
+    sources = {
+        "This ROMarr already has a password. Sign in instead.",
+        "Use at least {count} characters.",
+        "two-factor code required or wrong",
+        "Send the link however you like -- it carries no secret. Send the code separately if you can: by voice, by text, in another app. It works once, expires in 15 minutes, and you still confirm the peer here before they can see anything.",
+        "This invitation carries no address for your server, so your friend's ROMarr cannot call you back. Set your public URL under Settings -> General, then mint a fresh invitation.",
+        "the claim code is missing. It travels separately from the link on purpose -- ask your friend for the eight characters",
+        "that claim code has expired -- ask your friend for a fresh one, it only lives 15 minutes",
+        "Connected to {friend}. They confirm you on their side before you can see anything.",
+        "Connected to {friend}: {count} title with hashes ROMarr can match on.",
+        "Connected to {friend}: {count} titles with hashes ROMarr can match on.",
+    }
+    assert sources <= UI_LABELS.keys()
+
+    setup = login_page(claimed=False)
+    assert "Use at least {count} characters." in setup
+    assert "window.ROMarrI18n.has(detail)" in setup
+    invitation = link_page()
+    assert "Checking this invitation…" in invitation
+    assert "window.ROMarrI18n.translate(msg)" in invitation
+
+
+def test_standalone_steam_result_uses_public_localization_and_escapes_message():
+    page_html = steam_result_page("connected", "<img src=x onerror=alert(1)>")
+    assert 'data-i18n="Steam connected"' in page_html
+    assert 'data-i18n="Back to Lists"' in page_html
+    assert "romarrng.interface-language" in page_html
+    assert 'lang="und" dir="auto">&lt;img src=x onerror=alert(1)&gt;' in page_html
+    assert "<img src=x onerror=alert(1)>" not in page_html
+
+
 def test_interface_language_choice_survives_storage_failure_for_current_tab():
     import shutil
     import subprocess
@@ -289,10 +339,13 @@ def test_the_system_page_explains_and_builds_the_ggrequestz_webhook():
 def test_plugin_install_errors_are_displayed_in_the_hub():
     """A failed install used to refresh the catalogue and erase the API error."""
     html = page()
-    assert "let q='', cap='', inst='', actionError=''" in html
+    assert "let q='', cap='', inst='', actionError=null" in html
     assert "if(!r.ok||result.ok!==true)" in html
-    assert "actionError=result.error||result.reason" in html
-    assert "esc(actionError)" in html
+    assert "const detail=result.error||result.reason" in html
+    assert "actionError=detail?{raw:detail}" in html
+    assert "actionError.source" in html
+    assert "interfaceTemplateMarkup(actionError.source,actionError.values)" in html
+    assert "<span lang=\"und\" dir=\"auto\">" in html
 
 
 def test_every_rendered_inline_script_parses_as_javascript():
@@ -485,14 +538,14 @@ def test_regional_formatting_is_applied_at_dashboard_count_call_sites():
     assert "regionalFormat.onchange=()=>{\n      applyRegionalFormat(regionalFormat.value,regionalFormat);" in html
     assert "if(setRegionalLocale(regionalFormat.value)) go('general')" not in html
     assert "★ ${num(x.rating)}" in html
-    assert "Clear ${fmt(failed)} failed" in html
+    assert "'Clear {count} failed'" in html
     assert "<div><b>${fmt(h.platforms)}</b><span>Platforms</span></div>" in html
     assert "<div><b>${fmt(h.dats||0)}</b><span>DATs loaded</span></div>" in html
     assert "<div><b>${fmt(h.dat_games||0)}</b><span>Known dumps</span></div>" in html
     assert "<div><b>${fmt(h.events)}</b><span>History events</span></div>" in html
-    assert "+fmt(x.percent)+'% — '+esc(x.status)" in html
+    assert "+fmt(x.percent)+'% — '+statusMarkup(x.status)" in html
     assert "+fmt(x.done)+'</td><td>'+fmt(x.failed)+'</td><td>'+fmt(x.remaining)" in html
-    assert ">Page ${fmt(page)} of ${fmt(pages)}</span>" in html
+    assert "interfaceTemplateMarkup('Page {page} of {pages}'" in html
     assert "${fmt(r.local||0)}" in html
     assert "${fmt(r.stream||0)}" in html
     assert "${fmt(r.archive||0)}" in html
@@ -502,4 +555,4 @@ def test_regional_formatting_is_applied_at_dashboard_count_call_sites():
     assert "fmt(p.max_size_mb/1024)+' GB' : fmt(p.max_size_mb)+' MB'" in html
     assert "interfaceTemplateMarkup('Interval: {count} min'" in html
     assert "interfaceTemplateMarkup('Interval: {count} s'" in html
-    assert "Disabled until ${esc(regionalDateTime(item.disabledUntil))}" in html
+    assert "interfaceTemplateMarkup('Disabled until {date}'" in html
