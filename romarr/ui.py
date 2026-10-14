@@ -855,7 +855,9 @@ const observeInterfaceText=()=>{
 };
 const applyInterfaceLanguage=(language=readInterfaceLanguage())=>{
   document.documentElement.lang=language;
-  document.documentElement.dir=language==='ar'?'rtl':'ltr';
+  // Arabic labels set their own direction. Keep the overall shell LTR until
+  // the broader layout has had a dedicated RTL review.
+  document.documentElement.dir='ltr';
   applyTranslatedLabels(document,language);
   applyTranslatedTemplates(document,language);
   document.querySelectorAll('[data-i18n-aria-label]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nAriaLabel,'aria-label',language));
@@ -4192,32 +4194,31 @@ RENDER.collections=async()=>{
 };
 
 RENDER.manualimport=async()=>{
-  $('#page').innerHTML='<div class="card"><h3>Manual Import</h3>'
-    +'<p class="help">Point ROMarr at a directory you already have. It works out '
-    +'which platform each file belongs to and verifies against your DATs, then '
-    +'you choose what to adopt.</p>'
-    +'<div class="row"><input id="mipath" placeholder="/downloads/roms" '
+  $('#page').innerHTML='<div class="card"><h3>'+interfaceMarkup('Manual Import')+'</h3>'
+    +'<p class="help">'+interfaceMarkup('Point ROMarr at a directory you already have. It works out which platform each file belongs to and verifies against your DATs, then you choose what to adopt.')+'</p>'
+    +'<label for="mipath">'+interfaceMarkup('Path')+'</label>'
+    +'<div class="row"><input id="mipath" lang="und" dir="auto" placeholder="/downloads/roms" '
     +'style="flex:1;padding:8px 12px;background:var(--bg);color:var(--fg);'
     +'border:1px solid var(--line);border-radius:6px">'
-    +'<button class="btn" id="miscan">Scan</button></div>'
+    +'<button class="btn" id="miscan">'+interfaceMarkup('Scan')+'</button></div>'
     +'<div id="mires" style="margin-top:14px"></div></div>';
 
   const opts=sel=>PLATFORMS.map(p=>'<option value="'+esc(p.slug)+'"'
-      +(p.slug===sel?' selected':'')+'>'+esc(p.name)+'</option>').join('');
+      +(p.slug===sel?' selected':'')+' lang="und" dir="auto">'+esc(p.name)+'</option>').join('');
 
   // The distinction the whole page turns on. UNKNOWN means "not in the DAT you
   // loaded" -- normal for homebrew, translations and anything newer than your
   // DAT -- and must never be presented as a problem. Only a bad dump is.
   const verdict=v=>v==='verified'
-    ? '<span class="pill" style="background:var(--ok);color:#08210d">verified</span>'
+    ? '<span class="pill" style="background:var(--ok);color:#08210d">'+interfaceMarkup('verified')+'</span>'
     : v==='bad-dump'
-      ? '<span class="pill" style="background:var(--bad);color:#2a0b0b">bad dump</span>'
-      : '<span class="pill" title="Not in your DAT. Often perfectly fine.">unknown</span>';
+      ? '<span class="pill" style="background:var(--bad);color:#2a0b0b">'+interfaceMarkup('bad dump')+'</span>'
+      : '<span class="pill" data-i18n-title="Not in your DAT. Often perfectly fine." title="'+esc(translateLabel('Not in your DAT. Often perfectly fine.',readInterfaceLanguage()))+'">'+interfaceMarkup('unknown')+'</span>';
 
   async function adopt(row, force){
     const btn=row.querySelector('.mi-go');
     const st=row.querySelector('.mi-st');
-    btn.disabled=true; st.textContent='Importing…';
+    btn.disabled=true; st.innerHTML=interfaceMarkup('Importing…');
     const d=await j('/api/v1/manualimport',{method:'POST',
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({path:row.dataset.path,
@@ -4227,8 +4228,8 @@ RENDER.manualimport=async()=>{
     if(d.ok){
       const one=d.imported[0]||{};
       st.innerHTML=one.forced
-        ? '<span style="color:var(--warn)">imported (forced)</span>'
-        : '<span style="color:var(--ok)">imported</span>';
+        ? '<span style="color:var(--warn)">'+interfaceMarkup('imported (forced)')+'</span>'
+        : '<span style="color:var(--ok)">'+interfaceMarkup('imported')+'</span>';
       btn.remove();
       row.querySelector('.mi-pf').disabled=true;
       return;
@@ -4239,7 +4240,7 @@ RENDER.manualimport=async()=>{
     if(bad.needs_force){
       // Never a silent reinterpretation: forcing is a second, separate act,
       // and the button says exactly what it does.
-      btn.textContent='Import anyway';
+      btn.innerHTML=interfaceMarkup('Import anyway');
       btn.style.background='var(--bad)';
       btn.onclick=()=>{
         if(confirmMessage('This file did not match a known dump. Import it anyway? It will be recorded as a forced import, and ROMarr will not claim it is verified.')) adopt(row,true);
@@ -4249,7 +4250,7 @@ RENDER.manualimport=async()=>{
 
   $('#miscan').onclick=async()=>{
     const out=$('#mires');
-    out.innerHTML='<div class="empty">Scanning…</div>';
+    out.innerHTML='<div class="empty">'+interfaceMarkup('Scanning…')+'</div>';
     const d=await j('/api/v1/manualimport?path='
       +encodeURIComponent($('#mipath').value)).catch(()=>({error:'scan failed'}));
     if(d.error){out.innerHTML='<div class="panel-note panel-warn">'+appMessageMarkup(d.error)+'</div>';return;}
@@ -4259,20 +4260,20 @@ RENDER.manualimport=async()=>{
       {importable:fmt(c.length),skipped:fmt(d.skipped||0)})+'</p>'
       +(c.length
         ?'<div class="row" style="margin-bottom:10px">'
-         +'<button class="btn ghost" id="miall">Import everything verified</button></div>'
-         +'<table><thead><tr><th>File</th><th>Platform</th><th>Why</th>'
-         +'<th>DAT</th><th></th><th></th></tr></thead><tbody>'
+         +'<button class="btn ghost" id="miall">'+interfaceMarkup('Import everything verified')+'</button></div>'
+         +'<table><thead><tr><th>'+interfaceMarkup('File')+'</th><th>'+interfaceMarkup('Platform')+'</th><th>'+interfaceMarkup('Why')+'</th>'
+         +'<th lang="en" dir="ltr">DAT</th><th></th><th></th></tr></thead><tbody>'
          +c.slice(0,200).map(x=>'<tr data-path="'+esc(x.path||'')+'" '
            +'data-verdict="'+esc(x.verdict)+'">'
-           +'<td>'+esc(x.filename)+'</td>'
+           +'<td><span lang="und" dir="auto">'+esc(x.filename)+'</span></td>'
            +'<td><select class="mi-pf">'+opts(x.platform)+'</select></td>'
-           +'<td class="help" style="margin:0">'+esc(x.reason)+'</td>'
-           +'<td>'+(x.hollow?'<span class="pill" style="background:var(--bad);color:#2a0b0b" title="'+esc(x.hollow)+'">EMPTY FILE</span><br>':'')+verdict(x.verdict)+(x.header_says?'<br><span class="pill" style="background:var(--warn);color:#2a1c05" title="'+esc(x.header_detail||'')+'">'+interfaceMarkup('Header says')+' <span lang="und" dir="auto">'+esc(x.header_says)+'</span></span>':'')+'</td>'
-           +'<td><button class="btn mi-go">Import</button></td>'
+           +'<td class="help" style="margin:0">'+appMessageMarkup(x.reason)+'</td>'
+           +'<td>'+(x.hollow?'<span class="pill" lang="und" dir="auto" style="background:var(--bad);color:#2a0b0b" title="'+esc(x.hollow)+'">'+interfaceMarkup('EMPTY FILE')+'</span><br>':'')+verdict(x.verdict)+(x.header_says?'<br><span class="pill" lang="und" dir="auto" style="background:var(--warn);color:#2a1c05" title="'+esc(x.header_detail||'')+'">'+interfaceMarkup('Header says')+' <span lang="und" dir="auto">'+esc(x.header_says)+'</span></span>':'')+'</td>'
+           +'<td><button class="btn mi-go">'+interfaceMarkup('Import')+'</button></td>'
            +'<td class="mi-st help" style="margin:0"></td></tr>').join('')
          +'</tbody></table>'
-        :'<div class="empty-cat"><b>Nothing importable there</b>'
-         +'Check the path, or that the files carry extensions ROMarr knows.</div>');
+        :'<div class="empty-cat"><b>'+interfaceMarkup('Nothing importable there')+'</b>'
+         +interfaceMarkup('Check the path, or that the files carry extensions ROMarr knows.')+'</div>');
 
     out.querySelectorAll('tbody tr').forEach(row=>{
       const btn=row.querySelector('.mi-go');
@@ -4553,7 +4554,7 @@ const message=(source,values={})=>translate(source).replace(/\{([A-Za-z][A-Za-z0
 const sources=new WeakMap();
 const text=(node)=>{const parent=node.parentElement;if(!parent||parent.closest('script,style,textarea,input,select,code,[contenteditable="true"],[lang="und"],[data-i18n]'))return;const source=sources.get(node)||node.data.replace(/\s+/g,' ').trim();if(!Object.hasOwn(labels,source))return;sources.set(node,source);const left=node.data.match(/^\s*/)?.[0]||'',right=node.data.match(/\s*$/)?.[0]||'',value=left+translate(source)+right;if(value!==node.data)node.data=value;const localized=Boolean(labels[source]?.[active]);parent.lang=localized?active:'en';parent.dir=localized&&active==='ar'?'rtl':'ltr'};
 const tree=root=>{if(root.nodeType===Node.TEXT_NODE){text(root);return}const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);while(walker.nextNode())text(walker.currentNode)};
-const apply=()=>{document.documentElement.lang=active;document.documentElement.dir=active==='ar'?'rtl':'ltr';document.querySelectorAll('[data-i18n]').forEach(el=>{const source=el.dataset.i18n,localized=Boolean(labels[source]?.[active]);el.textContent=translate(source);el.lang=localized?active:'en';el.dir=localized&&active==='ar'?'rtl':'ltr'});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const source=el.dataset.i18nPlaceholder;el.placeholder=translate(source);el.lang=labels[source]?.[active]?active:'en';el.dir=labels[source]?.[active]&&active==='ar'?'rtl':'ltr'});for(const [marker,attribute] of [['data-i18n-aria-label','aria-label'],['data-i18n-title','title']])document.querySelectorAll('['+marker+']').forEach(el=>{const source=el.getAttribute(marker);el.setAttribute(attribute,translate(source))});tree(document.body);const selector=document.querySelector('#public-language-select');if(selector)selector.value=active;document.title=translate(document.body.dataset.title||'ROMarr')+' · ROMarr'};
+const apply=()=>{document.documentElement.lang=active;document.documentElement.dir='ltr';document.querySelectorAll('[data-i18n]').forEach(el=>{const source=el.dataset.i18n,localized=Boolean(labels[source]?.[active]);el.textContent=translate(source);el.lang=localized?active:'en';el.dir=localized&&active==='ar'?'rtl':'ltr'});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const source=el.dataset.i18nPlaceholder;el.placeholder=translate(source);el.lang=labels[source]?.[active]?active:'en';el.dir=labels[source]?.[active]&&active==='ar'?'rtl':'ltr'});for(const [marker,attribute] of [['data-i18n-aria-label','aria-label'],['data-i18n-title','title']])document.querySelectorAll('['+marker+']').forEach(el=>{const source=el.getAttribute(marker);el.setAttribute(attribute,translate(source))});tree(document.body);const selector=document.querySelector('#public-language-select');if(selector)selector.value=active;document.title=translate(document.body.dataset.title||'ROMarr')+' · ROMarr'};
 const picker=document.querySelector('#public-language-select');if(picker){picker.innerHTML=languages.map(([code,name])=>'<option value="'+code+'">'+name+'</option>').join('');picker.value=active;picker.addEventListener('change',()=>{active=picker.value;try{localStorage.setItem(key,active)}catch(_){}apply()})}
 window.ROMarrI18n={translate,message,has:source=>Object.hasOwn(labels,source),apply,get language(){return active}};
 apply();

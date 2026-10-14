@@ -4,9 +4,9 @@
 
 The interface is rendered by the Python service in `romarr/ui.py`. The rail footer provides a browser-local language selector for English and the twelve non-English locales listed below. The English-keyed catalog contains 1,210 app-owned UI strings, including labels, help, empty states, prompts, notifications, dynamic library summaries, and finite download/import statuses. Each locale has a value for every source key and English remains the fallback for a missing value.
 
-The regional-format preference is separate from interface language. Fan-translation settings, ROM names, platform slugs, filenames, paths, DAT values, API data, and other user data remain unchanged.
+The regional-format preference is separate from interface language. Fan-translation settings, ROM names, platform slugs, filenames, paths, DAT values, API data, and other user data remain unchanged. Arabic translations carry label-level language and direction metadata; the document direction stays LTR until the full shell receives a layout review.
 
-Arabic sets the document language and direction and uses logical layout rules. Earlier browser review covered the shell at 390px and 1280px. In this follow-up, the Agentic VM visual pass refreshed the Arabic library view at 1280px; page-specific API-backed workflows were outside the preview.
+Earlier RTL screenshots covered a prior implementation. They do not establish full RTL support for the current LTR shell or the API-backed manual-import workflow.
 
 ## First-pass locale order
 
@@ -29,14 +29,14 @@ The World Bank's 2025 report estimates Mandarin Chinese, Hindi, and Spanish at 1
 
 ## Translation boundaries and acceptance
 
-Translate interface labels, help, empty states, validation, notifications, dynamic summaries, finite status messages, and errors. Keep media titles, user names, filenames and paths, commands, API identifiers, protocol values, and other user-supplied content unchanged. Use the selected UI language for date, time, number, and plural formatting. Every locale falls back to English for a missing key; catalog review checks key coverage, placeholders, and preserved technical tokens. Arabic sets the document language and direction and uses logical layout properties. The shell and initial empty-library state have had a visual RTL pass at narrow and desktop widths; production API-backed workflows remain outside that preview.
+Translate interface labels, help, empty states, validation, notifications, dynamic summaries, finite status messages, and errors. Keep media titles, user names, filenames and paths, commands, API identifiers, protocol values, and other user-supplied content unchanged. Use the selected UI language for date, time, number, and plural formatting. Every locale falls back to English for a missing key; catalog review checks key coverage, placeholders, and preserved technical tokens. Arabic labels carry their own direction metadata while the document remains LTR. Full RTL layout support is not claimed.
 
 ## Implemented
 
 The rail footer offers a browser-local interface-language selector for English plus twelve locales: Spanish, Simplified Chinese, Hindi, German, Japanese, French, Brazilian Portuguese, Arabic, Korean, Traditional Chinese, Vietnamese, and Indonesian. The choice stays in that browser. Theme controls, navigation, page titles, Library filters, request and search workflows, empty states, actions, and finite download/import states use the selected language with per-key English fallback.
 
-The interface catalog has 1,210 source keys translated across all twelve non-English locales. It includes navigation and page copy, actions, help, validation, dynamic summaries, status messages, provider-import and webhook instructions, and toast templates. Translated text and attributes carry language metadata; Arabic sets `lang="ar"` and `dir="rtl"`. Unknown statuses and free-form API or user data remain unchanged. This interface setting does not change ROM translation settings or game metadata.
+The interface catalog has 1,210 source keys translated across all twelve non-English locales. It includes navigation and page copy, actions, help, validation, dynamic summaries, status messages, provider-import and webhook instructions, and toast templates. Translated text and attributes carry language metadata; Arabic labels use `lang="ar"` and `dir="rtl"` within the LTR document. Unknown statuses and free-form API or user data remain unchanged. This interface setting does not change ROM translation settings or game metadata.
 
 Regional formatting remains a separate browser-local preference. It formats visible counts, ratings, scores, file sizes, calendar days and months, and date/time values across the Library, search, wanted list, import lists, sync status, History, live logs, blocklist, tasks, Statistics, collections, friends, and calendar views. Date-only values stay on their original calendar day; month-day anniversary dates are formatted without inventing a year, and year labels retain their source value.
 
-Arabic direction, selector accessibility, empty-search validation, and storage-failure fallback were reviewed in source. The current follow-up browser pass refreshed the Arabic library at 1280px. It did not refresh a narrow-screen screenshot or exercise empty-search and storage-failure interactions; production API-backed workflows were outside the preview.
+Arabic label direction, selector accessibility, empty-search validation, and storage-failure fallback were reviewed in source. The prior browser screenshots predate the current LTR document-direction setting. A fresh visual review of this head, including manual import, was not possible because the Agent VM tools were unavailable; full RTL layout signoff remains outstanding.
