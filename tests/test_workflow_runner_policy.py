@@ -16,7 +16,7 @@ TRUSTED_MAIN_RUNNER_JSON = '{"group":"trusted-main","labels":["self-hosted","Lin
 TRUSTED_MAIN_RUNNER = (
     "$" + "{{ (" + TRUSTED_MAIN_CONDITION
     + " && vars.TRUSTED_MAIN_RUNNERS_ENABLED == 'true' "
-    + "&& fromJSON('" + TRUSTED_MAIN_RUNNER_JSON + "') || 'ubuntu-latest' }}"
+    + "&& fromJSON('" + TRUSTED_MAIN_RUNNER_JSON + "')) || 'ubuntu-latest' }}"
 )
 
 
