@@ -166,6 +166,55 @@ def test_static_localization_helper_sources_exist_in_every_catalog():
     assert referenced <= UI_LABELS.keys(), sorted(referenced - UI_LABELS.keys())
 
 
+def test_runtime_status_fallbacks_and_generated_hub_errors_have_catalog_coverage():
+    from romarr.ui import UI_LABELS
+
+    source = (Path(__file__).parents[1] / "romarr" / "ui.py").read_text(
+        encoding="utf-8"
+    )
+    runtime_labels = {
+        "Bad",
+        "Streamed",
+        "Ready — you both have the same dump",
+        "Playable, with a caveat",
+        "Same game, different dumps",
+        "They do not have this dump",
+        "ROMarr has not hashed your copy yet",
+    }
+    assert "bad:'Bad'" in source
+    netplay = re.search(r"const head=\{(.*?)\}\[r\.status\]", source, re.S)
+    assert netplay
+    netplay_labels = set(re.findall(r":'([^']+)'", netplay.group(1)))
+    assert runtime_labels - {"Bad", "Streamed"} <= netplay_labels
+    assert netplay_labels <= UI_LABELS.keys()
+    route_labels = set(re.findall(r"routeRow\('[^']+','([^']+)'", source))
+    assert {"Browser emulator", "Streamed", "Download only"} <= route_labels
+    assert route_labels <= UI_LABELS.keys()
+    assert runtime_labels <= UI_LABELS.keys()
+
+    download_states = re.search(
+        r"const DOWNLOAD_STATE_LABELS=\{(.*?)\};", source, re.S
+    )
+    assert download_states
+    assert set(re.findall(r":'([^']+)'", download_states.group(1))) <= UI_LABELS.keys()
+
+    library_states = {"Unreachable", "Cannot read", "Path missing", "Connected"}
+    assert all(f"'{label}'" in source for label in library_states)
+    assert library_states <= UI_LABELS.keys()
+
+    actions = {"install", "enable", "disable"}
+    generated_errors = {
+        f"Could not {action} {{slug}} (HTTP {{status}})."
+        for action in actions
+    } | {
+        f"Could not {action} {{slug}}: {{error}}"
+        for action in actions
+    }
+    assert "Could not ${action} {slug} (HTTP {status})." in source
+    assert "Could not ${action} {slug}: {error}" in source
+    assert generated_errors <= UI_LABELS.keys()
+
+
 def test_public_auth_and_invitation_messages_have_catalog_coverage():
     from romarr.ui import UI_LABELS, link_page, login_page
 
