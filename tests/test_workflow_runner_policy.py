@@ -12,10 +12,11 @@ TRUSTED_MAIN_CONDITION = (
     "((github.event_name == 'push' && github.ref == 'refs/heads/main') "
     "|| (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'))"
 )
+TRUSTED_MAIN_RUNNER_JSON = '{"group":"trusted-main","labels":["self-hosted","Linux","X64","host"]}'
 TRUSTED_MAIN_RUNNER = (
     "$" + "{{ (" + TRUSTED_MAIN_CONDITION
     + " && vars.TRUSTED_MAIN_RUNNERS_ENABLED == 'true' "
-    + "&& 'trusted-main') || 'ubuntu-latest' }}"
+    + "&& fromJSON('" + TRUSTED_MAIN_RUNNER_JSON + "') || 'ubuntu-latest' }}"
 )
 
 

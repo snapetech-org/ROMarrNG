@@ -286,10 +286,11 @@ def test_public_workflow_uses_org_pool_only_for_trusted_main():
         "((github.event_name == 'push' && github.ref == 'refs/heads/main') "
         "|| (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'))"
     )
+    trusted_runner_json = '{"group":"trusted-main","labels":["self-hosted","Linux","X64","host"]}'
     expected_runner = (
         "runs-on: " + "$" + "{{ (" + trusted_condition
         + " && vars.TRUSTED_MAIN_RUNNERS_ENABLED == 'true' "
-        + "&& 'trusted-main') || 'ubuntu-latest' }}"
+        + "&& fromJSON('" + trusted_runner_json + "') || 'ubuntu-latest' }}"
     )
     assert expected_runner in test_job
 
