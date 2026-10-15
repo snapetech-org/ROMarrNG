@@ -15091,7 +15091,7 @@
     "vi": "Nguồn: {source}",
     "id": "Sumber: {source}"
   },
-  "Seeders: {count}": {
+  "seeders: {count}": {
     "es": "Seeders: {count}",
     "zh-Hans": "做种数：{count}",
     "hi": "सीडर: {count}",
@@ -18045,7 +18045,7 @@
     "vi": "Không tìm thấy bản phát hành phù hợp trong {count} kết quả",
     "id": "Tidak ada rilisan yang dapat digunakan dari {count} hasil"
   },
-  "No {platform} ROM found; candidate count: {count}.": {
+  "no {platform} ROM found; candidate count: {count}.": {
     "es": "No hay ninguna ROM de {platform} entre los {count} archivos",
     "zh-Hans": "在 {count} 个文件中没有找到 {platform} ROM",
     "hi": "{count} फ़ाइलों में कोई {platform} ROM नहीं मिली",

@@ -195,7 +195,7 @@ def test_backend_explanations_and_validation_errors_reach_localized_sinks():
     profiles = (root / "romarr" / "profiles.py").read_text(encoding="utf-8")
 
     required = {
-        "Seeders: {count}",
+        "seeders: {count}",
         "no seeders on a public tracker",
         "no seeders (private tracker, often temporary)",
         "title does not match {title}",
@@ -212,7 +212,7 @@ def test_backend_explanations_and_validation_errors_reach_localized_sinks():
         "release offers no usable download link",
         "could not tell which platform this belongs to; choose one",
         "{path} does not exist",
-        "No {platform} ROM found; candidate count: {count}.",
+        "no {platform} ROM found; candidate count: {count}.",
         "already in the library",
         "unsafe game directory",
         "unsafe or duplicate game file",
@@ -260,7 +260,7 @@ def test_backend_explanations_and_validation_errors_reach_localized_sinks():
     assert "d.problems.map(appMessageMarkup)" in ui
     assert "no usable release among (\\d+) result\\(s\\)" in ui
     assert "no (.+) ROM among (\\d+) file\\(s\\)" in ui
-    assert "f\"Seeders: {release.seeders}\"" in selection
+    assert "f\"seeders: {release.seeders}\"" in selection
     assert "no dump matched your preferred regions, so the set keeps " in collections
     assert "slug must be lower-case words joined by hyphens" in catalogue
     assert "declare at least one capability" in catalogue
@@ -274,7 +274,7 @@ def test_backend_explanations_and_validation_errors_reach_localized_sinks():
     assert 'f"excluded by release profile ({term!r})"' in profiles
     assert 'f"missing a required term ({term!r})"' in profiles
     assert 'f"unknown platform: {platform_name!r}"' in app
-    assert 'f"No {platform.name} ROM found; candidate count: {len(candidates)}."' in library
+    assert 'f"no {platform.name} ROM found; candidate count: {len(candidates)}."' in library
     assert 'f"two files in this download are both called {name!r}' in library
 
 

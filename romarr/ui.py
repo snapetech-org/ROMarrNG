@@ -791,8 +791,8 @@ const appMessageMarkup=value=>{
       '{reason} — chosen over {count} platforms sharing this extension',
       {reason,count:fmt(Number(match[2]))});
   }
-  match=source.match(/^Seeders: (\d+)$/);
-  if(match)return interfaceTemplateMarkup('Seeders: {count}',{count:fmt(Number(match[1]))});
+  match=source.match(/^seeders: (\d+)$/);
+  if(match)return interfaceTemplateMarkup('seeders: {count}',{count:fmt(Number(match[1]))});
   match=source.match(/^unknown platform: (.+)$/s);
   if(match)return interfaceTemplateMarkup('unknown platform: {platform}',{platform:match[1]});
   match=source.match(/^search failed: (.+)$/s);
@@ -805,17 +805,17 @@ const appMessageMarkup=value=>{
     {count:fmt(Number(match[1]))});
   match=source.match(/^(.+) does not exist$/s);
   if(match)return interfaceTemplateMarkup('{path} does not exist',{path:match[1]});
-  match=source.match(/^No (.+) ROM found; candidate count: (\d+)\.$/);
-  if(match)return interfaceTemplateMarkup('No {platform} ROM found; candidate count: {count}.',
+  match=source.match(/^no (.+) ROM found; candidate count: (\d+)\.$/);
+  if(match)return interfaceTemplateMarkup('no {platform} ROM found; candidate count: {count}.',
     {platform:match[1],count:fmt(Number(match[2]))});
   match=source.match(/^no (.+) ROM among (\d+) file\(s\)$/);
-  if(match)return interfaceTemplateMarkup('No {platform} ROM found; candidate count: {count}.',
+  if(match)return interfaceTemplateMarkup('no {platform} ROM found; candidate count: {count}.',
     {platform:match[1],count:fmt(Number(match[2]))});
   match=source.match(/^game import failed: (.+)$/s);
   if(match)return interfaceTemplateMarkup('game import failed: {error}',{error:match[1]});
   match=source.match(/^download path does not exist in this container: (.+)\. Mount the download client's completed directory at that exact path, or add a remote path mapping under Settings -> Media Management\.$/s);
   if(match)return interfaceTemplateMarkup(
-    'download path does not exist in this container: {path}. Mount the download client\'s completed directory at that exact path, or add a remote path mapping under Settings -> Media Management.',
+    "download path does not exist in this container: {path}. Mount the download client's completed directory at that exact path, or add a remote path mapping under Settings -> Media Management.",
     {path:match[1]});
   match=source.match(/^(.+) is a (\.[^ ]+) archive and bsdtar is not installed, so its contents cannot be read\. Install libarchive-tools \(Debian\/Alpine\) or use the official ROMarr image, which ships it\.$/s);
   if(match)return interfaceTemplateMarkup(
@@ -1664,7 +1664,7 @@ RENDER.add=async()=>{
     $('#g-out').innerHTML=r.ok
       ? `<div class="card" style="margin:0"><h3 data-i18n="Grabbed">Grabbed</h3>
          <p class="help"><span lang="und" dir="auto">${esc(r.release)}</span> — ${interfaceTemplateMarkup(
-           'Seeders: {count}',{count:num(r.seeders)})}</p></div>`
+           'seeders: {count}',{count:num(r.seeders)})}</p></div>`
        : `<div class="card" style="margin:0"><h3 data-i18n="Not grabbed">Not grabbed</h3>
          <p class="help">${appMessageMarkup(r.error||'no usable release')}</p></div>`;
     applyInterfaceLanguage();

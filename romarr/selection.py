@@ -377,7 +377,7 @@ def judge(release: Release, wanted: str,
             add(-20, "no seeders (private tracker, often temporary)")
         else:
             add(min(release.seeders, 20) * 2,
-                f"Seeders: {release.seeders}")
+                f"seeders: {release.seeders}")
 
     region = 0
     label = ""
