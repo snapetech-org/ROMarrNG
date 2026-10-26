@@ -7,9 +7,9 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 WORKFLOW_DIR = ROOT / ".github" / "workflows"
-HOSTED_RUNNERS = {"ubuntu-latest", "macos-latest", "windows-latest"}
 TRUSTED_MAIN_WORKFLOWS = {
     "docker.yml",
+    "dependency-review.yml",
     "semgrep-community.yml",
     "trivy-filesystem.yml",
 }
@@ -44,7 +44,9 @@ TRUSTED_MAIN_JOB_LABELS = {
         "image_browser_publish": "gha-{0}-image_browser_publish",
         "verify-stable-image-tags": "gha-{0}-verify-stable-image-tags",
         "release": "gha-{0}-release",
+        "legacy-aliases": "gha-{0}-legacy-aliases",
     },
+    "dependency-review.yml": {"dependency-review": "gha-{0}-dependency-review"},
     "semgrep-community.yml": {"semgrep": "gha-{0}-semgrep"},
     "trivy-filesystem.yml": {"trivy": "gha-{0}-trivy"},
 }
@@ -54,11 +56,12 @@ OWNER_PR_JOB_LABELS = {
     "acquisition-proof": "gha-{0}-acquisition-{matrix.dockerfile}",
     "image": "gha-{0}-image",
     "image-browser": "gha-{0}-image-browser",
+    "security-review": "gha-{0}-security-review",
 }
 OWNER_PR_GATE = (
     "github.event_name == 'workflow_dispatch' && "
     "(github.actor == 'snapetech' || github.actor == 'github-actions[bot]') && "
-    "inputs.pr_number != '' && inputs.pr_sha != '' && "
+    "inputs.pr_number != '' && inputs.pr_sha != '' && inputs.pr_base_sha != '' && "
     "inputs.target_run_id != '' && github.ref == 'refs/heads/main'"
 )
 OWNER_PR_SPECIAL_GATES = {
@@ -76,19 +79,29 @@ OWNER_PR_SPECIAL_LABELS = {
     "dispatch-owner-pr": "gha-{0}-owner-pr-dispatcher",
     "report-owner-pr-check": "gha-{0}-owner-pr-reporter",
 }
-HOSTED_FIRST_GATE = (
-    "vars.NG_HOSTED_FIRST != 'true' || vars.NG_FORCE_JIT == 'true' || "
-    "github.run_attempt > 1"
-)
 MAIN_OR_TAG_ROUTE = (
     "contains(fromJSON('[\"push\",\"workflow_dispatch\",\"schedule\","
     "\"release\",\"repository_dispatch\"]'), github.event_name) && "
     "(github.ref == 'refs/heads/main' || (github.ref_type == 'tag' && "
     "startsWith(github.ref_name, 'v')))"
 )
-MAIN_EVENT_ROUTE = (
-    "(github.event_name == 'push' || github.event_name == 'workflow_dispatch' "
-    "|| github.event_name == 'schedule') && github.ref == 'refs/heads/main'"
+SCAN_ROUTE = (
+    "(github.event_name == 'push' && github.ref_type == 'tag' && "
+    "startsWith(github.ref_name, 'v')) || "
+    "(github.event_name == 'workflow_dispatch' && "
+    "github.ref == 'refs/heads/main')"
+)
+DEPENDENCY_REVIEW_GATE = (
+    "github.event_name == 'workflow_dispatch' && "
+    "github.actor == 'snapetech' && github.ref == 'refs/heads/main'"
+)
+LEGACY_ALIASES_ROUTE = (
+    "((github.event_name == 'push' && github.ref_type == 'tag' && "
+    "startsWith(github.ref_name, 'v')) || "
+    "(github.event_name == 'workflow_dispatch' && "
+    "(github.actor == 'snapetech' || github.actor == 'github-actions[bot]') && "
+    "github.ref == 'refs/heads/main' && inputs.pr_number == '' && "
+    "inputs.pr_sha == '' && inputs.pr_base_sha == '' && inputs.target_run_id == ''))"
 )
 
 
@@ -128,14 +141,27 @@ def _is_trusted_main_runner(
     if job_label is None:
         return False
     matrix_runner = job_name == "acquisition-proof"
+    if workflow.name in {"semgrep-community.yml", "trivy-filesystem.yml"}:
+        expected = "${{ (" + SCAN_ROUTE + ") && " + _runner_payload(job_label) + " }}"
+        return job.get("if") == SCAN_ROUTE and runner == expected
+    if workflow.name == "dependency-review.yml":
+        expected = (
+            "${{ ("
+            + DEPENDENCY_REVIEW_GATE
+            + ") && "
+            + _runner_payload(job_label)
+            + " }}"
+        )
+        return job.get("if") == DEPENDENCY_REVIEW_GATE and runner == expected
+
     route_condition = (
-        MAIN_EVENT_ROUTE
-        if workflow.name in {"semgrep-community.yml", "trivy-filesystem.yml"}
-        else f"({MAIN_OR_TAG_ROUTE})"
+        LEGACY_ALIASES_ROUTE
+        if job_name == "legacy-aliases"
+        else MAIN_OR_TAG_ROUTE
     )
     normal_route = (
-        f"({HOSTED_FIRST_GATE}) && {route_condition} && "
-        f"{_runner_payload(job_label, matrix=matrix_runner)} || 'ubuntu-latest'"
+        f"(({route_condition}) && "
+        f"{_runner_payload(job_label, matrix=matrix_runner)})"
     )
     if job_name not in OWNER_PR_JOB_LABELS:
         return runner == "${{ " + normal_route + " }}"
@@ -157,9 +183,9 @@ def _is_trusted_main_runner(
         + owner_route
         + " || (!("
         + OWNER_PR_GATE
-        + ") && ("
+        + ") && "
         + normal_route
-        + ")) }}"
+        + ") }}"
     )
     return runner == expected
 
@@ -209,30 +235,9 @@ def _runner_policy_violations(workflow_dir: Path) -> list[str]:
                 continue
             if _is_trusted_main_runner(workflow, job_name, job, runner):
                 continue
-            if runner == "ubuntu-latest":
-                continue
-            if runner == "${{ matrix.os }}":
-                strategy = job.get("strategy")
-                matrix = strategy.get("matrix") if isinstance(strategy, dict) else None
-                matrix_os = matrix.get("os") if isinstance(matrix, dict) else None
-                if (
-                    isinstance(matrix_os, list)
-                    and matrix_os
-                    and all(
-                        isinstance(label, str) and label in HOSTED_RUNNERS
-                        for label in matrix_os
-                    )
-                    and "include" not in matrix
-                ):
-                    continue
-                violations.append(
-                    f"{location}: matrix.os must contain only hosted runner labels"
-                )
-                continue
-
             violations.append(
                 f"{location}: unsupported runner assignment {runner!r}; "
-                "public workflows must use hosted runners except for the exact trusted-main or external-fork JIT job"
+                "workflows must use approved private JIT runners; hosted fallback is forbidden"
             )
 
     if runner_count == 0 and not violations:
@@ -241,16 +246,17 @@ def _runner_policy_violations(workflow_dir: Path) -> list[str]:
 
 
 class WorkflowRunnerPolicyTests(unittest.TestCase):
-    def test_main_and_release_buildkit_use_the_proxy_with_hosted_fallback(self) -> None:
+    def test_main_and_release_buildkit_use_the_proxy_without_hosted_fallback(self) -> None:
         workflow = yaml.safe_load(
             (WORKFLOW_DIR / "docker.yml").read_text(encoding="utf-8")
         )
         image_job = workflow["jobs"]["image"]
         proxy_gate = image_job["env"]["BUILDKIT_EGRESS_PROXY"]
         self.assertIn(OWNER_PR_GATE, proxy_gate)
-        self.assertIn(HOSTED_FIRST_GATE, proxy_gate)
         self.assertIn(MAIN_OR_TAG_ROUTE, proxy_gate)
         self.assertIn("'http://10.0.2.100:3128' || ''", proxy_gate)
+        self.assertNotIn("NG_HOSTED_FIRST", proxy_gate)
+        self.assertNotIn("ubuntu-latest", str(image_job["runs-on"]))
         buildx = next(
             step
             for step in image_job["steps"]
@@ -285,8 +291,9 @@ class WorkflowRunnerPolicyTests(unittest.TestCase):
             with self.subTest(job=job_name):
                 job = workflow["jobs"][job_name]
                 if job_name == "image-browser":
-                    self.assertIn("github.event_name == 'pull_request'", job["if"])
-                    self.assertIn("|| 'ubuntu-latest'", job["runs-on"])
+                    self.assertIn(OWNER_PR_GATE, job["if"])
+                    self.assertIn("gha-{0}-image-browser", job["runs-on"])
+                    self.assertNotIn("ubuntu-latest", job["runs-on"])
                     self.assertIn("BUILDKIT_EGRESS_PROXY", job.get("env", {}))
                     self.assertIn(OWNER_PR_GATE, job["env"]["BUILDKIT_EGRESS_PROXY"])
                 else:
@@ -334,7 +341,7 @@ class WorkflowRunnerPolicyTests(unittest.TestCase):
             all(step["with"].get("push", False) is False for step in build_steps)
         )
 
-    def test_dependency_review_runs_use_pull_request_scoped_cancellation(self) -> None:
+    def test_dependency_review_runs_use_run_scoped_non_cancelling_concurrency(self) -> None:
         workflow = yaml.safe_load(
             (WORKFLOW_DIR / "dependency-review.yml").read_text(encoding="utf-8")
         )
@@ -342,24 +349,24 @@ class WorkflowRunnerPolicyTests(unittest.TestCase):
         self.assertEqual(
             workflow["concurrency"],
             {
-                "group": "${{ github.workflow }}-${{ github.event.pull_request.number || github.run_id }}",
-                "cancel-in-progress": True,
+                "group": "${{ github.workflow }}-${{ github.run_id }}",
+                "cancel-in-progress": False,
             },
         )
 
-    def test_public_workflows_use_hosted_runners_except_exact_runner_groups(self) -> None:
+    def test_workflows_use_private_jit_except_the_exact_sandbox_smoke_job(self) -> None:
         self.assertEqual(
             _runner_policy_violations(WORKFLOW_DIR),
             [],
-            "only the exact trusted-main or main-only gVisor smoke job may select runner groups",
+            "only exact private JIT routes and the gVisor sandbox smoke job may select runner groups",
         )
 
     def test_trusted_main_runner_is_scoped_to_this_project_and_run(self) -> None:
         condition = MAIN_OR_TAG_ROUTE
         valid_runner = (
-            "${{ (" + HOSTED_FIRST_GATE + ") && (" + condition + ") && "
+            "${{ ((" + condition + ") && "
             + _runner_payload("gha-{0}-image_publish")
-            + " || 'ubuntu-latest' }}"
+            + ") }}"
         )
 
         self.assertTrue(
@@ -447,7 +454,7 @@ class WorkflowRunnerPolicyTests(unittest.TestCase):
             violations = _runner_policy_violations(workflow_dir)
 
         self.assertEqual(len(violations), 1)
-        self.assertIn("matrix.os must contain only hosted runner labels", violations[0])
+        self.assertIn("unsupported runner assignment '${{ matrix.os }}'", violations[0])
 
 
 if __name__ == "__main__":

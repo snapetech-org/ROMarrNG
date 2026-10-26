@@ -6,12 +6,12 @@ Semgrep runs on supported source and security configuration. It defaults to two 
 
 The installed pre-commit hook runs Semgrep on staged source/config files; Trivy runs during full local scans and any configured CI workflow.
 
-A weekly public GitHub Actions job runs the current official Semgrep CE image and refreshes `p/default` rules; scan output is uploaded to GitHub code scanning.
+A private JIT workflow runs the current official Semgrep CE image on version-tag pushes and manual runs from `main`; scan output is uploaded to GitHub code scanning. Trusted same-repository owner pull-request validation also scans the exact PR head with Semgrep and Trivy and reviews dependency changes against the exact base and head SHAs. Public fork code does not use the trusted runner route.
 
-The weekly Trivy filesystem job uses the current Trivy release and refreshes its vulnerability database.
+The private JIT Trivy filesystem job uses the current Trivy release and refreshes its vulnerability database on version tags and manual runs from `main`.
 
 Scans report findings without failing by default so existing findings can be triaged. Set `SEMGREP_FAIL_ON_FINDINGS=1` or `TRIVY_EXIT_CODE=1` to make a local scan fail on findings. Trivy downloads its vulnerability and check databases automatically; use `TRIVY_OFFLINE=1` only after those databases are cached. The default timeout is 20 minutes for slow first downloads; set `TRIVY_TIMEOUT` to change it.
 
-Run `./scripts/update-security-tools.sh` to refresh the local Semgrep package cache, pull the current Semgrep fallback image, and refresh Trivy's database. Public scan workflows use weekly schedules to exercise current scanner releases and rules. Existing private runner workflows retain their current version and runner policy.
+Run `./scripts/update-security-tools.sh` to refresh the local Semgrep package cache, pull the current Semgrep fallback image, and refresh Trivy's database. CI scans use private JIT runners only; no GitHub-hosted fallback is configured.
 
 Semgrep uses the POSIX I/O backend by default for compatibility with restricted Linux runners. Set `SEMGREP_EIO_BACKEND` only if your runner needs a different backend.
