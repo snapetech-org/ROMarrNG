@@ -14,6 +14,80 @@ TRUSTED_MAIN_WORKFLOWS = {
     "trivy-filesystem.yml",
 }
 GVISOR_SANDBOX_RUNNER = {"group": "gvisor-sandbox", "labels": "gvisor-sandbox"}
+PUBLIC_FORK_RUNNER = {
+    "group": "public-fork-jit",
+    "labels": [
+        "self-hosted",
+        "linux",
+        "x64",
+        "public-pr-romarrng",
+        "ng-public-run-${{ github.run_id }}",
+    ],
+}
+PUBLIC_FORK_CHILD_PREFIX = (
+    "snapetech-org/ROMarrNG/.github/workflows/fork-safe-validation.yml@"
+)
+
+
+def _workflow_events(document: dict) -> object:
+    events = document.get("on")
+    if events is None and True in document:
+        events = document[True]
+    return events
+
+
+def _is_approved_public_fork_wrapper(
+    workflow: Path, job_name: str, job: dict, document: dict
+) -> bool:
+    events = _workflow_events(document)
+    pull_request = events.get("pull_request") if isinstance(events, dict) else None
+    uses = job.get("uses")
+    if not isinstance(uses, str) or not uses.startswith(PUBLIC_FORK_CHILD_PREFIX):
+        return False
+    pin = uses.removeprefix(PUBLIC_FORK_CHILD_PREFIX)
+    return (
+        workflow.name == "public-fork-pr.yml"
+        and job_name == "validate"
+        and document.get("permissions") == {"contents": "read"}
+        and isinstance(pull_request, dict)
+        and pull_request.get("branches") == ["main"]
+        and pull_request.get("types")
+        == ["opened", "synchronize", "reopened", "ready_for_review"]
+        and len(pin) == 40
+        and all(character in "0123456789abcdef" for character in pin)
+        and all(
+            condition in job.get("if", "")
+            for condition in (
+                "github.event.pull_request.head.repo.fork == true",
+                "github.event.pull_request.base.repo.full_name == 'snapetech-org/ROMarrNG'",
+                "github.event.pull_request.base.ref == 'main'",
+            )
+        )
+    )
+
+
+def _is_approved_public_fork_runner(
+    workflow: Path, job_name: str, job: dict, document: dict
+) -> bool:
+    events = _workflow_events(document)
+    return (
+        workflow.name == "fork-safe-validation.yml"
+        and job_name == "validate"
+        and events == {"workflow_call": None}
+        and document.get("permissions") == {"contents": "read"}
+        and job.get("permissions") == {"contents": "read"}
+        and job.get("runs-on") == PUBLIC_FORK_RUNNER
+        and all(
+            condition in job.get("if", "")
+            for condition in (
+                "github.event.pull_request.head.repo.fork == true",
+                "github.event.pull_request.base.repo.full_name == 'snapetech-org/ROMarrNG'",
+                "github.event.pull_request.base.ref == 'main'",
+            )
+        )
+    )
+
+
 def _is_approved_gvisor_sandbox_job(
     workflow: Path, job_name: str, job: dict, document: dict
 ) -> bool:
@@ -220,6 +294,8 @@ def _runner_policy_violations(workflow_dir: Path) -> list[str]:
                 )
                 continue
             if "uses" in job and "runs-on" not in job:
+                if _is_approved_public_fork_wrapper(workflow, job_name, job, document):
+                    continue
                 violations.append(
                     f"{workflow.name}/{job_name}: reusable workflow runner is not "
                     "visible in this file"
@@ -230,6 +306,8 @@ def _runner_policy_violations(workflow_dir: Path) -> list[str]:
             runner_count += 1
             location = f"{workflow.name}/{job_name}"
             if _is_approved_gvisor_sandbox_job(workflow, job_name, job, document):
+                continue
+            if _is_approved_public_fork_runner(workflow, job_name, job, document):
                 continue
             if _is_approved_owner_pr_runner(workflow, job_name, runner):
                 continue
