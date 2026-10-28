@@ -11,6 +11,10 @@ def svc(tmp_path, **env):
 
 def test_the_platform_directory_says_how_each_one_plays(tmp_path):
     directory = svc(tmp_path).platform_directory()
+    assert {row["category"] for row in directory} <= {
+        "Nintendo", "Sony PlayStation", "Sega", "Microsoft Xbox", "Atari",
+        "Arcade", "NEC and Japanese systems", "Computers", "Other systems",
+    }
     by_slug = {row["slug"]: row for row in directory}
 
     assert by_slug["psx"]["media"] == "disc"

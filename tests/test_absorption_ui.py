@@ -54,9 +54,8 @@ def test_the_stats_page_says_updates_are_never_automatic():
 
 
 def test_frontend_rows_survive_pathless_backend_rows(tmp_path):
-    """RomM's cached rows carry no filesystem path. Building the fallback
-    from library_root(None) was a 500 on every export -- caught by the live
-    Playnite proof, of all things."""
+    """A display title is not a launch path. Exports must skip it instead of
+    inventing a plausible-looking path under the default library root."""
     from romarr.app import ROMarr
     from romarr.libraries import Game
     svc = ROMarr(env={"ROMARR_DATA": str(tmp_path / "s.json"),
@@ -64,8 +63,9 @@ def test_frontend_rows_survive_pathless_backend_rows(tmp_path):
     svc._library_cache = ([Game(id="1", name="Super Metroid (USA)",
                                 platform="snes")], 9e18, "")
     rows = svc.frontend_rows()
-    assert "snes" in rows[0]["path"]
-    assert rows[0]["path"].endswith("Super Metroid (USA)")
+    assert rows == []
+    assert svc._frontend_export_stats == {
+        "total": 1, "exported": 0, "unsupported": 1, "complete": True}
 
 
 def test_the_library_serves_organised_pages_not_the_first_100(tmp_path):

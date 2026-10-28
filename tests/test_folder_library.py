@@ -57,7 +57,33 @@ def test_the_platform_is_the_containing_directory(tmp_path):
     lib = library(tmp_path, "snes/Super Metroid.smc", "genesis/Sonic.md")
     by_name = {g.name: g for g in lib.games()}
     assert by_name["Super Metroid"].platform == "snes"
+    assert by_name["Super Metroid"].platform_slug == "snes"
     assert by_name["Sonic"].platform == "genesis"
+    assert by_name["Sonic"].platform_slug == "genesis-slash-megadrive"
+
+
+def test_single_system_root_is_identified_from_its_name(tmp_path):
+    root = tmp_path / "PS1"
+    root.mkdir()
+    (root / "Final Fantasy VII (USA).chd").write_bytes(b"rom")
+    (root / "Vagrant Story (USA).bin").write_bytes(b"rom")
+
+    rows = FolderLibrary(FolderConfig(root=str(root))).games()
+
+    assert {row.platform_slug for row in rows} == {"psx"}
+    assert {row.platform for row in rows} == {"Sony PlayStation"}
+
+
+def test_single_system_root_can_be_mapped_when_its_folder_name_is_generic(tmp_path):
+    root = tmp_path / "games"
+    root.mkdir()
+    (root / "Dark Cloud.iso").write_bytes(b"rom")
+
+    row = FolderLibrary(FolderConfig(root=str(root),
+                                     scan_platform="PlayStation 2")).games()[0]
+
+    assert row.platform_slug == "ps2"
+    assert row.platform == "Sony PlayStation 2"
 
 
 def test_games_paginate(tmp_path):
@@ -87,6 +113,7 @@ def test_it_is_a_registered_kind_with_no_url_field():
     fields = {f["name"] for f in LIBRARY_TYPES["folder"]["fields"]}
     assert "url" not in fields
     assert {"path", "name", "enable", "is_default", "platforms"} <= fields
+    assert "scan_platform" in fields
 
 
 def test_it_builds_from_the_environment_and_from_stored_config(tmp_path):

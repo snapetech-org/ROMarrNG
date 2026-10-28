@@ -14,8 +14,8 @@ import xml.etree.ElementTree as ET
 import pytest
 
 from romarr.frontends import (
-    FORMATS, esde_folder, launchbox_platform, to_gamelist, to_launchbox,
-    to_playnite)
+    FORMATS, esde_folder, launchbox_platform, parse_frontend_import,
+    to_gamelist, to_launchbox, to_playnite, to_romarr_json)
 from romarr.platforms import PLATFORMS
 
 ROWS = [
@@ -161,3 +161,77 @@ def test_every_format_survives_an_empty_library(name):
         ET.fromstring(out)
     else:
         json.loads(out)
+
+
+def test_romarr_json_exchange_round_trips_metadata_and_source_fields():
+    rows = [{"id": "old-source-id", "platform": "psx",
+             "relative_path": "psx/Final Fantasy VII.chd",
+             "title": "Final Fantasy VII", "desc": "A long RPG.",
+             "released": "1997-01-31", "rating": 9.1,
+             "genres": ["RPG"], "cover": "https://example.test/cover.jpg",
+             "notes": "Keep this note.",
+             "source_fields": {"launchbox_custom": {"favorite": True}}}]
+    imported = parse_frontend_import("romarr-json", to_romarr_json(rows))
+    assert imported[0]["locator"] == "psx/Final Fantasy VII.chd"
+    assert imported[0]["metadata"] == {
+        "summary": "A long RPG.", "released": "1997-01-31", "rating": 9.1,
+        "genres": ["RPG"], "region": "", "cover_url": "https://example.test/cover.jpg",
+        "notes": "Keep this note.",
+    }
+    assert imported[0]["source_fields"]["launchbox_custom"] == {"favorite": True}
+    assert imported[0]["source_fields"]["romarr_external_id"] == "old-source-id"
+
+
+def test_playnite_romarr_export_can_be_imported_with_a_root_mapping():
+    payload = to_playnite([{"id": "42", "title": "Silent Hill", "platform": "psx",
+                            "path": "/old/roms/psx/Silent Hill.chd"}])
+    imported = parse_frontend_import(
+        "playnite", payload, source_prefix="/old/roms")
+    assert imported[0]["locator"] == "psx/Silent Hill.chd"
+    assert imported[0]["source_fields"]["romarr_external_id"] == "42"
+
+
+@pytest.mark.parametrize("locator", ["../escape.iso", "psx/../../escape.iso", "C:\\escape.iso"])
+def test_frontend_import_rejects_paths_that_escape_the_selected_root(locator):
+    payload = json.dumps({"source": "ROMarr", "version": 1,
+                          "games": [{"name": "Bad path", "romPath": locator}]})
+    with pytest.raises(ValueError):
+        parse_frontend_import("playnite", payload)
+
+
+def test_frontend_import_requires_explicit_prefix_for_absolute_paths():
+    payload = json.dumps({"source": "ROMarr", "version": 1,
+                          "games": [{"name": "Game", "romPath": "/roms/psx/Game.chd"}]})
+    with pytest.raises(ValueError, match="Absolute frontend paths"):
+        parse_frontend_import("playnite", payload)
+    imported = parse_frontend_import(
+        "playnite", payload, source_prefix="/roms",)
+    assert imported[0]["locator"] == "psx/Game.chd"
+
+
+def test_frontend_import_rejects_xml_entities_and_unknown_versions():
+    with pytest.raises(ValueError, match="document types or entities"):
+        parse_frontend_import("gamelist", '<!DOCTYPE gameList [<!ENTITY x "boom">]><gameList/>')
+    payload = json.dumps({"format": "romarr.frontend-exchange", "version": 88,
+                          "games": []})
+    with pytest.raises(ValueError, match="version is unsupported"):
+        parse_frontend_import("romarr-json", payload)
+
+
+def test_frontend_import_rejects_ambiguous_duplicate_locators():
+    payload = json.dumps({"source": "ROMarr", "version": 1, "games": [
+        {"name": "First", "romPath": "psx/Game.chd"},
+        {"name": "Second", "romPath": "psx/Game.chd"},
+    ]})
+    with pytest.raises(ValueError, match="duplicate paths"):
+        parse_frontend_import("playnite", payload)
+
+
+def test_xml_import_preserves_unknown_frontend_fields_as_bounded_data():
+    payload = ("<LaunchBox><Game><Title>Game</Title>"
+               "<ApplicationPath>psx/Game.chd</ApplicationPath>"
+               "<Platform>Sony Playstation</Platform>"
+               "<CustomField><Favorite>true</Favorite></CustomField>"
+               "</Game></LaunchBox>")
+    imported = parse_frontend_import("launchbox", payload)
+    assert imported[0]["source_fields"]["CustomField"] == {"Favorite": "true"}

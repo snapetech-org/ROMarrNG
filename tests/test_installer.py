@@ -110,6 +110,14 @@ def test_the_update_path_preserves_state():
         assert keep in body, f"update.sh does not preserve {keep}"
 
 
+def test_the_update_path_snapshots_and_restores_the_catalog_sidecar():
+    body = UPDATE.read_text(encoding="utf-8")
+    for marker in ("ROMARR_CATALOG_DATA", "romarr-catalog.sqlite3",
+                   "romarr-catalog.path", "source.backup(destination)"):
+        assert marker in body, marker
+    assert body.count('"${BACKUP}/romarr-catalog.sqlite3"') >= 2
+
+
 def test_the_installer_refuses_to_deploy_a_build_without_authentication():
     """The published release can lag main badly.
 

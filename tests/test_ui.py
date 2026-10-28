@@ -87,6 +87,14 @@ def test_the_brand_reads_romarr():
     assert _text(brand.group(1)).strip() == "ROMarr"
 
 
+def test_settings_exposes_catalog_backup_and_reviewed_frontend_import():
+    html = page()
+    for marker in ("/api/v1/backup/catalog", "Download inventory and jobs database",
+                   "fe-import-preview", "fe-import-commit",
+                   "relative path prefix", "Apply preview"):
+        assert marker in html, marker
+
+
 def test_the_old_name_appears_nowhere_a_user_can_read_it():
     assert "Rommarr" not in _text(page())
 
@@ -740,7 +748,8 @@ def test_regional_formatting_is_applied_at_dashboard_count_call_sites():
     assert "<div><b>${fmt(h.dat_games||0)}</b><span>Known dumps</span></div>" in html
     assert "<div><b>${fmt(h.events)}</b><span>History events</span></div>" in html
     assert "+fmt(x.percent)+'% — '+statusMarkup(x.status)" in html
-    assert "+fmt(x.done)+'</td><td>'+fmt(x.failed)+'</td><td>'+fmt(x.remaining)" in html
+    assert "+fmt(x.accepted??x.done)+'</td><td>'+fmt(x.failed)+'</td>'" in html
+    assert "+'<td>'+fmt(x.remaining)+'</td>'" in html
     assert "interfaceTemplateMarkup('Page {page} of {pages}'" in html
     assert "${fmt(r.local||0)}" in html
     assert "${fmt(r.stream||0)}" in html

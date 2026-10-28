@@ -3,6 +3,8 @@ import os
 import threading
 from concurrent.futures import ThreadPoolExecutor
 
+import pytest
+
 from romarr.store import DEFAULT_SETTINGS, Event, SeerrRequest, Store
 
 
@@ -54,6 +56,81 @@ def test_requesting_the_same_game_twice_is_a_retry_not_a_duplicate(tmp_path):
     s.want("contra", "nes")          # different case, same game
     s.want("Contra", "snes")         # different platform, genuinely different
     assert len(s.wanted) == 2
+
+
+def test_wanted_bulk_deduplicates_and_persists_once(tmp_path):
+    s = Store(tmp_path / "r.json")
+    assert s.want_many([("Contra", "nes"), ("Contra", "nes"),
+                        ("Contra", "snes")]) == (2, 1)
+    assert len(Store(tmp_path / "r.json").missing()) == 2
+
+
+def test_library_metadata_is_stored_in_sqlite_and_in_explicit_backups(tmp_path):
+    path = tmp_path / "romarr.json"
+    store = Store(path)
+    store.set_library_metadata("library-one", "/roms/psx/game.chd", {
+        "metadata_title": "Final Fantasy VII", "cover_url": "https://example.test/cover.jpg",
+        "metadata_status": "identified",
+    })
+    store.save()
+
+    persisted = path.read_text(encoding="utf-8")
+    assert "library_metadata" not in persisted
+    assert "/roms/psx/game.chd" not in persisted
+    assert store.metadata_path.exists()
+    reopened = Store(path)
+    assert reopened.library_metadata("library-one", "/roms/psx/game.chd")[
+        "metadata_title"] == "Final Fantasy VII"
+
+    backup = reopened.backup_settings()
+    metadata = backup.pop("library_metadata")
+    assert len(metadata) == 1
+    restored = Store(tmp_path / "restored.json")
+    assert restored.restore_library_metadata(metadata) == 1
+    assert restored.all_library_metadata() == metadata
+
+
+def test_bulk_metadata_import_rolls_back_as_one_transaction(tmp_path):
+    store = Store(tmp_path / "romarr.json")
+    bad_key = Store._library_metadata_key("library-one", "second")
+    store._metadata_db.execute(
+        "CREATE TRIGGER reject_second BEFORE INSERT ON library_metadata "
+        f"WHEN NEW.key='{bad_key}' BEGIN SELECT RAISE(ABORT, 'fixture failure'); END")
+    store._metadata_db.commit()
+
+    with pytest.raises(Exception):
+        store.set_library_metadata_many([
+            ("library-one", "first", {"summary": "Would otherwise be written."}),
+            ("library-one", "second", {"summary": "Rejected."}),
+        ])
+
+    assert store.library_metadata("library-one", "first") == {}
+    assert store.library_metadata("library-one", "second") == {}
+
+
+def test_recurring_metadata_enrichment_is_opt_in_for_existing_settings(tmp_path):
+    path = tmp_path / "legacy-metadata.json"
+    path.write_text(json.dumps({"settings": {
+        "metadata_providers": [{"type": "rawg", "api_key": "configured"}]
+    }}), encoding="utf-8")
+
+    store = Store(path)
+
+    assert store.settings["metadata_auto_identify"] is False
+
+
+def test_legacy_json_library_metadata_migrates_to_sqlite(tmp_path):
+    path = tmp_path / "legacy.json"
+    key = Store._library_metadata_key("lib", "42")
+    path.write_text(json.dumps({"settings": {"library_metadata": {
+        key: {"metadata_title": "Metroid", "metadata_status": "identified"}
+    }}}), encoding="utf-8")
+
+    store = Store(path)
+
+    assert store.library_metadata("lib", "42")["metadata_title"] == "Metroid"
+    assert "library_metadata" not in store.settings
+    assert "library_metadata" not in json.loads(path.read_text(encoding="utf-8"))["settings"]
 
 
 def test_an_arrival_clears_the_wanted_entry(tmp_path):
@@ -501,3 +578,24 @@ def test_upstream_integration_requests_migrate_without_losing_status_or_assets(t
     saved = json.loads(path.read_text(encoding="utf-8"))
     assert saved["seerr_requests"][0]["external_request_id"] == "cartridge-42"
     assert "integration_requests" not in saved["settings"]
+
+
+def test_a_failed_state_write_is_reported_to_the_caller(tmp_path, monkeypatch):
+    from romarr.store import StateWriteError
+
+    path = tmp_path / "romarr.json"
+    store = Store(path)
+    store.save()
+    original = path.read_bytes()
+    store.settings["min_seeders"] = 99
+
+    def fail_replace(*_args, **_kwargs):
+        raise OSError("disk full")
+
+    monkeypatch.setattr("romarr.store.os.replace", fail_replace)
+    with pytest.raises(StateWriteError, match="durably write"):
+        store.save()
+    assert path.read_bytes() == original
+    with pytest.raises(StateWriteError):
+        store.put_item("batches", {"id": "not-accepted"})
+    assert store.list_items("batches") == []

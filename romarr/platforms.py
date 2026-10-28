@@ -621,6 +621,55 @@ def resolve(text: str) -> Platform | None:
     return _BY_LABEL.get(_normalise(needle))
 
 
+# Broad maker and format groups keep the platform directory navigable without
+# changing the canonical platform IDs used by libraries, DATs and requests.
+# A group is a browsing hint only: it never changes routing or support.
+PLATFORM_CATEGORIES: tuple[str, ...] = (
+    "Nintendo", "Sony PlayStation", "Sega", "Microsoft Xbox", "Atari",
+    "Arcade", "NEC and Japanese systems", "Computers", "Other systems",
+)
+
+_PLATFORM_CATEGORY_SLUGS = {
+    "Nintendo": {
+        "nes", "snes", "gb", "gbc", "gba", "n64", "nds", "3ds",
+        "famicom", "fds", "sfam", "ngc", "wii", "wiiu", "switch",
+        "virtualboy",
+    },
+    "Sony PlayStation": {
+        "psx", "ps2", "ps3", "ps4", "ps5", "psvita", "psp",
+    },
+    "Sega": {
+        "genesis-slash-megadrive", "sms", "gamegear", "saturn", "segacd",
+        "dc", "sega32", "sg1000",
+    },
+    "Microsoft Xbox": {"xbox", "xbox360", "xboxone", "series-x-s"},
+    "Atari": {
+        "atari2600", "atari5200", "atari7800", "lynx", "jaguar",
+        "atari-jaguar-cd", "atari8bit", "atari-st",
+    },
+    "Arcade": {"arcade", "neogeoaes", "neogeomvs", "neo-geo-cd"},
+    "NEC and Japanese systems": {
+        "turbografx16--1", "turbografx-16-slash-pc-engine-cd", "pc-fx",
+        "supergrafx", "wonderswan", "wonderswan-color", "neo-geo-pocket",
+        "neo-geo-pocket-color", "3do", "philips-cd-i", "amiga-cd32",
+        "vectrex", "intellivision", "colecovision", "odyssey-2-slash-videopac-g7000",
+    },
+    "Computers": {
+        "c64", "c128", "vic-20", "cpet", "amiga", "acpc", "zxs",
+        "sinclair-zx81", "msx", "msx2", "sharp-x68000", "apple2",
+        "mac", "trs-80-mc-10", "palm-os", "dos", "win",
+    },
+}
+
+
+def platform_category(slug: str) -> str:
+    """A stable display group for the browse/setup surfaces."""
+    for category, slugs in _PLATFORM_CATEGORY_SLUGS.items():
+        if slug in slugs:
+            return category
+    return "Other systems"
+
+
 def platform_for_file(filename: str) -> Platform | None:
     """Which platform a ROM file belongs to, judged by its extension.
 

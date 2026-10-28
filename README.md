@@ -14,6 +14,11 @@ Move Weight
 
 ROMarr runs perfectly well on its own — nothing above it is required.
 
+ROMarr can also organize games you already own. Add a local folder, choose its
+system, browse the collection, and enrich titles with covers when a metadata
+provider is configured. Indexers and download clients are only needed when you
+want ROMarr to find and fetch releases.
+
 ROMarrNG is the Snapetech-maintained fork of
 [BlizzHacker/romarr](https://github.com/BlizzHacker/romarr). We keep it because
 SeerrNG needs a versioned game catalog and request lifecycle with scoped file
@@ -496,7 +501,7 @@ python -m romarr
 
 | Volume | Notes |
 |---|---|
-| `/config` | Settings, history, the API key and the password hash — `romarr.json` here **is** the install. Back it up. |
+| `/config` | Settings, history, the API key and password hash in `romarr.json`, plus saved per-game metadata in the sibling `romarr.library-metadata.sqlite3`. Back up both files for a file-level restore. |
 | `/roms` | Your library root. Must be the same tree your library server scans. |
 | `/downloads` | **The container-side path must match what your download client reports.** qBittorrent: Options → Downloads → "Save path". SABnzbd: Config → Folders → "Completed Download Folder". If they cannot match, set a mapping under Settings → Media Management. |
 
@@ -585,6 +590,7 @@ request actually came through it.
 | `LIBRARY_API_KEY` | — | Alternative to username/password |
 | `LIBRARY_PATH` | yes | Library root **as ROMarr sees it** (`/roms` in Docker) |
 | `QBITTORRENT_URL` / `_USER` / `_PASS` | — | Torrent client |
+| `QBITTORRENT_API_KEY` / `QBITTORRENT_AUTH_MODE` | — | Optional qBittorrent Bearer API key and auth mode; API-key auth requires qBittorrent 5.2.0 or WebAPI 2.14.1+ |
 | `SABNZBD_URL` / `SABNZBD_API_KEY` | — | Usenet client |
 | `NZBGET_URL` / `NZBGET_USER` / `NZBGET_PASS` | — | Usenet client |
 | `QBITTORRENT_CATEGORY` etc. | no | Download category per client (default `romarr`) |
@@ -600,6 +606,7 @@ request actually came through it.
 | `ROMARR_PLAYERS` | no | Which browser players to offer, best first: `emulatorjs,ruffle,jsdos,emularity`. All four when unset; `none` turns every browser route off |
 | `ROMARR_JSDOS_URL` / `ROMARR_EMULARITY_URL` | no | Where your own js-dos and Emularity live. Without one, ROMarr reports that the player *would* run a file and names the setting that would let it link there |
 | `ROMARR_DATA` | no | Path to the state file |
+| `ROMARR_CATALOG_DATA` | no | SQLite path for durable folder scans, jobs, previews and acquisition outbox; defaults beside `ROMARR_DATA` |
 | `ROMARR_HOST` | no | Address to listen on (default `0.0.0.0`); use `127.0.0.1` only when the proxy shares the host network namespace |
 | `ROMARR_ALLOW_UNSANDBOXED_PLUGINS` | no | Explicitly allow ROM Hub plugins when Landlock or seccomp is unavailable; keep unset to require both boundaries |
 | `DAT_PATH` | no | Directory of No-Intro / Redump DATs. Loose `.dat`/`.xml` files **and** the ZIP archives No-Intro distributes are read, including one level down beside the platform they describe. Point it at a DAT directory, not at your ROM library |
@@ -1187,12 +1194,12 @@ release profiles, remote path mappings, and Manual Import.
 
 ### The ecosystem ROMarr stands on
 
-ROMarr acquires ROMs and files them — nothing more. It stores no library,
-serves no player, publishes no DAT, indexes no tracker, runs no download.
-**Every one of those is somebody else's work, and without them there is
-nothing here to automate.** The same list, with an install command for each
-where one exists, is on the app's **System → Ecosystem** page — because
-respect that is also a convenience is worth more than a paragraph.
+ROMarr organizes and enriches your collection, helps you discover catalogued
+games, and can acquire releases when you choose to connect those sources. It
+does not emulate games or replace your frontend. **The library server, emulator,
+DAT publishers, indexers and download clients remain separate tools.** The
+app's **System → Ecosystem** page groups them around the task you selected and
+links to their project pages and install guidance.
 
 **Library servers** — where your games actually live:
 [RomM](https://github.com/rommapp/romm) ([romm.app](https://romm.app)),
