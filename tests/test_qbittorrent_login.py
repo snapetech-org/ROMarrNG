@@ -164,3 +164,53 @@ def test_an_add_is_retried_after_refreshing_an_expired_session():
     assert [path.rsplit('/api/v2/', 1)[-1] for path in session.paths] == [
         "torrents/add", "auth/login", "torrents/add"
     ]
+
+
+class _ApiKeySession:
+    def __init__(self, status=200):
+        self.status = status
+        self.calls = []
+
+    def get(self, url, **kwargs):
+        self.calls.append(("GET", url, kwargs))
+        return _Response(self.status, "v5.2.0")
+
+    def post(self, url, **kwargs):
+        self.calls.append(("POST", url, kwargs))
+        return _Response(self.status, "Ok.")
+
+
+def test_api_key_auth_uses_bearer_header_without_cookie_login():
+    session = _ApiKeySession()
+    qbit = QBittorrent(QbitConfig(
+        base_url="http://qbit:8090", api_key="qbt_" + "a" * 28,
+        username="legacy-user", password="legacy-pass", auth_mode="api_key"),
+        session=session)
+
+    assert qbit.reachable() is True
+    assert qbit.add("magnet:?xt=urn:btih:example") is True
+    assert [method for method, *_ in session.calls] == ["GET", "POST"]
+    assert all(call[2]["headers"]["Authorization"] ==
+               "Bearer qbt_" + "a" * 28 for call in session.calls)
+
+
+def test_api_key_rejection_never_falls_back_to_saved_password():
+    session = _ApiKeySession(status=401)
+    qbit = QBittorrent(QbitConfig(
+        base_url="http://qbit:8090", api_key="qbt_" + "b" * 28,
+        username="legacy-user", password="legacy-pass", auth_mode="api_key"),
+        session=session)
+
+    assert qbit.reachable() is False
+    assert len(session.calls) == 1
+    assert session.calls[0][0] == "GET"
+    assert "/auth/login" not in session.calls[0][1]
+
+
+def test_api_key_is_inferred_for_older_config_without_auth_mode():
+    session = _ApiKeySession()
+    qbit = QBittorrent(QbitConfig(
+        base_url="http://qbit:8090", api_key="qbt_" + "c" * 28), session=session)
+
+    assert qbit.reachable() is True
+    assert session.calls[0][2]["headers"]["Authorization"].startswith("Bearer qbt_")

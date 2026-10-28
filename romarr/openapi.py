@@ -49,6 +49,12 @@ DESCRIPTIONS: dict[str, tuple[str, str]] = {
                             "many rows are cached and browsable right now. "
                             "Filterable by platform, genre, region, decade, "
                             "origin and source."),
+    "/api/v1/catalog/options": ("GET", "Available DAT and genre-tagged catalogs for the guided platform browser."),
+    "/api/v1/catalog/page": ("GET", "Browse one platform catalog with library and Wanted status."),
+    "/api/v1/wanted/bulk": ("POST", "Add a reviewed selection of up to 100 titles to Wanted without starting downloads."),
+    "/api/v1/library/metadata/enrich": ("POST", "Start a bounded metadata identification pass for games missing saved artwork or details."),
+    "/api/v1/library/metadata/refresh": ("POST", "Identify one library item, persist its metadata and artwork, and report the match provenance."),
+    "/api/v1/library/metadata/correct": ("POST", "Save a manual system correction for one library item without moving its file."),
     "/api/v1/integration/ping": ("GET", "Authenticated version handshake for "
                                          "SeerrNG software requests."),
     "/api/v1/patches/search": ("GET", "Search patch projects for the Patches page."),

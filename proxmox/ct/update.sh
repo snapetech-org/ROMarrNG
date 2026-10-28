@@ -33,9 +33,9 @@ BEFORE=$(version_at "$ROOT")
 info "Currently installed: ${BEFORE:-unknown}"
 
 # romarr.json holds the request history, the release profile, the API key and
-# the password hash. .env holds every credential. Losing either turns an update
-# into a reinstall, so they are copied out before anything is unpacked over the
-# top and put back afterwards.
+# the password hash. The SQLite sibling holds per-game metadata overrides.
+# .env holds service credentials. These are copied to an operator-local backup
+# before the install is replaced.
 #
 # The romarr/ package is copied too, and that copy is not redundant with the
 # archive: it is what gets put back when the new build does not come up. An
@@ -49,7 +49,7 @@ done
 # The drop-in backends directory is operator-owned; it is not ours to replace.
 [[ -d "${ROOT}/backends" ]] && cp -a "${ROOT}/backends" "${BACKUP}/"
 [[ -d "${ROOT}/romarr" ]] && cp -a "${ROOT}/romarr" "${BACKUP}/"
-msg "Backed up state and the running build to ${BACKUP}"
+msg "Backed up configuration and the running build to ${BACKUP}"
 
 info "Fetching latest"
 answer=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" 2>/dev/null || true)
@@ -105,6 +105,42 @@ fi
 # with ROMarrNG.
 systemctl stop romarr 2>/dev/null || true
 
+# SQLite's online backup API gives a consistent snapshot even when ROMarr was
+# writing metadata while the release was downloaded and staged. Make this
+# snapshot only after stopping the service, immediately before replacement.
+STATE_PATH="${ROMARR_DATA:-}"
+if [[ -z "$STATE_PATH" && -f "${ROOT}/.env" ]]; then
+  STATE_PATH=$(sed -n 's/^[[:space:]]*ROMARR_DATA[[:space:]]*=[[:space:]]*//p' \
+    "${ROOT}/.env" | tail -1)
+  STATE_PATH=${STATE_PATH#\"}; STATE_PATH=${STATE_PATH%\"}
+  STATE_PATH=${STATE_PATH#\'}; STATE_PATH=${STATE_PATH%\'}
+fi
+STATE_PATH="${STATE_PATH:-${ROOT}/romarr.json}"
+[[ "$STATE_PATH" = /* ]] || STATE_PATH="${ROOT}/${STATE_PATH}"
+METADATA_DB_PATH=$(python3 - "$STATE_PATH" <<'PY'
+from pathlib import Path
+import sys
+state = Path(sys.argv[1])
+print(state.with_name(state.stem + ".library-metadata.sqlite3"))
+PY
+)
+if [[ -f "$METADATA_DB_PATH" ]]; then
+  if ! python3 - "$METADATA_DB_PATH" "${BACKUP}/library-metadata.sqlite3" <<'PY'
+import sqlite3
+import sys
+
+with sqlite3.connect(sys.argv[1], timeout=10) as source:
+    with sqlite3.connect(sys.argv[2]) as destination:
+        source.backup(destination)
+PY
+  then
+    systemctl start romarr
+    die "Could not safely back up ${METADATA_DB_PATH}; the service was restarted and the install is unchanged."
+  fi
+  printf '%s\n' "$METADATA_DB_PATH" > "${BACKUP}/library-metadata.path"
+fi
+msg "Backed up state and the running build to ${BACKUP}"
+
 # The package directory is replaced, not merged. `cp -a` over the top leaves
 # any module that upstream deleted sitting in an importable package forever,
 # which is how a version reports itself as new while still running old code.
@@ -144,6 +180,12 @@ systemctl stop romarr 2>/dev/null || true
 if [[ -d "${BACKUP}/romarr" ]]; then
   rm -rf "${ROOT}/romarr"
   cp -a "${BACKUP}/romarr" "${ROOT}/"
+  if [[ -f "${BACKUP}/library-metadata.sqlite3" \
+        && -f "${BACKUP}/library-metadata.path" ]]; then
+    metadata_path=$(cat "${BACKUP}/library-metadata.path")
+    mkdir -p "$(dirname "$metadata_path")"
+    cp -a "${BACKUP}/library-metadata.sqlite3" "$metadata_path"
+  fi
   systemctl start romarr
   for _ in $(seq 1 20); do
     if curl -fsS -o /dev/null "http://127.0.0.1:${PORT}/api/health" 2>/dev/null; then
@@ -157,5 +199,5 @@ if [[ -d "${BACKUP}/romarr" ]]; then
 fi
 
 die "ROMarrNG did not come back up, and the rollback did not either. State is
-   in ${BACKUP} -- romarr.json and .env there are intact.
+   in ${BACKUP} -- romarr.json, .env and any saved metadata snapshot are there.
    Look at:  journalctl -u romarr -n 50 --no-pager"

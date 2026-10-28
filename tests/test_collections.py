@@ -195,3 +195,22 @@ def test_failures_can_be_retried_without_redoing_the_successes():
 
 def test_an_empty_batch_does_not_divide_by_zero():
     assert Batch(id="b1").progress()["percent"] == 0.0
+
+
+def test_collection_step_counts_a_refused_request_as_failed(tmp_path, monkeypatch):
+    from romarr.app import ROMarr
+
+    service = ROMarr({"ROMARR_DATA": str(tmp_path / "state.json")})
+    batch = Batch(id="batch-1", platform="psx", dat="Redump PS1",
+                  queue=["Final Fantasy VII (USA)"])
+    service.store.put_item("batches", batch.to_dict())
+    monkeypatch.setattr(service, "request", lambda *_args, **_kwargs: {
+        "ok": False, "error": "no usable release was found"})
+
+    progress = service.collection_step("batch-1")
+
+    assert progress["done"] == 0
+    assert progress["failed"] == 1
+    assert progress["remaining"] == 0
+    assert service._batches()["batch-1"].failed == {
+        "Final Fantasy VII (USA)": "no usable release was found"}

@@ -132,6 +132,63 @@ def test_a_failing_search_is_reported_not_raised(tmp_path):
     assert out["items"] == []
 
 
+def test_any_platform_search_uses_direct_indexers_in_both_entry_points(tmp_path):
+    s = svc(tmp_path)
+    release = rel("Super Metroid (USA) [!].smc", size=3_000_000,
+                  url="magnet:?xt=urn:btih:DIRECT", indexer="Direct tracker")
+    s.prowlarr = FakeProwlarr([])
+    direct = FakeProwlarr([release])
+    direct.name = "Direct tracker"
+    s.indexers = [direct]
+
+    automatic = s.search("Super Metroid")
+    interactive = s.candidates("Super Metroid")
+
+    assert automatic["found"] == interactive["found"] == 1
+    assert automatic["best"]["title"] == interactive["items"][0]["title"]
+    assert interactive["items"][0]["accepted"] is True
+
+
+def test_add_new_and_interactive_search_use_same_direct_indexer_candidates(tmp_path):
+    s = svc(tmp_path)
+    release = rel("Super Metroid (USA) [!].smc", size=3_000_000,
+                  url="magnet:?xt=urn:btih:DIRECT", indexer="Direct tracker")
+    s.prowlarr = FakeProwlarr([])
+    direct = FakeProwlarr([release])
+    direct.name = "Direct tracker"
+    s.indexers = [direct]
+    client = FakeClient()
+    s.clients = [client]
+
+    interactive = s.candidates("Super Metroid", "snes")
+    requested = s.request("Super Metroid", "snes")
+
+    assert interactive["items"][0]["title"] == release.title
+    assert interactive["items"][0]["accepted"] is True
+    assert requested["ok"] is True
+    assert client.added == [release.download_url]
+
+
+def test_request_reports_partial_and_total_search_source_failures(tmp_path):
+    class Broken:
+        _config = type("C", (), {"base_url": "http://p", "api_key": "k"})()
+
+        def search(self, *a, **kw):
+            raise TimeoutError("private source details must not escape")
+
+    s = svc(tmp_path)
+    s.prowlarr = Broken()
+    s.indexers = []
+
+    result = s.request("Super Metroid", "snes")
+
+    assert result["ok"] is False
+    assert result["found"] == 0
+    assert result["source_failures"]
+    assert all("TimeoutError" in failure for failure in result["source_failures"])
+    assert "private source details" not in result["error"]
+
+
 # --- grabbing by hand -------------------------------------------------------
 
 class FakeClient:
@@ -201,3 +258,5 @@ def test_the_search_page_is_reachable_in_the_ui():
     assert 'data-page="search"' in html
     assert "RENDER.search" in html
     assert "/api/v1/release" in html
+    assert "SEARCH_PREFILL={game,platform}" in html
+    assert "if(prefill?.game) run();" in html

@@ -255,6 +255,57 @@ def test_seerrng_can_browse_and_request_a_dat_catalog_title(server, monkeypatch)
     )[0] == 409
 
 
+def test_first_party_catalog_marks_presence_and_bulk_adds_reviewed_wanted(server):
+    base, service = server
+    service.dats.add(parse_dat(
+        '''<datafile><header><name>Sony - PlayStation</name><version>2025</version></header>
+        <game name="Final Fantasy VII (USA)"/><game name="Chrono Cross (USA)"/>
+        <game name="Vagrant Story (USA)"/></datafile>'''
+    ))
+    service._publish_library([
+        Game(id="owned", name="Final Fantasy VII (USA)",
+             platform="Sony PlayStation", platform_slug="psx")
+    ], "", partial=False)
+
+    code, body, _ = get(base + "/api/v1/catalog/options", key="testkey")
+    assert code == 200
+    options = json.loads(body)
+    assert options["dat"]["results"][0]["slug"] == "psx"
+
+    code, body, _ = get(
+        base + "/api/v1/catalog/page?source=dat&platform=psx&limit=10",
+        key="testkey")
+    assert code == 200
+    page = json.loads(body)
+    statuses = {row["title"]: row["presence"] for row in page["results"]}
+    assert statuses == {
+        "Chrono Cross": "missing",
+        "Final Fantasy VII": "present",
+        "Vagrant Story": "missing",
+    }
+
+    code, body, _ = get(
+        base + "/api/v1/wanted/bulk", key="testkey", method="POST",
+        body={"items": [{"game": "Chrono Cross", "platform": "psx"},
+                         {"game": "Vagrant Story", "platform": "Sony PlayStation"}]})
+    assert code == 200
+    assert json.loads(body) == {"ok": True, "added": 2, "already_wanted": 0,
+                                "total": 2}
+
+    code, body, _ = get(
+        base + "/api/v1/wanted/bulk", key="testkey", method="POST",
+        body={"items": [{"game": "Chrono Cross", "platform": "psx"}]})
+    assert code == 200
+    assert json.loads(body)["already_wanted"] == 1
+
+    service._publish_library([], "", partial=True)
+    code, body, _ = get(
+        base + "/api/v1/catalog/page?source=dat&platform=psx&limit=10",
+        key="testkey")
+    assert code == 200
+    assert {row["presence"] for row in json.loads(body)["results"]} == {"unknown"}
+
+
 def test_seerrng_scoped_key_cannot_read_the_admin_api(server):
     base, service = server
     key = service.auth.integration_key
@@ -335,7 +386,10 @@ def test_dat_seerr_request_matches_region_alias_without_scoring_dat_suffix(
                 "torrent", "fixture"),
     ]
     monkeypatch.setattr(service, "_search_releases",
-                        lambda game, platform: (queried.append(game) or releases))
+                        lambda game, platform, **kwargs:
+                        ((queried.append(game) or releases), [])
+                        if kwargs.get("with_errors") else
+                        (queried.append(game) or releases))
     selected = []
     monkeypatch.setattr(service, "grab",
                         lambda pick, *args, **kwargs:

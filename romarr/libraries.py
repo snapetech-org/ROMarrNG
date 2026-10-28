@@ -116,6 +116,18 @@ class Game:
     #: The slug is unambiguous, so anything asking "what plays this" uses it
     #: and falls back to the display name only when a backend has no slug.
     platform_slug: str = ""
+    # Stable identity of the configured library that supplied this row. ROMM
+    # IDs are local to an installation, so this is needed when two servers
+    # happen to return the same numeric ID.
+    library_id: str = ""
+    # ROMarr-owned enrichment is kept separate from backend fields: external
+    # libraries remain authoritative for their own metadata, while local
+    # folder libraries can still show a title, description and artwork.
+    summary: str = ""
+    metadata_title: str = ""
+    metadata_source: str = ""
+    matched_by: str = ""
+    metadata_status: str = ""
 
 
 # Budget for the background shelf fetch. Nothing waits on it, so it is
@@ -662,6 +674,10 @@ def build_library(kind: str, env: dict[str, str]):
 @dataclass(frozen=True)
 class FolderConfig:
     root: str
+    # Optional explicit meaning for a single-system root whose directory name
+    # is not a known alias (for example /games/console-a). Empty keeps the
+    # conventional platform/subfolder layout and inference from the root name.
+    scan_platform: str = ""
 
 
 class FolderLibrary:
@@ -715,6 +731,8 @@ class FolderLibrary:
         from .platforms import resolve
         if not self.configured:
             return
+        declared = resolve(self._config.scan_platform)
+        root_platform = declared or resolve(self._root.name)
         exts = self._extensions()
         seen = 0
         visited = 0
@@ -729,7 +747,11 @@ class FolderLibrary:
                              if not (directory / name).is_symlink()
                              and not name.startswith(".romarr-import-"))
             relative = directory.relative_to(self._root)
-            platform = resolve(relative.parts[0]) if relative.parts else None
+            # An explicit choice applies to the whole root. Otherwise a root
+            # named after a platform is a single-system library; only a mixed
+            # root such as /roms infers from the first directory below it.
+            platform = (declared or root_platform
+                        or (resolve(relative.parts[0]) if relative.parts else None))
             if (platform and platform.directory_layout and len(relative.parts) >= 2
                     and all(self._layout_file(directory, name)
                             for name in platform.directory_layout)):
@@ -783,17 +805,28 @@ class FolderLibrary:
         """
         out: list[Game] = []
         try:
+            from .platforms import resolve
+            declared = resolve(self._config.scan_platform)
+            root_platform = declared or resolve(self._root.name)
             for n, path in enumerate(self._walk(offset + limit)):
                 if n < offset:
                     continue
+                relative = path.relative_to(self._root)
+                inferred = (declared or root_platform
+                            or (resolve(relative.parts[0]) if relative.parts else None))
+                fallback = (relative.parts[0] if relative.parts
+                            else self._root.name)
+                display_platform = (inferred.name
+                                   if inferred and (declared or root_platform)
+                                   else fallback)
                 out.append(Game(
                     id=str(path),
                     name=path.name if path.is_dir() else path.stem,
-                    platform=path.relative_to(self._root).parts[0]
-                    if path.parent != self._root else "",
+                    platform=display_platform,
                     # Free here, where every other backend has to be asked
                     # for it: the walk is over real files.
                     extension=path.suffix.lower(),
+                    platform_slug=inferred.slug if inferred else "",
                 ))
         except OSError as err:
             log.warning("folder library read failed: %s", err.__class__.__name__)
@@ -892,7 +925,10 @@ LIBRARY_TYPES = {
         # No URL and no credentials: there is no server. Offering an address
         # field would invite somebody to fill it in and then wonder why nothing
         # connects.
-        "fields": [f for f in _COMMON_LIBRARY_FIELDS if f["name"] != "url"],
+        "fields": [f for f in _COMMON_LIBRARY_FIELDS if f["name"] != "url"] + [
+            _FIELD("scan_platform", "System in this folder",
+                   help="Optional canonical slug or platform name for a single-system root, such as psx or PlayStation. Leave empty to infer a system root from its folder name or a mixed root from its platform subfolders. This affects scanning only; import routing stays in Platforms."),
+        ],
     },
     "gameyfin": {
         "label": "Gameyfin",
@@ -903,7 +939,10 @@ LIBRARY_TYPES = {
         "fields": [f if f["name"] != "path" else
                    {**f, "help": "A directory Gameyfin watches as a library; "
                                  "its own watcher picks up what ROMarr files"}
-                   for f in _COMMON_LIBRARY_FIELDS if f["name"] != "url"],
+                   for f in _COMMON_LIBRARY_FIELDS if f["name"] != "url"] + [
+            _FIELD("scan_platform", "System in this folder",
+                   help="Optional canonical slug or platform name for a single-system root, such as psx or PlayStation. Leave empty to infer a system root from its folder name or a mixed root from its platform subfolders."),
+        ],
     },
 }
 
@@ -1056,9 +1095,11 @@ def build_library_from_config(cfg: dict):
     if kind == "retrom":
         return RetromLibrary(RetromConfig(base_url=url, api_key=key))
     if kind == "folder":
-        return FolderLibrary(FolderConfig(root=cfg.get("path", "")))
+        return FolderLibrary(FolderConfig(root=cfg.get("path", ""),
+                                          scan_platform=cfg.get("scan_platform", "")))
     if kind == "gameyfin":
-        return GameyfinLibrary(FolderConfig(root=cfg.get("path", "")))
+        return GameyfinLibrary(FolderConfig(root=cfg.get("path", ""),
+                                            scan_platform=cfg.get("scan_platform", "")))
     if kind == "romm":
         return Romm(RommConfig(base_url=url, username=user, password=pw,
                                api_token=key))

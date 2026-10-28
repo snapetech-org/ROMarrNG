@@ -3395,8 +3395,15 @@ CLIENT_TYPES = {
         "protocol": "torrent",
         "default_port": 8080,
         "fields": _COMMON + [
+            FIELD("auth_mode", "Authentication", "select", "",
+                  options=[["", "Automatic — API key when set"],
+                           ["api_key", "API key"],
+                           ["username_password", "Username and password"],
+                           ["none", "No authentication"]],
+                  help="qBittorrent API-key auth requires qBittorrent 5.2.0 or WebAPI 2.14.1+. API key takes precedence only in automatic mode when one is configured."),
             FIELD("username", "Username"),
             FIELD("password", "Password", "secret"),
+            FIELD("api_key", "API Key", "secret"),
             FIELD("category", "Category", default="romarr"),
         ],
     },
@@ -3815,7 +3822,10 @@ def build_client(cfg: dict):
         from .clients import QBittorrent, QbitConfig
         client = QBittorrent(QbitConfig(
             base_url=url, username=cfg.get("username", ""),
-            password=cfg.get("password", ""), category=category))
+            password=cfg.get("password", ""),
+            api_key=cfg.get("api_key", ""),
+            auth_mode=cfg.get("auth_mode", ""),
+            category=category))
     elif kind == "transmission":
         client = Transmission(TransmissionConfig(
             base_url=url, username=cfg.get("username", ""),

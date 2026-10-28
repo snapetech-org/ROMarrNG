@@ -56,6 +56,63 @@ def test_requesting_the_same_game_twice_is_a_retry_not_a_duplicate(tmp_path):
     assert len(s.wanted) == 2
 
 
+def test_wanted_bulk_deduplicates_and_persists_once(tmp_path):
+    s = Store(tmp_path / "r.json")
+    assert s.want_many([("Contra", "nes"), ("Contra", "nes"),
+                        ("Contra", "snes")]) == (2, 1)
+    assert len(Store(tmp_path / "r.json").missing()) == 2
+
+
+def test_library_metadata_is_stored_in_sqlite_and_in_explicit_backups(tmp_path):
+    path = tmp_path / "romarr.json"
+    store = Store(path)
+    store.set_library_metadata("library-one", "/roms/psx/game.chd", {
+        "metadata_title": "Final Fantasy VII", "cover_url": "https://example.test/cover.jpg",
+        "metadata_status": "identified",
+    })
+    store.save()
+
+    persisted = path.read_text(encoding="utf-8")
+    assert "library_metadata" not in persisted
+    assert "/roms/psx/game.chd" not in persisted
+    assert store.metadata_path.exists()
+    reopened = Store(path)
+    assert reopened.library_metadata("library-one", "/roms/psx/game.chd")[
+        "metadata_title"] == "Final Fantasy VII"
+
+    backup = reopened.backup_settings()
+    metadata = backup.pop("library_metadata")
+    assert len(metadata) == 1
+    restored = Store(tmp_path / "restored.json")
+    assert restored.restore_library_metadata(metadata) == 1
+    assert restored.all_library_metadata() == metadata
+
+
+def test_recurring_metadata_enrichment_is_opt_in_for_existing_settings(tmp_path):
+    path = tmp_path / "legacy-metadata.json"
+    path.write_text(json.dumps({"settings": {
+        "metadata_providers": [{"type": "rawg", "api_key": "configured"}]
+    }}), encoding="utf-8")
+
+    store = Store(path)
+
+    assert store.settings["metadata_auto_identify"] is False
+
+
+def test_legacy_json_library_metadata_migrates_to_sqlite(tmp_path):
+    path = tmp_path / "legacy.json"
+    key = Store._library_metadata_key("lib", "42")
+    path.write_text(json.dumps({"settings": {"library_metadata": {
+        key: {"metadata_title": "Metroid", "metadata_status": "identified"}
+    }}}), encoding="utf-8")
+
+    store = Store(path)
+
+    assert store.library_metadata("lib", "42")["metadata_title"] == "Metroid"
+    assert "library_metadata" not in store.settings
+    assert "library_metadata" not in json.loads(path.read_text(encoding="utf-8"))["settings"]
+
+
 def test_an_arrival_clears_the_wanted_entry(tmp_path):
     s = Store(tmp_path / "r.json")
     s.want("Zelda", "snes")

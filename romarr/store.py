@@ -5,12 +5,10 @@ asked for, what happened to it, and how you configured the thing. ROMarr kept
 all of it in memory, so a restart lost your history and your settings -- which
 is the difference between a tool and a demo.
 
-This is a JSON file with a lock rather than a database, and that is a
-deliberate ceiling rather than an oversight: the entire working set is a few
-thousand events, and an *arr that needs a database daemon to file ROMs is
-harder to install than the thing it automates. If this ever outgrows a file,
-the shape here (load / mutate / save under one lock) is the same shape SQLite
-would want.
+Configuration and the bounded acquisition ledger stay in one JSON file.
+Per-game metadata lives in a sibling SQLite file because it can grow with a
+large ROM library and must not rewrite or return the whole configuration for
+each cover. Both files are local and need no database service.
 
 Writes are atomic -- written to a sibling temp file and renamed -- because the
 alternative is that a crash mid-write leaves a truncated JSON file and the
@@ -20,9 +18,12 @@ service will not start again.
 from __future__ import annotations
 
 import copy
+import hashlib
 import json
 import logging
 import os
+import re
+import sqlite3
 import tempfile
 import threading
 from dataclasses import asdict, dataclass, field, fields as dataclass_fields, is_dataclass
@@ -177,6 +178,16 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     # Read ROM hashes from the library server so netplay can match on bytes.
     # Daily and at startup; off only if you never want the traffic.
     "hash_index": True,
+    # A shortlist for guided discovery and setup. Empty means no system filter;
+    # it never removes owned games, support or existing automation.
+    "system_interests": [],
+    "setup_task": "",
+    # Metadata is part of the collection experience. The background pass stays
+    # idle until a usable provider and a complete library snapshot exist.
+    # A provider connection must not trigger a collection-wide scrape after an
+    # upgrade. Operators can opt into recurring enrichment from Metadata or
+    # run the explicit one-shot "Update missing metadata" action.
+    "metadata_auto_identify": False,
     # Media management
     #
     # Empty means "nobody has chosen one", which is what a fresh install is.
@@ -305,6 +316,16 @@ class Store:
         self.wanted: list[WantedItem] = []
         self.queue: list[QueueItem] = []
         self.seerr_requests: list[SeerrRequest] = []
+        self.metadata_path = self.path.with_name(
+            self.path.stem + ".library-metadata.sqlite3")
+        self.metadata_path.parent.mkdir(parents=True, exist_ok=True)
+        self._metadata_db = sqlite3.connect(
+            str(self.metadata_path), timeout=10, check_same_thread=False)
+        self._metadata_db.execute("PRAGMA synchronous=FULL")
+        self._metadata_db.execute(
+            "CREATE TABLE IF NOT EXISTS library_metadata ("
+            "key TEXT PRIMARY KEY, payload TEXT NOT NULL)")
+        self._metadata_db.commit()
         self.load()
 
     # -- persistence -------------------------------------------------------
@@ -342,10 +363,13 @@ class Store:
             log.warning("could not read %s (%s); starting from defaults", self.path, err)
             return
         migrated_integration_requests = False
+        legacy_library_metadata = {}
         with self._lock:
+            stored_settings = dict(raw.get("settings") or {})
+            legacy_library_metadata = stored_settings.pop("library_metadata", {})
             # Merged rather than replaced, so a setting added in a later
             # version has its default instead of being absent.
-            self.settings = {**copy.deepcopy(DEFAULT_SETTINGS), **(raw.get("settings") or {})}
+            self.settings = {**copy.deepcopy(DEFAULT_SETTINGS), **stored_settings}
             self.events = _rows(raw.get("events"), Event)
             self.wanted = _rows(raw.get("wanted"), WantedItem)
             # Absent in files written before the queue was persisted, which is
@@ -405,7 +429,8 @@ class Store:
                 self.settings.pop("integration_requests", None)
                 migrated_integration_requests = True
             self.seerr_requests = list(requests_by_id.values())
-        if migrated_integration_requests:
+        migrated_metadata = self.restore_library_metadata(legacy_library_metadata)
+        if migrated_integration_requests or migrated_metadata:
             # Persist the converted rows once, atomically, so later starts no
             # longer depend on the legacy settings representation.
             self.save()
@@ -467,6 +492,25 @@ class Store:
             self.wanted.append(item)
         self.save()
         return item
+
+    def want_many(self, items: list[tuple[str, str]]) -> tuple[int, int]:
+        """Add a reviewed set of games to Wanted with one durable write."""
+        added = 0
+        existing = 0
+        with self._lock:
+            known = {(item.game.casefold(), item.platform)
+                     for item in self.wanted}
+            for game, platform in items:
+                key = (game.casefold(), platform)
+                if key in known:
+                    existing += 1
+                    continue
+                self.wanted.append(WantedItem(game=game, platform=platform))
+                known.add(key)
+                added += 1
+        if added:
+            self.save()
+        return added, existing
 
     def fulfil(self, game: str, platform: str) -> bool:
         """Drop something from Wanted once it has actually arrived."""
@@ -806,6 +850,109 @@ class Store:
     def all_game_meta(self) -> list[dict]:
         with self._lock:
             return [dict(v) for v in (self.settings.get("game_meta") or {}).values()]
+
+    @staticmethod
+    def _library_metadata_key(library_id: str, item_id: str) -> str:
+        raw = f"{library_id or 'default'}\0{item_id}".encode("utf-8")
+        return hashlib.sha256(raw).hexdigest()
+
+    def library_metadata(self, library_id: str, item_id: str) -> dict:
+        key = self._library_metadata_key(library_id, item_id)
+        with self._lock:
+            row = self._metadata_db.execute(
+                "SELECT payload FROM library_metadata WHERE key=?", (key,)
+            ).fetchone()
+        if not row:
+            return {}
+        try:
+            value = json.loads(row[0])
+        except (TypeError, json.JSONDecodeError):
+            return {}
+        return value if isinstance(value, dict) else {}
+
+    def all_library_metadata(self) -> dict[str, dict]:
+        with self._lock:
+            rows = self._metadata_db.execute(
+                "SELECT key,payload FROM library_metadata ORDER BY key"
+            ).fetchall()
+        result = {}
+        for key, payload in rows:
+            try:
+                value = json.loads(payload)
+            except (TypeError, json.JSONDecodeError):
+                continue
+            if isinstance(value, dict):
+                result[str(key)] = value
+        return result
+
+    def restore_library_metadata(self, rows) -> int:
+        """Restore hashed metadata records from an API backup or old JSON state."""
+        if not isinstance(rows, dict):
+            return 0
+        payloads = []
+        for key, value in rows.items():
+            if (not isinstance(key, str)
+                    or not re.fullmatch(r"[0-9a-f]{64}", key)
+                    or not isinstance(value, dict)):
+                continue
+            clean = {field: item for field, item in value.items()
+                     if field in {"metadata_title", "summary", "cover_url",
+                                  "released", "rating", "genres",
+                                  "metadata_source", "matched_by",
+                                  "metadata_status", "metadata_attempted_at",
+                                  "platform_slug", "platform_manual", "updated_at"}}
+            payloads.append((key, json.dumps(clean, ensure_ascii=False)))
+        if payloads:
+            with self._lock:
+                self._metadata_db.executemany(
+                    "INSERT INTO library_metadata(key,payload) VALUES (?,?) "
+                    "ON CONFLICT(key) DO UPDATE SET payload=excluded.payload",
+                    payloads)
+                self._metadata_db.commit()
+        return len(payloads)
+
+    def set_library_metadata(self, library_id: str, item_id: str,
+                             patch: dict) -> dict:
+        """Persist allowed metadata fields without exposing filesystem IDs.
+
+        Provider fields and operator overrides share a record so rescans can
+        reapply them, but only a deliberate platform correction can change the
+        identity used by filtering and Collections.
+        """
+        allowed = {"metadata_title", "summary", "cover_url", "released",
+                   "rating", "genres", "metadata_source", "matched_by",
+                   "metadata_status", "metadata_attempted_at",
+                   "platform_slug", "platform_manual"}
+        clean = {key: value for key, value in patch.items() if key in allowed}
+        key = self._library_metadata_key(library_id, item_id)
+        with self._lock:
+            existing = self._metadata_db.execute(
+                "SELECT payload FROM library_metadata WHERE key=?", (key,)
+            ).fetchone()
+            try:
+                row = json.loads(existing[0]) if existing else {}
+            except (TypeError, json.JSONDecodeError):
+                row = {}
+            if not isinstance(row, dict):
+                row = {}
+            row.update(clean)
+            row["updated_at"] = now_iso()
+            self._metadata_db.execute(
+                "INSERT INTO library_metadata(key,payload) VALUES (?,?) "
+                "ON CONFLICT(key) DO UPDATE SET payload=excluded.payload",
+                (key, json.dumps(row, ensure_ascii=False)))
+            self._metadata_db.commit()
+            out = dict(row)
+        return out
+
+    def backup_settings(self) -> dict[str, Any]:
+        """Settings plus metadata, for an explicit portable backup only."""
+        with self._lock:
+            settings = copy.deepcopy(self.settings)
+        metadata = self.all_library_metadata()
+        if metadata:
+            settings["library_metadata"] = metadata
+        return settings
 
     # -- settings ----------------------------------------------------------
 

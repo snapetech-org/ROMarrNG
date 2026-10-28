@@ -148,15 +148,32 @@ def _get_json(url: str, headers: dict | None = None):
     return None
 
 
-def _rawg(cfg: dict, term: str) -> GameInfo:
+def _matches_platform(names, platform_slug: str) -> bool:
+    """Require provider-declared system evidence for an item-level match."""
+    from .platforms import resolve
+    wanted = resolve(platform_slug)
+    if wanted is None:
+        return False
+    for name in names or ():
+        candidate = resolve(str(name or ""))
+        if candidate and candidate.slug == wanted.slug:
+            return True
+    return False
+
+
+def _rawg(cfg: dict, term: str, *, platform_slug: str = "") -> GameInfo:
     key = str(cfg.get("api_key") or "")
     if not key:
         return GameInfo()
     url = ("https://api.rawg.io/api/games?"
            + urllib.parse.urlencode({"key": key, "search": term,
-                                     "page_size": 1, "search_exact": "true"}))
+                                     "page_size": 10, "search_exact": "true"}))
     body = _get_json(url) or {}
     rows = body.get("results") or []
+    if platform_slug:
+        rows = [row for row in rows if _matches_platform(
+            [((p.get("platform") or {}).get("name") or "")
+             for p in (row.get("platforms") or [])], platform_slug)]
     if not rows:
         return GameInfo()
     row = rows[0]
@@ -459,6 +476,15 @@ def igdb_catalog_platforms(cfg: dict) -> list[dict]:
             for row in rows if row.get("id") and row.get("name")]
 
 
+def igdb_catalog_genres(cfg: dict) -> list[str]:
+    """The provider's real genre vocabulary for catalog filters."""
+    rows = igdb_query(cfg, "genres", "fields name; sort name asc; limit 500;",
+                      strict=True)
+    return sorted({str(row.get("name") or "").strip()
+                   for row in rows if str(row.get("name") or "").strip()},
+                  key=str.casefold)
+
+
 def igdb_catalog_search(cfg: dict, query: str, limit: int, offset: int,
                         platform_ids: list[int] | None = None,
                         genre: str = "", release_year: int | None = None
@@ -599,12 +625,15 @@ def igdb_catalog_game(cfg: dict, igdb_id: int,
     return game
 
 
-def _igdb(cfg: dict, term: str) -> GameInfo:
+def _igdb(cfg: dict, term: str, *, platform_slug: str = "") -> GameInfo:
     """Name one game, for `identify`."""
     rows = igdb_query(cfg, "games",
                       f'search "{term}"; fields name,summary,'
-                      f'first_release_date,rating,genres.name,cover.url;'
-                      f' limit 1;')
+                      f'first_release_date,rating,genres.name,cover.url,platforms.name;'
+                      f' limit 10;')
+    if platform_slug:
+        rows = [row for row in rows if _matches_platform(
+            [p.get("name") for p in (row.get("platforms") or [])], platform_slug)]
     if not rows:
         return GameInfo()
     row = rows[0]
@@ -655,7 +684,8 @@ class Metadata:
 
     providers: list[dict] = field(default_factory=list)
 
-    def identify(self, *, verification=None, filename: str = "") -> GameInfo:
+    def identify(self, *, verification=None, filename: str = "",
+                 platform_slug: str = "") -> GameInfo:
         """What this file is, named from the strongest key available.
 
         Never raises and never blocks an import. Metadata is an enhancement;
@@ -673,7 +703,11 @@ class Metadata:
                 log.warning("unknown metadata provider %r", cfg.get("type"))
                 continue
             try:
-                info = spec["lookup"](cfg, term)
+                if platform_slug:
+                    info = spec["lookup"](cfg, term,
+                                           platform_slug=platform_slug)
+                else:
+                    info = spec["lookup"](cfg, term)
             except Exception as exc:
                 log.warning("metadata provider %r raised: %s",
                         cfg.get("type"), type(exc).__name__)
