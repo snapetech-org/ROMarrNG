@@ -1912,7 +1912,7 @@ RENDER.missing=async()=>{
 };
 
 const LIST_CATALOG={source:'dat',platform:'',offset:0,next:null,
-  rows:[],options:null,selected:new Map(),selectionFilter:''};
+  rows:[],options:null,selected:new Map(),selectionFilter:'',savedLists:[]};
 const listCatalogPlatforms=source=>source==='igdb'
   ?((LIST_CATALOG.options||{}).igdb_platforms||[])
   :((((LIST_CATALOG.options||{}).dat||{}).results)||[]);
@@ -1931,7 +1931,7 @@ const listCatalogMarkup=()=>{
   }
   return `<details class="card" style="margin:0 0 16px" open>
     <summary style="cursor:pointer;font-size:16px;font-weight:650">Browse curated game lists by system</summary>
-    <p class="help" style="margin-top:8px">Use No-Intro/Redump for the broadest verified dump set. IGDB adds genre filters and popularity ranking when configured. Catalog membership only adds chosen titles to Wanted; it never downloads automatically.</p>
+    <p class="help" style="margin-top:8px">Use No-Intro/Redump for the broadest verified dump set. IGDB adds genre filters and popularity ranking when configured. Saved lists remember the source and filters; catalog membership can change as the source updates. Adding chosen titles to Wanted never starts a download.</p>
     <div class="row" style="gap:8px;flex-wrap:wrap;align-items:end">
       <div class="field" style="min-width:210px;margin:0"><label for="lc-source">Catalog</label>
         <select id="lc-source"><option value="dat"${LIST_CATALOG.source==='dat'?' selected':''}${hasDat?'':' disabled'}>No-Intro / Redump DAT</option>
@@ -1944,6 +1944,14 @@ const listCatalogMarkup=()=>{
       <div class="field" style="flex:1;min-width:210px;margin:0"><label for="lc-query">Title search (optional)</label>
         <input id="lc-query" placeholder="e.g. Final Fantasy"></div>
       <button class="btn" id="lc-load"${available.length?'':' disabled'}>Load games</button>
+    </div>
+    <div class="row" style="gap:8px;flex-wrap:wrap;align-items:end;margin-top:10px">
+      <div class="field" style="min-width:220px;margin:0"><label for="lc-saved-list">Saved platform lists</label>
+        <select id="lc-saved-list"><option value="">Choose a saved list</option>${(LIST_CATALOG.savedLists||[]).map(list=>`<option value="${esc(list.id)}">${esc(list.name)} — ${esc(String(list.platform||'').toUpperCase())}</option>`).join('')}</select></div>
+      <button class="btn ghost" id="lc-open-list" disabled>Open saved list</button>
+      <div class="field" style="flex:1;min-width:200px;margin:0"><label for="lc-list-name">Save these filters as a curated list</label>
+        <input id="lc-list-name" maxlength="80" placeholder="e.g. PS1 RPGs"></div>
+      <button class="btn ghost" id="lc-save-list">Save list</button>
     </div>
     <div class="help" style="margin-top:8px">${LIST_CATALOG.source==='dat'
       ?'DAT lists are alphabetic and cover the loaded set. DATs do not contain genre tags; use IGDB for genre filtering.'
@@ -2049,10 +2057,12 @@ async function loadListCatalogPage(){
 }
 
 RENDER.lists=async()=>{
-  const [d,options]=await Promise.all([
+  const [d,options,savedLists]=await Promise.all([
     j('/api/v1/importlist').catch(()=>({items:[]})),
-    j('/api/v1/catalog/options').catch(()=>({dat:{results:[],error:'Could not load catalog options.'},igdb_platforms:[],genres:[]}))]);
+    j('/api/v1/catalog/options').catch(()=>({dat:{results:[],error:'Could not load catalog options.'},igdb_platforms:[],genres:[]})),
+    j('/api/v1/catalog/lists').catch(()=>({items:[]}))]);
   LIST_CATALOG.options=options;
+  LIST_CATALOG.savedLists=savedLists.items||[];
   $('#page').innerHTML=`<div class="row" style="margin-bottom:14px">
       <button class="btn" id="l-add" data-i18n="Add List">Add List</button>
       <button class="btn ghost" id="l-sync" data-i18n="Sync Now">Sync Now</button>
@@ -2133,6 +2143,35 @@ RENDER.lists=async()=>{
   $('#lc-genre').onchange=()=>{LIST_CATALOG.offset=0;loadListCatalogPage();};
   $('#lc-load').onclick=()=>{LIST_CATALOG.offset=0;loadListCatalogPage();};
   $('#lc-query').onkeydown=e=>{if(e.key==='Enter'){LIST_CATALOG.offset=0;loadListCatalogPage();}};
+  const savedListControl=$('#lc-saved-list'),openSavedList=$('#lc-open-list');
+  savedListControl.onchange=()=>{openSavedList.disabled=!savedListControl.value;};
+  openSavedList.onclick=()=>{
+    const item=LIST_CATALOG.savedLists.find(row=>row.id===savedListControl.value);
+    if(!item)return;
+    sourceControl.value=item.source;updateCatalogPlatforms();
+    LIST_CATALOG.platform=item.platform;platformControl.value=item.platform;
+    $('#lc-genre').value=item.genre||'';$('#lc-query').value=item.query||'';
+    LIST_CATALOG.offset=0;loadListCatalogPage();
+  };
+  $('#lc-save-list').onclick=async event=>{
+    const button=event.currentTarget,name=$('#lc-list-name').value.trim();
+    if(!name){$('#lc-status').textContent='Enter a name for this curated list.';$('#lc-list-name').focus();return;}
+    button.disabled=true;
+    const saved=await j('/api/v1/catalog/lists',{method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({name,source:LIST_CATALOG.source,platform:LIST_CATALOG.platform,
+        genre:$('#lc-genre').value,query:$('#lc-query').value.trim()})})
+      .catch(()=>({ok:false,error:'Could not save this curated list.'}));
+    button.disabled=false;
+    if(!saved.ok){$('#lc-status').textContent=saved.error||'Could not save this curated list.';return;}
+    LIST_CATALOG.savedLists=[...LIST_CATALOG.savedLists.filter(row=>row.id!==saved.item.id),saved.item]
+      .sort((a,b)=>a.name.localeCompare(b.name));
+    savedListControl.innerHTML='<option value="">Choose a saved list</option>'
+      +LIST_CATALOG.savedLists.map(list=>`<option value="${esc(list.id)}">${esc(list.name)} — ${esc(String(list.platform||'').toUpperCase())}</option>`).join('');
+    savedListControl.value=saved.item.id;openSavedList.disabled=false;
+    $('#lc-list-name').value=saved.item.name;
+    $('#lc-status').textContent='Curated list saved. It stores these filters only; it does not add titles to Wanted.';
+  };
   if(LIST_CATALOG.platform)loadListCatalogPage();
   document.querySelectorAll('[data-paste]').forEach(b=>b.onclick=async()=>{
     const s=await j('/api/v1/connect/sources').catch(()=>({paste_sources:{}}));

@@ -50,6 +50,7 @@ DESCRIPTIONS: dict[str, tuple[str, str]] = {
                             "Filterable by platform, genre, region, decade, "
                             "origin and source."),
     "/api/v1/catalog/options": ("GET", "Available DAT and genre-tagged catalogs for the guided platform browser."),
+    "/api/v1/catalog/lists": ("GET, POST", "Read or save named catalog source/platform/filter definitions. Saving a list does not create Wanted entries."),
     "/api/v1/catalog/page": ("GET", "Browse one platform catalog with library and Wanted status."),
     "/api/v1/wanted/bulk": ("POST", "Add up to 100 reviewed titles to Wanted without starting downloads; requires a complete inventory snapshot and rechecks ownership and existing Wanted entries at commit."),
     "/api/v1/library/metadata/enrich": ("POST", "Start a bounded metadata identification pass for games missing saved artwork or details."),

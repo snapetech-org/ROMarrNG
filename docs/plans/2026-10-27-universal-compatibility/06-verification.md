@@ -53,8 +53,8 @@ was qualified in this PR.
 ## V1.2. Follow-up implementation evidence (2026-10-28)
 
 The Collection scheduler, in-flight recovery, strict state-write reporting,
-catalog selection across pages and server-side Wanted rechecks were exercised
-with focused tests. **101 tests passed** across `test_collections.py`,
+named catalog filter lists, selection across pages and server-side Wanted
+rechecks were exercised with focused tests. **101 tests passed** across `test_collections.py`,
 `test_store.py`, `test_scheduling_integration.py` and `test_ui.py`; the
 catalog/Wanted HTTP regression also passed separately (**1 passed**). One
 initial HTTP assertion expected success for an incomplete inventory; the route

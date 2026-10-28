@@ -3331,6 +3331,39 @@ class ROMarr:
         return {"dat": dat, "igdb_platforms": igdb_platforms,
                 "genres": genres, "igdb_error": igdb_error}
 
+    def catalog_lists(self) -> dict:
+        """Saved catalog filters; definitions do not imply acquisition."""
+        items = self.store.list_items("catalog_lists")
+        return {"items": sorted(items,
+                                key=lambda row: str(row.get("name") or "").casefold())}
+
+    def save_catalog_list(self, raw) -> dict:
+        """Save a named DAT/IGDB source and filter for later browsing."""
+        if not isinstance(raw, dict):
+            return {"ok": False, "error": "A catalog list must be an object."}
+        name = str(raw.get("name") or "").strip()
+        source = str(raw.get("source") or "").strip().lower()
+        platform = resolve(str(raw.get("platform") or ""))
+        genre = str(raw.get("genre") or "").strip()
+        query = str(raw.get("query") or "").strip()
+        if not name or len(name) > 80:
+            return {"ok": False, "error": "Give the saved list a name of 1–80 characters."}
+        if source not in ("dat", "igdb") or platform is None:
+            return {"ok": False, "error": "Choose a catalog source and supported system."}
+        if len(genre) > 64 or len(query) > 200:
+            return {"ok": False, "error": "The saved catalog filters are too long."}
+        if source == "dat" and genre:
+            return {"ok": False, "error": "DAT catalogs do not provide genre filters."}
+        existing = next((row for row in self.store.list_items("catalog_lists")
+                         if str(row.get("name") or "").casefold()
+                         == name.casefold()), None)
+        item = self.store.put_item("catalog_lists", {
+            **({"id": existing["id"]} if existing and existing.get("id") else {}),
+            "name": name, "source": source, "platform": platform.slug,
+            "genre": genre, "query": query,
+        })
+        return {"ok": True, "item": item}
+
     def catalog_page(self, source: str, platform_slug: str, *,
                      query: str = "", genre: str = "", offset: int = 0,
                      limit: int = 24) -> dict:
@@ -6777,6 +6810,8 @@ def make_handler(service: ROMarr):
                     sort=(query.get("sort") or [""])[0]))
             if route.path == "/api/v1/catalog/options":
                 return self._json(200, service.catalog_options())
+            if route.path == "/api/v1/catalog/lists":
+                return self._json(200, service.catalog_lists())
             if route.path == "/api/v1/catalog/page":
                 try:
                     result = service.catalog_page(
@@ -8122,6 +8157,9 @@ def make_handler(service: ROMarr):
                 return self._json(200, service.request(game, platform))
             if route.path == "/api/v1/wanted/bulk":
                 result = service.wanted_bulk(body.get("items"))
+                return self._json(200 if result.get("ok") else 400, result)
+            if route.path == "/api/v1/catalog/lists":
+                result = service.save_catalog_list(body)
                 return self._json(200 if result.get("ok") else 400, result)
             if route.path == "/api/v1/release/grab":
                 release_id = (body.get("id") or "").strip()

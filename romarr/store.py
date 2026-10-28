@@ -253,6 +253,9 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     # entry keeps a ledger of what it already added, so a list re-syncing
     # never resurrects a title that was acquired and fulfilled.
     "import_lists": [],
+    # Saved source/platform/filter definitions for the Lists catalog browser.
+    # These are membership views only; saving one never creates Wanted rows.
+    "catalog_lists": [],
     "list_sync_interval_hours": 6,
     # Download clients and indexers, each a list of stored configurations.
     #

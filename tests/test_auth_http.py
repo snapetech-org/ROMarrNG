@@ -272,6 +272,25 @@ def test_first_party_catalog_marks_presence_and_bulk_adds_reviewed_wanted(server
     options = json.loads(body)
     assert options["dat"]["results"][0]["slug"] == "psx"
 
+    # Curated catalog lists persist their filters and membership intent only;
+    # they do not populate Wanted when saved or refreshed.
+    code, body, _ = get(
+        base + "/api/v1/catalog/lists", key="testkey", method="POST",
+        body={"name": "PS1 RPGs", "source": "igdb", "platform": "psx",
+              "genre": "Role-Playing", "query": ""})
+    assert code == 200
+    saved_list = json.loads(body)["item"]
+    assert saved_list["platform"] == "psx"
+    assert service.store.missing() == []
+    code, body, _ = get(base + "/api/v1/catalog/lists", key="testkey")
+    assert code == 200
+    assert json.loads(body)["items"] == [saved_list]
+    code, body, _ = get(
+        base + "/api/v1/catalog/lists", key="testkey", method="POST",
+        body={"name": "DAT with genre", "source": "dat", "platform": "psx",
+              "genre": "RPG"})
+    assert code == 400
+
     code, body, _ = get(
         base + "/api/v1/catalog/page?source=dat&platform=psx&limit=10",
         key="testkey")
