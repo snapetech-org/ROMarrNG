@@ -453,10 +453,30 @@ def igdb_catalog_row(row: dict) -> dict:
 
 
 def igdb_catalog_platforms(cfg: dict) -> list[dict]:
-    rows = igdb_query(cfg, "platforms",
-                      "fields id,name; sort name asc; limit 500;", strict=True)
-    return [{"id": int(row["id"]), "name": str(row.get("name") or "")}
-            for row in rows if row.get("id") and row.get("name")]
+    rows = igdb_query(
+        cfg, "platforms",
+        "fields id,name,generation,platform_logo.url; sort name asc; limit 500;",
+        strict=True,
+    )
+    out = []
+    for row in rows:
+        if not row.get("id") or not row.get("name"):
+            continue
+        logo = row.get("platform_logo")
+        generation = row.get("generation")
+        try:
+            generation = int(generation) if generation is not None else None
+        except (TypeError, ValueError):
+            generation = None
+        out.append({
+            "id": int(row["id"]),
+            "name": str(row.get("name") or ""),
+            "generation": generation,
+            "logoUrl": igdb_cover(
+                logo.get("url") or "", "t_logo_med"
+            ) if isinstance(logo, dict) else "",
+        })
+    return out
 
 
 def igdb_catalog_search(cfg: dict, query: str, limit: int, offset: int,

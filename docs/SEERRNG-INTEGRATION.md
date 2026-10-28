@@ -45,6 +45,11 @@ media details, supported extensions, size limit, and playability information.
 Use aliases to map catalog platform names to ROMarrNG slugs. SeerrNG decides
 which systems are requestable and whether each belongs to Retro or Modern.
 
+The ROMarrNG browser UI uses the same bounded catalog handlers at
+`/api/v1/catalog/...`. These aliases pass through the normal ROMarrNG session
+or API-key gate; the browser never receives SeerrNG's integration credential.
+Platform rows also include optional IGDB `generation` and `logoUrl` metadata.
+
 `POST /api/v1/integration/library/lookup` accepts between 1 and 100
 `{ "title": "...", "platform": "..." }` entries and returns whether those
 games already exist in the configured library.
@@ -59,7 +64,7 @@ developers, screenshots, and videos.
 
 | Endpoint | Query | Response |
 | --- | --- | --- |
-| `GET /api/v1/integration/catalog/platforms` | — | IGDB platform `{ id, name }` rows |
+| `GET /api/v1/integration/catalog/platforms` | — | IGDB platform `{ id, name, generation, logoUrl }` rows |
 | `GET /api/v1/integration/catalog/search` | `q` required; `limit` 1–50, default 20; optional `platformIds` as comma-separated IDs, `genre`, `releaseYear` | Search result array |
 | `GET /api/v1/integration/catalog/search-page` | Same as search, plus `cursor` (default `0`) | `{ results, nextCursor }`; cursor is the next IGDB offset or `null` |
 | `GET /api/v1/integration/catalog/popular` | `limit` 1–50, default 20; optional `offset` (0–10000), `platformIds`, `genre`, `releaseYear` | Popular result array |

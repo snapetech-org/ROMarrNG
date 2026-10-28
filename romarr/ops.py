@@ -221,7 +221,7 @@ class RateLimiter:
         path = str(path or "")
         if "/login" in path:
             return "login"
-        if "/integration/" in path:
+        if "/integration/" in path or path.startswith("/api/v1/catalog/"):
             return "integration"
         if "/search" in path or "/release" in path or "/candidates" in path:
             return "search"

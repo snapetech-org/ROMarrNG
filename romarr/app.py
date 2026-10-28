@@ -5745,6 +5745,13 @@ def make_handler(service: ROMarr):
             if route.path == seerr_prefix or route.path.startswith(seerr_prefix + "/"):
                 route = route._replace(
                     path="/api/v1/integration" + route.path[len(seerr_prefix):])
+            # The browser UI must not receive SeerrNG's integration credential.
+            # These aliases inherit _gate's normal session/API-key auth, then
+            # reuse the bounded catalog handlers shared with SeerrNG.
+            catalog_prefix = "/api/v1/catalog"
+            if route.path == catalog_prefix or route.path.startswith(catalog_prefix + "/"):
+                route = route._replace(
+                    path="/api/v1/integration/catalog" + route.path[len(catalog_prefix):])
             if route.path == "/link":
                 # Served before the sign-in check on purpose, and without
                 # consulting anything: the visitor is a stranger holding a
@@ -6723,6 +6730,36 @@ def make_handler(service: ROMarr):
             body, body_error = self._read_json_body(route.path)
             if body_error is not None:
                 return body_error
+
+            if route.path == "/api/v1/catalog/ownership":
+                candidates = body.get("games") if isinstance(body, dict) else None
+                if not isinstance(candidates, list) or not 1 <= len(candidates) <= 50:
+                    return self._json(400, {"error": "provide 1 to 50 game/platform pairs"})
+                parsed = []
+                for candidate in candidates:
+                    if not isinstance(candidate, dict):
+                        return self._json(400, {"error": "invalid game/platform pair"})
+                    title = candidate.get("title")
+                    platform_name = candidate.get("platform")
+                    platform = resolve(platform_name) if isinstance(platform_name, str) else None
+                    if (not isinstance(title, str) or not title.strip()
+                            or len(title) > 200 or platform is None):
+                        return self._json(400, {"error": "invalid title or platform"})
+                    parsed.append((title.strip(), platform.slug))
+                library, _, _ = service._library_cache
+                if library is None:
+                    return self._json(503, {"error": "library is still loading"})
+                def ownership_key(value):
+                    plain = unicodedata.normalize("NFKD", str(value or ""))
+                    plain = plain.encode("ascii", "ignore").decode("ascii").casefold()
+                    return re.sub(r"[^a-z0-9]+", "", plain)
+                known = {
+                    (ownership_key(game.name), str(game.platform or "").casefold())
+                    for game in library
+                }
+                owned = [index for index, (title, platform) in enumerate(parsed)
+                         if (ownership_key(title), platform.casefold()) in known]
+                return self._json(200, {"owned": owned})
 
             if route.path == "/api/v1/integration/library/lookup":
                 titles = body.get("titles") if isinstance(body, dict) else None

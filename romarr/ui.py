@@ -1157,6 +1157,10 @@ const regionalYear=value=>{
     useGrouping:false}):String(value??'');
 };
 let PLATFORMS=[], SETTINGS={};
+let CATALOG_VIEW={mode:'catalog',source:'igdb',platform:'',query:'',genre:'',
+  year:'',offset:0,sort:'popular',view:'grid',hideOwned:true,selected:[],
+  igdbPlatforms:[],datPlatforms:[],rows:[],next:null};
+let PLATFORM_VIEW={group:'all',query:''};
 
 function toast(msg,language='en',direction='ltr'){
   const t=document.createElement('div');
@@ -1790,9 +1794,321 @@ RENDER.missing=async()=>{
   });
 };
 
+
+function listsNav(active){
+  return '<div class="row" style="margin-bottom:12px">'
+    +'<button class="btn '+(active==='catalog'?'':'ghost')+'" data-list-mode="catalog">Browse catalog</button>'
+    +'<button class="btn '+(active==='imports'?'':'ghost')+'" data-list-mode="imports">Import lists</button>'
+    +'<span style="flex:1"></span>'
+    +'<a class="btn ghost" style="text-decoration:none" href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG discovery</a>'
+    +'<a class="help" href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">Integration guide</a>'
+    +'</div>';
+}
+function wireListNav(){
+  document.querySelectorAll('[data-list-mode]').forEach(b=>b.onclick=()=>{
+    CATALOG_VIEW.mode=b.dataset.listMode; go('lists');
+  });
+}
+function catalogNorm(value){
+  return String(value||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g,'');
+}
+function catalogPlatform(value){
+  const needle=catalogNorm(value);
+  return PLATFORMS.find(p=>[p.name,p.slug].concat(p.aliases||[])
+    .some(name=>catalogNorm(name)===needle))||null;
+}
+function catalogImage(value){
+  try{
+    const u=new URL(String(value||''),location.href);
+    return u.protocol==='https:'&&u.hostname==='images.igdb.com'?u.href:'';
+  }catch(_){return '';}
+}
+function catalogPlatformsForGame(game){
+  const names=(game.platformOptions||[]).map(p=>p.name||p.key||'')
+    .concat(game.platforms||[]);
+  const out=[],seen=new Set();
+  names.forEach(name=>{
+    const local=catalogPlatform(name);
+    if(local&&!seen.has(local.slug)){seen.add(local.slug);out.push(local);}
+  });
+  (game.platformOptions||[]).forEach(p=>{
+    const local=PLATFORMS.find(x=>x.slug===p.key);
+    if(local&&!seen.has(local.slug)){seen.add(local.slug);out.push(local);}
+  });
+  return out;
+}
+function catalogAspect(slug){
+  if(['psx','ps2','ps3','ps4','ps5','xbox','xbox360','xboxone','series-x-s'].includes(slug))return '1 / 1';
+  if(['genesis-slash-megadrive','sms','gamegear','gb','gbc','gba','nds','3ds','psp','psvita'].includes(slug))return '2 / 3';
+  if(['nes','snes','n64','ngc','wii','wiiu','switch'].includes(slug))return '4 / 3';
+  return '3 / 4';
+}
+async function catalogOwnedRows(rows){
+  const targets=[];
+  rows.forEach((game,index)=>{
+    let platforms=CATALOG_VIEW.platform
+      ? [PLATFORMS.find(p=>p.slug===CATALOG_VIEW.platform)].filter(Boolean)
+      : catalogPlatformsForGame(game);
+    if(game.catalogProvider==='dat'&&game.platformOptions&&game.platformOptions[0]){
+      const key=game.platformOptions[0].key;
+      const exact=PLATFORMS.find(p=>p.slug===key);
+      if(exact)platforms=[exact];
+    }
+    platforms.forEach(platform=>targets.push({
+      title:String(game.title||'').slice(0,200),platform:platform.slug,index
+    }));
+  });
+  const owned=new Set();
+  for(let at=0;at<targets.length;at+=50){
+    const batch=targets.slice(at,at+50);
+    const result=await j('/api/v1/catalog/ownership',{method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({games:batch.map(x=>({title:x.title,platform:x.platform}))})
+    }).catch(error=>({error:error.message||'ownership lookup failed'}));
+    if(result.error)throw new Error(result.error);
+    (result.owned||[]).forEach(i=>{
+      if(batch[i])owned.add(batch[i].index);
+    });
+  }
+  return owned;
+}
+function catalogRequestPlatform(game){
+  if(CATALOG_VIEW.platform){
+    return PLATFORMS.find(p=>p.slug===CATALOG_VIEW.platform)||null;
+  }
+  const matches=catalogPlatformsForGame(game);
+  if(game.catalogProvider==='dat'&&game.platformOptions&&game.platformOptions[0]){
+    const exact=PLATFORMS.find(p=>p.slug===game.platformOptions[0].key);
+    if(exact)return exact;
+  }
+  if(matches.length===1)return matches[0];
+  const available=matches.length?matches:PLATFORMS;
+  const choice=promptMessage('Choose a platform for {game}. Available: {platforms}',{
+    game:game.title,platforms:available.map(p=>p.name+' ('+p.slug+')').join(', ')
+  });
+  const normalized=catalogNorm(choice);
+  return available.find(p=>catalogNorm(p.slug)===normalized
+    ||catalogNorm(p.name)===normalized)||null;
+}
+async function sendCatalogRequest(game){
+  const platform=catalogRequestPlatform(game);
+  if(!platform){toastLabel('Need a known platform');return null;}
+  return j('/api/request',{method:'POST',
+    headers:{'content-type':'application/json'},
+    body:JSON.stringify({game:game.title,platform:platform.slug})
+  });
+}
+const CATALOG_GENRES=['Action','Adventure','Arcade','Card & Board Game','Fighting',
+  'Hack and slash/Beat \'em up','Indie','Music','Pinball','Platform','Puzzle',
+  'Racing','Role-playing (RPG)','Shooter','Simulator','Sport','Strategy',
+  'Tactical','Turn-based strategy (TBS)','Quiz/Trivia','Visual Novel'];
+async function renderGameCatalog(){
+  const queuedPlatform=sessionStorage.getItem('romarr.catalogPlatform');
+  if(queuedPlatform){
+    CATALOG_VIEW.platform=queuedPlatform;
+    sessionStorage.removeItem('romarr.catalogPlatform');
+  }
+  let [igdb,dat]=await Promise.all([
+    j('/api/v1/catalog/platforms').catch(error=>({error:error.message||'IGDB unavailable'})),
+    j('/api/v1/catalog/dat/platforms').catch(error=>({error:error.message||'DAT catalog unavailable'}))
+  ]);
+  CATALOG_VIEW.igdbPlatforms=Array.isArray(igdb)?igdb:[];
+  CATALOG_VIEW.datPlatforms=(dat&&dat.results)||[];
+  const igdbChoices=CATALOG_VIEW.igdbPlatforms.map(row=>({
+    row,local:catalogPlatform(row.name)
+  })).filter(x=>x.local);
+  const hasIgdb=CATALOG_VIEW.igdbPlatforms.length>0;
+  const hasDat=CATALOG_VIEW.datPlatforms.length>0;
+  if(!hasIgdb&&hasDat)CATALOG_VIEW.source='dat';
+  if(CATALOG_VIEW.source==='dat'&&!hasDat&&hasIgdb)CATALOG_VIEW.source='igdb';
+  if(!hasIgdb&&!hasDat){
+    CATALOG_VIEW.rows=[];
+    $('#page').innerHTML=listsNav('catalog')
+      +'<div class="card"><h3>Browse games</h3>'
+      +'<p class="help">Connect an IGDB metadata provider under <a href="#metadata">Metadata</a>, or load No-Intro / Redump DATs under <a href="#collections">Collections</a>, to browse a catalog here.</p>'
+      +'<p class="help">For a guided discovery and user request queue, pair ROMarrNG with <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a>. ROMarr handles release search, verification and filing; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a>.</p></div>';
+    wireListNav();
+    return;
+  }
+  if(CATALOG_VIEW.source==='igdb'&&!hasIgdb)CATALOG_VIEW.source='dat';
+  if(CATALOG_VIEW.source==='dat'&&!hasDat)CATALOG_VIEW.source='igdb';
+  const source=CATALOG_VIEW.source;
+  const platformOptions=source==='dat'
+    ?CATALOG_VIEW.datPlatforms.map(x=>({slug:x.slug,name:x.name}))
+    :igdbChoices.filter((x,i,a)=>a.findIndex(y=>y.local.slug===x.local.slug)===i)
+      .map(x=>({slug:x.local.slug,name:x.local.name,id:x.row.id}));
+  if(CATALOG_VIEW.platform&&!platformOptions.some(p=>p.slug===CATALOG_VIEW.platform))
+    CATALOG_VIEW.platform='';
+  let endpoint,params=[];
+  const pageSize=24;
+  if(source==='dat'){
+    params=['limit='+pageSize,'cursor='+encodeURIComponent(String(CATALOG_VIEW.offset))];
+    if(CATALOG_VIEW.platform)params.push('platformSlugs='+encodeURIComponent(CATALOG_VIEW.platform));
+    if(CATALOG_VIEW.query.trim()){
+      endpoint='/api/v1/catalog/dat/search-page';
+      params.push('q='+encodeURIComponent(CATALOG_VIEW.query.trim()));
+    }else endpoint='/api/v1/catalog/dat/browse-page';
+  }else{
+    const selected=platformOptions.find(p=>p.slug===CATALOG_VIEW.platform);
+    params=['limit='+pageSize];
+    if(selected)params.push('platformIds='+encodeURIComponent(String(selected.id)));
+    if(CATALOG_VIEW.genre)params.push('genre='+encodeURIComponent(CATALOG_VIEW.genre));
+    if(CATALOG_VIEW.year)params.push('releaseYear='+encodeURIComponent(CATALOG_VIEW.year));
+    if(CATALOG_VIEW.query.trim()){
+      endpoint='/api/v1/catalog/search-page';
+      params.push('q='+encodeURIComponent(CATALOG_VIEW.query.trim()));
+      params.push('cursor='+encodeURIComponent(String(CATALOG_VIEW.offset)));
+    }else{
+      endpoint='/api/v1/catalog/popular-page';
+      params.push('offset='+encodeURIComponent(String(CATALOG_VIEW.offset)));
+    }
+  }
+  const data=await j(endpoint+'?'+params.join('&'))
+    .catch(error=>({error:error.message||'Catalog could not be loaded'}));
+  const rows=data.results||[];
+  CATALOG_VIEW.rows=rows;
+  CATALOG_VIEW.next=data.nextOffset??data.nextCursor??null;
+  CATALOG_VIEW.selected=[];
+  let owned=new Set(),ownedError='';
+  if(CATALOG_VIEW.hideOwned&&rows.length){
+    try{owned=await catalogOwnedRows(rows);}
+    catch(error){owned=new Set();ownedError=error.message||'library ownership is unavailable';}
+  }
+  let visible=rows.map((game,index)=>({game,index}))
+    .filter(x=>!owned.has(x.index));
+  if(source==='igdb'&&CATALOG_VIEW.sort==='name')
+    visible.sort((a,b)=>String(a.game.title).localeCompare(String(b.game.title)));
+  if(source==='igdb'&&CATALOG_VIEW.sort==='rating')
+    visible.sort((a,b)=>(Number(b.game.rating)||0)-(Number(a.game.rating)||0));
+  if(source==='igdb'&&CATALOG_VIEW.sort==='year')
+    visible.sort((a,b)=>String(b.game.releaseDate||'').localeCompare(String(a.game.releaseDate||'')));
+  const sourcePlatforms=platformOptions.map(p=>'<option value="'+esc(p.slug)+'"'
+    +(p.slug===CATALOG_VIEW.platform?' selected':'')+'>'+esc(p.name)+'</option>').join('');
+  const genreOptions=CATALOG_GENRES.map(g=>'<option value="'+esc(g)+'"'
+    +(g===CATALOG_VIEW.genre?' selected':'')+'>'+esc(g)+'</option>').join('');
+  const coverMarkup=(game,index)=>{
+    const image=catalogImage(game.coverUrl);
+    const platform=CATALOG_VIEW.platform
+      ?PLATFORMS.find(p=>p.slug===CATALOG_VIEW.platform)
+      :catalogPlatformsForGame(game)[0];
+    const ratio=catalogAspect(platform&&platform.slug);
+    const boxWidth=CATALOG_VIEW.view==='list'?'width:62px;':'';
+    return image?'<div class="art" style="aspect-ratio:'+ratio+';'+boxWidth+'"><img loading="lazy" referrerpolicy="no-referrer" alt="" src="'+esc(image)+'" style="width:100%;height:100%;object-fit:contain"></div>'
+      :'<div class="art" style="aspect-ratio:'+ratio+';'+boxWidth+'display:flex;align-items:center;justify-content:center;color:var(--dim);font-size:12px">No cover</div>';
+  };
+  let resultsMarkup='';
+  if(visible.length&&CATALOG_VIEW.view==='grid'){
+    resultsMarkup='<div class="grid">'+visible.map(({game,index})=>{
+      const tags=(game.genres||[]).slice(0,3).map(x=>'<button class="mini" data-c-similar="'+esc(x)+'" title="Explore more games in this genre">'+esc(x)+'</button>').join(' ');
+      const rating=Number(game.rating)||0;
+      const ratingLine=rating?'<span>★ '+(source==='igdb'?num(rating/20):num(rating))+'</span>':'';
+      const release=game.releaseDate||'';
+      const platforms=(game.platforms||[]).slice(0,2).join(' · ');
+      const provider=game.source||source.toUpperCase();
+      return '<div class="tile">'+coverMarkup(game,index)
+        +'<div class="nm" lang="und" dir="auto">'+esc(game.title||'Untitled')+'</div>'
+        +'<div class="pf">'+[release,ratingLine,provider].filter(Boolean).join(' · ')+'</div>'
+        +'<div class="pf" style="padding-top:0">'+esc(platforms)+'</div>'
+        +(tags?'<div class="pf" style="display:flex;gap:4px;flex-wrap:wrap">'+tags+'</div>':'')
+        +'<div class="rowact" style="padding:0 8px 9px"><label class="check" style="margin:0;flex:1"><input type="checkbox" data-c-select="'+index+'"> Select</label><button data-c-request="'+index+'">Request</button></div></div>';
+    }).join('')+'</div>';
+  }else if(visible.length){
+    resultsMarkup='<div style="overflow-x:auto"><table><thead><tr><th>Select</th><th>Cover</th><th>Game</th><th>Platform</th><th>Genres</th><th>Released</th><th>Rating</th><th></th></tr></thead><tbody>'
+      +visible.map(({game,index})=>'<tr><td><input type="checkbox" data-c-select="'+index+'"></td><td>'+coverMarkup(game,index)+'</td>'
+        +'<td lang="und" dir="auto"><b>'+esc(game.title||'Untitled')+'</b><div class="help">'+esc(game.source||source.toUpperCase())+'</div></td>'
+        +'<td>'+esc((game.platforms||[]).slice(0,3).join(', ')||'—')+'</td>'
+        +'<td>'+esc((game.genres||[]).slice(0,3).join(', ')||'—')+'</td>'
+        +'<td>'+esc(game.releaseDate||'—')+'</td>'
+        +'<td>'+(Number(game.rating)?'★ '+num(Number(game.rating)/20):'—')+'</td>'
+        +'<td><button data-c-request="'+index+'">Request</button></td></tr>').join('')+'</tbody></table></div>';
+  }else{
+    resultsMarkup='<div class="empty">'+(data.error?appMessageMarkup(data.error):'No titles match these filters.')+'</div>';
+  }
+  const sources='<div class="row" style="margin-bottom:10px">'
+    +(hasIgdb?'<button class="btn '+(source==='igdb'?'':'ghost')+'" data-c-source="igdb">IGDB · covers, genres and ratings</button>':'')
+    +(hasDat?'<button class="btn '+(source==='dat'?'':'ghost')+'" data-c-source="dat">Loaded DATs · verified dump names</button>':'')
+    +'<span style="flex:1"></span><button class="btn ghost" id="c-grid">Cover view</button><button class="btn ghost" id="c-list">List view</button></div>';
+  const filters='<div class="row" style="align-items:end;margin-bottom:12px">'
+    +'<div style="flex:2;min-width:210px"><label for="c-query">Search titles</label><input id="c-query" type="search" value="'+esc(CATALOG_VIEW.query)+'" placeholder="Search this catalog"></div>'
+    +'<div style="flex:1;min-width:190px"><label for="c-platform">Platform</label><select id="c-platform"><option value="">All supported platforms</option>'+sourcePlatforms+'</select></div>'
+    +(source==='igdb'?'<div style="flex:1;min-width:150px"><label for="c-genre">Genre</label><select id="c-genre"><option value="">All genres</option>'+genreOptions+'</select></div><div style="width:115px"><label for="c-year">Release year</label><input id="c-year" type="number" min="1950" max="2200" value="'+esc(CATALOG_VIEW.year)+'" placeholder="Any"></div><div style="width:190px"><label for="c-sort">Sort this page</label><select id="c-sort"><option value="popular">Recommended · IGDB popular</option><option value="name"'+(CATALOG_VIEW.sort==='name'?' selected':'')+'>Title A–Z</option><option value="rating"'+(CATALOG_VIEW.sort==='rating'?' selected':'')+'>Highest rated</option><option value="year"'+(CATALOG_VIEW.sort==='year'?' selected':'')+'>Newest release</option></select></div>':'')
+    +'<label class="check" style="margin:0 0 8px"><input id="c-hide-owned" type="checkbox"'+(CATALOG_VIEW.hideOwned?' checked':'')+'> Hide owned</label>'
+    +'<button class="btn" id="c-search">Search</button></div>';
+  const pageInfo='<div class="row" style="margin:12px 0"><span class="help">'
+    +(source==='dat'?'Loaded DAT titles are verified dump references; this source has no covers, genre, release date or rating metadata.'
+      :'IGDB results are metadata catalog matches. Ratings and artwork are supplied by IGDB.')
+    +'</span><span style="flex:1"></span><button class="btn ghost" id="c-request-selected">Request selected (max 5)</button>'
+    +'<button class="btn ghost" id="c-prev"'+(CATALOG_VIEW.offset?'':' disabled')+'>Previous</button>'
+    +'<button class="btn ghost" id="c-next"'+(CATALOG_VIEW.next===null?' disabled':'')+'>Next</button></div>';
+  const status='<p class="help">'+visible.length+' shown on this page'
+    +(owned.size?' · '+owned.size+' already in your library hidden':'')
+    +(ownedError?' · owned check unavailable: '+esc(ownedError):'')
+    +(CATALOG_VIEW.platform?' · '+esc((PLATFORMS.find(p=>p.slug===CATALOG_VIEW.platform)||{}).name||''):'')
+    +'</p>';
+  $('#page').innerHTML=listsNav('catalog')+sources
+    +'<div class="card"><h3>Discoverable games</h3>'
+    +'<p class="help">Request searches your configured sources and hands a usable release to your download client. If no usable release is found, ROMarr keeps the title on Wanted.</p>'
+    +filters+status+resultsMarkup+pageInfo
+    +'<p class="help">For a household catalog and request queue, use <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a>. ROMarrNG handles acquiring, verifying and filing. <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">See how they connect</a>.</p></div>';
+  wireListNav();
+  document.querySelectorAll('[data-c-source]').forEach(b=>b.onclick=()=>{
+    CATALOG_VIEW.source=b.dataset.cSource;CATALOG_VIEW.platform='';CATALOG_VIEW.offset=0;go('lists');
+  });
+  const update=()=>{
+    CATALOG_VIEW.query=$('#c-query').value.trim();
+    CATALOG_VIEW.platform=$('#c-platform').value;
+    CATALOG_VIEW.genre=$('#c-genre')?$('#c-genre').value:'';
+    CATALOG_VIEW.year=$('#c-year')?$('#c-year').value:'';
+    CATALOG_VIEW.sort=$('#c-sort')?$('#c-sort').value:'popular';
+    CATALOG_VIEW.hideOwned=$('#c-hide-owned').checked;
+    CATALOG_VIEW.offset=0;go('lists');
+  };
+  $('#c-search').onclick=update;
+  $('#c-query').onkeydown=event=>{if(event.key==='Enter'){event.preventDefault();update();}};
+  $('#c-platform').onchange=update;
+  if($('#c-genre'))$('#c-genre').onchange=update;
+  if($('#c-year'))$('#c-year').onchange=update;
+  if($('#c-sort'))$('#c-sort').onchange=update;
+  $('#c-hide-owned').onchange=update;
+  $('#c-grid').onclick=()=>{CATALOG_VIEW.view='grid';go('lists');};
+  $('#c-list').onclick=()=>{CATALOG_VIEW.view='list';go('lists');};
+  $('#c-prev').onclick=()=>{CATALOG_VIEW.offset=Math.max(0,CATALOG_VIEW.offset-pageSize);go('lists');};
+  $('#c-next').onclick=()=>{CATALOG_VIEW.offset=Number(CATALOG_VIEW.next)||0;go('lists');};
+  document.querySelectorAll('[data-c-similar]').forEach(b=>b.onclick=()=>{
+    CATALOG_VIEW.source='igdb';CATALOG_VIEW.genre=b.dataset.cSimilar;
+    CATALOG_VIEW.query='';CATALOG_VIEW.offset=0;go('lists');
+  });
+  document.querySelectorAll('[data-c-request]').forEach(b=>b.onclick=async()=>{
+    b.disabled=true;b.textContent='Searching…';
+    const result=await sendCatalogRequest(rows[Number(b.dataset.cRequest)]);
+    if(result&&result.ok)toastMessage('Grabbed {release}',{release:result.release||'release'});
+    else if(result&&result.error)toastAppMessage(result.error);
+    refreshCounts();go('lists');
+  });
+  document.querySelectorAll('[data-c-select]').forEach(b=>b.onchange=()=>{
+    const index=Number(b.dataset.cSelect);
+    if(b.checked&&!CATALOG_VIEW.selected.includes(index))CATALOG_VIEW.selected.push(index);
+    if(!b.checked)CATALOG_VIEW.selected=CATALOG_VIEW.selected.filter(x=>x!==index);
+  });
+  $('#c-request-selected').onclick=async()=>{
+    const chosen=CATALOG_VIEW.selected.slice();
+    if(!chosen.length){toastLabel('Select at least one');return;}
+    if(chosen.length>5){toastLabel('Request up to 5 titles at a time');return;}
+    if(!confirmMessage('Search and request {count} selected titles now?',{count:chosen.length}))return;
+    const button=$('#c-request-selected');button.disabled=true;
+    for(const index of chosen){
+      const game=rows[index];
+      const result=await sendCatalogRequest(game);
+      if(result&&result.error)toastAppMessage(result.error);
+    }
+    refreshCounts();go('lists');
+  };
+}
+
 RENDER.lists=async()=>{
+  if(CATALOG_VIEW.mode==='catalog')return renderGameCatalog();
   const d=await j('/api/v1/importlist').catch(()=>({items:[]}));
-  $('#page').innerHTML=`<div class="row" style="margin-bottom:14px">
+  $('#page').innerHTML=listsNav('imports')+`<div class="row" style="margin-bottom:14px">
       <button class="btn" id="l-add" data-i18n="Add List">Add List</button>
       <button class="btn ghost" id="l-sync" data-i18n="Sync Now">Sync Now</button>
       <span style="color:var(--dim);font-size:12.5px">Feed Wanted from a
@@ -1852,6 +2168,7 @@ RENDER.lists=async()=>{
           lives, which is usually a server with no launchers.</span></div>
       <div id="l-noapi" style="color:var(--dim);font-size:12.5px"></div></div>`;
 
+  wireListNav();
   applyInterfaceLanguage();
   document.querySelectorAll('[data-paste]').forEach(b=>b.onclick=async()=>{
     const s=await j('/api/v1/connect/sources').catch(()=>({paste_sources:{}}));
@@ -3798,21 +4115,88 @@ const playCard=r=>`<div class="card"><h3>How platforms play here</h3>
     See <a href="#platforms">Platforms</a> for the per-platform answer.</p></div>`;
 
 RENDER.platforms=async()=>{
-  const rows=await j('/api/platforms').catch(()=>[]);
-  const badge=k=>`<span class="pill">${esc(k)}</span>`;
-  $('#page').innerHTML=`<div class="card"><h3>Platforms</h3>
-    <p class="help" data-i18n="The table shows what ROMarr can request and how you can play each platform on this install. Nine disc-based platforms run in a standard RomM browser; the rest stream from a streaming server.">The table shows what ROMarr can request and how you can play each platform on this install. Nine disc-based platforms run in a standard RomM browser; the rest stream from a streaming server.</p>
-    <table><thead><tr><th>Platform</th><th>Media</th><th>Plays</th>
-      <th>Ceiling</th><th>Extensions</th></tr></thead><tbody>
-    ${rows.map(p=>`<tr>
-      <td>${esc(p.name)}<div style="color:var(--dim);font-size:12px">${esc(p.slug)}</div></td>
-      <td>${badge(p.media)}</td>
-      <td>${(p.play_routes||[]).map(badge).join(' ')}</td>
-      <td style="white-space:nowrap">${p.max_size_mb>=1024
-          ? fmt(p.max_size_mb/1024)+' GB' : fmt(p.max_size_mb)+' MB'}</td>
-      <td style="color:var(--dim);font-size:12px">${esc((p.extensions||[]).join(' '))}</td>
-    </tr>`).join('')}
-    </tbody></table></div>`;
+  const [rows,igdb,dat]=await Promise.all([
+    j('/api/platforms').catch(()=>[]),
+    j('/api/v1/catalog/platforms').catch(()=>[]),
+    j('/api/v1/catalog/dat/platforms').catch(()=>({results:[]}))
+  ]);
+  CATALOG_VIEW.igdbPlatforms=Array.isArray(igdb)?igdb:[];
+  CATALOG_VIEW.datPlatforms=(dat&&dat.results)||[];
+  const eras=[
+    {id:'early',label:'1970s–early 80s',slugs:['atari2600','atari5200','atari7800','colecovision','intellivision','vectrex','odyssey-2-slash-videopac-g7000','sg1000']},
+    {id:'8bit',label:'8 & 16-bit · 1980s–90s',slugs:['nes','famicom','fds','snes','sfam','genesis-slash-megadrive','sms','gamegear','gb','gbc','gba','lynx','turbografx16--1','sega32','neo-geo-pocket','neo-geo-pocket-color','virtualboy','wonderswan','wonderswan-color','atari-jaguar','supergrafx']},
+    {id:'disc',label:'3D & discs · 1990s–2000s',slugs:['n64','psx','saturn','segacd','dc','3do','ps2','ngc','psp','nds','xbox','philips-cd-i','pc-fx','turbografx-16-slash-pc-engine-cd','amiga-cd32','neo-geo-cd','atari-jaguar-cd']},
+    {id:'hd',label:'HD era · 2000s–2010s',slugs:['ps3','xbox360','wii','wiiu','3ds','psvita']},
+    {id:'modern',label:'Modern · 2010s+',slugs:['ps4','ps5','xboxone','series-x-s','switch']},
+    {id:'computer',label:'Computers',media:'computer'},
+    {id:'arcade',label:'Arcade',slugs:['arcade','neogeoaes','neogeomvs']},
+    {id:'other',label:'Other systems',slugs:[]}
+  ];
+  const groupFor=p=>{
+    if(p.media==='computer')return 'computer';
+    const found=eras.find(g=>g.slugs.includes(p.slug));
+    return found?found.id:(p.slug==='arcade'?'arcade':'other');
+  };
+  const countFor=id=>rows.filter(p=>groupFor(p)===id).length;
+  const search=String(PLATFORM_VIEW.query||'').toLowerCase();
+  const filtered=rows.filter(p=>(PLATFORM_VIEW.group==='all'||groupFor(p)===PLATFORM_VIEW.group)
+    &&(!search||(p.name+' '+p.slug+' '+p.media).toLowerCase().includes(search)));
+  const eraButtons=[{id:'all',label:'All platforms'}].concat(eras)
+    .filter(g=>g.id==='all'||countFor(g.id)>0)
+    .map(g=>'<button class="btn '+(PLATFORM_VIEW.group===g.id?'':'ghost')+'" data-platform-group="'+esc(g.id)+'" style="padding:5px 10px;font-size:12px">'+esc(g.label)+' <span class="pill">'+fmt(g.id==='all'?rows.length:countFor(g.id))+'</span></button>').join('');
+  const cards=filtered.map(p=>{
+    const match=CATALOG_VIEW.igdbPlatforms.find(x=>{
+      const local=catalogPlatform(x.name);return local&&local.slug===p.slug;
+    });
+    const logo=catalogImage(match&&match.logoUrl);
+    const datCount=CATALOG_VIEW.datPlatforms.find(x=>x.slug===p.slug);
+    const canBrowse=Boolean(match||datCount);
+    const generation=match&&match.generation?'Generation '+esc(match.generation):'';
+    const logoMarkup=logo
+      ?'<img loading="lazy" referrerpolicy="no-referrer" alt="" src="'+esc(logo)+'" style="max-width:100%;max-height:58px;object-fit:contain">'
+      :'<span style="font-size:19px;font-weight:700;color:var(--accent-text)">'+esc(p.name.split(/\s+/).map(x=>x[0]||'').slice(0,3).join('').toUpperCase())+'</span>';
+    const routeBadges=(p.play_routes||[]).map(x=>'<span class="pill">'+esc(x)+'</span>').join(' ');
+    const max=p.max_size_mb>=1024?fmt(p.max_size_mb/1024)+' GB':fmt(p.max_size_mb)+' MB';
+    return '<article class="tile" style="padding:12px;display:flex;flex-direction:column;min-height:224px">'
+      +'<div style="height:62px;display:flex;align-items:center;justify-content:center;background:var(--surface-2);border-radius:var(--r-sm);margin-bottom:8px">'+logoMarkup+'</div>'
+      +'<div class="nm" style="padding:2px 0 4px"><b>'+esc(p.name)+'</b></div>'
+      +'<div class="pf" style="padding:0 0 6px">'+esc(p.media)+(generation?' · '+generation:'')+'</div>'
+      +'<div class="pf" style="padding:0 0 6px">'+routeBadges+'</div>'
+      +'<div class="pf" style="padding:0 0 8px">'+esc((p.extensions||[]).slice(0,5).join(' '))+' · '+esc(max)
+        +(datCount?' · '+fmt(datCount.gameCount)+' DAT titles':'')+'</div>'
+      +'<div style="margin-top:auto"><button class="btn ghost" data-platform-browse="'+esc(p.slug)+'"'+(canBrowse?'':' disabled')+' style="width:100%">'+(canBrowse?'Browse games':'Catalog unavailable')+'</button></div>'
+      +'</article>';
+  }).join('');
+  $('#page').innerHTML='<div class="card"><h3>Platforms, by era</h3>'
+    +'<p class="help">Choose a generation you remember, search by name, then open its catalog. The playback label shows how this install handles each system.</p>'
+    +'<p class="help">ROMarr acquires, verifies and files games. For household discovery, covers and a request queue, pair it with <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a>; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a>.</p>'
+    +'<div class="row" style="gap:6px;margin-bottom:12px;flex-wrap:wrap">'+eraButtons+'</div>'
+    +'<div class="row" style="margin-bottom:14px"><input id="platform-filter" type="search" value="'+esc(PLATFORM_VIEW.query)+'" placeholder="Search platforms" style="max-width:340px"><span class="help">'+fmt(filtered.length)+' platforms</span></div>'
+    +(cards?'<div class="grid">'+cards+'</div>':'<div class="empty">No platforms match this filter.</div>')
+    +'<details class="card" style="margin-top:14px"><summary>Technical details</summary>'
+    +'<table style="margin-top:10px"><thead><tr><th>Platform</th><th>Media</th><th>Plays</th><th>Size ceiling</th><th>Extensions</th></tr></thead><tbody>'
+    +filtered.map(p=>'<tr><td><b>'+esc(p.name)+'</b><div class="help">'+esc(p.slug)+'</div></td>'
+      +'<td><span class="pill">'+esc(p.media)+'</span></td>'
+      +'<td>'+((p.play_routes||[]).map(x=>'<span class="pill">'+esc(x)+'</span>').join(' '))+'</td>'
+      +'<td>'+esc(p.max_size_mb>=1024?fmt(p.max_size_mb/1024)+' GB':fmt(p.max_size_mb)+' MB')+'</td>'
+      +'<td class="help">'+esc((p.extensions||[]).join(' '))+'</td></tr>').join('')
+    +'</tbody></table></details></div>';
+  document.querySelectorAll('[data-platform-group]').forEach(b=>b.onclick=()=>{
+    PLATFORM_VIEW.group=b.dataset.platformGroup;RENDER.platforms();
+  });
+  $('#platform-filter').onchange=()=>{
+    PLATFORM_VIEW.query=$('#platform-filter').value;RENDER.platforms();
+  };
+  document.querySelectorAll('[data-platform-browse]').forEach(b=>b.onclick=()=>{
+    const slug=b.dataset.platformBrowse;
+    const igdbMatch=CATALOG_VIEW.igdbPlatforms.some(x=>{
+      const local=catalogPlatform(x.name);return local&&local.slug===slug;
+    });
+    const datMatch=CATALOG_VIEW.datPlatforms.some(x=>x.slug===slug);
+    CATALOG_VIEW.platform=slug;CATALOG_VIEW.mode='catalog';
+    CATALOG_VIEW.source=igdbMatch?'igdb':(datMatch?'dat':'igdb');
+    CATALOG_VIEW.offset=0;go('lists');
+  });
 };
 
 // --- Blocklist -------------------------------------------------------------
@@ -4182,6 +4566,15 @@ RENDER.getstarted=async()=>{
     +'<span style="color:var(--dim)">'+interfaceMarkup('└─ ROMarr does the first four ─┘ └ you choose this ┘')+'</span>'
     +'</div></div>'
 
+    +'<div class="card" style="margin-top:16px"><h3>Choose a starting point</h3>'
+    +'<p class="help">Pick one route. You can return here and add the other pieces later.</p>'
+    +'<div class="grid">'
+    +'<a class="tile" href="#platforms" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Choose a system or era</div><div class="pf">Browse supported platforms, see how they play, and open the matching catalog.</div></a>'
+    +'<a class="tile" href="#manualimport" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">I already have ROMs</div><div class="pf">Import a folder you own and let ROMarr identify and file what is there.</div></a>'
+    +'<a class="tile" href="#lists" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Build a request list</div><div class="pf">Browse catalog titles or connect an import list. Requests use your configured sources and client.</div></a>'
+    +'<a class="tile" href="#collections" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Work toward a complete set</div><div class="pf">Load a DAT and see verified titles and collection progress.</div></a>'
+    +'</div>'
+    +'<p class="help" style="margin-top:12px">For a shared catalog and household request queue, use <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a>. ROMarr handles release search, verification and filing; the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a> explains the connection.</p></div>'
     +'<div class="card" style="margin-top:16px"><h3>Your setup</h3>'
     +step(1,'An indexer',indexerOk,
        interfaceMarkup('Prowlarr, or Torznab/Newznab indexers added directly under')
