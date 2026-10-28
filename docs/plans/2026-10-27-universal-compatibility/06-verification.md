@@ -50,6 +50,22 @@ routed around that guard. The full suite is therefore **not qualified**. No
 live service, package, browser journey, resource benchmark or private-JIT run
 was qualified in this PR.
 
+## V1.2. Follow-up implementation evidence (2026-10-28)
+
+The Collection scheduler, in-flight recovery, strict state-write reporting,
+catalog selection across pages and server-side Wanted rechecks were exercised
+with focused tests. **101 tests passed** across `test_collections.py`,
+`test_store.py`, `test_scheduling_integration.py` and `test_ui.py`; the
+catalog/Wanted HTTP regression also passed separately (**1 passed**). One
+initial HTTP assertion expected success for an incomplete inventory; the route
+correctly returned 400, and the assertion was corrected before the passing
+route rerun.
+
+`python -m compileall -q romarr tests`, `bash -n proxmox/ct/update.sh` and
+`git diff --check` passed after the implementation changes. The full suite was
+not retried after the automatic-review block described in V1.1. Runtime and
+private-JIT qualification remain open.
+
 ## V2. Fixture suite
 
 Keep fixtures synthetic and redistributable: small binary headers/descriptors, invented titles, deterministic hashes, sanitized provider responses and fake HTTP/grpc-web endpoints. No commercial ROM payloads, private tokens, downloaded catalogs of uncertain redistribution status or live indexer credentials.

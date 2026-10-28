@@ -658,6 +658,10 @@ these requirements is unavailable, plugin operations stop unless
 | Drop-in backends | `ROMARR_BACKENDS_DIR` | `/opt/romarr/backends/` |
 | ROMs | your library volume | your `ROM_PATH` |
 
+The paths above use the default `ROMARR_DATA`. If you set a custom state-file
+path, the SQLite sidecar lives beside it and is named
+`<state-file stem>.library-metadata.sqlite3`.
+
 `romarr.json` stores settings, acquisition state and history. ROMarr also keeps
 per-game metadata overrides in the adjacent SQLite file so a large collection
 does not inflate every settings response. Stop ROMarr and back up both files

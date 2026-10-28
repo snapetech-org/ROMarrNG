@@ -1334,6 +1334,14 @@ class ROMarr:
                 return float(self.store.settings.get(key) or 0) * 3600
             return read
 
+        # Collection requests are admitted durably before they are sent to an
+        # indexer/downloader. Serialize a batch step with pause/cancel so a
+        # second caller cannot dispatch the same queue row concurrently.
+        self._collection_lock = threading.RLock()
+        self._collection_worker_lock = threading.Lock()
+        self._collection_rotation = 0
+        self._recover_collection_batches()
+
         self.scheduler = Scheduler()
         self.scheduler.add(
             "ImportCompleted", "Import completed downloads",
@@ -1374,6 +1382,10 @@ class ROMarr:
             lambda: (900 if self.store.settings.get("metadata_auto_identify", False)
                      else 0),
             self.start_metadata_enrichment)
+        self.scheduler.add(
+            "CollectionBatches", "Continue set acquisition batches",
+            self._collection_interval,
+            self._schedule_collection_work)
         self.scheduler.start()
 
         # The scheduler does not fire a daily job until a day has passed, so
@@ -3399,6 +3411,9 @@ class ROMarr:
 
     def wanted_bulk(self, items) -> dict:
         """Add a bounded, explicitly selected catalog page to Wanted."""
+        from .dat_catalog import _normalise
+        from .dat import base_title
+
         if not isinstance(items, list) or not items or len(items) > 100:
             return {"ok": False,
                     "error": "Select between 1 and 100 games at a time."}
@@ -3411,13 +3426,54 @@ class ROMarr:
             if not game or len(game) > 500 or platform is None:
                 return {"ok": False,
                         "error": "Every selected game needs a title and supported platform."}
-            key = (game.casefold(), platform.slug)
+            key = (_normalise(base_title(game)), platform.slug)
             if key not in seen:
                 clean.append((game, platform.slug))
                 seen.add(key)
-        added, existing = self.store.want_many(clean)
-        return {"ok": True, "added": added, "already_wanted": existing,
-                "total": len(clean)}
+
+        # The UI's inventory labels can go stale while somebody reviews a
+        # multi-page selection. Re-check the complete snapshot at commit time
+        # so a newly owned title is not silently queued for acquisition.
+        inventory_by_platform: dict[str, set[str]] = {}
+        wanted_by_platform: dict[str, set[str]] = {}
+        for _game, slug in clean:
+            if slug in inventory_by_platform:
+                continue
+            present = self._present_titles(slug)
+            if not getattr(self, "_presence_complete", False):
+                return {"ok": False,
+                        "error": "Library inventory is incomplete. Wait for a complete scan, then review the selection again."}
+            inventory_by_platform[slug] = {
+                _normalise(base_title(name)) for name in present
+            }
+            wanted_by_platform[slug] = {
+                _normalise(base_title(str(row.get("game") or "")))
+                for row in self.store.missing()
+                if (mapped := resolve(str(row.get("platform") or "")))
+                and mapped.slug == slug
+            }
+
+        eligible, skipped = [], []
+        already_wanted = 0
+        for game, slug in clean:
+            title_key = _normalise(base_title(game))
+            if title_key in inventory_by_platform[slug]:
+                skipped.append({"game": game, "platform": slug,
+                                "reason": "already present"})
+            elif title_key in wanted_by_platform[slug]:
+                already_wanted += 1
+                skipped.append({"game": game, "platform": slug,
+                                "reason": "already wanted"})
+            else:
+                eligible.append((game, slug))
+
+        added, existing = self.store.want_many(eligible) if eligible else (0, 0)
+        result = {"ok": True, "added": added,
+                  "already_wanted": already_wanted + existing,
+                  "total": len(clean)}
+        if skipped:
+            result["skipped"] = skipped
+        return result
 
     def dat_names(self) -> list[str]:
         from .titled import SWITCH_COLLECTION
@@ -3526,6 +3582,76 @@ class ROMarr:
         return {raw["id"]: Batch.from_dict(raw)
                 for raw in self.store.list_items("batches")}
 
+    def _recover_collection_batches(self) -> None:
+        """Make interrupted external dispatches visible after a restart.
+
+        A request can reach a downloader just before the process exits. There
+        is no safe way to infer whether that external side effect happened, so
+        replaying it automatically could queue a duplicate. Keep the title in
+        an explicit review state; ordinary queued titles remain resumable.
+        """
+        from .collections import BATCH_DONE, BATCH_PENDING, BATCH_RUNNING, Batch
+
+        for raw in self.store.list_items("batches"):
+            batch = Batch.from_dict(raw)
+            if not batch.in_flight and batch.status != BATCH_RUNNING:
+                continue
+            for name in list(batch.in_flight):
+                batch.record(
+                    name, ok=False, outcome_uncertain=True,
+                    reason=("ROMarr stopped while this request was in progress. "
+                            "Check Activity and the download client before retrying."),
+                )
+            if batch.queue:
+                batch.status = BATCH_PENDING
+            elif batch.status == BATCH_RUNNING:
+                batch.status = BATCH_DONE
+            self.store.put_item("batches", batch.to_dict())
+
+    def _collection_interval(self) -> int:
+        from .collections import BATCH_PENDING, BATCH_RUNNING
+
+        return 60 if any(
+            batch.status in (BATCH_PENDING, BATCH_RUNNING)
+            and (batch.queue or batch.in_flight)
+            for batch in self._batches().values()
+        ) else 0
+
+    def _schedule_collection_work(self) -> str:
+        """Run collection I/O outside the scheduler's shared clock thread."""
+        if not self._collection_worker_lock.acquire(blocking=False):
+            return "collection worker is already running"
+
+        def run_one() -> None:
+            try:
+                from .collections import BATCH_PENDING, BATCH_RUNNING
+
+                active = sorted(
+                    batch.id for batch in self._batches().values()
+                    if batch.status in (BATCH_PENDING, BATCH_RUNNING)
+                    and batch.queue
+                )
+                if not active:
+                    return
+                batch_id = active[self._collection_rotation % len(active)]
+                self._collection_rotation += 1
+                result = self.collection_step(batch_id)
+                log.info("scheduled collection step %s: %s", batch_id,
+                         result.get("status") or result.get("error") or "done")
+            except Exception as exc:  # scheduler worker must remain alive
+                log.warning("scheduled collection step failed: %s",
+                            exc.__class__.__name__)
+            finally:
+                self._collection_worker_lock.release()
+
+        try:
+            threading.Thread(target=run_one, name="romarr-collection",
+                             daemon=True).start()
+        except Exception:
+            self._collection_worker_lock.release()
+            raise
+        return "collection work started"
+
     def collection_start(self, dat_name: str, platform: str = "",
                          per_pass: int = 5, **policy_kw) -> dict:
         """Queue every missing title from a plan, resumably."""
@@ -3542,9 +3668,10 @@ class ROMarr:
 
         batch = Batch(id=uuid.uuid4().hex[:12], platform=plan.get("platform") or platform,
                       dat=plan["dat"], status=BATCH_PENDING,
-                      queue=missing, per_pass=max(1, int(per_pass)))
-        self.store.put_item("batches", batch.to_dict())
-        self.store.save()
+                      queue=missing,
+                      per_pass=max(1, min(int(per_pass), 50)))
+        with self._collection_lock:
+            self.store.put_item("batches", batch.to_dict())
         return {"ok": True, "queued": len(missing), **batch.progress()}
 
     def collection_step(self, batch_id: str) -> dict:
@@ -3555,55 +3682,90 @@ class ROMarr:
         other traffic. Draining the queue in one pass would also mean losing
         the lot if the process stopped halfway.
         """
-        from .collections import BATCH_DONE, BATCH_PAUSED, BATCH_RUNNING
+        from .collections import BATCH_DONE, BATCH_PAUSED
 
-        batches = self._batches()
-        batch = batches.get(batch_id)
-        if batch is None:
-            return {"error": "no such batch"}
-        if batch.status == BATCH_PAUSED:
-            return {"paused": True, **batch.progress()}
+        with self._collection_lock:
+            batch = self._batches().get(batch_id)
+            if batch is None:
+                return {"error": "no such batch"}
+            # A prior result write may have failed after the request left this
+            # process. Treat the old claim as uncertain before making progress
+            # so it is never sent a second time implicitly.
+            if batch.in_flight:
+                for name in list(batch.in_flight):
+                    batch.record(
+                        name, ok=False, outcome_uncertain=True,
+                        reason=("The previous request result was not saved. "
+                                "Check Activity and the download client before retrying."),
+                    )
+                self.store.put_item("batches", batch.to_dict())
+            if batch.status == BATCH_PAUSED:
+                return {"paused": True, **batch.progress()}
 
-        batch.status = BATCH_RUNNING
-        for name in batch.take():
-            try:
-                result = self.request(name, batch.platform)
-                accepted = isinstance(result, dict) and result.get("ok") is True
-                batch.record(name, ok=accepted,
-                             reason=(str(result.get("error") or "request was not accepted")
-                                     if isinstance(result, dict) and not accepted
-                                     else ""))
-            except Exception as err:  # noqa: BLE001 - one title must not stop the set
-                batch.record(name, ok=False,
-                             reason=f"{err.__class__.__name__}: {err}")
-        if not batch.queue:
-            batch.status = BATCH_DONE
-        self.store.put_item("batches", batch.to_dict())
-        self.store.save()
-        return batch.progress()
+            for _ in range(min(max(1, min(batch.per_pass, 50)),
+                               len(batch.queue))):
+                name = batch.claim(1)[0]
+                # Persist the claim before making an external request. If the
+                # process stops after dispatch, startup recovery marks it as
+                # uncertain instead of silently putting it back in the queue.
+                self.store.put_item("batches", batch.to_dict())
+                try:
+                    result = self.request(name, batch.platform)
+                except Exception as err:  # an exception may follow dispatch
+                    batch.record(
+                        name, ok=False, outcome_uncertain=True,
+                        reason=f"{err.__class__.__name__} during request; check Activity before retrying.",
+                    )
+                else:
+                    accepted = isinstance(result, dict) and result.get("ok") is True
+                    reason = ""
+                    if not accepted:
+                        detail = (result.get("error") if isinstance(result, dict)
+                                  else "")
+                        # Keep persisted batch reasons useful without copying
+                        # provider URLs or arbitrary exception text into the
+                        # browser-facing state file.
+                        folded = str(detail or "").casefold()
+                        if "no usable release" in folded:
+                            reason = "No usable release was found."
+                        elif "no download client" in folded:
+                            reason = "No download client is configured for this release."
+                        elif "unknown platform" in folded:
+                            reason = "The selected platform is unsupported."
+                        else:
+                            reason = "Request was not accepted; see Activity for details."
+                    batch.record(name, ok=accepted, reason=reason)
+                self.store.put_item("batches", batch.to_dict())
+
+            if batch.queue:
+                batch.status = BATCH_PENDING
+            elif not batch.in_flight:
+                batch.status = BATCH_DONE
+            self.store.put_item("batches", batch.to_dict())
+            return batch.progress()
 
     def collection_control(self, batch_id: str, action: str) -> dict:
         from .collections import BATCH_PAUSED, BATCH_PENDING
 
-        batches = self._batches()
-        batch = batches.get(batch_id)
-        if batch is None:
-            return {"error": "no such batch"}
-        if action == "pause":
-            batch.status = BATCH_PAUSED
-        elif action == "resume":
-            batch.status = BATCH_PENDING
-        elif action == "retry":
-            batch.retry_failed()
-        elif action == "cancel":
-            self.store.delete_item("batches", batch_id)
-            self.store.save()
-            return {"ok": True, "cancelled": batch_id}
-        else:
-            return {"error": f"unknown action {action!r}"}
-        self.store.put_item("batches", batch.to_dict())
-        self.store.save()
-        return batch.progress()
+        with self._collection_lock:
+            batch = self._batches().get(batch_id)
+            if batch is None:
+                return {"error": "no such batch"}
+            if action == "pause":
+                batch.status = BATCH_PAUSED
+            elif action == "resume":
+                batch.status = BATCH_PENDING
+            elif action == "retry":
+                batch.retry_failed()
+            elif action == "retry-uncertain":
+                batch.retry_uncertain()
+            elif action == "cancel":
+                self.store.delete_item("batches", batch_id)
+                return {"ok": True, "cancelled": batch_id}
+            else:
+                return {"error": f"unknown action {action!r}"}
+            self.store.put_item("batches", batch.to_dict())
+            return batch.progress()
 
     def collection_status(self) -> dict:
         return {"batches": [b.progress() for b in self._batches().values()],

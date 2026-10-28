@@ -740,7 +740,8 @@ def test_regional_formatting_is_applied_at_dashboard_count_call_sites():
     assert "<div><b>${fmt(h.dat_games||0)}</b><span>Known dumps</span></div>" in html
     assert "<div><b>${fmt(h.events)}</b><span>History events</span></div>" in html
     assert "+fmt(x.percent)+'% — '+statusMarkup(x.status)" in html
-    assert "+fmt(x.done)+'</td><td>'+fmt(x.failed)+'</td><td>'+fmt(x.remaining)" in html
+    assert "+fmt(x.accepted??x.done)+'</td><td>'+fmt(x.failed)+'</td>'" in html
+    assert "+'<td>'+fmt(x.remaining)+'</td>'" in html
     assert "interfaceTemplateMarkup('Page {page} of {pages}'" in html
     assert "${fmt(r.local||0)}" in html
     assert "${fmt(r.stream||0)}" in html

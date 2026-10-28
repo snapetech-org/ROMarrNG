@@ -9715,6 +9715,34 @@
     "vi": "Nền tảng của {game}? Có sẵn: {platforms}",
     "id": "Platform untuk {game}? Tersedia: {platforms}"
   },
+  "Skipped {count} already present or wanted": {
+    "es": "Se omitieron {count}: ya están en tu biblioteca o en Wanted",
+    "zh-Hans": "已跳过 {count} 个：已拥有或已加入 Wanted",
+    "hi": "{count} शीर्षक छोड़े गए: वे पहले से मौजूद हैं या Wanted में हैं",
+    "de": "{count} übersprungen: bereits vorhanden oder in Wanted",
+    "ja": "{count} 件をスキップしました。所持済みまたは Wanted に追加済みです",
+    "fr": "{count} ignorés : déjà présents ou déjà dans Wanted",
+    "pt-BR": "{count} ignorados: já estão na biblioteca ou em Wanted",
+    "ar": "تم تخطي {count}: موجودة بالفعل أو في Wanted",
+    "ko": "{count}개 건너뜀: 이미 보유했거나 Wanted에 있습니다",
+    "zh-Hant": "已略過 {count} 個：已擁有或已加入 Wanted",
+    "vi": "Đã bỏ qua {count}: đã có trong thư viện hoặc trong Wanted",
+    "id": "{count} dilewati: sudah ada atau sudah masuk Wanted"
+  },
+  "Check Activity and your download client first. Retrying an uncertain request may queue a duplicate. Retry these titles now?": {
+    "es": "Primero revisa Actividad y tu cliente de descargas. Reintentar una solicitud incierta puede añadir un duplicado a la cola. ¿Reintentar estos títulos ahora?",
+    "zh-Hans": "请先检查活动记录和下载客户端。重试结果不确定的请求可能会重复排队。现在重试这些游戏吗？",
+    "hi": "पहले Activity और अपना डाउनलोड क्लाइंट जाँचें। अनिश्चित अनुरोध को दोबारा भेजने से डुप्लिकेट कतार में आ सकता है। क्या अब इन शीर्षकों को फिर से आज़माएँ?",
+    "de": "Prüfe zuerst Aktivität und Download-Client. Beim erneuten Versuch kann eine unklare Anfrage doppelt eingereiht werden. Diese Titel jetzt erneut versuchen?",
+    "ja": "まずアクティビティとダウンロードクライアントを確認してください。結果が不明なリクエストを再試行すると重複して登録される可能性があります。これらのタイトルを再試行しますか？",
+    "fr": "Vérifiez d’abord l’activité et votre client de téléchargement. Réessayer une demande au résultat incertain peut créer un doublon dans la file. Réessayer ces titres maintenant ?",
+    "pt-BR": "Confira primeiro a Atividade e o cliente de downloads. Repetir uma solicitação incerta pode criar um pedido duplicado. Tentar esses títulos novamente agora?",
+    "ar": "تحقق أولاً من النشاط وعميل التنزيل. قد تؤدي إعادة محاولة طلب غير مؤكد إلى إدراج نسخة مكررة. هل تريد إعادة محاولة هذه العناوين الآن؟",
+    "ko": "먼저 활동 내역과 다운로드 클라이언트를 확인하세요. 결과가 불확실한 요청을 다시 시도하면 중복으로 대기열에 추가될 수 있습니다. 지금 이 타이틀을 다시 시도할까요?",
+    "zh-Hant": "請先檢查活動記錄和下載用戶端。重試結果不明的要求可能會重複排入佇列。現在重試這些遊戲嗎？",
+    "vi": "Trước tiên hãy kiểm tra Hoạt động và ứng dụng tải xuống. Thử lại một yêu cầu chưa rõ kết quả có thể tạo yêu cầu trùng lặp. Thử lại các tựa game này ngay bây giờ?",
+    "id": "Periksa Aktivitas dan klien unduhan terlebih dahulu. Mencoba ulang permintaan yang hasilnya belum pasti dapat membuat antrean duplikat. Coba ulang judul ini sekarang?"
+  },
   "Cancel this set? Titles already requested are unaffected.": {
     "es": "¿Cancelar este set? Los títulos ya solicitados no son afectados.",
     "zh-Hans": "取消此游戏集？已提交请求的标题不受影响。",

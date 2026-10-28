@@ -21,7 +21,20 @@ def test_the_service_registers_its_jobs(tmp_path):
     s = svc(tmp_path)
     names = {j["name"] for j in s.scheduler.status()}
     assert names == {"ImportCompleted", "MissingGameSearch", "RssSync",
-                     "ListSync", "UpdateCheck", "HashIndex", "FailedDownloads"}
+                     "ListSync", "UpdateCheck", "HashIndex", "FailedDownloads",
+                     "MetadataEnrichment", "CollectionBatches"}
+
+
+def test_collection_scheduler_runs_only_after_a_batch_is_persisted(tmp_path):
+    s = svc(tmp_path)
+    job = next(j for j in s.scheduler._jobs if j.name == "CollectionBatches")
+    assert job.interval() == 0
+    s.store.put_item("batches", {
+        "id": "batch-1", "platform": "nes", "dat": "Nintendo NES",
+        "status": "pending", "queue": ["Game"], "done": [],
+        "failed": {}, "per_pass": 1,
+    })
+    assert job.interval() == 60
 
 
 def test_turning_off_failed_download_handling_disables_its_job_live(tmp_path):

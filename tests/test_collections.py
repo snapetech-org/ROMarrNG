@@ -183,6 +183,22 @@ def test_a_batch_survives_a_restart():
     assert revived.platform == "nes"
 
 
+def test_a_claimed_title_is_persisted_before_dispatch_and_can_be_reconciled():
+    batch = Batch(id="b1", platform="nes", queue=["a", "b"], per_pass=2)
+    assert batch.claim(1) == ["a"]
+    assert batch.queue == ["b"]
+    assert batch.in_flight == ["a"]
+    revived = Batch.from_dict(batch.to_dict())
+    assert revived.in_flight == ["a"]
+    revived.record("a", ok=False, outcome_uncertain=True,
+                   reason="check Activity before retrying")
+    assert revived.uncertain == {"a": "check Activity before retrying"}
+    assert revived.progress()["processing"] == 0
+    assert revived.retry_uncertain() == 1
+    assert revived.queue == ["b", "a"]
+    assert not revived.uncertain
+
+
 def test_failures_can_be_retried_without_redoing_the_successes():
     batch = Batch(id="b1", queue=["a", "b", "c"])
     for name in batch.take(3):
@@ -213,4 +229,40 @@ def test_collection_step_counts_a_refused_request_as_failed(tmp_path, monkeypatc
     assert progress["failed"] == 1
     assert progress["remaining"] == 0
     assert service._batches()["batch-1"].failed == {
-        "Final Fantasy VII (USA)": "no usable release was found"}
+        "Final Fantasy VII (USA)": "No usable release was found."}
+
+
+def test_collection_step_records_exceptions_as_uncertain_not_retryable(tmp_path,
+                                                                      monkeypatch):
+    from romarr.app import ROMarr
+
+    service = ROMarr({"ROMARR_DATA": str(tmp_path / "state.json")})
+    batch = Batch(id="batch-uncertain", platform="psx", queue=["Game"])
+    service.store.put_item("batches", batch.to_dict())
+
+    def timeout(*_args, **_kwargs):
+        raise TimeoutError("connection timed out")
+
+    monkeypatch.setattr(service, "request", timeout)
+    progress = service.collection_step("batch-uncertain")
+
+    assert progress["done"] == 0
+    assert progress["uncertain"] == 1
+    assert progress["failed"] == 0
+    assert "check Activity" in service._batches()["batch-uncertain"].uncertain["Game"]
+
+
+def test_restart_recovers_an_in_flight_dispatch_without_replaying_it(tmp_path):
+    from romarr.app import ROMarr
+
+    data = str(tmp_path / "state.json")
+    first = ROMarr({"ROMARR_DATA": data})
+    batch = Batch(id="batch-restart", platform="psx", queue=["Next", "Later"])
+    batch.claim(1)
+    first.store.put_item("batches", batch.to_dict())
+
+    revived = ROMarr({"ROMARR_DATA": data})
+    recovered = revived._batches()["batch-restart"]
+    assert recovered.queue == ["Later"]
+    assert recovered.in_flight == []
+    assert "Next" in recovered.uncertain

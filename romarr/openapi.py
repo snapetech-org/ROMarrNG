@@ -51,7 +51,7 @@ DESCRIPTIONS: dict[str, tuple[str, str]] = {
                             "origin and source."),
     "/api/v1/catalog/options": ("GET", "Available DAT and genre-tagged catalogs for the guided platform browser."),
     "/api/v1/catalog/page": ("GET", "Browse one platform catalog with library and Wanted status."),
-    "/api/v1/wanted/bulk": ("POST", "Add a reviewed selection of up to 100 titles to Wanted without starting downloads."),
+    "/api/v1/wanted/bulk": ("POST", "Add up to 100 reviewed titles to Wanted without starting downloads; requires a complete inventory snapshot and rechecks ownership and existing Wanted entries at commit."),
     "/api/v1/library/metadata/enrich": ("POST", "Start a bounded metadata identification pass for games missing saved artwork or details."),
     "/api/v1/library/metadata/refresh": ("POST", "Identify one library item, persist its metadata and artwork, and report the match provenance."),
     "/api/v1/library/metadata/correct": ("POST", "Save a manual system correction for one library item without moving its file."),
@@ -196,7 +196,7 @@ DESCRIPTIONS: dict[str, tuple[str, str]] = {
                                        "each dump won its group."),
     "/api/v1/collection/start": ("POST", "Queue every missing title from a "
                                          "plan as a resumable batch."),
-    "/api/v1/collection/step": ("POST", "Request the next slice of a batch."),
+    "/api/v1/collection/step": ("POST", "Request the next bounded slice of a batch. In-flight requests are saved before dispatch; uncertain outcomes require explicit review."),
     "/api/v1/collection/control": ("POST", "pause, resume, retry or cancel a "
                                            "batch."),
     "/api/v1/manualimport": ("GET", "Scan a directory for files ROMarr could adopt."),

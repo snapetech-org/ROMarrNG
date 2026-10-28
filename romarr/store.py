@@ -42,6 +42,10 @@ class StateUnreadable(RuntimeError):
     """
 
 
+class StateWriteError(RuntimeError):
+    """An accepted state change could not be durably written."""
+
+
 def now_iso() -> str:
     return datetime.now(timezone.utc).isoformat(timespec="seconds")
 
@@ -461,6 +465,9 @@ class Store:
                     os.unlink(tmp)
                 except OSError:
                     pass
+                raise StateWriteError(
+                    f"could not durably write ROMarr state to {self.path}"
+                ) from err
 
     # -- history -----------------------------------------------------------
 
@@ -977,6 +984,7 @@ class Store:
         import uuid
         with self._lock:
             items = self._collection(key)
+            before = copy.deepcopy(items)
             if item.get("id"):
                 for i, existing in enumerate(items):
                     if str(existing.get("id")) == str(item["id"]):
@@ -988,18 +996,30 @@ class Store:
                 item["id"] = uuid.uuid4().hex[:12]
                 items.append(item)
             out = dict(item)
-        self.save()
-        return out
+            try:
+                self.save()
+            except Exception:
+                # Do not leave a failed admission visible in memory: a later
+                # unrelated save must not turn a rejected write into an
+                # accepted request.
+                self.settings[key] = before
+                raise
+            return out
 
     def delete_item(self, key: str, item_id: str) -> bool:
         with self._lock:
             items = self._collection(key)
-            before = len(items)
+            original = copy.deepcopy(items)
+            count_before = len(items)
             self.settings[key] = [i for i in items if str(i.get("id")) != str(item_id)]
-            changed = len(self.settings[key]) != before
-        if changed:
-            self.save()
-        return changed
+            changed = len(self.settings[key]) != count_before
+            if changed:
+                try:
+                    self.save()
+                except Exception:
+                    self.settings[key] = original
+                    raise
+            return changed
 
     def update_settings(self, patch: dict[str, Any]) -> dict[str, Any]:
         """Apply a partial settings update.

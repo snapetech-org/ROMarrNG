@@ -1912,7 +1912,7 @@ RENDER.missing=async()=>{
 };
 
 const LIST_CATALOG={source:'dat',platform:'',offset:0,next:null,
-  rows:[],options:null};
+  rows:[],options:null,selected:new Map(),selectionFilter:''};
 const listCatalogPlatforms=source=>source==='igdb'
   ?((LIST_CATALOG.options||{}).igdb_platforms||[])
   :((((LIST_CATALOG.options||{}).dat||{}).results)||[]);
@@ -1959,6 +1959,10 @@ async function loadListCatalogPage(){
   const status=$('#lc-status'),results=$('#lc-results'),button=$('#lc-load');
   if(!status||!results)return;
   const query=$('#lc-query').value.trim(),genre=$('#lc-genre').value;
+  const selectionFilter=[LIST_CATALOG.source,LIST_CATALOG.platform,genre,query].join('\u0000');
+  if(LIST_CATALOG.selectionFilter!==selectionFilter){
+    LIST_CATALOG.selected.clear();LIST_CATALOG.selectionFilter=selectionFilter;
+  }
   button.disabled=true;status.textContent='Loading catalog…';results.innerHTML='';
   const params=new URLSearchParams({source:LIST_CATALOG.source,
     platform:LIST_CATALOG.platform,q:query,genre,offset:String(LIST_CATALOG.offset),limit:'24'});
@@ -1966,7 +1970,8 @@ async function loadListCatalogPage(){
   button.disabled=false;LIST_CATALOG.rows=data.results||[];LIST_CATALOG.next=data.next_offset;
   if(data.error){status.textContent=data.error;return;}
   status.textContent=`${LIST_CATALOG.rows.length} titles · ${LIST_CATALOG.source==='dat'?'loaded DAT':'IGDB'} · `
-    +(data.inventory_complete?'library scan complete':'library presence unknown until a complete scan finishes');
+    +(data.inventory_complete?'library scan complete':'library presence unknown until a complete scan finishes')
+    +(LIST_CATALOG.selected.size?` · ${LIST_CATALOG.selected.size} selected across pages`:'');
   const eligibility=LIST_CATALOG.rows.filter(row=>row.presence==='missing'&&!row.wanted);
   results.innerHTML=(LIST_CATALOG.rows.length?`<div class="row" style="justify-content:space-between;flex-wrap:wrap;margin:8px 0">
       <label class="check"><input type="checkbox" id="lc-select-page"${eligibility.length?'':' disabled'}><span>Select ${eligibility.length} confirmed missing titles on this page</span></label>
@@ -1976,7 +1981,8 @@ async function loadListCatalogPage(){
         const canSelect=row.presence==='missing'&&!row.wanted;
         const state=row.presence==='present'?'Owned':row.wanted?'Already wanted'
           :row.presence==='unknown'?'Unknown — scan incomplete':'Missing';
-        return `<tr><td><input type="checkbox" class="lc-choice" data-lc-row="${index}"${canSelect?'':' disabled'} aria-label="Select ${esc(row.title)}"></td>
+        const selectedKey=LIST_CATALOG.source+'|'+LIST_CATALOG.platform+'|'+String(row.id||row.title).toLowerCase();
+        return `<tr><td><input type="checkbox" class="lc-choice" data-lc-row="${index}"${canSelect?'':' disabled'}${LIST_CATALOG.selected.has(selectedKey)?' checked':''} aria-label="Select ${esc(row.title)}"></td>
           <td>${row.coverUrl?`<img src="${esc(row.coverUrl)}" alt="" loading="lazy" referrerpolicy="no-referrer" style="width:42px;height:56px;object-fit:cover;vertical-align:middle;margin-inline-end:8px">`:''}<b lang="und" dir="auto">${esc(row.title)}</b></td>
           <td>${(row.genres||[]).length?(row.genres||[]).map(genre=>`<span class="pill">${esc(genre)}</span>`).join(' '):'—'}</td>
           <td><span class="pill">${state}</span></td></tr>`;
@@ -1987,26 +1993,53 @@ async function loadListCatalogPage(){
     :'<div class="empty">No titles match this selection.</div>');
   const selectAll=$('#lc-select-page');
   if(selectAll)selectAll.onchange=()=>{
-    document.querySelectorAll('.lc-choice:not(:disabled)').forEach(box=>box.checked=selectAll.checked);
+    document.querySelectorAll('.lc-choice:not(:disabled)').forEach(box=>{
+      const row=LIST_CATALOG.rows[Number(box.dataset.lcRow)];
+      const key=LIST_CATALOG.source+'|'+LIST_CATALOG.platform+'|'+String(row?.id||row?.title||'').toLowerCase();
+      if(selectAll.checked&&row){
+        if(!LIST_CATALOG.selected.has(key)&&LIST_CATALOG.selected.size>=100){box.checked=false;return;}
+        LIST_CATALOG.selected.set(key,{game:row.title,platform:LIST_CATALOG.platform});
+        box.checked=true;
+      }else{LIST_CATALOG.selected.delete(key);box.checked=false;}
+    });
     updateSelected();
   };
-  document.querySelectorAll('.lc-choice').forEach(box=>box.onchange=updateSelected);
+  document.querySelectorAll('.lc-choice').forEach(box=>box.onchange=()=>{
+    const row=LIST_CATALOG.rows[Number(box.dataset.lcRow)];
+    const key=LIST_CATALOG.source+'|'+LIST_CATALOG.platform+'|'+String(row?.id||row?.title||'').toLowerCase();
+    if(box.checked&&row){
+      if(!LIST_CATALOG.selected.has(key)&&LIST_CATALOG.selected.size>=100){
+        box.checked=false;toastLabel('Select up to 100 missing titles');return;
+      }
+      LIST_CATALOG.selected.set(key,{game:row.title,platform:LIST_CATALOG.platform});
+    }else LIST_CATALOG.selected.delete(key);
+    updateSelected();
+  });
   function updateSelected(){
-    const count=document.querySelectorAll('.lc-choice:checked').length;
+    const count=LIST_CATALOG.selected.size;
     const add=$('#lc-wanted');if(add){add.disabled=!count;add.textContent=count?`Add ${count} selected to Wanted`:'Add selected to Wanted';}
+    const selectAll=$('#lc-select-page');
+    if(selectAll){
+      const eligible=[...document.querySelectorAll('.lc-choice:not(:disabled)')];
+      selectAll.checked=eligible.length>0&&eligible.every(box=>box.checked);
+    }
+    status.textContent=status.textContent.replace(/ · \d+ selected across pages$/,'')
+      +(count?` · ${count} selected across pages`:'');
   }
   const add=$('#lc-wanted');
   if(add)add.onclick=async()=>{
-    const selected=[...document.querySelectorAll('.lc-choice:checked')]
-      .map(box=>LIST_CATALOG.rows[Number(box.dataset.lcRow)])
-      .filter(row=>row&&row.presence==='missing'&&!row.wanted)
-      .map(row=>({game:row.title,platform:LIST_CATALOG.platform}));
+    const selected=[...LIST_CATALOG.selected.values()];
     if(!selected.length||selected.length>100){toastLabel('Select up to 100 missing titles');return;}
     if(!confirmMessage('Add {count} selected games to Wanted? No downloads start until you search or run the Wanted task.',{count:fmt(selected.length)}))return;
     add.disabled=true;
     const saved=await j('/api/v1/wanted/bulk',{method:'POST',
       headers:{'content-type':'application/json'},body:JSON.stringify({items:selected})});
-    if(saved.ok){toastMessage('Added {count} to Wanted',{count:fmt(saved.added)});await loadListCatalogPage();refreshCounts();}
+    if(saved.ok){
+      LIST_CATALOG.selected.clear();
+      toastMessage('Added {count} to Wanted',{count:fmt(saved.added)});
+      if(saved.skipped?.length)toastMessage('Skipped {count} already present or wanted',{count:fmt(saved.skipped.length)});
+      await loadListCatalogPage();refreshCounts();
+    }
     else toastAppMessage(saved.error||'Could not update Wanted');
     add.disabled=false;
   };
@@ -4662,6 +4695,7 @@ RENDER.collections=async()=>{
     +'<label><input type="checkbox" id="cslatest" checked> Latest listed version only</label></div>'
     +'<div id="cres" style="margin-top:16px"></div></div>'
     +'<div class="card" style="margin-top:16px"><h3>Batches</h3>'
+    +'<p class="help">Saved set requests continue in the background about once a minute, even when this page is closed. “Accepted” means the downloader accepted the request; it does not mean the ROM has finished downloading or importing. If ROMarr stopped during a request, check Activity and the client before retrying that item.</p>'
     +'<div id="cbatch"></div></div>';
 
   const drawBatches=async()=>{
@@ -4669,19 +4703,22 @@ RENDER.collections=async()=>{
     const cb=$('#cbatch'); if(!cb) return;   // left the Collections page
     const b=s.batches||[];
     cb.innerHTML=b.length
-      ?'<table><thead><tr><th>Set</th><th>Progress</th><th>Done</th>'
-       +'<th>Failed</th><th>Left</th><th></th></tr></thead><tbody>'
+      ?'<table><thead><tr><th>Set</th><th>Progress</th><th>Requests accepted</th>'
+       +'<th>Failed</th><th>Needs review</th><th>Left</th><th></th></tr></thead><tbody>'
        +b.map(x=>'<tr data-id="'+esc(x.id)+'"><td>'+esc(x.dat||x.platform||x.id)+'</td>'
          +'<td style="min-width:150px"><div style="background:var(--bg);'
          +'border:1px solid var(--line);border-radius:4px;height:16px;overflow:hidden">'
          +'<div style="height:100%;width:'+x.percent+'%;background:var(--accent)"></div>'
          +'</div><span class="help" style="margin:0">'+fmt(x.percent)+'% — '+statusMarkup(x.status)+'</span></td>'
-         +'<td>'+fmt(x.done)+'</td><td>'+fmt(x.failed)+'</td><td>'+fmt(x.remaining)+'</td>'
+         +'<td>'+fmt(x.accepted??x.done)+'</td><td>'+fmt(x.failed)+'</td>'
+         +'<td>'+fmt(x.uncertain||0)+(x.processing?' <span class="pill">'+fmt(x.processing)+' processing</span>':'')+'</td>'
+         +'<td>'+fmt(x.remaining)+'</td>'
          +'<td class="row" style="gap:6px">'
-         +'<button class="btn ghost cstep">Run next</button>'
-         +'<button class="btn ghost cact" data-a="'+(x.status==='paused'?'resume':'pause')+'">'
-         +(x.status==='paused'?'Resume':'Pause')+'</button>'
+         +(x.remaining?'<button class="btn ghost cstep">Run next</button>':'')
+         +(x.remaining?'<button class="btn ghost cact" data-a="'+(x.status==='paused'?'resume':'pause')+'">'
+         +(x.status==='paused'?'Resume':'Pause')+'</button>':'')
          +(x.failed?'<button class="btn ghost cact" data-a="retry">Retry failed</button>':'')
+         +(x.uncertain?'<button class="btn ghost cact" data-a="retry-uncertain">Review &amp; retry</button>':'')
          +'<button class="btn ghost cact" data-a="cancel">Cancel</button></td></tr>').join('')
        +'</tbody></table>'
       :'<div class="empty">No set is being acquired.</div>';
@@ -4696,6 +4733,7 @@ RENDER.collections=async()=>{
     cb.querySelectorAll('.cact').forEach(el=>el.onclick=async e=>{
       const id=e.target.closest('tr').dataset.id, action=e.target.dataset.a;
       if(action==='cancel'&&!confirmMessage('Cancel this set? Titles already requested are unaffected.')) return;
+      if(action==='retry-uncertain'&&!confirmMessage('Check Activity and your download client first. Retrying an uncertain request may queue a duplicate. Retry these titles now?')) return;
       await j('/api/v1/collection/control',{method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({id:id,action:action})});

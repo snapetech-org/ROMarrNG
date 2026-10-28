@@ -298,12 +298,30 @@ def test_first_party_catalog_marks_presence_and_bulk_adds_reviewed_wanted(server
     assert code == 200
     assert json.loads(body)["already_wanted"] == 1
 
+    # The browser's preview may be stale by the time a multi-page selection
+    # is committed. Ownership is checked again at the server boundary.
+    code, body, _ = get(
+        base + "/api/v1/wanted/bulk", key="testkey", method="POST",
+        body={"items": [{"game": "Final Fantasy VII", "platform": "psx"}]})
+    assert code == 200
+    stale = json.loads(body)
+    assert stale["added"] == 0
+    assert stale["skipped"] == [{"game": "Final Fantasy VII",
+                                 "platform": "psx",
+                                 "reason": "already present"}]
+
     service._publish_library([], "", partial=True)
     code, body, _ = get(
         base + "/api/v1/catalog/page?source=dat&platform=psx&limit=10",
         key="testkey")
     assert code == 200
     assert {row["presence"] for row in json.loads(body)["results"]} == {"unknown"}
+    code, body, _ = get(
+        base + "/api/v1/wanted/bulk", key="testkey", method="POST",
+        body={"items": [{"game": "Chrono Cross", "platform": "psx"}]})
+    assert code == 400
+    assert json.loads(body)["ok"] is False
+    assert "incomplete" in json.loads(body)["error"].lower()
 
 
 def test_seerrng_scoped_key_cannot_read_the_admin_api(server):

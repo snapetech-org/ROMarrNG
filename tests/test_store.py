@@ -3,6 +3,8 @@ import os
 import threading
 from concurrent.futures import ThreadPoolExecutor
 
+import pytest
+
 from romarr.store import DEFAULT_SETTINGS, Event, SeerrRequest, Store
 
 
@@ -558,3 +560,24 @@ def test_upstream_integration_requests_migrate_without_losing_status_or_assets(t
     saved = json.loads(path.read_text(encoding="utf-8"))
     assert saved["seerr_requests"][0]["external_request_id"] == "cartridge-42"
     assert "integration_requests" not in saved["settings"]
+
+
+def test_a_failed_state_write_is_reported_to_the_caller(tmp_path, monkeypatch):
+    from romarr.store import StateWriteError
+
+    path = tmp_path / "romarr.json"
+    store = Store(path)
+    store.save()
+    original = path.read_bytes()
+    store.settings["min_seeders"] = 99
+
+    def fail_replace(*_args, **_kwargs):
+        raise OSError("disk full")
+
+    monkeypatch.setattr("romarr.store.os.replace", fail_replace)
+    with pytest.raises(StateWriteError, match="durably write"):
+        store.save()
+    assert path.read_bytes() == original
+    with pytest.raises(StateWriteError):
+        store.put_item("batches", {"id": "not-accepted"})
+    assert store.list_items("batches") == []
