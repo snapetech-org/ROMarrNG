@@ -884,30 +884,35 @@ class FolderLibrary:
         referenced: dict[str, str] = {}
         groups: dict[str, tuple[list[str], bool, list[str]]] = {}
 
-        def cue_missing(entry) -> list[str]:
+        def cue_tracks(entry) -> tuple[list[str], list[str]]:
             try:
                 if entry.stat().st_size > 256_000:
-                    return [entry.name]
+                    return [], [entry.name]
                 cue = Path(entry.path).read_text(
                     encoding="utf-8-sig", errors="replace")
             except OSError:
-                return [entry.name]
-            members = re.findall(
+                return [], [entry.name]
+            raw_members = re.findall(
                 r"(?im)^\s*FILE\s+\"([^\"]+)\"|^\s*FILE\s+([^\s]+)", cue)
+            members = [first or second for first, second in raw_members]
+            if not members:
+                return [], [entry.name]
             missing = []
-            for first, second in members:
-                name = (first or second).replace("\\", "/").strip()
+            for member in members:
+                name = member.replace("\\", "/").strip()
                 candidate = entries_by_name.get(name) if "/" not in name else None
                 if (not name or candidate is None or candidate.is_symlink()
                         or not candidate.is_file()):
                     missing.append(name[:1024] or entry.name)
-            return missing
+            return [name.replace("\\", "/").strip() for name in members
+                    if name.replace("\\", "/").strip() and "/" not in name], missing
 
         for entry in all_entries:
             suffix = Path(entry.name).suffix.lower()
             if suffix not in (".m3u", ".cue") or entry.is_symlink() or not entry.is_file():
                 continue
             members = []
+            media_members = []
             try:
                 if entry.stat().st_size > 256_000:
                     continue
@@ -937,14 +942,21 @@ class FolderLibrary:
                     valid = False
                     missing.append(name[:1024])
                     continue
+                nested_tracks = []
+                nested_missing = []
                 if Path(name).suffix.lower() == ".cue":
-                    nested_missing = cue_missing(candidate)
+                    nested_tracks, nested_missing = cue_tracks(candidate)
                     if nested_missing:
                         valid = False
                         missing.extend(nested_missing)
                 members.append(name)
+                media_members.append(name)
+                if Path(name).suffix.lower() == ".cue" and not nested_missing:
+                    media_members.extend(nested_tracks)
+                    for track in nested_tracks:
+                        referenced.setdefault(track, entry.name)
             if members or not valid:
-                groups[entry.name] = (members, valid, missing)
+                groups[entry.name] = (media_members, valid, missing)
                 for name in members:
                     referenced.setdefault(name, entry.name)
 

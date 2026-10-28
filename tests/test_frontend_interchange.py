@@ -66,3 +66,43 @@ def test_frontend_preview_is_bound_to_the_complete_scan_generation(tmp_path):
     stale = service.frontend_import_commit(preview["preview_id"])
     assert stale["ok"] is False
     assert "inventory changed" in stale["error"].lower()
+
+
+def test_m3u_with_cue_discs_is_one_complete_media_set(tmp_path):
+    root = tmp_path / "roms"
+    root.mkdir()
+    (root / "Final Fantasy VII.m3u").write_text(
+        "Disc 1.cue\nDisc 2.cue\n", encoding="utf-8")
+    for number in (1, 2):
+        (root / f"Disc {number}.cue").write_text(
+            f'FILE "Disc {number}.bin" BINARY\n', encoding="utf-8")
+        (root / f"Disc {number}.bin").write_bytes(b"disc")
+    service = ROMarr({"ROMARR_DATA": str(tmp_path / "romarr.json")})
+    backend = FolderLibrary(FolderConfig(root=str(root), scan_platform="psx"))
+    backend.bind_catalog(service.catalog_store, "ps1", "media-v1")
+
+    status = backend.scan_slice(seconds=10)
+    rows = backend.games()
+    assert status["complete"] is True
+    assert len(rows) == 1
+    assert rows[0].name == "Final Fantasy VII"
+    assert rows[0].media_status == "complete"
+    assert set(rows[0].media_files) == {
+        "Disc 1.cue", "Disc 1.bin", "Disc 2.cue", "Disc 2.bin"}
+
+
+def test_m3u_with_a_missing_cue_track_is_marked_incomplete(tmp_path):
+    root = tmp_path / "roms"
+    root.mkdir()
+    (root / "Game.m3u").write_text("Disc.cue\n", encoding="utf-8")
+    (root / "Disc.cue").write_text('FILE "Missing.bin" BINARY\n', encoding="utf-8")
+    service = ROMarr({"ROMARR_DATA": str(tmp_path / "romarr.json")})
+    backend = FolderLibrary(FolderConfig(root=str(root), scan_platform="psx"))
+    backend.bind_catalog(service.catalog_store, "ps1", "media-v1")
+
+    status = backend.scan_slice(seconds=10)
+    rows = backend.games()
+    assert status["complete"] is True
+    assert len(rows) == 1
+    assert rows[0].media_status == "incomplete"
+    assert rows[0].media_missing == ("Missing.bin",)
