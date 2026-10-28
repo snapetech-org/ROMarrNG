@@ -1,6 +1,6 @@
 # Verification, release gates and planning evidence
 
-**Confidence:** high in the recorded local results below; proposed budgets have moderate confidence and require measurement; live compatibility remains unknown until qualified. This file separates tests already run for planning from the tests Luna must add/run for implementation.
+**Confidence:** high in the recorded local results below; proposed budgets have moderate confidence and require measurement; live compatibility remains unknown until qualified. This file separates planning baseline, current source checks and the implementation gates still open.
 
 ## V1. Planning evidence actually obtained
 
@@ -28,6 +28,27 @@ Two isolated probes used synthetic filenames/bytes and a temporary Store:
 The collection probe used `object.__new__(ROMarr)` with only a temporary Store and a deterministic request stub, then called the actual `collection_step()` method. It proves that method's return-value handling; it does not simulate a real downloader. Folder probes exercised the actual `FolderLibrary.games()` implementation. The reporter's production environment was not accessed.
 
 Document checks for this planning PR: verify relative links and code-path references, requirement/packet coverage, Markdown structure, `git diff --check`, repository hygiene and release-note opt-out. Record the final PR/commit and check results in the PR description. No full build or live-provider validation is implied by creating the plan.
+
+## V1.1. Implementation evidence (2026-10-28)
+
+On the implementation branch, the focused regression set below passed: **81
+passed**, with one existing Authlib deprecation warning. It includes the
+interactive/Add New search path, rendered UI and localization script checks,
+SQLite metadata migration/backup behavior, per-game refresh/correction and
+metadata preference defaults.
+
+```bash
+python -m pytest -q tests/test_ui.py tests/test_store.py \
+  tests/test_library_metadata.py tests/test_interactive_search.py
+```
+
+`bash -n proxmox/ct/update.sh`, `python -m compileall -q romarr tests` and
+`git diff --check` also passed. A full `pytest -q` run was started, but automatic
+review blocked further interaction after detecting an unexpected HTTP request
+to an untrusted external host with an unknown payload. It was not retried or
+routed around that guard. The full suite is therefore **not qualified**. No
+live service, package, browser journey, resource benchmark or private-JIT run
+was qualified in this PR.
 
 ## V2. Fixture suite
 

@@ -1,6 +1,6 @@
 # ROMarrNG: usable first run and universal compatibility
 
-**Status:** implementation plan; no application behavior changes in this PR.
+**Status:** implementation in progress in [PR #60](https://github.com/snapetech-org/ROMarrNG/pull/60); source changes are not yet runtime qualified.
 
 **Implementation owner:** Luna.
 
@@ -23,7 +23,17 @@ The feedback exposes missing connections between features that already exist. Fo
 5. [Ordered implementation packets and ledger](05-delivery.md): dependencies, file owners, acceptance gates, rollout and handoff instructions.
 6. [Verification and release qualification](06-verification.md): fixtures, regression scenarios, budgets, migration exercises and evidence requirements.
 
-Luna should read all six before changing interfaces. Start with `R00`, ship the bounded repairs in `R01`, and follow the dependency graph. Update the ledger in each implementation PR. This is a sequence of reviewable changes, not one application rewrite.
+The first implementation wave is being developed in PR #60. It currently covers
+folder-to-system mapping, guided task setup, metadata refresh/correction,
+source-scoped catalog browsing, selected-to-Wanted flow, qBittorrent API-key
+authentication, and search-source parity. The delivery ledger records which
+packets have source-level evidence and which still need implementation or
+qualification. Full scan snapshots, durable background jobs, complete
+catalog/list snapshots, frontend interchange and live compatibility evidence
+remain open work; no runtime or release qualification is implied by this PR.
+The latest focused regression set passes **81 tests**. A full-suite run was
+blocked after automatic review detected an unexpected request to an untrusted
+external host; see [verification](06-verification.md) for the exact boundary.
 
 ## Product decisions
 
@@ -62,6 +72,6 @@ The [private JIT runner directive](../../../AGENTS.md) applies to every GitHub A
 
 ## Planning verification
 
-At the inspected base, isolated probes reproduced blank system/artwork fields for two single-system folder roots and a collection reporting `done=1, failed=0` after a request returned `ok=false`. The six relevant existing test modules passed: **108 tests**, using Python 3.12 in an isolated environment. That is evidence of coverage gaps, not evidence the reported journeys work. See [the verification record](06-verification.md) for exact scope and commands.
+At the inspected base, isolated probes reproduced blank system/artwork fields for two single-system folder roots and a collection reporting `done=1, failed=0` after a request returned `ok=false`. The six relevant existing test modules passed: **108 tests**, using Python 3.12 in an isolated environment. That was evidence of coverage gaps, not evidence the reported journeys work. Current implementation evidence and remaining gates are recorded in [the verification record](06-verification.md).
 
-No live library, indexer, download client or emulation endpoint was exercised while preparing this plan. Application implementation remains pending in the ledger. No release note is needed for this documentation-only PR.
+No live library, indexer, download client or emulation endpoint has been exercised for the current implementation. A release-note fragment is included; source tests do not qualify live compatibility or private-JIT CI.

@@ -10,7 +10,15 @@ secure start.
 
 ## Product-specific flow
 
-After the install is claimed, guide operators from the task they want to do:
+After the install is claimed, Get Started asks what the operator wants to do
+first and which systems they care about. The current choices are to browse
+games already owned, find games to add, do both, or explore catalogs. System
+interests are optional presentation preferences grouped by console family; they
+do not remove supported systems from the application. The side navigation
+starts with task-relevant destinations and keeps a **Show all options** control
+available for every advanced page.
+
+Guide operators from the task they want to do:
 
 1. **Find releases:** configure an existing Prowlarr, Torznab/Newznab source,
    or torrent RSS feed through the current indexer settings.
@@ -20,8 +28,15 @@ After the install is claimed, guide operators from the task they want to do:
    Retrom library. Confirm the actual library root and the completed-download
    path reported by the client; explain that these paths must resolve inside
    the ROMarr container.
-4. **Improve matching (optional):** introduce DAT verification, import lists,
-   plugins, and streaming hosts only when the operator chooses those features.
+4. **Improve matching (optional):** introduce metadata providers and cover
+   refresh first; offer DAT verification, import lists, plugins, and streaming
+   hosts only when the operator chooses those features.
+
+A folder-first operator can scan and browse without configuring an indexer or
+download client. The Get Started checklist omits those setup steps unless the
+selected task includes acquisition. The Lists page offers source-scoped DAT
+catalog browsing and IGDB genre/popularity filters when configured; selected
+catalog entries go to Wanted only after an explicit confirmation.
 
 Known environment and saved values may prefill the current settings forms, but
 show their source and let the operator confirm paths. Never create a library

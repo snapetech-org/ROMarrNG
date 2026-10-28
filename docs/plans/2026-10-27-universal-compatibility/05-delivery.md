@@ -1,6 +1,6 @@
 # Delivery plan and Luna implementation ledger
 
-This ledger is the implementation handoff. All packets start **pending**. The plan PR is documentation only; none of these checkboxes imply shipped code. Confidence in ordering is **high**; complexity is relative, not a calendar estimate. Re-evaluate scope after the first real single-folder journey and the storage benchmark.
+This ledger tracks implementation in [PR #60](https://github.com/snapetech-org/ROMarrNG/pull/60). Status means source evidence only unless explicitly marked runtime qualified or released. Confidence in ordering is **high**; complexity is relative, not a calendar estimate. Re-evaluate scope after the first real single-folder journey and the storage benchmark.
 
 ## Execution rules
 
@@ -48,22 +48,22 @@ flowchart TD
 
 | Packet | Priority / relative size | Depends on | Status | Implementation PR / evidence |
 | --- | --- | --- | --- | --- |
-| R00 — reproduce and contract baseline | P0 / M | None | pending | — |
-| R01 — bounded correctness repairs | P0 / M | R00 | pending | — |
-| R02 — guided tasks and interests | P1 / M | R00 | pending | — |
-| R03 — canonical identity and mappings | P0 / L | R00 | pending | — |
-| R04 — scan snapshots and media sets | P0 / L | R03, R05, reconcile #58 | pending | — |
-| R05 — durable store/jobs and migration | P0 / L | R03 | pending | — |
-| R06 — enrichment and artwork | P0 / L | R04, R05 | pending | — |
-| R07 — qBittorrent API keys | P1 / M | R00 | pending | — |
-| R08 — actionable Games and navigation | P1 / L | R02, R03, R06 | pending | — |
-| R09 — one release evaluation contract | P0 / M | R03 | pending | — |
-| R10 — reliable set planning/execution | P0 / L | R01, R04, R05, R09 | pending | — |
-| R11 — source-scoped platform catalogs | P1 / L | R03, R05, R06 | pending | — |
-| R12 — curated lists and bulk intent | P1 / L | R10, R11 | pending | — |
-| R13 — metadata/frontend interchange | P2 / L | R04, R06 | pending | — |
-| R14 — capabilities/ecosystem qualification | P1 / L | R02, R07, R08, R09, R13 | pending | — |
-| R15 — full integration/rollout | P0 gate / L | R00–R14 | pending | — |
+| R00 — reproduce and contract baseline | P0 / M | None | in progress | PR #60: regression tests cover folder roots, metadata, collection status, catalog/Wanted and qB auth; 81 final focused tests pass. Full acceptance fixture/resource baseline remains open. |
+| R01 — bounded correctness repairs | P0 / M | R00 | source complete | PR #60: explicit folder scan-system mapping, canonical platform slugs, complete-cache ownership checks and failed collection-result handling; focused regressions. |
+| R02 — guided tasks and interests | P1 / M | R00 | in progress | PR #60: task/interests screen, task-scoped checklist/navigation and platform categories; full keyboard/mobile/RTL journey qualification remains open. |
+| R03 — canonical identity and mappings | P0 / L | R00 | in progress | PR #60: canonical platform mapping plus per-library/item metadata keys; stable scan identities, provider crosswalks and typed DTO contract remain open. |
+| R04 — scan snapshots and media sets | P0 / L | R03, R05, reconcile #58 | pending | No generation snapshots, checkpoints or logical media-set scanner delivered. Reconcile PR #58 before implementation. |
+| R05 — durable store/jobs and migration | P0 / L | R03 | in progress | PR #60: SQLite metadata sidecar, legacy JSON migration and API-backup inclusion; durable jobs, leases, outbox, strict writes and scale/recovery gates remain open. |
+| R06 — enrichment and artwork | P0 / L | R04, R05 | in progress | PR #60: per-game refresh/correction, saved metadata, opt-in recurring enrichment and detail UI; candidate review, provenance per field, bounded artwork cache and durable work remain open. |
+| R07 — qBittorrent API keys | P1 / M | R00 | source complete | PR #60: env/config schema, bearer transport, no password fallback and auth regression matrix. Live supported-version handshake/transfer remains unqualified. |
+| R08 — actionable Games and navigation | P1 / L | R02, R03, R06 | in progress | PR #60: game detail actions, category filters, task-focused nav and catalog links; source-library filters, cursor stability, 500+ UI journey and actual-file playability remain open. |
+| R09 — one release evaluation contract | P0 / M | R03 | in progress | PR #60: Add New and Interactive Search share source fan-out; direct indexers included, failure summaries shown, and failed Add New can open prefilled results. Context snapshots and identical verdict/rejection diagnostics remain open. |
+| R10 — reliable set planning/execution | P0 / L | R01, R04, R05, R09 | in progress | PR #60: invalid DAT/system checks and request-failure accounting fixed; durable preview revision, scheduled execution, pause/resume/cancel and import-state separation remain open. |
+| R11 — source-scoped platform catalogs | P1 / L | R03, R05, R06 | in progress | PR #60: DAT and IGDB source/platform pages with genre/popularity facets and inventory presence; persistent catalog snapshots, freshness/coverage and crosswalks remain open. |
+| R12 — curated lists and bulk intent | P1 / L | R10, R11 | in progress | PR #60: paginated catalog selection, explicit confirmation and selected-to-Wanted action; imported curated lists, all-page pinned selection, exclusions/idempotent outcomes remain open. |
+| R13 — metadata/frontend interchange | P2 / L | R04, R06 | pending | No scoped sidecar import/export profiles or full-inventory frontend interchange delivered. |
+| R14 — capabilities/ecosystem qualification | P1 / L | R02, R07, R08, R09, R13 | in progress | PR #60: task-aware ecosystem next steps and qB auth schema; per-operation capability evidence, backend matrix and Browser deployment qualification remain open. |
+| R15 — full integration/rollout | P0 gate / L | R00–R14 | in progress | 81 focused tests plus compile/shell syntax/diff checks pass. Full-suite run was blocked by automatic review after unexpected external HTTP; live integrations, resource budgets, browser acceptance and private-JIT run are not qualified. |
 
 P0 means correctness or an architectural dependency; it does not authorize turning every foundation into a release-blocking rewrite. The early repair/auth releases can ship independently once their own gates pass.
 
