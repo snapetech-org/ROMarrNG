@@ -203,6 +203,7 @@ DESCRIPTIONS: dict[str, tuple[str, str]] = {
     "/api/v1/manualimport": ("GET", "Scan a directory for files ROMarr could adopt."),
     "/api/v1/backup": ("GET", "A restorable snapshot. Credentials are stripped "
                               "unless ?secrets=1."),
+    "/api/v1/backup/catalog": ("GET", "A consistent SQLite snapshot of inventory generations, durable jobs, previews and the acquisition outbox."),
     "/api/v1/backup/encrypted": ("GET", "A credential-inclusive encrypted backup. "
                                           "Supply X-ROMarr-Backup-Passphrase as a header."),
     "/api/v1/restore": ("POST", "Restore a credential-free, plain full, or encrypted backup. "
@@ -211,6 +212,12 @@ DESCRIPTIONS: dict[str, tuple[str, str]] = {
     "/api/v1/frontend/formats": ("GET", "Available frontend export formats."),
     "/api/v1/frontend/export": ("GET", "LaunchBox XML, ES-DE gamelist.xml or "
                                        "Playnite JSON."),
+    "/api/v1/frontend/import/preview": ("POST", "Validate a bounded frontend sidecar and preview exact matches against a complete local folder scan."),
+    "/api/v1/frontend/import/commit": ("POST", "Apply a reviewed frontend sidecar preview while preserving conflict and generation checks."),
+    "/api/v1/library/rescan": ("POST", "Queue bounded library scans and preserve last-good generations until a new scan completes."),
+    "/api/v1/jobs": ("GET", "List durable local jobs with bounded pagination and optional state filter."),
+    "/api/v1/jobs/{jobId}": ("GET", "Read one durable job and its current state."),
+    "/api/v1/jobs/{jobId}/cancel": ("POST", "Cancel a queued durable job and any unapplied local outbox operation."),
     "/api/v1/hub/catalogue": ("GET", "Search the plugin catalogue."),
     "/api/v1/hub/plugins": ("GET", "The plugin catalogue, unfiltered."),
     "/api/v1/hub/plugin": ("POST", "Install, enable, disable or uninstall a plugin."),

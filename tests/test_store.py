@@ -90,6 +90,24 @@ def test_library_metadata_is_stored_in_sqlite_and_in_explicit_backups(tmp_path):
     assert restored.all_library_metadata() == metadata
 
 
+def test_bulk_metadata_import_rolls_back_as_one_transaction(tmp_path):
+    store = Store(tmp_path / "romarr.json")
+    bad_key = Store._library_metadata_key("library-one", "second")
+    store._metadata_db.execute(
+        "CREATE TRIGGER reject_second BEFORE INSERT ON library_metadata "
+        f"WHEN NEW.key='{bad_key}' BEGIN SELECT RAISE(ABORT, 'fixture failure'); END")
+    store._metadata_db.commit()
+
+    with pytest.raises(Exception):
+        store.set_library_metadata_many([
+            ("library-one", "first", {"summary": "Would otherwise be written."}),
+            ("library-one", "second", {"summary": "Rejected."}),
+        ])
+
+    assert store.library_metadata("library-one", "first") == {}
+    assert store.library_metadata("library-one", "second") == {}
+
+
 def test_recurring_metadata_enrichment_is_opt_in_for_existing_settings(tmp_path):
     path = tmp_path / "legacy-metadata.json"
     path.write_text(json.dumps({"settings": {

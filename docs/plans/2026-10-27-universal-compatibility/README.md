@@ -23,17 +23,23 @@ The feedback exposes missing connections between features that already exist. Fo
 5. [Ordered implementation packets and ledger](05-delivery.md): dependencies, file owners, acceptance gates, rollout and handoff instructions.
 6. [Verification and release qualification](06-verification.md): fixtures, regression scenarios, budgets, migration exercises and evidence requirements.
 
-The first implementation wave is being developed in PR #60. It currently covers
-folder-to-system mapping, guided task setup, metadata refresh/correction,
-source-scoped catalog browsing, selected-to-Wanted flow, qBittorrent API-key
-authentication, and search-source parity. The delivery ledger records which
-packets have source-level evidence and which still need implementation or
-qualification. Full scan snapshots, durable background jobs, complete
-catalog/list snapshots, frontend interchange and live compatibility evidence
-remain open work; no runtime or release qualification is implied by this PR.
-The latest focused regression set passes **81 tests**. A full-suite run was
-blocked after automatic review detected an unexpected request to an untrusted
-external host; see [verification](06-verification.md) for the exact boundary.
+PR #60 now covers folder-to-system mapping, guided task setup, metadata
+refresh/correction, source-scoped catalog browsing, selected-to-Wanted flow,
+qBittorrent API-key authentication, search-source parity, durable folder scan
+generations/media sets, the SQLite job/outbox foundation and reviewable
+frontend interchange. The delivery ledger separates implementation evidence
+from runtime qualification. Catalog/list snapshots, broader worker migration,
+live backend and scale evidence, browser journeys and private-JIT qualification
+remain open.
+
+Before this follow-up, focused suites passed 101 tests plus one separate
+catalog/Wanted HTTP case. New scan-store and interchange tests are added, but
+cannot run in the current offline environment because pytest and requests are
+not in its package cache. Direct standard-library smoke checks cover generation
+promotion/retention, outbox idempotency, SQLite backup, parser bounds and
+metadata rollback. A prior full-suite run was blocked after automatic review
+detected an unexpected request to an untrusted external host; see
+[verification](06-verification.md) for the exact boundary.
 
 ## Product decisions
 

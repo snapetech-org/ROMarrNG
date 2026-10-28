@@ -87,6 +87,14 @@ def test_the_brand_reads_romarr():
     assert _text(brand.group(1)).strip() == "ROMarr"
 
 
+def test_settings_exposes_catalog_backup_and_reviewed_frontend_import():
+    html = page()
+    for marker in ("/api/v1/backup/catalog", "Download inventory and jobs database",
+                   "fe-import-preview", "fe-import-commit",
+                   "relative path prefix", "Apply preview"):
+        assert marker in html, marker
+
+
 def test_the_old_name_appears_nowhere_a_user_can_read_it():
     assert "Rommarr" not in _text(page())
 

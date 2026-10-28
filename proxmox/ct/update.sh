@@ -105,9 +105,9 @@ fi
 # with ROMarrNG.
 systemctl stop romarr 2>/dev/null || true
 
-# SQLite's online backup API gives a consistent snapshot even when ROMarr was
-# writing metadata while the release was downloaded and staged. Make this
-# snapshot only after stopping the service, immediately before replacement.
+# SQLite's online backup API gives consistent snapshots of the metadata and
+# catalog sidecars. Make these after stopping the service, immediately before
+# replacement, so both are covered by the rollback point.
 STATE_PATH="${ROMARR_DATA:-}"
 if [[ -z "$STATE_PATH" && -f "${ROOT}/.env" ]]; then
   STATE_PATH=$(sed -n 's/^[[:space:]]*ROMARR_DATA[[:space:]]*=[[:space:]]*//p' \
@@ -124,6 +124,38 @@ state = Path(sys.argv[1])
 print(state.with_name(state.stem + ".library-metadata.sqlite3"))
 PY
 )
+CATALOG_DB_PATH="${ROMARR_CATALOG_DATA:-}"
+if [[ -z "$CATALOG_DB_PATH" && -f "${ROOT}/.env" ]]; then
+  CATALOG_DB_PATH=$(sed -n 's/^[[:space:]]*ROMARR_CATALOG_DATA[[:space:]]*=[[:space:]]*//p' \
+    "${ROOT}/.env" | tail -1)
+  CATALOG_DB_PATH=${CATALOG_DB_PATH#\"}; CATALOG_DB_PATH=${CATALOG_DB_PATH%\"}
+  CATALOG_DB_PATH=${CATALOG_DB_PATH#\'}; CATALOG_DB_PATH=${CATALOG_DB_PATH%\'}
+fi
+if [[ -z "$CATALOG_DB_PATH" ]]; then
+  CATALOG_DB_PATH=$(python3 - "$STATE_PATH" <<'PY'
+from pathlib import Path
+import sys
+state = Path(sys.argv[1])
+print(state.with_name("romarr-catalog.sqlite3"))
+PY
+)
+fi
+[[ "$CATALOG_DB_PATH" = /* ]] || CATALOG_DB_PATH="${ROOT}/${CATALOG_DB_PATH}"
+if [[ -f "$CATALOG_DB_PATH" ]]; then
+  if ! python3 - "$CATALOG_DB_PATH" "${BACKUP}/romarr-catalog.sqlite3" <<'PY'
+import sqlite3
+import sys
+
+with sqlite3.connect(sys.argv[1], timeout=10) as source:
+    with sqlite3.connect(sys.argv[2]) as destination:
+        source.backup(destination)
+PY
+  then
+    systemctl start romarr
+    die "Could not safely back up ${CATALOG_DB_PATH}; the service was restarted and the install is unchanged."
+  fi
+  printf '%s\n' "$CATALOG_DB_PATH" > "${BACKUP}/romarr-catalog.path"
+fi
 if [[ -f "$METADATA_DB_PATH" ]]; then
   if ! python3 - "$METADATA_DB_PATH" "${BACKUP}/library-metadata.sqlite3" <<'PY'
 import sqlite3
@@ -185,6 +217,12 @@ if [[ -d "${BACKUP}/romarr" ]]; then
     metadata_path=$(cat "${BACKUP}/library-metadata.path")
     mkdir -p "$(dirname "$metadata_path")"
     cp -a "${BACKUP}/library-metadata.sqlite3" "$metadata_path"
+  fi
+  if [[ -f "${BACKUP}/romarr-catalog.sqlite3" \
+        && -f "${BACKUP}/romarr-catalog.path" ]]; then
+    catalog_path=$(cat "${BACKUP}/romarr-catalog.path")
+    mkdir -p "$(dirname "$catalog_path")"
+    cp -a "${BACKUP}/romarr-catalog.sqlite3" "$catalog_path"
   fi
   systemctl start romarr
   for _ in $(seq 1 20); do

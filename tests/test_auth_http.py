@@ -930,6 +930,22 @@ def test_backup_can_include_credentials_when_asked(server):
     assert b"hunter2" in body
 
 
+def test_catalog_backup_download_is_a_valid_sqlite_snapshot(server, tmp_path):
+    import sqlite3
+
+    base, service = server
+    service.catalog_store.register_source("library-a", "folder", "/roms", "rev-1")
+    code, body, headers = get(base + "/api/v1/backup/catalog", key="testkey")
+    assert code == 200
+    assert "application/vnd.sqlite3" in headers.get("Content-Type", "")
+    assert "romarr-catalog.sqlite3" in headers.get("Content-Disposition", "")
+    backup = tmp_path / "download.sqlite3"
+    backup.write_bytes(body)
+    with sqlite3.connect(backup) as db:
+        assert db.execute("PRAGMA integrity_check").fetchone()[0] == "ok"
+        assert db.execute("SELECT source_id FROM library_sources").fetchone()[0] == "library-a"
+
+
 def test_encrypted_backup_endpoint_exports_and_restores_credentials(server):
     base, service = server
     passphrase = "correct horse battery staple"

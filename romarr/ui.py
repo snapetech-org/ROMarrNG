@@ -3851,6 +3851,7 @@ RENDER.status=async()=>{
     between installs without storing them as plain text.</p>
     <div class="row" style="flex-wrap:wrap;gap:8px">
       <button class="btn" id="bk-dl">Download backup</button>
+      <button class="btn ghost" id="bk-catalog">Download inventory and jobs database</button>
       <button class="btn ghost" id="bk-dle">Download encrypted backup with credentials</button>
       <button class="btn ghost" id="bk-dls">Download with credentials (plain JSON)</button>
       <button class="btn ghost" id="bk-rs">Restore from file…</button>
@@ -3871,6 +3872,25 @@ RENDER.status=async()=>{
     </div>
     <p class="help" style="margin-top:16px">Or as a frontend's own format:</p>
     <div class="row" style="flex-wrap:wrap;gap:8px" id="fe-row"></div>
+    <hr style="border:0;border-top:1px solid var(--line);margin:18px 0">
+    <h4>Import frontend metadata</h4>
+    <p class="help">Preview a ROMarr, LaunchBox, Playnite or ES-DE/EmulationStation file against a complete local folder scan. ROMarr never moves ROMs or fetches imported artwork URLs.</p>
+    <div class="row" style="flex-wrap:wrap;gap:8px;align-items:center">
+      <select id="fe-import-format" aria-label="Frontend format"></select>
+      <select id="fe-import-library" aria-label="Local folder library"></select>
+      <input type="file" id="fe-import-file" accept=".json,.xml,application/json,application/xml,text/xml">
+      <input id="fe-source-prefix" placeholder="Source path prefix for absolute paths (optional)">
+      <input id="fe-relative-prefix" placeholder="Relative path prefix under library root (optional)">
+      <input id="fe-default-platform" placeholder="Default platform if the file omits it">
+      <select id="fe-conflict-policy" aria-label="Metadata conflict policy">
+        <option value="keep">Keep existing metadata</option>
+        <option value="replace">Replace conflicting metadata</option>
+      </select>
+      <button class="btn" id="fe-import-preview">Preview import</button>
+      <button class="btn ghost" id="fe-import-commit" disabled>Apply preview</button>
+    </div>
+    <div id="fe-import-msg" class="testline"></div>
+    <div id="fe-import-results"></div>
     </div>`;
 
   wireGGRequestz();
@@ -3882,6 +3902,7 @@ RENDER.status=async()=>{
     a.href=url; a.download=name; document.body.append(a); a.click(); a.remove();};
 
   $('#bk-dl').onclick=()=>save('/api/v1/backup','romarr-backup.json');
+  $('#bk-catalog').onclick=()=>save('/api/v1/backup/catalog','romarr-catalog.sqlite3');
   $('#bk-dle').onclick=async()=>{
     const pass=promptMessage('Choose a passphrase with at least 16 non-whitespace characters. Keep it separately; ROMarr cannot recover it.');
     if(pass===null) return;
@@ -3936,6 +3957,63 @@ RENDER.status=async()=>{
   feRow.querySelectorAll('.fe-btn').forEach(b=>b.onclick=()=>
     save('/api/v1/frontend/export?format='+b.dataset.f,
          'romarr-'+b.dataset.f+'.export'));
+
+  const importFormats=fe.imports||[];
+  $('#fe-import-format').innerHTML=importFormats.map(f=>
+    `<option value="${esc(f.name)}">${esc(f.label||f.name)}</option>`).join('');
+  const sources=await j('/api/v1/frontend/sources').catch(()=>({items:[]}));
+  const localSources=(sources.items||[]).filter(s=>s.scan);
+  $('#fe-import-library').innerHTML=localSources.map(s=>
+    `<option value="${esc(s.id)}">${esc(s.name)} — ${esc(s.type)}</option>`).join('')
+    ||'<option value="">No scanned local folder libraries</option>';
+  const importMsg=(ok,message)=>{
+    const el=$('#fe-import-msg'); el.className='testline '+(ok?'ok':'bad');
+    el.textContent=message;
+  };
+  let activeImportPreview='';
+  $('#fe-import-preview').onclick=async()=>{
+    const file=$('#fe-import-file').files[0];
+    if(!file){importMsg(false,'Choose a frontend export file first.');return;}
+    if(file.size>20*1024*1024){importMsg(false,'The import exceeds the 20 MiB limit.');return;}
+    importMsg(true,'Reading and matching metadata…');
+    $('#fe-import-commit').disabled=true; $('#fe-import-results').innerHTML='';
+    try{
+      const payload=await file.text();
+      const result=await j('/api/v1/frontend/import/preview',{method:'POST',
+        headers:{'Content-Type':'application/json'},body:JSON.stringify({
+          format:$('#fe-import-format').value,
+          library_id:$('#fe-import-library').value,
+          source_prefix:$('#fe-source-prefix').value,
+          relative_prefix:$('#fe-relative-prefix').value,
+          default_platform:$('#fe-default-platform').value,payload})});
+      if(!result.ok) throw new Error(result.error||'Could not preview this file.');
+      activeImportPreview=result.preview_id;
+      const rows=result.sample||[];
+      $('#fe-import-results').innerHTML=`<p class="help">Matched ${fmt(result.matched)}; unmatched ${fmt(result.unmatched)}; platform conflicts ${fmt(result.platform_conflicts)}; metadata conflicts ${fmt(result.value_conflicts)}. ${rows.length<result.matched?'Showing the first '+fmt(rows.length)+' matches.':''}</p>`
+        +rows.map(row=>`<details class="card" style="margin:8px 0"><summary>${esc(row.title)} <span class="pill">${esc(row.locator)}</span>${row.conflicts.length?' <span class="pill">conflict</span>':''}</summary>`
+          +`<p class="help">${row.conflicts.length?'Existing values are preserved by default.':'No existing metadata conflicts.'}</p>`
+          +(row.conflicts.length?`<pre style="white-space:pre-wrap">${esc(JSON.stringify({existing:row.current,imported:row.proposed},null,2))}</pre><label>For this game <select data-fe-decision="${esc(row.item_id)}"><option value="keep">Keep existing</option><option value="replace">Replace</option><option value="skip">Skip game</option></select></label>`:'')
+          +'</details>').join('');
+      $('#fe-import-commit').disabled=false;
+      importMsg(true,'Preview is ready. Review the matches and apply it when ready.');
+    }catch(err){activeImportPreview='';importMsg(false,err.message||'Could not preview this file.');}
+  };
+  $('#fe-import-commit').onclick=async()=>{
+    if(!activeImportPreview)return;
+    if(!confirmMessage('Apply imported metadata to the matched games? ROM files will not be changed.'))return;
+    $('#fe-import-commit').disabled=true; importMsg(true,'Applying metadata…');
+    try{
+      const decisions={};
+      document.querySelectorAll('[data-fe-decision]').forEach(el=>decisions[el.dataset.feDecision]=el.value);
+      const result=await j('/api/v1/frontend/import/commit',{method:'POST',
+        headers:{'Content-Type':'application/json'},body:JSON.stringify({
+          preview_id:activeImportPreview,
+          conflict_policy:$('#fe-conflict-policy').value,decisions})});
+      if(!result.ok)throw new Error(result.error||'Could not apply the preview.');
+      activeImportPreview='';
+      importMsg(true,`Updated ${fmt(result.updated)} games; kept ${fmt(result.conflicts_kept)} conflicting values; skipped ${fmt(result.skipped)}.`);
+    }catch(err){$('#fe-import-commit').disabled=false;importMsg(false,err.message||'Could not apply the preview.');}
+  };
 };
 
 // GG Requestz pushes to ROMarr; the reachability probe above is deliberately

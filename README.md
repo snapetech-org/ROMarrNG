@@ -606,6 +606,7 @@ request actually came through it.
 | `ROMARR_PLAYERS` | no | Which browser players to offer, best first: `emulatorjs,ruffle,jsdos,emularity`. All four when unset; `none` turns every browser route off |
 | `ROMARR_JSDOS_URL` / `ROMARR_EMULARITY_URL` | no | Where your own js-dos and Emularity live. Without one, ROMarr reports that the player *would* run a file and names the setting that would let it link there |
 | `ROMARR_DATA` | no | Path to the state file |
+| `ROMARR_CATALOG_DATA` | no | SQLite path for durable folder scans, jobs, previews and acquisition outbox; defaults beside `ROMARR_DATA` |
 | `ROMARR_HOST` | no | Address to listen on (default `0.0.0.0`); use `127.0.0.1` only when the proxy shares the host network namespace |
 | `ROMARR_ALLOW_UNSANDBOXED_PLUGINS` | no | Explicitly allow ROM Hub plugins when Landlock or seccomp is unavailable; keep unset to require both boundaries |
 | `DAT_PATH` | no | Directory of No-Intro / Redump DATs. Loose `.dat`/`.xml` files **and** the ZIP archives No-Intro distributes are read, including one level down beside the platform they describe. Point it at a DAT directory, not at your ROM library |

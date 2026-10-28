@@ -369,6 +369,12 @@ python -m romarr
 State goes to `/opt/romarr/romarr.json` unless you set `ROMARR_DATA`. On a
 laptop you almost certainly want to.
 
+Folder-library scan generations, resumable checkpoints, durable jobs,
+selection previews and the acquisition outbox live in `romarr-catalog.sqlite3`
+beside that state file. Set `ROMARR_CATALOG_DATA` to move it. Keep it on local
+storage with reliable SQLite locking; the database uses rollback journaling
+and full synchronous commits.
+
 Install `bsdtar` (`libarchive-tools` on Debian/Ubuntu, `libarchive` on Alpine
 and Arch, `brew install libarchive` on macOS) or every disc-platform import
 fails on a format it cannot open — the PlayStation, PS2 and Wii sets ship
@@ -506,6 +512,7 @@ Every variable ROMarr reads. "Seeded" means first-run only — see
 | `ROMARR_PORT` | `6868` | Nothing listens where you expect. Change the published port to match. |
 | `ROMARR_HOST` | `0.0.0.0` | The address ROMarr listens on. Use `127.0.0.1` only when the proxy shares the host network namespace. |
 | `ROMARR_DATA` | `/opt/romarr/romarr.json` (`/config/romarr.json` in Docker) | Points at a new file → a fresh, unclaimed install with a new API key. Points at an unreadable file → **ROMarr refuses to start** and says so, rather than overwriting it. |
+| `ROMARR_CATALOG_DATA` | `romarr-catalog.sqlite3` beside `ROMARR_DATA` | Path for durable scan generations, jobs, previews and acquisition outbox. Keep SQLite on storage with reliable locking. |
 | `LOG_LEVEL` | `INFO` | `DEBUG` for the full request trace. |
 | `PUID` / `PGID` | `1000` / `1000` | Imported ROMs are owned by the wrong user; your library server may not be able to read them. Docker only. |
 | `UMASK` | `002` | New files are not group-writable. Three or four octal digits; Docker only. Existing downloads are never rewritten. |
@@ -707,8 +714,15 @@ history from the JSON file and saved per-game metadata from SQLite.
 docker compose stop
 cp /srv/romarr/config/romarr.json /somewhere/safe/romarr-$(date +%F).json
 cp /srv/romarr/config/romarr.library-metadata.sqlite3 /somewhere/safe/romarr-$(date +%F).library-metadata.sqlite3
+cp /srv/romarr/config/romarr-catalog.sqlite3 /somewhere/safe/romarr-$(date +%F).catalog.sqlite3
 docker compose start
 ```
+
+The catalog database can also be downloaded as a consistent SQLite online
+snapshot from **Settings → Backup and export → Download inventory and jobs
+database**, or from `GET /api/v1/backup/catalog`. Store it beside the JSON
+backup and metadata sidecar when you need resumable generations and jobs after
+a restore. A custom `ROMARR_CATALOG_DATA` location must be backed up explicitly.
 
 **2. Or use the API**, which produces a portable settings and metadata snapshot
 rather than files you have to find:
@@ -828,8 +842,8 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 
 **A rollback is code-only.** If the version you are leaving wrote a setting the
 older one does not understand, the older one drops it — unknown keys are not
-stored — so roll back with copies of `romarr.json` and
-`romarr.library-metadata.sqlite3` in hand.
+stored — so roll back with copies of `romarr.json`,
+`romarr.library-metadata.sqlite3` and `romarr-catalog.sqlite3` in hand.
 
 ### Proxmox LXC
 
@@ -841,6 +855,10 @@ systemctl stop romarr
 rm -rf /opt/romarr/romarr
 cp -a /opt/romarr-backup-<stamp>/romarr /opt/romarr/
 cp -a /opt/romarr-backup-<stamp>/romarr.json /opt/romarr/
+if [ -f /opt/romarr-backup-<stamp>/romarr-catalog.sqlite3 ]; then
+  cp -a /opt/romarr-backup-<stamp>/romarr-catalog.sqlite3 \
+    "$(cat /opt/romarr-backup-<stamp>/romarr-catalog.path)"
+fi
 if [ -f /opt/romarr-backup-<stamp>/library-metadata.sqlite3 ]; then
   cp -a /opt/romarr-backup-<stamp>/library-metadata.sqlite3 \
     "$(cat /opt/romarr-backup-<stamp>/library-metadata.path)"

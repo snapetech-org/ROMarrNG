@@ -66,6 +66,38 @@ route rerun.
 not retried after the automatic-review block described in V1.1. Runtime and
 private-JIT qualification remain open.
 
+## V1.3. Durable scan and interchange follow-up (2026-10-28)
+
+The follow-up adds durable folder scan generations with resumable directory
+cursors, last-good promotion, M3U/CUE media grouping, SQLite job leases and a
+Wanted outbox bridge, a consistent catalog-database backup route, and
+reviewable frontend metadata import/export. Focused tests were added in
+`test_catalog_store.py`, `test_frontend_interchange.py`, `test_frontends.py`,
+`test_store.py`, `test_auth_http.py`, `test_ui.py` and `test_installer.py`.
+
+Local evidence for this follow-up:
+
+- `python3 -m compileall -q romarr tests` passed.
+- `bash -n proxmox/ct/update.sh` passed.
+- `git diff --check` passed.
+- A direct standard-library smoke run passed scan publication/last-good
+  retention, outbox idempotency, online SQLite backup integrity, frontend
+  exchange parsing, metadata transaction rollback and the rendered Settings
+  import/backup controls.
+- The focused pytest suite could not run: `uv run --offline --with pytest
+  --with requests pytest --version` reported that pytest is absent from the
+  package cache, and network package resolution is disabled in this runtime.
+  No claim is made that the newly added pytest cases passed.
+
+Private-JIT qualification is blocked for the actual candidate revision. The
+repository directive in `AGENTS.md` prohibits hosted fallback. PR #56's latest
+handoff says the isolated group-5 runner pool has no registered runners and
+the C0/current-slot-owner handoff is unconfirmed; the GitHub connection here
+can read runs/status but cannot dispatch a workflow. No exact-head private-JIT
+result exists. Live backends, filesystem diversity, 23k/177k scale targets,
+browser journeys, upgrade/restore/rollback and concurrency fault injection
+remain release gates.
+
 ## V2. Fixture suite
 
 Keep fixtures synthetic and redistributable: small binary headers/descriptors, invented titles, deterministic hashes, sanitized provider responses and fake HTTP/grpc-web endpoints. No commercial ROM payloads, private tokens, downloaded catalogs of uncertain redistribution status or live indexer credentials.

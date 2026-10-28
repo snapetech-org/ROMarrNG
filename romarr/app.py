@@ -40,6 +40,7 @@ import pathlib
 import re
 import secrets as _secrets
 import tarfile
+import tempfile
 import threading
 import unicodedata
 from dataclasses import asdict, dataclass, field, replace
@@ -84,7 +85,7 @@ from .capture import ingest as capture_ingest
 from .capture import status as capture_status
 from .catalogue import (Submission, check_source, facets as hub_facets,
                         search as hub_search, submission_link)
-from .frontends import FORMATS as FRONTEND_FORMATS
+from .frontends import FORMATS as FRONTEND_FORMATS, IMPORT_FORMATS as FRONTEND_IMPORT_FORMATS
 from .metadata import PROVIDERS as METADATA_PROVIDERS
 from .notify import (FIELD_HELP, FIELD_LABELS, NOTIFIERS, Message, Notifier,
                      failed, grabbed, imported, send_test, update_available)
@@ -1044,6 +1045,14 @@ class ROMarr:
         # lost everything you had asked for, which is the difference between a
         # tool and a demo.
         self.store = Store(e.get("ROMARR_DATA", "/opt/romarr/romarr.json"))
+        # Large inventories and durable work live beside the configured state
+        # file. Keep the older per-game metadata sidecar separate so existing
+        # installations upgrade without a file move or schema ambiguity.
+        from .catalog_store import CatalogStore
+        catalog_path = e.get("ROMARR_CATALOG_DATA") or str(
+            self.store.path.with_name("romarr-catalog.sqlite3"))
+        self.catalog_store = CatalogStore(catalog_path)
+        self._recover_wanted_outbox()
         # Translation, hack and improvement projects. Nothing is bundled:
         # projects come from <data dir>/patch-catalog.d and an optional URL.
         self.patches = PatchCatalog(
@@ -1383,6 +1392,10 @@ class ROMarr:
                      else 0),
             self.start_metadata_enrichment)
         self.scheduler.add(
+            "DurableOutbox", "Reconcile accepted local acquisition intents",
+            lambda: 30,
+            self._process_wanted_outbox)
+        self.scheduler.add(
             "CollectionBatches", "Continue set acquisition batches",
             self._collection_interval,
             self._schedule_collection_work)
@@ -1430,6 +1443,7 @@ class ROMarr:
             # answer than no breakdown.
             on_disk: int | None = 0
             catalogued: int | None = 0
+            scan_work = False
             # The authoritative platform list, straight from each backend.
             # Derived-from-the-cache chips are a prefix of the truth while
             # the walk runs, and a person looking for a platform the walk
@@ -1471,6 +1485,22 @@ class ROMarr:
             for cfg, backend in self.game_libraries:
                 label = cfg.get("name") or getattr(backend, "name", "library")
                 expected = None
+                if getattr(backend, "durable_scan", False):
+                    try:
+                        scan = backend.scan_slice()
+                        if scan.get("status") == "running":
+                            scan_work = True
+                        if not scan.get("complete"):
+                            inventory_complete = False
+                        if scan.get("error") or scan.get("truncation_reason"):
+                            detail = (scan.get("error") or
+                                      scan.get("truncation_reason"))
+                            reasons[label] = str(detail)
+                    except Exception as err:  # noqa: BLE001 - keep last good generation
+                        inventory_complete = False
+                        reasons[label] = _read_failure(err)
+                        log.warning("folder scan refresh failed for %s: %s",
+                                    label, err.__class__.__name__)
                 try:
                     split = library_counts(backend)
                     expected = split.get("total")
@@ -1525,7 +1555,10 @@ class ROMarr:
                             break
                     if expected is not None and offset < int(expected):
                         inventory_complete = False
-                    if backend_limit and offset >= backend_limit:
+                    durable_scan = getattr(backend, "durable_scan", False)
+                    scan_complete = (backend.scan_status().get("complete")
+                                     if durable_scan else False)
+                    if backend_limit and offset >= backend_limit and not scan_complete:
                         # A capped folder walk cannot prove that a set is
                         # complete at the exact cap, so Collections must not
                         # turn the unseen tail into a missing list.
@@ -1560,7 +1593,8 @@ class ROMarr:
                 cached, at, _ = self._library_cache
                 self._library_cache = (cached, at, "; ".join(failures))
 
-            delay = self.COUNT_TTL if ok else min(delay * 2, 300)
+            delay = (1 if scan_work else
+                     self.COUNT_TTL if ok else min(delay * 2, 300))
             self._wait(delay)
 
     def _wait(self, seconds: float) -> None:
@@ -1665,6 +1699,9 @@ class ROMarr:
                 "facets": getattr(self, "_library_facets", {}),
                 "libraries": names,
                 "library": self.game_library.name,
+                "scans": [backend.scan_status() for _cfg, backend
+                          in self.game_libraries
+                          if callable(getattr(backend, "scan_status", None))],
                 "age_seconds": int(time.monotonic() - at) if at else None,
                 "error": err}
 
@@ -1772,6 +1809,19 @@ class ROMarr:
                 continue
             backend = build_library_from_config(cfg)
             if backend is not None:
+                if callable(getattr(backend, "bind_catalog", None)):
+                    source_id = str(cfg.get("id") or hashlib.sha256(
+                        f"{cfg.get('type', '')}\0{cfg.get('path', '')}".encode()
+                    ).hexdigest()[:32])
+                    public_config = {
+                        key: cfg.get(key) for key in
+                        ("type", "path", "scan_platform", "scan_mappings")
+                        if key in cfg
+                    }
+                    revision = hashlib.sha256(json.dumps(
+                        public_config, ensure_ascii=False, sort_keys=True,
+                        separators=(",", ":")).encode("utf-8")).hexdigest()
+                    backend.bind_catalog(self.catalog_store, source_id, revision)
                 built.append((cfg, backend))
         self.game_libraries = built
 
@@ -3442,7 +3492,7 @@ class ROMarr:
                 "inventory_complete": complete, "results": rows,
                 "next_offset": next_offset}
 
-    def wanted_bulk(self, items) -> dict:
+    def wanted_bulk(self, items, *, idempotency_key: str = "") -> dict:
         """Add a bounded, explicitly selected catalog page to Wanted."""
         from .dat_catalog import _normalise
         from .dat import base_title
@@ -3500,13 +3550,69 @@ class ROMarr:
             else:
                 eligible.append((game, slug))
 
-        added, existing = self.store.want_many(eligible) if eligible else (0, 0)
+        if eligible:
+            try:
+                _job_id, operation_id = self.catalog_store.create_wanted_operation(
+                    eligible, idempotency_key=str(idempotency_key or ""))
+                added, existing = self._apply_wanted_outbox(operation_id)
+            except Exception as err:  # noqa: BLE001 - do not report a false acceptance
+                return {"ok": False,
+                        "error": "The selected games could not be durably added to Wanted. "
+                                 "The operation remains available for safe recovery if it was accepted.",
+                        "detail": err.__class__.__name__}
+        else:
+            added, existing = 0, 0
         result = {"ok": True, "added": added,
                   "already_wanted": already_wanted + existing,
                   "total": len(clean)}
         if skipped:
             result["skipped"] = skipped
         return result
+
+    def _apply_wanted_outbox(self, operation_id: str) -> tuple[int, int]:
+        """Apply one JSON Store mutation once, then acknowledge its SQLite row."""
+        rows = {row["operation_id"]: row
+                for row in self.catalog_store.pending_outbox(limit=500)}
+        item = rows.get(operation_id)
+        if item is None:
+            # A repeated client request can refer to an already-acknowledged
+            # idempotent operation. Its Store receipt is the durable answer.
+            result = self.store.operation_result(operation_id)
+            if result:
+                return int(result.get("added") or 0), int(result.get("existing") or 0)
+            raise RuntimeError("outbox operation is unavailable")
+        payload = item.get("payload") or {}
+        wanted = payload.get("items") or []
+        clean = [(str(row.get("game") or ""), str(row.get("platform") or ""))
+                 for row in wanted if isinstance(row, dict)]
+        added, existing = self.store.want_many(clean, operation_id=operation_id)
+        outcome = {"added": added, "existing": existing,
+                   "accepted": len(clean)}
+        self.catalog_store.acknowledge_outbox(operation_id, outcome)
+        return added, existing
+
+    def _recover_wanted_outbox(self) -> dict:
+        """Replay only local Wanted operations; no network mutation is retried."""
+        recovered = 0
+        failed = 0
+        for row in self.catalog_store.pending_outbox(limit=100):
+            if row.get("target_identity") != "legacy-store:wanted":
+                continue
+            try:
+                self._apply_wanted_outbox(str(row["operation_id"]))
+                recovered += 1
+            except Exception as err:  # noqa: BLE001 - keep service available
+                failed += 1
+                self.catalog_store.fail_outbox(
+                    str(row["operation_id"]), err.__class__.__name__)
+                log.warning("Wanted outbox recovery deferred: %s",
+                            err.__class__.__name__)
+        return {"recovered": recovered, "failed": failed}
+
+    def _process_wanted_outbox(self) -> str:
+        result = self._recover_wanted_outbox()
+        return (f"reconciled {result['recovered']} accepted Wanted operation(s); "
+                f"{result['failed']} remain pending")
 
     def dat_names(self) -> list[str]:
         from .titled import SWITCH_COLLECTION
@@ -4011,40 +4117,295 @@ class ROMarr:
         return {"ok": True, "platform": selected.slug if selected else "",
                 "name": selected.name if selected else ""}
 
-    def frontend_rows(self, platform: str = "") -> list[dict]:
-        """The library flattened into the shape every frontend export wants.
+    def frontend_rows(self, platform: str = "", library_id: str = "", *,
+                      target_root: str = "") -> list[dict]:
+        """Read every row in a complete source and keep only real launch paths."""
+        from .libraries import FolderLibrary
 
-        One shape for all three, because the differences between LaunchBox,
-        Playnite and EmulationStation are in how the fields are *written*, not
-        in which fields exist -- and three near-identical row builders would
-        drift apart the first time one of them gained a column.
-        """
-        items = (self.library_view() or {}).get("items", [])
-        wanted = str(platform or "").strip().lower()
-        rows = []
-        for item in items:
-            slug = str(item.get("platform_slug") or item.get("platform") or "")
-            if wanted and slug.lower() != wanted:
-                continue
-            name = str(item.get("file_name") or item.get("filename")
-                       or item.get("name") or "")
-            rows.append({
-                "id": item.get("id") or item.get("rom_id") or "",
-                "title": item.get("name") or item.get("title") or name,
-                "platform": slug,
-                "filename": name,
-                # The default library root, not library_root(None): that
-                # helper reads its argument, and handing it None was a 500
-                # on every export whose backend rows carry no path -- which
-                # is what RomM's cached rows look like. Caught live by
-                # scripts/playnite_proof.ps1.
-                "path": item.get("path") or item.get("full_path")
-                        or (str(self.library / slug / name)
-                            if name and slug else ""),
-                "region": item.get("region") or "",
-                "verified": item.get("verified") or "",
-            })
+        requested = str(platform or "").strip()
+        selected = resolve(requested) if requested else None
+        if requested and selected is None:
+            raise ValueError(f"Unknown platform: {requested}")
+        wanted = selected.slug if selected else ""
+        sources = [(cfg, backend) for cfg, backend in self.game_libraries
+                   if not library_id or str(cfg.get("id") or cfg.get("name") or "")
+                   == str(library_id)]
+        if not sources:
+            # Preserve the in-process utility for callers that supply a test
+            # snapshot directly, while refusing to manufacture a path from a
+            # display title or a guessed default root.
+            games = list((self._library_cache[0] or []))
+            sources = [({"id": "", "name": "cache", "path": ""},
+                        type("CachedSource", (), {"games": lambda _s, **_kw: games,
+                                                  "count": lambda _s: len(games)})())]
+        rows: list[dict] = []
+        skipped = 0
+        expected_total = 0
+        for cfg, backend in sources:
+            status = (backend.scan_status()
+                      if callable(getattr(backend, "scan_status", None)) else None)
+            if isinstance(backend, FolderLibrary) and backend.durable_scan:
+                if not status or not status.get("complete"):
+                    raise ValueError(
+                        "The folder inventory has no complete scan generation yet. "
+                        "Wait for scanning to finish, then export again.")
+            counts = library_counts(backend)
+            expected = counts.get("total")
+            if expected is None:
+                raise ValueError(
+                    f"{cfg.get('name') or backend.name} cannot prove a complete export count.")
+            expected = int(expected)
+            if expected > 500_000:
+                raise ValueError("This frontend export is over the 500,000-item safety limit.")
+            offset = 0
+            while offset < expected:
+                batch = backend.games(limit=1000, offset=offset,
+                                      timeout=getattr(backend, "BACKGROUND_TIMEOUT", 300))
+                if not batch:
+                    raise ValueError(
+                        f"{cfg.get('name') or backend.name} returned a short page; "
+                        "the export was stopped before creating an incomplete file.")
+                for game in batch:
+                    slug = str(game.platform_slug or "")
+                    mapped = resolve(slug or game.platform)
+                    slug = mapped.slug if mapped else slug
+                    if wanted and slug != wanted:
+                        continue
+                    expected_total += 1
+                    path = str(game.path or "").strip()
+                    locator = str(game.locator or "").strip()
+                    if not path and locator and cfg.get("path"):
+                        path = str(Path(cfg["path"]) / Path(locator))
+                    entry = Path(path) if path else None
+                    relative_path = locator
+                    if entry is not None and entry.is_dir():
+                        platform = resolve(slug)
+                        if not platform or not platform.directory_layout:
+                            entry = None
+                        else:
+                            candidate = entry.joinpath(*platform.directory_layout[0].split("/"))
+                            entry = candidate if candidate.is_file() else None
+                            if entry is not None:
+                                relative_path = f"{locator}/{platform.directory_layout[0]}"
+                    if entry is None or not entry.is_file():
+                        skipped += 1
+                        continue
+                    if not locator:
+                        root = str(cfg.get("path") or "")
+                        if root:
+                            try:
+                                locator = Path(path).relative_to(Path(root)).as_posix()
+                            except ValueError:
+                                locator = ""
+                    if not locator:
+                        skipped += 1
+                        continue
+                    saved = self.store.library_metadata(
+                        str(game.library_id or cfg.get("id") or "default"), str(game.id))
+                    output_path = str(entry)
+                    if target_root:
+                        output_path = str(Path(target_root) / Path(relative_path))
+                    rows.append({
+                        "id": str(game.id), "library_id": str(game.library_id or ""),
+                        "title": str(saved.get("metadata_title") or game.name),
+                        "platform": slug, "platform_slug": slug,
+                        "filename": entry.name, "path": output_path,
+                        "locator": locator, "relative_path": relative_path,
+                        "region": str(saved.get("region") or ""),
+                        "released": str(saved.get("released") or game.released or ""),
+                        "rating": saved.get("rating") or game.rating or 0,
+                        "genres": list(saved.get("genres") or game.genres or ()),
+                        "desc": str(saved.get("summary") or game.summary or ""),
+                        "cover": str(saved.get("cover_url") or game.cover or ""),
+                        "notes": str(saved.get("notes") or ""),
+                        "verified": "",
+                        "source_fields": dict(saved.get("frontend_source_fields") or {}),
+                    })
+                offset += len(batch)
+                if offset > expected:
+                    raise ValueError("The source changed while it was being exported.")
+            if offset != expected:
+                raise ValueError("The source changed while it was being exported.")
+        self._frontend_export_stats = {
+            "total": expected_total, "exported": len(rows),
+            "unsupported": skipped,
+            "complete": len(rows) + skipped == expected_total,
+        }
         return rows
+
+    def frontend_import_preview(self, profile: str, payload: str, *,
+                                library_id: str, source_prefix: str = "",
+                                relative_prefix: str = "",
+                                default_platform: str = "") -> dict:
+        from .frontends import parse_frontend_import, safe_relative_locator
+
+        source = next(((cfg, backend) for cfg, backend in self.game_libraries
+                       if str(cfg.get("id") or cfg.get("name") or "") == library_id), None)
+        if source is None:
+            return {"ok": False, "error": "Choose a configured library first."}
+        cfg, backend = source
+        if not callable(getattr(backend, "scan_status", None)):
+            return {"ok": False,
+                    "error": "Sidecar matching currently requires a local folder library."}
+        scan = backend.scan_status()
+        if not scan.get("complete"):
+            return {"ok": False,
+                    "error": "Wait for a complete folder scan before importing sidecar metadata."}
+        try:
+            incoming = parse_frontend_import(profile, payload,
+                                             source_prefix=source_prefix)
+            prefix = (safe_relative_locator(relative_prefix)
+                      if relative_prefix else "")
+        except ValueError as err:
+            return {"ok": False, "error": str(err)}
+        if default_platform:
+            chosen = resolve(default_platform)
+            if chosen is None:
+                return {"ok": False, "error": "Choose a supported default platform."}
+            default_platform = chosen.slug
+        by_locator = {}
+        total = int(backend.count())
+        offset = 0
+        while offset < total:
+            batch = backend.games(limit=2000, offset=offset)
+            if not batch:
+                return {"ok": False,
+                        "error": "The library changed during preview. Refresh the library and try again."}
+            by_locator.update({str(game.locator): game for game in batch if game.locator})
+            offset += len(batch)
+        planned = []
+        unmatched = 0
+        platform_conflicts = 0
+        value_conflicts = 0
+        for row in incoming:
+            locator = f"{prefix}/{row['locator']}" if prefix else row["locator"]
+            game = by_locator.get(locator)
+            if game is None:
+                unmatched += 1
+                continue
+            imported_platform = resolve(row.get("platform") or default_platform)
+            current_platform = resolve(game.platform_slug or game.platform)
+            if imported_platform and current_platform and imported_platform.slug != current_platform.slug:
+                platform_conflicts += 1
+                continue
+            metadata = row.get("metadata") or {}
+            cover = str(metadata.get("cover_url") or "")
+            if cover and not cover.startswith("https://"):
+                cover = ""
+            metadata_library_id = str(game.library_id or cfg.get("id")
+                                      or library_id or "default")
+            current = self.store.library_metadata(metadata_library_id,
+                                                  str(game.id))
+            fields_from_import = {
+                "metadata_title": row.get("title") or "",
+                "summary": metadata.get("summary") or "",
+                "released": metadata.get("released") or "",
+                "rating": metadata.get("rating") or 0,
+                "genres": metadata.get("genres") or [],
+                "cover_url": cover,
+                "notes": metadata.get("notes") or "",
+            }
+            patch = {key: value for key, value in fields_from_import.items()
+                     if value not in ("", [], 0, None)}
+            if patch:
+                imported_source_fields = row.get("source_fields") or {}
+                previous_source_fields = current.get("frontend_source_fields") or {}
+                if profile == "romarr-json" and isinstance(imported_source_fields, dict):
+                    source_fields = {**previous_source_fields, **imported_source_fields}
+                else:
+                    source_fields = {**previous_source_fields,
+                                     profile: imported_source_fields}
+                patch.update({
+                    "metadata_source": f"frontend:{profile}",
+                    "metadata_status": "identified",
+                    "frontend_source_fields": source_fields,
+                })
+            conflicts = [key for key, value in patch.items()
+                         if key not in ("metadata_source", "metadata_status",
+                                        "frontend_source_fields")
+                         and current.get(key) not in (None, "", [], 0)
+                         and current.get(key) != value]
+            if conflicts:
+                value_conflicts += 1
+            planned.append({"item_id": str(game.id),
+                            "metadata_library_id": metadata_library_id,
+                            "locator": locator,
+                            "title": str(game.name), "patch": patch,
+                            "current": {key: current.get(key) for key in conflicts},
+                            "conflicts": conflicts})
+        preview = {"profile": profile, "library_id": library_id,
+                   "generation": str(scan.get("generation") or ""),
+                   "items": planned, "unmatched": unmatched,
+                   "platform_conflicts": platform_conflicts,
+                   "value_conflicts": value_conflicts}
+        preview_id = self.catalog_store.put_preview(
+            preview, source_id=library_id,
+            inventory_generation=preview["generation"],
+            policy_revision=str(scan.get("config_revision") or ""))
+        return {"ok": True, "preview_id": preview_id,
+                "matched": len(planned), "unmatched": unmatched,
+                "platform_conflicts": platform_conflicts,
+                "value_conflicts": value_conflicts,
+                "sample": [{"item_id": row["item_id"], "locator": row["locator"],
+                            "title": row["title"], "conflicts": row["conflicts"],
+                            "current": row["current"],
+                            "proposed": {key: row["patch"].get(key)
+                                         for key in row["conflicts"]}}
+                           for row in planned[:100]]}
+
+    def frontend_import_commit(self, preview_id: str, *, conflict_policy: str = "keep",
+                               decisions: dict | None = None) -> dict:
+        preview_row = self.catalog_store.get_preview(preview_id)
+        if not preview_row:
+            return {"ok": False, "error": "That preview expired. Preview the file again."}
+        preview = preview_row["payload"]
+        source = next(((cfg, backend) for cfg, backend in self.game_libraries
+                       if str(cfg.get("id") or cfg.get("name") or "")
+                       == str(preview.get("library_id") or "")), None)
+        if source is None:
+            return {"ok": False, "error": "The selected library is no longer configured."}
+        _cfg, backend = source
+        current = backend.scan_status() if callable(
+            getattr(backend, "scan_status", None)) else {}
+        if str(current.get("generation") or "") != str(preview.get("generation") or ""):
+            return {"ok": False,
+                    "error": "The inventory changed after preview. Review the file again."}
+        if conflict_policy not in ("keep", "replace"):
+            return {"ok": False, "error": "Choose keep or replace for conflicting metadata."}
+        updates = []
+        conflicts_kept = 0
+        skipped = 0
+        for row in preview.get("items") or []:
+            decision = str((decisions or {}).get(str(row.get("item_id") or ""))
+                           or conflict_policy)
+            if decision not in ("keep", "replace", "skip"):
+                decision = "keep"
+            if decision == "skip":
+                skipped += 1
+                continue
+            if row.get("conflicts") and decision == "keep":
+                patch = {key: value for key, value in row["patch"].items()
+                         if key not in row["conflicts"]}
+                conflicts_kept += 1
+            else:
+                patch = row["patch"]
+            updates.append((str(row.get("metadata_library_id")
+                                or preview["library_id"]),
+                            str(row["item_id"]), patch))
+        try:
+            written = self.store.set_library_metadata_many(updates)
+        except Exception as err:  # noqa: BLE001 - partial batches are safe to replay
+            return {"ok": False, "error": "Metadata could not be saved durably. "
+                    "Preview again before retrying.", "detail": err.__class__.__name__}
+        games, _at, error = self._library_cache
+        if games is not None:
+            self._publish_library(games, error,
+                                  partial=getattr(self, "_library_partial", False))
+        return {"ok": True, "updated": written,
+                "conflicts_kept": conflicts_kept,
+                "skipped": skipped,
+                "unmatched": int(preview.get("unmatched") or 0),
+                "platform_conflicts": int(preview.get("platform_conflicts") or 0)}
 
     def metrics(self) -> str:
         """Everything a scrape needs, from state already computed."""
@@ -6005,12 +6366,35 @@ def make_handler(service: ROMarr):
     class Handler(BaseHTTPRequestHandler):
         server_version = "ROMarr"
 
-        def _send(self, code: int, body: bytes, content_type: str):
+        def _send(self, code: int, body: bytes, content_type: str,
+                  headers: dict[str, str] | None = None):
             self.send_response(code)
             self.send_header("Content-Type", content_type)
+            for name, value in (headers or {}).items():
+                self.send_header(name, str(value))
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)
+
+        def _send_file(self, path: Path, filename: str, content_type: str):
+            try:
+                fh = open(path, "rb")
+                size = os.fstat(fh.fileno()).st_size
+            except OSError:
+                return self._json(500, {"error": "backup file is unavailable"})
+            self.send_response(200)
+            self.send_header("Content-Type", content_type)
+            self.send_header("Content-Disposition",
+                             f'attachment; filename="{filename.replace(chr(34), "")}"')
+            self.send_header("Content-Length", str(size))
+            self.end_headers()
+            try:
+                while chunk := fh.read(1 << 20):
+                    self.wfile.write(chunk)
+            except (BrokenPipeError, ConnectionResetError):
+                pass
+            finally:
+                fh.close()
 
         def _redirect(self, location: str, *, clear_oidc_state: bool = False,
                       oidc_state: str = ""):
@@ -6247,6 +6631,10 @@ def make_handler(service: ROMarr):
                 limit = 65536
             elif path == "/api/v1/restore":
                 limit = 16 << 20
+            elif path == "/api/v1/frontend/import/preview":
+                # The file itself is capped at 20 MiB by the parser. Leave a
+                # little room for the surrounding JSON request envelope.
+                limit, error = 21 << 20, "frontend import too large"
             elif path == "/api/v1/capture":
                 limit, error = CAPTURE_MAX_BODY, "capture too large"
             if length > limit:
@@ -6886,6 +7274,14 @@ def make_handler(service: ROMarr):
                 include = query.get("secrets", ["0"])[0] in ("1", "true", "yes")
                 return self._json(200, make_backup(service.store.backup_settings(),
                                                    include_secrets=include))
+            if route.path == "/api/v1/backup/catalog":
+                # The inventory/job database can be large. Stream a consistent
+                # SQLite online backup instead of materializing it in memory.
+                with tempfile.TemporaryDirectory(prefix="romarr-catalog-backup-") as temp:
+                    snapshot = service.catalog_store.backup_to(
+                        Path(temp) / "romarr-catalog.sqlite3")
+                    return self._send_file(snapshot, "romarr-catalog.sqlite3",
+                                           "application/vnd.sqlite3")
             if route.path == "/api/v1/backup/encrypted":
                 try:
                     passphrase = self.headers.get("X-ROMarr-Backup-Passphrase", "")
@@ -7051,8 +7447,19 @@ def make_handler(service: ROMarr):
             if route.path == "/api/v1/frontend/formats":
                 return self._json(200, {"formats": [
                     {"name": name, "label": spec["label"],
-                     "filename": spec["filename"]}
-                    for name, spec in FRONTEND_FORMATS.items()]})
+                     "filename": spec["filename"],
+                     "version": spec.get("version", 1)}
+                    for name, spec in FRONTEND_FORMATS.items()],
+                    "imports": [{"name": name, **spec}
+                                for name, spec in FRONTEND_IMPORT_FORMATS.items()]})
+            if route.path == "/api/v1/frontend/sources":
+                return self._json(200, {"items": [
+                    {"id": str(cfg.get("id") or cfg.get("name") or ""),
+                     "name": str(cfg.get("name") or backend.name),
+                     "type": str(cfg.get("type") or ""),
+                     "scan": backend.scan_status()
+                     if callable(getattr(backend, "scan_status", None)) else None}
+                    for cfg, backend in service.game_libraries]})
             if route.path == "/api/v1/frontend/export":
                 name = (query.get("format", ["launchbox"])[0] or "").lower()
                 spec = FRONTEND_FORMATS.get(name)
@@ -7060,9 +7467,26 @@ def make_handler(service: ROMarr):
                     return self._json(400, {
                         "error": "unknown format",
                         "known": sorted(FRONTEND_FORMATS)})
-                rows = service.frontend_rows(query.get("platform", [""])[0])
-                return self._send(200, spec["render"](rows).encode("utf-8"),
-                                  spec["content_type"])
+                platform = (query.get("platform") or [""])[0]
+                if name in ("gamelist", "esde", "emulationstation") and not platform:
+                    return self._json(400, {
+                        "error": "Choose one platform for a gamelist.xml export."})
+                try:
+                    rows = service.frontend_rows(
+                        platform, (query.get("library_id") or [""])[0],
+                        target_root=(query.get("target_root") or [""])[0])
+                    stats = getattr(service, "_frontend_export_stats", {})
+                    content = spec["render"](rows).encode("utf-8")
+                except ValueError as err:
+                    return self._json(409, {"error": str(err)})
+                filename = spec["filename"].replace('"', "")
+                return self._send(200, content, spec["content_type"], {
+                    "Content-Disposition": f'attachment; filename="{filename}"',
+                    "X-ROMarr-Export-Total": str(stats.get("total", len(rows))),
+                    "X-ROMarr-Exported": str(stats.get("exported", len(rows))),
+                    "X-ROMarr-Unsupported": str(stats.get("unsupported", 0)),
+                    "X-ROMarr-Export-Complete": str(bool(stats.get("complete", True))).lower(),
+                })
             if route.path == "/api/v1/indexer/schema":
                 return self._json(200, {"types": INDEXER_TYPES})
             if route.path == "/api/v1/library":
@@ -7090,6 +7514,18 @@ def make_handler(service: ROMarr):
                 })
             if route.path == "/api/v1/system/tasks":
                 return self._json(200, {"items": service.scheduler.status()})
+            if route.path == "/api/v1/jobs":
+                try:
+                    limit = int((query.get("limit") or ["100"])[0] or 100)
+                except (TypeError, ValueError):
+                    return self._json(400, {"error": "invalid job limit"})
+                return self._json(200, {"items": service.catalog_store.list_jobs(
+                    limit=limit, state=(query.get("state") or [""])[0])})
+            if route.path.startswith("/api/v1/jobs/"):
+                job_id = unquote(route.path.rsplit("/", 1)[-1])
+                job = service.catalog_store.get_job(job_id)
+                return (self._json(200, job) if job else
+                        self._json(404, {"error": "job not found"}))
             if route.path == "/api/v1/capture/status":
                 # What the extension's options page calls to prove its
                 # settings work. Authenticated, so a wrong key answers 401 --
@@ -8155,9 +8591,47 @@ def make_handler(service: ROMarr):
                 if not game or not platform:
                     return self._json(400, {"error": "game and platform are required"})
                 return self._json(200, service.request(game, platform))
-            if route.path == "/api/v1/wanted/bulk":
-                result = service.wanted_bulk(body.get("items"))
+            if route.path == "/api/v1/frontend/import/preview":
+                payload = body.get("payload") or ""
+                if not isinstance(payload, str):
+                    payload = json.dumps(payload, ensure_ascii=False)
+                result = service.frontend_import_preview(
+                    str(body.get("format") or ""), payload,
+                    library_id=str(body.get("library_id") or ""),
+                    source_prefix=str(body.get("source_prefix") or ""),
+                    relative_prefix=str(body.get("relative_prefix") or ""),
+                    default_platform=str(body.get("default_platform") or ""))
                 return self._json(200 if result.get("ok") else 400, result)
+            if route.path == "/api/v1/frontend/import/commit":
+                decisions = body.get("decisions")
+                if not isinstance(decisions, dict):
+                    decisions = {}
+                result = service.frontend_import_commit(
+                    str(body.get("preview_id") or ""),
+                    conflict_policy=str(body.get("conflict_policy") or "keep"),
+                    decisions=decisions)
+                return self._json(200 if result.get("ok") else 409, result)
+            if route.path == "/api/v1/wanted/bulk":
+                result = service.wanted_bulk(
+                    body.get("items"),
+                    idempotency_key=str(body.get("idempotency_key") or ""))
+                return self._json(200 if result.get("ok") else 400, result)
+            if route.path == "/api/v1/library/rescan":
+                started = 0
+                for _cfg, backend in service.game_libraries:
+                    rescan = getattr(backend, "rescan", None)
+                    if callable(rescan) and rescan():
+                        started += 1
+                service._refresh_now.set()
+                return self._json(200, {"ok": True, "queued": started,
+                                        "message": "Library scans were queued."})
+            if route.path.startswith("/api/v1/jobs/") and route.path.endswith("/cancel"):
+                job_id = unquote(route.path[len("/api/v1/jobs/"):-len("/cancel")].strip("/"))
+                changed = service.catalog_store.cancel_job(job_id)
+                return self._json(200 if changed else 409,
+                                  {"ok": changed, "job_id": job_id,
+                                   "message": "Job cancelled." if changed else
+                                   "Job is missing or already terminal."})
             if route.path == "/api/v1/catalog/lists":
                 result = service.save_catalog_list(body)
                 return self._json(200 if result.get("ok") else 400, result)

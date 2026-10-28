@@ -309,6 +309,7 @@ class Store:
     # state file, not an expected working size.
     MAX_QUEUE = 500
     MAX_SEERR_REQUESTS = 1000
+    MAX_OPERATION_RESULTS = 20_000
 
     def __init__(self, path: str | Path):
         self.path = Path(path)
@@ -323,6 +324,10 @@ class Store:
         self.wanted: list[WantedItem] = []
         self.queue: list[QueueItem] = []
         self.seerr_requests: list[SeerrRequest] = []
+        # Idempotency receipts for cross-file outbox operations. These are
+        # persisted in the same JSON replacement as the Wanted mutation, so a
+        # replay after a crash can tell whether the Store side already landed.
+        self.operation_results: dict[str, dict] = {}
         self.metadata_path = self.path.with_name(
             self.path.stem + ".library-metadata.sqlite3")
         self.metadata_path.parent.mkdir(parents=True, exist_ok=True)
@@ -436,6 +441,12 @@ class Store:
                 self.settings.pop("integration_requests", None)
                 migrated_integration_requests = True
             self.seerr_requests = list(requests_by_id.values())
+            raw_results = raw.get("operation_results") or {}
+            if isinstance(raw_results, dict):
+                self.operation_results = {
+                    str(key): dict(value) for key, value in raw_results.items()
+                    if isinstance(key, str) and isinstance(value, dict)
+                }
         migrated_metadata = self.restore_library_metadata(legacy_library_metadata)
         if migrated_integration_requests or migrated_metadata:
             # Persist the converted rows once, atomically, so later starts no
@@ -450,6 +461,7 @@ class Store:
                 "wanted": [asdict(w) for w in self.wanted],
                 "queue": [asdict(q) for q in self.queue[-self.MAX_QUEUE:]],
                 "seerr_requests": [asdict(row) for row in self.seerr_requests],
+                "operation_results": self.operation_results,
             }
             # Keep the lock through replace as well as snapshotting. Two
             # concurrent saves used to be able to write snapshots in order A,
@@ -503,11 +515,17 @@ class Store:
         self.save()
         return item
 
-    def want_many(self, items: list[tuple[str, str]]) -> tuple[int, int]:
-        """Add a reviewed set of games to Wanted with one durable write."""
+    def want_many(self, items: list[tuple[str, str]], *,
+                  operation_id: str = "") -> tuple[int, int]:
+        """Add a reviewed set, with a persisted receipt for safe outbox replay."""
         added = 0
         existing = 0
         with self._lock:
+            if operation_id and operation_id in self.operation_results:
+                result = self.operation_results[operation_id]
+                return int(result.get("added") or 0), int(result.get("existing") or 0)
+            before_wanted = copy.deepcopy(self.wanted)
+            before_results = copy.deepcopy(self.operation_results)
             known = {(item.game.casefold(), item.platform)
                      for item in self.wanted}
             for game, platform in items:
@@ -518,9 +536,25 @@ class Store:
                 self.wanted.append(WantedItem(game=game, platform=platform))
                 known.add(key)
                 added += 1
-        if added:
-            self.save()
+            if operation_id:
+                self.operation_results[operation_id] = {
+                    "added": added, "existing": existing, "recorded_at": now_iso()}
+                while len(self.operation_results) > self.MAX_OPERATION_RESULTS:
+                    self.operation_results.pop(next(iter(self.operation_results)))
+        if added or operation_id:
+            try:
+                self.save()
+            except Exception:
+                with self._lock:
+                    self.wanted = before_wanted
+                    self.operation_results = before_results
+                raise
         return added, existing
+
+    def operation_result(self, operation_id: str) -> dict | None:
+        with self._lock:
+            result = self.operation_results.get(str(operation_id))
+            return dict(result) if result else None
 
     def fulfil(self, game: str, platform: str) -> bool:
         """Drop something from Wanted once it has actually arrived."""
@@ -910,7 +944,8 @@ class Store:
                                   "released", "rating", "genres",
                                   "metadata_source", "matched_by",
                                   "metadata_status", "metadata_attempted_at",
-                                  "platform_slug", "platform_manual", "updated_at"}}
+                                  "platform_slug", "platform_manual", "notes",
+                                  "frontend_source_fields", "updated_at"}}
             payloads.append((key, json.dumps(clean, ensure_ascii=False)))
         if payloads:
             with self._lock:
@@ -932,7 +967,8 @@ class Store:
         allowed = {"metadata_title", "summary", "cover_url", "released",
                    "rating", "genres", "metadata_source", "matched_by",
                    "metadata_status", "metadata_attempted_at",
-                   "platform_slug", "platform_manual"}
+                   "platform_slug", "platform_manual", "notes",
+                   "frontend_source_fields"}
         clean = {key: value for key, value in patch.items() if key in allowed}
         key = self._library_metadata_key(library_id, item_id)
         with self._lock:
@@ -954,6 +990,46 @@ class Store:
             self._metadata_db.commit()
             out = dict(row)
         return out
+
+    def set_library_metadata_many(self, updates: list[tuple[str, str, dict]]) -> int:
+        """Merge a reviewed metadata import atomically in the sidecar database."""
+        allowed = {"metadata_title", "summary", "cover_url", "released",
+                   "rating", "genres", "metadata_source", "matched_by",
+                   "metadata_status", "metadata_attempted_at",
+                   "platform_slug", "platform_manual", "notes",
+                   "frontend_source_fields"}
+        normalized = []
+        for library_id, item_id, patch in updates:
+            if not isinstance(patch, dict):
+                continue
+            clean = {key: value for key, value in patch.items() if key in allowed}
+            if clean:
+                normalized.append((self._library_metadata_key(library_id, item_id), clean))
+        with self._lock:
+            self._metadata_db.execute("BEGIN IMMEDIATE")
+            try:
+                writes = []
+                for key, patch in normalized:
+                    old = self._metadata_db.execute(
+                        "SELECT payload FROM library_metadata WHERE key=?", (key,)
+                    ).fetchone()
+                    try:
+                        current = json.loads(old[0]) if old else {}
+                    except (TypeError, json.JSONDecodeError):
+                        current = {}
+                    if not isinstance(current, dict):
+                        current = {}
+                    current.update(patch)
+                    current["updated_at"] = now_iso()
+                    writes.append((key, json.dumps(current, ensure_ascii=False)))
+                self._metadata_db.executemany(
+                    "INSERT INTO library_metadata(key,payload) VALUES (?,?) "
+                    "ON CONFLICT(key) DO UPDATE SET payload=excluded.payload", writes)
+                self._metadata_db.commit()
+            except Exception:
+                self._metadata_db.rollback()
+                raise
+        return len(writes)
 
     def backup_settings(self) -> dict[str, Any]:
         """Settings plus metadata, for an explicit portable backup only."""

@@ -25,12 +25,21 @@ from __future__ import annotations
 import logging
 import os
 import re
-from dataclasses import dataclass
+import hashlib
+import json
+import threading
+import time
+from dataclasses import dataclass, fields
+from pathlib import Path
 from typing import Protocol, runtime_checkable
 
 import requests
 
 log = logging.getLogger(__name__)
+
+
+class FolderScanLimit(RuntimeError):
+    """A configured traversal budget was reached before a complete snapshot."""
 
 # Short budget for anything a page waits on. A library that is merely slow must
 # not read as ROMarr being broken.
@@ -128,6 +137,15 @@ class Game:
     metadata_source: str = ""
     matched_by: str = ""
     metadata_status: str = ""
+    # A folder item's stable database identity and its private source locator
+    # are separate. `id` remains opaque; `path` is populated only by a local
+    # filesystem backend and is used for launch/export operations.
+    path: str = ""
+    locator: str = ""
+    media_files: tuple[str, ...] = ()
+    media_status: str = ""
+    media_missing: tuple[str, ...] = ()
+    scan_generation: str = ""
 
 
 # Budget for the background shelf fetch. Nothing waits on it, so it is
@@ -706,10 +724,330 @@ class FolderLibrary:
     # Walking a library of tens of thousands of files on every refresh is not
     # worth it for a number on a badge, so the walk stops here and the count is
     # reported as at-least. An honest ceiling beats a slow exact answer.
-    MAX_SCAN = 50_000
+    MAX_SCAN = 500_000
+    SCAN_TTL = 600
+    SCAN_SLICE_SECONDS = 1.5
+    SCAN_BATCH_ENTRIES = 5000
+    MAX_DIRECTORY_ENTRIES = 100_000
+    MAX_DIRECTORIES = 100_000
 
     def __init__(self, config: FolderConfig):
         self._config = config
+        self._catalog = None
+        self._source_id = ""
+        self._config_revision = ""
+        self._scan_lock = threading.Lock()
+        self._force_scan = False
+
+    def bind_catalog(self, catalog, source_id: str, config_revision: str) -> None:
+        """Opt this source into durable scan generations."""
+        self._catalog = catalog
+        self._source_id = str(source_id)
+        self._config_revision = str(config_revision)
+        catalog.register_source(self._source_id, "folder", self._source_id,
+                                self._config_revision)
+
+    @property
+    def durable_scan(self) -> bool:
+        return self._catalog is not None and bool(self._source_id)
+
+    def scan_status(self) -> dict:
+        if not self.durable_scan:
+            return {"status": "unmanaged", "complete": False, "count": 0}
+        return self._catalog.scan_status(self._source_id)
+
+    def scan_slice(self, seconds: float | None = None) -> dict:
+        """Advance a resumable directory walk for a bounded amount of time.
+
+        Each directory has a persisted name cursor and each emitted batch is
+        committed before that cursor advances. A restart can safely repeat the
+        current directory; item keys are idempotent and the last complete
+        generation remains authoritative until the new one is complete.
+        """
+        if not self.durable_scan:
+            return {"status": "unmanaged", "complete": False, "count": 0}
+        if not self._scan_lock.acquire(blocking=False):
+            return self.scan_status()
+        try:
+            import datetime
+            status = self.scan_status()
+            now = datetime.datetime.now(datetime.timezone.utc)
+            updated = status.get("updated_at") or status.get("finished_at") or ""
+            age = None
+            if updated:
+                try:
+                    stamp = datetime.datetime.fromisoformat(updated)
+                    if stamp.tzinfo is None:
+                        stamp = stamp.replace(tzinfo=datetime.timezone.utc)
+                    age = (now - stamp).total_seconds()
+                except ValueError:
+                    pass
+            if not self._force_scan:
+                if status.get("status") == "running":
+                    pass
+                elif status.get("status") in ("failed", "partial", "superseded") \
+                        and status.get("run_config_revision") == self._config_revision \
+                        and age is not None and age < 300:
+                    return status
+                elif status.get("active_current") and age is not None \
+                        and age < self.SCAN_TTL:
+                    return status
+            self._force_scan = False
+            if not self.reachable():
+                run_id = self._catalog.ensure_scan(self._source_id,
+                                                   self._config_revision)
+                self._catalog.finish_scan(
+                    run_id, complete=False,
+                    error="Configured folder root is unavailable; the previous complete generation was kept.")
+                return self.scan_status()
+            run_id = self._catalog.ensure_scan(self._source_id,
+                                               self._config_revision)
+            started = time.monotonic()
+            budget = max(0.1, min(float(seconds or self.SCAN_SLICE_SECONDS), 15.0))
+            visited_in_slice = 0
+            while time.monotonic() - started < budget:
+                work = self._catalog.next_scan_directory(run_id)
+                if work is None:
+                    self._catalog.finish_scan(run_id, complete=True)
+                    return self.scan_status()
+                relative = str(work["relative_path"] or "")
+                directory = self._root.joinpath(*relative.split("/")) if relative else self._root
+                try:
+                    if (relative and directory.is_symlink()) or not directory.is_dir():
+                        self._catalog.finish_scan_directory(
+                            run_id, relative, [], cursor_name=None, entry_count=0)
+                        continue
+                    with os.scandir(directory) as iterator:
+                        entries = sorted(iterator, key=lambda entry: entry.name)
+                except OSError as err:
+                    self._catalog.finish_scan(
+                        run_id, complete=False,
+                        error=f"Could not read a configured library directory ({err.__class__.__name__}); the previous complete generation was kept.")
+                    return self.scan_status()
+                if len(entries) > self.MAX_DIRECTORY_ENTRIES:
+                    self._catalog.finish_scan(
+                        run_id, complete=False,
+                        truncation_reason=(
+                            f"A directory exceeds the {self.MAX_DIRECTORY_ENTRIES:,}-entry safety limit; "
+                            "the previous complete generation was kept."))
+                    return self.scan_status()
+                cursor = str(work.get("cursor_name") or "")
+                remaining = [entry for entry in entries if entry.name > cursor]
+                selected = remaining[:self.SCAN_BATCH_ENTRIES]
+                next_cursor = (selected[-1].name if len(remaining) > len(selected)
+                               and selected else None)
+                try:
+                    games, children, skipped = self._scan_directory_entries(
+                        relative, selected, entries, run_id)
+                    self._catalog.record_scan_batch(
+                        run_id, self._source_id, games,
+                        visited_entries=len(selected), skipped_entries=skipped)
+                    self._catalog.finish_scan_directory(
+                        run_id, relative, children, cursor_name=next_cursor,
+                        entry_count=len(selected))
+                except FolderScanLimit as err:
+                    self._catalog.finish_scan(
+                        run_id, complete=False, truncation_reason=str(err))
+                    return self.scan_status()
+                except OSError as err:
+                    self._catalog.finish_scan(
+                        run_id, complete=False,
+                        error=f"Could not inspect a configured library item ({err.__class__.__name__}); the previous complete generation was kept.")
+                    return self.scan_status()
+                visited_in_slice += len(selected)
+                current = self.scan_status()
+                if int(current.get("visited_entries") or 0) >= self.MAX_SCAN:
+                    if self._catalog.next_scan_directory(run_id) is not None:
+                        self._catalog.finish_scan(
+                            run_id, complete=False,
+                            truncation_reason=(
+                                f"The configured scan safety limit of {self.MAX_SCAN:,} entries was reached; "
+                                "the previous complete generation was kept."))
+                    else:
+                        self._catalog.finish_scan(run_id, complete=True)
+                    return self.scan_status()
+                if visited_in_slice >= self.SCAN_BATCH_ENTRIES:
+                    break
+            work = self._catalog.next_scan_directory(run_id)
+            if work is None:
+                self._catalog.finish_scan(run_id, complete=True)
+            return self.scan_status()
+        finally:
+            self._scan_lock.release()
+
+    def _scan_directory_entries(self, relative: str, selected, all_entries,
+                                run_id: str):
+        from .catalog_store import stable_item_id
+        from .platforms import resolve
+
+        entries_by_name = {entry.name: entry for entry in all_entries}
+        referenced: dict[str, str] = {}
+        groups: dict[str, tuple[list[str], bool, list[str]]] = {}
+
+        def cue_missing(entry) -> list[str]:
+            try:
+                if entry.stat().st_size > 256_000:
+                    return [entry.name]
+                cue = Path(entry.path).read_text(
+                    encoding="utf-8-sig", errors="replace")
+            except OSError:
+                return [entry.name]
+            members = re.findall(
+                r"(?im)^\s*FILE\s+\"([^\"]+)\"|^\s*FILE\s+([^\s]+)", cue)
+            missing = []
+            for first, second in members:
+                name = (first or second).replace("\\", "/").strip()
+                candidate = entries_by_name.get(name) if "/" not in name else None
+                if (not name or candidate is None or candidate.is_symlink()
+                        or not candidate.is_file()):
+                    missing.append(name[:1024] or entry.name)
+            return missing
+
+        for entry in all_entries:
+            suffix = Path(entry.name).suffix.lower()
+            if suffix not in (".m3u", ".cue") or entry.is_symlink() or not entry.is_file():
+                continue
+            members = []
+            try:
+                if entry.stat().st_size > 256_000:
+                    continue
+                text = Path(entry.path).read_text(encoding="utf-8-sig", errors="replace")
+            except OSError:
+                continue
+            if suffix == ".m3u":
+                raw_members = [line.strip() for line in text.splitlines()
+                               if line.strip() and not line.lstrip().startswith("#")]
+            else:
+                raw_members = re.findall(
+                    r"(?im)^\s*FILE\s+\"([^\"]+)\"|^\s*FILE\s+([^\s]+)", text)
+                raw_members = [first or second for first, second in raw_members]
+            valid = bool(raw_members)
+            missing = []
+            for member in raw_members:
+                name = member.replace("\\", "/").strip()
+                # Media sets are grouped only when their members are sibling
+                # files. Nested or escaping paths remain visible as separate
+                # items instead of being guessed into a set.
+                if not name or "/" in name or name in (".", ".."):
+                    valid = False
+                    missing.append(name[:1024] or entry.name)
+                    continue
+                candidate = entries_by_name.get(name)
+                if candidate is None or candidate.is_symlink() or not candidate.is_file():
+                    valid = False
+                    missing.append(name[:1024])
+                    continue
+                if Path(name).suffix.lower() == ".cue":
+                    nested_missing = cue_missing(candidate)
+                    if nested_missing:
+                        valid = False
+                        missing.extend(nested_missing)
+                members.append(name)
+            if members or not valid:
+                groups[entry.name] = (members, valid, missing)
+                for name in members:
+                    referenced.setdefault(name, entry.name)
+
+        declared = resolve(self._config.scan_platform)
+        root_platform = declared or resolve(self._root.name)
+        exts = self._extensions()
+        games = []
+        children = []
+        skipped = 0
+        directory_count = self._catalog.scan_directory_count(run_id)
+        for entry in selected:
+            name = entry.name
+            if name.startswith(".") or name.startswith(".romarr-import-"):
+                skipped += 1
+                continue
+            if entry.is_symlink():
+                skipped += 1
+                continue
+            locator = f"{relative}/{name}" if relative else name
+            path = Path(entry.path)
+            if entry.is_dir(follow_symlinks=False):
+                rel_parts = locator.split("/")
+                platform = (declared or root_platform
+                            or (resolve(rel_parts[0]) if rel_parts else None))
+                if (platform and platform.directory_layout
+                        and all(self._layout_file(path, layout)
+                                for layout in platform.directory_layout)):
+                    games.append(self._folder_game(
+                        stable_item_id(self._source_id, locator), path, locator,
+                        platform, run_id, media_files=(), media_status="directory"))
+                elif directory_count + len(children) < self.MAX_DIRECTORIES:
+                    children.append(locator)
+                else:
+                    raise FolderScanLimit(
+                        f"The scan directory frontier exceeded the safety limit of "
+                        f"{self.MAX_DIRECTORIES:,}; the previous complete generation was kept.")
+                continue
+            if not entry.is_file(follow_symlinks=False):
+                skipped += 1
+                continue
+            suffix = path.suffix.lower()
+            rel_parts = locator.split("/")
+            platform = (declared or root_platform
+                        or (resolve(rel_parts[0]) if len(rel_parts) > 1 else None))
+            allowed = (set(platform.extensions) | set(self.ARCHIVES)
+                       if platform else exts)
+            if name in groups:
+                allowed.update((".cue", ".m3u"))
+            if suffix not in allowed:
+                skipped += 1
+                continue
+            owner = referenced.get(name)
+            if owner:
+                skipped += 1
+                continue
+            media_files: tuple[str, ...] = ()
+            media_status = "single"
+            media_missing: tuple[str, ...] = ()
+            if name in groups:
+                members, complete, missing = groups[name]
+                media_files = tuple(
+                    f"{relative}/{member}" if relative else member
+                    for member in members)
+                media_status = "complete" if complete else "incomplete"
+                media_missing = tuple(missing)
+            games.append(self._folder_game(
+                stable_item_id(self._source_id, locator), path, locator,
+                platform, run_id, media_files=media_files,
+                media_status=media_status, media_missing=media_missing))
+        return games, children, skipped
+
+    def _folder_game(self, item_id: str, path: Path, locator: str,
+                     platform, run_id: str, *, media_files=(), media_status="",
+                     media_missing=()) -> dict:
+        return {
+            "id": item_id,
+            "name": path.stem if path.is_file() else path.name,
+            "platform": platform.name if platform else "",
+            "platform_slug": platform.slug if platform else "",
+            "extension": path.suffix.lower() if path.is_file() else "",
+            "path": str(path),
+            "locator": locator,
+            "library_id": self._source_id,
+            "origin": "local",
+            "provenance": "local",
+            "media_files": list(media_files),
+            "media_status": media_status,
+            "media_missing": list(media_missing),
+            "scan_generation": run_id,
+        }
+
+    def _entries_as_games(self, rows: list[dict]) -> list[Game]:
+        allowed = {field.name for field in fields(Game)}
+        tuple_fields = {"genres", "regions", "franchises", "companies", "modes",
+                        "media_files", "media_missing"}
+        out = []
+        for row in rows:
+            value = {key: item for key, item in row.items() if key in allowed}
+            for key in tuple_fields:
+                if key in value and isinstance(value[key], list):
+                    value[key] = tuple(value[key])
+            out.append(Game(**value))
+        return out
 
     @property
     def configured(self) -> bool:
@@ -789,6 +1127,8 @@ class FolderLibrary:
             return False
 
     def count(self) -> int:
+        if self.durable_scan:
+            return int(self.scan_status().get("count") or 0)
         try:
             return sum(1 for _ in self._walk(self.MAX_SCAN))
         except OSError as err:
@@ -803,6 +1143,9 @@ class FolderLibrary:
         every one of these frontends imposes -- and it is the same layout the
         importer writes, so a ROM filed by ROMarr lands where it will be found.
         """
+        if self.durable_scan:
+            return self._entries_as_games(self._catalog.scan_page(
+                self._source_id, limit=limit, offset=offset))
         out: list[Game] = []
         try:
             from .platforms import resolve
@@ -838,6 +1181,9 @@ class FolderLibrary:
         True rather than False for the same reason as Gaseous: nothing failed,
         and reporting failure would mark every successful import as half-broken.
         """
+        if self.durable_scan:
+            self._catalog.invalidate_scan(self._source_id)
+            self._force_scan = True
         return True
 
 
