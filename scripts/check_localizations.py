@@ -6,6 +6,8 @@ import hashlib
 import json
 import re
 import sys
+from collections import Counter
+from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,7 +18,7 @@ PLACEHOLDER = re.compile(r"\{([A-Za-z][A-Za-z0-9_]*)\}")
 STABLE_REFERENCE = re.compile(r"ui\.[a-z0-9-]+\.[0-9a-f]{10}")
 LOCALIZATION_CALL = re.compile(
     r"\b(?:interfaceMarkup|interfaceTemplateMarkup|interfaceTitleTemplate|"
-    r"toastLabel|toastMessage|confirmMessage|promptMessage|translateLabel)"
+    r"toastLabel|toastMessage|confirmMessage|promptMessage|translateLabel|messageInfo)"
     r"\(\s*(['\"`])((?:\\\\.|(?!\1).)*?)\1",
     re.S,
 )
@@ -30,12 +32,18 @@ def placeholders(value: str) -> set[str]:
     return set(PLACEHOLDER.findall(value))
 
 
+def translation_hash(value: object) -> str:
+    serialized = json.dumps(value, ensure_ascii=False, sort_keys=True,
+                            separators=(",", ":"))
+    return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
+
+
 def validate() -> list[str]:
     errors: list[str] = []
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     snapshot = json.loads(SNAPSHOT_PATH.read_text(encoding="utf-8"))
-    if catalog.get("schemaVersion") != 2:
-        errors.append("catalog schemaVersion must be 2")
+    if catalog.get("schemaVersion") != 3:
+        errors.append("catalog schemaVersion must be 3")
     if catalog.get("baseLocale") != "en":
         errors.append("baseLocale must be en")
 
@@ -63,6 +71,20 @@ def validate() -> list[str]:
                 errors.append(f"{code}: inherited locale needs a selectable parent")
         if status == "planned" and code in available:
             errors.append(f"{code}: planned locale must not be selectable")
+        review_status = locale.get("translationReview")
+        if review_status not in {"source", "unverified", "reviewed",
+                                 "inherited", "not started"}:
+            errors.append(f"{code}: invalid locale translationReview {review_status!r}")
+        if code == "en" and review_status != "source":
+            errors.append("en: translationReview must be source")
+        elif status == "planned" and review_status != "not started":
+            errors.append(f"{code}: planned locale translationReview must be not started")
+        elif status == "inherited" and review_status != "inherited":
+            errors.append(f"{code}: inherited locale translationReview must be inherited")
+        elif status == "available" and code != "en" and review_status not in {
+            "unverified", "reviewed"
+        }:
+            errors.append(f"{code}: directly translated locale needs a review state")
 
     rtl_locales = set(catalog.get("rtlLocales", []))
     for code, locale in locales.items():
@@ -74,6 +96,10 @@ def validate() -> list[str]:
     current_snapshot: dict[str, str] = {}
     direct_locales = {code for code in available
                       if locales[code]["status"] == "available" and code != "en"}
+    inherited_locales = {
+        code: parent for code, parent in catalog.get("regionalParents", {}).items()
+        if code in available and locales.get(code, {}).get("status") == "inherited"
+    }
     for key, message in messages.items():
         source = message.get("source")
         if not isinstance(source, str) or not source.strip():
@@ -87,6 +113,58 @@ def validate() -> list[str]:
         if message.get("sourceHash") != source_hash:
             errors.append(f"{key}: sourceHash does not match source text")
         translations = message.get("translations", {})
+        hashes = message.get("translationHashes")
+        if not isinstance(hashes, dict):
+            hashes = {}
+            errors.append(f"{key}: translationHashes must be an object")
+        stored_statuses = message.get("translationStatus")
+        expected_hashes = set(stored_statuses) if isinstance(stored_statuses, dict) else set()
+        if set(hashes) != expected_hashes:
+            errors.append(f"{key}: translationHashes locales do not match review overrides")
+        for code, value in translations.items():
+            if code in hashes and hashes.get(code) != translation_hash(value):
+                errors.append(f"{key}/{code}: translationHash does not match text")
+        statuses = message.get("translationStatus")
+        review_evidence = message.get("translationReview")
+        if not isinstance(statuses, dict):
+            statuses = {}
+            errors.append(f"{key}: translationStatus must be an object")
+        if not isinstance(review_evidence, dict):
+            review_evidence = {}
+            errors.append(f"{key}: translationReview must contain reviewer evidence by locale")
+        extra_statuses = set(statuses) - direct_locales
+        if extra_statuses:
+            errors.append(f"{key}: translationStatus has non-direct locales {sorted(extra_statuses)}")
+        if set(translations) & set(inherited_locales):
+            errors.append(f"{key}: inherited locales must resolve through their declared parent")
+        for code in direct_locales:
+            state = statuses.get(code, "unverified")
+            if not isinstance(state, str) or state not in {"unverified", "draft", "reviewed"}:
+                errors.append(f"{key}/{code}: direct translation needs a valid review status")
+            if state == "unverified" and code in statuses:
+                errors.append(f"{key}/{code}: omit unverified status to keep catalog metadata sparse")
+            evidence = review_evidence.get(code)
+            if state == "reviewed":
+                valid_date = False
+                if isinstance(evidence, dict) and isinstance(evidence.get("reviewedAt"), str):
+                    try:
+                        date.fromisoformat(evidence["reviewedAt"])
+                        valid_date = True
+                    except ValueError:
+                        pass
+                if (not isinstance(evidence, dict)
+                        or not isinstance(evidence.get("reviewer"), str)
+                        or not evidence["reviewer"].strip()
+                        or not valid_date):
+                    errors.append(f"{key}/{code}: reviewed text needs reviewer and YYYY-MM-DD reviewedAt")
+            elif code in review_evidence:
+                errors.append(f"{key}/{code}: reviewer evidence requires reviewed status")
+        for code, parent in inherited_locales.items():
+            if parent not in translations:
+                errors.append(f"{key}/{code}: inherited parent {parent} has no translation")
+        extra_evidence = set(review_evidence) - direct_locales
+        if extra_evidence:
+            errors.append(f"{key}: review evidence references non-direct locales {sorted(extra_evidence)}")
         extra_locales = set(translations) - (set(locales) | {"en"})
         if extra_locales:
             errors.append(f"{key}: unknown translation locales {sorted(extra_locales)}")
@@ -126,6 +204,12 @@ def validate() -> list[str]:
 
     if current_snapshot != snapshot:
         errors.append("source snapshot is stale; run scripts/migrate_ui_catalog.py")
+    for code in direct_locales:
+        if locales[code].get("translationReview") == "reviewed" and any(
+            message.get("translationStatus", {}).get(code, "unverified") != "reviewed"
+            for message in messages.values()
+        ):
+            errors.append(f"{code}: locale cannot be fully reviewed while messages remain unreviewed")
     ui_source = UI_PATH.read_text(encoding="utf-8")
     referenced = set(STABLE_REFERENCE.findall(ui_source))
     missing = referenced - set(messages)
@@ -133,6 +217,7 @@ def validate() -> list[str]:
         errors.append(f"ui.py references unknown stable IDs: {sorted(missing)[:12]}")
     source_to_id = {message["source"]: key for key, message in messages.items()}
     for _, literal in LOCALIZATION_CALL.findall(ui_source):
+        literal = re.sub(r"\{\{([A-Za-z][A-Za-z0-9_]*)\}\}", r"{\1}", literal)
         if literal.startswith("ui."):
             if literal not in messages:
                 errors.append(f"localization helper references unknown key {literal}")
@@ -165,9 +250,19 @@ def main() -> int:
                  for code in available)
     inherited = sum(locales[code]["status"] == "inherited" for code in available)
     planned = sum(locale["status"] == "planned" for locale in locales.values())
+    review_counts = Counter(
+        message.get("translationStatus", {}).get(code, "unverified")
+        for message in catalog["messages"].values()
+        for code in available
+        if locales[code]["status"] == "available" and code != "en"
+    )
+    direct_messages = sum(review_counts.values())
     print(f"Valid: {len(catalog['messages']):,} stable messages, "
           f"{direct} directly translated locales, {inherited} regional fallbacks, "
-          f"{planned} locales awaiting translation.")
+          f"{planned} locales awaiting translation. "
+          f"Reviewed strings: {review_counts['reviewed']:,}/{direct_messages:,}; "
+          f"drafts: {review_counts['draft']:,}; "
+          f"unverified: {review_counts['unverified']:,}.")
     return 0
 
 

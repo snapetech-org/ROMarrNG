@@ -295,8 +295,10 @@ API values, and other user data stay as entered.
 Date, time, and number formatting is a separate browser preference. It refreshes
 the current view when changed and does not change interface language. The
 catalog registers 37 locales, but 22 remain marked as awaiting translation and
-are not offered. Existing translations have not yet received full native-speaker
-review; this is documented as a limit rather than implying complete coverage.
+are not offered. Review status is tracked per message and locale, with reviewer
+and date required before a string can be marked reviewed. Existing translations
+have not yet received full native-speaker review; this is documented as a limit
+rather than implying complete coverage.
 Arabic is the only selectable right-to-left translation today. RTL direction
 and layout behavior are wired through the shell, but visual signoff is still
 needed. See the [localization notes](docs/localization-roadmap.md) for the

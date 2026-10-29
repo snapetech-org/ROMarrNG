@@ -2,7 +2,7 @@
 """Migrate ROMarr's English-keyed UI translations to stable catalog IDs.
 
 The migration is lossless. Existing locale values are retained verbatim and
-new IDs are assigned once; rerunning the tool preserves IDs from the v2 file.
+new IDs are assigned once; rerunning the tool preserves IDs and review records.
 """
 from __future__ import annotations
 
@@ -330,26 +330,43 @@ def source_hash(source: str) -> str:
     return hashlib.sha256(source.encode("utf-8")).hexdigest()
 
 
+def translation_hash(value: object) -> str:
+    serialized = json.dumps(value, ensure_ascii=False, sort_keys=True,
+                            separators=(",", ":"))
+    return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
+
+
 def stable_id(source: str) -> str:
     ascii_source = unicodedata.normalize("NFKD", source).encode("ascii", "ignore").decode()
     slug = re.sub(r"[^a-z0-9]+", "-", ascii_source.lower()).strip("-")[:36].rstrip("-")
     return f"ui.{slug or 'message'}.{source_hash(source)[:10]}"
 
 
-def load_legacy() -> tuple[dict[str, dict[str, str]], dict[str, str]]:
+def load_legacy() -> tuple[
+    dict[str, dict[str, object]], dict[str, str], dict[str, dict[str, object]]
+]:
     raw = json.loads(CATALOG.read_text(encoding="utf-8"))
-    if raw.get("schemaVersion") == 2:
-        return ({message["source"]: message["translations"]
-                 for message in raw["messages"].values()},
-                {message["source"]: key for key, message in raw["messages"].items()})
-    return raw, {}
+    if raw.get("schemaVersion") in {2, 3}:
+        messages = raw["messages"]
+        return (
+            {message["source"]: message["translations"]
+             for message in messages.values()},
+            {message["source"]: key for key, message in messages.items()},
+            {message["source"]: {
+                "sourceHash": message.get("sourceHash"),
+                "translationHashes": message.get("translationHashes", {}),
+                "translationStatus": message.get("translationStatus", {}),
+                "translationReview": message.get("translationReview", {}),
+            } for message in messages.values()},
+        )
+    return raw, {}, {}
 
 
 def main() -> int:
     if not CATALOG.exists():
         print("romarr/ui-labels.json is missing", file=sys.stderr)
         return 2
-    translations, previous_ids = load_legacy()
+    translations, previous_ids, previous_metadata = load_legacy()
     for source, values in NEW_TRANSLATIONS.items():
         translations.setdefault(source, values)
 
@@ -359,11 +376,37 @@ def main() -> int:
         if key in messages:
             print(f"stable ID collision: {key}", file=sys.stderr)
             return 2
+        previous = previous_metadata.get(source, {})
+        old_hashes = previous.get("translationHashes", {})
+        old_status = previous.get("translationStatus", {})
+        old_review = previous.get("translationReview", {})
+        source_unchanged = previous.get("sourceHash") == source_hash(source)
+        statuses: dict[str, str] = {}
+        review_evidence: dict[str, dict[str, str]] = {}
+        for locale, value in translations[source].items():
+            if locale == "en":
+                continue
+            unchanged = (
+                source_unchanged and isinstance(old_hashes, dict)
+                and old_hashes.get(locale) == translation_hash(value)
+            )
+            prior_status = old_status.get(locale) if isinstance(old_status, dict) else None
+            if not unchanged or prior_status not in {"draft", "reviewed"}:
+                continue
+            evidence = old_review.get(locale) if isinstance(old_review, dict) else None
+            if prior_status == "reviewed" and isinstance(evidence, dict) \
+                    and evidence.get("reviewer") and evidence.get("reviewedAt"):
+                review_evidence[locale] = evidence
+            elif prior_status == "reviewed":
+                continue
+            statuses[locale] = prior_status
         messages[key] = {
             "source": source,
             "sourceHash": source_hash(source),
             "translations": translations[source],
-            "translationReview": "unverified; legacy provenance not recorded",
+            "translationHashes": {},
+            "translationStatus": statuses,
+            "translationReview": review_evidence,
         }
 
     singular = "Connected to {friend}: {count} title with hashes ROMarr can match on."
@@ -396,20 +439,31 @@ def main() -> int:
                 "kind": "plural", "argument": "count", "forms": forms
             }
 
+    for message in messages.values():
+        message["translationHashes"] = {
+            locale: translation_hash(value)
+            for locale, value in message["translations"].items()
+            if locale in message["translationStatus"]
+        }
+
     locales = {
         tag: {
             "englishName": english,
             "nativeName": native,
             "direction": direction,
             "status": status,
-            "translationReview": "unverified" if status != "planned" else "not started",
+            "translationReview": (
+                "source" if tag == "en" else
+                "inherited" if status == "inherited" else
+                "unverified" if status == "available" else "not started"
+            ),
         }
         for tag, english, native, direction, status in LOCALE_ROWS
     }
     available = [tag for tag, _, _, _, status in LOCALE_ROWS
                  if status in {"available", "inherited"}]
     catalog = {
-        "schemaVersion": 2,
+        "schemaVersion": 3,
         "baseLocale": "en",
         "locales": locales,
         "availableLocales": available,

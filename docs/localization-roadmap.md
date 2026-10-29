@@ -28,11 +28,15 @@ translations. The remaining registered locales stay out of the picker until
 their translations exist and pass the catalog checks.
 
 The existing translation text was carried over without changing its wording.
-Its provenance and native-speaker review status are not recorded, so the
-catalog marks it `unverified`. A complete native review and RTL visual review
-have not been done. ROMarr therefore does not claim translation quality parity
+Each message now records review status separately for every direct locale;
+existing text is `unverified` because its provenance is unknown. Regional
+entries are marked `inherited`. A message can be marked `reviewed` only with a
+reviewer and review date. A complete native review and RTL visual review have
+not been done. ROMarr therefore does not claim translation quality parity
 with PlezyNG, even though the catalog and runtime now support a broader locale
-workflow.
+workflow. Unverified is the default and is stored sparsely; regional inheritance
+comes from the locale parent table. Fingerprints are stored only for draft or
+reviewed overrides, keeping the runtime catalog compact.
 
 ## Runtime behavior
 
@@ -43,7 +47,8 @@ and public pages. It provides:
 - Browser/system language detection, canonical BCP 47 matching, Chinese script
   aliases, Latin American Spanish matching, and regional parent fallback.
 - Per-message English fallback, escaped interpolation through text/attribute
-  sinks, and Unicode bidi isolation around dynamic values.
+  sinks, and Unicode bidi isolation around dynamic values after removing
+  embedded directional controls.
 - CLDR plural-category selection and locale-aware number rendering for plural
   messages.
 - Right-to-left document direction, translated element metadata, and mirrored
@@ -65,25 +70,36 @@ provider language.
    `data-i18n-key` and stable IDs in rendering helpers. The runtime still accepts
    source text for dynamic messages during migration.
 3. Add translation text only for locales with a qualified reviewer. Keep
-   placeholders intact. For count-sensitive messages, use the plural object
-   shape (`kind`, `argument`, and locale forms) instead of concatenating
-   singular and plural strings.
-4. Change a locale from `planned` only when its catalog coverage is complete.
+   placeholders intact. Set that message's `translationStatus[locale]` to
+   `draft` for machine-generated text. Leave the status absent (or remove its
+   override) when the origin is unknown; that means `unverified`.
+   For count-sensitive messages, use the plural object shape (`kind`, `argument`,
+   and locale forms) instead of concatenating singular and plural strings.
+4. After a native speaker checks the translation in context, set its status to
+   `reviewed` and add `translationReview[locale]` with `reviewer` and an ISO
+   `reviewedAt` date. Review is tracked per message and locale. The migration
+   script preserves evidence when text is unchanged and resets changed copy to
+   `unverified`. Stored source and translation fingerprints make this check
+   repeatable; changing the English source also clears review status because
+   it may change the meaning translators reviewed.
+5. Change a locale from `planned` only when its catalog coverage is complete.
    Regional fallback locales must name a selectable parent.
-5. Run `python scripts/check_localizations.py` before publishing. It checks
+6. Run `python scripts/check_localizations.py` before publishing. It checks
    stable source hashes, source snapshots, locale status, direct coverage,
-   inherited coverage, placeholders, plural forms, and stable IDs referenced
-   by the UI.
+   inherited coverage, per-message review metadata, placeholders, plural forms,
+   and stable IDs referenced by the UI.
 
 `python scripts/migrate_ui_catalog.py` imports the current source-keyed catalog
-into the stable-ID schema. It preserves IDs already present and writes the
-source snapshot. Run the checker afterward; the migration script does not
-translate new text.
+into the stable-ID schema. It preserves IDs and unchanged review evidence,
+resets metadata for changed or newly added translations to unverified, and
+writes source fingerprints, sparse review fingerprints, and the source
+snapshot. Run the checker afterward; the migration script does not translate
+new text.
 
 ## Remaining work
 
-- Review each existing translation with native speakers and record review
-  provenance by locale and message.
+- Review each existing translation with native speakers and record reviewer
+  and date by locale and message.
 - Translate and review the 22 planned locales before adding them to the picker.
 - Expand real plural messages and validate all CLDR categories with reviewers;
   runtime support exists, but most current messages do not need plural forms.

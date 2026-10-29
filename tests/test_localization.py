@@ -2,11 +2,15 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
+import io
 import json
 import re
 import shutil
 import subprocess
+import tempfile
 import unittest
+from contextlib import redirect_stdout
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -35,7 +39,7 @@ def _message_forms(value: object) -> dict[str, str]:
 
 
 def test_catalog_is_stable_complete_and_marks_unfinished_locales() -> None:
-    assert UI_CATALOG["schemaVersion"] == 2
+    assert UI_CATALOG["schemaVersion"] == 3
     assert len(UI_CATALOG["locales"]) == 37
     assert len(UI_AVAILABLE_LOCALES) == 15
     assert UI_CATALOG["locales"]["es-419"]["status"] == "inherited"
@@ -51,6 +55,14 @@ def test_catalog_is_stable_complete_and_marks_unfinished_locales() -> None:
         assert UI_SOURCE_TO_ID[source] == key
         assert message["sourceHash"] == hashlib.sha256(source.encode()).hexdigest()
         assert set(UI_LABELS[source]) == set(UI_AVAILABLE_LOCALES) - {"en"}
+        translation_status = message["translationStatus"]
+        assert not translation_status
+        assert not message["translationReview"]
+        assert not message["translationHashes"]
+        assert all(
+            translation_status.get(locale, "unverified") == "unverified"
+            for locale in UI_AVAILABLE_LOCALES if locale != "en"
+        )
         source_tokens = set(PLACEHOLDER.findall(source))
         for locale, translation in message["translations"].items():
             required = source_tokens
@@ -102,6 +114,10 @@ def test_public_localization_pages_have_safe_script_catalogs() -> None:
     node = shutil.which("node")
     pages = [login_page(claimed=False), link_page(),
              steam_result_page("connected", "sample")]
+    assert all(
+        'data-i18n-key="ui.use-browser-settings.02d22d3f39"' in rendered
+        for rendered in pages
+    )
     for rendered in pages:
         parser = ScriptParser()
         parser.feed(rendered)
@@ -151,7 +167,8 @@ const out={
   zero:i18n.translate(catalog,pluralKey,'fr-CA',{friend:'Nora',count:0},'fr-CA'),
   one:i18n.translate(catalog,pluralKey,'fr-CA',{friend:'Nora',count:1},'fr-CA'),
   many:i18n.translate(catalog,pluralKey,'fr-CA',{friend:'Nora',count:2},'fr-CA'),
-  isolate:i18n.isolate('a\u202Eb')
+  isolate:i18n.isolate('a\u202Eb'),
+  controls:i18n.isolate('A\u061cB\u200eC\u200fD\u202aE\u202cF\u2066G\u2069H\u206aI\u206fJ')
 };
 process.stdout.write(JSON.stringify(out));
 """
@@ -170,6 +187,10 @@ process.stdout.write(JSON.stringify(out));
     assert "1 titre" in without_isolates(values["one"])
     assert "2 titres" in without_isolates(values["many"])
     assert "\u202e" not in values["isolate"]
+    controls_without_isolates = values["controls"].replace("\u2068", "").replace("\u2069", "")
+    assert controls_without_isolates == "ABCDEFGHIJ"
+    assert not re.search(r"[\u061c\u200e\u200f\u202a-\u202e\u2066-\u206f]",
+                         controls_without_isolates)
 
 
 class LocalizationTests(unittest.TestCase):
@@ -189,3 +210,76 @@ class LocalizationTests(unittest.TestCase):
 
     def test_runtime(self) -> None:
         test_runtime_resolves_canonical_locale_tags_rtl_and_plural_messages()
+
+    def test_migration_review_evidence(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = Path(directory)
+            catalog_path = temp_root / "ui-labels.json"
+            snapshot_path = temp_root / "ui-source-snapshot.json"
+            catalog = json.loads(json.dumps(UI_CATALOG))
+            message = next(
+                message for message in catalog["messages"].values()
+                if isinstance(message["translations"].get("es"), str)
+            )
+            source = message["source"]
+            key = UI_SOURCE_TO_ID[source]
+            message["translationStatus"]["es"] = "reviewed"
+            message["translationReview"]["es"] = {
+                "reviewer": "QA reviewer",
+                "reviewedAt": "2026-10-28",
+            }
+            serialized = json.dumps(message["translations"]["es"], ensure_ascii=False,
+                                    sort_keys=True, separators=(",", ":"))
+            message["translationHashes"]["es"] = hashlib.sha256(
+                serialized.encode()
+            ).hexdigest()
+            catalog_path.write_text(json.dumps(catalog, ensure_ascii=False),
+                                    encoding="utf-8")
+
+            spec = importlib.util.spec_from_file_location(
+                "romarr_migrate_ui_catalog", ROOT / "scripts" / "migrate_ui_catalog.py"
+            )
+            assert spec and spec.loader
+            migration = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(migration)
+            migration.CATALOG = catalog_path
+            migration.SNAPSHOT = snapshot_path
+
+            with redirect_stdout(io.StringIO()):
+                assert migration.main() == 0
+            migrated = json.loads(catalog_path.read_text(encoding="utf-8"))
+            preserved = migrated["messages"][key]
+            assert preserved["translationStatus"]["es"] == "reviewed"
+            assert preserved["translationReview"]["es"]["reviewer"] == "QA reviewer"
+
+            preserved["translations"]["es"] += " (edited)"
+            catalog_path.write_text(json.dumps(migrated, ensure_ascii=False),
+                                    encoding="utf-8")
+            with redirect_stdout(io.StringIO()):
+                assert migration.main() == 0
+            changed = json.loads(catalog_path.read_text(encoding="utf-8"))["messages"][key]
+            assert changed["translationStatus"].get("es", "unverified") == "unverified"
+            assert "es" not in changed["translationHashes"]
+            assert "es" not in changed["translationReview"]
+
+            changed_catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+            changed_catalog["messages"][key]["translationStatus"]["es"] = "reviewed"
+            changed_catalog["messages"][key]["translationReview"]["es"] = {
+                "reviewer": "QA reviewer",
+                "reviewedAt": "2026-10-28",
+            }
+            changed_translation = changed_catalog["messages"][key]["translations"]["es"]
+            serialized = json.dumps(changed_translation, ensure_ascii=False,
+                                    sort_keys=True, separators=(",", ":"))
+            changed_catalog["messages"][key]["translationHashes"]["es"] = (
+                hashlib.sha256(serialized.encode()).hexdigest()
+            )
+            changed_catalog["messages"][key]["source"] = source + " Updated wording."
+            catalog_path.write_text(json.dumps(changed_catalog, ensure_ascii=False),
+                                    encoding="utf-8")
+            with redirect_stdout(io.StringIO()):
+                assert migration.main() == 0
+            source_changed = json.loads(catalog_path.read_text(encoding="utf-8"))["messages"][key]
+            assert source_changed["source"] == source + " Updated wording."
+            assert source_changed["translationStatus"].get("es", "unverified") == "unverified"
+            assert "es" not in source_changed["translationReview"]

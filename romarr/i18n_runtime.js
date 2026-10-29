@@ -4,7 +4,9 @@
   'use strict';
 
   const RTL_FALLBACK = ['ar', 'fa', 'he'];
-  const isolate = value => '\u2068' + String(value ?? '').replace(/[\u202a-\u202e\u2066-\u2069]/g, '') + '\u2069';
+  // Keep untrusted titles, usernames, and paths inside an isolate and remove
+  // embedded direction marks/overrides that could reorder surrounding copy.
+  const isolate = value => '\u2068' + String(value ?? '').replace(/[\u061c\u200e\u200f\u202a-\u202e\u2066-\u206f]/g, '') + '\u2069';
   const normalizeTag = value => String(value || '').trim().replace(/_/g, '-').toLowerCase();
   const matchingTag = (values, requested) => {
     if (values && Object.hasOwn(values, requested)) return requested;

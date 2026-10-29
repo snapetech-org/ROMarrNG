@@ -164,10 +164,13 @@ def test_static_localization_helper_sources_exist_in_every_catalog():
     )
     call = re.compile(
         r"\b(?:interfaceMarkup|interfaceTemplateMarkup|toastLabel|toastMessage|"
-        r"confirmMessage|promptMessage)\(\s*(['\"`])((?:\\\\.|(?!\1).)*?)\1",
+        r"confirmMessage|promptMessage|messageInfo)\(\s*(['\"`])((?:\\\\.|(?!\1).)*?)\1",
         re.S,
     )
-    referenced = {match.group(2) for match in call.finditer(source)}
+    referenced = {
+        re.sub(r"\{\{([A-Za-z][A-Za-z0-9_]*)\}\}", r"{\1}", match.group(2))
+        for match in call.finditer(source)
+    }
     known = set(UI_LABELS) | set(UI_SOURCE_TO_ID.values())
     assert referenced <= known, sorted(referenced - known)
 

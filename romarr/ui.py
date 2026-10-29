@@ -24,8 +24,8 @@ import json
 from pathlib import Path
 
 UI_CATALOG = json.loads(Path(__file__).with_name("ui-labels.json").read_text(encoding="utf-8"))
-if UI_CATALOG.get("schemaVersion") != 2:
-    raise ValueError("ROMarr UI translation catalog must use stable-key schema v2")
+if UI_CATALOG.get("schemaVersion") != 3:
+    raise ValueError("ROMarr UI translation catalog must use stable-key schema v3")
 UI_CATALOG_JSON = (json.dumps(UI_CATALOG, ensure_ascii=False, separators=(",", ":"))
                    .replace("<", "\\u003c").replace(">", "\\u003e")
                    .replace("&", "\\u0026").replace("\u2028", "\\u2028")
@@ -5954,15 +5954,17 @@ const preference=()=>{try{const value=localStorage.getItem(key);return value&&ca
 let active=preference()==='system'?detect():preference();
 const lookup=source=>core.lookup(catalog,source,active);
 const translate=source=>core.translate(catalog,source,active);
-const message=(source,values={})=>core.formatMessage(lookup(source).value,values,active,undefined,(nested,args)=>message(nested,args));
+const messageInfo=(source,values={})=>{const found=lookup(source);return{text:core.formatMessage(found.value,values,active,undefined,(nested,args)=>message(nested,args)),translated:found.translated,locale:found.locale}};
+const message=(source,values={})=>messageInfo(source,values).text;
 const has=source=>lookup(source).key!==null;
 const localized=source=>lookup(source).translated;
 const sources=new WeakMap();
 const text=(node)=>{const parent=node.parentElement;if(!parent||parent.closest('script,style,textarea,input,select,code,[contenteditable="true"],[lang="und"],[data-i18n],[data-i18n-key]'))return;const source=sources.get(node)||node.data.replace(/\s+/g,' ').trim();if(!has(source))return;sources.set(node,source);const left=node.data.match(/^\s*/)?.[0]||'',right=node.data.match(/\s*$/)?.[0]||'',value=left+translate(source)+right;if(value!==node.data)node.data=value;parent.lang=localized(source)?active:'en';parent.dir=localized(source)&&core.isRTL(active,catalog)?'rtl':'ltr'};
 const tree=root=>{if(root.nodeType===Node.TEXT_NODE){text(root);return}const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);while(walker.nextNode())text(walker.currentNode)};
 const apply=()=>{document.documentElement.lang=active;document.documentElement.dir=core.isRTL(active,catalog)?'rtl':'ltr';document.querySelectorAll('[data-i18n],[data-i18n-key]').forEach(el=>{const source=el.dataset.i18nKey||el.dataset.i18n,done=localized(source);el.textContent=translate(source);el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const source=el.dataset.i18nPlaceholder,done=localized(source);el.placeholder=translate(source);el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});for(const [marker,attribute] of [['data-i18n-aria-label','aria-label'],['data-i18n-title','title']])document.querySelectorAll('['+marker+']').forEach(el=>{const source=el.getAttribute(marker),done=localized(source);el.setAttribute(attribute,translate(source));el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});tree(document.body);const selector=document.querySelector('#public-language-select');if(selector)selector.value=preference();document.title=translate(document.body.dataset.title||'ROMarr')+' · ROMarr'};
-const picker=document.querySelector('#public-language-select');if(picker){picker.innerHTML='<option value="system">'+translate('Use browser settings')+'</option>'+languages.map(([code,name])=>'<option value="'+code+'" lang="'+code+'" dir="'+(core.isRTL(code,catalog)?'rtl':'ltr')+'">'+name+'</option>').join('');picker.value=preference();picker.addEventListener('change',()=>{try{if(picker.value==='system')localStorage.removeItem(key);else localStorage.setItem(key,picker.value)}catch(_){}active=picker.value==='system'?detect():picker.value;apply()})}
-const api=Object.assign({},core,{translate,message,has,apply});
+const picker=document.querySelector('#public-language-select');if(picker){picker.innerHTML='<option value="system" data-i18n-key="ui.use-browser-settings.02d22d3f39">Use browser settings</option>'+languages.map(([code,name])=>'<option value="'+code+'" lang="'+code+'" dir="'+(core.isRTL(code,catalog)?'rtl':'ltr')+'">'+name+'</option>').join('');picker.value=preference();picker.addEventListener('change',()=>{try{if(picker.value==='system')localStorage.removeItem(key);else localStorage.setItem(key,picker.value)}catch(_){}active=picker.value==='system'?detect():picker.value;apply()})}
+const api=Object.assign({},core,{translate,message,messageInfo,has,apply,
+  isRTLForLocale:locale=>core.isRTL(locale,catalog)});
 Object.defineProperty(api,'language',{get:()=>active});
 window.ROMarrI18n=api;
 apply();
@@ -6068,9 +6070,13 @@ if (keylink) keylink.onclick = function() {{
   document.getElementById('apikey').focus();
 }};
 function fail(m, raw) {{
-  err.textContent = raw ? String(m) : window.ROMarrI18n.translate(m);
-  err.lang = raw ? 'und' : window.ROMarrI18n.language;
-  err.dir = raw ? 'auto' : (window.ROMarrI18n.language === 'ar' ? 'rtl' : 'ltr');
+  var localized = raw ? null :
+    (m && typeof m === 'object' && typeof m.text === 'string'
+      ? m : window.ROMarrI18n.messageInfo(m));
+  err.textContent = raw ? String(m) : localized.text;
+  err.lang = raw ? 'und' : (localized.translated ? localized.locale : 'en');
+  err.dir = raw ? 'auto' : (localized.translated
+    && window.ROMarrI18n.isRTLForLocale(localized.locale) ? 'rtl' : 'ltr');
   err.className = 'err on'; go.disabled = false;
   go.textContent = window.ROMarrI18n.translate(claimed ? 'Sign in' : 'Create password');
 }}
@@ -6103,10 +6109,10 @@ f.onsubmit = async function(e) {{
     var detail = d.detail || d.error;
     if (d.error === 'weak password') {{
       var minimum = (String(detail || '').match(/\\d+/) || [])[0] || '8';
-      fail(window.ROMarrI18n.message('Use at least {{count}} characters.',
+      fail(window.ROMarrI18n.messageInfo('Use at least {{count}} characters.',
         {{count:minimum}}));
     }} else if (detail) fail(detail, !window.ROMarrI18n.has(detail));
-    else fail(window.ROMarrI18n.message('Refused (HTTP {{status}}).', {{status:r.status}}));
+    else fail(window.ROMarrI18n.messageInfo('Refused (HTTP {{status}}).', {{status:r.status}}));
   }} catch (_) {{ fail('Could not reach ROMarr.'); }}
 }};
 </script></body></html>"""
