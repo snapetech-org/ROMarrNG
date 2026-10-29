@@ -59,7 +59,7 @@ def validate() -> list[str]:
         errors.append(f"availableLocales references unknown locales: {sorted(unknown)}")
     for code, locale in locales.items():
         status = locale.get("status")
-        if status not in {"available", "inherited", "planned"}:
+        if status not in {"available", "inherited", "draft", "planned"}:
             errors.append(f"{code}: invalid availability status {status!r}")
         if locale.get("direction") not in {"ltr", "rtl"}:
             errors.append(f"{code}: direction must be ltr or rtl")
@@ -69,16 +69,18 @@ def validate() -> list[str]:
             parent = catalog.get("regionalParents", {}).get(code)
             if not parent or parent not in available or parent == code:
                 errors.append(f"{code}: inherited locale needs a selectable parent")
-        if status == "planned" and code in available:
-            errors.append(f"{code}: planned locale must not be selectable")
+        if status in {"planned", "draft"} and code in available:
+            errors.append(f"{code}: unfinished locale must not be selectable")
         review_status = locale.get("translationReview")
         if review_status not in {"source", "unverified", "reviewed",
-                                 "inherited", "not started"}:
+                                 "inherited", "draft", "not started"}:
             errors.append(f"{code}: invalid locale translationReview {review_status!r}")
         if code == "en" and review_status != "source":
             errors.append("en: translationReview must be source")
         elif status == "planned" and review_status != "not started":
             errors.append(f"{code}: planned locale translationReview must be not started")
+        elif status == "draft" and review_status != "draft":
+            errors.append(f"{code}: partial locale translationReview must be draft")
         elif status == "inherited" and review_status != "inherited":
             errors.append(f"{code}: inherited locale translationReview must be inherited")
         elif status == "available" and code != "en" and review_status not in {
@@ -96,6 +98,11 @@ def validate() -> list[str]:
     current_snapshot: dict[str, str] = {}
     direct_locales = {code for code in available
                       if locales[code]["status"] == "available" and code != "en"}
+    draft_locales = {
+        code for code, locale in locales.items()
+        if locale["status"] == "draft"
+    }
+    reviewable_locales = direct_locales | draft_locales
     inherited_locales = {
         code: parent for code, parent in catalog.get("regionalParents", {}).items()
         if code in available and locales.get(code, {}).get("status") == "inherited"
@@ -132,15 +139,33 @@ def validate() -> list[str]:
         if not isinstance(review_evidence, dict):
             review_evidence = {}
             errors.append(f"{key}: translationReview must contain reviewer evidence by locale")
-        extra_statuses = set(statuses) - direct_locales
+        extra_statuses = set(statuses) - reviewable_locales
         if extra_statuses:
-            errors.append(f"{key}: translationStatus has non-direct locales {sorted(extra_statuses)}")
+            errors.append(f"{key}: translationStatus has non-reviewable locales {sorted(extra_statuses)}")
         if set(translations) & set(inherited_locales):
             errors.append(f"{key}: inherited locales must resolve through their declared parent")
-        for code in direct_locales:
-            state = statuses.get(code, "unverified")
-            if not isinstance(state, str) or state not in {"unverified", "draft", "reviewed"}:
+        for code in reviewable_locales:
+            locale_status = locales[code]["status"]
+            has_translation = code in translations
+            default_state = (
+                "unverified" if locale_status == "available" else "fallback"
+            )
+            state = statuses.get(code, default_state)
+            if locale_status == "draft" and not has_translation:
+                if code in statuses:
+                    errors.append(f"{key}/{code}: fallback message must not have a review override")
+                if code in review_evidence:
+                    errors.append(f"{key}/{code}: fallback message must not have reviewer evidence")
+                continue
+            if locale_status == "draft" and state not in {"draft", "reviewed"}:
+                errors.append(f"{key}/{code}: draft-locale text needs draft or reviewed status")
+            elif locale_status == "available" and not isinstance(state, str):
                 errors.append(f"{key}/{code}: direct translation needs a valid review status")
+            elif locale_status == "available" and state not in {
+                "unverified", "draft", "reviewed"
+            }:
+                errors.append(f"{key}/{code}: direct translation needs a valid review status")
+            state = statuses.get(code, "unverified")
             if state == "unverified" and code in statuses:
                 errors.append(f"{key}/{code}: omit unverified status to keep catalog metadata sparse")
             evidence = review_evidence.get(code)
@@ -162,9 +187,9 @@ def validate() -> list[str]:
         for code, parent in inherited_locales.items():
             if parent not in translations:
                 errors.append(f"{key}/{code}: inherited parent {parent} has no translation")
-        extra_evidence = set(review_evidence) - direct_locales
+        extra_evidence = set(review_evidence) - reviewable_locales
         if extra_evidence:
-            errors.append(f"{key}: review evidence references non-direct locales {sorted(extra_evidence)}")
+            errors.append(f"{key}: review evidence references non-reviewable locales {sorted(extra_evidence)}")
         extra_locales = set(translations) - (set(locales) | {"en"})
         if extra_locales:
             errors.append(f"{key}: unknown translation locales {sorted(extra_locales)}")
@@ -200,7 +225,7 @@ def validate() -> list[str]:
                 errors.append(f"{key}: missing direct translation for {code}")
         for code, locale in locales.items():
             if locale["status"] == "planned" and code in translations:
-                errors.append(f"{key}: planned locale {code} contains unreviewed text")
+                errors.append(f"{key}: planned locale {code} has text but is not marked draft")
 
     if current_snapshot != snapshot:
         errors.append("source snapshot is stale; run scripts/migrate_ui_catalog.py")
@@ -249,6 +274,7 @@ def main() -> int:
     direct = sum(locales[code]["status"] == "available" and code != "en"
                  for code in available)
     inherited = sum(locales[code]["status"] == "inherited" for code in available)
+    drafted_locales = sum(locale["status"] == "draft" for locale in locales.values())
     planned = sum(locale["status"] == "planned" for locale in locales.values())
     review_counts = Counter(
         message.get("translationStatus", {}).get(code, "unverified")
@@ -259,6 +285,7 @@ def main() -> int:
     direct_messages = sum(review_counts.values())
     print(f"Valid: {len(catalog['messages']):,} stable messages, "
           f"{direct} directly translated locales, {inherited} regional fallbacks, "
+          f"{drafted_locales} locales with translation drafts, "
           f"{planned} locales awaiting translation. "
           f"Reviewed strings: {review_counts['reviewed']:,}/{direct_messages:,}; "
           f"drafts: {review_counts['draft']:,}; "

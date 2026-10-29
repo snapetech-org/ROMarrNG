@@ -14,6 +14,7 @@ English on a message-by-message basis.
 | English source | 1 | Always selectable |
 | Direct translations | 12 | Selectable; full catalog coverage |
 | Regional fallbacks | 2 | Selectable; inherit from `es` or `fr` |
+| Draft translations | 0 currently | Hidden; must be complete and reviewed before selection |
 | Planned translations | 22 | Registered for formatting and future work; not selectable |
 
 The 37 registered locales are Arabic, Azerbaijani, Bulgarian, Bengali, Czech,
@@ -69,10 +70,10 @@ provider language.
 2. Add new UI copy to the catalog before wiring it into `romarr/ui.py`. Prefer
    `data-i18n-key` and stable IDs in rendering helpers. The runtime still accepts
    source text for dynamic messages during migration.
-3. Add translation text only for locales with a qualified reviewer. Keep
-   placeholders intact. Set that message's `translationStatus[locale]` to
-   `draft` for machine-generated text. Leave the status absent (or remove its
-   override) when the origin is unknown; that means `unverified`.
+3. Add translation text for the target locale and keep placeholders intact.
+   Mark machine-generated or not-yet-reviewed text as `draft`. Leave the status
+   absent (or remove its override) when the origin is unknown; that means
+   `unverified`.
    For count-sensitive messages, use the plural object shape (`kind`, `argument`,
    and locale forms) instead of concatenating singular and plural strings.
 4. After a native speaker checks the translation in context, set its status to
@@ -88,6 +89,52 @@ provider language.
    stable source hashes, source snapshots, locale status, direct coverage,
    inherited coverage, per-message review metadata, placeholders, plural forms,
    and stable IDs referenced by the UI.
+
+### Review bundles
+
+Use `scripts/localization_review.py` to prepare translations for human review
+without editing the application catalog by hand. The bundle is plain JSON; the
+importer treats it as data and does not execute its contents.
+
+```sh
+python scripts/localization_review.py export \
+  --locale it --output /tmp/romarr-it-review.json
+```
+
+Edit only each row's `translation`. Keep its ID, English source, source hash,
+translation hash, and status unchanged. For an existing locale, export includes
+strings that have not been marked reviewed; use `--include-reviewed` when
+rechecking already-reviewed copy. For a planned locale, the export contains an
+empty translation for every message. Fill these in while preserving every
+placeholder and, for plural messages, every required form.
+
+Validate the completed file first. Without `--apply`, import checks schema
+version, stable message IDs, unchanged source and translation fingerprints,
+placeholders, plural forms, reviewer details, and review date without writing
+to the catalog:
+
+```sh
+python scripts/localization_review.py import \
+  --bundle /tmp/romarr-it-review.json \
+  --reviewer "Reviewer name" --reviewed-at YYYY-MM-DD
+```
+
+After a successful validation, repeat the command with `--apply` to atomically
+update `romarr/ui-labels.json`. If the source or an existing translation
+changed after export, the import is rejected; export a fresh bundle and carry
+over the translation manually. Imports are all-or-nothing, so a malformed row
+cannot leave a half-updated catalog.
+
+A planned locale remains hidden while translations are incomplete. Partial
+imports mark it as a hidden `draft`; the picker exposes it only when every
+message has a translation and every message was explicitly marked `reviewed`.
+The reviewer and date fields are an audit record, not credential verification:
+only mark a translation reviewed after a human has checked it in context and
+confirmed its language quality. These tools do not generate or certify
+translations.
+
+Translation guidance and names that should stay unchanged are in the
+[localization glossary](localization-glossary.md).
 
 `python scripts/migrate_ui_catalog.py` imports the current source-keyed catalog
 into the stable-ID schema. It preserves IDs and unchanged review evidence,

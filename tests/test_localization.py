@@ -208,6 +208,41 @@ class LocalizationTests(unittest.TestCase):
     def test_checker(self) -> None:
         test_localization_checker_accepts_repository_catalog()
 
+    def test_checker_accepts_a_partial_hidden_locale(self) -> None:
+        spec = importlib.util.spec_from_file_location(
+            "romarr_check_localizations", ROOT / "scripts" / "check_localizations.py"
+        )
+        assert spec and spec.loader
+        checker = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(checker)
+
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = Path(directory)
+            catalog = json.loads(json.dumps(UI_CATALOG))
+            locale = "it"
+            key = UI_SOURCE_TO_ID["Use browser settings"]
+            entry = catalog["messages"][key]
+            entry["translations"][locale] = "Usa le impostazioni del browser"
+            entry["translationStatus"][locale] = "draft"
+            entry["translationHashes"][locale] = checker.translation_hash(
+                entry["translations"][locale]
+            )
+            catalog["locales"][locale]["status"] = "draft"
+            catalog["locales"][locale]["translationReview"] = "draft"
+
+            catalog_path = temp_root / "ui-labels.json"
+            snapshot_path = temp_root / "ui-source-snapshot.json"
+            catalog_path.write_text(json.dumps(catalog, ensure_ascii=False),
+                                    encoding="utf-8")
+            snapshot_path.write_text(
+                (ROOT / "romarr" / "ui-source-snapshot.json").read_text(encoding="utf-8"),
+                encoding="utf-8",
+            )
+            checker.CATALOG_PATH = catalog_path
+            checker.SNAPSHOT_PATH = snapshot_path
+            checker.UI_PATH = ROOT / "romarr" / "ui.py"
+            self.assertEqual(checker.validate(), [])
+
     def test_runtime(self) -> None:
         test_runtime_resolves_canonical_locale_tags_rtl_and_plural_messages()
 
@@ -283,3 +318,122 @@ class LocalizationTests(unittest.TestCase):
             assert source_changed["source"] == source + " Updated wording."
             assert source_changed["translationStatus"].get("es", "unverified") == "unverified"
             assert "es" not in source_changed["translationReview"]
+
+    def test_review_bundle_accepts_edits_and_rejects_stale_content(self) -> None:
+        spec = importlib.util.spec_from_file_location(
+            "romarr_localization_review", ROOT / "scripts" / "localization_review.py"
+        )
+        assert spec and spec.loader
+        review = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(review)
+
+        catalog = json.loads(json.dumps(UI_CATALOG))
+        key = next(
+            key for key, entry in catalog["messages"].items()
+            if isinstance(entry["translations"].get("es"), str)
+        )
+        bundle = review.export_bundle(catalog, "es")
+        row = next(message for message in bundle["messages"] if message["id"] == key)
+        original = catalog["messages"][key]["translations"]["es"]
+        row["translation"] = original + " revisado"
+
+        updated, count = review.apply_review_bundle(
+            catalog, {**bundle, "messages": [row]}, "Reviewer", "2026-10-29"
+        )
+        self.assertEqual(count, 1)
+        self.assertEqual(catalog["messages"][key]["translations"]["es"], original)
+        self.assertEqual(
+            updated["messages"][key]["translations"]["es"],
+            original + " revisado",
+        )
+        self.assertEqual(updated["messages"][key]["translationStatus"]["es"], "reviewed")
+        self.assertEqual(
+            updated["messages"][key]["translationReview"]["es"],
+            {"reviewer": "Reviewer", "reviewedAt": "2026-10-29"},
+        )
+
+        stale_catalog = json.loads(json.dumps(catalog))
+        stale_catalog["messages"][key]["translations"]["es"] += " changed elsewhere"
+        with self.assertRaisesRegex(ValueError, "translation changed after export"):
+            review.apply_review_bundle(
+                stale_catalog, {**bundle, "messages": [row]}, "Reviewer", "2026-10-29"
+            )
+        self.assertNotIn("it", catalog["messages"][key]["translations"])
+
+        stale_source_catalog = json.loads(json.dumps(catalog))
+        source_entry = stale_source_catalog["messages"][key]
+        source_entry["source"] += " changed"
+        source_entry["sourceHash"] = hashlib.sha256(
+            source_entry["source"].encode()
+        ).hexdigest()
+        with self.assertRaisesRegex(ValueError, "English source changed"):
+            review.apply_review_bundle(
+                stale_source_catalog, {**bundle, "messages": [row]},
+                "Reviewer", "2026-10-29",
+            )
+
+        bad_schema = {**bundle, "catalogSchemaVersion": 999, "messages": [row]}
+        with self.assertRaisesRegex(ValueError, "different catalog schema"):
+            review.apply_review_bundle(catalog, bad_schema, "Reviewer", "2026-10-29")
+        with self.assertRaisesRegex(ValueError, "JSON object"):
+            review.apply_review_bundle(catalog, [], "Reviewer", "2026-10-29")
+        with self.assertRaisesRegex(ValueError, "reviewer must contain"):
+            review.apply_review_bundle(
+                catalog, {**bundle, "messages": [row]}, "R" * 201, "2026-10-29"
+            )
+        with self.assertRaisesRegex(ValueError, "ISO date"):
+            review.apply_review_bundle(
+                catalog, {**bundle, "messages": [row]}, "Reviewer", "2026-02-30"
+            )
+
+    def test_planned_locale_stays_hidden_until_every_message_is_reviewed(self) -> None:
+        spec = importlib.util.spec_from_file_location(
+            "romarr_localization_review_promotion",
+            ROOT / "scripts" / "localization_review.py",
+        )
+        assert spec and spec.loader
+        review = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(review)
+
+        def message(source: str) -> dict[str, object]:
+            return {
+                "source": source,
+                "sourceHash": hashlib.sha256(source.encode()).hexdigest(),
+                "translations": {},
+                "translationHashes": {},
+                "translationStatus": {},
+                "translationReview": {},
+            }
+
+        catalog = {
+            "schemaVersion": 3,
+            "baseLocale": "en",
+            "availableLocales": ["en"],
+            "locales": {
+                "en": {"status": "available"},
+                "it": {"status": "planned", "englishName": "Italian"},
+            },
+            "messages": {
+                "ui.test.0000000001": message("Hello {name}"),
+                "ui.test.0000000002": message("Goodbye {name}"),
+            },
+        }
+        first = review.export_bundle(catalog, "it")
+        first["messages"] = first["messages"][:1]
+        first["messages"][0]["translation"] = "Ciao {name}"
+        partial, count = review.apply_review_bundle(
+            catalog, first, "Italian reviewer", "2026-10-29"
+        )
+        self.assertEqual(count, 1)
+        self.assertEqual(partial["locales"]["it"]["status"], "draft")
+        self.assertNotIn("it", partial["availableLocales"])
+
+        second = review.export_bundle(partial, "it")
+        self.assertEqual(len(second["messages"]), 1)
+        second["messages"][0]["translation"] = "Arrivederci {name}"
+        complete, count = review.apply_review_bundle(
+            partial, second, "Italian reviewer", "2026-10-29"
+        )
+        self.assertEqual(count, 1)
+        self.assertEqual(complete["locales"]["it"]["status"], "available")
+        self.assertIn("it", complete["availableLocales"])

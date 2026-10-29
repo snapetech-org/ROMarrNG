@@ -302,7 +302,9 @@ rather than implying complete coverage.
 Arabic is the only selectable right-to-left translation today. RTL direction
 and layout behavior are wired through the shell, but visual signoff is still
 needed. See the [localization notes](docs/localization-roadmap.md) for the
-coverage table and validation workflow.
+coverage table and validation workflow. The same guide documents safe review
+bundles for translation contributors, with shared terminology in the
+[localization glossary](docs/localization-glossary.md).
 
 ## Requirements
 
