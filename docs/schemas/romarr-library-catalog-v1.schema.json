@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/snapetech-org/ROMarrNG/blob/main/docs/schemas/romarr-library-catalog-v1.schema.json",
+  "title": "ROMarr Library Catalog v1",
+  "description": "Portable catalog export containing ROMarr Game Metadata v1 records.",
+  "type": "object",
+  "required": ["format", "schema_version", "generated_at", "games"],
+  "properties": {
+    "format": {"const": "org.romarr.library-catalog"},
+    "schema_version": {"const": 1},
+    "generated_at": {"type": "string"},
+    "games": {
+      "type": "array",
+      "items": {"$ref": "romarr-game-metadata-v1.schema.json"}
+    }
+  },
+  "additionalProperties": true
+}

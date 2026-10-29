@@ -24,6 +24,7 @@ import logging
 import re
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
+from datetime import datetime, timezone
 
 log = logging.getLogger(__name__)
 
@@ -273,6 +274,71 @@ def to_playnite(rows: list[dict]) -> str:
     }, indent=2)
 
 
+def romarr_game_document(row: dict) -> dict:
+    """Return the versioned, frontend-neutral ROMarr game metadata record."""
+    identity_id = str(row.get("identity_id") or row.get("id") or "")
+    platform = str(row.get("platform") or "")
+    digest = str(row.get("content_sha256") or "")
+    if not digest and ":" in identity_id:
+        digest = identity_id.rsplit(":", 1)[-1]
+    metadata = row.get("metadata") or {}
+    if not isinstance(metadata, dict):
+        metadata = {}
+    return {
+        "format": "org.romarr.game-metadata",
+        "schema_version": 1,
+        "identity_id": identity_id,
+        "identity": {"platform": platform, "sha256": digest},
+        "game": {
+            "title": str(row.get("canonical_title") or row.get("title") or ""),
+            "filename": str(row.get("filename") or ""),
+            "region": str(row.get("region") or ""),
+        },
+        "file": {
+            "relative_path": str(row.get("relative_path") or row.get("filename") or ""),
+            "is_directory": bool(row.get("is_directory", False)),
+        },
+        "identification": {
+            "confidence": str(row.get("confidence") or row.get("matched_by") or ""),
+            "details": str(row.get("match_details") or ""),
+            "manual_mapping": bool(row.get("manual_mapping", False)),
+            "dat": {
+                "name": str(row.get("dat") or ""),
+                "status": str(row.get("dat_status") or "unknown"),
+                "title": str(row.get("dat_game") or ""),
+                "hashes": row.get("hashes") or {},
+            },
+        },
+        "metadata": {
+            "summary": str(metadata.get("summary") or row.get("desc") or ""),
+            "released": str(metadata.get("released") or row.get("released") or ""),
+            "genres": list(metadata.get("genres") or row.get("genres") or []),
+            "rating": metadata.get("rating", row.get("rating", 0)),
+            "source": str(metadata.get("source") or row.get("metadata_source") or ""),
+            "provider_id": str(metadata.get("provider_id") or ""),
+            "matched_by": str(metadata.get("matched_by") or ""),
+        },
+        "artwork": {"path": str(row.get("metadata_artwork_path")
+                                  or row.get("cover_path") or "")},
+        "relationships": {
+            "switch": row.get("switch") or {},
+            "disc_group": row.get("disc_group") or {},
+            "manifests": row.get("manifests") or [],
+        },
+        "updated_at": str(row.get("updated_at") or ""),
+    }
+
+
+def to_romarr_json(rows: list[dict]) -> str:
+    """Export the portable ROMarr metadata catalog, not an app-specific view."""
+    return json.dumps({
+        "format": "org.romarr.library-catalog",
+        "schema_version": 1,
+        "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "games": [romarr_game_document(row) for row in rows],
+    }, ensure_ascii=False, indent=2)
+
+
 FORMATS = {
     "launchbox": {"label": "LaunchBox", "render": to_launchbox,
                   "content_type": "application/xml; charset=utf-8",
@@ -283,4 +349,8 @@ FORMATS = {
     "playnite": {"label": "Playnite", "render": to_playnite,
                  "content_type": "application/json; charset=utf-8",
                  "filename": "romarr-playnite.json"},
+    "romarr-json": {"label": "ROMarr portable metadata JSON",
+                    "render": to_romarr_json,
+                    "content_type": "application/json; charset=utf-8",
+                    "filename": "romarr-library-catalog.json"},
 }

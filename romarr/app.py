@@ -6463,8 +6463,11 @@ def make_handler(service: ROMarr):
                 return self._json(200, result)
             if route.path == "/api/v1/organizer/rename-plan":
                 try:
+                    plan_offset = int((query.get("offset") or ["0"])[0] or 0)
+                    plan_limit = int((query.get("limit") or ["200"])[0] or 200)
                     result = service.organizer.rename_plan(
-                        (query.get("platform") or [""])[0])
+                        (query.get("platform") or [""])[0],
+                        offset=plan_offset, limit=plan_limit)
                 except (ValueError, OSError) as exc:
                     return self._json(400, {"error": str(exc)})
                 return self._json(200, result)
@@ -6806,9 +6809,12 @@ def make_handler(service: ROMarr):
                 if not isinstance(body, dict):
                     return self._json(400, {"error": "expected a JSON object"})
                 try:
+                    plan_offset = int(body.get("offset", 0))
+                    plan_limit = int(body.get("limit", 200))
                     result = service.organizer.apply_rename_plan(
                         str(body.get("plan_id") or ""),
-                        platform=str(body.get("platform") or ""))
+                        platform=str(body.get("platform") or ""),
+                        offset=plan_offset, limit=plan_limit)
                 except (ValueError, OSError) as exc:
                     return self._json(409, {"error": str(exc)})
                 return self._json(200, result)

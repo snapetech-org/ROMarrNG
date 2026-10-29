@@ -635,7 +635,7 @@ LIBRARY_PATH=/mnt/roms
 
 ### Shared library identification
 
-The **Identify & Organize** page can inventory an existing ROM folder, verify files against loaded DATs, look up metadata, cache artwork, and publish ES-DE data. It is read only until a user previews and applies a rename plan. See [shared library identification](docs/features/shared-library-identification.md) for the mount layout, evidence levels, and safety limits.
+The **Identify & Organize** page can inventory an existing ROM folder, reuse existing ES-DE metadata and artwork, verify files against loaded DATs, look up metadata, and publish ES-DE data. It is read only until a user previews and applies a rename plan; large rename previews are reviewed and applied in bounded batches. A versioned ROMarr metadata JSON export is available alongside the frontend formats. See [shared library identification](docs/features/shared-library-identification.md) for the mount layout, import behavior, format schemas, evidence levels, and safety limits.
 
 ### Supported platforms
 

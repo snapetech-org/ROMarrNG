@@ -3928,12 +3928,12 @@ RENDER.status=async()=>{
   const fe=await j('/api/v1/frontend/formats').catch(()=>({formats:[]}));
   const feRow=$('#fe-row'); if(!feRow) return;   // navigated away mid-fetch
   feRow.innerHTML=(fe.formats||[]).map(f=>
-    '<button class="btn ghost fe-btn" data-f="'+esc(f.name||f)+'">'
+    '<button class="btn ghost fe-btn" data-f="'+esc(f.name||f)+'" data-filename="'+esc(f.filename||('romarr-'+(f.name||f)+'.export'))+'">'
     +esc(f.label||f.name||f)+'</button>').join('')
     ||'<span class="help" style="margin:0">No frontend formats available.</span>';
   feRow.querySelectorAll('.fe-btn').forEach(b=>b.onclick=()=>
-    save('/api/v1/frontend/export?format='+b.dataset.f,
-         'romarr-'+b.dataset.f+'.export'));
+    save('/api/v1/frontend/export?format='+encodeURIComponent(b.dataset.f),
+         b.dataset.filename||'romarr-export.export'));
 };
 
 // GG Requestz pushes to ROMarr; the reachability probe above is deliberately
@@ -4847,12 +4847,14 @@ RENDER.organize=async()=>{
   let offset=0;
   let reviewOnly=false;
   let currentPlan=null;
+  let nextPlanOffset=0;
+  const planLimit=200;
   const platformOptions='<option value="">All platforms</option>'
     +PLATFORMS.map(x=>'<option value="'+esc(x.slug)+'">'+esc(x.name)+'</option>').join('');
   p.innerHTML=
     '<div class="card"><div class="row" style="align-items:flex-start;gap:12px">'
     +'<div style="flex:1"><h3>Identify &amp; Organize</h3>'
-    +'<p class="help">Build a portable inventory, match exact DAT dumps, cache provider metadata and artwork, and review safe name changes. Scanning is read only. ROMarr changes files only after you preview and apply a plan.</p></div>'
+    +'<p class="help">Build a portable inventory, reuse existing ES-DE metadata, match exact DAT dumps, and review safe name changes. Scanning is read only. ROMarr changes files only after you preview and apply a plan.</p></div>'
     +'<a class="btn ghost" href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">Requests in SeerrNG ↗</a></div>'
     +'<p class="help" style="margin:0">Use <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a> for the shared household request queue; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a> to connect the services.</p>'
     +'<div class="st" style="margin-top:12px">'
@@ -4870,7 +4872,7 @@ RENDER.organize=async()=>{
     +'<button class="btn ghost" id="org-plan" '+(!SETTINGS.metadata_path?'disabled':'')+'>Preview safe renames</button>'
     +'<button class="btn ghost" id="org-undo" '+(!SETTINGS.metadata_path?'disabled':'')+'>Undo last rename</button>'
     +'<button class="btn ghost" id="org-esde" '+(!SETTINGS.metadata_path?'disabled':'')+'>Publish ES-DE gamelist</button></div>'
-    +'<p class="help" style="margin:8px 0 0">Provider lookups are capped at 200 per scan to protect catalog services. Scan again to continue a large library; Refresh metadata revisits cached matches.</p></div>'
+    +'<p class="help" style="margin:8px 0 0">ROMarr reads an existing platform gamelist.xml before online lookup and reuses its descriptions and local artwork. Provider lookups are capped at 200 per scan. Export the portable catalog from <a href="#status">System → Backup &amp; Export</a>; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/features/shared-library-identification.md#portable-metadata" target="_blank" rel="noopener noreferrer">format and schema</a>.</p></div>'
     +'<div id="org-message"></div><div id="org-status"></div><div id="org-plan-result"></div>'
     +'<div class="card"><div class="row" style="align-items:center">'
     +'<h3 style="margin:0;flex:1">Library inventory</h3><span id="org-page-label" class="help" style="margin:0"></span></div>'
@@ -4901,6 +4903,7 @@ RENDER.organize=async()=>{
       +'<span class="help" style="margin:0">DAT verified '+fmt(status.verified||0)+'</span>'
       +'<span class="help" style="margin:0">TitleDB catalogued '+fmt(status.catalogued||0)+'</span>'
       +'<span class="help" style="margin:0">Suggestions '+fmt(status.suggested||0)+'</span>'
+      +'<span class="help" style="margin:0">Local ES-DE records reused '+fmt(status.local_metadata_imported||0)+'</span>'
       +'<span class="help" style="margin:0">Unmatched '+fmt(status.unmatched||0)+'</span>'
       +'<span class="help" style="margin:0">Switch versions behind catalog '+fmt(status.switch_outdated||0)+'</span></div>'
       +(status.truncated?'<p class="help" style="margin:8px 0 0">This scan was bounded at 50,000 entries. Filter to a platform and scan again to continue.</p>':'')
@@ -4922,6 +4925,7 @@ RENDER.organize=async()=>{
         dat_verified:'DAT checksum verified',
         title_id_catalog:'TitleDB ID match · bytes unverified',
         provider_suggestion:'Provider suggestion · review',
+        local_metadata:'Imported local metadata · review title',
         ambiguous_name:'Ambiguous title · review',
         manual:'Manually confirmed',
         filename_only:'Filename only · review',
@@ -4944,11 +4948,19 @@ RENDER.organize=async()=>{
           const title=row.canonical_title||row.filename||'Untitled';
           const canMap=row.confidence!=='dat_verified';
           const discGroup=row.disc_group||{};
+          const manifestInfo=(row.manifests||[]).map(manifest=>
+            '<details style="margin-top:5px"><summary class="help" style="cursor:pointer">'
+              +'Manifest '+esc(manifest.path||'')+' · '+fmt((manifest.references||[]).length)+' linked file(s)'
+              +'</summary><div class="help" style="margin:4px 0">'+(manifest.references||[]).map(path=>
+                '<div lang="und" dir="auto">'+esc(path)+'</div>').join('')+'</div></details>'
+          ).join('');
           const pathCell=discGroup.id
             ?'<span class="pill">Likely '+fmt(discGroup.disc_count||0)+'-disc set</span>'
+              +(discGroup.manifest_path?'<div class="help" style="margin:4px 0">Playlist: <span lang="und" dir="auto">'+esc(discGroup.manifest_path)+'</span></div>':'')
               +'<div class="help" style="margin:4px 0">'+(discGroup.members||[]).map(member=>
                 '<div lang="und" dir="auto">'+esc(member.relative_path||'')+'</div>').join('')+'</div>'
-            :'<span lang="und" dir="auto">'+esc(row.relative_path||'')+'</span>';
+              +manifestInfo
+            :'<span lang="und" dir="auto">'+esc(row.relative_path||'')+'</span>'+manifestInfo;
           return '<tr data-identity="'+esc(row.identity_id||'')+'"><td>'+art+'<b>'+esc(title)+'</b>'
             +'<div class="help" style="margin:4px 0">'+esc(confidenceLabel[row.confidence]||row.confidence||'Unknown')+'</div>'
             +'<div class="help" style="margin:0">'+esc(row.match_details||'')+'</div>'
@@ -4984,6 +4996,7 @@ RENDER.organize=async()=>{
   const startScan=async(force)=>{
     offset=0;
     currentPlan=null;
+    nextPlanOffset=0;
     $('#org-plan-result').innerHTML='';
     message(force?'Refreshing provider metadata…':'Starting a read-only library scan…',false);
     const result=await j('/api/v1/organizer/scan',{method:'POST',
@@ -4995,35 +5008,57 @@ RENDER.organize=async()=>{
   };
   $('#org-scan').onclick=()=>startScan(false);
   $('#org-refresh').onclick=()=>startScan(true);
-  $('#org-platform').onchange=()=>{offset=0;currentPlan=null;$('#org-plan-result').innerHTML='';loadInventory();};
+  $('#org-platform').onchange=()=>{offset=0;currentPlan=null;nextPlanOffset=0;$('#org-plan-result').innerHTML='';loadInventory();};
   $('#org-review').onchange=event=>{reviewOnly=event.target.checked;offset=0;loadInventory();};
   $('#org-prev').onclick=()=>{offset=Math.max(0,offset-limit);loadInventory();};
   $('#org-next').onclick=()=>{offset+=limit;loadInventory();};
-  $('#org-plan').onclick=async()=>{
-    const query=platform()?'?platform='+encodeURIComponent(platform()):'';
-    const plan=await j('/api/v1/organizer/rename-plan'+query)
+  const previewPlan=async(planOffset)=>{
+    const query=new URLSearchParams({offset:String(planOffset),limit:String(planLimit)});
+    if(platform())query.set('platform',platform());
+    const plan=await j('/api/v1/organizer/rename-plan?'+query.toString())
       .catch(()=>({error:'Could not create a rename preview.'}));
     currentPlan=plan;
     if(plan.error){message(plan.error,true);$('#org-plan-result').innerHTML='';return;}
+    const batch=plan.batch||{offset:planOffset,limit:planLimit,total:0,count:0,has_more:false};
+    const first=batch.count?batch.offset+1:0;
+    const last=batch.offset+batch.count;
     const rows=(plan.operations||[]).map(op=>'<tr><td lang="und" dir="auto">'+esc(op.from)+'</td><td lang="und" dir="auto">'+esc(op.to)+'</td><td>'+esc(op.reason)+'</td></tr>').join('');
     const blocked=(plan.blocked||[]).map(op=>'<tr><td>'+esc(op.identity_id||'')+'</td><td>'+esc(op.reason||'')+'</td></tr>').join('');
-    $('#org-plan-result').innerHTML='<div class="card"><h3>Rename preview</h3><p class="help">'
-      +fmt((plan.operations||[]).length)+' file(s) can be renamed. '+fmt((plan.blocked||[]).length)+' were left alone.</p>'
-      +(rows?'<div style="overflow-x:auto"><table><thead><tr><th>Current path</th><th>Proposed path</th><th>Evidence</th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<p class="empty">No safe renames are ready.</p>')
+    $('#org-plan-result').innerHTML='<div class="card"><h3>Rename preview · '+fmt(first)+'–'+fmt(last)+' of '+fmt(batch.total||0)+'</h3><p class="help">'
+      +fmt((plan.operations||[]).length)+' safe rename(s) in this batch. '+fmt((plan.blocked||[]).length)+' matching entries were left alone.'
+      +(batch.has_more?' More entries will be reviewed in the next batch.':'')+'</p>'
+      +(rows?'<div style="overflow-x:auto"><table><thead><tr><th>Current path</th><th>Proposed path</th><th>Evidence</th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<p class="empty">No safe renames are ready in this batch.</p>')
       +(blocked?'<details style="margin-top:10px"><summary>See blocked items</summary><div style="overflow-x:auto"><table><thead><tr><th>Game</th><th>Reason</th></tr></thead><tbody>'+blocked+'</tbody></table></div></details>':'')
-      +(rows?'<button class="btn" id="org-apply" style="margin-top:12px">Apply '+fmt((plan.operations||[]).length)+' renames</button>':'')+'</div>';
+      +(rows?'<button class="btn" id="org-apply" style="margin-top:12px">Apply this batch · '+fmt((plan.operations||[]).length)+'</button>':'')
+      +(batch.has_more?'<button class="btn ghost" id="org-next-plan" style="margin:12px 0 0 8px">Preview next batch</button>':'')+'</div>';
+    const next=$('#org-next-plan');
+    if(next)next.onclick=()=>{
+      nextPlanOffset=batch.next_offset;
+      previewPlan(nextPlanOffset);
+    };
     const apply=$('#org-apply');
     if(apply)apply.onclick=async()=>{
       if(!currentPlan||!confirmMessage('Apply {count} safe file renames?',{count:(currentPlan.operations||[]).length}))return;
+      const appliedPlan=currentPlan;
       const result=await j('/api/v1/organizer/rename/apply',{method:'POST',
         headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({plan_id:currentPlan.plan_id,platform:platform()})})
+        body:JSON.stringify({plan_id:appliedPlan.plan_id,platform:platform(),
+          offset:batch.offset,limit:batch.limit})})
         .catch(()=>({error:'Could not apply the rename plan.'}));
       if(result.error){message(result.error,true);return;}
-      message(result.message||'Rename plan applied.',false);
+      message(result.message||'Rename batch applied.',false);
       currentPlan=null;
+      nextPlanOffset=batch.has_more?batch.next_offset:0;
+      $('#org-plan-result').innerHTML=batch.has_more
+        ?'<div class="card"><span class="help">Batch applied. Continue when ready.</span> <button class="btn ghost" id="org-continue-plan">Preview next batch</button></div>':'';
+      const continueButton=$('#org-continue-plan');
+      if(continueButton)continueButton.onclick=()=>previewPlan(nextPlanOffset);
       await loadInventory();
     };
+  };
+  $('#org-plan').onclick=()=>{
+    currentPlan=null;
+    previewPlan(nextPlanOffset);
   };
   $('#org-undo').onclick=async()=>{
     if(!confirmMessage('Undo the last ROMarr rename batch? Files changed since then will be left alone.'))return;

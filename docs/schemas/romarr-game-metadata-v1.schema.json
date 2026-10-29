@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/snapetech-org/ROMarrNG/blob/main/docs/schemas/romarr-game-metadata-v1.schema.json",
+  "title": "ROMarr Game Metadata v1",
+  "description": "Portable metadata for one ROM identity. Paths are relative to the configured ROM or metadata root as described by the containing field.",
+  "type": "object",
+  "required": ["format", "schema_version", "identity_id", "identity", "game", "file", "identification", "metadata", "artwork", "relationships", "updated_at"],
+  "properties": {
+    "format": {"const": "org.romarr.game-metadata"},
+    "schema_version": {"const": 1},
+    "identity_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,79}:[a-f0-9]{64}$"},
+    "identity": {
+      "type": "object",
+      "required": ["platform", "sha256"],
+      "properties": {
+        "platform": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      },
+      "additionalProperties": true
+    },
+    "game": {
+      "type": "object",
+      "required": ["title", "filename", "region"],
+      "properties": {
+        "title": {"type": "string"},
+        "filename": {"type": "string"},
+        "region": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "file": {
+      "type": "object",
+      "required": ["relative_path", "is_directory"],
+      "properties": {
+        "relative_path": {"type": "string"},
+        "is_directory": {"type": "boolean"}
+      },
+      "additionalProperties": true
+    },
+    "identification": {
+      "type": "object",
+      "required": ["confidence", "details", "manual_mapping", "dat"],
+      "properties": {
+        "confidence": {"type": "string"},
+        "details": {"type": "string"},
+        "manual_mapping": {"type": "boolean"},
+        "dat": {
+          "type": "object",
+          "required": ["name", "status", "title", "hashes"],
+          "properties": {
+            "name": {"type": "string"},
+            "status": {"type": "string"},
+            "title": {"type": "string"},
+            "hashes": {"type": "object"}
+          },
+          "additionalProperties": true
+        }
+      },
+      "additionalProperties": true
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["summary", "released", "genres", "rating", "source", "provider_id", "matched_by"],
+      "properties": {
+        "summary": {"type": "string"},
+        "released": {"type": "string"},
+        "genres": {"type": "array", "items": {"type": "string"}},
+        "rating": {"type": ["number", "string", "null"]},
+        "source": {"type": "string"},
+        "provider_id": {"type": "string"},
+        "matched_by": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "artwork": {
+      "type": "object",
+      "required": ["path"],
+      "properties": {"path": {"type": "string"}},
+      "additionalProperties": true
+    },
+    "relationships": {
+      "type": "object",
+      "required": ["switch", "disc_group", "manifests"],
+      "properties": {
+        "switch": {"type": "object"},
+        "disc_group": {"type": "object"},
+        "manifests": {"type": "array", "items": {"type": "object"}}
+      },
+      "additionalProperties": true
+    },
+    "updated_at": {"type": "string"},
+    "sidecar_path": {"type": "string"},
+    "platform": {"type": "string"},
+    "title": {"type": "string"},
+    "relative_path": {"type": "string"},
+    "confidence": {"type": "string"},
+    "match_details": {"type": "string"},
+    "dat": {"type": "string"},
+    "dat_status": {"type": "string"},
+    "switch": {"type": "object"},
+    "disc_group": {"type": "object"},
+    "artwork_path": {"type": "string"}
+  },
+  "additionalProperties": true
+}

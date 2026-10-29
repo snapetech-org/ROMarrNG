@@ -14,6 +14,7 @@ import json
 import logging
 import os
 import re
+import shlex
 import stat
 import shutil
 import secrets
@@ -27,10 +28,12 @@ from pathlib import Path, PurePosixPath
 from urllib.parse import urlsplit
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
+from xml.parsers import expat
 
 import requests
 
 from .dat import UNKNOWN, VERIFIED, header_size
+from .frontends import romarr_game_document
 from .metadata import clean_title
 from .platforms import PLATFORMS, resolve
 from .titled import base_tid_of, validate_switch_rom
@@ -42,6 +45,12 @@ MAX_DIRECTORY_FILES = 10_000
 MAX_CATALOG_BYTES = 128 * 1024 * 1024
 MAX_ART_BYTES = 15 * 1024 * 1024
 MAX_PROVIDER_LOOKUPS_PER_SCAN = 200
+MAX_GAMELIST_BYTES = 32 * 1024 * 1024
+MAX_GAMELIST_GAMES = 100_000
+MAX_MANIFEST_BYTES = 1024 * 1024
+MAX_MANIFEST_ENTRIES = 256
+RENAME_PLAN_BATCH_SIZE = 200
+MAX_RENAME_PLAN_BATCH = 500
 ART_HOSTS = frozenset({"images.igdb.com", "media.rawg.io"})
 ARCHIVE_EXTENSIONS = frozenset({".zip", ".7z", ".rar"})
 _SWITCH_ID = re.compile(r"(?<![0-9a-f])([0-9a-f]{16})(?![0-9a-f])", re.I)
@@ -250,17 +259,27 @@ def _collapse_disc_groups(rows: list[dict]) -> list[dict]:
             item["title"] = item["canonical_title"]
             item["confidence"] = "multi_disc"
             item["match_details"] = str(disc.get("match_details") or "")
-            item["disc_group"] = {**disc, "members": []}
+            item["disc_group"] = {
+                **disc,
+                "members": [dict(member) for member in disc.get("members", [])
+                            if isinstance(member, dict)],
+            }
             grouped[group_id] = item
             output.append(item)
         item = grouped[group_id]
-        item["disc_group"]["members"].append({
-            "identity_id": row.get("identity_id", ""),
-            "relative_path": row.get("relative_path", ""),
-            "filename": row.get("filename", ""),
-            "disc_number": (row.get("disc_group") or {}).get("disc_number", 0),
-            "confidence": row.get("confidence", ""),
-        })
+        is_playlist = str(row.get("relative_path") or "") == str(disc.get("manifest_path") or "")
+        existing_members = item["disc_group"]["members"]
+        if not is_playlist and not any(
+                (member.get("identity_id") and member.get("identity_id") == row.get("identity_id"))
+                or (member.get("relative_path") and member.get("relative_path") == row.get("relative_path"))
+                for member in existing_members):
+            existing_members.append({
+                "identity_id": row.get("identity_id", ""),
+                "relative_path": row.get("relative_path", ""),
+                "filename": row.get("filename", ""),
+                "disc_number": (row.get("disc_group") or {}).get("disc_number", 0),
+                "confidence": row.get("confidence", ""),
+            })
         if not item.get("cover_path") and row.get("cover_path"):
             item["cover_path"] = row["cover_path"]
         metadata = row.get("metadata") or {}
@@ -268,6 +287,79 @@ def _collapse_disc_groups(rows: list[dict]) -> list[dict]:
         if metadata.get("summary") and not current.get("summary"):
             item["metadata"] = metadata
     return output
+
+
+def _apply_manifest_disc_groups(rows: dict[str, dict], root: Path) -> set[str]:
+    """Add set-level relationships from bounded, local M3U manifests."""
+    changed: set[str] = set()
+    by_path = {
+        _normalize_catalog_path(str(row.get("relative_path") or "")): row
+        for row in rows.values() if row.get("relative_path")
+    }
+    for identity_id, row in list(rows.items()):
+        relative = PurePosixPath(str(row.get("relative_path") or ""))
+        manifest = root.joinpath(*relative.parts)
+        try:
+            platform_root = root / relative.parts[0]
+        except IndexError:
+            continue
+        if manifest.suffix.lower() not in {".m3u", ".cue", ".gdi", ".toc"}:
+            continue
+        references = _manifest_paths(manifest, root, platform_root)
+        if references:
+            row["manifests"] = [{"path": relative.as_posix(),
+                                 "references": references}]
+            changed.add(identity_id)
+        elif row.get("manifests"):
+            # Do not keep an old playlist relationship after its references
+            # have been removed or the manifest becomes unreadable.
+            row["manifests"] = []
+            changed.add(identity_id)
+        if manifest.suffix.lower() != ".m3u" or len(references) < 2:
+            continue
+
+        member_rows = []
+        members = []
+        for number, member_path in enumerate(references, 1):
+            member = by_path.get(_normalize_catalog_path(member_path))
+            member_identity = str((member or {}).get("identity_id") or "")
+            members.append({
+                "identity_id": member_identity,
+                "relative_path": member_path,
+                "filename": PurePosixPath(member_path).name,
+                "disc_number": number,
+                "confidence": str((member or {}).get("confidence") or ""),
+            })
+            if member is not None:
+                member_rows.append(member)
+        group_identity = sorted({identity_id, *[
+            str(member.get("identity_id") or "") for member in members
+            if member.get("identity_id")
+        ]})
+        group_id = hashlib.sha256(("\0".join(group_identity) + "\0" +
+                                   "\0".join(references)).encode("utf-8")).hexdigest()[:24]
+        title = _safe_component(PurePosixPath(row.get("filename") or manifest.name).stem)
+        group_rows = [row, *member_rows]
+        mapped_titles = {
+            str(item.get("canonical_title") or "")
+            for item in group_rows if item.get("manual_mapping")
+        }
+        if (len(mapped_titles) == 1
+                and all(item.get("manual_mapping") for item in group_rows)):
+            title = next(iter(mapped_titles)) or title
+        group = {
+            "id": group_id,
+            "title": title or str(row.get("canonical_title") or manifest.stem),
+            "disc_count": len(references),
+            "members": members,
+            "manifest_path": relative.as_posix(),
+            "manifest_type": "m3u",
+            "match_details": "Grouped from a local M3U playlist and its contained disc references; files stay intact.",
+        }
+        for member_row in group_rows:
+            member_row["disc_group"] = dict(group)
+            changed.add(str(member_row.get("identity_id") or ""))
+    return changed
 
 
 def _valid_slug(value: str) -> bool:
@@ -351,6 +443,10 @@ def _scan_paths(root: Path, metadata_root: Path, only_platform: str = ""):
             continue
 
         allowed = set(platform.extensions) | set(ARCHIVE_EXTENSIONS)
+        if str(getattr(platform, "media", "")).casefold() == "disc":
+            # Playlists and cue sheets are useful set metadata even on disc
+            # platforms whose acquisition extension list omits the sidecar.
+            allowed.update((".m3u", ".cue", ".gdi", ".toc"))
         for name in sorted(files):
             if seen >= MAX_SCAN_FILES:
                 truncated = True
@@ -436,6 +532,137 @@ def _load_json(path: Path) -> dict:
         os.close(fd)
     raw = json.loads(payload.decode("utf-8"))
     return raw if isinstance(raw, dict) else {}
+
+
+def _read_bounded_file(path: Path, max_bytes: int, allowed_roots: tuple[Path, ...]) -> bytes:
+    """Read a small regular local file without following links or leaving roots."""
+    if path.is_symlink() or _path_has_symlink(path):
+        raise ValueError("local metadata path contains a symlink")
+    resolved = path.resolve(strict=True)
+    if not any(_within(root, resolved) and _no_symlink_path(root, resolved)
+               for root in allowed_roots):
+        raise ValueError("local metadata path is outside configured roots")
+    fd = os.open(resolved, os.O_RDONLY | getattr(os, "O_BINARY", 0)
+                 | getattr(os, "O_NOFOLLOW", 0))
+    try:
+        before = os.fstat(fd)
+        if not stat.S_ISREG(before.st_mode) or before.st_size > max_bytes:
+            raise ValueError("local metadata file is not a bounded regular file")
+        chunks = []
+        total = 0
+        while True:
+            chunk = os.read(fd, min(64 * 1024, max_bytes + 1 - total))
+            if not chunk:
+                break
+            chunks.append(chunk)
+            total += len(chunk)
+            if total > max_bytes:
+                raise ValueError("local metadata file exceeds its size limit")
+        after = os.fstat(fd)
+        if (before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns) != (
+                after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns):
+            raise ValueError("local metadata file changed while it was read")
+        return b"".join(chunks)
+    finally:
+        os.close(fd)
+
+
+def _normalize_catalog_path(value: str) -> str:
+    text = str(value or "").replace("\\", "/").strip()
+    while text.startswith("./"):
+        text = text[2:]
+    return os.path.normcase(PurePosixPath(text).as_posix()).casefold()
+
+
+def _resolve_manifest_reference(reference: str, manifest: Path,
+                                root: Path, platform_root: Path) -> str | None:
+    raw = str(reference or "").strip().strip('"').strip()
+    if not raw or "\x00" in raw:
+        return None
+    parsed = urlsplit(raw)
+    if parsed.scheme or parsed.netloc:
+        return None
+    candidate = Path(raw.replace("\\", os.sep))
+    if not candidate.is_absolute():
+        candidate = manifest.parent / candidate
+    try:
+        if candidate.is_symlink() or _path_has_symlink(candidate):
+            return None
+        resolved = candidate.resolve(strict=True)
+        if (not resolved.is_file() or not _within(root, resolved)
+                or not _within(platform_root, resolved)
+                or not _no_symlink_path(root, resolved)):
+            return None
+        return resolved.relative_to(root.resolve(strict=True)).as_posix()
+    except (OSError, ValueError):
+        return None
+
+
+def _manifest_paths(path: Path, root: Path, platform_root: Path) -> list[str]:
+    """Extract local media references from common playlist/track manifests."""
+    suffix = path.suffix.lower()
+    if suffix not in {".m3u", ".cue", ".gdi", ".toc"}:
+        return []
+    try:
+        payload = _read_bounded_file(path, MAX_MANIFEST_BYTES, (root,))
+        try:
+            text = payload.decode("utf-8-sig")
+        except UnicodeDecodeError:
+            text = payload.decode("cp1252")
+    except (OSError, ValueError):
+        return []
+    references: list[str] = []
+    for line in text.splitlines()[:MAX_MANIFEST_ENTRIES * 4]:
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        names: list[str] = []
+        if suffix == ".m3u":
+            names = [stripped]
+        elif suffix == ".cue":
+            match = re.match(r"(?i)^\s*FILE\s+(?:\"([^\"]+)\"|'([^']+)'|(\S+))", line)
+            if match:
+                names = [next(value for value in match.groups() if value)]
+        elif suffix == ".gdi":
+            try:
+                fields = shlex.split(stripped, posix=True)
+            except ValueError:
+                fields = []
+            if len(fields) >= 5 and fields[0].isdigit():
+                names = [fields[4]]
+        else:  # TOC files commonly use FILE "name" [format]
+            match = re.match(r"(?i)^\s*FILE\s+(?:\"([^\"]+)\"|'([^']+)'|(\S+))", line)
+            if match:
+                names = [next(value for value in match.groups() if value)]
+        for name in names:
+            relative = _resolve_manifest_reference(name, path, root, platform_root)
+            if relative and relative not in references:
+                references.append(relative)
+                if len(references) >= MAX_MANIFEST_ENTRIES:
+                    return references
+    return references
+
+
+def _parse_esde_gamelist(payload: bytes) -> ET.Element:
+    """Parse ES-DE XML only after rejecting DTDs and entity declarations.
+
+    The Expat preflight recognizes declarations in the document's declared
+    encoding (including UTF-16), which a byte-pattern check alone cannot do.
+    Rejecting the document type before building a tree prevents entity
+    expansion from consuming unbounded resources.
+    """
+    parser = expat.ParserCreate()
+
+    def reject_declaration(*_args):
+        raise ValueError("DTD and entity declarations are not supported")
+
+    parser.StartDoctypeDeclHandler = reject_declaration
+    parser.EntityDeclHandler = reject_declaration
+    parser.ExternalEntityRefHandler = lambda *_args: 0
+    if hasattr(parser, "SetParamEntityParsing"):
+        parser.SetParamEntityParsing(expat.XML_PARAM_ENTITY_PARSING_NEVER)
+    parser.Parse(payload, True)
+    return ET.fromstring(payload)
 
 
 def _atomic_bytes(path: Path, data: bytes, root: Path) -> None:
@@ -682,6 +909,181 @@ class LibraryOrganizer:
         }
         _atomic_json(path, payload, root)
 
+    def _esde_catalog_paths(self, slug: str, root: Path,
+                            metadata_root: Path) -> list[Path]:
+        candidates = []
+        try:
+            for child in root.iterdir():
+                if (child.is_symlink() or not child.is_dir()
+                        or resolve(child.name) is None
+                        or resolve(child.name).slug != slug):
+                    continue
+                candidates.extend((child / "gamelist.xml",
+                                   child / "roms" / "gamelist.xml"))
+        except OSError:
+            pass
+        # Some EmuDeck setups keep scraped metadata outside the ROM tree.
+        candidates.append(metadata_root / slug / "gamelist.xml")
+        seen = set()
+        output = []
+        for candidate in candidates:
+            key = os.path.normcase(str(candidate.absolute())).casefold()
+            if key in seen or candidate.is_symlink() or not candidate.is_file():
+                continue
+            if not (_within(root, candidate) or _within(metadata_root, candidate)):
+                continue
+            seen.add(key)
+            output.append(candidate)
+        return output
+
+    def _esde_rom_relative(self, value: str, base: Path, root: Path) -> str | None:
+        raw = str(value or "").strip()
+        if not raw or "\x00" in raw:
+            return None
+        parsed = urlsplit(raw)
+        if parsed.scheme or parsed.netloc:
+            return None
+        candidate = Path(raw.replace("\\", os.sep))
+        if not candidate.is_absolute():
+            candidate = base / candidate
+        try:
+            if candidate.is_symlink() or _path_has_symlink(candidate):
+                return None
+            resolved = candidate.resolve(strict=True)
+            if (not (resolved.is_file() or resolved.is_dir())
+                    or not _within(root, resolved)
+                    or not _no_symlink_path(root, resolved)):
+                return None
+            return resolved.relative_to(root.resolve(strict=True)).as_posix()
+        except (OSError, ValueError):
+            return None
+
+    def _esde_asset_path(self, value: str, base: Path, root: Path,
+                         metadata_root: Path) -> Path | None:
+        raw = str(value or "").strip()
+        if not raw or "\x00" in raw:
+            return None
+        parsed = urlsplit(raw)
+        if parsed.scheme or parsed.netloc:
+            return None  # A local import never fetches an XML-supplied URL.
+        source = Path(raw.replace("\\", os.sep))
+        candidates = [source] if source.is_absolute() else [base / source,
+                                                             metadata_root / source]
+        for candidate in candidates:
+            try:
+                if candidate.is_symlink() or _path_has_symlink(candidate):
+                    continue
+                resolved = candidate.resolve(strict=True)
+                if (not resolved.is_file()
+                        or not any(_within(allowed, resolved)
+                                   and _no_symlink_path(allowed, resolved)
+                                   for allowed in (root, metadata_root))):
+                    continue
+                return resolved
+            except (OSError, ValueError):
+                continue
+        return None
+
+    def _read_esde_metadata(self, slug: str, root: Path,
+                            metadata_root: Path) -> dict[str, dict]:
+        """Read existing local ES-DE gamelists as a bounded metadata source."""
+        output: dict[str, dict] = {}
+        allowed_roots = (root, metadata_root)
+        for gamelist in self._esde_catalog_paths(slug, root, metadata_root):
+            try:
+                data = _read_bounded_file(gamelist, MAX_GAMELIST_BYTES, allowed_roots)
+                document = _parse_esde_gamelist(data)
+                if document.tag.rsplit("}", 1)[-1].casefold() != "gamelist":
+                    continue
+                entries = [node for node in document
+                           if node.tag.rsplit("}", 1)[-1].casefold() == "game"]
+                if len(entries) > MAX_GAMELIST_GAMES:
+                    raise ValueError("ES-DE gamelist contains too many entries")
+
+                def value(node, name: str, limit: int = 8192) -> str:
+                    child = next((item for item in node
+                                  if item.tag.rsplit("}", 1)[-1].casefold() == name), None)
+                    return str(child.text or "").strip()[:limit] if child is not None else ""
+
+                for node in entries:
+                    relative = self._esde_rom_relative(value(node, "path", 4096),
+                                                       gamelist.parent, root)
+                    if not relative:
+                        continue
+                    key = _normalize_catalog_path(relative)
+                    name = value(node, "name", 512)
+                    summary = value(node, "desc")
+                    released_raw = value(node, "releasedate", 64)
+                    release_match = re.match(r"^(\d{4})(\d{2})(\d{2})", released_raw)
+                    released = ("-".join(release_match.groups())
+                                if release_match else released_raw[:10])
+                    genre_raw = value(node, "genre", 1024)
+                    genres = list(dict.fromkeys(
+                        part.strip()[:80] for part in re.split(r"[,;/|]", genre_raw)
+                        if part.strip()))[:32]
+                    rating_raw = value(node, "rating", 32)
+                    try:
+                        rating_value = max(0.0, min(1.0, float(rating_raw or 0)))
+                    except ValueError:
+                        rating_value = 0.0
+                    metadata = {
+                        "summary": summary,
+                        "released": released,
+                        "genres": genres,
+                        "source": "ES-DE local",
+                        "provider_id": "",
+                        "matched_by": "existing_gamelist_path",
+                    }
+                    if rating_raw:
+                        # ES-DE rating is normalized to 0..1; ROMarr's common
+                        # metadata scale is 0..10.
+                        metadata["rating"] = round(rating_value * 10.0, 3)
+                    metadata = {key: item for key, item in metadata.items()
+                                if item not in ("", [], None)}
+                    entry = {
+                        "title": name,
+                        "metadata": metadata,
+                        "image_source": self._esde_asset_path(
+                            value(node, "image", 4096), gamelist.parent,
+                            root, metadata_root),
+                        "source_path": str(gamelist),
+                    }
+                    # If duplicate gamelists describe one ROM, keep the entry
+                    # with more user-curated fields instead of last-writer wins.
+                    previous = output.get(key)
+                    quality = (len(metadata), bool(name), bool(entry["image_source"]))
+                    old_quality = ((len(previous.get("metadata") or {}),
+                                    bool(previous.get("title")),
+                                    bool(previous.get("image_source")))
+                                   if previous else (-1, False, False))
+                    if quality > old_quality:
+                        output[key] = entry
+            except (OSError, ValueError, ET.ParseError, expat.ExpatError,
+                    RecursionError) as exc:
+                log.info("skipping local ES-DE metadata %s (%s)",
+                         gamelist.name, type(exc).__name__)
+        return output
+
+    def _cache_local_artwork(self, source: Path | None, slug: str,
+                             metadata_root: Path) -> str:
+        if source is None:
+            return ""
+        try:
+            data = _read_bounded_file(source, MAX_ART_BYTES,
+                                      (self.rom_root.expanduser().resolve(strict=True),
+                                       metadata_root.resolve(strict=True)))
+            extension = _cover_extension("application/octet-stream", data[:16])
+            if not extension:
+                return ""
+            digest = _sha256_bytes(data)
+            destination = metadata_root / slug / "artwork" / f"{digest}{extension}"
+            root = metadata_root.resolve(strict=True)
+            if not destination.is_file():
+                _atomic_bytes(destination, data, root)
+            return destination.relative_to(root).as_posix()
+        except (OSError, ValueError):
+            return ""
+
     def _journal_key(self) -> bytes:
         """Use a private local key to authenticate shared undo state."""
         store = self.service.store
@@ -730,9 +1132,10 @@ class LibraryOrganizer:
         path = root / slug / directory / "metadata.json"
         relative = path.relative_to(root).as_posix()
         record["metadata_sidecar"] = relative
-        payload = {
-            "schema_version": 1,
-            "identity_id": identity_id,
+        payload = romarr_game_document(record)
+        # Preserve the original flat keys for sidecar readers from the first
+        # release of this feature while publishing the documented contract.
+        payload.update({
             "sidecar_path": relative,
             "platform": slug,
             "title": str(record.get("canonical_title") or record.get("title") or ""),
@@ -741,12 +1144,10 @@ class LibraryOrganizer:
             "match_details": str(record.get("match_details") or ""),
             "dat": str(record.get("dat") or ""),
             "dat_status": str(record.get("dat_status") or UNKNOWN),
-            "metadata": record.get("metadata") or {},
             "switch": record.get("switch") or {},
             "disc_group": record.get("disc_group") or {},
             "artwork_path": str(record.get("cover_path") or ""),
-            "updated_at": str(record.get("updated_at") or _now()),
-        }
+        })
         _atomic_json(path, payload, root)
         if previous_path and previous_path != relative:
             try:
@@ -792,7 +1193,8 @@ class LibraryOrganizer:
                 "state": "scanning", "processed": 0, "total": 0, "error": "",
                 "started_at": _now(), "finished_at": "", "platform": selected,
                 "verified": 0, "catalogued": 0, "suggested": 0, "unmatched": 0,
-                "switch_outdated": 0, "truncated": False, "force": bool(force),
+                "switch_outdated": 0, "local_metadata_imported": 0,
+                "truncated": False, "force": bool(force),
             }
             self._thread = threading.Thread(
                 target=self._scan, args=(selected, bool(force)),
@@ -809,14 +1211,18 @@ class LibraryOrganizer:
                                     error="Shared metadata root was removed.")
             return
         totals = {"verified": 0, "catalogued": 0, "suggested": 0,
-                  "unmatched": 0, "switch_outdated": 0}
+                  "unmatched": 0, "switch_outdated": 0,
+                  "local_metadata_imported": 0}
         by_platform: dict[str, dict[str, dict]] = {}
         errors = []
         truncated = False
         provider_lookups = 0
         seen_identities: dict[str, set[str]] = {}
         failed_paths: dict[str, set[str]] = {}
+        esde_by_platform: dict[str, dict[str, dict]] = {}
         try:
+            root = root.resolve(strict=True)
+            meta_root = meta_root.resolve(strict=True)
             paths = []
             for platform, path, _ in _scan_paths(root, meta_root, selected):
                 paths.append((platform, path))
@@ -839,12 +1245,16 @@ class LibraryOrganizer:
                         if isinstance(row, dict) and row.get("identity_id")
                     }
                     by_platform[slug] = dict(existing[slug])
+                    esde_by_platform[slug] = self._read_esde_metadata(
+                        slug, root, meta_root)
 
-                relative = path.relative_to(root.resolve(strict=True)).as_posix()
+                relative = path.relative_to(root).as_posix()
                 try:
                     identity_hash, hashes, _, members = _identity(path, platform)
                     identity_id = f"{slug}:{identity_hash}"
                     cached = existing[slug].get(identity_id, {})
+                    local = esde_by_platform[slug].get(
+                        _normalize_catalog_path(relative), {})
                     is_directory = path.is_dir()
 
                     dat_match = None
@@ -913,12 +1323,32 @@ class LibraryOrganizer:
 
                     manual = bool(cached.get("manual_mapping"))
                     info = {}
-                    metadata = dict(cached.get("metadata") or {})
+                    cached_metadata = dict(cached.get("metadata") or {})
+                    local_metadata = dict(local.get("metadata") or {})
+                    local_title = str(local.get("title") or "")
+                    local_has_details = bool(
+                        local_metadata.get("summary") or local_metadata.get("released")
+                        or local_metadata.get("genres") or local_metadata.get("rating")
+                        or local.get("image_source"))
+                    metadata = {**cached_metadata, **local_metadata}
+                    local_cover = self._cache_local_artwork(
+                        local.get("image_source"), slug, meta_root)
+                    if local_has_details:
+                        totals["local_metadata_imported"] += 1
                     lookup_attempted = bool(cached.get("lookup_attempted")) and not force
                     lookup_deferred = False
                     if manual:
                         confidence = "manual"
                         title = str(cached.get("canonical_title") or cached.get("title") or "")
+                    elif local_has_details and not force:
+                        # Existing ES-DE data is already the result of a user
+                        # or scraper pass. Reuse it without making another
+                        # provider request; manual confirmation is still
+                        # required before a filename can be changed.
+                        confidence = "local_metadata"
+                        title = (local_title or str(cached.get("canonical_title") or "")
+                                 or switch_title or clean_title(path.name))
+                        lookup_attempted = True
                     elif lookup_attempted:
                         confidence = str(cached.get("confidence") or "filename_only")
                         title = str(cached.get("canonical_title") or "")
@@ -941,7 +1371,7 @@ class LibraryOrganizer:
                                 "matched_by": str(info_obj.matched_by or ""),
                                 "cover_url": str(info_obj.cover_url or ""),
                             }
-                            metadata = dict(info)
+                            metadata = {**info, **cached_metadata, **local_metadata}
                         if dat_match.status == VERIFIED and dat_match.game:
                             confidence = "dat_verified"
                             title = str(dat_match.game)
@@ -965,11 +1395,14 @@ class LibraryOrganizer:
                             # Continue provider lookups on later bounded scans
                             # instead of repeatedly querying the first 200.
                             info = {}
-                            metadata = dict(cached.get("metadata") or {})
+                            metadata = {**cached_metadata, **local_metadata}
 
                     if not manual and dat_match.status == VERIFIED and dat_match.game:
                         confidence = "dat_verified"
                         title = str(dat_match.game)
+                    elif not manual and local_title:
+                        confidence = "local_metadata"
+                        title = local_title
                     elif not manual and switch.get("matched_by_name"):
                         title = switch_title or title or clean_title(path.name)
                         confidence = "ambiguous_name"
@@ -979,11 +1412,11 @@ class LibraryOrganizer:
                         confidence = "title_id_catalog"
 
                     previous_cover = str(cached.get("cover_path") or "")
-                    cover_path = previous_cover
+                    cover_path = local_cover or previous_cover
                     cover_url = str(
                         (info.get("cover_url") if isinstance(info, dict) else "")
                         or metadata.get("cover_url") or "")
-                    if not manual and cover_url and (force or not previous_cover
+                    if not manual and not local_cover and cover_url and (force or not previous_cover
                             or not (meta_root / previous_cover).is_file()):
                         art_dir = meta_root / slug / "artwork"
                         art_stem = art_dir / identity_hash
@@ -993,7 +1426,7 @@ class LibraryOrganizer:
                         totals["verified"] += 1
                     elif confidence == "title_id_catalog":
                         totals["catalogued"] += 1
-                    elif confidence in ("provider_suggestion", "ambiguous_name"):
+                    elif confidence in ("provider_suggestion", "ambiguous_name", "local_metadata"):
                         totals["suggested"] += 1
                     else:
                         totals["unmatched"] += 1
@@ -1015,6 +1448,8 @@ class LibraryOrganizer:
                             if confidence == "dat_verified" else
                             str(switch.get("details") or "Title ID found in TitleDB; file bytes are not verified")
                             if confidence == "title_id_catalog" else
+                            "Imported from the existing ES-DE gamelist; review before renaming"
+                            if confidence == "local_metadata" else
                             "Metadata provider title suggestion; confirm before renaming"
                             if confidence in ("provider_suggestion", "ambiguous_name") else
                             "Filename only; no verified catalog match"
@@ -1028,6 +1463,7 @@ class LibraryOrganizer:
                         "lookup_attempted": False if lookup_deferred else True,
                         "cover_path": cover_path,
                         "manual_mapping": manual,
+                        "manifests": cached.get("manifests") or [],
                         "updated_at": _now(),
                     }
                     record["metadata_sidecar"] = self._write_sidecar(
@@ -1067,6 +1503,7 @@ class LibraryOrganizer:
                     }
             for slug, rows in by_platform.items():
                 changed_groups = _apply_disc_groups(rows)
+                changed_groups.update(_apply_manifest_disc_groups(rows, root))
                 for identity_id in changed_groups:
                     row = rows.get(identity_id)
                     if row is not None:
@@ -1181,26 +1618,40 @@ class LibraryOrganizer:
             base = base / "roms"
         return base / component
 
-    def rename_plan(self, platform: str = "") -> dict:
+    def rename_plan(self, platform: str = "", *, offset: int = 0,
+                    limit: int = RENAME_PLAN_BATCH_SIZE) -> dict:
         if self.metadata_root is None:
             raise ValueError("Set a shared metadata root before making a rename plan.")
         root = self.rom_root.expanduser().resolve(strict=True)
         if platform and resolve(platform) is None:
             raise ValueError("Select a supported platform.")
+        try:
+            offset = max(0, int(offset))
+            limit = max(1, min(int(limit), MAX_RENAME_PLAN_BATCH))
+        except (TypeError, ValueError):
+            raise ValueError("Rename batch offset and limit must be integers.") from None
         requested = resolve(platform).slug if platform else ""
-        source = self.records(requested, limit=500, offset=0)
+        source = self.records(requested, limit=limit, offset=offset)
+        if source.get("error"):
+            return {"error": source["error"], "operations": [], "blocked": [],
+                    "plan_id": "", "batch": {"offset": offset, "limit": limit,
+                                                "total": source.get("total", 0)}}
         all_rows = source["items"]
-        # Fetch complete platform catalogs for planning; the UI only pages the
-        # review table, while plans must never silently omit files.
-        if source["total"] > len(all_rows):
-            all_rows = self.records(requested, limit=500, offset=0)["items"]
-            # Plans with more than 500 entries are intentionally refused below.
-        if source["total"] > 500:
-            return {"error": "This plan exceeds 500 entries. Select one platform to preview and apply safely.",
-                    "operations": [], "blocked": [], "plan_id": ""}
+        total = int(source.get("total", 0))
+        next_offset = offset + len(all_rows)
+        has_more = next_offset < total
         operations, blocked = [], []
         destinations = set()
+        fingerprint = []
         for row in all_rows:
+            fingerprint.append({
+                "identity_id": str(row.get("identity_id") or ""),
+                "relative_path": str(row.get("relative_path") or ""),
+                "content_sha256": str(row.get("content_sha256") or ""),
+                "canonical_title": str(row.get("canonical_title") or ""),
+                "confidence": str(row.get("confidence") or ""),
+                "disc_group": str((row.get("disc_group") or {}).get("id") or ""),
+            })
             confidence = str(row.get("confidence") or "")
             if confidence not in ("dat_verified", "manual"):
                 continue
@@ -1276,14 +1727,25 @@ class LibraryOrganizer:
                 })
             except (OSError, ValueError):
                 blocked.append({"identity_id": row.get("identity_id"), "reason": "Unsafe destination or unable to verify source"})
-        payload = {"operations": operations, "blocked": blocked}
+        payload = {
+            "operations": operations,
+            "blocked": blocked,
+            "fingerprint": fingerprint,
+            "batch": {
+                "offset": offset, "limit": limit, "total": total,
+                "count": len(all_rows), "next_offset": next_offset if has_more else None,
+                "has_more": has_more,
+            },
+        }
         plan_id = _sha256_bytes(json.dumps(payload, sort_keys=True, separators=(",", ":")).encode())
         return {"plan_id": plan_id, **payload}
 
-    def apply_rename_plan(self, plan_id: str, platform: str = "") -> dict:
+    def apply_rename_plan(self, plan_id: str, platform: str = "", *,
+                          offset: int = 0,
+                          limit: int = RENAME_PLAN_BATCH_SIZE) -> dict:
         if not re.fullmatch(r"[a-f0-9]{64}", str(plan_id or "")):
             raise ValueError("Invalid plan token.")
-        plan = self.rename_plan(platform)
+        plan = self.rename_plan(platform, offset=offset, limit=limit)
         if plan.get("plan_id") != plan_id:
             raise ValueError("The library changed after this preview. Scan and preview again.")
         operations = plan.get("operations", [])
@@ -1523,21 +1985,37 @@ class LibraryOrganizer:
                     art = ""
             rows.append({
                 "id": row.get("identity_id", ""),
+                "identity_id": row.get("identity_id", ""),
+                "content_sha256": row.get("content_sha256", ""),
                 "title": row.get("canonical_title") or row.get("title") or path.stem,
                 "platform": slug,
                 "filename": frontend_path,
+                "relative_path": rel,
+                "is_directory": bool(row.get("is_directory")),
                 "path": str(path),
                 "region": "",
                 "verified": "verified" if row.get("confidence") == "dat_verified" else "",
+                "confidence": row.get("confidence") or "",
+                "match_details": row.get("match_details") or "",
+                "dat": row.get("dat") or "",
+                "dat_status": row.get("dat_status") or UNKNOWN,
+                "dat_game": row.get("dat_game") or "",
+                "hashes": row.get("hashes") or {},
                 "desc": metadata.get("summary") or "",
                 "released": metadata.get("released") or "",
                 "genres": metadata.get("genres") or [],
                 "rating": metadata.get("rating") or 0,
                 "metadata_source": metadata.get("source") or "",
                 "cover_path": art,
+                "metadata_artwork_path": cover,
                 "cover_url": "",
                 "matched_by": row.get("confidence") or "",
                 "switch": switch,
+                "disc_group": row.get("disc_group") or {},
+                "manifests": row.get("manifests") or [],
+                "metadata": metadata,
+                "manual_mapping": bool(row.get("manual_mapping")),
+                "updated_at": row.get("updated_at") or "",
             })
         return rows
 
