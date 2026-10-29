@@ -3391,6 +3391,26 @@ function settingsPage(title, help, body, after){
         remote:row.querySelector('[data-map-remote]').value.trim(),
         local:row.querySelector('[data-map-local]').value.trim(),
       })).filter(m=>m.remote&&m.local);
+    const folders=$('#platform-folder-mappings');
+    if(folders){
+      const mapped={};
+      for(const row of folders.querySelectorAll('[data-platform-folder-row]')){
+        const name=row.querySelector('[data-platform-folder-name]').value.trim();
+        const slug=row.querySelector('[data-platform-folder-slug]').value;
+        if(!name&&!slug)continue;
+        if(!name||!slug||name==='.'||name==='..'||name.includes('/')
+            ||name.includes(String.fromCharCode(92))
+            ||name.includes(String.fromCharCode(0))){
+          toastAppMessage('Enter one folder name and choose its platform.');return;
+        }
+        const key=name.toLocaleLowerCase();
+        if(Object.keys(mapped).some(existing=>existing.toLocaleLowerCase()===key)){
+          toastAppMessage('Each platform folder name can be mapped only once.');return;
+        }
+        mapped[name]=slug;
+      }
+      patch.platform_folder_mappings=mapped;
+    }
     SETTINGS=await j('/api/v1/config',{method:'PUT',
       headers:{'content-type':'application/json'},body:JSON.stringify(patch)});
     toastLabel('Saved');
@@ -3431,11 +3451,28 @@ const pathMappingRow=m=>{
   </div>`;
 };
 const pathMappingRows=m=>(Array.isArray(m)&&m.length?m:[{}]).map(pathMappingRow).join('');
+const platformFolderRow=m=>{
+  m=m||{};
+  const options=(PLATFORMS||[]).map(p=>`<option value="${esc(p.slug)}"${String(m.platform||'')===String(p.slug)?' selected':''}>${esc(p.name||p.slug)}</option>`).join('');
+  return `<div data-platform-folder-row style="display:grid;grid-template-columns:minmax(160px,1fr) minmax(180px,1fr) auto;gap:8px;margin:8px 0">
+    <input data-platform-folder-name aria-label="Folder name" value="${esc(m.folder||'')}" placeholder="Folder name, e.g. ps2">
+    <select data-platform-folder-slug aria-label="Platform"><option value="">Choose platform</option>${options}</select>
+    <button type="button" data-platform-folder-remove aria-label="Remove folder mapping">Remove</button>
+  </div>`;
+};
+const platformFolderRows=m=>Object.entries(m&&typeof m==='object'&&!Array.isArray(m)?m:{}).map(([folder,platform])=>platformFolderRow({folder,platform})).join('');
 RENDER.media=()=>settingsPage('Media Management',
   'Where imported ROMs and the shared metadata catalog live. The ROM path must be the path your library server scans. Completed-download paths are reported by the client per item; compare that exact path before import and add a remote path mapping below when ROMarr sees it somewhere else.',
   fld('library_path','ROM library root',SETTINGS.library_path)
   +fld('metadata_path','Shared metadata root',SETTINGS.metadata_path||'')
-  +\`<div class="help" style="margin:-6px 0 14px">Mount this folder at the same relative location on your emulation machines. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another metadata lookup. Choose a folder outside the ROM library root.</div>\`
+  +`<div class="help" style="margin:-6px 0 14px">Use one ROM root with one folder per platform, such as <code>Emulation/roms/ps2</code> and <code>Emulation/roms/snes</code>; you do not need a separate library entry for each system. With EmuDeck, point this at its <code>Emulation/roms</code> folder, not the wider <code>Emulation</code> directory. Keep shared metadata alongside it at <code>Emulation/metadata</code>, outside the ROM root, and mount that folder on each client. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another provider lookup.</div>`
+  +`<div class="field"><label>Platform folder names</label>
+    <div style="color:var(--dim);font-size:11.5px;margin:4px 0 8px">ROMarr recognizes platform slugs and unambiguous ES-DE system names automatically. Add a mapping only when your existing folder uses another name, such as <code>PS2 Games</code>. Folder names are matched only at the library root.</div>
+    <div id="platform-folder-mappings">${platformFolderRows(SETTINGS.platform_folder_mappings)}</div>
+    <button class="btn ghost" id="platform-folder-mapping-add" type="button">Add folder mapping</button></div>`
+  +fld('esde_gamelists_path','Existing ES-DE gamelists folder (optional)',SETTINGS.esde_gamelists_path||'')
+  +fld('esde_media_path','Existing ES-DE media folder (optional)',SETTINGS.esde_media_path||'')
+  +`<div class="help" style="margin:-6px 0 14px">Set these only when you want ROMarr to import an existing ES-DE setup visible inside this server. ROMarr publishes shared output to <code>metadata/esde/gamelists</code> and <code>metadata/esde/downloaded_media</code>. Link or configure ES-DE's gamelist directory to the shared <code>gamelists</code> folder and set its Game media directory to <code>downloaded_media</code>. Media files follow ROM names and folders, so artwork remains matched when clients mount the same library at different paths.</div>`
   +fld('dat_path','DAT directory',SETTINGS.dat_path||'')
   +`<div class="field"><label>Remote path mappings</label>
      <div style="color:var(--dim);font-size:11.5px;margin:4px 0 8px">
@@ -3453,7 +3490,7 @@ RENDER.media=()=>settingsPage('Media Management',
      +'Per-library overrides live on the Libraries page.')
   +chk('rename_on_import','Rename on import',SETTINGS.rename_on_import)
   +chk('switch_auto_route','Route Switch updates and DLC by TitleDB filename ID',SETTINGS.switch_auto_route)
-  +\`<div class="help" style="margin:-6px 0 12px">Switch IDs and version numbers come from the filename and TitleDB. They classify a likely base game, update or DLC; they do not verify the package bytes. When enabled, only TitleDB identified updates and DLC are routed to the folders below.</div>\`
+  +`<div class="help" style="margin:-6px 0 12px">Switch IDs and version numbers come from the filename and TitleDB. They classify a likely base game, update or DLC; they do not verify the package bytes. When enabled, only TitleDB identified updates and DLC are routed to the folders below.</div>`
   +fld('switch_updates_dir','Switch updates folder',SETTINGS.switch_updates_dir||'Updates')
   +fld('switch_dlc_dir','Switch DLC folder',SETTINGS.switch_dlc_dir||'DLC')
   +chk('overwrite_existing','Overwrite an existing file',SETTINGS.overwrite_existing)
@@ -3496,6 +3533,12 @@ RENDER.media=()=>settingsPage('Media Management',
     rows.onclick=e=>{
       const remove=e.target.closest('[data-mapping-remove]');
       if(remove)remove.closest('[data-mapping-row]').remove();
+    };
+    const folders=$('#platform-folder-mappings');
+    $('#platform-folder-mapping-add').onclick=()=>folders.insertAdjacentHTML('beforeend',platformFolderRow({}));
+    folders.onclick=e=>{
+      const remove=e.target.closest('[data-platform-folder-remove]');
+      if(remove)remove.closest('[data-platform-folder-row]').remove();
     };
   });
 
@@ -4617,6 +4660,11 @@ RENDER.getstarted=async()=>{
     +'<tr><td>Gaseous or Retrom</td><td>Their own web players and clients</td></tr>'
     +'<tr><td>'+interfaceMarkup('A folder')+'</td><td>'+interfaceMarkup('Batocera, RetroPie, Recalbox, ES-DE, EmuDeck, Lakka, muOS, LaunchBox or Playnite — they all read a per-platform directory, which is exactly what ROMarr writes')+'</td></tr>'
     +'</tbody></table>'
+    +'<div class="panel-note" style="margin-top:12px"><b>'+interfaceMarkup('Set up a play device')+'</b><br>'
+    +interfaceMarkup('For an EmuDeck-style layout, set the ROM library root to the shared')+' <code>Emulation/roms</code> '+interfaceMarkup('folder and keep')+' <code>Emulation/metadata</code> '+interfaceMarkup('beside it. Add a platform folder mapping in Media Management if your existing folder names differ. Set up the frontend and emulator on each device that will play the games.')
+    +' <a href="https://emudeck.github.io/" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('EmuDeck setup guide ↗')+'</a>'
+    +' · <a href="https://es-de.org/" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('ES-DE ↗')+'</a>'
+    +' · <a href="#ecosystem">'+interfaceMarkup('More player options')+'</a></div>'
     +'<p class="help">'+interfaceMarkup('ROMarr can also export your library as LaunchBox XML, an ES-DE gamelist.xml or Playnite JSON — see')
     +' <a href="#status">'+interfaceMarkup('System')+'</a>.</p>'
     +(Object.keys(counts).length
@@ -4861,7 +4909,7 @@ RENDER.organize=async()=>{
     +'<div><b>ROM root</b><span lang="und" dir="auto">'+esc(SETTINGS.library_path||'not configured')+'</span></div>'
     +'<div><b>Shared metadata</b><span lang="und" dir="auto">'+esc(SETTINGS.metadata_path||'not configured')+'</span></div></div>'
     +(!SETTINGS.metadata_path
-      ?'<div class="panel-note panel-warn" style="margin-top:12px">Set a shared metadata root in <a href="#media">Media Management</a>. Mount it at the same relative location on the machines that share this library.</div>'
+      ?'<div class="panel-note panel-warn" style="margin-top:12px">Set a shared metadata root in <a href="#media">Media Management</a>. Mount it on each client and point ES-DE at its shared gamelists and media folders.</div>'
       :'')
     +'<p class="help" style="margin:12px 0 8px">Switch title IDs and versions are read from filenames and TitleDB. They help group base games, updates and DLC, but do not verify the package bytes. Exact DAT checksums or a manual confirmation are required before ROMarr offers a rename.</p>'
     +'<div class="row" style="flex-wrap:wrap;gap:8px;align-items:center">'
@@ -4871,8 +4919,8 @@ RENDER.organize=async()=>{
     +'<button class="btn ghost" id="org-refresh" '+(!SETTINGS.metadata_path?'disabled':'')+'>Refresh metadata</button>'
     +'<button class="btn ghost" id="org-plan" '+(!SETTINGS.metadata_path?'disabled':'')+'>Preview safe renames</button>'
     +'<button class="btn ghost" id="org-undo" '+(!SETTINGS.metadata_path?'disabled':'')+'>Undo last rename</button>'
-    +'<button class="btn ghost" id="org-esde" '+(!SETTINGS.metadata_path?'disabled':'')+'>Publish ES-DE gamelist</button></div>'
-    +'<p class="help" style="margin:8px 0 0">ROMarr reads an existing platform gamelist.xml before online lookup and reuses its descriptions and local artwork. Provider lookups are capped at 200 per scan. Export the portable catalog from <a href="#status">System → Backup &amp; Export</a>; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/features/shared-library-identification.md#portable-metadata" target="_blank" rel="noopener noreferrer">format and schema</a>.</p></div>'
+    +'<button class="btn ghost" id="org-esde" '+(!SETTINGS.metadata_path?'disabled':'')+'>Publish ES-DE data</button></div>'
+    +'<p class="help" style="margin:8px 0 0">ROMarr reads ES-DE gamelists and matching local media before online lookup. Publishing writes a shared gamelist and matching covers under the metadata root, using paths relative to the ROM root and matching ES-DE media names. Provider lookups are capped at 200 per scan. Export the portable catalog from <a href="#status">System → Backup &amp; Export</a>; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/features/shared-library-identification.md#portable-metadata" target="_blank" rel="noopener noreferrer">format and schema</a>.</p></div>'
     +'<div id="org-message"></div><div id="org-status"></div><div id="org-plan-result"></div>'
     +'<div class="card"><div class="row" style="align-items:center">'
     +'<h3 style="margin:0;flex:1">Library inventory</h3><span id="org-page-label" class="help" style="margin:0"></span></div>'

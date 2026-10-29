@@ -601,6 +601,7 @@ request actually came through it.
 | `ROMARR_JSDOS_URL` / `ROMARR_EMULARITY_URL` | no | Where your own js-dos and Emularity live. Without one, ROMarr reports that the player *would* run a file and names the setting that would let it link there |
 | `ROMARR_DATA` | no | Path to the state file |
 | `ROMARR_METADATA_PATH` | no | Optional shared sidecar directory for the read-only library catalog and cached artwork; can also be set under Settings → Media Management |
+| `ROMARR_ESDE_GAMELISTS_PATH` / `ROMARR_ESDE_MEDIA_PATH` | no | Existing ES-DE `gamelists` / `downloaded_media` roots to import from when they are mounted inside the container; shared output is written under `ROMARR_METADATA_PATH/esde` |
 | `ROMARR_HOST` | no | Address to listen on (default `0.0.0.0`); use `127.0.0.1` only when the proxy shares the host network namespace |
 | `ROMARR_ALLOW_UNSANDBOXED_PLUGINS` | no | Explicitly allow ROM Hub plugins when Landlock or seccomp is unavailable; keep unset to require both boundaries |
 | `DAT_PATH` | no | Directory of No-Intro / Redump DATs. Loose `.dat`/`.xml` files **and** the ZIP archives No-Intro distributes are read, including one level down beside the platform they describe. Point it at a DAT directory, not at your ROM library |
@@ -625,8 +626,10 @@ Legacy `ROMM_*` variables are still read, so existing installs need no changes.
 
 `folder` covers Batocera, RetroPie, Recalbox, EmulationStation, ES-DE, EmuDeck,
 Pegasus, Lakka, muOS, ArkOS, LaunchBox, Playnite and Steam ROM Manager — they read
-ROMs from a directory laid out by platform, which is what ROMarr writes. No URL, no
-account, no API key:
+ROMs from a directory laid out by platform, which is what ROMarr writes. Use one
+library root, then map any custom immediate folder names to their platforms under
+Settings → Media Management. The map guides scans, exports, and new imports. For EmuDeck, set the root to `Emulation/roms`; keep
+shared metadata at the sibling `Emulation/metadata`. No URL, account, or API key:
 
 ```
 LIBRARY_KIND=folder
@@ -635,7 +638,7 @@ LIBRARY_PATH=/mnt/roms
 
 ### Shared library identification
 
-The **Identify & Organize** page can inventory an existing ROM folder, reuse existing ES-DE metadata and artwork, verify files against loaded DATs, look up metadata, and publish ES-DE data. It is read only until a user previews and applies a rename plan; large rename previews are reviewed and applied in bounded batches. A versioned ROMarr metadata JSON export is available alongside the frontend formats. See [shared library identification](docs/features/shared-library-identification.md) for the mount layout, import behavior, format schemas, evidence levels, and safety limits.
+The **Identify & Organize** page can inventory an existing ROM folder, reuse existing ES-DE metadata and artwork, verify files against loaded DATs, look up metadata, and publish ES-DE data to the shared metadata root. Modern ES-DE gamelists live under `esde/gamelists/<system>` and covers under `esde/downloaded_media/<system>/covers`. See [shared library identification](docs/features/shared-library-identification.md) for mount setup, import behavior, format schemas, evidence levels, and safety limits.
 
 ### Supported platforms
 
@@ -1215,7 +1218,8 @@ the playability routing.
 [Wolf](https://github.com/games-on-whales/wolf),
 [Sunshine](https://github.com/LizardByte/Sunshine),
 [Steam Headless](https://github.com/Steam-Headless/docker-steam-headless),
-[ES-DE](https://es-de.org), [Batocera](https://batocera.org),
+[ES-DE](https://es-de.org), [EmuDeck](https://www.emudeck.com),
+[Batocera](https://batocera.org),
 [Playnite](https://playnite.link),
 [LaunchBox](https://www.launchbox-app.com).
 

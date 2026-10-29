@@ -25,6 +25,7 @@ import re
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 from datetime import datetime, timezone
+from pathlib import PurePosixPath
 
 log = logging.getLogger(__name__)
 
@@ -207,18 +208,24 @@ def to_launchbox(rows: list[dict]) -> str:
 def to_gamelist(rows: list[dict]) -> str:
     """An ES-DE / EmulationStation `gamelist.xml` for ONE system.
 
-    Paths are written relative with a leading `./`, which is what
-    EmulationStation expects and what makes a gamelist survive the ROM
-    directory being mounted somewhere else -- the normal case when the files
-    live on a NAS and the frontend runs on a handheld.
+    Modern ES-DE keeps this file in its data tree and expands relative paths
+    against ROMDirectory, so organizer rows provide `esde_path` relative to
+    the shared library root. Other callers can provide a system-relative
+    `filename`. Media tags remain for older EmulationStation forks; ES-DE
+    finds modern media by matching files under its configured media root.
     """
     root = ET.Element("gameList")
     for row in rows:
-        name = str(row.get("filename") or row.get("path") or "").strip()
+        name = str(row.get("esde_path") or row.get("filename") or row.get("path") or "").strip()
         if not name:
             continue
+        normalized = name.replace("\\", "/")
+        relative = normalized[2:] if normalized.startswith("./") else normalized
+        if (normalized.startswith("/") or not relative
+                or any(part in ("", ".", "..") for part in PurePosixPath(relative).parts)):
+            continue
         game = ET.SubElement(root, "game")
-        ET.SubElement(game, "path").text = f"./{name.lstrip('./')}"
+        ET.SubElement(game, "path").text = f"./{relative}"
         ET.SubElement(game, "name").text = str(row.get("title") or name)
         if row.get("desc"):
             ET.SubElement(game, "desc").text = str(row["desc"])

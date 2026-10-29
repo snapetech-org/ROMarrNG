@@ -411,10 +411,15 @@ TRANSLATION_SUBDIR = "Translations"
 
 
 def platform_dir(library_root: Path, platform: "Platform | str", *,
-                 layout: str = "flat", translation: bool = False) -> Path:
+                 layout: str = "flat", translation: bool = False,
+                 folder_name: str = "") -> Path:
     """Where a ROM for this platform is filed, under the chosen layout."""
     slug = getattr(platform, "slug", platform)
-    base = library_root / slug
+    name = str(folder_name or slug)
+    if (not name or name in (".", "..") or "/" in name or "\\" in name
+            or "\x00" in name or name != _canonical_component(name)):
+        raise ValueError("platform folder name must be one safe path component")
+    base = library_root / name
     if str(layout).lower() in ("nested", "romm_b", "b"):
         base = base / "roms"
     if translation:
@@ -426,6 +431,7 @@ def import_rom(download: Path, platform: Platform, library_root: Path, *,
                overwrite: bool = False, dats=None,
                require_verified: bool = False,
                layout: str = "flat", translation: bool = False,
+               folder_name: str = "",
                rename: bool = False, switch_index=None,
                route_switch_catalog: bool = False,
                switch_updates_dir: str = "Updates",
@@ -472,7 +478,8 @@ def import_rom(download: Path, platform: Platform, library_root: Path, *,
             continue
 
         target_dir = platform_dir(library_root, platform,
-                                   layout=layout, translation=translation)
+                                   layout=layout, translation=translation,
+                                   folder_name=folder_name)
 
         if platform.slug == "switch" and route_switch_catalog:
             # TitleDB classifies an ID read from the filename; it does not

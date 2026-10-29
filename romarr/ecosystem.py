@@ -132,6 +132,11 @@ ECOSYSTEM: dict[str, list[Project]] = {
             "EmulationStation Desktop Edition -- a frontend for many emulators.",
             site="https://es-de.org"),
         Project(
+            "EmuDeck",
+            "Setup scripts that install and configure emulators and frontends "
+            "for supported gaming devices.",
+            site="https://www.emudeck.com"),
+        Project(
             "Batocera",
             "A retro-gaming distribution that turns a PC into a console.",
             site="https://batocera.org"),

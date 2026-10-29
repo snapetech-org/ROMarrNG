@@ -33,7 +33,7 @@ from xml.parsers import expat
 import requests
 
 from .dat import UNKNOWN, VERIFIED, header_size
-from .frontends import romarr_game_document
+from .frontends import esde_folder, romarr_game_document
 from .metadata import clean_title
 from .platforms import PLATFORMS, resolve
 from .titled import base_tid_of, validate_switch_rom
@@ -49,6 +49,7 @@ MAX_GAMELIST_BYTES = 32 * 1024 * 1024
 MAX_GAMELIST_GAMES = 100_000
 MAX_MANIFEST_BYTES = 1024 * 1024
 MAX_MANIFEST_ENTRIES = 256
+MAX_PLATFORM_FOLDER_MAPPINGS = 256
 RENAME_PLAN_BATCH_SIZE = 200
 MAX_RENAME_PLAN_BATCH = 500
 ART_HOSTS = frozenset({"images.igdb.com", "media.rawg.io"})
@@ -385,7 +386,7 @@ def _layout_member(directory: Path, layout: str) -> Path | None:
             child = next((p for p in current.iterdir()
                           if p.name.casefold() == part.casefold()
                           and not p.is_symlink()), None)
-        except OSError:
+        except (OSError, ValueError):
             return None
         if child is None:
             return None
@@ -393,7 +394,53 @@ def _layout_member(directory: Path, layout: str) -> Path | None:
     return current if current.is_file() else None
 
 
-def _scan_paths(root: Path, metadata_root: Path, only_platform: str = ""):
+def _platform_folder_mappings(value: object) -> dict[str, object]:
+    """Keep explicit folder aliases to one safe path component and platform."""
+    if not isinstance(value, dict):
+        return {}
+    output = {}
+    for index, (folder, target) in enumerate(value.items()):
+        if index >= MAX_PLATFORM_FOLDER_MAPPINGS:
+            break
+        name = str(folder or "").strip()
+        try:
+            name_bytes = len(name.encode("utf-8"))
+        except UnicodeEncodeError:
+            continue
+        if (not name or name_bytes > 180 or name != _safe_component(name)
+                or name in (".", "..")
+                or any(ord(char) < 32 or ord(char) == 127 for char in name)
+                or "/" in name or "\\" in name or "\x00" in name):
+            continue
+        target = str(target or "").strip()
+        if len(target) > 120:
+            continue
+        platform = resolve(target)
+        if platform is not None:
+            output[os.path.normcase(name).casefold()] = platform
+    return output
+
+
+def _platform_for_folder(value: str, folder_mappings: dict[str, object] | None = None):
+    """Resolve a library's platform directory without guessing ambiguous names."""
+    folded = os.path.normcase(str(value or "").strip()).casefold()
+    explicit = (folder_mappings or {}).get(folded)
+    if explicit is not None:
+        return explicit
+    direct = next((item for item in PLATFORMS if item.slug.casefold() == folded), None)
+    if direct is not None:
+        return direct
+    esde_matches = [item for item in PLATFORMS
+                    if os.path.normcase(esde_folder(item.slug)).casefold() == folded]
+    if len(esde_matches) == 1:
+        return esde_matches[0]
+    if esde_matches:
+        return None
+    return resolve(value)
+
+
+def _scan_paths(root: Path, metadata_root: Path, only_platform: str = "",
+                 folder_mappings: dict[str, object] | None = None):
     """Walk platform-shaped folders without following symlinks or scanning metadata."""
     root_real = root.resolve(strict=True)
     metadata_real = metadata_root.resolve(strict=False)
@@ -426,7 +473,8 @@ def _scan_paths(root: Path, metadata_root: Path, only_platform: str = ""):
         except ValueError:
             dirs[:] = []
             continue
-        platform = resolve(relative.parts[0]) if relative.parts else None
+        platform = (_platform_for_folder(relative.parts[0], folder_mappings)
+                    if relative.parts else None)
         if platform is None:
             continue
         if only_platform and platform.slug.casefold() != only_platform.casefold():
@@ -862,6 +910,69 @@ class LibraryOrganizer:
         value = str(self.service.store.settings.get("metadata_path") or "").strip()
         return Path(os.path.abspath(str(Path(value).expanduser()))) if value else None
 
+    def _source_root(self, setting: str, metadata_root: Path,
+                     default_relative: str) -> Path | None:
+        value = str(self.service.store.settings.get(setting) or "").strip()
+        candidate = (Path(value).expanduser() if value else
+                     metadata_root / default_relative)
+        candidate = Path(os.path.abspath(str(candidate)))
+        try:
+            if candidate.is_symlink() or _path_has_symlink(candidate):
+                return None
+            return candidate.resolve(strict=True) if candidate.is_dir() else None
+        except (OSError, ValueError):
+            return None
+
+    def _esde_gamelist_roots(self, metadata_root: Path) -> list[Path]:
+        roots = [self._source_root("esde_gamelists_path", metadata_root,
+                                   "esde/gamelists"),
+                 self._source_root("", metadata_root, "esde/gamelists")]
+        return list(dict.fromkeys(path for path in roots if path is not None))
+
+    def _esde_media_roots(self, metadata_root: Path) -> list[Path]:
+        roots = [self._source_root("esde_media_path", metadata_root,
+                                   "esde/downloaded_media"),
+                 self._source_root("", metadata_root,
+                                   "esde/downloaded_media")]
+        return list(dict.fromkeys(path for path in roots if path is not None))
+
+    def _platform_root_for_path(self, root: Path, slug: str,
+                                relative_path: str = "") -> Path:
+        nested = str(self.service.store.settings.get("library_layout") or "").lower() in (
+            "nested", "romm_b", "b")
+        mappings = _platform_folder_mappings(
+            self.service.store.settings.get("platform_folder_mappings"))
+        parts = PurePosixPath(str(relative_path or "").replace("\\", "/")).parts
+        folder = parts[0] if parts else ""
+        platform = _platform_for_folder(folder, mappings) if folder else None
+        if not platform or platform.slug != slug:
+            folder = self._folder_name_for_platform(slug, root, mappings)
+        base = root / folder
+        return base / "roms" if nested else base
+
+    def _folder_name_for_platform(self, slug: str, root: Path | None = None,
+                                  mappings: dict[str, object] | None = None) -> str:
+        mappings = mappings or _platform_folder_mappings(
+            self.service.store.settings.get("platform_folder_mappings"))
+        if root is not None:
+            try:
+                matches = [child.name for child in root.iterdir()
+                           if child.is_dir() and not child.is_symlink()
+                           and (_platform_for_folder(child.name, mappings) is not None)
+                           and _platform_for_folder(child.name, mappings).slug == slug]
+                if len(matches) == 1:
+                    return matches[0]
+            except OSError:
+                pass
+        configured_raw = self.service.store.settings.get("platform_folder_mappings")
+        configured_raw = configured_raw if isinstance(configured_raw, dict) else {}
+        configured = [name for name, target in configured_raw.items()
+                      if isinstance(name, str) and _platform_for_folder(name, mappings)
+                      and _platform_for_folder(name, mappings).slug == slug]
+        if len(configured) == 1:
+            return configured[0]
+        return slug
+
     def _catalog_path(self, platform: str) -> Path:
         if not _valid_slug(platform):
             raise ValueError("unknown platform")
@@ -909,57 +1020,68 @@ class LibraryOrganizer:
         }
         _atomic_json(path, payload, root)
 
-    def _esde_catalog_paths(self, slug: str, root: Path,
-                            metadata_root: Path) -> list[Path]:
-        candidates = []
-        try:
-            for child in root.iterdir():
-                if (child.is_symlink() or not child.is_dir()
-                        or resolve(child.name) is None
-                        or resolve(child.name).slug != slug):
-                    continue
-                candidates.extend((child / "gamelist.xml",
-                                   child / "roms" / "gamelist.xml"))
-        except OSError:
-            pass
-        # Some EmuDeck setups keep scraped metadata outside the ROM tree.
-        candidates.append(metadata_root / slug / "gamelist.xml")
+    def _esde_catalog_paths(self, slug: str, root: Path, metadata_root: Path,
+                            platform_root: Path) -> list[tuple[Path, Path]]:
+        """Return modern ES-DE catalogs plus safe legacy per-folder catalogs."""
+        candidates: list[tuple[Path, Path]] = []
+        system = esde_folder(slug)
+        # ES-DE 2.x+ stores gamelists beneath its data directory, separately
+        # from the ROM folders. Its path entries are relative to ROMDirectory.
+        for gamelists_root in self._esde_gamelist_roots(metadata_root):
+            candidates.append((gamelists_root / system / "gamelist.xml", root))
+        # Older EmulationStation layouts place the file next to each system.
+        candidates.extend((path, path.parent) for path in (
+            platform_root / "gamelist.xml",
+            platform_root.parent / "gamelist.xml",
+            platform_root.parent / "roms" / "gamelist.xml",
+            metadata_root / slug / "gamelist.xml"))
+        allowed_roots = (root, metadata_root, *self._esde_gamelist_roots(metadata_root))
         seen = set()
         output = []
-        for candidate in candidates:
+        for candidate, base in candidates:
             key = os.path.normcase(str(candidate.absolute())).casefold()
             if key in seen or candidate.is_symlink() or not candidate.is_file():
                 continue
-            if not (_within(root, candidate) or _within(metadata_root, candidate)):
+            if not any(_within(allowed, candidate) for allowed in allowed_roots):
+                continue
+            if _path_has_symlink(candidate):
                 continue
             seen.add(key)
-            output.append(candidate)
+            output.append((candidate, base))
         return output
 
-    def _esde_rom_relative(self, value: str, base: Path, root: Path) -> str | None:
+    def _esde_rom_relative(self, value: str, base: Path, root: Path,
+                           platform_root: Path) -> str | None:
         raw = str(value or "").strip()
         if not raw or "\x00" in raw:
             return None
+        if raw.upper().startswith("%ROMPATH%"):
+            raw = raw[len("%ROMPATH%"):].lstrip("/\\")
+            base = root
         parsed = urlsplit(raw)
         if parsed.scheme or parsed.netloc:
             return None
         candidate = Path(raw.replace("\\", os.sep))
-        if not candidate.is_absolute():
-            candidate = base / candidate
-        try:
-            if candidate.is_symlink() or _path_has_symlink(candidate):
-                return None
-            resolved = candidate.resolve(strict=True)
-            if (not (resolved.is_file() or resolved.is_dir())
-                    or not _within(root, resolved)
-                    or not _no_symlink_path(root, resolved)):
-                return None
-            return resolved.relative_to(root.resolve(strict=True)).as_posix()
-        except (OSError, ValueError):
-            return None
+        candidates = [candidate] if candidate.is_absolute() else [
+            base / candidate, root / candidate, platform_root / candidate]
+        for possible in candidates:
+            try:
+                if possible.is_symlink() or _path_has_symlink(possible):
+                    continue
+                resolved = possible.resolve(strict=True)
+                if (not (resolved.is_file() or resolved.is_dir())
+                        or not _within(root, resolved)
+                        or not _within(platform_root, resolved)
+                        or not _no_symlink_path(root, resolved)):
+                    continue
+                return resolved.relative_to(root.resolve(strict=True)).as_posix()
+            except (OSError, ValueError):
+                continue
+        return None
 
     def _esde_asset_path(self, value: str, base: Path, root: Path,
-                         metadata_root: Path) -> Path | None:
+                         metadata_root: Path,
+                         allowed_roots: tuple[Path, ...] = ()) -> Path | None:
         raw = str(value or "").strip()
         if not raw or "\x00" in raw:
             return None
@@ -967,8 +1089,10 @@ class LibraryOrganizer:
         if parsed.scheme or parsed.netloc:
             return None  # A local import never fetches an XML-supplied URL.
         source = Path(raw.replace("\\", os.sep))
-        candidates = [source] if source.is_absolute() else [base / source,
-                                                             metadata_root / source]
+        roots = allowed_roots or (root, metadata_root)
+        candidates = ([source] if source.is_absolute() else
+                      [base / source, metadata_root / source,
+                       *(allowed / source for allowed in roots)])
         for candidate in candidates:
             try:
                 if candidate.is_symlink() or _path_has_symlink(candidate):
@@ -977,19 +1101,42 @@ class LibraryOrganizer:
                 if (not resolved.is_file()
                         or not any(_within(allowed, resolved)
                                    and _no_symlink_path(allowed, resolved)
-                                   for allowed in (root, metadata_root))):
+                                   for allowed in roots)):
                     continue
                 return resolved
             except (OSError, ValueError):
                 continue
         return None
 
+    def _esde_media_art(self, slug: str, filename: str, is_directory: bool,
+                        media_roots: list[Path]) -> Path | None:
+        relative = PurePosixPath(str(filename or "").replace("\\", "/"))
+        stem = relative if is_directory else relative.with_suffix("")
+        system = esde_folder(slug)
+        for media_root in media_roots:
+            for extension in (".jpg", ".png", ".webp"):
+                candidate = media_root / system / "covers" / (str(stem) + extension)
+                try:
+                    if (candidate.is_symlink() or _path_has_symlink(candidate)
+                            or not candidate.is_file()):
+                        continue
+                    resolved = candidate.resolve(strict=True)
+                    if _within(media_root, resolved) and _no_symlink_path(media_root, resolved):
+                        return resolved
+                except OSError:
+                    continue
+        return None
+
     def _read_esde_metadata(self, slug: str, root: Path,
-                            metadata_root: Path) -> dict[str, dict]:
+                            metadata_root: Path,
+                            platform_root: Path) -> dict[str, dict]:
         """Read existing local ES-DE gamelists as a bounded metadata source."""
         output: dict[str, dict] = {}
-        allowed_roots = (root, metadata_root)
-        for gamelist in self._esde_catalog_paths(slug, root, metadata_root):
+        gamelist_roots = self._esde_gamelist_roots(metadata_root)
+        media_roots = self._esde_media_roots(metadata_root)
+        allowed_roots = (root, metadata_root, *gamelist_roots, *media_roots)
+        for gamelist, rom_base in self._esde_catalog_paths(
+                slug, root, metadata_root, platform_root):
             try:
                 data = _read_bounded_file(gamelist, MAX_GAMELIST_BYTES, allowed_roots)
                 document = _parse_esde_gamelist(data)
@@ -1007,7 +1154,7 @@ class LibraryOrganizer:
 
                 for node in entries:
                     relative = self._esde_rom_relative(value(node, "path", 4096),
-                                                       gamelist.parent, root)
+                                                       rom_base, root, platform_root)
                     if not relative:
                         continue
                     key = _normalize_catalog_path(relative)
@@ -1039,7 +1186,16 @@ class LibraryOrganizer:
                         metadata["rating"] = round(rating_value * 10.0, 3)
                     image_source = self._esde_asset_path(
                         value(node, "image", 4096), gamelist.parent,
-                        root, metadata_root)
+                        root, metadata_root, allowed_roots)
+                    if image_source is None:
+                        try:
+                            frontend_path = _resolve_relative(root, relative).relative_to(
+                                platform_root).as_posix()
+                        except (OSError, ValueError):
+                            frontend_path = ""
+                        image_source = self._esde_media_art(
+                            slug, frontend_path,
+                            _resolve_relative(root, relative).is_dir(), media_roots)
                     if metadata or image_source:
                         metadata.update({
                             "source": "ES-DE local",
@@ -1069,13 +1225,15 @@ class LibraryOrganizer:
         return output
 
     def _cache_local_artwork(self, source: Path | None, slug: str,
-                             metadata_root: Path) -> str:
+                             metadata_root: Path,
+                             allowed_roots: tuple[Path, ...] = ()) -> str:
         if source is None:
             return ""
         try:
-            data = _read_bounded_file(source, MAX_ART_BYTES,
-                                      (self.rom_root.expanduser().resolve(strict=True),
-                                       metadata_root.resolve(strict=True)))
+            roots = allowed_roots or (
+                self.rom_root.expanduser().resolve(strict=True),
+                metadata_root.resolve(strict=True))
+            data = _read_bounded_file(source, MAX_ART_BYTES, roots)
             extension = _cover_extension("application/octet-stream", data[:16])
             if not extension:
                 return ""
@@ -1223,12 +1381,18 @@ class LibraryOrganizer:
         provider_lookups = 0
         seen_identities: dict[str, set[str]] = {}
         failed_paths: dict[str, set[str]] = {}
-        esde_by_platform: dict[str, dict[str, dict]] = {}
+        esde_by_platform: dict[tuple[str, str], dict[str, dict]] = {}
         try:
             root = root.resolve(strict=True)
             meta_root = meta_root.resolve(strict=True)
+            local_art_roots = (root, meta_root,
+                               *self._esde_media_roots(meta_root),
+                               *self._esde_gamelist_roots(meta_root))
             paths = []
-            for platform, path, _ in _scan_paths(root, meta_root, selected):
+            folder_mappings = _platform_folder_mappings(
+                self.service.store.settings.get("platform_folder_mappings"))
+            for platform, path, _ in _scan_paths(root, meta_root, selected,
+                                                  folder_mappings):
                 paths.append((platform, path))
                 if len(paths) >= MAX_SCAN_FILES:
                     truncated = True
@@ -1249,15 +1413,18 @@ class LibraryOrganizer:
                         if isinstance(row, dict) and row.get("identity_id")
                     }
                     by_platform[slug] = dict(existing[slug])
-                    esde_by_platform[slug] = self._read_esde_metadata(
-                        slug, root, meta_root)
 
                 relative = path.relative_to(root).as_posix()
+                platform_root = self._platform_root_for_path(root, slug, relative)
+                local_key = (slug, str(platform_root))
+                if local_key not in esde_by_platform:
+                    esde_by_platform[local_key] = self._read_esde_metadata(
+                        slug, root, meta_root, platform_root)
                 try:
                     identity_hash, hashes, _, members = _identity(path, platform)
                     identity_id = f"{slug}:{identity_hash}"
                     cached = existing[slug].get(identity_id, {})
-                    local = esde_by_platform[slug].get(
+                    local = esde_by_platform[local_key].get(
                         _normalize_catalog_path(relative), {})
                     is_directory = path.is_dir()
 
@@ -1336,7 +1503,8 @@ class LibraryOrganizer:
                         or local.get("image_source"))
                     metadata = {**cached_metadata, **local_metadata}
                     local_cover = self._cache_local_artwork(
-                        local.get("image_source"), slug, meta_root)
+                        local.get("image_source"), slug, meta_root,
+                        local_art_roots)
                     if local_title or local_has_details:
                         totals["local_metadata_imported"] += 1
                     lookup_attempted = bool(cached.get("lookup_attempted")) and not force
@@ -1616,7 +1784,8 @@ class LibraryOrganizer:
         component = _safe_component(subdir)
         if component != subdir or "/" in subdir or "\\" in subdir:
             return None
-        base = self.rom_root.expanduser().resolve(strict=True) / slug
+        root = self.rom_root.expanduser().resolve(strict=True)
+        base = root / self._folder_name_for_platform(slug, root)
         if str(self.service.store.settings.get("library_layout") or "").lower() in (
                 "nested", "romm_b", "b"):
             base = base / "roms"
@@ -1962,8 +2131,6 @@ class LibraryOrganizer:
             return []
         root = self.rom_root.expanduser().resolve(strict=False)
         meta_root = self.metadata_root.resolve(strict=False)
-        nested = str(self.service.store.settings.get("library_layout") or "").lower() in (
-            "nested", "romm_b", "b")
         rows = []
         for row in result["items"]:
             rel = str(row.get("relative_path") or "")
@@ -1974,7 +2141,7 @@ class LibraryOrganizer:
             metadata = row.get("metadata") or {}
             switch = row.get("switch") or {}
             slug = str(row.get("platform") or "")
-            platform_root = root / slug / ("roms" if nested else "")
+            platform_root = self._platform_root_for_path(root, slug, rel)
             try:
                 frontend_path = path.relative_to(platform_root).as_posix()
             except ValueError:
@@ -1994,6 +2161,9 @@ class LibraryOrganizer:
                 "title": row.get("canonical_title") or row.get("title") or path.stem,
                 "platform": slug,
                 "filename": frontend_path,
+                # Current ES-DE expands gamelist paths against ROMDirectory,
+                # which is the library root above the per-platform folders.
+                "esde_path": "./" + PurePosixPath(rel).as_posix(),
                 "relative_path": rel,
                 "is_directory": bool(row.get("is_directory")),
                 "path": str(path),
@@ -2054,31 +2224,145 @@ class LibraryOrganizer:
         if not rows:
             return {"written": False, "message": "Scan this platform before publishing its ES-DE gamelist."}
         root = self.rom_root.expanduser().resolve(strict=True)
-        base = root / resolved.slug
-        if str(self.service.store.settings.get("library_layout") or "").lower() in (
-                "nested", "romm_b", "b"):
-            base = base / "roms"
-        target = base / "gamelist.xml"
-        if not _within(root, target) or not _no_symlink_path(root, base):
+        metadata_root = self.metadata_root
+        if metadata_root is None or _path_has_symlink(metadata_root):
+            raise ValueError("Set a safe shared metadata root before publishing ES-DE data.")
+        metadata_root = metadata_root.resolve(strict=True)
+        system = esde_folder(resolved.slug)
+        esde_root = metadata_root / "esde"
+        target = esde_root / "gamelists" / system / "gamelist.xml"
+        if not _within(metadata_root, target) or not _no_symlink_path(metadata_root, target):
             raise ValueError("The ES-DE gamelist path is unsafe.")
-        from .frontends import to_gamelist
-        generated = ET.fromstring(to_gamelist(rows).encode("utf-8"))
+        physical_root = self._platform_root_for_path(
+            root, resolved.slug, str(rows[0].get("relative_path") or ""))
+        source_gamelists = self._esde_catalog_paths(
+            resolved.slug, root, metadata_root, physical_root)
+        allowed_roots = (root, metadata_root,
+                         *self._esde_gamelist_roots(metadata_root))
+        # Validate every existing source before writing the shared media tree,
+        # so a broken XML file cannot leave half of a publish behind.
         existing_games = {}
-        if target.exists():
-            if target.is_symlink() or not target.is_file():
-                raise ValueError("Existing gamelist.xml is not a regular file.")
+        existing_files = [(target, root)]
+        existing_files.extend(source_gamelists)
+        seen_files = set()
+        for gamelist, rom_base in existing_files:
+            key_file = os.path.normcase(str(gamelist.absolute())).casefold()
+            if key_file in seen_files or not gamelist.exists():
+                continue
+            seen_files.add(key_file)
             try:
-                current = ET.fromstring(target.read_bytes())
-                for game in current.findall("game"):
-                    path = (game.findtext("path") or "").replace("\\", "/")
-                    if path:
-                        existing_games[os.path.normcase(path).casefold()] = game
+                current = _parse_esde_gamelist(_read_bounded_file(
+                    gamelist, MAX_GAMELIST_BYTES, allowed_roots))
+                if current.tag.rsplit("}", 1)[-1].casefold() != "gamelist":
+                    continue
+                for game in current:
+                    if game.tag.rsplit("}", 1)[-1].casefold() != "game":
+                        continue
+                    game_path = (game.findtext("path") or "").strip()
+                    if not game_path:
+                        continue
+                    actual = self._esde_rom_relative(
+                        game_path, rom_base, root, physical_root)
+                    normalized = actual or game_path.removeprefix("./").replace("\\", "/")
+                    path_key = os.path.normcase(normalized).casefold()
+                    existing_games.setdefault(path_key, game)
             except Exception as exc:
                 raise ValueError("Existing gamelist.xml is invalid; it was left untouched.") from exc
+        from .frontends import to_gamelist
+        generated_rows = []
+        artwork_index_path = esde_root / ".romarr-artwork.json"
+        try:
+            artwork_index = json.loads(_read_bounded_file(
+                artwork_index_path, MAX_CATALOG_BYTES, (metadata_root,)).decode("utf-8"))
+            if not isinstance(artwork_index, dict):
+                artwork_index = {}
+        except FileNotFoundError:
+            artwork_index = {}
+        except (ValueError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+            raise ValueError("The shared ES-DE artwork index is invalid; it was left untouched.") from exc
+        managed_art = artwork_index.get("files")
+        if not isinstance(managed_art, dict):
+            managed_art = {}
+        published_media = 0
+        for row in rows:
+            item = dict(row)
+            item["esde_path"] = "./" + PurePosixPath(
+                str(row.get("relative_path") or "").replace("\\", "/")).as_posix()
+            item["cover_path"] = ""
+            artwork_relative = str(row.get("metadata_artwork_path") or "")
+            if artwork_relative:
+                try:
+                    artwork_path = _resolve_relative(metadata_root, artwork_relative)
+                    artwork = _read_bounded_file(artwork_path, MAX_ART_BYTES,
+                                                 (metadata_root,))
+                    extension = _cover_extension("application/octet-stream", artwork[:16])
+                    if extension:
+                        physical_root = self._platform_root_for_path(
+                            root, resolved.slug, str(row.get("relative_path") or ""))
+                        frontend_path = _resolve_relative(
+                            root, str(row.get("relative_path") or "")).relative_to(
+                                physical_root).as_posix()
+                        relative = PurePosixPath(frontend_path)
+                        stem = relative if row.get("is_directory") else relative.with_suffix("")
+                        media_dir = esde_root / "downloaded_media" / system / "covers"
+                        destination = media_dir / Path(str(stem) + extension)
+                        if (not _within(metadata_root, destination)
+                                or not _no_symlink_path(metadata_root, destination)):
+                            raise ValueError("The ES-DE media path is unsafe.")
+                        target_relative = destination.relative_to(metadata_root).as_posix()
+                        candidates = [media_dir / (str(stem) + ext)
+                                      for ext in (".jpg", ".png", ".webp")]
+                        existing = next((path for path in candidates
+                                         if path.exists() or path.is_symlink()), None)
+                        reusable = None
+                        reusable_hash = ""
+                        stale_managed = []
+                        if existing is not None:
+                            if (existing.is_symlink() or not existing.is_file()
+                                    or not _no_symlink_path(metadata_root, existing)):
+                                raise ValueError("An existing ES-DE media file is unsafe.")
+                            existing_relative = existing.relative_to(metadata_root).as_posix()
+                            current = _read_bounded_file(existing, MAX_ART_BYTES,
+                                                         (metadata_root,))
+                            current_hash = _sha256_bytes(current)
+                            if managed_art.get(existing_relative) == current_hash:
+                                reusable = existing
+                                reusable_hash = current_hash
+                                if existing != destination:
+                                    stale_managed.append((existing, existing_relative))
+                            else:
+                                # Preserve artwork someone chose or edited in
+                                # ES-DE; ROMarr owns only files it can verify.
+                                item["cover_path"] = os.path.relpath(
+                                    existing, target.parent).replace(os.sep, "/")
+                                managed_art.pop(existing_relative, None)
+                        if not item["cover_path"]:
+                            if reusable != destination or reusable_hash != _sha256_bytes(artwork):
+                                _atomic_bytes(destination, artwork, metadata_root)
+                            managed_art[target_relative] = _sha256_bytes(artwork)
+                            for old_path, old_relative in stale_managed:
+                                try:
+                                    old_path.unlink()
+                                except OSError:
+                                    pass
+                                managed_art.pop(old_relative, None)
+                            item["cover_path"] = os.path.relpath(
+                                destination, target.parent).replace(os.sep, "/")
+                            published_media += 1
+                except (OSError, ValueError):
+                    # A missing or user-modified cover does not block the
+                    # portable metadata catalog from being published.
+                    pass
+            generated_rows.append(item)
+        artwork_index = {"schema_version": 1, "files": managed_art}
+        _atomic_json(artwork_index_path, artwork_index, metadata_root)
+        generated = ET.fromstring(to_gamelist(generated_rows).encode("utf-8"))
+
         output = ET.Element("gameList")
         used = set()
         for new_game in generated.findall("game"):
-            key = os.path.normcase((new_game.findtext("path") or "").replace("\\", "/")).casefold()
+            new_path = (new_game.findtext("path") or "").replace("\\", "/")
+            key = os.path.normcase(new_path.removeprefix("./")).casefold()
             old = existing_games.get(key)
             if old is not None:
                 merged = ET.fromstring(ET.tostring(old, encoding="utf-8"))
@@ -2098,8 +2382,10 @@ class LibraryOrganizer:
                 output.append(old)
         raw = ET.tostring(output, encoding="utf-8")
         pretty = minidom.parseString(raw).toprettyxml(indent="  ", encoding="utf-8")
-        _atomic_bytes(target, pretty, root)
+        _atomic_bytes(target, pretty, metadata_root)
         return {"written": True, "path": str(target), "games": len(rows),
+                "media": published_media,
+                "message": f"Published {len(rows)} ES-DE entries and {published_media} shared covers.",
                 "preserved_existing": max(0, len(existing_games) - len(used))}
 
 

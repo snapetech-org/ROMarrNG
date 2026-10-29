@@ -189,6 +189,13 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     # A shared sidecar root for cached metadata and artwork, mounted at the same
     # relative location on each frontend machine. Empty disables local publishing.
     "metadata_path": "",
+    # Optional aliases for immediate folders under LIBRARY_PATH. Empty means
+    # canonical platform slugs plus unambiguous ES-DE system folders.
+    "platform_folder_mappings": {},
+    # Optional roots from an existing ES-DE installation, each containing
+    # per-system subfolders. ROMarr's shared output lives under metadata_path.
+    "esde_gamelists_path": "",
+    "esde_media_path": "",
     # Private local key authenticating rename history stored on the shared
     # metadata mount. Generated on first use and never writable through config.
     "_organizer_journal_key": "",

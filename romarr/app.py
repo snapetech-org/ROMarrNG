@@ -1068,6 +1068,13 @@ class ROMarr:
         environment_metadata_path = str(e.get("ROMARR_METADATA_PATH") or "")
         if not saved_metadata_path and environment_metadata_path:
             self.store.update_settings({"metadata_path": environment_metadata_path})
+        seed_paths = {
+            "esde_gamelists_path": "ROMARR_ESDE_GAMELISTS_PATH",
+            "esde_media_path": "ROMARR_ESDE_MEDIA_PATH",
+        }
+        for setting, variable in seed_paths.items():
+            if not str(self.store.settings.get(setting) or "").strip() and e.get(variable):
+                self.store.update_settings({setting: str(e[variable])})
 
         # Shown on the General page so an operator can see what is wired up
         # without opening a shell. URLs only -- never a credential.
@@ -3136,6 +3143,9 @@ class ROMarr:
             source, platform, self.library_root(target_cfg),
             dats=self.dats, require_verified=False,
             layout=self.library_layout(target_cfg),
+            folder_name=(self.organizer._folder_name_for_platform(
+                platform.slug, self.library_root(target_cfg))
+                if target_cfg.get("type") == "folder" else ""),
             translation=is_translation(source.name),
             rename=bool(self.store.settings.get("rename_on_import", True)),
             switch_index=self.ensure_titled() if route_switch and platform.slug == "switch" else None,
@@ -3243,9 +3253,12 @@ class ROMarr:
         listed = False
         if platform_slug:
             for cfg, _ in self.game_libraries:
+                folder_name = (self.organizer._folder_name_for_platform(
+                    platform_slug, self.library_root(cfg))
+                    if cfg.get("type") == "folder" else "")
                 folder = platform_dir(
                     self.library_root(cfg), platform_slug,
-                    layout=self.library_layout(cfg))
+                    layout=self.library_layout(cfg), folder_name=folder_name)
                 try:
                     entries = list(folder.iterdir())
                 except OSError:
@@ -3460,6 +3473,7 @@ class ROMarr:
                 return local_rows
         items = (self.library_view() or {}).get("items", [])
         wanted = str(platform or "").strip().lower()
+        default = self.default_library()
         rows = []
         for item in items:
             slug = str(item.get("platform_slug") or item.get("platform") or "")
@@ -3467,6 +3481,9 @@ class ROMarr:
                 continue
             name = str(item.get("file_name") or item.get("filename")
                        or item.get("name") or "")
+            folder_name = (organizer._folder_name_for_platform(slug, self.library)
+                           if organizer is not None and default
+                           and default[0].get("type") == "folder" else slug)
             rows.append({
                 "id": item.get("id") or item.get("rom_id") or "",
                 "title": item.get("name") or item.get("title") or name,
@@ -3478,7 +3495,7 @@ class ROMarr:
                 # is what RomM's cached rows look like. Caught live by
                 # scripts/playnite_proof.ps1.
                 "path": item.get("path") or item.get("full_path")
-                        or (str(self.library / slug / name)
+                        or (str(self.library / folder_name / name)
                             if name and slug else ""),
                 "region": item.get("region") or "",
                 "verified": item.get("verified") or "",
@@ -4794,7 +4811,11 @@ class ROMarr:
             return {"error": "no DATs loaded -- set the DAT directory under "
                              "Settings -> Media Management first"}
 
-        root = self.library / platform.slug
+        default = self.default_library()
+        folder_name = (self.organizer._folder_name_for_platform(
+            platform.slug, self.library)
+            if default and default[0].get("type") == "folder" else platform.slug)
+        root = self.library / folder_name
         state = {"status": "running", "platform": platform.slug,
                  "scanned": 0, "verified": 0, "bad": 0, "unknown": 0,
                  "bad_files": [], "duplicates": [],
@@ -5314,6 +5335,9 @@ class ROMarr:
                 path, platform, self.library_root(target_cfg),
                 dats=self.dats, require_verified=False,
                 layout=self.library_layout(target_cfg),
+                folder_name=(self.organizer._folder_name_for_platform(
+                    platform.slug, self.library_root(target_cfg))
+                    if target_cfg.get("type") == "folder" else ""),
                 translation=is_translation(queue_item.release if queue_item else name),
                 rename=bool(self.store.settings.get("rename_on_import", True)),
                 switch_index=self.ensure_titled() if route_switch and platform.slug == "switch" else None,
