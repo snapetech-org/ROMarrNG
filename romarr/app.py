@@ -2001,7 +2001,7 @@ class ROMarr:
         """
         kind = str(cfg.get("type") or "").lower()
         url, key = cfg.get("url", ""), cfg.get("api_key", "")
-        if not url:
+        if not url and kind != "internetarchive":
             return {"ok": False, "message": "a URL is required"}
         try:
             if kind == "prowlarr":
@@ -2014,14 +2014,17 @@ class ROMarr:
             probe = build_indexer(cfg)
             if probe is None:
                 return {"ok": False, "message": f"unknown indexer type: {kind!r}"}
-            # Both protocols answer a caps query, which needs no search term and
-            # so tests the credential without asking the site to run a query.
+            # Probe through the same client used by search. For network-backed
+            # sources this checks the public API without requesting a game.
             probe.caps()
             return {"ok": True, "message": "Connected"}
         except Exception as err:
             import requests as _rq
             if isinstance(err, _rq.HTTPError) and err.response is not None \
                     and err.response.status_code in (401, 403):
+                if kind == "internetarchive":
+                    return {"ok": False,
+                            "message": "Internet Archive refused the request"}
                 return {"ok": False, "message": "Rejected the API key"}
             return {"ok": False, "message": f"{type(err).__name__}: {err}"}
 
@@ -2105,23 +2108,10 @@ class ROMarr:
         release was simply just below the bar.
         """
         platform = resolve(platform_name) if platform_name else None
-        # Both branches have to survive an indexer failing. _search_releases
-        # already isolates each source, but the no-platform branch queried
-        # Prowlarr unprotected, so one aggregate search exceeding its 60s
-        # timeout took the whole request down -- and an unrecognised platform
-        # name silently routes here, which is how `?platform=psx` returned no
-        # status code at all rather than a result or an error.
-        if platform is not None:
-            releases = self._search_releases(game, platform)
-        else:
-            try:
-                releases = self.prowlarr.search(game)
-            except Exception as err:
-                log.warning("prowlarr search failed for %r: %s", game, err)
-                releases = []
-            # The hub lane joins here too, or this endpoint answers a
-            # different question than the request path it claims to mirror.
-            releases = releases + self._hub_releases(game, None)
+        # _search_releases isolates each source and also accepts a missing
+        # platform. An unrecognised name routes here without platform evidence,
+        # which is reported separately in the response below.
+        releases = self._search_releases(game, platform)
         pick = best_release(releases, game, platform,
                            profile=self.profile, blocklist=self.blocklist)
         scored = sorted(
@@ -2244,7 +2234,7 @@ class ROMarr:
         wider net: score() already rejects a release naming a foreign system,
         one in the wrong category, or one too large to be a cartridge.
         """
-        seen: set[tuple[str, str]] = set()
+        seen: dict[tuple[str, str], int] = {}
         merged = []
         # Prowlarr plus every directly-configured indexer. One source failing
         # must never lose another's results -- an indexer that is down, rate
@@ -2253,7 +2243,8 @@ class ROMarr:
         sources: list[tuple[str, object]] = [("prowlarr", self.prowlarr)]
         sources += [(getattr(i, "name", "indexer"), i)
                     for i in getattr(self, "indexers", [])]
-        for term in (game, f"{game} {platform.name}"):
+        terms = (game, f"{game} {platform.name}") if platform else (game,)
+        for term in terms:
             for label, source in sources:
                 try:
                     found = source.search(term)
@@ -2263,8 +2254,16 @@ class ROMarr:
                 for release in found:
                     key = (release.title, release.download_url)
                     if key in seen:
+                        previous = merged[seen[key]]
+                        # A platform-qualified search may add structured
+                        # platform evidence to a result already seen in the
+                        # broad query. Keep that stronger copy for scoring.
+                        if (release.indexer == previous.indexer
+                                and release.platform_slug
+                                and not previous.platform_slug):
+                            merged[seen[key]] = release
                         continue
-                    seen.add(key)
+                    seen[key] = len(merged)
                     merged.append(release)
         # Enabled ROM Hub plugins are searched alongside the indexers: the
         # same titles, scored by the same rules, grabbable from the same
@@ -2273,7 +2272,7 @@ class ROMarr:
         for release in self._hub_releases(game, platform):
             key = (release.title, release.download_url)
             if key not in seen:
-                seen.add(key)
+                seen[key] = len(merged)
                 merged.append(release)
         return merged
 
@@ -2452,19 +2451,7 @@ class ROMarr:
                     "items": []}
 
         try:
-            if platform:
-                releases = self._search_releases(game, platform)
-            else:
-                search_error = None
-                try:
-                    releases = self.prowlarr.search(game)
-                except Exception as err:
-                    log.warning("prowlarr interactive search failed: %s", type(err).__name__)
-                    search_error = err
-                    releases = []
-                releases += self._hub_releases(game, None)
-                if search_error is not None and not releases:
-                    raise search_error
+            releases = self._search_releases(game, platform)
         except Exception as err:
             log.warning("interactive search failed for %r: %s", game, err)
             return {"error": f"search failed: {type(err).__name__}",

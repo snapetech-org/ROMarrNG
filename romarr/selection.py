@@ -222,7 +222,7 @@ class Release:
     seeders: int              # 0 for usenet
     categories: tuple[int, ...]
     download_url: str
-    protocol: str             # "torrent" | "usenet"
+    protocol: str             # "torrent" | "usenet" | "direct" | "browser" | "hub"
     indexer: str = ""
     # Whether the indexer it came from is a private tracker. This changes two
     # decisions that are wrong by default for private trackers: what a seeder

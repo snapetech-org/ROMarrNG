@@ -2820,9 +2820,19 @@ class SiteDownloader:
         """
         if not self.configured:
             return False
-        if not str(url or "").lower().startswith(("http://", "https://")):
+        url = str(url or "")
+        archive_bundle = False
+        if self.protocol == "direct" and url.startswith("romarr-ia://"):
+            try:
+                from .internetarchive import decode_bundle_url
+                decode_bundle_url(url)
+                archive_bundle = True
+            except ValueError:
+                log.warning("site downloader was handed an invalid Archive.org bundle")
+                return False
+        if not url.lower().startswith(("http://", "https://")) and not archive_bundle:
             log.warning("site downloader was handed a %s link, not an HTTP one",
-                        str(url).split(":", 1)[0] or "blank")
+                        url.split(":", 1)[0] or "blank")
             return False
         rows = self._read()
         if any(r.get("url") == url and r.get("state") in ("pending", "done")
@@ -2880,27 +2890,92 @@ class SiteDownloader:
     def _run(self, row: dict) -> None:
         """Fetch one job, in place, recording why if it did not work."""
         url = row.get("url", "")
-        host = SitePolicy._host(url)
-        if host in self._forbidden:
-            row.update(state="failed",
-                       detail="this site answered 403 earlier in this session")
-            return
-        allowed, why = self._policy.allowed(url)
-        if not allowed:
-            row.update(state="failed", detail=why)
-            log.warning("refusing %s: %s", host, why)
-            return
         target = Path(row.get("save_path") or self._config.save_path)
         try:
-            if self.protocol == "browser":
-                saved = self._browser_fetch(url, target)
+            if self.protocol == "direct" and str(url).startswith("romarr-ia://"):
+                saved = self._archive_bundle_fetch(url, target, row.get("name") or "")
             else:
-                saved = self._direct_fetch(url, target)
+                host = SitePolicy._host(url)
+                if host in self._forbidden:
+                    row.update(state="failed",
+                               detail="this site answered 403 earlier in this session")
+                    return
+                allowed, why = self._policy.allowed(url)
+                if not allowed:
+                    row.update(state="failed", detail=why)
+                    log.warning("refusing %s: %s", host, why)
+                    return
+                if self.protocol == "browser":
+                    saved = self._browser_fetch(url, target)
+                else:
+                    saved = self._direct_fetch(url, target)
         except Exception as err:
             row.update(state="failed", detail=f"{type(err).__name__}: {err}")
             log.warning("site download failed: %s", err)
             return
         row.update(state="done", detail="", file=str(saved))
+
+    def _archive_bundle_fetch(self, url: str, target: Path, name: str) -> Path:
+        """Fetch a validated Archive.org disc set into one importable directory."""
+        import shutil
+        from pathlib import PurePosixPath
+        from .internetarchive import archive_download_url, decode_bundle_url
+
+        bundle = decode_bundle_url(url)
+        identifier = bundle["identifier"]
+        files = bundle["files"]
+        target.mkdir(parents=True, exist_ok=True)
+        digest = hashlib.sha256(url.encode("utf-8")).hexdigest()[:12]
+        label = re.sub(r"[^A-Za-z0-9._-]+", "_", str(name or "ROM")).strip("._-")[:48]
+        label = label or "ROM"
+        final = target / f"{label} [IA {digest}]"
+
+        def complete(path: Path) -> bool:
+            if not path.is_dir():
+                return False
+            for member in files:
+                saved = path.joinpath(*PurePosixPath(member["name"]).parts)
+                if not saved.is_file():
+                    return False
+                if member["size"] and saved.stat().st_size != member["size"]:
+                    return False
+            return True
+
+        if complete(final):
+            return final
+        suffix = 2
+        while final.exists():
+            final = target / f"{label} [IA {digest}-{suffix}]"
+            if complete(final):
+                return final
+            suffix += 1
+
+        stage = target / f".{final.name}.{secrets.token_hex(6)}.partial"
+        stage.mkdir(parents=True, exist_ok=False)
+        try:
+            for member in files:
+                source = archive_download_url(identifier, member["name"])
+                allowed, why = self._policy.allowed(source)
+                if not allowed:
+                    raise RuntimeError(f"Internet Archive download refused: {why}")
+                host = SitePolicy._host(source)
+                if host in self._forbidden:
+                    raise RuntimeError("Internet Archive answered 403 earlier in this session")
+                saved = self._direct_fetch(source, stage)
+                destination = stage.joinpath(*PurePosixPath(member["name"]).parts)
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                if saved != destination:
+                    if destination.exists():
+                        raise RuntimeError("duplicate file in Internet Archive download set")
+                    saved.replace(destination)
+                if member["size"] and destination.stat().st_size != member["size"]:
+                    raise RuntimeError(
+                        f"Internet Archive file size mismatch for {member['name']}")
+            stage.replace(final)
+            return final
+        except Exception:
+            shutil.rmtree(stage, ignore_errors=True)
+            raise
 
     def _direct_fetch(self, url: str, target: Path) -> Path:
         """A plain GET, streamed to disk, with the manners turned on.

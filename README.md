@@ -27,7 +27,7 @@ switch back.
 
 Support ROMarrNG on [Ko-fi](https://ko-fi.com/snapetech).
 
-For local MCP access, see the [SnapeTech MCP integration guide](docs/integrations/snapetech-mcp.md).
+For local MCP access, see the [SnapeTech MCP integration guide](docs/integrations/snapetech-mcp.md). For Internet Archive search setup, see the [Internet Archive integration guide](docs/integrations/internet-archive.md).
 
 
 On Unraid, the [ROMarrNG fork template](packaging/unraid/romarrng.xml) installs

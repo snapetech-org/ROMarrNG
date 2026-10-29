@@ -4061,7 +4061,9 @@ RENDER.libraries=async()=>{
 };
 
 RENDER.indexers=async()=>{
-  const d=await j('/api/v1/indexer');
+  const [d,types]=await Promise.all([
+    j('/api/v1/indexer'), loadSchema('indexer')
+  ]);
   const hasEnabledSource=(d.items||[]).some(i=>i.enable)
     ||(d.proxied||[]).some(i=>i.enable);
   $('#page').innerHTML=`<div class="card">
@@ -4069,13 +4071,14 @@ RENDER.indexers=async()=>{
       <h3 style="margin:0">Indexers</h3>
       <button class="btn" id="i-add" style="margin-inline-start:auto">Add</button>
     </div>
-    <p class="help">Add a Newznab or Torznab indexer directly, or point at
-      Prowlarr and use everything it already has configured.</p>
+    <p class="help">Add a Newznab or Torznab indexer, search public Internet
+      Archive software records through Direct HTTP, or connect Prowlarr.
+      Internet Archive grabs need the Direct HTTP client configured.</p>
     ${d.items.length&&!hasEnabledSource?`<p class="panel-note panel-warn">${interfaceMarkup('ui.release-search-is-unavailable-until.6240f4b5a8')}</p>`:''}
     ${d.items.length?`<table><thead><tr><th>Name</th><th>Type</th><th>URL</th>
       <th>Enabled</th><th></th></tr></thead><tbody>
       ${d.items.map((it,i)=>`<tr><td>${esc(it.name||'—')}</td>
-        <td><span class="pill">${esc(it.type)}</span></td>
+        <td><span class="pill">${esc((types[it.type]||{}).label||it.type)}</span></td>
         <td style="color:var(--dim)">${esc(it.url||'—')}</td>
         <td><span class="dot ${it.enable?'up':'down'}"></span>${it.enable?'yes':'no'}</td>
         <td><div class="rowact"><button data-iedit="${i}">Edit</button></div></td>

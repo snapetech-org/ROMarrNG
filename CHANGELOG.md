@@ -1,5 +1,13 @@
 # Changelog
 
+## [Unreleased]
+
+### User-facing changes
+
+#### Added
+
+- **Indexers:** Internet Archive can now be added from Settings → Indexers. Its public software search results use the existing Direct HTTP grab and import flow, including multi-file disc sets.
+
 ## [0.14.12] - 2026-10-24
 
 ### User-facing changes

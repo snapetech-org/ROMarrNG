@@ -26,6 +26,7 @@ from urllib.parse import quote, quote_plus, urlencode
 import requests
 
 from .selection import CONSOLE_CATEGORIES, PC_GAME_CATEGORIES, Release
+from .internetarchive import InternetArchiveIndexer
 
 log = logging.getLogger(__name__)
 
@@ -722,19 +723,24 @@ def build_indexer(cfg: dict):
     the service holds separately because it aggregates many indexers rather
     than being one. Searching it here as well would search it twice.
 
-    Everything else is dispatched on the type's declared driver rather than on
-    its name, which is what lets Jackett, NZBHydra2, Cardigann and Bitmagnet be
-    four rows in a table instead of four clients: they are all Torznab or
-    Newznab underneath, and the differences that matter -- default port, URL
-    shape, whether a key is required -- are configuration, not code.
+    Torznab-compatible products are dispatched on their declared driver, so
+    Jackett, NZBHydra2, Cardigann and Bitmagnet share one implementation.
+    Sources with their own protocol, such as Internet Archive, have a dedicated
+    driver and still return the same Release shape.
     """
     kind = str(cfg.get("type") or "").lower()
     driver = driver_for(kind)
-    if driver in ("", "prowlarr") or not cfg.get("url"):
+    if driver in ("", "prowlarr"):
         return None
-    spec = INDEXER_TYPES[kind]
+    spec = INDEXER_TYPES.get(kind)
+    if spec is None:
+        return None
     name = cfg.get("name") or spec["label"]
 
+    if driver == "internetarchive":
+        return InternetArchiveIndexer(name=name)
+    if not cfg.get("url"):
+        return None
     if driver == "rss":
         return TorrentRss(TorrentRssConfig(
             url=cfg["url"], name=name,
@@ -842,6 +848,17 @@ INDEXER_TYPES = {
             INDEXER_FIELD("enable", "Enable", "bool", True),
             INDEXER_FIELD("url", "URL", default="http://localhost:9696"),
             INDEXER_FIELD("api_key", "API Key", "secret"),
+        ],
+    },
+    "internetarchive": {
+        "label": "Internet Archive",
+        "protocol": "direct",
+        "driver": "internetarchive",
+        "help": "Searches public software-item metadata and sends eligible "
+                "files through Direct HTTP. No URL or API key is needed.",
+        "fields": [
+            INDEXER_FIELD("name", "Name", default="Internet Archive"),
+            INDEXER_FIELD("enable", "Enable", "bool", True),
         ],
     },
     # -- aggregators and proxies, all Torznab/Newznab underneath -------------
