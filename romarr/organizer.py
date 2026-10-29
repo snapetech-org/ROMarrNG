@@ -1026,26 +1026,30 @@ class LibraryOrganizer:
                         rating_value = max(0.0, min(1.0, float(rating_raw or 0)))
                     except ValueError:
                         rating_value = 0.0
-                    metadata = {
-                        "summary": summary,
-                        "released": released,
-                        "genres": genres,
-                        "source": "ES-DE local",
-                        "provider_id": "",
-                        "matched_by": "existing_gamelist_path",
-                    }
+                    metadata = {}
+                    if summary:
+                        metadata["summary"] = summary
+                    if released:
+                        metadata["released"] = released
+                    if genres:
+                        metadata["genres"] = genres
                     if rating_raw:
                         # ES-DE rating is normalized to 0..1; ROMarr's common
                         # metadata scale is 0..10.
                         metadata["rating"] = round(rating_value * 10.0, 3)
-                    metadata = {key: item for key, item in metadata.items()
-                                if item not in ("", [], None)}
+                    image_source = self._esde_asset_path(
+                        value(node, "image", 4096), gamelist.parent,
+                        root, metadata_root)
+                    if metadata or image_source:
+                        metadata.update({
+                            "source": "ES-DE local",
+                            "provider_id": "",
+                            "matched_by": "existing_gamelist_path",
+                        })
                     entry = {
                         "title": name,
                         "metadata": metadata,
-                        "image_source": self._esde_asset_path(
-                            value(node, "image", 4096), gamelist.parent,
-                            root, metadata_root),
+                        "image_source": image_source,
                         "source_path": str(gamelist),
                     }
                     # If duplicate gamelists describe one ROM, keep the entry
@@ -1333,7 +1337,7 @@ class LibraryOrganizer:
                     metadata = {**cached_metadata, **local_metadata}
                     local_cover = self._cache_local_artwork(
                         local.get("image_source"), slug, meta_root)
-                    if local_has_details:
+                    if local_title or local_has_details:
                         totals["local_metadata_imported"] += 1
                     lookup_attempted = bool(cached.get("lookup_attempted")) and not force
                     lookup_deferred = False
