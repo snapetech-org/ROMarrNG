@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import logging
 import os
+import re
 import shutil
 import subprocess
 import tempfile
@@ -100,6 +101,20 @@ class ImportResult:
     #: when none is configured -- metadata is an enhancement and its
     #: absence must never look like a failed import.
     info: dict = field(default_factory=dict)
+
+
+def _canonical_component(value: str) -> str:
+    """A DAT title as a portable filename component, never as a path."""
+    name = re.sub(r'[<>:"/\\|?*\x00-\x1f\x7f]', " ", str(value or ""))
+    name = re.sub(r"\s+", " ", name).strip(" .")[:180].rstrip(" .")
+    while name and len(name.encode("utf-8")) > 180:
+        name = name[:-1].rstrip(" .")
+    if name.casefold() in {"", ".", ".."}:
+        return ""
+    if re.match(r"^(?:CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(?:\..*)?$",
+                name, re.I):
+        name = "_" + name
+    return name
 
 
 def is_safe_name(name: str, root: Path) -> bool:
@@ -410,7 +425,11 @@ def platform_dir(library_root: Path, platform: "Platform | str", *,
 def import_rom(download: Path, platform: Platform, library_root: Path, *,
                overwrite: bool = False, dats=None,
                require_verified: bool = False,
-               layout: str = "flat", translation: bool = False) -> list[ImportResult]:
+               layout: str = "flat", translation: bool = False,
+               rename: bool = False, switch_index=None,
+               route_switch_catalog: bool = False,
+               switch_updates_dir: str = "Updates",
+               switch_dlc_dir: str = "DLC") -> list[ImportResult]:
     """Place every ROM from a finished download into the library.
 
     A cartridge zip may hold several games (a 3-in-1 collection, a bundle)
@@ -455,6 +474,27 @@ def import_rom(download: Path, platform: Platform, library_root: Path, *,
         target_dir = platform_dir(library_root, platform,
                                    layout=layout, translation=translation)
 
+        if platform.slug == "switch" and route_switch_catalog:
+            # TitleDB classifies an ID read from the filename; it does not
+            # verify the package header or contents. This routing stays behind
+            # an explicit setting and never changes the reported DAT verdict.
+            try:
+                from .titled import validate_switch_rom
+                switch = validate_switch_rom(
+                    Path(chosen.primary).name, index=switch_index)
+                title = switch.get("title")
+                kind = str(getattr(title, "kind", "") or "")
+                subdir = (switch_updates_dir if kind == "update" else
+                          switch_dlc_dir if kind == "dlc" else "")
+                subdir = str(subdir or "").strip()
+                if (switch.get("status") == "verified"
+                        and kind in ("update", "dlc") and subdir
+                        and _canonical_component(subdir) == subdir
+                        and "/" not in subdir and "\\" not in subdir):
+                    target_dir = target_dir / subdir
+            except Exception as exc:
+                log.debug("Switch content routing skipped (%s)", type(exc).__name__)
+
         if chosen.preserve_paths:
             results.append(_import_directory_set(
                 source, chosen, download, target_dir, library_root,
@@ -463,7 +503,26 @@ def import_rom(download: Path, platform: Platform, library_root: Path, *,
 
         if not chosen.is_multi_file:
             target_dir.mkdir(parents=True, exist_ok=True)
-            destination = target_dir / Path(chosen.primary).name
+            original_name = Path(chosen.primary).name
+            destination_name = original_name
+            if rename and verdict.status == VERIFIED and verdict.game:
+                component = _canonical_component(verdict.game)
+                if component:
+                    destination_name = component + Path(original_name).suffix
+            destination = target_dir / destination_name
+            if destination_name != original_name and target_dir.is_dir():
+                try:
+                    collision = next((p for p in target_dir.iterdir()
+                                      if p.name.casefold() == destination.name.casefold()
+                                      and p.name != original_name), None)
+                except OSError:
+                    collision = None
+                if collision is not None and collision != destination:
+                    results.append(ImportResult(
+                        False, collision,
+                        "canonical DAT name already exists; refusing to overwrite it",
+                        verification=verdict))
+                    continue
             if destination.exists() and not overwrite:
                 results.append(
                     ImportResult(False, destination, "already in the library"))

@@ -655,7 +655,8 @@ def _theme_control_html() -> str:
 
 # The nav, in *arr order. `count` names a stat the badge reads.
 NAV = [
-    ("Library",  [("library", "Games", "games"), ("add", "Add New", None),
+    ("Library",  [("library", "Games", "games"),
+                  ("organize", "Identify & Organize", None), ("add", "Add New", None),
                   ("discover", "Discover", None), ("patches", "Patches", None),
                   ("search", "Interactive Search", None)]),
     ("Wanted",   [("missing", "Missing", "missing"), ("lists", "Lists", None),
@@ -1201,6 +1202,7 @@ function go(page){
     status:'System Status',platforms:'Platforms',tasks:'Tasks',logs:'Logs',
     blocklist:'Blocklist',connections:'Connections',metadata:'Metadata',
     calendar:'Release Calendar',manualimport:'Manual Import',
+    organize:'Identify & Organize',
     collections:'Collections \u2014 full sets and 1G1R',
     getstarted:'Get Started',
     hub:'ROM Hub — Plugins'};
@@ -3430,8 +3432,10 @@ const pathMappingRow=m=>{
 };
 const pathMappingRows=m=>(Array.isArray(m)&&m.length?m:[{}]).map(pathMappingRow).join('');
 RENDER.media=()=>settingsPage('Media Management',
-  'Where imported ROMs are filed. This container path must be the same path your library server scans. Completed-download paths are reported by the client per item; compare that exact path before import and add a remote path mapping below when ROMarr sees it somewhere else.',
+  'Where imported ROMs and the shared metadata catalog live. The ROM path must be the path your library server scans. Completed-download paths are reported by the client per item; compare that exact path before import and add a remote path mapping below when ROMarr sees it somewhere else.',
   fld('library_path','ROM library root',SETTINGS.library_path)
+  +fld('metadata_path','Shared metadata root',SETTINGS.metadata_path||'')
+  +\`<div class="help" style="margin:-6px 0 14px">Mount this folder at the same relative location on your emulation machines. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another metadata lookup. Choose a folder outside the ROM library root.</div>\`
   +fld('dat_path','DAT directory',SETTINGS.dat_path||'')
   +`<div class="field"><label>Remote path mappings</label>
      <div style="color:var(--dim);font-size:11.5px;margin:4px 0 8px">
@@ -3448,6 +3452,10 @@ RENDER.media=()=>settingsPage('Media Management',
      +'&lt;root&gt;/&lt;platform&gt;/&lt;rom&gt;; Structure B adds a roms/ level. '
      +'Per-library overrides live on the Libraries page.')
   +chk('rename_on_import','Rename on import',SETTINGS.rename_on_import)
+  +chk('switch_auto_route','Route Switch updates and DLC by TitleDB filename ID',SETTINGS.switch_auto_route)
+  +\`<div class="help" style="margin:-6px 0 12px">Switch IDs and version numbers come from the filename and TitleDB. They classify a likely base game, update or DLC; they do not verify the package bytes. When enabled, only TitleDB identified updates and DLC are routed to the folders below.</div>\`
+  +fld('switch_updates_dir','Switch updates folder',SETTINGS.switch_updates_dir||'Updates')
+  +fld('switch_dlc_dir','Switch DLC folder',SETTINGS.switch_dlc_dir||'DLC')
   +chk('overwrite_existing','Overwrite an existing file',SETTINGS.overwrite_existing)
   +chk('rescan_after_import','Tell your library server to rescan after an import',SETTINGS.rescan_after_import)
   +sel('translation_policy','Fan translations in 1G1R sets',
@@ -4571,6 +4579,7 @@ RENDER.getstarted=async()=>{
     +'<div class="grid">'
     +'<a class="tile" href="#platforms" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Choose a system or era</div><div class="pf">Browse supported platforms, see how they play, and open the matching catalog.</div></a>'
     +'<a class="tile" href="#manualimport" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">I already have ROMs</div><div class="pf">Import a folder you own and let ROMarr identify and file what is there.</div></a>'
+    +'<a class="tile" href="#organize" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Organize a library you already have</div><div class="pf">Match DATs, cache shared metadata and artwork, and preview safe renames.</div></a>'
     +'<a class="tile" href="#lists" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Build a request list</div><div class="pf">Browse catalog titles or connect an import list. Requests use your configured sources and client.</div></a>'
     +'<a class="tile" href="#collections" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Work toward a complete set</div><div class="pf">Load a DAT and see verified titles and collection progress.</div></a>'
     +'</div>'
@@ -4626,6 +4635,7 @@ RENDER.getstarted=async()=>{
     +'<div class="card" style="margin-top:16px"><h3>Next</h3>'
     +'<p class="help">'
     +'<a href="#add">'+interfaceMarkup('Request a game')+'</a> '+interfaceMarkup('to watch the whole chain run once, or')+' '
+    +'<a href="#organize">'+interfaceMarkup('Identify & Organize')+'</a> '+interfaceMarkup('to build a shared inventory from an existing library, or')+' '
     +'<a href="#manualimport">'+interfaceMarkup('Manual Import')+'</a> '+interfaceMarkup('to adopt ROMs you already have. If you want a whole system at once,')+' '
     +'<a href="#collections">'+interfaceMarkup('Collections')+'</a> '
     +interfaceMarkup('compares a DAT against your shelf and requests only what is missing.')
@@ -4827,6 +4837,213 @@ RENDER.collections=async()=>{
       drawBatches();
     };
   };
+};
+
+RENDER.organize=async()=>{
+  const p=$('#page');
+  const token=(window._organizeViewToken||0)+1;
+  window._organizeViewToken=token;
+  const limit=80;
+  let offset=0;
+  let reviewOnly=false;
+  let currentPlan=null;
+  const platformOptions='<option value="">All platforms</option>'
+    +PLATFORMS.map(x=>'<option value="'+esc(x.slug)+'">'+esc(x.name)+'</option>').join('');
+  p.innerHTML=
+    '<div class="card"><div class="row" style="align-items:flex-start;gap:12px">'
+    +'<div style="flex:1"><h3>Identify &amp; Organize</h3>'
+    +'<p class="help">Build a portable inventory, match exact DAT dumps, cache provider metadata and artwork, and review safe name changes. Scanning is read only. ROMarr changes files only after you preview and apply a plan.</p></div>'
+    +'<a class="btn ghost" href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">Requests in SeerrNG ↗</a></div>'
+    +'<p class="help" style="margin:0">Use <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a> for the shared household request queue; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a> to connect the services.</p>'
+    +'<div class="st" style="margin-top:12px">'
+    +'<div><b>ROM root</b><span lang="und" dir="auto">'+esc(SETTINGS.library_path||'not configured')+'</span></div>'
+    +'<div><b>Shared metadata</b><span lang="und" dir="auto">'+esc(SETTINGS.metadata_path||'not configured')+'</span></div></div>'
+    +(!SETTINGS.metadata_path
+      ?'<div class="panel-note panel-warn" style="margin-top:12px">Set a shared metadata root in <a href="#media">Media Management</a>. Mount it at the same relative location on the machines that share this library.</div>'
+      :'')
+    +'<p class="help" style="margin:12px 0 8px">Switch title IDs and versions are read from filenames and TitleDB. They help group base games, updates and DLC, but do not verify the package bytes. Exact DAT checksums or a manual confirmation are required before ROMarr offers a rename.</p>'
+    +'<div class="row" style="flex-wrap:wrap;gap:8px;align-items:center">'
+    +'<select id="org-platform" aria-label="Platform">'+platformOptions+'</select>'
+    +'<label class="help" style="margin:0"><input type="checkbox" id="org-review"> Needs review</label>'
+    +'<button class="btn" id="org-scan" '+(!SETTINGS.metadata_path?'disabled':'')+'>Scan library</button>'
+    +'<button class="btn ghost" id="org-refresh" '+(!SETTINGS.metadata_path?'disabled':'')+'>Refresh metadata</button>'
+    +'<button class="btn ghost" id="org-plan" '+(!SETTINGS.metadata_path?'disabled':'')+'>Preview safe renames</button>'
+    +'<button class="btn ghost" id="org-undo" '+(!SETTINGS.metadata_path?'disabled':'')+'>Undo last rename</button>'
+    +'<button class="btn ghost" id="org-esde" '+(!SETTINGS.metadata_path?'disabled':'')+'>Publish ES-DE gamelist</button></div>'
+    +'<p class="help" style="margin:8px 0 0">Provider lookups are capped at 200 per scan to protect catalog services. Scan again to continue a large library; Refresh metadata revisits cached matches.</p></div>'
+    +'<div id="org-message"></div><div id="org-status"></div><div id="org-plan-result"></div>'
+    +'<div class="card"><div class="row" style="align-items:center">'
+    +'<h3 style="margin:0;flex:1">Library inventory</h3><span id="org-page-label" class="help" style="margin:0"></span></div>'
+    +'<div id="org-items" style="margin-top:12px"><div class="empty">Loading inventory…</div></div>'
+    +'<div class="row" style="justify-content:flex-end;gap:8px;margin-top:12px">'
+    +'<button class="btn ghost" id="org-prev" disabled>Previous</button><button class="btn ghost" id="org-next" disabled>Next</button></div></div>';
+  applyInterfaceLanguage();
+
+  const message=(text,bad)=>{
+    const box=$('#org-message');
+    if(!box)return;
+    box.innerHTML=text?'<div class="panel-note '+(bad?'panel-warn':'')+'" style="margin:12px 0">'+esc(text)+'</div>':'';
+  };
+  const platform=()=>($('#org-platform')||{}).value||'';
+  const loadInventory=async()=>{
+    if(token!==window._organizeViewToken||location.hash!=='#organize')return null;
+    const query=new URLSearchParams({limit:String(limit),offset:String(offset)});
+    if(platform())query.set('platform',platform());
+    if(reviewOnly)query.set('review','1');
+    const [status,data]=await Promise.all([
+      j('/api/v1/organizer/status').catch(()=>({state:'unavailable'})),
+      j('/api/v1/organizer/items?'+query.toString()).catch(()=>({items:[],total:0,error:'Could not load the inventory.'}))
+    ]);
+    if(token!==window._organizeViewToken||location.hash!=='#organize')return null;
+    const stateLabel={idle:'Ready to scan',scanning:'Scanning',complete:'Scan complete',partial:'Scan reached its safety limit',failed:'Scan failed',unavailable:'Status unavailable'}[status.state]||status.state||'Unknown';
+    $('#org-status').innerHTML='<div class="card"><div class="row" style="align-items:center">'
+      +'<b>'+esc(stateLabel)+'</b><span class="help" style="margin:0">'+fmt(status.processed||0)+' / '+fmt(status.total||0)+' files checked</span>'
+      +'<span class="help" style="margin:0">DAT verified '+fmt(status.verified||0)+'</span>'
+      +'<span class="help" style="margin:0">TitleDB catalogued '+fmt(status.catalogued||0)+'</span>'
+      +'<span class="help" style="margin:0">Suggestions '+fmt(status.suggested||0)+'</span>'
+      +'<span class="help" style="margin:0">Unmatched '+fmt(status.unmatched||0)+'</span>'
+      +'<span class="help" style="margin:0">Switch versions behind catalog '+fmt(status.switch_outdated||0)+'</span></div>'
+      +(status.truncated?'<p class="help" style="margin:8px 0 0">This scan was bounded at 50,000 entries. Filter to a platform and scan again to continue.</p>':'')
+      +(status.error?'<p class="help" style="margin:8px 0 0;color:var(--warn)">'+esc(status.error)+'</p>':'')
+      +'</div>';
+    const items=data.items||[];
+    const start=data.total?offset+1:0;
+    const end=Math.min(data.total||0,offset+items.length);
+    $('#org-page-label').textContent=fmt(start)+'–'+fmt(end)+' of '+fmt(data.total||0);
+    $('#org-prev').disabled=offset<=0;
+    $('#org-next').disabled=offset+limit>=(data.total||0);
+    const target=$('#org-items');
+    if(data.error){
+      target.innerHTML='<div class="panel-note panel-warn">'+esc(data.error)+'</div>';
+    }else if(!items.length){
+      target.innerHTML='<div class="empty">No inventory entries yet. Scan a configured ROM library to begin.</div>';
+    }else{
+      const confidenceLabel={
+        dat_verified:'DAT checksum verified',
+        title_id_catalog:'TitleDB ID match · bytes unverified',
+        provider_suggestion:'Provider suggestion · review',
+        ambiguous_name:'Ambiguous title · review',
+        manual:'Manually confirmed',
+        filename_only:'Filename only · review',
+        multi_disc:'Likely multi-disc set · review'
+      };
+      target.innerHTML='<div style="overflow-x:auto"><table><thead><tr>'
+        +'<th>Game / evidence</th><th>ROM path</th><th>Switch family</th><th>Metadata</th><th></th>'
+        +'</tr></thead><tbody>'+items.map(row=>{
+          const sw=row.switch||{};
+          const metadata=row.metadata||{};
+          const ver=sw.file_version===null||sw.file_version===undefined?'':'v'+esc(sw.file_version)+' / latest '+esc(sw.latest_version||0);
+          const switchLine=sw.title_id
+            ?'<div lang="und" dir="ltr">'+esc(sw.kind||'title')+' · '+esc(sw.title_id)+'</div>'
+              +(sw.base_title?'<div>'+esc(sw.base_title)+'</div>':'')
+              +(ver?'<div class="help" style="margin:3px 0">'+ver+' · '+esc(sw.version_status||'unknown')+'</div>':'')
+            :'<span class="help">No TitleDB ID</span>';
+          const art=row.cover_path
+            ?'<img src="/api/v1/organizer/art?identity_id='+encodeURIComponent(row.identity_id||'')+'" alt="" loading="lazy" style="width:42px;height:58px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-inline-end:8px">'
+            :'';
+          const title=row.canonical_title||row.filename||'Untitled';
+          const canMap=row.confidence!=='dat_verified';
+          const discGroup=row.disc_group||{};
+          const pathCell=discGroup.id
+            ?'<span class="pill">Likely '+fmt(discGroup.disc_count||0)+'-disc set</span>'
+              +'<div class="help" style="margin:4px 0">'+(discGroup.members||[]).map(member=>
+                '<div lang="und" dir="auto">'+esc(member.relative_path||'')+'</div>').join('')+'</div>'
+            :'<span lang="und" dir="auto">'+esc(row.relative_path||'')+'</span>';
+          return '<tr data-identity="'+esc(row.identity_id||'')+'"><td>'+art+'<b>'+esc(title)+'</b>'
+            +'<div class="help" style="margin:4px 0">'+esc(confidenceLabel[row.confidence]||row.confidence||'Unknown')+'</div>'
+            +'<div class="help" style="margin:0">'+esc(row.match_details||'')+'</div>'
+            +(canMap?'<button type="button" class="btn ghost org-map" style="margin-top:7px">Confirm or edit title</button>':'')
+            +'</td><td>'+pathCell+'</td><td>'+switchLine+'</td>'
+            +'<td>'+esc(metadata.source||'')+(metadata.released?'<div>'+esc(metadata.released)+'</div>':'')
+            +(metadata.genres&&metadata.genres.length?'<div>'+esc(metadata.genres.join(', '))+'</div>':'')
+            +(metadata.summary?'<div class="help" style="margin:4px 0;max-width:360px">'+esc(String(metadata.summary).slice(0,220))+'</div>':'')
+            +(row.metadata_sidecar?'<div class="help" style="margin:4px 0" lang="und" dir="auto">'+esc(row.metadata_sidecar)+'</div>':'')
+            +'</td><td>'+(row.cover_path?'<span class="pill">Artwork cached</span>':'')+'</td></tr>';
+        }).join('')+'</tbody></table></div>';
+      target.querySelectorAll('.org-map').forEach(button=>button.onclick=async()=>{
+        const row=button.closest('tr');
+        const identity=row&&row.dataset.identity;
+        const item=items.find(x=>x.identity_id===identity);
+        const title=promptMessage('Canonical game title',{},item&&item.canonical_title||'');
+        if(title===null)return;
+        const result=await j('/api/v1/organizer/map',{method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({identity_id:identity,title:title,platform:platform()})})
+          .catch(()=>({error:'Could not save this mapping.'}));
+        if(result.error){message(result.error,true);return;}
+        message('Title mapping saved. This game is now eligible for a safe rename preview.',false);
+        await loadInventory();
+      });
+    }
+    if(status.state==='scanning'){
+      setTimeout(()=>{if(token===window._organizeViewToken&&location.hash==='#organize')loadInventory();},1300);
+    }
+    return status;
+  };
+
+  const startScan=async(force)=>{
+    offset=0;
+    currentPlan=null;
+    $('#org-plan-result').innerHTML='';
+    message(force?'Refreshing provider metadata…':'Starting a read-only library scan…',false);
+    const result=await j('/api/v1/organizer/scan',{method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({platform:platform(),force:!!force})})
+      .catch(()=>({error:'Could not start the library scan.'}));
+    if(result.error){message(result.error,true);return;}
+    await loadInventory();
+  };
+  $('#org-scan').onclick=()=>startScan(false);
+  $('#org-refresh').onclick=()=>startScan(true);
+  $('#org-platform').onchange=()=>{offset=0;currentPlan=null;$('#org-plan-result').innerHTML='';loadInventory();};
+  $('#org-review').onchange=event=>{reviewOnly=event.target.checked;offset=0;loadInventory();};
+  $('#org-prev').onclick=()=>{offset=Math.max(0,offset-limit);loadInventory();};
+  $('#org-next').onclick=()=>{offset+=limit;loadInventory();};
+  $('#org-plan').onclick=async()=>{
+    const query=platform()?'?platform='+encodeURIComponent(platform()):'';
+    const plan=await j('/api/v1/organizer/rename-plan'+query)
+      .catch(()=>({error:'Could not create a rename preview.'}));
+    currentPlan=plan;
+    if(plan.error){message(plan.error,true);$('#org-plan-result').innerHTML='';return;}
+    const rows=(plan.operations||[]).map(op=>'<tr><td lang="und" dir="auto">'+esc(op.from)+'</td><td lang="und" dir="auto">'+esc(op.to)+'</td><td>'+esc(op.reason)+'</td></tr>').join('');
+    const blocked=(plan.blocked||[]).map(op=>'<tr><td>'+esc(op.identity_id||'')+'</td><td>'+esc(op.reason||'')+'</td></tr>').join('');
+    $('#org-plan-result').innerHTML='<div class="card"><h3>Rename preview</h3><p class="help">'
+      +fmt((plan.operations||[]).length)+' file(s) can be renamed. '+fmt((plan.blocked||[]).length)+' were left alone.</p>'
+      +(rows?'<div style="overflow-x:auto"><table><thead><tr><th>Current path</th><th>Proposed path</th><th>Evidence</th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<p class="empty">No safe renames are ready.</p>')
+      +(blocked?'<details style="margin-top:10px"><summary>See blocked items</summary><div style="overflow-x:auto"><table><thead><tr><th>Game</th><th>Reason</th></tr></thead><tbody>'+blocked+'</tbody></table></div></details>':'')
+      +(rows?'<button class="btn" id="org-apply" style="margin-top:12px">Apply '+fmt((plan.operations||[]).length)+' renames</button>':'')+'</div>';
+    const apply=$('#org-apply');
+    if(apply)apply.onclick=async()=>{
+      if(!currentPlan||!confirmMessage('Apply {count} safe file renames?',{count:(currentPlan.operations||[]).length}))return;
+      const result=await j('/api/v1/organizer/rename/apply',{method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({plan_id:currentPlan.plan_id,platform:platform()})})
+        .catch(()=>({error:'Could not apply the rename plan.'}));
+      if(result.error){message(result.error,true);return;}
+      message(result.message||'Rename plan applied.',false);
+      currentPlan=null;
+      await loadInventory();
+    };
+  };
+  $('#org-undo').onclick=async()=>{
+    if(!confirmMessage('Undo the last ROMarr rename batch? Files changed since then will be left alone.'))return;
+    const result=await j('/api/v1/organizer/rename/undo',{method:'POST',
+      headers:{'Content-Type':'application/json'},body:'{}'})
+      .catch(()=>({error:'Could not undo the last rename batch.'}));
+    if(result.error){message(result.error,true);return;}
+    message('Undid '+fmt(result.undone||0)+' rename(s).',false);
+    await loadInventory();
+  };
+  $('#org-esde').onclick=async()=>{
+    if(!platform()){message('Choose one platform before publishing its ES-DE gamelist.',true);return;}
+    const result=await j('/api/v1/organizer/publish/esde',{method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({platform:platform()})})
+      .catch(()=>({error:'Could not publish the ES-DE gamelist.'}));
+    if(result.error){message(result.error,true);return;}
+    message(result.message||('Published '+fmt(result.games||0)+' ES-DE entries.'),!result.written);
+  };
+  await loadInventory();
 };
 
 RENDER.manualimport=async()=>{

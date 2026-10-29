@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 import xml.etree.ElementTree as ET
 from xml.dom import minidom
 
@@ -173,8 +174,20 @@ def to_launchbox(rows: list[dict]) -> str:
         ET.SubElement(game, "ID").text = str(row.get("id") or "")
         if row.get("region"):
             ET.SubElement(game, "Region").text = str(row["region"])
-        if row.get("notes"):
-            ET.SubElement(game, "Notes").text = str(row["notes"])
+        notes = str(row.get("notes") or "")
+        details = []
+        if row.get("desc"):
+            details.append(str(row["desc"]))
+        if row.get("released"):
+            details.append(f"Released: {row['released']}")
+        if row.get("genres"):
+            details.append("Genres: " + ", ".join(map(str, row["genres"])))
+        if row.get("matched_by"):
+            details.append("ROMarr match: " + str(row["matched_by"]))
+        if details:
+            notes = "\n".join(part for part in (notes, *details) if part)
+        if notes:
+            ET.SubElement(game, "Notes").text = notes
         # ROMarr knows something LaunchBox has no field for: whether the file
         # verified against a DAT. It goes in Notes rather than being dropped,
         # because it is the most useful thing in the row.
@@ -210,6 +223,24 @@ def to_gamelist(rows: list[dict]) -> str:
             ET.SubElement(game, "desc").text = str(row["desc"])
         if row.get("region"):
             ET.SubElement(game, "region").text = str(row["region"])
+        if row.get("cover_path"):
+            ET.SubElement(game, "image").text = str(row["cover_path"])
+        if row.get("genres"):
+            ET.SubElement(game, "genre").text = ", ".join(map(str, row["genres"]))
+        if row.get("released"):
+            released = str(row["released"])
+            match = re.fullmatch(r"(\d{4})-(\d{2})-(\d{2}).*", released)
+            if match:
+                ET.SubElement(game, "releasedate").text = (
+                    f"{match.group(1)}{match.group(2)}{match.group(3)}T000000")
+        try:
+            rating = float(row.get("rating") or 0)
+            source = str(row.get("metadata_source") or "").lower()
+            maximum = 5.0 if source == "rawg" else 10.0
+            if rating > 0:
+                ET.SubElement(game, "rating").text = f"{max(0.0, min(1.0, rating / maximum)):.3f}"
+        except (TypeError, ValueError):
+            pass
     return _pretty(root)
 
 
@@ -230,6 +261,12 @@ def to_playnite(rows: list[dict]) -> str:
                 "romPath": str(row.get("path") or ""),
                 "id": str(row.get("id") or ""),
                 "verified": str(row.get("verified") or ""),
+                "description": str(row.get("desc") or ""),
+                "releaseDate": str(row.get("released") or ""),
+                "genres": [str(value) for value in (row.get("genres") or [])],
+                "rating": float(row.get("rating") or 0),
+                "coverPath": str(row.get("cover_path") or ""),
+                "matchedBy": str(row.get("matched_by") or ""),
             }
             for row in rows if row.get("path")
         ],

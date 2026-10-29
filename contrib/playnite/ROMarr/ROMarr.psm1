@@ -110,8 +110,26 @@ function Invoke-ROMarrSync {
         $game.GameActions = [System.Collections.ObjectModel.ObservableCollection[Playnite.SDK.Models.GameAction]]::new()
         $game.GameActions.Add($action)
 
+        $notes = [System.Collections.Generic.List[string]]::new()
         if ($entry.verified -eq "verified") {
-            $game.Notes = "ROMarr: verified against DAT"
+            $notes.Add("ROMarr: verified against DAT")
+        }
+        if (-not [string]::IsNullOrWhiteSpace([string]$entry.description)) {
+            $description = [string]$entry.description
+            if ($description.Length -gt 4000) { $description = $description.Substring(0, 4000) }
+            $notes.Add("Description: $description")
+        }
+        if (-not [string]::IsNullOrWhiteSpace([string]$entry.releaseDate)) {
+            $notes.Add("Released: $($entry.releaseDate)")
+        }
+        if ($entry.genres) {
+            $notes.Add("Genres: $(@($entry.genres) -join ', ')")
+        }
+        if (-not [string]::IsNullOrWhiteSpace([string]$entry.matchedBy)) {
+            $notes.Add("ROMarr match: $($entry.matchedBy)")
+        }
+        if ($notes.Count) {
+            $game.Notes = [string]::Join([Environment]::NewLine, $notes)
         }
 
         $PlayniteApi.Database.Games.Add($game)

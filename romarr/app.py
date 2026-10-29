@@ -70,6 +70,7 @@ from .library import import_rom, map_remote_path, platform_dir
 from .game_assets import bundle_range, directory_asset, stream_directory
 from .collections import is_translation
 from .library import TRANSLATION_SUBDIR
+from .organizer import LibraryOrganizer
 from .patches import PatchCatalog, PatchError, prepare_patched_file, public_project
 from .auth import DISABLED as AUTH_DISABLED
 from .auth import MIN_PASSWORD, SESSION_COOKIE, Auth, new_api_key, parse_cookies
@@ -1063,6 +1064,11 @@ class ROMarr:
             # the path ROMs are actually filed into rather than a blank field.
             self.store.update_settings({"library_path": str(self.library)})
 
+        saved_metadata_path = str(self.store.settings.get("metadata_path") or "")
+        environment_metadata_path = str(e.get("ROMARR_METADATA_PATH") or "")
+        if not saved_metadata_path and environment_metadata_path:
+            self.store.update_settings({"metadata_path": environment_metadata_path})
+
         # Shown on the General page so an operator can see what is wired up
         # without opening a shell. URLs only -- never a credential.
         self.store.settings["_prowlarr_url"] = e.get("PROWLARR_URL", "")
@@ -1250,6 +1256,7 @@ class ROMarr:
         self._seed_from_env(e)
         self.reload_clients()
         self.reload_libraries()
+        self.organizer = LibraryOrganizer(self)
 
         # The library count is refreshed off the request path entirely.
         # `None` means "not known yet", which the UI shows as a dash -- an
@@ -3123,11 +3130,17 @@ class ROMarr:
         target_cfg, target_lib = target
         label = target_cfg.get("name") or getattr(target_lib, "name", "library")
 
-        outcomes = import_rom(source, platform, self.library_root(target_cfg),
-                              dats=self.dats,
-                              require_verified=False,
-                              layout=self.library_layout(target_cfg),
-                              translation=is_translation(source.name))
+        route_switch = bool(self.store.settings.get("switch_auto_route"))
+        outcomes = import_rom(
+            source, platform, self.library_root(target_cfg),
+            dats=self.dats, require_verified=False,
+            layout=self.library_layout(target_cfg),
+            translation=is_translation(source.name),
+            rename=bool(self.store.settings.get("rename_on_import", True)),
+            switch_index=self.ensure_titled() if route_switch and platform.slug == "switch" else None,
+            route_switch_catalog=route_switch,
+            switch_updates_dir=str(self.store.settings.get("switch_updates_dir") or "Updates"),
+            switch_dlc_dir=str(self.store.settings.get("switch_dlc_dir") or "DLC"))
 
         imported, refused = [], []
         for outcome in outcomes:
@@ -3433,17 +3446,17 @@ class ROMarr:
             "genres": list(info.genres),
             "cover_url": info.cover_url,
             "source": info.source,
+            "provider_id": info.provider_id,
             "matched_by": info.matched_by,
         }
 
     def frontend_rows(self, platform: str = "") -> list[dict]:
-        """The library flattened into the shape every frontend export wants.
-
-        One shape for all three, because the differences between LaunchBox,
-        Playnite and EmulationStation are in how the fields are *written*, not
-        in which fields exist -- and three near-identical row builders would
-        drift apart the first time one of them gained a column.
-        """
+        """Return shared local metadata rows when scanned, then the live backend catalog."""
+        organizer = getattr(self, "organizer", None)
+        if organizer is not None:
+            local_rows = organizer.frontend_rows(platform)
+            if local_rows:
+                return local_rows
         items = (self.library_view() or {}).get("items", [])
         wanted = str(platform or "").strip().lower()
         rows = []
@@ -5295,10 +5308,17 @@ class ROMarr:
             target_cfg, target_lib = target
             label = target_cfg.get("name") or getattr(target_lib, "name", "library")
 
+            route_switch = bool(self.store.settings.get("switch_auto_route"))
             outcomes = import_rom(
                 path, platform, self.library_root(target_cfg),
+                dats=self.dats, require_verified=False,
                 layout=self.library_layout(target_cfg),
-                translation=is_translation(queue_item.release if queue_item else name))
+                translation=is_translation(queue_item.release if queue_item else name),
+                rename=bool(self.store.settings.get("rename_on_import", True)),
+                switch_index=self.ensure_titled() if route_switch and platform.slug == "switch" else None,
+                route_switch_catalog=route_switch,
+                switch_updates_dir=str(self.store.settings.get("switch_updates_dir") or "Updates"),
+                switch_dlc_dir=str(self.store.settings.get("switch_dlc_dir") or "DLC"))
             if not outcomes:
                 self.store.record(Event(kind="failed", game=name,
                                         platform=platform.slug,
@@ -6426,6 +6446,34 @@ def make_handler(service: ROMarr):
             if route.path == "/api/v1/metadata/lookup":
                 return self._json(200, service.identify(
                     filename=query.get("filename", [""])[0]))
+            if route.path == "/api/v1/organizer/status":
+                return self._json(200, service.organizer.status())
+            if route.path == "/api/v1/organizer/items":
+                try:
+                    limit = int((query.get("limit") or ["100"])[0] or 100)
+                    offset = int((query.get("offset") or ["0"])[0] or 0)
+                except (TypeError, ValueError):
+                    return self._json(400, {"error": "limit and offset must be integers"})
+                result = service.organizer.records(
+                    platform=(query.get("platform") or [""])[0],
+                    review_only=(query.get("review") or ["0"])[0].lower() in ("1", "true"),
+                    group_discs=True,
+                    limit=limit, offset=offset)
+                return self._json(200, result)
+            if route.path == "/api/v1/organizer/rename-plan":
+                try:
+                    result = service.organizer.rename_plan(
+                        (query.get("platform") or [""])[0])
+                except (ValueError, OSError) as exc:
+                    return self._json(400, {"error": str(exc)})
+                return self._json(200, result)
+            if route.path == "/api/v1/organizer/art":
+                try:
+                    data, content_type = service.organizer.artwork(
+                        (query.get("identity_id") or [""])[0])
+                except (FileNotFoundError, ValueError, OSError):
+                    return self._json(404, {"error": "artwork not found"})
+                return self._send(200, data, content_type)
             if route.path == "/api/v1/frontend/formats":
                 return self._json(200, {"formats": [
                     {"name": name, "label": spec["label"],
@@ -6730,6 +6778,53 @@ def make_handler(service: ROMarr):
             body, body_error = self._read_json_body(route.path)
             if body_error is not None:
                 return body_error
+
+            if route.path == "/api/v1/organizer/scan":
+                if not isinstance(body, dict):
+                    return self._json(400, {"error": "expected a JSON object"})
+                try:
+                    result = service.organizer.start_scan(
+                        platform=str(body.get("platform") or ""),
+                        force=body.get("force") is True)
+                except (ValueError, OSError) as exc:
+                    return self._json(400, {"error": str(exc)})
+                return self._json(202, result)
+            if route.path == "/api/v1/organizer/map":
+                if (not isinstance(body, dict)
+                        or not isinstance(body.get("identity_id"), str)
+                        or not isinstance(body.get("title"), str)):
+                    return self._json(400, {"error": "identity_id and title are required"})
+                try:
+                    result = service.organizer.map_record(
+                        body["identity_id"], body["title"],
+                        platform=str(body.get("platform") or ""))
+                except (ValueError, OSError) as exc:
+                    return self._json(400, {"error": str(exc)})
+                return self._json(200, result)
+            if route.path == "/api/v1/organizer/rename/apply":
+                if not isinstance(body, dict):
+                    return self._json(400, {"error": "expected a JSON object"})
+                try:
+                    result = service.organizer.apply_rename_plan(
+                        str(body.get("plan_id") or ""),
+                        platform=str(body.get("platform") or ""))
+                except (ValueError, OSError) as exc:
+                    return self._json(409, {"error": str(exc)})
+                return self._json(200, result)
+            if route.path == "/api/v1/organizer/rename/undo":
+                try:
+                    return self._json(200, service.organizer.undo_last())
+                except (ValueError, OSError) as exc:
+                    return self._json(409, {"error": str(exc)})
+            if route.path == "/api/v1/organizer/publish/esde":
+                if not isinstance(body, dict):
+                    return self._json(400, {"error": "expected a JSON object"})
+                try:
+                    result = service.organizer.publish_esde(
+                        str(body.get("platform") or ""))
+                except (ValueError, OSError) as exc:
+                    return self._json(400, {"error": str(exc)})
+                return self._json(200, result)
 
             if route.path == "/api/v1/catalog/ownership":
                 candidates = body.get("games") if isinstance(body, dict) else None

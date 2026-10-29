@@ -53,6 +53,8 @@ class GameInfo:
     genres: tuple[str, ...] = ()
     cover_url: str = ""
     source: str = ""
+    #: Provider-scoped identity for reusing a catalog match across exports.
+    provider_id: str = ""
     #: How the lookup key was arrived at. Kept because "we matched a DAT name"
     #: and "we guessed from the filename" deserve different amounts of trust,
     #: and a UI that shows metadata without saying which is inviting somebody
@@ -168,6 +170,7 @@ def _rawg(cfg: dict, term: str) -> GameInfo:
                      if g.get("name")),
         cover_url=str(row.get("background_image") or ""),
         source="RAWG",
+        provider_id=str(row.get("id") or ""),
     )
 
 
@@ -631,11 +634,17 @@ def _igdb(cfg: dict, term: str) -> GameInfo:
     return GameInfo(
         title=str(row.get("name") or ""),
         summary=str(row.get("summary") or ""),
+        released=(
+            datetime.datetime.fromtimestamp(
+                float(row.get("first_release_date") or 0),
+                datetime.timezone.utc).date().isoformat()
+            if row.get("first_release_date") else ""),
         rating=float(row.get("rating") or 0.0) / 10.0,
         genres=tuple(str(g.get("name")) for g in (row.get("genres") or [])
                      if g.get("name")),
         cover_url=igdb_cover((row.get("cover") or {}).get("url") or ""),
         source="IGDB",
+        provider_id=str(row.get("id") or ""),
     )
 
 

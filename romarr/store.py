@@ -186,6 +186,14 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     # -- making both documented variables do nothing at all. It looked correct
     # only because the default matched the path the docs used as an example.
     "library_path": "",
+    # A shared sidecar root for cached metadata and artwork, mounted at the same
+    # relative location on each frontend machine. Empty disables local publishing.
+    "metadata_path": "",
+    # Switch update/DLC routing is explicit because TitleDB IDs come from
+    # filenames and do not verify package bytes.
+    "switch_auto_route": False,
+    "switch_updates_dir": "Updates",
+    "switch_dlc_dir": "DLC",
     # Where No-Intro/Redump DATs live, as ROMarr sees it. Applied through
     # reload_dats when saved from the UI, so the setting acts rather than
     # just sits.
