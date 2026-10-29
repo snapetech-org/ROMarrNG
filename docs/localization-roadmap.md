@@ -1,42 +1,94 @@
-# UI localization roadmap
+# UI localization
 
-## Current support
+## What is available
 
-The interface is rendered by the Python service in `romarr/ui.py`. The rail footer provides a browser-local language selector for English and the twelve non-English locales listed below. The English-keyed catalog contains 1,314 app-owned UI strings, including labels, help, empty states, prompts, notifications, dynamic library summaries, scorer and collection explanations, plugin-source validation, and finite download/import diagnostics. Each locale has a value for every source key and English remains the fallback for a missing value.
+ROMarr's Python service renders the dashboard and public sign-in, invitation,
+and connection pages. The localization catalog contains 1,348 app-owned
+messages under stable IDs. English is the source language. Twelve other locales
+have direct translations; Latin American Spanish inherits from Spanish, and
+Canadian French inherits from French. Missing translations fall back to
+English on a message-by-message basis.
 
-The regional-format preference is separate from interface language. Fan-translation settings, ROM names, platform slugs, filenames, paths, DAT values, API data, and other user data remain unchanged. Arabic translations carry label-level language and direction metadata; the document direction stays LTR until the full shell receives a layout review.
+| Locale state | Count | Behavior |
+| --- | ---: | --- |
+| English source | 1 | Always selectable |
+| Direct translations | 12 | Selectable; full catalog coverage |
+| Regional fallbacks | 2 | Selectable; inherit from `es` or `fr` |
+| Planned translations | 22 | Registered for formatting and future work; not selectable |
 
-Earlier RTL screenshots covered a prior implementation. They do not establish full RTL support for the current LTR shell or the API-backed manual-import workflow.
+The 37 registered locales are Arabic, Azerbaijani, Bulgarian, Bengali, Czech,
+Danish, German, Spanish, Latin American Spanish, Persian, French, Canadian
+French, Hebrew, Hindi, Hungarian, Indonesian, Italian, Japanese, Kazakh, Korean,
+Malay, Norwegian Bokmål, Dutch, Polish, Portuguese, Brazilian Portuguese,
+European Portuguese, Russian, Swedish, Thai, Turkish, Ukrainian, Uzbek,
+Vietnamese, Simplified Chinese, and Traditional Chinese. Of these, Arabic,
+German, Spanish, French, Hindi, Indonesian, Japanese, Korean, Brazilian
+Portuguese, Vietnamese, Simplified Chinese, and Traditional Chinese have direct
+translations. The remaining registered locales stay out of the picker until
+their translations exist and pass the catalog checks.
 
-## First-pass locale order
+The existing translation text was carried over without changing its wording.
+Its provenance and native-speaker review status are not recorded, so the
+catalog marks it `unverified`. A complete native review and RTL visual review
+have not been done. ROMarr therefore does not claim translation quality parity
+with PlezyNG, even though the catalog and runtime now support a broader locale
+workflow.
 
-This is a practical rollout order, not a claim about these apps' actual user base. Product-level language analytics are not available. It combines global speaker estimates with online-content usage, and keeps the requested Arabic and Asian-language coverage in the first waves:
+## Runtime behavior
 
-1. Spanish (es; es-MX where the product already distinguishes it)
-2. Simplified Chinese (zh-Hans / zh-CN)
-3. Hindi (hi)
-4. German (de)
-5. Japanese (ja)
-6. French (fr)
-7. Brazilian Portuguese (pt-BR)
-8. Arabic (ar; selectable, with full right-to-left layout support still under review)
-9. Korean (ko)
-10. Traditional Chinese (zh-Hant / zh-TW)
-11. Vietnamese (vi)
-12. Indonesian (id)
+`romarr/i18n_runtime.js` is a dependency-free shared runtime for the dashboard
+and public pages. It provides:
 
-The World Bank's 2025 report estimates Mandarin Chinese, Hindi, and Spanish at 15%, 7.6%, and 6.9% of the global population respectively; its online-content data also places German, Chinese, and Japanese among the leading languages. [World Bank, Digital Progress and Trends Report 2025](https://documents1.worldbank.org/curated/en/099112525160536089/pdf/P505350-59c98ca8-0803-4f23-b470-17f3dab010ab.pdf). W3Techs tracks website content-language share rather than app users. [W3Techs content-language survey](https://w3techs.com/technologies/cross/content_language/ranking). Reorder this list if maintainers later receive reliable demand signals.
+- Stable message IDs, source-text compatibility lookup, and source snapshots.
+- Browser/system language detection, canonical BCP 47 matching, Chinese script
+  aliases, Latin American Spanish matching, and regional parent fallback.
+- Per-message English fallback, escaped interpolation through text/attribute
+  sinks, and Unicode bidi isolation around dynamic values.
+- CLDR plural-category selection and locale-aware number rendering for plural
+  messages.
+- Right-to-left document direction, translated element metadata, and mirrored
+  mobile navigation behavior for RTL languages.
+- Separate browser-local interface and regional-format preferences, including
+  cross-tab synchronization. Regional changes refresh the active view without
+  changing the interface language.
 
-## Translation boundaries and acceptance
+User-entered values and external data are not translated: game names, platform
+names, paths, usernames, API identifiers, commands, and provider responses keep
+their original content. The interface language does not set the metadata
+provider language.
 
-Translate interface labels, help, empty states, validation, notifications, dynamic summaries, finite status messages, and errors. Keep media titles, user names, filenames and paths, commands, API identifiers, protocol values, and other user-supplied content unchanged. Use the selected UI language for date, time, number, and plural formatting. Every locale falls back to English for a missing key; catalog review checks key coverage, placeholders, and preserved technical tokens. Arabic labels carry their own direction metadata while the document remains LTR. Full RTL layout support is not claimed.
+## Adding or changing translations
 
-## Implemented
+1. Edit `romarr/ui-labels.json`; keep an existing stable ID when changing its
+   English source or translation. Add a new key for a genuinely new message.
+2. Add new UI copy to the catalog before wiring it into `romarr/ui.py`. Prefer
+   `data-i18n-key` and stable IDs in rendering helpers. The runtime still accepts
+   source text for dynamic messages during migration.
+3. Add translation text only for locales with a qualified reviewer. Keep
+   placeholders intact. For count-sensitive messages, use the plural object
+   shape (`kind`, `argument`, and locale forms) instead of concatenating
+   singular and plural strings.
+4. Change a locale from `planned` only when its catalog coverage is complete.
+   Regional fallback locales must name a selectable parent.
+5. Run `python scripts/check_localizations.py` before publishing. It checks
+   stable source hashes, source snapshots, locale status, direct coverage,
+   inherited coverage, placeholders, plural forms, and stable IDs referenced
+   by the UI.
 
-The rail footer offers a browser-local interface-language selector for English plus twelve locales: Spanish, Simplified Chinese, Hindi, German, Japanese, French, Brazilian Portuguese, Arabic, Korean, Traditional Chinese, Vietnamese, and Indonesian. The choice stays in that browser. Theme controls, navigation, page titles, Library filters, request and search workflows, empty states, actions, and finite download/import states use the selected language with per-key English fallback.
+`python scripts/migrate_ui_catalog.py` imports the current source-keyed catalog
+into the stable-ID schema. It preserves IDs already present and writes the
+source snapshot. Run the checker afterward; the migration script does not
+translate new text.
 
-The interface catalog has 1,314 source keys translated across all twelve non-English locales. It includes navigation and page copy, actions, help, validation, dynamic summaries, status messages, provider-import and webhook instructions, scorer and collection rationale, plugin-source checks, import guidance, and toast templates. Translated text and attributes carry language metadata; Arabic labels use `lang="ar"` and `dir="rtl"` within the LTR document. Unknown statuses and free-form API or user data remain unchanged. This interface setting does not change ROM translation settings or game metadata.
+## Remaining work
 
-Regional formatting remains a separate browser-local preference. It formats visible counts, ratings, scores, file sizes, calendar days and months, and date/time values across the Library, search, wanted list, import lists, sync status, History, live logs, blocklist, tasks, Statistics, collections, friends, and calendar views. Date-only values stay on their original calendar day; month-day anniversary dates are formatted without inventing a year, and year labels retain their source value.
-
-Arabic label direction, selector accessibility, empty-search validation, and storage-failure fallback were reviewed in source. The prior browser screenshots predate the current LTR document-direction setting. A fresh visual review of this head, including manual import, was not possible because the Agent VM tools were unavailable; full RTL layout signoff remains outstanding.
+- Review each existing translation with native speakers and record review
+  provenance by locale and message.
+- Translate and review the 22 planned locales before adding them to the picker.
+- Expand real plural messages and validate all CLDR categories with reviewers;
+  runtime support exists, but most current messages do not need plural forms.
+- Perform a browser visual review of Arabic across navigation, modals, forms,
+  tables, manual import, and public pages. Arabic direction is active, but that
+  review has not established full RTL signoff.
+- Consider a separate metadata-language preference only after each provider's
+  supported language behavior is confirmed; it is not currently implemented.

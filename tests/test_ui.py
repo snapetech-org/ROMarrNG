@@ -108,21 +108,21 @@ def test_interface_language_name_is_localized_and_fallback_content_stays_english
     assert 'value="ar"' in selector.group(1)
     assert '<html lang="en">' in html
     assert "document.documentElement.lang=language;" in html
-    assert "document.documentElement.dir='ltr';" in html
-    assert "el.dir=translated&&language==='ar'?'rtl':'ltr'" in html
+    assert "document.documentElement.dir=ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr'" in html
+    assert "el.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr'" in html
     assert "el.lang=translated?language:'en'" in html
 
 
 def test_library_and_search_labels_cover_selectable_interface_languages():
-    from romarr.ui import UI_LABELS
+    from romarr.ui import UI_LABELS, UI_SOURCE_TO_ID
 
     html = page()
     selector = re.search(r'<select id="interface-language"[^>]*>(.*?)</select>', html, re.S)
     assert selector
-    selectable = set(re.findall(r'<option value="([^"]+)"', selector.group(1))) - {"en"}
+    selectable = set(re.findall(r'<option value="([^"]+)"', selector.group(1))) - {"en", "system"}
     for label in ("On disk & catalogued", "Any source", "Enter a game name"):
         assert selectable <= UI_LABELS[label].keys(), f"{label} is missing translations"
-    assert "if(!game){toastLabel('Enter a game name');return;}" in html
+    assert f"if(!game){{toastLabel('{UI_SOURCE_TO_ID['Enter a game name']}');return;}}" in html
 
 
 def test_interface_catalog_covers_every_locale_and_placeholder():
@@ -131,30 +131,33 @@ def test_interface_catalog_covers_every_locale_and_placeholder():
     html = page()
     selector = re.search(r'<select id="interface-language"[^>]*>(.*?)</select>', html, re.S)
     assert selector
-    locales = set(re.findall(r'<option value="([^"]+)"', selector.group(1))) - {"en"}
+    locales = set(re.findall(r'<option value="([^"]+)"', selector.group(1))) - {"en", "system"}
     assert locales == {
-        "es", "zh-Hans", "hi", "de", "ja", "fr", "pt-BR", "ar",
+        "es", "es-419", "zh-Hans", "hi", "de", "ja", "fr", "fr-CA", "pt-BR", "ar",
         "ko", "zh-Hant", "vi", "id",
     }
-    assert "UI_LABELS[source]?.[language]||source" in html
+    assert "typeof value==='string'&&value?value:source" in html
 
     for source, translations in UI_LABELS.items():
         assert set(translations) == locales, f"{source} has incomplete locale coverage"
         source_placeholders = sorted(re.findall(r"\{([A-Za-z][A-Za-z0-9_]*)\}", source))
         for locale, translated in translations.items():
-            assert isinstance(translated, str) and translated.strip(), (
-                f"{source} is empty in {locale}"
-            )
-            translated_placeholders = sorted(
-                re.findall(r"\{([A-Za-z][A-Za-z0-9_]*)\}", translated)
-            )
-            assert translated_placeholders == source_placeholders, (
-                f"{source} has placeholder mismatch in {locale}"
-            )
+            forms = translated["forms"] if isinstance(translated, dict) else {"other": translated}
+            required_placeholders = set(source_placeholders)
+            if isinstance(translated, dict):
+                required_placeholders.discard(translated["argument"])
+            for form, text in forms.items():
+                assert isinstance(text, str) and text.strip(), (source, locale, form)
+                translated_placeholders = set(
+                    re.findall(r"\{([A-Za-z][A-Za-z0-9_]*)\}", text)
+                )
+                assert required_placeholders <= translated_placeholders <= set(source_placeholders), (
+                    source, locale, form
+                )
 
 
 def test_static_localization_helper_sources_exist_in_every_catalog():
-    from romarr.ui import UI_LABELS
+    from romarr.ui import UI_LABELS, UI_SOURCE_TO_ID
 
     source = (Path(__file__).parents[1] / "romarr" / "ui.py").read_text(
         encoding="utf-8"
@@ -165,7 +168,8 @@ def test_static_localization_helper_sources_exist_in_every_catalog():
         re.S,
     )
     referenced = {match.group(2) for match in call.finditer(source)}
-    assert referenced <= UI_LABELS.keys(), sorted(referenced - UI_LABELS.keys())
+    known = set(UI_LABELS) | set(UI_SOURCE_TO_ID.values())
+    assert referenced <= known, sorted(referenced - known)
 
 
 def test_localization_catalog_rejects_duplicate_source_keys():
@@ -257,14 +261,14 @@ def test_backend_explanations_and_validation_errors_reach_localized_sinks():
     assert "r.reasons.map(searchReasonMarkup)" in ui
     assert "collectionReasonMarkup(t.why)" in ui
     assert "appMessageMarkup(i.detail)" in ui
-    assert "d.problems.map(appMessageMarkup)" in ui
+    assert "problems.map(appMessageMarkup)" in ui
     assert "no usable release among (\\d+) result\\(s\\)" in ui
     assert "no (.+) ROM among (\\d+) file\\(s\\)" in ui
     assert "f\"seeders: {release.seeders}\"" in selection
     assert "no dump matched your preferred regions, so the set keeps " in collections
     assert "slug must be lower-case words joined by hyphens" in catalogue
     assert "declare at least one capability" in catalogue
-    assert "repository: {host} is not an allowed source" in ui
+    assert "ui.repository-host-is-not-an-allowed-so.5a31078d00" in ui
     assert "sniffedMessageTemplate" in ui
     assert "manualDiagnosticTitle(x.hollow)" in ui
     assert "manualDiagnosticTitle(x.header_detail||'')" in ui
@@ -282,7 +286,8 @@ def test_manual_import_localizes_header_label_but_preserves_dat_value():
     source = (Path(__file__).parents[1] / "romarr" / "ui.py").read_text(
         encoding="utf-8"
     )
-    assert "interfaceMarkup('Header says')" in source
+    from romarr.ui import UI_SOURCE_TO_ID
+    assert f"interfaceMarkup('{UI_SOURCE_TO_ID['Header says']}')" in source
     assert """lang="und" dir="auto">'+esc(x.header_says)""" in source
     assert """+'header says '+esc(x.header_says)""" not in source
 
@@ -340,6 +345,7 @@ def test_static_select_labels_use_interface_catalog_markers():
     source = (Path(__file__).parents[1] / "romarr" / "ui.py").read_text(
         encoding="utf-8"
     )
+    from romarr.ui import UI_SOURCE_TO_ID
     for label in (
         "unrated",
         "All platforms",
@@ -353,11 +359,9 @@ def test_static_select_labels_use_interface_catalog_markers():
         "Updates",
         "All three",
     ):
-        assert f'data-i18n="{label}"' in source, (
-            f"static select option is missing its translation marker: {label}"
-        )
+        assert label in UI_SOURCE_TO_ID, f"select label is missing from the catalog: {label}"
     assert (
-        "const marker=Object.hasOwn(UI_LABELS,source)?` data-i18n=\"${esc(source)}\"`:'';"
+        "const marker=hasLabel(source)?` data-i18n-key=\"${esc(stableLocalizationKey(source)||source)}\"`:'';"
         in source
     )
 
@@ -388,9 +392,11 @@ def test_public_auth_and_invitation_messages_have_catalog_coverage():
 
 
 def test_standalone_steam_result_uses_public_localization_and_escapes_message():
+    from romarr.ui import UI_SOURCE_TO_ID
+
     page_html = steam_result_page("connected", "<img src=x onerror=alert(1)>")
-    assert 'data-i18n="Steam connected"' in page_html
-    assert 'data-i18n="Back to Lists"' in page_html
+    assert f'data-i18n-key="{UI_SOURCE_TO_ID["Steam connected"]}"' in page_html
+    assert f'data-i18n-key="{UI_SOURCE_TO_ID["Back to Lists"]}"' in page_html
     assert "romarrng.interface-language" in page_html
     assert 'lang="und" dir="auto">&lt;img src=x onerror=alert(1)&gt;' in page_html
     assert "<img src=x onerror=alert(1)>" not in page_html
@@ -424,6 +430,11 @@ const selector = {
   addEventListener: (_name, handler) => { changeLanguage = handler; }
 };
 globalThis.navigator = {languages: ["en"], language: "en"};
+const UI_CATALOG = JSON.parse(require("node:fs").readFileSync("romarr/ui-labels.json", "utf8"));
+require("./romarr/i18n_runtime.js");
+const UI_MESSAGES = UI_CATALOG.messages;
+const UI_LABELS = Object.create(null);
+const UI_SOURCE_TO_KEY = Object.create(null);
 globalThis.localStorage = {
   getItem: () => storedLanguage,
   setItem: (_key, value) => {
@@ -487,7 +498,7 @@ console.log(JSON.stringify({
     assert '"successfulWriteChoice":"es"' in result.stdout
     assert '"crossTabLanguage":"fr"' in result.stdout
     assert '"clearFallback":"en"' in result.stdout
-    assert '"selectedAfterClear":"en"' in result.stdout
+    assert '"selectedAfterClear":"system"' in result.stdout
     assert '"selected":"fr"' in result.stdout
 
 
@@ -515,7 +526,7 @@ def test_a_list_field_round_trips_through_the_form():
     save the string "n64, snes" as a single platform name that matches nothing.
     """
     html = page()
-    assert "f.type === 'list'" in html
+    assert "if(f.type==='list')" in html
     assert "el.dataset.list ? el.value.split(',')" in html
 
 
@@ -582,8 +593,16 @@ const memory = new Map();
 let storageAvailable = true;
 let storageWritable = true;
 const UI_LABELS = {};
+const UI_CATALOG = {locales:{},messages:{}};
+const ROMarrI18n = {isRTL:()=>false};
+const stableLocalizationKey = source => source === "Use browser settings"
+  ? "ui.use-browser-settings.02d22d3f39" : "ui.test.0000000000";
+const isTranslated = () => false;
 const readInterfaceLanguage = () => "en";
 const translateLabel = source => source;
+globalThis.document = {querySelector: () => null};
+globalThis.location = {hash: "#general"};
+const go = () => {};
 globalThis.localStorage = {
   getItem: key => {
     if (!storageAvailable) throw new Error("storage unavailable");
@@ -686,7 +705,7 @@ console.log(JSON.stringify({
     && selectedMarkup.includes('id="g-regional-format-help"'),
   germanOptionSelected: /<option value="de"[^>]* selected>/.test(selectedMarkup),
   systemOptionSelected: /<option value="system"[^>]* selected>/.test(systemMarkup)
-    && systemMarkup.includes('data-i18n="Use browser settings"')
+    && systemMarkup.includes('data-i18n-key="ui.use-browser-settings.02d22d3f39"')
 }));
 """
     checked = subprocess.run(
@@ -729,26 +748,29 @@ console.log(JSON.stringify({
 
 def test_regional_formatting_is_applied_at_dashboard_count_call_sites():
     """Formatting helpers must reach the visible values that claim to use them."""
+    from romarr.ui import UI_SOURCE_TO_ID
+
     html = page()
     assert "if(setRegionalLocale(regionalFormat.value)) refreshCounts();" not in html
     assert "regionalFormat.onchange=()=>{\n      applyRegionalFormat(regionalFormat.value,regionalFormat);" in html
     assert "if(setRegionalLocale(regionalFormat.value)) go('general')" not in html
     assert "★ ${num(x.rating)}" in html
-    assert "'Clear {count} failed'" in html
+    assert f"'{UI_SOURCE_TO_ID['Clear {count} failed']}'" in html
     assert "<div><b>${fmt(h.platforms)}</b><span>Platforms</span></div>" in html
     assert "<div><b>${fmt(h.dats||0)}</b><span>DATs loaded</span></div>" in html
     assert "<div><b>${fmt(h.dat_games||0)}</b><span>Known dumps</span></div>" in html
     assert "<div><b>${fmt(h.events)}</b><span>History events</span></div>" in html
     assert "+fmt(x.percent)+'% — '+statusMarkup(x.status)" in html
     assert "+fmt(x.done)+'</td><td>'+fmt(x.failed)+'</td><td>'+fmt(x.remaining)" in html
-    assert "interfaceTemplateMarkup('Page {page} of {pages}'" in html
+    assert f"interfaceTemplateMarkup('{UI_SOURCE_TO_ID['Page {page} of {pages}']}'" in html
     assert "${fmt(r.local||0)}" in html
     assert "${fmt(r.stream||0)}" in html
     assert "${fmt(r.archive||0)}" in html
     assert "${fmt(r.download_only||0)}" in html
     assert "minutes:fmt(Math.max(0,Math.round((r.code_expires_in||0)/60)))" in html
     assert "Math.max(1,Math.round(left/60))" in html
-    assert "fmt(p.max_size_mb/1024)+' GB' : fmt(p.max_size_mb)+' MB'" in html
-    assert "interfaceTemplateMarkup('Interval: {count} min'" in html
-    assert "interfaceTemplateMarkup('Interval: {count} s'" in html
-    assert "interfaceTemplateMarkup('Disabled until {date}'" in html
+    assert "const max=p.max_size_mb>=1024?fmt(p.max_size_mb/1024)+' GB':fmt(p.max_size_mb)+' MB'" in html
+    assert f"interfaceTemplateMarkup('{UI_SOURCE_TO_ID['Interval: {count} min']}'" in html
+    assert f"interfaceTemplateMarkup('{UI_SOURCE_TO_ID['Interval: {count} s']}'" in html
+    assert f"interfaceTemplateMarkup('{UI_SOURCE_TO_ID['Disabled until {date}']}'" in html
+

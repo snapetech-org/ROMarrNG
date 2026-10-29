@@ -284,17 +284,23 @@ library root, and an existing ROM is never silently overwritten.
 
 ### Pick your language and number format
 
-The rail footer lets each browser choose English or one of twelve other
-interface languages. The catalog covers navigation, settings, help, validation,
-Library and request workflows, manual import, release and collection
-explanations, plugin-source checks, and download/import diagnostics. Missing
-translations fall back to English; game titles, platform names, paths, API
-values, and other user data stay as entered. The separate regional-format
-setting controls dates, counts, ratings, scores, and file sizes without changing
-the interface language. Both choices stay in that browser. Arabic labels carry
-right-to-left metadata, while full right-to-left layout support remains under
-review. See the [localization notes](docs/localization-roadmap.md) for coverage
-and limits.
+The rail footer lets each browser follow its system language or choose English,
+one of twelve fully populated interface translations, or a regional Spanish or
+French option that inherits its parent translation. The catalog uses stable
+message IDs, per-key English fallback, browser language matching, and
+locale-aware plural rules. The shared runtime serves the dashboard and public
+sign-in, invitation, and connection pages. Game titles, platform names, paths,
+API values, and other user data stay as entered.
+
+Date, time, and number formatting is a separate browser preference. It refreshes
+the current view when changed and does not change interface language. The
+catalog registers 37 locales, but 22 remain marked as awaiting translation and
+are not offered. Existing translations have not yet received full native-speaker
+review; this is documented as a limit rather than implying complete coverage.
+Arabic is the only selectable right-to-left translation today. RTL direction
+and layout behavior are wired through the shell, but visual signoff is still
+needed. See the [localization notes](docs/localization-roadmap.md) for the
+coverage table and validation workflow.
 
 ## Requirements
 
