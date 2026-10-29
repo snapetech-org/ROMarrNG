@@ -45,8 +45,9 @@ CSS = """
   --bg:#12141a; --surface:#1a1d25; --surface-2:#212734; --surface-3:#2b3240;
   --rail:#0d0f14; --rail-2:#1a1f2a;
   --line:#282e3a; --line-soft:#1f2530;
-  --fg:#e8eaf0; --fg-2:#b4bbca; --dim:#89909f;
-  --ok:#3ecf6d; --warn:#f0a92c; --bad:#f4645f; --info:#5aa2e8;
+  --fg:#e8eaf0; --fg-2:#b4bbca; --dim:#9aa1b0;
+  --ok:#3ecf6d; --warn:#f0a92c; --bad:#ff7771; --info:#5aa2e8;
+  --ok-ink:#08210d; --warn-ink:#2a1c05; --bad-ink:#2a0b0b; --info-ink:#06131f;
   --shadow-1:0 1px 2px rgba(0,0,0,.45);
   --shadow-2:0 2px 6px rgba(0,0,0,.35),0 14px 30px -16px rgba(0,0,0,.8);
   --shadow-3:0 30px 70px -24px rgba(0,0,0,.85);
@@ -58,25 +59,25 @@ CSS = """
   --bg:#eef1f6; --surface:#fff; --surface-2:#f5f7fb; --surface-3:#e7ebf2;
   --rail:#fff; --rail-2:#eef1f7;
   --line:#dce2ec; --line-soft:#eaeef5;
-  --fg:#161b24; --fg-2:#404859; --dim:#697083;
-  --ok:#12a150; --warn:#b8760a; --bad:#d43b37; --info:#2b6fbd;
+  --fg:#161b24; --fg-2:#404859; --dim:#626a7a;
+  --ok:#08783a; --warn:#765000; --bad:#b42318; --info:#255d99;
+  --ok-ink:#fff; --warn-ink:#fff; --bad-ink:#fff; --info-ink:#fff;
   --shadow-1:0 1px 2px rgba(16,24,40,.06);
   --shadow-2:0 1px 3px rgba(16,24,40,.09),0 14px 30px -18px rgba(16,24,40,.32);
   --shadow-3:0 34px 70px -26px rgba(16,24,40,.38);
   --edge:inset 0 1px 0 rgba(255,255,255,.9);
   --art:#e3e8f0;
 }
-/* Easy on the eyes: warm paper, almost no blue, and a deliberately narrow
-   contrast range. It is a light mode you can sit in after midnight -- pure
-   white at 2am is the thing being avoided, so the surfaces stay dimmer than
-   light mode and the ink stays browner than black. */
+/* Easy on the eyes: warm paper and little blue, with the same readable text
+   contrast as the other modes. Surfaces stay dimmer than light mode. */
 :root[data-theme="sepia"]{
   color-scheme:light;
   --bg:#e6dbcb; --surface:#f3ebde; --surface-2:#ece2d2; --surface-3:#dfd2bd;
   --rail:#e0d4c0; --rail-2:#d5c6ae;
   --line:#d2c3ab; --line-soft:#ded0ba;
-  --fg:#3d362c; --fg-2:#5e5446; --dim:#8a7f6e;
-  --ok:#4f8f56; --warn:#a8742a; --bad:#b5544c; --info:#4c7a9e;
+  --fg:#3d362c; --fg-2:#5e5446; --dim:#574c3c;
+  --ok:#2c5c34; --warn:#6b4a0c; --bad:#88342c; --info:#2b5169;
+  --ok-ink:#fff; --warn-ink:#fff; --bad-ink:#fff; --info-ink:#fff;
   --shadow-1:0 1px 2px rgba(74,58,36,.09);
   --shadow-2:0 1px 3px rgba(74,58,36,.10),0 12px 26px -16px rgba(74,58,36,.30);
   --shadow-3:0 28px 60px -24px rgba(74,58,36,.36);
@@ -128,12 +129,14 @@ a:hover{text-decoration:underline;text-underline-offset:2px}
 #navwrap{flex:1;overflow-y:auto;padding:6px 0 10px}
 .navgroup{padding:8px 0 2px}
 .navhead{padding:6px 20px;font-size:10.5px;font-weight:600;
-  text-transform:uppercase;letter-spacing:.1em;color:var(--dim);opacity:.8}
+  text-transform:uppercase;letter-spacing:.1em;color:var(--dim)}
 .nav{display:flex;align-items:center;gap:10px;margin:1px 10px;
-  padding:8px 11px;color:var(--fg-2);cursor:pointer;font-size:13.5px;
-  border-radius:var(--r-sm);position:relative;
+  width:calc(100% - 20px);min-height:40px;padding:8px 11px;
+  color:var(--fg-2);background:transparent;border:0;text-align:start;
+  font-family:inherit;cursor:pointer;font-size:13.5px;line-height:1.4;
+  text-decoration:none;border-radius:var(--r-sm);position:relative;
   transition:background var(--t),color var(--t)}
-.nav:hover{background:var(--rail-2);color:var(--fg)}
+.nav:hover{background:var(--rail-2);color:var(--fg);text-decoration:none}
 .nav.on{background:var(--accent-soft);color:var(--accent-text);font-weight:600}
 /* The active marker is a rounded bar rather than *arr's flat 3px border, and
    it lives on a pseudo-element so the row can keep its own radius. */
@@ -154,7 +157,7 @@ a:hover{text-decoration:underline;text-underline-offset:2px}
 #railfoot{flex:none;border-top:1px solid var(--line-soft);padding:12px 12px 14px;
   background:var(--rail)}
 .thm-lbl{font-size:10.5px;font-weight:600;text-transform:uppercase;
-  letter-spacing:.1em;color:var(--dim);opacity:.8;margin:0 0 8px 2px}
+  letter-spacing:.1em;color:var(--dim);margin:0 0 8px 2px}
 .thm-modes{display:flex;gap:3px;background:var(--surface-2);padding:3px;
   border-radius:var(--r-sm);margin-bottom:10px}
 /* Longhand, not the `font` shorthand: `inherit` is not a family name, so
@@ -167,7 +170,7 @@ a:hover{text-decoration:underline;text-underline-offset:2px}
 .thm:hover{color:var(--fg)}
 .thm.on{background:var(--surface);color:var(--fg);box-shadow:var(--shadow-1)}
 .thm-accents{display:flex;flex-wrap:wrap;gap:6px}
-.sw{width:19px;height:19px;padding:0;border-radius:var(--r-pill);
+.sw{width:24px;height:24px;padding:0;border-radius:var(--r-pill);
   border:1px solid rgba(128,128,128,.35);background:var(--sw,var(--accent));
   cursor:pointer;position:relative;transition:transform var(--t)}
 .sw:hover{transform:scale(1.14)}
@@ -178,7 +181,7 @@ a:hover{text-decoration:underline;text-underline-offset:2px}
   height:calc(100% + 8px);opacity:0;cursor:pointer;border:0;padding:0}
 
 /* ---- main ---- */
-#main{margin-inline-start:222px;min-height:100vh}
+#main-content{margin-inline-start:222px;min-height:100vh}
 #top{position:sticky;top:0;display:flex;align-items:center;gap:14px;
   padding:13px 26px;z-index:10;border-bottom:1px solid var(--line);
   background:color-mix(in srgb,var(--bg) 80%,transparent);
@@ -190,6 +193,28 @@ a:hover{text-decoration:underline;text-underline-offset:2px}
   outline:none;transition:border-color var(--t),box-shadow var(--t)}
 #top input:focus{border-color:var(--accent-line);box-shadow:var(--ring)}
 .page{padding:24px 26px 48px;max-width:1600px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:fixed;inset-block-start:10px;inset-inline-start:10px;
+  z-index:100;transform:translateY(-160%);padding:9px 13px;
+  background:var(--surface);color:var(--fg);border:2px solid var(--accent-text);
+  border-radius:var(--r-sm);font-weight:650;box-shadow:var(--shadow-2)}
+.skip-link:focus{transform:translateY(0)}
+.nav-toggle{display:none;align-items:center;justify-content:center;min-height:40px;
+  padding:7px 12px;border:1px solid var(--line);border-radius:var(--r-sm);
+  background:var(--surface);color:var(--fg);font-family:inherit;
+  font-size:13px;font-weight:600;line-height:1.3;cursor:pointer}
+.nav-backdrop{display:none;position:fixed;inset:0;z-index:19;padding:0;border:0;
+  background:rgba(0,0,0,.56);cursor:pointer}
+.nav-backdrop[hidden]{display:none}
+.mapping-field{display:flex;flex-direction:column;gap:5px;min-width:0;margin:0;
+  color:var(--fg-2);font-size:12px;font-weight:600}
+.settings-group{min-width:0;padding:0;border:0;margin:8px 0 14px}
+.settings-group legend{margin-bottom:5px;color:var(--fg);font-size:13px;font-weight:650}
+.mapping-row{display:grid;gap:8px;margin:8px 0;align-items:end}
+.mapping-row.platform-folder{grid-template-columns:minmax(140px,.8fr) minmax(190px,1fr) auto}
+.mapping-row.path-map{grid-template-columns:minmax(140px,1fr) minmax(160px,1fr) minmax(160px,1fr) auto}
+.mapping-row button{min-height:38px}
 
 /* ---- plugin catalogue ---------------------------------------------------
    A card grid rather than a table. A plugin is a thing you decide to trust,
@@ -203,12 +228,12 @@ a:hover{text-decoration:underline;text-underline-offset:2px}
   outline:none;transition:border-color var(--t),box-shadow var(--t)}
 .cat-bar input:focus{border-color:var(--accent-line);box-shadow:var(--ring)}
 .chip{padding:5px 12px;border-radius:var(--r-pill);border:1px solid var(--line);
-  background:var(--bg);color:var(--dim);cursor:pointer;font-size:12px;
-  white-space:nowrap;transition:all var(--t)}
+  background:var(--bg);color:var(--dim);cursor:pointer;font-family:inherit;
+  font-size:12px;line-height:1.35;white-space:nowrap;transition:all var(--t)}
 .chip:hover{border-color:var(--accent-line);color:var(--fg)}
 .chip.on{background:var(--accent);border-color:var(--accent);
   color:var(--accent-ink);font-weight:600}
-.chip .n{opacity:.65;margin-inline-start:5px}
+.chip .n{color:inherit;margin-inline-start:5px}
 
 /* The scroll the catalogue needs once it is more than a screenful. Bounded
    so the page header and the add-your-own panel stay put while it moves. */
@@ -319,14 +344,10 @@ tbody tr:last-child td{border-bottom:0}
 .pill{font-size:11px;padding:2px 10px;border-radius:var(--r-pill);
   border:1px solid var(--line);background:var(--surface-2);color:var(--fg-2);
   display:inline-block;white-space:nowrap;font-weight:500}
-.pill.grabbed{color:var(--info);border-color:color-mix(in srgb,var(--info) 45%,transparent);
-  background:color-mix(in srgb,var(--info) 13%,transparent)}
-.pill.imported{color:var(--ok);border-color:color-mix(in srgb,var(--ok) 45%,transparent);
-  background:color-mix(in srgb,var(--ok) 13%,transparent)}
-.pill.failed{color:var(--bad);border-color:color-mix(in srgb,var(--bad) 45%,transparent);
-  background:color-mix(in srgb,var(--bad) 13%,transparent)}
-.pill.queued{color:var(--warn);border-color:color-mix(in srgb,var(--warn) 45%,transparent);
-  background:color-mix(in srgb,var(--warn) 13%,transparent)}
+.pill.grabbed{color:var(--info-ink);border-color:var(--info);background:var(--info)}
+.pill.imported{color:var(--ok-ink);border-color:var(--ok);background:var(--ok)}
+.pill.failed{color:var(--bad-ink);border-color:var(--bad);background:var(--bad)}
+.pill.queued{color:var(--warn-ink);border-color:var(--warn);background:var(--warn)}
 /* An empty page is a state, not an accident. Given a dashed enclosure it
    reads as "there is a place for things here and it is empty" rather than as
    a page that failed to load. */
@@ -453,30 +474,44 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
    column of blank clickable boxes. It gives up width instead. */
 @media(max-width:820px){
   #rail{width:168px}
-  #main{margin-inline-start:168px}
+  #main-content{margin-inline-start:168px}
   #brand{font-size:17px;padding:14px 13px 13px}
   .navhead{padding:5px 14px}
-  .nav{padding:7px 9px;margin:1px 7px;font-size:13px;gap:6px}
+  .nav{width:calc(100% - 14px);padding:7px 9px;margin:1px 7px;font-size:13px;gap:6px}
   .nav.on::before{inset-inline-start:-5px}
   #top{padding:11px 14px}
   .page{padding:16px 14px 40px}
   #railfoot{padding:10px 9px 12px}
   .thm{font-size:10px;padding:5px 2px}
-  .sw{width:17px;height:17px}
+  .sw{width:24px;height:24px}
   .grid{grid-template-columns:repeat(auto-fill,minmax(126px,1fr));gap:12px}
   .pgrid{grid-template-columns:1fr}
   .panels{grid-template-columns:1fr}
 }
 @media(max-width:540px){
   #rail{width:138px}
-  #main{margin-inline-start:138px}
+  #main-content{margin-inline-start:138px}
   #brand{font-size:15px;padding:13px 10px 12px}
-  .nav{padding:7px 8px;margin:1px 5px;font-size:12.5px}
+  .nav{width:calc(100% - 10px);padding:7px 8px;margin:1px 5px;font-size:12.5px}
   .thm-modes{flex-direction:column;gap:2px}
   .thm-accents{justify-content:center;gap:5px}
   .page{padding:14px 12px 36px}
   .card{padding:15px 14px}
   th,td{padding:8px 8px}
+}
+@media(max-width:680px){
+  #rail{width:min(282px,calc(100vw - 48px));transform:translateX(-105%);
+    transition:transform var(--t);box-shadow:var(--shadow-3)}
+  #rail.mobile-open{transform:translateX(0)}
+  #main-content{margin-inline-start:0}
+  .nav-toggle{display:inline-flex}
+  #nav-backdrop:not([hidden]){display:block}
+  #top{flex-wrap:wrap;gap:8px;padding:10px 12px}
+  #top h1{flex:1;white-space:normal;font-size:16px}
+  #top input{flex:1 1 100%;width:100%;max-width:none}
+  .page{padding:16px 12px 36px}
+  .mapping-row,.mapping-row.platform-folder,.mapping-row.path-map{
+    grid-template-columns:minmax(0,1fr)}
 }
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{transition:none !important;animation:none !important}
@@ -550,18 +585,24 @@ THEME_BOOT = r"""
            :h<240?[0,x,c]:h<300?[x,0,c]:[c,0,x];
     return [(t[0]+m)*255,(t[1]+m)*255,(t[2]+m)*255];
   }
-  /* The accent as *text*: same hue, walked toward whichever end of the
-     lightness scale is away from the background until it is legible. */
-  function legible(accent,bg){
-    var c=rgb(accent), b=rgb(bg);
-    if(!c||!b) return accent;
-    if(ratio(c,b)>=4.5) return accent;
-    var hsl=toHsl(c), up=lum(b)<.5, best=accent, score=ratio(c,b);
+  /* Accent text appears on cards, the rail and the selected-nav tint. Walk
+     its lightness until it clears every surface used by links and focus rings. */
+  function legible(accent,backgrounds){
+    var c=rgb(accent), list=(Array.isArray(backgrounds)?backgrounds:[backgrounds])
+      .map(rgb).filter(Boolean);
+    if(!c||!list.length) return accent;
+    function worst(candidate){
+      return Math.min.apply(null,list.map(function(bg){return ratio(candidate,bg)}));
+    }
+    var score=worst(c);
+    if(score>=4.5)return accent;
+    var average=list.reduce(function(sum,bg){return sum+lum(bg)},0)/list.length,
+        hsl=toHsl(c),up=average<.5,best=accent;
     for(var i=1;i<=100;i++){
       var l=up?Math.min(1,hsl[2]+i/100):Math.max(0,hsl[2]-i/100),
-          t=toRgb(hsl[0],hsl[1],l), r=ratio(t,b);
-      if(r>score){ score=r; best=hex(t); }
-      if(r>=4.5) return hex(t);
+          candidate=toRgb(hsl[0],hsl[1],l),r=worst(candidate);
+      if(r>score){score=r;best=hex(candidate)}
+      if(r>=4.5)return hex(candidate);
     }
     return best;
   }
@@ -577,8 +618,15 @@ THEME_BOOT = r"""
     root.style.setProperty('--accent',accent);
     // Read back rather than remember: whatever the mode block just set is the
     // background this accent actually has to survive.
-    var bg=getComputedStyle(root).getPropertyValue('--bg').trim()||'#12141a';
-    root.style.setProperty('--accent-text',legible(accent,bg));
+    var styles=getComputedStyle(root), backgrounds=['--bg','--surface','--surface-2','--surface-3','--rail','--rail-2']
+      .map(function(token){return styles.getPropertyValue(token).trim()})
+      .filter(Boolean);
+    // The active nav sits on a 15% accent tint, which is its own text surface.
+    var baseRail=rgb(styles.getPropertyValue('--rail').trim()),accentRgb=rgb(accent);
+    if(baseRail&&accentRgb)backgrounds.push(hex(baseRail.map(function(channel,index){
+      return channel*.85+accentRgb[index]*.15;
+    })));
+    root.style.setProperty('--accent-text',legible(accent,backgrounds));
     root.style.setProperty('--accent-ink',ink(accent));
     // Announced rather than pushed: this runs in <head>, so the rail's
     // controls do not exist yet and cannot be told directly. Whoever ends up
@@ -620,7 +668,7 @@ def _theme_control_html() -> str:
         f'<button class="sw" type="button" data-accent="{value}" '
         f'style="--sw:{value}" data-i18n-title="{name} accent" '
         f'data-i18n-aria-label="{name} accent" title="{name} accent" '
-        f'aria-label="{name} accent"></button>'
+        f'aria-label="{name} accent" aria-pressed="false"></button>'
         for value, name in ACCENTS
     )
     language_options = ''.join(
@@ -638,12 +686,12 @@ def _theme_control_html() -> str:
         '<div class="thm-lbl" data-i18n="Theme">Theme</div>'
         '<div class="thm-modes" role="group" data-i18n-aria-label="Colour mode" aria-label="Colour mode">'
         '<button class="thm" type="button" data-theme-set="dark" '
-        'data-i18n="Dark" data-i18n-title="Dark" title="Dark">Dark</button>'
+        'data-i18n="Dark" data-i18n-title="Dark" title="Dark" aria-pressed="false">Dark</button>'
         '<button class="thm" type="button" data-theme-set="light" '
-        'data-i18n="Light" data-i18n-title="Light" title="Light">Light</button>'
+        'data-i18n="Light" data-i18n-title="Light" title="Light" aria-pressed="false">Light</button>'
         '<button class="thm" type="button" data-theme-set="sepia" '
-        'data-i18n="Sepia" data-i18n-title="Warm sepia theme with low contrast and less blue light" '
-        'title="Warm sepia theme with low contrast and less blue light">'
+        'data-i18n="Sepia" data-i18n-title="Warm sepia theme" '
+        'title="Warm sepia theme" aria-pressed="false">'
         'Sepia</button></div>'
         f'<div class="thm-accents">{swatches}'
         '<label class="sw pick" data-i18n-title="Custom accent colour" title="Custom accent colour">'
@@ -681,13 +729,15 @@ NAV = [
 
 def _nav_html() -> str:
     out = []
-    for group, items in NAV:
-        out.append(f'<div class="navgroup"><div class="navhead" data-i18n="{group}">{group}</div>')
+    for group_index, (group, items) in enumerate(NAV):
+        heading_id = f'nav-heading-{group_index}'
+        out.append(f'<div class="navgroup" role="group" aria-labelledby="{heading_id}">'
+                   f'<div class="navhead" id="{heading_id}" data-i18n="{group}">{group}</div>')
         for key, label, count in items:
             badge = f'<b class="ct" data-ct="{count}"></b>' if count else ""
             out.append(
-                f'<div class="nav" data-page="{key}">'
-                f'<span class="lbl" data-i18n="{label}">{label}</span>{badge}</div>'
+                f'<a class="nav" href="#{key}" data-page="{key}">'
+                f'<span class="lbl" data-i18n="{label}">{label}</span>{badge}</a>'
             )
         out.append("</div>")
     return "".join(out)
@@ -1010,6 +1060,7 @@ const observeInterfaceText=()=>{
     for(const record of records){
       if(record.type==='characterData')applyTranslatedTextNode(record.target,readInterfaceLanguage());
       for(const node of record.addedNodes){
+        enhanceFormLabels(node);
         applyTranslatedLabels(node,readInterfaceLanguage());
         applyTranslatedTemplates(node,readInterfaceLanguage());
         applyTranslatedTextTree(node,readInterfaceLanguage());
@@ -1019,6 +1070,52 @@ const observeInterfaceText=()=>{
   });
   interfaceTextObserver.observe(document.body,{subtree:true,childList:true,characterData:true});
 };
+let generatedControlId=0;
+function enhanceFormLabels(root=document.body){
+  if(!root)return;
+  const labels=[];
+  if(root.nodeType===Node.ELEMENT_NODE&&root.matches('label:not([for])'))labels.push(root);
+  if(root.querySelectorAll)labels.push(...root.querySelectorAll('label:not([for])'));
+  for(const label of labels){
+    if(label.querySelector('input,select,textarea,button'))continue;
+    const field=label.closest('.field,.mapping-field');
+    if(!field)continue;
+    const control=[...field.querySelectorAll('input,select,textarea')]
+      .find(el=>!el.closest('label'));
+    if(!control)continue;
+    if(!control.id){
+      let id;
+      do{id='romarr-field-'+(++generatedControlId)}while(document.getElementById(id));
+      control.id=id;
+    }
+    label.htmlFor=control.id;
+    const help=field.querySelector(':scope > .help');
+    if(help&&!control.hasAttribute('aria-describedby')){
+      if(!help.id){
+        let id;
+        do{id='romarr-help-'+(++generatedControlId)}while(document.getElementById(id));
+        help.id=id;
+      }
+      control.setAttribute('aria-describedby',help.id);
+    }
+  }
+  const selectNames={genre:'Genre',region:'Region',decade:'Decade',origin:'Origin',source:'Source',sort:'Sort by'};
+  const controls=[];
+  if(root.nodeType===Node.ELEMENT_NODE&&root.matches('input,select,textarea'))controls.push(root);
+  if(root.querySelectorAll)controls.push(...root.querySelectorAll('input,select,textarea'));
+  for(const control of controls){
+    if(control.hasAttribute('aria-label')||control.hasAttribute('aria-labelledby'))continue;
+    if(control.id&&[...document.querySelectorAll('label[for]')].some(label=>label.htmlFor===control.id))continue;
+    if(control.closest('label'))continue;
+    const source=selectNames[control.dataset.lf];
+    const fallback=source?translateLabel(source,readInterfaceLanguage()):
+      (control.getAttribute('placeholder')||control.getAttribute('title'));
+    if(fallback){
+      control.setAttribute('aria-label',fallback);
+      if(source)control.dataset.i18nAriaLabel=source;
+    }
+  }
+}
 const applyInterfaceLanguage=(language=readInterfaceLanguage())=>{
   document.documentElement.lang=language;
   // Arabic labels set their own direction. Keep the overall shell LTR until
@@ -1036,8 +1133,11 @@ const applyInterfaceLanguage=(language=readInterfaceLanguage())=>{
   });
   applyTranslatedTextTree(document.body,language);
   applyTranslatedAttributes(document.body,language);
+  enhanceFormLabels(document.body);
   observeInterfaceText();
   const selector=$('#interface-language'); if(selector) selector.value=language;
+  const heading=$('#page-title');
+  if(heading)document.title=heading.textContent.trim()+' · ROMarr';
 };
 const j=(u,o)=>fetch(u,o).then(r=>r.json());
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>
@@ -1165,7 +1265,12 @@ let PLATFORM_VIEW={group:'all',query:''};
 
 function toast(msg,language='en',direction='ltr'){
   const t=document.createElement('div');
-  t.className='toast'; t.lang=language; t.dir=direction; t.textContent=msg; document.body.append(t);
+  t.className='toast'; t.lang=language; t.dir=direction; t.textContent=msg;
+  t.setAttribute('aria-hidden','true');
+  document.body.append(t);
+  const live=$('#app-announcement');
+  if(live){live.lang=language;live.dir=direction;live.textContent='';
+    requestAnimationFrame(()=>{if(live.isConnected)live.textContent=msg;});}
   setTimeout(()=>t.remove(),4200);
 }
 function toastLabel(source){
@@ -1189,10 +1294,46 @@ function promptMessage(source,values={},defaultValue=''){
 }
 
 /* ---------------- routing ---------------- */
-function go(page){
-  location.hash=page;
-  document.querySelectorAll('.nav').forEach(n=>
-    n.classList.toggle('on', n.dataset.page===page));
+let mobileNavPreviousOverflow='', routeEpoch=0;
+function setMobileNavOpen(open,restoreFocus=true){
+  const rail=$('#rail'),main=$('#main-content'),toggle=$('#nav-toggle'),backdrop=$('#nav-backdrop');
+  if(!rail||!toggle||!backdrop)return;
+  if(open){
+    if(rail.classList.contains('mobile-open'))return;
+    mobileNavPreviousOverflow=document.body.style.overflow;
+    rail.classList.add('mobile-open');
+    toggle.setAttribute('aria-expanded','true');
+    toggle.dataset.i18nAriaLabel='Close navigation';
+    toggle.setAttribute('aria-label',translateLabel('Close navigation',readInterfaceLanguage()));
+    toggle.dataset.i18n='Close';applyTranslatedLabel(toggle,readInterfaceLanguage());
+    backdrop.hidden=false;
+    if(main)main.inert=true;
+    document.body.style.overflow='hidden';
+    requestAnimationFrame(()=>rail.querySelector('.nav')?.focus({preventScroll:true}));
+  }else{
+    if(!rail.classList.contains('mobile-open'))return;
+    rail.classList.remove('mobile-open');
+    toggle.setAttribute('aria-expanded','false');
+    toggle.dataset.i18nAriaLabel='Open navigation';
+    toggle.setAttribute('aria-label',translateLabel('Open navigation',readInterfaceLanguage()));
+    toggle.dataset.i18n='Menu';applyTranslatedLabel(toggle,readInterfaceLanguage());
+    backdrop.hidden=true;
+    if(main)main.inert=false;
+    document.body.style.overflow=mobileNavPreviousOverflow;
+    if(restoreFocus)toggle.focus({preventScroll:true});
+  }
+}
+function go(page,focusHeading=false){
+  if(!document.querySelector('.nav[data-page="'+CSS.escape(page)+'"]'))page='library';
+  const renderEpoch=++routeEpoch;
+  if(location.hash!=='#'+page)location.hash=page;
+  document.querySelectorAll('.nav').forEach(n=>{
+    const current=n.dataset.page===page;
+    n.classList.toggle('on',current);
+    if(current)n.setAttribute('aria-current','page');
+    else n.removeAttribute('aria-current');
+  });
+  setMobileNavOpen(false,false);
   const titles={library:'Games',add:'Add New Game',search:'Interactive Search',
     missing:'Wanted — Missing',lists:'Import Lists',stats:'Statistics',
     discover:'Discover',patches:'Patches — translations, hacks and improvements',ecosystem:'The Ecosystem',peers:'Friends',
@@ -1209,18 +1350,34 @@ function go(page){
   const title=$('#top h1');
   title.dataset.i18n=titles[page]||'ROMarr';
   applyTranslatedLabel(title,readInterfaceLanguage());
+  document.title=title.textContent.trim()+' · ROMarr';
   $('#search').classList.toggle('hide', !['library','add'].includes(page));
-  (RENDER[page]||RENDER.library)();
+  const main=$('#main-content'),content=$('#page');
+  main.setAttribute('aria-busy','true');
+  Promise.resolve().then(()=> (RENDER[page]||RENDER.library)(renderEpoch))
+    .catch(()=>{
+      if(renderEpoch!==routeEpoch)return;
+      content.innerHTML='<div class="card" role="alert" aria-live="assertive">'
+        +'<h2>Page could not be loaded</h2><p class="help">ROMarr could not finish loading this page. Check the connection and try again.</p>'
+        +'<button class="btn" id="page-retry" type="button">Try again</button></div>';
+      $('#page-retry').onclick=()=>go(page,true);
+    })
+    .finally(()=>{if(renderEpoch===routeEpoch)main.removeAttribute('aria-busy');});
+  if(focusHeading)requestAnimationFrame(()=>title.focus({preventScroll:true}));
 }
-addEventListener('hashchange',()=>go(location.hash.slice(1)||'library'));
+addEventListener('hashchange',()=>{
+  const page=location.hash.slice(1);
+  if(document.querySelector('.nav[data-page="'+CSS.escape(page)+'"]'))go(page,true);
+});
 
 /* ---------------- pages ---------------- */
 const RENDER={};
-RENDER.hub=async()=>{
+RENDER.hub=async(renderEpoch=routeEpoch)=>{
   // Installing a plugin means running its author's code. Whether that code is
   // confined is the thing to know first, so it goes at the top of the page
   // rather than in a log the operator will never read.
   const hs=await j('/api/v1/hub/status').catch(()=>({}));
+  if(renderEpoch!==routeEpoch||location.hash!=='#hub')return;
   const confined=hs.sandboxed===true;
   const sandboxNote=hs.available===false ? '' :
     (confined
@@ -1258,15 +1415,17 @@ RENDER.hub=async()=>{
 
   // State lives here rather than in the DOM: a filter that has to be read
   // back out of the markup drifts from what is actually displayed.
-  let q='', cap='', inst='', actionError=null;
+  let q='', cap='', inst='', actionError=null,catalogueRequest=0;
 
   const load=async()=>{
     const qs=new URLSearchParams();
     if(q) qs.set('q',q);
     if(cap) qs.set('capability',cap);
     if(inst) qs.set('installed',inst);
-    return j('/api/v1/hub/catalogue?'+qs.toString())
+    const request=++catalogueRequest;
+    const result=await j('/api/v1/hub/catalogue?'+qs.toString())
       .catch(()=>({items:[],facets:{capabilities:[],platforms:[]},error:'ROM Hub unreachable'}));
+    return {...result,_catalogueRequest:request};
   };
 
   const card=pl=>{
@@ -1289,23 +1448,28 @@ RENDER.hub=async()=>{
   };
 
   const render=d=>{
+    if(renderEpoch!==routeEpoch||location.hash!=='#hub'||d._catalogueRequest!==catalogueRequest)return;
     const items=d.items||[];
     const facets=(d.facets&&d.facets.capabilities)||[];
-    const chips=facets.map(([name,n])=>
-      '<span class="chip'+(cap===name?' on':'')+'" data-cap="'+esc(name)+'">'
-      +esc(name)+'<span class="n">'+fmt(n)+'</span></span>').join('');
+    const chips=facets.map(([name,n])=>{
+      const selected=cap===name;
+      return '<button type="button" class="chip'+(selected?' on':'')
+        +'" aria-pressed="'+String(selected)+'" data-cap="'+esc(name)+'">'
+        +esc(name)+'<span class="n">'+fmt(n)+'</span></button>';
+    }).join('');
 
     p.innerHTML=sandboxNote+acqNote+'<div class="card"><h3>Plugins'
-      +'<span class="help" style="margin-inline-start:10px">'
+      +'<span class="help" aria-live="polite" aria-atomic="true" style="margin-inline-start:10px">'
       +interfaceTemplateMarkup('Showing {shown} of {total} plugins',
         {shown:fmt(items.length),total:fmt(d.total||0)})+'</span></h3>'
       +'<div class="cat-bar">'
+      +'<label class="sr-only" for="pq">Search plugins</label>'
       +'<input id="pq" placeholder="Search plugins by name, author or description…" value="'+esc(q)+'">'
-      +'<span class="chip'+(inst==='1'?' on':'')+'" data-inst="1">Installed</span>'
-      +'<span class="chip'+(inst==='0'?' on':'')+'" data-inst="0">Available</span>'
-      +chips+'</div>'
-      +(d.error?'<div class="panel-note panel-warn">'+appMessageMarkup(d.error)+'</div>':'')
-      +(actionError?'<div class="panel-note panel-warn">'+(actionError.source
+      +'<button type="button" class="chip'+(inst==='1'?' on':'')+'" aria-pressed="'+String(inst==='1')+'" data-inst="1">Installed</button>'
+      +'<button type="button" class="chip'+(inst==='0'?' on':'')+'" aria-pressed="'+String(inst==='0')+'" data-inst="0">Available</button>'
+      +chips+'</div>' 
+      +(d.error?'<div class="panel-note panel-warn" role="alert" aria-live="assertive">'+appMessageMarkup(d.error)+'</div>':'')
+      +(actionError?'<div id="hub-action-error" class="panel-note panel-warn" role="alert" aria-live="assertive">'+(actionError.source
         ?interfaceTemplateMarkup(actionError.source,actionError.values)
         :'<span lang="und" dir="auto">'+esc(actionError.raw)+'</span>')+'</div>':'')
       +'<div class="cat-scroll">'
@@ -1318,10 +1482,10 @@ RENDER.hub=async()=>{
       +'<div class="card"><h3>Add your own</h3>'
       +'<p class="help">Install a plugin straight from its repository — yours, '
       +'or somebody else\'s that is not in the catalogue yet.</p>'
-      +'<div class="field"><label>Repository URL</label>'
+      +'<div class="field"><label for="ownurl">Repository URL</label>'
       +'<input id="ownurl" placeholder="https://github.com/you/rom-hub-your-plugin"></div>'
       +'<button class="mini accent" id="ownadd">Check and install</button>'
-      +'<div id="ownmsg"></div>'
+      +'<div id="ownmsg" role="status" aria-live="polite" aria-atomic="true"></div>'
       +'<div class="panel-note">A plugin is code ROMarr runs. Only https, and only '
       +'from a forge where you can read the source first — the check tells you which '
       +'hosts are allowed.</div></div>'
@@ -1329,14 +1493,14 @@ RENDER.hub=async()=>{
       +'<div class="card"><h3>Submit to be featured</h3>'
       +'<p class="help">Propose your plugin for the shared catalogue so everyone '
       +'can find it.</p>'
-      +'<div class="field"><label>Slug</label><input id="sslug" placeholder="your-plugin"></div>'
-      +'<div class="field"><label>Name</label><input id="sname" placeholder="Your Plugin"></div>'
-      +'<div class="field"><label>Repository</label><input id="srepo" placeholder="https://github.com/you/your-plugin"></div>'
-      +'<div class="field"><label>Capabilities</label><input id="scaps" placeholder="search, importer"></div>'
-      +'<div class="field"><label>Description</label><textarea id="sdesc" '
+      +'<div class="field"><label for="sslug">Slug</label><input id="sslug" placeholder="your-plugin"></div>'
+      +'<div class="field"><label for="sname">Name</label><input id="sname" placeholder="Your Plugin"></div>'
+      +'<div class="field"><label for="srepo">Repository</label><input id="srepo" placeholder="https://github.com/you/your-plugin"></div>'
+      +'<div class="field"><label for="scaps">Capabilities</label><input id="scaps" placeholder="search, importer"></div>'
+      +'<div class="field"><label for="sdesc">Description</label><textarea id="sdesc" '
       +'placeholder="What it does, and what somebody is trusting when they run it."></textarea></div>'
       +'<button class="mini accent" id="ssubmit">Prepare submission</button>'
-      +'<div id="smsg"></div>'
+      +'<div id="smsg" role="status" aria-live="polite" aria-atomic="true"></div>'
       +'<div class="panel-note">ROMarr does not post this for you. It prepares the '
       +'entry and hands you a link to review and submit yourself.</div></div>'
       +'</div>';
@@ -1350,10 +1514,19 @@ RENDER.hub=async()=>{
       const n=$('#pq'); n.focus(); n.setSelectionRange(at,at);
     },220);};
 
-    p.querySelectorAll('.chip[data-cap]').forEach(c=>c.onclick=async()=>{
-      cap = cap===c.dataset.cap ? '' : c.dataset.cap; render(await load());});
-    p.querySelectorAll('.chip[data-inst]').forEach(c=>c.onclick=async()=>{
-      inst = inst===c.dataset.inst ? '' : c.dataset.inst; render(await load());});
+    p.querySelectorAll('button.chip[data-cap]').forEach(c=>c.onclick=async()=>{
+      const selected=c.dataset.cap;
+      cap=cap===selected?'':selected;
+      render(await load());
+      Array.from(p.querySelectorAll('button.chip[data-cap]'))
+        .find(button=>button.dataset.cap===selected)?.focus();
+    });
+    p.querySelectorAll('button.chip[data-inst]').forEach(c=>c.onclick=async()=>{
+      const selected=c.dataset.inst;
+      inst=inst===selected?'':selected;
+      render(await load());
+      p.querySelector(`button.chip[data-inst="${selected}"]`)?.focus();
+    });
 
     p.querySelectorAll('button[data-act]').forEach(b=>b.onclick=async()=>{
       const slug=b.dataset.slug, action=b.dataset.act;
@@ -1379,35 +1552,49 @@ RENDER.hub=async()=>{
     });
 
     $('#ownadd').onclick=async()=>{
-      const msg=$('#ownmsg');
-      const r=await fetch('/api/v1/hub/source/check',{method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({url:$('#ownurl').value.trim()})});
-      const d=await r.json();
-      msg.innerHTML='<div class="panel-note'+(d.ok?'':' panel-warn')+'">'
-        +(d.ok?interfaceTemplateMarkup('Source accepted: {host}. Installing…',{host:d.host})
-          :appMessageMarkup(d.reason))+'</div>';
+      const button=$('#ownadd'),msg=$('#ownmsg');button.disabled=true;
+      try{
+        const r=await fetch('/api/v1/hub/source/check',{method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({url:$('#ownurl').value.trim()})});
+        const d=await r.json().catch(()=>({})),ok=r.ok&&d.ok===true;
+        msg.setAttribute('role',ok?'status':'alert');
+        msg.setAttribute('aria-live',ok?'polite':'assertive');
+        msg.innerHTML='<div class="panel-note'+(ok?'':' panel-warn')+'">'
+          +(ok?interfaceTemplateMarkup('Source accepted: {host}. Installing…',{host:d.host})
+            :appMessageMarkup(d.reason||d.error||'Could not check this plugin source.'))+'</div>';
+      }catch(_){
+        msg.setAttribute('role','alert');msg.setAttribute('aria-live','assertive');
+        msg.textContent='ROMarr could not check this source. Check the connection and try again.';
+      }finally{button.disabled=false;}
     };
 
     $('#ssubmit').onclick=async()=>{
-      const msg=$('#smsg');
-      const r=await fetch('/api/v1/hub/submit',{method:'POST',
-        headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          slug:$('#sslug').value.trim(), name:$('#sname').value.trim(),
-          repository:$('#srepo').value.trim(),
-          description:$('#sdesc').value.trim(),
-          capabilities:$('#scaps').value.split(',').map(x=>x.trim()).filter(Boolean)})});
-      const d=await r.json();
-      if(d.problems){
-      msg.innerHTML='<div class="panel-note panel-warn"><b>'+interfaceMarkup('Fix these:')+'</b><br>'
-          +d.problems.map(appMessageMarkup).join('<br>')+'</div>';
-      }else{
-        msg.innerHTML='<div class="panel-note">'+interfaceMarkup('Ready.')+' '
-          +'<a href="'+esc(d.submit_url)+'" target="_blank" rel="noopener">'
-          +interfaceMarkup('Open the submission')+'</a> '
-          +interfaceMarkup('to review and post it yourself.')+'</div>';
-      }
+      const button=$('#ssubmit'),msg=$('#smsg');button.disabled=true;
+      try{
+        const r=await fetch('/api/v1/hub/submit',{method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            slug:$('#sslug').value.trim(), name:$('#sname').value.trim(),
+            repository:$('#srepo').value.trim(),
+            description:$('#sdesc').value.trim(),
+            capabilities:$('#scaps').value.split(',').map(x=>x.trim()).filter(Boolean)})});
+        const d=await r.json().catch(()=>({})),problems=d.problems||(!r.ok?[d.error||'Could not prepare this submission.']:[]);
+        msg.setAttribute('role',problems.length?'alert':'status');
+        msg.setAttribute('aria-live',problems.length?'assertive':'polite');
+        if(problems.length){
+          msg.innerHTML='<div class="panel-note panel-warn"><b>'+interfaceMarkup('Fix these:')+'</b><br>'
+            +problems.map(appMessageMarkup).join('<br>')+'</div>';
+        }else{
+          msg.innerHTML='<div class="panel-note">'+interfaceMarkup('Ready.')+' '
+            +'<a href="'+esc(d.submit_url)+'" target="_blank" rel="noopener noreferrer">'
+            +interfaceMarkup('Open the submission')+'</a> '
+            +interfaceMarkup('to review and post it yourself.')+'</div>';
+        }
+      }catch(_){
+        msg.setAttribute('role','alert');msg.setAttribute('aria-live','assertive');
+        msg.textContent='ROMarr could not prepare the submission. Check the connection and try again.';
+      }finally{button.disabled=false;}
     };
   };
 
@@ -1425,7 +1612,10 @@ const SOURCE_LABEL={
   archive:'Archive.org (streams)',
   flashpoint:'Flashpoint (streams)',
   cloud:'Catalogued, source unknown'};
-RENDER.library=async()=>{
+let libraryRequest=0;
+RENDER.library=async(renderEpoch=routeEpoch)=>{
+  if(renderEpoch!==routeEpoch||location.hash!=='#library')return;
+  const request=++libraryRequest;
   const p=$('#page');
   if(!p.querySelector('#lib-grid')){
     p.innerHTML='<div class="empty" data-i18n="Reading the library">Reading the library</div>';
@@ -1441,6 +1631,7 @@ RENDER.library=async()=>{
     +`&source=${encodeURIComponent(LIB.source)}`
     +`&sort=${encodeURIComponent(LIB.sort)}`)
     .catch(()=>({items:[],error:'Unreachable'}));
+  if(renderEpoch!==routeEpoch||request!==libraryRequest||location.hash!=='#library')return;
 
   if(d.loading){
     // The first fetch has not landed yet. Say so, rather than showing an
@@ -1483,14 +1674,15 @@ RENDER.library=async()=>{
       : '';
     return `<button class="btn ${LIB.platform===x.platform?'':'ghost'}" data-plat="${esc(x.platform)}"
       style="padding:4px 10px;font-size:12px"${tipAttrs}>${esc(x.platform)}
-      <span style="opacity:.7">${part?fmt(x.cached)+'/'+fmt(x.count):fmt(x.count)}</span>
-      ${mixed?`<span style="opacity:.55;font-size:11px">${interfaceTemplateMarkup(
+      <span style="color:var(--dim)">${part?fmt(x.cached)+'/'+fmt(x.count):fmt(x.count)}</span>
+      ${mixed?`<span style="color:var(--dim);font-size:11px">${interfaceTemplateMarkup(
         '({count} here)',{count:fmt(disk)})}</span>`:''}</button>`;
   }).join('');
   const f=d.facets||{};
   const sel=(key,label,list,fmt)=>{
     if(!list||!list.length) return '';
-    return `<select data-lf="${key}" style="padding:4px 8px;font-size:12px">
+    const filterName=({genre:'Genre',region:'Region',decade:'Decade',origin:'Origin',source:'Source',sort:'Sort by'})[key]||label;
+    return `<select data-lf="${key}" aria-label="${esc(translateLabel(filterName,readInterfaceLanguage()))}" data-i18n-aria-label="${esc(filterName)}" style="padding:4px 8px;font-size:12px">
       <option value="" data-i18n="${esc(label)}">${esc(translateLabel(label,readInterfaceLanguage()))}</option>
       ${list.map(x=>`<option value="${esc(x.value)}"${LIB[key]===x.value?' selected':''}
         >${esc(fmt?fmt(x.value):x.value)} (${num(x.count)})</option>`).join('')}
@@ -1524,7 +1716,7 @@ RENDER.library=async()=>{
   const head=banner+`<div class="row" style="flex-wrap:wrap;gap:6px;margin-bottom:10px">
       <button class="btn ${LIB.platform?'ghost':''}" data-plat=""
         style="padding:4px 10px;font-size:12px"><span data-i18n="All">All</span>
-        <span style="opacity:.7">${fmt(d.grand_total)}</span></button>${chips}</div>
+        <span style="color:var(--dim)">${fmt(d.grand_total)}</span></button>${chips}</div>
     <div class="row" style="flex-wrap:wrap;gap:6px;margin-bottom:10px;align-items:center">
       ${sel('genre','Any genre',f.genres)}
       ${sel('region','Any region',f.regions)}
@@ -1533,7 +1725,7 @@ RENDER.library=async()=>{
         v=>v==='local'?'On disk (plays now)':'Catalogued (needs fetching)'):''}
       ${(f.sources||[]).length>1?sel('source','Any source',f.sources,
         v=>SOURCE_LABEL[v]||v):''}
-      <select data-lf="sort" style="padding:4px 8px;font-size:12px">
+      <select data-lf="sort" aria-label="Sort by" data-i18n-aria-label="Sort by" style="padding:4px 8px;font-size:12px">
         <option value="" data-i18n="Platform, then name"${LIB.sort?'':' selected'}>Platform, then name</option>
         <option value="name" data-i18n="Name A–Z"${LIB.sort==='name'?' selected':''}>Name A–Z</option>
         <option value="rating" data-i18n="Top rated"${LIB.sort==='rating'?' selected':''}>Top rated</option>
@@ -1580,6 +1772,10 @@ RENDER.library=async()=>{
        <button class="btn" id="lib-more">${interfaceTemplateMarkup(
          'Show more ({count} left)',{count:fmt(d.total-LIB.offset-items.length)})}</button></div>`:'';
   p.innerHTML=head+grid+more;
+  if(q||d.error){
+    const live=$('#app-announcement');
+    if(live)live.textContent=d.error?'Could not load the game library.':fmt(d.total||0)+' games found.';
+  }
   applyInterfaceLanguage();
   bindLibraryChips(p);
   const moreBtn=p.querySelector('#lib-more');
@@ -1633,7 +1829,7 @@ function shelfEditor(g, meta){
       <button class="btn ghost sp" data-close>Cancel</button>
       <button class="btn" id="sh-save">Save</button>
     </div></div>`;
-  document.body.append(m);
+  openModal(m);
   m.onclick=e=>{ if(e.target===m||e.target.dataset.close!==undefined) closeModal(); };
   m.querySelector('#sh-save').onclick=async()=>{
     const f=readForm();
@@ -1722,7 +1918,7 @@ RENDER.search=async()=>{
       <p class="help">${interfaceTemplateMarkup('Found {found} releases; {accepted} match your selection. Rejected results are also shown with the reason for each rejection.',{found:fmt(d.found),accepted:fmt(d.accepted)})}</p>
       <table><thead><tr><th data-i18n="Score">Score</th><th data-i18n="Release">Release</th><th data-i18n="Size">Size</th>
         <th data-i18n="Seeders">Seeders</th><th data-i18n="Indexer">Indexer</th><th data-i18n="Why">Why</th><th></th></tr></thead><tbody>
-      ${d.items.map((r,i)=>`<tr style="${r.accepted?'':'opacity:.62'}">
+      ${d.items.map((r,i)=>`<tr>
         <td><span class="pill ${r.accepted?'imported':'failed'}">${num(r.score)}</span></td>
         <td><span lang="und" dir="auto">${esc(r.title)}</span>${r.info_url?` <a href="${esc(r.info_url)}" target="_blank"
             rel="noopener noreferrer"
@@ -2202,36 +2398,42 @@ RENDER.lists=async()=>{
         <div style="color:var(--dim);font-size:11.5px;margin-top:4px">
           Paste the entire page if you like — ROMarr pulls the value out.</div>
       </div>
-      <div id="testline"></div>
+      <div id="testline" role="status" aria-live="polite" aria-atomic="true"></div>
       <div class="foot">
         <button class="btn ghost sp" data-close>Cancel</button>
         <button class="btn" id="tok-save">Connect</button>
       </div></div>`;
-    document.body.append(m);
+    openModal(m);
     m.onclick=e=>{ if(e.target===m||e.target.dataset.close!==undefined) closeModal(); };
     setTimeout(()=>m.querySelector('#tok-v')?.focus(),50);
     $('#tok-save').onclick=async()=>{
       const value=$('#tok-v').value.trim();
       if(!value){toastLabel('Paste the value first');return;}
+      const button=$('#tok-save');button.disabled=true;
       const body={name:spec.label+' library',type:b.dataset.token,
                   platform:'',enable:true};
       body[spec.field]=value;
       const line=(ok,msg)=>{
         const el=m.querySelector('#testline');
-        el.className='testline '+(ok?'ok':'bad'); el.innerHTML=appMessageMarkup(msg);
+        el.className='testline '+(ok?'ok':'bad');
+        el.setAttribute('role',ok?'status':'alert');el.setAttribute('aria-live',ok?'polite':'assertive');
+        el.innerHTML=appMessageMarkup(msg);
       };
       line(true,'Connecting…');
-      const saved=await j('/api/v1/importlist',{method:'POST',
-        headers:{'content-type':'application/json'},body:JSON.stringify(body)});
-      if(saved.error){line(false,saved.error);return;}
-      const r=await j('/api/v1/command',{method:'POST',
-        headers:{'content-type':'application/json'},
-        body:JSON.stringify({name:'ListSync'})});
-      // The failure reason belongs here, in front of the person who just
-      // pasted, not in a toast that vanishes.
-      const failed=(r.failures||[]).find(f=>f.id===saved.id);
-      if(failed){ line(false,failed.reason); return; }
-      closeModal(); if(r.message)toastAppMessage(r.message);else toastLabel('Connected'); go('lists');
+      try{
+        const saved=await j('/api/v1/importlist',{method:'POST',
+          headers:{'content-type':'application/json'},body:JSON.stringify(body)});
+        if(saved.error){line(false,saved.error);return;}
+        const r=await j('/api/v1/command',{method:'POST',
+          headers:{'content-type':'application/json'},
+          body:JSON.stringify({name:'ListSync'})});
+        // The failure reason belongs here, in front of the person who just
+        // pasted, not in a toast that vanishes.
+        const failed=(r.failures||[]).find(f=>f.id===saved.id);
+        if(failed){line(false,failed.reason);return;}
+        closeModal(); if(r.message)toastAppMessage(r.message);else toastLabel('Connected'); go('lists',true);
+      }catch(_){line(false,'ROMarr could not complete this connection. Check the server and try again.');}
+      finally{if(button.isConnected)button.disabled=false;}
     };
   });
   j('/api/v1/importlist/schema').then(s=>{
@@ -2350,7 +2552,7 @@ function editList(item){
       <button class="btn ghost sp" data-close data-i18n="Cancel">Cancel</button>
       <button class="btn" id="l-save" data-i18n="Save">Save</button>
     </div></div>`;
-  document.body.append(m);
+  openModal(m);
   applyInterfaceLanguage();
   m.onclick=e=>{ if(e.target===m||e.target.dataset.close!==undefined) closeModal(); };
   m.querySelector('[data-f=type]').onchange=e=>{
@@ -2362,6 +2564,8 @@ function editList(item){
   const payload=()=>({...readForm(), id:item.id});
   const line=(ok,markup)=>{
     m.querySelector('#testline').className='testline '+(ok?'ok':'bad');
+    m.querySelector('#testline').setAttribute('role',ok?'status':'alert');
+    m.querySelector('#testline').setAttribute('aria-live',ok?'polite':'assertive');
     m.querySelector('#testline').innerHTML=markup;
   };
   m.querySelector('#l-preview').onclick=async e=>{
@@ -2383,16 +2587,28 @@ function editList(item){
     e.target.disabled=false;
   };
   m.querySelector('#l-save').onclick=async()=>{
-    await j('/api/v1/importlist',{method:'POST',
-      headers:{'content-type':'application/json'},body:JSON.stringify(payload())});
-    closeModal(); toastLabel('Saved'); go('lists');
+    const button=m.querySelector('#l-save');button.disabled=true;
+    try{
+      const saved=await j('/api/v1/importlist',{method:'POST',
+        headers:{'content-type':'application/json'},body:JSON.stringify(payload())});
+      if(saved.error){line(false,appMessageMarkup(saved.error));button.disabled=false;return;}
+      closeModal(); toastLabel('Saved'); go('lists',true);
+    }catch(_){
+      line(false,appMessageMarkup('Could not save this list. Check the connection and try again.'));
+      button.disabled=false;
+    }
   };
   const del=m.querySelector('#l-del');
   if(del) del.onclick=async()=>{
     if(!confirmMessage('Remove {name}?',{name:item.name
       ||translateLabel('this list',readInterfaceLanguage())})) return;
-    await fetch(`/api/v1/importlist/${item.id}`,{method:'DELETE'});
-    closeModal(); toastLabel('Removed'); go('lists');
+    del.disabled=true;
+    try{
+      const response=await fetch(`/api/v1/importlist/${item.id}`,{method:'DELETE'});
+      const result=await response.json().catch(()=>({}));
+      if(!response.ok||result.error)throw new Error(result.error||`Could not remove this list (HTTP ${response.status}).`);
+      closeModal(); toastLabel('Removed'); go('lists',true);
+    }catch(error){line(false,appMessageMarkup(error.message||'Could not remove this list.'));del.disabled=false;}
   };
 }
 
@@ -2467,7 +2683,7 @@ RENDER.discover=async()=>{
         <div class="pf">${esc(g.platform||'')}${sub(g)?' · '+esc(sub(g)):''}${
           g.rating?' · ★'+num(g.rating):''}${
           g.players&&g.players!=='1'?' · '+esc(g.players)+'p':''}</div>
-        <div class="pf" style="padding-top:0;opacity:.75">${esc(
+        <div class="pf" style="padding-top:0;color:var(--dim)">${esc(
           (g.franchises||[]).concat(g.genres||[]).slice(0,2).join(' · '))}</div>
         </div>`).join('')}</div>`;
     return;
@@ -2504,12 +2720,12 @@ RENDER.discover=async()=>{
       <div class="art" style="background-image:url('${esc(g.cover_url||'')}')"></div>
       <div class="nm">${esc(g.title)}</div>
       <div class="pf">${esc(regionalDate(g.released))}${g.rating?' · ★'+num(g.rating):''}</div>
-      <div class="pf" style="padding-top:0;opacity:.7">${g.source||src
+      <div class="pf" style="padding-top:0;color:var(--dim)">${g.source||src
         ?interfaceTemplateMarkup('Source: {source}',{source:g.source||src})
         :interfaceMarkup('Source: metadata provider')}</div>
       ${plats.length?`<div class="rowact" style="margin-top:4px">
         <button data-dreq="${i}">Request</button></div>`
-        :`<div class="pf" style="opacity:.6">${interfaceMarkup('No ROM platform')}</div>`}</div>`;
+        :`<div class="pf" style="color:var(--dim)">${interfaceMarkup('No ROM platform')}</div>`}</div>`;
   }).join('')}</div>
   <p class="help" style="margin-top:10px">Request shows only for games on a
     platform ROMarr models — the scorer takes it from there, DAT
@@ -2643,7 +2859,7 @@ RENDER.peers=async()=>{
         clearInterval(tick);
         help.innerHTML=interfaceMarkup('— expired');
         const code=$('#p-code');
-        if(code) code.style.opacity='.35';
+        if(code) code.removeAttribute('aria-label');
       } else help.innerHTML=interfaceTemplateMarkup(claimCodeMessage,{minutes:fmt(Math.max(1,Math.round(left/60)))});
     },10000);
   };
@@ -2801,8 +3017,8 @@ RENDER.peers=async()=>{
       <div class="row" style="justify-content:flex-end;gap:8px;margin-top:14px">
         <button class="btn ghost" data-close="1">Cancel</button>
         <button class="btn" id="rm-go">Connect</button></div></div>`;
-    document.body.appendChild(m);
-    const close=()=>m.remove();
+    openModal(m);
+    const close=()=>closeModal();
     m.querySelector('[data-close]').onclick=close;
     m.onclick=e=>{ if(e.target===m) close(); };
     m.querySelector('#rm-go').onclick=async()=>{
@@ -2987,7 +3203,7 @@ function sharingEditor(peer){
     <div class="foot">
       <button class="btn ghost sp" data-close>Cancel</button>
       <button class="btn" id="p-save">Save</button></div></div>`;
-  document.body.append(m);
+  openModal(m);
   m.onclick=e=>{ if(e.target===m||e.target.dataset.close!==undefined) closeModal(); };
   m.querySelector('#p-save').onclick=async()=>{
     const f=readForm();
@@ -2996,7 +3212,7 @@ function sharingEditor(peer){
       body:JSON.stringify({peer_id:peer.peer_id,scope:f.scope,
         access:f.access,platforms:f.platforms,
         delegate_users:f.delegate_users})});
-    closeModal(); if(r.error)toastAppMessage(r.error);else toastLabel('Saved'); go('peers');
+    closeModal(); if(r.error)toastAppMessage(r.error);else toastLabel('Saved'); go('peers',true);
   };
 }
 
@@ -3235,29 +3451,35 @@ async function loadSchema(kind){
 }
 
 function fieldHtml(f, value){
-  const v = value === undefined || value === null ? f.default : value;
-  const help = f.help ? `<div style="color:var(--dim);font-size:11.5px;margin-top:4px">${esc(f.help)}</div>` : '';
-  if(f.type === 'bool')
-    return `<label class="check"><input type="checkbox" data-f="${f.name}"
-      ${v ? 'checked' : ''}><span>${esc(f.label)}</span></label>${help}`;
-  // A list is edited as comma-separated text, which is what the settings file
-  // holds anyway, and readForm splits it back apart.
-  if(f.type === 'list')
-    return `<div class="field"><label>${esc(f.label)}</label>
-      <input type="text" data-f="${f.name}" data-list="1"
-        value="${esc(Array.isArray(v) ? v.join(', ') : (v ?? ''))}">${help}</div>`;
-  if(f.type === 'select')
-    return `<div class="field"><label>${esc(f.label)}</label>
-      <select data-f="${f.name}">${(f.options||[]).map(o=>{
+  const v=value===undefined||value===null?f.default:value;
+  const fieldName=String(f.name||'field');
+  const fieldId='schema-'+fieldName.replace(/[^A-Za-z0-9_-]/g,'-');
+  const fieldData=esc(fieldName);
+  const required=f.required===true;
+  const requiredAttr=required?' required aria-required="true"':'';
+  const helpId=fieldId+'-help';
+  const described=f.help?` aria-describedby="${helpId}"`:'';
+  const help=f.help?`<div id="${helpId}" class="help" style="font-size:11.5px;margin-top:4px">${esc(f.help)}</div>`:'';
+  if(f.type==='bool')
+    return `<label class="check"><input id="${fieldId}" type="checkbox" data-f="${fieldData}"${requiredAttr}${described}
+      ${v?'checked':''}><span>${esc(f.label)}</span></label>${help}`;
+  // Lists stay comma-separated in settings, with the same parsing on save.
+  if(f.type==='list')
+    return `<div class="field"><label for="${fieldId}">${esc(f.label)}</label>
+      <input id="${fieldId}" type="text" data-f="${fieldData}" data-list="1"${requiredAttr}${described}
+        value="${esc(Array.isArray(v)?v.join(', '):(v??''))}">${help}</div>`;
+  if(f.type==='select')
+    return `<div class="field"><label for="${fieldId}">${esc(f.label)}</label>
+      <select id="${fieldId}" data-f="${fieldData}"${requiredAttr}${described}>${(f.options||[]).map(o=>{
         const [ov,ot]=Array.isArray(o)?o:[o,o];
         const source=String(ot??'');
         const marker=Object.hasOwn(UI_LABELS,source)?` data-i18n="${esc(source)}"`:'';
-        return `<option value="${esc(ov)}"${String(v ?? '')===String(ov)?' selected':''}${marker}>${esc(translateLabel(source,readInterfaceLanguage()))}</option>`;
+        return `<option value="${esc(ov)}"${String(v??'')===String(ov)?' selected':''}${marker}>${esc(translateLabel(source,readInterfaceLanguage()))}</option>`;
       }).join('')}</select>${help}</div>`;
-  const t = f.type === 'int' ? 'number' : (f.type === 'secret' ? 'password' : 'text');
-  return `<div class="field"><label>${esc(f.label)}</label>
-    <input type="${t}" data-f="${f.name}" value="${esc(v ?? '')}"
-      ${f.type === 'secret' ? 'autocomplete="new-password"' : ''}>${help}</div>`;
+  const type=f.type==='int'?'number':(f.type==='secret'?'password':'text');
+  return `<div class="field"><label for="${fieldId}">${esc(f.label)}</label>
+    <input id="${fieldId}" type="${type}" data-f="${fieldData}" value="${esc(v??'')}"${requiredAttr}${described}
+      ${f.type==='secret'?'autocomplete="new-password"':''}>${help}</div>`;
 }
 
 function readForm(){
@@ -3271,7 +3493,95 @@ function readForm(){
   return out;
 }
 
-function closeModal(){ document.querySelector('.modal')?.remove(); }
+let activeDialog=null, dialogReturnFocus=null, dialogPreviousState=null, dialogSequence=0;
+const dialogFocusableSelector='a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])';
+function dialogFocusables(dialog){
+  return Array.from(dialog.querySelectorAll(dialogFocusableSelector))
+    .filter(el=>el.getClientRects().length>0&&!el.closest('[hidden],[inert]'));
+}
+function openModal(modal){
+  if(activeDialog&&activeDialog!==modal)closeModal();
+  if($('#rail')?.classList.contains('mobile-open'))setMobileNavOpen(false,false);
+  const heading=modal.querySelector('.box h1,.box h2,.box h3,[data-dialog-title]');
+  const description=modal.querySelector('.box .sub');
+  if(heading){
+    if(!heading.id)heading.id='romarr-dialog-title-'+(++dialogSequence);
+    modal.setAttribute('aria-labelledby',heading.id);
+  }else{
+    modal.setAttribute('aria-label','ROMarr dialog');
+  }
+  if(description){
+    if(!description.id)description.id='romarr-dialog-description-'+dialogSequence;
+    modal.setAttribute('aria-describedby',description.id);
+  }
+  modal.setAttribute('role','dialog');
+  modal.setAttribute('aria-modal','true');
+  modal.setAttribute('tabindex','-1');
+  dialogReturnFocus=document.activeElement;
+  const main=$('#main-content'),rail=$('#rail');
+  dialogPreviousState={overflow:document.body.style.overflow,
+    mainInert:main?.inert||false,railInert:rail?.inert||false};
+  if(main)main.inert=true;
+  if(rail)rail.inert=true;
+  document.body.style.overflow='hidden';
+  document.body.append(modal);
+  activeDialog=modal;
+  requestAnimationFrame(()=>{
+    if(activeDialog!==modal)return;
+    const target=dialogFocusables(modal)[0]||modal;
+    target.focus({preventScroll:true});
+  });
+}
+function closeModal(){
+  const modal=activeDialog||document.querySelector('.modal');
+  if(!modal)return;
+  modal.remove();
+  activeDialog=null;
+  if(dialogPreviousState){
+    document.body.style.overflow=dialogPreviousState.overflow;
+    const main=$('#main-content'),rail=$('#rail');
+    if(main)main.inert=dialogPreviousState.mainInert;
+    if(rail)rail.inert=dialogPreviousState.railInert;
+  }
+  dialogPreviousState=null;
+  const target=dialogReturnFocus;
+  dialogReturnFocus=null;
+  requestAnimationFrame(()=>{
+    if(target?.isConnected)target.focus({preventScroll:true});
+    else $('#page-title')?.focus({preventScroll:true});
+  });
+}
+document.addEventListener('keydown',event=>{
+  if(activeDialog){
+    if(event.key==='Escape'){
+      event.preventDefault();
+      closeModal();
+      return;
+    }
+    if(event.key==='Tab'){
+      const focusables=dialogFocusables(activeDialog);
+      if(!focusables.length){event.preventDefault();activeDialog.focus();return;}
+      const first=focusables[0],last=focusables[focusables.length-1];
+      if(event.shiftKey&&(document.activeElement===first||!activeDialog.contains(document.activeElement))){
+        event.preventDefault();last.focus();
+      }else if(!event.shiftKey&&(document.activeElement===last||!activeDialog.contains(document.activeElement))){
+        event.preventDefault();first.focus();
+      }
+    }
+    return;
+  }
+  if($('#rail')?.classList.contains('mobile-open')){
+    if(event.key==='Escape'){event.preventDefault();setMobileNavOpen(false);return;}
+    if(event.key==='Tab'){
+      const focusables=Array.from($('#rail').querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled])'))
+        .filter(el=>el.getClientRects().length>0);
+      if(!focusables.length){event.preventDefault();return;}
+      const first=focusables[0],last=focusables[focusables.length-1];
+      if(event.shiftKey&&(document.activeElement===first||!$('#rail').contains(document.activeElement))){event.preventDefault();last.focus();}
+      else if(!event.shiftKey&&(document.activeElement===last||!$('#rail').contains(document.activeElement))){event.preventDefault();first.focus();}
+    }
+  }
+});
 
 /* What each editable kind is called, and which page lists it. Stated once so a
    fourth kind does not mean hunting for three ternaries. */
@@ -3293,7 +3603,7 @@ async function addItem(kind){
     <div class="pick">${Object.entries(types).map(([k, t]) =>
       `<button data-t="${k}">${esc(t.label)}<small>${esc(t.protocol || k)}</small></button>`).join('')}</div>
     <div class="foot"><button class="btn ghost sp" data-close>Cancel</button></div></div>`;
-  document.body.append(m);
+  openModal(m);
   m.onclick = e => { if(e.target === m || e.target.dataset.close !== undefined) closeModal(); };
   m.querySelectorAll('[data-t]').forEach(b => b.onclick = () => {
     closeModal();
@@ -3336,37 +3646,53 @@ async function editItem(kind, item){
       <button class="btn ghost sp" data-close>Cancel</button>
       <button class="btn" id="m-save">Save</button>
     </div></div>`;
-  document.body.append(m);
+  openModal(m);
   m.onclick = e => { if(e.target === m || e.target.dataset.close !== undefined) closeModal(); };
 
   const payload = () => ({ ...readForm(), type: item.type, id: item.id });
   const line = (ok, msg) => {
-    m.querySelector('#testline').className = 'testline ' + (ok ? 'ok' : 'bad');
-    m.querySelector('#testline').innerHTML = appMessageMarkup(msg);
+    const status=m.querySelector('#testline');
+    status.className = 'testline ' + (ok ? 'ok' : 'bad');
+    status.setAttribute('role',ok?'status':'alert');
+    status.setAttribute('aria-live',ok?'polite':'assertive');
+    status.innerHTML = appMessageMarkup(msg);
   };
 
   m.querySelector('#m-test').onclick = async (e) => {
     e.target.disabled = true; line(true, 'Testing…');
-    const r = await j(`/api/v1/${kind}/test`, {
-      method: 'POST', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(payload()) });
-    line(r.ok, r.message || (r.ok ? 'Connected' : 'Failed'));
+    try{
+      const r = await j(`/api/v1/${kind}/test`, {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload()) });
+      line(r.ok, r.message || (r.ok ? 'Connected' : 'Failed'));
+    }catch(_){line(false,'Could not reach ROMarr. Check the connection and try again.');}
     e.target.disabled = false;
   };
 
   m.querySelector('#m-save').onclick = async (e) => {
     e.target.disabled = true;
-    await j(`/api/v1/${kind}`, {
-      method: 'POST', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(payload()) });
-    closeModal(); toastLabel('Saved'); go((KINDS[kind] || {}).page || 'clients');
+    try{
+      const saved=await j(`/api/v1/${kind}`, {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload()) });
+      if(saved.error){line(false,saved.error);e.target.disabled=false;return;}
+      closeModal(); toastLabel('Saved'); go((KINDS[kind] || {}).page || 'clients',true);
+    }catch(_){
+      line(false,'Could not save this connection. Check the connection and try again.');
+      e.target.disabled=false;
+    }
   };
 
   const del = m.querySelector('#m-del');
   if(del) del.onclick = async () => {
     if(!confirmMessage('Remove {name}?',{name:item.name||spec.label})) return;
-    await fetch(`/api/v1/${kind}/${item.id}`, { method: 'DELETE' });
-    closeModal(); toastLabel('Removed'); go((KINDS[kind] || {}).page || 'clients');
+    del.disabled=true;
+    try{
+      const response=await fetch(`/api/v1/${kind}/${item.id}`, { method: 'DELETE' });
+      const result=await response.json().catch(()=>({}));
+      if(!response.ok||result.error)throw new Error(result.error||`Could not remove this entry (HTTP ${response.status}).`);
+      closeModal(); toastLabel('Removed'); go((KINDS[kind] || {}).page || 'clients',true);
+    }catch(error){line(false,error.message||'Could not remove this entry.');del.disabled=false;}
   };
 }
 
@@ -3374,18 +3700,27 @@ async function editItem(kind, item){
 function settingsPage(title, help, body, after){
   $('#page').innerHTML=`<div class="card"><h3>${title}</h3>
     <p class="help">${help}</p>${body}
+    <div id="settings-save-status" class="help" role="status" aria-live="polite" aria-atomic="true"></div>
     <button class="btn" id="s-save">Save</button></div>`;
-  if(after) after();
+  if(after)after();
+  const reportSettingsError=(message,control)=>{
+    const status=$('#settings-save-status');
+    status.setAttribute('role','alert');status.setAttribute('aria-live','assertive');
+    status.textContent=message;
+    control?.setAttribute('aria-invalid','true');
+    control?.focus({preventScroll:false});
+  };
   $('#s-save').onclick=async()=>{
     const patch={};
+    document.querySelectorAll('[aria-invalid="true"]').forEach(el=>el.removeAttribute('aria-invalid'));
     document.querySelectorAll('[data-k]').forEach(el=>{
-      patch[el.dataset.k]= el.type==='checkbox' ? el.checked
-        : el.type==='number' ? Number(el.value)
-        : el.dataset.list ? el.value.split(',').map(s=>s.trim()).filter(Boolean)
-        : el.value;
+      patch[el.dataset.k]=el.type==='checkbox'?el.checked
+        :el.type==='number'?(el.value===''?null:Number(el.value))
+        :el.dataset.list?el.value.split(',').map(s=>s.trim()).filter(Boolean)
+        :el.value;
     });
     const mappings=$('#remote-path-mappings');
-    if(mappings) patch.remote_path_mappings=[...mappings.querySelectorAll('[data-mapping-row]')]
+    if(mappings)patch.remote_path_mappings=[...mappings.querySelectorAll('[data-mapping-row]')]
       .map(row=>({
         client_id:row.querySelector('[data-map-client]').value,
         remote:row.querySelector('[data-map-remote]').value.trim(),
@@ -3398,22 +3733,37 @@ function settingsPage(title, help, body, after){
         const name=row.querySelector('[data-platform-folder-name]').value.trim();
         const slug=row.querySelector('[data-platform-folder-slug]').value;
         if(!name&&!slug)continue;
-        if(!name||!slug||name==='.'||name==='..'||name.includes('/')
-            ||name.includes(String.fromCharCode(92))
-            ||name.includes(String.fromCharCode(0))){
-          toastAppMessage('Enter one folder name and choose its platform.');return;
+        const invalidFolderName=!name||name==='.'||name==='..'||name.includes('/')
+          ||name.includes(String.fromCharCode(92))||name.includes(String.fromCharCode(0));
+        if(invalidFolderName||!slug){
+          reportSettingsError('Enter one folder name and choose its platform.',
+            row.querySelector(invalidFolderName?'[data-platform-folder-name]':'[data-platform-folder-slug]'));
+          return;
         }
-        const key=name.toLocaleLowerCase();
-        if(Object.keys(mapped).some(existing=>existing.toLocaleLowerCase()===key)){
-          toastAppMessage('Each platform folder name can be mapped only once.');return;
+        const key=name.normalize('NFKC').toLocaleLowerCase();
+        if(Object.keys(mapped).some(existing=>existing.normalize('NFKC').toLocaleLowerCase()===key)){
+          reportSettingsError('Each platform folder name can be mapped only once.',
+            row.querySelector('[data-platform-folder-name]'));
+          return;
         }
         mapped[name]=slug;
       }
       patch.platform_folder_mappings=mapped;
     }
-    SETTINGS=await j('/api/v1/config',{method:'PUT',
-      headers:{'content-type':'application/json'},body:JSON.stringify(patch)});
-    toastLabel('Saved');
+    const button=$('#s-save'),status=$('#settings-save-status');
+    button.disabled=true;status.setAttribute('role','status');status.setAttribute('aria-live','polite');
+    status.textContent='Saving settings…';
+    try{
+      const response=await fetch('/api/v1/config',{method:'PUT',
+        headers:{'content-type':'application/json'},body:JSON.stringify(patch)});
+      const saved=await response.json().catch(()=>({}));
+      if(!response.ok||!saved||typeof saved!=='object'||saved.error)
+        throw new Error(saved.error||`Settings could not be saved (HTTP ${response.status}).`);
+      SETTINGS=saved;status.textContent='Settings saved.';toastLabel('Saved');
+    }catch(error){
+      status.setAttribute('role','alert');status.setAttribute('aria-live','assertive');
+      status.textContent=String(error&&error.message||'Settings could not be saved. Try again.');
+    }finally{button.disabled=false;}
   };
 }
 const fld=(k,label,val,type='text',extra='')=>`<div class="field"><label for="s-${k}">${label}</label>
@@ -3436,28 +3786,41 @@ const pathMappingRow=m=>{
     String(c.id||''),`${c.name||c.type||'Download client'} · ${c.type||'client'} · ${c.host||'local'}${c.port?':'+c.port:''}`])];
   if(clientId&&!clients.some(c=>String(c.id||'')===clientId))
     options.push([clientId,`Unavailable download client · ${clientId}`]);
-  return `<div data-mapping-row style="display:grid;grid-template-columns:minmax(160px,1fr) minmax(160px,1fr) minmax(160px,1fr) auto;gap:8px;margin:8px 0">
-    <select data-map-client aria-label="Download client">${options.map(([value,label])=>{
-      const unavailable=value===clientId&&!clients.some(c=>String(c.id||'')===clientId);
-      const marker=value===''?' data-i18n="All download clients"'
-        :unavailable?' data-i18n-template="Unavailable download client · {id}" data-i18n-values="'+esc(JSON.stringify({id:clientId}))+'"':'';
-      const text=value===''?translateLabel('All download clients',readInterfaceLanguage())
-        :unavailable?translateTemplate('Unavailable download client · {id}',{id:clientId}):label;
-      return `<option value="${esc(value)}"${value===clientId?' selected':''}${marker}>${esc(text)}</option>`;
-    }).join('')}</select>
-    <input data-map-remote aria-label="Remote path" value="${esc(m.remote||'')}" placeholder="Path reported by client">
-    <input data-map-local aria-label="Local path" value="${esc(m.local||'')}" placeholder="Path visible to ROMarr">
-    <button type="button" data-mapping-remove aria-label="Remove mapping">Remove</button>
+  const rowName=m.remote?`Path mapping for ${m.remote}`:'New path mapping';
+  return `<div data-mapping-row class="mapping-row path-map" role="group" aria-label="${esc(rowName)}">
+    <label class="mapping-field">Download client
+      <select data-map-client>${options.map(([value,label])=>{
+        const unavailable=value===clientId&&!clients.some(c=>String(c.id||'')===clientId);
+        const marker=value===''?' data-i18n="All download clients"'
+          :unavailable?' data-i18n-template="Unavailable download client · {id}" data-i18n-values="'+esc(JSON.stringify({id:clientId}))+'"':'';
+        const text=value===''?translateLabel('All download clients',readInterfaceLanguage())
+          :unavailable?translateTemplate('Unavailable download client · {id}',{id:clientId}):label;
+        return `<option value="${esc(value)}"${value===clientId?' selected':''}${marker}>${esc(text)}</option>`;
+      }).join('')}</select>
+    </label>
+    <label class="mapping-field">Remote path
+      <input data-map-remote value="${esc(m.remote||'')}" placeholder="Path reported by client">
+    </label>
+    <label class="mapping-field">Local path
+      <input data-map-local value="${esc(m.local||'')}" placeholder="Path visible to ROMarr">
+    </label>
+    <button class="btn ghost" type="button" data-mapping-remove aria-label="Remove ${esc(rowName)}">Remove</button>
   </div>`;
 };
 const pathMappingRows=m=>(Array.isArray(m)&&m.length?m:[{}]).map(pathMappingRow).join('');
 const platformFolderRow=m=>{
   m=m||{};
+  const folder=String(m.folder||'');
+  const rowName=folder?`Platform folder mapping for ${folder}`:'New platform folder mapping';
   const options=(PLATFORMS||[]).map(p=>`<option value="${esc(p.slug)}"${String(m.platform||'')===String(p.slug)?' selected':''}>${esc(p.name||p.slug)}</option>`).join('');
-  return `<div data-platform-folder-row style="display:grid;grid-template-columns:minmax(160px,1fr) minmax(180px,1fr) auto;gap:8px;margin:8px 0">
-    <input data-platform-folder-name aria-label="Folder name" value="${esc(m.folder||'')}" placeholder="Folder name, e.g. ps2">
-    <select data-platform-folder-slug aria-label="Platform"><option value="">Choose platform</option>${options}</select>
-    <button type="button" data-platform-folder-remove aria-label="Remove folder mapping">Remove</button>
+  return `<div data-platform-folder-row class="mapping-row platform-folder" role="group" aria-label="${esc(rowName)}">
+    <label class="mapping-field">Folder name
+      <input data-platform-folder-name value="${esc(folder)}" placeholder="e.g. PS2 Games">
+    </label>
+    <label class="mapping-field">Platform
+      <select data-platform-folder-slug><option value="">Choose a platform</option>${options}</select>
+    </label>
+    <button class="btn ghost" type="button" data-platform-folder-remove aria-label="Remove ${esc(rowName)}">Remove</button>
   </div>`;
 };
 const platformFolderRows=m=>Object.entries(m&&typeof m==='object'&&!Array.isArray(m)?m:{}).map(([folder,platform])=>platformFolderRow({folder,platform})).join('');
@@ -3466,22 +3829,22 @@ RENDER.media=()=>settingsPage('Media Management',
   fld('library_path','ROM library root',SETTINGS.library_path)
   +fld('metadata_path','Shared metadata root',SETTINGS.metadata_path||'')
   +`<div class="help" style="margin:-6px 0 14px">Use one ROM root with one folder per platform, such as <code>Emulation/roms/ps2</code> and <code>Emulation/roms/snes</code>; you do not need a separate library entry for each system. With EmuDeck, point this at its <code>Emulation/roms</code> folder, not the wider <code>Emulation</code> directory. Keep shared metadata alongside it at <code>Emulation/metadata</code>, outside the ROM root, and mount that folder on each client. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another provider lookup.</div>`
-  +`<div class="field"><label>Platform folder names</label>
-    <div style="color:var(--dim);font-size:11.5px;margin:4px 0 8px">ROMarr recognizes platform slugs and unambiguous ES-DE system names automatically. Add a mapping only when your existing folder uses another name, such as <code>PS2 Games</code>. Folder names are matched only at the library root.</div>
+  +`<fieldset class="settings-group"><legend>Platform folder names</legend>
+    <p class="help" style="margin:4px 0 8px">ROMarr recognizes platform slugs and unambiguous ES-DE system names automatically. Add a mapping only when your existing folder uses another name, such as <code>PS2 Games</code>. Folder names are matched only at the library root.</p>
     <div id="platform-folder-mappings">${platformFolderRows(SETTINGS.platform_folder_mappings)}</div>
-    <button class="btn ghost" id="platform-folder-mapping-add" type="button">Add folder mapping</button></div>`
+    <button class="btn ghost" id="platform-folder-mapping-add" type="button">Add folder mapping</button></fieldset>`
   +fld('esde_gamelists_path','Existing ES-DE gamelists folder (optional)',SETTINGS.esde_gamelists_path||'')
   +fld('esde_media_path','Existing ES-DE media folder (optional)',SETTINGS.esde_media_path||'')
   +`<div class="help" style="margin:-6px 0 14px">Set these only when you want ROMarr to import an existing ES-DE setup visible inside this server. ROMarr publishes shared output to <code>metadata/esde/gamelists</code> and <code>metadata/esde/downloaded_media</code>. Link or configure ES-DE's gamelist directory to the shared <code>gamelists</code> folder and set its Game media directory to <code>downloaded_media</code>. Media files follow ROM names and folders, so artwork remains matched when clients mount the same library at different paths.</div>`
   +fld('dat_path','DAT directory',SETTINGS.dat_path||'')
-  +`<div class="field"><label>Remote path mappings</label>
-     <div style="color:var(--dim);font-size:11.5px;margin:4px 0 8px">
+  +`<fieldset class="settings-group"><legend>Remote path mappings</legend>
+     <p class="help" style="margin:4px 0 8px">
        Map the path a download client reports to the path ROMarr can see. Choose
        a client to keep SABnzbd and torrent paths separate, or use All download
        clients for a shared path. Client-specific mappings take precedence;
-       within a scope, the longest matching prefix wins.</div>
+       within a scope, the longest matching prefix wins.</p>
      <div id="remote-path-mappings">${pathMappingRows(SETTINGS.remote_path_mappings)}</div>
-     <button class="btn ghost" id="remote-path-mapping-add" type="button">Add mapping</button></div>`
+     <button class="btn ghost" id="remote-path-mapping-add" type="button">Add path mapping</button></fieldset>`
   +sel('library_layout','Folder structure',
      [['flat','Structure A — platform/rom'],['nested','Structure B — platform/roms/rom']],
      SETTINGS.library_layout||'flat',
@@ -3529,16 +3892,34 @@ RENDER.media=()=>settingsPage('Media Management',
      +'in your regions.'),
   ()=>{
     const rows=$('#remote-path-mappings');
-    $('#remote-path-mapping-add').onclick=()=>rows.insertAdjacentHTML('beforeend',pathMappingRow({}));
+    const addPath=$('#remote-path-mapping-add');
+    addPath.onclick=()=>{
+      rows.insertAdjacentHTML('beforeend',pathMappingRow({}));
+      rows.lastElementChild?.querySelector('[data-map-remote]')?.focus();
+    };
     rows.onclick=e=>{
       const remove=e.target.closest('[data-mapping-remove]');
-      if(remove)remove.closest('[data-mapping-row]').remove();
+      if(!remove)return;
+      const row=remove.closest('[data-mapping-row]');
+      const siblings=[...rows.querySelectorAll('[data-mapping-row]')];
+      const next=siblings[siblings.indexOf(row)+1]||siblings[siblings.indexOf(row)-1];
+      row.remove();
+      (next?.querySelector('[data-map-remote]')||addPath).focus();
     };
     const folders=$('#platform-folder-mappings');
-    $('#platform-folder-mapping-add').onclick=()=>folders.insertAdjacentHTML('beforeend',platformFolderRow({}));
+    const addFolder=$('#platform-folder-mapping-add');
+    addFolder.onclick=()=>{
+      folders.insertAdjacentHTML('beforeend',platformFolderRow({}));
+      folders.lastElementChild?.querySelector('[data-platform-folder-name]')?.focus();
+    };
     folders.onclick=e=>{
       const remove=e.target.closest('[data-platform-folder-remove]');
-      if(remove)remove.closest('[data-platform-folder-row]').remove();
+      if(!remove)return;
+      const row=remove.closest('[data-platform-folder-row]');
+      const siblings=[...folders.querySelectorAll('[data-platform-folder-row]')];
+      const next=siblings[siblings.indexOf(row)+1]||siblings[siblings.indexOf(row)-1];
+      row.remove();
+      (next?.querySelector('[data-platform-folder-name]')||addFolder).focus();
     };
   });
 
@@ -4383,7 +4764,7 @@ RENDER.metadata=async()=>{
 const metaResult=d=>{
   if(!d||!d.matched_by) return '<div class="help">No answer.</div>';
   const badge = d.matched_by==='dat'
-    ? '<span class="pill" style="background:var(--ok);color:#08210d">matched by DAT — exact</span>'
+    ? '<span class="pill" style="background:var(--ok);color:var(--ok-ink)">matched by DAT — exact</span>'
     : '<span class="pill">matched by filename — a guess</span>';
   return '<div class="pcard"><h4>'+esc(d.title||'Not identified')+'</h4>'
     +'<div class="meta">'+badge+(d.source?'<span class="pill">'+esc(d.source)+'</span>':'')+'</div>'
@@ -4526,7 +4907,7 @@ RENDER.calendar=async()=>{
       +'<h4>'+esc(g.title)+'</h4>'
       +'<div class="meta"><span class="pill">'+(g.released
         ?esc(regionalDate(g.released)):interfaceMarkup('Not announced'))+'</span>'
-      +(g.upcoming?'<span class="pill" style="background:var(--info);color:#06131f">upcoming</span>':'')
+      +(g.upcoming?'<span class="pill" style="background:var(--info);color:var(--info-ink)">upcoming</span>':'')
       +(g.source||wsrc?'<span class="pill">'+esc(g.source||wsrc)+'</span>'
         :interfaceMarkup('Metadata provider'))
       +'</div>'
@@ -4576,8 +4957,8 @@ RENDER.getstarted=async()=>{
   ]);
   const items=libs.items||[];
   const platforms=plat.platforms||[];
-  const ok=x=>x?'<span class="pill" style="background:var(--ok);color:#08210d">ready</span>'
-                :'<span class="pill" style="background:var(--warn);color:#2a1c05">not set up</span>';
+  const ok=x=>x?'<span class="pill" style="background:var(--ok);color:var(--ok-ink)">ready</span>'
+                :'<span class="pill" style="background:var(--warn);color:var(--warn-ink)">not set up</span>';
 
   const indexerOk=!!(status.prowlarr||(status.indexers||0)>0);
   // /api/v1/system/status reports configured clients in `clients`. The
@@ -4719,7 +5100,7 @@ RENDER.collections=async()=>{
           +'value="'+kind+'" checked> '+interfaceMarkup(label)+'</label>').join('')
        +'</div>'
        +'<div class="row" style="gap:8px;margin-top:10px;align-items:center">'
-       +'<label class="help" style="margin:0">Fan translations</label>'
+       +'<label class="help" style="margin:0" for="ctrans">Fan translations</label>'
        +'<select id="ctrans">'
        +[['exclude','Exclude — published dumps only'],
          ['fill','Fill gaps — use a translation only when no preferred-region dump exists'],
@@ -4728,7 +5109,7 @@ RENDER.collections=async()=>{
           '<option value="'+o[0]+'" data-i18n="'+esc(o[1])+'"'+((SETTINGS.translation_policy||'exclude')===o[0]?' selected':'')
           +'>'+esc(o[1])+'</option>').join('')
        +'</select>'
-       +'<label class="help" style="margin:0">languages</label>'
+       +'<label class="help" style="margin:0" for="ctranslangs">languages</label>'
        +'<input id="ctranslangs" placeholder="'+esc((SETTINGS.translation_langs||['en']).join(', '))+'" '
        +'value="'+esc((SETTINGS.translation_langs||['en']).join(', '))+'" '
        +'style="width:110px;padding:6px 8px;background:var(--bg);color:var(--fg);'
@@ -4855,11 +5236,11 @@ RENDER.collections=async()=>{
       +'<th>Why this dump</th></tr></thead><tbody>'
       +d.titles.slice(0,300).map(t=>{
         const pill=t.status==='verified'
-          ?'<span class="pill" style="background:var(--ok);color:#08210d">verified</span>'
+          ?'<span class="pill" style="background:var(--ok);color:var(--ok-ink)">verified</span>'
           :t.status==='bad'
-            ?'<span class="pill" style="background:var(--bad);color:#2a0b0b">bad dump</span>'
+            ?'<span class="pill" style="background:var(--bad);color:var(--bad-ink)">bad dump</span>'
             :t.status==='missing'
-              ?'<span class="pill" style="background:var(--warn);color:#2a1c05">missing</span>'
+              ?'<span class="pill" style="background:var(--warn);color:var(--warn-ink)">missing</span>'
               :'<span class="pill">present</span>';
         const clones=(t.discarded||[]).length
           ?'<details><summary class="help" style="margin:0;cursor:pointer">'
@@ -4922,6 +5303,7 @@ RENDER.organize=async()=>{
     +'<button class="btn ghost" id="org-esde" '+(!SETTINGS.metadata_path?'disabled':'')+'>Publish ES-DE data</button></div>'
     +'<p class="help" style="margin:8px 0 0">ROMarr reads ES-DE gamelists and matching local media before online lookup. Publishing writes a shared gamelist and matching covers under the metadata root, using paths relative to the ROM root and matching ES-DE media names. Provider lookups are capped at 200 per scan. Export the portable catalog from <a href="#status">System → Backup &amp; Export</a>; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/features/shared-library-identification.md#portable-metadata" target="_blank" rel="noopener noreferrer">format and schema</a>.</p></div>'
     +'<div id="org-message"></div><div id="org-status"></div><div id="org-plan-result"></div>'
+    +'<div id="org-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>'
     +'<div class="card"><div class="row" style="align-items:center">'
     +'<h3 style="margin:0;flex:1">Library inventory</h3><span id="org-page-label" class="help" style="margin:0"></span></div>'
     +'<div id="org-items" style="margin-top:12px"><div class="empty">Loading inventory…</div></div>'
@@ -4932,8 +5314,16 @@ RENDER.organize=async()=>{
   const message=(text,bad)=>{
     const box=$('#org-message');
     if(!box)return;
+    if(text){
+      box.setAttribute('role',bad?'alert':'status');
+      box.setAttribute('aria-live',bad?'assertive':'polite');
+      box.setAttribute('aria-atomic','true');
+    }else{
+      box.removeAttribute('role');box.removeAttribute('aria-live');
+    }
     box.innerHTML=text?'<div class="panel-note '+(bad?'panel-warn':'')+'" style="margin:12px 0">'+esc(text)+'</div>':'';
   };
+  let lastAnnouncedOrganizerState='';
   const platform=()=>($('#org-platform')||{}).value||'';
   const loadInventory=async()=>{
     if(token!==window._organizeViewToken||location.hash!=='#organize')return null;
@@ -4946,6 +5336,11 @@ RENDER.organize=async()=>{
     ]);
     if(token!==window._organizeViewToken||location.hash!=='#organize')return null;
     const stateLabel={idle:'Ready to scan',scanning:'Scanning',complete:'Scan complete',partial:'Scan reached its safety limit',failed:'Scan failed',unavailable:'Status unavailable'}[status.state]||status.state||'Unknown';
+    if(['complete','partial','failed'].includes(status.state)&&lastAnnouncedOrganizerState!==status.state){
+      const announcement=$('#org-announcement');
+      if(announcement)announcement.textContent=stateLabel+'. '+fmt(status.processed||0)+' of '+fmt(status.total||0)+' files checked.';
+    }
+    lastAnnouncedOrganizerState=status.state||'';
     $('#org-status').innerHTML='<div class="card"><div class="row" style="align-items:center">'
       +'<b>'+esc(stateLabel)+'</b><span class="help" style="margin:0">'+fmt(status.processed||0)+' / '+fmt(status.total||0)+' files checked</span>'
       +'<span class="help" style="margin:0">DAT verified '+fmt(status.verified||0)+'</span>'
@@ -5072,8 +5467,11 @@ RENDER.organize=async()=>{
     const last=batch.offset+batch.count;
     const rows=(plan.operations||[]).map(op=>'<tr><td lang="und" dir="auto">'+esc(op.from)+'</td><td lang="und" dir="auto">'+esc(op.to)+'</td><td>'+esc(op.reason)+'</td></tr>').join('');
     const blocked=(plan.blocked||[]).map(op=>'<tr><td>'+esc(op.identity_id||'')+'</td><td>'+esc(op.reason||'')+'</td></tr>').join('');
+    const safeCount=(plan.operations||[]).length,blockedCount=(plan.blocked||[]).length;
+    const planAnnouncement=$('#org-announcement');
+    if(planAnnouncement)planAnnouncement.textContent='Rename preview ready. '+fmt(safeCount)+' safe renames in this batch; '+fmt(blockedCount)+' entries left alone.';
     $('#org-plan-result').innerHTML='<div class="card"><h3>Rename preview · '+fmt(first)+'–'+fmt(last)+' of '+fmt(batch.total||0)+'</h3><p class="help">'
-      +fmt((plan.operations||[]).length)+' safe rename(s) in this batch. '+fmt((plan.blocked||[]).length)+' matching entries were left alone.'
+      +fmt(safeCount)+' safe rename(s) in this batch. '+fmt(blockedCount)+' matching entries were left alone.'
       +(batch.has_more?' More entries will be reviewed in the next batch.':'')+'</p>'
       +(rows?'<div style="overflow-x:auto"><table><thead><tr><th>Current path</th><th>Proposed path</th><th>Evidence</th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<p class="empty">No safe renames are ready in this batch.</p>')
       +(blocked?'<details style="margin-top:10px"><summary>See blocked items</summary><div style="overflow-x:auto"><table><thead><tr><th>Game</th><th>Reason</th></tr></thead><tbody>'+blocked+'</tbody></table></div></details>':'')
@@ -5146,9 +5544,9 @@ RENDER.manualimport=async()=>{
   // loaded" -- normal for homebrew, translations and anything newer than your
   // DAT -- and must never be presented as a problem. Only a bad dump is.
   const verdict=v=>v==='verified'
-    ? '<span class="pill" style="background:var(--ok);color:#08210d">'+interfaceMarkup('verified')+'</span>'
+    ? '<span class="pill" style="background:var(--ok);color:var(--ok-ink)">'+interfaceMarkup('verified')+'</span>'
     : v==='bad-dump'
-      ? '<span class="pill" style="background:var(--bad);color:#2a0b0b">'+interfaceMarkup('bad dump')+'</span>'
+      ? '<span class="pill" style="background:var(--bad);color:var(--bad-ink)">'+interfaceMarkup('bad dump')+'</span>'
       : '<span class="pill" data-i18n-title="Not in your DAT. Often perfectly fine." title="'+esc(translateLabel('Not in your DAT. Often perfectly fine.',readInterfaceLanguage()))+'">'+interfaceMarkup('unknown')+'</span>';
 
   async function adopt(row, force){
@@ -5204,7 +5602,7 @@ RENDER.manualimport=async()=>{
            +'<td><span lang="und" dir="auto">'+esc(x.filename)+'</span></td>'
            +'<td><select class="mi-pf">'+opts(x.platform)+'</select></td>'
            +'<td class="help" style="margin:0">'+appMessageMarkup(x.reason)+'</td>'
-           +'<td>'+(x.hollow?'<span class="pill" lang="und" dir="auto" style="background:var(--bad);color:#2a0b0b" '+manualDiagnosticTitle(x.hollow)+'>'+interfaceMarkup('EMPTY FILE')+'</span><br>':'')+verdict(x.verdict)+(x.header_says?'<br><span class="pill" lang="und" dir="auto" style="background:var(--warn);color:#2a1c05" '+manualDiagnosticTitle(x.header_detail||'')+'>'+interfaceMarkup('Header says')+' <span lang="und" dir="auto">'+esc(x.header_says)+'</span></span>':'')+'</td>'
+           +'<td>'+(x.hollow?'<span class="pill" lang="und" dir="auto" style="background:var(--bad);color:var(--bad-ink)" '+manualDiagnosticTitle(x.hollow)+'>'+interfaceMarkup('EMPTY FILE')+'</span><br>':'')+verdict(x.verdict)+(x.header_says?'<br><span class="pill" lang="und" dir="auto" style="background:var(--warn);color:var(--warn-ink)" '+manualDiagnosticTitle(x.header_detail||'')+'>'+interfaceMarkup('Header says')+' <span lang="und" dir="auto">'+esc(x.header_says)+'</span></span>':'')+'</td>'
            +'<td><button class="btn mi-go">'+interfaceMarkup('Import')+'</button></td>'
            +'<td class="mi-st help" style="margin:0"></td></tr>').join('')
          +'</tbody></table>'
@@ -5324,10 +5722,16 @@ RENDER.logs=async()=>{
    is left here is wiring the buttons and keeping them showing the truth. */
 function paintTheme(){
   const mode=ROMTHEME.mode(), accent=ROMTHEME.accent().toLowerCase();
-  document.querySelectorAll('[data-theme-set]').forEach(b=>
-    b.classList.toggle('on', b.dataset.themeSet===mode));
-  document.querySelectorAll('[data-accent]').forEach(b=>
-    b.classList.toggle('on', b.dataset.accent.toLowerCase()===accent));
+  document.querySelectorAll('[data-theme-set]').forEach(b=>{
+    const selected=b.dataset.themeSet===mode;
+    b.classList.toggle('on',selected);
+    b.setAttribute('aria-pressed',String(selected));
+  });
+  document.querySelectorAll('[data-accent]').forEach(b=>{
+    const selected=b.dataset.accent.toLowerCase()===accent;
+    b.classList.toggle('on',selected);
+    b.setAttribute('aria-pressed',String(selected));
+  });
   const pick=$('#accent-pick'); if(pick) pick.value=accent;
 }
 function bindTheme(){
@@ -5366,7 +5770,15 @@ async function refreshCounts(){
   });
 }
 (async()=>{
-  document.querySelectorAll('.nav').forEach(n=>n.onclick=()=>go(n.dataset.page));
+  document.querySelectorAll('.nav').forEach(n=>n.onclick=()=>{
+    if(location.hash==='#'+n.dataset.page)go(n.dataset.page,true);
+  });
+  const navToggle=$('#nav-toggle'),navBackdrop=$('#nav-backdrop');
+  navToggle.onclick=()=>setMobileNavOpen(true);
+  navBackdrop.onclick=()=>setMobileNavOpen(false);
+  window.addEventListener('resize',()=>{
+    if(window.innerWidth>680)setMobileNavOpen(false,false);
+  });
   const languageSelect=$('#interface-language');
   if(languageSelect){
     languageSelect.addEventListener('change',()=>{
@@ -5394,7 +5806,11 @@ async function refreshCounts(){
     searchTimer=setTimeout(()=>RENDER.library(),250);};
   [PLATFORMS,SETTINGS]=await Promise.all([
     j('/api/platforms').catch(()=>[]), j('/api/v1/config').catch(()=>({}))]);
-  go(location.hash.slice(1)||'library');
+  const requestedPage=location.hash.slice(1);
+  const initialPage=document.querySelector('.nav[data-page="'+CSS.escape(requestedPage)+'"]')
+    ?requestedPage:'library';
+  if(location.hash!=='#'+initialPage)history.replaceState(null,'','#'+initialPage);
+  go(initialPage);
   refreshCounts(); setInterval(refreshCounts,15000);
 })();
 """.replace("__UI_LABELS__", json.dumps(UI_LABELS, ensure_ascii=False))
@@ -5404,13 +5820,23 @@ def page() -> str:
     return f"""<!doctype html><html lang="en"><head><meta charset="utf-8">
 <title>ROMarr</title><meta name="viewport" content="width=device-width,initial-scale=1">
 <style>{CSS}</style><script>{THEME_BOOT}</script></head><body>
-<nav id="rail"><div id="brand">ROM<span>arr</span></div>
-<div id="navwrap">{_nav_html()}</div>
-{_theme_control_html()}</nav>
-<div id="main">
-  <div id="top"><h1 data-i18n="Games">Games</h1><input id="search" data-i18n-placeholder="Filter…" placeholder="Filter…" autocomplete="off" lang="und" dir="auto"></div>
+<a class="skip-link" href="#main-content" data-i18n="Skip to content">Skip to content</a>
+<aside id="rail" aria-label="ROMarr sidebar">
+  <div id="brand">ROM<span>arr</span></div>
+  <nav id="navwrap" aria-label="Main navigation">{_nav_html()}</nav>
+  {_theme_control_html()}
+</aside>
+<button id="nav-backdrop" class="nav-backdrop" type="button" aria-label="Close navigation" data-i18n-aria-label="Close navigation" hidden></button>
+<div id="app-announcement" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></div>
+<main id="main-content" tabindex="-1">
+  <header id="top"><button id="nav-toggle" class="nav-toggle" type="button"
+    aria-controls="navwrap" aria-expanded="false" aria-label="Open navigation" data-i18n-aria-label="Open navigation" data-i18n="Menu">Menu</button>
+    <h1 id="page-title" tabindex="-1" data-i18n="Games">Games</h1>
+    <label class="sr-only" for="search" data-i18n="Filter games">Filter games</label>
+    <input id="search" data-i18n-placeholder="Filter…" placeholder="Filter…"
+      aria-label="Filter games" data-i18n-aria-label="Filter games" autocomplete="off" lang="und" dir="auto"></header>
   <div class="page" id="page"></div>
-</div>
+</main>
 <script>{JS}</script></body></html>"""
 
 
