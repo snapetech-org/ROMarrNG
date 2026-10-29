@@ -189,6 +189,9 @@ DEFAULT_SETTINGS: dict[str, Any] = {
     # A shared sidecar root for cached metadata and artwork, mounted at the same
     # relative location on each frontend machine. Empty disables local publishing.
     "metadata_path": "",
+    # Private local key authenticating rename history stored on the shared
+    # metadata mount. Generated on first use and never writable through config.
+    "_organizer_journal_key": "",
     # Switch update/DLC routing is explicit because TitleDB IDs come from
     # filenames and do not verify package bytes.
     "switch_auto_route": False,
@@ -870,7 +873,7 @@ class Store:
         """
         with self._lock:
             for key, value in patch.items():
-                if key in DEFAULT_SETTINGS:
+                if key in DEFAULT_SETTINGS and key != "_organizer_journal_key":
                     self.settings[key] = value
             out = dict(self.settings)
         self.save()

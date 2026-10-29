@@ -16,6 +16,7 @@ import os
 import re
 import stat
 import shutil
+import secrets
 import tempfile
 import threading
 import unicodedata
@@ -682,12 +683,15 @@ class LibraryOrganizer:
         _atomic_json(path, payload, root)
 
     def _journal_key(self) -> bytes:
-        """Use this server's private API key to authenticate shared undo state."""
-        auth = getattr(self.service, "auth", None)
-        value = getattr(auth, "api_key", "")
-        if not isinstance(value, str) or len(value) < 32:
-            raise ValueError("A server API key is required to protect rename history.")
-        return value.encode("utf-8")
+        """Use a private local key to authenticate shared undo state."""
+        store = self.service.store
+        with store._lock:
+            value = store.settings.get("_organizer_journal_key")
+            if not isinstance(value, str) or not re.fullmatch(r"[a-f0-9]{64}", value):
+                value = secrets.token_hex(32)
+                store.settings["_organizer_journal_key"] = value
+                store.save()
+        return bytes.fromhex(value)
 
     def _save_journal(self, path: Path, journal: dict, root: Path) -> None:
         journal.pop("signature", None)

@@ -1907,7 +1907,8 @@ class ROMarr:
         # here by name for the same reason as the two above: the underscore
         # is a naming convention, not a boundary, and `_romm_url` proves the
         # convention is not a reliable one to filter on.
-        for secret in ("_api_key", "_seerrng_api_key", "_password_hash", "_peers"):
+        for secret in ("_api_key", "_seerrng_api_key", "_password_hash", "_peers",
+                       "_organizer_journal_key"):
             out.pop(secret, None)
         return out
 
