@@ -8,11 +8,13 @@ import json
 import re
 import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 from contextlib import redirect_stdout
 from html.parser import HTMLParser
 from pathlib import Path
+from unittest.mock import patch
 
 from romarr.ui import (
     UI_AVAILABLE_LOCALES,
@@ -437,3 +439,56 @@ class LocalizationTests(unittest.TestCase):
         self.assertEqual(count, 1)
         self.assertEqual(complete["locales"]["it"]["status"], "available")
         self.assertIn("it", complete["availableLocales"])
+
+    def test_review_cli_exports_dry_runs_and_applies_atomically(self) -> None:
+        spec = importlib.util.spec_from_file_location(
+            "romarr_localization_review_cli",
+            ROOT / "scripts" / "localization_review.py",
+        )
+        assert spec and spec.loader
+        review = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(review)
+
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = Path(directory)
+            catalog_path = temp_root / "ui-labels.json"
+            bundle_path = temp_root / "it-review.json"
+            catalog_path.write_text(
+                json.dumps(UI_CATALOG, ensure_ascii=False), encoding="utf-8"
+            )
+            review.CATALOG_PATH = catalog_path
+
+            with patch.object(sys, "argv", [
+                "localization_review.py", "export", "--locale", "it",
+                "--output", str(bundle_path),
+            ]), redirect_stdout(io.StringIO()):
+                self.assertEqual(review.main(), 0)
+            bundle = json.loads(bundle_path.read_text(encoding="utf-8"))
+            self.assertEqual(len(bundle["messages"]), len(UI_MESSAGES))
+            bundle["messages"] = bundle["messages"][:1]
+            bundle["messages"][0]["translation"] = "Traduzione di prova"
+            bundle_path.write_text(json.dumps(bundle, ensure_ascii=False),
+                                   encoding="utf-8")
+            before = catalog_path.read_bytes()
+
+            with patch.object(sys, "argv", [
+                "localization_review.py", "import", "--bundle", str(bundle_path),
+                "--reviewer", "CLI test reviewer", "--reviewed-at", "2026-10-29",
+            ]), redirect_stdout(io.StringIO()):
+                self.assertEqual(review.main(), 0)
+            self.assertEqual(catalog_path.read_bytes(), before)
+
+            with patch.object(sys, "argv", [
+                "localization_review.py", "import", "--bundle", str(bundle_path),
+                "--reviewer", "CLI test reviewer", "--reviewed-at", "2026-10-29",
+                "--apply",
+            ]), redirect_stdout(io.StringIO()):
+                self.assertEqual(review.main(), 0)
+            applied = json.loads(catalog_path.read_text(encoding="utf-8"))
+            self.assertEqual(applied["locales"]["it"]["status"], "draft")
+            self.assertNotIn("it", applied["availableLocales"])
+            imported = next(
+                item for item in applied["messages"].values()
+                if item["translations"].get("it") == "Traduzione di prova"
+            )
+            self.assertEqual(imported["translationStatus"]["it"], "reviewed")
