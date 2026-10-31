@@ -1626,6 +1626,11 @@ class LibraryOrganizer:
                             if confidence in ("provider_suggestion", "ambiguous_name") else
                             "Filename only; no verified catalog match"
                         ),
+                        "match_details_source": (
+                            "Exact DAT checksum match"
+                            if confidence == "dat_verified"
+                            and not str(getattr(dat_match, "game", "") or "") else ""
+                        ),
                         "dat": str(getattr(dat_match, "dat", "") or ""),
                         "dat_status": str(getattr(dat_match, "status", UNKNOWN) or UNKNOWN),
                         "dat_game": str(getattr(dat_match, "game", "") or ""),

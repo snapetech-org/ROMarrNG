@@ -70,6 +70,69 @@ TASK_RESULT_METHODS = {
     "retire_dead_downloads", "list_sync", "check_update",
     "start_hash_seed", "run_command",
 }
+VISIBLE_MESSAGE_METHODS = {
+    "romarr/app.py": {
+        "test_indexer", "test_client", "test_library", "collection_plan",
+        "index_hashes_from_library", "friend_want", "audit_library",
+        "scan_launchers", "connect_launchers", "claim_invitation", "adopt",
+        "_friend", "_call_friend", "_romm_friend_rows", "friend_shelf",
+        "netplay_invite", "claim_invitation",
+    },
+    "romarr/organizer.py": {
+        "_scan", "start_scan", "records", "map_record", "rename_plan",
+        "apply_rename_plan", "undo_last", "publish_esde",
+    },
+    "romarr/playability.py": {"submit_pin"},
+    "romarr/hub.py": {"plugins", "fetch"},
+    "romarr/titled.py": {"validate_switch_rom"},
+    "romarr/notify.py": {"send_test"},
+    "romarr/catalogue.py": {"check_source", "problems"},
+    "romarr/federation.py": {
+        "parse_invite_link", "redeem", "accept", "add_romm", "netplay_answer",
+    },
+    "romarr/indexers.py": {"diagnose"},
+    "romarr/downloaders.py": {"_run"},
+}
+VISIBLE_INLINE_MESSAGE_ROUTES = {
+    "romarr/app.py": {
+        "/api/v1/importlist/preview": {"error"},
+        "/api/v1/hashes": {"detail"},
+        "/api/v1/metadataprovider/test": {"message"},
+        "/api/v1/connection/test": {"message"},
+        "/api/v1/totp/enroll": {"note"},
+        "/api/v1/peer/invite": {"note", "warning"},
+        "/api/v1/peer/redeem": {"error"},
+        "/api/v1/peer/romm": {"error"},
+        "/api/v1/peer/accept": {"error"},
+        "/api/v1/peer/policy": {"error"},
+        "/api/v1/hub/source/check": {"reason"},
+        "/api/v1/hub/submit": {"problems"},
+    },
+}
+VISIBLE_LITERAL_MESSAGE_SOURCES = {
+    "romarr/app.py": {
+        "IGDB catalog is not configured",
+        "IGDB catalog request failed",
+        "No DAT catalog is loaded in ROMarrNG",
+        "library is still loading",
+    },
+    "romarr/ui.py": {"Catalog could not be loaded", "library ownership is unavailable"},
+}
+VISIBLE_MESSAGE_FIELDS = {
+    "error", "message", "detail", "warning", "note", "reason", "match_details",
+    "match_details_source", "details",
+}
+VISIBLE_EXCEPTION_METHODS = {
+    "romarr/organizer.py": {
+        "start_scan", "map_record", "rename_plan", "apply_rename_plan",
+        "undo_last", "publish_esde",
+    },
+    "romarr/federation.py": {
+        "parse_invite_link", "redeem", "accept", "add_romm",
+    },
+    "romarr/hub.py": {"fetch"},
+}
+JS_LABEL_MAPS = ("confidenceLabel", "head", "accessLabels")
 TASK_PLACEHOLDER_ALIASES = {
     "VERSION": "version",
     "added": "count",
@@ -155,7 +218,7 @@ def _source_anchor_tokens(source: str) -> list[str]:
     parts = [html.unescape(part).strip()
              for part in re.split(r"\{[A-Za-z][A-Za-z0-9_]*\}", source)
              if part.strip()]
-    text = next((part for part in parts if re.search(r"[A-Za-z]{2,}", part)), source)
+    text = next((part for part in parts if re.search(r"[A-Za-z]{2,}", part)), "")
     return re.findall(r"[A-Za-z0-9]+", text)[:4]
 
 
@@ -175,7 +238,384 @@ def _location_has_source(location: str, source: str) -> bool:
             lines[max(0, start - 2):min(len(lines), end) + 2]
         ))
     ).casefold()
-    return all(token.casefold() in context for token in _source_anchor_tokens(source))
+    anchors = _source_anchor_tokens(source)
+    # Placeholder-only wrappers (for example "{error_type}: {detail}") have
+    # no literal word to anchor. Their explicit line location is the source
+    # evidence, while the coverage pass below validates the source template.
+    return not anchors or all(token.casefold() in context for token in anchors)
+
+
+def _message_expression(node: ast.AST) -> set[str]:
+    """Return fixed text and placeholder templates from one bounded API value."""
+    if isinstance(node, ast.Constant) and isinstance(node.value, str):
+        return {node.value}
+    if isinstance(node, ast.JoinedStr):
+        def formatted(expression: ast.AST, conversion: int = -1) -> set[str]:
+            if isinstance(expression, ast.Constant) and isinstance(expression.value, str):
+                return {expression.value}
+            if isinstance(expression, (ast.BoolOp, ast.IfExp)):
+                branches = (expression.values if isinstance(expression, ast.BoolOp)
+                            else (expression.body, expression.orelse))
+                return set().union(*(formatted(branch) for branch in branches))
+            name: str | None = None
+            if isinstance(expression, ast.Name):
+                aliases = {
+                    "err": "detail", "exc": "detail", "root": "path",
+                    "platform_name": "platform", "platform_slug": "platform",
+                    "rows": "entries", "indexers": "indexers",
+                    "published_media": "covers",
+                }
+                name = aliases.get(expression.id, expression.id)
+            elif (isinstance(expression, ast.Call)
+                  and isinstance(expression.func, ast.Name)
+                  and expression.func.id == "len" and len(expression.args) == 1):
+                target = expression.args[0]
+                if isinstance(target, ast.Name) and target.id == "indexers":
+                    name = "indexers"
+                elif isinstance(target, ast.Name) and target.id == "rows":
+                    name = "entries"
+                elif isinstance(target, ast.Subscript):
+                    name = "launchers" if getattr(target.slice, "value", None) == "counts" else "count"
+                else:
+                    name = "count"
+            elif (isinstance(expression, ast.Call)
+                  and isinstance(expression.func, ast.Attribute)
+                  and isinstance(expression.func.value, ast.Name)):
+                name = (
+                    "kind" if expression.func.attr == "get"
+                    and expression.func.value.id == "cfg"
+                    and expression.args
+                    and isinstance(expression.args[0], ast.Constant)
+                    and expression.args[0].value == "type"
+                    else expression.func.value.id
+                )
+            elif (isinstance(expression, ast.Call)
+                  and isinstance(expression.func, ast.Attribute)
+                  and expression.func.attr == "join"
+                  and len(expression.args) == 1
+                  and isinstance(expression.args[0], ast.Name)):
+                name = expression.args[0].id
+            elif isinstance(expression, ast.Attribute):
+                name = "error_type" if expression.attr == "__name__" else expression.attr
+            elif isinstance(expression, ast.Subscript):
+                key = expression.slice
+                name = ({"state": "state", "total": "games", "url": "url"}.get(
+                    key.value, "kind") if isinstance(key, ast.Constant) else "kind")
+            if name is None:
+                return set()
+            # Hub slugs use !r; retain those known identifier quotes while
+            # leaving the runtime slug value opaque.
+            if conversion == ord("r") and name == "slug":
+                return {"'{" + name + "}'"}
+            return {"{" + name + "}"}
+
+        variants = [""]
+        for value in node.values:
+            if isinstance(value, ast.Constant) and isinstance(value.value, str):
+                variants = [prefix + value.value for prefix in variants]
+            elif isinstance(value, ast.FormattedValue):
+                choices = formatted(value.value, value.conversion)
+                if not choices:
+                    return set()
+                variants = [prefix + choice for prefix in variants for choice in choices]
+            else:
+                return set()
+        return set(variants)
+    if isinstance(node, ast.BinOp) and isinstance(node.op, ast.Add):
+        left, right = _message_expression(node.left), _message_expression(node.right)
+        return {a + b for a in left for b in right} if left and right else set()
+    if isinstance(node, ast.IfExp):
+        return _message_expression(node.body) | _message_expression(node.orelse)
+    if isinstance(node, ast.BoolOp):
+        return set().union(*(_message_expression(value) for value in node.values))
+    if (isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+            and node.func.id == "str" and len(node.args) == 1):
+        return _message_expression(node.args[0])
+    return set()
+
+
+def _visible_api_message_sources() -> dict[str, list[str]]:
+    found: dict[str, list[str]] = {}
+    for relative, names in VISIBLE_MESSAGE_METHODS.items():
+        path = ROOT / relative
+        if not path.is_file():
+            continue
+        source = path.read_text(encoding="utf-8")
+        tree = ast.parse(source)
+        for node in ast.walk(tree):
+            if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) \
+                    or node.name not in names:
+                continue
+            local_sources: dict[str, set[str]] = {}
+            for statement in ast.walk(node):
+                if isinstance(statement, ast.Assign):
+                    targets = statement.targets
+                    expression = statement.value
+                elif isinstance(statement, ast.AnnAssign):
+                    targets = [statement.target]
+                    expression = statement.value
+                else:
+                    continue
+                values = _message_expression(expression) if expression is not None else set()
+                if values:
+                    for target in targets:
+                        if isinstance(target, ast.Name):
+                            local_sources.setdefault(target.id, set()).update(values)
+
+            def sources_for(expression: ast.AST) -> set[str]:
+                if isinstance(expression, ast.Name):
+                    return set(local_sources.get(expression.id, ()))
+                if isinstance(expression, ast.BoolOp):
+                    return set().union(*(sources_for(value) for value in expression.values))
+                if isinstance(expression, ast.IfExp):
+                    return sources_for(expression.body) | sources_for(expression.orelse)
+                return _message_expression(expression)
+
+            for child in ast.walk(node):
+                values: set[str] = set()
+                if isinstance(child, ast.Dict):
+                    for key, value in zip(child.keys, child.values):
+                        if (isinstance(key, ast.Constant)
+                                and key.value in VISIBLE_MESSAGE_FIELDS):
+                            if node.name == "claim_invitation" and key.value == "detail":
+                                # The invitation UI replaces this success detail
+                                # with its localized message using the peer name.
+                                continue
+                            values.update(sources_for(value))
+                if isinstance(child, ast.Assign):
+                    if any(
+                        isinstance(target, ast.Subscript)
+                        and isinstance(target.slice, ast.Constant)
+                        and target.slice.value in VISIBLE_MESSAGE_FIELDS
+                        for target in child.targets
+                    ):
+                        values.update(sources_for(child.value))
+                if (relative == "romarr/app.py"
+                        and node.name in {"_friend", "_call_friend", "_romm_friend_rows"}
+                        and isinstance(child, ast.Return)
+                        and isinstance(child.value, ast.Tuple)
+                        and len(child.value.elts) >= 2):
+                    values.update(sources_for(child.value.elts[1]))
+                if isinstance(child, ast.Call):
+                    for keyword in child.keywords:
+                        if keyword.arg in {"error", "reason"}:
+                            values.update(sources_for(keyword.value))
+                    if (relative == "romarr/catalogue.py" and node.name == "problems"
+                            and isinstance(child.func, ast.Attribute)
+                            and child.func.attr == "append" and child.args):
+                        values.update(sources_for(child.args[0]))
+                    if (relative in VISIBLE_EXCEPTION_METHODS
+                            and node.name in VISIBLE_EXCEPTION_METHODS[relative]
+                            and isinstance(child.func, ast.Name)
+                            and child.func.id == "ValueError" and child.args):
+                        values.update(sources_for(child.args[0]))
+                if (relative == "romarr/notify.py" and node.name == "send_test"
+                        and isinstance(child, ast.Return)
+                        and isinstance(child.value, ast.Tuple)
+                        and len(child.value.elts) == 2):
+                    # The shared connection editor displays the message half
+                    # of send_test's (ok, message) result. Dynamic notifier
+                    # reasons are intentionally opaque; fixed fallback text
+                    # and app-authored wrappers are catalog sources.
+                        values.update(sources_for(child.value.elts[1]))
+                for value in values:
+                    normalized = re.sub(r"\s+", " ", value).strip()
+                    if normalized:
+                        found.setdefault(normalized, []).append(
+                            f"{relative}:{getattr(child, 'lineno', 1)}")
+
+    for relative, routes in VISIBLE_INLINE_MESSAGE_ROUTES.items():
+        path = ROOT / relative
+        if not path.is_file():
+            continue
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.If):
+                continue
+            route_path = _route_path_condition(node.test)
+            if route_path not in routes:
+                continue
+            expected_fields = routes[route_path]
+            for child in ast.walk(node):
+                if not isinstance(child, ast.Dict):
+                    continue
+                for key, value in zip(child.keys, child.values):
+                    if isinstance(key, ast.Constant) and key.value in expected_fields:
+                        for source_text in _message_expression(value):
+                            normalized = re.sub(r"\s+", " ", source_text).strip()
+                            if normalized:
+                                found.setdefault(normalized, []).append(
+                                    f"{relative}:{getattr(child, 'lineno', 1)}")
+    for relative, expected_sources in VISIBLE_LITERAL_MESSAGE_SOURCES.items():
+        path = ROOT / relative
+        if not path.is_file():
+            continue
+        for line_number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+            for source_text in expected_sources:
+                if source_text in line:
+                    found.setdefault(source_text, []).append(
+                        f"{relative}:{line_number}")
+    return found
+
+
+def _route_path_condition(node: ast.AST) -> str | None:
+    if isinstance(node, ast.BoolOp):
+        found = {
+            route_path for value in node.values
+            if (route_path := _route_path_condition(value)) is not None
+        }
+        return next(iter(found)) if len(found) == 1 else None
+    if not isinstance(node, ast.Compare) or len(node.ops) != 1 or len(node.comparators) != 1:
+        return None
+    if not isinstance(node.ops[0], ast.Eq) or not isinstance(node.comparators[0], ast.Constant):
+        return None
+    left = node.left
+    if (isinstance(left, ast.Attribute) and left.attr == "path"
+            and isinstance(left.value, ast.Name) and left.value.id == "route"
+            and isinstance(node.comparators[0].value, str)):
+        return node.comparators[0].value
+    return None
+
+
+def _visible_message_surface_errors() -> list[str]:
+    errors: list[str] = []
+    for relative, expected in VISIBLE_MESSAGE_METHODS.items():
+        path = ROOT / relative
+        if not path.is_file():
+            continue
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        found = {
+            node.name for node in ast.walk(tree)
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+        }
+        missing = sorted(expected - found)
+        if missing:
+            errors.append(
+                f"UI message coverage surface changed at {relative}; "
+                f"review missing methods: {', '.join(missing)}"
+            )
+    for relative, expected_routes in VISIBLE_INLINE_MESSAGE_ROUTES.items():
+        path = ROOT / relative
+        if not path.is_file():
+            continue
+        tree = ast.parse(path.read_text(encoding="utf-8"))
+        found_routes = {
+            route_path for node in ast.walk(tree) if isinstance(node, ast.If)
+            if (route_path := _route_path_condition(node.test)) is not None
+        }
+        missing_routes = sorted(set(expected_routes) - found_routes)
+        if missing_routes:
+            errors.append(
+                f"UI message coverage routes changed at {relative}; review missing routes: "
+                f"{', '.join(missing_routes)}"
+            )
+        for route_path, expected_fields in expected_routes.items():
+            route_nodes = [
+                node for node in ast.walk(tree) if isinstance(node, ast.If)
+                and _route_path_condition(node.test) == route_path
+            ]
+            found_fields = {
+                key.value for route_node in route_nodes for child in ast.walk(route_node)
+                if isinstance(child, ast.Dict)
+                for key in child.keys
+                if isinstance(key, ast.Constant) and isinstance(key.value, str)
+            }
+            for route_node in route_nodes:
+                for child in ast.walk(route_node):
+                    if not isinstance(child, (ast.Assign, ast.AnnAssign)):
+                        continue
+                    targets = child.targets if isinstance(child, ast.Assign) else [child.target]
+                    for target in targets:
+                        if (isinstance(target, ast.Subscript)
+                                and isinstance(target.slice, ast.Constant)
+                                and isinstance(target.slice.value, str)):
+                            found_fields.add(target.slice.value)
+            missing_fields = sorted(expected_fields - found_fields)
+            if missing_fields:
+                errors.append(
+                    f"UI message coverage fields changed at {relative} {route_path}; "
+                    f"review missing fields: {', '.join(missing_fields)}"
+                )
+    for relative, expected_sources in VISIBLE_LITERAL_MESSAGE_SOURCES.items():
+        path = ROOT / relative
+        if not path.is_file():
+            continue
+        source = path.read_text(encoding="utf-8")
+        for message in sorted(expected_sources):
+            if message not in source:
+                errors.append(
+                    f"UI message coverage literal changed at {relative}; "
+                    f"review missing source: {message!r}"
+                )
+    return errors
+
+
+def _localized_ui_call_sources(source: str) -> dict[str, list[int]]:
+    """Find literal messages and stable keys passed into localization sinks."""
+    calls = re.compile(
+        r"\b(?:interfaceMarkup|interfaceTemplateMarkup|appMessageMarkup|"
+        r"toastAppMessage|toastLabel|toastMessage|message|messageTemplate)"
+        r"\(\s*(['\"])((?:\\.|(?!\1).)*?)\1",
+        re.S,
+    )
+    fallbacks = re.compile(
+        r"\b(?:appMessageMarkup|toastAppMessage|message|line)\([^)]*?\|\|\s*"
+        r"(['\"])((?:\\.|(?!\1).)*?)\1",
+        re.S,
+    )
+    found: dict[str, list[int]] = {}
+    for pattern in (calls, fallbacks):
+        for match in pattern.finditer(source):
+            raw = match.group(2)
+            try:
+                value = ast.literal_eval(match.group(1) + raw + match.group(1))
+            except (SyntaxError, ValueError):
+                value = raw
+            if (not isinstance(value, str) or not value
+                    or not re.search(r"[A-Za-z]{2}", value)):
+                continue
+            found.setdefault(value, []).append(source.count("\n", 0, match.start()) + 1)
+    return found
+
+
+def _runtime_template_covers(source: str, catalog_sources: set[str]) -> bool:
+    # appMessageMarkup intentionally reuses these existing templates while
+    # keeping the dynamic provider/platform/path detail as an isolated value.
+    aliases = {
+        "unknown platform: {platform}",
+        "search failed: {error}",
+    }
+    if source in aliases and source in catalog_sources:
+        return True
+    if source == "repository: {reason}" and "Repository" in catalog_sources:
+        # The Hub submission form renders the existing field label separately
+        # and runs the reason through appMessageMarkup, preserving known source
+        # templates while keeping arbitrary URL details opaque.
+        return True
+    if (re.fullmatch(r"unknown platform: \{[a-zA-Z_][a-zA-Z0-9_]*\}", source)
+            and "unknown platform: {platform}" in catalog_sources):
+        return True
+    if (re.fullmatch(r"search failed: \{[a-zA-Z_][a-zA-Z0-9_]*\}", source)
+            and "search failed: {error}" in catalog_sources):
+        return True
+    return False
+
+
+def _js_label_map_sources(source: str) -> dict[str, list[int]]:
+    found: dict[str, list[int]] = {}
+    for name in JS_LABEL_MAPS:
+        match = re.search(
+            rf"const\s+{re.escape(name)}\s*=\s*\{{(?P<body>.*?)^\s*\}}",
+            source, re.S | re.M)
+        if not match:
+            continue
+        for value in re.finditer(r"\b[A-Za-z_][A-Za-z0-9_]*\s*:\s*(['\"])(.*?)\1",
+                                 match.group("body"), re.S):
+            text = re.sub(r"\s+", " ", html.unescape(value.group(2))).strip()
+            if text and re.search(r"[A-Za-z]{2}", text):
+                line = source.count("\n", 0, match.start("body") + value.start(2)) + 1
+                found.setdefault(text, []).append(line)
+    return found
 
 
 def _raw_ui_text(source: str) -> dict[str, list[int]]:
@@ -409,10 +849,22 @@ def coverage_errors(catalog: dict | None = None) -> list[str]:
                 )
 
     ui_source = UI_PATH.read_text(encoding="utf-8")
+    catalog_ids = set(messages)
+    for source, lines in _localized_ui_call_sources(ui_source).items():
+        if source not in source_to_id and source not in catalog_ids:
+            errors.append(
+                f"fixed localized UI message is missing from the catalog at "
+                f"romarr/ui.py:{lines[0]}: {source!r}"
+            )
     for source, lines in _raw_ui_text(ui_source).items():
         if source not in source_to_id:
             errors.append(
                 f"raw rendered UI text is missing from the catalog at romarr/ui.py:{lines[0]}: {source!r}"
+            )
+    for source, lines in _js_label_map_sources(ui_source).items():
+        if source not in source_to_id:
+            errors.append(
+                f"fixed JavaScript label map text is missing from the catalog at romarr/ui.py:{lines[0]}: {source!r}"
             )
     for source, lines in _lang_und_sources(ui_source).items():
         errors.append(
@@ -456,6 +908,15 @@ def coverage_errors(catalog: dict | None = None) -> list[str]:
             errors.append(
                 f"fixed task result is missing from the catalog at romarr/app.py:{lines[0]}: {source!r}"
             )
+
+    for source, locations in _visible_api_message_sources().items():
+        if (source not in catalog_sources
+                and not _runtime_template_covers(source, catalog_sources)):
+            errors.append(
+                "fixed UI-consumed API message is missing from the catalog at "
+                f"{locations[0]}: {source!r}"
+            )
+    errors.extend(_visible_message_surface_errors())
 
     # Return-message coverage is intentionally opt-in: only source templates
     # classified for visible UI/API/task output participate. Provider payloads,

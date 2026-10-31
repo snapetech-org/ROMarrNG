@@ -1010,6 +1010,12 @@ const appMessageMarkup=value=>{
     return interfaceTemplateMarkup(catalogTemplate.source,catalogTemplate.values);
   return '<span lang="und" dir="auto">'+esc(source)+'</span>';
 };
+const submissionProblemMarkup=value=>{
+  const source=String(value??''),repository=source.match(/^repository: ([\s\S]+)$/s);
+  return repository
+    ?interfaceMarkup('Repository')+': '+appMessageMarkup(repository[1])
+    :appMessageMarkup(source);
+};
 const searchReasonMarkup=value=>{
   const source=String(value??''),scored=source.match(/^([+-])(\d+)\s+(.+)$/s);
   const score=scored?'<span lang="und" dir="ltr">'+scored[1]+fmt(Number(scored[2]))+'</span> ':'';
@@ -1682,7 +1688,7 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
         msg.setAttribute('aria-live',problems.length?'assertive':'polite');
         if(problems.length){
           msg.innerHTML='<div class="panel-note panel-warn"><b>'+interfaceMarkup('ui.fix-these.e5c50d4696')+'</b><br>'
-            +problems.map(appMessageMarkup).join('<br>')+'</div>';
+            +problems.map(submissionProblemMarkup).join('<br>')+'</div>';
         }else{
           msg.innerHTML='<div class="panel-note">'+interfaceMarkup('ui.ready.e20846d20b')+' '
             +'<a href="'+esc(d.submit_url)+'" target="_blank" rel="noopener noreferrer">'
@@ -2157,7 +2163,7 @@ async function catalogOwnedRows(rows){
     const result=await j('/api/v1/catalog/ownership',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({games:batch.map(x=>({title:x.title,platform:x.platform}))})
-    }).catch(error=>({error:error.message||'ownership lookup failed'}));
+    }).catch(error=>({error:error.message||'library ownership is unavailable'}));
     if(result.error)throw new Error(result.error);
     (result.owned||[]).forEach(i=>{
       if(batch[i])owned.add(batch[i].index);
@@ -2335,7 +2341,7 @@ async function renderGameCatalog(){
     +'<button class="btn ghost" id="c-next"'+(CATALOG_VIEW.next===null?' disabled':'')+'>Next</button></div>';
   const status='<p class="help">'+visible.length+' shown on this page'
     +(owned.size?' · '+owned.size+' already in your library hidden':'')
-    +(ownedError?' · owned check unavailable: '+esc(ownedError):'')
+    +(ownedError?' · '+interfaceMarkup('Owned check unavailable')+': '+appMessageMarkup(ownedError):'')
     +(CATALOG_VIEW.platform?' · '+esc((PLATFORMS.find(p=>p.slug===CATALOG_VIEW.platform)||{}).name||''):'')
     +'</p>';
   $('#page').innerHTML=listsNav('catalog')+sources
@@ -2700,9 +2706,12 @@ function editList(item){
     try{
       const response=await fetch(`/api/v1/importlist/${item.id}`,{method:'DELETE'});
       const result=await response.json().catch(()=>({}));
-      if(!response.ok||result.error)throw new Error(result.error||`Could not remove this list (HTTP ${response.status}).`);
+      if(result.error){line(false,appMessageMarkup(result.error));del.disabled=false;return;}
+      if(!response.ok){line(false,interfaceTemplateMarkup(
+        'Could not remove this list (HTTP {status}).',{status:fmt(response.status)}));
+        del.disabled=false;return;}
       closeModal(); toastLabel('ui.removed.4118fb4fed'); go('lists',true);
-    }catch(error){line(false,appMessageMarkup(error.message||'Could not remove this list.'));del.disabled=false;}
+    }catch(_){line(false,appMessageMarkup('Could not remove this list.'));del.disabled=false;}
   };
 }
 
@@ -3213,7 +3222,7 @@ async function friendShelf(peerId, opts){
       headers:{'content-type':'application/json'},
       body:JSON.stringify({peer_id:FSHELF.peer,title:b.dataset.fwant,
         platform:b.dataset.fplat})});
-    if(r.ok)toastMessage('ui.added-detail.96268cbde3',{detail:r.detail||''});
+    if(r.ok)toastAppMessage(r.detail||'added to Wanted -- your indexers will look for it');
     else if(r.error)toastAppMessage(r.error);else toastLabel('ui.could-not-add.4c45a2e67f');
   });
   document.querySelectorAll('[data-fplay]').forEach(b=>b.onclick=async()=>{
@@ -3769,9 +3778,12 @@ async function editItem(kind, item){
     try{
       const response=await fetch(`/api/v1/${kind}/${item.id}`, { method: 'DELETE' });
       const result=await response.json().catch(()=>({}));
-      if(!response.ok||result.error)throw new Error(result.error||`Could not remove this entry (HTTP ${response.status}).`);
+      if(result.error){status.innerHTML=appMessageMarkup(result.error);del.disabled=false;return;}
+      if(!response.ok){status.innerHTML=interfaceTemplateMarkup(
+        'Could not remove this entry (HTTP {status}).',{status:fmt(response.status)});
+        del.disabled=false;return;}
       closeModal(); toastLabel('ui.removed.4118fb4fed'); go((KINDS[kind] || {}).page || 'clients',true);
-    }catch(error){line(false,error.message||'Could not remove this entry.');del.disabled=false;}
+    }catch(_){line(false,appMessageMarkup('Could not remove this entry.'));del.disabled=false;}
   };
 }
 
@@ -5355,6 +5367,24 @@ RENDER.collections=async()=>{
   };
 };
 
+const ORGANIZER_FIXED_MATCH_DETAILS=new Set([
+  'Imported from the existing ES-DE gamelist; review before renaming',
+  'Metadata provider title suggestion; confirm before renaming',
+  'Filename only; no verified catalog match',
+  'Title ID found in TitleDB; file bytes are not verified',
+  'Manually confirmed by the library owner.',
+  'Grouped from explicit numbered disc filenames; original files stay intact.',
+  'Grouped from a local M3U playlist and its contained disc references; files stay intact.'
+]);
+const organizerMatchDetailsMarkup=(value,confidence,sourceCopy)=>{
+  const source=String(value??'');
+  // DAT game names and other provider values stay opaque. TitleDB's values are
+  // app-authored diagnostics with dynamic IDs/names represented by templates.
+  if((sourceCopy==='Exact DAT checksum match')
+      ||confidence==='title_id_catalog'||ORGANIZER_FIXED_MATCH_DETAILS.has(source))
+    return appMessageMarkup(source);
+  return '<span lang="und" dir="auto">'+esc(source)+'</span>';
+};
 RENDER.organize=async()=>{
   const p=$('#page');
   const token=(window._organizeViewToken||0)+1;
@@ -5402,18 +5432,21 @@ RENDER.organize=async()=>{
     +'<button class="btn ghost" id="org-prev" disabled>Previous</button><button class="btn ghost" id="org-next" disabled>Next</button></div></div>';
   applyInterfaceLanguage();
 
-  const message=(text,bad)=>{
+  const renderMessage=(markup,bad)=>{
     const box=$('#org-message');
     if(!box)return;
-    if(text){
+    if(markup){
       box.setAttribute('role',bad?'alert':'status');
       box.setAttribute('aria-live',bad?'assertive':'polite');
       box.setAttribute('aria-atomic','true');
     }else{
       box.removeAttribute('role');box.removeAttribute('aria-live');
     }
-    box.innerHTML=text?'<div class="panel-note '+(bad?'panel-warn':'')+'" style="margin:12px 0">'+esc(text)+'</div>':'';
+    box.innerHTML=markup?'<div class="panel-note '+(bad?'panel-warn':'')+'" style="margin:12px 0">'+markup+'</div>':'';
   };
+  const message=(text,bad)=>renderMessage(text?appMessageMarkup(text):'',bad);
+  const messageTemplate=(source,values,bad)=>renderMessage(
+    source?interfaceTemplateMarkup(source,values):'',bad);
   let lastAnnouncedOrganizerState='';
   const platform=()=>($('#org-platform')||{}).value||'';
   const loadInventory=async()=>{
@@ -5501,8 +5534,11 @@ RENDER.organize=async()=>{
               +manifestInfo
             :'<span lang="und" dir="auto">'+esc(row.relative_path||'')+'</span>'+manifestInfo;
           return '<tr data-identity="'+esc(row.identity_id||'')+'"><td>'+art+'<b>'+esc(title)+'</b>'
-            +'<div class="help" style="margin:4px 0">'+esc(confidenceLabel[row.confidence]||row.confidence||'Unknown')+'</div>'
-            +'<div class="help" style="margin:0">'+esc(row.match_details||'')+'</div>'
+            +'<div class="help" style="margin:4px 0">'+(confidenceLabel[row.confidence]
+              ?interfaceMarkup(confidenceLabel[row.confidence])
+              :row.confidence?'<span lang="und" dir="auto">'+esc(row.confidence)+'</span>'
+                :interfaceMarkup('Unknown'))+'</div>'
+            +'<div class="help" style="margin:0">'+organizerMatchDetailsMarkup(row.match_details,row.confidence,row.match_details_source)+'</div>'
             +(canMap?'<button type="button" class="btn ghost org-map" style="margin-top:7px">Confirm or edit title</button>':'')
             +'</td><td>'+pathCell+'</td><td>'+switchLine+'</td>'
             +'<td>'+esc(metadata.source||'')+(metadata.released?'<div>'+esc(metadata.released)+'</div>':'')
@@ -5610,7 +5646,7 @@ RENDER.organize=async()=>{
       headers:{'Content-Type':'application/json'},body:'{}'})
       .catch(()=>({error:'Could not undo the last rename batch.'}));
     if(result.error){message(result.error,true);return;}
-    message('Undid '+fmt(result.undone||0)+' rename(s).',false);
+    messageTemplate('Undid {count} rename(s).',{count:fmt(result.undone||0)},false);
     await loadInventory();
   };
   $('#org-esde').onclick=async()=>{
@@ -5620,7 +5656,9 @@ RENDER.organize=async()=>{
       body:JSON.stringify({platform:platform()})})
       .catch(()=>({error:'Could not publish the ES-DE gamelist.'}));
     if(result.error){message(result.error,true);return;}
-    message(result.message||('Published '+fmt(result.games||0)+' ES-DE entries.'),!result.written);
+    if(result.message)message(result.message,!result.written);
+    else messageTemplate('Published {count} ES-DE entries.',
+      {count:fmt(result.games||0)},!result.written);
   };
   await loadInventory();
 };

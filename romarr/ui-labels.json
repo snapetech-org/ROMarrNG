@@ -1079,6 +1079,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.a-destination-directory-contains-a-s.e93a44b035": {
+      "source": "A destination directory contains a symlink.",
+      "sourceHash": "e93a44b03583933c45b9fa080888ea4c5dc160f2222cd1b0881328784b969be3",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.a-directory-gameyfin-watches-as-a-li.f67b759d7f": {
       "source": "A directory Gameyfin watches as a library; its own watcher picks up what ROMarr files",
       "sourceHash": "f67b759d7fc9e1c88cc501e24588d83c0d088f2b19007ce73e0eb44da492195e",
@@ -1120,6 +1143,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.a-file-changed-after-preview.f1af411a29": {
+      "source": "A file changed after preview.",
+      "sourceHash": "f1af411a29e9488e804648600b137a55644e431441321ad80cd6de15a9200f3f",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.a-folder.3305da5c6c": {
       "source": "A folder",
@@ -1351,6 +1397,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.a-path-contains-a-symlink.2bf911f8e5": {
+      "source": "A path contains a symlink.",
+      "sourceHash": "2bf911f8e5373935c6c0c0255091c32b3a4983f82a6c48e9e27498ff75c313ca",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.a-plain-rss-feed-of-torrents-no-quer.c7c008ad6e": {
       "source": "A plain RSS feed of torrents. No query interface, so ROMarr filters it here.",
@@ -1603,6 +1672,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.a-source-or-destination-changed-afte.3324717225": {
+      "source": "A source or destination changed after preview.",
+      "sourceHash": "3324717225815255479930fd2d834097516791bf2acdcb1940248b2f991443dd",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.a-tab-just-opened-how.e4de8fcadf": {
       "source": "A tab just opened. {how}",
@@ -2861,6 +2953,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.ambiguous-title-review.cc965cc461": {
+      "source": "Ambiguous title · review",
+      "sourceHash": "cc965cc461a916357eb9cade2671e86adb60629922f6f084bf354bccd42e1dc8",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
+    },
     "ui.an-apprise-api-server-which-fans-out.194540e690": {
       "source": "An Apprise API server, which fans out to a hundred more services.",
       "sourceHash": "194540e6906889f07204c1c8758f2224e30988777b28d1f2fb6ff1c1af821dbc",
@@ -2902,6 +3017,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.an-existing-es-de-media-file-is-unsa.5a649de603": {
+      "source": "An existing ES-DE media file is unsafe.",
+      "sourceHash": "5a649de60327798084266717054c38ebdf8805124eaf38b0ed1cfa87f249829b",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.an-indexer.cc48cca9e4": {
       "source": "An indexer",
@@ -3007,6 +3145,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.another-planned-file-has-the-same-de.3c3fc7bc29": {
+      "source": "Another planned file has the same destination",
+      "sourceHash": "3c3fc7bc29bdb541f3367f5dc6af72c02b64c575c9acc4078009185a975a17eb",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.any.2b505597da": {
       "source": "Any",
@@ -4586,6 +4747,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.catalog-could-not-be-loaded.4b0b6eb493": {
+      "source": "Catalog could not be loaded",
+      "sourceHash": "4b0b6eb49387c19b9a3f2177faf9e289242b57deb71200a8441b03de3fe0cedf",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.catalogued-needs-fetching.9aef1bf930": {
       "source": "Catalogued (needs fetching)",
       "sourceHash": "9aef1bf930a06430c302a68365a071a091e6f5421cda606c04d71943c49c09c3",
@@ -4974,6 +5158,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.choose-a-shared-metadata-folder-outs.7c29635d8c": {
+      "source": "Choose a shared metadata folder outside the ROM library root.",
+      "sourceHash": "7c29635d8cc66071dcd57832090518eb66784e1da9c7112d2b28ab16f222b090",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.choose-a-starting-point.a136fdd982": {
       "source": "Choose a starting point",
       "sourceHash": "a136fdd982ce14c7113f085f0195b04086b264bd6ae2fa7480c6702f5bca9354",
@@ -5040,6 +5247,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.choose-one-platform-before-publishin.31b64e6106": {
+      "source": "Choose one platform before publishing its ES-DE gamelist.",
+      "sourceHash": "31b64e610603272925b9c37014d83b3a7d940f92f00da341746b6043dbede720",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.choose-the-language-used-for-the-int.68f99c0936": {
       "source": "Choose the language used for the interface.",
@@ -6122,6 +6352,75 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.connected-but-no-library-path-is-set.22fe97e9f2": {
+      "source": "Connected, but no library path is set -- nothing can be imported",
+      "sourceHash": "22fe97e9f21298a318fb7b79b3744c4326f33d553289195cffe21a7659a5ad20",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.connected-but-path-does-not-exist-he.f513312bc1": {
+      "source": "Connected, but {path} does not exist here. Mount it into ROMarr, or correct the path.",
+      "sourceHash": "f513312bc109d6ca454a0041f76d21d22c9efd070377fd08b39ab308cf0c0826",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
+    "ui.connected-indexers-indexer-s-private.5277d9b7ff": {
+      "source": "Connected, {indexers} indexer(s), {private} private",
+      "sourceHash": "5277d9b7ff0ba7425f57e99bd66cac558dedc7fe10209c3d0f02b042a48155a2",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status-template"
+    },
     "ui.connecting.d403c686f6": {
       "source": "Connecting",
       "sourceHash": "d403c686f6a1048014bdd230f59963271b0123ea48245754fc9f264b962a2182",
@@ -6249,6 +6548,29 @@
         "zh-Hant"
       ],
       "sourceKind": "ui"
+    },
+    "ui.content-changed-since-the-last-scan.f67cb69b06": {
+      "source": "Content changed since the last scan",
+      "sourceHash": "f67cb69b06af412c8cf60eed3b5c5b113e72d5b00b18dc4e6deeccaf0a796ae2",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.copied.8d525e5f15": {
       "source": "Copied",
@@ -6569,6 +6891,29 @@
       ],
       "sourceKind": "ui-error"
     },
+    "ui.could-not-connect-or-authenticate.e998092980": {
+      "source": "Could not connect or authenticate",
+      "sourceHash": "e99809298005aab6d325c8b1454b645b15112f736190bf05f515fa988d221940",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.could-not-create-a-rename-preview.90f9f40598": {
       "source": "Could not create a rename preview.",
       "sourceHash": "90f9f405986dd03447ed24af6097da7ce8f100c496d282387a58ede4b2c58721",
@@ -6696,6 +7041,52 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.could-not-extract-a-title-id-from-th.edf79affab": {
+      "source": "Could not extract a title ID from the filename",
+      "sourceHash": "edf79affab562facbc47b2cfe84d3c7eb749c641e617418786a590b5ff8aa7f5",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
+    "ui.could-not-extract-a-title-id-from-th.fbcadfff19": {
+      "source": "Could not extract a title ID from the filename and no names are loaded for a name search",
+      "sourceHash": "fbcadfff19ba91c08c311b345628a51dd42649d7f28a843c7110d0a1d468eafb",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
     },
     "ui.could-not-grab-that-release.8861451b16": {
       "source": "Could not grab that release",
@@ -6912,6 +7303,98 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.could-not-remove-this-entry-http-sta.c69f59f013": {
+      "source": "Could not remove this entry (HTTP {status}).",
+      "sourceHash": "c69f59f01316cc5bbc42f92aaaac131efebac981400ba981a250bab6bb4f91dc",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
+    "ui.could-not-remove-this-entry.1ef3c1eab9": {
+      "source": "Could not remove this entry.",
+      "sourceHash": "1ef3c1eab99042cee93b03e938603d7f128e5f1d9e366a91d30ac87d8bc259e4",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.could-not-remove-this-list-http-stat.5b23e8bd75": {
+      "source": "Could not remove this list (HTTP {status}).",
+      "sourceHash": "5b23e8bd75f4d2d268ffad139e8a6688a54d33320c6a2f3d02000d3c93e22d45",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
+    "ui.could-not-remove-this-list.c9ae48271f": {
+      "source": "Could not remove this list.",
+      "sourceHash": "c9ae48271fef3543959708f6de330d01e329094f36b465287f5a14dfe69dc2e9",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.could-not-rotate-provider-key.02c09c9a71": {
       "source": "Could not rotate provider key",
@@ -7157,6 +7640,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.dat-checksum-verified.61bbcedbd0": {
+      "source": "DAT checksum verified",
+      "sourceHash": "61bbcedbd012c1eb86c1933915b532aa6a17af08d4453aa543e06bd46e9794d5",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
     },
     "ui.dat-directory.6e18f83bfd": {
       "source": "DAT directory",
@@ -7542,6 +8048,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.destination-already-exists-nothing-w.0e64b66747": {
+      "source": "Destination already exists; nothing will be overwritten",
+      "sourceHash": "0e64b6674769494a893b90d51392ca0b7405efd194863bf8781992e423a90319",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.details.45989de49f": {
       "source": "Details",
       "sourceHash": "45989de49fb7f66dfe17a8fc26f3a02c7abcd74f7e8e6cf9f39fa0e3775780df",
@@ -7667,6 +8196,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.disc-set-member-renaming-one-file-co.b82bf071b6": {
+      "source": "Disc set member; renaming one file could break its cue or playlist references",
+      "sourceHash": "b82bf071b6006f2b3fa7df0f187684c88843f87f32415ceb6a7457b3f1bc9479",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.discover.d4a33d5b78": {
       "source": "Discover",
@@ -8493,6 +9045,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.enter-a-valid-canonical-game-title.a8e4f2b29f": {
+      "source": "Enter a valid canonical game title.",
+      "sourceHash": "a8e4f2b29f496172d777be9f2db1ce9514b5bb3992d3f2b69f35ea3641a84344",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.enter-one-folder-name-and-choose-its.6652b9417b": {
       "source": "Enter one folder name and choose its platform.",
       "sourceHash": "6652b9417bece0ef0bbc8c2629a41373e5326e819caefe1afc4fd37a2189878a",
@@ -8795,6 +9370,29 @@
       ],
       "sourceKind": "ui"
     },
+    "ui.exact-dat-checksum-match.91363b80af": {
+      "source": "Exact DAT checksum match",
+      "sourceHash": "91363b80af9704d2b54b0030ed0d515ed9e3263598f8dba9c0d370c9ca15bae0",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
     "ui.exclude-rom-hacks.3141be8d5f": {
       "source": "Exclude ROM hacks",
       "sourceHash": "3141be8d5fed2baddde19151ac22d668693de6960fd8b5bf95b4221946ad301a",
@@ -8987,6 +9585,29 @@
         "zh-Hant"
       ],
       "sourceKind": "ui"
+    },
+    "ui.existing-gamelist-xml-is-invalid-it.6951c0112d": {
+      "source": "Existing gamelist.xml is invalid; it was left untouched.",
+      "sourceHash": "6951c0112d068cde1b34c7a81035225613251da657f190510480e614483c456b",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.explore-more-games-in-this-genre.ca9764a30b": {
       "source": "Explore more games in this genre",
@@ -9326,6 +9947,52 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.filename-only-review.7ff9deba1a": {
+      "source": "Filename only · review",
+      "sourceHash": "7ff9deba1a6d6f83ef4920860ca9d0992e1a46ae9c5b5ea10c83bde634b8f26e",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
+    },
+    "ui.filename-only-no-verified-catalog-ma.c5ef8667b2": {
+      "source": "Filename only; no verified catalog match",
+      "sourceHash": "c5ef8667b29014f136409918e4a54f5a55b5c6fabae10468b8bad173e081f3dd",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
     "ui.fill-gaps-use-a-translation-only-whe.818e100547": {
       "source": "Fill gaps — use a translation only when no preferred-region dump exists",
       "sourceHash": "818e100547bc178d89844ac69b9038c64ed29f0d8a753ac7638dc8ee6e15b2fa",
@@ -9496,6 +10163,29 @@
       ],
       "sourceKind": "ui"
     },
+    "ui.folder-packages-are-left-intact-to-p.e180bb56ad": {
+      "source": "Folder packages are left intact to preserve their contents and references",
+      "sourceHash": "e180bb56ad021adb6db1c836effcfd6d84695a3210019656abef9d58acfce50f",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.folder-structure.4dee0b3f5c": {
       "source": "Folder structure",
       "sourceHash": "4dee0b3f5cf474cbedf84d1aca0c4c6232058c78aca9ace0a598ef7fa658a93b",
@@ -9627,6 +10317,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.found-count-matching-title-s-by-name.a1dfa4d604": {
+      "source": "Found {count} matching title(s) by name",
+      "sourceHash": "a1dfa4d604fbe78a7ae0a074115ce388d1911d74f9cd07944e016016f6ff9dea",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status-template"
     },
     "ui.found-count-titles.4c3d13d187": {
       "source": "Found {count} titles.",
@@ -10843,6 +11556,52 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.igdb-catalog-is-not-configured.6deb64d59f": {
+      "source": "IGDB catalog is not configured",
+      "sourceHash": "6deb64d59f012f80094fc1e4eaec62376d57e9423c650e5bc40fe678cec127ab",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "api-error"
+    },
+    "ui.igdb-catalog-request-failed.47ac4d494b": {
+      "source": "IGDB catalog request failed",
+      "sourceHash": "47ac4d494b561941b7e5db5324165cc57900314edd77c991515aeb03f08117b6",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "api-error"
+    },
     "ui.igdb-covers-genres-and-ratings.6035ecaefc": {
       "source": "IGDB · covers, genres and ratings",
       "sourceHash": "6035ecaefcfac403c95b859ab066eaf7d0843a3fe1aef6a064f4f7b50c5620e2",
@@ -11297,6 +12056,52 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.imported-from-the-existing-es-de-gam.5fa9036446": {
+      "source": "Imported from the existing ES-DE gamelist; review before renaming",
+      "sourceHash": "5fa9036446446bd34d53192e5a4d20fb2b361ff2e386192f189716ab2502cbf4",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
+    "ui.imported-local-metadata-review-title.5db9952dae": {
+      "source": "Imported local metadata · review title",
+      "sourceHash": "5db9952dae52d55b551c8003f5559747d05d8c4e853c8e30b734cfe64bf0609c",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
     },
     "ui.imported-total.5f100c0878": {
       "source": "Imported {total}",
@@ -11770,6 +12575,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.internet-archive-refused-the-request.515fff2c13": {
+      "source": "Internet Archive refused the request",
+      "sourceHash": "515fff2c13ae903881f998793afbe7b442fa49c8c18a52f430c9328c3810009a",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.interval-count-h.c4dc89c3ad": {
       "source": "Interval: {count} h",
       "sourceHash": "c4dc89c3ad54c2778e3d3421ddc7bae3ab3fa02c6686eeedbadb8007d5f966df",
@@ -11832,6 +12660,52 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.invalid-game-identity.0efd907d22": {
+      "source": "Invalid game identity.",
+      "sourceHash": "0efd907d22cebd1800d5df2f3c60dd3d0adb15a8aa6dc2d3969e64d0d31fe331",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.invalid-plan-token.6f52b99b6e": {
+      "source": "Invalid plan token.",
+      "sourceHash": "6f52b99b6ee2feb0234995673c59ce6c97ec1c9b702573cad9e14a8721650e39",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.invitation.af4ea02852": {
       "source": "Invitation",
@@ -12513,6 +13387,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.likely-multi-disc-set-review.f3a26e13cb": {
+      "source": "Likely multi-disc set · review",
+      "sourceHash": "f3a26e13cbef714786db98c00e7bf3071530131e8058090d118ede3cd3ab6c02",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
+    },
     "ui.link-copied.d12860c21e": {
       "source": "Link copied",
       "sourceHash": "d12860c21e78baa522ac743ecfbd77fb9cf4558e581e0e54afcace23b3ce1849",
@@ -13073,6 +13970,52 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.manually-confirmed.9b66efab12": {
+      "source": "Manually confirmed",
+      "sourceHash": "9b66efab12024e48bf0614d34b730a43252b1354287573c34ef8e07b71eab45a",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
+    },
+    "ui.manually-confirmed-by-the-library-ow.5b75fab860": {
+      "source": "Manually confirmed by the library owner.",
+      "sourceHash": "5b75fab8606953804c43cbaccd24f6f2496a24aece688946994c7a74636d5483",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
     "ui.map-the-path-a-download-client-repor.c6de45b83c": {
       "source": "Map the path a download client reports to the path ROMarr can see. Choose a client to keep SABnzbd and torrent paths separate, or use All download clients for a shared path. Client-specific mappings take precedence; within a scope, the longest matching prefix wins.",
       "sourceHash": "c6de45b83c563beea3de096b422656c2a56ede545d2f264845328210fae3965e",
@@ -13287,6 +14230,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.metadata-provider-title-suggestion-c.f44517c58a": {
+      "source": "Metadata provider title suggestion; confirm before renaming",
+      "sourceHash": "f44517c58aec183e756d9236b9829c326ae70ec823bf00ead74c8687135c44d2",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
     "ui.minimum-seeders.a78f3d2116": {
       "source": "Minimum seeders",
       "sourceHash": "a78f3d21169ba99d3ca34fb9fed030e3d78261fd3758c4716f296c7d4a1b315e",
@@ -13481,6 +14447,29 @@
         "zh-Hant"
       ],
       "sourceKind": "ui"
+    },
+    "ui.multi-disc-set-is-grouped-for-metada.86db33ad47": {
+      "source": "Multi-disc set is grouped for metadata; its disc files stay together",
+      "sourceHash": "86db33ad47d9baa6436ee1e7c92eb0b1386c5423f8d30e2b22df2555a3f0dc05",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.multiplayer.563370a7b0": {
       "source": "Multiplayer",
@@ -14205,6 +15194,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.no-dat-catalog-is-loaded-in-romarrng.f57b5eb371": {
+      "source": "No DAT catalog is loaded in ROMarrNG",
+      "sourceHash": "f57b5eb3711069f82aca2152aa1af8f6aef26cdd5eb743d013d7733ec2e5f534",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "api-error"
     },
     "ui.no-dat-loaded.3c44dc8796": {
       "source": "No DAT loaded",
@@ -14971,6 +15983,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.no-safe-canonical-title.2968a7e7ba": {
+      "source": "No safe canonical title",
+      "sourceHash": "2968a7e7bad39b710b63ba1af3927b4ceae6badd23e9bdf7e59b1a427628e07b",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.no-safe-renames-are-ready-in-this-ba.45fe5b5767": {
       "source": "No safe renames are ready in this batch.",
@@ -16316,6 +17351,29 @@
         "zh-Hant"
       ],
       "sourceKind": "ui"
+    },
+    "ui.owned-check-unavailable.b3cf0beade": {
+      "source": "Owned check unavailable",
+      "sourceHash": "b3cf0beadeea0b7a55b33c8977e8de71470631743755f2dc19614d83248e90d2",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
     },
     "ui.owned-games.6092613ad5": {
       "source": "Owned games",
@@ -18063,6 +19121,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.provider-suggestion-review.0111b979ee": {
+      "source": "Provider suggestion · review",
+      "sourceHash": "0111b979ee347425c91f6d1fb53d94acafe1897bec2f2b98f07f4fe8116e7d41",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
+    },
     "ui.prowlarr.c5244cb74f": {
       "source": "Prowlarr",
       "sourceHash": "c5244cb74f83161ffbe3816569275d06b333064cea2f2bc2215caf341108c880",
@@ -18171,6 +19252,52 @@
         "zh-Hant"
       ],
       "sourceKind": "ui"
+    },
+    "ui.published-count-es-de-entries.8e45db116a": {
+      "source": "Published {count} ES-DE entries.",
+      "sourceHash": "8e45db116a5add91e56c3b1f30f46630c7eb38b21819475493d1c872edf63cf9",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status-template"
+    },
+    "ui.published-entries-es-de-entries-and.ae49136d2f": {
+      "source": "Published {entries} ES-DE entries and {covers} shared covers.",
+      "sourceHash": "ae49136d2fed79d99306c5d350204fe783c5550dabaa044994f794b154776c72",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status-template"
     },
     "ui.queue.3b2fe03e36": {
       "source": "Queue",
@@ -18454,6 +19581,29 @@
         "zh-Hant"
       ],
       "sourceKind": "ui"
+    },
+    "ui.rom-root-is-not-available-path.793283d1d4": {
+      "source": "ROM root is not available: {path}",
+      "sourceHash": "793283d1d47bf425f38eb6ad0af0a94042717bfc2c9b94b6f9439f74d58645b8",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
     },
     "ui.rom-sites-use-plain-http-through-the.c48f008c07": {
       "source": "ROM sites use plain HTTP through the Direct HTTP client. Some sites require a form that their own page submits, so those need the Headless Browser client to load the page and submit the form. Sites that require a CAPTCHA or bot-detection challenge are reported as unavailable instead of being bypassed.",
@@ -19539,6 +20689,52 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.read-seen-entries-and-found-added-wi.ca302edb9e": {
+      "source": "Read {seen} entries and found {added} with a hash. Netplay can match those. The other {without} are catalogued entries your library has never scanned off a disk, so there is nothing to match them on. None matched a DAT, so all are unverified -- check the DAT directory under Settings.",
+      "sourceHash": "ca302edb9e7f097f4217c3b5ef28e29902bf7d79cbd26f88e0273f8561444ea7",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "library-status-template"
+    },
+    "ui.read-seen-entries-and-found-added-wi.9304d58175": {
+      "source": "Read {seen} entries and found {added} with a hash. Netplay can match those. The other {without} are catalogued entries your library has never scanned off a disk, so there is nothing to match them on. {confirmed} matched a No-Intro or Redump dump and are marked verified.",
+      "sourceHash": "9304d58175b587233df1fc5bc97782c69c3b8791c418b58c377137b0b8bfc5ba",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "library-status-template"
+    },
     "ui.reading-the-library.fe68286704": {
       "source": "Reading the library",
       "sourceHash": "fe6828670425865783d2bd2c3f16612be3e08053c67b39bbe1580485a81bc0cf",
@@ -20011,6 +21207,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.rejected-the-api-key.119a3d3e36": {
+      "source": "Rejected the API key",
+      "sourceHash": "119a3d3e369deed4da35c048d1637bce2f9a6f0d2ce6bf6cbf933ac3bbbccf47",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.release.e020e3c67b": {
       "source": "Release",
       "sourceHash": "e020e3c67bd0c31227720bd8eb2c3a777d162e0987e8fd8438b007c170266476",
@@ -20395,6 +21614,98 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.rename-batch-applied.a6d8ac268e": {
+      "source": "Rename batch applied.",
+      "sourceHash": "a6d8ac268ea2df8fce95d6900538f7d5c2ace17931351c627795ba015ada985c",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
+    "ui.rename-batch-offset-and-limit-must-b.831c95032c": {
+      "source": "Rename batch offset and limit must be integers.",
+      "sourceHash": "831c95032c272aa6d64af3fe1c789d72a8097d7d580363ed4f2a71603d201eee",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.rename-failed-and-was-state-error-ty.4b2bacea36": {
+      "source": "Rename failed and was {state}: {error_type}",
+      "sourceHash": "4b2bacea365f5d7064133c76763c3d476c0475cbcb74a94bd373763105f9223b",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
+    "ui.rename-journal-path-contains-a-symli.71d15d82a6": {
+      "source": "Rename journal path contains a symlink.",
+      "sourceHash": "71d15d82a6763146e7442291414145209bdf51a8194115a03d1ca610c29cbf22",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.rename-on-import.b6261d12c4": {
       "source": "Rename on import",
       "sourceHash": "b6261d12c4dce48176483b7d350e52ee909bf414542b25f1abaea51644266bfe",
@@ -20417,6 +21728,29 @@
         "zh-Hant"
       ],
       "sourceKind": "ui"
+    },
+    "ui.rename-plan-applied.5918c173b4": {
+      "source": "Rename plan applied.",
+      "sourceHash": "5918c173b41d06308ea2d6bfed2914a83e0dc6ab1c1eee7c2ef1675dbdf4ad46",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
     },
     "ui.rename-preview-ready-safe-safe-renam.4f86f2186a": {
       "source": "Rename preview ready. {safe} safe renames in this batch; {blocked} entries left alone.",
@@ -21767,6 +23101,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.scan-this-platform-before-publishing.1d09921c52": {
+      "source": "Scan this platform before publishing its ES-DE gamelist.",
+      "sourceHash": "1d09921c52db67c0bc9767d30bd2f8813dbc9b96420807c0e31f1134fa4a4ceb",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.scanned-count-dry-run.442c1ab947": {
       "source": "Scanned {count} (dry run)",
       "sourceHash": "442c1ab947b647a20c979d2f8bf28260e74d9a573115a9a95da39b5f8e8402a3",
@@ -22614,6 +23971,52 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.select-a-supported-platform-or-all-p.b323a213be": {
+      "source": "Select a supported platform or All platforms.",
+      "sourceHash": "b323a213beacefcce94a9f8da89bde1859860ff2aaf99d5864b72afc741d12b3",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.select-a-supported-platform.db05980cc0": {
+      "source": "Select a supported platform.",
+      "sourceHash": "db05980cc0a9455caf885bfb011561ff3316b66fef027fb421175b904b84ab72",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.select-at-least-one.49b538bd75": {
       "source": "Select at least one",
       "sourceHash": "49b538bd7561cb4dbc5352505cccd7d6f271d89fab37f98b4d8f6009e7d9be53",
@@ -22910,6 +24313,52 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.set-a-safe-shared-metadata-root-befo.192587ef8f": {
+      "source": "Set a safe shared metadata root before publishing ES-DE data.",
+      "sourceHash": "192587ef8f5d7af86040d863f65bb656ee200673b502c813cacdeba36a810d46",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.set-a-shared-metadata-root-before-ma.a29034f503": {
+      "source": "Set a shared metadata root before making a rename plan.",
+      "sourceHash": "a29034f5037968dd9474066a377a799db7bb716da454b3009b4cac45ce0bbf59",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.set-a-shared-metadata-root-in.8684390491": {
       "source": "Set a shared metadata root in",
       "sourceHash": "868439049133ce4bef40e9c6f5f449890cef4a93302a6ac0ab3b59dd52536285",
@@ -22932,6 +24381,29 @@
         "zh-Hant"
       ],
       "sourceKind": "ui"
+    },
+    "ui.set-a-shared-metadata-root-under-set.fd7934bdaa": {
+      "source": "Set a shared metadata root under Settings → Media Management first.",
+      "sourceHash": "fd7934bdaa7b40271971b700327ca346984c9cc6a2d46c3f91ec4ee6ae48c2d1",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.set-from-any-game-tile-in-the-librar.4d1328f412": {
       "source": "Set from any game tile in the Library.",
@@ -23240,6 +24712,98 @@
         "zh-Hant"
       ],
       "sourceKind": "ui"
+    },
+    "ui.shared-metadata-root-contains-a-syml.ce5703e28a": {
+      "source": "Shared metadata root contains a symlink.",
+      "sourceHash": "ce5703e28a6b22f4363dc3c94fea4cc73a3299e8edd19d4a14c923a8d4561bf6",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.shared-metadata-root-is-not-a-direct.ea308fa308": {
+      "source": "Shared metadata root is not a directory.",
+      "sourceHash": "ea308fa30871fb46bfda85a949e2561f2ce48ef50f196f4bec9a24f04ee72ad0",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.shared-metadata-root-is-not-configur.15d503238b": {
+      "source": "Shared metadata root is not configured.",
+      "sourceHash": "15d503238b124af30ec1ef4e586d979956b27094a5ba54f8cd8f9829e9872ef6",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.shared-metadata-root-was-removed.cf29003534": {
+      "source": "Shared metadata root was removed.",
+      "sourceHash": "cf29003534d276a56130e999ba15bd11dd6cf60c6e01a62639eda5406f2f523a",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.shared-with-me.e7662e3bf9": {
       "source": "Shared with Me",
@@ -23728,6 +25292,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.source-file-is-missing-or-is-a-symli.ca704e4514": {
+      "source": "Source file is missing or is a symlink",
+      "sourceHash": "ca704e45142292fbef57dae7547bc4748d19475162c8698724d49b47472f586c",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.source-metadata-provider.cb5f04257e": {
       "source": "Source: metadata provider",
       "sourceHash": "cb5f04257eef44860ff43d6153f09464a1896782a011e96214ff3289e281e472",
@@ -24108,6 +25695,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.stopped-after-seen-entries-truncated.fc5c0496ad": {
+      "source": "Stopped after {seen} entries: {truncated}. {added} hashes were kept; run it again to continue.",
+      "sourceHash": "fc5c0496adebc84be3f8cc2fbc375f35e3125b05478a18b8907d5f853a40e33c",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "library-status-template"
+    },
     "ui.stream-server.54d7c5488a": {
       "source": "Stream server",
       "sourceHash": "54d7c5488a4991107fb2d928017668e5b595c9d7d8c5f9851cccfaeff0bc03bf",
@@ -24318,6 +25928,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.submitted-the-host-does-not-report-w.9ba72a4bcd": {
+      "source": "Submitted. The host does not report whether the PIN was correct -- check that your client now appears in the paired list.",
+      "sourceHash": "9ba72a4bcd7e6e0b724547e6a0048d2b90ce7a440d53a273c64ab67a9d102224",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
     "ui.suggestions-count.17be8f21b6": {
       "source": "Suggestions {count}",
       "sourceHash": "17be8f21b6b8ed8106452e933606fa28f7a696c1d17dd1b480752bc0e06bfbac",
@@ -24384,6 +26017,29 @@
         "zh-Hant"
       ],
       "sourceKind": "provider-diagnostic"
+    },
+    "ui.sunshine-refused-it-no-moonlight-cli.fb8441c69d": {
+      "source": "Sunshine refused it: no Moonlight client is waiting to pair. Start the pairing on your client first.",
+      "sourceHash": "fb8441c69d9be3e21858f056c290ba3299826fa9c57cb990fc4d58889d88692d",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.super-mario-world.e64142f04b": {
       "source": "Super Mario World",
@@ -25268,6 +26924,52 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.the-es-de-gamelist-path-is-unsafe.97565fc096": {
+      "source": "The ES-DE gamelist path is unsafe.",
+      "sourceHash": "97565fc096e3f7be9a2a04e5d40c1fd05045671cad8a81bb02e652b92b8b9e52",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.the-es-de-media-path-is-unsafe.4c628d520a": {
+      "source": "The ES-DE media path is unsafe.",
+      "sourceHash": "4c628d520a8c2a0589d23a6484acbebb91d6040a3697b32c5595f0c7544a7e6d",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.the-ecosystem.c9150e7532": {
       "source": "The Ecosystem",
       "sourceHash": "c9150e7532c966add6b27e666d0e18fb63a5751da6a1ac4d6e3ca7b53827e76d",
@@ -25562,6 +27264,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.the-library-changed-after-this-previ.020c0da111": {
+      "source": "The library changed after this preview. Scan and preview again.",
+      "sourceHash": "020c0da1116bf8ecbf54c001d3fa4b70a5ed141f46842b1c6171f7525f8bb7d7",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.the-library-read-failed.2292f7174a": {
       "source": "The library read failed.",
       "sourceHash": "2292f7174a32e9cf282a987c7c0eaf905764110501995591d4ed0c9c553162e3",
@@ -25793,6 +27518,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.the-selected-platform-does-not-match.7fc02a4c9a": {
+      "source": "The selected platform does not match this game.",
+      "sourceHash": "7fc02a4c9a2d17feff8771b349a9ae1652475a4dee2604e66023e6f60da765c2",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.the-service-fetches-the-release-on-i.52928a64a0": {
       "source": "The service fetches the release on its own hardware; ROMarr downloads the result into here and imports from it. Only what ROMarr itself sent is ever touched.",
       "sourceHash": "52928a64a0e0a1d92741471d16d78ba4dcd50669d6954753c56b77f3e46ab83a",
@@ -25834,6 +27582,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.the-shared-es-de-artwork-index-is-in.23e8aa4933": {
+      "source": "The shared ES-DE artwork index is invalid; it was left untouched.",
+      "sourceHash": "23e8aa49338d7a5389c3da67e44cc831d919fb8c8c0834099931bfb758d7a383",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.the-simplest-api-to-run-dos-win-9x-p.bbf84041f3": {
       "source": "The simplest API to run DOS/Win 9x programs in browser or node.",
@@ -26002,6 +27773,52 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.there-are-no-safe-renames-to-apply.2b1548fd8b": {
+      "source": "There are no safe renames to apply.",
+      "sourceHash": "2b1548fd8b1563cbbe71d0fdffe57fe6a62996f5d2793dc3050a217c69f67a47",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.there-is-no-applied-rename-batch-to.3f62bc3a68": {
+      "source": "There is no applied rename batch to undo.",
+      "sourceHash": "3f62bc3a68860d5e59ca6f726cc414f766422a95e56ef71a76acd4f8d81972f2",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.these-counts-come-from-rows-romarr-r.846b680488": {
       "source": "These counts come from rows ROMarr read. Each catalogue is identified by the filename written by its indexer. Rows that match neither are labeled “source unknown” instead of being assigned to the larger catalogue.",
@@ -26299,6 +28116,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.this-game-is-no-longer-in-the-metada.a47b6df5d8": {
+      "source": "This game is no longer in the metadata catalog. Scan the library again.",
+      "sourceHash": "a47b6df5d8dbc9042d6d0280a9dd59cf7c2ac2c63440748d9ff944ccdc4caa77",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.this-host-also-serves-a-browser-desk.1ee6961387": {
       "source": "This host also serves a browser desktop:",
       "sourceHash": "1ee696138702720c26b7548258257523fa28e0571e07352ccb71705ff7433d2e",
@@ -26576,6 +28416,98 @@
       ],
       "sourceKind": "ui-select"
     },
+    "ui.title-id-found-in-titledb-file-bytes.7f9727f251": {
+      "source": "Title ID found in TitleDB; file bytes are not verified",
+      "sourceHash": "7f9727f251910a87ad12bc15121e4520846214cb67b667c5a49e3f9527fc9b92",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
+    "ui.title-id-tid-kind-is-not-in-the-load.8e113c529e": {
+      "source": "Title ID {tid} ({kind}) is not in the loaded TitleDB index",
+      "sourceHash": "8e113c529e8534493d8e75c1eae4d795541efef996a000b5ca712a21515659bf",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status-template"
+    },
+    "ui.title-id-tid-kind-is-not-in-the-load.3c35099e7f": {
+      "source": "Title ID {tid} ({kind}) is not in the loaded TitleDB index (names not loaded; ID list only)",
+      "sourceHash": "3c35099e7f9e4fadbf4ba348fc909e190170e6e17c993174ea951c9b9c943b90",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status-template"
+    },
+    "ui.title-mapping-saved-this-game-is-now.27229b1c17": {
+      "source": "Title mapping saved. This game is now eligible for a safe rename preview.",
+      "sourceHash": "27229b1c17646704889b1b3b3ea96f14b93879f9b2874f7bde54e6e96a889e59",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
     "ui.title-name-or-id.5af449b23d": {
       "source": "Title name or ID",
       "sourceHash": "5af449b23d77f438e34b1755ffb22342b8f95694f4137c62affd8fb5de44ac87",
@@ -26596,6 +28528,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.titledb-id-match-bytes-unverified.29825a4566": {
+      "source": "TitleDB ID match · bytes unverified",
+      "sourceHash": "29825a4566831e622fd0698b629bb6a7e4b232bddc1bf3cf6af545674c94160c",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
     },
     "ui.titledb-catalogued-count.d0885b4902": {
       "source": "TitleDB catalogued {count}",
@@ -27235,6 +29190,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.undid-count-rename-s.629d799a5a": {
+      "source": "Undid {count} rename(s).",
+      "sourceHash": "629d799a5a5ee201844686d2d58b7970a358599cb6f19e6f070ddc09c6395a20",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status-template"
+    },
     "ui.undo-last-rename.0e8c2dc5c0": {
       "source": "Undo last rename",
       "sourceHash": "0e8c2dc5c0b1b31f304707697414a1a0ecca30515b009520725136b650613bfd",
@@ -27257,6 +29235,75 @@
         "zh-Hant"
       ],
       "sourceKind": "ui"
+    },
+    "ui.undo-stopped-at-an-interrupted-move.2d8927e701": {
+      "source": "Undo stopped at an interrupted move whose paths changed.",
+      "sourceHash": "2d8927e701c87981817e06dcdab2a1af89b15bd6fd93ece7e543866ab2fedaaa",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.undo-stopped-because-a-file-changed.3b1c2e5f4f": {
+      "source": "Undo stopped because a file changed or its original path is occupied.",
+      "sourceHash": "3b1c2e5f4f72948984c8a84c5824c6367123484e1fc8bb8d6bf35d9494dde963",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.undo-stopped-because-an-interrupted.0f345e0e90": {
+      "source": "Undo stopped because an interrupted move is missing from both paths.",
+      "sourceHash": "0f345e0e903267479db029f1ca3bef2bf58c5e2cb86b482be3be9c07cecaadd8",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.undo-the-last-romarr-rename-batch-fi.45e19a3d56": {
       "source": "Undo the last ROMarr rename batch? Files changed since then will be left alone.",
@@ -27320,6 +29367,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.unknown-platform-identity.979e6b8009": {
+      "source": "Unknown platform identity.",
+      "sourceHash": "979e6b80095ef50d187025ca9729d1b0e292dc1948e4d81205f1ee59db6de68d",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.unknown-store.e7ff0236d5": {
       "source": "Unknown store",
@@ -27490,6 +29560,52 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.unsafe-destination-or-unable-to-veri.9aed971986": {
+      "source": "Unsafe destination or unable to verify source",
+      "sourceHash": "9aed9719865cd5c2b24993e9ef6c5694472cbca525da107487a1b154fa998d2c",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.unsafe-or-missing-source-path.eb55cb15e5": {
+      "source": "Unsafe or missing source path",
+      "sourceHash": "eb55cb15e50d7bc4bf889e4e0ab2c6d1ed4f6d403518dcc0f925b27d932fb010",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.upcoming.5f1a2542e4": {
       "source": "Upcoming",
@@ -27954,6 +30070,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.verified-display-name.bd72120df6": {
+      "source": "Verified: {display_name}",
+      "sourceHash": "bd72120df663a4195e1d0d21cdbf1c19af4506ecbd8aa527dc7c877550e4ae72",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status-template"
     },
     "ui.verify.eea2745e28": {
       "source": "Verify",
@@ -28969,6 +31108,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.wolf-needs-the-pair-secret-of-the-wa.24cdf5228c": {
+      "source": "Wolf needs the pair secret of the waiting request; refresh the pending list and try again",
+      "sourceHash": "24cdf5228cb2d2716da1c1e108c4f771b75a6cf340470d98b9f2cf49d74ba779",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.work-toward-a-complete-set.230f250c43": {
       "source": "Work toward a complete set",
       "sourceHash": "230f250c4325c251059619e42bf0a30751c8e586a901fcdd64e9ecb7aafb3816",
@@ -29517,6 +31679,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.a-url-is-required.985ecfc33e": {
+      "source": "a URL is required",
+      "sourceHash": "985ecfc33e2bf8827d8b47178beff1eddf0b13361a095d56f733b53e1130d454",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.a-compilation-not-a-single-game-mark.a15bc468ef": {
       "source": "a compilation, not a single game ({marker})",
       "sourceHash": "a15bc468ef4330bde37d461dcb637cc57085b3eb92a1aece0cc1789356f0fea6",
@@ -29601,6 +31786,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.added-to-wanted-your-indexers-will-l.cdd975a628": {
+      "source": "added to Wanted -- your indexers will look for it",
+      "sourceHash": "cdd975a628bda781b266336c24e704f25abbe2ee8f0330df3ed15c123c8e4004",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
     "ui.added-count-to-wanted.6f8ee97f5d": {
       "source": "added {count} to Wanted",
       "sourceHash": "6f8ee97f5df9d1685eaf4840d20fcc92916b9203ea7bc0cb2f9791ce78c4c541",
@@ -29644,6 +31852,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.an-audit-is-already-running.47b43a1eb8": {
+      "source": "an audit is already running",
+      "sourceHash": "47b43a1eb88522cb34a4c5ed03b20de8a1868e0db7bad6c420e1bc8edf9475aa",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.any-platform.294127e8da": {
       "source": "any platform",
@@ -29770,6 +32001,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.bad-dump-the-file-is-the-size-of-a-k.f9f15e9c2a": {
+      "source": "bad dump: the file is the size of a known ROM but its hash does not match. Import anyway only if you know why -- a patch, a hack or a translation will look exactly like this.",
+      "sourceHash": "f9f15e9c2aea4c166449031359638d63209aad9d6ad2b41b3c4b49c7328d2c9b",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.beside-it-add-a-platform-folder-mapp.6425999b49": {
       "source": "beside it. Add a platform folder mapping in Media Management if your existing folder names differ. Set up the frontend and emulator on each device that will play the games.",
@@ -29981,6 +32235,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.connected-games-game-s-from-launcher.8111359d00": {
+      "source": "connected {games} game(s) from {launchers} launcher(s)",
+      "sourceHash": "8111359d00fe10edb6000113418baa1ae3aac2e61a9d50154b4cf47bfc3ca7f0",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status-template"
+    },
     "ui.could-not-fetch-the-list-detail.b9f4a0eda8": {
       "source": "could not fetch the list: {detail}",
       "sourceHash": "b9f4a0eda835e4d97ef4d0bbf8b274a41041355eb450b6579f30fe917c9c0181",
@@ -30049,6 +32326,29 @@
         "zh-Hant"
       ],
       "sourceKind": "provider-diagnostic-template"
+    },
+    "ui.could-not-read-the-plugin-catalog-de.648b3d8cb1": {
+      "source": "could not read the plugin catalog: {detail}",
+      "sourceHash": "648b3d8cb11872fc0f5232cfa0f1fba58220ff17ae88722e48a5d89e293540d2",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
     },
     "ui.could-not-tell-which-platform-this-b.3fd388e50c": {
       "source": "could not tell which platform this belongs to; choose one",
@@ -30154,6 +32454,52 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.delivery-failed-check-the-connection.b37f013d19": {
+      "source": "delivery failed; check the connection settings",
+      "sourceHash": "b37f013d19e38b6a5ac6f2e459e188fbd96e15c0dcf884d8ae516c659ac44af9",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.delivery-raised-error-type.059c615ba2": {
+      "source": "delivery raised {error_type}",
+      "sourceHash": "059c615ba22bebafd5faf5acd04da57a1462c2586bf7929f521f47151d454524",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
     },
     "ui.description-is-required-it-is-what-s.5203084bde": {
       "source": "description is required -- it is what somebody reads before deciding to run your code",
@@ -30483,6 +32829,29 @@
         "zh-Hant"
       ],
       "sourceKind": "ui"
+    },
+    "ui.found-chrono-trigger-the-key-works.a32a50d8a8": {
+      "source": "found Chrono Trigger -- the key works",
+      "sourceHash": "a32a50d8a8ccb7b8a694f8da76389e2128c00ef3306c61006c33ba62586d2847",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
     },
     "ui.game-import-failed-error.8386b9617a": {
       "source": "game import failed: {error}",
@@ -30933,6 +33302,75 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.library-is-still-loading.90adeafbbc": {
+      "source": "library is still loading",
+      "sourceHash": "90adeafbbccc9ec653543e45aeddf346c947c8ddaff1a6ef7396278502266764",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "api-error"
+    },
+    "ui.library-ownership-is-unavailable.c3e4517ff2": {
+      "source": "library ownership is unavailable",
+      "sourceHash": "c3e4517ff2446127d1c6f65c4ab8ad6c4c0f4b9894d7c2b44c485a293edc7b92",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.library-read-failed-detail.4ae2084070": {
+      "source": "library read failed: {detail}",
+      "sourceHash": "4ae208407061e713753ed6b528f339e63a3eb622f70f215d89d3e880e013126f",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
     "ui.link-a-browser-can-hand-off-moonligh.d1db2f1131": {
       "source": "link a browser can hand off — Moonlight registers no URL scheme. What does work:",
       "sourceHash": "d1db2f1131619bfc1e2bbc98971a4c740f54801666f3722c62b24e83e7c35bfb",
@@ -31019,6 +33457,29 @@
       ],
       "sourceKind": "provider-diagnostic-template"
     },
+    "ui.lookup-failed-error-type.6d33ec9b4f": {
+      "source": "lookup failed: {error_type}",
+      "sourceHash": "6d33ec9b4fc812203e07e90236c79193adcd66862fb48417e57b60242debef31",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
     "ui.ltr.9422b24d2f": {
       "source": "ltr",
       "sourceHash": "9422b24d2f1f1fc85c11d8c79624a50a75fc77c4dedb8d12ad59d597ac545431",
@@ -31039,6 +33500,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.manual-mapping-confirmed.bc63310ebc": {
+      "source": "manual mapping confirmed",
+      "sourceHash": "bc63310ebc51e0edaadeaaaf1e4dc127713634a5a075a8d5e94f19242a820b3a",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
     },
     "ui.matched-by-dat-exact.2b3aecec27": {
       "source": "matched by DAT — exact",
@@ -31189,6 +33673,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.missing-required-field-labels.cd47426c9f": {
+      "source": "missing required field: {labels}",
+      "sourceHash": "cd47426c9f1646583bdc04183bf5aab092d33897b3056b1792441868a8ae286b",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
     "ui.moonlight.259453a935": {
       "source": "moonlight://",
       "sourceHash": "259453a9354a4931bc815f7a7df09898808db8bb470e2a7f69e148091740fff6",
@@ -31293,6 +33800,75 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.no-dat-loaded-point-dat-path-at-a-no.9c9046a1d2": {
+      "source": "no DAT loaded. Point DAT_PATH at a No-Intro or Redump directory, or add one under Settings.",
+      "sourceHash": "9c9046a1d201acfcc053686a907a874b97ac1258649b9fc6da35bdac86dbf1d5",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.no-dats-loaded-set-the-dat-directory.db28ed3469": {
+      "source": "no DATs loaded -- set the DAT directory under Settings -> Media Management first",
+      "sourceHash": "db28ed3469084144d2f377df8c3be792683d075b61c3770a93aba7cbec85bd11",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.no-pin-given.fca565efd1": {
+      "source": "no PIN given",
+      "sourceHash": "fca565efd1ef6b90538ec6d44759ba30412c5e90256bd9feca42b997e89091d1",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.no-roms-found-in-download.8c68b621a7": {
       "source": "no ROMs found in download",
@@ -31463,6 +34039,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.no-launcher-libraries-found-on-this.bbbd98d024": {
+      "source": "no launcher libraries found on this machine",
+      "sourceHash": "bbbd98d02431dab296240ef04116bdf1e4c76086a63d83175fce89d7a4d0fc04",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.no-library-configured.2f7f2b199a": {
       "source": "no library configured",
@@ -31679,6 +34278,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.no-title.8cb9a5c65b": {
+      "source": "no title",
+      "sourceHash": "8cb9a5c65bfe9b03180bdfd26ef54ef23c585df29ebe0a63406ae5627b867c51",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.no-usable-release.5f54237b1a": {
       "source": "no usable release",
@@ -32843,6 +35465,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.scan-failed-error-type.e99ccb8157": {
+      "source": "scan failed: {error_type}",
+      "sourceHash": "e99ccb815768abb38ba67f230aea12fe9a2b3823fedd9ae097572802b7f7155f",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
     "ui.search.2419329067": {
       "source": "search",
       "sourceHash": "2419329067823cab5b4e5ac5dd18a6abf1f57f45e753f5fc934292f3085a3717",
@@ -33074,6 +35719,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.test-notification-delivered.7d8c6c3794": {
+      "source": "test notification delivered",
+      "sourceHash": "7d8c6c3794d7bc8710e28b3d4dbaa37df1e532806ccfbf90304b6e720400ae53",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
     "ui.that-claim-code-has-expired-ask-your.8a4a7b92a3": {
       "source": "that claim code has expired -- ask your friend for a fresh one, it only lives 15 minutes",
       "sourceHash": "8a4a7b92a3c26317e49347dcf19c9049265425b11985f4f29497a0eac2e4633c",
@@ -33263,6 +35931,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.the-attached-library-server-does-not.3a4dc1f14e": {
+      "source": "the attached library server does not publish file hashes, so netplay cannot be seeded from it -- run an audit instead",
+      "sourceHash": "3a4dc1f14ecaae6c32a967f8bc73ebf6af33317badc31f2771a640ed474a3f8f",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.the-claim-code-is-missing-it-travels.924decc4df": {
       "source": "the claim code is missing. It travels separately from the link on purpose -- ask your friend for the eight characters",
       "sourceHash": "924decc4df52b655c60a7e61a22fc9338c81ee5623441f4c48ba6c23c644c482",
@@ -33306,6 +35997,29 @@
         "zh-Hant"
       ],
       "sourceKind": "api-error"
+    },
+    "ui.the-provider-answered-but-found-noth.553dba1e26": {
+      "source": "the provider answered but found nothing -- check the key",
+      "sourceHash": "553dba1e26682a8e0e0b97034900ae1369fb7f9a29e3446de6f63afd2bd60053",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.their-users-too.352f5b2ff0": {
       "source": "their users too",
@@ -33752,6 +36466,121 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.unknown-client-type-kind.65382dc90b": {
+      "source": "unknown client type: {kind}",
+      "sourceHash": "65382dc90b86c928034dd1c43e91d654de4e805f0e209cefd68fd56fb2c42cf9",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
+    "ui.unknown-connection-type.98bbe5c88f": {
+      "source": "unknown connection type",
+      "sourceHash": "98bbe5c88f1200b656c0a6fcf564045ae96ce880f2e7c985c7e5e17c9d4aead4",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.unknown-indexer-type-kind.fb6e3d15a4": {
+      "source": "unknown indexer type: {kind}",
+      "sourceHash": "fb6e3d15a40171051375d8342f903bc0dbcd01a2f12ce8e6b30e75341bc33ca4",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
+    "ui.unknown-library-type-kind.fcd0b2d006": {
+      "source": "unknown library type: {kind}",
+      "sourceHash": "fcd0b2d006b557ab1b064ad064f70437842261995907d60c62cf2d7edc5fc332",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
+    "ui.unknown-platform.7b810125ea": {
+      "source": "unknown platform",
+      "sourceHash": "7b810125ea00e3698da6c05b15629cbd2a3c86e69fc6b5473acec8d2b9fa1f4e",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
     "ui.unknown-platform-platform.489002d02a": {
       "source": "unknown platform: {platform}",
       "sourceHash": "489002d02a29cb7b0c3471058c3b318f4b4d720240bfbe5c0367ed0d052b60d5",
@@ -33772,6 +36601,29 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.unknown-provider.30ddcc5c00": {
+      "source": "unknown provider",
+      "sourceHash": "30ddcc5c00ea36bd42e016ce7b1b95dc7dc09c35e5b96b248ac6228f6de2bab1",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
     },
     "ui.unknown-scope-or-access.c5c830808a": {
       "source": "unknown scope or access",
@@ -34705,6 +37557,29 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.error-type-detail.0888abaf04": {
+      "source": "{error_type}: {detail}",
+      "sourceHash": "0888abaf04ca6102e7ce2177fe753166899ad4cc7c628c0a3371d9ef12968066",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
     "ui.extension-is-unique-to-it.8c668c3c22": {
       "source": "{extension} is unique to it",
       "sourceHash": "8c668c3c224cda74d51ef855b3f8d2adaa492aaf982a160060390aac20ffef07",
@@ -35340,6 +38215,75 @@
       ],
       "sourceKind": "ui-template"
     },
+    "ui.tid-is-not-a-16-hex-digit-title-id.c890779e33": {
+      "source": "{tid} is not a 16-hex-digit title ID",
+      "sourceHash": "c890779e339fe913229d0dbc7ad04a4950879c9440631dd3781a10a62020a8b5",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status-template"
+    },
+    "ui.tid-parses-as-a-kind-title-but-no-ti.1ef189f1be": {
+      "source": "{tid} parses as a {kind} title, but no TitleDB index is loaded",
+      "sourceHash": "1ef189f1bee1c95aedf5758e7407d4156683cdc4a8e9dfa6324228e600194218",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status-template"
+    },
+    "ui.url-answered-http-status-code.462fe89da5": {
+      "source": "{url} answered HTTP {status_code}",
+      "sourceHash": "462fe89da5254d8b3bb4a633c6c69d5aeb59c466ea4142210f5fe78515e97271",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
     "ui.expired.843a037ea1": {
       "source": "— expired",
       "sourceHash": "843a037ea1155239d69b855a06d1745d828bdd4a8b6dccbae7c4220de5d2302d",
@@ -35423,6 +38367,765 @@
       "translationHashes": {},
       "translationStatus": {},
       "translationReview": {}
+    },
+    "ui.could-not-read-name-detail.243b61096e": {
+      "source": "could not read {name}: {detail}",
+      "sourceHash": "243b61096ea77b55459c67ccbbac78099bbce592ba2c17ad666b57a1707c06f8",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
+    "ui.no-such-friend.0ce32b32e5": {
+      "source": "no such friend",
+      "sourceHash": "0ce32b32e5ebfd3587233a83e257285aef214f826cb953ae59854d5685c00f3a",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.this-friend-is-not-confirmed-yet-con.0774558c3a": {
+      "source": "this friend is not confirmed yet -- confirm them before asking their server for anything",
+      "sourceHash": "0774558c3a360815d57bee8ad95e885d57120459ec6abd6bf9e7f02ae1e3f8e5",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.this-friend-s-invitation-carried-no.3bcc6742fb": {
+      "source": "this friend's invitation carried no address, so there is nowhere to call. Ask them to set their public URL and send a fresh invitation.",
+      "sourceHash": "3bcc6742fb66abbb328a3a5fa8b7db0fe63e52c37361d6b30ff61ffb881d28bf",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.name-refused-the-credential-they-may.dfa9c11bed": {
+      "source": "{name} refused the credential -- they may have removed you, or not confirmed you yet",
+      "sourceHash": "dfa9c11bed6a4adef2def54ad593587c9f2ea9b6371491c481a5d5a6e5dee7fa",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
+    "ui.name-answered-http-status-code.2a5471f26b": {
+      "source": "{name} answered HTTP {status_code}",
+      "sourceHash": "2a5471f26b949094f9d39c0c8a1c8d2b10443df47e71bc876c4e198365c29536",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
+    "ui.could-not-reach-name-detail.9fc06e87fc": {
+      "source": "could not reach {name}: {detail}",
+      "sourceHash": "9fc06e87fca1269a81e672730db6fcc616eb99317365d9298647856918437e31",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
+    "ui.name-sent-something-that-was-not-jso.4b46f86ff4": {
+      "source": "{name} sent something that was not JSON",
+      "sourceHash": "4b46f86ff4cbb0ec40a502b910293e5406669ab2759747946e455e3d627c17ae",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
+    "ui.romarr-has-not-hashed-this-game-yet.6a2fe9bd9d": {
+      "source": "ROMarr has not hashed this game yet, so it cannot prove which dump you have. Run an audit of this platform under Tasks and try again.",
+      "sourceHash": "6a2fe9bd9d097023e07a628c9180ac487cd5e56b3247e2193519d0636f5d0bf9",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
+    "ui.romarr-has-not-hashed-this-game-yet.79cd9c465d": {
+      "source": "ROMarr has not hashed this game yet, so it cannot prove which dump you have. Run an audit of {platform} under Tasks and try again.",
+      "sourceHash": "79cd9c465d62c0373c7cbfbcdaeab2b4e527e1956b8142912b530ad4721d015f",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status-template"
+    },
+    "ui.you-both-have-this-exact-dump-but-em.57debe052e": {
+      "source": "You both have this exact dump, but EmulatorJS has no core for {platform} -- you will need a native emulator that can join a room.",
+      "sourceHash": "57debe052e39eaec5b802e35b47a232d078edb9bb8fbf4493be663ce4f008c42",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status-template"
+    },
+    "ui.plugin-slug-is-disabled.c2cc567d69": {
+      "source": "plugin '{slug}' is disabled",
+      "sourceHash": "c2cc567d697cde4c2747adedf92e86d7eaab1f45efd38db38164616c9ac3af13",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error-template"
+    },
+    "ui.rom-hub-filesystem-confinement-could.39a3df62cc": {
+      "source": "ROM Hub filesystem confinement could not start ({error_type})",
+      "sourceHash": "39a3df62ccdac29c455e74c1fca3c927df28359a3a001927d968538749fa9751",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "provider-diagnostic-template"
+    },
+    "ui.invalid-hub-result-detail.4d640652cb": {
+      "source": "invalid hub result: {detail}",
+      "sourceHash": "4d640652cb0cf26ccfd324f595eecae85a0ba73340747b375b604728968f162b",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "provider-diagnostic-template"
+    },
+    "ui.plugin-slug-is-not-installed-detail.7b9e5fbd47": {
+      "source": "plugin '{slug}' is not installed: {detail}",
+      "sourceHash": "7b9e5fbd47241afdd814958e3294fbaee161f5320771ab3b8603e58fc203040b",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "provider-diagnostic-template"
+    },
+    "ui.plugin-fetch-failed-error-type.2cd1f793d7": {
+      "source": "plugin fetch failed ({error_type})",
+      "sourceHash": "2cd1f793d7429e428a7286ee9599a40c4338e8273cf9b5ef43e3539211244759",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "provider-diagnostic-template"
+    },
+    "ui.plugin-output-escapes-the-staging-di.e14e2cda8d": {
+      "source": "plugin output escapes the staging directory",
+      "sourceHash": "e14e2cda8d876181e08d010c7cded2a651fffa41c034f0a7f1479a13485cd6dd",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.not-in-this-library-the-hash-identif.15bd6cace0": {
+      "source": "not in this library; the hash identifies exactly which dump to acquire",
+      "sourceHash": "15bd6cace0090ff8ebd4f38d2ad9263243191fef39cde2dcff7742e80aaa43a5",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
+    "ui.the-invitation-carried-no-hash-so-th.c8549ddce0": {
+      "source": "the invitation carried no hash, so the dump cannot be matched -- ROMarr will not start a session it cannot prove",
+      "sourceHash": "c8549ddce01537ebe4006555d5a25c4c723a7a2696b63c7c058bb76654c73ba7",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
+    "ui.you-both-have-this-game-and-they-are.c809e912f2": {
+      "source": "you both have this game and they are different dumps -- netplay would desync within seconds, which usually gets blamed on the connection",
+      "sourceHash": "c809e912f27e946f0fdad8564f03d3230d05b02df41ab84f06ae5221ae7ed954",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
+    "ui.the-bytes-match-but-one-side-has-not.a803bf75ba": {
+      "source": "the bytes match, but one side has not verified this dump against a DAT",
+      "sourceHash": "a803bf75baaa746993b7e990a36c79b85465b97276c1e805df502342bebfbb2c",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
+    "ui.prowlarr-management-api-could-not-be.a6e4de015d": {
+      "source": "Prowlarr management API could not be read ({error_type}).",
+      "sourceHash": "a6e4de015dc5d27acfbcf2748f89ccaaedcd0d90ffd56f99728060f0626503df",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "provider-diagnostic-template"
+    },
+    "ui.prowlarr-management-api-returned-htt.88f77e78dd": {
+      "source": "Prowlarr management API returned HTTP {status_code}.",
+      "sourceHash": "88f77e78ddafee26a4fd9dad7b5bea72c29d1428c9df53c2662ccf5ba7e994d8",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "provider-diagnostic-template"
+    },
+    "ui.prowlarr-returned-an-invalid-system.d3c9c6fde6": {
+      "source": "Prowlarr returned an invalid system status.",
+      "sourceHash": "d3c9c6fde6cb4d8d00b3dc1a0851a0a55c0d55965c67a21ee67196c3daa9cad9",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "provider-diagnostic"
+    },
+    "ui.prowlarr-indexer-inventory-returned.b8b0b20255": {
+      "source": "Prowlarr indexer inventory returned HTTP {status_code}.",
+      "sourceHash": "b8b0b20255f54dd4fc4db7bb2084ea573fc77c064894bf165062b296c253e325",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "provider-diagnostic-template"
+    },
+    "ui.prowlarr-returned-an-invalid-indexer.27343c60f9": {
+      "source": "Prowlarr returned an invalid indexer inventory.",
+      "sourceHash": "27343c60f99536bb2812d43f63e994b952079296d3acf9e57d93f1a062caf32a",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "provider-diagnostic"
+    },
+    "ui.prowlarr-feed-returned-http-status-c.43e5f8aed4": {
+      "source": "Prowlarr feed returned HTTP {status_code}.",
+      "sourceHash": "43e5f8aed4842457845c2550bbd0a4bba776b2db9388ddc12a237d53c79a7b6b",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "provider-diagnostic-template"
+    },
+    "ui.prowlarr-feed-returned-an-html-page.fedd51229e": {
+      "source": "Prowlarr feed returned an HTML page instead of an indexer response.",
+      "sourceHash": "fedd51229ec1aa59895119c363b12596c627e8a454cf17269c48f28da89ca115",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "provider-diagnostic"
+    },
+    "ui.prowlarr-feed-returned-an-indexer-er.d6d595e86d": {
+      "source": "Prowlarr feed returned an indexer error response.",
+      "sourceHash": "d6d595e86d7f3b2fd2e8261b020e0a76e73812d916b82242fcdb84693c2d5513",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "provider-diagnostic"
+    },
+    "ui.prowlarr-feed-could-not-be-reached-e.8ff706bac1": {
+      "source": "Prowlarr feed could not be reached ({error_type}).",
+      "sourceHash": "8ff706bac1f7d8b2803c8698634eceb23acf60a639570d8a860ed2ce47cf16f1",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "provider-diagnostic-template"
+    },
+    "ui.read-from-your-library-server-s-own.7d67cc2fcd": {
+      "source": "Read from your library server's own hashes, and upgraded to verified by an audit or a verified import.",
+      "sourceHash": "7d67cc2fcd85313cd46fec56deb73ecd2842cdc94d65df2a3087a466bb402345",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-status"
+    },
+    "ui.no-such-peer.5e878c21ac": {
+      "source": "no such peer",
+      "sourceHash": "5e878c21acf5c2b98bd7a5ade267ff933d07dd194189d01fd06bc7281520edcb",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-error"
+    },
+    "ui.could-not-fetch-the-list-error-type.f2f965f9db": {
+      "source": "could not fetch the list: {error_type}",
+      "sourceHash": "f2f965f9db28b46fb81ecf8d80afa92fc3ca89fb2071b343443b010db9ac258c",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "provider-diagnostic-template"
     }
   }
 }
