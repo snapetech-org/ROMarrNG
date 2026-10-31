@@ -5203,7 +5203,7 @@ RENDER.collections=async()=>{
   switchControls();
   planBtn.onclick=async()=>{
     const out=$('#cres');
-    out.innerHTML='<div class="empty">Planning…</div>';
+    out.innerHTML='<div class="empty">'+interfaceMarkup('Planning…')+'</div>';
     const ex=[...document.querySelectorAll('.cex')].filter(c=>c.checked)
       .map(c=>c.value).join(',');
     const q='dat='+encodeURIComponent($('#cdat').value)
@@ -5255,19 +5255,23 @@ RENDER.collections=async()=>{
       +'<p class="help">'+datMarkup+' — '+policyMarkup+strictMarkup+'.</p>'
       +'<div class="row"><button class="btn" id="cstart">'
       +interfaceTemplateMarkup('ui.request-count-missing.fbb85426ea',{count:fmt(c.missing)})+'</button>'
-      +'<label class="help" style="margin:0">at <input id="cpp" type="number" '
+      +'<label class="help" style="margin:0">'+interfaceMarkup('at')+' <input id="cpp" type="number" '
       +'min="1" max="50" value="5" style="width:60px;padding:5px;background:var(--bg);'
-      +'color:var(--fg);border:1px solid var(--line);border-radius:4px"> per pass</label></div>'
-      +'<table style="margin-top:14px"><thead><tr><th>Title</th><th>Status</th>'
-      +'<th>Why this dump</th></tr></thead><tbody>'
+      +'color:var(--fg);border:1px solid var(--line);border-radius:4px"> '
+      +interfaceMarkup('per pass')+'</label></div>'
+      +'<table style="margin-top:14px"><thead><tr><th>'+interfaceMarkup('Title')+'</th><th>'
+      +interfaceMarkup('Status')+'</th><th>'+interfaceMarkup('Why this dump')+'</th></tr></thead><tbody>'
       +d.titles.slice(0,300).map(t=>{
         const pill=t.status==='verified'
-          ?'<span class="pill" style="background:var(--ok);color:var(--ok-ink)">verified</span>'
+          ?'<span class="pill" style="background:var(--ok);color:var(--ok-ink)">'
+            +interfaceMarkup('verified')+'</span>'
           :t.status==='bad'
-            ?'<span class="pill" style="background:var(--bad);color:var(--bad-ink)">bad dump</span>'
+            ?'<span class="pill" style="background:var(--bad);color:var(--bad-ink)">'
+              +interfaceMarkup('bad dump')+'</span>'
             :t.status==='missing'
-              ?'<span class="pill" style="background:var(--warn);color:var(--warn-ink)">missing</span>'
-              :'<span class="pill">present</span>';
+              ?'<span class="pill" style="background:var(--warn);color:var(--warn-ink)">'
+                +interfaceMarkup('missing')+'</span>'
+              :'<span class="pill">'+interfaceMarkup('present')+'</span>';
         const clones=(t.discarded||[]).length
           ?'<details><summary class="help" style="margin:0;cursor:pointer">'
            +interfaceTemplateMarkup(t.discarded.length===1
@@ -5276,14 +5280,16 @@ RENDER.collections=async()=>{
              '<li class="help" style="margin:0">'+esc(x.name)+' — '+collectionReasonMarkup(x.why)+'</li>').join('')
            +'</ul></details>':'';
         return '<tr><td>'+esc(t.name)
-          +(t.outside_preference?' <span class="pill" title="No dump in your preferred regions; kept so the game is not lost">outside regions</span>':'')
+          +(t.outside_preference?' <span class="pill" '
+            +interfaceTitleTemplate('No dump in your preferred regions; kept so the game is not lost',{})+'>'
+            +interfaceMarkup('outside regions')+'</span>':'')
           +'</td><td>'+pill+'</td><td class="help" style="margin:0">'+collectionReasonMarkup(t.why)
           +clones+'</td></tr>';
       }).join('')+'</tbody></table>'
       +(d.titles.length>300?'<p class="help">'+interfaceTemplateMarkup('ui.showing-the-first-limit-of-count.94b5cbae9f',{limit:fmt(300),count:fmt(d.titles.length)})+'</p>':'');
 
     $('#cstart').onclick=async e=>{
-      e.target.disabled=true; e.target.textContent='Queueing…';
+      e.target.disabled=true; e.target.innerHTML=interfaceMarkup('Queueing…');
       const r=await j('/api/v1/collection/start',{method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({...planned, per_pass:parseInt($('#cpp').value,10)||5})});
