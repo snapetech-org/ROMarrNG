@@ -28,17 +28,26 @@ Portuguese, Vietnamese, Simplified Chinese, and Traditional Chinese have direct
 translations. The remaining registered locales stay out of the picker until
 their translations exist and pass the catalog checks.
 
-The existing translation text was carried over, with targeted corrections for
-verified semantic errors in the Arabic folder label and status tooltip, and
-Hindi gaming terminology and script contamination. Each message records review
-status separately for every direct locale; existing text is `unverified`
-because its provenance is unknown. Regional entries are marked `inherited`. A
-message can be marked `reviewed` only with a reviewer and review date. A
-complete native review and RTL visual review have not been done. This catalog
-pass does not certify translation quality or establish RTL signoff. Unverified
-is the default and is stored sparsely; regional inheritance comes from the
-locale parent table. Fingerprints are stored only for draft or reviewed
-overrides, keeping the runtime catalog compact.
+The existing translation text was carried over, with targeted high-confidence
+corrections across all 12 direct locales for ROM-dump false friends,
+game-library and set terminology, DAT/hash status labels, protocol names, and
+other contextual interface copy. A focused semantic pass checked 272
+glossary-related source messages across 12 locales (3,264 locale cells), plus
+the 388 locale cells across 95 messages whose translation exactly matched the
+English source; those groups overlap. The exact-match scan found only expected
+brands, identifiers, technical terms, and cognates after the remaining
+Wanted-list text was localized. A Unicode-script mismatch scan of all
+16,176 direct locale cells found no remaining candidates after correcting two
+stray Chinese full stops in Hindi. This focused pass is not a native-speaker
+review of the whole catalog. Each message records review status separately for
+every direct locale; existing text remains `unverified` because its provenance
+is unknown. Regional entries are marked `inherited`. A message can be marked
+`reviewed` only with a reviewer and review date. Native-speaker review and
+Arabic RTL visual review have not been completed. This pass does not certify
+translation quality or establish RTL signoff. Unverified is the default and is
+stored sparsely; regional inheritance comes from the locale parent table.
+Fingerprints are stored only for draft or reviewed overrides, keeping the
+runtime catalog compact.
 
 ## Runtime behavior
 
