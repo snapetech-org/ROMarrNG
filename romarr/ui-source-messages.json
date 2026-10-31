@@ -1,0 +1,7100 @@
+{
+  "schemaVersion": 1,
+  "messages": [
+    {
+      "source": ". A Moonlight host renders a real desktop emulator on the host's GPU and sends video — which is how machines with no browser core get played. ROMarr reports what it can verify about one and never guesses the rest.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4511"
+      ],
+      "id": "ui.a-moonlight-host-renders-a-real-desk.7dbcb1c7e0",
+      "sourceHash": "7dbcb1c7e020b2d450211ea48c2414b2be1d7a7d5e9c84bcf281591d2ab5ac2b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Accept betas and prototypes",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4012"
+      ],
+      "id": "ui.accept-betas-and-prototypes.174a23003b",
+      "sourceHash": "174a23003b95736efdb26d5d459dc9884f5aaec5237726148f77385c3ef31d49",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Accept ROM hacks",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4013"
+      ],
+      "id": "ui.accept-rom-hacks.d33281271c",
+      "sourceHash": "d33281271cc5bb98163a153815e2251ad0e14fcdfe0e8695d8706f70e55bb2f8",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Add a Newznab or Torznab indexer, search public Internet Archive software records through Direct HTTP, or connect Prowlarr. Internet Archive grabs need the Direct HTTP client configured.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4129"
+      ],
+      "id": "ui.add-a-newznab-or-torznab-indexer-sea.fb7167a5ea",
+      "sourceHash": "fb7167a5eaaf6c259a4753b653c6676afe9ab44f7101072fda4f4dd0c5a2a7a8",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Add folder mapping",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3912"
+      ],
+      "id": "ui.add-folder-mapping.adba1811d4",
+      "sourceHash": "adba1811d4d512ff00fd392b6dd5a56e41f23f2508ed6c20ca6c595a36d3a9c4",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Add path mapping",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3907"
+      ],
+      "id": "ui.add-path-mapping.7b04056f8b",
+      "sourceHash": "7b04056f8b9f78d10803bed916665fa40fae60c0f151e9de5a2c6b487705307f",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "added {count} to Wanted",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:5126"
+      ],
+      "id": "ui.added-count-to-wanted.6f8ee97f5d",
+      "sourceHash": "6f8ee97f5df9d1685eaf4840d20fcc92916b9203ea7bc0cb2f9791ce78c4c541",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "count"
+      ]
+    },
+    {
+      "source": "All genres",
+      "category": "ui-select",
+      "locations": [
+        "romarr/ui.py:2327"
+      ],
+      "id": "ui.all-genres.69558e9e33",
+      "sourceHash": "69558e9e33a927d7a5749723ddf5313306556af80d720cf533888adb7309e0ef",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "All kinds",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3493"
+      ],
+      "id": "ui.all-kinds.ddd0c2108e",
+      "sourceHash": "ddd0c2108e40c8b8a3b9b7c9acb0353001b80725cbc226b1b7b0d8be0a0b0c84",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "All supported platforms",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2326"
+      ],
+      "id": "ui.all-supported-platforms.a1ae65366d",
+      "sourceHash": "a1ae65366d1528304ce81cb1326bb6180f1070b46fe141094ee355e955aa43ca",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Already reading your library.",
+      "category": "task-result",
+      "locations": [
+        "romarr/app.py:4255"
+      ],
+      "id": "ui.already-reading-your-library.aa167f8f1a",
+      "sourceHash": "aa167f8f1ae50f6e59b3bed2dedfa5503f40d44a86644bd0bff529cf71a54766",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Any",
+      "category": "ui-attribute",
+      "locations": [
+        "romarr/ui.py:2327"
+      ],
+      "id": "ui.any.2b505597da",
+      "sourceHash": "2b505597daa736f13c2910c260e8deb1af3b20ffe375eb5e01a003e92f541db9",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Apps:",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4536"
+      ],
+      "id": "ui.apps.368a9c19ee",
+      "sourceHash": "368a9c19ee76b8e18c145ef72533360c16c2b2c9ada80d0572e024f24deda4e6",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Artwork cached",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5512"
+      ],
+      "id": "ui.artwork-cached.d3a615d8a7",
+      "sourceHash": "d3a615d8a719837279fc306499f522ac6d47df78fecaf81c4dc4dc6e3de90912",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Backup codes (single use, save them now):",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4285"
+      ],
+      "id": "ui.backup-codes-single-use-save-them-no.0a8d68a14d",
+      "sourceHash": "0a8d68a14da1a3cadf64ebcb97a8e54e756f8d506122babbac2cd2808acb6b83",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Base game",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3476"
+      ],
+      "id": "ui.base-game.84a278d86a",
+      "sourceHash": "84a278d86a7c9a439ae1b4b54aa7d8e5fa2288e2b1d178d0fd3f4850af59e065",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Batch applied. Continue when ready.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5597"
+      ],
+      "id": "ui.batch-applied-continue-when-ready.6fc6a759df",
+      "sourceHash": "6fc6a759dfdef94927bb9cc4f9e6bcfd65cccbb3749e857b0f5037e740aa417c",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Browse catalog titles or connect an import list. Requests use your configured sources and client.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5088"
+      ],
+      "id": "ui.browse-catalog-titles-or-connect-an.6795ab0e9e",
+      "sourceHash": "6795ab0e9eba95f44397b741beb6b64108575f07607bb2ae87b15e371cf8d850",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Browse catalog",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2093"
+      ],
+      "id": "ui.browse-catalog.4d05dc6da8",
+      "sourceHash": "4d05dc6da83718c826d81f2b36bddc6f9fa3fab8706e5bdd57a2e35639dcaa59",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Browse games",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2220"
+      ],
+      "id": "ui.browse-games.cf37299e27",
+      "sourceHash": "cf37299e27fb28ff23ba23bf3b2a143cb84d25b53db94f8e1efbe109fb12ef92",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Browse supported platforms, see how they play, and open the matching catalog.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5085"
+      ],
+      "id": "ui.browse-supported-platforms-see-how-t.6aab2a7ebf",
+      "sourceHash": "6aab2a7ebfdbba27dede7c8493aa817297bdcd982e9b77eb5bf1010db8c3c140",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Build a portable inventory, reuse existing ES-DE metadata, match exact DAT dumps, and review safe name changes. Scanning is read only. ROMarr changes files only after you preview and apply a plan.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5373"
+      ],
+      "id": "ui.build-a-portable-inventory-reuse-exi.da369004a7",
+      "sourceHash": "da369004a775dcd05292cb9134cb40b94b7c884be893203b4f826c1f6c4d2549",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Build a request list",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5088"
+      ],
+      "id": "ui.build-a-request-list.ea5090f168",
+      "sourceHash": "ea5090f1682afeeb569d1a5c73776474a92ae859fa889f968791c576ae725ee3",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Catalogued (needs fetching)",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:1822"
+      ],
+      "id": "ui.catalogued-needs-fetching.9aef1bf930",
+      "sourceHash": "9aef1bf930a06430c302a68365a071a091e6f5421cda606c04d71943c49c09c3",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Check github.com daily for a newer ROMarr (never auto-updates)",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4231"
+      ],
+      "id": "ui.check-github-com-daily-for-a-newer-r.472f62ec22",
+      "sourceHash": "472f62ec22bb12267ff3f30b6370e1533f6d6234ba0d48beb8d60d02080df16b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Check github.com for a newer ROMarr",
+      "category": "task-label",
+      "locations": [
+        "romarr/app.py:1373"
+      ],
+      "id": "ui.check-github-com-for-a-newer-romarr.649bac6cc7",
+      "sourceHash": "649bac6cc7301d437df5086e28335fc921dc8acd7258412e48f6b484239d2787",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Choose a generation you remember, search by name, then open its catalog. The playback label shows how this install handles each system.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4684"
+      ],
+      "id": "ui.choose-a-generation-you-remember-sea.58d6be3f1f",
+      "sourceHash": "58d6be3f1f35990eb280d0f325006bc93be13a92f18985d9172e21e620259a0e",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Choose a platform",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3900"
+      ],
+      "id": "ui.choose-a-platform.b71eafb4ef",
+      "sourceHash": "b71eafb4ef58ec25aee1d09dbe4b130404b9a086f487ca066af18eff6e64b470",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Choose a starting point",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5082"
+      ],
+      "id": "ui.choose-a-starting-point.a136fdd982",
+      "sourceHash": "a136fdd982ce14c7113f085f0195b04086b264bd6ae2fa7480c6702f5bca9354",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Choose a system or era",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5085"
+      ],
+      "id": "ui.choose-a-system-or-era.09b0943f15",
+      "sourceHash": "09b0943f1568ff1fa88fdc3978a26d501a465e77dd53d8c6a140f060f1744fbd",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Company",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2719"
+      ],
+      "id": "ui.company.de4743c879",
+      "sourceHash": "de4743c879734dc38cb3e270ecefcae077c3c2e626f9298115d5a03c8613f89b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Complete only",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3471"
+      ],
+      "id": "ui.complete-only.a21fbd0330",
+      "sourceHash": "a21fbd0330f35221eb235ae41b8c6429e7097819efc01fe446f4a400970a1f65",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Configured client save path: {path}.",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:3710"
+      ],
+      "id": "ui.configured-client-save-path-path.a33a0140fe",
+      "sourceHash": "a33a0140fe64dc86cbade244b5b001e4f48ff06073ddf2bc1f3dae29c77e95a2",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "path"
+      ]
+    },
+    {
+      "source": "Confirm or edit title",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5506"
+      ],
+      "id": "ui.confirm-or-edit-title.ca7001f6a6",
+      "sourceHash": "ca7001f6a677409c18a31f77316282762f0dccbcda7585b20e98e63aa4eabc54",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Connect an IGDB metadata provider under",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2221"
+      ],
+      "id": "ui.connect-an-igdb-metadata-provider-un.94cf3e816e",
+      "sourceHash": "94cf3e816e6548a3bd391749cd1640557a07a7a25b2a2d10ed5c42428bc91cf5",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Container path check",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3707"
+      ],
+      "id": "ui.container-path-check.b603a2ff42",
+      "sourceHash": "b603a2ff42d0583c6c3e81c375f0fe12c7660a917a48398b325ecb22bf9fc6a3",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Could not apply the rename plan.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:5591"
+      ],
+      "id": "ui.could-not-apply-the-rename-plan.141c7d0846",
+      "sourceHash": "141c7d084699f948b25210e671923db44a43ba38f702013de8ba49d9b9b825fe",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Could not check this plugin source.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:1663"
+      ],
+      "id": "ui.could-not-check-this-plugin-source.8ee6a543d4",
+      "sourceHash": "8ee6a543d4a23cc9b150c7322bed59c2fe8dcff8edc841df5541da0155246517",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Could not create a rename preview.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:5558"
+      ],
+      "id": "ui.could-not-create-a-rename-preview.90f9f40598",
+      "sourceHash": "90f9f405986dd03447ed24af6097da7ce8f100c496d282387a58ede4b2c58721",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "could not fetch the list: {detail}",
+      "category": "provider-diagnostic-template",
+      "locations": [
+        "romarr/app.py:7525"
+      ],
+      "id": "ui.could-not-fetch-the-list-detail.b9f4a0eda8",
+      "sourceHash": "b9f4a0eda835e4d97ef4d0bbf8b274a41041355eb450b6579f30fe917c9c0181",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "detail"
+      ]
+    },
+    {
+      "source": "Could not load the game library.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:1873"
+      ],
+      "id": "ui.could-not-load-the-game-library.d8a8a923f0",
+      "sourceHash": "d8a8a923f0eee22b3504de6343440a06778d6ac0ffed84093d49c3d34b9d1349",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Could not load the inventory.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:5426"
+      ],
+      "id": "ui.could-not-load-the-inventory.4d993717b5",
+      "sourceHash": "4d993717b57f851658531e2f9553972cd92e542a9f02e4a0a8b37158f71fd950",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Could not prepare this submission.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:1680"
+      ],
+      "id": "ui.could-not-prepare-this-submission.34fb54ae0c",
+      "sourceHash": "34fb54ae0cc0de77b5dfa43cc434671a01ebd1cb29f9a9c698d9b45a4a50c317",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "could not reach github.com: {error_type}",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:4957"
+      ],
+      "id": "ui.could-not-reach-github-com-error-typ.188d9cd896",
+      "sourceHash": "188d9cd896e0636095aaadc848f772653ea13527e26c13aee5aa446b5168dd1b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "error_type"
+      ]
+    },
+    {
+      "source": "could not reach {url}: {detail}",
+      "category": "provider-diagnostic-template",
+      "locations": [
+        "romarr/app.py:4425"
+      ],
+      "id": "ui.could-not-reach-url-detail.521369cf6f",
+      "sourceHash": "521369cf6f0ebc88db53eea8e95a5f315bbe4273835c44c4a7fff49d7ed1448b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "url",
+        "detail"
+      ]
+    },
+    {
+      "source": "Could not save this list. Check the connection and try again.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:2691"
+      ],
+      "id": "ui.could-not-save-this-list-check-the-c.cbade7c1e6",
+      "sourceHash": "cbade7c1e60a44fc462d6595d2cb7447cad55005e8389ca724ba602623741192",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Could not save this mapping.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:5523"
+      ],
+      "id": "ui.could-not-save-this-mapping.3dc3d560c2",
+      "sourceHash": "3dc3d560c214a868137d494551f257e402256e016098a67e48b9fe8997a8b3a4",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Could not start the library scan.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:5544"
+      ],
+      "id": "ui.could-not-start-the-library-scan.e79311bf7a",
+      "sourceHash": "e79311bf7adf9ce7da75542450bee3837c6689a74ab1459a18e29f0caef64b15",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Could not undo the last rename batch.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:5611"
+      ],
+      "id": "ui.could-not-undo-the-last-rename-batch.bb51562aed",
+      "sourceHash": "bb51562aed33384d8ff24982485dd6dc878f34ed3246b4690d75bf5fe0b8bcdc",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "{count} already added before",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:5128"
+      ],
+      "id": "ui.count-already-added-before.e957b67cbe",
+      "sourceHash": "e957b67cbea30e93286fab867900afa1a27d175455586921a63d3b9b48aaf6d2",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "count"
+      ]
+    },
+    {
+      "source": "{count} games found.",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:1874"
+      ],
+      "id": "ui.count-games-found.0aa35fe1f1",
+      "sourceHash": "0aa35fe1f1c091c834d1e411827168779be2f35e99f6775008fae3622436045b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "count"
+      ]
+    },
+    {
+      "source": "{count} kept aside with no ROM platform (normal for modern store titles -- see each list's Edit view)",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:5130-5132"
+      ],
+      "id": "ui.count-kept-aside-with-no-rom-platfor.c9223eb266",
+      "sourceHash": "c9223eb2660b9773d58dd27852abfbe729d1f9337e04bba5573118d0c9ee6519",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "count"
+      ]
+    },
+    {
+      "source": "Cover view",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2323"
+      ],
+      "id": "ui.cover-view.26cf7ea2d6",
+      "sourceHash": "26cf7ea2d60b603101f514ed15aaea39b89d07bd0ab02f8c0cee04f790f353cf",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Cover",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2290"
+      ],
+      "id": "ui.cover.fa8d845666",
+      "sourceHash": "fa8d84566676ee2ee6627116304e7eef7c9b06875d230435a4b23264fcc34f98",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Current path",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5574"
+      ],
+      "id": "ui.current-path.dc9e5c941f",
+      "sourceHash": "dc9e5c941f61d1a9c3f08bbaff16d82a6549a1d1166558029d08e636a44ab3dc",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "DAT directory",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3910"
+      ],
+      "id": "ui.dat-directory.6e18f83bfd",
+      "sourceHash": "6e18f83bfdcaa9859670068a7d4a64da959590390041a9372975e51ae239b771",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "DAT verified {count}",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5442"
+      ],
+      "id": "ui.dat-verified-count.33e684a005",
+      "sourceHash": "33e684a00589e89fe7d4d2469c4d439fbcbc0c3fea1a287d80749a8887f24f9c",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "count"
+      ]
+    },
+    {
+      "source": "directory. Keep shared metadata alongside it at",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3910"
+      ],
+      "id": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+      "sourceHash": "e2e13b466b4758346323fe1a31f0be954cb87ee4b4355a2be2f0acc58c7f6ad1",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Discoverable games",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2342"
+      ],
+      "id": "ui.discoverable-games.789aa51e99",
+      "sourceHash": "789aa51e9983962a5ef24c4d840752ba68cedf0af31c6c935999e50579383aaa",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "DLC",
+      "category": "ui-select",
+      "locations": [
+        "romarr/ui.py:5204"
+      ],
+      "id": "ui.dlc.d3387a1505",
+      "sourceHash": "d3387a15055f423f7d3af46e24256a1b1aa6b8300546c6c31b2f0211f551efc6",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Each platform folder name can be mapped only once.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:3824"
+      ],
+      "id": "ui.each-platform-folder-name-can-be-map.01335e72f4",
+      "sourceHash": "01335e72f432781b7e7c74cfdda8ea4475fa2ff9e4f9f29d00fa394b2733688b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Enter a Switch title name or title ID to limit the set.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/titled.py:504"
+      ],
+      "id": "ui.enter-a-switch-title-name-or-title-i.220678945e",
+      "sourceHash": "220678945e499d8d760447e7214e98c0e11475149b524864477ca417f85cf2ca",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Enter one folder name and choose its platform.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:3818"
+      ],
+      "id": "ui.enter-one-folder-name-and-choose-its.6652b9417b",
+      "sourceHash": "6652b9417bece0ef0bbc8c2629a41373e5326e819caefe1afc4fd37a2189878a",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Enter the ROMarr URL reachable from inside GG Requestz",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:4476"
+      ],
+      "id": "ui.enter-the-romarr-url-reachable-from.b7fbd08882",
+      "sourceHash": "b7fbd08882a9c7f4c42e141cf7d7d7da4e9eaae2cc821a24d9e3d952eebad083",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Every platform can be downloaded.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4623"
+      ],
+      "id": "ui.every-platform-can-be-downloaded.25abe82cf6",
+      "sourceHash": "25abe82cf6da4508f18f72ad95a612d9401dc5c4ff8fcd9863bfcc219434186e",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Evidence",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5574"
+      ],
+      "id": "ui.evidence.03867aea70",
+      "sourceHash": "03867aea70acaf4c5dce37a76cf5a04dab1716d6ff70bf03761c439daa8be984",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Existing ES-DE gamelists folder (optional)",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3915"
+      ],
+      "id": "ui.existing-es-de-gamelists-folder-opti.1659a3153e",
+      "sourceHash": "1659a3153e0f06253dd020fede13c19c3f788cf65e864a10ed1f659b0cf4e42f",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Existing ES-DE media folder (optional)",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3916"
+      ],
+      "id": "ui.existing-es-de-media-folder-optional.dcc4281be8",
+      "sourceHash": "dcc4281be827e455182a09b5828c2a6a77c7f83918bc9eedda1458794bc89018",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "explains the connection.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5091"
+      ],
+      "id": "ui.explains-the-connection.9e80ba4652",
+      "sourceHash": "9e80ba46529646a293696c05b54c7fdbf716a85ae5b802518b4447611c989d96",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Explore more games in this genre",
+      "category": "ui-attribute",
+      "locations": [
+        "romarr/ui.py:2295"
+      ],
+      "id": "ui.explore-more-games-in-this-genre.ca9764a30b",
+      "sourceHash": "ca9764a30b7378cf871204fefc0975fabb662987729b9a4dbb2c14e137f2e326",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "failed download handling is off",
+      "category": "task-result",
+      "locations": [
+        "romarr/app.py:2892"
+      ],
+      "id": "ui.failed-download-handling-is-off.ad2c9dba83",
+      "sourceHash": "ad2c9dba8307b5b79cfcce82a433439cf24caed553a9232e01f41926766f8599",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "folder and set its Game media directory to",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3917"
+      ],
+      "id": "ui.folder-and-set-its-game-media-direct.6970455da7",
+      "sourceHash": "6970455da732ad653242f9596a431d81af72356dd7db5e7a24aae36d0cf40fda",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Folder name",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3893"
+      ],
+      "id": "ui.folder-name.14d34edf50",
+      "sourceHash": "14d34edf50ef6c8738db97eb3fc56d0d5c8521b4555404b3ad456cedbb0c815d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": ". Folder names are matched only at the library root.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3912"
+      ],
+      "id": "ui.folder-names-are-matched-only-at-the.a6064d8258",
+      "sourceHash": "a6064d8258a0279c314cdb00783ccbfa8050f3c2b20d9caa5736e11cb924d871",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "folder, not the wider",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3910"
+      ],
+      "id": "ui.folder-not-the-wider.d61c242874",
+      "sourceHash": "d61c24287440892e1adf9646fc06a20d6ed7d65df8c1719ee40772270c61a539",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "For a guided discovery and user request queue, pair ROMarrNG with",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2222"
+      ],
+      "id": "ui.for-a-guided-discovery-and-user-requ.409fbe664a",
+      "sourceHash": "409fbe664a6071c18edc5f77aa04d1b320347afb07df59da51c4c566139fe935",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "For a household catalog and request queue, use",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2345"
+      ],
+      "id": "ui.for-a-household-catalog-and-request.2ec86400a0",
+      "sourceHash": "2ec86400a018eab78a29e9300289e791b4c4b865f3eadfe77c0ddd8626e44aa2",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "For a shared catalog and household request queue, use",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5091"
+      ],
+      "id": "ui.for-a-shared-catalog-and-household-r.027b0accc2",
+      "sourceHash": "027b0accc264107abdb6ca9af7941dd4dd2be7bd15919b9250b693d86a3d1408",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "for the shared household request queue; see the",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5375"
+      ],
+      "id": "ui.for-the-shared-household-request-que.d2ef0c1d6b",
+      "sourceHash": "d2ef0c1d6be945869a72371a9dcc9ff172d157db4d16982f445af0547708bd62",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "format and schema",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5395"
+      ],
+      "id": "ui.format-and-schema.a697cd2d86",
+      "sourceHash": "a697cd2d86f551935e4f00b8b42ede62159416464788da2f0bc32957a1b5688a",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Franchise",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2718"
+      ],
+      "id": "ui.franchise.cae83311f5",
+      "sourceHash": "cae83311f5ab2f27220741ec46d3900cded1577220aaf5542d9ab69f8408feee",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Game / evidence",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5474"
+      ],
+      "id": "ui.game-evidence.036c1e0c7e",
+      "sourceHash": "036c1e0c7e391bffcf38ca288a936372248eaa08dae47ca4fb66e6758c615c9f",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "games found.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:1874"
+      ],
+      "id": "ui.games-found.5080dc3701",
+      "sourceHash": "5080dc3701cea586a9c578e61038191d1b939328c2e12f713f5be8ce4d5a4f28",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "{games} games across {count} libraries",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:5173"
+      ],
+      "id": "ui.games-games-across-count-libraries.6f3af8400b",
+      "sourceHash": "6f3af8400b1f53998d13d52a2286d58636e81083ef835edf7ddcbb5001485215",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "games",
+        "count"
+      ]
+    },
+    {
+      "source": "{games} games across {count} library",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:5171"
+      ],
+      "id": "ui.games-games-across-count-library.f0b5160790",
+      "sourceHash": "f0b5160790587aa7bafbff1d898409a9bd2ae78b103ab5980d0fb18f17bd2247",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "games",
+        "count"
+      ]
+    },
+    {
+      "source": "Genre",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2709"
+      ],
+      "id": "ui.genre.6da795a866",
+      "sourceHash": "6da795a8664f37f696f9855d819ff63ea38a8e81ffbd24d5e7d997b65c9dc8ed",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Genres",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2295"
+      ],
+      "id": "ui.genres.3561abfe80",
+      "sourceHash": "3561abfe8067f3c1cdec6de4240f041af78d44a6ba619deee9e1d0735fe73e1e",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "github.com answered without a tag",
+      "category": "task-result",
+      "locations": [
+        "romarr/app.py:4961"
+      ],
+      "id": "ui.github-com-answered-without-a-tag.5f20c86070",
+      "sourceHash": "5f20c86070b55764b03c4aab5cc61a73f0d291aee3156439d942fa526acad2a3",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Hacks",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3494"
+      ],
+      "id": "ui.hacks.fdb80196c5",
+      "sourceHash": "fdb80196c5198afcfc0a28a5d3de7fcde3a8f2da52624ca0ebc64a4e461e44f2",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Hidden gems",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2716"
+      ],
+      "id": "ui.hidden-gems.0650c15c81",
+      "sourceHash": "0650c15c81cb1dd66875febeb587045fde55f0b5672faea7c64c0448594bebd7",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Hide owned",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2328"
+      ],
+      "id": "ui.hide-owned.1fc90fc8dc",
+      "sourceHash": "1fc90fc8dc786af6d886aa31243a0aebd09e73ff09c27b6f3d69c15e30e787dd",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Highest rated",
+      "category": "ui-select",
+      "locations": [
+        "romarr/ui.py:2327"
+      ],
+      "id": "ui.highest-rated.35d17e3fb4",
+      "sourceHash": "35d17e3fb45d8a57b5acf7bd9b1ce54221e5c554cef26a269a613dae53aa8241",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "I already have ROMs",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5086"
+      ],
+      "id": "ui.i-already-have-roms.3e38d0345c",
+      "sourceHash": "3e38d0345c89734b20fc4d09abb1d253a3d1ed68632880625f07d7ee5c366f2f",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Idle",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4531"
+      ],
+      "id": "ui.idle.ab0171ca04",
+      "sourceHash": "ab0171ca0494d441cb6fe96e2efbe1c2a129f1d87cd6c17f03613cfd111149dd",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "IGDB · covers, genres and ratings",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2321"
+      ],
+      "id": "ui.igdb-covers-genres-and-ratings.6035ecaefc",
+      "sourceHash": "6035ecaefcfac403c95b859ab066eaf7d0843a3fe1aef6a064f4f7b50c5620e2",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Import a folder you own and let ROMarr identify and file what is there.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5086"
+      ],
+      "id": "ui.import-a-folder-you-own-and-let-roma.a06dc1fe1e",
+      "sourceHash": "a06dc1fe1eeab251185918f5b6bf1e25687a3266d3f93df96b7145ad0a1cc8cd",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Import check (minutes)",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4223"
+      ],
+      "id": "ui.import-check-minutes.afebe8564c",
+      "sourceHash": "afebe8564cdbb4c07f4cc0a847eec5a8f8a178563b9a9119a5f5ef48cb3f797d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Import completed downloads automatically",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4214"
+      ],
+      "id": "ui.import-completed-downloads-automatic.0436b11a02",
+      "sourceHash": "0436b11a02a44a56412042c61699febf7c7515d60c23d953f506db9c7fe2cccf",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Import completed downloads",
+      "category": "task-label",
+      "locations": [
+        "romarr/app.py:1350"
+      ],
+      "id": "ui.import-completed-downloads.fd1a4510eb",
+      "sourceHash": "fd1a4510eb3f601ce7a793e5515684f9cfde4530ee9bb135363e864aa8096bfc",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Import lists",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2094"
+      ],
+      "id": "ui.import-lists.cdf54991b2",
+      "sourceHash": "cdf54991b296b33028b015ba3a8246ceff8f70bd063ba74122b30846eee80070",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "imported {imported} of {total} finished download(s)",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:4988"
+      ],
+      "id": "ui.imported-imported-of-total-finished.5726eabd36",
+      "sourceHash": "5726eabd36e98b027d04d3e62d8c722ceb631846ca91b12e874a53105b3a727a",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "imported",
+        "total"
+      ]
+    },
+    {
+      "source": "Imported {total}",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:5148"
+      ],
+      "id": "ui.imported-total.5f100c0878",
+      "sourceHash": "5f100c08788496c6ec6b0a20029b6cca6291d4583b500a5440d82ed2c7aed9a9",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "total"
+      ]
+    },
+    {
+      "source": "Improvements",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3495"
+      ],
+      "id": "ui.improvements.c3eb9e6f2b",
+      "sourceHash": "c3eb9e6f2b69b3acf3795a7ff1e8784896318ffd126befcd90c8e5a27acffe6d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "In a game",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4510"
+      ],
+      "id": "ui.in-a-game.a0458668e7",
+      "sourceHash": "a0458668e766d340ef8a534827ba0a287ada6744b35a4eed8cbfacf1692333f3",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "In library",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3484"
+      ],
+      "id": "ui.in-library.be6339943d",
+      "sourceHash": "be6339943daa231feab8786b8842338a0b4d255bc44d5ba38d8f76c960d19a0e",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Integration guide",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2097"
+      ],
+      "id": "ui.integration-guide.02a0a9e2c2",
+      "sourceHash": "02a0a9e2c23ddca5fd31ec188143d7650492cc327743dfae8200bdc15c8385de",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "integration guide",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2222",
+        "romarr/ui.py:4685",
+        "romarr/ui.py:5091",
+        "romarr/ui.py:5375"
+      ],
+      "id": "ui.integration-guide.6cfa2d0314",
+      "sourceHash": "6cfa2d0314f8b1da4dd457bd11b39027be5eb4bd13b3a2230df34be284558a37",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Invitation · ROMarr",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:6349"
+      ],
+      "id": "ui.invitation-romarr.6b427c1d21",
+      "sourceHash": "6b427c1d21f03fe932fa1c8c0d5e39ab0579cc4b2f45f3189914fb702c78fd92",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "{items} feed item(s) from {sources} source(s), grabbed {grabbed}",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:4938-4939"
+      ],
+      "id": "ui.items-feed-item-s-from-sources-sourc.2cf1cff247",
+      "sourceHash": "2cf1cff24775cddf6ef04723b469d5963d10f608bdb52b2bb8a1ff47e60b7364",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "items",
+        "sources",
+        "grabbed"
+      ]
+    },
+    {
+      "source": "Just added",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2716"
+      ],
+      "id": "ui.just-added.649fd15af1",
+      "sourceHash": "649fd15af1e0003921bddadc6b07a386f48fa1c632452dd7d4881364ff18a9ae",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Kind",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3466"
+      ],
+      "id": "ui.kind.f5387f9bb6",
+      "sourceHash": "f5387f9bb6ed70315a77fdcb9335facc27a9bf241f35955bd2755c55e0c016c7",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "{latest} is available (running {version})",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:4978"
+      ],
+      "id": "ui.latest-is-available-running-version.2d3ed5b75c",
+      "sourceHash": "2d3ed5b75cea3265cb366ee6f680efef4c117c50f77c4680b5682c7020d38051",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "latest",
+        "version"
+      ]
+    },
+    {
+      "source": "Library inventory",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5399"
+      ],
+      "id": "ui.library-inventory.18d033ce16",
+      "sourceHash": "18d033ce16489e237be785604f6e6ca3edcc6dff3e4c92f016f5ede5f8d8e4c1",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "{library} unreachable ({error_type})",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:5166"
+      ],
+      "id": "ui.library-unreachable-error-type.b2611060a9",
+      "sourceHash": "b2611060a95edc0233b89e70cc27d36caf3318c9188849abda3d776e3151500e",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "library",
+        "error_type"
+      ]
+    },
+    {
+      "source": ". Link or configure ES-DE's gamelist directory to the shared",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3917"
+      ],
+      "id": "ui.link-or-configure-es-de-s-gamelist-d.4233d95510",
+      "sourceHash": "4233d95510b3d7e28398445c7d858c00ca2f825e3f74c6c184c4732b8f901327",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "List sync (hours)",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4229"
+      ],
+      "id": "ui.list-sync-hours.8c392b5fd2",
+      "sourceHash": "8c392b5fd2e1bb51de0b94b726c35780367af539e1fae48cca4c77b8aff16e58",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "List view",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2323"
+      ],
+      "id": "ui.list-view.5d8c3e1b63",
+      "sourceHash": "5d8c3e1b635eed6f3475260c63650062958ebd2f2e2cddd8abc59de76bea7f72",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Load a DAT and see verified titles and collection progress.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5089"
+      ],
+      "id": "ui.load-a-dat-and-see-verified-titles-a.6177c2b17c",
+      "sourceHash": "6177c2b17c05151b2b5ebaa7f0782d66e3d746a458307fa6e3671c26a12a6a10",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Loaded DATs · verified dump names",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2322"
+      ],
+      "id": "ui.loaded-dats-verified-dump-names.b8c1ccfba0",
+      "sourceHash": "b8c1ccfba0eedb01db6377904d88125a49219ad9ad49662937f25e73a24b85b2",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Loading inventory…",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5400"
+      ],
+      "id": "ui.loading-inventory.98a81c2073",
+      "sourceHash": "98a81c20730e815ad0c1b184c4c81f0e10410eb022c6ddda70705a0f994b4964",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Local ES-DE records reused {count}",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5445"
+      ],
+      "id": "ui.local-es-de-records-reused-count.54d131e229",
+      "sourceHash": "54d131e22995890c9603f7ea846fe7df3594af8b0de64890d3960bfde893dcc7",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "count"
+      ]
+    },
+    {
+      "source": "lookup failed: {detail}",
+      "category": "provider-diagnostic-template",
+      "locations": [
+        "romarr/app.py:7265"
+      ],
+      "id": "ui.lookup-failed-detail.47273998cc",
+      "sourceHash": "47273998cc05ccd40e7df45d7efd61556dfbbbb37358ee408637440b71262346",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "detail"
+      ]
+    },
+    {
+      "source": "Main navigation",
+      "category": "ui-attribute",
+      "locations": [
+        "romarr/ui.py:5944"
+      ],
+      "id": "ui.main-navigation.eb355944b9",
+      "sourceHash": "eb355944b92d10582856f8aea34b3e319ba465b8aa4c294973cf53f665399a2c",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Match DATs, cache shared metadata and artwork, and preview safe renames.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5087"
+      ],
+      "id": "ui.match-dats-cache-shared-metadata-and.1454c1af0c",
+      "sourceHash": "1454c1af0caf22766a11c0b98d0c1483fbdccfa19c485164dadeb9059ff1f3d1",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Maximum size (MB)",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4015"
+      ],
+      "id": "ui.maximum-size-mb.02998adaa9",
+      "sourceHash": "02998adaa9f35753f72dbf661e2d0807feccc21b76ee19b7c03fe1c1fd4e5bef",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": ". Media files follow ROM names and folders, so artwork remains matched when clients mount the same library at different paths.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3917"
+      ],
+      "id": "ui.media-files-follow-rom-names-and-fol.52c3259775",
+      "sourceHash": "52c3259775f1173bcffdbb64eb84371f51fa18f4268a5e22fcf7c1bf807507d5",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "metadata root not configured",
+      "category": "ui-error",
+      "locations": [
+        "romarr/organizer.py:1703"
+      ],
+      "id": "ui.metadata-root-not-configured.d22feb8b9c",
+      "sourceHash": "d22feb8b9caa97136225b1c05046853fc5ccc08bf0b21e926c5f8aeb3de29a4d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Minimum seeders",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4014"
+      ],
+      "id": "ui.minimum-seeders.a78f3d2116",
+      "sourceHash": "a78f3d21169ba99d3ca34fb9fed030e3d78261fd3758c4716f296c7d4a1b315e",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Moonlight pairing cannot be automated. The PIN is created by your Moonlight client, on your device -- no host API can produce it or skip it. Start pairing in Moonlight, read the PIN it shows you, and type it here.",
+      "category": "provider-diagnostic",
+      "locations": [
+        "romarr/playability.py:1409"
+      ],
+      "id": "ui.moonlight-pairing-cannot-be-automate.e1a9d014f9",
+      "sourceHash": "e1a9d014f9e91246a933e83539213339eb3167c2e061e968133d6b2ed41da063",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": ". Mount it on each client and point ES-DE at its shared gamelists and media folders.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5384"
+      ],
+      "id": "ui.mount-it-on-each-client-and-point-es.357a7ec8cd",
+      "sourceHash": "357a7ec8cd02a1f6453fb2e41939c04c1dafa28cc4aed057e6335f3c6f896069",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Mount it on each client and point ES-DE at its shared gamelists and media folders.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5384"
+      ],
+      "id": "ui.mount-it-on-each-client-and-point-es.a021b4cc73",
+      "sourceHash": "a021b4cc73a632dac21b1ca25ef6a1bea8fc45473de69376569501417b5e785b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Multiplayer",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2717"
+      ],
+      "id": "ui.multiplayer.563370a7b0",
+      "sourceHash": "563370a7b0ef8fea32b1e01b441b507bcd6bae0b924205512c30c54ac1beca62",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Needs review",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5389"
+      ],
+      "id": "ui.needs-review.07297fa94a",
+      "sourceHash": "07297fa94a997d0f807bd37c61993a8821ca406b5e4498e4f0759e50ab154dd4",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "New releases",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2720"
+      ],
+      "id": "ui.new-releases.136dfb88fd",
+      "sourceHash": "136dfb88fd85c566c3010fc1a4e19aef020ec76c17278d6eaf6ae65801d1bc5b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Newest release",
+      "category": "ui-select",
+      "locations": [
+        "romarr/ui.py:2327"
+      ],
+      "id": "ui.newest-release.8736254705",
+      "sourceHash": "8736254705933c03b3bdc8ebf5a96654c5c0dcb4b5b7ba8d20309a99e2edf9d9",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Newest",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2715"
+      ],
+      "id": "ui.newest.d15efa178c",
+      "sourceHash": "d15efa178cf65ae16596a270671aa320bc9d2a5f18d78ecc5d479f73b3ffd51e",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "No cover",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2290"
+      ],
+      "id": "ui.no-cover.b2ec3181b3",
+      "sourceHash": "b2ec3181b360d0347d8658cb177771e904d6bae9c4b80974be48cff505d1d600",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "no indexer could be read",
+      "category": "task-result",
+      "locations": [
+        "romarr/app.py:4926"
+      ],
+      "id": "ui.no-indexer-could-be-read.ad531cd423",
+      "sourceHash": "ad531cd423bb92f980b8e32a18393c6cd3b40a901f324b0f58de517ab8ab1a49",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "No inventory entries yet. Scan a configured ROM library to begin.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5461"
+      ],
+      "id": "ui.no-inventory-entries-yet-scan-a-conf.acb0dacd79",
+      "sourceHash": "acb0dacd79a0138ef576c9abe95aa0c96bb41c86aa650bc70b6fca7ccb7b0f91",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "no library configured",
+      "category": "task-result",
+      "locations": [
+        "romarr/app.py:5168"
+      ],
+      "id": "ui.no-library-configured.2f7f2b199a",
+      "sourceHash": "2f7f2b199a720c1f4f449c69029f54e32f32fe05fb907c712ba306ec0121dfa0",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "no lists configured",
+      "category": "task-result",
+      "locations": [
+        "romarr/app.py:5067"
+      ],
+      "id": "ui.no-lists-configured.f0f61cd546",
+      "sourceHash": "f0f61cd5467971aee41be233711ced0f53c5732410a88c2590e1f17dd64e7e65",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "no metadata provider that can {what} is configured -- add {offer} under Settings -> Metadata",
+      "category": "provider-diagnostic-template",
+      "locations": [
+        "romarr/metadata.py:917"
+      ],
+      "id": "ui.no-metadata-provider-that-can-what-i.55f272fb94",
+      "sourceHash": "55f272fb9448d8b36756e83345b5e099a278b537f8988bf2bd7a538f89562daa",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "what",
+        "offer"
+      ]
+    },
+    {
+      "source": "No patch projects match. Add a catalogue in Media Management or drop JSON files into the patch-catalog.d folder.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3486"
+      ],
+      "id": "ui.no-patch-projects-match-add-a-catalo.c81829dd8f",
+      "sourceHash": "c81829dd8ff59f0602dfda4a130dd59078d9d01c05a17bcdc2ec158bdf1c380c",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "No platforms match this filter.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4688"
+      ],
+      "id": "ui.no-platforms-match-this-filter.a9e7efc40f",
+      "sourceHash": "a9e7efc40fea05c6389c0e22ee10378b7208611a1dc836b495141184d97c3ca6",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "No safe renames are ready in this batch.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5574"
+      ],
+      "id": "ui.no-safe-renames-are-ready-in-this-ba.45fe5b5767",
+      "sourceHash": "45fe5b5767b3acc6a30021a1ed6452d45a8ef81035bb9b9f202e6b5567005968",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "No TitleDB ID",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5483"
+      ],
+      "id": "ui.no-titledb-id.3c3d2f2f0a",
+      "sourceHash": "3c3d2f2f0a359e288310e9c86bfe0857199e9b9e910947a39c32fced91ac09f7",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "No titles match these filters.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2318"
+      ],
+      "id": "ui.no-titles-match-these-filters.a0f06fb7bb",
+      "sourceHash": "a0f06fb7bb2c89040d798bd1f4218640adf4759b41a8b7d30059abea521afd39",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Not available",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4301"
+      ],
+      "id": "ui.not-available.67a926f700",
+      "sourceHash": "67a926f7008e2b0e7f2b3f7a4b37597834830110be1d51138f425d6f3449bc09",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Not in library",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3484"
+      ],
+      "id": "ui.not-in-library.c2f9e4fde9",
+      "sourceHash": "c2f9e4fde96646a1969c0792c3f2688630247adaa25a18812240da6acfacc6ce",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "nothing finished",
+      "category": "task-result",
+      "locations": [
+        "romarr/app.py:4986"
+      ],
+      "id": "ui.nothing-finished.cd66a4ec32",
+      "sourceHash": "cd66a4ec32d8b397fb13136b264bc58b8d795246698bdb8785aa78df6f899a0d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "nothing wanted, nothing to match",
+      "category": "task-result",
+      "locations": [
+        "romarr/app.py:4911"
+      ],
+      "id": "ui.nothing-wanted-nothing-to-match.d281ab9dfe",
+      "sourceHash": "d281ab9dfe6ac1c469663d8afd94818021b006f6a5740d3320d45392c57223a1",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "OK",
+      "category": "ui-status",
+      "locations": [
+        "romarr/ui.py:4292"
+      ],
+      "id": "ui.ok.565339bc4d",
+      "sourceHash": "565339bc4d33d72817b583024112eb7f5cdf3e5eef0252d6ec1b9c9a94e12bb3",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "On disk (plays now)",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:1822"
+      ],
+      "id": "ui.on-disk-plays-now.325a11ceda",
+      "sourceHash": "325a11ceda6c5379498ece518c46a081019f59b3fd88ba32ea53dbdc653f397b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "On this day",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2717"
+      ],
+      "id": "ui.on-this-day.d011904834",
+      "sourceHash": "d011904834fe28b25d7a9d9043c048b00e2b6f0ebf162498850f2105696195d6",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Optional connections to the rest of the stack. Credentials live in the environment file, not here — this page never shows or stores a secret. Indexers and download clients have their own Settings pages; notifications and metadata connections can be added only when you choose to use them.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4198"
+      ],
+      "id": "ui.optional-connections-to-the-rest-of.636208f858",
+      "sourceHash": "636208f8587950df7a309c063bdb973bc221aa53c810889a811ff06f7d9ea8ce",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Optional follow-ups",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5109"
+      ],
+      "id": "ui.optional-follow-ups.e3fee9a99c",
+      "sourceHash": "e3fee9a99c9bf2af64aa820ad46e1bcf227905c8a3f819ff26dd03db2278c37f",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": ", or load No-Intro / Redump DATs under",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2221"
+      ],
+      "id": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa",
+      "sourceHash": "02eaa58bfa6c824f83791cb11b32f6eba88e517acaa2fe36dcd2333c7d3fe00c",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "or load No-Intro / Redump DATs under",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2221"
+      ],
+      "id": "ui.or-load-no-intro-redump-dats-under.22540d7871",
+      "sourceHash": "22540d7871a7b8be53a7a9ec9c3092168915e4daac0be59de43b1e09dd3cbbba",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Organize a library you already have",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5087"
+      ],
+      "id": "ui.organize-a-library-you-already-have.61369e08be",
+      "sourceHash": "61369e08be38ee4a8b298278f9278fd8740a6f2dcae563c1c4b603c26da824b1",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": ", outside the ROM root, and mount that folder on each client. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another provider lookup.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3910"
+      ],
+      "id": "ui.outside-the-rom-root-and-mount-that.6deae8166d",
+      "sourceHash": "6deae8166ddbe69392aebb90be5fba8c2901e1e09caa7b27a60c3db82edbd610",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Overwrite an existing file",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3938"
+      ],
+      "id": "ui.overwrite-an-existing-file.9d5f5484e6",
+      "sourceHash": "9d5f5484e67157499dde68915b81e50de7605effeb74108ed77452e850f51d1d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Page could not be loaded",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:1459"
+      ],
+      "id": "ui.page-could-not-be-loaded.b4aa008f1c",
+      "sourceHash": "b4aa008f1c141b110b5b833fd0437a31f8026f695bfd756f99404c0f2428d58b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Patch catalogue URL (optional)",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3950"
+      ],
+      "id": "ui.patch-catalogue-url-optional.da0d568bab",
+      "sourceHash": "da0d568babe7e4775cc6a65199aafa40bf37757e61bfec6bca1cbbea2df2455f",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "{path} does not exist in this container. Mount your library volume there, or change the path on the Settings page.",
+      "category": "library-status-template",
+      "locations": [
+        "romarr/app.py:1811"
+      ],
+      "id": "ui.path-does-not-exist-in-this-containe.794119b508",
+      "sourceHash": "794119b50869ed548d427e5315cb02df9137891e255d34770378c990643eb579",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "path"
+      ]
+    },
+    {
+      "source": "{path} does not exist in this container, but {fallback_path} does. {path} was stored on first run, and a stored path outranks the environment -- change it on the Settings page, because editing the environment will not move it.",
+      "category": "library-status-template",
+      "locations": [
+        "romarr/app.py:1807"
+      ],
+      "id": "ui.path-does-not-exist-in-this-containe.b930479dc1",
+      "sourceHash": "b930479dc185884711116ba565d4d061e0895c9be6d9303d588b25fbf15b42e2",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "path",
+        "fallback_path",
+        "path"
+      ]
+    },
+    {
+      "source": "Pick one route. You can return here and add the other pieces later.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5083"
+      ],
+      "id": "ui.pick-one-route-you-can-return-here-a.3424d84932",
+      "sourceHash": "3424d84932c1ec6ffc35ccc58383a4af07e96ce06d933e36966fd8ae81178467",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Platform folder names",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3911"
+      ],
+      "id": "ui.platform-folder-names.4486e3993b",
+      "sourceHash": "4486e3993b98bc725eadd46cf3eb40b6010198c8de7f2016bff5cc45110270d5",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Platforms, by era",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4683"
+      ],
+      "id": "ui.platforms-by-era.f61faf3b5f",
+      "sourceHash": "f61faf3b5fe3fdc0403b20261fbf029a3deec34cca6a9acfe9d7307ea8b7ac97",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Playlist:",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5498"
+      ],
+      "id": "ui.playlist.0901ed5364",
+      "sourceHash": "0901ed53643deb4257c3b597db9ffc63b3a06a2a0c208b32d6254cb4ec58807a",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Popular",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2720"
+      ],
+      "id": "ui.popular.76327dec9a",
+      "sourceHash": "76327dec9ae3a06a8c3c283e6a81d3710ae736021b583875c13e4e8fb2ad83c0",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Preview next batch",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5577"
+      ],
+      "id": "ui.preview-next-batch.da5ef387bb",
+      "sourceHash": "da5ef387bbe2e72a847cba86c4dd51a60d9129507f3769c8f4ffda787540a0af",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Preview safe renames",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5392"
+      ],
+      "id": "ui.preview-safe-renames.b22bfffeca",
+      "sourceHash": "b22bfffeca615351ce1b49e0239657d955bb6e23d850bde66de917fb517403a8",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "{processed} / {total} files checked",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5433"
+      ],
+      "id": "ui.processed-total-files-checked.12551d7ec5",
+      "sourceHash": "12551d7ec5be3e4962e07539ae34a6dc4c72bf3bd09c6cbe88ec21d5b1c97014",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "processed",
+        "total"
+      ]
+    },
+    {
+      "source": "Project",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3474"
+      ],
+      "id": "ui.project.9859597853",
+      "sourceHash": "985959785319747668373cc6dee294b11db782b03cdd90a2851fbdc0637c6b7b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Projects come from your own catalogue only. Completeness is what a project states, never a guess. Requests come from SeerrNG.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3489"
+      ],
+      "id": "ui.projects-come-from-your-own-catalogu.82063d8e45",
+      "sourceHash": "82063d8e45bbc630056a5c701c65f9178b4580075b2e43d97384fa54fa7b6cac",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Proposed path",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5574"
+      ],
+      "id": "ui.proposed-path.0e656434e8",
+      "sourceHash": "0e656434e80590d2ce603558ddd2a151db963a9de8c3fc0809eda315682b44f6",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "{providers} answered, but has nothing to {what} right now",
+      "category": "provider-diagnostic-template",
+      "locations": [
+        "romarr/metadata.py:906"
+      ],
+      "id": "ui.providers-answered-but-has-nothing-t.6705231612",
+      "sourceHash": "6705231612b895413a432808359384c03cbf3fd6451c01c7fa75a7f10273af16",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "providers",
+        "what"
+      ]
+    },
+    {
+      "source": "{providers} could not be reached -- see the log",
+      "category": "provider-diagnostic-template",
+      "locations": [
+        "romarr/metadata.py:909"
+      ],
+      "id": "ui.providers-could-not-be-reached-see-t.56aa99862c",
+      "sourceHash": "56aa99862c7239341483ed622ae8ec19452b80d56372f759149bb3defbacee4a",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "providers"
+      ]
+    },
+    {
+      "source": "{providers} is configured but {needs} -- fill it in under Settings -> Metadata",
+      "category": "provider-diagnostic-template",
+      "locations": [
+        "romarr/metadata.py:925"
+      ],
+      "id": "ui.providers-is-configured-but-needs-fi.ccdb31a413",
+      "sourceHash": "ccdb31a4130f79f05f7b01a62623b24dfa9622a8ed8c9cd0e4f49631d7e045c1",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "providers",
+        "needs"
+      ]
+    },
+    {
+      "source": "{providers} is configured but switched off -- enable it under Settings -> Metadata",
+      "category": "provider-diagnostic-template",
+      "locations": [
+        "romarr/metadata.py:921-923"
+      ],
+      "id": "ui.providers-is-configured-but-switched.5a8f02dcf8",
+      "sourceHash": "5a8f02dcf83439e70d573c08ce7a8aceb382cdc4beada1e8ee14cf645f95c0d2",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "providers"
+      ]
+    },
+    {
+      "source": "Prowlarr diagnostics failed: {error_type}.",
+      "category": "ui-error-template",
+      "locations": [
+        "romarr/app.py:7709"
+      ],
+      "id": "ui.prowlarr-diagnostics-failed-error-ty.c9d3eda833",
+      "sourceHash": "c9d3eda8335be80edf7e88e3f2645c91a8dfed439e0ab82e88e7ecbd69a2073c",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "error_type"
+      ]
+    },
+    {
+      "source": "Publish ES-DE data",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5394"
+      ],
+      "id": "ui.publish-es-de-data.0e81c10a08",
+      "sourceHash": "0e81c10a080ab1725fbec00831620a5bd7cdfa106b91de0d3f83f4f9ad4fb5ea",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Read ROM hashes from the library for netplay",
+      "category": "task-label",
+      "locations": [
+        "romarr/app.py:1380"
+      ],
+      "id": "ui.read-rom-hashes-from-the-library-for.16f925f2d1",
+      "sourceHash": "16f925f2d1d13414a8ca88c1c33a163a251dbb53209e5dcab3a3f6577c3894d4",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Reading the library from {where}…",
+      "category": "library-status-template",
+      "locations": [
+        "romarr/app.py:1570"
+      ],
+      "id": "ui.reading-the-library-from-where.f6d252e9c7",
+      "sourceHash": "f6d252e9c73e3de54c2fea521d9fc47afddb4d1a9cca281fd6fdbfc1c625fd4b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "where"
+      ]
+    },
+    {
+      "source": "Reading your library in the background. This page does not have to stay open.",
+      "category": "task-result",
+      "locations": [
+        "romarr/app.py:4276"
+      ],
+      "id": "ui.reading-your-library-in-the-backgrou.c77eb7ff59",
+      "sourceHash": "c77eb7ff59d587dd60a238403ca8fc8b721430f50fdf7eb5fb2185fea7af6693",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Ready to scan",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5429"
+      ],
+      "id": "ui.ready-to-scan.6b32c3b007",
+      "sourceHash": "6b32c3b0071012561ceac050640d0572a4039794a16abe6c38eb617a5c0e362c",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Recommended · IGDB popular",
+      "category": "ui-select",
+      "locations": [
+        "romarr/ui.py:2327"
+      ],
+      "id": "ui.recommended-igdb-popular.5eea53d8e1",
+      "sourceHash": "5eea53d8e1ff494f77d6f443a8241cae6a43ce5fc1fdc4f620ed6a28f4465f8d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Refresh metadata",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5391"
+      ],
+      "id": "ui.refresh-metadata.024000f113",
+      "sourceHash": "024000f113f7a11bf229c3f8859f84d564d9558f03a554f22f790e90144ae007",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Release Profile",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4005"
+      ],
+      "id": "ui.release-profile.787c727f17",
+      "sourceHash": "787c727f170b151bb300488ad12ed11f2545e132fd0e00d3a63e51dcac53bbdb",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Release year",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2327"
+      ],
+      "id": "ui.release-year.6ada277b6f",
+      "sourceHash": "6ada277b6f9a9d22ac8f849ec5b2691ada83da6d4f97d96150399a9243aa0bc0",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Released",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2277"
+      ],
+      "id": "ui.released.f33deea9b1",
+      "sourceHash": "f33deea9b1009db3148f2614e5da59c03c6fe43df55972f3860d8b871e1b2ace",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Rename on import",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3933"
+      ],
+      "id": "ui.rename-on-import.b6261d12c4",
+      "sourceHash": "b6261d12c4dce48176483b7d350e52ee909bf414542b25f1abaea51644266bfe",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Rename preview ready. {safe} safe renames in this batch; {blocked} entries left alone.",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:5569"
+      ],
+      "id": "ui.rename-preview-ready-safe-safe-renam.4f86f2186a",
+      "sourceHash": "4f86f2186a7641cbd9ff8af597de094f6e61bd13932edcffa04d9c36dd00f22d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "safe",
+        "blocked"
+      ]
+    },
+    {
+      "source": "Request searches your configured sources and hands a usable release to your download client. If no usable release is found, ROMarr keeps the title on Wanted.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2343"
+      ],
+      "id": "ui.request-searches-your-configured-sou.3f429c4868",
+      "sourceHash": "3f429c4868cc8f01a651a81185ac8a4b40fa0ac3a061c49a2173b9d9c13544bf",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Request selected (max 5)",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2333"
+      ],
+      "id": "ui.request-selected-max-5.3261b3c2f3",
+      "sourceHash": "3261b3c2f3928fdfad6cef741054a8c70900678fddf8f0d129dd1430e324e138",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Requests in SeerrNG ↗",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5374"
+      ],
+      "id": "ui.requests-in-seerrng.94ac015721",
+      "sourceHash": "94ac01572121cfa86286c6ebb0f5dddedecbbc35f9cb31754abdc7af6c8834ce",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Retire dead downloads and grab a replacement",
+      "category": "task-label",
+      "locations": [
+        "romarr/app.py:1364"
+      ],
+      "id": "ui.retire-dead-downloads-and-grab-a-rep.4af313cc1e",
+      "sourceHash": "4af313cc1eca5ee0641611556c74890305cd35695e5311e3dd03304ecaba5e01",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "retired {blocklisted} dead download(s), grabbed {regrabbed} replacement(s)",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:2945"
+      ],
+      "id": "ui.retired-blocklisted-dead-download-s.5e329a4393",
+      "sourceHash": "5e329a4393ac41e8ff7c8310dfc47533941c4bfc4de12bb9e276cdd475a7685e",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "blocklisted",
+        "regrabbed"
+      ]
+    },
+    {
+      "source": "ROM Hub is not installed: {detail}",
+      "category": "ui-error-template",
+      "locations": [
+        "romarr/hub.py:136",
+        "romarr/hub.py:519",
+        "romarr/hub.py:576"
+      ],
+      "id": "ui.rom-hub-is-not-installed-detail.65cb63d8cc",
+      "sourceHash": "65cb63d8cc34d360db1e799cb8ac25ab01f921b3dbb1521191aa54fc7ccc9d20",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "detail"
+      ]
+    },
+    {
+      "source": "ROM library root",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3908"
+      ],
+      "id": "ui.rom-library-root.4644e972f3",
+      "sourceHash": "4644e972f384d98ad8dad336927b4407f9622b89b234c7319a8843df612a9607",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROM library",
+      "category": "ui-status",
+      "locations": [
+        "romarr/ui.py:4317"
+      ],
+      "id": "ui.rom-library.9a43486972",
+      "sourceHash": "9a434869722fa7fcec5eda8b8e3f0a40ee88ac97d61fff5dc0e57658694e5506",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROM path",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5474"
+      ],
+      "id": "ui.rom-path.126fbde809",
+      "sourceHash": "126fbde80917a42b09ddb6c70372f6077b44835a173004b22d0e53737d2ed297",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROM root",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5377"
+      ],
+      "id": "ui.rom-root.95251f6ecf",
+      "sourceHash": "95251f6ecf5d229455f7d1603514e2e723a6c379df6e5360a85c2f70d96363ac",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROMarr acquires, verifies and files games. For household discovery, covers and a request queue, pair it with",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4685"
+      ],
+      "id": "ui.romarr-acquires-verifies-and-files-g.417be68822",
+      "sourceHash": "417be688224d943a8d61f5d235e6049a52a2acf4b72d5d0506fa331a1cd36afe",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROMarr cannot say which platforms it plays and does not guess.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4552"
+      ],
+      "id": "ui.romarr-cannot-say-which-platforms-it.ba28060e2c",
+      "sourceHash": "ba28060e2cdfa32442c1332ed99ffa338ec71335f763d9b291e0798f3809eadc",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROMarr checks the actual completed path during import. If that path is not visible inside ROMarr, use the remote path mapping on Media Management; keep the download path and library destination distinct.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3712"
+      ],
+      "id": "ui.romarr-checks-the-actual-completed-p.227823654c",
+      "sourceHash": "227823654c6e647a076a7d5a5479b628ba147ba0573d61a1c558c6055f7ea13e",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROMarr could not check this source. Check the connection and try again.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:1666"
+      ],
+      "id": "ui.romarr-could-not-check-this-source-c.a348d0627e",
+      "sourceHash": "a348d0627e421ce9917f94b88b0b5802c960f5256ff4fc881d32f51f531496e0",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROMarr could not finish loading this page. Check the connection and try again.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:1459"
+      ],
+      "id": "ui.romarr-could-not-finish-loading-this.83728f760b",
+      "sourceHash": "83728f760b37637ee409e7f47ccb6b0539677141e595fe87076b79781ab30f31",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROMarr could not prepare the submission. Check the connection and try again.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:1694"
+      ],
+      "id": "ui.romarr-could-not-prepare-the-submiss.2edba64e67",
+      "sourceHash": "2edba64e671933a0e6a0c22f9047269911bac537d5d12d00746a6006283feda4",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROMarr did not return an API key",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:4478"
+      ],
+      "id": "ui.romarr-did-not-return-an-api-key.fd35532a78",
+      "sourceHash": "fd35532a7805e62d6508c19798013b83374216bf98021361c65429fbf9a8c003",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": ". ROMarr handles release search, verification and filing; see the",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2222"
+      ],
+      "id": "ui.romarr-handles-release-search-verifi.0eedeff8ae",
+      "sourceHash": "0eedeff8ae08b5e86f7b34644a82a603e3f287de76e45bbe80a1498aff5ecde9",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": ". ROMarr handles release search, verification and filing; the",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5091"
+      ],
+      "id": "ui.romarr-handles-release-search-verifi.2efb2a35a6",
+      "sourceHash": "2efb2a35a64203ee02a43400afdfc274255b8c260da58ab46dcb07f5f33bc165",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROMarr handles release search, verification and filing; see the",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2222"
+      ],
+      "id": "ui.romarr-handles-release-search-verifi.45939bf69e",
+      "sourceHash": "45939bf69e2ac7e91a2589eb320c08a1affa601a322abc230759c730714fe38d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROMarr handles release search, verification and filing; the",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5091"
+      ],
+      "id": "ui.romarr-handles-release-search-verifi.fde43e75b6",
+      "sourceHash": "fde43e75b609774e23e84196d21af2cec63b81205976dd76a74d3093abea60cf",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROMarr library destination: {path}.",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:3708"
+      ],
+      "id": "ui.romarr-library-destination-path.26eb39192d",
+      "sourceHash": "26eb39192d37a6e5a1321797c6786de3dc2e408ea6bb0122e877642f3c144cf5",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "path"
+      ]
+    },
+    {
+      "source": "ROMarr portable metadata JSON",
+      "category": "ui-format-label",
+      "locations": [
+        "romarr/frontends.py:359"
+      ],
+      "id": "ui.romarr-portable-metadata-json.d3a4242956",
+      "sourceHash": "d3a4242956cfcc5e5f74a9e2bddcaf52cf86f15a76f096a0ee3b2ab3c240f9f6",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROMarr reads ES-DE gamelists and matching local media before online lookup. Publishing writes a shared gamelist and matching covers under the metadata root, using paths relative to the ROM root and matching ES-DE media names. Provider lookups are capped at 200 per scan. Export the portable catalog from",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5395"
+      ],
+      "id": "ui.romarr-reads-es-de-gamelists-and-mat.deddc5b79b",
+      "sourceHash": "deddc5b79b57d630611a75227b419b1718b0f1e0eedb67b2047e344af99c20b1",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROMarr recognizes platform slugs and unambiguous ES-DE system names automatically. Add a mapping only when your existing folder uses another name, such as",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3912"
+      ],
+      "id": "ui.romarr-recognizes-platform-slugs-and.dbdab9544b",
+      "sourceHash": "dbdab9544be1d0904c54fb778fcf432ac4aef859064e4083908466a06f99aae2",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROMarr reports what it can verify about one and never guesses the rest.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4513"
+      ],
+      "id": "ui.romarr-reports-what-it-can-verify-ab.7a47672fa2",
+      "sourceHash": "7a47672fa293008f2205d1dbbfc9067f55cbb3177c7d428f34ac85897b6d8592",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "ROMarr sidebar",
+      "category": "ui-attribute",
+      "locations": [
+        "romarr/ui.py:5942"
+      ],
+      "id": "ui.romarr-sidebar.539bf1952d",
+      "sourceHash": "539bf1952d731f5e742cd9bdd3386536424b9b9f00accb11fdd4ce237da4ba9d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": ". ROMarrNG handles acquiring, verifying and filing.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2345"
+      ],
+      "id": "ui.romarrng-handles-acquiring-verifying.6dd98e68b1",
+      "sourceHash": "6dd98e68b15af25593513379b692ed8a92c1d51703c1507081bdc5ef86f06c1e",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "RomM\\'s built-in EmulatorJS, in the browser",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5121"
+      ],
+      "id": "ui.romm-s-built-in-emulatorjs-in-the-br.9e054ff196",
+      "sourceHash": "9e054ff196f24e22f980c3901b1512e9ac661a8e4e8df31388d1bf6ae4922354",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Route Switch updates and DLC by TitleDB filename ID",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3934"
+      ],
+      "id": "ui.route-switch-updates-and-dlc-by-titl.527b3ed147",
+      "sourceHash": "527b3ed1471774f52842212971b4927794dbc614670c91414f75234e6607d9d3",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "RSS sync (minutes)",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4227"
+      ],
+      "id": "ui.rss-sync-minutes.11c1659d7e",
+      "sourceHash": "11c1659d7e1d688c213e6f8693eff06aa13ce3f9d85121509bcfd4a157c40c86",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Saving settings…",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3834"
+      ],
+      "id": "ui.saving-settings.67c658e70a",
+      "sourceHash": "67c658e70aaa2f64d9d46997444ccfeb26144a089a11ff8e262a01613255cdc9",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Scan complete",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5429"
+      ],
+      "id": "ui.scan-complete.bd35a52d0a",
+      "sourceHash": "bd35a52d0ac8c44e7a7ae2ae6c2cab36c1330ab2c1b1daa95ca273e1b75b8e9d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Scan failed",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5429"
+      ],
+      "id": "ui.scan-failed.4a490e4bdc",
+      "sourceHash": "4a490e4bdcc95463a12f2996b9b8e7f9cc73fa5386be39990a4fa07eb9403305",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Scan library",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5390"
+      ],
+      "id": "ui.scan-library.1f5ec92645",
+      "sourceHash": "1f5ec92645d3d2cc7e633d6df27e23d31c0d2e4fa103f2f38205c0f3a41a7044",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Scan reached its safety limit",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5429"
+      ],
+      "id": "ui.scan-reached-its-safety-limit.0d2401c522",
+      "sourceHash": "0d2401c522495a6d4ea8b5c6474ba413ec9f16f096cbfa2213b0135ac3fa15e2",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Scan the URI or enter the secret in any TOTP app. Codes are asked for at sign-in from now on; the backup codes are single-use.",
+      "category": "ui",
+      "locations": [
+        "romarr/app.py:7218"
+      ],
+      "id": "ui.scan-the-uri-or-enter-the-secret-in.612ce1fd46",
+      "sourceHash": "612ce1fd463f6f3a9767a66a0090d2aea1b459b10b33d69f239dc89a0b32e120",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Scanning",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5373"
+      ],
+      "id": "ui.scanning.474ad819c8",
+      "sourceHash": "474ad819c8baf68afb6e6ea375fd1543d36a124df10c68d4d94f8c6fc261ef8d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Search patch projects",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3492"
+      ],
+      "id": "ui.search-patch-projects.6428423995",
+      "sourceHash": "6428423995e7685816ae0a74bf62877d914695c5a0dc5ab09ec0ef5d299b32ed",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Search platforms",
+      "category": "ui-attribute",
+      "locations": [
+        "romarr/ui.py:4687"
+      ],
+      "id": "ui.search-platforms.b8e0cffddc",
+      "sourceHash": "b8e0cffddc9bf0cf8bd546ebef808923495c1cd419bbd8d5e6f09ec4b37d527a",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Search plugins",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:1564"
+      ],
+      "id": "ui.search-plugins.df08b7498d",
+      "sourceHash": "df08b7498d9a1be739b5bec4ec1205e5c9350f66faf66ce0b26784d94031ca73",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Search the Wanted list",
+      "category": "task-label",
+      "locations": [
+        "romarr/app.py:1354"
+      ],
+      "id": "ui.search-the-wanted-list.db632dc353",
+      "sourceHash": "db632dc35374bf96d504c18f0beae8baca6f7b3b66ac9be643fd1f7317038451",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Search this catalog",
+      "category": "ui-attribute",
+      "locations": [
+        "romarr/ui.py:2325"
+      ],
+      "id": "ui.search-this-catalog.382dda31b7",
+      "sourceHash": "382dda31b759fc132f505843261c0f84f0941a2b49dd2aade75e2c23d1c2c89e",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Search titles",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2325"
+      ],
+      "id": "ui.search-titles.fc85598751",
+      "sourceHash": "fc85598751044a5ba931ebe218ff81b467dca0d65d0ed2bca79c6df4f4f079c0",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Searched {searched}, grabbed {grabbed}, {skipped} waiting out backoff",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:4893"
+      ],
+      "id": "ui.searched-searched-grabbed-grabbed-sk.8d691039ba",
+      "sourceHash": "8d691039baf89feed23c5448712c11a381f0c0f812c86f2b9838ba9aa3bbf16c",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "searched",
+        "grabbed",
+        "skipped"
+      ]
+    },
+    {
+      "source": "Searched {searched}, grabbed {grabbed}",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:4893"
+      ],
+      "id": "ui.searched-searched-grabbed-grabbed.bff6322b8e",
+      "sourceHash": "bff6322b8eca0650ad33f4df1d2563acaddce616b6071525f5485fdd7bc43d98",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "searched",
+        "grabbed"
+      ]
+    },
+    {
+      "source": "Secret: {secret}",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:4283"
+      ],
+      "id": "ui.secret-secret.fde930878d",
+      "sourceHash": "fde930878dcabf2154b5144937c3c0e48d2cca522652aac173ab6239edb6610c",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "secret"
+      ]
+    },
+    {
+      "source": "See blocked items",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5575"
+      ],
+      "id": "ui.see-blocked-items.a4a019f8d4",
+      "sourceHash": "a4a019f8d49ebe3a49f2be66da3d4af7a408ef59bb95104395745fcfb4d72340",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "See how they connect",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2345"
+      ],
+      "id": "ui.see-how-they-connect.c54069210e",
+      "sourceHash": "c54069210e0fbcd82db152c630198d0afe498d1d9659900f6735803c30dc2e3e",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "; see the",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4685"
+      ],
+      "id": "ui.see-the.2d464f0f23",
+      "sourceHash": "2d464f0f23703e53a4b5d32e1e64435ae062e3a57dc95d1095d7e8c09c943186",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "SeerrNG discovery",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2096"
+      ],
+      "id": "ui.seerrng-discovery.f140768191",
+      "sourceHash": "f140768191c3906cad20b63ec4dab1f87e06db44c678a2ad2c9879fd92ebcf94",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Select base, dlc and/or update title kinds.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/titled.py:501"
+      ],
+      "id": "ui.select-base-dlc-and-or-update-title.a6df813736",
+      "sourceHash": "a6df813736391e065895ab802d7c44cba0b68e3fe8898c3948664d1e32fd3a98",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Select",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2281"
+      ],
+      "id": "ui.select.2a78025de6",
+      "sourceHash": "2a78025de6aae5e7ff88e5a951bb3a78ddd67388913529cf9e2dd9653e62b02d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Set a shared metadata root in",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5380"
+      ],
+      "id": "ui.set-a-shared-metadata-root-in.8684390491",
+      "sourceHash": "868439049133ce4bef40e9c6f5f449890cef4a93302a6ac0ab3b59dd52536285",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Set these only when you want ROMarr to import an existing ES-DE setup visible inside this server. ROMarr publishes shared output to",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3917"
+      ],
+      "id": "ui.set-these-only-when-you-want-romarr.2f1841a46b",
+      "sourceHash": "2f1841a46bf4890386de9ab2f5bf51ba12660f46bf87e6ce64fd417b38c0cab2",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Settings could not be saved (HTTP {status}).",
+      "category": "ui-error-template",
+      "locations": [
+        "romarr/ui.py:3840"
+      ],
+      "id": "ui.settings-could-not-be-saved-http-sta.cc1bb02976",
+      "sourceHash": "cc1bb02976668b71fa83798d4e06e514f3a2d568454aa901bf99b70be37ef4e4",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "status"
+      ]
+    },
+    {
+      "source": "Settings could not be saved. Try again.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/ui.py:3840"
+      ],
+      "id": "ui.settings-could-not-be-saved-try-agai.c6cc6f474d",
+      "sourceHash": "c6cc6f474dfe21e5c0cab4ab1d9f6954a9832b8931bf63128c4da24107460397",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Settings saved.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3840"
+      ],
+      "id": "ui.settings-saved.ae493e21cd",
+      "sourceHash": "ae493e21cd43411d56e1c55c6851d820ce32fb9104e69c0c72a2e1270c7a02c5",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Setup scripts that install and configure emulators and frontends for supported gaming devices.",
+      "category": "ecosystem-copy",
+      "locations": [
+        "romarr/ecosystem.py:136"
+      ],
+      "id": "ui.setup-scripts-that-install-and-confi.8a6558132f",
+      "sourceHash": "8a6558132f4946d2157b6980c92f89e852999a63d43f25072a8513186354f074",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Shared metadata root",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3909"
+      ],
+      "id": "ui.shared-metadata-root.31c1ead8c0",
+      "sourceHash": "31c1ead8c01f1ca40d1fea520a715c8c964d551af9fb55242df02c18df7c8617",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Shared metadata",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5380"
+      ],
+      "id": "ui.shared-metadata.fb4cb78bf2",
+      "sourceHash": "fb4cb78bf2f2fa2b468e7126216af14e7657a0771ea46e098c14e95d6be441bd",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Size ceiling",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4690"
+      ],
+      "id": "ui.size-ceiling.b53f3f0f45",
+      "sourceHash": "b53f3f0f4567ae30ad986fabcf6a250a3cc86c8cee2c95755b35a8fc1c5ed800",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Sort this page",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2327"
+      ],
+      "id": "ui.sort-this-page.b7eea6be6f",
+      "sourceHash": "b7eea6be6fec8c6fad8296650af449bd8e37c7dc715295c891d3bab76d0ba9b3",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "{state}. {processed} of {total} files checked.",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:5366"
+      ],
+      "id": "ui.state-processed-of-total-files-check.3ba5dc7f71",
+      "sourceHash": "3ba5dc7f71972cc325d085cc5c4be8cbfc546db2a386301a3ab498861a17b812",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "state",
+        "processed",
+        "total"
+      ]
+    },
+    {
+      "source": "Status unavailable",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5425"
+      ],
+      "id": "ui.status-unavailable.7eb5af92e4",
+      "sourceHash": "7eb5af92e49c32f0e22097bda3e39b3b9b3bcdeb80d5c278b5d74504b96c2beb",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Suggestions {count}",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5444"
+      ],
+      "id": "ui.suggestions-count.17be8f21b6",
+      "sourceHash": "17be8f21b6b8ed8106452e933606fa28f7a696c1d17dd1b480752bc0e06bfbac",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "count"
+      ]
+    },
+    {
+      "source": "Sunshine has no endpoint that lists waiting clients -- its API can accept a PIN and cannot tell you one is wanted. Start the pairing from your Moonlight client, then type the PIN it shows.",
+      "category": "provider-diagnostic",
+      "locations": [
+        "romarr/playability.py:1740"
+      ],
+      "id": "ui.sunshine-has-no-endpoint-that-lists.06228315a7",
+      "sourceHash": "06228315a71d085c4995893e80589b1a9803bd525c783893c7c5365bd025c508",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Switch DLC folder",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3935"
+      ],
+      "id": "ui.switch-dlc-folder.e71ab4eb73",
+      "sourceHash": "e71ab4eb73df661fab8d44c548c9a24dba47ecbe9fcb05e0a84d0c3d1e64a1dd",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Switch family",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5474"
+      ],
+      "id": "ui.switch-family.472d692ccd",
+      "sourceHash": "472d692ccd2461ca1d4b80b5628853989a44f83ff919593f5bedbc8a475f3ac5",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Switch IDs and version numbers come from the filename and TitleDB. They classify a likely base game, update or DLC; they do not verify the package bytes. When enabled, only TitleDB identified updates and DLC are routed to the folders below.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3935"
+      ],
+      "id": "ui.switch-ids-and-version-numbers-come.498f902664",
+      "sourceHash": "498f9026642769bc555cc06bbe7f1f11e2854f411b11588599ea895e866b3c5f",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Switch title IDs and versions are read from filenames and TitleDB. They help group base games, updates and DLC, but do not verify the package bytes. Exact DAT checksums or a manual confirmation are required before ROMarr offers a rename.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5386"
+      ],
+      "id": "ui.switch-title-ids-and-versions-are-re.9ab021f74a",
+      "sourceHash": "9ab021f74a7313b6314d0260a83439ad0ab74807369b4f596b819246b4f4a337",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Switch updates folder",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3935"
+      ],
+      "id": "ui.switch-updates-folder.9d1d6c74c3",
+      "sourceHash": "9d1d6c74c3d1a16b74b5b1c90a5fbc69cb5ebb5d8305887300f126a5d6905ff4",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Switch versions behind catalog {count}",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5447"
+      ],
+      "id": "ui.switch-versions-behind-catalog-count.49fa53ebd9",
+      "sourceHash": "49fa53ebd95401bcf18ff4d99aa941709a01d6166f4679f999dc0a1fc3b1c25b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "count"
+      ]
+    },
+    {
+      "source": "Sync import lists into Wanted",
+      "category": "task-label",
+      "locations": [
+        "romarr/app.py:1369"
+      ],
+      "id": "ui.sync-import-lists-into-wanted.1f50a30707",
+      "sourceHash": "1f50a30707b1a018b78b6a06e8e3cf8e207aca16da63989b131ebef9212946a9",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "System → Backup & Export",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5395"
+      ],
+      "id": "ui.system-backup-export.fa73040d32",
+      "sourceHash": "fa73040d320daf86f492a039b898b6085216d25695e206c1435fe1d2aa5a634d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Technical details",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4689"
+      ],
+      "id": "ui.technical-details.890ab358a5",
+      "sourceHash": "890ab358a55d7fcefe7527f675efb96865cf84d1d54e8d52d9692e3b599031e3",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Tell your library server to rescan after an import",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3939"
+      ],
+      "id": "ui.tell-your-library-server-to-rescan-a.4090ccdd1f",
+      "sourceHash": "4090ccdd1f9ca9ee9a0901c308bc69aa390c55d84b6345286969443786a48b2f",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Testing…",
+      "category": "ui-status",
+      "locations": [
+        "romarr/ui.py:4166"
+      ],
+      "id": "ui.testing.407b7a0466",
+      "sourceHash": "407b7a04662f2aabdfb3f017054466068e8155fc44815f88d9530833f30f7ff1",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "the library has not been read yet",
+      "category": "api-error",
+      "locations": [
+        "romarr/app.py:3910",
+        "romarr/app.py:4031"
+      ],
+      "id": "ui.the-library-has-not-been-read-yet.45b3861238",
+      "sourceHash": "45b38612388b68b56e2baceb888cbe8419046fef02ec0c780d02c593e5037b76",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "This client reports the completed path for each download.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3711"
+      ],
+      "id": "ui.this-client-reports-the-completed-pa.a7de394512",
+      "sourceHash": "a7de394512b7718d10c1279d314c01c36ef4fddac8bca0816ecc4db862e36c71",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "This scan was bounded at 50,000 entries. Filter to a platform and scan again to continue.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5448"
+      ],
+      "id": "ui.this-scan-was-bounded-at-50-000-entr.6a520cf022",
+      "sourceHash": "6a520cf0225a6bd38b7fc77579b3a77ea7d8ea04be3e038c84be7ac7f66de399",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Title A–Z",
+      "category": "ui-select",
+      "locations": [
+        "romarr/ui.py:2327"
+      ],
+      "id": "ui.title-az.ab217de6af",
+      "sourceHash": "ab217de6af5998dbdf41e073513a9f668982a4aff10c8e4f96b0cac5236e8fa6",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "TitleDB catalogued {count}",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5443"
+      ],
+      "id": "ui.titledb-catalogued-count.d0885b4902",
+      "sourceHash": "d0885b4902627d3d23c2c514f9c1bfb13207ec70cd0c28f2ff86e900df1a9fee",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "count"
+      ]
+    },
+    {
+      "source": "TitleDB is empty. Reload DATs to load the catalogue.",
+      "category": "ui-error",
+      "locations": [
+        "romarr/titled.py:506"
+      ],
+      "id": "ui.titledb-is-empty-reload-dats-to-load.cd59ede63c",
+      "sourceHash": "cd59ede63caddce4e93d0afb3cb94fc5a56d2d12637d66a3ee770579128248c5",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": ", to browse a catalog here.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2221"
+      ],
+      "id": "ui.to-browse-a-catalog-here.8df4394282",
+      "sourceHash": "8df4394282e3d7bb88baf4330e2d256bcedbc21011c0c1b69d63e9b626af53f5",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "to browse a catalog here.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2221"
+      ],
+      "id": "ui.to-browse-a-catalog-here.e316dbbfa7",
+      "sourceHash": "e316dbbfa7b79727f0f5da8654fa362e1f1277136fc9ee89bba38b91f87d8432",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "to connect the services.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5375"
+      ],
+      "id": "ui.to-connect-the-services.5a78cb6959",
+      "sourceHash": "5a78cb69599fd1303a026acc1c40e519c13d2758def0f9f1f53dd8b993ababfe",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Translations",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3494"
+      ],
+      "id": "ui.translations.266a41b90d",
+      "sourceHash": "266a41b90d4f831ea1626e6188606e9ba4fe3f9f72bdb65cb1626d364d212162",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Try again",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:1459"
+      ],
+      "id": "ui.try-again.d8b8392e2c",
+      "sourceHash": "d8b8392e2c542950ca64867168e4ef87d4ad606882d5898f826b51c6d553988f",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Undo last rename",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5393"
+      ],
+      "id": "ui.undo-last-rename.0e8c2dc5c0",
+      "sourceHash": "0e8c2dc5c0b1b31f304707697414a1a0ecca30515b009520725136b650613bfd",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Unmatched {count}",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5446"
+      ],
+      "id": "ui.unmatched-count.04a433579d",
+      "sourceHash": "04a433579d13b508fa11d1ba02df4e7f8b2a2adc7b32770c480849bc150b8cd8",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "count"
+      ]
+    },
+    {
+      "source": "up to date ({version})",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:4979"
+      ],
+      "id": "ui.up-to-date-version.34ba92ea5c",
+      "sourceHash": "34ba92ea5cb16900aa915b5925829d2d1f83c15c8a918e7fced32ed5ab2866b8",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "version"
+      ]
+    },
+    {
+      "source": "Use one ROM root with one folder per platform, such as",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3910"
+      ],
+      "id": "ui.use-one-rom-root-with-one-folder-per.e277cc412b",
+      "sourceHash": "e277cc412bb0b3ca3c6cf946fd291e234a835d4548288cda48aac0aa394aba8a",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Wanted search (hours)",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4225"
+      ],
+      "id": "ui.wanted-search-hours.3db82ddd6e",
+      "sourceHash": "3db82ddd6e970bba9df0119e1f5a305faf96bcb35c317392c37867bb471c8de4",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Watch indexer feeds for wanted games",
+      "category": "task-label",
+      "locations": [
+        "romarr/app.py:1358"
+      ],
+      "id": "ui.watch-indexer-feeds-for-wanted-games.f533016d24",
+      "sourceHash": "f533016d24c7eabc6be530d48ddd89cd6a5d93c640ca775b4919fa22f539965d",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Where imported ROMs and the shared metadata catalog live. The ROM path must be the path your library server scans. Completed-download paths are reported by the client per item; compare that exact path before import and add a remote path mapping below when ROMarr sees it somewhere else.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3907"
+      ],
+      "id": "ui.where-imported-roms-and-the-shared-m.2d88d093e1",
+      "sourceHash": "2d88d093e172df203d196e590571c0bf0f26e6ae0626206017a45265ea960b1b",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Work toward a complete set",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5089"
+      ],
+      "id": "ui.work-toward-a-complete-set.230f250c43",
+      "sourceHash": "230f250c4325c251059619e42bf0a30751c8e586a901fcdd64e9ecb7aafb3816",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "; you do not need a separate library entry for each system. With EmuDeck, point this at its",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3910"
+      ],
+      "id": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+      "sourceHash": "806dd21e529fb36a7b3607259c1448252952cbcf999e90f5c3bbc65e250db2ff",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    }
+  ]
+}

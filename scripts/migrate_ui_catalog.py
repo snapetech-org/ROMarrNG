@@ -16,6 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "romarr" / "ui-labels.json"
 SNAPSHOT = ROOT / "romarr" / "ui-source-snapshot.json"
+SOURCE_MESSAGES = ROOT / "romarr" / "ui-source-messages.json"
 
 LOCALE_ROWS = [
     ("en", "English", "English", "ltr", "available"),
@@ -357,6 +358,7 @@ def load_legacy() -> tuple[
                 "translationHashes": message.get("translationHashes", {}),
                 "translationStatus": message.get("translationStatus", {}),
                 "translationReview": message.get("translationReview", {}),
+                "translationPending": message.get("translationPending", []),
             } for message in messages.values()},
         )
     return raw, {}, {}
@@ -369,6 +371,17 @@ def main() -> int:
     translations, previous_ids, previous_metadata = load_legacy()
     for source, values in NEW_TRANSLATIONS.items():
         translations.setdefault(source, values)
+    source_manifest = json.loads(SOURCE_MESSAGES.read_text(encoding="utf-8")) \
+        if SOURCE_MESSAGES.exists() else {"messages": []}
+    source_kinds = {
+        entry["source"]: entry.get("category", "ui")
+        for entry in source_manifest.get("messages", [])
+        if isinstance(entry, dict) and isinstance(entry.get("source"), str)
+    }
+    for entry in source_manifest.get("messages", []):
+        source = entry.get("source") if isinstance(entry, dict) else None
+        if isinstance(source, str) and source.strip():
+            translations.setdefault(source, {})
 
     messages: dict[str, dict[str, object]] = {}
     for source in sorted(translations):
@@ -408,6 +421,13 @@ def main() -> int:
             "translationStatus": statuses,
             "translationReview": review_evidence,
         }
+        missing_direct = [tag for tag, _, _, _, status in LOCALE_ROWS
+                          if status == "available" and tag != "en"
+                          and tag not in translations[source]]
+        if missing_direct:
+            messages[key]["translationPending"] = sorted(missing_direct)
+        if source in source_kinds:
+            messages[key]["sourceKind"] = source_kinds[source]
 
     singular = "Connected to {friend}: {count} title with hashes ROMarr can match on."
     plural = "Connected to {friend}: {count} titles with hashes ROMarr can match on."

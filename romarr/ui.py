@@ -807,6 +807,28 @@ const readInterfaceLanguage=()=>{
 };
 const stableLocalizationKey=source=>Object.hasOwn(UI_MESSAGES,source)?source:(UI_SOURCE_TO_KEY[source]||'');
 const hasLabel=source=>Boolean(stableLocalizationKey(source));
+const APP_MESSAGE_TEMPLATE_KINDS=new Set(['ui-error-template','task-result-template',
+  'provider-diagnostic-template','library-status-template','ui-status-template']);
+const APP_MESSAGE_TEMPLATES=Object.values(UI_MESSAGES)
+  .filter(message=>APP_MESSAGE_TEMPLATE_KINDS.has(message.sourceKind)
+    &&typeof message.source==='string'&&message.source.includes('{'))
+  .map(message=>{
+    const names=[];
+    const escaped=message.source.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')
+      .replace(/\\\{([A-Za-z][A-Za-z0-9_]*)\\\}/g,(_,name)=>{names.push(name);return '([\\s\\S]+?)';});
+    return {source:message.source,names,pattern:new RegExp('^'+escaped+'$')};
+  }).sort((a,b)=>b.source.length-a.source.length);
+const matchAppMessageTemplate=value=>{
+  for(const entry of APP_MESSAGE_TEMPLATES){
+    const match=entry.pattern.exec(String(value??''));
+    if(match){
+      const values={};
+      entry.names.forEach((name,index)=>{values[name]=match[index+1]});
+      return {source:entry.source,values};
+    }
+  }
+  return null;
+};
 const translationInfo=(source,language)=>ROMarrI18n.lookup(UI_CATALOG,source,language);
 const isTranslated=(source,language)=>translationInfo(source,language).translated;
 const translateLegacyLabel=(source,language)=>{
@@ -871,7 +893,19 @@ const manualDiagnosticTitle=value=>{
 const appMessageMarkup=value=>{
   const source=String(value??'');
   if(hasLabel(source)) return interfaceMarkup(source);
-  let match=source.match(/^(.+) — confirmed by the header$/s);
+  let match=source.match(/^(\d+) games across (\d+) (library|libraries)(?:; ([\s\S]*))?$/);
+  if(match){
+    const template=match[3]==='library'
+      ?'{games} games across {count} library'
+      :'{games} games across {count} libraries';
+    const parts=[interfaceTemplateMarkup(template,
+      {games:fmt(Number(match[1])),count:fmt(Number(match[2]))})];
+    if(match[4])parts.push('; ',match[4].includes(', ')
+      ?'<span lang="und" dir="auto">'+esc(match[4])+'</span>'
+      :appMessageMarkup(match[4]));
+    return parts.join('');
+  }
+  match=source.match(/^(.+) — confirmed by the header$/s);
   if(match){
     const reason=sniffedMessageTemplate(match[1]);
     if(reason)return interfaceTemplateMarkup('ui.reason-confirmed-by-the-header.28b2925292',{reason});
@@ -971,6 +1005,9 @@ const appMessageMarkup=value=>{
   if(match)return interfaceTemplateMarkup('ui.language-translation-preferred-over.af52539e78',{language:match[1],name:match[2]});
   match=source.match(/^(.+) translation added to the set$/);
   if(match)return interfaceTemplateMarkup('ui.language-translation-added-to-the-se.28bfcbdfa9',{language:match[1]});
+  const catalogTemplate=matchAppMessageTemplate(source);
+  if(catalogTemplate)
+    return interfaceTemplateMarkup(catalogTemplate.source,catalogTemplate.values);
   return '<span lang="und" dir="auto">'+esc(source)+'</span>';
 };
 const searchReasonMarkup=value=>{
@@ -995,9 +1032,16 @@ const collectionReasonMarkup=value=>{
 };
 const statusMarkup=value=>{
   const raw=String(value??''),source=DOWNLOAD_STATE_LABELS[raw];
-  return source
-    ? interfaceMarkup(source)
-    : '<span lang="und" dir="auto">'+esc(raw)+'</span>';
+  if(source)return interfaceMarkup(source);
+  let match=raw.match(/^added (\d+) to Wanted(?:, (\d+) already added before)?(?:, (\d+) kept aside with no ROM platform \(normal for modern store titles -- see each list's Edit view\))?(?:; ([\s\S]*))?$/);
+  if(match){
+    const parts=[interfaceTemplateMarkup('added {count} to Wanted',{count:fmt(Number(match[1]))})];
+    if(match[2])parts.push(', ',interfaceTemplateMarkup('{count} already added before',{count:fmt(Number(match[2]))}));
+    if(match[3])parts.push(', ',interfaceTemplateMarkup("{count} kept aside with no ROM platform (normal for modern store titles -- see each list's Edit view)",{count:fmt(Number(match[3]))}));
+    if(match[4])parts.push('; <span lang="und" dir="auto">'+esc(match[4])+'</span>');
+    return parts.join('');
+  }
+  return appMessageMarkup(raw);
 };
 const applyTranslatedLabel=(el,language)=>{
   const source=el.dataset.i18nKey||el.dataset.i18n, translated=isTranslated(source,language);
@@ -1326,8 +1370,18 @@ function toastMessage(source,values={}){
 }
 function toastAppMessage(message){
   const source=String(message??'');
-  if(hasLabel(source))toastLabel(source);
-  else if(source)toast(source,'und','auto');
+  if(!source)return;
+  const holder=document.createElement('div');
+  holder.innerHTML=appMessageMarkup(source);
+  const language=readInterfaceLanguage();
+  applyTranslatedLabels(holder,language);
+  applyTranslatedTemplates(holder,language);
+  const rendered=holder.firstElementChild;
+  if(rendered&&rendered.hasAttribute('data-i18n-key'))
+    toast(holder.textContent,rendered.lang||'en',rendered.dir||'ltr');
+  else if(rendered&&rendered.hasAttribute('data-i18n-template-key'))
+    toast(holder.textContent,rendered.lang||'en',rendered.dir||'ltr');
+  else toast(holder.textContent,'und','auto');
 }
 function confirmMessage(source,values={}){
   return window.confirm(translateTemplate(source,values,readInterfaceLanguage()));
@@ -1485,7 +1539,7 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
     return '<div class="pcard'+(pl.installed?' installed':'')+'">'
       +'<h4>'+esc(pl.name)+(pl.author?'<span class="by">'
         +interfaceTemplateMarkup('ui.by-author.c63374c540',{author:pl.author})+'</span>':'')+'</h4>'
-      +'<div class="desc">'+esc(pl.description||'No description supplied.')+'</div>'
+       +'<div class="desc">'+appMessageMarkup(pl.description||'No description supplied.')+'</div>'
       +'<div class="meta">'+(caps||'<span class="help" style="margin:0">no capabilities declared</span>')+'</div>'
       +'<div class="foot">'+action
       +(net?'<span class="net">'+interfaceTemplateMarkup('ui.reaches-hosts.ad1513043f',{hosts:net})+'</span>':'')+'</div></div>';
@@ -1609,7 +1663,7 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
             :appMessageMarkup(d.reason||d.error||'Could not check this plugin source.'))+'</div>';
       }catch(_){
         msg.setAttribute('role','alert');msg.setAttribute('aria-live','assertive');
-        msg.textContent='ROMarr could not check this source. Check the connection and try again.';
+        msg.innerHTML=appMessageMarkup('ROMarr could not check this source. Check the connection and try again.');
       }finally{button.disabled=false;}
     };
 
@@ -1637,7 +1691,7 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
         }
       }catch(_){
         msg.setAttribute('role','alert');msg.setAttribute('aria-live','assertive');
-        msg.textContent='ROMarr could not prepare the submission. Check the connection and try again.';
+        msg.innerHTML=appMessageMarkup('ROMarr could not prepare the submission. Check the connection and try again.');
       }finally{button.disabled=false;}
     };
   };
@@ -1816,7 +1870,8 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
   p.innerHTML=head+grid+more;
   if(q||d.error){
     const live=$('#app-announcement');
-    if(live)live.textContent=d.error?'Could not load the game library.':fmt(d.total||0)+' games found.';
+    if(live)live.innerHTML=d.error?appMessageMarkup('Could not load the game library.')
+      :interfaceTemplateMarkup('{count} games found.',{count:fmt(d.total||0)});
   }
   applyInterfaceLanguage();
   bindLibraryChips(p);
@@ -2268,8 +2323,8 @@ async function renderGameCatalog(){
     +'<span style="flex:1"></span><button class="btn ghost" id="c-grid">Cover view</button><button class="btn ghost" id="c-list">List view</button></div>';
   const filters='<div class="row" style="align-items:end;margin-bottom:12px">'
     +'<div style="flex:2;min-width:210px"><label for="c-query">Search titles</label><input id="c-query" type="search" value="'+esc(CATALOG_VIEW.query)+'" placeholder="Search this catalog"></div>'
-    +'<div style="flex:1;min-width:190px"><label for="c-platform">Platform</label><select id="c-platform"><option value="">All supported platforms</option>'+sourcePlatforms+'</select></div>'
-    +(source==='igdb'?'<div style="flex:1;min-width:150px"><label for="c-genre">Genre</label><select id="c-genre"><option value="">All genres</option>'+genreOptions+'</select></div><div style="width:115px"><label for="c-year">Release year</label><input id="c-year" type="number" min="1950" max="2200" value="'+esc(CATALOG_VIEW.year)+'" placeholder="Any"></div><div style="width:190px"><label for="c-sort">Sort this page</label><select id="c-sort"><option value="popular">Recommended · IGDB popular</option><option value="name"'+(CATALOG_VIEW.sort==='name'?' selected':'')+'>Title A–Z</option><option value="rating"'+(CATALOG_VIEW.sort==='rating'?' selected':'')+'>Highest rated</option><option value="year"'+(CATALOG_VIEW.sort==='year'?' selected':'')+'>Newest release</option></select></div>':'')
+      +'<div style="flex:1;min-width:190px"><label for="c-platform">Platform</label><select id="c-platform"><option value="" data-i18n-key="'+esc(stableLocalizationKey('All supported platforms'))+'">All supported platforms</option>'+sourcePlatforms+'</select></div>'
+      +(source==='igdb'?'<div style="flex:1;min-width:150px"><label for="c-genre">Genre</label><select id="c-genre"><option value="" data-i18n-key="'+esc(stableLocalizationKey('All genres'))+'">All genres</option>'+genreOptions+'</select></div><div style="width:115px"><label for="c-year">Release year</label><input id="c-year" type="number" min="1950" max="2200" value="'+esc(CATALOG_VIEW.year)+'" placeholder="Any"></div><div style="width:190px"><label for="c-sort">Sort this page</label><select id="c-sort"><option value="popular" data-i18n-key="'+esc(stableLocalizationKey('Recommended · IGDB popular'))+'">Recommended · IGDB popular</option><option value="name" data-i18n-key="'+esc(stableLocalizationKey('Title A–Z'))+'"'+(CATALOG_VIEW.sort==='name'?' selected':'')+'>Title A–Z</option><option value="rating" data-i18n-key="'+esc(stableLocalizationKey('Highest rated'))+'"'+(CATALOG_VIEW.sort==='rating'?' selected':'')+'>Highest rated</option><option value="year" data-i18n-key="'+esc(stableLocalizationKey('Newest release'))+'"'+(CATALOG_VIEW.sort==='year'?' selected':'')+'>Newest release</option></select></div>':'')
     +'<label class="check" style="margin:0 0 8px"><input id="c-hide-owned" type="checkbox"'+(CATALOG_VIEW.hideOwned?' checked':'')+'> Hide owned</label>'
     +'<button class="btn" id="c-search">Search</button></div>';
   const pageInfo='<div class="row" style="margin:12px 0"><span class="help">'
@@ -3435,9 +3490,9 @@ RENDER.patches=async()=>{
       states, never a guess. Requests come from SeerrNG.</div>
     <div class="field" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
       <input type="search" id="patch-q" aria-label="Search patch projects" placeholder="Search">
-      <select id="patch-kind" aria-label="Kind"><option value="">All kinds</option>
-        <option value="translation">Translations</option><option value="hack">Hacks</option>
-        <option value="improvement">Improvements</option></select>
+      <select id="patch-kind" aria-label="Kind"><option value="" data-i18n-key="${esc(stableLocalizationKey('All kinds'))}">All kinds</option>
+        <option value="translation" data-i18n-key="${esc(stableLocalizationKey('Translations'))}">Translations</option><option value="hack" data-i18n-key="${esc(stableLocalizationKey('Hacks'))}">Hacks</option>
+        <option value="improvement" data-i18n-key="${esc(stableLocalizationKey('Improvements'))}">Improvements</option></select>
       <label class="check"><input type="checkbox" id="patch-complete"><span>Complete only</span></label>
     </div>
     <div id="patch-results" aria-live="polite"></div>`;
@@ -3650,10 +3705,10 @@ async function editItem(kind, item){
   m.className = 'modal';
   const clientPathContext = kind === 'downloadclient'
     ? `<div class="panel-note"><b>Container path check</b><br>
-      ROMarr library destination: <code>${esc(SETTINGS.library_path||'not configured')}</code>.<br>
+      ${interfaceTemplateMarkup('ROMarr library destination: {path}.',{path:SETTINGS.library_path||'not configured'})}<br>
       ${item.save_path
-        ? `Configured client save path: <code>${esc(item.save_path)}</code>.`
-        : 'This client reports the completed path for each download.'}
+        ? interfaceTemplateMarkup('Configured client save path: {path}.',{path:item.save_path})
+        : interfaceMarkup('This client reports the completed path for each download.')}
       ROMarr checks the actual completed path during import. If that path is not
       visible inside ROMarr, use the remote path mapping on Media Management;
       keep the download path and library destination distinct.</div>`
@@ -3730,7 +3785,7 @@ function settingsPage(title, help, body, after){
   const reportSettingsError=(message,control)=>{
     const status=$('#settings-save-status');
     status.setAttribute('role','alert');status.setAttribute('aria-live','assertive');
-    status.textContent=message;
+    status.innerHTML=appMessageMarkup(message);
     control?.setAttribute('aria-invalid','true');
     control?.focus({preventScroll:false});
   };
@@ -3786,7 +3841,7 @@ function settingsPage(title, help, body, after){
       SETTINGS=saved;status.textContent='Settings saved.';toastLabel('ui.saved.b5c120b316');
     }catch(error){
       status.setAttribute('role','alert');status.setAttribute('aria-live','assertive');
-      status.textContent=String(error&&error.message||'Settings could not be saved. Try again.');
+      status.innerHTML=appMessageMarkup(String(error&&error.message||'Settings could not be saved. Try again.'));
     }finally{button.disabled=false;}
   };
 }
@@ -3842,7 +3897,7 @@ const platformFolderRow=m=>{
       <input data-platform-folder-name value="${esc(folder)}" placeholder="e.g. PS2 Games">
     </label>
     <label class="mapping-field">Platform
-      <select data-platform-folder-slug><option value="">Choose a platform</option>${options}</select>
+      <select data-platform-folder-slug><option value="" data-i18n-key="${esc(stableLocalizationKey('Choose a platform'))}">Choose a platform</option>${options}</select>
     </label>
     <button class="btn ghost" type="button" data-platform-folder-remove aria-label="Remove ${esc(rowName)}">Remove</button>
   </div>`;
@@ -4033,7 +4088,7 @@ RENDER.libraries=async()=>{
     ${noDefault?`<p class="help" style="color:var(--warn)">${interfaceMarkup('ui.no-library-is-marked-default-so-anyt.60146a85ac')}</p>`:''}
     ${unmounted.map(l=>`<p class="help" style="color:var(--warn)">
       ${interfaceTemplateMarkup('ui.name-answers-but-nothing-can-be-impo.2992263c10',
-        {name:l.name||''})} ${esc(l.path_hint||'')}</p>
+        {name:l.name||''})} ${appMessageMarkup(l.path_hint||'')}</p>
       ${l.readable===false?`<p class="panel-note panel-warn">${esc(l.detail||'')}</p>`:''}`).join('')}
     ${d.items.length?`<table><thead><tr><th>Library</th><th>Type</th>
       <th>Address</th><th>Path</th><th>Platforms</th><th>Status</th><th></th></tr>
@@ -4108,7 +4163,7 @@ RENDER.indexers=async()=>{
   if(emptyAdd)emptyAdd.onclick=()=>addItem('indexer');
   const test=$('#i-diagnose');
   if(test)test.onclick=async()=>{
-    test.disabled=true;test.textContent='Testing…';
+    test.disabled=true;test.innerHTML=interfaceMarkup('Testing…');
     try{
       const report=await j('/api/v1/indexer/diagnose',{method:'POST',
         headers:{'Content-Type':'application/json'},body:'{}'});
@@ -4133,7 +4188,7 @@ RENDER.indexers=async()=>{
         </div>`;
     }catch(e){
       $('#i-diagnostics').innerHTML=`<div class="card"><p class="help" style="color:var(--warn)">${appMessageMarkup(e.message||'Diagnostics failed')}</p></div>`;
-    }finally{test.disabled=false;test.textContent='Test indexers';}
+    }finally{test.disabled=false;test.innerHTML=interfaceMarkup('Test indexers');}
   };
   document.querySelectorAll('[data-iedit]').forEach(b=>b.onclick=()=>
     editItem('indexer', d.items[Number(b.dataset.iedit)]));
@@ -4225,11 +4280,11 @@ RENDER.general=()=>settingsPage('General',
       const d=await j('/api/v1/totp/enroll',{method:'POST',
         headers:{'content-type':'application/json'},body:'{}'}).catch(()=>({}));
       const out=$('#g-totpout'); out.style.display='block';
-      out.textContent='Secret:  '+(d.secret||'?')
-        +'\nURI:     '+(d.uri||'?')
-        +'\n\nBackup codes (single use, save them now):\n  '
-        +((d.backup_codes||[]).join('\n  '))
-        +'\n\n'+(d.note||'');
+      out.innerHTML=interfaceTemplateMarkup('Secret: {secret}',{secret:d.secret||'?'})
+        +'\nURI:     '+esc(d.uri||'?')
+        +'\n\n'+interfaceMarkup('Backup codes (single use, save them now):')+'\n  '
+        +esc((d.backup_codes||[]).join('\n  '))
+        +'\n\n'+appMessageMarkup(d.note||'');
     };
     $('#g-totpoff').onclick=async()=>{
       const d=await j('/api/v1/totp/disable',{method:'POST',
@@ -4244,7 +4299,7 @@ RENDER.status=async()=>{
   const h=await j('/api/v1/system/status');
   const row=(l,ok,extra='')=>`<tr><td>${l}</td>
     <td><span class="dot ${ok?'up':'down'}"></span>${ok?'OK':'Not available'}</td>
-    <td style="color:var(--dim)">${esc(extra)}</td></tr>`;
+    <td style="color:var(--dim)">${appMessageMarkup(extra)}</td></tr>`;
   const g=h.ggrequestz||{};
   $('#page').innerHTML=`<div class="card"><h3>Health</h3><table><tbody>
       ${row('Prowlarr',h.prowlarr,h.prowlarr_url)}
@@ -4379,7 +4434,7 @@ RENDER.status=async()=>{
   const feRow=$('#fe-row'); if(!feRow) return;   // navigated away mid-fetch
   feRow.innerHTML=(fe.formats||[]).map(f=>
     '<button class="btn ghost fe-btn" data-f="'+esc(f.name||f)+'" data-filename="'+esc(f.filename||('romarr-'+(f.name||f)+'.export'))+'">'
-    +esc(f.label||f.name||f)+'</button>').join('')
+    +appMessageMarkup(f.label||f.name||f)+'</button>').join('')
     ||'<span class="help" style="margin:0">No frontend formats available.</span>';
   feRow.querySelectorAll('.fe-btn').forEach(b=>b.onclick=()=>
     save('/api/v1/frontend/export?format='+encodeURIComponent(b.dataset.f),
@@ -4453,11 +4508,11 @@ const wireGGRequestz=()=>{
 // failure.
 const moonlightCard=m=>{
   if(!m.configured) return `<div class="card"><h3>Game streaming host</h3>
-    <p class="help">${esc(m.hint||'')}. A Moonlight host renders a real
+    <p class="help">${m.hint?appMessageMarkup(m.hint):''}. A Moonlight host renders a real
     desktop emulator on the host's GPU and sends video &mdash; which is how
     machines with no browser core get played. ROMarr reports what it can
     verify about one and never guesses the rest.</p>
-    <p class="help">${esc(m.manual||'')}</p></div>`;
+    <p class="help">${appMessageMarkup(m.manual||'')}</p></div>`;
 
   if(!m.ok) return `<div class="card"><h3>${esc(m.kind_label||'Moonlight')}</h3>
     <p class="testline bad">${interfaceTemplateMarkup('ui.no-answer-from-host-port.d291802598',
@@ -4495,19 +4550,19 @@ const moonlightCard=m=>{
               {count:fmt((m.apps||[]).length)})}</p>`)
       : `<p class="help"><b>Reachable, but its app list could not be read</b>,
          so ROMarr cannot say which platforms it plays and does not guess.
-         ${esc(m.apps_problem||'')}</p>`}
+         ${appMessageMarkup(m.apps_problem||'')}</p>`}
     ${(m.apps||[]).length?`<p class="help">Apps: ${
       (m.apps||[]).map(a=>'<span class="pill">'+esc(a)+'</span>').join(' ')}</p>`:''}
 
     <h4 style="margin:18px 0 6px">Pairing</h4>
-    <p class="help">${esc((m.pairing||{}).manual||'')}</p>
+    <p class="help">${appMessageMarkup((m.pairing||{}).manual||'')}</p>
     ${canList
       ? (pend.length
           ? `<p class="help">${interfaceTemplateMarkup(
               pend.length===1?'{count} client waiting:':'{count} clients waiting:',
               {count:fmt(pend.length)})}</p>`
           : `<p class="help">${interfaceTemplateMarkup('ui.no-moonlight-client-is-waiting-to-pa.baaa9b58a1',{host:m.host||''})}</p>`)
-      : `<p class="help">${esc((m.pairing||{}).detail||'')}</p>`}
+      : `<p class="help">${appMessageMarkup((m.pairing||{}).detail||'')}</p>`}
     <div class="row" style="flex-wrap:wrap;gap:8px;align-items:center">
       ${canList&&pend.length
         ? `<select id="ml-secret">${pend.map(p=>
@@ -5146,7 +5201,7 @@ RENDER.collections=async()=>{
        +'there is no list of what a complete set contains.</div>')
     +'<div id="cswitch" hidden><p class="help">Switch uses catalogue IDs and filename versions, not checksum verification. DAT region and translation controls do not apply. Name searches need TITLED_NAMES=1.</p>'
     +'<label>Switch title name or ID <input id="csquery" placeholder="Title name or ID"></label>'
-    +'<label> Include <select id="cskinds"><option value="base" data-i18n="ui.base-games.6462a63d20">Base games</option><option value="update" data-i18n="ui.updates.22e2bada8f">Updates</option><option value="dlc">DLC</option><option value="base,update,dlc" data-i18n="ui.all-three.10243133c1">All three</option></select></label>'
+    +'<label> Include <select id="cskinds"><option value="base" data-i18n="ui.base-games.6462a63d20">Base games</option><option value="update" data-i18n="ui.updates.22e2bada8f">Updates</option><option value="dlc" data-i18n-key="'+esc(stableLocalizationKey('DLC'))+'">DLC</option><option value="base,update,dlc" data-i18n="ui.all-three.10243133c1">All three</option></select></label>'
     +'<label><input type="checkbox" id="cslatest" checked> Latest listed version only</label></div>'
     +'<div id="cres" style="margin-top:16px"></div></div>'
     +'<div class="card" style="margin-top:16px"><h3>Batches</h3>'
@@ -5310,7 +5365,7 @@ RENDER.organize=async()=>{
   let currentPlan=null;
   let nextPlanOffset=0;
   const planLimit=200;
-  const platformOptions='<option value="">All platforms</option>'
+  const platformOptions='<option value="" data-i18n-key="ui.all-platforms.6d46bb346f">All platforms</option>'
     +PLATFORMS.map(x=>'<option value="'+esc(x.slug)+'">'+esc(x.name)+'</option>').join('');
   p.innerHTML=
     '<div class="card"><div class="row" style="align-items:flex-start;gap:12px">'
@@ -5319,8 +5374,12 @@ RENDER.organize=async()=>{
     +'<a class="btn ghost" href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">Requests in SeerrNG ↗</a></div>'
     +'<p class="help" style="margin:0">Use <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a> for the shared household request queue; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a> to connect the services.</p>'
     +'<div class="st" style="margin-top:12px">'
-    +'<div><b>ROM root</b><span lang="und" dir="auto">'+esc(SETTINGS.library_path||'not configured')+'</span></div>'
-    +'<div><b>Shared metadata</b><span lang="und" dir="auto">'+esc(SETTINGS.metadata_path||'not configured')+'</span></div></div>'
+    +'<div><b>ROM root</b>'+(SETTINGS.library_path
+      ?'<span lang="und" dir="auto">'+esc(SETTINGS.library_path)+'</span>'
+      :interfaceMarkup('not configured'))+'</div>'
+    +'<div><b>Shared metadata</b>'+(SETTINGS.metadata_path
+      ?'<span lang="und" dir="auto">'+esc(SETTINGS.metadata_path)+'</span>'
+      :interfaceMarkup('not configured'))+'</div></div>'
     +(!SETTINGS.metadata_path
       ?'<div class="panel-note panel-warn" style="margin-top:12px">Set a shared metadata root in <a href="#media">Media Management</a>. Mount it on each client and point ES-DE at its shared gamelists and media folders.</div>'
       :'')
@@ -5370,19 +5429,24 @@ RENDER.organize=async()=>{
     const stateLabel={idle:'Ready to scan',scanning:'Scanning',complete:'Scan complete',partial:'Scan reached its safety limit',failed:'Scan failed',unavailable:'Status unavailable'}[status.state]||status.state||'Unknown';
     if(['complete','partial','failed'].includes(status.state)&&lastAnnouncedOrganizerState!==status.state){
       const announcement=$('#org-announcement');
-      if(announcement)announcement.textContent=stateLabel+'. '+fmt(status.processed||0)+' of '+fmt(status.total||0)+' files checked.';
+      if(announcement)announcement.innerHTML=interfaceTemplateMarkup(
+        '{state}. {processed} of {total} files checked.',
+        {state:{source:stateLabel,values:{}},processed:fmt(status.processed||0),
+          total:fmt(status.total||0)});
     }
     lastAnnouncedOrganizerState=status.state||'';
     $('#org-status').innerHTML='<div class="card"><div class="row" style="align-items:center">'
-      +'<b>'+esc(stateLabel)+'</b><span class="help" style="margin:0">'+fmt(status.processed||0)+' / '+fmt(status.total||0)+' files checked</span>'
-      +'<span class="help" style="margin:0">DAT verified '+fmt(status.verified||0)+'</span>'
-      +'<span class="help" style="margin:0">TitleDB catalogued '+fmt(status.catalogued||0)+'</span>'
-      +'<span class="help" style="margin:0">Suggestions '+fmt(status.suggested||0)+'</span>'
-      +'<span class="help" style="margin:0">Local ES-DE records reused '+fmt(status.local_metadata_imported||0)+'</span>'
-      +'<span class="help" style="margin:0">Unmatched '+fmt(status.unmatched||0)+'</span>'
-      +'<span class="help" style="margin:0">Switch versions behind catalog '+fmt(status.switch_outdated||0)+'</span></div>'
+      +'<b>'+interfaceMarkup(stateLabel)+'</b>'
+      +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('{processed} / {total} files checked',
+        {processed:fmt(status.processed||0),total:fmt(status.total||0)})+'</span>'
+      +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('DAT verified {count}',{count:fmt(status.verified||0)})+'</span>'
+      +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('TitleDB catalogued {count}',{count:fmt(status.catalogued||0)})+'</span>'
+      +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('Suggestions {count}',{count:fmt(status.suggested||0)})+'</span>'
+      +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('Local ES-DE records reused {count}',{count:fmt(status.local_metadata_imported||0)})+'</span>'
+      +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('Unmatched {count}',{count:fmt(status.unmatched||0)})+'</span>'
+      +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('Switch versions behind catalog {count}',{count:fmt(status.switch_outdated||0)})+'</span></div>'
       +(status.truncated?'<p class="help" style="margin:8px 0 0">This scan was bounded at 50,000 entries. Filter to a platform and scan again to continue.</p>':'')
-      +(status.error?'<p class="help" style="margin:8px 0 0;color:var(--warn)">'+esc(status.error)+'</p>':'')
+      +(status.error?'<p class="help" style="margin:8px 0 0;color:var(--warn)">'+appMessageMarkup(status.error)+'</p>':'')
       +'</div>';
     const items=data.items||[];
     const start=data.total?offset+1:0;
@@ -5392,7 +5456,7 @@ RENDER.organize=async()=>{
     $('#org-next').disabled=offset+limit>=(data.total||0);
     const target=$('#org-items');
     if(data.error){
-      target.innerHTML='<div class="panel-note panel-warn">'+esc(data.error)+'</div>';
+      target.innerHTML='<div class="panel-note panel-warn">'+appMessageMarkup(data.error)+'</div>';
     }else if(!items.length){
       target.innerHTML='<div class="empty">No inventory entries yet. Scan a configured ROM library to begin.</div>';
     }else{
@@ -5497,11 +5561,13 @@ RENDER.organize=async()=>{
     const batch=plan.batch||{offset:planOffset,limit:planLimit,total:0,count:0,has_more:false};
     const first=batch.count?batch.offset+1:0;
     const last=batch.offset+batch.count;
-    const rows=(plan.operations||[]).map(op=>'<tr><td lang="und" dir="auto">'+esc(op.from)+'</td><td lang="und" dir="auto">'+esc(op.to)+'</td><td>'+esc(op.reason)+'</td></tr>').join('');
-    const blocked=(plan.blocked||[]).map(op=>'<tr><td>'+esc(op.identity_id||'')+'</td><td>'+esc(op.reason||'')+'</td></tr>').join('');
+      const rows=(plan.operations||[]).map(op=>'<tr><td lang="und" dir="auto">'+esc(op.from)+'</td><td lang="und" dir="auto">'+esc(op.to)+'</td><td>'+appMessageMarkup(op.reason)+'</td></tr>').join('');
+      const blocked=(plan.blocked||[]).map(op=>'<tr><td>'+esc(op.identity_id||'')+'</td><td>'+appMessageMarkup(op.reason||'')+'</td></tr>').join('');
     const safeCount=(plan.operations||[]).length,blockedCount=(plan.blocked||[]).length;
     const planAnnouncement=$('#org-announcement');
-    if(planAnnouncement)planAnnouncement.textContent='Rename preview ready. '+fmt(safeCount)+' safe renames in this batch; '+fmt(blockedCount)+' entries left alone.';
+    if(planAnnouncement)planAnnouncement.innerHTML=interfaceTemplateMarkup(
+      'Rename preview ready. {safe} safe renames in this batch; {blocked} entries left alone.',
+      {safe:fmt(safeCount),blocked:fmt(blockedCount)});
     $('#org-plan-result').innerHTML='<div class="card"><h3>Rename preview · '+fmt(first)+'–'+fmt(last)+' of '+fmt(batch.total||0)+'</h3><p class="help">'
       +fmt(safeCount)+' safe rename(s) in this batch. '+fmt(blockedCount)+' matching entries were left alone.'
       +(batch.has_more?' More entries will be reviewed in the next batch.':'')+'</p>'
@@ -5660,6 +5726,14 @@ RENDER.manualimport=async()=>{
 
 RENDER.tasks=async()=>{
   const d=await j('/api/v1/system/tasks').catch(()=>({items:[]}));
+  const taskNames={ImportCompleted:'Import completed downloads',
+    MissingGameSearch:'Search the Wanted list',
+    RssSync:'Watch indexer feeds for wanted games',
+    FailedDownloads:'Retire dead downloads and grab a replacement',
+    ListSync:'Sync import lists into Wanted',
+    UpdateCheck:'Check github.com for a newer ROMarr',
+    HashIndex:'Read ROM hashes from the library for netplay',
+    RefreshLibrary:'Refresh library',Decompress:'Decompress'};
   const every=s=>!s?interfaceMarkup('ui.off.ca7981b46e')
     :s%3600===0?interfaceTemplateMarkup('ui.interval-count-h.c4dc89c3ad',{count:fmt(s/3600)})
     :s%60===0?interfaceTemplateMarkup('ui.interval-count-min.f79e014946',{count:fmt(s/60)})
@@ -5677,10 +5751,10 @@ RENDER.tasks=async()=>{
     <table><thead><tr><th data-i18n="ui.task.4bc74b2135">Task</th><th data-i18n="ui.schedule.f4830a1dae">Schedule</th><th data-i18n="ui.last-ran.2e024dc014">Last ran</th>
       <th data-i18n="ui.result.6e7d50e84f">Result</th><th></th></tr></thead><tbody>
     ${scheduled.concat(manualOnly).map(([n,label,t])=>{
-      const source=n==='RefreshLibrary'?'Refresh library':n==='Decompress'?'Decompress':null;
+      const source=taskNames[n];
       const nameMarkup=source?interfaceMarkup(source):'<span lang="und" dir="auto">'+esc(n)+'</span>';
       const detailMarkup=label?(hasLabel(label)?interfaceMarkup(label):'<span lang="und" dir="auto">'+esc(label)+'</span>'):'';
-      const result=t&&t.last_error?`<span lang="und" dir="auto" style="color:var(--warn)">${esc(t.last_error)}</span>`
+      const result=t&&t.last_error?`<span style="color:var(--warn)">${appMessageMarkup(t.last_error)}</span>`
         :t&&t.last_result?statusMarkup(t.last_result):'—';
       return `<tr><td><b>${nameMarkup}</b>
       <div style="color:var(--dim);font-size:12px">${detailMarkup}</div></td>

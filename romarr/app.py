@@ -5166,9 +5166,11 @@ class ROMarr:
                     failed.append(f"{label} unreachable ({err.__class__.__name__})")
             if not self.game_libraries:
                 return {"message": "no library configured"}
-            where = f"{len(self.game_libraries)} librar" + \
-                    ("y" if len(self.game_libraries) == 1 else "ies")
-            msg = f"{counted} games across {where}"
+            library_count = len(self.game_libraries)
+            if library_count == 1:
+                msg = f"{counted} games across {library_count} library"
+            else:
+                msg = f"{counted} games across {library_count} libraries"
             return {"message": msg + ("; " + ", ".join(failed) if failed else "")}
         if name == "Decompress":
             return self.decompress_batch()

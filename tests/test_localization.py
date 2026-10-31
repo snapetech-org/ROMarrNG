@@ -51,19 +51,31 @@ def test_catalog_is_stable_complete_and_marks_unfinished_locales() -> None:
     assert len(UI_MESSAGES) == len(UI_SOURCE_TO_ID) == len(UI_LABELS)
     assert set(UI_CATALOG["availableLocales"]) == set(UI_AVAILABLE_LOCALES)
 
+    direct_locales = {
+        code for code in UI_AVAILABLE_LOCALES
+        if code != "en" and UI_CATALOG["locales"][code]["status"] == "available"
+    }
+    inherited = {"es-419": "es", "fr-CA": "fr"}
     for key, message in UI_MESSAGES.items():
         source = message["source"]
         assert key.startswith("ui.")
         assert UI_SOURCE_TO_ID[source] == key
         assert message["sourceHash"] == hashlib.sha256(source.encode()).hexdigest()
-        assert set(UI_LABELS[source]) == set(UI_AVAILABLE_LOCALES) - {"en"}
+        pending = set(message.get("translationPending", []))
+        assert pending <= direct_locales
+        assert set(message["translations"]) - {"en"} == direct_locales - pending
+        expected_labels = direct_locales - pending
+        expected_labels.update(
+            locale for locale, parent in inherited.items() if parent not in pending
+        )
+        assert set(UI_LABELS[source]) == expected_labels
         translation_status = message["translationStatus"]
         assert not translation_status
         assert not message["translationReview"]
         assert not message["translationHashes"]
         assert all(
             translation_status.get(locale, "unverified") == "unverified"
-            for locale in UI_AVAILABLE_LOCALES if locale != "en"
+            for locale in direct_locales - pending
         )
         source_tokens = set(PLACEHOLDER.findall(source))
         for locale, translation in message["translations"].items():
@@ -145,6 +157,102 @@ def test_localization_checker_accepts_repository_catalog() -> None:
     assert result.returncode == 0, result.stderr
     assert "12 directly translated locales" in result.stdout
     assert "22 locales awaiting translation" in result.stdout
+    assert "source-only fallbacks: 291 messages / 3,492 locale cells" in result.stdout
+
+
+def test_source_bundle_freezes_only_pending_english_sources() -> None:
+    spec = importlib.util.spec_from_file_location(
+        "romarr_localization_review", ROOT / "scripts" / "localization_review.py"
+    )
+    assert spec and spec.loader
+    review = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(review)
+
+    bundle = review.export_source_bundle(
+        UI_CATALOG,
+        "cedcbb66443891d0702954be5733fa6749f12155",
+        "f" * 40,
+    )
+    assert bundle["messageCount"] == 291
+    assert bundle["directPendingCells"] == 3_492
+    assert re.fullmatch(r"[0-9a-f]{64}", bundle["manifestHash"])
+    assert all("translation" not in row for row in bundle["messages"])
+    assert all(
+        set(row["translationPending"]) == {
+            code for code in UI_CATALOG["availableLocales"]
+            if code != "en" and UI_CATALOG["locales"][code]["status"] == "available"
+        }
+        for row in bundle["messages"]
+    )
+
+
+def test_source_coverage_guard_detects_authored_copy_and_exempt_values() -> None:
+    spec = importlib.util.spec_from_file_location(
+        "romarr_ui_source_coverage", ROOT / "scripts" / "check_ui_source_coverage.py"
+    )
+    assert spec and spec.loader
+    guard = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(guard)
+
+    with tempfile.TemporaryDirectory() as directory:
+        temp_root = Path(directory)
+        ui_path = temp_root / "ui.py"
+        manifest_path = temp_root / "manifest.json"
+        guard.ROOT = temp_root
+        guard.UI_PATH = ui_path
+        guard.MANIFEST_PATH = manifest_path
+        app_path = temp_root / "app.py"
+        guard.APP_PATH = app_path
+        manifest_path.write_text(json.dumps({"messages": []}), encoding="utf-8")
+        app_path.write_text(
+            'class ROMarr:\n'
+            '    def search_missing(self):\n'
+            '        return {"message": "Uncatalogued task result"}\n'
+            '    def list_sync(self):\n'
+            '        return {"message": provider_exception}\n',
+            encoding="utf-8",
+        )
+        catalog = {
+            "availableLocales": ["en", "es"],
+            "locales": {"es": {"status": "available"}},
+            "messages": {},
+        }
+
+        ui_path.write_text(
+            '<p>Uncatalogued fixed message</p>\n'
+            '<span lang="und">Fixed authored fallback text</span>\n'
+            '<select><option>Unmarked source label</option></select>\n'
+            '<span lang="und">${esc(provider_detail)}</span>'
+            '<code>downloaded_media</code>\n',
+            encoding="utf-8",
+        )
+        errors = guard.coverage_errors(catalog)
+        assert any("Uncatalogued fixed message" in error for error in errors)
+        assert any("Fixed authored fallback text" in error for error in errors)
+        assert any("Unmarked source label" in error for error in errors)
+        assert any("Uncatalogued task result" in error for error in errors)
+        assert not any("provider_detail" in error for error in errors)
+        assert not any("provider_exception" in error for error in errors)
+        assert not any("downloaded_media" in error for error in errors)
+
+        ui_path.write_text(
+            '<p>Unmarked source label</p>\n'
+            '<select><option>Unmarked source label</option></select>',
+            encoding="utf-8",
+        )
+        app_path.write_text(
+            'class ROMarr:\n'
+            '    def list_sync(self):\n'
+            '        return {"message": provider_exception}\n',
+            encoding="utf-8",
+        )
+        source = "Unmarked source label"
+        message_id = guard._stable_id(source)
+        catalog["messages"] = {message_id: {"source": source}}
+        manifest_path.write_text(json.dumps({"messages": []}), encoding="utf-8")
+        errors = guard.coverage_errors(catalog)
+        assert not any("missing from the catalog" in error for error in errors)
+        assert any("select option bypasses localization" in error for error in errors)
 
 
 def test_runtime_resolves_canonical_locale_tags_rtl_and_plural_messages() -> None:
@@ -247,6 +355,12 @@ class LocalizationTests(unittest.TestCase):
 
     def test_runtime(self) -> None:
         test_runtime_resolves_canonical_locale_tags_rtl_and_plural_messages()
+
+    def test_source_bundle(self) -> None:
+        test_source_bundle_freezes_only_pending_english_sources()
+
+    def test_source_coverage_guard(self) -> None:
+        test_source_coverage_guard_detects_authored_copy_and_exempt_values()
 
     def test_migration_review_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
