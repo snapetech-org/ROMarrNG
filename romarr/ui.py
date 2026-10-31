@@ -40,6 +40,14 @@ def _ui_key(source: str) -> str:
 
 UI_LOCALE_OPTIONS = UI_CATALOG["locales"]
 UI_AVAILABLE_LOCALES = UI_CATALOG["availableLocales"]
+
+
+def _locale_option_label(locale: dict[str, str]) -> str:
+    native = locale["nativeName"]
+    english = locale["englishName"]
+    return native if native == english else f"{native} — {english}"
+
+
 # Kept as a source-keyed compatibility view for Python callers. Regional
 # choices expose their actual inherited text so older callers see the same
 # complete coverage as the browser runtime. The browser embeds stable IDs.
@@ -711,7 +719,7 @@ def _theme_control_html() -> str:
         for value, name in ACCENTS
     )
     language_options = '<option value="system" data-i18n-key="ui.use-browser-settings.02d22d3f39">Use browser settings</option>' + ''.join(
-        f'<option value="{code}" lang="{code}" dir="{item["direction"]}">{item["nativeName"]}</option>'
+        f'<option value="{code}" lang="{code}" dir="{item["direction"]}">{html.escape(_locale_option_label(item))}</option>'
         for code in UI_AVAILABLE_LOCALES
         for item in (UI_LOCALE_OPTIONS[code],)
     )
@@ -6069,7 +6077,12 @@ body{display:flex;align-items:center;justify-content:center;min-height:100vh;
 PUBLIC_I18N_JS = r"""
 (()=>{
 const catalog=__UI_CATALOG__,core=window.ROMarrI18n,key='romarrng.interface-language';
-const languages=catalog.availableLocales.map(code=>[code,catalog.locales[code].nativeName]);
+const languages=catalog.availableLocales.map(code=>{
+  const locale=catalog.locales[code];
+  const name=locale.nativeName===locale.englishName
+    ?locale.nativeName:`${locale.nativeName} — ${locale.englishName}`;
+  return {code,name,direction:locale.direction};
+});
 const detect=()=>core.resolveLocale(navigator.languages?.length?navigator.languages:[navigator.language],catalog,catalog.availableLocales);
 const preference=()=>{try{const value=localStorage.getItem(key);return value&&catalog.availableLocales.includes(value)?value:'system'}catch(_){return'system'}};
 let active=preference()==='system'?detect():preference();
@@ -6083,7 +6096,18 @@ const sources=new WeakMap();
 const text=(node)=>{const parent=node.parentElement;if(!parent||parent.closest('script,style,textarea,input,select,code,[contenteditable="true"],[lang="und"],[data-i18n],[data-i18n-key]'))return;const source=sources.get(node)||node.data.replace(/\s+/g,' ').trim();if(!has(source))return;sources.set(node,source);const left=node.data.match(/^\s*/)?.[0]||'',right=node.data.match(/\s*$/)?.[0]||'',value=left+translate(source)+right;if(value!==node.data)node.data=value;parent.lang=localized(source)?active:'en';parent.dir=localized(source)&&core.isRTL(active,catalog)?'rtl':'ltr'};
 const tree=root=>{if(root.nodeType===Node.TEXT_NODE){text(root);return}const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);while(walker.nextNode())text(walker.currentNode)};
 const apply=()=>{document.documentElement.lang=active;document.documentElement.dir=core.isRTL(active,catalog)?'rtl':'ltr';document.querySelectorAll('[data-i18n],[data-i18n-key]').forEach(el=>{const source=el.dataset.i18nKey||el.dataset.i18n,done=localized(source);el.textContent=translate(source);el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const source=el.dataset.i18nPlaceholder,done=localized(source);el.placeholder=translate(source);el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});for(const [marker,attribute] of [['data-i18n-aria-label','aria-label'],['data-i18n-title','title']])document.querySelectorAll('['+marker+']').forEach(el=>{const source=el.getAttribute(marker),done=localized(source);el.setAttribute(attribute,translate(source));el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});tree(document.body);const selector=document.querySelector('#public-language-select');if(selector)selector.value=preference();document.title=translate(document.body.dataset.title||'ROMarr')+' · ROMarr'};
-const picker=document.querySelector('#public-language-select');if(picker){picker.innerHTML='<option value="system" data-i18n-key="ui.use-browser-settings.02d22d3f39">Use browser settings</option>'+languages.map(([code,name])=>'<option value="'+code+'" lang="'+code+'" dir="'+(core.isRTL(code,catalog)?'rtl':'ltr')+'">'+name+'</option>').join('');picker.value=preference();picker.addEventListener('change',()=>{try{if(picker.value==='system')localStorage.removeItem(key);else localStorage.setItem(key,picker.value)}catch(_){}active=picker.value==='system'?detect():picker.value;apply()})}
+const picker=document.querySelector('#public-language-select');if(picker){
+  const system=document.createElement('option');
+  system.value='system';system.dataset.i18nKey='ui.use-browser-settings.02d22d3f39';
+  system.textContent='Use browser settings';
+  const options=languages.map(({code,name,direction})=>{
+    const option=document.createElement('option');
+    option.value=code;option.lang=code;option.dir=direction;option.textContent=name;
+    return option;
+  });
+  picker.replaceChildren(system,...options);picker.value=preference();
+  picker.addEventListener('change',()=>{try{if(picker.value==='system')localStorage.removeItem(key);else localStorage.setItem(key,picker.value)}catch(_){}active=picker.value==='system'?detect():picker.value;apply()})
+}
 const api=Object.assign({},core,{translate,message,messageInfo,has,apply,
   isRTLForLocale:locale=>core.isRTL(locale,catalog)});
 Object.defineProperty(api,'language',{get:()=>active});

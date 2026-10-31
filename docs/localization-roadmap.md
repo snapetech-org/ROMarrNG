@@ -33,6 +33,9 @@ Portuguese, Vietnamese, Simplified Chinese, and Traditional Chinese have direct
 translations. The remaining registered locales stay out of the picker until
 their translations exist and pass the catalog checks.
 
+Language choices show each locale's native name and English name. When both
+names are the same, the selector displays the name once.
+
 The source-only additions cover authored route copy, task labels and results,
 form labels, and stable application error/status templates. A checked source
 manifest records each exact message, dynamic placeholder boundary, and source
@@ -48,7 +51,7 @@ corrections across all 12 direct locales for ROM-dump false friends,
 game-library and set terminology, DAT/hash status labels, protocol names, and
 other contextual interface copy. A focused semantic pass checked 272
 glossary-related source messages across 12 locales (3,264 locale cells), plus
-the 388 locale cells across 95 messages whose translation exactly matched the
+the 377 locale cells across 95 messages whose translation exactly matched the
 English source; those groups overlap. The exact-match scan found only expected
 brands, identifiers, technical terms, and cognates after the remaining
 Wanted-list text was localized. A Unicode-script mismatch scan of all

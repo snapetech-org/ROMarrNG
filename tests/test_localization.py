@@ -99,10 +99,22 @@ def test_language_picker_and_rtl_shell_use_catalogue_metadata() -> None:
     assert selector
     offered = set(re.findall(r'<option value="([^"]+)"', selector.group(1)))
     assert offered == {"system", *UI_AVAILABLE_LOCALES}
+    for code in UI_AVAILABLE_LOCALES:
+        locale = UI_CATALOG["locales"][code]
+        option_label = locale["nativeName"]
+        if locale["englishName"] != locale["nativeName"]:
+            option_label += f" — {locale['englishName']}"
+        assert f">{option_label}</option>" in selector.group(1)
     assert 'data-i18n-key="ui.library.' in rendered
     assert "document.documentElement.dir=ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr'" in rendered
     assert "[dir=rtl] #rail{transform:translateX(105%)}" in rendered
     assert "data-i18n-key=\"ui.use-browser-settings." in rendered
+
+    public_page = login_page(claimed=False)
+    assert "locale.nativeName===locale.englishName" in public_page
+    assert "`${locale.nativeName} — ${locale.englishName}`" in public_page
+    assert "option.textContent=name" in public_page
+    assert "picker.replaceChildren(system,...options)" in public_page
 
 
 def test_public_localization_pages_have_safe_script_catalogs() -> None:
