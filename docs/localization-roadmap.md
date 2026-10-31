@@ -28,16 +28,17 @@ Portuguese, Vietnamese, Simplified Chinese, and Traditional Chinese have direct
 translations. The remaining registered locales stay out of the picker until
 their translations exist and pass the catalog checks.
 
-The existing translation text was carried over without changing its wording.
-Each message now records review status separately for every direct locale;
-existing text is `unverified` because its provenance is unknown. Regional
-entries are marked `inherited`. A message can be marked `reviewed` only with a
-reviewer and review date. A complete native review and RTL visual review have
-not been done. ROMarr therefore does not claim translation quality parity
-with PlezyNG, even though the catalog and runtime now support a broader locale
-workflow. Unverified is the default and is stored sparsely; regional inheritance
-comes from the locale parent table. Fingerprints are stored only for draft or
-reviewed overrides, keeping the runtime catalog compact.
+The existing translation text was carried over, with targeted corrections for
+verified semantic errors in the Arabic folder label and status tooltip, and
+Hindi gaming terminology and script contamination. Each message records review
+status separately for every direct locale; existing text is `unverified`
+because its provenance is unknown. Regional entries are marked `inherited`. A
+message can be marked `reviewed` only with a reviewer and review date. A
+complete native review and RTL visual review have not been done. This catalog
+pass does not certify translation quality or establish RTL signoff. Unverified
+is the default and is stored sparsely; regional inheritance comes from the
+locale parent table. Fingerprints are stored only for draft or reviewed
+overrides, keeping the runtime catalog compact.
 
 ## Runtime behavior
 

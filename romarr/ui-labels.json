@@ -833,7 +833,7 @@
         "ja": "フォルダ",
         "fr": "Un dossier",
         "pt-BR": "Uma pasta",
-        "ar": "ملف",
+        "ar": "مجلد",
         "ko": "폴더",
         "zh-Hant": "一個資料夾",
         "vi": "Thư mục",
@@ -2025,7 +2025,7 @@
       "translations": {
         "es": "Añadido el {date}",
         "zh-Hans": "加入于 {date}",
-        "hi": "添加于 {date}",
+        "hi": "जोड़ा गया: {date}",
         "de": "Hinzugefügt am {date}",
         "ja": "追加日：{date}",
         "fr": "Ajouté le {date}",
@@ -2487,7 +2487,7 @@
       "translations": {
         "es": "Aniversarios",
         "zh-Hans": "发行周年",
-        "hi": "发行纪念日",
+        "hi": "रिलीज़ की वर्षगाँठें",
         "de": "Jahrestage",
         "ja": "記念日",
         "fr": "Anniversaires",
@@ -4165,18 +4165,18 @@
       "source": "Click to set status, rating, notes",
       "sourceHash": "2de14d61e0acb9dfadafc0e83c680229b560914fc9b5f7b9b6bec0f20a6c1670",
       "translations": {
-        "es": "Haga clic para establecer el estado, calificación, notas",
-        "zh-Hans": "点击以设置状态、 评分、 注释",
-        "hi": "स्थिति, रेटिंग, नोट्स सेट करने के लिए क्लिक करें",
-        "de": "Klicken Sie, um Status, Bewertung, Notizen festzulegen",
-        "ja": "クリックしてステータス、評価、メモを設定",
-        "fr": "Cliquez pour définir l'état, la cote, les notes",
-        "pt-BR": "Clique para definir status, classificação, notas",
-        "ar": "انقر لتعيين الحالة. انقر مرة أخرى للتبديل بينها.",
-        "ko": "상태를 설정하려면 클릭하세요. 다시 클릭하면 상태가 전환됩니다.",
-        "zh-Hant": "點選以設定狀態、 評分、 註釋",
-        "vi": "Nhấn vào để đặt trạng thái, đánh giá, ghi chú",
-        "id": "Klik untuk mengatur status, peringkat, catatan"
+        "es": "Haga clic para establecer el estado, la calificación y las notas",
+        "zh-Hans": "点击以设置状态、评分和备注",
+        "hi": "स्थिति, रेटिंग और नोट्स सेट करने के लिए क्लिक करें",
+        "de": "Klicken Sie, um Status, Bewertung und Notizen festzulegen",
+        "ja": "クリックしてステータス、評価、メモを設定します",
+        "fr": "Cliquez pour définir le statut, la note et les commentaires",
+        "pt-BR": "Clique para definir o status, a classificação e as anotações",
+        "ar": "انقر لتعيين الحالة والتقييم والملاحظات",
+        "ko": "클릭하여 상태, 평점, 메모를 설정하세요.",
+        "zh-Hant": "點選以設定狀態、評分和備註",
+        "vi": "Nhấn để đặt trạng thái, đánh giá và ghi chú",
+        "id": "Klik untuk mengatur status, rating, dan catatan"
       },
       "translationHashes": {},
       "translationStatus": {},
@@ -7191,7 +7191,7 @@
       "translations": {
         "es": "Excluir hacks de ROM",
         "zh-Hans": "排除 ROM 改版",
-        "hi": "ROM 改版 को बाहर रखें",
+        "hi": "ROM हैक्स को बाहर रखें",
         "de": "ROM-Hacks ausschließen",
         "ja": "ROMハックを除外",
         "fr": "Exclure les hacks ROM",
@@ -9207,7 +9207,7 @@
       "translations": {
         "es": "Importaciones por plataforma",
         "zh-Hans": "按平台导入",
-        "hi": "मंच द्वारा आयात",
+        "hi": "प्लेटफ़ॉर्म के अनुसार आयात",
         "de": "Importvorgänge je Plattform",
         "ja": "プラットフォームによるインポート",
         "fr": "Importations par plate-forme",
@@ -11097,7 +11097,7 @@
       "translations": {
         "es": "Necesito una plataforma conocida",
         "zh-Hans": "需要一个已知的平台",
-        "hi": "एक ज्ञात मंच की जरूरत है",
+        "hi": "ज्ञात गेमिंग प्लेटफ़ॉर्म चाहिए",
         "de": "Sie benötigen eine bekannte Plattform",
         "ja": "既知のプラットフォームが必要です",
         "fr": "Besoin d'une plateforme connue",
@@ -13029,7 +13029,7 @@
       "translations": {
         "es": "Abrir en {indexer}",
         "zh-Hans": "在 {indexer} 中打开",
-        "hi": "在 {indexer} 中打开",
+        "hi": "इंडेक्सर {indexer} पर खोलें",
         "de": "Bei {indexer} öffnen",
         "ja": "{indexer} で開く",
         "fr": "Ouvrir sur {indexer}",
@@ -13848,7 +13848,7 @@
       "translations": {
         "es": "¿En qué plataforma está {game}? Disponible: {platforms}",
         "zh-Hans": "{game} 使用哪个平台？可用平台：{platforms}",
-        "hi": "मंच {game}? उपलब्ध: {platforms}",
+        "hi": "{game} के लिए कौन सा प्लेटफ़ॉर्म? उपलब्ध: {platforms}",
         "de": "Plattform für {game}? Verfügbarkeit: {platforms}",
         "ja": "{game}のプラットフォームを選択してください。選択可能：{platforms}",
         "fr": "Plateforme pour {game}? Disponible: {platforms}",
@@ -16032,7 +16032,7 @@
       "translations": {
         "es": "Lanzado el {date}",
         "zh-Hans": "发行于 {date}",
-        "hi": "发布于 {date}",
+        "hi": "रिलीज़ की तारीख: {date}",
         "de": "Veröffentlicht am {date}",
         "ja": "発売日：{date}",
         "fr": "Sorti le {date}",
@@ -16557,7 +16557,7 @@
       "translations": {
         "es": "Las solicitudes sin una regla de plataforma coincidente se guardan aquí",
         "zh-Hans": "没有匹配平台规则的请求会存放在此处",
-        "hi": "जिस अनुरोध से मेल खाता platform नियम न हो, उसे यहाँ रखा जाएगा",
+        "hi": "जिन अनुरोधों के लिए कोई प्लेटफ़ॉर्म नियम मेल नहीं खाता, उन्हें यहाँ रखा जाएगा",
         "de": "Anfragen ohne passende Plattformregel werden hier abgelegt",
         "ja": "一致するプラットフォームルールがないリクエストはここに保存されます。",
         "fr": "Les demandes sans règle de plateforme correspondante sont déposées ici",
@@ -17019,7 +17019,7 @@
       "translations": {
         "es": "Dirige solo estas plataformas aquí. Vacío significa cualquier plataforma.",
         "zh-Hans": "仅将这些平台路由到此处。留空表示所有平台。",
-        "hi": "केवल इन platform को यहाँ भेजें। खाली का अर्थ कोई भी platform है।",
+        "hi": "यहाँ केवल इन प्लेटफ़ॉर्मों पर रूट करें। खाली छोड़ने पर कोई भी प्लेटफ़ॉर्म स्वीकार होगा।",
         "de": "Nur diese Plattformen hierher leiten. Leer bedeutet alle Plattformen.",
         "ja": "ここには選択したプラットフォームだけを割り当てます。空欄なら全プラットフォームです。",
         "fr": "Acheminer uniquement ces plateformes ici. Vide signifie toutes les plateformes.",
@@ -19854,7 +19854,7 @@
       "translations": {
         "es": "Esa biblioteca no tiene configuración almacenada para editar",
         "zh-Hans": "该库没有可编辑的存储配置",
-        "hi": "उस पुस्तकालय में संपादन के लिए कोई संग्रहीत विन्यास नहीं है",
+        "hi": "उस लाइब्रेरी में संपादन योग्य कोई संग्रहीत कॉन्फ़िगरेशन नहीं है",
         "de": "Diese Bibliothek hat keine gespeicherte Konfiguration zum Bearbeiten",
         "ja": "このライブラリには編集できる保存済み設定がありません",
         "fr": "Cette bibliothèque n'a pas de configuration à éditer",
@@ -21786,7 +21786,7 @@
       "translations": {
         "es": "Plataforma desconocida",
         "zh-Hans": "未知的平台",
-        "hi": "अज्ञात मंच",
+        "hi": "अज्ञात प्लेटफ़ॉर्म",
         "de": "Unbekannte Plattform",
         "ja": "未知のプラットフォーム",
         "fr": "Plateforme inconnue",
@@ -22017,7 +22017,7 @@
       "translations": {
         "es": "Actualizado el {date}",
         "zh-Hans": "更新于 {date}",
-        "hi": "更新于 {date}",
+        "hi": "अपडेट किया गया: {date}",
         "de": "Aktualisiert am {date}",
         "ja": "更新日：{date}",
         "fr": "Mis à jour le {date}",
@@ -23151,7 +23151,7 @@
       "translations": {
         "es": "Donde viene la biblioteca",
         "zh-Hans": "图书馆从哪里来?",
-        "hi": "जहाँ पुस्तकालय आता है",
+        "hi": "लाइब्रेरी कहाँ से आती है",
         "de": "Woher die Bibliothek kommt",
         "ja": "ライブラリの取得元",
         "fr": "D'où vient la bibliothèque",
@@ -23214,7 +23214,7 @@
       "translations": {
         "es": "¿Qué plataforma? Disponible: {platforms}",
         "zh-Hans": "哪个平台? 可用 : {platforms}",
-        "hi": "कौन सा मंच? उपलब्ध: {platforms}",
+        "hi": "कौन सा प्लेटफ़ॉर्म? उपलब्ध: {platforms}",
         "de": "Welche Plattform? Verfügbarkeit: {platforms}",
         "ja": "プラットフォームを選択してください。選択可能：{platforms}",
         "fr": "Quelle plateforme ? Disponible: {platforms}",
@@ -23970,7 +23970,7 @@
       "translations": {
         "es": "cualquier plataforma",
         "zh-Hans": "任何平台",
-        "hi": "कोई मंच",
+        "hi": "कोई भी प्लेटफ़ॉर्म",
         "de": "jede Plattform",
         "ja": "任意のプラットフォーム",
         "fr": "toute plate-forme",
@@ -24453,7 +24453,7 @@
       "translations": {
         "es": "antes o después de hoy",
         "zh-Hans": "今天前后",
-        "hi": "今天前后",
+        "hi": "आज के आसपास",
         "de": "vor oder nach heute",
         "ja": "今日の前後",
         "fr": "avant ou après aujourd’hui",
@@ -25461,7 +25461,7 @@
       "translations": {
         "es": "ninguna plataforma retro",
         "zh-Hans": "没有复古平台",
-        "hi": "कोई पुराना मंच",
+        "hi": "कोई रेट्रो गेमिंग प्लेटफ़ॉर्म नहीं",
         "de": "Keine Retro-Plattform",
         "ja": "レトロなプラットホーム無し",
         "fr": "pas de plateforme rétro",
@@ -26805,7 +26805,7 @@
       "translations": {
         "es": "todavía cargando desde el servidor de la biblioteca...",
         "zh-Hans": "仍在从库服务器装入...",
-        "hi": "अभी भी पुस्तकालय सर्वर से लोड हो रहा है ...",
+        "hi": "लाइब्रेरी सर्वर से अभी लोड हो रहा है…",
         "de": "immer noch vom Bibliotheksserver geladen...",
         "ja": "ライブラリサーバからはまだ読み込みます...",
         "fr": "chargement à partir du serveur de la bibliothèque...",
@@ -26826,7 +26826,7 @@
       "translations": {
         "es": "próximamente",
         "zh-Hans": "尚未发行",
-        "hi": "即将推出",
+        "hi": "अभी आने वाले",
         "de": "noch ausstehend",
         "ja": "これから発売",
         "fr": "à venir",
@@ -27960,7 +27960,7 @@
       "translations": {
         "es": "{count} volcados más",
         "zh-Hans": "另外 {count} 个转储",
-        "hi": "अन्य {count} dump",
+        "hi": "अन्य {count} डंप",
         "de": "{count} weitere Dumps",
         "ja": "ほか{count}件のダンプ",
         "fr": "{count} autres dumps",
@@ -27981,7 +27981,7 @@
       "translations": {
         "es": "{count} plataforma obtiene una ruta de streaming aquí gracias a un emulador identificado para una sola máquina en la lista de aplicaciones de este host:",
         "zh-Hans": "此主机的应用列表中有专用于单一机器的命名模拟器，因此这里有 {count} 个平台可通过串流运行：",
-        "hi": "इस host की ऐप सूची में किसी एक मशीन के लिए नामित emulator होने से यहाँ {count} platform को stream route मिलता है:",
+        "hi": "इस होस्ट की ऐप सूची में केवल एक मशीन के लिए नामित एमुलेटर मौजूद है, इसलिए यहाँ {count} प्लेटफ़ॉर्म के लिए स्ट्रीमिंग रूट उपलब्ध है:",
         "de": "{count} Plattform erhält hier eine Streaming-Route, weil in der App-Liste dieses Hosts ein namentlich bekannter Emulator für genau eine Maschine steht:",
         "ja": "このホストのアプリ一覧に特定の1機種向けと分かるエミュレーターがあるため、{count}個のプラットフォームにストリーミング経路が追加されます：",
         "fr": "{count} plateforme obtient ici une route de streaming grâce à un émulateur nommé pour une seule machine dans la liste d’applications de cet hôte :",
@@ -28023,7 +28023,7 @@
       "translations": {
         "es": "{count} plataformas obtienen una ruta de streaming aquí gracias a emuladores identificados para una sola máquina en la lista de aplicaciones de este host:",
         "zh-Hans": "此主机的应用列表中有专用于单一机器的命名模拟器，因此这里有 {count} 个平台可通过串流运行：",
-        "hi": "इस host की ऐप सूची में किसी एक मशीन के लिए नामित emulator होने से यहाँ {count} platforms को stream route मिलता है:",
+        "hi": "इस होस्ट की ऐप सूची में केवल एक मशीन के लिए नामित एमुलेटर मौजूद है, इसलिए यहाँ {count} प्लेटफ़ॉर्म के लिए स्ट्रीमिंग रूट उपलब्ध है:",
         "de": "{count} Plattformen erhalten hier eine Streaming-Route, weil in der App-Liste dieses Hosts namentlich bekannte Emulatoren für jeweils genau eine Maschine stehen:",
         "ja": "このホストのアプリ一覧に特定の1機種向けと分かるエミュレーターがあるため、{count}個のプラットフォームにストリーミング経路が追加されます：",
         "fr": "{count} plateformes obtiennent ici une route de streaming grâce à des émulateurs nommés pour une seule machine dans la liste d’applications de cet hôte :",
@@ -28128,7 +28128,7 @@
       "translations": {
         "es": "{count} juegos del catálogo de {provider} antes y después de hoy. No están en tu biblioteca; por eso tienen el botón Solicitar.",
         "zh-Hans": "{provider} 目录中今天前后发行的 {count} 款游戏。它们不在你的媒体库中，因此提供“请求”按钮。",
-        "hi": "{provider} की सूची में आज से पहले या बाद में रिलीज़ हुए {count} गेम हैं। वे आपकी लाइब्रेरी में नहीं हैं，因此 अनुरोध बटन दिखता है。",
+        "hi": "{provider} की सूची में आज से पहले या बाद में रिलीज़ हुए {count} गेम हैं। वे आपकी लाइब्रेरी में नहीं हैं, इसलिए अनुरोध बटन दिखता है।",
         "de": "{count} Spiele aus dem Katalog von {provider}, die vor oder nach heute erscheinen. Sie sind nicht in deiner Bibliothek und haben deshalb eine Schaltfläche zum Anfordern.",
         "ja": "{provider} のカタログから、今日より前後に発売されたゲームが {count} 本あります。ライブラリにはないため、「リクエスト」ボタンが表示されます。",
         "fr": "{count} jeux du catalogue de {provider}, de part et d’autre d’aujourd’hui. Ils ne figurent pas dans votre bibliothèque, d’où le bouton Demander.",
