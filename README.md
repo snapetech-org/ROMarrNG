@@ -1121,13 +1121,15 @@ The supporting documents are the [complete issue/PR audit](docs/UPSTREAM_AUDIT.m
 ## State of the project
 
 An honest map of what is solid, what is thin, and where a contribution
-lands hardest. CI validates pull requests, pushes to `main`, and version-tag
-pushes; manual runs may target any ref. Pushes to other branches do not trigger
-the Docker workflow. Pull requests, version tags, and manual runs outside main
-use GitHub-hosted runners; main validation uses the configured shared runner. PR
-image builds use read-only permissions; only main and version-tag workflows, plus
-manual runs on main, can publish images. In the 2026-10-12 local full-suite run, 2,319 tests
-passed, 3 were skipped, and 1 network test was deselected.
+lands hardest. CI validates version-tag pushes, trusted same-repository owner
+pull requests, and manual runs on `main`. Build, test, scan, packaging, and
+release jobs require compatible private JIT runners; there is no GitHub-hosted
+fallback. Owner pull requests use a main-pinned metadata dispatcher before the
+exact PR head is checked on JIT. Public fork code is not sent to the trusted
+runner pool. A missing private platform route blocks that job until compatible
+capacity is available. Only pushed version tags can publish images. In the
+2026-10-12 local full-suite run, 2,319 tests passed, 3 were skipped, and 1
+network test was deselected.
 The numbers below are per area, and "tested against fakes" means the protocol
 conversation is asserted but no live server was in the loop.
 
@@ -1253,4 +1255,4 @@ Unofficial. Not affiliated with or endorsed by the RomM, Gaseous or Retrom proje
 
 ## Local security scanning
 
-Run `./scripts/security-scan-local.sh` for local Semgrep CE and the Trivy scanners that fit this repository. The installed pre-commit hook runs Semgrep on staged source/config files only; Trivy runs on demand or in CI. This public repository also runs Semgrep CE in GitHub Actions on changes and weekly. See [security-scanning.md](docs/security-scanning.md). Use `./scripts/update-security-tools.sh` to refresh local scanner data and the Trivy database.
+Run `./scripts/security-scan-local.sh` for local Semgrep CE and the Trivy scanners that fit this repository. The installed pre-commit hook runs Semgrep on staged source/config files only; Trivy runs on demand or in CI. Private JIT workflows run Semgrep and Trivy on version tags and manual runs from `main`; trusted same-repository owner PR validation scans the exact PR head and reviews its dependency changes. See [security-scanning.md](docs/security-scanning.md). Use `./scripts/update-security-tools.sh` to refresh local scanner data and the Trivy database.

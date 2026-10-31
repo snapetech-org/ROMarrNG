@@ -16,4 +16,3 @@ The shared policy and exact workflow inventory live in
 `snapetech-org/packer/scripts/shared-jit-runner-pool/`. Source routing, deployed
 broker policy, runner-group access and live platform capacity must all agree.
 Do not report the rollout complete from YAML changes alone.
-

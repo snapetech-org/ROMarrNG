@@ -16,7 +16,7 @@
 
 - **Ci:** The Semgrep container now inherits the isolated runner's proxy and trusted certificate bundle so it can fetch community rules through the restricted egress path.
 - **Validation:** Trusted main validation now carries only the verified Python tool-cache library path into its test processes, and the packaged acquisition checks receive Docker in their disposable runner VMs. Pull-request validation remains isolated from the shared main runner pool.
-- **Ci:** Eligible Linux validation gains staged hosted-first routing with a JIT retry path. Superseded security scans are cancelled. Hosted-first routing remains disabled until the updated runner broker is deployed and the operator enables `NG_HOSTED_FIRST`; platform-specific and pull-request runner boundaries remain enforced.
+- **CI:** Builds, tests, security scans, packaging, and releases require compatible private JIT runners with no GitHub-hosted fallback. Trusted same-repository owner pull requests use the main-pinned metadata dispatcher; public forks stay outside the trusted runner path.
 - **Unraid:** Unraid installs that still pull the retired image path now receive each stable ROMarrNG release automatically, so the template's latest tag no longer stays on an old version.
 
 #### Security

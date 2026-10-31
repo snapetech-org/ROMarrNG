@@ -13,7 +13,7 @@ maintained operator and contributor guides.
   troubleshooting.
 - [Localization roadmap](localization-roadmap.md): supported locales and
   remaining translation work.
-- [Security scanning](security-scanning.md): local and hosted scan workflows.
+- [Security scanning](security-scanning.md): local and private JIT scan workflows.
 
 ## Integrate and understand
 

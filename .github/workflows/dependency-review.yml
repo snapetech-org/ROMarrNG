@@ -2,20 +2,47 @@
 name: Dependency review
 
 on:
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      base_sha:
+        description: Exact base commit SHA to compare
+        required: true
+        type: string
+      head_sha:
+        description: Exact head commit SHA to compare
+        required: true
+        type: string
 concurrency:
   group: ${{ github.workflow }}-${{ github.run_id }}
   cancel-in-progress: false
 
 permissions:
   contents: read
+  pull-requests: read
 
 jobs:
   dependency-review:
-    if: github.event_name == 'pull_request'
-    runs-on: ${{ fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}","gha-{0}-dependency-review"]}}', github.run_id)) }}
+    name: Dependency review
+    if: >-
+      github.event_name == 'workflow_dispatch' &&
+      github.actor == 'snapetech' &&
+      github.ref == 'refs/heads/main'
+    runs-on: ${{ (github.event_name == 'workflow_dispatch' && github.actor == 'snapetech' && github.ref == 'refs/heads/main') && fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}","gha-{0}-dependency-review"]}}', github.run_id)) }}
+    timeout-minutes: 10
     steps:
+      - name: Validate exact commit references
+        env:
+          BASE_SHA: ${{ inputs.base_sha }}
+          HEAD_SHA: ${{ inputs.head_sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$BASE_SHA" =~ ^[0-9a-fA-F]{40}$ ]]
+          [[ "$HEAD_SHA" =~ ^[0-9a-fA-F]{40}$ ]]
+
       - name: Review dependency changes
         uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
         with:
+          base-ref: ${{ inputs.base_sha }}
+          head-ref: ${{ inputs.head_sha }}
           fail-on-severity: moderate

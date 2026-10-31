@@ -286,20 +286,22 @@ def test_the_install_guide_exists_and_the_readme_sends_people_to_it():
     assert "docs/INSTALL.md" in README.read_text(encoding="utf-8"), (
         "the full install guide is unreachable from the README")
 
-def test_public_test_job_routes_trusted_refs_to_jit_with_hosted_fallback():
+def test_public_test_job_uses_private_jit_without_hosted_fallback():
     workflow = (ROOT / ".github" / "workflows" / "docker.yml").read_text(
         encoding="utf-8"
     )
-    assert 'branches: ["main"]' in workflow
-    assert 'branches: ["**"]' not in workflow
+    events = workflow.split("jobs:", 1)[0]
+    assert "# ng-runner-policy: private-jit-only-v1" in workflow
+    assert "pull_request_target:" in events
+    assert not re.search(r"(?m)^  pull_request:", events)
     assert 'tags: ["v*"]' in workflow
+    assert "NG_HOSTED_FIRST" not in workflow
+    assert "ubuntu-latest" not in workflow
 
     test_job = workflow.split("  test:\n", 1)[1].split(
         "\n  validation-environment-portability:", 1
     )[0]
-    # Trusted main and version-tag work may use the isolated JIT group. Public
-    # pull requests and all other refs must resolve to GitHub-hosted runners.
-    assert re.search(r"(?m)^    runs-on:.*ubuntu-latest.*$", test_job)
+    # Main-pinned owner PR validation and version-tag work use the private pool.
     assert "ng-shared-main-jit" in test_job
     assert "ng-main-run-{0}" in test_job
     assert "github.ref == 'refs/heads/main'" in test_job
