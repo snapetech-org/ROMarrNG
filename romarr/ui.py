@@ -1553,7 +1553,9 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
     return '<div class="pcard'+(pl.installed?' installed':'')+'">'
       +'<h4>'+esc(pl.name)+(pl.author?'<span class="by">'
         +interfaceTemplateMarkup('ui.by-author.c63374c540',{author:pl.author})+'</span>':'')+'</h4>'
-       +'<div class="desc">'+appMessageMarkup(pl.description||'No description supplied.')+'</div>'
+       +'<div class="desc">'+(pl.description
+        ?'<span lang="und" dir="auto">'+esc(pl.description)+'</span>'
+        :interfaceMarkup('No description supplied.'))+'</div>'
       +'<div class="meta">'+(caps||'<span class="help" style="margin:0">no capabilities declared</span>')+'</div>'
       +'<div class="foot">'+action
       +(net?'<span class="net">'+interfaceTemplateMarkup('ui.reaches-hosts.ad1513043f',{hosts:net})+'</span>':'')+'</div></div>';

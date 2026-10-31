@@ -493,6 +493,8 @@ def test_ui_consumed_api_and_organizer_messages_stay_catalogued() -> None:
     assert "messageTemplate('Published {count} ES-DE entries.'" in ui_source
     assert "appMessageMarkup(data.error)" in ui_source
     assert "appMessageMarkup(ownedError)" in ui_source
+    assert "'<span lang=\"und\" dir=\"auto\">'+esc(pl.description)+'</span>'" in ui_source
+    assert ":interfaceMarkup('No description supplied.')" in ui_source
     assert guard._runtime_template_covers("repository: {reason}", set(UI_SOURCE_TO_ID))
     assert guard.coverage_errors(UI_CATALOG) == []
 
