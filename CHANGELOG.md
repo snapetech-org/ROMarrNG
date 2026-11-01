@@ -7,6 +7,7 @@
 #### Added
 
 - **Indexers:** Internet Archive can now be added from Settings → Indexers. Its public software search results use the existing Direct HTTP grab and import flow, including multi-file disc sets.
+- **Localization:** Account-connection instructions now use stable locale templates while keeping credential examples, URLs, and provider response examples unchanged.
 
 ## [0.14.12] - 2026-10-24
 

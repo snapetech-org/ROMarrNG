@@ -25,7 +25,7 @@ DIRECT_CATEGORIES = {
     "ui-status", "ui-status-template", "ui-error", "ui-error-template",
     "api-error", "provider-diagnostic", "provider-diagnostic-template",
     "library-status-template", "task-label", "task-result",
-    "task-result-template", "ecosystem-copy",
+    "task-result-template", "ecosystem-copy", "ui-help-template",
 }
 TAG_TEXT_PATTERN = re.compile(
     r"<(?P<tag>/?[A-Za-z][A-Za-z0-9:-]*)(?P<attrs>[^<>]*)>"
@@ -456,6 +456,80 @@ def _visible_api_message_sources() -> dict[str, list[str]]:
                     found.setdefault(source_text, []).append(
                         f"{relative}:{line_number}")
     return found
+
+
+def _connect_how_template_records() -> tuple[list[tuple[str, str, str]], list[str]]:
+    """Collect trusted localized instruction descriptors from connect-source tables."""
+    path = ROOT / "romarr" / "connect.py"
+    if not path.is_file():
+        return [], ["romarr/connect.py is missing"]
+    tree = ast.parse(path.read_text(encoding="utf-8"))
+    records: list[tuple[str, str, str]] = []
+    errors: list[str] = []
+    table_names = {"TOKEN_SOURCES", "PASTE_SOURCES"}
+    for node in tree.body:
+        if (not isinstance(node, ast.Assign) or not isinstance(node.value, ast.Dict)
+                or not any(isinstance(target, ast.Name) and target.id in table_names
+                           for target in node.targets)):
+            continue
+        table = next(target.id for target in node.targets
+                     if isinstance(target, ast.Name) and target.id in table_names)
+        for entry in node.value.values:
+            if not isinstance(entry, ast.Dict):
+                continue
+            how = next((value for key, value in zip(entry.keys, entry.values)
+                        if isinstance(key, ast.Constant) and key.value == "how"), None)
+            if how is None:
+                continue
+            descriptor = next((value for key, value in zip(entry.keys, entry.values)
+                               if isinstance(key, ast.Constant)
+                               and key.value == "how_template"), None)
+            if not isinstance(descriptor, ast.Dict):
+                errors.append(
+                    f"{table} instruction is missing how_template at "
+                    f"romarr/connect.py:{getattr(how, 'lineno', 1)}"
+                )
+                continue
+            fields = {
+                key.value: value for key, value in zip(descriptor.keys, descriptor.values)
+                if isinstance(key, ast.Constant) and isinstance(key.value, str)
+            }
+            sources = _message_expression(fields.get("source", ast.Constant(None)))
+            keys = _message_expression(fields.get("key", ast.Constant(None)))
+            if len(sources) != 1 or len(keys) != 1:
+                errors.append(
+                    f"{table} how_template must have one fixed source and key at "
+                    f"romarr/connect.py:{getattr(descriptor, 'lineno', 1)}"
+                )
+                continue
+            source = next(iter(sources))
+            values_node = fields.get("values")
+            value_names = {
+                key.value for key in values_node.keys
+                if isinstance(key, ast.Constant) and isinstance(key.value, str)
+            } if isinstance(values_node, ast.Dict) else set()
+            values_are_fixed_text = (
+                isinstance(values_node, ast.Dict)
+                and len(value_names) == len(values_node.keys)
+                and all(isinstance(value, ast.Constant)
+                        and isinstance(value.value, str)
+                        for value in values_node.values)
+            )
+            source_names = set(re.findall(
+                r"\{([A-Za-z][A-Za-z0-9_]*)\}", source,
+            ))
+            if not values_are_fixed_text or value_names != source_names:
+                errors.append(
+                    f"{table} how_template placeholder values differ from its source at "
+                    f"romarr/connect.py:{getattr(descriptor, 'lineno', 1)}"
+                )
+                continue
+            records.append((
+                source,
+                next(iter(keys)),
+                f"romarr/connect.py:{getattr(fields.get('source'), 'lineno', 1)}",
+            ))
+    return records, errors
 
 
 def _route_path_condition(node: ast.AST) -> str | None:
@@ -916,6 +990,34 @@ def coverage_errors(catalog: dict | None = None) -> list[str]:
                 "fixed UI-consumed API message is missing from the catalog at "
                 f"{locations[0]}: {source!r}"
             )
+    connect_templates, connect_template_errors = _connect_how_template_records()
+    errors.extend(connect_template_errors)
+    for source, key, location in connect_templates:
+        catalog_key = source_to_id.get(source)
+        if catalog_key is None:
+            errors.append(
+                f"connect-source instruction is missing from the catalog at "
+                f"{location}: {source!r}"
+            )
+        elif key != catalog_key:
+            errors.append(
+                f"connect-source descriptor key disagrees with the catalog at "
+                f"{location}: {key!r} != {catalog_key!r}"
+            )
+    connect_key_match = re.search(
+        r"const\s+CONNECT_HOW_TEMPLATE_KEYS\s*=\s*new Set\(\[(.*?)\]\);",
+        ui_source, re.S,
+    )
+    expected_connect_keys = {key for _, key, _ in connect_templates}
+    rendered_connect_keys = (
+        set(re.findall(r"['\"](ui\.[a-z0-9-]+\.[0-9a-f]{10})['\"]",
+                       connect_key_match.group(1)))
+        if connect_key_match else set()
+    )
+    if not connect_key_match or rendered_connect_keys != expected_connect_keys:
+        errors.append(
+            "connect-source template allowlist does not match the trusted source descriptors"
+        )
     errors.extend(_visible_message_surface_errors())
 
     # Return-message coverage is intentionally opt-in: only source templates

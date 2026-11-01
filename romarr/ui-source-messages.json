@@ -11645,6 +11645,260 @@
         "zh-Hant"
       ],
       "dynamicPlaceholders": []
+    },
+    {
+      "source": "Amazon's only API needs full device registration -- there is no page that issues a token. Select-all-copy your library page and paste it as a list; the parser pulls the titles out of the mess.",
+      "category": "ui-help-template",
+      "locations": [
+        "romarr/connect.py:399"
+      ],
+      "id": "ui.amazon-s-only-api-needs-full-device.5661d650da",
+      "sourceHash": "5661d650dae63dddbfe1a843a16cccd0ce8bea2c6de854f50d9a6bfeb2b186e7",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Click '{button}' there and approve with your Microsoft account; the console then shows an API key to copy. OpenXBL is a third-party bridge because Microsoft publishes no owned-games API of its own.",
+      "category": "ui-help-template",
+      "locations": [
+        "romarr/connect.py:246"
+      ],
+      "id": "ui.click-button-there-and-approve-with.9fb68901fb",
+      "sourceHash": "9fb68901fba7f0221c5be51e18877575b383106a2c043fc0fee595c4784be584",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "button"
+      ]
+    },
+    {
+      "source": "Generate a key on that page and copy it.",
+      "category": "ui-help-template",
+      "locations": [
+        "romarr/connect.py:260"
+      ],
+      "id": "ui.generate-a-key-on-that-page-and-copy.9a9b11d5bf",
+      "sourceHash": "9a9b11d5bfb1ab223729a7431aa17af24fd46ab1b31bab1e81bca16ba09e39eb",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Humble's API answers to your browser session and nothing else. With the library open: press F12, Application tab, Cookies, humblebundle.com, and copy the {cookie_name} value. Every game ever bought or claimed comes back.",
+      "category": "ui-help-template",
+      "locations": [
+        "romarr/connect.py:376"
+      ],
+      "id": "ui.humble-s-api-answers-to-your-browser.6ee3516476",
+      "sourceHash": "6ee35164768efd4a6d8352b6d00f984a0cafd90369327a74da9e543570b1fda8",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "cookie_name"
+      ]
+    },
+    {
+      "source": "Same story: no token page, no key programme. Copy your games list from the account portal (or the Ubisoft Connect app) and paste it as a list. Installed Ubisoft games are also picked up by the gaming-PC scan.",
+      "category": "ui-help-template",
+      "locations": [
+        "romarr/connect.py:415"
+      ],
+      "id": "ui.same-story-no-token-page-no-key-prog.7e3daf7ba1",
+      "sourceHash": "7e3daf7ba1962c70529e8930330344d86be398ade388a106448b27dc29ac4335",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Sign in if asked; the page then shows {example}. Copy the token. EA issues no application keys, so this is the same credential Playnite uses. It is short-lived — re-paste when a sync says it expired. If EA answers {provider_message} it is blocking the sign-in itself, usually because of a VPN or unfamiliar IP — turn the VPN off for this one sign-in and try again.",
+      "category": "ui-help-template",
+      "locations": [
+        "romarr/connect.py:336"
+      ],
+      "id": "ui.sign-in-if-asked-the-page-then-shows.e3615cbaf6",
+      "sourceHash": "e3615cbaf6bc1e7c6d7f51eb8208319504867c4d06dd25a98e159febf899bbc6",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "example",
+        "provider_message"
+      ]
+    },
+    {
+      "source": "Sign in there; the page ends up showing {example}. Copy the code. If Epic asks you to accept terms first, do that and it continues. The code is single-use and expires in minutes, so paste it straight away -- ROMarr swaps it for a refresh token and never asks again.",
+      "category": "ui-help-template",
+      "locations": [
+        "romarr/connect.py:307"
+      ],
+      "id": "ui.sign-in-there-the-page-ends-up-showi.aa5efe7dd3",
+      "sourceHash": "aa5efe7dd3be42889791070317426734adcf6cee7384ef09e0a1640fcb739c53",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "example"
+      ]
+    },
+    {
+      "source": "Signed in to Blizzard, that page is a plain JSON list of your games. Copy the whole document and paste it -- it is data, not a credential, so nothing secret is stored.",
+      "category": "ui-help-template",
+      "locations": [
+        "romarr/connect.py:359"
+      ],
+      "id": "ui.signed-in-to-blizzard-that-page-is-a.7c3d547316",
+      "sourceHash": "7c3d5473169c10f7bd558f1568a1995d485ce2be4845631be659214f7ac8c467",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Signed in to GOG, that page shows {example} near the start. Paste that username. Your profile's games list must be public ({settings_url}) — that is the whole credential, there is no token.",
+      "category": "ui-help-template",
+      "locations": [
+        "romarr/connect.py:278"
+      ],
+      "id": "ui.signed-in-to-gog-that-page-shows-exa.3512fe96cf",
+      "sourceHash": "3512fe96cf3c06b857cbf9c425d2a2a3d61cccf7c6707229430ca9e5d34dbf9e",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "example",
+        "settings_url"
+      ]
+    },
+    {
+      "source": "Signed in to playstation.com, this page shows {example}. Copy the value between the quotes.",
+      "category": "ui-help-template",
+      "locations": [
+        "romarr/connect.py:228"
+      ],
+      "id": "ui.signed-in-to-playstation-com-this-pa.acf50352eb",
+      "sourceHash": "acf50352eb9ea9de13e7f08bbde5087ae4458f814db9a8cf0b2cb71c262c2ab5",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "example"
+      ]
     }
   ]
 }

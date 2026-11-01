@@ -223,6 +223,12 @@ TOKEN_SOURCES = {
         "field": "npsso",
         "how": "Signed in to playstation.com, this page shows "
                '{"npsso":"..."}. Copy the value between the quotes.',
+        "how_template": {
+            "key": "ui.signed-in-to-playstation-com-this-pa.acf50352eb",
+            "source": "Signed in to playstation.com, this page shows "
+                      "{example}. Copy the value between the quotes.",
+            "values": {"example": '{"npsso":"..."}'},
+        },
     },
     "xbox": {
         "label": "Xbox",
@@ -235,12 +241,25 @@ TOKEN_SOURCES = {
                "Microsoft account; the console then shows an API key to "
                "copy. OpenXBL is a third-party bridge because Microsoft "
                "publishes no owned-games API of its own.",
+        "how_template": {
+            "key": "ui.click-button-there-and-approve-with.9fb68901fb",
+            "source": "Click '{button}' there and approve with your "
+                      "Microsoft account; the console then shows an API key "
+                      "to copy. OpenXBL is a third-party bridge because "
+                      "Microsoft publishes no owned-games API of its own.",
+            "values": {"button": "Login with Xbox Live"},
+        },
     },
     "itchio": {
         "label": "itch.io",
         "open": "https://itch.io/user/settings/api-keys",
         "field": "itchio_key",
         "how": "Generate a key on that page and copy it.",
+        "how_template": {
+            "key": "ui.generate-a-key-on-that-page-and-copy.9a9b11d5bf",
+            "source": "Generate a key on that page and copy it.",
+            "values": {},
+        },
     },
     "gog": {
         "label": "GOG",
@@ -254,6 +273,17 @@ TOKEN_SOURCES = {
                "the start. Paste that username. Your profile's games list "
                "must be public (gog.com/account/settings/privacy) — that "
                "is the whole credential, there is no token.",
+        "how_template": {
+            "key": "ui.signed-in-to-gog-that-page-shows-exa.3512fe96cf",
+            "source": "Signed in to GOG, that page shows {example} near "
+                      "the start. Paste that username. Your profile's games "
+                      "list must be public ({settings_url}) — that is the "
+                      "whole credential, there is no token.",
+            "values": {
+                "example": '{"username":"..."}',
+                "settings_url": "gog.com/account/settings/privacy",
+            },
+        },
     },
     "epic": {
         "label": "Epic Games",
@@ -272,6 +302,16 @@ TOKEN_SOURCES = {
                "to accept terms first, do that and it continues. The code is "
                "single-use and expires in minutes, so paste it straight away "
                "-- ROMarr swaps it for a refresh token and never asks again.",
+        "how_template": {
+            "key": "ui.sign-in-there-the-page-ends-up-showi.aa5efe7dd3",
+            "source": "Sign in there; the page ends up showing {example}. "
+                      "Copy the code. If Epic asks you to accept terms first, "
+                      "do that and it continues. The code is single-use and "
+                      "expires in minutes, so paste it straight away -- "
+                      "ROMarr swaps it for a refresh token and never asks "
+                      "again.",
+            "values": {"example": '{"authorizationCode":"..."}'},
+        },
     },
     "ea": {
         # `prompt=none` means "only succeed if a session is already visible
@@ -291,6 +331,21 @@ TOKEN_SOURCES = {
                '"Service limitations apply" it is blocking the sign-in '
                "itself, usually because of a VPN or unfamiliar IP — turn "
                "the VPN off for this one sign-in and try again.",
+        "how_template": {
+            "key": "ui.sign-in-if-asked-the-page-then-shows.e3615cbaf6",
+            "source": "Sign in if asked; the page then shows {example}. "
+                      "Copy the token. EA issues no application keys, so "
+                      "this is the same credential Playnite uses. It is "
+                      "short-lived — re-paste when a sync says it expired. "
+                      "If EA answers {provider_message} it is blocking the "
+                      "sign-in itself, usually because of a VPN or unfamiliar "
+                      "IP — turn the VPN off for this one sign-in and try "
+                      "again.",
+            "values": {
+                "example": '{"access_token":"..."}',
+                "provider_message": '"Service limitations apply"',
+            },
+        },
     },
     "battlenet": {
         "label": "Battle.net",
@@ -299,6 +354,14 @@ TOKEN_SOURCES = {
         "how": "Signed in to Blizzard, that page is a plain JSON list of "
                "your games. Copy the whole document and paste it -- it is "
                "data, not a credential, so nothing secret is stored.",
+        "how_template": {
+            "key": "ui.signed-in-to-blizzard-that-page-is-a.7c3d547316",
+            "source": "Signed in to Blizzard, that page is a plain JSON list "
+                      "of your games. Copy the whole document and paste it "
+                      "-- it is data, not a credential, so nothing secret "
+                      "is stored.",
+            "values": {},
+        },
     },
     "humble": {
         "label": "Humble Bundle",
@@ -308,6 +371,15 @@ TOKEN_SOURCES = {
                "else. With the library open: press F12, Application tab, "
                "Cookies, humblebundle.com, and copy the _simpleauth_sess "
                "value. Every game ever bought or claimed comes back.",
+        "how_template": {
+            "key": "ui.humble-s-api-answers-to-your-browser.6ee3516476",
+            "source": "Humble's API answers to your browser session and "
+                      "nothing else. With the library open: press F12, "
+                      "Application tab, Cookies, humblebundle.com, and copy "
+                      "the {cookie_name} value. Every game ever bought or "
+                      "claimed comes back.",
+            "values": {"cookie_name": "_simpleauth_sess"},
+        },
     },
 }
 
@@ -322,6 +394,14 @@ PASTE_SOURCES = {
                "is no page that issues a token. Select-all-copy your "
                "library page and paste it as a list; the parser pulls the "
                "titles out of the mess.",
+        "how_template": {
+            "key": "ui.amazon-s-only-api-needs-full-device.5661d650da",
+            "source": "Amazon's only API needs full device registration -- "
+                      "there is no page that issues a token. Select-all-copy "
+                      "your library page and paste it as a list; the parser "
+                      "pulls the titles out of the mess.",
+            "values": {},
+        },
     },
     "ubisoft": {
         "label": "Ubisoft Connect",
@@ -330,5 +410,13 @@ PASTE_SOURCES = {
                "games list from the account portal (or the Ubisoft Connect "
                "app) and paste it as a list. Installed Ubisoft games are "
                "also picked up by the gaming-PC scan.",
+        "how_template": {
+            "key": "ui.same-story-no-token-page-no-key-prog.7e3daf7ba1",
+            "source": "Same story: no token page, no key programme. Copy "
+                      "your games list from the account portal (or the "
+                      "Ubisoft Connect app) and paste it as a list. Installed "
+                      "Ubisoft games are also picked up by the gaming-PC scan.",
+            "values": {},
+        },
     },
 }

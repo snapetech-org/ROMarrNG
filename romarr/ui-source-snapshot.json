@@ -1820,5 +1820,15 @@
   "ui.platform-folder-mapping-for-folder.5ddc81c9dd": "5ddc81c9dd978333e3a83649c5de0d1931dd12c5ba30d579c18a4920ef3c3709",
   "ui.new-platform-folder-mapping.648d572fa1": "648d572fa1d1c44bc19849f79339f89275f5325c6937339b131ef87551c7eeba",
   "ui.remove-platform-folder-mapping-for-f.6573856e84": "6573856e8451d864aa53c67d61f506e6ff0b69f55250ab948b4e2abfdfb963f9",
-  "ui.remove-this-platform-folder-mapping.ce253c16c0": "ce253c16c0752f2a6ff00b011949db108575f51a6623966db5c8e2f6d6f71ced"
+  "ui.remove-this-platform-folder-mapping.ce253c16c0": "ce253c16c0752f2a6ff00b011949db108575f51a6623966db5c8e2f6d6f71ced",
+  "ui.amazon-s-only-api-needs-full-device.5661d650da": "5661d650dae63dddbfe1a843a16cccd0ce8bea2c6de854f50d9a6bfeb2b186e7",
+  "ui.click-button-there-and-approve-with.9fb68901fb": "9fb68901fba7f0221c5be51e18877575b383106a2c043fc0fee595c4784be584",
+  "ui.generate-a-key-on-that-page-and-copy.9a9b11d5bf": "9a9b11d5bfb1ab223729a7431aa17af24fd46ab1b31bab1e81bca16ba09e39eb",
+  "ui.humble-s-api-answers-to-your-browser.6ee3516476": "6ee35164768efd4a6d8352b6d00f984a0cafd90369327a74da9e543570b1fda8",
+  "ui.same-story-no-token-page-no-key-prog.7e3daf7ba1": "7e3daf7ba1962c70529e8930330344d86be398ade388a106448b27dc29ac4335",
+  "ui.sign-in-if-asked-the-page-then-shows.e3615cbaf6": "e3615cbaf6bc1e7c6d7f51eb8208319504867c4d06dd25a98e159febf899bbc6",
+  "ui.sign-in-there-the-page-ends-up-showi.aa5efe7dd3": "aa5efe7dd3be42889791070317426734adcf6cee7384ef09e0a1640fcb739c53",
+  "ui.signed-in-to-blizzard-that-page-is-a.7c3d547316": "7c3d5473169c10f7bd558f1568a1995d485ce2be4845631be659214f7ac8c467",
+  "ui.signed-in-to-gog-that-page-shows-exa.3512fe96cf": "3512fe96cf3c06b857cbf9c425d2a2a3d61cccf7c6707229430ca9e5d34dbf9e",
+  "ui.signed-in-to-playstation-com-this-pa.acf50352eb": "acf50352eb9ea9de13e7f08bbde5087ae4458f814db9a8cf0b2cb71c262c2ab5"
 }

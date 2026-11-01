@@ -814,7 +814,10 @@ const readInterfaceLanguage=()=>{
   return preference==='system'?browserInterfaceLanguage():preference;
 };
 const stableLocalizationKey=source=>Object.hasOwn(UI_MESSAGES,source)?source:(UI_SOURCE_TO_KEY[source]||'');
-const hasLabel=source=>Boolean(stableLocalizationKey(source));
+const hasLabel=source=>{
+  const key=stableLocalizationKey(source);
+  return Boolean(key&&UI_MESSAGES[key]?.sourceKind!=='ui-help-template');
+};
 const APP_MESSAGE_TEMPLATE_KINDS=new Set(['ui-error','ui-error-template','task-result',
   'task-result-template','provider-diagnostic-template','library-status-template',
   'ui-status-template']);
@@ -958,6 +961,21 @@ const LOCAL_API_TEMPLATE_KEYS=new Set([
   'ui.lookup-failed-error-type.6d33ec9b4f',
   'ui.could-not-fetch-the-list-error-type.f2f965f9db',
 ]);
+// This narrower allowlist is only for the local /connect/sources response.
+// Do not let generic API/provider text acquire template authority by matching
+// one of these instruction messages.
+const CONNECT_HOW_TEMPLATE_KEYS=new Set([
+  'ui.signed-in-to-playstation-com-this-pa.acf50352eb',
+  'ui.click-button-there-and-approve-with.9fb68901fb',
+  'ui.generate-a-key-on-that-page-and-copy.9a9b11d5bf',
+  'ui.signed-in-to-gog-that-page-shows-exa.3512fe96cf',
+  'ui.sign-in-there-the-page-ends-up-showi.aa5efe7dd3',
+  'ui.sign-in-if-asked-the-page-then-shows.e3615cbaf6',
+  'ui.signed-in-to-blizzard-that-page-is-a.7c3d547316',
+  'ui.humble-s-api-answers-to-your-browser.6ee3516476',
+  'ui.amazon-s-only-api-needs-full-device.5661d650da',
+  'ui.same-story-no-token-page-no-key-prog.7e3daf7ba1',
+]);
 const explicitTemplateMarkup=template=>{
   if(!template||!LOCAL_API_TEMPLATE_KEYS.has(template.key))return '';
   const message=UI_MESSAGES[template.key];
@@ -971,6 +989,24 @@ const explicitTemplateMarkup=template=>{
     if(typeof value==='number'&&Number.isFinite(value))values[key]=fmt(value);
     else if(typeof value!=='string')return '';
   }
+  return interfaceTemplateMarkup(template.key,values);
+};
+const connectHowMarkup=spec=>{
+  const fallback=apiMessageMarkup(spec?.how);
+  const template=spec?.how_template;
+  if(!template||typeof template!=='object'||Array.isArray(template)
+      ||!CONNECT_HOW_TEMPLATE_KEYS.has(template.key))return fallback;
+  const message=UI_MESSAGES[template.key];
+  if(!message||message.sourceKind!=='ui-help-template'
+      ||template.source!==message.source)return fallback;
+  const supplied=template.values??{};
+  if(!supplied||typeof supplied!=='object'||Array.isArray(supplied))return fallback;
+  const names=[...message.source.matchAll(/\{([A-Za-z][A-Za-z0-9_]*)\}/g)]
+    .map(match=>match[1]);
+  if(Object.keys(supplied).length!==names.length
+      ||names.some(name=>!Object.hasOwn(supplied,name)))return fallback;
+  const values={...supplied};
+  if(Object.values(values).some(value=>typeof value!=='string'))return fallback;
   return interfaceTemplateMarkup(template.key,values);
 };
 const apiMessageMarkup=(value,explicitTemplate=null)=>{
@@ -2617,7 +2653,7 @@ RENDER.lists=async()=>{
     const spec=(s.paste_sources||{})[b.dataset.paste];
     if(!spec){toastLabel('ui.unknown-store.e7ff0236d5');return;}
     window.open(spec.open,'_blank','noopener');
-    toastSourceMessage(spec.how);
+    toastMarkupMessage(connectHowMarkup(spec));
     editList({type:'paste',name:spec.label+' library'});
   });
   document.querySelectorAll('[data-token]').forEach(b=>b.onclick=async()=>{
@@ -2625,6 +2661,9 @@ RENDER.lists=async()=>{
     const spec=(s.token_sources||{})[b.dataset.token];
     if(!spec){toastLabel('ui.unknown-store.e7ff0236d5');return;}
     window.open(spec.open,'_blank','noopener');
+    const howPrefix=interfaceTemplateMarkup(
+      'ui.a-tab-just-opened-how.e4de8fcadf',{how:''});
+    const howMarkup=connectHowMarkup(spec);
     // A modal, not an inline panel: window.open moves the person to another
     // tab, and when they come back a box further down the page is a box
     // they never see. This one is in front of them and focused.
@@ -2632,8 +2671,7 @@ RENDER.lists=async()=>{
     m.className='modal';
     m.innerHTML=`<div class="box">
       <h3>${interfaceTemplateMarkup('ui.connect-to-service.bb9d648886',{service:spec.label})}</h3>
-      <div class="sub">${interfaceTemplateMarkup('ui.a-tab-just-opened-how.e4de8fcadf',
-        {how:spec.how||''})}</div>
+      <div class="sub">${howPrefix}${howMarkup}</div>
       <div class="field"><label>Paste it here</label>
         <textarea id="tok-v" rows="4" autocomplete="off" spellcheck="false"
           placeholder='paste the whole thing — {"npsso":"..."} is fine'
