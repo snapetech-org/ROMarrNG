@@ -960,6 +960,23 @@ const LOCAL_API_TEMPLATE_KEYS=new Set([
   'ui.could-not-reach-github-com-error-typ.188d9cd896',
   'ui.lookup-failed-error-type.6d33ec9b4f',
   'ui.could-not-fetch-the-list-error-type.f2f965f9db',
+  'ui.a-url-is-required.985ecfc33e',
+  'ui.connected.22965568d2',
+  'ui.connected-indexers-indexer-s-private.5277d9b7ff',
+  'ui.connected-but-no-library-path-is-set.22fe97e9f2',
+  'ui.connected-but-path-does-not-exist-he.f513312bc1',
+  'ui.could-not-connect-or-authenticate.e998092980',
+  'ui.internet-archive-refused-the-request.515fff2c13',
+  'ui.rejected-the-api-key.119a3d3e36',
+  'ui.unknown-indexer-type-kind.fb6e3d15a4',
+  'ui.unknown-client-type-kind.65382dc90b',
+  'ui.unknown-library-type-kind.fcd0b2d006',
+  'ui.testing.407b7a0466',
+  'ui.connecting.72021eb70e',
+  'ui.failed.031a8f0f65',
+  'ui.the-claim-code-is-missing-it-travels.924decc4df',
+  'ui.that-server-completed-the-handshake.b1a5c997c1',
+  'ui.library-read-failed-detail.4ae2084070',
 ]);
 // This narrower allowlist is only for the local /connect/sources response.
 // Do not let generic API/provider text acquire template authority by matching
@@ -979,7 +996,14 @@ const CONNECT_HOW_TEMPLATE_KEYS=new Set([
 const explicitTemplateMarkup=template=>{
   if(!template||!LOCAL_API_TEMPLATE_KEYS.has(template.key))return '';
   const message=UI_MESSAGES[template.key];
-  if(!message||!APP_MESSAGE_TEMPLATE_KINDS.has(message.sourceKind))return '';
+  if(!message)return '';
+  // Older catalog literals predate sourceKind metadata. They remain safe here
+  // only because the exact key is locally allowlisted and has no placeholders.
+  const legacyLiteral=!message.sourceKind&&typeof message.source==='string'
+    &&!message.source.includes('{');
+  const allowlistedStatus=message.sourceKind==='ui-status';
+  if(!APP_MESSAGE_TEMPLATE_KINDS.has(message.sourceKind)
+      &&!allowlistedStatus&&!legacyLiteral)return '';
   const supplied=template.values??{};
   if(!supplied||typeof supplied!=='object'||Array.isArray(supplied))return '';
   const names=[...message.source.matchAll(/\{([A-Za-z][A-Za-z0-9_]*)\}/g)].map(match=>match[1]);
@@ -2695,13 +2719,13 @@ RENDER.lists=async()=>{
       const body={name:spec.label+' library',type:b.dataset.token,
                   platform:'',enable:true};
       body[spec.field]=value;
-      const line=(ok,msg)=>{
+      const line=(ok,msg,explicitTemplate=null)=>{
         const el=m.querySelector('#testline');
         el.className='testline '+(ok?'ok':'bad');
         el.setAttribute('role',ok?'status':'alert');el.setAttribute('aria-live',ok?'polite':'assertive');
-        el.innerHTML=apiMessageMarkup(msg);
+        el.innerHTML=apiMessageMarkup(msg,explicitTemplate);
       };
-      line(true,'Connecting…');
+      line(true,'Connecting…',{key:'ui.connecting.72021eb70e',values:{}});
       try{
         const saved=await j('/api/v1/importlist',{method:'POST',
           headers:{'content-type':'application/json'},body:JSON.stringify(body)});
@@ -3259,7 +3283,8 @@ RENDER.peers=async()=>{
       apiMessageMarkup(st.detail,st.detail_template)}</div>`;
     } else if(st.status==='failed'){
       live.innerHTML=`<div class="panel panel-warn" style="margin-top:10px">${
-        (st.error?apiMessageMarkup(st.error):appMessageMarkup('The library read failed.'))}</div>`;
+        (st.error?apiMessageMarkup(st.error,st.error_template)
+          :appMessageMarkup('The library read failed.'))}</div>`;
     }
   };
   seedPoll();
@@ -3422,14 +3447,16 @@ async function friendShelf(peerId, opts){
 //: evening blaming on their connection.
 function netplayVerdict(r){
   const cls=r.ok?'panel':'panel panel-warn';
-  const knownHead={
+  const knownHeadSources={
     ready:'Ready — you both have the same dump',
     unverified:'Playable, with a caveat',
     mismatch:'Same game, different dumps',
     missing:'They do not have this dump',
     unhashed:'ROMarr has not hashed your copy yet',
     error:'Could not ask'
-  }[r.status];
+  };
+  const knownHead=Object.hasOwn(knownHeadSources,r.status)
+    ?knownHeadSources[r.status]:null;
   const headMarkup=knownHead?appMessageMarkup(knownHead):apiMessageMarkup(r.status||'No answer');
   let extra='';
   if(r.room){
@@ -3929,12 +3956,17 @@ async function editItem(kind, item){
   };
 
   m.querySelector('#m-test').onclick = async (e) => {
-    e.target.disabled = true; line(true, 'Testing…');
+    e.target.disabled = true;
+    line(true, 'Testing…', {key:'ui.testing.407b7a0466',values:{}});
     try{
       const r = await j(`/api/v1/${kind}/test`, {
         method: 'POST', headers: { 'content-type': 'application/json' },
         body: JSON.stringify(payload()) });
-      line(r.ok, r.message || (r.ok ? 'Connected' : 'Failed'),r.message_template);
+      const fallbackTemplate=r.ok
+        ?{key:'ui.connected.22965568d2',values:{}}
+        :{key:'ui.failed.031a8f0f65',values:{}};
+      line(r.ok, r.message || (r.ok ? 'Connected' : 'Failed'),
+        r.message_template||fallbackTemplate);
     }catch(_){line(false,'Could not reach ROMarr. Check the connection and try again.');}
     e.target.disabled = false;
   };

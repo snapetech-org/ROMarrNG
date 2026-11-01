@@ -2004,7 +2004,11 @@ class ROMarr:
         kind = str(cfg.get("type") or "").lower()
         url, key = cfg.get("url", ""), cfg.get("api_key", "")
         if not url and kind != "internetarchive":
-            return {"ok": False, "message": "a URL is required"}
+            return {"ok": False, "message": "a URL is required",
+                    "message_template": {
+                        "key": "ui.a-url-is-required.985ecfc33e",
+                        "values": {},
+                    }}
         try:
             if kind == "prowlarr":
                 probe = Prowlarr(ProwlarrConfig(base_url=url, api_key=key))
@@ -2012,35 +2016,69 @@ class ROMarr:
                 private = sum(1 for i in indexers if i.get("privacy") == "private")
                 return {"ok": True,
                         "message": f"Connected, {len(indexers)} indexer(s), "
-                                   f"{private} private"}
+                                   f"{private} private",
+                        "message_template": {
+                            "key": "ui.connected-indexers-indexer-s-private.5277d9b7ff",
+                            "values": {"indexers": len(indexers),
+                                       "private": private},
+                        }}
             probe = build_indexer(cfg)
             if probe is None:
-                return {"ok": False, "message": f"unknown indexer type: {kind!r}"}
+                return {"ok": False,
+                        "message": f"unknown indexer type: {kind!r}",
+                        "message_template": {
+                            "key": "ui.unknown-indexer-type-kind.fb6e3d15a4",
+                            "values": {"kind": repr(kind)},
+                        }}
             # Probe through the same client used by search. For network-backed
             # sources this checks the public API without requesting a game.
             probe.caps()
-            return {"ok": True, "message": "Connected"}
+            return {"ok": True, "message": "Connected",
+                    "message_template": {
+                        "key": "ui.connected.22965568d2",
+                        "values": {},
+                    }}
         except Exception as err:
             import requests as _rq
             if isinstance(err, _rq.HTTPError) and err.response is not None \
                     and err.response.status_code in (401, 403):
                 if kind == "internetarchive":
                     return {"ok": False,
-                            "message": "Internet Archive refused the request"}
-                return {"ok": False, "message": "Rejected the API key"}
+                            "message": "Internet Archive refused the request",
+                            "message_template": {
+                                "key": "ui.internet-archive-refused-the-request.515fff2c13",
+                                "values": {},
+                            }}
+                return {"ok": False, "message": "Rejected the API key",
+                        "message_template": {
+                            "key": "ui.rejected-the-api-key.119a3d3e36",
+                            "values": {},
+                        }}
             return {"ok": False, "message": f"{type(err).__name__}: {err}"}
 
     def test_client(self, cfg: dict) -> dict:
         """Try a configuration without saving it, the way *arr's Test does."""
         client = build_client(cfg)
         if client is None:
-            return {"ok": False, "message": f"unknown client type: {cfg.get('type')!r}"}
+            kind = repr(cfg.get("type"))
+            return {"ok": False, "message": f"unknown client type: {kind}",
+                    "message_template": {
+                        "key": "ui.unknown-client-type-kind.65382dc90b",
+                        "values": {"kind": kind},
+                    }}
         try:
             ok = client.reachable()
         except Exception as err:
             return {"ok": False, "message": f"{type(err).__name__}: {err}"}
-        return {"ok": bool(ok),
-                "message": "Connected" if ok else "Could not connect or authenticate"}
+        connected = bool(ok)
+        return {"ok": connected,
+                "message": "Connected" if connected else
+                           "Could not connect or authenticate",
+                "message_template": {
+                    "key": "ui.connected.22965568d2" if connected else
+                           "ui.could-not-connect-or-authenticate.e998092980",
+                    "values": {},
+                }}
 
     def test_library(self, cfg: dict) -> dict:
         """Try a library configuration without saving it.
@@ -2052,7 +2090,12 @@ class ROMarr:
         """
         backend = build_library_from_config(cfg)
         if backend is None:
-            return {"ok": False, "message": f"unknown library type: {cfg.get('type')!r}"}
+            kind = repr(cfg.get("type"))
+            return {"ok": False, "message": f"unknown library type: {kind}",
+                    "message_template": {
+                        "key": "ui.unknown-library-type-kind.fcd0b2d006",
+                        "values": {"kind": kind},
+                    }}
 
         root = Path(cfg.get("path") or "")
         path_ok = bool(cfg.get("path")) and root.exists()
@@ -2064,16 +2107,32 @@ class ROMarr:
 
         if not ok:
             return {"ok": False, "path_ok": path_ok,
-                    "message": "Could not connect or authenticate"}
+                    "message": "Could not connect or authenticate",
+                    "message_template": {
+                        "key": "ui.could-not-connect-or-authenticate.e998092980",
+                        "values": {},
+                    }}
         if not cfg.get("path"):
             return {"ok": False, "path_ok": False,
                     "message": "Connected, but no library path is set -- "
-                               "nothing can be imported"}
+                               "nothing can be imported",
+                    "message_template": {
+                        "key": "ui.connected-but-no-library-path-is-set.22fe97e9f2",
+                        "values": {},
+                    }}
         if not path_ok:
             return {"ok": False, "path_ok": False,
                     "message": f"Connected, but {root} does not exist here. "
-                               "Mount it into ROMarr, or correct the path."}
-        return {"ok": True, "path_ok": True, "message": "Connected"}
+                               "Mount it into ROMarr, or correct the path.",
+                    "message_template": {
+                        "key": "ui.connected-but-path-does-not-exist-he.f513312bc1",
+                        "values": {"path": str(root)},
+                    }}
+        return {"ok": True, "path_ok": True, "message": "Connected",
+                "message_template": {
+                    "key": "ui.connected.22965568d2",
+                    "values": {},
+                }}
 
     # -- operations --------------------------------------------------------
 
@@ -4277,7 +4336,8 @@ class ROMarr:
             try:
                 result = self.index_hashes_from_library(
                     progress=ROMarr._seed_state)
-                ROMarr._seed_state.update(result, status="done")
+                ROMarr._seed_state.update(
+                    result, status="done" if result.get("ok") else "failed")
             except Exception as err:                # noqa: BLE001 - reported
                 log.warning("hash seed failed: %s", err)
                 ROMarr._seed_state.update(status="failed", error=str(err))
@@ -4329,7 +4389,12 @@ class ROMarr:
                 page, raw = client.hashes(limit=500, offset=offset)
             except Exception as err:                # noqa: BLE001 - reported
                 if not added:
-                    return {"ok": False, "error": f"library read failed: {err}"}
+                    return {"ok": False,
+                            "error": f"library read failed: {err}",
+                            "error_template": {
+                                "key": "ui.library-read-failed-detail.4ae2084070",
+                                "values": {"detail": str(err)},
+                            }}
                 # Partial is better than nothing, but a partial read that
                 # reports plain success is how 63,500 of 166,578 looked like
                 # a complete answer. Say where it stopped and why.
@@ -4450,7 +4515,11 @@ class ROMarr:
             return {"ok": False,
                     "error": "the claim code is missing. It travels "
                              "separately from the link on purpose -- ask your "
-                             "friend for the eight characters"}
+                             "friend for the eight characters",
+                    "error_template": {
+                        "key": "ui.the-claim-code-is-missing-it-travels.924decc4df",
+                        "values": {},
+                    }}
         # Sent so the inviter's Friends page can call back. Read fresh from
         # settings for the same reason minting does: an operator who set a
         # public URL five minutes ago should not have to restart to use it.
@@ -4496,7 +4565,11 @@ class ROMarr:
                              "token back, so there is nothing to talk to it "
                              "with. It is probably running a ROMarr from "
                              "before invitation links -- ask for the older "
-                             "pasted invitation instead"}
+                             "pasted invitation instead",
+                    "error_template": {
+                        "key": "ui.that-server-completed-the-handshake.b1a5c997c1",
+                        "values": {},
+                    }}
         peer = Peer(peer_id=invite["peer_id"],
                     name=(str(body.get("name") or "") or invite["name"]
                           or invite["url"]),
