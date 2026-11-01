@@ -6003,7 +6003,7 @@ def page() -> str:
 <style>{CSS}</style><script>{THEME_BOOT}</script></head><body>
 <a class="skip-link" href="#main-content" data-i18n-key="ui.skip-to-content.ac576a66d4">Skip to content</a>
 <aside id="rail" aria-label="ROMarr sidebar">
-  <div id="brand">ROM<span>arr</span></div>
+  <div id="brand" lang="en" dir="ltr">ROM<span>arr</span></div>
   <nav id="navwrap" aria-label="Main navigation">{_nav_html()}</nav>
   {_theme_control_html()}
 </aside>
