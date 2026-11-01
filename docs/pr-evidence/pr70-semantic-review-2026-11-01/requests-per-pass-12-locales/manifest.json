@@ -1,0 +1,174 @@
+{
+  "artifact": "ROMarrNG PR #70 populated-cell semantic review, next disjoint window",
+  "artifactFiles": {
+    "README.md": "ae3efdab92b2a94cdf283dd66d726e1e9fb256a4d1a3d0658b6fba35b4f56685",
+    "review-decisions.jsonl": "6a7ef9feaadfe1f4db622bfe8014740432b41c2f244fb1c41c0d24a728e2f395",
+    "review-input.jsonl": "6abae2656d1011e083c4f3897f0b272256ea54c8e95bdf8f825426483a251bad",
+    "source-context.txt": "6ee3595342be5965f7a4a25ad8f9487a702293c071a2e516c2362f98acb8bdc2",
+    "verify_evidence.py": "054cb52a3ce35bf101965b34f98606567a97cacd992d344c167f60ff567f1aa1"
+  },
+  "catalogReconciliation": {
+    "changedTargetCellsAtCurrentHead": 300,
+    "currentCatalogPopulatedCells": 21996,
+    "newCellsOutsidePriorSnapshot": 5820,
+    "priorPopulatedCellsReviewed": 16176,
+    "sameTargetAtCurrentHead": 15876,
+    "separatelyReviewedNewCells": 5808,
+    "thisPhraseCells": 12
+  },
+  "createdAtUtc": "2026-11-01T22:39:38Z",
+  "frozenFiles": {
+    "romarr/ui-labels.json": {
+      "bytes": 2988218,
+      "path": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-pr70-head-review-20261101/romarr/ui-labels.json",
+      "sha256": "639d2449119ea25c1f76ccd09b05bffbb87da0373dac8bbe9dcee9547ef499a2"
+    },
+    "romarr/ui-source-messages.json": {
+      "bytes": 276885,
+      "path": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-pr70-head-review-20261101/romarr/ui-source-messages.json",
+      "sha256": "ba11bdfa7f8a282dea83d7367e1156ce716ad79aabafbdd72b7e887df647bec5"
+    },
+    "romarr/ui.py": {
+      "bytes": 403843,
+      "path": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-pr70-head-review-20261101/romarr/ui.py",
+      "sha256": "028e05f27f1fad6137494c85b1fa8847512a2d11db37c9fa44c4b611a2e797ad"
+    }
+  },
+  "livePullRequestHeadVerified": true,
+  "overlapExclusion": {
+    "reviewPath": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-review-79b144e3-20261101/romarr-missing-cell-review-5808-2026-11-01.jsonl",
+    "reviewRows": 5808,
+    "selectedSourceIdPresentIn5808CellReview": false,
+    "selectedWindowDisjoint": true
+  },
+  "priorInventory": {
+    "head": "863d4afcfa82b8ed82c4214c09d564d62ea4e093",
+    "manifestPath": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-review-08689f3e/per-pass-phrase-cells-863d4afc-manifest.json",
+    "manifestSha256": "fa78a72d6019fcd9f9cf7b4683a1d28914c71751fdd8259422dccbbd1a686af5",
+    "priorInventoryScope": "presence and target hashes only; not semantic decisions",
+    "priorValuesChangedAtCurrentHead": [
+      "es",
+      "hi"
+    ],
+    "rows": 12,
+    "rowsPath": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-review-08689f3e/per-pass-phrase-cells-863d4afc.jsonl",
+    "rowsSha256": "8c25ee28338526272b0c9e2c41555e75a768631131ba6e5f5555c018acc8f7e5"
+  },
+  "pullRequest": 70,
+  "pullRequestStateAtPreflight": "OPEN",
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewLimits": {
+    "catalogSourcePrBodyEdited": false,
+    "headedBrowserReview": "not performed in this semantic window; prior focused browser evidence cited elsewhere is at an earlier head",
+    "localModelLock": "not acquired; shared qwen-model.lock was held by active Seerr review PID 596882 at preflight; no local model invoked",
+    "modelCalls": 0,
+    "nativeHumanReview": "not performed; all 12 cells require native-speaker validation",
+    "testsBuildsScansCiRun": false,
+    "translationStatusMetadata": "empty in the pinned catalog record"
+  },
+  "reviewedHead": "a1278acda1cea823443d7d6b712ed6ace8a99694",
+  "reviewedTree": "1e8a8d4fb191490a20bc443fb2b7bf24f05fa294",
+  "schemaVersion": 1,
+  "sourceCodeContext": {
+    "lineEnd": 5554,
+    "lineStart": 5550,
+    "path": "romarr/ui.py",
+    "sha256": "0642d8e5542d248bff2ac6119b3b3c69d1afffcf2cc61efac6e4b9a50738c501"
+  },
+  "window": {
+    "cells": 12,
+    "cellsPerLocale": {
+      "ar": 1,
+      "de": 1,
+      "es": 1,
+      "fr": 1,
+      "hi": 1,
+      "id": 1,
+      "ja": 1,
+      "ko": 1,
+      "pt-BR": 1,
+      "vi": 1,
+      "zh-Hans": 1,
+      "zh-Hant": 1
+    },
+    "confidence": {
+      "moderate": 12
+    },
+    "decisions": {
+      "accepted_unchanged": 12
+    },
+    "locales": [
+      "es",
+      "zh-Hans",
+      "hi",
+      "de",
+      "ja",
+      "fr",
+      "pt-BR",
+      "ar",
+      "ko",
+      "zh-Hant",
+      "vi",
+      "id"
+    ],
+    "perLocale": {
+      "ar": {
+        "cells": 1,
+        "decision": "accepted_unchanged"
+      },
+      "de": {
+        "cells": 1,
+        "decision": "accepted_unchanged"
+      },
+      "es": {
+        "cells": 1,
+        "decision": "accepted_unchanged"
+      },
+      "fr": {
+        "cells": 1,
+        "decision": "accepted_unchanged"
+      },
+      "hi": {
+        "cells": 1,
+        "decision": "accepted_unchanged"
+      },
+      "id": {
+        "cells": 1,
+        "decision": "accepted_unchanged"
+      },
+      "ja": {
+        "cells": 1,
+        "decision": "accepted_unchanged"
+      },
+      "ko": {
+        "cells": 1,
+        "decision": "accepted_unchanged"
+      },
+      "pt-BR": {
+        "cells": 1,
+        "decision": "accepted_unchanged"
+      },
+      "vi": {
+        "cells": 1,
+        "decision": "accepted_unchanged"
+      },
+      "zh-Hans": {
+        "cells": 1,
+        "decision": "accepted_unchanged"
+      },
+      "zh-Hant": {
+        "cells": 1,
+        "decision": "accepted_unchanged"
+      }
+    },
+    "placeholderMismatches": 0,
+    "source": "Requests per pass:",
+    "sourceId": "ui.requests-per-pass.74961b68a5",
+    "targetKinds": {
+      "string": 12
+    },
+    "windowId": "pr70-a1278acd-ui.requests-per-pass"
+  },
+  "worktree": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-pr70-head-review-20261101",
+  "worktreeCleanAtPreflight": true
+}

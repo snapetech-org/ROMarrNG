@@ -1,0 +1,5 @@
+5550:       +'</div>'
+5551:       +'<p class="help">'+datMarkup+' — '+policyMarkup+strictMarkup+'.</p>'
+5552:       +'<div class="row"><button class="btn" id="cstart">'
+5553:       +interfaceTemplateMarkup('ui.request-count-missing.fbb85426ea',{count:fmt(c.missing)})+'</button>'
+5554:       +'<label class="help" style="margin:0">'+interfaceMarkup('Requests per pass:')+' <input id="cpp" type="number" '
