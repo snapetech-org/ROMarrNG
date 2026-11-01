@@ -5523,7 +5523,7 @@ RENDER.collections=async()=>{
     const d=await j('/api/v1/collection/plan?'+q).catch(()=>({error:'plan failed'}));
     if(d.error){out.innerHTML='<div class="panel-note panel-warn">'+apiMessageMarkup(d.error)+'</div>';return;}
     const c=d.counts;
-    const tile=(n,label,colour)=>'<div style="flex:1;min-width:110px;padding:10px 12px;'
+    const tile=(n,label,colour)=>'<div style="min-width:0;box-sizing:border-box;padding:10px 12px;'
       +'background:var(--bg);border:1px solid var(--line);border-radius:6px">'
       +'<div style="font-size:22px;font-weight:600;color:'+colour+'">'+fmt(n)+'</div>'
       +'<div class="help" style="margin:0">'+label+'</div></div>';
@@ -5537,7 +5537,7 @@ RENDER.collections=async()=>{
     const strictMarkup=d.policy.region_mode==='strict'
       ? ' '+interfaceMarkup('ui.strict-titles-without-a-matching-reg.ce5799c1e8')
       : '';
-    out.innerHTML='<div class="row" style="gap:10px;flex-wrap:wrap">'
+    out.innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:10px">'
       +tile(c.expected,interfaceMarkup('ui.in-the-set.6ac2ef8855'),'var(--fg)')
       +tile(c.have,interfaceMarkup('ui.you-have.af3f12e161'),'var(--ok)')
       +tile(c.missing,interfaceMarkup('ui.missing.6be36ca49e'),'var(--warn)')
