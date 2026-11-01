@@ -39158,7 +39158,8 @@
           "kind": "plural",
           "argument": "count",
           "forms": {
-            "one": "Manifest {path} · # linked file",
+            "=0": "Manifest {path} · # linked files",
+            "=1": "Manifest {path} · # linked file",
             "other": "Manifest {path} · # linked files"
           }
         }
