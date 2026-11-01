@@ -881,6 +881,8 @@ const DOWNLOAD_STATE_LABELS={queued:'Queued',grabbed:'Grabbed',imported:'Importe
   shelved:'Shelved',verified:'Verified',bad:'Bad',unknown:'Unknown'};
 const interfaceMarkup=source=>'<span data-i18n-key="'+esc(stableLocalizationKey(source)||source)+'">'
   +esc(translateLabel(source,readInterfaceLanguage()))+'</span>';
+const interfacePhraseSpace=()=>/^(?:ja|zh)/.test(readInterfaceLanguage())?'':' ';
+const interfaceSentencePeriod=()=>/^(?:ja|zh)/.test(readInterfaceLanguage())?'。':'.';
 const interfaceTemplateMarkup=(source,values)=>{
   const language=readInterfaceLanguage(),translated=isTranslated(source,language);
   return '<span lang="'+(translated?esc(language):'en')+'" dir="'
@@ -5327,7 +5329,7 @@ RENDER.getstarted=async()=>{
     +'<a class="tile" href="#lists" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Build a request list</div><div class="pf">Browse catalog titles or connect an import list. Requests use your configured sources and client.</div></a>'
     +'<a class="tile" href="#collections" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Work toward a complete set</div><div class="pf">Load a DAT and see verified titles and collection progress.</div></a>'
     +'</div>'
-    +'<p class="help" style="margin-top:12px">For a shared catalog and household request queue, use <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a>. ROMarr handles release search, verification and filing; the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a> explains the connection.</p></div>'
+    +'<p class="help" style="margin-top:12px">'+interfaceMarkup('ui.for-a-shared-catalog-and-household-r.027b0accc2')+interfacePhraseSpace()+'<a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a>'+interfaceSentencePeriod()+interfacePhraseSpace()+interfaceMarkup('ui.romarr-handles-release-search-verifi.fde43e75b6')+interfacePhraseSpace()+'<a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('ui.integration-guide.6cfa2d0314')+'</a>'+interfacePhraseSpace()+interfaceMarkup('ui.explains-the-connection.9e80ba4652')+'</p></div>'
     +'<div class="card" style="margin-top:16px"><h3>Your setup</h3>'
     +step(1,'An indexer',indexerOk,
        interfaceMarkup('ui.prowlarr-or-torznab-newznab-indexers.529ec79be7')
@@ -5354,7 +5356,7 @@ RENDER.getstarted=async()=>{
     +'<li>'+interfaceMarkup('ui.streaming-hosts-and-browser-players.16b5157dac')+' <a href="#platforms">'+interfaceMarkup('ui.platforms.ab9bd7584a')+'</a> · <a href="#status">'+interfaceMarkup('ui.system.6725e7bbcd')+'</a></li>'
     +'</ul></div>'
 
-    +'<div class="card" style="margin-top:16px"><h3>Where you actually play</h3>'
+    +'<div class="card" style="margin-top:16px"><h3>'+interfaceMarkup('ui.where-you-actually-play.7bee154f1c')+'</h3>'
     +'<p class="help">'+interfaceMarkup('ui.romarr-files-the-rom-one-of-these-ru.2b6fa916bb')+'</p>'
     +'<table><thead><tr><th>If your library is</th><th>You play in</th></tr></thead><tbody>'
     +'<tr><td>RomM</td><td>RomM\'s built-in EmulatorJS, in the browser</td></tr>'
