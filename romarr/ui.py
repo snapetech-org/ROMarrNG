@@ -164,6 +164,7 @@ a:hover{text-decoration:underline;text-underline-offset:2px}
 #rail{position:fixed;inset-inline-start:0;top:0;bottom:0;width:222px;background:var(--rail);
   border-inline-end:1px solid var(--line);z-index:20;
   display:flex;flex-direction:column;overflow:hidden}
+[dir=rtl] #rail{left:auto;right:0}
 /* No gap: the brand is one word split into two nodes so that "arr" can
    carry the accent colour, and a flex gap renders it as "ROM arr". */
 #brand{display:flex;align-items:center;gap:0;padding:17px 18px 16px;
