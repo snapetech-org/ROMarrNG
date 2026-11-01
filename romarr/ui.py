@@ -857,6 +857,11 @@ const translateLabel=(source,language)=>{
 const translateTemplate=(source,values,language=readInterfaceLanguage())=>
   ROMarrI18n.formatMessage(translationInfo(source,language).value,values,language,
     getRegionalLocale(),(nested,nestedValues)=>translateTemplate(nested,nestedValues,language));
+const translatedTemplateMarkup=(source,values,language=readInterfaceLanguage())=>
+  translateTemplate(source,values,language).split(/\u2068([\s\S]*?)\u2069/g)
+    .map((part,index)=>index%2
+      ?'<bdi lang="und" dir="auto">'+esc(part)+'</bdi>'
+      :esc(part)).join('');
 const ACCOUNT_IMPORT_HELP=`Steam is a true one-click: Steam's own "Sign in through Steam", no key, no app registration — it comes straight back with your library connected. Epic, EA and Battle.net pull your owned library through the same web APIs Playnite uses — none of them issues an application key, so each opens the page your signed-in browser already has and takes one paste. GOG needs only your public profile name.`;
 const GGR_WEBHOOK_HELP=`Restart GG Requestz after changing its environment. In GG Requestz 1.5+, the webhook fires when a request becomes approved; enable request.auto_approve or approve it manually. A successful delivery now receives HTTP 202. Rejected payloads receive HTTP 422 and are named in both applications' logs.`;
 const ROMM_FRIEND_HELP=`Your friend does not need to run ROMarr. If they use RomM, ask them for an account and choose Add a RomM server. RomM publishes a hash for every ROM, so browsing and netplay matching work without installing anything on their server. The account gets the access their RomM grants; ROMarr cannot narrow it.`;
@@ -872,14 +877,18 @@ const DOWNLOAD_STATE_LABELS={queued:'Queued',grabbed:'Grabbed',imported:'Importe
   shelved:'Shelved',verified:'Verified',bad:'Bad',unknown:'Unknown'};
 const interfaceMarkup=source=>'<span data-i18n-key="'+esc(stableLocalizationKey(source)||source)+'">'
   +esc(translateLabel(source,readInterfaceLanguage()))+'</span>';
-const interfaceTemplateMarkup=(source,values)=>'<span data-i18n-template-key="'+esc(stableLocalizationKey(source)||source)
-  +'" data-i18n-values="'+esc(JSON.stringify(values))+'">'
-  +esc(translateTemplate(source,values))+'</span>';
+const interfaceTemplateMarkup=(source,values)=>{
+  const language=readInterfaceLanguage(),translated=isTranslated(source,language);
+  return '<span lang="'+(translated?esc(language):'en')+'" dir="'
+    +(translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr')+'" data-i18n-template-key="'
+    +esc(stableLocalizationKey(source)||source)+'" data-i18n-values="'+esc(JSON.stringify(values))+'">'
+    +translatedTemplateMarkup(source,values,language)+'</span>';
+};
 const interfaceTitleTemplate=(source,values)=>'title="'+esc(translateTemplate(source,values))
   +'" data-i18n-title-template-key="'+esc(stableLocalizationKey(source)||source)+'" data-i18n-title-values="'
   +esc(JSON.stringify(values))+'"';
-const interfaceAriaLabelTemplate=(source,values)=>'aria-label="'+esc(translateTemplate(source,values))
-  +'" data-i18n-aria-label-template-key="'+esc(stableLocalizationKey(source)||source)+'" data-i18n-aria-label-values="'
+const interfaceAriaLabelTemplate=(source,values)=>'data-i18n-aria-label-template-key="'
+  +esc(stableLocalizationKey(source)||source)+'" data-i18n-aria-label-values="'
   +esc(JSON.stringify(values))+'"';
 const sniffedMessageTemplate=value=>{
   const source=String(value??'');
@@ -1171,7 +1180,7 @@ const applyTranslatedTemplates=(root,language)=>{
     try{values=JSON.parse(el.dataset.i18nValues||'{}')}catch(_){continue}
     const source=el.dataset.i18nTemplateKey||el.dataset.i18nTemplate;
     const translated=isTranslated(source,language);
-    el.textContent=translateTemplate(source,values,language);
+    el.innerHTML=translatedTemplateMarkup(source,values,language);
     el.lang=translated?language:'en';
     el.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';
   }
@@ -1184,6 +1193,8 @@ const applyTranslatedAttribute=(el,source,attribute,language)=>{
 };
 const translatedTextSources=new WeakMap();
 const translatedAttributeSources=new WeakMap();
+const translatedAriaLabelNodes=new WeakMap();
+let translatedAriaLabelSequence=0;
 const applyTranslatedTextNode=(node,language)=>{
   const parent=node.parentElement;
   if(!parent||parent.closest('script,style,textarea,input,select,[contenteditable="true"],[lang="und"],[data-i18n],[data-i18n-key]'))return;
@@ -1202,18 +1213,41 @@ const applyTranslatedTextTree=(root,language)=>{
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
   while(walker.nextNode())applyTranslatedTextNode(walker.currentNode,language);
 };
+const applyTranslatedAriaLabelTemplate=(el,source,values,language)=>{
+  let label=translatedAriaLabelNodes.get(el);
+  if(!label){
+    label=document.createElement('span');
+    label.id='romarr-interface-aria-label-'+(++translatedAriaLabelSequence);
+    label.style.position='absolute';label.style.width='1px';label.style.height='1px';
+    label.style.padding='0';label.style.margin='-1px';label.style.overflow='hidden';
+    label.style.clip='rect(0, 0, 0, 0)';label.style.whiteSpace='nowrap';label.style.border='0';
+    el.appendChild(label);translatedAriaLabelNodes.set(el,label);
+  }
+  label.dataset.i18nTemplateKey=source;label.dataset.i18nValues=JSON.stringify(values);
+  label.innerHTML=translatedTemplateMarkup(source,values,language);
+  const localized=Boolean(isTranslated(source,language));
+  label.lang=localized?language:'en';
+  label.dir=localized&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';
+  const references=(el.getAttribute('aria-labelledby')||'').split(/\s+/).filter(id=>id&&id!==label.id);
+  references.push(label.id);el.setAttribute('aria-labelledby',references.join(' '));
+  el.removeAttribute('aria-label');
+};
 const keepPlaceholderLiteral=source=>/^(?:https?:\/\/|[a-z]+\.[a-z.]+\/|[A-Z0-9_-]{5,}$|[a-z0-9_-]+(?:,\s*[a-z0-9_-]+)+$)/i.test(source)
   ||['Dave\'s RomM','K7RM-9TFQ','Phantasy Star IV','Super Mario World','Your Plugin','your-plugin','search, importer','snes, n64'].includes(source);
 const applyTranslatedAttributes=(root,language)=>{
   const elements=[];
   if(root.nodeType===Node.ELEMENT_NODE)elements.push(root);
-  if(root.querySelectorAll)elements.push(...root.querySelectorAll('[title],[aria-label],[placeholder],[data-i18n-title],[data-i18n-aria-label],[data-i18n-placeholder],[data-i18n-title-template],[data-i18n-title-template-key]'));
+  if(root.querySelectorAll)elements.push(...root.querySelectorAll('[title],[aria-label],[placeholder],[data-i18n-title],[data-i18n-aria-label],[data-i18n-placeholder],[data-i18n-title-template],[data-i18n-title-template-key],[data-i18n-aria-label-template-key]'));
   for(const el of elements){
     for(const [attribute,marker] of [['title','data-i18n-title'],['aria-label','data-i18n-aria-label'],['placeholder','data-i18n-placeholder']]){
       const template=el.getAttribute(marker+'-template-key')??el.getAttribute(marker+'-template');
       if(template!==null){
         let values={};
         try{values=JSON.parse(el.getAttribute(marker+'-values')||'{}')}catch(_){continue}
+        if(attribute==='aria-label'){
+          applyTranslatedAriaLabelTemplate(el,template,values,language);
+          continue;
+        }
         el.setAttribute(attribute,translateTemplate(template,values,language));
         const localized=Boolean(isTranslated(template,language));
         el.lang=localized?language:'en';
@@ -2121,12 +2155,10 @@ RENDER.search=async()=>{
       applyInterfaceLanguage();
       return;
     }
-  const indexerTitle=r=>r.indexer
-    ? `title="${esc(translateTemplate('Open on {indexer}',{indexer:r.indexer}))}"
-       data-i18n-title-template-key="ui.open-on-indexer.202e1ad5f5"
-       data-i18n-title-values="${esc(JSON.stringify({indexer:r.indexer}))}"`
-    : `title="${esc(translateLabel('ui.open-on-the-indexer.4766c56d0d',readInterfaceLanguage()))}"
-       data-i18n-title="ui.open-on-the-indexer.4766c56d0d"`;
+  const indexerTitle=r=>`title="${esc(translateLabel('ui.open-on-the-indexer.4766c56d0d',readInterfaceLanguage()))}"
+    data-i18n-title="ui.open-on-the-indexer.4766c56d0d" ${r.indexer
+      ? interfaceAriaLabelTemplate('Open on {indexer}',{indexer:r.indexer})
+      : interfaceAriaLabelTemplate('Open on the indexer',{})}`;
     $('#s-out').innerHTML=`
       <p class="help">${interfaceTemplateMarkup('ui.found-found-releases-accepted-match.65f542cd3e',{found:fmt(d.found),accepted:fmt(d.accepted)})}</p>
       <table><thead><tr><th data-i18n="ui.score.38e5a46cbc">Score</th><th data-i18n="ui.release.e020e3c67b">Release</th><th data-i18n="ui.size.1af8519073">Size</th>
@@ -6224,6 +6256,14 @@ const lookup=source=>core.lookup(catalog,source,active);
 const translate=source=>core.translate(catalog,source,active);
 const messageInfo=(source,values={})=>{const found=lookup(source);return{text:core.formatMessage(found.value,values,active,undefined,(nested,args)=>message(nested,args)),translated:found.translated,locale:found.locale}};
 const message=(source,values={})=>messageInfo(source,values).text;
+const ariaTemplateLabels=new WeakMap();let ariaTemplateSequence=0;
+const renderMessageTemplate=(el,source,values)=>{
+  const parts=message(source,values).split(/\u2068([\s\S]*?)\u2069/g);
+  el.replaceChildren(...parts.map((part,index)=>{
+    if(index%2===0)return document.createTextNode(part);
+    const value=document.createElement('bdi');value.lang='und';value.dir='auto';value.textContent=part;return value;
+  }));
+};
 const has=source=>lookup(source).key!==null;
 const localized=source=>lookup(source).translated;
 const sources=new WeakMap();
@@ -6236,7 +6276,7 @@ const applyTemplates=root=>{
   for(const el of textNodes){
     let values={};try{values=JSON.parse(el.getAttribute('data-i18n-values')||'{}')}catch(_){continue}
     const source=el.getAttribute('data-i18n-template-key'),done=localized(source);
-    el.textContent=message(source,values);el.lang=done?active:'en';
+    renderMessageTemplate(el,source,values);el.lang=done?active:'en';
     el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr';
   }
   for(const [marker,attribute] of [['data-i18n-aria-label-template-key','aria-label'],['data-i18n-title-template-key','title']]){
@@ -6246,6 +6286,23 @@ const applyTemplates=root=>{
     for(const el of elements){
       let values={};try{values=JSON.parse(el.getAttribute(marker.replace('-template-key','-values'))||'{}')}catch(_){continue}
       const source=el.getAttribute(marker),done=localized(source);
+      if(attribute==='aria-label'){
+        let label=ariaTemplateLabels.get(el);
+        if(!label){
+          label=document.createElement('span');label.id='romarr-public-aria-label-'+(++ariaTemplateSequence);
+          label.style.position='absolute';label.style.width='1px';label.style.height='1px';
+          label.style.padding='0';label.style.margin='-1px';label.style.overflow='hidden';
+          label.style.clip='rect(0, 0, 0, 0)';label.style.whiteSpace='nowrap';label.style.border='0';
+          el.appendChild(label);ariaTemplateLabels.set(el,label);
+        }
+        label.setAttribute('data-i18n-template-key',source);
+        label.setAttribute('data-i18n-values',JSON.stringify(values));
+        renderMessageTemplate(label,source,values);label.lang=done?active:'en';
+        label.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr';
+        const references=(el.getAttribute('aria-labelledby')||'').split(/\s+/).filter(id=>id&&id!==label.id);
+        references.push(label.id);el.setAttribute('aria-labelledby',references.join(' '));
+        el.removeAttribute('aria-label');continue;
+      }
       el.setAttribute(attribute,message(source,values));el.lang=done?active:'en';
       el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr';
     }
