@@ -39877,9 +39877,9 @@
       "source": "Requests per pass:",
       "sourceHash": "74961b68a5e0d5655dcbc4058f2547cd78f3f96914196af9685491e4d1f73b13",
       "translations": {
-        "es": "Solicitudes por pase:",
+        "es": "Solicitudes por ronda:",
         "zh-Hans": "每轮请求数：",
-        "hi": "प्रति पास अनुरोधों की संख्या:",
+        "hi": "प्रति चक्र अनुरोधों की संख्या:",
         "de": "Anfragen pro Durchlauf:",
         "ja": "1回あたりのリクエスト数：",
         "fr": "Nombre de requêtes par passage :",
