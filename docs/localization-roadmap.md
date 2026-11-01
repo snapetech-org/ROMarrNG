@@ -3,20 +3,23 @@
 ## What is available
 
 ROMarr's Python service renders the dashboard and public sign-in, invitation,
-and connection pages. The localization catalog contains 1,814 app-owned
+and connection pages. The localization catalog contains 1,822 app-owned
 messages under stable IDs. English is the source language. Twelve other locales
 have direct translations for the 1,348 previously cataloged messages. The 291
 messages in the frozen October 31 bundle, 161 further API, test, organizer,
 catalog-error, and organizer-result sources, and 14 newly captured source gaps
-have no target text yet and remain English through the normal fallback. There
-are 466 pending messages (5,592 direct locale cells) in the current catalog. Latin American Spanish inherits from Spanish, and Canadian French
+have no target text yet and remain English through the normal fallback. The
+frozen November 1 source snapshot has 466 pending messages (5,592 direct locale
+cells). Eight mapping-row accessibility templates were added after that
+snapshot; the current catalog has 474 pending messages (5,688 direct locale
+cells). Latin American Spanish inherits from Spanish, and Canadian French
 inherits from French. Missing translations fall back to English on a
 message-by-message basis.
 
 | Locale state | Count | Behavior |
 | --- | ---: | --- |
 | English source | 1 | Always selectable |
-| Direct translations | 12 | Selectable; 1,348 messages translated, 466 source-only |
+| Direct translations | 12 | Selectable; 1,348 messages translated, 474 source-only |
 | Regional fallbacks | 2 | Selectable; inherit from `es` or `fr` |
 | Draft translations | 0 currently | Hidden; must be complete and reviewed before selection |
 | Planned translations | 22 | Registered for formatting and future work; not selectable |
@@ -45,6 +48,9 @@ its 291 messages and includes all 466 currently pending messages (5,592 direct
 locale cells) as of commit `865e1aee`; 175 IDs and 2,100 cells were added after
 the October 31 snapshot. Provider replies, library names and paths, versions,
 exception bodies, and user values stay opaque inside their existing boundaries.
+The eight later mapping-row templates localize accessible group and remove
+button names while keeping path and folder values in placeholders. Their 96
+direct locale cells remain pending for the next frozen translation input.
 
 The existing translation text was carried over, with targeted high-confidence
 corrections across all 12 direct locales for ROM-dump false friends,

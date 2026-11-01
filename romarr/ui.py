@@ -871,6 +871,9 @@ const interfaceTemplateMarkup=(source,values)=>'<span data-i18n-template-key="'+
 const interfaceTitleTemplate=(source,values)=>'title="'+esc(translateTemplate(source,values))
   +'" data-i18n-title-template-key="'+esc(stableLocalizationKey(source)||source)+'" data-i18n-title-values="'
   +esc(JSON.stringify(values))+'"';
+const interfaceAriaLabelTemplate=(source,values)=>'aria-label="'+esc(translateTemplate(source,values))
+  +'" data-i18n-aria-label-template-key="'+esc(stableLocalizationKey(source)||source)+'" data-i18n-aria-label-values="'
+  +esc(JSON.stringify(values))+'"';
 const sniffedMessageTemplate=value=>{
   const source=String(value??'');
   if(hasLabel(source))return {source,values:{}};
@@ -3887,8 +3890,13 @@ const pathMappingRow=m=>{
     String(c.id||''),`${c.name||c.type||'Download client'} · ${c.type||'client'} · ${c.host||'local'}${c.port?':'+c.port:''}`])];
   if(clientId&&!clients.some(c=>String(c.id||'')===clientId))
     options.push([clientId,`Unavailable download client · ${clientId}`]);
-  const rowName=m.remote?`Path mapping for ${m.remote}`:'New path mapping';
-  return `<div data-mapping-row class="mapping-row path-map" role="group" aria-label="${esc(rowName)}">
+  const rowName=m.remote
+    ?{source:'Path mapping for {path}',values:{path:m.remote}}
+    :{source:'New path mapping',values:{}};
+  const removeName=m.remote
+    ?{source:'Remove path mapping for {path}',values:{path:m.remote}}
+    :{source:'Remove this path mapping',values:{}};
+  return `<div data-mapping-row class="mapping-row path-map" role="group" ${interfaceAriaLabelTemplate(rowName.source,rowName.values)}>
     <label class="mapping-field">Download client
       <select data-map-client>${options.map(([value,label])=>{
         const unavailable=value===clientId&&!clients.some(c=>String(c.id||'')===clientId);
@@ -3905,23 +3913,28 @@ const pathMappingRow=m=>{
     <label class="mapping-field">Local path
       <input data-map-local value="${esc(m.local||'')}" placeholder="Path visible to ROMarr">
     </label>
-    <button class="btn ghost" type="button" data-mapping-remove aria-label="Remove ${esc(rowName)}">Remove</button>
+    <button class="btn ghost" type="button" data-mapping-remove ${interfaceAriaLabelTemplate(removeName.source,removeName.values)}>Remove</button>
   </div>`;
 };
 const pathMappingRows=m=>(Array.isArray(m)&&m.length?m:[{}]).map(pathMappingRow).join('');
 const platformFolderRow=m=>{
   m=m||{};
   const folder=String(m.folder||'');
-  const rowName=folder?`Platform folder mapping for ${folder}`:'New platform folder mapping';
+  const rowName=folder
+    ?{source:'Platform folder mapping for {folder}',values:{folder}}
+    :{source:'New platform folder mapping',values:{}};
+  const removeName=folder
+    ?{source:'Remove platform folder mapping for {folder}',values:{folder}}
+    :{source:'Remove this platform folder mapping',values:{}};
   const options=(PLATFORMS||[]).map(p=>`<option value="${esc(p.slug)}"${String(m.platform||'')===String(p.slug)?' selected':''}>${esc(p.name||p.slug)}</option>`).join('');
-  return `<div data-platform-folder-row class="mapping-row platform-folder" role="group" aria-label="${esc(rowName)}">
+  return `<div data-platform-folder-row class="mapping-row platform-folder" role="group" ${interfaceAriaLabelTemplate(rowName.source,rowName.values)}>
     <label class="mapping-field">Folder name
       <input data-platform-folder-name value="${esc(folder)}" placeholder="e.g. PS2 Games">
     </label>
     <label class="mapping-field">Platform
       <select data-platform-folder-slug><option value="" data-i18n-key="${esc(stableLocalizationKey('Choose a platform'))}">Choose a platform</option>${options}</select>
     </label>
-    <button class="btn ghost" type="button" data-platform-folder-remove aria-label="Remove ${esc(rowName)}">Remove</button>
+    <button class="btn ghost" type="button" data-platform-folder-remove ${interfaceAriaLabelTemplate(removeName.source,removeName.values)}>Remove</button>
   </div>`;
 };
 const platformFolderRows=m=>Object.entries(m&&typeof m==='object'&&!Array.isArray(m)?m:{}).map(([folder,platform])=>platformFolderRow({folder,platform})).join('');

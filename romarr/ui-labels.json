@@ -39458,6 +39458,190 @@
         "zh-Hant"
       ],
       "sourceKind": "ui-template"
+    },
+    "ui.path-mapping-for-path.4d05308441": {
+      "source": "Path mapping for {path}",
+      "sourceHash": "4d053084413d78175e48fe3469071d77c054c329211419b69d6503389b18720c",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
+    },
+    "ui.new-path-mapping.4ca0624ee6": {
+      "source": "New path mapping",
+      "sourceHash": "4ca0624ee64513da967c639bdeb19bde70f4fa90734437a2471c5ce5c0ebd9a0",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
+    },
+    "ui.remove-path-mapping-for-path.c9d8c8aeff": {
+      "source": "Remove path mapping for {path}",
+      "sourceHash": "c9d8c8aefff73f2a8f34d3dc38f5cb29acd307789dd8ae6697af5fc36e0f486a",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
+    },
+    "ui.remove-this-path-mapping.9cb94bc02b": {
+      "source": "Remove this path mapping",
+      "sourceHash": "9cb94bc02bb652ff514fad65076b38d83625c2ce8e6895cf75e43ac5b3b9f429",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
+    },
+    "ui.platform-folder-mapping-for-folder.5ddc81c9dd": {
+      "source": "Platform folder mapping for {folder}",
+      "sourceHash": "5ddc81c9dd978333e3a83649c5de0d1931dd12c5ba30d579c18a4920ef3c3709",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
+    },
+    "ui.new-platform-folder-mapping.648d572fa1": {
+      "source": "New platform folder mapping",
+      "sourceHash": "648d572fa1d1c44bc19849f79339f89275f5325c6937339b131ef87551c7eeba",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
+    },
+    "ui.remove-platform-folder-mapping-for-f.6573856e84": {
+      "source": "Remove platform folder mapping for {folder}",
+      "sourceHash": "6573856e8451d864aa53c67d61f506e6ff0b69f55250ab948b4e2abfdfb963f9",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
+    },
+    "ui.remove-this-platform-folder-mapping.ce253c16c0": {
+      "source": "Remove this platform folder mapping",
+      "sourceHash": "ce253c16c0752f2a6ff00b011949db108575f51a6623966db5c8e2f6d6f71ced",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
     }
   }
 }

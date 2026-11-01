@@ -11445,6 +11445,206 @@
       "dynamicPlaceholders": [
         "provider"
       ]
+    },
+    {
+      "source": "Path mapping for {path}",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:3894"
+      ],
+      "id": "ui.path-mapping-for-path.4d05308441",
+      "sourceHash": "4d053084413d78175e48fe3469071d77c054c329211419b69d6503389b18720c",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "path"
+      ]
+    },
+    {
+      "source": "New path mapping",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:3895"
+      ],
+      "id": "ui.new-path-mapping.4ca0624ee6",
+      "sourceHash": "4ca0624ee64513da967c639bdeb19bde70f4fa90734437a2471c5ce5c0ebd9a0",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Remove path mapping for {path}",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:3897"
+      ],
+      "id": "ui.remove-path-mapping-for-path.c9d8c8aeff",
+      "sourceHash": "c9d8c8aefff73f2a8f34d3dc38f5cb29acd307789dd8ae6697af5fc36e0f486a",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "path"
+      ]
+    },
+    {
+      "source": "Remove this path mapping",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:3898"
+      ],
+      "id": "ui.remove-this-path-mapping.9cb94bc02b",
+      "sourceHash": "9cb94bc02bb652ff514fad65076b38d83625c2ce8e6895cf75e43ac5b3b9f429",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Platform folder mapping for {folder}",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:3924"
+      ],
+      "id": "ui.platform-folder-mapping-for-folder.5ddc81c9dd",
+      "sourceHash": "5ddc81c9dd978333e3a83649c5de0d1931dd12c5ba30d579c18a4920ef3c3709",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "folder"
+      ]
+    },
+    {
+      "source": "New platform folder mapping",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:3925"
+      ],
+      "id": "ui.new-platform-folder-mapping.648d572fa1",
+      "sourceHash": "648d572fa1d1c44bc19849f79339f89275f5325c6937339b131ef87551c7eeba",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Remove platform folder mapping for {folder}",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:3927"
+      ],
+      "id": "ui.remove-platform-folder-mapping-for-f.6573856e84",
+      "sourceHash": "6573856e8451d864aa53c67d61f506e6ff0b69f55250ab948b4e2abfdfb963f9",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "folder"
+      ]
+    },
+    {
+      "source": "Remove this platform folder mapping",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:3928"
+      ],
+      "id": "ui.remove-this-platform-folder-mapping.ce253c16c0",
+      "sourceHash": "ce253c16c0752f2a6ff00b011949db108575f51a6623966db5c8e2f6d6f71ced",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
     }
   ]
 }
