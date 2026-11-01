@@ -39872,6 +39872,29 @@
         "zh-Hant"
       ],
       "sourceKind": "ui-help-template"
+    },
+    "ui.requests-per-pass.74961b68a5": {
+      "source": "Requests per pass:",
+      "sourceHash": "74961b68a5e0d5655dcbc4058f2547cd78f3f96914196af9685491e4d1f73b13",
+      "translations": {
+        "es": "Solicitudes por pase:",
+        "zh-Hans": "每轮请求数：",
+        "hi": "प्रति पास अनुरोधों की संख्या:",
+        "de": "Anfragen pro Durchlauf:",
+        "ja": "1回あたりのリクエスト数：",
+        "fr": "Nombre de requêtes par passage :",
+        "pt-BR": "Solicitações por rodada:",
+        "ar": "عدد الطلبات في كل دورة:",
+        "ko": "회차당 요청 수:",
+        "zh-Hant": "每輪請求數：",
+        "vi": "Số yêu cầu mỗi lượt:",
+        "id": "Jumlah permintaan per putaran:"
+      },
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "sourceKind": "ui",
+      "translationPending": []
     }
   }
 }

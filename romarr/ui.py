@@ -5548,10 +5548,10 @@ RENDER.collections=async()=>{
       +'<p class="help">'+datMarkup+' — '+policyMarkup+strictMarkup+'.</p>'
       +'<div class="row"><button class="btn" id="cstart">'
       +interfaceTemplateMarkup('ui.request-count-missing.fbb85426ea',{count:fmt(c.missing)})+'</button>'
-      +'<label class="help" style="margin:0">'+interfaceMarkup('at')+' <input id="cpp" type="number" '
+      +'<label class="help" style="margin:0">'+interfaceMarkup('Requests per pass:')+' <input id="cpp" type="number" '
       +'min="1" max="50" value="5" style="width:60px;padding:5px;background:var(--bg);'
       +'color:var(--fg);border:1px solid var(--line);border-radius:4px"> '
-      +interfaceMarkup('per pass')+'</label></div>'
+      +'</label></div>'
       +'<table style="margin-top:14px"><thead><tr><th>'+interfaceMarkup('Title')+'</th><th>'
       +interfaceMarkup('Status')+'</th><th>'+interfaceMarkup('Why this dump')+'</th></tr></thead><tbody>'
       +d.titles.slice(0,300).map(t=>{

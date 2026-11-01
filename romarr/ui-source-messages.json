@@ -11899,6 +11899,30 @@
       "dynamicPlaceholders": [
         "example"
       ]
+    },
+    {
+      "source": "Requests per pass:",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5551"
+      ],
+      "id": "ui.requests-per-pass.74961b68a5",
+      "sourceHash": "74961b68a5e0d5655dcbc4058f2547cd78f3f96914196af9685491e4d1f73b13",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
     }
   ]
 }
