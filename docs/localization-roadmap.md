@@ -53,9 +53,11 @@ the October 31 snapshot. Provider replies, library names and paths, versions,
 exception bodies, and user values stay opaque inside their existing boundaries.
 The eight mapping-row templates localize accessible group and remove button
 names while keeping path and folder values in placeholders. Their 96 direct
-locale cells remain pending for the next frozen translation input. The 10
-connect-source templates add another 120 direct locale cells for the next
-translation input; no English target text is seeded as a translation.
+locale cells remain pending. The successor bundle
+[20261101-connect-instructions.json](../localization/source-bundles/20261101-connect-instructions.json)
+freezes all 484 current source messages (5,808 direct locale cells), including
+the 10 new connect-source templates. No English target text is seeded as a
+translation.
 
 The existing translation text was carried over, with targeted high-confidence
 corrections across all 12 direct locales for ROM-dump false friends,
