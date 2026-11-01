@@ -114,7 +114,7 @@ from .lists import LIST_TYPES
 LIST_SECRETS = ("api_key", "openxbl_key", "npsso", "itchio_key",
                 "epic_code", "epic_refresh", "ea_token",
                 "battlenet_cookie", "humble_cookie")
-from .scheduler import Scheduler, next_search_due
+from .scheduler import Scheduler, TaskResult, next_search_due
 from .selection import best_release, judge, score
 from .store import Event, QueueItem, SeerrRequest, Store
 from .ui import page as ui_page
@@ -1349,37 +1349,39 @@ class ROMarr:
         self.scheduler.add(
             "ImportCompleted", "Import completed downloads",
             _minutes("auto_import_interval_minutes", gate="auto_import"),
-            lambda: self._auto_import_summary())
+            lambda: TaskResult.from_response(self._auto_import_summary()))
         self.scheduler.add(
             "MissingGameSearch", "Search the Wanted list",
             _hours("search_missing_interval_hours"),
-            lambda: self.search_missing(auto=True)["message"])
+            lambda: TaskResult.from_response(self.search_missing(auto=True)))
         self.scheduler.add(
             "RssSync", "Watch indexer feeds for wanted games",
             _minutes("rss_sync_interval_minutes"),
-            self.rss_sync)
+            lambda: TaskResult.from_response(self._rss_sync_result()))
         # Often enough that a dead grab is replaced the same evening, rarely
         # enough that the replacement searches it triggers are not a hammering.
         self.scheduler.add(
             "FailedDownloads", "Retire dead downloads and grab a replacement",
             lambda: (900 if self.store.settings.get(
                 "blocklist_failed_downloads", True) else 0),
-            lambda: self.retire_dead_downloads()["message"])
+            lambda: TaskResult.from_response(self.retire_dead_downloads()))
         self.scheduler.add(
             "ListSync", "Sync import lists into Wanted",
             _hours("list_sync_interval_hours"),
-            lambda: self.list_sync()["message"])
+            lambda: TaskResult.from_response(self.list_sync()))
         self.scheduler.add(
             "UpdateCheck", "Check github.com for a newer ROMarr",
             lambda: 86400 if self.store.settings.get("update_check", True) else 0,
-            lambda: self.check_update()["message"])
+            lambda: TaskResult.from_response(self.check_update()))
         # Netplay is useless without hashes, and a shelf this size takes
         # minutes to read. Nobody should have to know that, or press a
         # button for it, so it runs daily and once at startup.
         self.scheduler.add(
             "HashIndex", "Read ROM hashes from the library for netplay",
             lambda: 86400 if self.store.settings.get("hash_index", True) else 0,
-            lambda: self.start_hash_seed(quiet=True).get("detail", ""))
+            lambda: TaskResult.from_response(
+                self.start_hash_seed(quiet=True), message_field="detail",
+                template_field="detail_template"))
         self.scheduler.start()
 
         # The scheduler does not fire a daily job until a day has passed, so
@@ -2889,7 +2891,11 @@ class ROMarr:
         """
         if not self.store.settings.get("blocklist_failed_downloads", True):
             return {"blocklisted": 0, "regrabbed": 0,
-                    "message": "failed download handling is off"}
+                    "message": "failed download handling is off",
+                    "message_template": {
+                        "key": "ui.failed-download-handling-is-off.ad2c9dba83",
+                        "values": {},
+                    }}
 
         try:
             stall_minutes = int(self.store.settings.get("stalled_timeout_minutes") or 0)
@@ -2945,7 +2951,12 @@ class ROMarr:
         message = (f"retired {blocklisted} dead download(s), "
                    f"grabbed {regrabbed} replacement(s)")
         return {"blocklisted": blocklisted, "regrabbed": regrabbed,
-                "message": message}
+                "message": message,
+                "message_template": {
+                    "key": "ui.retired-blocklisted-dead-download-s.5e329a4393",
+                    "values": {"blocklisted": blocklisted,
+                               "regrabbed": regrabbed},
+                }}
 
     @staticmethod
     def _row_age_minutes(row, now) -> float | None:
@@ -4252,7 +4263,11 @@ class ROMarr:
 
         if ROMarr._seed_thread is not None and ROMarr._seed_thread.is_alive():
             return {"ok": True, "already": True, **self.seed_status(),
-                    "detail": "Already reading your library."}
+                    "detail": "Already reading your library.",
+                    "detail_template": {
+                        "key": "ui.already-reading-your-library.aa167f8f1a",
+                        "values": {},
+                    }}
 
         ROMarr._seed_state = {"status": "running", "seen": 0, "added": 0,
                               "started": datetime.now(timezone.utc)
@@ -4274,7 +4289,11 @@ class ROMarr:
             log.info("reading hashes from the library in the background")
         return {"ok": True, "started": True, **self.seed_status(),
                 "detail": "Reading your library in the background. This page "
-                          "does not have to stay open."}
+                          "does not have to stay open.",
+                "detail_template": {
+                    "key": "ui.reading-your-library-in-the-backgrou.c77eb7ff59",
+                    "values": {},
+                }}
 
     def index_hashes_from_library(self, progress: dict | None = None) -> dict:
         """Fill the hash index from the library server, not from disk.
@@ -4296,7 +4315,11 @@ class ROMarr:
             return {"ok": False,
                     "error": "the attached library server does not publish "
                              "file hashes, so netplay cannot be seeded from "
-                             "it -- run an audit instead"}
+                             "it -- run an audit instead",
+                    "error_template": {
+                        "key": "ui.the-attached-library-server-does-not.3a4dc1f14e",
+                        "values": {},
+                    }}
         from .dat import VERIFIED
 
         added = offset = seen = confirmed = 0
@@ -4360,9 +4383,28 @@ class ROMarr:
                  "hash out of %d entries; %d known in total",
                  added, seen, len(self.hashes))
         without = max(0, seen - added)
+        if truncated:
+            detail_template = {
+                "key": "ui.stopped-after-seen-entries-truncated.fc5c0496ad",
+                "values": {"seen": seen, "truncated": truncated,
+                           "added": added},
+            }
+        elif confirmed:
+            detail_template = {
+                "key": "ui.read-seen-entries-and-found-added-wi.9304d58175",
+                "values": {"seen": seen, "added": added,
+                           "without": without, "confirmed": confirmed},
+            }
+        else:
+            detail_template = {
+                "key": "ui.read-seen-entries-and-found-added-wi.ca302edb9e",
+                "values": {"seen": seen, "added": added,
+                           "without": without},
+            }
         return {"ok": True, "added": added, "seen": seen,
                 "total": len(self.hashes), "verified": confirmed,
                 "stopped_early": bool(truncated), "error": truncated,
+                "detail_template": detail_template,
                 "detail": (f"Stopped after {seen:,} entries: {truncated}. "
                            f"{added:,} hashes were kept; run it again to "
                            f"continue." if truncated else
@@ -4422,17 +4464,27 @@ class ROMarr:
                 timeout=20)
         except _rq.RequestException as err:
             return {"ok": False,
-                    "error": f"could not reach {invite['url']}: {err}"}
+                    "error": f"could not reach {invite['url']}: {err}",
+                    "error_template": {
+                        "key": "ui.could-not-reach-url-detail.521369cf6f",
+                        "values": {"url": invite["url"], "detail": str(err)},
+                    }}
         body = {}
         try:
             body = response.json()
         except ValueError:
             body = {}
         if not response.ok:
+            error = body.get("error")
+            if error:
+                return {"ok": False, "error": str(error)}
             return {"ok": False,
-                    "error": str(body.get("error")
-                                 or f"{invite['url']} answered HTTP "
-                                    f"{response.status_code}")}
+                    "error": f"{invite['url']} answered HTTP {response.status_code}",
+                    "error_template": {
+                        "key": "ui.url-answered-http-status-code.462fe89da5",
+                        "values": {"url": invite["url"],
+                                   "status_code": response.status_code},
+                    }}
         token = str(body.get("token") or "")
         if not token:
             # An older ROMarr accepts the handshake and returns no token, so
@@ -4496,7 +4548,7 @@ class ROMarr:
     ROMM_FRIEND_PAGE = 500
     ROMM_FRIEND_MAX = 10_000
 
-    def _romm_friend_rows(self, peer) -> tuple[list, str]:
+    def _romm_friend_rows(self, peer) -> tuple[list, str, dict | None]:
         """A RomM friend's shelf, in the same shape a ROMarr peer projects.
 
         Projected to exactly the ROMarr peer fields on purpose: the rest of
@@ -4513,7 +4565,10 @@ class ROMarr:
             except Exception as err:            # noqa: BLE001 - reported
                 if rows:
                     break                        # partial is better than none
-                return [], f"could not read {peer.name}: {err}"
+                return [], f"could not read {peer.name}: {err}", {
+                    "key": "ui.could-not-read-name-detail.243b61096e",
+                    "values": {"name": peer.name, "detail": str(err)},
+                }
             if not raw:
                 break
             for row in page:
@@ -4526,7 +4581,7 @@ class ROMarr:
             if len(page) < self.ROMM_FRIEND_PAGE:
                 break
             offset += self.ROMM_FRIEND_PAGE
-        return rows, ""
+        return rows, "", None
 
     def _friend(self, peer_id: str):
         """The peer I am about to call, or a reason I cannot."""
@@ -4551,16 +4606,29 @@ class ROMarr:
             response = _rq.request(method, url, headers=peer.headers(),
                                    json=payload, timeout=timeout)
         except _rq.RequestException as err:
-            return None, f"could not reach {peer.name}: {err}"
+            return None, f"could not reach {peer.name}: {err}", {
+                "key": "ui.could-not-reach-name-detail.9fc06e87fc",
+                "values": {"name": peer.name, "detail": str(err)},
+            }
         if response.status_code == 401:
             return None, (f"{peer.name} refused the credential -- they may "
-                          f"have removed you, or not confirmed you yet")
+                          f"have removed you, or not confirmed you yet"), {
+                "key": "ui.name-refused-the-credential-they-may.dfa9c11bed",
+                "values": {"name": peer.name},
+            }
         if not response.ok:
-            return None, f"{peer.name} answered HTTP {response.status_code}"
+            return None, f"{peer.name} answered HTTP {response.status_code}", {
+                "key": "ui.name-answered-http-status-code.2a5471f26b",
+                "values": {"name": peer.name,
+                           "status_code": response.status_code},
+            }
         try:
-            return response.json(), ""
+            return response.json(), "", None
         except ValueError:
-            return None, f"{peer.name} sent something that was not JSON"
+            return None, f"{peer.name} sent something that was not JSON", {
+                "key": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+                "values": {"name": peer.name},
+            }
 
     #: A friend's shelf is refetched at most this often. Their library does
     #: not change per keystroke, and filtering happens here.
@@ -4583,10 +4651,10 @@ class ROMarr:
         if refresh or cached is None or \
                 (time.monotonic() - cached[1]) > self.FRIEND_SHELF_TTL:
             if peer.kind == "romm":
-                rows, err = self._romm_friend_rows(peer)
+                rows, err, err_template = self._romm_friend_rows(peer)
                 if err and cached is None:
                     return {"ok": False, "error": err, "items": [],
-                            "total": 0}
+                            "total": 0, "error_template": err_template}
                 if not err:
                     self._friend_shelves[peer.peer_id] = (rows,
                                                           time.monotonic())
@@ -4594,15 +4662,17 @@ class ROMarr:
                 return {**self._slice_shelf(rows, q, platform, offset, limit),
                         "ok": True, "friend": peer.name, "kind": "romm",
                         "access": "catalogue"}
-            body, err = self._call_friend(peer, "GET", "/api/v1/peer/shelf")
+            body, err, err_template = self._call_friend(
+                peer, "GET", "/api/v1/peer/shelf")
             if body is None:
                 if cached is None:
-                    return {"ok": False, "error": err, "items": [], "total": 0}
+                    return {"ok": False, "error": err, "items": [],
+                            "total": 0, "error_template": err_template}
                 # Serve what we last saw rather than blanking the page.
                 rows, at = cached
                 return {**self._slice_shelf(rows, q, platform, offset, limit),
                         "ok": True, "stale": True, "error": err,
-                        "friend": peer.name}
+                        "error_template": err_template, "friend": peer.name}
             rows = [r for r in (body.get("items") or []) if isinstance(r, dict)]
             self._friend_shelves[peer.peer_id] = (rows, time.monotonic())
         rows = self._friend_shelves[peer.peer_id][0]
@@ -4684,20 +4754,21 @@ class ROMarr:
             rows, err = (self._friend_shelves.get(peer.peer_id, ([], 0))[0],
                          "")
             if not rows:
-                rows, err = self._romm_friend_rows(peer)
+                rows, err, err_template = self._romm_friend_rows(peer)
                 if not err:
                     self._friend_shelves[peer.peer_id] = (rows,
                                                           time.monotonic())
             if err:
-                return {"ok": False, "status": "error", "detail": err}
+                return {"ok": False, "status": "error", "detail": err,
+                        "detail_template": err_template}
             theirs = [_RommDump(r) for r in rows if r.get("sha1")]
             body = self.federation.netplay_answer(offer, theirs)
         else:
-            body, err = self._call_friend(peer, "POST",
-                                          "/api/v1/peer/netplay",
-                                          {"offer": offer})
+            body, err, err_template = self._call_friend(
+                peer, "POST", "/api/v1/peer/netplay", {"offer": offer})
             if body is None:
-                return {"ok": False, "status": "error", "detail": err}
+                return {"ok": False, "status": "error", "detail": err,
+                        "detail_template": err_template}
 
         status = str(body.get("status") or "")
         answer = {
@@ -4893,10 +4964,26 @@ class ROMarr:
         message = f"Searched {searched}, grabbed {grabbed_count}"
         if skipped:
             message += f", {skipped} waiting out backoff"
+        if skipped:
+            message_template = {
+                "key": "ui.searched-searched-grabbed-grabbed-sk.8d691039ba",
+                "values": {"searched": searched, "grabbed": grabbed_count,
+                           "skipped": skipped},
+            }
+        else:
+            message_template = {
+                "key": "ui.searched-searched-grabbed-grabbed.bff6322b8e",
+                "values": {"searched": searched, "grabbed": grabbed_count},
+            }
         return {"searched": searched, "grabbed": grabbed_count,
-                "skipped": skipped, "message": message}
+                "skipped": skipped, "message": message,
+                "message_template": message_template}
 
     def rss_sync(self) -> str:
+        """Watch feeds and preserve the historical plain-text return value."""
+        return self._rss_sync_result()["message"]
+
+    def _rss_sync_result(self) -> dict:
         """Watch what is new instead of asking again for everything.
 
         Torznab's convention: a search with no query is the indexer's latest
@@ -4908,7 +4995,13 @@ class ROMarr:
         """
         wanted = list(self.store.wanted)
         if not wanted:
-            return "nothing wanted, nothing to match"
+            return {
+                "message": "nothing wanted, nothing to match",
+                "message_template": {
+                    "key": "ui.nothing-wanted-nothing-to-match.d281ab9dfe",
+                    "values": {},
+                },
+            }
         releases, sources = [], 0
         candidates: list[tuple[str, object]] = []
         if self.prowlarr._config.base_url:
@@ -4923,7 +5016,13 @@ class ROMarr:
                 log.warning("%s feed read failed: %s", label,
                             err.__class__.__name__)
         if not sources:
-            return "no indexer could be read"
+            return {
+                "message": "no indexer could be read",
+                "message_template": {
+                    "key": "ui.no-indexer-could-be-read.ad531cd423",
+                    "values": {},
+                },
+            }
         grabbed_count = 0
         for item in wanted:
             platform = resolve(item.platform)
@@ -4935,8 +5034,15 @@ class ROMarr:
                 continue
             if self.grab(pick, item.game, platform.slug).get("ok"):
                 grabbed_count += 1
-        return (f"{len(releases)} feed item(s) from {sources} source(s), "
-                f"grabbed {grabbed_count}")
+        return {
+            "message": (f"{len(releases)} feed item(s) from {sources} source(s), "
+                        f"grabbed {grabbed_count}"),
+            "message_template": {
+                "key": "ui.items-feed-item-s-from-sources-sourc.2cf1cff247",
+                "values": {"items": len(releases), "sources": sources,
+                           "grabbed": grabbed_count},
+            },
+        }
 
     #: Where release news comes from. Only ever read, never written to.
     RELEASES_URL = "https://api.github.com/repos/snapetech-org/ROMarrNG/releases/latest"
@@ -4954,11 +5060,22 @@ class ROMarr:
             body = response.json()
         except Exception as err:
             return {"ok": False,
-                    "message": f"could not reach github.com: {err.__class__.__name__}"}
+                    "message": f"could not reach github.com: {err.__class__.__name__}",
+                    "message_template": {
+                        "key": "ui.could-not-reach-github-com-error-typ.188d9cd896",
+                        "values": {"error_type": err.__class__.__name__},
+                    }}
         latest = str(body.get("tag_name") or "").lstrip("vV")
         url = str(body.get("html_url") or "")
         if not latest:
-            return {"ok": False, "message": "github.com answered without a tag"}
+            return {
+                "ok": False,
+                "message": "github.com answered without a tag",
+                "message_template": {
+                    "key": "ui.github-com-answered-without-a-tag.5f20c86070",
+                    "values": {},
+                },
+            }
 
         def parts(version: str) -> tuple:
             try:
@@ -4978,14 +5095,33 @@ class ROMarr:
         message = (f"{latest} is available (running {VERSION})" if newer
                    else f"up to date ({VERSION})")
         return {"ok": True, "latest": latest, "update_available": newer,
-                "message": message}
+                "message": message,
+                "message_template": ({
+                    "key": "ui.latest-is-available-running-version.2d3ed5b75c",
+                    "values": {"latest": latest, "version": VERSION},
+                } if newer else {
+                    "key": "ui.up-to-date-version.34ba92ea5c",
+                    "values": {"version": VERSION},
+                })}
 
-    def _auto_import_summary(self) -> str:
+    def _auto_import_summary(self) -> dict:
         done = self.import_finished(retry_failed=False)
         if not done:
-            return "nothing finished"
+            return {
+                "message": "nothing finished",
+                "message_template": {
+                    "key": "ui.nothing-finished.cd66a4ec32",
+                    "values": {},
+                },
+            }
         ok = sum(1 for d in done if d.get("ok"))
-        return f"imported {ok} of {len(done)} finished download(s)"
+        return {
+            "message": f"imported {ok} of {len(done)} finished download(s)",
+            "message_template": {
+                "key": "ui.imported-imported-of-total-finished.5726eabd36",
+                "values": {"imported": ok, "total": len(done)},
+            },
+        }
 
     def connect_steam(self, steam_id: str) -> dict:
         """Save a verified SteamID64 as a list, and sync it immediately.
@@ -5064,7 +5200,11 @@ class ROMarr:
         from .lists import fetch_entries
         lists = self.store.list_items("import_lists")
         if not lists:
-            return {"added": 0, "message": "no lists configured"}
+            return {"added": 0, "message": "no lists configured",
+                    "message_template": {
+                        "key": "ui.no-lists-configured.f0f61cd546",
+                        "values": {},
+                    }}
         added = known = unknown = failed_lists = 0
         failures: list[dict] = []
         for cfg in lists:
@@ -5135,9 +5275,37 @@ class ROMarr:
             # useful half of what is known here.
             message += "; " + "; ".join(
                 f"{f['name']}: {f['reason']}" for f in failures)
+        message_parts = [{"template": {
+            "key": "ui.added-count-to-wanted.6f8ee97f5d",
+            "values": {"count": added},
+        }}]
+        if known:
+            message_parts.extend([
+                {"opaque": ", "},
+                {"template": {
+                    "key": "ui.count-already-added-before.e957b67cbe",
+                    "values": {"count": known},
+                }},
+            ])
+        if unknown:
+            message_parts.extend([
+                {"opaque": ", "},
+                {"template": {
+                    "key": "ui.count-kept-aside-with-no-rom-platfor.c9223eb266",
+                    "values": {"count": unknown},
+                }},
+            ])
+        if failures:
+            message_parts.append({"opaque": "; "})
+            for index, failure in enumerate(failures):
+                if index:
+                    message_parts.append({"opaque": "; "})
+                # List names and provider/exception details remain raw data.
+                message_parts.append({
+                    "opaque": f"{failure['name']}: {failure['reason']}"})
         return {"added": added, "known": known, "unknown": unknown,
                 "failed_lists": failed_lists, "failures": failures,
-                "message": message}
+                "message": message, "message_parts": message_parts}
 
     def run_command(self, name: str) -> dict:
         """The Tasks page. Names match how *arr labels its commands."""
@@ -5145,9 +5313,16 @@ class ROMarr:
             return self.search_missing()
         if name == "ImportCompleted":
             done = self.import_finished()
-            return {"imported": done, "message": f"Imported {len(done)}"}
+            return {
+                "imported": done,
+                "message": f"Imported {len(done)}",
+                "message_template": {
+                    "key": "ui.imported-total.5f100c0878",
+                    "values": {"total": len(done)},
+                },
+            }
         if name == "RssSync":
-            return {"message": self.rss_sync()}
+            return self._rss_sync_result()
         if name == "FailedDownloads":
             return self.retire_dead_downloads()
         if name == "ListSync":
@@ -5156,6 +5331,7 @@ class ROMarr:
             return self.check_update()
         if name == "RefreshLibrary":
             counted, failed = 0, []
+            library_failures = []
             for cfg, backend in self.game_libraries:
                 label = cfg.get("name") or getattr(backend, "name", "library")
                 try:
@@ -5164,14 +5340,37 @@ class ROMarr:
                     # Named, because "unreachable" without saying which server
                     # is useless once there is more than one.
                     failed.append(f"{label} unreachable ({err.__class__.__name__})")
+                    library_failures.append({
+                        "library": label,
+                        "error_type": err.__class__.__name__,
+                    })
             if not self.game_libraries:
-                return {"message": "no library configured"}
+                return {
+                    "message": "no library configured",
+                    "message_template": {
+                        "key": "ui.no-library-configured.2f7f2b199a",
+                        "values": {},
+                    },
+                }
             library_count = len(self.game_libraries)
             if library_count == 1:
                 msg = f"{counted} games across {library_count} library"
+                message_key = "ui.games-games-across-count-library.f0b5160790"
             else:
                 msg = f"{counted} games across {library_count} libraries"
-            return {"message": msg + ("; " + ", ".join(failed) if failed else "")}
+                message_key = "ui.games-games-across-count-libraries.6f3af8400b"
+            return {
+                # Keep the original plain-text field for API consumers which
+                # have not adopted the structured localization fields yet.
+                "message": msg + ("; " + ", ".join(failed) if failed else ""),
+                "message_template": {
+                    "key": message_key,
+                    "values": {"games": counted, "count": library_count},
+                },
+                # Do not parse the old joined string: configured library names
+                # can contain commas and are user-authored data.
+                "library_failures": library_failures,
+            }
         if name == "Decompress":
             return self.decompress_batch()
         return {"error": f"unknown command: {name}"}
@@ -7262,7 +7461,11 @@ def make_handler(service: ROMarr):
                 except Exception as exc:
                     return self._json(200, {
                         "ok": False,
-                        "message": f"lookup failed: {exc.__class__.__name__}"})
+                        "message": f"lookup failed: {exc.__class__.__name__}",
+                        "message_template": {
+                            "key": "ui.lookup-failed-error-type.6d33ec9b4f",
+                            "values": {"error_type": exc.__class__.__name__},
+                        }})
                 found = bool(getattr(info, "found", False))
                 return self._json(200, {
                     "ok": found,
@@ -7407,12 +7610,13 @@ def make_handler(service: ROMarr):
                         token=str(body.get("token") or ""))
                 except ValueError as exc:
                     return self._json(400, {"error": str(exc)})
-                rows, err = service._romm_friend_rows(peer)
+                rows, err, err_template = service._romm_friend_rows(peer)
                 if err:
                     # Do not keep a friend we could not read: a row that
                     # never works is worse than a clear failure now.
                     service.federation.revoke(peer.peer_id)
-                    return self._json(400, {"error": err})
+                    return self._json(400, {"error": err,
+                                           "error_template": err_template})
                 service._friend_shelves[peer.peer_id] = (rows, time.monotonic())
                 service.save_peers()
                 return self._json(200, {
@@ -7521,8 +7725,13 @@ def make_handler(service: ROMarr):
                 except ValueError as exc:
                     return self._json(400, {"error": str(exc)})
                 except Exception as exc:
+                    error_type = exc.__class__.__name__
                     return self._json(502, {
-                        "error": f"could not fetch the list: {exc.__class__.__name__}"})
+                        "error": f"could not fetch the list: {error_type}",
+                        "error_template": {
+                            "key": "ui.could-not-fetch-the-list-error-type.f2f965f9db",
+                            "values": {"error_type": error_type},
+                        }})
                 default = str(body.get("platform") or "")
                 out = []
                 for entry in entries[:500]:

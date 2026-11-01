@@ -815,8 +815,9 @@ const readInterfaceLanguage=()=>{
 };
 const stableLocalizationKey=source=>Object.hasOwn(UI_MESSAGES,source)?source:(UI_SOURCE_TO_KEY[source]||'');
 const hasLabel=source=>Boolean(stableLocalizationKey(source));
-const APP_MESSAGE_TEMPLATE_KINDS=new Set(['ui-error-template','task-result-template',
-  'provider-diagnostic-template','library-status-template','ui-status-template']);
+const APP_MESSAGE_TEMPLATE_KINDS=new Set(['ui-error','ui-error-template','task-result',
+  'task-result-template','provider-diagnostic-template','library-status-template',
+  'ui-status-template']);
 const APP_MESSAGE_TEMPLATES=Object.values(UI_MESSAGES)
   .filter(message=>APP_MESSAGE_TEMPLATE_KINDS.has(message.sourceKind)
     &&typeof message.source==='string'&&message.source.includes('{'))
@@ -827,15 +828,21 @@ const APP_MESSAGE_TEMPLATES=Object.values(UI_MESSAGES)
     return {source:message.source,names,pattern:new RegExp('^'+escaped+'$')};
   }).sort((a,b)=>b.source.length-a.source.length);
 const matchAppMessageTemplate=value=>{
+  let matched=null;
   for(const entry of APP_MESSAGE_TEMPLATES){
     const match=entry.pattern.exec(String(value??''));
     if(match){
+      // Free-form values can make two distinct templates fit the same raw
+      // message (for example a peer name and an invitation URL). Do not let
+      // catalog ordering decide which meaning the user sees; callers that
+      // authored an ambiguous message attach its stable template explicitly.
+      if(matched&&matched.source!==entry.source)return null;
       const values={};
       entry.names.forEach((name,index)=>{values[name]=match[index+1]});
-      return {source:entry.source,values};
+      matched={source:entry.source,values};
     }
   }
-  return null;
+  return matched;
 };
 const translationInfo=(source,language)=>ROMarrI18n.lookup(UI_CATALOG,source,language);
 const isTranslated=(source,language)=>translationInfo(source,language).translated;
@@ -901,6 +908,96 @@ const manualDiagnosticTitle=value=>{
   return parsed?interfaceTitleTemplate(parsed.source,parsed.values)
     :'title="'+esc(source)+'" lang="und" dir="auto"';
 };
+// These keys are attached by local app.py routes. Peer responses are not
+// allowed to supply template authority for their own text.
+const LOCAL_API_TEMPLATE_KEYS=new Set([
+  'ui.could-not-reach-url-detail.521369cf6f',
+  'ui.url-answered-http-status-code.462fe89da5',
+  'ui.could-not-read-name-detail.243b61096e',
+  'ui.could-not-reach-name-detail.9fc06e87fc',
+  'ui.name-refused-the-credential-they-may.dfa9c11bed',
+  'ui.name-answered-http-status-code.2a5471f26b',
+  'ui.name-sent-something-that-was-not-jso.4b46f86ff4',
+  'ui.already-reading-your-library.aa167f8f1a',
+  'ui.imported-total.5f100c0878',
+  'ui.reading-your-library-in-the-backgrou.c77eb7ff59',
+  'ui.searched-searched-grabbed-grabbed.bff6322b8e',
+  'ui.searched-searched-grabbed-grabbed-sk.8d691039ba',
+  'ui.added-count-to-wanted.6f8ee97f5d',
+  'ui.failed-download-handling-is-off.ad2c9dba83',
+  'ui.github-com-answered-without-a-tag.5f20c86070',
+  'ui.imported-imported-of-total-finished.5726eabd36',
+  'ui.no-indexer-could-be-read.ad531cd423',
+  'ui.no-library-configured.2f7f2b199a',
+  'ui.no-lists-configured.f0f61cd546',
+  'ui.nothing-finished.cd66a4ec32',
+  'ui.nothing-wanted-nothing-to-match.d281ab9dfe',
+  'ui.retired-blocklisted-dead-download-s.5e329a4393',
+  'ui.up-to-date-version.34ba92ea5c',
+  'ui.count-already-added-before.e957b67cbe',
+  'ui.count-kept-aside-with-no-rom-platfor.c9223eb266',
+  'ui.items-feed-item-s-from-sources-sourc.2cf1cff247',
+  'ui.latest-is-available-running-version.2d3ed5b75c',
+  'ui.read-seen-entries-and-found-added-wi.ca302edb9e',
+  'ui.read-seen-entries-and-found-added-wi.9304d58175',
+  'ui.stopped-after-seen-entries-truncated.fc5c0496ad',
+  'ui.the-attached-library-server-does-not.3a4dc1f14e',
+  'ui.games-games-across-count-library.f0b5160790',
+  'ui.games-games-across-count-libraries.6f3af8400b',
+  'ui.library-unreachable-error-type.b2611060a9',
+  'ui.could-not-reach-github-com-error-typ.188d9cd896',
+  'ui.lookup-failed-error-type.6d33ec9b4f',
+  'ui.could-not-fetch-the-list-error-type.f2f965f9db',
+]);
+const explicitTemplateMarkup=template=>{
+  if(!template||!LOCAL_API_TEMPLATE_KEYS.has(template.key))return '';
+  const message=UI_MESSAGES[template.key];
+  if(!message||!APP_MESSAGE_TEMPLATE_KINDS.has(message.sourceKind))return '';
+  const supplied=template.values??{};
+  if(!supplied||typeof supplied!=='object'||Array.isArray(supplied))return '';
+  const names=[...message.source.matchAll(/\{([A-Za-z][A-Za-z0-9_]*)\}/g)].map(match=>match[1]);
+  if(Object.keys(supplied).length!==names.length||names.some(name=>!Object.hasOwn(supplied,name)))return '';
+  const values={...(template.values||{})};
+  for(const [key,value] of Object.entries(values)){
+    if(typeof value==='number'&&Number.isFinite(value))values[key]=fmt(value);
+    else if(typeof value!=='string')return '';
+  }
+  return interfaceTemplateMarkup(template.key,values);
+};
+const apiMessageMarkup=(value,explicitTemplate=null)=>{
+  const explicit=explicitTemplateMarkup(explicitTemplate);
+  if(explicit)return explicit;
+  if(value===null||value===undefined||value==='')return '';
+  if(typeof value!=='string'&&typeof value!=='number')return '';
+  const source=String(value);
+  return '<span lang="und" dir="auto">'+esc(source)+'</span>';
+};
+const messagePartsMarkup=parts=>Array.isArray(parts)?parts.map(part=>{
+  if(part&&typeof part==='object'&&part.template)
+    return explicitTemplateMarkup(part.template);
+  if(part&&typeof part==='object'&&typeof part.opaque==='string')
+    return apiMessageMarkup(part.opaque);
+  return '';
+}).join(''):'';
+const commandResultMarkup=result=>{
+  if(!result||typeof result!=='object')return apiMessageMarkup(result);
+  const parts=[];
+  if(Array.isArray(result.message_parts))
+    parts.push(messagePartsMarkup(result.message_parts));
+  else if(result.message||result.message_template)
+    parts.push(apiMessageMarkup(result.message,result.message_template));
+  for(const failure of Array.isArray(result.library_failures)?result.library_failures:[]){
+    if(!failure||typeof failure!=='object')continue;
+    const library=String(failure.library??''),errorType=String(failure.error_type??'');
+    parts.push('; ',apiMessageMarkup(`${library} unreachable (${errorType})`,{
+      key:'ui.library-unreachable-error-type.b2611060a9',
+      values:{library,error_type:errorType}
+    }));
+  }
+  return parts.join('');
+};
+// Use only for source-owned app copy or diagnostics with an app-owned format.
+// API/provider/peer values go through apiMessageMarkup instead.
 const appMessageMarkup=value=>{
   const source=String(value??'');
   if(hasLabel(source)) return interfaceMarkup(source);
@@ -1024,7 +1121,7 @@ const appMessageMarkup=value=>{
 const submissionProblemMarkup=value=>{
   const source=String(value??''),repository=source.match(/^repository: ([\s\S]+)$/s);
   return repository
-    ?interfaceMarkup('Repository')+': '+appMessageMarkup(repository[1])
+    ?interfaceMarkup('Repository')+': '+apiMessageMarkup(repository[1])
     :appMessageMarkup(source);
 };
 const searchReasonMarkup=value=>{
@@ -1047,18 +1144,11 @@ const collectionReasonMarkup=value=>{
     return interfaceMarkup(source);
   return appMessageMarkup(source);
 };
-const statusMarkup=value=>{
+const statusMarkup=(value,explicitTemplate=null,explicitParts=null)=>{
   const raw=String(value??''),source=DOWNLOAD_STATE_LABELS[raw];
   if(source)return interfaceMarkup(source);
-  let match=raw.match(/^added (\d+) to Wanted(?:, (\d+) already added before)?(?:, (\d+) kept aside with no ROM platform \(normal for modern store titles -- see each list's Edit view\))?(?:; ([\s\S]*))?$/);
-  if(match){
-    const parts=[interfaceTemplateMarkup('added {count} to Wanted',{count:fmt(Number(match[1]))})];
-    if(match[2])parts.push(', ',interfaceTemplateMarkup('{count} already added before',{count:fmt(Number(match[2]))}));
-    if(match[3])parts.push(', ',interfaceTemplateMarkup("{count} kept aside with no ROM platform (normal for modern store titles -- see each list's Edit view)",{count:fmt(Number(match[3]))}));
-    if(match[4])parts.push('; <span lang="und" dir="auto">'+esc(match[4])+'</span>');
-    return parts.join('');
-  }
-  return appMessageMarkup(raw);
+  if(Array.isArray(explicitParts))return messagePartsMarkup(explicitParts);
+  return apiMessageMarkup(raw,explicitTemplate);
 };
 const applyTranslatedLabel=(el,language)=>{
   const source=el.dataset.i18nKey||el.dataset.i18n, translated=isTranslated(source,language);
@@ -1385,11 +1475,10 @@ function toastMessage(source,values={}){
   const language=readInterfaceLanguage(), translated=Boolean(isTranslated(source,language));
   toast(translateTemplate(source,values,language),translated?language:'en',translated&&language==='ar'?'rtl':'ltr');
 }
-function toastAppMessage(message){
-  const source=String(message??'');
-  if(!source)return;
+function toastMarkupMessage(markup){
+  if(!markup)return;
   const holder=document.createElement('div');
-  holder.innerHTML=appMessageMarkup(source);
+  holder.innerHTML=markup;
   const language=readInterfaceLanguage();
   applyTranslatedLabels(holder,language);
   applyTranslatedTemplates(holder,language);
@@ -1399,6 +1488,16 @@ function toastAppMessage(message){
   else if(rendered&&rendered.hasAttribute('data-i18n-template-key'))
     toast(holder.textContent,rendered.lang||'en',rendered.dir||'ltr');
   else toast(holder.textContent,'und','auto');
+}
+function toastAppMessage(message,explicitTemplate=null){
+  toastMarkupMessage(apiMessageMarkup(message,explicitTemplate));
+}
+function toastSourceMessage(message){
+  const source=String(message??'');
+  if(source)toastMarkupMessage(appMessageMarkup(source));
+}
+function toastCommandMessage(result){
+  toastMarkupMessage(commandResultMarkup(result));
 }
 function confirmMessage(source,values={}){
   return window.confirm(translateTemplate(source,values,readInterfaceLanguage()));
@@ -1504,7 +1603,7 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
         +'processes. Network requests go through ROMarr and can reach only '
         +'declared hosts.</div>'
       : '<div class="panel-note panel-warn"><b>Plugins run with no '
-        +'confinement.</b> '+appMessageMarkup(hs.sandbox_detail||'')+' A plugin you install '
+        +'confinement.</b> '+apiMessageMarkup(hs.sandbox_detail||'')+' A plugin you install '
         +'may run without one or both boundaries if you explicitly override '
         +'this check; check the missing capability before allowing it.</div>');
   // What enabling a searchable plugin actually does now, said out loud:
@@ -1519,7 +1618,7 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
           {capability:'search',plugins:(hs.searchable_plugins||[]).join(', ')})
         +'</div>'
       : '<div class="panel-note panel-warn"><b>Plugins are installed but not '
-        +'part of search yet.</b> '+appMessageMarkup(acq)
+        +'part of search yet.</b> '+apiMessageMarkup(acq)
         +'. '+interfaceMarkup('ui.add-a-rom-hub-download-client-downlo.bf65f18682')
         +' '
         +'<code>rom-hub search</code> / <code>rom-hub import</code> '
@@ -1585,7 +1684,7 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
       +'<button type="button" class="chip'+(inst==='1'?' on':'')+'" aria-pressed="'+String(inst==='1')+'" data-inst="1">Installed</button>'
       +'<button type="button" class="chip'+(inst==='0'?' on':'')+'" aria-pressed="'+String(inst==='0')+'" data-inst="0">Available</button>'
       +chips+'</div>' 
-      +(d.error?'<div class="panel-note panel-warn" role="alert" aria-live="assertive">'+appMessageMarkup(d.error)+'</div>':'')
+      +(d.error?'<div class="panel-note panel-warn" role="alert" aria-live="assertive">'+apiMessageMarkup(d.error)+'</div>':'')
       +(actionError?'<div id="hub-action-error" class="panel-note panel-warn" role="alert" aria-live="assertive">'+(actionError.source
         ?interfaceTemplateMarkup(actionError.source,actionError.values)
         :'<span lang="und" dir="auto">'+esc(actionError.raw)+'</span>')+'</div>':'')
@@ -1679,7 +1778,7 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
         msg.setAttribute('aria-live',ok?'polite':'assertive');
         msg.innerHTML='<div class="panel-note'+(ok?'':' panel-warn')+'">'
           +(ok?interfaceTemplateMarkup('ui.source-accepted-host-installing.06bc7327df',{host:d.host})
-            :appMessageMarkup(d.reason||d.error||'Could not check this plugin source.'))+'</div>';
+            :(d.reason||d.error?apiMessageMarkup(d.reason||d.error):appMessageMarkup('Could not check this plugin source.')))+'</div>';
       }catch(_){
         msg.setAttribute('role','alert');msg.setAttribute('aria-live','assertive');
         msg.innerHTML=appMessageMarkup('ROMarr could not check this source. Check the connection and try again.');
@@ -1754,8 +1853,8 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
     // The first fetch has not landed yet. Say so, rather than showing an
     // empty grid that reads as "your library is empty".
     p.innerHTML=`<div class="card"><h3 data-i18n="ui.reading-the-library.fe68286704">Reading the library</h3>
-      <p class="help">${d.message?appMessageMarkup(d.message):'<span data-i18n="ui.fetching-from-romm.24384ccda6">Fetching from RomM…</span>'}
-      ${d.error?` <span data-i18n="ui.last-attempt.3ec078252b">Last attempt:</span> <b>${appMessageMarkup(d.error)}</b>. <span data-i18n="ui.retrying-with-backoff.06028a831f">Retrying with backoff.</span>`:''}</p></div>`;
+      <p class="help">${d.message?apiMessageMarkup(d.message):'<span data-i18n="ui.fetching-from-romm.24384ccda6">Fetching from RomM…</span>'}
+      ${d.error?` <span data-i18n="ui.last-attempt.3ec078252b">Last attempt:</span> <b>${apiMessageMarkup(d.error)}</b>. <span data-i18n="ui.retrying-with-backoff.06028a831f">Retrying with backoff.</span>`:''}</p></div>`;
     applyInterfaceLanguage();
     return;
   }
@@ -1857,7 +1956,7 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
       ${LIB.platform?` ${interfaceTemplateMarkup('ui.on-platform.351081c667',{platform:LIB.platform})}`:''}${q?` ${interfaceTemplateMarkup('ui.matching-query.12aacdc131',{query:q})}`:''}
       · ${interfaceTemplateMarkup('ui.cached-cached-across-platformcount-p.55b169ed05',{cached:fmt(d.grand_total),platformCount:fmt((d.platforms||[]).length)})}
       ${d.partial?` · <b>${interfaceMarkup('ui.still-loading-from-the-library-serve.4b07f1a4b9')}</b>`:''}
-      ${d.error?` · ${interfaceMarkup('ui.last-refresh.519ad138a1')} ${appMessageMarkup(d.error)}`:''}</p>`;
+      ${d.error?` · ${interfaceMarkup('ui.last-refresh.519ad138a1')} ${apiMessageMarkup(d.error)}`:''}</p>`;
 
   if(!items.length){
     p.innerHTML=head+`<div class="empty">
@@ -1982,7 +2081,7 @@ RENDER.add=async()=>{
       ? `<div class="card" style="margin:0"><h3 data-i18n="ui.grabbed.cdb5425259">Grabbed</h3>
          <p class="help"><span lang="und" dir="auto">${esc(r.release)}</span> — ${interfaceTemplateMarkup('ui.seeders-count.c31e318db5',{count:num(r.seeders)})}</p></div>`
        : `<div class="card" style="margin:0"><h3 data-i18n="ui.not-grabbed.c2d3260a1a">Not grabbed</h3>
-         <p class="help">${appMessageMarkup(r.error||'no usable release')}</p></div>`;
+         <p class="help">${(r.error?apiMessageMarkup(r.error):appMessageMarkup('no usable release'))}</p></div>`;
     applyInterfaceLanguage();
     refreshCounts();
   };
@@ -2014,7 +2113,7 @@ RENDER.search=async()=>{
     const d=await j(`/api/v1/release?game=${encodeURIComponent(game)}`
       +`&platform=${encodeURIComponent(platform)}`);
     if(d.error){
-      $('#s-out').innerHTML=`<p class="help" style="color:var(--warn)">${appMessageMarkup(d.error)}</p>`;
+      $('#s-out').innerHTML=`<p class="help" style="color:var(--warn)">${apiMessageMarkup(d.error)}</p>`;
       return;
     }
     if(!d.items.length){
@@ -2334,7 +2433,7 @@ async function renderGameCatalog(){
         +'<td>'+(Number(game.rating)?'★ '+num(Number(game.rating)/20):'—')+'</td>'
         +'<td><button data-c-request="'+index+'">Request</button></td></tr>').join('')+'</tbody></table></div>';
   }else{
-    resultsMarkup='<div class="empty">'+(data.error?appMessageMarkup(data.error):'No titles match these filters.')+'</div>';
+    resultsMarkup='<div class="empty">'+(data.error?apiMessageMarkup(data.error):'No titles match these filters.')+'</div>';
   }
   const sources='<div class="row" style="margin-bottom:10px">'
     +(hasIgdb?'<button class="btn '+(source==='igdb'?'':'ghost')+'" data-c-source="igdb">IGDB · covers, genres and ratings</button>':'')
@@ -2354,7 +2453,7 @@ async function renderGameCatalog(){
     +'<button class="btn ghost" id="c-next"'+(CATALOG_VIEW.next===null?' disabled':'')+'>Next</button></div>';
   const status='<p class="help">'+visible.length+' shown on this page'
     +(owned.size?' · '+owned.size+' already in your library hidden':'')
-    +(ownedError?' · '+interfaceMarkup('Owned check unavailable')+': '+appMessageMarkup(ownedError):'')
+    +(ownedError?' · '+interfaceMarkup('Owned check unavailable')+': '+apiMessageMarkup(ownedError):'')
     +(CATALOG_VIEW.platform?' · '+esc((PLATFORMS.find(p=>p.slug===CATALOG_VIEW.platform)||{}).name||''):'')
     +'</p>';
   $('#page').innerHTML=listsNav('catalog')+sources
@@ -2486,7 +2585,7 @@ RENDER.lists=async()=>{
     const spec=(s.paste_sources||{})[b.dataset.paste];
     if(!spec){toastLabel('ui.unknown-store.e7ff0236d5');return;}
     window.open(spec.open,'_blank','noopener');
-    toastAppMessage(spec.how);
+    toastSourceMessage(spec.how);
     editList({type:'paste',name:spec.label+' library'});
   });
   document.querySelectorAll('[data-token]').forEach(b=>b.onclick=async()=>{
@@ -2530,7 +2629,7 @@ RENDER.lists=async()=>{
         const el=m.querySelector('#testline');
         el.className='testline '+(ok?'ok':'bad');
         el.setAttribute('role',ok?'status':'alert');el.setAttribute('aria-live',ok?'polite':'assertive');
-        el.innerHTML=appMessageMarkup(msg);
+        el.innerHTML=apiMessageMarkup(msg);
       };
       line(true,'Connecting…');
       try{
@@ -2685,7 +2784,7 @@ function editList(item){
     e.target.disabled=true; line(true,interfaceMarkup('ui.reading.874bfa5bed'));
     const r=await j('/api/v1/importlist/preview',{method:'POST',
       headers:{'content-type':'application/json'},body:JSON.stringify(payload())});
-    if(r.error){ line(false,appMessageMarkup(r.error)); }
+    if(r.error){ line(false,apiMessageMarkup(r.error,r.error_template)); }
     else{
       const unresolved=r.items.filter(x=>x.unresolved).length;
       const summary=unresolved
@@ -2704,7 +2803,7 @@ function editList(item){
     try{
       const saved=await j('/api/v1/importlist',{method:'POST',
         headers:{'content-type':'application/json'},body:JSON.stringify(payload())});
-      if(saved.error){line(false,appMessageMarkup(saved.error));button.disabled=false;return;}
+      if(saved.error){line(false,apiMessageMarkup(saved.error));button.disabled=false;return;}
       closeModal(); toastLabel('ui.saved.b5c120b316'); go('lists',true);
     }catch(_){
       line(false,appMessageMarkup('Could not save this list. Check the connection and try again.'));
@@ -2719,7 +2818,7 @@ function editList(item){
     try{
       const response=await fetch(`/api/v1/importlist/${item.id}`,{method:'DELETE'});
       const result=await response.json().catch(()=>({}));
-      if(result.error){line(false,appMessageMarkup(result.error));del.disabled=false;return;}
+      if(result.error){line(false,apiMessageMarkup(result.error));del.disabled=false;return;}
       if(!response.ok){line(false,interfaceTemplateMarkup(
         'Could not remove this list (HTTP {status}).',{status:fmt(response.status)}));
         del.disabled=false;return;}
@@ -2777,7 +2876,7 @@ RENDER.discover=async()=>{
     const items=d.items||[];
     if(!items.length){
       const facetNames={genre:'Genre',franchise:'Franchise',company:'Company'};
-      const emptyCopy=d.error?appMessageMarkup(d.error)
+      const emptyCopy=d.error?apiMessageMarkup(d.error)
         :facet&&!DISC.genre?interfaceTemplateMarkup('ui.pick-a-facet-above.95ff025720',{
           facet:translateLabel(facetNames[facet[0]]||facet[0],readInterfaceLanguage())})
         :interfaceMarkup('ui.nothing-on-this-shelf-yet.337c41f2eb');
@@ -2810,7 +2909,7 @@ RENDER.discover=async()=>{
     // providers are configured and which credential is blank; a fixed line
     // here naming one provider is how somebody with a working IGDB setup
     // gets told to go and register for RAWG.
-    $('#d-out').innerHTML=`<div class="empty">${appMessageMarkup(d.error||'Nothing to show.')}</div>`;
+    $('#d-out').innerHTML=`<div class="empty">${d.error?apiMessageMarkup(d.error):appMessageMarkup('Nothing to show.')}</div>`;
     return;
   }
   const src=d.provider_label||'';
@@ -2930,8 +3029,8 @@ RENDER.peers=async()=>{
     const claimCodeMessage='This claim code is a secret. Send it separately from the link, for example by saying it aloud, texting it, or using another app. It works once and expires in {minutes} minutes.';
     $('#p-out').innerHTML=`<div class="card" style="margin:0">
       <h3>Send your friend two things</h3>
-      ${r.note?`<p class="help">${appMessageMarkup(r.note)}</p>`:''}
-      ${r.warning?`<div class="panel panel-warn">${appMessageMarkup(r.warning)}</div>`:''}
+      ${r.note?`<p class="help">${apiMessageMarkup(r.note)}</p>`:''}
+      ${r.warning?`<div class="panel panel-warn">${apiMessageMarkup(r.warning)}</div>`:''}
       ${r.link?`<div class="field"><label>1. The link — send it anywhere</label>
         <input type="text" id="p-link" readonly value="${esc(r.link)}"
           style="width:100%;font:12px/1.5 ui-monospace,Menlo,monospace">
@@ -3023,7 +3122,7 @@ RENDER.peers=async()=>{
         body:JSON.stringify({link:$('#p-link-in').value.trim(),
                              code:$('#p-code-in').value.trim()})});
       b.disabled=false; b.textContent='Become friends';
-      if(!r.ok){ if(r.error)toastAppMessage(r.error);else toastLabel('ui.that-invitation-was-refused.dbe525c91c'); return; }
+      if(!r.ok){ if(r.error)toastAppMessage(r.error,r.error_template);else toastLabel('ui.that-invitation-was-refused.dbe525c91c'); return; }
       if(r.warning) toastAppMessage(r.warning);
       if(r.name&&r.detail)toastMessage('ui.connected-to-friend-they-confirm-you.d27741887e',
         {friend:r.name});
@@ -3087,10 +3186,10 @@ RENDER.peers=async()=>{
       setTimeout(seedPoll,2000);
     } else if(st.status==='done'&&st.seen){
       live.innerHTML=`<div class="panel" style="margin-top:10px">${
-      appMessageMarkup(st.detail||'')}</div>`;
+      apiMessageMarkup(st.detail,st.detail_template)}</div>`;
     } else if(st.status==='failed'){
       live.innerHTML=`<div class="panel panel-warn" style="margin-top:10px">${
-        appMessageMarkup(st.error||'The library read failed.')}</div>`;
+        (st.error?apiMessageMarkup(st.error):appMessageMarkup('The library read failed.'))}</div>`;
     }
   };
   seedPoll();
@@ -3101,7 +3200,7 @@ RENDER.peers=async()=>{
     const r=await j('/api/v1/hashes/seed',{method:'POST',
       headers:{'content-type':'application/json'},body:'{}'});
     b.disabled=false; b.textContent='Read them again now';
-    toastAppMessage(r.detail||r.error||'');
+    toastAppMessage(r.detail||r.error||'',r.detail?r.detail_template:r.error_template);
     seedPoll();
   };
 
@@ -3138,7 +3237,7 @@ RENDER.peers=async()=>{
         body:JSON.stringify({url:val('url'),username:val('username'),
           password:val('password'),name:val('name')})});
       btn.disabled=false; btn.textContent='Connect';
-      if(r.error){ toastAppMessage(r.error); return; }
+      if(r.error){ toastAppMessage(r.error,r.error_template); return; }
       close();
       if(r.name&&Number.isFinite(Number(r.titles))){
         const source='Connected to {friend}: {count} title with hashes ROMarr can match on.';
@@ -3165,7 +3264,7 @@ async function friendShelf(peerId, opts){
   const r=await j('/api/v1/friends/shelf?'+p.toString()).catch(()=>({}));
   if(!r.ok){
     out.innerHTML=`<div class="panel panel-warn" style="margin-top:14px">${
-      appMessageMarkup(r.error||'Could not reach that friend.')}</div>`;
+      (r.error?apiMessageMarkup(r.error,r.error_template):appMessageMarkup('Could not reach that friend.'))}</div>`;
     return;
   }
   const rows=r.items||[];
@@ -3179,7 +3278,7 @@ async function friendShelf(peerId, opts){
   const accessMarkup=r.access==='catalogue'
     ?interfaceMarkup('ui.you-can-add-anything-here-to-your-ow.3972ab31c3')
     :interfaceMarkup('ui.they-allow.293deba9f6')+' '+(accessLabels[r.access]
-      ?interfaceMarkup(accessLabels[r.access]):appMessageMarkup(r.access||'—'));
+      ?interfaceMarkup(accessLabels[r.access]):apiMessageMarkup(r.access||'—'));
   out.innerHTML=`<div style="margin-top:18px;border-top:1px solid var(--line);
       padding-top:16px">
     <h3 style="margin:0 0 4px">${friendTitle}</h3>
@@ -3235,7 +3334,7 @@ async function friendShelf(peerId, opts){
       headers:{'content-type':'application/json'},
       body:JSON.stringify({peer_id:FSHELF.peer,title:b.dataset.fwant,
         platform:b.dataset.fplat})});
-    if(r.ok)toastAppMessage(r.detail||'added to Wanted -- your indexers will look for it');
+    if(r.ok)toastSourceMessage(r.detail||'added to Wanted -- your indexers will look for it');
     else if(r.error)toastAppMessage(r.error);else toastLabel('ui.could-not-add.4c45a2e67f');
   });
   document.querySelectorAll('[data-fplay]').forEach(b=>b.onclick=async()=>{
@@ -3253,15 +3352,15 @@ async function friendShelf(peerId, opts){
 //: evening blaming on their connection.
 function netplayVerdict(r){
   const cls=r.ok?'panel':'panel panel-warn';
-  const head={
+  const knownHead={
     ready:'Ready — you both have the same dump',
     unverified:'Playable, with a caveat',
     mismatch:'Same game, different dumps',
     missing:'They do not have this dump',
     unhashed:'ROMarr has not hashed your copy yet',
     error:'Could not ask'
-  }[r.status]||r.status||'No answer';
-  const headMarkup=appMessageMarkup(head);
+  }[r.status];
+  const headMarkup=knownHead?appMessageMarkup(knownHead):apiMessageMarkup(r.status||'No answer');
   let extra='';
   if(r.room){
     extra=`<div style="margin-top:8px">${interfaceMarkup('ui.room.911ea89c43')} <code>${esc(r.room)}</code>
@@ -3273,7 +3372,7 @@ function netplayVerdict(r){
       ${interfaceTemplateMarkup('ui.compared-on-sha1-sha1-not-the-title.5935055754',{sha1:r.sha1})}</div>`;
   }
   return `<div class="${cls}" style="margin-top:12px"><b>${headMarkup}</b>
-    ${r.detail?`<div style="margin-top:6px">${appMessageMarkup(r.detail)}</div>`:''}
+    ${r.detail?`<div style="margin-top:6px">${apiMessageMarkup(r.detail,r.detail_template)}</div>`:''}
     ${extra}</div>`;
 }
 
@@ -3451,7 +3550,7 @@ RENDER.queue=async()=>{
     ${d.items.map((i,n)=>`<tr><td>${esc(i.game)}</td><td>${esc(i.platform)}</td>
       <td>${esc(i.release||'—')}</td><td>${num(i.seeders)}</td>
       <td><span class="pill ${esc(i.state)}">${statusMarkup(i.state)}</span>
-      ${i.detail?`<div style="color:var(--dim);font-size:11.5px">${appMessageMarkup(i.detail)}</div>`:''}
+      ${i.detail?`<div style="color:var(--dim);font-size:11.5px">${apiMessageMarkup(i.detail)}</div>`:''}
       </td><td style="text-align:end"><div class="rowact">
         ${i.state==='failed'?`<button data-qretry="${n}">Retry</button>`:''}
         <button data-qremove="${n}">Remove</button></div></td></tr>`).join('')}
@@ -3751,12 +3850,12 @@ async function editItem(kind, item){
   m.onclick = e => { if(e.target === m || e.target.dataset.close !== undefined) closeModal(); };
 
   const payload = () => ({ ...readForm(), type: item.type, id: item.id });
-  const line = (ok, msg) => {
+  const line = (ok, msg, explicitTemplate=null) => {
     const status=m.querySelector('#testline');
     status.className = 'testline ' + (ok ? 'ok' : 'bad');
     status.setAttribute('role',ok?'status':'alert');
     status.setAttribute('aria-live',ok?'polite':'assertive');
-    status.innerHTML = appMessageMarkup(msg);
+    status.innerHTML = apiMessageMarkup(msg,explicitTemplate);
   };
 
   m.querySelector('#m-test').onclick = async (e) => {
@@ -3765,7 +3864,7 @@ async function editItem(kind, item){
       const r = await j(`/api/v1/${kind}/test`, {
         method: 'POST', headers: { 'content-type': 'application/json' },
         body: JSON.stringify(payload()) });
-      line(r.ok, r.message || (r.ok ? 'Connected' : 'Failed'));
+      line(r.ok, r.message || (r.ok ? 'Connected' : 'Failed'),r.message_template);
     }catch(_){line(false,'Could not reach ROMarr. Check the connection and try again.');}
     e.target.disabled = false;
   };
@@ -3791,7 +3890,7 @@ async function editItem(kind, item){
     try{
       const response=await fetch(`/api/v1/${kind}/${item.id}`, { method: 'DELETE' });
       const result=await response.json().catch(()=>({}));
-      if(result.error){status.innerHTML=appMessageMarkup(result.error);del.disabled=false;return;}
+      if(result.error){status.innerHTML=apiMessageMarkup(result.error);del.disabled=false;return;}
       if(!response.ok){status.innerHTML=interfaceTemplateMarkup(
         'Could not remove this entry (HTTP {status}).',{status:fmt(response.status)});
         del.disabled=false;return;}
@@ -3810,7 +3909,7 @@ function settingsPage(title, help, body, after){
   const reportSettingsError=(message,control)=>{
     const status=$('#settings-save-status');
     status.setAttribute('role','alert');status.setAttribute('aria-live','assertive');
-    status.innerHTML=appMessageMarkup(message);
+    status.innerHTML=apiMessageMarkup(message);
     control?.setAttribute('aria-invalid','true');
     control?.focus({preventScroll:false});
   };
@@ -3866,7 +3965,9 @@ function settingsPage(title, help, body, after){
       SETTINGS=saved;status.textContent='Settings saved.';toastLabel('ui.saved.b5c120b316');
     }catch(error){
       status.setAttribute('role','alert');status.setAttribute('aria-live','assertive');
-      status.innerHTML=appMessageMarkup(String(error&&error.message||'Settings could not be saved. Try again.'));
+      status.innerHTML=error&&error.message
+        ?apiMessageMarkup(error.message)
+        :appMessageMarkup('Settings could not be saved. Try again.');
     }finally{button.disabled=false;}
   };
 }
@@ -4123,7 +4224,7 @@ RENDER.libraries=async()=>{
     ${noDefault?`<p class="help" style="color:var(--warn)">${interfaceMarkup('ui.no-library-is-marked-default-so-anyt.60146a85ac')}</p>`:''}
     ${unmounted.map(l=>`<p class="help" style="color:var(--warn)">
       ${interfaceTemplateMarkup('ui.name-answers-but-nothing-can-be-impo.2992263c10',
-        {name:l.name||''})} ${appMessageMarkup(l.path_hint||'')}</p>
+        {name:l.name||''})} ${apiMessageMarkup(l.path_hint||'')}</p>
       ${l.readable===false?`<p class="panel-note panel-warn">${esc(l.detail||'')}</p>`:''}`).join('')}
     ${d.items.length?`<table><thead><tr><th>Library</th><th>Type</th>
       <th>Address</th><th>Path</th><th>Platforms</th><th>Status</th><th></th></tr>
@@ -4189,7 +4290,7 @@ RENDER.indexers=async()=>{
         <td><span class="dot ${i.enable?'up':'down'}"></span>${i.enable?'yes':'no'}</td>
         </tr>`).join('')}</tbody></table></div><div id="i-diagnostics"></div>`
     :(d.error?`<div class="card"><h3>Via Prowlarr</h3>
-        <p class="help" style="color:var(--warn)">${appMessageMarkup(d.error)}</p>
+        <p class="help" style="color:var(--warn)">${apiMessageMarkup(d.error)}</p>
         <div class="row" style="justify-content:flex-end">
           <button class="btn ghost" id="i-diagnose">Test indexers</button></div>
         </div><div id="i-diagnostics"></div>`:'')}`;
@@ -4210,19 +4311,19 @@ RENDER.indexers=async()=>{
           <b>Management API</b> — ${interfaceMarkup(management.success?'Connected':'Failed')}
           ${management.status?' · HTTP '+esc(management.status):''}
           ${management.version?' · '+esc(management.version):''}</p>
-    ${management.error?`<p class="help" style="color:var(--warn)">${appMessageMarkup(management.error)}</p>`:''}
+    ${management.error?`<p class="help" style="color:var(--warn)">${apiMessageMarkup(management.error)}</p>`:''}
         ${rows.length?`<table><thead><tr><th>Indexer</th><th>Feed</th><th>Details</th>
           </tr></thead><tbody>${rows.map(item=>`<tr>
             <td>${esc(item.name||'Indexer')}</td>
             <td><span class="dot ${item.success?'up':'down'}"></span>
               ${interfaceMarkup(item.success?'Connected':'Failed')}${item.status?' · HTTP '+esc(item.status):''}</td>
-            <td style="color:var(--dim)">${appMessageMarkup(item.error||item.recentFailure||'—')}
+            <td style="color:var(--dim)">${apiMessageMarkup(item.error||item.recentFailure||'—')}
               ${item.disabledUntil?`<br>${interfaceTemplateMarkup('ui.disabled-until-date.9bb80884d5',{date:regionalDateTime(item.disabledUntil)})}`:''}</td>
             </tr>`).join('')}</tbody></table>`
           :'<p class="help">No enabled torrent or usenet indexers were found.</p>'}
         </div>`;
     }catch(e){
-      $('#i-diagnostics').innerHTML=`<div class="card"><p class="help" style="color:var(--warn)">${appMessageMarkup(e.message||'Diagnostics failed')}</p></div>`;
+      $('#i-diagnostics').innerHTML=`<div class="card"><p class="help" style="color:var(--warn)">${apiMessageMarkup(e.message||'Diagnostics failed')}</p></div>`;
     }finally{test.disabled=false;test.innerHTML=interfaceMarkup('Test indexers');}
   };
   document.querySelectorAll('[data-iedit]').forEach(b=>b.onclick=()=>
@@ -4319,7 +4420,7 @@ RENDER.general=()=>settingsPage('General',
         +'\nURI:     '+esc(d.uri||'?')
         +'\n\n'+interfaceMarkup('Backup codes (single use, save them now):')+'\n  '
         +esc((d.backup_codes||[]).join('\n  '))
-        +'\n\n'+appMessageMarkup(d.note||'');
+        +'\n\n'+apiMessageMarkup(d.note||'');
     };
     $('#g-totpoff').onclick=async()=>{
       const d=await j('/api/v1/totp/disable',{method:'POST',
@@ -4334,7 +4435,7 @@ RENDER.status=async()=>{
   const h=await j('/api/v1/system/status');
   const row=(l,ok,extra='')=>`<tr><td>${l}</td>
     <td><span class="dot ${ok?'up':'down'}"></span>${ok?'OK':'Not available'}</td>
-    <td style="color:var(--dim)">${appMessageMarkup(extra)}</td></tr>`;
+    <td style="color:var(--dim)">${apiMessageMarkup(extra)}</td></tr>`;
   const g=h.ggrequestz||{};
   $('#page').innerHTML=`<div class="card"><h3>Health</h3><table><tbody>
       ${row('Prowlarr',h.prowlarr,h.prowlarr_url)}
@@ -4434,7 +4535,7 @@ RENDER.status=async()=>{
       const blob=new Blob([JSON.stringify(encrypted,null,2)],{type:'application/json'});
       const url=URL.createObjectURL(blob); save(url,'romarr-backup-encrypted.json');
       setTimeout(()=>URL.revokeObjectURL(url),1000); msg(true,interfaceMarkup('ui.encrypted-backup-downloaded.d15118586e'));
-    }catch(err){ msg(false,appMessageMarkup(err.message||'Could not encrypt backup.')); }
+    }catch(err){ msg(false,(err.message?apiMessageMarkup(err.message):appMessageMarkup('Could not encrypt backup.'))); }
   };
   $('#bk-dls').onclick=()=>{
     if(confirmMessage('ui.this-file-will-contain-your-api-key.bfeea73fc6'))
@@ -4454,8 +4555,8 @@ RENDER.status=async()=>{
         headers['X-ROMarr-Backup-Passphrase']=pass;
       }
       const r=await j('/api/v1/restore',{method:'POST',headers,body:JSON.stringify(backup)});
-      msg(!r.error,r.error?appMessageMarkup(r.error)
-        :(r.warning?appMessageMarkup(r.warning):interfaceMarkup('ui.restored.54fb6e453c'))
+      msg(!r.error,r.error?apiMessageMarkup(r.error)
+        :(r.warning?apiMessageMarkup(r.warning):interfaceMarkup('ui.restored.54fb6e453c'))
           +' '+interfaceMarkup('ui.reloading.ea456dcf3d'));
       if(!r.error) setTimeout(()=>location.reload(),1200);
     }catch(_){ msg(false,interfaceMarkup('ui.that-file-is-not-a-romarr-backup.4e556a59e7')); }
@@ -4469,7 +4570,7 @@ RENDER.status=async()=>{
   const feRow=$('#fe-row'); if(!feRow) return;   // navigated away mid-fetch
   feRow.innerHTML=(fe.formats||[]).map(f=>
     '<button class="btn ghost fe-btn" data-f="'+esc(f.name||f)+'" data-filename="'+esc(f.filename||('romarr-'+(f.name||f)+'.export'))+'">'
-    +appMessageMarkup(f.label||f.name||f)+'</button>').join('')
+    +apiMessageMarkup(f.label||f.name||f)+'</button>').join('')
     ||'<span class="help" style="margin:0">No frontend formats available.</span>';
   feRow.querySelectorAll('.fe-btn').forEach(b=>b.onclick=()=>
     save('/api/v1/frontend/export?format='+encodeURIComponent(b.dataset.f),
@@ -4543,16 +4644,16 @@ const wireGGRequestz=()=>{
 // failure.
 const moonlightCard=m=>{
   if(!m.configured) return `<div class="card"><h3>Game streaming host</h3>
-    <p class="help">${m.hint?appMessageMarkup(m.hint):''}. A Moonlight host renders a real
+    <p class="help">${m.hint?apiMessageMarkup(m.hint):''}. A Moonlight host renders a real
     desktop emulator on the host's GPU and sends video &mdash; which is how
     machines with no browser core get played. ROMarr reports what it can
     verify about one and never guesses the rest.</p>
-    <p class="help">${appMessageMarkup(m.manual||'')}</p></div>`;
+    <p class="help">${apiMessageMarkup(m.manual||'')}</p></div>`;
 
   if(!m.ok) return `<div class="card"><h3>${esc(m.kind_label||'Moonlight')}</h3>
     <p class="testline bad">${interfaceTemplateMarkup('ui.no-answer-from-host-port.d291802598',
       {host:m.host||'',port:String(m.port||'')})}
-    &mdash; ${m.problem?appMessageMarkup(m.problem):interfaceMarkup('ui.unreachable.abaa46adb4')}</p>
+    &mdash; ${m.problem?apiMessageMarkup(m.problem):interfaceMarkup('ui.unreachable.abaa46adb4')}</p>
     <p class="help">${interfaceTemplateMarkup('ui.romarr-checks-path-on-the-moonlight.e63082c6ce',{path:'/serverinfo'})}</p></div>`;
 
   const slugs=Object.keys(m.platforms||{});
@@ -4585,19 +4686,19 @@ const moonlightCard=m=>{
               {count:fmt((m.apps||[]).length)})}</p>`)
       : `<p class="help"><b>Reachable, but its app list could not be read</b>,
          so ROMarr cannot say which platforms it plays and does not guess.
-         ${appMessageMarkup(m.apps_problem||'')}</p>`}
+         ${apiMessageMarkup(m.apps_problem||'')}</p>`}
     ${(m.apps||[]).length?`<p class="help">Apps: ${
       (m.apps||[]).map(a=>'<span class="pill">'+esc(a)+'</span>').join(' ')}</p>`:''}
 
     <h4 style="margin:18px 0 6px">Pairing</h4>
-    <p class="help">${appMessageMarkup((m.pairing||{}).manual||'')}</p>
+    <p class="help">${apiMessageMarkup((m.pairing||{}).manual||'')}</p>
     ${canList
       ? (pend.length
           ? `<p class="help">${interfaceTemplateMarkup(
               pend.length===1?'{count} client waiting:':'{count} clients waiting:',
               {count:fmt(pend.length)})}</p>`
           : `<p class="help">${interfaceTemplateMarkup('ui.no-moonlight-client-is-waiting-to-pa.baaa9b58a1',{host:m.host||''})}</p>`)
-      : `<p class="help">${appMessageMarkup((m.pairing||{}).detail||'')}</p>`}
+      : `<p class="help">${apiMessageMarkup((m.pairing||{}).detail||'')}</p>`}
     <div class="row" style="flex-wrap:wrap;gap:8px;align-items:center">
       ${canList&&pend.length
         ? `<select id="ml-secret">${pend.map(p=>
@@ -4637,7 +4738,7 @@ const wireMoonlight=m=>{
     // request is outstanding (LizardByte/Sunshine#3944) -- so the strongest
     // honest word is "accepted", and the check is the paired-client count.
     out.className='testline '+(r.ok?'ok':'bad');
-    out.innerHTML=appMessageMarkup(r.detail||(r.ok?'Accepted.':'Refused.'));
+    out.innerHTML=(r.detail?apiMessageMarkup(r.detail):appMessageMarkup(r.ok?'Accepted.':'Refused.'));
     if(r.ok) setTimeout(()=>RENDER.status(),1500);
   };
 };
@@ -4933,7 +5034,7 @@ RENDER.calendar=async()=>{
       +' data-calview="'+k+'" style="padding:4px 10px;font-size:12px">'
       +l+'</button>').join('')
     +'</div>'
-      +(d.error?'<div class="panel-note panel-warn">'+appMessageMarkup(d.error)+'</div>':'')
+      +(d.error?'<div class="panel-note panel-warn">'+apiMessageMarkup(d.error)+'</div>':'')
     +(d.note?'<p class="help">'+esc(d.note)+'</p>':'')
     +(d.view!=='upcoming'&&d.month
       ?'<div class="row" style="align-items:center;gap:8px;margin:4px 0 8px">'
@@ -5030,7 +5131,7 @@ RENDER.calendar=async()=>{
       +'<div class="desc">'+esc((g.platforms||[]).slice(0,4).join(', '))+'</div>'
       +'<div class="rowact" style="margin-top:6px"><button data-calreq="'+n+'">Request</button></div>'
       +'</div>').join('')+'</div>'
-    :'<div class="empty">'+appMessageMarkup(w.error||'No provider configured.')+'</div>';
+    :'<div class="empty">'+(w.error?apiMessageMarkup(w.error):appMessageMarkup('No provider configured.'))+'</div>';
   document.querySelectorAll('[data-calreq]').forEach(b=>b.onclick=()=>
     requestGame(web[Number(b.dataset.calreq)]));
 };
@@ -5318,7 +5419,7 @@ RENDER.collections=async()=>{
           translation_langs:($('#ctranslangs').value.trim()||'').split(',').map(s=>s.trim()).filter(Boolean),
           exclude:ex.split(',').filter(Boolean)};
     const d=await j('/api/v1/collection/plan?'+q).catch(()=>({error:'plan failed'}));
-    if(d.error){out.innerHTML='<div class="panel-note panel-warn">'+appMessageMarkup(d.error)+'</div>';return;}
+    if(d.error){out.innerHTML='<div class="panel-note panel-warn">'+apiMessageMarkup(d.error)+'</div>';return;}
     const c=d.counts;
     const tile=(n,label,colour)=>'<div style="flex:1;min-width:110px;padding:10px 12px;'
       +'background:var(--bg);border:1px solid var(--line);border-radius:6px">'
@@ -5468,6 +5569,8 @@ RENDER.organize=async()=>{
     box.innerHTML=markup?'<div class="panel-note '+(bad?'panel-warn':'')+'" style="margin:12px 0">'+markup+'</div>':'';
   };
   const message=(text,bad)=>renderMessage(text?appMessageMarkup(text):'',bad);
+  const messageApi=(text,bad,template=null)=>renderMessage(
+    text?apiMessageMarkup(text,template):'',bad);
   const messageTemplate=(source,values,bad)=>renderMessage(
     source?interfaceTemplateMarkup(source,values):'',bad);
   let lastAnnouncedOrganizerState='';
@@ -5502,7 +5605,7 @@ RENDER.organize=async()=>{
       +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('Unmatched {count}',{count:fmt(status.unmatched||0)})+'</span>'
       +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('Switch versions behind catalog {count}',{count:fmt(status.switch_outdated||0)})+'</span></div>'
       +(status.truncated?'<p class="help" style="margin:8px 0 0">This scan was bounded at 50,000 entries. Filter to a platform and scan again to continue.</p>':'')
-      +(status.error?'<p class="help" style="margin:8px 0 0;color:var(--warn)">'+appMessageMarkup(status.error)+'</p>':'')
+      +(status.error?'<p class="help" style="margin:8px 0 0;color:var(--warn)">'+apiMessageMarkup(status.error)+'</p>':'')
       +'</div>';
     const items=data.items||[];
     const start=data.total?offset+1:0;
@@ -5512,7 +5615,7 @@ RENDER.organize=async()=>{
     $('#org-next').disabled=offset+limit>=(data.total||0);
     const target=$('#org-items');
     if(data.error){
-      target.innerHTML='<div class="panel-note panel-warn">'+appMessageMarkup(data.error)+'</div>';
+      target.innerHTML='<div class="panel-note panel-warn">'+apiMessageMarkup(data.error)+'</div>';
     }else if(!items.length){
       target.innerHTML='<div class="empty">No inventory entries yet. Scan a configured ROM library to begin.</div>';
     }else{
@@ -5595,7 +5698,7 @@ RENDER.organize=async()=>{
           headers:{'Content-Type':'application/json'},
           body:JSON.stringify({identity_id:identity,title:title,platform:platform()})})
           .catch(()=>({error:'Could not save this mapping.'}));
-        if(result.error){message(result.error,true);return;}
+        if(result.error){messageApi(result.error,true,result.error_template);return;}
         message('Title mapping saved. This game is now eligible for a safe rename preview.',false);
         await loadInventory();
       });
@@ -5616,7 +5719,7 @@ RENDER.organize=async()=>{
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({platform:platform(),force:!!force})})
       .catch(()=>({error:'Could not start the library scan.'}));
-    if(result.error){message(result.error,true);return;}
+    if(result.error){messageApi(result.error,true,result.error_template);return;}
     await loadInventory();
   };
   $('#org-scan').onclick=()=>startScan(false);
@@ -5631,12 +5734,12 @@ RENDER.organize=async()=>{
     const plan=await j('/api/v1/organizer/rename-plan?'+query.toString())
       .catch(()=>({error:'Could not create a rename preview.'}));
     currentPlan=plan;
-    if(plan.error){message(plan.error,true);$('#org-plan-result').innerHTML='';return;}
+    if(plan.error){messageApi(plan.error,true,plan.error_template);$('#org-plan-result').innerHTML='';return;}
     const batch=plan.batch||{offset:planOffset,limit:planLimit,total:0,count:0,has_more:false};
     const first=batch.count?batch.offset+1:0;
     const last=batch.offset+batch.count;
-      const rows=(plan.operations||[]).map(op=>'<tr><td lang="und" dir="auto">'+esc(op.from)+'</td><td lang="und" dir="auto">'+esc(op.to)+'</td><td>'+appMessageMarkup(op.reason)+'</td></tr>').join('');
-      const blocked=(plan.blocked||[]).map(op=>'<tr><td>'+esc(op.identity_id||'')+'</td><td>'+appMessageMarkup(op.reason||'')+'</td></tr>').join('');
+      const rows=(plan.operations||[]).map(op=>'<tr><td lang="und" dir="auto">'+esc(op.from)+'</td><td lang="und" dir="auto">'+esc(op.to)+'</td><td>'+apiMessageMarkup(op.reason)+'</td></tr>').join('');
+      const blocked=(plan.blocked||[]).map(op=>'<tr><td>'+esc(op.identity_id||'')+'</td><td>'+apiMessageMarkup(op.reason||'')+'</td></tr>').join('');
     const safeCount=(plan.operations||[]).length,blockedCount=(plan.blocked||[]).length;
     const planAnnouncement=$('#org-announcement');
     if(planAnnouncement)planAnnouncement.innerHTML=interfaceTemplateMarkup(
@@ -5663,8 +5766,9 @@ RENDER.organize=async()=>{
         body:JSON.stringify({plan_id:appliedPlan.plan_id,platform:platform(),
           offset:batch.offset,limit:batch.limit})})
         .catch(()=>({error:'Could not apply the rename plan.'}));
-      if(result.error){message(result.error,true);return;}
-      message(result.message||'Rename batch applied.',false);
+      if(result.error){messageApi(result.error,true,result.error_template);return;}
+      if(result.message)messageApi(result.message,false,result.message_template);
+      else message('Rename batch applied.',false);
       currentPlan=null;
       nextPlanOffset=batch.has_more?batch.next_offset:0;
       $('#org-plan-result').innerHTML=batch.has_more
@@ -5683,7 +5787,7 @@ RENDER.organize=async()=>{
     const result=await j('/api/v1/organizer/rename/undo',{method:'POST',
       headers:{'Content-Type':'application/json'},body:'{}'})
       .catch(()=>({error:'Could not undo the last rename batch.'}));
-    if(result.error){message(result.error,true);return;}
+    if(result.error){messageApi(result.error,true,result.error_template);return;}
     messageTemplate('Undid {count} rename(s).',{count:fmt(result.undone||0)},false);
     await loadInventory();
   };
@@ -5693,7 +5797,7 @@ RENDER.organize=async()=>{
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({platform:platform()})})
       .catch(()=>({error:'Could not publish the ES-DE gamelist.'}));
-    if(result.error){message(result.error,true);return;}
+    if(result.error){messageApi(result.error,true,result.error_template);return;}
     if(result.message)message(result.message,!result.written);
     else messageTemplate('Published {count} ES-DE entries.',
       {count:fmt(result.games||0)},!result.written);
@@ -5743,7 +5847,7 @@ RENDER.manualimport=async()=>{
       return;
     }
     const bad=(d.refused||[])[0]||{};
-    st.innerHTML='<span style="color:var(--bad)">'+appMessageMarkup(bad.reason||'refused')+'</span>';
+    st.innerHTML='<span style="color:var(--bad)">'+apiMessageMarkup(bad.reason||'refused')+'</span>';
     btn.disabled=false;
     if(bad.needs_force){
       // Never a silent reinterpretation: forcing is a second, separate act,
@@ -5761,7 +5865,7 @@ RENDER.manualimport=async()=>{
     out.innerHTML='<div class="empty">'+interfaceMarkup('ui.scanning.38d96da6e8')+'</div>';
     const d=await j('/api/v1/manualimport?path='
       +encodeURIComponent($('#mipath').value)).catch(()=>({error:'scan failed'}));
-    if(d.error){out.innerHTML='<div class="panel-note panel-warn">'+appMessageMarkup(d.error)+'</div>';return;}
+    if(d.error){out.innerHTML='<div class="panel-note panel-warn">'+apiMessageMarkup(d.error)+'</div>';return;}
     const c=d.candidates||[];
     out.innerHTML='<p class="help">'+interfaceTemplateMarkup('ui.importable-importable-skipped-skippe.7567d58f0d',
       {importable:fmt(c.length),skipped:fmt(d.skipped||0)})+'</p>'
@@ -5774,7 +5878,7 @@ RENDER.manualimport=async()=>{
            +'data-verdict="'+esc(x.verdict)+'">'
            +'<td><span lang="und" dir="auto">'+esc(x.filename)+'</span></td>'
            +'<td><select class="mi-pf">'+opts(x.platform)+'</select></td>'
-           +'<td class="help" style="margin:0">'+appMessageMarkup(x.reason)+'</td>'
+           +'<td class="help" style="margin:0">'+apiMessageMarkup(x.reason)+'</td>'
            +'<td>'+(x.hollow?'<span class="pill" lang="und" dir="auto" style="background:var(--bad);color:var(--bad-ink)" '+manualDiagnosticTitle(x.hollow)+'>'+interfaceMarkup('ui.empty-file.0045fa2e36')+'</span><br>':'')+verdict(x.verdict)+(x.header_says?'<br><span class="pill" lang="und" dir="auto" style="background:var(--warn);color:var(--warn-ink)" '+manualDiagnosticTitle(x.header_detail||'')+'>'+interfaceMarkup('ui.header-says.b5143b147b')+' <span lang="und" dir="auto">'+esc(x.header_says)+'</span></span>':'')+'</td>'
            +'<td><button class="btn mi-go">'+interfaceMarkup('ui.import.2cff9baabf')+'</button></td>'
            +'<td class="mi-st help" style="margin:0"></td></tr>').join('')
@@ -5830,8 +5934,8 @@ RENDER.tasks=async()=>{
       const source=taskNames[n];
       const nameMarkup=source?interfaceMarkup(source):'<span lang="und" dir="auto">'+esc(n)+'</span>';
       const detailMarkup=label?(hasLabel(label)?interfaceMarkup(label):'<span lang="und" dir="auto">'+esc(label)+'</span>'):'';
-      const result=t&&t.last_error?`<span style="color:var(--warn)">${appMessageMarkup(t.last_error)}</span>`
-        :t&&t.last_result?statusMarkup(t.last_result):'—';
+      const result=t&&t.last_error?`<span style="color:var(--warn)">${apiMessageMarkup(t.last_error)}</span>`
+        :t&&t.last_result?statusMarkup(t.last_result,t.last_result_template,t.last_result_parts):'—';
       return `<tr><td><b>${nameMarkup}</b>
       <div style="color:var(--dim);font-size:12px">${detailMarkup}</div></td>
       <td>${t?every(t.interval_seconds):interfaceMarkup('ui.manual-only.be1016ce6d')}</td>
@@ -5851,7 +5955,7 @@ RENDER.tasks=async()=>{
     const r=await j('/api/v1/command',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify(body)});
-    if(r.message)toastAppMessage(r.message);
+    if(r.message)toastCommandMessage(r);
     else if(r.scanned!==undefined)toastMessage('ui.scanned-count-dry-run.442c1ab947',{count:fmt(r.scanned)});
     else toastLabel('ui.done.11a6767d56');
     go('tasks'); refreshCounts();
