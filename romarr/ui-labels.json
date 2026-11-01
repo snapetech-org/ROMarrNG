@@ -4260,7 +4260,7 @@
         "ko": "응용 프로그램 :",
         "zh-Hant": "應用程序:",
         "vi": "Ứng dụng :",
-        "id": "Aplikasi yang :"
+        "id": "Aplikasi:"
       },
       "translationHashes": {
         "es": "5d8566f33bfc1bf666147deb6509e885facd51f5ce167e6add3664d30ee0b9a5",
@@ -4274,7 +4274,7 @@
         "ko": "083ca1bcaa11df702b1e7dfb17ab3c70ec833dd7342116176c99ca87fa400900",
         "zh-Hant": "8e2a09248a49be5941e92db1863a31a78dffbca119d21dcac5891212dc1bbb76",
         "vi": "d0b1395d8b3c6375a4951177ecbf401c29ada3add94c9411b7a450552c3b7a4d",
-        "id": "4fa7a234bb7a6a26035aad201a2784c35d9c22c42c325d851b68b6013a374e9d"
+        "id": "722e0ed1768200427c5ba7e39bfba104de24d30a89c1e38b04068be65ff56c6e"
       },
       "translationStatus": {
         "es": "draft",
@@ -4623,7 +4623,7 @@
         "es": "Códigos de seguridad (un solo uso, guardarlos ahora):",
         "zh-Hans": "备用代码（仅可使用一次，请立即保存）：",
         "hi": "बैकअप कोड (एक बार उपयोग के लिए; अभी सहेजें):",
-        "de": "Backup-Codes (einfach genutzt, speichern Sie sie jetzt):",
+        "de": "Backup-Codes (nur einmal verwendbar; bitte jetzt speichern):",
         "ja": "バックアップコード（使い捨てです。今すぐ保存してください）：",
         "fr": "Codes de secours (à usage unique ; enregistrez-les maintenant) :",
         "pt-BR": "Códigos de recuperação (uso único; salve-os agora):",
@@ -4631,13 +4631,13 @@
         "ko": "백업 코드 (단일 사용, 지금 저장) :",
         "zh-Hant": "備用碼（僅可使用一次，請立即儲存）：",
         "vi": "Mã sao lưu (một lần sử dụng, lưu chúng bây giờ):",
-        "id": "Kode sandaran (satu-satunya penggunaan, simpan sekarang):"
+        "id": "Kode cadangan (hanya dapat digunakan satu kali; simpan sekarang):"
       },
       "translationHashes": {
         "es": "a5b76540e2fcd2797f9a33a3bea320787f91cf8e19688ebc2c7f823da256a252",
         "zh-Hans": "050215cbad02a1c5399e14a1834547510d33822cd8abec9aba3a48c4c93d4dc6",
         "hi": "6af3e9b19ccb43860ed31c0f72cb4a248af2326aa7b3e7eb719344112ea7047c",
-        "de": "c185f9a6361234e1506d7ebdc271033e1165f6851486b45e490db53267279216",
+        "de": "d19f231766947b16114ebfd834ba552d0f9c1af2f6072967d5773fb15d8f16a9",
         "ja": "d88f3760c3d8c0ed581f27cd1dbcb64b4af54f3e608d07cbe1d3d1e8f1f27ae1",
         "fr": "f24be85bd26b1e06fa0157731af44d4cc9d7ba205f2d0901fda5e9faeae0c7f2",
         "pt-BR": "43facbdb3cb51370d4832b1a935bd5aefbfd81394a8c0874952527bcb9d97ebc",
@@ -4645,7 +4645,7 @@
         "ko": "259a9a82e12206324eac776428b7f246b608c72d387f75cb1a1632939fb4c9ec",
         "zh-Hant": "f99752019e5eb7a1b44c20f087de3f16deef9f7e84c52a9d4a204b27731622da",
         "vi": "6da692756d8a7a5e220c096558f30b20a55df1a237a8f738b0942e8b189781a4",
-        "id": "605a73761706dffe737ac5690c958fbbd43b4b2fdc486b369c67ba194e67bad6"
+        "id": "9e668ddc24579f905c48878cbc69dabbfe5987db29fe7e3b61084a44b4e9d3cc"
       },
       "translationStatus": {
         "es": "draft",
@@ -7512,29 +7512,29 @@
       "sourceHash": "94cf3e816e6548a3bd391749cd1640557a07a7a25b2a2d10ed5c42428bc91cf5",
       "translations": {
         "es": "Conecta un proveedor de metadatos IGDB en",
-        "zh-Hans": "连接 IGDB 数据提供商",
-        "hi": "IGDB मेटाडेटा प्रदाता से कनेक्ट करें",
+        "zh-Hans": "如需连接 IGDB 元数据提供方，请前往",
+        "hi": "IGDB मेटाडेटा प्रदाता जोड़ने के लिए यहाँ जाएँ:",
         "de": "Verbinden Sie einen IGDB Metadatenanbieter unter",
-        "ja": "IGDB メタデータプロバイダーを接続する",
+        "ja": "IGDB メタデータプロバイダーを設定するには、次を開いてください：",
         "fr": "Connectez un fournisseur de métadonnées IGDB dans",
         "pt-BR": "Conecte um fornecedor de metadados IGDB abaixo",
         "ar": "اتصل بـ IGDB مزود البيانات تحت",
-        "ko": "IGDB 메타 데이터 공급자에 연결하십시오",
-        "zh-Hant": "連接 IGDB 數據提供商",
+        "ko": "IGDB 메타데이터 제공자를 연결하려면 다음으로 이동하세요:",
+        "zh-Hant": "如需連接 IGDB 中繼資料提供者，請前往",
         "vi": "Kết nối với nhà cung cấp dữ liệu IGDB dưới đây:",
         "id": "Menghubungkan penyedia metadata IGDB di bawah"
       },
       "translationHashes": {
         "es": "aa5b7ca6be88ac7074d50cdfb2146f61b9b970245f243a23c1f60777b7c3fca6",
-        "zh-Hans": "155d016bdeafb0dd1e74d88a05643419634ed72de4e601b5f9216f937335da82",
-        "hi": "8079bdcfefd79c5f6d26c6fbc548501440d5a5cff8ee9da7d6d1de276869890a",
+        "zh-Hans": "e5e72c9be258c774cdefb33e6f6fa4af687bb47f93b9cb22c639e29147b84c39",
+        "hi": "0974c85dab2a824d5000b36da528f38a3f7eb8caaf22abea40546a68f2089c70",
         "de": "3d6efa04d178434598213888d1e38ecaec77e593bece034822bf546b20968e0b",
-        "ja": "64c66990cd388dcc0ce77d355bf838cdf765edfe62e1fe7af838eab4bee956e2",
+        "ja": "263219caa82841b192f5bd58f386e83160eb0dc436e171cdb70e7eb5189fbe9c",
         "fr": "0edf151383ec938803c38905e296ef380bed8123f0bb5ef819fb579800e52c61",
         "pt-BR": "78daacb36ee6857f9b4a5ad22331e5a7e34139969a4df1a32bb50ed6e2b162b6",
         "ar": "6c8370757ebd503d158b2b03fa67f3417b6ee034d82fcf868540a7a09bea027a",
-        "ko": "428c2d79250ce00740f13cafd2109c585dc31e61e65a2355cef0801e562e09aa",
-        "zh-Hant": "efc77a86d2bdba60f33a3190f97fcaa4727c1203b3f462f750aeb00509e68584",
+        "ko": "8a6d80f00deb9c38f54bf7e23fd55fbf46452210a9e20b0d2c72041c7045cb0d",
+        "zh-Hant": "f085eb1787e45f719a89889b43bd28183c3c247c388602fd188075db888bfb3c",
         "vi": "9d4ee1d1233d1dc4c269af056854677c67f68a606d5fc8a19629f9f3caf90d8d",
         "id": "756fe2623cfd9b666e851fe4427ebecc7b0ca1adff9f0cdd4b8c928bbf2e7ba9"
       },
@@ -21949,7 +21949,7 @@
         "ko": "이미 보유한 라이브러리 정리",
         "zh-Hant": "整理您現有的遊戲媒體庫",
         "vi": "Sắp xếp thư viện trò chơi bạn đã có",
-        "id": "Membangun perpustakaan yang sudah Anda miliki"
+        "id": "Atur koleksi game yang sudah Anda miliki"
       },
       "translationHashes": {
         "es": "f407dc01362206c5c2d02c98f95b882b6f1ad996d10f4670bc40b381337ce23b",
@@ -21963,7 +21963,7 @@
         "ko": "48e188faa814885e80f81d89af2c72148476fb6f4b24e5ad1b490ddf595836a8",
         "zh-Hant": "56f1aed8e06aa1481600dcdbb058c39ac22d0d55e604d322904aa6a549c3400c",
         "vi": "3d4c37f52d138f15918e02fbd5fac5201c1a528a6d3fe36d6e2bc896ffa91130",
-        "id": "672a2ed8a6afde6d997b4d6136e445db9a1423b45eb2f96af8e0273fc2beafc3"
+        "id": "3e1f1b90a1e7f16b0f5f072c3ee3e9131aba5fc19054a7803c98ff80ed0143a9"
       },
       "translationStatus": {
         "es": "draft",
@@ -25578,32 +25578,32 @@
       "source": "ROMarr handles release search, verification and filing; the",
       "sourceHash": "fde43e75b609774e23e84196d21af2cec63b81205976dd76a74d3093abea60cf",
       "translations": {
-        "es": "ROMarr maneja la búsqueda, la verificación y el envío; el",
-        "zh-Hans": "ROMarr处理释放搜索、验证和提交;",
-        "hi": "ROMarr रिलीज खोज, सत्यापन और जमा का प्रबंधन करता है;",
-        "de": "ROMarr verarbeitet die Release-Suche, Überprüfung und Einreichung; die",
-        "ja": "ROMarrは、リリース検索、検証および提出を処理します。",
-        "fr": "ROMarr gère la recherche, la vérification et l'envoi de données; le",
-        "pt-BR": "ROMarr gerencia a libertação de pesquisa, verificação e envio; o",
-        "ar": "ROMarr يتعامل مع إطلاق البحث والتحقق والتسجيل.",
-        "ko": "ROMarr는 릴리스 검색, 확인 및 제출을 처리합니다.",
-        "zh-Hant": "ROMarr處理釋放搜索、驗證和提交;",
-        "vi": "ROMarr xử lý phát hành tìm kiếm, xác minh và gửi;",
-        "id": "ROMarr mengendalikan pencarian, verifikasi dan pendaftaran;"
+        "es": "ROMarr busca versiones de juegos, las verifica y las organiza; la",
+        "zh-Hans": "ROMarr 负责搜索游戏发行版本、核验并整理归档；",
+        "hi": "ROMarr गेम के संस्करण खोजने, उनका सत्यापन करने और उन्हें व्यवस्थित करने का काम करता है;",
+        "de": "ROMarr sucht nach Spielversionen, überprüft sie und ordnet sie ein; der",
+        "ja": "ROMarr はゲームのバージョンを検索・検証し、整理します。詳しくは",
+        "fr": "ROMarr recherche les versions de jeux, les vérifie et les organise ; le",
+        "pt-BR": "O ROMarr cuida da busca por lançamentos de jogos, da verificação e da organização; o",
+        "ar": "يتولى ROMarr البحث عن إصدارات الألعاب والتحقق منها وتنظيمها؛",
+        "ko": "ROMarr는 게임 버전을 검색하고 검증해 정리합니다. ",
+        "zh-Hant": "ROMarr 負責搜尋遊戲版本、驗證並整理歸檔；",
+        "vi": "ROMarr phụ trách tìm kiếm các bản phát hành trò chơi, xác minh và sắp xếp;",
+        "id": "ROMarr menangani pencarian rilis game, verifikasi, dan pengarsipan;"
       },
       "translationHashes": {
-        "es": "adc2a683b975d657780a67c0235f1fc990d85e5682c86d0a3b6f98798f8dff1d",
-        "zh-Hans": "a5054cee2cbae99fef69a9f28e14badb8a9603de8a75bd1b068473e91a8d470b",
-        "hi": "4a8a76be39a79c2fd69da48b45bed4b1d9658c4e85fba109adb4c25c6ed92085",
-        "de": "ea3aff22446917e0e99e869d45b9ead790b607ae6521e66a71c5c2a4e32b1fad",
-        "ja": "6469f4f7dd39f26d152bc6d038347698a03da327410b3924be257deca496d608",
-        "fr": "695887a7ca3ff7b6f917500267fb3b27db2616ad45b10dc1b6a6278c830e6576",
-        "pt-BR": "b787ea5c32b7a36ba9e24cf12ccf5eca46b018d73c3767626e3f9b2124b1da1d",
-        "ar": "01b8b8c65ca520460a6c8884fb5ee0928dd651ad72fea98fbcf9b93fb1e93f6a",
-        "ko": "613bc473ed3a7391c3acf2227f6b7819699d9837c9b6092980009f259022b484",
-        "zh-Hant": "4795568b0ab8ec9ae3d32e4da32b976269940706f653e21e3068d0f64253bd1b",
-        "vi": "5e2cb8a67e7c63a81207c9eb8c1c53ba693711e245b19ee0fe61767e593f0428",
-        "id": "e1b6a1d0c6c8b80456f3a576595c7d99c1d6541a934d0a0a0b38d6227c0b916e"
+        "es": "5d17dba92c20eb999d0c83577b1ba3370764fbeb615dc3067677f2261e9460f8",
+        "zh-Hans": "1665eec743d62ec11e5264fc20571ffdfd62658cf1a3a83040e70f3962c5cb04",
+        "hi": "7e751e09b6d6f0cb64b926736f6cdcf28fb8b96d9d697353df3d169da896cec6",
+        "de": "dc6db4864fe298a75c0491bf605bcf9a1514f262fc708b9665210cc9d7299a5d",
+        "ja": "bed5f809692aa7dfe6b49a35821a88f464c4e95ccf3c7100ac23dfa947be9667",
+        "fr": "aeabe38c340a363673be998049688bf20ab509de6425dae6a8c3bd89c59ed443",
+        "pt-BR": "bedd4dc5e558629f6b89af195a513c2e8eebcc43cafef166ddb42b4f1e2b50e1",
+        "ar": "0e8c2b6ad857733785964632622a688a7259e1d04d6f8e1d9fc02e8e2ec3c4c8",
+        "ko": "e326ae338ffa6767c631199af6001af3122acf382ff909df6b0c93623bee6f6b",
+        "zh-Hant": "60b3dfdb58b48c5ee5cfe8655065bde5cfc4c14583ea22fa4ecd2d5cf08dedcd",
+        "vi": "aa6f5d3cc5467929c9cb4b671a172f9508e3f7c8e1af7bb4a168faa15d733853",
+        "id": "420a2417939c01c8ec578d1a61166340c97863b62a575e020a2175d18290a17f"
       },
       "translationStatus": {
         "es": "draft",
@@ -41832,32 +41832,32 @@
       "source": "explains the connection.",
       "sourceHash": "9e80ba46529646a293696c05b54c7fdbf716a85ae5b802518b4447611c989d96",
       "translations": {
-        "es": "Explica la conexión.",
-        "zh-Hans": "解释了联系。",
+        "es": "explica la conexión.",
+        "zh-Hans": "说明了连接方式。",
         "hi": "कनेक्शन को समझाता है।",
-        "de": "Erläutert die Verbindung.",
-        "ja": "つながりを説明する。",
-        "fr": "Il explique la connexion.",
-        "pt-BR": "Explica a conexão.",
-        "ar": "توضيح الاتصال .",
-        "ko": "연결을 설명합니다.",
-        "zh-Hant": "解釋了聯繫。",
-        "vi": "giải thích kết nối.",
-        "id": "menjelaskan koneksi tersebut."
+        "de": "erläutert die Verbindung.",
+        "ja": "で接続方法を説明しています。",
+        "fr": "explique la connexion.",
+        "pt-BR": "explica a conexão.",
+        "ar": "يوضح طريقة الاتصال.",
+        "ko": "가 연결 방법을 설명합니다.",
+        "zh-Hant": "說明了連線方式。",
+        "vi": "giải thích cách kết nối.",
+        "id": "menjelaskan cara menghubungkannya."
       },
       "translationHashes": {
-        "es": "eabfd7b67b8b6c5d993bea45623c6dbc80ed876dae146e443d9f3da649c32e01",
-        "zh-Hans": "af82af155265b0b271626fd61bf5e893c7f43895b2181935837c367bc60a64ce",
+        "es": "44c47f22eac85678aef8b88e01a939c22bea0d07d24ee171915480fbf790740b",
+        "zh-Hans": "970ce42ef022d16b5d5e507b3f5861f9887a88f2e8d5261187d4c78d25e424ee",
         "hi": "730c1c83d136e0c86f02c12f289265cb49d6f6c33aecf43ce13d5e1b6f820962",
-        "de": "c960c39222a5a63d375832fcbf9052632de5402281ff8f0f2afd1c7b9c1aa78b",
-        "ja": "04c8bf00e88a522e6728e344811b727dd577eb2fb0c06f52da6a629bd04304bb",
-        "fr": "b82dc5997ac316c85db3aa5e3637efbcf1d85011ea3b9268093e6dc3b253753a",
-        "pt-BR": "4968556d1fe6d4995774b40c0d1ae214d8d516a91cd6a21f5995189c60f34555",
-        "ar": "ee0c6f8cf69a059465f7d624613f521283df95a5ca8aba2b02a1e140f8900ee0",
-        "ko": "ce2238bd44150d07e51932f7137fa6cf78fd21327f7bf7e35db8eba51f132574",
-        "zh-Hant": "5108a843c2b024da4ab189f80319ccfbb4dac753c3b9f629112b1cec6700d4d3",
-        "vi": "6728440c9b9f21661218288656d06dc335e53c4f8fe8ddefadd6e88752b61a59",
-        "id": "aee132f76713e3c0a834644d045d2d671897369c50f53ec15e1d58fa7fdb8752"
+        "de": "3d33d2091592d8e8b1c111d71ba23b031822609d17eb6447c9a84a9cdf16891d",
+        "ja": "aaa7d7f7c95a6926349843bf130a910573eeece23b1d1a688dc4f445128cf99c",
+        "fr": "2cadb4c5c92d38bb1222087ead065d1b8a187efb3da555f29389e6e4aac8431f",
+        "pt-BR": "04d97268c076b970b0a19a65f149c94e110ad0cd952cedbb356837867683a879",
+        "ar": "9c9bd33edd9fc18ea05cfe0c6c8e8908b536d899f35628a91432fc6f9d9acd12",
+        "ko": "60abbb9344a1bfe57a1911b6573cc5253a959a8a9633d62b6f81345fb8b4c5a2",
+        "zh-Hant": "4420798f4574c7a4cf5276aee7939e4499853072c620da4a5f461bcda06e04a2",
+        "vi": "924012a94d0d145ca144ae85982c94c899bc12ec2d5f2a40ae19960416e4f48f",
+        "id": "b9775880e996e86b23b3b000259273cf3ab737216eba1ac366541fb1227a4e3f"
       },
       "translationStatus": {
         "es": "draft",
@@ -42574,32 +42574,32 @@
       "source": "integration guide",
       "sourceHash": "6cfa2d0314f8b1da4dd457bd11b39027be5eb4bd13b3a2230df34be284558a37",
       "translations": {
-        "es": "Guía de integración",
+        "es": "guía de integración",
         "zh-Hans": "集成指南",
         "hi": "एकीकरण गाइड",
         "de": "Integrationsleitfaden",
         "ja": "統合ガイド",
-        "fr": "Guide d’intégration",
-        "pt-BR": "Guia de integração",
+        "fr": "guide d’intégration",
+        "pt-BR": "guia de integração",
         "ar": "دليل التكامل",
         "ko": "통합 가이드",
-        "zh-Hant": "集成指南",
-        "vi": "Hướng dẫn tích hợp",
-        "id": "Panduan Integrasi"
+        "zh-Hant": "整合指南",
+        "vi": "hướng dẫn tích hợp",
+        "id": "panduan integrasi"
       },
       "translationHashes": {
-        "es": "37e8ee59fb4afceabc575e0e9221163437955470b816f09de73323dea88ff6de",
+        "es": "9d515231d5fa7ab7719eb4e8f30614e890d73fc3e68058c1c1fcefdfcd3e30dd",
         "zh-Hans": "f98e557259801681fef28113073ee237078f3e1dd42a6c116cf8ced66abd3b51",
         "hi": "8bb9cb22a19711ba86f8432404cd7a2114aff6a9ca4e0a3437e33f9a3cd34c3d",
         "de": "375cdc997b27dd6dfca39e68b66837be6ec9358b8e1f0abcf5d99c6ad5ffec5f",
         "ja": "9890820fa2cca7fd3bd33ac85cd1e45b9b22808a8f4fd4cca7b8f18fc08611da",
-        "fr": "3e23f718577c33d54c15ed357aac45f266585b22aa0a79a64395d0553a9722cd",
-        "pt-BR": "2eaa4c7598dac0c8411cfc33d2d3e2806d72aa5420fed1626e8ada54a273f7d1",
+        "fr": "edc27968020b66b2fbe891426367c6e2532861aabd26e5f8f21095a33eba771f",
+        "pt-BR": "0389595153f4803c7b800e6e96542a8c83f33ce5eb54cf3ca7ba70c1850a9a26",
         "ar": "a3b97ae5b48161c7a683be63a8825b6358919b7d1455e222e09e24cb8c5ec16d",
         "ko": "0fe722d02a3921f732d0008e94e910cf5503703e9bfaa0e8b6cc76f73e9e2ac4",
-        "zh-Hant": "f98e557259801681fef28113073ee237078f3e1dd42a6c116cf8ced66abd3b51",
-        "vi": "3419343394f69d71b1a999c95511ece45c9e30099b0efafaf8725e249da85715",
-        "id": "da48e4a43d6dd2bc3970bc117f1c757b87ca6104efae3f5d663f3d14649529b1"
+        "zh-Hant": "b0ddb9c79d2634655404f1a32c309e75bf4097d034606578f8c1be3ddb18a7ec",
+        "vi": "28e1dd592ab6e942179ecefaa51adcc52442d4a6342a47bb57f98e5d1a56d564",
+        "id": "b158564e6c83372eafbb6cae709564bcb05ad073f251dee63c5ac8c77a64fac0"
       },
       "translationStatus": {
         "es": "draft",
