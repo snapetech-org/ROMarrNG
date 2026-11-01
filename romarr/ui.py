@@ -6264,7 +6264,7 @@ def login_page(*, claimed: bool, totp: bool = False,
 <style>{CSS}{LOGIN_CSS}</style><script>{THEME_BOOT}</script></head><body data-title="{html.escape(title_key, quote=True)}">
 {_public_language_picker()}
 <form class="box" id="f" autocomplete="on">
-  <h1>ROM<span>arr</span></h1>
+  <h1 lang="en" dir="ltr">ROM<span>arr</span></h1>
   <div class="sub" data-i18n-key="{html.escape(title_key, quote=True)}">{html.escape(title)}</div>
   {fields}
   <button type="submit" id="go">{action}</button>
@@ -6397,7 +6397,7 @@ var box = document.getElementById('box');
 var f = frag(), here = location.origin;
 
 function bad(msg) {
-  box.innerHTML = '<h1>ROM<span>arr</span></h1>'
+  box.innerHTML = '<h1 lang="en" dir="ltr">ROM<span>arr</span></h1>'
     + '<div class="sub">Not an invitation</div>'
     + '<div class="note">' + esc(window.ROMarrI18n.translate(msg)) + '</div>';
 }
@@ -6424,7 +6424,7 @@ function away() {
   try { mine = localStorage.getItem('romarr-home') || ''; } catch (_) {}
   var link = here + '/link#i=' + encodeURIComponent(f.i)
     + (f.n ? '&n=' + encodeURIComponent(f.n) : '');
-  box.innerHTML = '<h1>ROM<span>arr</span></h1>'
+  box.innerHTML = '<h1 lang="en" dir="ltr">ROM<span>arr</span></h1>'
     + '<div class="sub">You have been invited to peer</div>'
     + '<div class="who" lang="und" dir="auto">' + esc(f.n || here) + '</div>'
     + '<div class="id" lang="und" dir="auto">' + esc(here) + '</div>'
@@ -6483,7 +6483,7 @@ def link_page() -> str:
 <style>{CSS}{LOGIN_CSS}{LINK_CSS}</style></head><body data-title="Invitation">
 {_public_language_picker()}
 <div class="box" id="box">
-  <h1>ROM<span>arr</span></h1>
+  <h1 lang="en" dir="ltr">ROM<span>arr</span></h1>
   <div class="sub" data-i18n="ui.checking-this-invitation.9246131855">Checking this invitation&hellip;</div>
 </div>
 <script>{I18N_RUNTIME}</script><script>{PUBLIC_I18N_JS}</script>
