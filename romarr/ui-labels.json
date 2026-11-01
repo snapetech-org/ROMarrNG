@@ -39126,6 +39126,337 @@
         "zh-Hant"
       ],
       "sourceKind": "provider-diagnostic-template"
+    },
+    "ui.use.c36d819e7b": {
+      "source": "Use",
+      "sourceHash": "c36d819e7bc6d2b7da51394411c733db89c395987885ca6770167a3b9bc45c3c",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
+    },
+    "ui.manifest-path-count-linked-file.253c71a38f": {
+      "source": "Manifest {path} · {count} linked file",
+      "sourceHash": "253c71a38f896987e48b6f93ede548ccc016f97dffeb58ec23d26b5ec5bc1953",
+      "translations": {
+        "en": {
+          "kind": "plural",
+          "argument": "count",
+          "forms": {
+            "one": "Manifest {path} · # linked file",
+            "other": "Manifest {path} · # linked files"
+          }
+        }
+      },
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
+    },
+    "ui.likely-count-disc-set.1648194847": {
+      "source": "Likely {count}-disc set",
+      "sourceHash": "1648194847ad339c4f688ddcc8cfc024fa8e55ae591e36e7bc87af0cc949f823",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
+    },
+    "ui.version-current-latest-listed-versio.c520347165": {
+      "source": "Version {current} · latest listed version {latest}",
+      "sourceHash": "c520347165a1d447adb6705d862a84b3388660aa63535008b4308eb225d59180",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
+    },
+    "ui.version-current.909025c238": {
+      "source": "Version {current}",
+      "sourceHash": "909025c23874c6399375bebfb3c98a119f866bdbdcfbe735aae20e35b21e89d9",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
+    },
+    "ui.version-not-labelled.11e88c4a78": {
+      "source": "Version not labelled",
+      "sourceHash": "11e88c4a7829045d35b81fb8906ab1526fdf31c347970d399649116c8b536ea9",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
+    },
+    "ui.version-check-not-applicable.e777a89195": {
+      "source": "Version check not applicable",
+      "sourceHash": "e777a891953a4bde006dcf566b6afc8d8420bb98c72c8fd98ef64ccec382e816",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
+    },
+    "ui.version-status-unknown.186ce5cede": {
+      "source": "Version status unknown",
+      "sourceHash": "186ce5cedec76ad1245111dc03f2815735b41fb0d1375b081577ba0c2c8108c4",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
+    },
+    "ui.older-than-latest-listed-version.28e22ad5b5": {
+      "source": "Older than latest listed version",
+      "sourceHash": "28e22ad5b5a4f37e4924b402f5a547a3ca0da7ef4cdafc2172383b7f7a073af3",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
+    },
+    "ui.newer-than-latest-listed-version.debaae0993": {
+      "source": "Newer than latest listed version",
+      "sourceHash": "debaae09936654c481ed08bdac92834e671e955fbfbbd5abe6cd243bcfd9a56b",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
+    },
+    "ui.up-to-date.ce29b7f85b": {
+      "source": "Up to date",
+      "sourceHash": "ce29b7f85b9eaf7dac52e625accb4b0cb56a856ebe9a9de9a09b613b6d978dca",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui"
+    },
+    "ui.continue-with-provider.9fa94be7fa": {
+      "source": "Continue with {provider}",
+      "sourceHash": "9fa94be7fa6aace06161d4d2461ac66aeb37632485637c6f6d3ec58d63833a87",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
+    },
+    "ui.setup-guide-for-provider.6f8c625366": {
+      "source": "Setup guide for {provider}",
+      "sourceHash": "6f8c625366fabff37f0a026c594b12a6734c4f6df9558d12bd65d6d48d479268",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
+    },
+    "ui.provider-identity-provider-setup-gui.e0aaaa0ccd": {
+      "source": "{provider} identity provider setup guide (opens in a new tab)",
+      "sourceHash": "e0aaaa0ccda7e176d49533341e45888d6283e0b74a87e9f9b87e591695d3e67b",
+      "translations": {},
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {},
+      "translationPending": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "sourceKind": "ui-template"
     }
   }
 }

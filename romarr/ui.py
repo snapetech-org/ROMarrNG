@@ -5412,7 +5412,7 @@ RENDER.organize=async()=>{
     +'<div style="flex:1"><h3>Identify &amp; Organize</h3>'
     +'<p class="help">Build a portable inventory, reuse existing ES-DE metadata, match exact DAT dumps, and review safe name changes. Scanning is read only. ROMarr changes files only after you preview and apply a plan.</p></div>'
     +'<a class="btn ghost" href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">Requests in SeerrNG ↗</a></div>'
-    +'<p class="help" style="margin:0">Use <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a> for the shared household request queue; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a> to connect the services.</p>'
+    +'<p class="help" style="margin:0">'+interfaceMarkup('Use')+' <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a> for the shared household request queue; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a> to connect the services.</p>'
     +'<div class="st" style="margin-top:12px">'
     +'<div><b>ROM root</b>'+(SETTINGS.library_path
       ?'<span lang="und" dir="auto">'+esc(SETTINGS.library_path)+'</span>'
@@ -5513,16 +5513,29 @@ RENDER.organize=async()=>{
         filename_only:'Filename only · review',
         multi_disc:'Likely multi-disc set · review'
       };
+      const versionStatusLabel={
+        unlabelled:'Version not labelled',
+        'not-applicable':'Version check not applicable',
+        unknown:'Version status unknown',
+        outdated:'Older than latest listed version',
+        future:'Newer than latest listed version',
+        current:'Up to date'
+      };
       target.innerHTML='<div style="overflow-x:auto"><table><thead><tr>'
         +'<th>Game / evidence</th><th>ROM path</th><th>Switch family</th><th>Metadata</th><th></th>'
         +'</tr></thead><tbody>'+items.map(row=>{
           const sw=row.switch||{};
           const metadata=row.metadata||{};
-          const ver=sw.file_version===null||sw.file_version===undefined?'':'v'+esc(sw.file_version)+' / latest '+esc(sw.latest_version||0);
+          const versionDetails=sw.file_version===null||sw.file_version===undefined?''
+            :Number(sw.latest_version)>0
+              ?interfaceTemplateMarkup('Version {current} · latest listed version {latest}',
+                {current:sw.file_version,latest:sw.latest_version})
+              :interfaceTemplateMarkup('Version {current}',{current:sw.file_version});
           const switchLine=sw.title_id
             ?'<div lang="und" dir="ltr">'+esc(sw.kind||'title')+' · '+esc(sw.title_id)+'</div>'
               +(sw.base_title?'<div>'+esc(sw.base_title)+'</div>':'')
-              +(ver?'<div class="help" style="margin:3px 0">'+ver+' · '+esc(sw.version_status||'unknown')+'</div>':'')
+              +'<div class="help" style="margin:3px 0">'+(versionDetails?versionDetails+' · ':'')
+                +interfaceMarkup(versionStatusLabel[sw.version_status]||versionStatusLabel.unknown)+'</div>'
             :'<span class="help">No TitleDB ID</span>';
           const art=row.cover_path
             ?'<img src="/api/v1/organizer/art?identity_id='+encodeURIComponent(row.identity_id||'')+'" alt="" loading="lazy" style="width:42px;height:58px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-inline-end:8px">'
@@ -5532,12 +5545,14 @@ RENDER.organize=async()=>{
           const discGroup=row.disc_group||{};
           const manifestInfo=(row.manifests||[]).map(manifest=>
             '<details style="margin-top:5px"><summary class="help" style="cursor:pointer">'
-              +'Manifest '+esc(manifest.path||'')+' · '+fmt((manifest.references||[]).length)+' linked file(s)'
+              +interfaceTemplateMarkup('Manifest {path} · {count} linked file',
+                {path:String(manifest.path||''),count:(manifest.references||[]).length})
               +'</summary><div class="help" style="margin:4px 0">'+(manifest.references||[]).map(path=>
                 '<div lang="und" dir="auto">'+esc(path)+'</div>').join('')+'</div></details>'
           ).join('');
           const pathCell=discGroup.id
-            ?'<span class="pill">Likely '+fmt(discGroup.disc_count||0)+'-disc set</span>'
+            ?'<span class="pill">'+interfaceTemplateMarkup('Likely {count}-disc set',
+              {count:discGroup.disc_count||0})+'</span>'
               +(discGroup.manifest_path?'<div class="help" style="margin:4px 0">Playlist: <span lang="und" dir="auto">'+esc(discGroup.manifest_path)+'</span></div>':'')
               +'<div class="help" style="margin:4px 0">'+(discGroup.members||[]).map(member=>
                 '<div lang="und" dir="auto">'+esc(member.relative_path||'')+'</div>').join('')+'</div>'
@@ -6095,9 +6110,31 @@ const message=(source,values={})=>messageInfo(source,values).text;
 const has=source=>lookup(source).key!==null;
 const localized=source=>lookup(source).translated;
 const sources=new WeakMap();
-const text=(node)=>{const parent=node.parentElement;if(!parent||parent.closest('script,style,textarea,input,select,code,[contenteditable="true"],[lang="und"],[data-i18n],[data-i18n-key]'))return;const source=sources.get(node)||node.data.replace(/\s+/g,' ').trim();if(!has(source))return;sources.set(node,source);const left=node.data.match(/^\s*/)?.[0]||'',right=node.data.match(/\s*$/)?.[0]||'',value=left+translate(source)+right;if(value!==node.data)node.data=value;parent.lang=localized(source)?active:'en';parent.dir=localized(source)&&core.isRTL(active,catalog)?'rtl':'ltr'};
+const text=(node)=>{const parent=node.parentElement;if(!parent||parent.closest('script,style,textarea,input,select,code,[contenteditable="true"],[lang="und"],[data-i18n],[data-i18n-key],[data-i18n-template-key]'))return;const source=sources.get(node)||node.data.replace(/\s+/g,' ').trim();if(!has(source))return;sources.set(node,source);const left=node.data.match(/^\s*/)?.[0]||'',right=node.data.match(/\s*$/)?.[0]||'',value=left+translate(source)+right;if(value!==node.data)node.data=value;parent.lang=localized(source)?active:'en';parent.dir=localized(source)&&core.isRTL(active,catalog)?'rtl':'ltr'};
 const tree=root=>{if(root.nodeType===Node.TEXT_NODE){text(root);return}const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);while(walker.nextNode())text(walker.currentNode)};
-const apply=()=>{document.documentElement.lang=active;document.documentElement.dir=core.isRTL(active,catalog)?'rtl':'ltr';document.querySelectorAll('[data-i18n],[data-i18n-key]').forEach(el=>{const source=el.dataset.i18nKey||el.dataset.i18n,done=localized(source);el.textContent=translate(source);el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const source=el.dataset.i18nPlaceholder,done=localized(source);el.placeholder=translate(source);el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});for(const [marker,attribute] of [['data-i18n-aria-label','aria-label'],['data-i18n-title','title']])document.querySelectorAll('['+marker+']').forEach(el=>{const source=el.getAttribute(marker),done=localized(source);el.setAttribute(attribute,translate(source));el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});tree(document.body);const selector=document.querySelector('#public-language-select');if(selector)selector.value=preference();document.title=translate(document.body.dataset.title||'ROMarr')+' · ROMarr'};
+const applyTemplates=root=>{
+  const textNodes=[];
+  if(root.nodeType===Node.ELEMENT_NODE&&root.matches('[data-i18n-template-key]'))textNodes.push(root);
+  if(root.querySelectorAll)textNodes.push(...root.querySelectorAll('[data-i18n-template-key]'));
+  for(const el of textNodes){
+    let values={};try{values=JSON.parse(el.getAttribute('data-i18n-values')||'{}')}catch(_){continue}
+    const source=el.getAttribute('data-i18n-template-key'),done=localized(source);
+    el.textContent=message(source,values);el.lang=done?active:'en';
+    el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr';
+  }
+  for(const [marker,attribute] of [['data-i18n-aria-label-template-key','aria-label'],['data-i18n-title-template-key','title']]){
+    const elements=[];
+    if(root.nodeType===Node.ELEMENT_NODE&&root.hasAttribute(marker))elements.push(root);
+    if(root.querySelectorAll)elements.push(...root.querySelectorAll('['+marker+']'));
+    for(const el of elements){
+      let values={};try{values=JSON.parse(el.getAttribute(marker.replace('-template-key','-values'))||'{}')}catch(_){continue}
+      const source=el.getAttribute(marker),done=localized(source);
+      el.setAttribute(attribute,message(source,values));el.lang=done?active:'en';
+      el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr';
+    }
+  }
+};
+const apply=()=>{document.documentElement.lang=active;document.documentElement.dir=core.isRTL(active,catalog)?'rtl':'ltr';document.querySelectorAll('[data-i18n],[data-i18n-key]').forEach(el=>{const source=el.dataset.i18nKey||el.dataset.i18n,done=localized(source);el.textContent=translate(source);el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const source=el.dataset.i18nPlaceholder,done=localized(source);el.placeholder=translate(source);el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});for(const [marker,attribute] of [['data-i18n-aria-label','aria-label'],['data-i18n-title','title']])document.querySelectorAll('['+marker+']').forEach(el=>{const source=el.getAttribute(marker),done=localized(source);el.setAttribute(attribute,translate(source));el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});applyTemplates(document);tree(document.body);const selector=document.querySelector('#public-language-select');if(selector)selector.value=preference();document.title=translate(document.body.dataset.title||'ROMarr')+' · ROMarr'};
 const picker=document.querySelector('#public-language-select');if(picker){
   const system=document.createElement('option');
   system.value='system';system.dataset.i18nKey='ui.use-browser-settings.02d22d3f39';
@@ -6115,7 +6152,7 @@ const api=Object.assign({},core,{translate,message,messageInfo,has,apply,
 Object.defineProperty(api,'language',{get:()=>active});
 window.ROMarrI18n=api;
 apply();
-new MutationObserver(records=>{for(const record of records){if(record.type==='characterData')text(record.target);for(const node of record.addedNodes)tree(node)}}).observe(document.body,{subtree:true,childList:true,characterData:true});
+new MutationObserver(records=>{for(const record of records){if(record.type==='characterData')text(record.target);for(const node of record.addedNodes){applyTemplates(node);tree(node)}}}).observe(document.body,{subtree:true,childList:true,characterData:true});
 window.addEventListener('languagechange',()=>{if(preference()==='system'){active=detect();apply()}});
 window.addEventListener('storage',event=>{if(event.key!==key&&event.key!==null)return;active=preference()==='system'?detect():preference();apply()});
 })()
@@ -6127,6 +6164,34 @@ def _public_language_picker() -> str:
             'data-i18n-key="ui.interface-language.8027f432a7">Interface language</label>'
             '<select id="public-language-select" aria-label="Interface language" '
             'data-i18n-aria-label="ui.interface-language.8027f432a7"></select></div>')
+
+
+def _public_i18n_template(source: str, values: dict[str, str]) -> str:
+    payload = html.escape(json.dumps(values, ensure_ascii=False, separators=(",", ":")), quote=True)
+    rendered = source
+    for name, value in values.items():
+        rendered = rendered.replace("{" + name + "}", str(value))
+    return (
+        f'<span data-i18n-template-key="{html.escape(_ui_key(source), quote=True)}" '
+        f'data-i18n-values="{payload}">{html.escape(rendered)}</span>'
+    )
+
+
+def _public_i18n_attribute_template(attribute: str, source: str,
+                                    values: dict[str, str]) -> str:
+    markers = {"aria-label": "data-i18n-aria-label", "title": "data-i18n-title"}
+    if attribute not in markers:
+        raise ValueError("unsupported public localization attribute")
+    payload = html.escape(json.dumps(values, ensure_ascii=False, separators=(",", ":")), quote=True)
+    rendered = source
+    for name, value in values.items():
+        rendered = rendered.replace("{" + name + "}", str(value))
+    marker = markers[attribute]
+    return (
+        f'{attribute}="{html.escape(rendered, quote=True)}" '
+        f'{marker}-template-key="{html.escape(_ui_key(source), quote=True)}" '
+        f'{marker}-values="{payload}"'
+    )
 
 
 def login_page(*, claimed: bool, totp: bool = False,
@@ -6144,15 +6209,17 @@ def login_page(*, claimed: bool, totp: bool = False,
             provider_label, provider_icon, provider_setup_url = (
                 oidc_provider_presentation(oidc_provider)
             )
+            provider_values = {"provider": provider_label}
             oidc_entry = (
                 '<a class="oidc-login" href="/auth/oidc/login">'
                 '<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">'
                 f'<use href="/oidc-provider-icons.svg#oidc-{provider_icon}"></use></svg>'
-                f'Continue with {provider_label}</a>'
+                f'{_public_i18n_template("Continue with {provider}", provider_values)}</a>'
                 f'<a class="oidc-provider-help" href="{provider_setup_url}" '
-                f'aria-label="{provider_label} identity provider setup guide (opens in a new tab)" '
+                f'{_public_i18n_attribute_template("aria-label", "{provider} identity provider setup guide (opens in a new tab)", provider_values)} '
                 'target="_blank" rel="noopener noreferrer">'
-                f'Setup guide for {provider_label} <span aria-hidden="true">↗</span></a>'
+                f'{_public_i18n_template("Setup guide for {provider}", provider_values)} '
+                '<span aria-hidden="true">↗</span></a>'
             )
         else:
             oidc_entry = ""
