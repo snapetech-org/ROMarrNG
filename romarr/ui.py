@@ -6327,7 +6327,7 @@ const preference=()=>{try{const value=localStorage.getItem(key);return value&&ca
 let active=preference()==='system'?detect():preference();
 const lookup=source=>core.lookup(catalog,source,active);
 const translate=source=>core.translate(catalog,source,active);
-const messageInfo=(source,values={})=>{const found=lookup(source);return{text:core.formatMessage(found.value,values,active,undefined,(nested,args)=>message(nested,args)),translated:found.translated,locale:found.locale}};
+const messageInfo=(source,values={})=>{const found=lookup(source);return{text:core.formatMessage(found.value,values,active,undefined,(nested,args)=>message(nested,args)),translated:found.translated,locale:found.locale,source,values}};
 const message=(source,values={})=>messageInfo(source,values).text;
 const ariaTemplateLabels=new WeakMap();let ariaTemplateSequence=0;
 const renderMessageTemplate=(el,source,values)=>{
@@ -6514,7 +6514,7 @@ def login_page(*, claimed: bool, totp: bool = False,
   <h1 lang="en" dir="ltr">ROM<span>arr</span></h1>
   <div class="sub" data-i18n-key="{html.escape(title_key, quote=True)}">{html.escape(title)}</div>
   {fields}
-  <button type="submit" id="go">{action}</button>
+  <button type="submit" id="go" data-i18n-key="{html.escape(_ui_key(action), quote=True)}">{html.escape(action)}</button>
   <div class="err{' on' if oidc_error else ''}" id="err" role="alert" aria-live="assertive">{oidc_error}</div>
   {oidc_entry}
   <div class="note" data-i18n-key="{html.escape(note_key, quote=True)}">{html.escape(note)}</div>
@@ -6531,15 +6531,28 @@ if (keylink) keylink.onclick = function() {{
   document.getElementById('apikey').focus();
 }};
 function fail(m, raw) {{
+  var isInfo = m && typeof m === 'object' && typeof m.text === 'string';
+  var source = raw ? null : (isInfo ? m.source : String(m));
+  var values = raw ? {{}} : (isInfo ? (m.values || {{}}) : {{}});
   var localized = raw ? null :
-    (m && typeof m === 'object' && typeof m.text === 'string'
+    (isInfo
       ? m : window.ROMarrI18n.messageInfo(m));
+  if (source && window.ROMarrI18n.has(source)) {{
+    err.setAttribute('data-i18n-template-key', source);
+    err.setAttribute('data-i18n-values', JSON.stringify(values));
+  }} else {{
+    err.removeAttribute('data-i18n-template-key');
+    err.removeAttribute('data-i18n-values');
+  }}
   err.textContent = raw ? String(m) : localized.text;
   err.lang = raw ? 'und' : (localized.translated ? localized.locale : 'en');
   err.dir = raw ? 'auto' : (localized.translated
     && window.ROMarrI18n.isRTLForLocale(localized.locale) ? 'rtl' : 'ltr');
   err.className = 'err on'; go.disabled = false;
-  go.textContent = window.ROMarrI18n.translate(claimed ? 'Sign in' : 'Create password');
+  var action = claimed ? 'Sign in' : 'Create password';
+  go.setAttribute('data-i18n-key', action);
+  go.textContent = window.ROMarrI18n.translate(action);
+  window.ROMarrI18n.apply();
 }}
 f.onsubmit = async function(e) {{
   e.preventDefault();
@@ -6559,7 +6572,9 @@ f.onsubmit = async function(e) {{
     url = '/api/v1/setup';
     body = {{password: pw}};
   }}
-  go.disabled = true; go.textContent = 'Working…';
+  go.disabled = true;
+  go.setAttribute('data-i18n-key', 'Working…');
+  go.textContent = window.ROMarrI18n.translate('Working…');
   try {{
     var r = await fetch(url, {{method: 'POST',
       headers: {{'Content-Type': 'application/json'}},
@@ -6645,8 +6660,9 @@ var f = frag(), here = location.origin;
 
 function bad(msg) {
   box.innerHTML = '<h1 lang="en" dir="ltr">ROM<span>arr</span></h1>'
-    + '<div class="sub">Not an invitation</div>'
-    + '<div class="note">' + esc(window.ROMarrI18n.translate(msg)) + '</div>';
+    + '<div class="sub" data-i18n="Not an invitation">Not an invitation</div>'
+    + '<div class="note" data-i18n="' + esc(msg) + '">' + esc(msg) + '</div>';
+  window.ROMarrI18n.apply();
 }
 
 /* Home. The fragment was rehomed onto this host, so this IS the recipient's
@@ -6686,6 +6702,7 @@ function away() {
     + '<div class="note"><span data-i18n="ui.no-romarr-on-this-device-copy-the-li.2d22717ea8">No ROMarr on this device? Copy the link and paste it into Friends &rarr; I have an invitation on your own server.</span>'
     + '<br><br><code>' + esc(link) + '</code>'
     + '<button class="copy" id="copy">Copy the link</button></div>';
+  window.ROMarrI18n.apply();
   document.getElementById('copy').onclick = function () {
     var b = document.getElementById('copy');
     navigator.clipboard.writeText(link).then(
