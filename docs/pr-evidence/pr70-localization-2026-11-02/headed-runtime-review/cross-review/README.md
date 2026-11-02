@@ -14,6 +14,8 @@ Refinements remove spacing before the German ellipsis and Japanese particle in t
 
 This pass reviewed the supplied browser findings against exact translation catalog values and source/callsite context. It did not capture new browser screenshots, claim native-speaker approval, or edit ROMarr files. The provided adjacent runtime state was excluded from this packet.
 
+Verification on 2026-11-02 passed against the pinned source/catalog commit and tree above. It checked all 48 rows, including source and target hashes, placeholders, and three caller/source pins; the final dispositions are 40 accept, 5 refine, and 3 keep, with 45 proposed values accepted or refined; this packet made no catalog edits and records no native-speaker approval.
+
 Run the read-only verifier with:
 
 ```sh
