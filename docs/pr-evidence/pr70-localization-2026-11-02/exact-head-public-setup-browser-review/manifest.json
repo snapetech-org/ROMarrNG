@@ -1,0 +1,36 @@
+{
+  "review_date": "2026-11-02",
+  "repository": "snapetech-org/ROMarrNG",
+  "pull_request": 70,
+  "head_commit": "8e3820252b0c362e18e421b3a73e7ff1478d32a0",
+  "tree": "0d29024efd7e5e886926a83d95f57c472f327db9",
+  "browser": "Chrome on the dedicated Agentic VM",
+  "viewport": {
+    "width": 1920,
+    "height": 1024
+  },
+  "route": "/login",
+  "rendered_page": "unclaimed public password setup",
+  "interaction": "Selected each target locale and English fallback; left both password fields blank; did not submit or save settings.",
+  "finding": "All 12 target locales and English fallback rendered setup labels, controls, button, and notice without visible clipping or overlap. Arabic rendered RTL; other inspected locales rendered LTR.",
+  "limitations": [
+    "Visual review covers only the public setup page.",
+    "Authenticated routes and full user flows were not reviewed.",
+    "This browser review does not constitute native-speaker approval."
+  ],
+  "screenshots": [
+    {"locale": "en", "file": "screenshots/setup-en.png"},
+    {"locale": "ar", "file": "screenshots/setup-ar.png"},
+    {"locale": "de", "file": "screenshots/setup-de.png"},
+    {"locale": "es", "file": "screenshots/setup-es.png"},
+    {"locale": "hi", "file": "screenshots/setup-hi.png"},
+    {"locale": "id", "file": "screenshots/setup-id.png"},
+    {"locale": "fr", "file": "screenshots/setup-fr.png"},
+    {"locale": "ja", "file": "screenshots/setup-ja.png"},
+    {"locale": "ko", "file": "screenshots/setup-ko.png"},
+    {"locale": "pt-BR", "file": "screenshots/setup-pt-BR.png"},
+    {"locale": "vi", "file": "screenshots/setup-vi.png"},
+    {"locale": "zh-Hans", "file": "screenshots/setup-zh-Hans.png"},
+    {"locale": "zh-Hant", "file": "screenshots/setup-zh-Hant.png"}
+  ]
+}
