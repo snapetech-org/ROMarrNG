@@ -1,0 +1,18 @@
+{
+  "actionTargets": 12,
+  "baselineHead": "9b56b5fde40daf59aa61a7ce2d14e6bf7b37bf9d",
+  "catalogKeysAfter": 1837,
+  "catalogKeysBefore": 1836,
+  "draftStatusesPreserved": true,
+  "evidencePlanOperations": 24,
+  "exactUnrelatedCatalogEntriesPreserved": true,
+  "fileNounTargets": 12,
+  "nativeReviewEntriesCreated": false,
+  "newMessageId": "ui.add-to-library.2bf9ea0e46",
+  "readbackCells": 24,
+  "sourcePipelineReplacementExact": true,
+  "sourceSnapshotPreservesAllOldEntries": true,
+  "testsBuildsCiRun": false,
+  "validationKind": "read-only exact-hash, JSON, source-snapshot, caller, and unchanged-entry verification",
+  "workflowsChanged": false
+}

@@ -5320,7 +5320,7 @@ RENDER.getstarted=async()=>{
     +'<div style="font-family:ui-monospace,monospace;font-size:12.5px;'
     +'background:var(--bg);border:1px solid var(--line);border-radius:6px;'
     +'padding:14px;overflow-x:auto;line-height:1.9">'
-    +'<b>Acquire</b> → <b>Verify</b> → <b>File</b> → <b>Scan</b> → <b>Play</b><br>'
+    +'<b>Acquire</b> → <b>Verify</b> → <b>'+interfaceMarkup('ui.add-to-library.2bf9ea0e46')+'</b> → <b>Scan</b> → <b>Play</b><br>'
     +'<span style="color:var(--dim)">'+interfaceMarkup('ui.indexers-dat-hashes-library-root-lib.6a5d3af601')+'</span><br>'
     +'<span style="color:var(--dim)">'+interfaceMarkup('ui.romarr-does-the-first-four-you-choos.88f6a36ef9')+'</span>'
     +'</div></div>'

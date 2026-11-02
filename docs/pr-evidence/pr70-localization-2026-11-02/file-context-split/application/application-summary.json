@@ -1,0 +1,25 @@
+{
+  "catalogMessageCount": 1837,
+  "changedLocaleCells": 24,
+  "changedSourceMessages": 1,
+  "existingCatalogMessageCountBefore": 1836,
+  "inputHead": "9b56b5fde40daf59aa61a7ce2d14e6bf7b37bf9d",
+  "inputTree": "117fb2a8cc208c958ac62d00927cc65defe6530d",
+  "migrationGeneratorInspection": {
+    "disposition": "Those generated catalog and snapshot outputs were restored; the final catalog includes only the 12 File changes and one reviewed Add to library message.",
+    "observedSideEffect": "The script included 141 unrelated pending source-manifest messages in catalog and snapshot output.",
+    "ranOnce": true
+  },
+  "migrationGeneratorReason": "The generator would import 141 unrelated pending source-manifest rows at this pinned head; only reviewed cells are in scope. Stable IDs, hashes, ordering, and source-snapshot conventions were applied directly.",
+  "nativeSpeakerReviewRecorded": false,
+  "newCatalogMessageId": "ui.add-to-library.2bf9ea0e46",
+  "outputTree": null,
+  "outputs": {
+    "catalogSha256": "7ac611cd80ecd9b691e1847330d18e0b60f85a1c43026a96d1424223c757b7d3",
+    "snapshotSha256": "b728cfb7d9e5b321b6ee4b99e315120b91fe4f7561b8b38d957189002d41d801",
+    "uiSourceSha256": "810ccf901f4c7651aaf78602ae6eb69d471da65076cc6749c3a86367aa42d566"
+  },
+  "projectMigrationGeneratorRun": true,
+  "sourceSnapshotEntryAdded": true,
+  "translationStatus": "draft"
+}

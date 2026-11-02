@@ -1,0 +1,173 @@
+{
+  "applicationPlan": "After independent review, change the pipeline source text to “Add to library”, update ui.file targets to nouns, add the new stable message and all twelve action targets, update source snapshot, and retain exact-hash evidence. No repository edits are part of this packet.",
+  "currentActionUse": {
+    "blob": "e88dc4007cd75f3cfc2b5821fe7e29ffd7446c94",
+    "callerContext": "Acquire → Verify → File → Scan → Play; here File is the process step that places identified games into the library.",
+    "fileSha256": "b110af999efbe7bf22e8a1ee98be8cf6b4dee92f8f3b3fff606b59e38f9f527e",
+    "line": 5323,
+    "lineText": "+'<b>Acquire</b> → <b>Verify</b> → <b>File</b> → <b>Scan</b> → <b>Play</b><br>'",
+    "path": "romarr/ui.py"
+  },
+  "currentCatalogBlob": "397b1a509a25a34e791fd526396d2eaf6cd5a586",
+  "currentCatalogPath": "romarr/ui-labels.json",
+  "currentCatalogSha256": "9c7a40251e51dc9904a3825e6bebc551d9db5313aa98bde62ffdeac32ffd7cd0",
+  "currentFileColumnUse": {
+    "blob": "e88dc4007cd75f3cfc2b5821fe7e29ffd7446c94",
+    "callerContext": "File is a column heading for the ROM filename.",
+    "fileSha256": "b110af999efbe7bf22e8a1ee98be8cf6b4dee92f8f3b3fff606b59e38f9f527e",
+    "line": 5987,
+    "lineText": "+'<table><thead><tr><th>'+interfaceMarkup('ui.file.50009ce1da')+'</th><th>'+interfaceMarkup('ui.platform.c78ffe1957')+'</th><th>'+interfaceMarkup('ui.why.d3ae14a50b')+'</th>'",
+    "path": "romarr/ui.py"
+  },
+  "currentFileEntryTranslationReview": {},
+  "currentFileKey": "ui.file.50009ce1da",
+  "currentFileSource": "File",
+  "currentFileSourceHash": "50009ce1da4d15e1c4a04024df691eed5f0d598e2c4c67092f205366d0adf99e",
+  "draft": true,
+  "head": "9b56b5fde40daf59aa61a7ce2d14e6bf7b37bf9d",
+  "proposals": [
+    {
+      "currentSharedFileTarget": "Organizar",
+      "currentStatus": "draft",
+      "currentTargetSha256": "2799523bb0aae991ef98198c99d08432dee7d44bf586f93a7b9811dc54b201ab",
+      "locale": "es",
+      "proposedActionLabel": "Añadir a la biblioteca",
+      "proposedFileHeader": "Archivo"
+    },
+    {
+      "currentSharedFileTarget": "整理",
+      "currentStatus": "draft",
+      "currentTargetSha256": "40365e6c2c147bdfba59087e7a60f009908190c1268036bf5ee77c047ba560ea",
+      "locale": "zh-Hans",
+      "proposedActionLabel": "添加到游戏库",
+      "proposedFileHeader": "文件"
+    },
+    {
+      "currentSharedFileTarget": "सहेजें",
+      "currentStatus": "draft",
+      "currentTargetSha256": "dbd13ddab6ed4fd2a084adeda624539c12a87137c7eebc77332d5861cbe63694",
+      "locale": "hi",
+      "proposedActionLabel": "लाइब्रेरी में जोड़ें",
+      "proposedFileHeader": "फ़ाइल"
+    },
+    {
+      "currentSharedFileTarget": "Einordnen",
+      "currentStatus": "draft",
+      "currentTargetSha256": "60eb05b0eb47e4321a47c7cabb1c94159ae30a42d84a313495c9973c7bded35b",
+      "locale": "de",
+      "proposedActionLabel": "Zur Bibliothek hinzufügen",
+      "proposedFileHeader": "Datei"
+    },
+    {
+      "currentSharedFileTarget": "整理",
+      "currentStatus": "draft",
+      "currentTargetSha256": "40365e6c2c147bdfba59087e7a60f009908190c1268036bf5ee77c047ba560ea",
+      "locale": "ja",
+      "proposedActionLabel": "ライブラリに追加",
+      "proposedFileHeader": "ファイル"
+    },
+    {
+      "currentSharedFileTarget": "Classer",
+      "currentStatus": "draft",
+      "currentTargetSha256": "c0d9a05cdff21f58316485215ce9c25c8c430a0d5e87a1f5bfc77524c07b0dfc",
+      "locale": "fr",
+      "proposedActionLabel": "Ajouter à la bibliothèque",
+      "proposedFileHeader": "Fichier"
+    },
+    {
+      "currentSharedFileTarget": "Organizar",
+      "currentStatus": "draft",
+      "currentTargetSha256": "2799523bb0aae991ef98198c99d08432dee7d44bf586f93a7b9811dc54b201ab",
+      "locale": "pt-BR",
+      "proposedActionLabel": "Adicionar à biblioteca",
+      "proposedFileHeader": "Arquivo"
+    },
+    {
+      "currentSharedFileTarget": "حفظ",
+      "currentStatus": "draft",
+      "currentTargetSha256": "3fcbb67a92d5bf2cbf29c55778b2a5a325bfc85e194f15603f937d225e04ae60",
+      "locale": "ar",
+      "proposedActionLabel": "أضِف إلى المكتبة",
+      "proposedFileHeader": "ملف"
+    },
+    {
+      "currentSharedFileTarget": "정리",
+      "currentStatus": "draft",
+      "currentTargetSha256": "df51c79e0cf8198224a614037f2d319d821cf40ce5425e8b93a15fdd5120a767",
+      "locale": "ko",
+      "proposedActionLabel": "라이브러리에 추가",
+      "proposedFileHeader": "파일"
+    },
+    {
+      "currentSharedFileTarget": "整理",
+      "currentStatus": "draft",
+      "currentTargetSha256": "40365e6c2c147bdfba59087e7a60f009908190c1268036bf5ee77c047ba560ea",
+      "locale": "zh-Hant",
+      "proposedActionLabel": "新增至遊戲庫",
+      "proposedFileHeader": "檔案"
+    },
+    {
+      "currentSharedFileTarget": "Sắp xếp",
+      "currentStatus": "draft",
+      "currentTargetSha256": "3ed76738a8c54e8d898283a46efd48df3c8263cf6a581a61886b363f237bc323",
+      "locale": "vi",
+      "proposedActionLabel": "Thêm vào thư viện",
+      "proposedFileHeader": "Tệp"
+    },
+    {
+      "currentSharedFileTarget": "Simpan",
+      "currentStatus": "draft",
+      "currentTargetSha256": "891e5b39b4225b3650a0382178ac395b4dbcfa6667eaaff9ff2d80b0b7e2fcfa",
+      "locale": "id",
+      "proposedActionLabel": "Tambahkan ke pustaka",
+      "proposedFileHeader": "Berkas"
+    }
+  ],
+  "proposedActionTargets": {
+    "ar": "أضِف إلى المكتبة",
+    "de": "Zur Bibliothek hinzufügen",
+    "es": "Añadir a la biblioteca",
+    "fr": "Ajouter à la bibliothèque",
+    "hi": "लाइब्रेरी में जोड़ें",
+    "id": "Tambahkan ke pustaka",
+    "ja": "ライブラリに追加",
+    "ko": "라이브러리에 추가",
+    "pt-BR": "Adicionar à biblioteca",
+    "vi": "Thêm vào thư viện",
+    "zh-Hans": "添加到游戏库",
+    "zh-Hant": "新增至遊戲庫"
+  },
+  "proposedNounTargets": {
+    "ar": "ملف",
+    "de": "Datei",
+    "es": "Archivo",
+    "fr": "Fichier",
+    "hi": "फ़ाइल",
+    "id": "Berkas",
+    "ja": "ファイル",
+    "ko": "파일",
+    "pt-BR": "Arquivo",
+    "vi": "Tệp",
+    "zh-Hans": "文件",
+    "zh-Hant": "檔案"
+  },
+  "proposedSourceSplit": {
+    "fileHeaderMessageId": "ui.file.50009ce1da",
+    "fileHeaderSource": "File",
+    "pipelineMessageId": "ui.add-to-library.2bf9ea0e46",
+    "pipelineSource": "Add to library",
+    "pipelineSourceSha256": "2bf9ea0e469087e8ac427990d72a88c37be1a8b07a5e9cbb961d3df2912d7877"
+  },
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "scope": "Resolve the current shared-key context collision by localizing the file-name header as a noun and the pipeline action as “Add to library”. Review 12 noun targets + 12 action targets.",
+  "state": "OPEN",
+  "translationContext": [
+    "12 supported direct locale catalogs are available: es, zh-Hans, hi, de, ja, fr, pt-BR, ar, ko, zh-Hant, vi, id.",
+    "All current ui.file translations are machine drafts; translationReview is empty.",
+    "“File” is an ambiguous English source. Its current translations were reviewed as an action and are inappropriate for the filename header.",
+    "The new pipeline step should remain an imperative “Add to library”; preserve the product concept/library term naturally in each locale.",
+    "Keep both messages concise enough for the pipeline and table header. No native-speaker approval may be claimed."
+  ],
+  "tree": "117fb2a8cc208c958ac62d00927cc65defe6530d"
+}
