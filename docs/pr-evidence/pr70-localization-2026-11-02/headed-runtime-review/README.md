@@ -9,6 +9,10 @@ Reviewed 2026-11-02 UTC in the persistent Agentic VM's isolated, visible Chrome 
 - Reviewed files: `romarr/app.py`, `romarr/organizer.py`, `romarr/ui.py`, and `romarr/ui-labels.json`.
 - The catalog patch contains 45 exact-hash reviewed target updates (40 accepted proposals and 5 refinements); 3 no-change targets were retained. Updated cells remain `draft`; no native-speaker approval is recorded.
 
+## Translation cross-review
+
+The exact-hash candidate packets and independent decision ledger for 48 source/locale cells are retained in the [cross-review bundle](cross-review/README.md). The ledger records 40 accepted proposals, 5 refinements, and 3 unchanged targets, with source, target, placeholder, caller, and catalog-hash evidence. Its checksum manifest verifies all files in the bundle.
+
 ## Browser observations
 
 - Spanish, Identify & Organize: pagination rendered as `Mostrando 0–0 de 0`; the known missing-metadata-root message rendered in Spanish. The SeerrNG integration sentence pair also rendered in Spanish.
