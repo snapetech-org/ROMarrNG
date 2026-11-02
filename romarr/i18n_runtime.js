@@ -124,14 +124,15 @@
     let renderedArgs = args;
     if (plural) {
       const argument = String(template.argument || 'count');
-      const number = Number(args[argument]);
+      const numberLocale = formatLocale || new Intl.NumberFormat().resolvedOptions().locale || 'en';
+      const number = parseFormattedNumber(args[argument], numberLocale);
       const forms = template.forms && typeof template.forms === 'object' ? template.forms : {};
       const exact = Number.isFinite(number) ? forms['=' + number] : null;
       const category = Number.isFinite(number)
         ? new Intl.PluralRules(locale || 'en').select(number) : 'other';
       source = exact || forms[category] || forms.other || '';
       if (Number.isFinite(number)) {
-        const formatted = new Intl.NumberFormat(formatLocale || locale || 'en').format(number);
+        const formatted = new Intl.NumberFormat(numberLocale).format(number);
         source = String(source).replace(/#/g, isolate(formatted));
         renderedArgs = {...args, [argument]: formatted};
       }
@@ -165,6 +166,22 @@
         return String(point - zero);
       return character;
     }).join('');
+  }
+
+  function parseFormattedNumber(value, locale) {
+    if (typeof value === 'number') return value;
+    const source = String(value ?? '').trim();
+    if (!source) return NaN;
+    const parts = new Intl.NumberFormat(locale || 'en').formatToParts(-123456789.5);
+    const groups = new Set(parts.filter(part => part.type === 'group').map(part => part.value));
+    const decimal = parts.find(part => part.type === 'decimal')?.value;
+    const minus = parts.find(part => part.type === 'minusSign')?.value;
+    let normalized = normalizeDigits(source)
+      .replace(/[\u061c\u200e\u200f\u202a-\u202e\u2066-\u2069]/g, '');
+    for (const group of groups) normalized = normalized.split(group).join('');
+    if (decimal && decimal !== '.') normalized = normalized.replace(decimal, '.');
+    if (minus && minus !== '-') normalized = normalized.replace(minus, '-');
+    return Number(normalized);
   }
 
   root.ROMarrI18n = Object.freeze({

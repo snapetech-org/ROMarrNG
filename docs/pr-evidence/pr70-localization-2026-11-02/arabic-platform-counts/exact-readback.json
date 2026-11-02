@@ -1,0 +1,53 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "baseHead": "c3bcb5fffb28419f82384ad2202686e97227c4f9",
+  "baseTree": "b7cd0c4948bd8295fc32039072973c13e8ca538a",
+  "diffSha256": "2b32da83ff9a1edccff1bc65a6dc70ca0c1e68cb31a7ce381b24726694b14a0e",
+  "sourceId": "ui.cached-cached-across-platformcount-p.55b169ed05",
+  "source": "{cached} cached across {platformCount} platforms",
+  "sourceSha256": "55b169ed05f40592bef9353a7c4d6e4fe3c48d135ed2807cb75d08ca67d76b45",
+  "arabicTarget": {
+    "kind": "plural",
+    "argument": "platformCount",
+    "forms": {
+      "zero": "تم تخزين {cached} مؤقتًا دون أي منصة",
+      "one": "تم تخزين {cached} مؤقتًا عبر منصة واحدة",
+      "two": "تم تخزين {cached} مؤقتًا عبر منصتين",
+      "few": "تم تخزين {cached} مؤقتًا عبر {platformCount} منصات",
+      "many": "تم تخزين {cached} مؤقتًا عبر {platformCount} منصة",
+      "other": "تم تخزين {cached} مؤقتًا عبر {platformCount} منصة"
+    }
+  },
+  "arabicTargetCanonicalJsonSha256": "f72af54b035c7180cd699698d540c4ec35acbed6e0fc7d572160431234dff4a9",
+  "arabicTargetFormPlaceholders": {
+    "zero": [
+      "cached"
+    ],
+    "one": [
+      "cached"
+    ],
+    "two": [
+      "cached"
+    ],
+    "few": [
+      "cached",
+      "platformCount"
+    ],
+    "many": [
+      "cached",
+      "platformCount"
+    ],
+    "other": [
+      "cached",
+      "platformCount"
+    ]
+  },
+  "changedFileSha256": {
+    "romarr/i18n_runtime.js": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+    "romarr/ui-labels.json": "9c7a40251e51dc9904a3825e6bebc551d9db5313aa98bde62ffdeac32ffd7cd0"
+  },
+  "catalogMessageCount": 1836,
+  "nativeSpeakerApproval": false,
+  "browserReviewAtNewHead": false
+}

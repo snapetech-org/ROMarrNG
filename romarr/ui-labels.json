@@ -47416,7 +47416,18 @@
         "ja": "{platformCount} プラットフォームに {cached} 件をキャッシュ",
         "fr": "{cached} en cache sur {platformCount} plateformes",
         "pt-BR": "{cached} em cache em {platformCount} plataformas",
-        "ar": "تم تخزين {cached} مؤقتًا عبر {platformCount} منصة",
+        "ar": {
+          "kind": "plural",
+          "argument": "platformCount",
+          "forms": {
+            "zero": "تم تخزين {cached} مؤقتًا دون أي منصة",
+            "one": "تم تخزين {cached} مؤقتًا عبر منصة واحدة",
+            "two": "تم تخزين {cached} مؤقتًا عبر منصتين",
+            "few": "تم تخزين {cached} مؤقتًا عبر {platformCount} منصات",
+            "many": "تم تخزين {cached} مؤقتًا عبر {platformCount} منصة",
+            "other": "تم تخزين {cached} مؤقتًا عبر {platformCount} منصة"
+          }
+        },
         "ko": "{platformCount}개 플랫폼에 {cached}개 캐시됨",
         "zh-Hant": "{platformCount} 個平台快取了 {cached} 項",
         "vi": "{cached} được lưu đệm trên {platformCount} nền tảng",
