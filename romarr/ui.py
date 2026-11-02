@@ -2749,8 +2749,12 @@ RENDER.lists=async()=>{
   j('/api/v1/importlist/schema').then(s=>{
     const el=$('#l-noapi'); if(!el) return;   // page may have changed
     const rows=Object.entries(s.no_api||{});
-    el.innerHTML=rows.map(([store,why])=>
-      `<p style="margin:6px 0"><b>${esc(store)}</b> — ${esc(why)}</p>`).join('');
+    el.innerHTML=rows.map(([store,why])=>{
+      const reason=store==='Nintendo'
+        ?interfaceMarkup('ui.no-web-api-and-nothing-written-to-a.fefddf8698')
+        :esc(why);
+      return `<p style="margin:6px 0"><b>${esc(store)}</b> — ${reason}</p>`;
+    }).join('');
   }).catch(()=>{});
   const scanBtn=$('#l-scan');
   if(scanBtn) scanBtn.onclick=async()=>{

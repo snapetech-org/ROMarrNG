@@ -11840,6 +11840,31 @@
         "zh-Hant"
       ],
       "dynamicPlaceholders": []
+    },
+    {
+      "source": "No web API, and nothing written to a PC to read either. Genuinely paste-only — and the one where DAT-verified acquisition matters most anyway.",
+      "category": "ui",
+      "locations": [
+        "romarr/lists.py:859-861",
+        "romarr/ui.py:2754"
+      ],
+      "id": "ui.no-web-api-and-nothing-written-to-a.fefddf8698",
+      "sourceHash": "fefddf869833664222ac58789630ae2747f217842f1714d5746f1dcb5157980e",
+      "pendingLocales": [
+        "es",
+        "zh-Hans",
+        "hi",
+        "de",
+        "ja",
+        "fr",
+        "pt-BR",
+        "ar",
+        "ko",
+        "zh-Hant",
+        "vi",
+        "id"
+      ],
+      "dynamicPlaceholders": []
     }
   ]
 }
