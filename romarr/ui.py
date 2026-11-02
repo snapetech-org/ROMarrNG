@@ -979,6 +979,8 @@ const LOCAL_API_TEMPLATE_KEYS=new Set([
   'ui.the-claim-code-is-missing-it-travels.924decc4df',
   'ui.that-server-completed-the-handshake.b1a5c997c1',
   'ui.library-read-failed-detail.4ae2084070',
+  'ui.reading-the-library-from-where.f6d252e9c7',
+  'ui.metadata-root-not-configured.d22feb8b9c',
 ]);
 // This narrower allowlist is only for the local /connect/sources response.
 // Do not let generic API/provider text acquire template authority by matching
@@ -1949,8 +1951,8 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
     // The first fetch has not landed yet. Say so, rather than showing an
     // empty grid that reads as "your library is empty".
     p.innerHTML=`<div class="card"><h3 data-i18n="ui.reading-the-library.fe68286704">Reading the library</h3>
-      <p class="help">${d.message?apiMessageMarkup(d.message):'<span data-i18n="ui.fetching-from-romm.24384ccda6">Fetching from RomM…</span>'}
-      ${d.error?` <span data-i18n="ui.last-attempt.3ec078252b">Last attempt:</span> <b>${apiMessageMarkup(d.error)}</b>. <span data-i18n="ui.retrying-with-backoff.06028a831f">Retrying with backoff.</span>`:''}</p></div>`;
+      <p class="help">${d.message?apiMessageMarkup(d.message,d.message_template):'<span data-i18n="ui.fetching-from-romm.24384ccda6">Fetching from RomM…</span>'}
+      ${d.error?` <span data-i18n="ui.last-attempt.3ec078252b">Last attempt:</span> <b>${apiMessageMarkup(d.error,d.error_template)}</b>. <span data-i18n="ui.retrying-with-backoff.06028a831f">Retrying with backoff.</span>`:''}</p></div>`;
     applyInterfaceLanguage();
     return;
   }
@@ -5714,12 +5716,14 @@ RENDER.organize=async()=>{
     const items=data.items||[];
     const start=data.total?offset+1:0;
     const end=Math.min(data.total||0,offset+items.length);
-    $('#org-page-label').textContent=fmt(start)+'–'+fmt(end)+' of '+fmt(data.total||0);
+    $('#org-page-label').innerHTML=interfaceTemplateMarkup(
+      'Showing {start}–{end} of {total}',
+      {start:fmt(start),end:fmt(end),total:fmt(data.total||0)});
     $('#org-prev').disabled=offset<=0;
     $('#org-next').disabled=offset+limit>=(data.total||0);
     const target=$('#org-items');
     if(data.error){
-      target.innerHTML='<div class="panel-note panel-warn">'+apiMessageMarkup(data.error)+'</div>';
+      target.innerHTML='<div class="panel-note panel-warn">'+apiMessageMarkup(data.error,data.error_template)+'</div>';
     }else if(!items.length){
       target.innerHTML='<div class="empty">No inventory entries yet. Scan a configured ROM library to begin.</div>';
     }else{

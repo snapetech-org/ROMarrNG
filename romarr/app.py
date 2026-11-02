@@ -1566,10 +1566,20 @@ class ROMarr:
         games, at, err = self._library_cache
         if games is None:
             where = ", ".join(names) or getattr(self.game_library, "name", "library")
-            return {"items": [], "loading": True,
-                    "error": err or "",
-                    "libraries": names,
-                    "message": f"Reading the library from {where}…"}
+            result = {"items": [], "loading": True,
+                      "error": err or "",
+                      "libraries": names,
+                      "message": f"Reading the library from {where}…",
+                      "message_template": {
+                          "key": "ui.reading-the-library-from-where.f6d252e9c7",
+                          "values": {"where": where},
+                      }}
+            if err == "no library configured":
+                result["error_template"] = {
+                    "key": "ui.no-library-configured.2f7f2b199a",
+                    "values": {},
+                }
+            return result
 
         rows = games
         wanted = str(platform or "").strip().lower()

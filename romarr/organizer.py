@@ -1705,7 +1705,12 @@ class LibraryOrganizer:
                 offset: int = 0) -> dict:
         root = self.metadata_root
         if root is None or _path_has_symlink(root) or not root.is_dir():
-            return {"items": [], "total": 0, "platforms": [], "error": "metadata root not configured"}
+            return {"items": [], "total": 0, "platforms": [],
+                    "error": "metadata root not configured",
+                    "error_template": {
+                        "key": "ui.metadata-root-not-configured.d22feb8b9c",
+                        "values": {},
+                    }}
         if platform and resolve(platform) is None:
             return {"items": [], "total": 0, "platforms": [],
                     "error": "unknown platform"}
