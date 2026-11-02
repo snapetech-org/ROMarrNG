@@ -5,7 +5,7 @@
       "source": ", or load No-Intro / Redump DATs under",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:2227"
+        "romarr/ui.py:2434"
       ],
       "id": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa",
       "sourceHash": "02eaa58bfa6c824f83791cb11b32f6eba88e517acaa2fe36dcd2333c7d3fe00c",
@@ -53,7 +53,7 @@
       "source": ", to browse a catalog here.",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:2227"
+        "romarr/ui.py:2434"
       ],
       "id": "ui.to-browse-a-catalog-here.8df4394282",
       "sourceHash": "8df4394282e3d7bb88baf4330e2d256bcedbc21011c0c1b69d63e9b626af53f5",
@@ -249,30 +249,6 @@
       ],
       "id": "ui.romarrng-handles-acquiring-verifying.6dd98e68b1",
       "sourceHash": "6dd98e68b15af25593513379b692ed8a92c1d51703c1507081bdc5ef86f06c1e",
-      "pendingLocales": [
-        "ar",
-        "de",
-        "es",
-        "fr",
-        "hi",
-        "id",
-        "ja",
-        "ko",
-        "pt-BR",
-        "vi",
-        "zh-Hans",
-        "zh-Hant"
-      ],
-      "dynamicPlaceholders": []
-    },
-    {
-      "source": "; see the",
-      "category": "ui",
-      "locations": [
-        "romarr/ui.py:4695"
-      ],
-      "id": "ui.see-the.2d464f0f23",
-      "sourceHash": "2d464f0f23703e53a4b5d32e1e64435ae062e3a57dc95d1095d7e8c09c943186",
       "pendingLocales": [
         "ar",
         "de",
@@ -893,7 +869,7 @@
       "source": "Browse games",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:2226"
+        "romarr/ui.py:2433"
       ],
       "id": "ui.browse-games.cf37299e27",
       "sourceHash": "cf37299e27fb28ff23ba23bf3b2a143cb84d25b53db94f8e1efbe109fb12ef92",
@@ -941,7 +917,7 @@
       "source": "Build a portable inventory, reuse existing ES-DE metadata, match exact DAT dumps, and review safe name changes. Scanning is read only. ROMarr changes files only after you preview and apply a plan.",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:5401"
+        "romarr/ui.py:5632"
       ],
       "id": "ui.build-a-portable-inventory-reuse-exi.da369004a7",
       "sourceHash": "da369004a775dcd05292cb9134cb40b94b7c884be893203b4f826c1f6c4d2549",
@@ -1085,7 +1061,7 @@
       "source": "Choose a generation you remember, search by name, then open its catalog. The playback label shows how this install handles each system.",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:4694"
+        "romarr/ui.py:4925"
       ],
       "id": "ui.choose-a-generation-you-remember-sea.58d6be3f1f",
       "sourceHash": "58d6be3f1f35990eb280d0f325006bc93be13a92f18985d9172e21e620259a0e",
@@ -1327,7 +1303,7 @@
       "source": "Connect an IGDB metadata provider under",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:2227"
+        "romarr/ui.py:2434"
       ],
       "id": "ui.connect-an-igdb-metadata-provider-un.94cf3e816e",
       "sourceHash": "94cf3e816e6548a3bd391749cd1640557a07a7a25b2a2d10ed5c42428bc91cf5",
@@ -2513,30 +2489,6 @@
       "dynamicPlaceholders": []
     },
     {
-      "source": "For a guided discovery and user request queue, pair ROMarrNG with",
-      "category": "ui",
-      "locations": [
-        "romarr/ui.py:2228"
-      ],
-      "id": "ui.for-a-guided-discovery-and-user-requ.409fbe664a",
-      "sourceHash": "409fbe664a6071c18edc5f77aa04d1b320347afb07df59da51c4c566139fe935",
-      "pendingLocales": [
-        "ar",
-        "de",
-        "es",
-        "fr",
-        "hi",
-        "id",
-        "ja",
-        "ko",
-        "pt-BR",
-        "vi",
-        "zh-Hans",
-        "zh-Hant"
-      ],
-      "dynamicPlaceholders": []
-    },
-    {
       "source": "For a household catalog and request queue, use",
       "category": "ui",
       "locations": [
@@ -2544,30 +2496,6 @@
       ],
       "id": "ui.for-a-household-catalog-and-request.2ec86400a0",
       "sourceHash": "2ec86400a018eab78a29e9300289e791b4c4b865f3eadfe77c0ddd8626e44aa2",
-      "pendingLocales": [
-        "ar",
-        "de",
-        "es",
-        "fr",
-        "hi",
-        "id",
-        "ja",
-        "ko",
-        "pt-BR",
-        "vi",
-        "zh-Hans",
-        "zh-Hant"
-      ],
-      "dynamicPlaceholders": []
-    },
-    {
-      "source": "For a shared catalog and household request queue, use",
-      "category": "ui",
-      "locations": [
-        "romarr/ui.py:5097"
-      ],
-      "id": "ui.for-a-shared-catalog-and-household-r.027b0accc2",
-      "sourceHash": "027b0accc264107abdb6ca9af7941dd4dd2be7bd15919b9250b693d86a3d1408",
       "pendingLocales": [
         "ar",
         "de",
@@ -4468,7 +4396,7 @@
       "source": "Platforms, by era",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:4693"
+        "romarr/ui.py:4924"
       ],
       "id": "ui.platforms-by-era.f61faf3b5f",
       "sourceHash": "f61faf3b5fe3fdc0403b20261fbf029a3deec34cca6a9acfe9d7307ea8b7ac97",
@@ -5186,30 +5114,6 @@
       ]
     },
     {
-      "source": "ROMarr acquires, verifies and files games. For household discovery, covers and a request queue, pair it with",
-      "category": "ui",
-      "locations": [
-        "romarr/ui.py:4695"
-      ],
-      "id": "ui.romarr-acquires-verifies-and-files-g.417be68822",
-      "sourceHash": "417be688224d943a8d61f5d235e6049a52a2acf4b72d5d0506fa331a1cd36afe",
-      "pendingLocales": [
-        "ar",
-        "de",
-        "es",
-        "fr",
-        "hi",
-        "id",
-        "ja",
-        "ko",
-        "pt-BR",
-        "vi",
-        "zh-Hans",
-        "zh-Hant"
-      ],
-      "dynamicPlaceholders": []
-    },
-    {
       "source": "ROMarr cannot say which platforms it plays and does not guess.",
       "category": "ui",
       "locations": [
@@ -5337,54 +5241,6 @@
       ],
       "id": "ui.romarr-did-not-return-an-api-key.fd35532a78",
       "sourceHash": "fd35532a7805e62d6508c19798013b83374216bf98021361c65429fbf9a8c003",
-      "pendingLocales": [
-        "ar",
-        "de",
-        "es",
-        "fr",
-        "hi",
-        "id",
-        "ja",
-        "ko",
-        "pt-BR",
-        "vi",
-        "zh-Hans",
-        "zh-Hant"
-      ],
-      "dynamicPlaceholders": []
-    },
-    {
-      "source": "ROMarr handles release search, verification and filing; see the",
-      "category": "ui",
-      "locations": [
-        "romarr/ui.py:2228"
-      ],
-      "id": "ui.romarr-handles-release-search-verifi.45939bf69e",
-      "sourceHash": "45939bf69e2ac7e91a2589eb320c08a1affa601a322abc230759c730714fe38d",
-      "pendingLocales": [
-        "ar",
-        "de",
-        "es",
-        "fr",
-        "hi",
-        "id",
-        "ja",
-        "ko",
-        "pt-BR",
-        "vi",
-        "zh-Hans",
-        "zh-Hant"
-      ],
-      "dynamicPlaceholders": []
-    },
-    {
-      "source": "ROMarr handles release search, verification and filing; the",
-      "category": "ui",
-      "locations": [
-        "romarr/ui.py:5101"
-      ],
-      "id": "ui.romarr-handles-release-search-verifi.fde43e75b6",
-      "sourceHash": "fde43e75b609774e23e84196d21af2cec63b81205976dd76a74d3093abea60cf",
       "pendingLocales": [
         "ar",
         "de",
@@ -6172,7 +6028,7 @@
       "source": "Requests in SeerrNG ↗",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:5402"
+        "romarr/ui.py:5633"
       ],
       "id": "ui.requests-in-seerrng.94ac015721",
       "sourceHash": "94ac01572121cfa86286c6ebb0f5dddedecbbc35f9cb31754abdc7af6c8834ce",
@@ -9018,30 +8874,6 @@
       "dynamicPlaceholders": []
     },
     {
-      "source": "explains the connection.",
-      "category": "ui",
-      "locations": [
-        "romarr/ui.py:5101"
-      ],
-      "id": "ui.explains-the-connection.9e80ba4652",
-      "sourceHash": "9e80ba46529646a293696c05b54c7fdbf716a85ae5b802518b4447611c989d96",
-      "pendingLocales": [
-        "ar",
-        "de",
-        "es",
-        "fr",
-        "hi",
-        "id",
-        "ja",
-        "ko",
-        "pt-BR",
-        "vi",
-        "zh-Hans",
-        "zh-Hant"
-      ],
-      "dynamicPlaceholders": []
-    },
-    {
       "source": "failed download handling is off",
       "category": "task-result",
       "locations": [
@@ -9259,33 +9091,6 @@
         "imported",
         "total"
       ]
-    },
-    {
-      "source": "integration guide",
-      "category": "ui",
-      "locations": [
-        "romarr/ui.py:2228",
-        "romarr/ui.py:4695",
-        "romarr/ui.py:5101",
-        "romarr/ui.py:5403"
-      ],
-      "id": "ui.integration-guide.6cfa2d0314",
-      "sourceHash": "6cfa2d0314f8b1da4dd457bd11b39027be5eb4bd13b3a2230df34be284558a37",
-      "pendingLocales": [
-        "ar",
-        "de",
-        "es",
-        "fr",
-        "hi",
-        "id",
-        "ja",
-        "ko",
-        "pt-BR",
-        "vi",
-        "zh-Hans",
-        "zh-Hant"
-      ],
-      "dynamicPlaceholders": []
     },
     {
       "source": "invalid hub result: {detail}",
@@ -11908,6 +11713,118 @@
       ],
       "id": "ui.requests-per-pass.74961b68a5",
       "sourceHash": "74961b68a5e0d5655dcbc4058f2547cd78f3f96914196af9685491e4d1f73b13",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Use {service} for game discovery, game covers, and a shared household request queue.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2435",
+        "romarr/ui.py:4926",
+        "romarr/ui.py:5332",
+        "romarr/ui.py:5634"
+      ],
+      "id": "ui.use-service-for-game-discovery-game.f3465a1ec2",
+      "sourceHash": "f3465a1ec21b9db801b49f626be31a2b24a5c2eb388fd779bf461292507f66a9",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "service"
+      ]
+    },
+    {
+      "source": "The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2435",
+        "romarr/ui.py:4926",
+        "romarr/ui.py:5332",
+        "romarr/ui.py:5634"
+      ],
+      "id": "ui.the-integration-guide-explains-how-t.59a854ef19",
+      "sourceHash": "59a854ef194752b1bb429e4bc7f58119cc5e0c97283014ea4da3c7abcacce389",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": []
+    },
+    {
+      "source": "Use {service} for game discovery, game covers, and a shared household request queue.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2435",
+        "romarr/ui.py:4926",
+        "romarr/ui.py:5332",
+        "romarr/ui.py:5634"
+      ],
+      "id": "ui.use-service-for-game-discovery-game.f3465a1ec2",
+      "sourceHash": "f3465a1ec21b9db801b49f626be31a2b24a5c2eb388fd779bf461292507f66a9",
+      "pendingLocales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "dynamicPlaceholders": [
+        "service"
+      ]
+    },
+    {
+      "source": "The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2435",
+        "romarr/ui.py:4926",
+        "romarr/ui.py:5332",
+        "romarr/ui.py:5634"
+      ],
+      "id": "ui.the-integration-guide-explains-how-t.59a854ef19",
+      "sourceHash": "59a854ef194752b1bb429e4bc7f58119cc5e0c97283014ea4da3c7abcacce389",
       "pendingLocales": [
         "ar",
         "de",

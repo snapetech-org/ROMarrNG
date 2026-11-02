@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "pinnedHead": "50bb70837512bb5abcf53c89b01031aa9a321321",
+  "pinnedTree": "c88c97301c042747bd5e183daff21d7d255d4cfc",
+  "candidateFile": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-root-fullsentence-review-50bb-20261102/candidates.jsonl",
+  "candidateFileSha256": "fc2678c69437e22d0de130c61d1fc2c377df074241c2544e674363ce3249728f",
+  "reviewedCells": 24,
+  "sourceMessages": 2,
+  "localeCount": 12,
+  "dispositions": {
+    "accepted": 21,
+    "refine": 3,
+    "held": 0
+  },
+  "refinements": [
+    {
+      "id": "ui.use-service-for-game-discovery-game.f3465a1ec2",
+      "locale": "de",
+      "target": "Mit {service} können Sie Spiele entdecken, Cover ansehen und eine gemeinsame Anfragewarteschlange für Ihren Haushalt nutzen.",
+      "sha256": "9cd423d55fe681fec1713b1fa8ba1514708b535eed2858eff28258c41250c985"
+    },
+    {
+      "id": "ui.use-service-for-game-discovery-game.f3465a1ec2",
+      "locale": "ko",
+      "target": "게임을 탐색하고 표지를 확인하며 가정 내 공유 요청 대기열을 이용하려면 {service}를 사용하세요.",
+      "sha256": "ca0f20631184e1263fb09d563dd399cfbc28f8a712996497478f278ccd587196"
+    },
+    {
+      "id": "ui.the-integration-guide-explains-how-t.59a854ef19",
+      "locale": "id",
+      "target": "Panduan integrasi menjelaskan cara menghubungkan layanan serta cara ROMarr mencari rilis game, memverifikasinya, dan mengatur game.",
+      "sha256": "e86cefd41a16379c1a3c24cf95b9e61c05cecb91a718364bb781e46cc2fa385b"
+    }
+  ],
+  "placeholderChecks": "24/24 pass; source A retains exactly one {service}; source B has none.",
+  "terminalPunctuationChecks": "24/24 pass with locale-appropriate terminal punctuation (including Devanagari danda).",
+  "context": "A is the complete link text inside the SeerrNG hyperlink. B is the complete link text inside the integration-guide hyperlink. The links are separated by interfacePhraseSpace(); it is empty for ja/zh and one space for other locales.",
+  "repositoryChanged": false,
+  "testsBuildCi": false,
+  "nativeSpeakerApproval": false
+}

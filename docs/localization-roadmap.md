@@ -3,26 +3,21 @@
 ## What is available
 
 ROMarr's Python service renders the dashboard and public sign-in, invitation,
-and connection pages. The localization catalog contains 1,832 app-owned
-messages under stable IDs. English is the source language. Twelve other locales
-have direct translations for the 1,348 previously cataloged messages. The 291
-messages in the frozen October 31 bundle, 161 further API, test, organizer,
-catalog-error, and organizer-result sources, and 14 newly captured source gaps
-have no target text yet and remain English through the normal fallback. The
-frozen November 1 source snapshot has 466 pending messages (5,592 direct locale
-cells). Eight mapping-row accessibility templates brought the catalog to 474
-pending messages (5,688 direct locale cells). Ten connect-source instruction
-templates add 120 pending cells, bringing the current catalog to 484 pending
-messages (5,808 direct locale cells). Latin American Spanish inherits from
-Spanish, and Canadian French inherits from French. Missing translations fall
-back to English on a message-by-message basis.
+and connection pages. The catalog contains 1,835 app-owned messages under
+stable IDs. All 22,020 direct target cells are populated across the twelve
+locales. Of these, 16,188 remain `unverified` because their review provenance is
+unknown, and 5,832 are marked `draft`. That draft group includes the 5,808 cells
+from the frozen 484-message source bundle and 24 cells for two newly localized
+integration messages. No target cells currently fall back to English because
+they are missing. Latin American Spanish inherits from Spanish, and Canadian
+French inherits from French.
 
 | Locale state | Count | Behavior |
 | --- | ---: | --- |
 | English source | 1 | Always selectable |
-| Direct translations | 12 | Selectable; 1,348 messages translated, 484 source-only |
+| Direct translations | 12 | Selectable; all 1,835 messages have a target |
 | Regional fallbacks | 2 | Selectable; inherit from `es` or `fr` |
-| Draft translations | 0 currently | Hidden; must be complete and reviewed before selection |
+| Draft locales | 0 currently | Hidden; must be complete and reviewed before selection |
 | Planned translations | 22 | Registered for formatting and future work; not selectable |
 
 The 37 registered locales are Arabic, Azerbaijani, Bulgarian, Bengali, Czech,
@@ -39,25 +34,27 @@ their translations exist and pass the catalog checks.
 Language choices show each locale's native name and English name. When both
 names are the same, the selector displays the name once.
 
-The source-only additions cover authored route copy, task labels and results,
-form labels, and stable application error/status templates. A checked source
-manifest records each exact message, dynamic placeholder boundary, and source
-location. The connect-source instructions use stable templates, with credential
-examples, URLs, and provider responses kept as opaque placeholders. A scoped
-source guard checks rendered UI literals, task results,
-UI-consumed API messages, and organizer confidence and reason fields. The
-October 31 source bundle remains frozen. The November 1 source bundle preserves
-its 291 messages and includes all 466 currently pending messages (5,592 direct
-locale cells) as of commit `865e1aee`; 175 IDs and 2,100 cells were added after
-the October 31 snapshot. Provider replies, library names and paths, versions,
-exception bodies, and user values stay opaque inside their existing boundaries.
-The eight mapping-row templates localize accessible group and remove button
-names while keeping path and folder values in placeholders. Their 96 direct
-locale cells remain pending. The successor bundle
+The source additions cover authored route copy, task labels and results, form
+labels, stable application error/status templates, connect-source instructions,
+and integration-screen copy. A checked source manifest records each exact
+message, dynamic placeholder boundary, and source location. The connect-source
+instructions use stable templates, with credential examples, URLs, and provider
+responses kept as opaque placeholders. A scoped source guard checks rendered UI
+literals, task results, UI-consumed API messages, and organizer confidence and
+reason fields. The October 31 source bundle remains frozen. The November 1
+source bundle preserves its 291 messages, and its successor freezes 484
+messages (5,808 direct locale cells), including eight mapping-row templates and
+ten connect-source templates. The 175 IDs and 2,100 cells added after the
+October 31 snapshot, the 96 mapping-row cells, and the 120 connect-source cells
+have since been populated as drafts. The latest source update adds two
+integration messages at four production call sites, with 24 additional draft
+cells. These sentences localize SeerrNG and integration-guide copy on the
+catalog-empty, platform, getting-started, and organize screens. Provider
+replies, library names and paths, versions, exception bodies, and user values
+stay opaque inside their existing boundaries. The successor bundle
 [20261101-connect-instructions.json](../localization/source-bundles/20261101-connect-instructions.json)
-freezes all 484 current source messages (5,808 direct locale cells), including
-the 10 new connect-source templates. No English target text is seeded as a
-translation.
+is a frozen source-only snapshot; it contains no generated translations. No
+English target text is seeded as a translation.
 
 The existing translation text was carried over, with targeted high-confidence
 corrections across all 12 direct locales for ROM-dump false friends,
@@ -70,10 +67,10 @@ brands, identifiers, technical terms, and cognates after the remaining
 Wanted-list text was localized. A Unicode-script mismatch scan of all
 16,176 previously translated direct locale cells found no remaining candidates
 after correcting two stray Chinese full stops in Hindi. The 3,492 direct
-locale cells in the frozen October 31 bundle and 2,100
-cells added since that snapshot were pending translation and were not part of
-that scan. This
-focused pass is not a native-speaker
+locale cells in the frozen October 31 bundle and 2,100 cells added since that
+snapshot were not part of that scan; they have since been populated as drafts
+and remain outside the focused semantic pass. This focused pass is not a
+native-speaker
 review of the whole catalog. Each message records review status separately for
 every direct locale; existing text remains `unverified` because its provenance
 is unknown. Regional entries are marked `inherited`. A message can be marked

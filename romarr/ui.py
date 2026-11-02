@@ -882,7 +882,6 @@ const DOWNLOAD_STATE_LABELS={queued:'Queued',grabbed:'Grabbed',imported:'Importe
 const interfaceMarkup=source=>'<span data-i18n-key="'+esc(stableLocalizationKey(source)||source)+'">'
   +esc(translateLabel(source,readInterfaceLanguage()))+'</span>';
 const interfacePhraseSpace=()=>/^(?:ja|zh)/.test(readInterfaceLanguage())?'':' ';
-const interfaceSentencePeriod=()=>/^(?:ja|zh)/.test(readInterfaceLanguage())?'。':'.';
 const interfaceTemplateMarkup=(source,values)=>{
   const language=readInterfaceLanguage(),translated=isTranslated(source,language);
   return '<span lang="'+(translated?esc(language):'en')+'" dir="'
@@ -2430,9 +2429,9 @@ async function renderGameCatalog(){
   if(!hasIgdb&&!hasDat){
     CATALOG_VIEW.rows=[];
     $('#page').innerHTML=listsNav('catalog')
-      +'<div class="card"><h3>Browse games</h3>'
-      +'<p class="help">Connect an IGDB metadata provider under <a href="#metadata">Metadata</a>, or load No-Intro / Redump DATs under <a href="#collections">Collections</a>, to browse a catalog here.</p>'
-      +'<p class="help">For a guided discovery and user request queue, pair ROMarrNG with <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a>. ROMarr handles release search, verification and filing; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a>.</p></div>';
+      +'<div class="card"><h3>'+interfaceMarkup('Browse games')+'</h3>'
+      +'<p class="help">'+interfaceMarkup('Connect an IGDB metadata provider under')+interfacePhraseSpace()+'<a href="#metadata">'+interfaceMarkup('Metadata')+'</a>'+interfaceMarkup(', or load No-Intro / Redump DATs under')+interfacePhraseSpace()+'<a href="#collections">'+interfaceMarkup('Collections')+'</a>'+interfaceMarkup(', to browse a catalog here.')+'</p>'
+      +'<p class="help"><a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">'+interfaceTemplateMarkup('Use {service} for game discovery, game covers, and a shared household request queue.',{service:'SeerrNG'})+'</a>'+interfacePhraseSpace()+'<a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.')+'</a></p></div>';
     wireListNav();
     return;
   }
@@ -4921,9 +4920,9 @@ RENDER.platforms=async()=>{
       +'<div style="margin-top:auto"><button class="btn ghost" data-platform-browse="'+esc(p.slug)+'"'+(canBrowse?'':' disabled')+' style="width:100%">'+(canBrowse?'Browse games':'Catalog unavailable')+'</button></div>'
       +'</article>';
   }).join('');
-  $('#page').innerHTML='<div class="card"><h3>Platforms, by era</h3>'
-    +'<p class="help">Choose a generation you remember, search by name, then open its catalog. The playback label shows how this install handles each system.</p>'
-    +'<p class="help">ROMarr acquires, verifies and files games. For household discovery, covers and a request queue, pair it with <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a>; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a>.</p>'
+  $('#page').innerHTML='<div class="card"><h3>'+interfaceMarkup('Platforms, by era')+'</h3>'
+    +'<p class="help">'+interfaceMarkup('Choose a generation you remember, search by name, then open its catalog. The playback label shows how this install handles each system.')+'</p>'
+    +'<p class="help"><a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">'+interfaceTemplateMarkup('Use {service} for game discovery, game covers, and a shared household request queue.',{service:'SeerrNG'})+'</a>'+interfacePhraseSpace()+'<a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.')+'</a></p>'
     +'<div class="row" style="gap:6px;margin-bottom:12px;flex-wrap:wrap">'+eraButtons+'</div>'
     +'<div class="row" style="margin-bottom:14px"><input id="platform-filter" type="search" value="'+esc(PLATFORM_VIEW.query)+'" placeholder="Search platforms" style="max-width:340px"><span class="help">'+fmt(filtered.length)+' platforms</span></div>'
     +(cards?'<div class="grid">'+cards+'</div>':'<div class="empty">No platforms match this filter.</div>')
@@ -5329,7 +5328,7 @@ RENDER.getstarted=async()=>{
     +'<a class="tile" href="#lists" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Build a request list</div><div class="pf">Browse catalog titles or connect an import list. Requests use your configured sources and client.</div></a>'
     +'<a class="tile" href="#collections" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Work toward a complete set</div><div class="pf">Load a DAT and see verified titles and collection progress.</div></a>'
     +'</div>'
-    +'<p class="help" style="margin-top:12px">'+interfaceMarkup('ui.for-a-shared-catalog-and-household-r.027b0accc2')+interfacePhraseSpace()+'<a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a>'+interfaceSentencePeriod()+interfacePhraseSpace()+interfaceMarkup('ui.romarr-handles-release-search-verifi.fde43e75b6')+interfacePhraseSpace()+'<a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('ui.integration-guide.6cfa2d0314')+'</a>'+interfacePhraseSpace()+interfaceMarkup('ui.explains-the-connection.9e80ba4652')+'</p></div>'
+    +'<p class="help" style="margin-top:12px"><a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">'+interfaceTemplateMarkup('Use {service} for game discovery, game covers, and a shared household request queue.',{service:'SeerrNG'})+'</a>'+interfacePhraseSpace()+'<a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.')+'</a></p></div>'
     +'<div class="card" style="margin-top:16px"><h3>Your setup</h3>'
     +step(1,'An indexer',indexerOk,
        interfaceMarkup('ui.prowlarr-or-torznab-newznab-indexers.529ec79be7')
@@ -5628,10 +5627,10 @@ RENDER.organize=async()=>{
     +PLATFORMS.map(x=>'<option value="'+esc(x.slug)+'">'+esc(x.name)+'</option>').join('');
   p.innerHTML=
     '<div class="card"><div class="row" style="align-items:flex-start;gap:12px">'
-    +'<div style="flex:1"><h3>Identify &amp; Organize</h3>'
-    +'<p class="help">Build a portable inventory, reuse existing ES-DE metadata, match exact DAT dumps, and review safe name changes. Scanning is read only. ROMarr changes files only after you preview and apply a plan.</p></div>'
-    +'<a class="btn ghost" href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">Requests in SeerrNG ↗</a></div>'
-    +'<p class="help" style="margin:0">'+interfaceMarkup('Use')+' <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a> for the shared household request queue; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a> to connect the services.</p>'
+    +'<div style="flex:1"><h3>'+interfaceMarkup('Identify & Organize')+'</h3>'
+    +'<p class="help">'+interfaceMarkup('Build a portable inventory, reuse existing ES-DE metadata, match exact DAT dumps, and review safe name changes. Scanning is read only. ROMarr changes files only after you preview and apply a plan.')+'</p></div>'
+    +'<a class="btn ghost" href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('Requests in SeerrNG ↗')+'</a></div>'
+    +'<p class="help" style="margin:0"><a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">'+interfaceTemplateMarkup('Use {service} for game discovery, game covers, and a shared household request queue.',{service:'SeerrNG'})+'</a>'+interfacePhraseSpace()+'<a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.')+'</a></p>'
     +'<div class="st" style="margin-top:12px">'
     +'<div><b>ROM root</b>'+(SETTINGS.library_path
       ?'<span lang="und" dir="auto">'+esc(SETTINGS.library_path)+'</span>'
