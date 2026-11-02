@@ -2304,11 +2304,11 @@ RENDER.missing=async()=>{
 
 function listsNav(active){
   return '<div class="row" style="margin-bottom:12px">'
-    +'<button class="btn '+(active==='catalog'?'':'ghost')+'" data-list-mode="catalog">Browse catalog</button>'
-    +'<button class="btn '+(active==='imports'?'':'ghost')+'" data-list-mode="imports">Import lists</button>'
+    +'<button class="btn '+(active==='catalog'?'':'ghost')+'" data-list-mode="catalog">'+interfaceMarkup('ui.browse-catalog.4d05dc6da8')+'</button>'
+    +'<button class="btn '+(active==='imports'?'':'ghost')+'" data-list-mode="imports">'+interfaceMarkup('ui.import-lists.cdf54991b2')+'</button>'
     +'<span style="flex:1"></span>'
-    +'<a class="btn ghost" style="text-decoration:none" href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG discovery</a>'
-    +'<a class="help" href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">Integration guide</a>'
+    +'<a class="btn ghost" style="text-decoration:none" href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('ui.seerrng-discovery.f140768191')+'</a>'
+    +'<a class="help" href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('ui.integration-guide.02a0a9e2c2')+'</a>'
     +'</div>';
 }
 function wireListNav(){
