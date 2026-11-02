@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "65a3f8a8feee1b041c8c547250feeae6900337f5",
+  "tree": "654f9065dcdd9c7f580df6909071f38278f44d61",
+  "sourceIds": 3,
+  "reviewedCells": 36,
+  "localeCount": 12,
+  "callerLocationRefs": 10,
+  "uniqueCallerFiles": 2,
+  "callerFileSha256": {
+    "romarr/lists.py": "adf7d4e412d94b0796c2671ce14d191fa7e990ed7749fa229d405b38e3580de4",
+    "romarr/ui.py": "b110af999efbe7bf22e8a1ee98be8cf6b4dee92f8f3b3fff606b59e38f9f527e"
+  },
+  "staleLocationPins": [
+    {
+      "id": "ui.the-integration-guide-explains-how-t.59a854ef19",
+      "path": "romarr/ui.py",
+      "registryLocation": "romarr/ui.py:2435",
+      "currentMatchingLines": [
+        2436
+      ]
+    },
+    {
+      "id": "ui.the-integration-guide-explains-how-t.59a854ef19",
+      "path": "romarr/ui.py",
+      "registryLocation": "romarr/ui.py:4926",
+      "currentMatchingLines": [
+        4931
+      ]
+    },
+    {
+      "id": "ui.the-integration-guide-explains-how-t.59a854ef19",
+      "path": "romarr/ui.py",
+      "registryLocation": "romarr/ui.py:5332",
+      "currentMatchingLines": [
+        5337
+      ]
+    },
+    {
+      "id": "ui.the-integration-guide-explains-how-t.59a854ef19",
+      "path": "romarr/ui.py",
+      "registryLocation": "romarr/ui.py:5634",
+      "currentMatchingLines": [
+        5639
+      ]
+    },
+    {
+      "id": "ui.use-service-for-game-discovery-game.f3465a1ec2",
+      "path": "romarr/ui.py",
+      "registryLocation": "romarr/ui.py:2435",
+      "currentMatchingLines": [
+        2436
+      ]
+    },
+    {
+      "id": "ui.use-service-for-game-discovery-game.f3465a1ec2",
+      "path": "romarr/ui.py",
+      "registryLocation": "romarr/ui.py:4926",
+      "currentMatchingLines": [
+        4931
+      ]
+    },
+    {
+      "id": "ui.use-service-for-game-discovery-game.f3465a1ec2",
+      "path": "romarr/ui.py",
+      "registryLocation": "romarr/ui.py:5332",
+      "currentMatchingLines": [
+        5337
+      ]
+    },
+    {
+      "id": "ui.use-service-for-game-discovery-game.f3465a1ec2",
+      "path": "romarr/ui.py",
+      "registryLocation": "romarr/ui.py:5634",
+      "currentMatchingLines": [
+        5639
+      ]
+    }
+  ],
+  "previousCatalogPoolHead": "a1278acda1cea823443d7d6b712ed6ace8a99694",
+  "baselineCatalogMessageCount": 1833,
+  "currentCatalogMessageCount": 1836,
+  "newCatalogMessageIdsSinceBaseline": [
+    "ui.no-web-api-and-nothing-written-to-a.fefddf8698",
+    "ui.the-integration-guide-explains-how-t.59a854ef19",
+    "ui.use-service-for-game-discovery-game.f3465a1ec2"
+  ],
+  "priorReviewHeads": {
+    "nintendoNoApi": "d259a92f89657b5c79be3653ed811e2bf8e01c58",
+    "integrationSentences": "50bb70837512bb5abcf53c89b01031aa9a321321"
+  },
+  "priorIntegrationCandidateFileSha256": "ba620cd2695f361e118da395b4d490e9560093326dcae4e82043fbabc6acfc99",
+  "currentRootDispositionCounts": {
+    "accept-current-prior-crossreview-reattested": 33,
+    "correct-current-target": 1,
+    "accept-current-revised-target": 2
+  },
+  "independentCrossReviewRequired": true,
+  "browserReviewAtCurrentHead": false,
+  "nativeSpeakerApproval": false,
+  "repositoryMutated": false,
+  "testsBuildsScansCiOrReleasesRun": false,
+  "staleLocationPinCount": 8
+}

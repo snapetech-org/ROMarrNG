@@ -52569,7 +52569,7 @@
         "ko": "통합 가이드에는 서비스를 연결하고 ROMarr가 게임 릴리스를 검색·검증·정리하는 방법이 설명되어 있습니다.",
         "zh-Hant": "整合指南說明如何連接這些服務，以及ROMarr如何搜尋、驗證並歸檔遊戲版本。",
         "vi": "Hướng dẫn tích hợp giải thích cách kết nối các dịch vụ và cách ROMarr tìm kiếm, xác minh rồi sắp xếp các bản phát hành trò chơi.",
-        "id": "Panduan integrasi menjelaskan cara menghubungkan layanan serta cara ROMarr mencari, memverifikasi, dan mengarsipkan rilis game."
+        "id": "Panduan integrasi menjelaskan cara menghubungkan layanan serta cara ROMarr mencari rilis game, memverifikasinya, dan mengatur game."
       },
       "translationHashes": {
         "es": "6e4ed4de3250cca356bbd3d20eeb285e418f9394fde3aaae48f60314f615cd17",
@@ -52583,7 +52583,7 @@
         "ko": "8c28e2e263a343ca83b1e6eef15f0cdade9411ef0c02dfda9b79ce8bd5c2658c",
         "zh-Hant": "1de513cf88917ec058d0d1f214706df7ab834a9f88727501615830c1e3c238cc",
         "vi": "3b86e70d6252960090ea5729202d2d7659956725bc698a8c033abb1e416b950b",
-        "id": "b8936f62429d6b8b62e033613942918ffd23463a526190732a2c8bb7fc278339"
+        "id": "d852124d81b8382111794068d0ca0691f4b14d82fc96e2776b0f6e7ed17bf128"
       },
       "translationStatus": {
         "es": "draft",
