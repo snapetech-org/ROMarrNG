@@ -1,0 +1,69 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "label": "candidate-free checksums",
+      "command": [
+        "sha256sum",
+        "-c",
+        "SHA256SUMS.txt"
+      ],
+      "returnCode": 0,
+      "stdout": "PR-attestation.json: OK\ncaller-search-audit.json: OK\ncatalog-file-pins.json: OK\ncatalog-insertion-queue.json: OK\ncurrent-target-numeric-mismatches.json: OK\ncurrent-target-placeholder-mismatches.json: OK\ncurrent-target-protected-literal-mismatches.json: OK\ndispatch-mechanics.json: OK\nmanifest.json: OK\nprior-hold-reattestation-summary.json: OK\nprior-lineage-provenance.json: OK\nprior-selection-reattestation-summary.json: OK\nregistry-order-note.json: OK\nselection.json: OK\nsource-queue.json: OK\nsource-snapshot.json: OK\ncatalog-source-inventory.jsonl: OK\ncurrent-target-cells.jsonl: OK\nprior-hold-reattestation.jsonl: OK\nprior-selection-reattestation.jsonl: OK\nselection-boundary.jsonl: OK\nsource-contexts.jsonl: OK\nsource-inventory-selection.jsonl: OK\nverify_input.py: OK\nREADME.md: OK",
+      "stderr": ""
+    },
+    {
+      "label": "candidate-free verifier",
+      "command": [
+        "/usr/bin/python3",
+        "verify_input.py"
+      ],
+      "returnCode": 0,
+      "stdout": "PASS candidate-free W425-W444: exact OPEN/DRAFT PR/branch/pull refs before and after; 20 catalog sources × 12 locales (240 cells); 479-source registry and 1,836-message catalog pins; 40 prior selected sources and 336 prior holds reattested unchanged; 0 placeholder, 2 numeric, 0 protected-literal mismatches recorded; no proposed targets or current-window decisions; checksums and portable evidence verifier pass.",
+      "stderr": ""
+    },
+    {
+      "label": "primary checksums",
+      "command": [
+        "sha256sum",
+        "-c",
+        "SHA256SUMS.txt"
+      ],
+      "returnCode": 0,
+      "stdout": "PR-attestation-after.json: OK\nPR-attestation-before.json: OK\nREADME.md: OK\nbuild_primary.py: OK\nmanifest.json: OK\nprimary-ledger.jsonl: OK\nseal_packet.py: OK\nsummary.json: OK\nverify_primary.py: OK",
+      "stderr": ""
+    },
+    {
+      "label": "primary verifier",
+      "command": [
+        "/usr/bin/python3",
+        "verify_primary.py",
+        "/home/keith/Documents/code/task-scratch/romarrng-pr70-w425-444-cross-audit-20261103/evidence/candidate-free-input"
+      ],
+      "returnCode": 0,
+      "stdout": "PASS primary W425-W444: 240 cells; 181 accept-current, 9 corrections, 38 refinements, 12 position-440 holds; 47 proposals; Chinese 100→百 semantic checks accepted twice; all selected placeholders/protected literals pass; numeric checks pass after semantic adjudication; prior 40 selections and 336 holds reattested; input verifier and packet checksums pass; PR remains OPEN/DRAFT at exact pinned head/tree.",
+      "stderr": ""
+    },
+    {
+      "label": "blind checksums",
+      "command": [
+        "sha256sum",
+        "-c",
+        "SHA256SUMS.txt"
+      ],
+      "returnCode": 0,
+      "stdout": "./README.md: OK\n./candidate-free-input-verification.txt: OK\n./cell-review.jsonl: OK\n./change-summary.json: OK\n./evidence/PR-attestation.json: OK\n./evidence/candidate-free-input/PR-attestation.json: OK\n./evidence/candidate-free-input/README.md: OK\n./evidence/candidate-free-input/caller-search-audit.json: OK\n./evidence/candidate-free-input/catalog-file-pins.json: OK\n./evidence/candidate-free-input/catalog-insertion-queue.json: OK\n./evidence/candidate-free-input/catalog-source-inventory.jsonl: OK\n./evidence/candidate-free-input/current-target-cells.jsonl: OK\n./evidence/candidate-free-input/current-target-numeric-mismatches.json: OK\n./evidence/candidate-free-input/current-target-placeholder-mismatches.json: OK\n./evidence/candidate-free-input/current-target-protected-literal-mismatches.json: OK\n./evidence/candidate-free-input/dispatch-mechanics.json: OK\n./evidence/candidate-free-input/manifest.json: OK\n./evidence/candidate-free-input/prior-hold-reattestation-summary.json: OK\n./evidence/candidate-free-input/prior-hold-reattestation.jsonl: OK\n./evidence/candidate-free-input/prior-lineage-provenance.json: OK\n./evidence/candidate-free-input/prior-selection-reattestation-summary.json: OK\n./evidence/candidate-free-input/prior-selection-reattestation.jsonl: OK\n./evidence/candidate-free-input/registry-order-note.json: OK\n./evidence/candidate-free-input/selection-boundary.jsonl: OK\n./evidence/candidate-free-input/selection.json: OK\n./evidence/candidate-free-input/source-contexts.jsonl: OK\n./evidence/candidate-free-input/source-inventory-selection.jsonl: OK\n./evidence/candidate-free-input/source-queue.json: OK\n./evidence/candidate-free-input/source-snapshot.json: OK\n./evidence/candidate-free-input/verify_input.py: OK\n./evidence/catalog-file-pins.json: OK\n./evidence/current-target-cells.jsonl: OK\n./evidence/dispatch-mechanics.json: OK\n./evidence/manifest.json: OK\n./evidence/prior-hold-reattestation-summary.json: OK\n./evidence/prior-hold-reattestation.jsonl: OK\n./evidence/prior-selection-reattestation-summary.json: OK\n./evidence/prior-selection-reattestation.jsonl: OK\n./evidence/source-contexts.jsonl: OK\n./live-pr-attestation.json: OK\n./manifest.json: OK\n./prior-hold-reattestation-summary.json: OK\n./prior-hold-reattestation.jsonl: OK\n./prior-selection-reattestation-summary.json: OK\n./prior-selection-reattestation.jsonl: OK\n./record_live_after.py: OK\n./source-context-interpretation.json: OK\n./verify_blind.py: OK",
+      "stderr": ""
+    },
+    {
+      "label": "blind verifier",
+      "command": [
+        "/usr/bin/python3",
+        "verify_blind.py"
+      ],
+      "returnCode": 0,
+      "stdout": "PASS blind W425-W444: 240 exact-hash cells; decisions {\"accept-current\": 214, \"correction\": 17, \"refinement\": 9}; 336 carried holds and 40 prior selections reattested; placeholders/protected literals valid; numeric-100 equivalence documented; source/caller evidence and checksums pass; live PR OPEN/DRAFT refs pinned before/after.",
+      "stderr": ""
+    }
+  ]
+}

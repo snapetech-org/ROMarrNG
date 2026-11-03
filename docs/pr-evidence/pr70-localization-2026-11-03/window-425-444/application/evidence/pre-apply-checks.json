@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "pinnedHead": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+  "pinnedTree": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d",
+  "baselineCatalogSha256": "d99f6636fefae13497849d8a88046d0bd6bb62c0d906fc030b2cc6946d6cd603",
+  "postCatalogSha256": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+  "selectedChangeCount": 46,
+  "dispositionCounts": {
+    "correction": 17,
+    "refinement": 29
+  },
+  "fullWindowReadbackCount": 240,
+  "keyOrderPreserved": true,
+  "localeOrderPreserved": true,
+  "allNonTargetCatalogValuesUnchanged": true,
+  "priorHoldCellsIntersectingEdits": 0,
+  "priorSelectedSourcesIntersectingEdits": 0,
+  "carriedPriorHoldCount": 336,
+  "carriedPriorSelectedSourceCount": 40
+}

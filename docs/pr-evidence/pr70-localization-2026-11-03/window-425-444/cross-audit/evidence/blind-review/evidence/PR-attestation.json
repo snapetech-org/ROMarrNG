@@ -1,0 +1,36 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "observedBefore": {
+    "observedUtc": "2026-11-03T19:10:49.920641+00:00",
+    "repository": "snapetech-org/ROMarrNG",
+    "pullRequest": 70,
+    "url": "https://github.com/snapetech-org/ROMarrNG/pull/70",
+    "state": "OPEN",
+    "isDraft": true,
+    "headRefName": "task/localization-translation-review-20261030",
+    "baseRefName": "main",
+    "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "headRefOid": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+    "headTree": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d",
+    "liveBranchRefOid": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+    "livePullRefOid": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6"
+  },
+  "observedAfter": {
+    "observedUtc": "2026-11-03T19:12:27.227051+00:00",
+    "repository": "snapetech-org/ROMarrNG",
+    "pullRequest": 70,
+    "url": "https://github.com/snapetech-org/ROMarrNG/pull/70",
+    "state": "OPEN",
+    "isDraft": true,
+    "headRefName": "task/localization-translation-review-20261030",
+    "baseRefName": "main",
+    "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "headRefOid": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+    "headTree": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d",
+    "liveBranchRefOid": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+    "livePullRefOid": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6"
+  },
+  "bothObservationsMatchPinnedHeadAndTree": true
+}

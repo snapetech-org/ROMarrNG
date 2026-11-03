@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "readbackCellCount": 240,
+  "selectedEditCount": 46,
+  "correctionCount": 17,
+  "refinementCount": 29,
+  "keyOrderPreserved": true,
+  "localeOrderPreserved": true,
+  "nonTargetValuesUnchanged": true,
+  "priorHoldCellsVerifiedUnchanged": 336,
+  "priorSelectedSourcesVerifiedUnchanged": 40,
+  "inheritedSelectionsAndHoldsIntersectingEditSet": 0,
+  "baselineCatalogSha256": "d99f6636fefae13497849d8a88046d0bd6bb62c0d906fc030b2cc6946d6cd603",
+  "appliedCatalogSha256": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+  "w440CurrentTargetsReadBack": 12
+}

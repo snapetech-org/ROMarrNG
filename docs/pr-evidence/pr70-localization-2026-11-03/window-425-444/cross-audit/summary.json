@@ -1,0 +1,336 @@
+{
+  "artifact": "ROMarrNG PR #70 W425-W444 third-party exact-head cross-audit",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+  "tree": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d",
+  "cellCount": 240,
+  "sourceCount": 20,
+  "localeCount": 12,
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "crossAuditDecisionCounts": {
+    "accept-current": 194,
+    "correction": 17,
+    "refinement": 29
+  },
+  "currentWindowHoldCount": 0,
+  "carriedPriorHoldCount": 336,
+  "carriedPriorHoldReattestation": {
+    "predecessorCandidateFreeHead": "c146189f29db8fbd77d68dff0c33a0ab59a6b601",
+    "currentHead": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+    "currentTree": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d",
+    "reattestedCellCount": 336,
+    "windowCounts": {
+      "W245-W264": 72,
+      "W265-W284": 168,
+      "W285-W304": 24,
+      "W325-W344": 24,
+      "W405-W424": 48
+    },
+    "allSourcesAndSelectionPositionsMatchCurrentSnapshot": true,
+    "allCurrentTargetHashesMatchPriorHoldEvidence": true,
+    "currentTargetChangedCells": 0
+  },
+  "carriedPriorSelectedSourceCount": 40,
+  "carriedPriorSelectionReattestation": {
+    "priorWindows": {
+      "W385-W404": 20,
+      "W405-W424": 20
+    },
+    "reattestedSelectedSourceCount": 40,
+    "allPriorSelectionsMatchCurrentCatalogAndRegistry": true,
+    "currentHead": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+    "currentTree": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d"
+  },
+  "primaryDecisionCounts": {
+    "accept-current": 181,
+    "refinement": 38,
+    "correction": 9,
+    "hold": 12
+  },
+  "blindDecisionCounts": {
+    "accept-current": 214,
+    "correction": 17,
+    "refinement": 9
+  },
+  "primaryBlindDispositionPairs": {
+    "accept-current|accept-current": 180,
+    "accept-current|correction": 1,
+    "correction|accept-current": 1,
+    "correction|correction": 7,
+    "correction|refinement": 1,
+    "hold|accept-current": 12,
+    "refinement|accept-current": 21,
+    "refinement|correction": 9,
+    "refinement|refinement": 8
+  },
+  "primaryBlindResolutionReconciliation": {
+    "cells": 240,
+    "sameDispositionAndEffectiveTarget": 190,
+    "sameEffectiveTargetDifferentDisposition": 9,
+    "differentEffectiveTarget": 41,
+    "totalReviewerDivergences": 50
+  },
+  "crossAuditAgreementWithReviews": {
+    "sameDispositionAndTargetAsPrimary": 218,
+    "sameDispositionAndTargetAsBlind": 212,
+    "sameTargetAsPrimary": 225,
+    "sameTargetAsBlind": 214
+  },
+  "tokenAndLiteralSummary": {
+    "placeholderMismatches": 0,
+    "protectedLiteralMismatches": 0,
+    "exactNumericTokenMatches": 238,
+    "acceptedNaturalizedMagnitudeCells": 2,
+    "naturalizedMagnitudeCells": [
+      {
+        "position": 439,
+        "locale": "zh-Hans",
+        "sourceTokens": [
+          "100"
+        ],
+        "selectedTarget": "可从各种列表向“待找”列表添加游戏，例如百大榜单文章、自制游戏目录或朋友的电子表格。每款游戏只添加一次；完整套装和 1G1R 在“合集”中管理。",
+        "targetMeaning": "百 (one hundred)"
+      },
+      {
+        "position": 439,
+        "locale": "zh-Hant",
+        "sourceTokens": [
+          "100"
+        ],
+        "selectedTarget": "可從各種清單將遊戲加入「待尋找」清單，例如百大榜單文章、自製遊戲目錄或朋友的試算表。每款遊戲只會新增一次；完整套裝和 1G1R 請至「合集」管理。",
+        "targetMeaning": "百 (one hundred)"
+      }
+    ]
+  },
+  "perPosition": [
+    {
+      "position": 425,
+      "sourceId": "ui.excluded-by-policy.fee2bad0b3",
+      "source": "Excluded by policy",
+      "decisions": {
+        "accept-current": 7,
+        "correction": 4,
+        "refinement": 1
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 426,
+      "sourceId": "ui.existing-es-de-gamelists-folder-opti.1659a3153e",
+      "source": "Existing ES-DE gamelists folder (optional)",
+      "decisions": {
+        "accept-current": 11,
+        "refinement": 1
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 427,
+      "sourceId": "ui.existing-es-de-media-folder-optional.dcc4281be8",
+      "source": "Existing ES-DE media folder (optional)",
+      "decisions": {
+        "accept-current": 11,
+        "refinement": 1
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 428,
+      "sourceId": "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+      "source": "Existing gamelist.xml is invalid; it was left untouched.",
+      "decisions": {
+        "accept-current": 12
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 429,
+      "sourceId": "ui.explore-more-games-in-this-genre.ca9764a30b",
+      "source": "Explore more games in this genre",
+      "decisions": {
+        "accept-current": 12
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 430,
+      "sourceId": "ui.export.3664895579",
+      "source": "Export",
+      "decisions": {
+        "accept-current": 9,
+        "correction": 1,
+        "refinement": 2
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 431,
+      "sourceId": "ui.export-the-library-itself-for-a-spre.5674054b64",
+      "source": "Export the library itself, for a spreadsheet or another tool:",
+      "decisions": {
+        "accept-current": 3,
+        "refinement": 9
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 432,
+      "sourceId": "ui.extensions.fe3436af86",
+      "source": "Extensions",
+      "decisions": {
+        "accept-current": 5,
+        "correction": 3,
+        "refinement": 4
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 433,
+      "sourceId": "ui.failed.031a8f0f65",
+      "source": "Failed",
+      "decisions": {
+        "accept-current": 12
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 434,
+      "sourceId": "ui.failures.7bd31a025d",
+      "source": "Failures",
+      "decisions": {
+        "accept-current": 8,
+        "correction": 4
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 435,
+      "sourceId": "ui.fan-translations.33094b18a1",
+      "source": "Fan translations",
+      "decisions": {
+        "accept-current": 10,
+        "correction": 1,
+        "refinement": 1
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 436,
+      "sourceId": "ui.fan-translation-languages.9fff699abb",
+      "source": "Fan-translation languages",
+      "decisions": {
+        "accept-current": 10,
+        "refinement": 2
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 437,
+      "sourceId": "ui.feed.396c3cb18f",
+      "source": "Feed",
+      "decisions": {
+        "accept-current": 9,
+        "correction": 3
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 438,
+      "sourceId": "ui.feed-url.b623f8b845",
+      "source": "Feed URL",
+      "decisions": {
+        "accept-current": 12
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 439,
+      "sourceId": "ui.feed-wanted-from-a-list-a-top-100-ar.30c5a812aa",
+      "source": "Feed Wanted from a list — a top-100 article, a homebrew catalogue, a friend's spreadsheet. Each title is added once, ever; full sets and 1G1R live under Collections.",
+      "decisions": {
+        "accept-current": 6,
+        "refinement": 6
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 440,
+      "sourceId": "ui.fern-accent.fc8d0ac312",
+      "source": "Fern accent",
+      "decisions": {
+        "accept-current": 12
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 441,
+      "sourceId": "ui.fetched-count-at-date.82745b0bd9",
+      "source": "Fetched {count} at {date}",
+      "decisions": {
+        "accept-current": 10,
+        "refinement": 2
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 442,
+      "sourceId": "ui.fetching-from-romm.24384ccda6",
+      "source": "Fetching from RomM…",
+      "decisions": {
+        "accept-current": 12
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 443,
+      "sourceId": "ui.file.50009ce1da",
+      "source": "File",
+      "decisions": {
+        "accept-current": 12
+      },
+      "cellCount": 12
+    },
+    {
+      "position": 444,
+      "sourceId": "ui.filename.971b974235",
+      "source": "Filename",
+      "decisions": {
+        "accept-current": 11,
+        "correction": 1
+      },
+      "cellCount": 12
+    }
+  ],
+  "sourceCatalogDriftCount": 0,
+  "sourceCatalogPinnedFileCount": 23,
+  "w440Resolution": "12 accept-current; exact dynamic swatch caller and runtime catalog mapping were verified against pinned source and all locale entries match current targets.",
+  "baseRefDivergence": {
+    "prApiBaseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "baseRefName": "main",
+    "liveMainRefOid": "bc1dee5df3d0dd88cdfe234f39ccc32f6eb86fe3",
+    "different": true,
+    "compareBaseToLiveMain": {
+      "status": "ahead",
+      "aheadBy": 4,
+      "behindBy": 0,
+      "mergeBase": null
+    },
+    "action": "recorded only; no rebase or branch mutation"
+  },
+  "nativeSpeakerClaim": false
+}

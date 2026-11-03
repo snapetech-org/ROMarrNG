@@ -1,0 +1,23 @@
+{
+  "mismatchCount": 2,
+  "mismatches": [
+    {
+      "position": 439,
+      "sourceId": "ui.feed-wanted-from-a-list-a-top-100-ar.30c5a812aa",
+      "locale": "zh-Hans",
+      "sourceTokens": [
+        "100"
+      ],
+      "targetTokens": []
+    },
+    {
+      "position": 439,
+      "sourceId": "ui.feed-wanted-from-a-list-a-top-100-ar.30c5a812aa",
+      "locale": "zh-Hant",
+      "sourceTokens": [
+        "100"
+      ],
+      "targetTokens": []
+    }
+  ]
+}

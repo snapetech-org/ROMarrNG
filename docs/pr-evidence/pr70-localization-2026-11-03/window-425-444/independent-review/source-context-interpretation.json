@@ -1,0 +1,36 @@
+{
+  "artifact": "W425-W444 blind caller-context interpretation",
+  "head": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+  "tree": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d",
+  "catalogFileSha256": "d99f6636fefae13497849d8a88046d0bd6bb62c0d906fc030b2cc6946d6cd603",
+  "sourceQueueSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+  "uiCodeFileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+  "sourceNotes": {
+    "425": "Direct stable catalog key in the organizer exclusions table; label describes policy exclusion.",
+    "426": "Settings path label produced by fld() for the Existing ES-DE gamelists folder field.",
+    "427": "Settings path label produced by fld() for the Existing ES-DE media folder field.",
+    "428": "Existing gamelist.xml invalid warning is raised in organizer and rendered through the stable UI key.",
+    "429": "Game genre chips use this exact title attribute; dynamic attribute dispatcher translates title markers.",
+    "430": "Export action button; exact source appears on export controls and frontend-export labels.",
+    "431": "Help instruction split across two raw text lines in the export panel; text-node dispatcher collapses whitespace to the catalog source.",
+    "432": "Technical-details table header; following cell renders platform filename extensions, so this means file extensions.",
+    "433": "Failed state and status labels use this catalog entry in UI and application results.",
+    "434": "Dashboard statistic displays fmt(events.failed) adjacent to this count label.",
+    "435": "Settings labels for fan-translations support; raw text is translated by stable-key lookup.",
+    "436": "Settings label for language filtering of fan translations.",
+    "437": "Prowlarr diagnostics table column for each indexer feed check; RSS/indexer context fixes the feed sense.",
+    "438": "RSS indexer field label for the feed URL.",
+    "439": "Multiline helper under Add List/Sync Now; HTML entity &mdash; decodes to em dash and whitespace normalization matches the catalog source.",
+    "440": "Theme swatch title and aria-label are generated from each accent name plus “ accent”; explicit attribute markers route this entry.",
+    "441": "Successful last-sync display uses interfaceTemplateMarkup with {count} and {date}.",
+    "442": "ROMM connection status uses an explicit stable key in the fetching status element.",
+    "443": "File label appears in import-result tables and other file-facing UI contexts.",
+    "444": "Filename label is used on the metadata lookup field; raw text observer handles this label."
+  },
+  "noCallerlessWindowCells": true,
+  "dynamicOrFragmentedRoutes": [
+    "431 raw text across ui.py:4664-4665 is whitespace-normalized",
+    "439 raw text across ui.py:2666-2669 contains &mdash; and is whitespace-normalized",
+    "440 generated title and aria-label attributes from ACCENTS via _ui_key and applyTranslatedAttributes"
+  ]
+}

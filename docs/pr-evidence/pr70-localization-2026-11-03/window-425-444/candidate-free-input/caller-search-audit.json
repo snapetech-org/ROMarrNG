@@ -1,0 +1,922 @@
+{
+  "scope": "all tracked production files romarr/*.py and romarr/*.js at the exact pinned head; exact per-line substring searches for each selected source id and complete source string",
+  "commit": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+  "tree": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d",
+  "filePins": {
+    "romarr/app.py": {
+      "fileSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+      "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd"
+    },
+    "romarr/browser.py": {
+      "fileSha256": "4856dc48bbf77781399481468ad979c86fd2120d23c8724df3b5f2cbc2e9bb66",
+      "gitBlob": "9fe5a80f8683909b36281cfc60778ce365a67d1b"
+    },
+    "romarr/dat.py": {
+      "fileSha256": "b7e002a3046195d4aa64a6413f7e844c906ffb29deb3eae42e3a572ff45a06b2",
+      "gitBlob": "a453111beacc34fc247934931c31c1337d6c1723"
+    },
+    "romarr/decompress.py": {
+      "fileSha256": "544275a2f42c94d86661b4b8d0703ec34b7c43481addc5ef6cfeddcf5977b4ba",
+      "gitBlob": "ff350ed0804391d0a398ce810e03b0c680e107cb"
+    },
+    "romarr/downloaders.py": {
+      "fileSha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed",
+      "gitBlob": "65952d7b8361fa3c6af742f675fde805ec361dd2"
+    },
+    "romarr/frontends.py": {
+      "fileSha256": "6c01b8fcfd1afef2fcbd70e96e73b01ca7e5fcf9251507b88b19d9717bec8e95",
+      "gitBlob": "fd36a48837fb7a6ab67b6774a63208b1046da1ce"
+    },
+    "romarr/indexers.py": {
+      "fileSha256": "f21bab5b203cde629f88558f5a576f7d161b3a55a36e937ef21279ffa30a764e",
+      "gitBlob": "0257ef9eb77f4e0a3c94ea26b5b58185fb55ac81"
+    },
+    "romarr/launchers.py": {
+      "fileSha256": "8a8a7d9b6959c2e5166b131d426d7a7942037df19bc16cd7ba512621fa07b588",
+      "gitBlob": "c23133f62281a3cc1cd057b9bc471c4e36320a30"
+    },
+    "romarr/library.py": {
+      "fileSha256": "2508bff50e8aa31ffc25c976cc061d396dedb975525e7cae640d84272a2bbcf3",
+      "gitBlob": "72b049ecf75c6736b985dc2439cda7054155d208"
+    },
+    "romarr/metadata.py": {
+      "fileSha256": "4b838ec909961bee7723d2760f9e7c8d18eff5db18874e9907a4d2d9cb0e5186",
+      "gitBlob": "856e5f1827449b99d2065c32999c4df82aa35978"
+    },
+    "romarr/notify.py": {
+      "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+      "gitBlob": "ef207435d6dedce92e2fd7310898c1a55e95f94e"
+    },
+    "romarr/organizer.py": {
+      "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390"
+    },
+    "romarr/patches.py": {
+      "fileSha256": "a004fee71b18831816726083dbd7ffabbe670c61d6800f027d857217ecdb42eb",
+      "gitBlob": "631e84907846c7fc3ceef2e49f28ed7de4c9a8eb"
+    },
+    "romarr/platforms.py": {
+      "fileSha256": "7766775a203f05c5ee1c51dc8c66487976434a249f4049188c1c6ce743abc7b6",
+      "gitBlob": "854e748596d0b8ee8b5e1a7c505bf02bf5d814b6"
+    },
+    "romarr/playability.py": {
+      "fileSha256": "fc193d93931383cd7202baf8b7696e30c93861e1495a83a05fc2aa3bc85c303d",
+      "gitBlob": "ad2eba5ecb2166ecc3fb837fdea87f97e41fda29"
+    },
+    "romarr/selection.py": {
+      "fileSha256": "4d503ccbb2bf21b3aea0c24596f8c36033248edee2549244b1edc469dbfa9d96",
+      "gitBlob": "c95757f005e2d84fcbc3baba0de85d1e1c2b687f"
+    },
+    "romarr/sniff.py": {
+      "fileSha256": "f8bfd66c7650b00461d3856677cfe296fa9b185a7035529a04584c614e0cbfb2",
+      "gitBlob": "ee261f71427b31e1642af1d3ea992aa40bd26e31"
+    },
+    "romarr/store.py": {
+      "fileSha256": "7923e65e7a34e911b3eb99363566320492d98ef39286cfd4dd976ec98e9efc29",
+      "gitBlob": "ea21251c9951e86f99e57337b52c2b36e3b5cfdb"
+    },
+    "romarr/ui.py": {
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0"
+    }
+  },
+  "queries": [
+    {
+      "position": 425,
+      "sourceId": "ui.excluded-by-policy.fee2bad0b3",
+      "queryKind": "source-id",
+      "literal": "ui.excluded-by-policy.fee2bad0b3",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 5610,
+          "text": "      +tile(c.excluded,interfaceMarkup('ui.excluded-by-policy.fee2bad0b3'),'var(--dim)')"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 425,
+      "sourceId": "ui.excluded-by-policy.fee2bad0b3",
+      "queryKind": "source-text",
+      "literal": "Excluded by policy",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 426,
+      "sourceId": "ui.existing-es-de-gamelists-folder-opti.1659a3153e",
+      "queryKind": "source-id",
+      "literal": "ui.existing-es-de-gamelists-folder-opti.1659a3153e",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 426,
+      "sourceId": "ui.existing-es-de-gamelists-folder-opti.1659a3153e",
+      "queryKind": "source-text",
+      "literal": "Existing ES-DE gamelists folder (optional)",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4215,
+          "text": "  +fld('esde_gamelists_path','Existing ES-DE gamelists folder (optional)',SETTINGS.esde_gamelists_path||'')"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 427,
+      "sourceId": "ui.existing-es-de-media-folder-optional.dcc4281be8",
+      "queryKind": "source-id",
+      "literal": "ui.existing-es-de-media-folder-optional.dcc4281be8",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 427,
+      "sourceId": "ui.existing-es-de-media-folder-optional.dcc4281be8",
+      "queryKind": "source-text",
+      "literal": "Existing ES-DE media folder (optional)",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4216,
+          "text": "  +fld('esde_media_path','Existing ES-DE media folder (optional)',SETTINGS.esde_media_path||'')"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 428,
+      "sourceId": "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+      "queryKind": "source-id",
+      "literal": "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 5742,
+          "text": "  'ui.existing-gamelist-xml-is-invalid-it.6951c0112d',"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 428,
+      "sourceId": "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+      "queryKind": "source-text",
+      "literal": "Existing gamelist.xml is invalid; it was left untouched.",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/organizer.py",
+          "line": 2280,
+          "text": "                raise ValueError(\"Existing gamelist.xml is invalid; it was left untouched.\") from exc"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 429,
+      "sourceId": "ui.explore-more-games-in-this-genre.ca9764a30b",
+      "queryKind": "source-id",
+      "literal": "ui.explore-more-games-in-this-genre.ca9764a30b",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 429,
+      "sourceId": "ui.explore-more-games-in-this-genre.ca9764a30b",
+      "queryKind": "source-text",
+      "literal": "Explore more games in this genre",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2554,
+          "text": "      const tags=(game.genres||[]).slice(0,3).map(x=>'<button class=\"mini\" data-c-similar=\"'+esc(x)+'\" title=\"Explore more games in this genre\">'+esc(x)+'</button>').join(' ');"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 430,
+      "sourceId": "ui.export.3664895579",
+      "queryKind": "source-id",
+      "literal": "ui.export.3664895579",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 430,
+      "sourceId": "ui.export.3664895579",
+      "queryKind": "source-text",
+      "literal": "Export",
+      "matchCount": 4,
+      "matches": [
+        {
+          "path": "romarr/frontends.py",
+          "line": 340,
+          "text": "    \"\"\"Export the portable ROMarr metadata catalog, not an app-specific view.\"\"\""
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4664,
+          "text": "    <p class=\"help\" style=\"margin-top:16px\">Export the library itself, for a"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4674,
+          "text": "      <button class=\"btn ghost\" id=\"ex-go\">Export</button>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5716,
+          "text": "    +'<p class=\"help\" style=\"margin:8px 0 0\">ROMarr reads ES-DE gamelists and matching local media before online lookup. Publishing writes a shared gamelist and matching covers under the metadata root, using paths relative to the ROM root and matching ES-DE media names. Provider lookups are capped at 200 per scan. Export the portable catalog from <a href=\"#status\">System → Backup &amp; Export</a>; see the <a href=\"https://github.com/snapetech-org/ROMarrNG/blob/main/docs/features/shared-library-identification.md#portable-metadata\" target=\"_blank\" rel=\"noopener noreferrer\">format and schema</a>.</p></div>'"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 431,
+      "sourceId": "ui.export-the-library-itself-for-a-spre.5674054b64",
+      "queryKind": "source-id",
+      "literal": "ui.export-the-library-itself-for-a-spre.5674054b64",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 431,
+      "sourceId": "ui.export-the-library-itself-for-a-spre.5674054b64",
+      "queryKind": "source-text",
+      "literal": "Export the library itself, for a spreadsheet or another tool:",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 432,
+      "sourceId": "ui.extensions.fe3436af86",
+      "queryKind": "source-id",
+      "literal": "ui.extensions.fe3436af86",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 432,
+      "sourceId": "ui.extensions.fe3436af86",
+      "queryKind": "source-text",
+      "literal": "Extensions",
+      "matchCount": 4,
+      "matches": [
+        {
+          "path": "romarr/decompress.py",
+          "line": 57,
+          "text": "# Extensions that count as \"compressed\" for the purposes of batch"
+        },
+        {
+          "path": "romarr/platforms.py",
+          "line": 348,
+          "text": "    # Extensions and ceilings below are read off the live library rather than"
+        },
+        {
+          "path": "romarr/platforms.py",
+          "line": 469,
+          "text": "    # Extensions here were sampled from the collections themselves rather than"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4993,
+          "text": "    +'<table style=\"margin-top:10px\"><thead><tr><th>Platform</th><th>Media</th><th>Plays</th><th>Size ceiling</th><th>Extensions</th></tr></thead><tbody>'"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 433,
+      "sourceId": "ui.failed.031a8f0f65",
+      "queryKind": "source-id",
+      "literal": "ui.failed.031a8f0f65",
+      "matchCount": 2,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 980,
+          "text": "  'ui.failed.031a8f0f65',"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4029,
+          "text": "        :{key:'ui.failed.031a8f0f65',values:{}};"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 433,
+      "sourceId": "ui.failed.031a8f0f65",
+      "queryKind": "source-text",
+      "literal": "Failed",
+      "matchCount": 17,
+      "matches": [
+        {
+          "path": "romarr/app.py",
+          "line": 1364,
+          "text": "            \"FailedDownloads\", \"Retire dead downloads and grab a replacement\","
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5425,
+          "text": "        if name == \"FailedDownloads\":"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5762,
+          "text": "                    \"/login?oidcFailed=true\", clear_oidc_state=True,"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5772,
+          "text": "                    \"/login?oidcFailed=true\", clear_oidc_state=True,"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 6109,
+          "text": "                    return self._redirect(\"/login?oidcFailed=true\")"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 6141,
+          "text": "                                      oidc_failed=(query.get(\"oidcFailed\") or [\"\"])[0] == \"true\")"
+        },
+        {
+          "path": "romarr/notify.py",
+          "line": 358,
+          "text": "    return Message(event=ON_FAILURE, title=f\"Failed {title}\", body=reason)"
+        },
+        {
+          "path": "romarr/store.py",
+          "line": 272,
+          "text": "    # Failed download handling, the same idea Radarr and Sonarr have: a"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 877,
+          "text": "  failed:'Failed','import-failed':'Import failed',cancelled:'Cancelled',"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2298,
+          "text": "      b.dataset.i18n=r.ok?'Grabbed':'Failed'; applyTranslatedLabel(b,readInterfaceLanguage());"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4030,
+          "text": "      line(r.ok, r.message || (r.ok ? 'Connected' : 'Failed'),"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4475,
+          "text": "          <b>Management API</b> — ${interfaceMarkup(management.success?'Connected':'Failed')}"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4483,
+          "text": "              ${interfaceMarkup(item.success?'Connected':'Failed')}${item.status?' · HTTP '+esc(item.status):''}</td>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4593,
+          "text": "      toastLabel(d.ok?'Two-factor disabled':'Failed');"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5092,
+          "text": "          +interfaceMarkup(x.ok?'Delivered':'Failed')).join(' · ')"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5519,
+          "text": "       +'<th>Failed</th><th>Left</th><th></th></tr></thead><tbody>'"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6094,
+          "text": "    FailedDownloads:'Retire dead downloads and grab a replacement',"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 434,
+      "sourceId": "ui.failures.7bd31a025d",
+      "queryKind": "source-id",
+      "literal": "ui.failures.7bd31a025d",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 434,
+      "sourceId": "ui.failures.7bd31a025d",
+      "queryKind": "source-text",
+      "literal": "Failures",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 3636,
+          "text": "      <div><b>${fmt((s.events||{}).failed||0)}</b><span>Failures</span></div>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 435,
+      "sourceId": "ui.fan-translations.33094b18a1",
+      "queryKind": "source-id",
+      "literal": "ui.fan-translations.33094b18a1",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 435,
+      "sourceId": "ui.fan-translations.33094b18a1",
+      "queryKind": "source-text",
+      "literal": "Fan translations",
+      "matchCount": 2,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4240,
+          "text": "  +sel('translation_policy','Fan translations in 1G1R sets',"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5487,
+          "text": "       +'<label class=\"help\" style=\"margin:0\" for=\"ctrans\">Fan translations</label>'"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 436,
+      "sourceId": "ui.fan-translation-languages.9fff699abb",
+      "queryKind": "source-id",
+      "literal": "ui.fan-translation-languages.9fff699abb",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 436,
+      "sourceId": "ui.fan-translation-languages.9fff699abb",
+      "queryKind": "source-text",
+      "literal": "Fan-translation languages",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4257,
+          "text": "  +`<div class=\"field\"><label for=\"s-translation_langs\">Fan-translation languages</label>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 437,
+      "sourceId": "ui.feed.396c3cb18f",
+      "queryKind": "source-id",
+      "literal": "ui.feed.396c3cb18f",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 437,
+      "sourceId": "ui.feed.396c3cb18f",
+      "queryKind": "source-text",
+      "literal": "Feed",
+      "matchCount": 6,
+      "matches": [
+        {
+          "path": "romarr/dat.py",
+          "line": 366,
+          "text": "    Logiqx -- No-Intro's own XML is behind a captcha. Feeding those to an XML"
+        },
+        {
+          "path": "romarr/indexers.py",
+          "line": 549,
+          "text": "    \"\"\"A plain RSS feed of torrents, as Radarr's \"Torrent RSS Feed\" offers."
+        },
+        {
+          "path": "romarr/indexers.py",
+          "line": 920,
+          "text": "        \"label\": \"Torrent RSS Feed\","
+        },
+        {
+          "path": "romarr/indexers.py",
+          "line": 928,
+          "text": "            INDEXER_FIELD(\"url\", \"Feed URL\","
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2666,
+          "text": "      <span style=\"color:var(--dim);font-size:12.5px\">Feed Wanted from a"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4479,
+          "text": "        ${rows.length?`<table><thead><tr><th>Indexer</th><th>Feed</th><th>Details</th>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 438,
+      "sourceId": "ui.feed-url.b623f8b845",
+      "queryKind": "source-id",
+      "literal": "ui.feed-url.b623f8b845",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 438,
+      "sourceId": "ui.feed-url.b623f8b845",
+      "queryKind": "source-text",
+      "literal": "Feed URL",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/indexers.py",
+          "line": 928,
+          "text": "            INDEXER_FIELD(\"url\", \"Feed URL\","
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 439,
+      "sourceId": "ui.feed-wanted-from-a-list-a-top-100-ar.30c5a812aa",
+      "queryKind": "source-id",
+      "literal": "ui.feed-wanted-from-a-list-a-top-100-ar.30c5a812aa",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 439,
+      "sourceId": "ui.feed-wanted-from-a-list-a-top-100-ar.30c5a812aa",
+      "queryKind": "source-text",
+      "literal": "Feed Wanted from a list — a top-100 article, a homebrew catalogue, a friend's spreadsheet. Each title is added once, ever; full sets and 1G1R live under Collections.",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 440,
+      "sourceId": "ui.fern-accent.fc8d0ac312",
+      "queryKind": "source-id",
+      "literal": "ui.fern-accent.fc8d0ac312",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 440,
+      "sourceId": "ui.fern-accent.fc8d0ac312",
+      "queryKind": "source-text",
+      "literal": "Fern accent",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 441,
+      "sourceId": "ui.fetched-count-at-date.82745b0bd9",
+      "queryKind": "source-id",
+      "literal": "ui.fetched-count-at-date.82745b0bd9",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2681,
+          "text": "              :interfaceTemplateMarkup('ui.fetched-count-at-date.82745b0bd9',"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 441,
+      "sourceId": "ui.fetched-count-at-date.82745b0bd9",
+      "queryKind": "source-text",
+      "literal": "Fetched {count} at {date}",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 442,
+      "sourceId": "ui.fetching-from-romm.24384ccda6",
+      "queryKind": "source-id",
+      "literal": "ui.fetching-from-romm.24384ccda6",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 1992,
+          "text": "      <p class=\"help\">${d.message?apiMessageMarkup(d.message,d.message_template):'<span data-i18n=\"ui.fetching-from-romm.24384ccda6\">Fetching from RomM…</span>'}"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 442,
+      "sourceId": "ui.fetching-from-romm.24384ccda6",
+      "queryKind": "source-text",
+      "literal": "Fetching from RomM…",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 1992,
+          "text": "      <p class=\"help\">${d.message?apiMessageMarkup(d.message,d.message_template):'<span data-i18n=\"ui.fetching-from-romm.24384ccda6\">Fetching from RomM…</span>'}"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 443,
+      "sourceId": "ui.file.50009ce1da",
+      "queryKind": "source-id",
+      "literal": "ui.file.50009ce1da",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 6057,
+          "text": "         +'<table><thead><tr><th>'+interfaceMarkup('ui.file.50009ce1da')+'</th><th>'+interfaceMarkup('ui.platform.c78ffe1957')+'</th><th>'+interfaceMarkup('ui.why.d3ae14a50b')+'</th>'"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 443,
+      "sourceId": "ui.file.50009ce1da",
+      "queryKind": "source-text",
+      "literal": "File",
+      "matchCount": 35,
+      "matches": [
+        {
+          "path": "romarr/app.py",
+          "line": 2789,
+          "text": "                        with zipfile.ZipFile(path, 'r') as zf:"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 2804,
+          "text": "                    except (zipfile.BadZipFile, OSError) as zip_err:"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 6789,
+          "text": "                except (FileNotFoundError, ValueError, OSError):"
+        },
+        {
+          "path": "romarr/browser.py",
+          "line": 397,
+          "text": "    FileNotFoundError raised from inside somebody else's driver."
+        },
+        {
+          "path": "romarr/downloaders.py",
+          "line": 44,
+          "text": "from urllib.robotparser import RobotFileParser"
+        },
+        {
+          "path": "romarr/downloaders.py",
+          "line": 195,
+          "text": "        # append(NZBFilename, Content, Category, Priority, AddToTop, AddPaused,"
+        },
+        {
+          "path": "romarr/downloaders.py",
+          "line": 1749,
+          "text": "        self._post(f\"/torrents/selectFiles/{torrent_id}\", {\"files\": \"all\"})"
+        },
+        {
+          "path": "romarr/downloaders.py",
+          "line": 2620,
+          "text": "        parser = RobotFileParser()"
+        },
+        {
+          "path": "romarr/downloaders.py",
+          "line": 3202,
+          "text": "        except FileNotFoundError:"
+        },
+        {
+          "path": "romarr/downloaders.py",
+          "line": 3216,
+          "text": "            with tempfile.NamedTemporaryFile(mode=\"w\", encoding=\"utf-8\","
+        },
+        {
+          "path": "romarr/downloaders.py",
+          "line": 3761,
+          "text": "            FIELD(\"magnet_extension\", \"Magnet File Extension\","
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 381,
+          "text": "        \"steam\": [Path(r\"C:\\Program Files (x86)\\Steam\\steamapps\")]"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 386,
+          "text": "        \"ea\": [d / \"Program Files\" / \"EA Games\" for d in drives]"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 387,
+          "text": "              + [d / \"Program Files (x86)\" / \"Origin Games\" for d in drives]"
+        },
+        {
+          "path": "romarr/library.py",
+          "line": 137,
+          "text": "def safe_members(archive: zipfile.ZipFile, root: Path) -> list[str]:"
+        },
+        {
+          "path": "romarr/library.py",
+          "line": 189,
+          "text": "        with zipfile.ZipFile(self.path) as archive:"
+        },
+        {
+          "path": "romarr/library.py",
+          "line": 193,
+          "text": "        with zipfile.ZipFile(self.path) as archive:"
+        },
+        {
+          "path": "romarr/library.py",
+          "line": 197,
+          "text": "        with zipfile.ZipFile(self.path) as archive, \\"
+        },
+        {
+          "path": "romarr/library.py",
+          "line": 202,
+          "text": "        with zipfile.ZipFile(self.path) as archive, archive.open(name) as handle:"
+        },
+        {
+          "path": "romarr/library.py",
+          "line": 209,
+          "text": "        with zipfile.ZipFile(self.path) as archive:"
+        },
+        {
+          "path": "romarr/library.py",
+          "line": 616,
+          "text": "        except (OSError, subprocess.SubprocessError, zipfile.BadZipFile) as exc:"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 17,
+          "text": "before it takes a filename. Filename parsing is still here, because an"
+        },
+        {
+          "path": "romarr/organizer.py",
+          "line": 1627,
+          "text": "                            \"Filename only; no verified catalog match\""
+        },
+        {
+          "path": "romarr/organizer.py",
+          "line": 2214,
+          "text": "            raise FileNotFoundError(\"No cached artwork for this game.\")"
+        },
+        {
+          "path": "romarr/organizer.py",
+          "line": 2217,
+          "text": "            raise FileNotFoundError(\"Metadata root is not configured.\")"
+        },
+        {
+          "path": "romarr/organizer.py",
+          "line": 2220,
+          "text": "            raise FileNotFoundError(\"Cached artwork is unavailable.\")"
+        },
+        {
+          "path": "romarr/organizer.py",
+          "line": 2289,
+          "text": "        except FileNotFoundError:"
+        },
+        {
+          "path": "romarr/patches.py",
+          "line": 5,
+          "text": "sometimes a successor. Filenames cannot tell you any of that -- a file called"
+        },
+        {
+          "path": "romarr/playability.py",
+          "line": 494,
+          "text": "#: Files that turn up in Flash archives wearing Flash's clothes, and are not"
+        },
+        {
+          "path": "romarr/selection.py",
+          "line": 846,
+          "text": "    \"\"\"Filenames a sheet refers to, or None when it could not be read."
+        },
+        {
+          "path": "romarr/sniff.py",
+          "line": 255,
+          "text": "        with zipfile.ZipFile(path) as archive:"
+        },
+        {
+          "path": "romarr/sniff.py",
+          "line": 271,
+          "text": "    except (OSError, zipfile.BadZipFile, RuntimeError):"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5133,
+          "text": "    +'<div class=\"field\"><label>Filename</label>'"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5664,
+          "text": "  'Filename only; no verified catalog match',"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5811,
+          "text": "        filename_only:'Filename only · review',"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 444,
+      "sourceId": "ui.filename.971b974235",
+      "queryKind": "source-id",
+      "literal": "ui.filename.971b974235",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 444,
+      "sourceId": "ui.filename.971b974235",
+      "queryKind": "source-text",
+      "literal": "Filename",
+      "matchCount": 8,
+      "matches": [
+        {
+          "path": "romarr/downloaders.py",
+          "line": 195,
+          "text": "        # append(NZBFilename, Content, Category, Priority, AddToTop, AddPaused,"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 17,
+          "text": "before it takes a filename. Filename parsing is still here, because an"
+        },
+        {
+          "path": "romarr/organizer.py",
+          "line": 1627,
+          "text": "                            \"Filename only; no verified catalog match\""
+        },
+        {
+          "path": "romarr/patches.py",
+          "line": 5,
+          "text": "sometimes a successor. Filenames cannot tell you any of that -- a file called"
+        },
+        {
+          "path": "romarr/selection.py",
+          "line": 846,
+          "text": "    \"\"\"Filenames a sheet refers to, or None when it could not be read."
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5133,
+          "text": "    +'<div class=\"field\"><label>Filename</label>'"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5664,
+          "text": "  'Filename only; no verified catalog match',"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5811,
+          "text": "        filename_only:'Filename only · review',"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    }
+  ],
+  "interpretation": "Search results are source evidence only. This candidate-free packet makes no translation accept/correct/refine/hold decisions."
+}

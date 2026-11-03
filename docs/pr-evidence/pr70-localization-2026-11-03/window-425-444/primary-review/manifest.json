@@ -1,0 +1,67 @@
+{
+  "artifact": "ROMarrNG PR #70 W425-W444 primary review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+  "tree": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d",
+  "window": "W425-W444",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "candidateFreeInputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w425-444-candidate-free-20261103/input",
+  "candidateFreeInputManifestSha256": "03462891dbf9a5a173cb7800583c18c888a0bde28879a83659b46cbb886d69c2",
+  "candidateFreeInputChecksumsSha256": "0c4a48dc4766ccf845e703b7b8a3356210819c6c4e92ebc8a12f355711684746",
+  "dispositions": {
+    "accept-current": 181,
+    "correction": 9,
+    "hold": 12,
+    "refinement": 38
+  },
+  "proposedCellCount": 47,
+  "priorLineageSelectionsReattested": 40,
+  "priorHoldCellsReattested": 336,
+  "chineseSemanticNumeralAccepted": 2,
+  "files": [
+    {
+      "path": "PR-attestation-after.json",
+      "sizeBytes": 660,
+      "sha256": "f3d937709bb9cae1c1307f9fc19ce7bcdd741d58f97dd54ca472f6176532ea16"
+    },
+    {
+      "path": "PR-attestation-before.json",
+      "sizeBytes": 660,
+      "sha256": "122d1b012a2e15c0623e40d3ef0d04f3d6c1c0da539ebfdc8dec99c6b8d63428"
+    },
+    {
+      "path": "README.md",
+      "sizeBytes": 2314,
+      "sha256": "ebeb860a55cbf7781d8cac25218e3ae9e54811c44e25ccd8d1160e9565e3f58d"
+    },
+    {
+      "path": "build_primary.py",
+      "sizeBytes": 27180,
+      "sha256": "941b26fa2ae11851e2f066d6a63100334b02f90e6f0c397b97f7d1b22194b99f"
+    },
+    {
+      "path": "primary-ledger.jsonl",
+      "sizeBytes": 518987,
+      "sha256": "12740733c523e6b266c7ee812fedebfd3db5f600d4733679b801e38d5a649395"
+    },
+    {
+      "path": "seal_packet.py",
+      "sizeBytes": 1854,
+      "sha256": "dcb38799d6d3622f268f9e32ae5918a2af5e580d3945c935b2559222e5d50b6e"
+    },
+    {
+      "path": "summary.json",
+      "sizeBytes": 2205,
+      "sha256": "db5846710fc3dc261b7aaf8e9fd07cc1b0d99cbbd2fcc27c6c660ee11b64812f"
+    },
+    {
+      "path": "verify_primary.py",
+      "sizeBytes": 9542,
+      "sha256": "4982aef99ed70131ac8b40fbbc358967dd8d598b30467a18795c0954161662df"
+    }
+  ]
+}

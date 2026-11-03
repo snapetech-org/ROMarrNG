@@ -1,0 +1,7 @@
+{
+  "crossAuditPacketPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w425-444-cross-audit-20261103",
+  "crossAuditChecksumListSha256": "5ad15fd039f6b4a802e820a875fc54c5156df78a85cd122661d182839db01560",
+  "crossAuditLedgerSha256": "29dc6d20ed29729229d4adcf2b6764302e30ebfd839ad1bdaba5a3de8ec2315b",
+  "selectedChangeLedgerSha256": "159c26c52c7364769add41ca9a89c65967f0cc3930b3e641379128435f28ac18",
+  "crossAuditVerifier": "PASS before apply"
+}
