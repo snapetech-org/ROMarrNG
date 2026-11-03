@@ -1,0 +1,18 @@
+{
+  "head": "6db0b917343fc9fb605f8a4ecfbf9b4c21cebd1b",
+  "tree": "bfb778ba77849174a4670a70883c812183506b43",
+  "livePRHead": "6db0b917343fc9fb605f8a4ecfbf9b4c21cebd1b",
+  "remoteBranchHead": "6db0b917343fc9fb605f8a4ecfbf9b4c21cebd1b",
+  "bundleFileSha256": "a6f047ba685db67ba51fe5fda0e20f6f83b84cdc94f303a68f648bc6540fe7a8",
+  "bundleManifestHash": "4fa8c0401f646bbfa9049fade543c7ead2a97e645990a8d962d3ed7039343996",
+  "uiLabelsSha256": "7ac611cd80ecd9b691e1847330d18e0b60f85a1c43026a96d1424223c757b7d3",
+  "sourceRows": 100,
+  "targetCells": 1200,
+  "targetCatalogHashAlgorithm": "sha256(json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(\",\", \":\")))",
+  "sourceMismatches": 0,
+  "targetMismatches": 0,
+  "callerLineMismatches": 0,
+  "callerReferences": 178,
+  "callerEvidenceRows": 35,
+  "renderEvidenceRows": 28
+}

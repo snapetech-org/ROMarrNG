@@ -1,0 +1,29 @@
+{
+  "prApi": {
+    "headRefName": "task/localization-translation-review-20261030",
+    "headRefOid": "6db0b917343fc9fb605f8a4ecfbf9b4c21cebd1b",
+    "isDraft": true,
+    "state": "OPEN"
+  },
+  "remoteHead": "6db0b917343fc9fb605f8a4ecfbf9b4c21cebd1b",
+  "head": "6db0b917343fc9fb605f8a4ecfbf9b4c21cebd1b",
+  "tree": "bfb778ba77849174a4670a70883c812183506b43",
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogSha256": "7ac611cd80ecd9b691e1847330d18e0b60f85a1c43026a96d1424223c757b7d3",
+  "sourceSnapshotPath": "romarr/ui-source-snapshot.json",
+  "sourceRegistryPath": "romarr/ui-source-messages.json",
+  "sourceBundlePath": "localization/source-bundles/20261101-connect-instructions.json",
+  "sourceBundleSha256": "a6f047ba685db67ba51fe5fda0e20f6f83b84cdc94f303a68f648bc6540fe7a8",
+  "selectedSourceCount": 100,
+  "selectedCellCount": 1200,
+  "sourceHashMismatches": 0,
+  "snapshotHashMismatches": 0,
+  "catalogSourceHashMismatches": 0,
+  "storedTargetHashMismatches": 0,
+  "missingOrBlankTargets": 0,
+  "wrongStatusCount": 0,
+  "selectedIdsWithVerifiedCodeOccurrences": 79,
+  "selectedIdsWithoutDirectCodeOccurrence": 21,
+  "exactCodeOccurrences": 145,
+  "independentReviewOutputRead": false
+}

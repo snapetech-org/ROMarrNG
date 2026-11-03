@@ -1,0 +1,200 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "6db0b917343fc9fb605f8a4ecfbf9b4c21cebd1b",
+  "tree": "bfb778ba77849174a4670a70883c812183506b43",
+  "sourceBundlePath": "localization/source-bundles/20261101-connect-instructions.json",
+  "sourceBundleSha256": "a6f047ba685db67ba51fe5fda0e20f6f83b84cdc94f303a68f648bc6540fe7a8",
+  "sourceBundleManifestHash": "4fa8c0401f646bbfa9049fade543c7ead2a97e645990a8d962d3ed7039343996",
+  "sourceBundleMessageCount": 484,
+  "sourceBundleDirectPendingCells": 5808,
+  "selectionMethod": "Take the earliest 100 source IDs in frozen source-bundle order that have no existing committed PR-evidence reference and no prior primary-review input reference.",
+  "selectedSourceCount": 100,
+  "selectedCellCount": 1200,
+  "firstSelectedSourceOrdinal": 1,
+  "lastSelectedSourceOrdinal": 105,
+  "selectedSourceOrdinals": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    33,
+    35,
+    36,
+    37,
+    38,
+    39,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    52,
+    53,
+    54,
+    55,
+    56,
+    57,
+    58,
+    59,
+    60,
+    61,
+    62,
+    63,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    101,
+    102,
+    103,
+    104,
+    105
+  ],
+  "excludedBeforeCompletion": [
+    {
+      "sourceOrdinal": 31,
+      "id": "ui.browse-catalog.4d05dc6da8",
+      "reasons": [
+        "existing committed PR-evidence reference; excluded conservatively without opening evidence contents"
+      ],
+      "evidencePaths": [
+        "docs/pr-evidence/pr70-localization-2026-11-02/listsnav-source-wiring/listsnav-findings.json"
+      ]
+    },
+    {
+      "sourceOrdinal": 32,
+      "id": "ui.browse-games.cf37299e27",
+      "reasons": [
+        "existing committed PR-evidence reference; excluded conservatively without opening evidence contents"
+      ],
+      "evidencePaths": [
+        "docs/pr-evidence/pr70-localization-2026-11-02/wired-copy-crossreview/apply-report.json",
+        "docs/pr-evidence/pr70-localization-2026-11-02/wired-copy-crossreview/independent-cell-review.jsonl",
+        "docs/pr-evidence/pr70-localization-2026-11-02/wired-copy-crossreview/root-decisions.jsonl"
+      ]
+    },
+    {
+      "sourceOrdinal": 34,
+      "id": "ui.build-a-portable-inventory-reuse-exi.da369004a7",
+      "reasons": [
+        "existing committed PR-evidence reference; excluded conservatively without opening evidence contents"
+      ],
+      "evidencePaths": [
+        "docs/pr-evidence/pr70-localization-2026-11-02/wired-copy-crossreview/apply-report.json",
+        "docs/pr-evidence/pr70-localization-2026-11-02/wired-copy-crossreview/independent-cell-review.jsonl",
+        "docs/pr-evidence/pr70-localization-2026-11-02/wired-copy-crossreview/root-decisions.jsonl"
+      ]
+    },
+    {
+      "sourceOrdinal": 40,
+      "id": "ui.choose-a-generation-you-remember-sea.58d6be3f1f",
+      "reasons": [
+        "existing committed PR-evidence reference; excluded conservatively without opening evidence contents"
+      ],
+      "evidencePaths": [
+        "docs/pr-evidence/pr70-localization-2026-11-02/wired-copy-crossreview/apply-report.json",
+        "docs/pr-evidence/pr70-localization-2026-11-02/wired-copy-crossreview/independent-cell-review.jsonl",
+        "docs/pr-evidence/pr70-localization-2026-11-02/wired-copy-crossreview/root-decisions.jsonl"
+      ]
+    },
+    {
+      "sourceOrdinal": 51,
+      "id": "ui.connect-an-igdb-metadata-provider-un.94cf3e816e",
+      "reasons": [
+        "existing committed PR-evidence reference; excluded conservatively without opening evidence contents"
+      ],
+      "evidencePaths": [
+        "docs/pr-evidence/pr70-localization-2026-11-02/wired-copy-crossreview/apply-report.json",
+        "docs/pr-evidence/pr70-localization-2026-11-02/wired-copy-crossreview/independent-cell-review.jsonl",
+        "docs/pr-evidence/pr70-localization-2026-11-02/wired-copy-crossreview/root-decisions.jsonl"
+      ]
+    }
+  ],
+  "priorPrimaryReviewIds": [
+    "Berkas",
+    "Tambahkan ke pustaka",
+    "ui.no-web-api-and-nothing-written-to-a.fefddf8698",
+    "ui.the-integration-guide-explains-how-t.59a854ef19",
+    "ui.use-service-for-game-discovery-game.f3465a1ec2"
+  ],
+  "unreadIndependentEvidence": "Independent review values and decisions were not opened; matching source-ID paths were used only as conservative coverage exclusions.",
+  "locales": [
+    "es",
+    "zh-Hans",
+    "hi",
+    "de",
+    "ja",
+    "fr",
+    "pt-BR",
+    "ar",
+    "ko",
+    "zh-Hant",
+    "vi",
+    "id"
+  ]
+}

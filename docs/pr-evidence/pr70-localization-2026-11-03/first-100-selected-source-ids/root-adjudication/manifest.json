@@ -1,0 +1,78 @@
+{
+  "applyPlanRows": 238,
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogSha256": "7ac611cd80ecd9b691e1847330d18e0b60f85a1c43026a96d1424223c757b7d3",
+  "cellCount": 1200,
+  "dispositions": {
+    "accept-current": 554,
+    "correction": 181,
+    "hold": 408,
+    "refinement": 57
+  },
+  "exactHead": "6db0b917343fc9fb605f8a4ecfbf9b4c21cebd1b",
+  "exactTree": "bfb778ba77849174a4670a70883c812183506b43",
+  "generatedWithoutRepositoryEdits": true,
+  "inputPins": {
+    "blindLedgerSealedSha256": "3f3c2d1397e95f3f49b227bf729595be3203bae73045ed3d77a47fedb8658597",
+    "crossReviewFiles": {
+      "blind-ledger.jsonl": "3f3c2d1397e95f3f49b227bf729595be3203bae73045ed3d77a47fedb8658597",
+      "blind-seal.json": "f44dffe46697c6d4a88f9a0ceb910ce578e52085a5f9d85386ad3ee6c06f5333",
+      "post-seal-primary-comparison.jsonl": "00650513d0454876a07a9f3d1145b82350154a93c5a1d384d3ab2911a3614d7f",
+      "post-seal-primary-comparison.md": "dbb605ba9db33b5cb0339b6e8785c19c480afec5303a239f94664a849dab38a1",
+      "reattestation.json": "91f0a20b3f0cfc16836903f81bac0161fdba2caec9bdca064b4f9cdb8da96767"
+    },
+    "crossReviewPacketPath": "/mnt/disks/scratch/task-scratch/romarrng-pr70-independent-crossreview-first100-20261103",
+    "primaryPacketChecksumFileSha256": "aed3caaf744390dede4ad14326cefc17173e71356b386da877bfbef7139695a1",
+    "primaryPacketFiles": {
+      "README.md": "b9b10a1a6d4885be8d93598ffc17c95ce48c40a5b07e20889fe9388b9705f501",
+      "caller-context-reattestation.jsonl": "8d54a0b06cd79b44082f6f79c9ce38dd605b0b3d52f59cbb20b12483b6ff003c",
+      "current-target-pins.jsonl": "0b242e169d607fa90e2daa8dfabb94cc3fe870983e03faa13f12613f3cad8ab9",
+      "exact-head-attestation.json": "51da0014c90ed8fe4ba4dec66a2830c5061e7a78f08db3b02a462aed924b83ef",
+      "manifest.json": "2f6ca07948548c08198ec216b32598ad113f225c7bb0a6d507a477521d69d6ab",
+      "manual-decisions.jsonl": "b78bfd16f33e525d1cd281d829b65542a2100139eddad5214baa27a6c5a7cc02",
+      "preflight-attestation.json": "fbc012bb2ac6fd722f90418ea9905ff74f31c8aab7ee3d5b183e2db0be198e7c",
+      "primary-review.jsonl": "ecd5b90f2be7d02286e85cc4160fbe5c90966e2def09db1467fd8e9004dc4370",
+      "render-path-evidence.jsonl": "48ef3980b5e4e4180953de48a80e17266eacee09f9130ad73cff4db935c0c13a",
+      "review-completion-checks.json": "2fc0ed3423732ca7735c5148fb7d2900429b642dae3e3e093399a1eeeff8dc63",
+      "selection.json": "a694ed43e0ee564a173a00a29f74ed0221ee87da52d00b7f6f776aa441af2d11",
+      "source-only-review-input.jsonl": "ebba58ea45853cb762de67235783d7e83aa8568d00398e1d72742e3ed7fbf21d",
+      "source-structural-baseline.jsonl": "e0982297bc509697c000f54a1c3405da104f7c639404fd50268b6facdc16ccec"
+    },
+    "primaryPacketPath": "/mnt/disks/scratch/task-scratch/romarrng-pr70-primary-first100-20261103",
+    "reviewInputHashes": {
+      "caller-context-reattestation.jsonl": "8d54a0b06cd79b44082f6f79c9ce38dd605b0b3d52f59cbb20b12483b6ff003c",
+      "current-target-pins.jsonl": "0b242e169d607fa90e2daa8dfabb94cc3fe870983e03faa13f12613f3cad8ab9",
+      "primary-review.jsonl": "ecd5b90f2be7d02286e85cc4160fbe5c90966e2def09db1467fd8e9004dc4370",
+      "render-path-evidence.jsonl": "48ef3980b5e4e4180953de48a80e17266eacee09f9130ad73cff4db935c0c13a",
+      "selection.json": "a694ed43e0ee564a173a00a29f74ed0221ee87da52d00b7f6f776aa441af2d11",
+      "source-only-review-input.jsonl": "ebba58ea45853cb762de67235783d7e83aa8568d00398e1d72742e3ed7fbf21d",
+      "source-structural-baseline.jsonl": "e0982297bc509697c000f54a1c3405da104f7c639404fd50268b6facdc16ccec"
+    }
+  },
+  "localeCount": 12,
+  "nativeSpeakerApproval": false,
+  "outputFiles": [
+    "root-decisions.jsonl",
+    "exact-hash-apply-plan.jsonl",
+    "adjudication-differences.jsonl",
+    "source-evidence.jsonl",
+    "exact-head-reattestation.json",
+    "summary.json",
+    "README.md"
+  ],
+  "primaryCrossDifferencesResolved": 224,
+  "pullRequest": 70,
+  "report": "Root adjudication of ROMarrNG PR #70 first 100 selected source IDs / 1,200 cells",
+  "repository": "snapetech-org/ROMarrNG",
+  "selectedPositions": [
+    0,
+    99
+  ],
+  "sourceBundlePath": "localization/source-bundles/20261101-connect-instructions.json",
+  "sourceBundleSha256": "a6f047ba685db67ba51fe5fda0e20f6f83b84cdc94f303a68f648bc6540fe7a8",
+  "sourceCount": 100,
+  "sourceOrdinals": [
+    1,
+    105
+  ]
+}

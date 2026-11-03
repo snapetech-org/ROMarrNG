@@ -1,0 +1,33 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "reviewedBaseHead": "6db0b917343fc9fb605f8a4ecfbf9b4c21cebd1b",
+  "reviewedBaseTree": "bfb778ba77849174a4670a70883c812183506b43",
+  "updates": 238,
+  "corrections": 181,
+  "refinements": 57,
+  "acceptCurrent": 554,
+  "holds": 408,
+  "heldSourceIds": 34,
+  "messageIds": 1837,
+  "reviewedLocales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "catalogBaseSha256": "7ac611cd80ecd9b691e1847330d18e0b60f85a1c43026a96d1424223c757b7d3",
+  "catalogReadbackSha256": "5377a4b6c76137e7a3a9da7096dfbecbb8c90558d92831085ba1fb37c80d1484",
+  "catalogReadbackBlob": "4a7bd1000b85787c15e5f720f08ab17a7c19a603",
+  "readbackCells": 238,
+  "readbackScope": "only the planned 238 translation and translationHashes values changed",
+  "canonicalHash": "scripts/localization_review.py:content_hash"
+}

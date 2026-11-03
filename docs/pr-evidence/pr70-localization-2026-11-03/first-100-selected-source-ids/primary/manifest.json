@@ -1,0 +1,89 @@
+{
+  "canonicalTargetHash": "sha256(json.dumps(target, ensure_ascii=False, sort_keys=True, separators=(\",\", \":\")))",
+  "cellCount": 1200,
+  "checksumNote": "This manifest excludes its own checksum and SHA256SUMS.txt to avoid a circular hash; SHA256SUMS.txt covers all packet files except itself.",
+  "createdAtUtc": "2026-11-03T01:02:46.389418+00:00",
+  "dispositions": {
+    "accept-current": 547,
+    "correction": 159,
+    "hold": 408,
+    "refinement": 86
+  },
+  "files": [
+    {
+      "bytes": 2823,
+      "name": "README.md",
+      "sha256": "b9b10a1a6d4885be8d93598ffc17c95ce48c40a5b07e20889fe9388b9705f501"
+    },
+    {
+      "bytes": 66229,
+      "name": "caller-context-reattestation.jsonl",
+      "sha256": "8d54a0b06cd79b44082f6f79c9ce38dd605b0b3d52f59cbb20b12483b6ff003c"
+    },
+    {
+      "bytes": 565572,
+      "name": "current-target-pins.jsonl",
+      "sha256": "0b242e169d607fa90e2daa8dfabb94cc3fe870983e03faa13f12613f3cad8ab9"
+    },
+    {
+      "bytes": 1558,
+      "name": "exact-head-attestation.json",
+      "sha256": "51da0014c90ed8fe4ba4dec66a2830c5061e7a78f08db3b02a462aed924b83ef"
+    },
+    {
+      "bytes": 480149,
+      "name": "manual-decisions.jsonl",
+      "sha256": "b78bfd16f33e525d1cd281d829b65542a2100139eddad5214baa27a6c5a7cc02"
+    },
+    {
+      "bytes": 1197,
+      "name": "preflight-attestation.json",
+      "sha256": "fbc012bb2ac6fd722f90418ea9905ff74f31c8aab7ee3d5b183e2db0be198e7c"
+    },
+    {
+      "bytes": 3483421,
+      "name": "primary-review.jsonl",
+      "sha256": "ecd5b90f2be7d02286e85cc4160fbe5c90966e2def09db1467fd8e9004dc4370"
+    },
+    {
+      "bytes": 42877,
+      "name": "render-path-evidence.jsonl",
+      "sha256": "48ef3980b5e4e4180953de48a80e17266eacee09f9130ad73cff4db935c0c13a"
+    },
+    {
+      "bytes": 1145,
+      "name": "review-completion-checks.json",
+      "sha256": "2fc0ed3423732ca7735c5148fb7d2900429b642dae3e3e093399a1eeeff8dc63"
+    },
+    {
+      "bytes": 4952,
+      "name": "selection.json",
+      "sha256": "a694ed43e0ee564a173a00a29f74ed0221ee87da52d00b7f6f776aa441af2d11"
+    },
+    {
+      "bytes": 173620,
+      "name": "source-only-review-input.jsonl",
+      "sha256": "ebba58ea45853cb762de67235783d7e83aa8568d00398e1d72742e3ed7fbf21d"
+    },
+    {
+      "bytes": 502408,
+      "name": "source-structural-baseline.jsonl",
+      "sha256": "e0982297bc509697c000f54a1c3405da104f7c639404fd50268b6facdc16ccec"
+    }
+  ],
+  "head": "6db0b917343fc9fb605f8a4ecfbf9b4c21cebd1b",
+  "heldSourceCount": 34,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewLimits": {
+    "independentReviewOutputRead": false,
+    "nativeSpeakerApproval": false,
+    "repositoryOrPullRequestEdited": false,
+    "testsBuildsScansCiOrBrowserRun": false
+  },
+  "selection": "First 100 previously unaudited source IDs in frozen source-bundle order; 12 locales per ID.",
+  "sourceBundle": "localization/source-bundles/20261101-connect-instructions.json",
+  "sourceBundleSha256": "a6f047ba685db67ba51fe5fda0e20f6f83b84cdc94f303a68f648bc6540fe7a8",
+  "sourceCount": 100,
+  "tree": "bfb778ba77849174a4670a70883c812183506b43"
+}
