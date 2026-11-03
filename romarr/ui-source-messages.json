@@ -4132,7 +4132,7 @@
       "source": "On disk (plays now)",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:1828"
+        "romarr/ui.py:2068"
       ],
       "id": "ui.on-disk-plays-now.325a11ceda",
       "sourceHash": "325a11ceda6c5379498ece518c46a081019f59b3fd88ba32ea53dbdc653f397b",
@@ -9566,7 +9566,7 @@
       "source": "no title",
       "category": "ui-error",
       "locations": [
-        "romarr/app.py:4640"
+        "romarr/app.py:4793"
       ],
       "id": "ui.no-title.8cb9a5c65b",
       "sourceHash": "8cb9a5c65bfe9b03180bdfd26ef54ef23c585df29ebe0a63406ae5627b867c51",
