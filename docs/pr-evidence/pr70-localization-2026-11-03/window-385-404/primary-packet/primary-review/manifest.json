@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "artifact": "ROMarrNG PR #70 W385-W404 rebased primary semantic review",
+  "reviewType": "primary-semantic-rebased",
+  "sealed": true,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "baseRefName": "main",
+  "head": "0afd1d8c150fb96d868394a8d9620371db612185",
+  "tree": "0ba717d05c49356d8b1f55ac4a6b8844c161a402",
+  "window": "W385-W404",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "inputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w385-404-rebased-candidate-free-20261103/input",
+  "inputManifestSha256": "4ba5c2b547d62dc952f7013c19a1d4b5a444b82d9490b6800d4ecb788fcc4e2c",
+  "inputChecksumListSha256": "b6dfd70dccfd2ee88baa18b31aac13df7ea6b40af86c4e946ff7e41f4c9c9990",
+  "priorPrimaryPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w385-404-primary-review-20261103/primary-review",
+  "priorPrimaryChecksumListSha256": "e1e680c211463ba483a434aebac7325e327de25da27068876f5f7adf6ff9c3e8",
+  "priorCrossAuditPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w385-404-cross-audit-20261103",
+  "priorCrossAuditChecksumListSha256": "09a2a2c8bb9bccd069e4ccb96b3ef44304b9170e5da49b0fabf2db7a6e4e102c",
+  "previousPrimaryRowsReattested": 240,
+  "previousCrossAuditRowsReattested": 240,
+  "previousCrossAuditResolvedCellsCarriedForward": 192,
+  "newlyRenderablePositions": [
+    392,
+    396,
+    398,
+    399
+  ],
+  "newlyRenderableCells": 48,
+  "newlyReviewedCells": 48,
+  "remainingDispatchGapPositions": [],
+  "remainingDispatchGapCells": 0,
+  "priorHoldCellCount": 288,
+  "priorHoldTargetsUnchanged": true,
+  "decisionCounts": {
+    "accept-current": 214,
+    "correction": 22,
+    "refinement": 4
+  },
+  "nativeSpeakerApproval": "not obtained",
+  "candidateFreeVerifier": "PASS",
+  "repositoryOrPrFilesEdited": false,
+  "files": {
+    "README.md": {
+      "sha256": "975b0c3da3ef49534e1a0e0ac62ab3a6b95af87c5716751e3adc71234666907c",
+      "byteCount": 2530
+    },
+    "independent-second-look.json": {
+      "sha256": "2fbb28732cc8f720a43871b346fdd6737aad8203532ca854ae9caf127ffbb0c3",
+      "byteCount": 1829
+    },
+    "input-verification.json": {
+      "sha256": "dc396cd2aeaeb2f486bf0da48a258995ff41d8265abbf4cc807bd30ac490eca5",
+      "byteCount": 1627
+    },
+    "prior-decision-reattestation.jsonl": {
+      "sha256": "09c04bed7797f8fada37cf74b887dd0b287ef8e2213ffa78964a8c1f80546660",
+      "byteCount": 473341
+    },
+    "prior-hold-reattestation.jsonl": {
+      "sha256": "4fd52745ae79cae3873e97538dc28959e93eb00fe15c7d2d8a61d7f9ba642d36",
+      "byteCount": 135960
+    },
+    "review-decisions.jsonl": {
+      "sha256": "656122f814bc1b532af2144c3dba5cfe1b4cf8fc3e453a2eb72dfac18e47136c",
+      "byteCount": 152333
+    },
+    "review-ledger.jsonl": {
+      "sha256": "39b425874a4f9f48d5aace0b5e4bc24e29254175faa5bff868dd5b2552de0fac",
+      "byteCount": 1572869
+    },
+    "source-context-evidence.jsonl": {
+      "sha256": "83f244db095cbea1173cd71ecc278214f23e9a63c0904ebb268d46651a3d3a2e",
+      "byteCount": 96738
+    },
+    "summary.json": {
+      "sha256": "8fe11317fabdec006c11d4f98c4b37d4c4bc863f7a30bc198277315f85402e87",
+      "byteCount": 2620
+    },
+    "verify-primary-review.py": {
+      "sha256": "30c8b5ca0cdc424866a846294ac13787080903a6d4a0b64dfaf1ed47c5f85160",
+      "byteCount": 13424
+    }
+  },
+  "createdAtUtc": "2026-11-03T17:52:30.090431+00:00"
+}

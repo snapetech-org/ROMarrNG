@@ -1,0 +1,25 @@
+{
+  "prBefore": {
+    "baseRefName": "main",
+    "headRefName": "task/localization-translation-review-20261030",
+    "headRefOid": "0afd1d8c150fb96d868394a8d9620371db612185",
+    "isDraft": true,
+    "state": "OPEN"
+  },
+  "prAfter": {
+    "baseRefName": "main",
+    "headRefName": "task/localization-translation-review-20261030",
+    "headRefOid": "0afd1d8c150fb96d868394a8d9620371db612185",
+    "isDraft": true,
+    "state": "OPEN"
+  },
+  "branchRef": "0afd1d8c150fb96d868394a8d9620371db612185",
+  "pullRef": "0afd1d8c150fb96d868394a8d9620371db612185",
+  "treeBefore": "0ba717d05c49356d8b1f55ac4a6b8844c161a402",
+  "treeAfter": "0ba717d05c49356d8b1f55ac4a6b8844c161a402",
+  "candidateFreeChecksumListSha256": "b6dfd70dccfd2ee88baa18b31aac13df7ea6b40af86c4e946ff7e41f4c9c9990",
+  "primaryChecksumListSha256": "c15dfb2440eda424cec96e6e69705671cc0fa251ed74420c60b9a11873fd8e12",
+  "blindChecksumListSha256": "a5b1c655e703468c64a21e30ac00a11e45d4e0cef57f20a61b306848b93d96cc",
+  "allInputVerifiersAndChecksumLists": "PASS",
+  "createdUtc": "2026-11-03T18:05:55Z"
+}

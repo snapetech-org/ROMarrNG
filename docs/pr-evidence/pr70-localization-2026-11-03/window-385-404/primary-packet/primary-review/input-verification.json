@@ -1,0 +1,33 @@
+{
+  "candidateFreeVerifier": "PASS",
+  "candidateFreeInputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w385-404-rebased-candidate-free-20261103/input",
+  "candidateFreeInputManifestSha256": "4ba5c2b547d62dc952f7013c19a1d4b5a444b82d9490b6800d4ecb788fcc4e2c",
+  "candidateFreeInputChecksumListSha256": "b6dfd70dccfd2ee88baa18b31aac13df7ea6b40af86c4e946ff7e41f4c9c9990",
+  "head": "0afd1d8c150fb96d868394a8d9620371db612185",
+  "tree": "0ba717d05c49356d8b1f55ac4a6b8844c161a402",
+  "cellCount": 240,
+  "currentCatalogSha256": "c5e6e3f722cdafb9082e75f7e6253dbb0d1af3f032bbbef52c713dc73b281a1a",
+  "priorCandidateFreeCatalogSha256": "c5e6e3f722cdafb9082e75f7e6253dbb0d1af3f032bbbef52c713dc73b281a1a",
+  "sameCatalogAsPriorHead": true,
+  "priorPrimaryVerifier": "PASS",
+  "priorPrimarySeal": "e1e680c211463ba483a434aebac7325e327de25da27068876f5f7adf6ff9c3e8",
+  "priorCrossAuditVerifier": "PASS",
+  "priorCrossAuditSeal": "09a2a2c8bb9bccd069e4ccb96b3ef44304b9170e5da49b0fabf2db7a6e4e102c",
+  "priorPrimaryRowsReattested": 240,
+  "priorCrossAuditRowsReattested": 240,
+  "allPriorSourcesAndCurrentTargetsUnchanged": true,
+  "priorResolvedDecisionsCarriedForward": 192,
+  "priorDispatchGapHoldsReplacedByNewReview": 48,
+  "priorHoldsReattested": 288,
+  "priorHoldBytesSha256": "4fd52745ae79cae3873e97538dc28959e93eb00fe15c7d2d8a61d7f9ba642d36",
+  "priorHoldsUnchanged": true,
+  "sourceContextFilesReattestedAgainstExactHead": [
+    "romarr/app.py",
+    "romarr/connect.py",
+    "romarr/organizer.py",
+    "romarr/playability.py",
+    "romarr/ui.py"
+  ],
+  "repositoryStatus": "clean",
+  "packetVerificationOnly": true
+}

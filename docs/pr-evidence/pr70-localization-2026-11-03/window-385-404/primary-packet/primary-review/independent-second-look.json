@@ -1,0 +1,38 @@
+{
+  "reviewScope": "Independent second look of the 48 current translations at positions 392, 396, 398, and 399 using only the sealed rebased candidate-free input and pinned caller context.",
+  "reviewer": "/root/slskdn_w66_primary/review_newly_renderable",
+  "candidateFreeInputOnly": true,
+  "priorPrimaryCrossAuditBlindMaterialOpened": false,
+  "positions": {
+    "392": {
+      "result": "same corrections recommended",
+      "locales": [
+        "ko",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "confidence": "moderate",
+      "note": "Current wording mixes English symlink; Korean also uses wording closer to disappeared. All other targets convey the blocked rename reason."
+    },
+    "396": {
+      "result": "accept all current",
+      "confidence": "high",
+      "note": "All preserve that the host does not confirm whether the PIN was correct and tell the user to check the paired list."
+    },
+    "398": {
+      "result": "accept all current",
+      "confidence": "high",
+      "note": "All preserve Sunshine and Moonlight, PIN, the API limitation, and the client-side pairing instruction."
+    },
+    "399": {
+      "result": "correct Indonesian; accept the other eleven on second-look",
+      "locale": "id",
+      "confidence": "high",
+      "suggestedTarget": "Sunshine menolak: tidak ada klien Moonlight yang menunggu untuk dipasangkan. Mulai proses pemasangan di klien Anda terlebih dahulu.",
+      "note": "Indonesian omits the client-side pairing instruction. The second-look reviewer did not flag Hindi; primary review separately corrects Hindi because the current target uses “adding” where the source says “pairing,” consistent with the earlier cross-audit hold note."
+    }
+  },
+  "usedAsNativeSpeakerApproval": false,
+  "nativeSpeakerApproval": "not obtained",
+  "filesChanged": false
+}

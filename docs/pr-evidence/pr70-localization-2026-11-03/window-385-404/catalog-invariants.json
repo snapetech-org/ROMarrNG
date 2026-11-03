@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 1,
+  "baseHead": "0afd1d8c150fb96d868394a8d9620371db612185",
+  "baseTree": "0ba717d05c49356d8b1f55ac4a6b8844c161a402",
+  "catalogPath": "romarr/ui-labels.json",
+  "baseSha256": "c5e6e3f722cdafb9082e75f7e6253dbb0d1af3f032bbbef52c713dc73b281a1a",
+  "resultSha256": "77e2ac045c73402be177bc194ab758b9f8d2df70c7c91829089cd99a5a07a985",
+  "baseGitBlob": "0fa7a15a1db50bd24166516fefa1e2166274d04c",
+  "messageCount": 1836,
+  "messageIdsPreserved": true,
+  "translationLocaleKeysPreserved": true,
+  "changedCellCount": 29,
+  "changedCells": [
+    {
+      "sourceId": "ui.sign-in-if-asked-the-page-then-shows.e3615cbaf6",
+      "locale": "hi"
+    },
+    {
+      "sourceId": "ui.signed-in-to-gog-that-page-shows-exa.3512fe96cf",
+      "locale": "zh-Hans"
+    },
+    {
+      "sourceId": "ui.signed-in-to-gog-that-page-shows-exa.3512fe96cf",
+      "locale": "zh-Hant"
+    },
+    {
+      "sourceId": "ui.sort-this-page.b7eea6be6f",
+      "locale": "ja"
+    },
+    {
+      "sourceId": "ui.source-file-is-missing-or-is-a-symli.ca704e4514",
+      "locale": "ko"
+    },
+    {
+      "sourceId": "ui.source-file-is-missing-or-is-a-symli.ca704e4514",
+      "locale": "zh-Hans"
+    },
+    {
+      "sourceId": "ui.source-file-is-missing-or-is-a-symli.ca704e4514",
+      "locale": "zh-Hant"
+    },
+    {
+      "sourceId": "ui.status-unavailable.7eb5af92e4",
+      "locale": "ja"
+    },
+    {
+      "sourceId": "ui.status-unavailable.7eb5af92e4",
+      "locale": "vi"
+    },
+    {
+      "sourceId": "ui.stopped-after-seen-entries-truncated.fc5c0496ad",
+      "locale": "ar"
+    },
+    {
+      "sourceId": "ui.stopped-after-seen-entries-truncated.fc5c0496ad",
+      "locale": "es"
+    },
+    {
+      "sourceId": "ui.stopped-after-seen-entries-truncated.fc5c0496ad",
+      "locale": "ko"
+    },
+    {
+      "sourceId": "ui.suggestions-count.17be8f21b6",
+      "locale": "ar"
+    },
+    {
+      "sourceId": "ui.suggestions-count.17be8f21b6",
+      "locale": "es"
+    },
+    {
+      "sourceId": "ui.suggestions-count.17be8f21b6",
+      "locale": "zh-Hans"
+    },
+    {
+      "sourceId": "ui.suggestions-count.17be8f21b6",
+      "locale": "zh-Hant"
+    },
+    {
+      "sourceId": "ui.sunshine-refused-it-no-moonlight-cli.fb8441c69d",
+      "locale": "hi"
+    },
+    {
+      "sourceId": "ui.sunshine-refused-it-no-moonlight-cli.fb8441c69d",
+      "locale": "id"
+    },
+    {
+      "sourceId": "ui.switch-family.472d692ccd",
+      "locale": "ko"
+    },
+    {
+      "sourceId": "ui.switch-family.472d692ccd",
+      "locale": "vi"
+    },
+    {
+      "sourceId": "ui.switch-ids-and-version-numbers-come.498f902664",
+      "locale": "hi"
+    },
+    {
+      "sourceId": "ui.switch-ids-and-version-numbers-come.498f902664",
+      "locale": "id"
+    },
+    {
+      "sourceId": "ui.switch-ids-and-version-numbers-come.498f902664",
+      "locale": "ja"
+    },
+    {
+      "sourceId": "ui.switch-ids-and-version-numbers-come.498f902664",
+      "locale": "ko"
+    },
+    {
+      "sourceId": "ui.switch-ids-and-version-numbers-come.498f902664",
+      "locale": "vi"
+    },
+    {
+      "sourceId": "ui.switch-title-ids-and-versions-are-re.9ab021f74a",
+      "locale": "ar"
+    },
+    {
+      "sourceId": "ui.switch-title-ids-and-versions-are-re.9ab021f74a",
+      "locale": "hi"
+    },
+    {
+      "sourceId": "ui.switch-updates-folder.9d1d6c74c3",
+      "locale": "de"
+    },
+    {
+      "sourceId": "ui.switch-updates-folder.9d1d6c74c3",
+      "locale": "ko"
+    }
+  ],
+  "carriedHoldCount": 288,
+  "carriedHoldsUnchanged": true
+}

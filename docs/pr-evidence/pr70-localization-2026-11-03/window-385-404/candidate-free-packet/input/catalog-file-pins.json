@@ -1,0 +1,134 @@
+{
+  "commit": "0afd1d8c150fb96d868394a8d9620371db612185",
+  "tree": "0ba717d05c49356d8b1f55ac4a6b8844c161a402",
+  "activeUniqueSourceIds": 479,
+  "catalogMessageCount": 1836,
+  "baseLocale": "en",
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "localeMetadata": {
+    "ar": {
+      "englishName": "Arabic",
+      "nativeName": "العربية",
+      "direction": "rtl",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "de": {
+      "englishName": "German",
+      "nativeName": "Deutsch",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "es": {
+      "englishName": "Spanish",
+      "nativeName": "Español",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "fr": {
+      "englishName": "French",
+      "nativeName": "Français",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "hi": {
+      "englishName": "Hindi",
+      "nativeName": "हिन्दी",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "id": {
+      "englishName": "Indonesian",
+      "nativeName": "Bahasa Indonesia",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "ja": {
+      "englishName": "Japanese",
+      "nativeName": "日本語",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "ko": {
+      "englishName": "Korean",
+      "nativeName": "한국어",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "pt-BR": {
+      "englishName": "Brazilian Portuguese",
+      "nativeName": "Português (Brasil)",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "vi": {
+      "englishName": "Vietnamese",
+      "nativeName": "Tiếng Việt",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "zh-Hans": {
+      "englishName": "Simplified Chinese",
+      "nativeName": "简体中文",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "zh-Hant": {
+      "englishName": "Traditional Chinese",
+      "nativeName": "繁體中文",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    }
+  },
+  "catalogSha256": "c5e6e3f722cdafb9082e75f7e6253dbb0d1af3f032bbbef52c713dc73b281a1a",
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "sourceQueueSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+  "sourceQueuePath": "romarr/ui-source-messages.json",
+  "sourceSnapshotSha256": "e8f580fc3a49da18add0748e8d5312186dc353bc30d3c01bcc94e06d2aaa077d",
+  "callerSourceFilePins": {
+    "romarr/connect.py": {
+      "fileSha256": "75aabd8d31edd5874d0b19f2c2f68de9da1e6eeceb6d72e954b3ea04349a8f5a",
+      "gitBlob": "2eedb989971c18f76d8742c413a9f8f224cc1bce"
+    },
+    "romarr/ui.py": {
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0"
+    },
+    "romarr/organizer.py": {
+      "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390"
+    },
+    "romarr/app.py": {
+      "fileSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+      "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd"
+    },
+    "romarr/playability.py": {
+      "fileSha256": "fc193d93931383cd7202baf8b7696e30c93861e1495a83a05fc2aa3bc85c303d",
+      "gitBlob": "ad2eba5ecb2166ecc3fb837fdea87f97e41fda29"
+    }
+  }
+}

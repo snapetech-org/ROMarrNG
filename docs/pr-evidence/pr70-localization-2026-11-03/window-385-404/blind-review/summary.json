@@ -1,0 +1,21 @@
+{
+  "window": "W385-W404",
+  "head": "0afd1d8c150fb96d868394a8d9620371db612185",
+  "tree": "0ba717d05c49356d8b1f55ac4a6b8844c161a402",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "dispositions": {
+    "accept-current": 216,
+    "correction": 16,
+    "refinement": 8
+  },
+  "updateCount": 24,
+  "carriedHoldCellCount": 288,
+  "carriedHoldCellsUnchanged": true,
+  "newHolds": 0,
+  "candidateFreeInputChecksumListSha256": "b6dfd70dccfd2ee88baa18b31aac13df7ea6b40af86c4e946ff7e41f4c9c9990",
+  "priorHoldReattestationSha256": "4fd52745ae79cae3873e97538dc28959e93eb00fe15c7d2d8a61d7f9ba642d36",
+  "reviewBoundary": "Blind review was developed from candidate-free input only; primary review/proposals were not accessed.",
+  "nativeSpeakerApproval": "not established"
+}

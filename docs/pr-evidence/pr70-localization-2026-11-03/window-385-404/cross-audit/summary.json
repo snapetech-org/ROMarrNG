@@ -1,0 +1,41 @@
+{
+  "result": "PASS",
+  "window": "W385-W404",
+  "head": "0afd1d8c150fb96d868394a8d9620371db612185",
+  "tree": "0ba717d05c49356d8b1f55ac4a6b8844c161a402",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "primaryDecisionCounts": {
+    "accept-current": 214,
+    "correction": 22,
+    "refinement": 4
+  },
+  "blindDecisionCounts": {
+    "accept-current": 216,
+    "correction": 16,
+    "refinement": 8
+  },
+  "exactAgreements": 213,
+  "disputedCellsResolved": 27,
+  "reconciledDispositions": {
+    "accept-current": 211,
+    "correction": 25,
+    "refinement": 4
+  },
+  "applyCellCount": 29,
+  "noOpCellCount": 211,
+  "newHoldCellCount": 0,
+  "carriedHoldCellCount": 288,
+  "carriedHoldsUnchanged": true,
+  "newlyRenderablePositions": [
+    392,
+    396,
+    398,
+    399
+  ],
+  "newlyRenderableCellsReviewed": 48,
+  "newlyRenderableCellsWithUpdates": 5,
+  "placeholderNumericProtectedLiteralMismatches": 0,
+  "nativeSpeakerApproval": "not obtained"
+}

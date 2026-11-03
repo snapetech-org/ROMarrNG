@@ -1,0 +1,185 @@
+{
+  "window": "W385-W404",
+  "method": "Sort all unique active IDs lexicographically by stable ID; reattest W365-W384; select the immediate next 20 IDs.",
+  "activeUniqueSourceIds": 479,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "priorWindow": "W365-W384",
+  "priorWindowPositions": [
+    365,
+    384
+  ],
+  "priorWindowSelectionReattested": true,
+  "positions": [
+    385,
+    404
+  ],
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "boundaries": [
+    {
+      "position": 384,
+      "role": "previous-window-final",
+      "source": "Shared metadata",
+      "sourceId": "ui.shared-metadata.fb4cb78bf2",
+      "sourceSha256": "fb4cb78bf2f2fa2b468e7126216af14e7657a0771ea46e098c14e95d6be441bd"
+    },
+    {
+      "position": 385,
+      "role": "selected-start",
+      "source": "Sign in if asked; the page then shows {example}. Copy the token. EA issues no application keys, so this is the same credential Playnite uses. It is short-lived — re-paste when a sync says it expired. If EA answers {provider_message} it is blocking the sign-in itself, usually because of a VPN or unfamiliar IP — turn the VPN off for this one sign-in and try again.",
+      "sourceId": "ui.sign-in-if-asked-the-page-then-shows.e3615cbaf6",
+      "sourceSha256": "e3615cbaf6bc1e7c6d7f51eb8208319504867c4d06dd25a98e159febf899bbc6"
+    },
+    {
+      "position": 404,
+      "role": "selected-end",
+      "source": "Switch updates folder",
+      "sourceId": "ui.switch-updates-folder.9d1d6c74c3",
+      "sourceSha256": "9d1d6c74c3d1a16b74b5b1c90a5fbc69cb5ebb5d8305887300f126a5d6905ff4"
+    },
+    {
+      "position": 405,
+      "role": "next-source",
+      "source": "Switch versions behind catalog {count}",
+      "sourceId": "ui.switch-versions-behind-catalog-count.49fa53ebd9",
+      "sourceSha256": "49fa53ebd95401bcf18ff4d99aa941709a01d6166f4679f999dc0a1fc3b1c25b"
+    }
+  ],
+  "selectedSources": [
+    {
+      "position": 385,
+      "sourceId": "ui.sign-in-if-asked-the-page-then-shows.e3615cbaf6",
+      "source": "Sign in if asked; the page then shows {example}. Copy the token. EA issues no application keys, so this is the same credential Playnite uses. It is short-lived — re-paste when a sync says it expired. If EA answers {provider_message} it is blocking the sign-in itself, usually because of a VPN or unfamiliar IP — turn the VPN off for this one sign-in and try again.",
+      "sourceSha256": "e3615cbaf6bc1e7c6d7f51eb8208319504867c4d06dd25a98e159febf899bbc6"
+    },
+    {
+      "position": 386,
+      "sourceId": "ui.sign-in-there-the-page-ends-up-showi.aa5efe7dd3",
+      "source": "Sign in there; the page ends up showing {example}. Copy the code. If Epic asks you to accept terms first, do that and it continues. The code is single-use and expires in minutes, so paste it straight away -- ROMarr swaps it for a refresh token and never asks again.",
+      "sourceSha256": "aa5efe7dd3be42889791070317426734adcf6cee7384ef09e0a1640fcb739c53"
+    },
+    {
+      "position": 387,
+      "sourceId": "ui.signed-in-to-blizzard-that-page-is-a.7c3d547316",
+      "source": "Signed in to Blizzard, that page is a plain JSON list of your games. Copy the whole document and paste it -- it is data, not a credential, so nothing secret is stored.",
+      "sourceSha256": "7c3d5473169c10f7bd558f1568a1995d485ce2be4845631be659214f7ac8c467"
+    },
+    {
+      "position": 388,
+      "sourceId": "ui.signed-in-to-gog-that-page-shows-exa.3512fe96cf",
+      "source": "Signed in to GOG, that page shows {example} near the start. Paste that username. Your profile's games list must be public ({settings_url}) — that is the whole credential, there is no token.",
+      "sourceSha256": "3512fe96cf3c06b857cbf9c425d2a2a3d61cccf7c6707229430ca9e5d34dbf9e"
+    },
+    {
+      "position": 389,
+      "sourceId": "ui.signed-in-to-playstation-com-this-pa.acf50352eb",
+      "source": "Signed in to playstation.com, this page shows {example}. Copy the value between the quotes.",
+      "sourceSha256": "acf50352eb9ea9de13e7f08bbde5087ae4458f814db9a8cf0b2cb71c262c2ab5"
+    },
+    {
+      "position": 390,
+      "sourceId": "ui.size-ceiling.b53f3f0f45",
+      "source": "Size ceiling",
+      "sourceSha256": "b53f3f0f4567ae30ad986fabcf6a250a3cc86c8cee2c95755b35a8fc1c5ed800"
+    },
+    {
+      "position": 391,
+      "sourceId": "ui.sort-this-page.b7eea6be6f",
+      "source": "Sort this page",
+      "sourceSha256": "b7eea6be6fec8c6fad8296650af449bd8e37c7dc715295c891d3bab76d0ba9b3"
+    },
+    {
+      "position": 392,
+      "sourceId": "ui.source-file-is-missing-or-is-a-symli.ca704e4514",
+      "source": "Source file is missing or is a symlink",
+      "sourceSha256": "ca704e45142292fbef57dae7547bc4748d19475162c8698724d49b47472f586c"
+    },
+    {
+      "position": 393,
+      "sourceId": "ui.state-processed-of-total-files-check.3ba5dc7f71",
+      "source": "{state}. {processed} of {total} files checked.",
+      "sourceSha256": "3ba5dc7f71972cc325d085cc5c4be8cbfc546db2a386301a3ab498861a17b812"
+    },
+    {
+      "position": 394,
+      "sourceId": "ui.status-unavailable.7eb5af92e4",
+      "source": "Status unavailable",
+      "sourceSha256": "7eb5af92e49c32f0e22097bda3e39b3b9b3bcdeb80d5c278b5d74504b96c2beb"
+    },
+    {
+      "position": 395,
+      "sourceId": "ui.stopped-after-seen-entries-truncated.fc5c0496ad",
+      "source": "Stopped after {seen} entries: {truncated}. {added} hashes were kept; run it again to continue.",
+      "sourceSha256": "fc5c0496adebc84be3f8cc2fbc375f35e3125b05478a18b8907d5f853a40e33c"
+    },
+    {
+      "position": 396,
+      "sourceId": "ui.submitted-the-host-does-not-report-w.9ba72a4bcd",
+      "source": "Submitted. The host does not report whether the PIN was correct -- check that your client now appears in the paired list.",
+      "sourceSha256": "9ba72a4bcd7e6e0b724547e6a0048d2b90ce7a440d53a273c64ab67a9d102224"
+    },
+    {
+      "position": 397,
+      "sourceId": "ui.suggestions-count.17be8f21b6",
+      "source": "Suggestions {count}",
+      "sourceSha256": "17be8f21b6b8ed8106452e933606fa28f7a696c1d17dd1b480752bc0e06bfbac"
+    },
+    {
+      "position": 398,
+      "sourceId": "ui.sunshine-has-no-endpoint-that-lists.06228315a7",
+      "source": "Sunshine has no endpoint that lists waiting clients -- its API can accept a PIN and cannot tell you one is wanted. Start the pairing from your Moonlight client, then type the PIN it shows.",
+      "sourceSha256": "06228315a71d085c4995893e80589b1a9803bd525c783893c7c5365bd025c508"
+    },
+    {
+      "position": 399,
+      "sourceId": "ui.sunshine-refused-it-no-moonlight-cli.fb8441c69d",
+      "source": "Sunshine refused it: no Moonlight client is waiting to pair. Start the pairing on your client first.",
+      "sourceSha256": "fb8441c69d9be3e21858f056c290ba3299826fa9c57cb990fc4d58889d88692d"
+    },
+    {
+      "position": 400,
+      "sourceId": "ui.switch-dlc-folder.e71ab4eb73",
+      "source": "Switch DLC folder",
+      "sourceSha256": "e71ab4eb73df661fab8d44c548c9a24dba47ecbe9fcb05e0a84d0c3d1e64a1dd"
+    },
+    {
+      "position": 401,
+      "sourceId": "ui.switch-family.472d692ccd",
+      "source": "Switch family",
+      "sourceSha256": "472d692ccd2461ca1d4b80b5628853989a44f83ff919593f5bedbc8a475f3ac5"
+    },
+    {
+      "position": 402,
+      "sourceId": "ui.switch-ids-and-version-numbers-come.498f902664",
+      "source": "Switch IDs and version numbers come from the filename and TitleDB. They classify a likely base game, update or DLC; they do not verify the package bytes. When enabled, only TitleDB identified updates and DLC are routed to the folders below.",
+      "sourceSha256": "498f9026642769bc555cc06bbe7f1f11e2854f411b11588599ea895e866b3c5f"
+    },
+    {
+      "position": 403,
+      "sourceId": "ui.switch-title-ids-and-versions-are-re.9ab021f74a",
+      "source": "Switch title IDs and versions are read from filenames and TitleDB. They help group base games, updates and DLC, but do not verify the package bytes. Exact DAT checksums or a manual confirmation are required before ROMarr offers a rename.",
+      "sourceSha256": "9ab021f74a7313b6314d0260a83439ad0ab74807369b4f596b819246b4f4a337"
+    },
+    {
+      "position": 404,
+      "sourceId": "ui.switch-updates-folder.9d1d6c74c3",
+      "source": "Switch updates folder",
+      "sourceSha256": "9d1d6c74c3d1a16b74b5b1c90a5fbc69cb5ebb5d8305887300f126a5d6905ff4"
+    }
+  ]
+}

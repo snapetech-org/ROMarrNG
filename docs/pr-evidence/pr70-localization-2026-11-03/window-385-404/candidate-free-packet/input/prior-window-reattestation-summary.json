@@ -1,0 +1,12 @@
+{
+  "priorWindow": "W365-W384",
+  "priorHead": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "priorTree": "3f42d41fe4bbb8edd921ff161e8298ca66038a91",
+  "currentHead": "0afd1d8c150fb96d868394a8d9620371db612185",
+  "currentTree": "0ba717d05c49356d8b1f55ac4a6b8844c161a402",
+  "currentSourceOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "reattestedSources": 20,
+  "allPriorSourceIdsAndHashesMatchCurrentQueue": true,
+  "priorWindowHoldCells": 0,
+  "priorWindowHoldPositions": []
+}
