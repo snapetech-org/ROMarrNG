@@ -1,0 +1,64 @@
+{
+  "artifact": "ROMarrNG PR #70 W345-W364 candidate-free input",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "baseRefName": "main",
+  "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "head": "6bef0c74632067906fd07279fa6bd3fd59159a48",
+  "tree": "4fd79e67f37e4c66d0253199418973d965a3fbd6",
+  "window": "W345-W364",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "activeUniqueSourceIdCount": 479,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "catalogMessageCount": 1836,
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "priorWindow": "W325-W344",
+  "priorWindowReattested": true,
+  "priorHoldCellCount": 288,
+  "priorHoldTargetsUnchanged": true,
+  "currentTargetPlaceholderMismatches": 0,
+  "currentTargetNumericMismatches": 0,
+  "currentTargetProtectedLiteralMismatches": 0,
+  "callerResolutionHoldPositions": [],
+  "callerResolutionHoldCells": 0,
+  "candidateFree": true,
+  "proposedTargetsIncluded": false,
+  "reviewDecisionsIncluded": false,
+  "sourceQueuePath": "romarr/ui-source-messages.json",
+  "sourceQueueSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+  "createdUtc": "2026-11-03T15:05:03.562811+00:00",
+  "renderingFollowups": [
+    {
+      "position": 346,
+      "sourceId": "ui.scan-failed-error-type.e99ccb8157",
+      "issue": "Launcher scan error currently displays through opaque API message rendering."
+    },
+    {
+      "position": 350,
+      "sourceId": "ui.scan-the-uri-or-enter-the-secret-in.612ce1fd46",
+      "issue": "TOTP enrollment note currently displays through opaque API message rendering."
+    }
+  ],
+  "translationDispatchGapPositions": [
+    346,
+    350
+  ]
+}

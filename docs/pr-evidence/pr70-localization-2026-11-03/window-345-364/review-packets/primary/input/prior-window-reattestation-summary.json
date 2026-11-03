@@ -1,0 +1,15 @@
+{
+  "priorWindow": "W325-W344",
+  "priorHead": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "priorTree": "c13dc4fc091565318d11a19ad9e851215a5f917e",
+  "currentHead": "6bef0c74632067906fd07279fa6bd3fd59159a48",
+  "currentTree": "4fd79e67f37e4c66d0253199418973d965a3fbd6",
+  "currentSourceOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "reattestedSources": 20,
+  "allPriorSourceIdsAndHashesMatchCurrentQueue": true,
+  "priorWindowHoldCells": 24,
+  "priorWindowHoldPositions": [
+    329,
+    330
+  ]
+}

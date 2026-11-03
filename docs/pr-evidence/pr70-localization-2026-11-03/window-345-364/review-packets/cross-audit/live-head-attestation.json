@@ -1,0 +1,15 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "state": "open",
+  "draft": true,
+  "baseRef": "main",
+  "headRef": "task/localization-translation-review-20261030",
+  "pullRequestHeadSha": "6bef0c74632067906fd07279fa6bd3fd59159a48",
+  "liveBranchRefSha": "6bef0c74632067906fd07279fa6bd3fd59159a48",
+  "localWorktreeHeadSha": "6bef0c74632067906fd07279fa6bd3fd59159a48",
+  "localWorktreeTreeSha": "4fd79e67f37e4c66d0253199418973d965a3fbd6",
+  "localWorktreeStatus": "clean",
+  "checkedAtUtc": "2026-11-03T15:23:57.369104+00:00",
+  "evidence": "Live GitHub PR/ref API reads plus exact local worktree head/tree/status; no repository or PR writes."
+}

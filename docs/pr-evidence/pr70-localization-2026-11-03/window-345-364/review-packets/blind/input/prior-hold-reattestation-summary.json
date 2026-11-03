@@ -1,0 +1,18 @@
+{
+  "candidateFreeHoldPackets": [
+    "W245-W264",
+    "W265-W284",
+    "W285-W304",
+    "W325-W344"
+  ],
+  "reattestedCellCount": 288,
+  "sourceAndPositionMatches": true,
+  "allCurrentTargetHashesMatchPriorHoldEvidence": true,
+  "windowCounts": {
+    "W245-W264": 72,
+    "W265-W284": 168,
+    "W285-W304": 24,
+    "W325-W344": 24
+  },
+  "note": "W305-W324 application summary records zero holds; carry-forward covers four later candidate-free callerless hold ledgers available at input head."
+}

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W345-W364",
+  "applicationApproved": true,
+  "releaseApproved": false,
+  "parentHead": "6bef0c74632067906fd07279fa6bd3fd59159a48",
+  "parentTree": "4fd79e67f37e4c66d0253199418973d965a3fbd6",
+  "branch": "task/localization-translation-review-20261030",
+  "selectedChangeCount": 144,
+  "retainedCellCount": 96,
+  "heldCellCount": 0,
+  "crossAuditLedgerSha256": "9011787954d0cc4648525afb8732f9d7e51d7f86e7fb4e4a373b59a7d9d48f0e",
+  "candidateFreeManifestSha256": "9290f5add4353ae65e4431d09c85a040b1d3a79830bfbce310c7399dd861ad5d",
+  "authorizationSource": "Parent task directing application of sealed candidate-free, primary, blind, and cross-audit decisions; standing user authorization covers commit, push, and PR updates; releases are excluded.",
+  "separateRuntimeFollowups": [
+    346,
+    350
+  ],
+  "sourceOrCallerChangesAuthorized": false,
+  "nativeSpeakerApproval": false
+}
