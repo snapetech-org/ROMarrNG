@@ -1,0 +1,91 @@
+{
+  "artifact": "ROMarrNG PR #70 W186-W205 root adjudication summary",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "baselineHead": "55ee760ea9600f71cc27cba35e098a082445dac8",
+  "baselineTree": "dbc192813f6347f4307ff8417d505624958eb321",
+  "nextSequentialWindow": "W206-W225",
+  "cells": 240,
+  "sourceIds": 20,
+  "locales": 12,
+  "primaryCounts": {
+    "accept-current": 137,
+    "correction": 23,
+    "refinement": 20,
+    "hold-context": 60
+  },
+  "independentBlindCounts": {
+    "accept-current": 159,
+    "correction": 13,
+    "refinement": 8,
+    "hold": 60
+  },
+  "rootCounts": {
+    "accept-current": 137,
+    "correction": 17,
+    "refinement": 26,
+    "hold": 60
+  },
+  "rootSelectedChanges": 43,
+  "heldCells": 60,
+  "heldOrdinals": [
+    188,
+    197,
+    198,
+    200,
+    201
+  ],
+  "recommendationConflicts": 36,
+  "recommendationsCompared": {
+    "bothPropose": 20,
+    "sameCandidate": 8,
+    "differentCandidate": 12,
+    "primaryOnly": 23,
+    "blindOnly": 1,
+    "bothHold": 60,
+    "bothAcceptCurrent": 136
+  },
+  "rootAdjudication": "Ratify third-party cross-audit per-cell dispositions. Apply 17 corrections and 26 refinements; accept 137 current values; retain 60 holds. No non-hold cell was held for linguistic uncertainty by this root pass; changed values remain draft and native-speaker review is outstanding.",
+  "specialAdjudications": [
+    {
+      "cell": "204/fr",
+      "decision": "refinement",
+      "detail": "Reject the primary wording that says the peer deleted the user account. Ratify the cross-audit wording that keeps the user as the object of “removed.”"
+    },
+    {
+      "cell": "202/zh-Hant",
+      "decision": "refinement",
+      "detail": "Use 多人遊戲. Correct the primary rationale: 戲 is traditional; 游 versus 遊 is the script-form distinction here."
+    },
+    {
+      "cell": "194/id",
+      "decision": "accept-current",
+      "detail": "Reject the blind-only optional imperative; the current compact confirmation instruction already matches the source."
+    }
+  ],
+  "holdRationale": "All 12 locales remain unchanged for ordinals 188, 197, 198, 200, and 201 because exact-head rendering does not resolve those catalog values: opaque API rendering or an unmatched sentence substring. See ratified ledger and input/cross-audit caller evidence.",
+  "checks": {
+    "inputAndThreeReviewManifests": "verified",
+    "exactHeadFilePins": 56,
+    "exactHeadCellPins": 240,
+    "candidateHashes": 43,
+    "placeholderProtectedChecks": 240,
+    "nativeSpeakerApproval": false,
+    "testsBuildsScansCiRun": false
+  },
+  "pendingGates": [
+    "qualified native-speaker approval",
+    "current-head headed-browser acceptance"
+  ],
+  "deliveryBoundary": {
+    "tests": false,
+    "builds": false,
+    "scans": false,
+    "ci": false,
+    "workflowChanges": false,
+    "merge": false,
+    "release": false,
+    "tag": false
+  }
+}

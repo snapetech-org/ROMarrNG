@@ -1,0 +1,342 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "55ee760ea9600f71cc27cba35e098a082445dac8",
+  "tree": "dbc192813f6347f4307ff8417d505624958eb321",
+  "branch": "task/localization-translation-review-20261030",
+  "range": [
+    186,
+    205
+  ],
+  "nextSequentialRange": [
+    206,
+    225
+  ],
+  "cellCount": 240,
+  "decisionCounts": {
+    "refinement": 8,
+    "accept-current": 159,
+    "hold": 60,
+    "correction": 13
+  },
+  "byLocale": {
+    "es": {
+      "refinement": 2,
+      "accept-current": 13,
+      "hold": 5
+    },
+    "zh-Hans": {
+      "accept-current": 13,
+      "hold": 5,
+      "refinement": 1,
+      "correction": 1
+    },
+    "hi": {
+      "accept-current": 14,
+      "hold": 5,
+      "correction": 1
+    },
+    "de": {
+      "accept-current": 15,
+      "hold": 5
+    },
+    "ja": {
+      "accept-current": 14,
+      "hold": 5,
+      "correction": 1
+    },
+    "fr": {
+      "accept-current": 14,
+      "hold": 5,
+      "correction": 1
+    },
+    "pt-BR": {
+      "accept-current": 12,
+      "hold": 5,
+      "correction": 2,
+      "refinement": 1
+    },
+    "ar": {
+      "accept-current": 13,
+      "hold": 5,
+      "correction": 1,
+      "refinement": 1
+    },
+    "ko": {
+      "accept-current": 14,
+      "hold": 5,
+      "correction": 1
+    },
+    "zh-Hant": {
+      "accept-current": 13,
+      "hold": 5,
+      "refinement": 1,
+      "correction": 1
+    },
+    "vi": {
+      "accept-current": 13,
+      "hold": 5,
+      "refinement": 1,
+      "correction": 1
+    },
+    "id": {
+      "accept-current": 11,
+      "hold": 5,
+      "correction": 3,
+      "refinement": 1
+    }
+  },
+  "holds": [
+    {
+      "sourceOrdinal": 188,
+      "id": "ui.manual-mapping-confirmed.bc63310ebc",
+      "locales": 12,
+      "renderPathReason": "The source is returned as a rename-preview operation reason and rendered by organizerApiMessageMarkup. Its key is not in ORGANIZER_API_MESSAGE_KEYS, so the helper returns opaque lang=und content."
+    },
+    {
+      "sourceOrdinal": 197,
+      "id": "ui.missing-required-field-labels.cd47426c9f",
+      "locales": 12,
+      "renderPathReason": "send_test returns the missing-field message as a plain API message; the UI passes it to apiMessageMarkup without the catalog template key or values, which renders the message as opaque lang=und content."
+    },
+    {
+      "sourceOrdinal": 198,
+      "id": "ui.moonlight-pairing-cannot-be-automate.e1a9d014f9",
+      "locales": 12,
+      "renderPathReason": "The exact static source is emitted in the API `manual` property and rendered through apiMessageMarkup, which escapes it as opaque lang=und text rather than mapping the source ID to a locale."
+    },
+    {
+      "sourceOrdinal": 200,
+      "id": "ui.mount-it-on-each-client-and-point-es.a021b4cc73",
+      "locales": 12,
+      "renderPathReason": "The source is only a substring of the rendered text node, whose exact source is ordinal 199 including the leading period. The text-node lookup cannot match this distinct message ID."
+    },
+    {
+      "sourceOrdinal": 201,
+      "id": "ui.multi-disc-set-is-grouped-for-metada.86db33ad47",
+      "locales": 12,
+      "renderPathReason": "The source is returned as a blocked rename-preview reason and rendered by organizerApiMessageMarkup. Its key is not in ORGANIZER_API_MESSAGE_KEYS, so the helper returns opaque lang=und content."
+    }
+  ],
+  "disputedCells": [
+    {
+      "sourceOrdinal": 186,
+      "id": "ui.main-navigation.eb355944b9",
+      "locale": "es",
+      "decision": "refinement",
+      "currentTarget": "La principal navegación",
+      "candidateTarget": "Navegación principal",
+      "rationale": "The current word order “La principal navegación” is understandable but unidiomatic for this concise navigation label. “Navegación principal” is the natural label form and preserves the aria-label meaning.",
+      "confidence": "moderate"
+    },
+    {
+      "sourceOrdinal": 189,
+      "id": "ui.manually-confirmed-by-the-library-ow.5b75fab860",
+      "locale": "es",
+      "decision": "refinement",
+      "currentTarget": "confirmado manualmente por el propietario de la biblioteca.",
+      "candidateTarget": "Confirmado manualmente por el propietario de la biblioteca.",
+      "rationale": "The source is a complete sentence, but the current target starts lowercase. Capitalizing the sentence improves correctness without changing the meaning.",
+      "confidence": "high"
+    },
+    {
+      "sourceOrdinal": 189,
+      "id": "ui.manually-confirmed-by-the-library-ow.5b75fab860",
+      "locale": "pt-BR",
+      "decision": "correction",
+      "currentTarget": "Manual confirmado pelo proprietário da biblioteca.",
+      "candidateTarget": "Confirmado manualmente pelo proprietário da biblioteca.",
+      "rationale": "“Manual confirmado” reads as a manual/handbook that was confirmed. The source means the mapping was confirmed manually; “manualmente” restores that adverbial meaning.",
+      "confidence": "moderate"
+    },
+    {
+      "sourceOrdinal": 189,
+      "id": "ui.manually-confirmed-by-the-library-ow.5b75fab860",
+      "locale": "ar",
+      "decision": "correction",
+      "currentTarget": "تأكيد يدويا من قبل صاحب المكتبة.",
+      "candidateTarget": "تم التأكيد يدويًا من قِبل مالك المكتبة.",
+      "rationale": "The current nominal phrase means roughly “manual confirmation by the library owner” and is awkward for the complete status sentence. The proposed passive sentence states that it was manually confirmed. Arabic fluency confidence is limited.",
+      "confidence": "low"
+    },
+    {
+      "sourceOrdinal": 189,
+      "id": "ui.manually-confirmed-by-the-library-ow.5b75fab860",
+      "locale": "vi",
+      "decision": "refinement",
+      "currentTarget": "Được xác nhận bằng tay bởi chủ sở hữu thư viện.",
+      "candidateTarget": "Được chủ sở hữu thư viện xác nhận thủ công.",
+      "rationale": "“Bằng tay” literally means “by hand.” “Thủ công” is the clearer conventional term for manual confirmation in this software status. Vietnamese idiom confidence is limited.",
+      "confidence": "low"
+    },
+    {
+      "sourceOrdinal": 189,
+      "id": "ui.manually-confirmed-by-the-library-ow.5b75fab860",
+      "locale": "id",
+      "decision": "correction",
+      "currentTarget": "Ditegaskan secara manual oleh pemilik perpustakaan.",
+      "candidateTarget": "Dikonfirmasi secara manual oleh pemilik perpustakaan.",
+      "rationale": "“Ditegaskan” means asserted/emphasized, not confirmed. “Dikonfirmasi” matches the source action of confirming the manual mapping.",
+      "confidence": "moderate"
+    },
+    {
+      "sourceOrdinal": 190,
+      "id": "ui.manually-confirmed.9b66efab12",
+      "locale": "id",
+      "decision": "correction",
+      "currentTarget": "Manual dikonfirmasi",
+      "candidateTarget": "Dikonfirmasi secara manual",
+      "rationale": "“Manual dikonfirmasi” is awkward and can read as a manual being confirmed. “Dikonfirmasi secara manual” expresses the passive status “manually confirmed.”",
+      "confidence": "moderate"
+    },
+    {
+      "sourceOrdinal": 194,
+      "id": "ui.metadata-provider-title-suggestion-c.f44517c58a",
+      "locale": "pt-BR",
+      "decision": "refinement",
+      "currentTarget": "Sugestão de título do fornecedor de metadados; confirmação antes de renomear",
+      "candidateTarget": "Sugestão de título do fornecedor de metadados; confirme antes de renomear",
+      "rationale": "The current second clause is a noun phrase (“confirmation before renaming”), while the source directly instructs the user to confirm. The imperative keeps the caller’s action clear.",
+      "confidence": "moderate"
+    },
+    {
+      "sourceOrdinal": 194,
+      "id": "ui.metadata-provider-title-suggestion-c.f44517c58a",
+      "locale": "id",
+      "decision": "refinement",
+      "currentTarget": "Saran judul dari penyedia metadata; konfirmasi sebelum mengganti nama",
+      "candidateTarget": "Saran judul dari penyedia metadata; konfirmasikan sebelum mengganti nama",
+      "rationale": "The current second clause says “confirmation before renaming” rather than directly asking the user to confirm. The suggested imperative better matches this review-before-rename status.",
+      "confidence": "moderate"
+    },
+    {
+      "sourceOrdinal": 195,
+      "id": "ui.metadata-root-not-configured.d22feb8b9c",
+      "locale": "pt-BR",
+      "decision": "correction",
+      "currentTarget": "Rota de metadados não configurada",
+      "candidateTarget": "Raiz de metadados não configurada",
+      "rationale": "“Rota” means route/path, but this source is specifically the metadata root directory. “Raiz” restores the configured-root meaning.",
+      "confidence": "high"
+    },
+    {
+      "sourceOrdinal": 195,
+      "id": "ui.metadata-root-not-configured.d22feb8b9c",
+      "locale": "vi",
+      "decision": "correction",
+      "currentTarget": "Metadata root không được cấu hình",
+      "candidateTarget": "Thư mục gốc siêu dữ liệu chưa được cấu hình",
+      "rationale": "The current target leaves “Metadata root” in English. The suggested Vietnamese phrase translates the root directory and the not-configured state.",
+      "confidence": "high"
+    },
+    {
+      "sourceOrdinal": 195,
+      "id": "ui.metadata-root-not-configured.d22feb8b9c",
+      "locale": "id",
+      "decision": "correction",
+      "currentTarget": "Metadata root tidak terkonfigurasi",
+      "candidateTarget": "Direktori utama metadata belum dikonfigurasi",
+      "rationale": "The current target leaves “Metadata root” untranslated. The suggested wording names the main/root metadata directory and states that it has not been configured.",
+      "confidence": "moderate"
+    },
+    {
+      "sourceOrdinal": 196,
+      "id": "ui.minimum-seeders.a78f3d2116",
+      "locale": "zh-Hans",
+      "decision": "refinement",
+      "currentTarget": "最低种子",
+      "candidateTarget": "最少做种者数",
+      "rationale": "The caller is a minimum count of seeder peers. “最低种子” can be read as minimum seeds rather than the number of seeding peers; “做种者数” makes the counted entity explicit. Chinese torrent terminology confidence is limited.",
+      "confidence": "low"
+    },
+    {
+      "sourceOrdinal": 196,
+      "id": "ui.minimum-seeders.a78f3d2116",
+      "locale": "ja",
+      "decision": "correction",
+      "currentTarget": "最低種子",
+      "candidateTarget": "最小シーダー数",
+      "rationale": "The field is a numeric minimum for torrent seeders. “最低種子” reads as minimum seeds and omits the count unit; “シーダー数” names the peer count.",
+      "confidence": "moderate"
+    },
+    {
+      "sourceOrdinal": 196,
+      "id": "ui.minimum-seeders.a78f3d2116",
+      "locale": "zh-Hant",
+      "decision": "refinement",
+      "currentTarget": "最低種子",
+      "candidateTarget": "最少做種者數",
+      "rationale": "The caller is a minimum count of seeder peers. “最低種子” can be read as minimum seeds rather than the number of seeding peers; “做種者數” makes the counted entity explicit. Traditional Chinese torrent terminology confidence is limited.",
+      "confidence": "low"
+    },
+    {
+      "sourceOrdinal": 205,
+      "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+      "locale": "zh-Hans",
+      "decision": "correction",
+      "currentTarget": "{name} 发送不 JSON 的东西",
+      "candidateTarget": "{name} 发送了非 JSON 格式的内容",
+      "rationale": "“发送不 JSON 的东西” is ungrammatical and obscures the format distinction. The proposed sentence clearly says the peer sent content that was not in JSON format.",
+      "confidence": "high"
+    },
+    {
+      "sourceOrdinal": 205,
+      "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+      "locale": "hi",
+      "decision": "correction",
+      "currentTarget": "{name} कुछ भेजा जो JSON नहीं था",
+      "candidateTarget": "{name} ने कुछ ऐसा भेजा जो JSON नहीं था",
+      "rationale": "The current sentence omits the ergative marker “ने” after the sender’s name, making the subject/action relation ungrammatical. The proposed form is grammatical and preserves the source meaning.",
+      "confidence": "moderate"
+    },
+    {
+      "sourceOrdinal": 205,
+      "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+      "locale": "fr",
+      "decision": "correction",
+      "currentTarget": "{name} envoie quelque chose qui n'était pas JSON",
+      "candidateTarget": "{name} a envoyé quelque chose qui n’était pas au format JSON",
+      "rationale": "The current “envoie” is present tense, while the source reports a completed send. “A envoyé” restores the past event; “au format JSON” makes the format meaning explicit.",
+      "confidence": "high"
+    },
+    {
+      "sourceOrdinal": 205,
+      "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+      "locale": "ar",
+      "decision": "refinement",
+      "currentTarget": "{name} أرسلت شيئا لم يكن JSON",
+      "candidateTarget": "المحتوى الذي أرسله {name} ليس بصيغة JSON",
+      "rationale": "The current verb “أرسلت” marks the sender as feminine, but {name} can be any peer name. Recasting the sentence around “the content sent by {name}” avoids imposing the sender’s gender. Arabic phrasing confidence is limited.",
+      "confidence": "low"
+    },
+    {
+      "sourceOrdinal": 205,
+      "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+      "locale": "ko",
+      "decision": "correction",
+      "currentTarget": "{name}는 JSON가 아닌 것을 보냈습니다.",
+      "candidateTarget": "{name}이(가) JSON이 아닌 내용을 보냈습니다.",
+      "rationale": "The current particle “가” does not agree with the final sound of the Latin token JSON. “이(가)” accommodates either final-sound class and “내용” reads naturally for a response body.",
+      "confidence": "moderate"
+    },
+    {
+      "sourceOrdinal": 205,
+      "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+      "locale": "zh-Hant",
+      "decision": "correction",
+      "currentTarget": "{name} 發送不 JSON 的東西",
+      "candidateTarget": "{name} 傳送了非 JSON 格式的內容",
+      "rationale": "“發送不 JSON 的東西” is ungrammatical and obscures the format distinction. The proposed sentence clearly says the peer sent content that was not in JSON format.",
+      "confidence": "high"
+    }
+  ],
+  "confidenceLimits": [
+    "This is an independent AI semantic review, not native-speaker approval.",
+    "Confidence is lower for idiom and grammar judgments in Arabic, Hindi, Korean, and Vietnamese; those accepted cells are marked low confidence unless a specific issue is recorded.",
+    "All five held IDs have unresolved localization render paths in the exact-head caller packet; their translations may be linguistically plausible but are not selected because the app does not render them from these catalog entries.",
+    "The reviewer used the packet rather than opening repository source files; exact-head Git blob IDs for all 56 file pins were verified."
+  ],
+  "nativeSpeakerApproved": false,
+  "independentBlindReview": true,
+  "primaryOutputRead": false
+}

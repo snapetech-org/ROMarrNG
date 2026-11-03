@@ -1,0 +1,40 @@
+{
+  "inputDirectory": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w186-205-primary-20261103/input",
+  "candidateFreePacket": true,
+  "manifestSha256": "4d1140d40351c1767e05aaed19894ba07c8b9860174942075619ed3bf1c83f5b",
+  "sha256SumsFileSha256": "c2899dbe432a9e651d71f7052a7a22e0f97698e5d4a1e5c325522cd4b34db362",
+  "verifiedPacketFiles": {
+    "README.txt": "3c539914f7650bd101ec6360a4e6cfe69ea23be3ddb4a0c8872d8f5d2e11581a",
+    "head-and-file-pins.json": "a35ba9d695ba54645f06dc0597fed0dc936c36c3ed7840164a579ff388ca678b",
+    "next-window-boundary.json": "4d23d233ed0047efa2f81d5558c408c82149243dbeee88361258568f413d8b07",
+    "review-input.jsonl": "e1f03c2d2874a81ab6c224cdd4a9ef36ebf4810b5ff9c4ecf2f86db67fc3fb5d",
+    "selection.json": "687dc975793abd695794cb1410110ac9fb4efea9f4920d901e450b67124dd7c4",
+    "source-context.jsonl": "3cd358b0f7c39525fb2d287047b625e4955bae85705a44cda083873434be70e7",
+    "source-structure.jsonl": "a88ddc76538a917e6792c32251d1dcb4bfa4aecfa17487d2b36cebf28336e32c"
+  },
+  "inputRowCount": 240,
+  "sourceContextRows": 20,
+  "sourceStructureRows": 20,
+  "inputReviewSha256": "e1f03c2d2874a81ab6c224cdd4a9ef36ebf4810b5ff9c4ecf2f86db67fc3fb5d",
+  "livePr": {
+    "repository": "snapetech-org/ROMarrNG",
+    "pullRequest": 70,
+    "state": "OPEN",
+    "draft": true,
+    "branch": "task/localization-translation-review-20261030",
+    "head": "55ee760ea9600f71cc27cba35e098a082445dac8",
+    "tree": "dbc192813f6347f4307ff8417d505624958eb321",
+    "remoteBranchHead": "55ee760ea9600f71cc27cba35e098a082445dac8"
+  },
+  "pinnedFileCount": 56,
+  "pinnedGitBlobMatches": 56,
+  "pinnedGitBlobMismatches": 0,
+  "sourceHashesVerified": 240,
+  "currentTargetHashesVerified": 240,
+  "placeholderAndProtectedLiteralFailures": 0,
+  "blindBoundary": "Only the candidate-free input packet and exact-head Git metadata needed to verify its pins were used. The primary ledger/output and PR body were not opened.",
+  "pinnedFileSha256Matches": 56,
+  "pinnedFileByteSizeMatches": 56,
+  "worktreeStatusClean": true,
+  "worktreeBranch": "codex/romarr-pr70-w166-apply-20261103"
+}

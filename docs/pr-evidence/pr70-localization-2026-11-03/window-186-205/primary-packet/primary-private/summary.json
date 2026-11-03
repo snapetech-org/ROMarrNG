@@ -1,0 +1,54 @@
+{
+  "artifact": "ROMarrNG PR #70 W186-W205 primary semantic and render-path review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "55ee760ea9600f71cc27cba35e098a082445dac8",
+  "tree": "dbc192813f6347f4307ff8417d505624958eb321",
+  "window": "W186-W205",
+  "inputManifestSha256": "4d1140d40351c1767e05aaed19894ba07c8b9860174942075619ed3bf1c83f5b",
+  "inputReviewSha256": "e1f03c2d2874a81ab6c224cdd4a9ef36ebf4810b5ff9c4ecf2f86db67fc3fb5d",
+  "sourceIds": 20,
+  "locales": 12,
+  "cells": 240,
+  "dispositions": {
+    "correction": 23,
+    "accept-current": 137,
+    "hold-context": 60,
+    "refinement": 20
+  },
+  "targetChanges": 43,
+  "targetChangesByDisposition": {
+    "correction": 23,
+    "refinement": 20
+  },
+  "targetChangesBySourceOrdinal": {
+    "186": 1,
+    "189": 6,
+    "190": 2,
+    "192": 4,
+    "194": 1,
+    "195": 4,
+    "196": 6,
+    "202": 5,
+    "203": 4,
+    "204": 2,
+    "205": 8
+  },
+  "heldRenderPathOrdinals": [
+    188,
+    197,
+    198,
+    200,
+    201
+  ],
+  "holdContextCells": 60,
+  "placeholderChecksPassed": 240,
+  "protectedLiteralChecksPassed": 240,
+  "callerPresentSourceCount": 20,
+  "nativeSpeakerApproved": false,
+  "repositoryOrPrMutations": false,
+  "automatedTestsBuildsScansCiBrowser": false,
+  "workflowChanges": false,
+  "releaseOrTagChanges": false,
+  "createdAtUtc": "2026-11-03T06:32:41.186485+00:00"
+}
