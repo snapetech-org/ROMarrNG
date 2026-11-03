@@ -1,0 +1,12 @@
+{
+  "checkedAtUtc": "2026-11-03T06:05:35.596294+00:00",
+  "state": "open",
+  "draft": true,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "5e45ce90babf3cf385fbb9775e70d7e8fcc6a783",
+  "tree": "580de0b2db5030101c47a81fbd8a23489e993f75",
+  "base": "main",
+  "updatedAt": "2026-11-03T05:22:16Z",
+  "unchangedFromBuildPin": true,
+  "mutated": false
+}

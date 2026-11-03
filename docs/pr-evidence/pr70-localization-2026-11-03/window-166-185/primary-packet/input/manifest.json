@@ -1,0 +1,102 @@
+{
+  "artifact": "ROMarrNG PR #70 W166-W185 clean localization review input",
+  "sealed": true,
+  "checksumNote": "manifest.json excludes its own hash and SHA256SUMS.txt; SHA256SUMS.txt covers every packet file except itself.",
+  "createdAtUtc": "2026-11-03T06:03:24.109607+00:00",
+  "files": [
+    {
+      "name": "README.txt",
+      "bytes": 1179,
+      "sha256": "d3a5de8e6f946d47ac1e5265300ec32d754c3a916b12aed26cba60d8c3a68d24"
+    },
+    {
+      "name": "head-and-file-pins.json",
+      "bytes": 14017,
+      "sha256": "447ffe0809635dfcc0a9a06c634aa351ee3a25c4cb2a79702bd458b45bb6e9eb"
+    },
+    {
+      "name": "next-window-boundary.json",
+      "bytes": 12331,
+      "sha256": "1b2ce17a1c2c92c907fdd9b75b82eeec373086ab1d8f7d3c5f21d43c2afdd5e2"
+    },
+    {
+      "name": "render-path-context.jsonl",
+      "bytes": 1713,
+      "sha256": "fa68eab57a5e101a8aeca8c7e24d5d41a79fa588f73da0a8880957a76f992fc3"
+    },
+    {
+      "name": "review-input.jsonl",
+      "bytes": 146903,
+      "sha256": "0c6ffa9e74b55831ea1c248f022f67fbc178be67a1774ef241021adec960ffb7"
+    },
+    {
+      "name": "selection.json",
+      "bytes": 3917,
+      "sha256": "db4fd5250cbaabcd9681c890f89bba4a2b6494343fce120ea9866013a3ad3914"
+    },
+    {
+      "name": "source-context.jsonl",
+      "bytes": 47614,
+      "sha256": "84c88cc92d0e8a6cc7232684abaa72adc4b8320ead1a3f7c4097db58035d1cea"
+    },
+    {
+      "name": "source-structure.jsonl",
+      "bytes": 5985,
+      "sha256": "3624549aafde4940229307ca5aa77f14927f1e93cd17cd7f7a110a3a13a51398"
+    }
+  ],
+  "head": "5e45ce90babf3cf385fbb9775e70d7e8fcc6a783",
+  "tree": "580de0b2db5030101c47a81fbd8a23489e993f75",
+  "inputPath": "review-input.jsonl",
+  "inputRows": 240,
+  "inputSha256": "0c6ffa9e74b55831ea1c248f022f67fbc178be67a1774ef241021adec960ffb7",
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "sourceContextRows": 20,
+  "sourceStructureRows": 20,
+  "renderPathEvidenceRows": 1,
+  "scopeLimits": {
+    "containsCurrentTargets": true,
+    "containsReviewDispositions": false,
+    "containsTranslationCandidates": false,
+    "repositoryOrPullRequestEdited": false,
+    "automatedTestsBuildsScansCiOrBrowserRun": false,
+    "exactHeadSourceReferenceSearch": true
+  },
+  "window": {
+    "firstSourceOrdinal": 166,
+    "lastSourceOrdinal": 185,
+    "sourceCount": 20,
+    "locales": [
+      "es",
+      "zh-Hans",
+      "hi",
+      "de",
+      "ja",
+      "fr",
+      "pt-BR",
+      "ar",
+      "ko",
+      "zh-Hant",
+      "vi",
+      "id"
+    ],
+    "cellCount": 240
+  },
+  "callerContext": {
+    "resolvedAtExactHead": true,
+    "callerPresentSourceCount": 19,
+    "callerAbsentOrdinals": [
+      184
+    ],
+    "callerExistenceGatePassed": false
+  },
+  "heldContextOrdinals": [
+    177,
+    184
+  ],
+  "nativeSpeakerApproved": false,
+  "sourceReferenceSearchUsed": true,
+  "searchedProductionCodeFileCount": 51,
+  "automatedSecurityScanRun": false
+}

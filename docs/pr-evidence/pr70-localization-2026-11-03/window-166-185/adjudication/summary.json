@@ -1,0 +1,38 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "base": "main",
+  "head": "5e45ce90babf3cf385fbb9775e70d7e8fcc6a783",
+  "tree": "580de0b2db5030101c47a81fbd8a23489e993f75",
+  "window": "W166-W185",
+  "cellCount": 240,
+  "sourceCount": 20,
+  "localeCount": 12,
+  "rootDispositionCounts": {
+    "accept-current": 175,
+    "correction": 25,
+    "refinement": 16,
+    "hold-context": 24
+  },
+  "approvedChangeCount": 41,
+  "heldCellCount": 24,
+  "heldOrdinals": [
+    177,
+    184
+  ],
+  "heldReasons": {
+    "177": "Source sentence is split around inline code; per-locale fragments are not safe to edit independently.",
+    "184": "No exact caller exists; the dynamic-text match is for ordinal 185, not this message."
+  },
+  "catalogFile": "romarr/ui-labels.json",
+  "catalogMessageCount": 1837,
+  "catalogFileSha256": "bdd28b82dbc9c2b32986c7c53488e54336d944293221afa3bed9b23dd998091e",
+  "catalogGitBlob": "59ffc419597b4ecd716daf2c0c4a91e1da974538",
+  "catalogMessageKeyOrderWillRemainUnchanged": true,
+  "placeholderAndProtectedLiteralChecks": "all 240 current cells and reviewed proposals passed",
+  "nativeSpeakerApproval": false,
+  "headedBrowserAcceptance": false,
+  "repositoryOrPullRequestMutated": false,
+  "testsBuildsScansCIWorkflowsRun": false
+}

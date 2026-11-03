@@ -1,0 +1,126 @@
+{
+  "artifact": "ROMarrNG PR #70 W166-W185 root-style cross-audit packet",
+  "sealed": true,
+  "checksumNote": "manifest.json excludes itself and SHA256SUMS.txt; SHA256SUMS.txt covers all other report files, including the independently copied blind packet.",
+  "createdAtUtc": "2026-11-03T06:16:43.001279+00:00",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "5e45ce90babf3cf385fbb9775e70d7e8fcc6a783",
+  "tree": "580de0b2db5030101c47a81fbd8a23489e993f75",
+  "fileCount": 21,
+  "files": [
+    {
+      "name": "README.md",
+      "bytes": 1452,
+      "sha256": "4c34fbd08bbd4c82d3607e5ab6a859191fb24590fe9f916d0064727c60ed2464"
+    },
+    {
+      "name": "build_cross_audit.py",
+      "bytes": 27847,
+      "sha256": "004896cb7ae285d2692aed7ba56494644135ef05400f3dffd8d4b68f536c640b"
+    },
+    {
+      "name": "cross-review-differences.jsonl",
+      "bytes": 95131,
+      "sha256": "de9e2afb4a3149b7a5abaedca5f8d3f7ba80953afb59ed1232352e6e6e1e8f8e"
+    },
+    {
+      "name": "independent-blind/README.md",
+      "bytes": 1077,
+      "sha256": "d182e891dc92b7e98c96652ae54533f2eb29bccb22d9482be25cccb084821dc6"
+    },
+    {
+      "name": "independent-blind/SHA256SUMS.txt",
+      "bytes": 321,
+      "sha256": "fd46967ac2ffe8400be9c4224e25966fa03da0dcf18b7ae50e660c518f50a074"
+    },
+    {
+      "name": "independent-blind/blind-review.jsonl",
+      "bytes": 171733,
+      "sha256": "2ff3dba7d999f53a1b11b205d9dfc10cae74d8a97f998ccce2ced64693231935"
+    },
+    {
+      "name": "independent-blind/input/README.txt",
+      "bytes": 1179,
+      "sha256": "d3a5de8e6f946d47ac1e5265300ec32d754c3a916b12aed26cba60d8c3a68d24"
+    },
+    {
+      "name": "independent-blind/input/SHA256SUMS.txt",
+      "bytes": 773,
+      "sha256": "caab4ae99b7583834f999e31d2617ab8c4b5eeaa2331f7f86f94f0e7ad06b1bc"
+    },
+    {
+      "name": "independent-blind/input/head-and-file-pins.json",
+      "bytes": 14017,
+      "sha256": "447ffe0809635dfcc0a9a06c634aa351ee3a25c4cb2a79702bd458b45bb6e9eb"
+    },
+    {
+      "name": "independent-blind/input/manifest.json",
+      "bytes": 2910,
+      "sha256": "17bc12b49b45fb5fe6ad1489e8f5029b3be73988bf8752c0d8c1f54cdad899e0"
+    },
+    {
+      "name": "independent-blind/input/next-window-boundary.json",
+      "bytes": 12331,
+      "sha256": "1b2ce17a1c2c92c907fdd9b75b82eeec373086ab1d8f7d3c5f21d43c2afdd5e2"
+    },
+    {
+      "name": "independent-blind/input/render-path-context.jsonl",
+      "bytes": 1713,
+      "sha256": "fa68eab57a5e101a8aeca8c7e24d5d41a79fa588f73da0a8880957a76f992fc3"
+    },
+    {
+      "name": "independent-blind/input/review-input.jsonl",
+      "bytes": 146903,
+      "sha256": "0c6ffa9e74b55831ea1c248f022f67fbc178be67a1774ef241021adec960ffb7"
+    },
+    {
+      "name": "independent-blind/input/selection.json",
+      "bytes": 3917,
+      "sha256": "db4fd5250cbaabcd9681c890f89bba4a2b6494343fce120ea9866013a3ad3914"
+    },
+    {
+      "name": "independent-blind/input/source-context.jsonl",
+      "bytes": 47614,
+      "sha256": "84c88cc92d0e8a6cc7232684abaa72adc4b8320ead1a3f7c4097db58035d1cea"
+    },
+    {
+      "name": "independent-blind/input/source-structure.jsonl",
+      "bytes": 5985,
+      "sha256": "3624549aafde4940229307ca5aa77f14927f1e93cd17cd7f7a110a3a13a51398"
+    },
+    {
+      "name": "independent-blind/make_review.py",
+      "bytes": 12343,
+      "sha256": "914c91fd53b250e12c9119137a0f4ea15e4bbc9532d0d4d45fc9b57a70f954fb"
+    },
+    {
+      "name": "independent-blind/summary.json",
+      "bytes": 996,
+      "sha256": "5772e8081c236eb9bc53967a7ee9d56eceb99bcdba056159d8dc3e1b3857e8c0"
+    },
+    {
+      "name": "live-pr-recheck.json",
+      "bytes": 355,
+      "sha256": "d0cf2fe447a5cb60e572513af970d017b67eae5c870ddc3077764facb740650e"
+    },
+    {
+      "name": "root-adjudicated-ledger.jsonl",
+      "bytes": 687299,
+      "sha256": "06f6ebb5dd123b5b486cec432306934ace74d47cfa760344146d0fc61170f457"
+    },
+    {
+      "name": "summary.json",
+      "bytes": 4047,
+      "sha256": "ff3dca7039e4c7d326c96daadd4cf18dd6ac9b7774832fafdbf9ead38ecc6bda"
+    }
+  ],
+  "rootLedgerPath": "root-adjudicated-ledger.jsonl",
+  "rootLedgerRows": 240,
+  "rootLedgerSha256": "06f6ebb5dd123b5b486cec432306934ace74d47cfa760344146d0fc61170f457",
+  "summarySha256": "ff3dca7039e4c7d326c96daadd4cf18dd6ac9b7774832fafdbf9ead38ecc6bda",
+  "blindEvidenceOriginalPath": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w166-185-independent-blind-20261103",
+  "primaryEvidencePath": "/mnt/datapool_lvm_media/codex-task-scratch/romarrng-pr70-w166-185-20261103",
+  "repoPrMutation": false,
+  "nativeSpeakerApproved": false
+}

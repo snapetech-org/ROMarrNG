@@ -1,0 +1,120 @@
+{
+  "artifact": "ROMarrNG PR #70 W166-W185 primary/blind cross-audit and root adjudication",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "livePr": {
+    "checkedAtUtc": "2026-11-03T06:16:42.984297+00:00",
+    "state": "open",
+    "draft": true,
+    "branch": "task/localization-translation-review-20261030",
+    "head": "5e45ce90babf3cf385fbb9775e70d7e8fcc6a783",
+    "tree": "580de0b2db5030101c47a81fbd8a23489e993f75",
+    "base": "main",
+    "updatedAt": "2026-11-03T05:22:16Z",
+    "unchangedFromBothPackets": true
+  },
+  "head": "5e45ce90babf3cf385fbb9775e70d7e8fcc6a783",
+  "tree": "580de0b2db5030101c47a81fbd8a23489e993f75",
+  "window": {
+    "firstSourceOrdinal": 166,
+    "lastSourceOrdinal": 185,
+    "sourceCount": 20,
+    "locales": [
+      "es",
+      "zh-Hans",
+      "hi",
+      "de",
+      "ja",
+      "fr",
+      "pt-BR",
+      "ar",
+      "ko",
+      "zh-Hant",
+      "vi",
+      "id"
+    ],
+    "cellCount": 240
+  },
+  "candidateFreeInput": {
+    "primaryInputManifestSha256": "17bc12b49b45fb5fe6ad1489e8f5029b3be73988bf8752c0d8c1f54cdad899e0",
+    "blindInputManifestSha256": "17bc12b49b45fb5fe6ad1489e8f5029b3be73988bf8752c0d8c1f54cdad899e0",
+    "primaryReviewInputSha256": "0c6ffa9e74b55831ea1c248f022f67fbc178be67a1774ef241021adec960ffb7",
+    "blindReviewInputSha256": "0c6ffa9e74b55831ea1c248f022f67fbc178be67a1774ef241021adec960ffb7",
+    "all240SourceAndCurrentTargetCellsIdentical": true,
+    "sourceContextIdentical": true,
+    "sourceStructureIdentical": true,
+    "renderPathContextIdentical": true,
+    "filePinsIdentical": true
+  },
+  "primary": {
+    "manifestSha256": "3e0fb03a2d0cd18a940dd902b2ed48b2ebf262bbcca6ecad979691c5786b1945",
+    "ledgerSha256": "d5947fa80706d5f1677ea22c6ab2e52fc9acefd367f5af2244de4194b0adf9e5",
+    "dispositions": {
+      "accept-current": 189,
+      "correction": 16,
+      "hold-context": 24,
+      "refinement": 11
+    },
+    "proposalCount": 27
+  },
+  "independentBlind": {
+    "packetPath": "independent-blind/",
+    "ledgerSha256": "2ff3dba7d999f53a1b11b205d9dfc10cae74d8a97f998ccce2ced64693231935",
+    "dispositions": {
+      "accept-current": 179,
+      "correction": 28,
+      "hold": 24,
+      "refinement": 9
+    },
+    "proposalCount": 37
+  },
+  "crossReview": {
+    "rawDispositionOrProposalDifferenceRows": 57,
+    "nonHoldDifferenceRows": 33,
+    "sameTargetButDispositionClassDiffRows": 4,
+    "differentCandidateOrAcceptVsProposeRows": 29,
+    "holdsAgreeFor24Cells": true
+  },
+  "rootAdjudication": {
+    "rows": 240,
+    "dispositions": {
+      "accept-current": 175,
+      "correction": 25,
+      "hold-context": 24,
+      "refinement": 16
+    },
+    "recommendedTargetChanges": 41,
+    "targetChangesByDisposition": {
+      "correction": 25,
+      "refinement": 16
+    },
+    "heldOrdinals": [
+      177,
+      184
+    ],
+    "heldCellCount": 24
+  },
+  "holdFindings": {
+    "177": {
+      "callerExists": true,
+      "caller": "romarr/ui.py:4163",
+      "evidence": "Full inline text is split around code value gamelists and a separate source fragment beginning 'folder and set its Game media directory to'; keep all 12 targets held for coordinated phrase treatment."
+    },
+    "184": {
+      "callerExists": false,
+      "selectedMessageIdReference": false,
+      "ambiguousMatch": "romarr/app.py:7547 dynamically forms lookup failed: {exc.__class__.__name__}; adjacent exact key is ui.lookup-failed-error-type.6d33ec9b4f (ordinal 185), not the selected detail key.",
+      "mapHint": "romarr/app.py:7265 points to unrelated Seerr request code at this head; keep all 12 targets held."
+    }
+  },
+  "sourceMapFinding": {
+    "hintCount": 21,
+    "hintsMatchingCurrentSourceOrId": 0,
+    "callerResolution": "All direct references were taken from the identical exact-head caller-context packets and checked against pinned code-file SHA-256 values."
+  },
+  "nativeSpeakerApproved": false,
+  "repoPrMutation": false,
+  "worktreeInspected": false,
+  "testsBuildsScansCiBrowser": false,
+  "createdAtUtc": "2026-11-03T06:16:42.998880+00:00"
+}
