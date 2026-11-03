@@ -1488,6 +1488,8 @@ class MoonlightPairing:
     can_list_pending: bool = True
     #: Why pending requests could not be listed, in one line.
     detail: str = ""
+    #: Stable app-owned ID for fixed local details; never copied from a host or provider response.
+    detail_source_id: str | None = None
 
 
 class MoonlightHost:
@@ -1740,7 +1742,8 @@ class MoonlightHost:
                 detail=("Sunshine has no endpoint that lists waiting clients "
                         "-- its API can accept a PIN and cannot tell you one "
                         "is wanted. Start the pairing from your Moonlight "
-                        "client, then type the PIN it shows."))
+                        "client, then type the PIN it shows."),
+                detail_source_id="ui.sunshine-has-no-endpoint-that-lists.06228315a7")
         try:
             body = self._wolf_get("/pair/pending")
         except Exception as exc:
@@ -1804,14 +1807,16 @@ class MoonlightHost:
                     return {"ok": False,
                             "detail": ("Sunshine refused it: no Moonlight "
                                        "client is waiting to pair. Start the "
-                                       "pairing on your client first.")}
+                                       "pairing on your client first."),
+                            "detail_source_id": "ui.sunshine-refused-it-no-moonlight-cli.fb8441c69d"}
         except Exception as exc:
             log.warning("PIN submission to %s failed: %s", self.label, exc)
             return {"ok": False, "detail": str(exc)}
         return {"ok": True,
                 "detail": ("Submitted. The host does not report whether the "
                            "PIN was correct -- check that your client now "
-                           "appears in the paired list.")}
+                           "appears in the paired list."),
+                "detail_source_id": "ui.submitted-the-host-does-not-report-w.9ba72a4bcd"}
 
     def paired_clients(self) -> list[dict]:
         """Who this host considers paired. The only honest pairing verdict."""
@@ -1860,6 +1865,8 @@ class MoonlightHost:
                 "can_list_pending": pairing.can_list_pending,
                 "pending": pairing.pending,
                 "detail": pairing.detail,
+                **({"detail_source_id": pairing.detail_source_id}
+                   if pairing.detail_source_id else {}),
                 # Stated on every response rather than in a doc nobody opens.
                 "manual": PAIRING_IS_MANUAL,
             },

@@ -1047,6 +1047,21 @@ const apiMessageMarkup=(value,explicitTemplate=null)=>{
   const source=String(value);
   return '<span lang="und" dir="auto">'+esc(source)+'</span>';
 };
+// Only app-owned fixed Moonlight branches attach these IDs. Check both the
+// exact allowlist and the catalog source before rendering through interfaceMarkup.
+const MOONLIGHT_API_MESSAGE_KEYS=new Set([
+  'ui.submitted-the-host-does-not-report-w.9ba72a4bcd',
+  'ui.sunshine-has-no-endpoint-that-lists.06228315a7',
+  'ui.sunshine-refused-it-no-moonlight-cli.fb8441c69d',
+]);
+const moonlightApiMessageMarkup=(value,sourceId)=>{
+  if(typeof value!=='string'||typeof sourceId!=='string'
+      ||!MOONLIGHT_API_MESSAGE_KEYS.has(sourceId))
+    return apiMessageMarkup(value);
+  const message=UI_MESSAGES[sourceId];
+  return message&&message.source===value
+    ?interfaceMarkup(sourceId):apiMessageMarkup(value);
+};
 const messagePartsMarkup=parts=>Array.isArray(parts)?parts.map(part=>{
   if(part&&typeof part==='object'&&part.template)
     return explicitTemplateMarkup(part.template);
@@ -4848,7 +4863,8 @@ const moonlightCard=m=>{
               pend.length===1?'{count} client waiting:':'{count} clients waiting:',
               {count:fmt(pend.length)})}</p>`
           : `<p class="help">${interfaceTemplateMarkup('ui.no-moonlight-client-is-waiting-to-pa.baaa9b58a1',{host:m.host||''})}</p>`)
-      : `<p class="help">${apiMessageMarkup((m.pairing||{}).detail||'')}</p>`}
+      : `<p class="help">${moonlightApiMessageMarkup(
+          (m.pairing||{}).detail||'',(m.pairing||{}).detail_source_id)}</p>`}
     <div class="row" style="flex-wrap:wrap;gap:8px;align-items:center">
       ${canList&&pend.length
         ? `<select id="ml-secret">${pend.map(p=>
@@ -4888,7 +4904,8 @@ const wireMoonlight=m=>{
     // request is outstanding (LizardByte/Sunshine#3944) -- so the strongest
     // honest word is "accepted", and the check is the paired-client count.
     out.className='testline '+(r.ok?'ok':'bad');
-    out.innerHTML=(r.detail?apiMessageMarkup(r.detail):appMessageMarkup(r.ok?'Accepted.':'Refused.'));
+    out.innerHTML=(r.detail?moonlightApiMessageMarkup(
+      r.detail,r.detail_source_id):appMessageMarkup(r.ok?'Accepted.':'Refused.'));
     if(r.ok) setTimeout(()=>RENDER.status(),1500);
   };
 };
@@ -5724,6 +5741,7 @@ RENDER.organize=async()=>{
 const ORGANIZER_API_MESSAGE_KEYS=new Set([
   'ui.existing-gamelist-xml-is-invalid-it.6951c0112d',
   'ui.folder-packages-are-left-intact-to-p.e180bb56ad',
+  'ui.source-file-is-missing-or-is-a-symli.ca704e4514',
 ]);
 const organizerApiMessageMarkup=(value,template=null)=>{
   if(typeof value!=='string')return apiMessageMarkup(value,template);
