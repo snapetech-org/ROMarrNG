@@ -1,0 +1,22 @@
+{
+  "reviewType": "independent-blind-semantic-review",
+  "candidateFreeInputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w325-344-primary-20261103/input",
+  "candidateFreeManifestJsonSha256": "dc3b9295a3fd0e35cf6047deaeca5c39528a79097187158ece508c2e1c5e40dc",
+  "candidateFreeChecksumListSha256": "7d3d5e424cae914d46815229598b430154b0965defe2e7e3a371608df4ca1c5a",
+  "candidateFreeInputVerifier": "PASS",
+  "livePrAttestation": "PR-attestation.json",
+  "ledger": "blind-ledger.jsonl",
+  "primaryReviewInspected": false,
+  "crossAuditInspected": false,
+  "prBodyInspected": false,
+  "repositoryModified": false,
+  "applicationAuthorizationCreated": false,
+  "translationReviewSignoff": "not provided; native-speaker signoff remains false",
+  "dispositionPolicy": {
+    "correction": "source meaning or structural accuracy is wrong",
+    "refinement": "meaning is retained but locale phrasing/terminology is materially improved",
+    "retain": "current target is acceptable against pinned source/caller/glossary",
+    "hold": "pinned caller evidence is insufficient to validate the joined fragment"
+  },
+  "createdAtUtc": "2026-11-03T13:29:41+00:00"
+}

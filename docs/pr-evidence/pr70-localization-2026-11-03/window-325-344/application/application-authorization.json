@@ -1,0 +1,49 @@
+{
+  "applicationApproved": true,
+  "applicationPlan": "application-plan.jsonl",
+  "applicationPlanSha256": "e0ef2e3a7cb080e42e79ed9e3be7ea9cba653c345196b2a23b86f068ee8c5f9b",
+  "authorizationSource": "Standing user instruction to complete localization, perform reviews, commit, push, and update PRs; release actions excluded.",
+  "baseRef": "main",
+  "baseSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "branch": "task/localization-translation-review-20261030",
+  "correctionCount": 43,
+  "crossAuditLedgerSha256": "0ffb8a30c2ce806253da4ac6dd2017752463f5146a7ed025f923b0b8f6dedffb",
+  "heldCellCount": 24,
+  "heldPositions": [
+    329,
+    330
+  ],
+  "nativeSpeakerApproval": false,
+  "nativeSpeakerFollowupSuggested": [
+    {
+      "locale": "fr",
+      "position": 339
+    },
+    {
+      "locale": "zh-Hans",
+      "position": 343
+    },
+    {
+      "locale": "zh-Hant",
+      "position": 343
+    }
+  ],
+  "parentHead": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "parentTree": "c13dc4fc091565318d11a19ad9e851215a5f917e",
+  "pullRequest": 70,
+  "refinementCount": 14,
+  "releaseApproved": false,
+  "repository": "snapetech-org/ROMarrNG",
+  "retainedCurrentCount": 159,
+  "reviewMethod": "Root inspected all 57 selected source/current/proposed target rows; candidate-free, primary, blind, and independent cross-audit packets were checksum-verified, and the cross-audit verifier passed.",
+  "reviewedPacketChecksums": {
+    "blindPacketSha256": "0ede74df768bb6fc5635951d14196ab1efb2a1413d90b2860128c87e6c501b46",
+    "candidateFreeInputSha256": "7d3d5e424cae914d46815229598b430154b0965defe2e7e3a371608df4ca1c5a",
+    "crossAuditPacketSha256": "b5b118d8ca8811ed9a396f33048371ddfbaac8ac0eb4bdc4d537118fa0e625df",
+    "primaryPacketSha256": "6e140fe03834f6e31831d3ecab00a570f50b824f5b6db0dd46dbc2108b589080"
+  },
+  "schemaVersion": 1,
+  "selectedChangeCount": 57,
+  "selectedChangeProposalSha256": "2eb4ed9da89a8f26d38cfd1d3f6551ff7444d56f73c09cbf094eac24a913e94d",
+  "window": "W325-W344"
+}

@@ -1,0 +1,30 @@
+{
+  "window": "W325-W344",
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "branch": "task/localization-translation-review-20261030",
+  "headSha": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "treeSha": "c13dc4fc091565318d11a19ad9e851215a5f917e",
+  "inputManifestJsonSha256": "dc3b9295a3fd0e35cf6047deaeca5c39528a79097187158ece508c2e1c5e40dc",
+  "inputChecksumListSha256": "7d3d5e424cae914d46815229598b430154b0965defe2e7e3a371608df4ca1c5a",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "counts": {
+    "accept-current": 159,
+    "correction": 43,
+    "hold": 24,
+    "refinement": 14
+  },
+  "selectedCount": 57,
+  "callerlessHoldCells": 24,
+  "holdPositions": [
+    329,
+    330
+  ],
+  "placeholderMismatches": 0,
+  "numericTokenMismatches": 0,
+  "protectedLiteralBaselineMismatches": 1,
+  "protectedLiteralBaselineDisposition": "The sole mismatch is rank 343 German; the selected correction restores exact Ubisoft Connect spelling.",
+  "reviewMethod": "Independent primary semantic review of all 240 cells from candidate-free input and pinned current callers/catalog values; no blind review was consulted."
+}

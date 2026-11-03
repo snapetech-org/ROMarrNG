@@ -1,0 +1,70 @@
+{
+  "artifact": "ROMarrNG PR #70 W325-W344 independent third-party cross-audit",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "tree": "c13dc4fc091565318d11a19ad9e851215a5f917e",
+  "window": "W325-W344",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "totalCells": 240,
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "crossAuditCounts": {
+    "correction": 43,
+    "hold": 24,
+    "refinement": 14,
+    "retain": 159
+  },
+  "selectedChanges": 57,
+  "exactTargetAgreementNonHoldCells": 174,
+  "adjudicatedProposalDisagreements": 42,
+  "unresolvedTargetDisagreements": 0,
+  "mandatoryCallerlessHoldPositions": [
+    329,
+    330
+  ],
+  "mandatoryCallerlessHoldCells": 24,
+  "additionalHolds": 0,
+  "baselineProtectedLiteralMismatches": 1,
+  "selectedProtectedLiteralMismatches": 0,
+  "placeholderMismatches": 0,
+  "numericTokenMismatches": 0,
+  "markupMismatches": 0,
+  "unresolvedItems": [
+    "Ranks 329 and 330 are held in all 12 locales because no exact production caller is pinned."
+  ],
+  "nativeSpeakerSignoff": false,
+  "nativeSpeakerReviewSuggestedCells": 3,
+  "applicationAuthorization": "proposal only; no repository or PR write is authorized by this packet",
+  "pathNote": "The supplied primary path suffix /primary/ was absent; the same sealed handoff contains primary-review/ with the declared review ledger, summary, verifier, and parent checksum coverage.",
+  "independenceNote": "This audit was created from the candidate-free input, primary review, and blind review only. The pre-existing provisional cross-audit directory was not opened or used.",
+  "sourcePacketHashes": {
+    "candidateFreeManifestSha256": "dc3b9295a3fd0e35cf6047deaeca5c39528a79097187158ece508c2e1c5e40dc",
+    "candidateFreeChecksumListSha256": "7d3d5e424cae914d46815229598b430154b0965defe2e7e3a371608df4ca1c5a",
+    "primaryRootChecksumListSha256": "6e140fe03834f6e31831d3ecab00a570f50b824f5b6db0dd46dbc2108b589080",
+    "primaryReviewLedgerSha256": "d35ae366e7d115a3b417539fdb2b62f0414153884b0c9382a0d8836b35307d55",
+    "blindChecksumListSha256": "0ede74df768bb6fc5635951d14196ab1efb2a1413d90b2860128c87e6c501b46",
+    "blindLedgerSha256": "02f78685d8b3dd3597e34cde7479b6aa30461486a6a8f0be89627fa98cd740ac"
+  },
+  "outputHashes": {
+    "live-reattestation.json": "fc98ee87fb738a0c6fee39adf49270e0b6a4bbecb4a91a311b89f82647a41c4a",
+    "cross-audit-ledger.jsonl": "0ffb8a30c2ce806253da4ac6dd2017752463f5146a7ed025f923b0b8f6dedffb",
+    "disagreements.jsonl": "6cf3c81869d57fb57255fa83c02f5e64501e354919aef0de8c10e2e12cdeed81",
+    "selected-changes-proposal.jsonl": "2eb4ed9da89a8f26d38cfd1d3f6551ff7444d56f73c09cbf094eac24a913e94d",
+    "verify_cross_audit.py": "4f86aa04b82e870ea8938f5b3b754376df55cf327ee7dac196bd64f18e3523d3"
+  }
+}

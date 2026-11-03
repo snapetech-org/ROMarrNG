@@ -1,0 +1,21 @@
+{
+  "method": "Protected product names and technical identifiers are checked per selected locale cell; baseline discrepancies are recorded for review.",
+  "mismatchCount": 1,
+  "mismatches": [
+    {
+      "position": 343,
+      "sourceId": "ui.same-story-no-token-page-no-key-prog.7e3daf7ba1",
+      "locale": "de",
+      "required": [
+        "Ubisoft Connect",
+        "Ubisoft"
+      ],
+      "present": [
+        "Ubisoft"
+      ],
+      "missing": [
+        "Ubisoft Connect"
+      ]
+    }
+  ]
+}

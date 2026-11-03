@@ -1,0 +1,83 @@
+{
+  "repo": "snapetech-org/ROMarrNG",
+  "pr": 70,
+  "state": "OPEN",
+  "isDraft": true,
+  "baseRefName": "main",
+  "branch": "task/localization-translation-review-20261030",
+  "head": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "tree": "c13dc4fc091565318d11a19ad9e851215a5f917e",
+  "branchRef": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "pullRef": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "attestedAtUtc": "2026-11-03T13:30:38+00:00",
+  "prBodyRead": false,
+  "sourceAndCatalogBlobPins": [
+    {
+      "path": "romarr/ui-source-messages.json",
+      "gitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "expectedGitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "matches": true,
+      "bytes": 273919,
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515"
+    },
+    {
+      "path": "romarr/ui-source-snapshot.json",
+      "gitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+      "expectedGitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+      "matches": true,
+      "bytes": 202767,
+      "sha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3"
+    },
+    {
+      "path": "romarr/ui-labels.json",
+      "gitBlob": "e519df466e891fed6be58ce9c65e3004bb1693aa",
+      "expectedGitBlob": "e519df466e891fed6be58ce9c65e3004bb1693aa",
+      "matches": true,
+      "bytes": 3008380,
+      "sha256": "9c5e76009d59c0bcb3f83178c18a8687cfbaee31eb76f29c77e0e24495e11f76"
+    },
+    {
+      "path": "docs/localization-glossary.md",
+      "gitBlob": "edfe311cb5a0fd66c49a0923a0b410d207fa315f",
+      "expectedGitBlob": "edfe311cb5a0fd66c49a0923a0b410d207fa315f",
+      "matches": true,
+      "bytes": 3031,
+      "sha256": "08f2f2e2ddf722065993a454523e8c353db823c336a6f07e48f9bf215e37ad34"
+    },
+    {
+      "path": "romarr/ui.py",
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "expectedGitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "matches": true,
+      "bytes": 407495,
+      "sha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+    },
+    {
+      "path": "romarr/app.py",
+      "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+      "expectedGitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+      "matches": true,
+      "bytes": 418446,
+      "sha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510"
+    },
+    {
+      "path": "romarr/frontends.py",
+      "gitBlob": "fd36a48837fb7a6ab67b6774a63208b1046da1ce",
+      "expectedGitBlob": "fd36a48837fb7a6ab67b6774a63208b1046da1ce",
+      "matches": true,
+      "bytes": 14935,
+      "sha256": "6c01b8fcfd1afef2fcbd70e96e73b01ca7e5fcf9251507b88b19d9717bec8e95"
+    },
+    {
+      "path": "romarr/connect.py",
+      "gitBlob": "2eedb989971c18f76d8742c413a9f8f224cc1bce",
+      "expectedGitBlob": "2eedb989971c18f76d8742c413a9f8f224cc1bce",
+      "matches": true,
+      "bytes": 19037,
+      "sha256": "75aabd8d31edd5874d0b19f2c2f68de9da1e6eeceb6d72e954b3ea04349a8f5a"
+    }
+  ],
+  "sourceQueueSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+  "catalogSha256": "9c5e76009d59c0bcb3f83178c18a8687cfbaee31eb76f29c77e0e24495e11f76",
+  "finalReattestationBeforeSeal": true
+}
