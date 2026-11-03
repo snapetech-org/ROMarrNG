@@ -1,0 +1,78 @@
+{
+  "inputPath": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w206-225-primary-20261103/clean-input/",
+  "inputChecksumListSha256": "7b019520a87edfb21794b1566cffe22fd91f0cc431c805d140e95d3239703975",
+  "verifiedInputFiles": {
+    "PR-attestation.json": "e0a006662dcb3e1c2e319bee1d9ba435498702fc7945786b56b0bd48db33667e",
+    "README.md": "aa8954bc795ad77ed42347aeead1dacbcd49fb51ffc5b472e51ef8dc35e24af7",
+    "catalog-file-pins.json": "75faf7a509fcd2d720307496c65fbdcf6b6d61dcee7bf199b56bcee6d133f5bd",
+    "current-target-cells.jsonl": "27969ce32728d9e77b3712bd032ca21d948e2cc1957bfe6cb528bf1cf75e52c2",
+    "manifest.json": "0a93fb84778e8e6e483d57e57a985be3dcb0d100ad095e14b2b47169cc040f4f",
+    "source-contexts.jsonl": "b31c9c081f70851a646ae15aa75fdb0a11e9bebf5ea7f36464d958b0a3a71c9c"
+  },
+  "livePR": {
+    "baseRefName": "main",
+    "headRefName": "task/localization-translation-review-20261030",
+    "headRefOid": "bef31ca8a94f21273b11303524d79bd9c5344305",
+    "isDraft": true,
+    "number": 70,
+    "state": "OPEN"
+  },
+  "remoteBranchHead": "bef31ca8a94f21273b11303524d79bd9c5344305",
+  "pinnedHead": "bef31ca8a94f21273b11303524d79bd9c5344305",
+  "pinnedTree": "7616d96ddd3a1bfe8078d43492eb5bea7213f080",
+  "reviewInputSha256": "27969ce32728d9e77b3712bd032ca21d948e2cc1957bfe6cb528bf1cf75e52c2",
+  "sourceContextsSha256": "b31c9c081f70851a646ae15aa75fdb0a11e9bebf5ea7f36464d958b0a3a71c9c",
+  "cellCounts": {
+    "input": 240,
+    "ledger": 240,
+    "unique": 240
+  },
+  "callerPins": {
+    "count": 5,
+    "files": {
+      "romarr/app.py": {
+        "byteCount": 417785,
+        "gitBlob": "1a6067d98a1e5c2c54c5af7c70a7f6cfeecedee5",
+        "lineCount": 8158,
+        "path": "romarr/app.py",
+        "sha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231"
+      },
+      "romarr/metadata.py": {
+        "byteCount": 41717,
+        "gitBlob": "856e5f1827449b99d2065c32999c4df82aa35978",
+        "lineCount": 986,
+        "path": "romarr/metadata.py",
+        "sha256": "4b838ec909961bee7723d2760f9e7c8d18eff5db18874e9907a4d2d9cb0e5186"
+      },
+      "romarr/organizer.py": {
+        "byteCount": 121857,
+        "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+        "lineCount": 2466,
+        "path": "romarr/organizer.py",
+        "sha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64"
+      },
+      "romarr/playability.py": {
+        "byteCount": 103236,
+        "gitBlob": "4d37d7cfa53ea86aff6fc6e797e4ca9253ff8cf9",
+        "lineCount": 2222,
+        "path": "romarr/playability.py",
+        "sha256": "c2ac6355e71c8fee3a317290dfe65f0790a05e9b29e02a8ff17f46f35a439c29"
+      },
+      "romarr/ui.py": {
+        "byteCount": 405689,
+        "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+        "lineCount": 6800,
+        "path": "romarr/ui.py",
+        "sha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71"
+      }
+    }
+  },
+  "catalogPin": {
+    "byteCount": 3007952,
+    "gitBlob": "791f41e3c0e9ac3713dd54468ef6125b8f0eabbc",
+    "lineCount": 52714,
+    "path": "romarr/ui-labels.json",
+    "sha256": "15a3893bc95cfd35a61a44fe881b2f793bda26dc32eaba277c4186d69acb536b"
+  },
+  "reviewBoundary": "Only clean-input files, GitHub PR metadata, and the remote branch ref were read. No primary review or repository contents were inspected."
+}

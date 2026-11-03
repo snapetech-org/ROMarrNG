@@ -1,0 +1,196 @@
+{
+  "baseRef": "main",
+  "baseSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "callerFileCount": 5,
+  "callerReferenceCount": 26,
+  "callerResolutionNote": "The source-message index location lines were stale at this exact head. Current caller spans were resolved against literal source messages or translation-key wiring in the pinned caller files; the original index locations are retained in sourceIndexLocations.",
+  "candidateFreeInputOnly": true,
+  "catalogFile": "romarr/ui-labels.json",
+  "cellCount": 240,
+  "head": "bef31ca8a94f21273b11303524d79bd9c5344305",
+  "headRef": "task/localization-translation-review-20261030",
+  "headRefOid": "bef31ca8a94f21273b11303524d79bd9c5344305",
+  "isDraft": true,
+  "localWorktree": "/mnt/disks/scratch/task-worktrees/localization-20261103/romarrng-pr70-w166-apply-20261103",
+  "localWorktreeBranch": "codex/romarr-pr70-w166-apply-20261103",
+  "localWorktreeHead": "bef31ca8a94f21273b11303524d79bd9c5344305",
+  "localWorktreeStatusClean": true,
+  "localWorktreeTree": "7616d96ddd3a1bfe8078d43492eb5bea7213f080",
+  "localeCatalogKeyCount": 1837,
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "nativeSpeakerApproval": false,
+  "proposedTranslationsIncluded": false,
+  "pullRequest": 70,
+  "remotePullRefHead": "bef31ca8a94f21273b11303524d79bd9c5344305",
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewDecisionsIncluded": false,
+  "selectedPositions": [
+    206,
+    225
+  ],
+  "selectionRule": "One-based positions 206–225 in the 480 unique active source IDs; duplicate source-index records are merged by ID and their caller locations unioned. IDs are ordered lexicographically. Source records come from romarr/ui-source-messages.json.",
+  "sourceContextRows": 20,
+  "sourceCount": 480,
+  "sourceIdOrderHashFormat": "SHA-256 of sorted unique source IDs, one per line, trailing newline.",
+  "sourceIdOrderSha256": "b3e885dd9b48106f0caa5fd65965d5c2a0540cdd351ecaca8e87080519002c45",
+  "sourceIds": [
+    {
+      "callerReferenceCount": 1,
+      "position": 206,
+      "source": "Newer than latest listed version",
+      "sourceId": "ui.newer-than-latest-listed-version.debaae0993",
+      "sourceSha256": "debaae09936654c481ed08bdac92834e671e955fbfbbd5abe6cd243bcfd9a56b"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 207,
+      "source": "Newest release",
+      "sourceId": "ui.newest-release.8736254705",
+      "sourceSha256": "8736254705933c03b3bdc8ebf5a96654c5c0dcb4b5b7ba8d20309a99e2edf9d9"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 208,
+      "source": "Newest",
+      "sourceId": "ui.newest.d15efa178c",
+      "sourceSha256": "d15efa178cf65ae16596a270671aa320bc9d2a5f18d78ecc5d479f73b3ffd51e"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 209,
+      "source": "No cover",
+      "sourceId": "ui.no-cover.b2ec3181b3",
+      "sourceSha256": "b2ec3181b360d0347d8658cb177771e904d6bae9c4b80974be48cff505d1d600"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 210,
+      "source": "No DAT catalog is loaded in ROMarrNG",
+      "sourceId": "ui.no-dat-catalog-is-loaded-in-romarrng.f57b5eb371",
+      "sourceSha256": "f57b5eb3711069f82aca2152aa1af8f6aef26cdd5eb743d013d7733ec2e5f534"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 211,
+      "source": "no DAT loaded. Point DAT_PATH at a No-Intro or Redump directory, or add one under Settings.",
+      "sourceId": "ui.no-dat-loaded-point-dat-path-at-a-no.9c9046a1d2",
+      "sourceSha256": "9c9046a1d201acfcc053686a907a874b97ac1258649b9fc6da35bdac86dbf1d5"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 212,
+      "source": "no DATs loaded -- set the DAT directory under Settings -> Media Management first",
+      "sourceId": "ui.no-dats-loaded-set-the-dat-directory.db28ed3469",
+      "sourceSha256": "db28ed3469084144d2f377df8c3be792683d075b61c3770a93aba7cbec85bd11"
+    },
+    {
+      "callerReferenceCount": 2,
+      "position": 213,
+      "source": "no indexer could be read",
+      "sourceId": "ui.no-indexer-could-be-read.ad531cd423",
+      "sourceSha256": "ad531cd423bb92f980b8e32a18393c6cd3b40a901f324b0f58de517ab8ab1a49"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 214,
+      "source": "No inventory entries yet. Scan a configured ROM library to begin.",
+      "sourceId": "ui.no-inventory-entries-yet-scan-a-conf.acb0dacd79",
+      "sourceSha256": "acb0dacd79a0138ef576c9abe95aa0c96bb41c86aa650bc70b6fca7ccb7b0f91"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 215,
+      "source": "no launcher libraries found on this machine",
+      "sourceId": "ui.no-launcher-libraries-found-on-this.bbbd98d024",
+      "sourceSha256": "bbbd98d02431dab296240ef04116bdf1e4c76086a63d83175fce89d7a4d0fc04"
+    },
+    {
+      "callerReferenceCount": 3,
+      "position": 216,
+      "source": "no library configured",
+      "sourceId": "ui.no-library-configured.2f7f2b199a",
+      "sourceSha256": "2f7f2b199a720c1f4f449c69029f54e32f32fe05fb907c712ba306ec0121dfa0"
+    },
+    {
+      "callerReferenceCount": 2,
+      "position": 217,
+      "source": "no lists configured",
+      "sourceId": "ui.no-lists-configured.f0f61cd546",
+      "sourceSha256": "f0f61cd5467971aee41be233711ced0f53c5732410a88c2590e1f17dd64e7e65"
+    },
+    {
+      "callerReferenceCount": 3,
+      "position": 218,
+      "source": "no metadata provider that can {what} is configured -- add {offer} under Settings -> Metadata",
+      "sourceId": "ui.no-metadata-provider-that-can-what-i.55f272fb94",
+      "sourceSha256": "55f272fb9448d8b36756e83345b5e099a278b537f8988bf2bd7a538f89562daa"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 219,
+      "source": "No patch projects match. Add a catalogue in Media Management or drop JSON files into the patch-catalog.d folder.",
+      "sourceId": "ui.no-patch-projects-match-add-a-catalo.c81829dd8f",
+      "sourceSha256": "c81829dd8ff59f0602dfda4a130dd59078d9d01c05a17bcdc2ec158bdf1c380c"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 220,
+      "source": "no PIN given",
+      "sourceId": "ui.no-pin-given.fca565efd1",
+      "sourceSha256": "fca565efd1ef6b90538ec6d44759ba30412c5e90256bd9feca42b997e89091d1"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 221,
+      "source": "No platforms match this filter.",
+      "sourceId": "ui.no-platforms-match-this-filter.a9e7efc40f",
+      "sourceSha256": "a9e7efc40fea05c6389c0e22ee10378b7208611a1dc836b495141184d97c3ca6"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 222,
+      "source": "No safe canonical title",
+      "sourceId": "ui.no-safe-canonical-title.2968a7e7ba",
+      "sourceSha256": "2968a7e7bad39b710b63ba1af3927b4ceae6badd23e9bdf7e59b1a427628e07b"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 223,
+      "source": "No safe renames are ready in this batch.",
+      "sourceId": "ui.no-safe-renames-are-ready-in-this-ba.45fe5b5767",
+      "sourceSha256": "45fe5b5767b3acc6a30021a1ed6452d45a8ef81035bb9b9f202e6b5567005968"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 224,
+      "source": "no such friend",
+      "sourceId": "ui.no-such-friend.0ce32b32e5",
+      "sourceSha256": "0ce32b32e5ebfd3587233a83e257285aef214f826cb953ae59854d5685c00f3a"
+    },
+    {
+      "callerReferenceCount": 1,
+      "position": 225,
+      "source": "no such peer",
+      "sourceId": "ui.no-such-peer.5e878c21ac",
+      "sourceSha256": "5e878c21acf5c2b98bd7a5ade267ff933d07dd194189d01fd06bc7281520edcb"
+    }
+  ],
+  "sourceRecordCount": 482,
+  "state": "OPEN",
+  "tree": "7616d96ddd3a1bfe8078d43492eb5bea7213f080",
+  "window": "W206-W225"
+}

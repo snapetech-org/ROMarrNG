@@ -1,0 +1,17 @@
+{
+  "blindCandidateViolations": 0,
+  "note": "Exact protected substrings were counted as occurrences so locale suffixes do not create false boundary failures.",
+  "primaryCandidateViolations": 0,
+  "sourceCellCountsByLiteral": {
+    "DAT": 36,
+    "DAT_PATH": 12,
+    "JSON": 12,
+    "No-Intro": 12,
+    "PIN": 12,
+    "ROM": 12,
+    "ROMarrNG": 12,
+    "Redump": 12,
+    "patch-catalog.d": 12
+  },
+  "thirdPartyTargetViolations": 0
+}

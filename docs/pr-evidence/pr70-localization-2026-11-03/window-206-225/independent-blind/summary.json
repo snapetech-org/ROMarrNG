@@ -1,0 +1,43 @@
+{
+  "artifact": "ROMarrNG PR #70 independent blind localization review W206-W225",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "bef31ca8a94f21273b11303524d79bd9c5344305",
+  "tree": "7616d96ddd3a1bfe8078d43492eb5bea7213f080",
+  "window": [
+    206,
+    225
+  ],
+  "reviewedCells": 240,
+  "sourceIds": 20,
+  "locales": 12,
+  "decisionCounts": {
+    "correction": 19,
+    "accept-current": 198,
+    "refinement": 11,
+    "hold": 12
+  },
+  "proposalCounts": {
+    "correction": 19,
+    "refinement": 11
+  },
+  "contextHolds": {
+    "cells": 12,
+    "positions": [
+      218
+    ]
+  },
+  "rank218": {
+    "decision": "hold-all-locales",
+    "sourceId": "ui.no-metadata-provider-that-can-what-i.55f272fb94",
+    "reason": "The supplied exact-head caller fragments show English what arguments (browse; answer for a date range) passed into _gap but do not establish that they are localized before interpolation or supplied through a localized template/value boundary."
+  },
+  "inputChecksumFilesVerified": 6,
+  "placeholderMarkupProtectedFailures": 0,
+  "nativeSpeakerApproval": false,
+  "primaryReviewInspected": false,
+  "repositoryOrPREdited": false,
+  "testsBuildsScansCIOrBrowserWork": false,
+  "confidenceLimit": "Machine semantic review; language fluency for all 12 locales remains unverified by native speakers."
+}
