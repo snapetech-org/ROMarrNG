@@ -1,0 +1,13 @@
+{
+  "candidateFlags": 0,
+  "candidateFreeInput": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w285-304-candidate-free-20261103/input",
+  "candidateFreeInputChecksumListSha256": "1047511955ef60dc180a49bdaef7a86452c70e9196fd681174732e98d408f338",
+  "candidateFreeInputManifestJsonSha256": "561d10943ebd3aa1f091942b7a83b408c0157e4bd2ae665d44397986d4d45610",
+  "cellCount": 240,
+  "checksumEntries": 11,
+  "checksumsVerified": true,
+  "currentPlaceholderMismatches": 0,
+  "localeCount": 12,
+  "reviewDecisionFlags": 0,
+  "sourceCount": 20
+}

@@ -1,0 +1,17 @@
+{
+  "callerSourceRows": 20,
+  "candidateFree": true,
+  "head": "363601fd2597f0fb97adff97554e651c2bea2d99",
+  "heldPositions": [
+    286,
+    304
+  ],
+  "holdsAreNoTarget": true,
+  "method": "Source-index locations were used as hints. Exact production caller and renderer contexts were resolved from tracked source at the pinned head; tests were not used as production evidence.",
+  "selectedPositions": [
+    285,
+    304
+  ],
+  "sourceIndexLocationsReconciled": 20,
+  "tree": "1f8ada1746f53796e2b4a8f43f9a0075150aa5d7"
+}

@@ -1,0 +1,25 @@
+{
+  "applicationApproved": true,
+  "head": "363601fd2597f0fb97adff97554e651c2bea2d99",
+  "holds": 24,
+  "holdsByRank": {
+    "286": 12,
+    "304": 12
+  },
+  "nativeSpeakerApproval": false,
+  "pullRequest": 70,
+  "releaseApproved": false,
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewedPackets": {
+    "blindLedgerSha256": "2d72e4fc5fe6f957d2c77129f3ae8c47636b48c3ad91620bb0c9f9105349b2b8",
+    "candidateFreeChecksumListSha256": "1047511955ef60dc180a49bdaef7a86452c70e9196fd681174732e98d408f338",
+    "crossAuditLedgerSha256": "1d8dbb94305a008b530a7c0998ee80d11a5f832b8937923d523165c6f01c7944",
+    "primaryLedgerSha256": "84d209443bad0951c200279a5414abbd9e690e4a51435fb24d587436cf9e6c1b"
+  },
+  "rootReviewComplete": true,
+  "selectedChangeCount": 84,
+  "selectedChangesSha256": "1647f9f3ffcf718438da5ab8b327a61623735161b62b2fe9fe26440c55daaafe",
+  "selectionRule": "Apply exactly rows in selected-changes.jsonl; preserve all holds and all other values.",
+  "tree": "1f8ada1746f53796e2b4a8f43f9a0075150aa5d7",
+  "window": "W285-W304"
+}

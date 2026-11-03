@@ -1,0 +1,42 @@
+{
+  "blindDispositions": {
+    "hold": 24,
+    "retain": 142,
+    "revise": 74
+  },
+  "cellCount": 240,
+  "exactHeadBrowserReview": false,
+  "head": "363601fd2597f0fb97adff97554e651c2bea2d99",
+  "holds": 24,
+  "holdsByRank": {
+    "286": 12,
+    "304": 12
+  },
+  "independentBlindReview": true,
+  "localeCount": 12,
+  "placeholderMismatches": 0,
+  "primaryDispositions": {
+    "accept-current": 171,
+    "correction": 26,
+    "hold": 24,
+    "refinement": 19
+  },
+  "protectedLiteralMismatches": 0,
+  "pullRequest": 70,
+  "qualifiedNativeSpeakerApproval": false,
+  "releaseApproved": false,
+  "repository": "snapetech-org/ROMarrNG",
+  "rootDispositions": {
+    "accept-current": 132,
+    "correction": 79,
+    "hold": 24,
+    "refinement": 5
+  },
+  "selectedChanges": 84,
+  "sourceChangesMade": false,
+  "sourceCount": 20,
+  "targetDisagreementCells": 93,
+  "tree": "1f8ada1746f53796e2b4a8f43f9a0075150aa5d7",
+  "window": "W285-W304",
+  "withdrawnEarlierBlindExcluded": true
+}

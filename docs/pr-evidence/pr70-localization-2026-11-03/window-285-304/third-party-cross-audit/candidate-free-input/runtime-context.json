@@ -1,0 +1,2166 @@
+{
+  "finding": "Stable-key labels and explicit source templates are translated through the interface catalog. Source-owned count-bearing status messages can be matched to an allowlisted catalog template. Dynamic API values remain opaque unless an explicit template is attached. Rank 286 is returned but not rendered by the current frontend; rank 304 is returned as raw API error text without an error_template.",
+  "head": "363601fd2597f0fb97adff97554e651c2bea2d99",
+  "helperGroups": [
+    {
+      "group": "stable-template-rendering",
+      "references": [
+        {
+          "contextEndLine": 856,
+          "contextLines": [
+            {
+              "line": 817,
+              "lineSha256": "6242e2a043f76503815a72aa600b05f0e9f0061c9f5f9796fb7a5ccee88156b9",
+              "text": "const stableLocalizationKey=source=>Object.hasOwn(UI_MESSAGES,source)?source:(UI_SOURCE_TO_KEY[source]||'');"
+            },
+            {
+              "line": 818,
+              "lineSha256": "748003ccf7e682ab8619a6c91d85da8aaa6a25594a48bb13413414ac35279f51",
+              "text": "const hasLabel=source=>{"
+            },
+            {
+              "line": 819,
+              "lineSha256": "464557481e5ed21c89f0e7a99b231a8fd92f86856a5131b136940c059f2a39f9",
+              "text": "  const key=stableLocalizationKey(source);"
+            },
+            {
+              "line": 820,
+              "lineSha256": "e886f368744888e8751215bbf577f9adf95d8a604f4be6aec44e7fb17b9330ae",
+              "text": "  return Boolean(key&&UI_MESSAGES[key]?.sourceKind!=='ui-help-template');"
+            },
+            {
+              "line": 821,
+              "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+              "text": "};"
+            },
+            {
+              "line": 822,
+              "lineSha256": "f56af9d9587b33c0839cc58fb716d24e5684580e8c41443094ee66a5796608f8",
+              "text": "const APP_MESSAGE_TEMPLATE_KINDS=new Set(['ui-error','ui-error-template','task-result',"
+            },
+            {
+              "line": 823,
+              "lineSha256": "493dcd1ec2d3fc72e3f41675ff0191005ee63307c4733e7b16d720c3730faed4",
+              "text": "  'task-result-template','provider-diagnostic-template','library-status-template',"
+            },
+            {
+              "line": 824,
+              "lineSha256": "e970ad38c46e5a0496fe5f1d6aca5669ef977e08876b77e4826cec64202a9c8c",
+              "text": "  'ui-status-template']);"
+            },
+            {
+              "line": 825,
+              "lineSha256": "ad59fcb0db31451a39ed30ab023b8366207a892133a21ccc21b63eb6ca9a7128",
+              "text": "const APP_MESSAGE_TEMPLATES=Object.values(UI_MESSAGES)"
+            },
+            {
+              "line": 826,
+              "lineSha256": "590a00bb1ed03dcdbc300cc81b7663ed7e189d6ff0677d989825ddea7f46fbbb",
+              "text": "  .filter(message=>APP_MESSAGE_TEMPLATE_KINDS.has(message.sourceKind)"
+            },
+            {
+              "line": 827,
+              "lineSha256": "de57dfd0d96b72414fa1405db696b3b350c347e4744271e83ecaccdaf494fc93",
+              "text": "    &&typeof message.source==='string'&&message.source.includes('{'))"
+            },
+            {
+              "line": 828,
+              "lineSha256": "027649f585d9113fa54791e095a0dc375b23254deb575c1b8a1a6e0210ea213a",
+              "text": "  .map(message=>{"
+            },
+            {
+              "line": 829,
+              "lineSha256": "5a0494409ac960c1d63c01a23ce09468f5dc56771e9e044d1b174077f7590aa8",
+              "text": "    const names=[];"
+            },
+            {
+              "line": 830,
+              "lineSha256": "9342002ea88d89be453df3f6b91fcb86c3519deea603c82a506316a954d875c6",
+              "text": "    const escaped=message.source.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')"
+            },
+            {
+              "line": 831,
+              "lineSha256": "a51544dc5cfef8003f811ffb26bc6853fcb192515c2c2e6ea9f84c28a6b795d7",
+              "text": "      .replace(/\\\\\\{([A-Za-z][A-Za-z0-9_]*)\\\\\\}/g,(_,name)=>{names.push(name);return '([\\\\s\\\\S]+?)';});"
+            },
+            {
+              "line": 832,
+              "lineSha256": "a929d4b758129482308b98d40094ae287b0d79245943b90dd083668232e783e7",
+              "text": "    return {source:message.source,names,pattern:new RegExp('^'+escaped+'$')};"
+            },
+            {
+              "line": 833,
+              "lineSha256": "171470fb3dceec9b6839fce8d215554a57bfab2f8db1bfa585128dfae065aafb",
+              "text": "  }).sort((a,b)=>b.source.length-a.source.length);"
+            },
+            {
+              "line": 834,
+              "lineSha256": "7c220fa8162640a3c6267db312847eef048557c7c8cea7b24cd1a123cc8d0696",
+              "text": "const matchAppMessageTemplate=value=>{"
+            },
+            {
+              "line": 835,
+              "lineSha256": "ac3f71ddc6b5554ae3b18198105d7e28857a00ebb7f4b793bc46fd8744068767",
+              "text": "  let matched=null;"
+            },
+            {
+              "line": 836,
+              "lineSha256": "6749c2b254e2db55c45892d2a20a72b1405564eee6ebd0e411131b24b5b759a1",
+              "text": "  for(const entry of APP_MESSAGE_TEMPLATES){"
+            },
+            {
+              "line": 837,
+              "lineSha256": "01721551136e7afc6471f29c18dbc8db26010a46340d03fe59d86fb6081ab58b",
+              "text": "    const match=entry.pattern.exec(String(value??''));"
+            },
+            {
+              "line": 838,
+              "lineSha256": "6329cc14a9931e33928f56fb3caafbd4d1fe45b5d3c13ca8dc1957b1a11bb5ed",
+              "text": "    if(match){"
+            },
+            {
+              "line": 839,
+              "lineSha256": "c1db3ee92666a470c8da4af3450c7ec9adaab079eb9f349c07a24b84550b7546",
+              "text": "      // Free-form values can make two distinct templates fit the same raw"
+            },
+            {
+              "line": 840,
+              "lineSha256": "b5fe59a568212f435423715eae881f3fe32b53fffd6caf4b909fa0c4ae168a9d",
+              "text": "      // message (for example a peer name and an invitation URL). Do not let"
+            },
+            {
+              "line": 841,
+              "lineSha256": "3b4d9603515fdfaf71f0109bf60e3112549b2273656af5a636b7b32f7fd7dd59",
+              "text": "      // catalog ordering decide which meaning the user sees; callers that"
+            },
+            {
+              "line": 842,
+              "lineSha256": "55800466d6fa9d53ab93f9c931e6c7cd1d436109819fe59ed0c476a3c5604ebd",
+              "text": "      // authored an ambiguous message attach its stable template explicitly."
+            },
+            {
+              "line": 843,
+              "lineSha256": "bd99b40539d9cfcd4d9515ece47cfc4336ed5675378692477970af6428218297",
+              "text": "      if(matched&&matched.source!==entry.source)return null;"
+            },
+            {
+              "line": 844,
+              "lineSha256": "4294ad2209196e626260bf5acad797776cda4a240b154ec0a9269193784e8aeb",
+              "text": "      const values={};"
+            },
+            {
+              "line": 845,
+              "lineSha256": "93e0757dbffade583e57ef590b6fa01819130554b60fd536414954bcf9ac9ae1",
+              "text": "      entry.names.forEach((name,index)=>{values[name]=match[index+1]});"
+            },
+            {
+              "line": 846,
+              "lineSha256": "f314ae75543e86748afdd38374ac791a968a39a807e639aea044988fb89ba28d",
+              "text": "      matched={source:entry.source,values};"
+            },
+            {
+              "line": 847,
+              "lineSha256": "28d86778615f6af47bb1bc4f40face756749768e5111f114cfa234a5060c25af",
+              "text": "    }"
+            },
+            {
+              "line": 848,
+              "lineSha256": "737db166c79ae98e44bbe5ad43e03bf3774f7b3696068842d56a72e863dfeb20",
+              "text": "  }"
+            },
+            {
+              "line": 849,
+              "lineSha256": "0fda9e7e68742339320acb66e7a9997a2a2c8bfbd5879cfdd95cad7b3d6bf01b",
+              "text": "  return matched;"
+            },
+            {
+              "line": 850,
+              "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+              "text": "};"
+            },
+            {
+              "line": 851,
+              "lineSha256": "533b55bdc1ddb137fc0c0de0ed3bdc9b0d67646db29715450d5e771f50304c37",
+              "text": "const translationInfo=(source,language)=>ROMarrI18n.lookup(UI_CATALOG,source,language);"
+            },
+            {
+              "line": 852,
+              "lineSha256": "f8cae21d68b70d5b5306aa44cdb64d6f11962ce272e0b2e1064a9232df7d3501",
+              "text": "const isTranslated=(source,language)=>translationInfo(source,language).translated;"
+            },
+            {
+              "line": 853,
+              "lineSha256": "b4907b4f704fb453e8faa848315009ca31bfd810f7ada9eb5ca4a1f90c03ceea",
+              "text": "const translateLegacyLabel=(source,language)=>{"
+            },
+            {
+              "line": 854,
+              "lineSha256": "ee199182b30b98d9b6a1bb70ee244510bb8c270c5550fc5f287b15737a05ff7f",
+              "text": "  const value=UI_LABELS[source]?.[language];"
+            },
+            {
+              "line": 855,
+              "lineSha256": "d34ec8ea0e68878c3f7e4a9be6587b799786ca1851821d9029e19b2380732a2d",
+              "text": "  return typeof value==='string'&&value?value:source;"
+            },
+            {
+              "line": 856,
+              "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+              "text": "};"
+            }
+          ],
+          "contextSha256": "ebb517db9da28fc338a447697a251fb5a933828ccd67a37485c2809d2674fa32",
+          "contextStartLine": 817,
+          "endLine": 855,
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+          "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+          "matchBasis": "stable key lookup and source-template matcher",
+          "path": "romarr/ui.py",
+          "startLine": 818
+        },
+        {
+          "contextEndLine": 901,
+          "contextLines": [
+            {
+              "line": 881,
+              "lineSha256": "f83a01aac9f41078f255e176e31a6c5af58efe7037c5fe0b54cfc8daeaf09a4b",
+              "text": "  shelved:'Shelved',verified:'Verified',bad:'Bad',unknown:'Unknown'};"
+            },
+            {
+              "line": 882,
+              "lineSha256": "4c2964d92c2ddb8c207ac35074307f044a58e2fd66edbf9d9e0fdbe1af9fdf9d",
+              "text": "const interfaceMarkup=source=>'<span data-i18n-key=\"'+esc(stableLocalizationKey(source)||source)+'\">'"
+            },
+            {
+              "line": 883,
+              "lineSha256": "08eb8f7cfe50b6f1f8c487ae0df559ec50ce806087087a8379e6d7a8d9e65dab",
+              "text": "  +esc(translateLabel(source,readInterfaceLanguage()))+'</span>';"
+            },
+            {
+              "line": 884,
+              "lineSha256": "5f753f4edffc7a8b4c24da05043a34ae855beb594de529881e83d61bc8fb21c8",
+              "text": "const interfacePhraseSpace=()=>/^(?:ja|zh)/.test(readInterfaceLanguage())?'':' ';"
+            },
+            {
+              "line": 885,
+              "lineSha256": "6aa6d0dd460cd27ea1d2e7b858c1b3e77ff5e93ca8bbbca71810dff0104fe524",
+              "text": "const interfaceTemplateMarkup=(source,values)=>{"
+            },
+            {
+              "line": 886,
+              "lineSha256": "47bb902778ed4b36f0dd9220bae1d7ac6d3ab23123427ac286b6985d6eacd7f0",
+              "text": "  const language=readInterfaceLanguage(),translated=isTranslated(source,language);"
+            },
+            {
+              "line": 887,
+              "lineSha256": "46bec4049f326cb72fd04921a99acce525723ec10002b683ecd60347a3d6cb4a",
+              "text": "  return '<span lang=\"'+(translated?esc(language):'en')+'\" dir=\"'"
+            },
+            {
+              "line": 888,
+              "lineSha256": "79d1d2116a507167ff497eac129b1f7982976d57d39775908c03ca9675434e13",
+              "text": "    +(translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr')+'\" data-i18n-template-key=\"'"
+            },
+            {
+              "line": 889,
+              "lineSha256": "b45f15cf2a0f611b7b388fc4eff8698edfc18430d664554b2455bcb756710d9d",
+              "text": "    +esc(stableLocalizationKey(source)||source)+'\" data-i18n-values=\"'+esc(JSON.stringify(values))+'\">'"
+            },
+            {
+              "line": 890,
+              "lineSha256": "295ed47294730853c91182e145134d352995b4da2bc04c8165f6ee99fdb54369",
+              "text": "    +translatedTemplateMarkup(source,values,language)+'</span>';"
+            },
+            {
+              "line": 891,
+              "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+              "text": "};"
+            },
+            {
+              "line": 892,
+              "lineSha256": "a7ba2e2784eee6530ca0dfdcb5c1ed774fcf919a3f808f3360cc31f663479cc6",
+              "text": "const interfaceTitleTemplate=(source,values)=>'title=\"'+esc(translateTemplate(source,values))"
+            },
+            {
+              "line": 893,
+              "lineSha256": "4609633445a7ac3a5b2d32eccd1e7633476fe2cc15b66fa02f8c5cc2e11454f6",
+              "text": "  +'\" data-i18n-title-template-key=\"'+esc(stableLocalizationKey(source)||source)+'\" data-i18n-title-values=\"'"
+            },
+            {
+              "line": 894,
+              "lineSha256": "6472a8fda9062677d283a6ba51ae2974d6150d50fcbff5ffa3ebbe4f948fb4f6",
+              "text": "  +esc(JSON.stringify(values))+'\"';"
+            },
+            {
+              "line": 895,
+              "lineSha256": "359b3794b1ca874a58afb3020d87b924a1c152e6ba71c7b8f4925bbdb559fc04",
+              "text": "const interfaceAriaLabelTemplate=(source,values)=>'data-i18n-aria-label-template-key=\"'"
+            },
+            {
+              "line": 896,
+              "lineSha256": "144124ded650a0b2ae9cb06990204054029baad52edaf3ce5e5778e888cf2083",
+              "text": "  +esc(stableLocalizationKey(source)||source)+'\" data-i18n-aria-label-values=\"'"
+            },
+            {
+              "line": 897,
+              "lineSha256": "6472a8fda9062677d283a6ba51ae2974d6150d50fcbff5ffa3ebbe4f948fb4f6",
+              "text": "  +esc(JSON.stringify(values))+'\"';"
+            },
+            {
+              "line": 898,
+              "lineSha256": "c21a98c5fb8b782fb99e96bd30f4a90c41b80e2a4173fc5284755d6b142cab03",
+              "text": "const sniffedMessageTemplate=value=>{"
+            },
+            {
+              "line": 899,
+              "lineSha256": "6092cd751ff61d722872ac9c4e93a7a71e946941b79aba06ade9d8d279cd7a2c",
+              "text": "  const source=String(value??'');"
+            },
+            {
+              "line": 900,
+              "lineSha256": "7ff893f602f671d1a878d1927a183c5f5cffc401bf6aedfc065e82266f4a22e3",
+              "text": "  if(hasLabel(source))return {source,values:{}};"
+            },
+            {
+              "line": 901,
+              "lineSha256": "2e841bbf2c06f31dc81e79f14c77b0db8c495f138ddc74d648011286bcdc5ebb",
+              "text": "  let match=source.match(/^Nintendo 64 magic, (.+)$/);"
+            }
+          ],
+          "contextSha256": "3369e27d5d850b788e382b80699d803577bbaa2a7224beac8239e1274871820b",
+          "contextStartLine": 881,
+          "endLine": 900,
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+          "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+          "matchBasis": "literal, named-template and aria-label template markup",
+          "path": "romarr/ui.py",
+          "startLine": 882
+        },
+        {
+          "contextEndLine": 977,
+          "contextLines": [
+            {
+              "line": 930,
+              "lineSha256": "1a00121e6c9a4dd66d01b9c4037e9a9ecc643d788c8735f055fb75dce309a87f",
+              "text": "  'ui.could-not-read-name-detail.243b61096e',"
+            },
+            {
+              "line": 931,
+              "lineSha256": "84e430fc4b936f4af656127e5da51c080bc9a02f216c890bd2895d6305c64987",
+              "text": "  'ui.could-not-reach-name-detail.9fc06e87fc',"
+            },
+            {
+              "line": 932,
+              "lineSha256": "55f868a5fa060d375e3c6642114e0937f4689901cec0d5b9212f78e5eaac4260",
+              "text": "  'ui.name-refused-the-credential-they-may.dfa9c11bed',"
+            },
+            {
+              "line": 933,
+              "lineSha256": "b401e2c05c4bef00e41e08ecc050b3af39c3586c2a6e3ff013af9fadfb7d206b",
+              "text": "  'ui.name-answered-http-status-code.2a5471f26b',"
+            },
+            {
+              "line": 934,
+              "lineSha256": "c630c95ee1c7a44c5ab4a6daf434fe7da998df85bc128dcbe61a5be4f82622bc",
+              "text": "  'ui.name-sent-something-that-was-not-jso.4b46f86ff4',"
+            },
+            {
+              "line": 935,
+              "lineSha256": "84ef13d615c99ce34d0ae3da4dce43f183bb2ae3f9765d812da9c2112c2cc9f2",
+              "text": "  'ui.already-reading-your-library.aa167f8f1a',"
+            },
+            {
+              "line": 936,
+              "lineSha256": "e3afb5030ee7754e172f9234b07bd4147c98273b3f29614b2c8fd1da4b530568",
+              "text": "  'ui.imported-total.5f100c0878',"
+            },
+            {
+              "line": 937,
+              "lineSha256": "7e99b0c3924298aa3da46e06a31c9968d3f7a958b8509d03a67883a7ec2240f0",
+              "text": "  'ui.reading-your-library-in-the-backgrou.c77eb7ff59',"
+            },
+            {
+              "line": 938,
+              "lineSha256": "94fc592c574c1976821d62fdd3a0001675dd807fc690df78a75fb74bfd19a9d9",
+              "text": "  'ui.searched-searched-grabbed-grabbed.bff6322b8e',"
+            },
+            {
+              "line": 939,
+              "lineSha256": "cdf412bf3be702798a6c55fe43ba6735ceebe23bc62fc24e37c42a89af93648b",
+              "text": "  'ui.searched-searched-grabbed-grabbed-sk.8d691039ba',"
+            },
+            {
+              "line": 940,
+              "lineSha256": "4944c634b6f30ccbb547563cbc7be74ca6978c23e2429e191fcc0dc7a172a141",
+              "text": "  'ui.added-count-to-wanted.6f8ee97f5d',"
+            },
+            {
+              "line": 941,
+              "lineSha256": "3ae32017b9ae962d5ba1d92ca8edef0850715f6b635dd6ac84c101444901970e",
+              "text": "  'ui.failed-download-handling-is-off.ad2c9dba83',"
+            },
+            {
+              "line": 942,
+              "lineSha256": "40bac5a693766b668e7b3dfcb92549b7c3deb80a13779e11c1eafcfb70ecce2c",
+              "text": "  'ui.github-com-answered-without-a-tag.5f20c86070',"
+            },
+            {
+              "line": 943,
+              "lineSha256": "ea54fb9e9de8290f89f57a15aba41c6414630fa747a4a919e4eec079340b87d2",
+              "text": "  'ui.imported-imported-of-total-finished.5726eabd36',"
+            },
+            {
+              "line": 944,
+              "lineSha256": "d8abbb5ba4956e4318d1b36ee2c846f00bb0cf3582a7e60913411988f792878b",
+              "text": "  'ui.no-indexer-could-be-read.ad531cd423',"
+            },
+            {
+              "line": 945,
+              "lineSha256": "ef025aed70945e32557e3f5903a85861baa3f144e1857d1a3b51985245f30abd",
+              "text": "  'ui.no-library-configured.2f7f2b199a',"
+            },
+            {
+              "line": 946,
+              "lineSha256": "f189711a71629f6f62cd6f94c0daed6b86041f072a434cdf400e2083c161b792",
+              "text": "  'ui.no-lists-configured.f0f61cd546',"
+            },
+            {
+              "line": 947,
+              "lineSha256": "ceffeabdfda142c91511912985e12f9b4e7d1b33a6e1e4f34f17e0c8ae79472b",
+              "text": "  'ui.no-title.8cb9a5c65b',"
+            },
+            {
+              "line": 948,
+              "lineSha256": "84be2d8385136793d07970eb016d2e95082d1ac21f63350e54546cc1f39dc44c",
+              "text": "  'ui.not-in-this-library-the-hash-identif.15bd6cace0',"
+            },
+            {
+              "line": 949,
+              "lineSha256": "cc2c09f7247329816106b9f5fd3e0c6eb2ea23791fa762fabb4f181d1ba78bc1",
+              "text": "  'ui.nothing-finished.cd66a4ec32',"
+            },
+            {
+              "line": 950,
+              "lineSha256": "b5a42cad7d025a6484cfc0a5f209e1f70ce21b5a13c4be4c1e2333dcecf372af",
+              "text": "  'ui.nothing-wanted-nothing-to-match.d281ab9dfe',"
+            },
+            {
+              "line": 951,
+              "lineSha256": "9fa27dcb59709356ae714dcba027512df9eafa4df3870dce4065ef31aebb541d",
+              "text": "  'ui.retired-blocklisted-dead-download-s.5e329a4393',"
+            },
+            {
+              "line": 952,
+              "lineSha256": "c6a667a47775bdc9019523c94efa73c1dfcc063e17fbe811d0784d234918defb",
+              "text": "  'ui.up-to-date-version.34ba92ea5c',"
+            },
+            {
+              "line": 953,
+              "lineSha256": "eeae831e399892559681e30e2fc491da74e270d9804f6b062c9c4d9451c443a5",
+              "text": "  'ui.count-already-added-before.e957b67cbe',"
+            },
+            {
+              "line": 954,
+              "lineSha256": "e9ea14c1da13855124b89e9892ace7700314a89065d69a31924bd032d169d882",
+              "text": "  'ui.count-kept-aside-with-no-rom-platfor.c9223eb266',"
+            },
+            {
+              "line": 955,
+              "lineSha256": "b2287f8d96a17ca0640da888eceb13422714e38fdc5d7aa43757a66384bd229a",
+              "text": "  'ui.items-feed-item-s-from-sources-sourc.2cf1cff247',"
+            },
+            {
+              "line": 956,
+              "lineSha256": "0292a807e43d8922f7095a92cd47c6a0957eab87c836522a5a2a7e394dd2ec68",
+              "text": "  'ui.latest-is-available-running-version.2d3ed5b75c',"
+            },
+            {
+              "line": 957,
+              "lineSha256": "31280d4dee5014c732a0d6e0543552afa3e3eb567a394480f1328bf45263bfb5",
+              "text": "  'ui.read-seen-entries-and-found-added-wi.ca302edb9e',"
+            },
+            {
+              "line": 958,
+              "lineSha256": "b4af59d3e0d1eb57b386a1a0faab205550611b5ce36df9cd96778d15334a7a75",
+              "text": "  'ui.read-seen-entries-and-found-added-wi.9304d58175',"
+            },
+            {
+              "line": 959,
+              "lineSha256": "e7d50ab821f61a4455215cd38c5e4ac1da836cf95d812cffed49492e176d27fc",
+              "text": "  'ui.stopped-after-seen-entries-truncated.fc5c0496ad',"
+            },
+            {
+              "line": 960,
+              "lineSha256": "492154cc980925b5d421a3bd43b69e74e111474d7dc32b1dcfb858f2fe50f5c6",
+              "text": "  'ui.the-attached-library-server-does-not.3a4dc1f14e',"
+            },
+            {
+              "line": 961,
+              "lineSha256": "ae1a3d136289edd35b171501c6f55781467eca49b64b5f1edd6d6394d7086b19",
+              "text": "  'ui.games-games-across-count-library.f0b5160790',"
+            },
+            {
+              "line": 962,
+              "lineSha256": "376e23aa8ac1b1fa3d1dffc5b0a261fd5eb2c4f161f41ff5e4426ed6614d62ac",
+              "text": "  'ui.games-games-across-count-libraries.6f3af8400b',"
+            },
+            {
+              "line": 963,
+              "lineSha256": "633b44ebcb9da613c95b78e34b4473932d44cd1c3bd851af7eb4d8083b2eeeb8",
+              "text": "  'ui.library-unreachable-error-type.b2611060a9',"
+            },
+            {
+              "line": 964,
+              "lineSha256": "5f3787c656e31b1588490b5d2a4a480d522743010ffbf96e406baa1b01d7b178",
+              "text": "  'ui.could-not-reach-github-com-error-typ.188d9cd896',"
+            },
+            {
+              "line": 965,
+              "lineSha256": "c480c221290fb6647b01259068d764cd70374e35d83d55dea4155497ccfca525",
+              "text": "  'ui.lookup-failed-error-type.6d33ec9b4f',"
+            },
+            {
+              "line": 966,
+              "lineSha256": "676d85b7dc8d3a9de8a9eff5591598827a95c9a992f18ce32fe3bc2e9f2268d9",
+              "text": "  'ui.could-not-fetch-the-list-error-type.f2f965f9db',"
+            },
+            {
+              "line": 967,
+              "lineSha256": "a0d044603a177fc59a6b945e877cf47a1064662ae2cbbe98e847e1b2a56506c1",
+              "text": "  'ui.a-url-is-required.985ecfc33e',"
+            },
+            {
+              "line": 968,
+              "lineSha256": "b405a18c2d891fbc680851308ad1080f25ab939d36a4da78a0f63b65df20b624",
+              "text": "  'ui.connected.22965568d2',"
+            },
+            {
+              "line": 969,
+              "lineSha256": "e5a77ee4df46ae71233ad9a6c0ee2df529c96fa8bfe24bf3b66a86930bba64b5",
+              "text": "  'ui.connected-indexers-indexer-s-private.5277d9b7ff',"
+            },
+            {
+              "line": 970,
+              "lineSha256": "696f715a0fd5e4c5aa4ae40aadbb46982b57021c01c6289f001cdfbb725d4266",
+              "text": "  'ui.connected-but-no-library-path-is-set.22fe97e9f2',"
+            },
+            {
+              "line": 971,
+              "lineSha256": "e1257fed712f6b8294707dbfe16d13f2d6a5653a6ef25bbb5f6554f5f9722020",
+              "text": "  'ui.connected-but-path-does-not-exist-he.f513312bc1',"
+            },
+            {
+              "line": 972,
+              "lineSha256": "7232544d8bbc015092a955004479e38c2ada298797f15d31338c214ff52b9fbd",
+              "text": "  'ui.could-not-connect-or-authenticate.e998092980',"
+            },
+            {
+              "line": 973,
+              "lineSha256": "b36a35cde691b2efafa046d81b0b514b237a7cd8fd3e1b3fdaf84486294e1928",
+              "text": "  'ui.internet-archive-refused-the-request.515fff2c13',"
+            },
+            {
+              "line": 974,
+              "lineSha256": "10dd84c0a8d9877c1497f6295c9585a2c8381e9a286e580b7f012a4f92619918",
+              "text": "  'ui.rejected-the-api-key.119a3d3e36',"
+            },
+            {
+              "line": 975,
+              "lineSha256": "4eba2b1ab655c337151973a14f23fc0c104a0915d77888f19cbab3b2226265e8",
+              "text": "  'ui.unknown-indexer-type-kind.fb6e3d15a4',"
+            },
+            {
+              "line": 976,
+              "lineSha256": "4cab214fa332f93ab3c4a43e1210899b4ff3c93931e928e8ec774fabe4b669ad",
+              "text": "  'ui.unknown-client-type-kind.65382dc90b',"
+            },
+            {
+              "line": 977,
+              "lineSha256": "05a4e53b425ee2c69714a1f601f277df38491487be168294bf9284e229cdcd2a",
+              "text": "  'ui.unknown-library-type-kind.fcd0b2d006',"
+            }
+          ],
+          "contextSha256": "7b13838dfd5a2f91f5de89225452c75864f422a8eb40583cb84ee8bb5010bf7e",
+          "contextStartLine": 930,
+          "endLine": 976,
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+          "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+          "matchBasis": "explicit API template is accepted only through a local key allowlist",
+          "path": "romarr/ui.py",
+          "startLine": 931
+        },
+        {
+          "contextEndLine": 1049,
+          "contextLines": [
+            {
+              "line": 1041,
+              "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+              "text": "};"
+            },
+            {
+              "line": 1042,
+              "lineSha256": "222e1101b1448fbc6bb2e2e36ac6088ebdaa4614474e733548e0bfaeae002135",
+              "text": "const apiMessageMarkup=(value,explicitTemplate=null)=>{"
+            },
+            {
+              "line": 1043,
+              "lineSha256": "ee6395c49a1c2145a24150c0cd3ee59ea88bc504bccfce32e8f466a00027c272",
+              "text": "  const explicit=explicitTemplateMarkup(explicitTemplate);"
+            },
+            {
+              "line": 1044,
+              "lineSha256": "65753c85a8536ac2028e103927525ba9b2a6f1edbe6f4ce56d7ac15c3c050df0",
+              "text": "  if(explicit)return explicit;"
+            },
+            {
+              "line": 1045,
+              "lineSha256": "54e679b0df397986474588f990cce074437a8df5da87cf9ce2de24f75baa5b1a",
+              "text": "  if(value===null||value===undefined||value==='')return '';"
+            },
+            {
+              "line": 1046,
+              "lineSha256": "770d46ebee6d35251ed89c83e7003d30827becaf651e6dc58384f79ff2ad2885",
+              "text": "  if(typeof value!=='string'&&typeof value!=='number')return '';"
+            },
+            {
+              "line": 1047,
+              "lineSha256": "0bb1bbf979d19b244f95ee719a0cbb80da4306deaf75dce06aa07bd70957fad7",
+              "text": "  const source=String(value);"
+            },
+            {
+              "line": 1048,
+              "lineSha256": "2a70e2ba5186ace1175242e35fd43c3bda0fa99a99698faac37d1e927e2d2371",
+              "text": "  return '<span lang=\"und\" dir=\"auto\">'+esc(source)+'</span>';"
+            },
+            {
+              "line": 1049,
+              "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+              "text": "};"
+            }
+          ],
+          "contextSha256": "faf4034611b2b4cc177ee1a1ca3f8bd0d4ea44a2d9c969a5a1113f6222ce9bab",
+          "contextStartLine": 1041,
+          "endLine": 1048,
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+          "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+          "matchBasis": "raw API values stay opaque when no explicit template is supplied",
+          "path": "romarr/ui.py",
+          "startLine": 1042
+        },
+        {
+          "contextEndLine": 1085,
+          "contextLines": [
+            {
+              "line": 1075,
+              "lineSha256": "918b6bca62036d60fa11e0472a4111a711eba854c8930461af2b3a5385d2a186",
+              "text": "// API/provider/peer values go through apiMessageMarkup instead."
+            },
+            {
+              "line": 1076,
+              "lineSha256": "7e89b62a6a1725247890f57600d67599220b11e1c21d2d71bbad618922bbabe3",
+              "text": "const appMessageMarkup=value=>{"
+            },
+            {
+              "line": 1077,
+              "lineSha256": "6092cd751ff61d722872ac9c4e93a7a71e946941b79aba06ade9d8d279cd7a2c",
+              "text": "  const source=String(value??'');"
+            },
+            {
+              "line": 1078,
+              "lineSha256": "96da70f92a3bef82db019d837e3942e31163d2192e423780c7d29e5a856b6f73",
+              "text": "  if(hasLabel(source)) return interfaceMarkup(source);"
+            },
+            {
+              "line": 1079,
+              "lineSha256": "7a03714b491d8e863ad024462644e45708b1c39c0611e4237246ba7ab7583216",
+              "text": "  let match=source.match(/^(\\d+) games across (\\d+) (library|libraries)(?:; ([\\s\\S]*))?$/);"
+            },
+            {
+              "line": 1080,
+              "lineSha256": "9e972907303237d3486c8320064e70cca57522bf5fbb0c0c97b9a4f15b70695c",
+              "text": "  if(match){"
+            },
+            {
+              "line": 1081,
+              "lineSha256": "95aa19ec12266d18c1e5d6eae58d0150ef3a0618a6f54e0c877c7f1aa8d47e5e",
+              "text": "    const template=match[3]==='library'"
+            },
+            {
+              "line": 1082,
+              "lineSha256": "2050341ca4c81e4e71e58c24f528a7fbc27e76cadbf680507949725f1fc9d19f",
+              "text": "      ?'{games} games across {count} library'"
+            },
+            {
+              "line": 1083,
+              "lineSha256": "7b5c542a08159349f8dbe7f7aef0b9176443329e63a89f9331937230d38e350a",
+              "text": "      :'{games} games across {count} libraries';"
+            },
+            {
+              "line": 1084,
+              "lineSha256": "ded38d1562c3da537bba7af00d82fdebf8c02b910cc31a75ed9abcb51ba0bbac",
+              "text": "    const parts=[interfaceTemplateMarkup(template,"
+            },
+            {
+              "line": 1085,
+              "lineSha256": "c7ae29eba915f1345e5bb2f900b51e9e2db4f0df129f434ce4e7898a62e73be3",
+              "text": "      {games:fmt(Number(match[1])),count:fmt(Number(match[2]))})];"
+            }
+          ],
+          "contextSha256": "70df1c25e004b57b0ec54189fdedd50ebc7b8f8f5fbf0c497851b6157a18034c",
+          "contextStartLine": 1075,
+          "endLine": 1084,
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+          "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+          "matchBasis": "app-owned stable messages use interfaceMarkup",
+          "path": "romarr/ui.py",
+          "startLine": 1076
+        },
+        {
+          "contextEndLine": 1195,
+          "contextLines": [
+            {
+              "line": 1187,
+              "lineSha256": "af4323074d7a7a9de123c3a0b54d74cfb69e453bddab2b7f6d9d97cd5eb8c02a",
+              "text": "  match=source.match(/^(.+) translation preferred over (.+)$/);"
+            },
+            {
+              "line": 1188,
+              "lineSha256": "005dd153e766ed935bfb4c59d50f6b01e43df84535ad673551cae147846d8c84",
+              "text": "  if(match)return interfaceTemplateMarkup('ui.language-translation-preferred-over.af52539e78',{language:match[1],name:match[2]});"
+            },
+            {
+              "line": 1189,
+              "lineSha256": "bc6c6fc239b103ef15481b693ca57d8359517d985b94e53cd8fbde5bf040819e",
+              "text": "  match=source.match(/^(.+) translation added to the set$/);"
+            },
+            {
+              "line": 1190,
+              "lineSha256": "f87bcce63dd30a0a489b6380d9515cd51ed07ca43f4f9c0529fb087e732357c2",
+              "text": "  if(match)return interfaceTemplateMarkup('ui.language-translation-added-to-the-se.28bfcbdfa9',{language:match[1]});"
+            },
+            {
+              "line": 1191,
+              "lineSha256": "4fc1e0c982dffefd75cf186c887893e28478a02ed321d57936f3d3bc4c3dea36",
+              "text": "  const catalogTemplate=matchAppMessageTemplate(source);"
+            },
+            {
+              "line": 1192,
+              "lineSha256": "1a732e327d21ab9ae9cce7e5b2c29893d9aa046a74f4aadbf32ee662689c8c94",
+              "text": "  if(catalogTemplate)"
+            },
+            {
+              "line": 1193,
+              "lineSha256": "eff108b41ac119c8f928c6393e75a4b712f8512b86115c331726a7f1a4c114cc",
+              "text": "    return interfaceTemplateMarkup(catalogTemplate.source,catalogTemplate.values);"
+            },
+            {
+              "line": 1194,
+              "lineSha256": "2a70e2ba5186ace1175242e35fd43c3bda0fa99a99698faac37d1e927e2d2371",
+              "text": "  return '<span lang=\"und\" dir=\"auto\">'+esc(source)+'</span>';"
+            },
+            {
+              "line": 1195,
+              "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+              "text": "};"
+            }
+          ],
+          "contextSha256": "178ab1993960cc95ce18d0233309f85f7c754012292cb5bc5faa9b2c3717cc4d",
+          "contextStartLine": 1187,
+          "endLine": 1194,
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+          "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+          "matchBasis": "appMessageMarkup resolves known count-bearing source templates",
+          "path": "romarr/ui.py",
+          "startLine": 1188
+        }
+      ]
+    },
+    {
+      "group": "automatic-text-node-localization",
+      "references": [
+        {
+          "contextEndLine": 1302,
+          "contextLines": [
+            {
+              "line": 1279,
+              "lineSha256": "86f9740427753309bacb5bba65fecddbe504dcff20a4e17482fb7d39d45a9608",
+              "text": "let translatedAriaLabelSequence=0;"
+            },
+            {
+              "line": 1280,
+              "lineSha256": "7d35627a5f8413dfc7479bec477b5184e6430a1688489e906576e7eb81cb30c3",
+              "text": "const applyTranslatedTextNode=(node,language)=>{"
+            },
+            {
+              "line": 1281,
+              "lineSha256": "71492fc4b2b24862dc6519d9be4ba029a7b09deb8c03e90efa5e7ad88a3db2dd",
+              "text": "  const parent=node.parentElement;"
+            },
+            {
+              "line": 1282,
+              "lineSha256": "4271e57104ba6ccbba64b6e480283add87df2bbb6873a6ba83cece8fe0591906",
+              "text": "  if(!parent||parent.closest('script,style,textarea,input,select,[contenteditable=\"true\"],[lang=\"und\"],[data-i18n],[data-i18n-key]'))return;"
+            },
+            {
+              "line": 1283,
+              "lineSha256": "68c6c6519c9f2c79d002c171a1b773a9393b713241c5ad924d747a8d4be7b4d8",
+              "text": "  const original=translatedTextSources.get(node)||node.data.trim().replace(/\\s+/g,' ');"
+            },
+            {
+              "line": 1284,
+              "lineSha256": "c70e7a576fcc52db02db927346c9500997c22177389fbe6313881abd940a991e",
+              "text": "  if(!hasLabel(original))return;"
+            },
+            {
+              "line": 1285,
+              "lineSha256": "4a575a8d5b7f3439506b6bd5390c6a1b5c97cdb247afb7183e59e685282868c2",
+              "text": "  translatedTextSources.set(node,original);"
+            },
+            {
+              "line": 1286,
+              "lineSha256": "877798610fb73f14c1f139efaee9c37862e22e54681051b8178ddfe453a70f66",
+              "text": "  const leading=node.data.match(/^\\s*/)?.[0]||'',trailing=node.data.match(/\\s*$/)?.[0]||'';"
+            },
+            {
+              "line": 1287,
+              "lineSha256": "461e16407fbce4608c89e19c7549f968e132a573d8953cdfd91eb34f4decc5cd",
+              "text": "  const value=leading+translateLabel(original,language)+trailing;"
+            },
+            {
+              "line": 1288,
+              "lineSha256": "685e368735697dfd8c1e67f4c282091c8c7e4ab7ad4965f0a859516aac92dd7e",
+              "text": "  if(node.data!==value)node.data=value;"
+            },
+            {
+              "line": 1289,
+              "lineSha256": "c354de16470a367ab3d8d2d768d28893926a480f62b0e159887553f11c9f2dbf",
+              "text": "  const translated=Boolean(isTranslated(original,language));"
+            },
+            {
+              "line": 1290,
+              "lineSha256": "fc3708becaa62c7f7f4b898cd9ba3ac305707ed5b4f5b289c2d2dce463a2b7bd",
+              "text": "  parent.lang=translated?language:'en';"
+            },
+            {
+              "line": 1291,
+              "lineSha256": "f16945fb58cb5289c9dda4c27aa1d50ca7d90cc0987ded95f97bbfb0e03962eb",
+              "text": "  parent.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';"
+            },
+            {
+              "line": 1292,
+              "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+              "text": "};"
+            },
+            {
+              "line": 1293,
+              "lineSha256": "408b5bfe3dc7efd6748d66c48cce4919ff211b77cd2ee445c6ba5b77bbc798ea",
+              "text": "const applyTranslatedTextTree=(root,language)=>{"
+            },
+            {
+              "line": 1294,
+              "lineSha256": "57c50af4e50f443833f61081ae575124524abd7ca635ca9369e1dd08570265d6",
+              "text": "  if(root.nodeType===Node.TEXT_NODE){applyTranslatedTextNode(root,language);return;}"
+            },
+            {
+              "line": 1295,
+              "lineSha256": "6ea29502bb4d90f76377fa9814f09b86aa907ed289ccb64b4de7770a5c620d75",
+              "text": "  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);"
+            },
+            {
+              "line": 1296,
+              "lineSha256": "da75259493eb2d2a62af8781ce33c8f56823f6d77fcfba395f5e5dafe9beeb5e",
+              "text": "  while(walker.nextNode())applyTranslatedTextNode(walker.currentNode,language);"
+            },
+            {
+              "line": 1297,
+              "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+              "text": "};"
+            },
+            {
+              "line": 1298,
+              "lineSha256": "6a6c749dbf2e9d7e7e0848f335f766bd60f5ce05b5e7a7548f215588156c31e2",
+              "text": "const applyTranslatedAriaLabelTemplate=(el,source,values,language)=>{"
+            },
+            {
+              "line": 1299,
+              "lineSha256": "bbf67933ae1183aa12c30cef4f1c949de0204b5d0a769f2a210cff0060567a19",
+              "text": "  let label=translatedAriaLabelNodes.get(el);"
+            },
+            {
+              "line": 1300,
+              "lineSha256": "6a2d65d4e87969c46e4acb3cb47ee175deec735a397c9684c216cbfd386c9a9e",
+              "text": "  if(!label){"
+            },
+            {
+              "line": 1301,
+              "lineSha256": "731ad8243ca0537614de3a4fd1d685c7b113def9272b1836a27bc19e1ac312ff",
+              "text": "    label=document.createElement('span');"
+            },
+            {
+              "line": 1302,
+              "lineSha256": "98f947a348bb49bba934a05138e1023080a25a18175c3746e386c163dee159ba",
+              "text": "    label.id='romarr-interface-aria-label-'+(++translatedAriaLabelSequence);"
+            }
+          ],
+          "contextSha256": "bbb5fcf9470d96494483262b644b3df4966caec3f932a6500f89bcd38fd7ca36",
+          "contextStartLine": 1279,
+          "endLine": 1301,
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+          "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+          "matchBasis": "known stable text nodes are translated by exact source lookup",
+          "path": "romarr/ui.py",
+          "startLine": 1280
+        },
+        {
+          "contextEndLine": 1375,
+          "contextLines": [
+            {
+              "line": 1358,
+              "lineSha256": "42637267a38e3cf052e2123efeb125a003bdca840bfbb269fb8553d96d637938",
+              "text": "let interfaceTextObserver=null;"
+            },
+            {
+              "line": 1359,
+              "lineSha256": "34ab241f8b7814906879be5738078433ed64907284a619e6d1ced17e70d6489b",
+              "text": "const observeInterfaceText=()=>{"
+            },
+            {
+              "line": 1360,
+              "lineSha256": "512e7ac82416d0dae37e4944df215202f7c698b23f04c53658019cfe4958f0bf",
+              "text": "  if(interfaceTextObserver||!document.body)return;"
+            },
+            {
+              "line": 1361,
+              "lineSha256": "e0e6fd099fea79eb8544156d3a40362f4c6bff08d63335b8be41a4a749b25cc8",
+              "text": "  interfaceTextObserver=new MutationObserver(records=>{"
+            },
+            {
+              "line": 1362,
+              "lineSha256": "0b41fe2f3d336b8e71d3cc4373ca49f94bc503be8f525ee99bcc4be0359062d5",
+              "text": "    for(const record of records){"
+            },
+            {
+              "line": 1363,
+              "lineSha256": "a3074a714a595f12e7242ec50e6b09eda156b8870d34e0e07df781dd603af18b",
+              "text": "      if(record.type==='characterData')applyTranslatedTextNode(record.target,readInterfaceLanguage());"
+            },
+            {
+              "line": 1364,
+              "lineSha256": "fd1e78efea4071aead35f97ae87487db06eaf8c0362aa68800530627fda3e0a1",
+              "text": "      for(const node of record.addedNodes){"
+            },
+            {
+              "line": 1365,
+              "lineSha256": "ed5571a9d595c6f0dfea878568133a99b120c70e73c85c1538d87a2fa340f7cf",
+              "text": "        enhanceFormLabels(node);"
+            },
+            {
+              "line": 1366,
+              "lineSha256": "9c28765265d5cf231e05a00915aafaf56059b46a2635ba7d1f7c14c10a9f9a21",
+              "text": "        applyTranslatedLabels(node,readInterfaceLanguage());"
+            },
+            {
+              "line": 1367,
+              "lineSha256": "4549a0967299e9f4596004564d8dfdf324fc1df9e6ca2e8843dee5a0d41eb827",
+              "text": "        applyTranslatedTemplates(node,readInterfaceLanguage());"
+            },
+            {
+              "line": 1368,
+              "lineSha256": "73cfa4db9869a601456713b170f684f8254384916c104bb43b531c91070817b3",
+              "text": "        applyTranslatedTextTree(node,readInterfaceLanguage());"
+            },
+            {
+              "line": 1369,
+              "lineSha256": "f2c1e6a6186e4f2e832a8bafe0fdfc8a036fe55117dcb2abddba14c6f9600d4a",
+              "text": "        applyTranslatedAttributes(node,readInterfaceLanguage());"
+            },
+            {
+              "line": 1370,
+              "lineSha256": "f61f5bbc379fd349ffd484746f91dcd132c4bb0b0a919ca7ec94604bf9ca2435",
+              "text": "      }"
+            },
+            {
+              "line": 1371,
+              "lineSha256": "28d86778615f6af47bb1bc4f40face756749768e5111f114cfa234a5060c25af",
+              "text": "    }"
+            },
+            {
+              "line": 1372,
+              "lineSha256": "8918205c87aec718d8ed26668abe0962b53a36e38887e5434ec02d59639e3ec1",
+              "text": "  });"
+            },
+            {
+              "line": 1373,
+              "lineSha256": "3040855cab7eb5b44df1098e6fd8f2d705a005ab30c93e3dda639c3f0b5ab012",
+              "text": "  interfaceTextObserver.observe(document.body,{subtree:true,childList:true,characterData:true});"
+            },
+            {
+              "line": 1374,
+              "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+              "text": "};"
+            },
+            {
+              "line": 1375,
+              "lineSha256": "925a09f75094de61a803b901765119346ee6e19564431ee117c1f3ef18df09f4",
+              "text": "let generatedControlId=0;"
+            }
+          ],
+          "contextSha256": "7330d588f6c4b900f296021980c29606140d5c55e97409f7a59d24a1102057f9",
+          "contextStartLine": 1358,
+          "endLine": 1374,
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+          "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+          "matchBasis": "MutationObserver applies translation to inserted nodes",
+          "path": "romarr/ui.py",
+          "startLine": 1359
+        },
+        {
+          "contextEndLine": 1440,
+          "contextLines": [
+            {
+              "line": 1420,
+              "lineSha256": "d10b36aa74a59bcf4a88185837f658afaf3646eff2bb16c3928d0e9335e945d2",
+              "text": "}"
+            },
+            {
+              "line": 1421,
+              "lineSha256": "f99cddeb37ad49e8d78598cda63b66677f4d9fbb28df871dc8a7595acb65a993",
+              "text": "const applyInterfaceLanguage=(language=readInterfaceLanguage())=>{"
+            },
+            {
+              "line": 1422,
+              "lineSha256": "b21cbe90c904727690b25a64b8a848dae56eb0440609a66c2ceed121a3487db2",
+              "text": "  document.documentElement.lang=language;"
+            },
+            {
+              "line": 1423,
+              "lineSha256": "71aee7cf5e2d8656faf50a62c2d8b385810a2369ecc832024115a2061d492020",
+              "text": "  document.documentElement.dir=ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';"
+            },
+            {
+              "line": 1424,
+              "lineSha256": "e38eda4f35d4f6249128f4e724178f547cfc8f87761abd1ac0690e8725e93e48",
+              "text": "  applyTranslatedLabels(document,language);"
+            },
+            {
+              "line": 1425,
+              "lineSha256": "76399c9af6a922363bc20076b22c3f49a8d03b2bde9414f924de25e1b4680801",
+              "text": "  applyTranslatedOptionLabels(document,language);"
+            },
+            {
+              "line": 1426,
+              "lineSha256": "9a94f5ac9c30a19ac3a5f894cfd8edea58ba43a127f1c3fd9202e51ba21bf699",
+              "text": "  applyTranslatedTemplates(document,language);"
+            },
+            {
+              "line": 1427,
+              "lineSha256": "2b9f34d2e295729c0d6a39e8ecbfc6111594ec621d50b631da23a90d1f6026f5",
+              "text": "  document.querySelectorAll('[data-i18n-aria-label]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nAriaLabel,'aria-label',language));"
+            },
+            {
+              "line": 1428,
+              "lineSha256": "fc0d1ddb2b07d5f0d19d3fab84dcfd38b5395889426065dc3469b715fa371896",
+              "text": "  document.querySelectorAll('[data-i18n-title]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nTitle,'title',language));"
+            },
+            {
+              "line": 1429,
+              "lineSha256": "a98c44460cf6a3576053f22787283fd9ec14685bc4997179fc7158a2f2cc9c87",
+              "text": "  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{"
+            },
+            {
+              "line": 1430,
+              "lineSha256": "5f280da3d78866adfd1ed9264f4f35b50ac5df8374889863bed83b9a8ebe7639",
+              "text": "    const source=el.dataset.i18nPlaceholder, translated=isTranslated(source,language);"
+            },
+            {
+              "line": 1431,
+              "lineSha256": "b7edf35648cbed4c0185e143f46ce61ea89f4ec1f9ca11d6eed8720ee464408d",
+              "text": "    el.placeholder=translateLabel(source,language);"
+            },
+            {
+              "line": 1432,
+              "lineSha256": "de4159ca9ca4c4886220bb311b0ca891ee74e357f45a15f0eec6c953c0efd267",
+              "text": "    el.lang=translated?language:'en';"
+            },
+            {
+              "line": 1433,
+              "lineSha256": "ab4983343be38a98dbc536d03f4f8f755b575ae7399ea20de2e812a9eb117912",
+              "text": "    el.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';"
+            },
+            {
+              "line": 1434,
+              "lineSha256": "8918205c87aec718d8ed26668abe0962b53a36e38887e5434ec02d59639e3ec1",
+              "text": "  });"
+            },
+            {
+              "line": 1435,
+              "lineSha256": "770b5dd07fd670621e49dff825ca53013ccf8611cf26289cb18c699c38d56770",
+              "text": "  applyTranslatedTextTree(document.body,language);"
+            },
+            {
+              "line": 1436,
+              "lineSha256": "39f0ee67dd4cae1317a1060cc56ace96c63beb5fb7b227bc31e0938817a3e7ca",
+              "text": "  applyTranslatedAttributes(document.body,language);"
+            },
+            {
+              "line": 1437,
+              "lineSha256": "7272400139ee0b157736047755082621da7ac57fb81f30d4382ad2e99e8bad26",
+              "text": "  enhanceFormLabels(document.body);"
+            },
+            {
+              "line": 1438,
+              "lineSha256": "335c2990d8ec2c9b86f892b92b4aff1de25c52488148ec92cbd2974e230b8352",
+              "text": "  observeInterfaceText();"
+            },
+            {
+              "line": 1439,
+              "lineSha256": "8bf21412a0b91bc2aa4cb5001d860da01e70d5ca84adb6da2c14d5cbd3b274a0",
+              "text": "  const selector=$('#interface-language'); if(selector) selector.value=readInterfacePreference();"
+            },
+            {
+              "line": 1440,
+              "lineSha256": "3adaa328b519ccaa6af66fe6062a5a675d55c220e8b3de93b63d8357f478cad0",
+              "text": "  const heading=$('#page-title');"
+            }
+          ],
+          "contextSha256": "0057abcd8d99049fc9cede625917ebd6e3651b79a064e9f76e6e7c77203fa64f",
+          "contextStartLine": 1420,
+          "endLine": 1439,
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+          "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+          "matchBasis": "language application traverses text nodes and starts observation",
+          "path": "romarr/ui.py",
+          "startLine": 1421
+        }
+      ]
+    },
+    {
+      "group": "hash-seed-template-flow",
+      "references": [
+        {
+          "contextEndLine": 4370,
+          "contextLines": [
+            {
+              "line": 4333,
+              "lineSha256": "f2827ad141662362d744c0c326d5329a5afa088f608643c16c65ac316963db1c",
+              "text": "        if ROMarr._seed_thread is not None and ROMarr._seed_thread.is_alive():"
+            },
+            {
+              "line": 4334,
+              "lineSha256": "1c59b07d98096e61ded277bab74874ec83cabc4e73941277774b8d58fda17fbe",
+              "text": "            return {\"ok\": True, \"already\": True, **self.seed_status(),"
+            },
+            {
+              "line": 4335,
+              "lineSha256": "73b43f5b1d5aeabe37741c5d11a9ab463a8db96950bf546740153779846a283a",
+              "text": "                    \"detail\": \"Already reading your library.\","
+            },
+            {
+              "line": 4336,
+              "lineSha256": "2c849589f9065eae1a24907019e223636e1f98924ad531b6bb2673cd9300fde7",
+              "text": "                    \"detail_template\": {"
+            },
+            {
+              "line": 4337,
+              "lineSha256": "a95fffa75ce1664ebf828e68eb629a4379ac74adb0a41b97a01be1bc81109cbe",
+              "text": "                        \"key\": \"ui.already-reading-your-library.aa167f8f1a\","
+            },
+            {
+              "line": 4338,
+              "lineSha256": "ed5e762c07f49b5d1a7fcc7befbe501d4628fcaf6321007332974a0f0c652049",
+              "text": "                        \"values\": {},"
+            },
+            {
+              "line": 4339,
+              "lineSha256": "dc36439da9fcdca69153e5fb71095514335984f46ad7a6ba6fffec2c7c7c490c",
+              "text": "                    }}"
+            },
+            {
+              "line": 4340,
+              "lineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "text": ""
+            },
+            {
+              "line": 4341,
+              "lineSha256": "528dc7d54411df86c667648a954675edd2bb5c306bc92c43c365d718f02ee53a",
+              "text": "        ROMarr._seed_state = {\"status\": \"running\", \"seen\": 0, \"added\": 0,"
+            },
+            {
+              "line": 4342,
+              "lineSha256": "469d8ae9b5c0e85f7c70a9ef1d9573e0afdeb23b6a782698d3f7ef172b1779e0",
+              "text": "                              \"started\": datetime.now(timezone.utc)"
+            },
+            {
+              "line": 4343,
+              "lineSha256": "43bb1d557360b7ff1bada8f2d4abd41249d7eb888f785d5f3cc44538927fa24b",
+              "text": "                              .isoformat(timespec=\"seconds\")}"
+            },
+            {
+              "line": 4344,
+              "lineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "text": ""
+            },
+            {
+              "line": 4345,
+              "lineSha256": "d110ab4df024b915b122ddec8a89f4116f40cfc78a210264bdb751f5ee1320a8",
+              "text": "        def run():"
+            },
+            {
+              "line": 4346,
+              "lineSha256": "501dcc82b6eb2d4d41341dd979587a167c3e2bae1bfb51c4b6e78e90c8783fad",
+              "text": "            try:"
+            },
+            {
+              "line": 4347,
+              "lineSha256": "89e43b9f7bd32b70ac23cc0c3779799f2ded16c1acec31439a5035af9f521374",
+              "text": "                result = self.index_hashes_from_library("
+            },
+            {
+              "line": 4348,
+              "lineSha256": "af491916abed9b5ebbea48896d8c6993f42cf7234b254099be0523e84a0cf6be",
+              "text": "                    progress=ROMarr._seed_state)"
+            },
+            {
+              "line": 4349,
+              "lineSha256": "56be2010079b5bc19d04e2444c53b2ac3106be64f4f6a5d3f8f067a81e91944b",
+              "text": "                ROMarr._seed_state.update("
+            },
+            {
+              "line": 4350,
+              "lineSha256": "ef0625f30093d5f3766ff1b73665974c3c8b40bb59047aaa83298c4e1e374a2c",
+              "text": "                    result, status=\"done\" if result.get(\"ok\") else \"failed\")"
+            },
+            {
+              "line": 4351,
+              "lineSha256": "b0d1a933ae7ebf2acb9cebd9943845fcf6dba7017dcbc069b8bf17eef0682e9e",
+              "text": "            except Exception as err:                # noqa: BLE001 - reported"
+            },
+            {
+              "line": 4352,
+              "lineSha256": "a68150f8a84727ea811709af59449b126aaa6b85aa2e33c55acfc21c8128442c",
+              "text": "                log.warning(\"hash seed failed: %s\", err)"
+            },
+            {
+              "line": 4353,
+              "lineSha256": "bc3f350eddfa49278c875aa6705c62ee648b35e23ba9e508a180522d2f073c3d",
+              "text": "                ROMarr._seed_state.update(status=\"failed\", error=str(err))"
+            },
+            {
+              "line": 4354,
+              "lineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "text": ""
+            },
+            {
+              "line": 4355,
+              "lineSha256": "075b8de6b2075cb32a2e5677d4928ee0a05a251d65ddbdac33da5a71f1568bb6",
+              "text": "        ROMarr._seed_thread = _threading.Thread("
+            },
+            {
+              "line": 4356,
+              "lineSha256": "c8b194890bf649e8e423bf2f4a32388525e1a27649a95ddc5218bd0a80e9d502",
+              "text": "            target=run, name=\"romarr-hash-seed\", daemon=True)"
+            },
+            {
+              "line": 4357,
+              "lineSha256": "a005be08a2897deb7fed851d37ec90ad2402ab3892cf471f55e5b7b3d76fe6c8",
+              "text": "        ROMarr._seed_thread.start()"
+            },
+            {
+              "line": 4358,
+              "lineSha256": "2a695e0930ac28ffb0b6eabc7c1312b41e2ebdebe0b16cda251dbda1b6902163",
+              "text": "        if not quiet:"
+            },
+            {
+              "line": 4359,
+              "lineSha256": "c4c8bb407cd8e35d1c4b7447621a012ae7eba3c546b1b601c0cce7adb9477515",
+              "text": "            log.info(\"reading hashes from the library in the background\")"
+            },
+            {
+              "line": 4360,
+              "lineSha256": "cc62698d6e13ff589b8a55ee7d65fe69782b94a5ce545e7264fba7bd022510c9",
+              "text": "        return {\"ok\": True, \"started\": True, **self.seed_status(),"
+            },
+            {
+              "line": 4361,
+              "lineSha256": "556d833b2326f42b2d1ffeba639c0db5363c55005ffce5535f62e05ee910633d",
+              "text": "                \"detail\": \"Reading your library in the background. This page \""
+            },
+            {
+              "line": 4362,
+              "lineSha256": "e68b4b1dc67d1909a6cada64127ce451adb0aaee2b705d8967e901490d8aa397",
+              "text": "                          \"does not have to stay open.\","
+            },
+            {
+              "line": 4363,
+              "lineSha256": "c16f0fe1f22ac224a1d6475be9e0356a240c5e34b4fdc3859ac09a5c3ae157c7",
+              "text": "                \"detail_template\": {"
+            },
+            {
+              "line": 4364,
+              "lineSha256": "a08b927dccf349bbaac072e77a94d907f93063e5c62e707d3236eb37d95dc493",
+              "text": "                    \"key\": \"ui.reading-your-library-in-the-backgrou.c77eb7ff59\","
+            },
+            {
+              "line": 4365,
+              "lineSha256": "e6ad4761b3ae72331e40327d90473a822c78a29110e31a8c756703cd6302b712",
+              "text": "                    \"values\": {},"
+            },
+            {
+              "line": 4366,
+              "lineSha256": "4f45274bbc2a104d5935fd76b9b0bf0e8f8a843568d1a225e33df18616dbd0a8",
+              "text": "                }}"
+            },
+            {
+              "line": 4367,
+              "lineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "text": ""
+            },
+            {
+              "line": 4368,
+              "lineSha256": "cd8e659ffcbcdeb253264eb3c6254e53cfd07884fd8654f874dbd141a3e32276",
+              "text": "    def index_hashes_from_library(self, progress: dict | None = None) -> dict:"
+            },
+            {
+              "line": 4369,
+              "lineSha256": "43d765169f90ce40d6d43a2fb68de045d99071a679fa91e0940dc00569b2712b",
+              "text": "        \"\"\"Fill the hash index from the library server, not from disk."
+            },
+            {
+              "line": 4370,
+              "lineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "text": ""
+            }
+          ],
+          "contextSha256": "692a0876ec0a8f2b64b10c8bb9f09efdce9327f6455c651a30f2a4c7080446a1",
+          "contextStartLine": 4333,
+          "endLine": 4369,
+          "fileSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+          "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+          "matchBasis": "seed status and result include explicit detail templates",
+          "path": "romarr/app.py",
+          "startLine": 4334
+        },
+        {
+          "contextEndLine": 4499,
+          "contextLines": [
+            {
+              "line": 4459,
+              "lineSha256": "74b1e59cb94247f0512531b245c3c23394cea5b5d5fa701da6a4b993214af744",
+              "text": "                 added, seen, len(self.hashes))"
+            },
+            {
+              "line": 4460,
+              "lineSha256": "39e42ca1cab31388ed3832df784b15380fb6048f0bbe6c445e0c1164e28f5e91",
+              "text": "        without = max(0, seen - added)"
+            },
+            {
+              "line": 4461,
+              "lineSha256": "82ef5efbde96eb36fd32145de4988c693025b24f38424fb17b648e0d24f9662d",
+              "text": "        if truncated:"
+            },
+            {
+              "line": 4462,
+              "lineSha256": "72ce983483a461517131f9acd50bbadb4ce02016903b57b7f96ec1d9d7245429",
+              "text": "            detail_template = {"
+            },
+            {
+              "line": 4463,
+              "lineSha256": "60f6df1b2cea240fed2587f8ef683dec4c3027bbf1753d51a803c889b85f2567",
+              "text": "                \"key\": \"ui.stopped-after-seen-entries-truncated.fc5c0496ad\","
+            },
+            {
+              "line": 4464,
+              "lineSha256": "cfbe69457677717a1256c185bfb79f34a45cd1516b8b3ca5f5a07a97cdf1f2b3",
+              "text": "                \"values\": {\"seen\": seen, \"truncated\": truncated,"
+            },
+            {
+              "line": 4465,
+              "lineSha256": "8dacf0b4d1b0a357ee877932daa3c9ae546376592444ac135e5d67fe14d065a4",
+              "text": "                           \"added\": added},"
+            },
+            {
+              "line": 4466,
+              "lineSha256": "86afdf70a95436e883aa7fc5c06a2ab083719054438f1218d15ebdaf287b4bac",
+              "text": "            }"
+            },
+            {
+              "line": 4467,
+              "lineSha256": "ce19c141c9e9314cc9d7388af845340d48c6dc3d745d47d3728ab92541535016",
+              "text": "        elif confirmed:"
+            },
+            {
+              "line": 4468,
+              "lineSha256": "72ce983483a461517131f9acd50bbadb4ce02016903b57b7f96ec1d9d7245429",
+              "text": "            detail_template = {"
+            },
+            {
+              "line": 4469,
+              "lineSha256": "ec2d908a5a423b2ef4a984534bedf05c9b37499e2c93edb1c11b3254462f229d",
+              "text": "                \"key\": \"ui.read-seen-entries-and-found-added-wi.9304d58175\","
+            },
+            {
+              "line": 4470,
+              "lineSha256": "67f0a9d69919b1298c3687862f5a40c44c356accac5b562efbc3794e399edb44",
+              "text": "                \"values\": {\"seen\": seen, \"added\": added,"
+            },
+            {
+              "line": 4471,
+              "lineSha256": "0e9c96b3e1e3e58c05b1af95d650281ba8f7796a0e06fd85b121f55bbff5c52b",
+              "text": "                           \"without\": without, \"confirmed\": confirmed},"
+            },
+            {
+              "line": 4472,
+              "lineSha256": "86afdf70a95436e883aa7fc5c06a2ab083719054438f1218d15ebdaf287b4bac",
+              "text": "            }"
+            },
+            {
+              "line": 4473,
+              "lineSha256": "5ef79885a9187ae8de2775676bd8526b741bfa964f566cd97a0369deaeb6b009",
+              "text": "        else:"
+            },
+            {
+              "line": 4474,
+              "lineSha256": "72ce983483a461517131f9acd50bbadb4ce02016903b57b7f96ec1d9d7245429",
+              "text": "            detail_template = {"
+            },
+            {
+              "line": 4475,
+              "lineSha256": "0e02cf15f16b732d820a96e221fbbef429b9ba054a34c74543abf497ea5ddbaf",
+              "text": "                \"key\": \"ui.read-seen-entries-and-found-added-wi.ca302edb9e\","
+            },
+            {
+              "line": 4476,
+              "lineSha256": "67f0a9d69919b1298c3687862f5a40c44c356accac5b562efbc3794e399edb44",
+              "text": "                \"values\": {\"seen\": seen, \"added\": added,"
+            },
+            {
+              "line": 4477,
+              "lineSha256": "93096560e4f738a4ffd9c85b14250903c77b83414277709aa776ff0913788cde",
+              "text": "                           \"without\": without},"
+            },
+            {
+              "line": 4478,
+              "lineSha256": "86afdf70a95436e883aa7fc5c06a2ab083719054438f1218d15ebdaf287b4bac",
+              "text": "            }"
+            },
+            {
+              "line": 4479,
+              "lineSha256": "fd214fcbe43a8370850483bbe49cd0335add727580fd911eca228fa0b9955cda",
+              "text": "        return {\"ok\": True, \"added\": added, \"seen\": seen,"
+            },
+            {
+              "line": 4480,
+              "lineSha256": "1f367d724af91934ae5f9c87e677e253b675090e5ee6a63f71127525389951ba",
+              "text": "                \"total\": len(self.hashes), \"verified\": confirmed,"
+            },
+            {
+              "line": 4481,
+              "lineSha256": "ed8c42287a6e55e42908bd613342adbb5913a9fa6a81d7d4e5a1f69e1993273f",
+              "text": "                \"stopped_early\": bool(truncated), \"error\": truncated,"
+            },
+            {
+              "line": 4482,
+              "lineSha256": "d31e029660c36106240b7fb3f4f31b13b0021ee656ead56d4514c6d4793c16b2",
+              "text": "                \"detail_template\": detail_template,"
+            },
+            {
+              "line": 4483,
+              "lineSha256": "72d8f35f7712d0a86439591735d746ead10321954ca3e7e0b38bf8310c26474a",
+              "text": "                \"detail\": (f\"Stopped after {seen:,} entries: {truncated}. \""
+            },
+            {
+              "line": 4484,
+              "lineSha256": "26c60bfcb762f9b4df0c7351741a507151e35bf3e75042ee6c0b8e0482e108b2",
+              "text": "                           f\"{added:,} hashes were kept; run it again to \""
+            },
+            {
+              "line": 4485,
+              "lineSha256": "a50d6c238d80a5d650863fd79b4a331f7e5d3e92f3c454c48b7d87e85dd88a35",
+              "text": "                           f\"continue.\" if truncated else"
+            },
+            {
+              "line": 4486,
+              "lineSha256": "02f30f22d3640eb9ca22a4da8c701d6d88bb665ecd5ad63cb4f7fd0c125fa1c0",
+              "text": "                           f\"Read {seen:,} entries and found {added:,} with a \""
+            },
+            {
+              "line": 4487,
+              "lineSha256": "cc2ca31c921aff0736b0b8495eed915e0b09825e1825c177facaa59d556c1c2b",
+              "text": "                          f\"hash. Netplay can match those. The other \""
+            },
+            {
+              "line": 4488,
+              "lineSha256": "7f69ad28494c320939c8f8caafa706b36c1b0bf58f552271901cecb83715d2fe",
+              "text": "                           f\"{without:,} are catalogued entries your library \""
+            },
+            {
+              "line": 4489,
+              "lineSha256": "54e4e530d21ad2b1fa119f1cc9b8e7e11fd07b176dc1e85430e12ea9748fc92d",
+              "text": "                           f\"has never scanned off a disk, so there is \""
+            },
+            {
+              "line": 4490,
+              "lineSha256": "b2b7f0d796927aa898a7210a9f94c203cbbfe4e6869d68df0cd2a00abf3d9d6f",
+              "text": "                           f\"nothing to match them on. \""
+            },
+            {
+              "line": 4491,
+              "lineSha256": "313c252d3be2357157d539a23766321ab155624a23fb0237693886e73a3b3dc0",
+              "text": "                           + (f\"{confirmed:,} matched a No-Intro or Redump \""
+            },
+            {
+              "line": 4492,
+              "lineSha256": "f0f1cf2f66e3ff3205b58ad529be511e8cda4017926c446ba28e43a76810e994",
+              "text": "                              f\"dump and are marked verified.\""
+            },
+            {
+              "line": 4493,
+              "lineSha256": "a6cfdfaa49d4dc836de8f3ecc3ee06bc2081e7c7d04a1c3a2a739185211fac62",
+              "text": "                              if confirmed else"
+            },
+            {
+              "line": 4494,
+              "lineSha256": "078664b9e456aaff945bd59b7b0a9a3d8d58e5fa71833a2040658fbc872c4cef",
+              "text": "                              \"None matched a DAT, so all are unverified -- \""
+            },
+            {
+              "line": 4495,
+              "lineSha256": "40d23f1905029b0218118f031ee1f6d5a6c8d2a1d8374163cf3748a8f4f99f8f",
+              "text": "                              \"check the DAT directory under Settings.\"))}"
+            },
+            {
+              "line": 4496,
+              "lineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "text": ""
+            },
+            {
+              "line": 4497,
+              "lineSha256": "b820c3786327317457e9ec31aacc193260714266350231d62b3d2330824b515f",
+              "text": "    def save_peers(self) -> None:"
+            },
+            {
+              "line": 4498,
+              "lineSha256": "dec394f47207de3c7401983d390817673a3977a21c7832ba10e7766caeec6afe",
+              "text": "        \"\"\"Persist relationships. Called after every change to one.\"\"\""
+            },
+            {
+              "line": 4499,
+              "lineSha256": "b34e2ad94c9dca004102e2098f9645ece44d98e5bb2c29caa2e58ab4102948bf",
+              "text": "        self.store.settings[\"_peers\"] = self.federation.dump()"
+            }
+          ],
+          "contextSha256": "cda2ef305788d06bfb71a0fb17d94b72aa76521eaa5814d9f2a4ca17d73741e7",
+          "contextStartLine": 4459,
+          "endLine": 4498,
+          "fileSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+          "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+          "matchBasis": "final hash seed result chooses a fixed template and named values",
+          "path": "romarr/app.py",
+          "startLine": 4460
+        },
+        {
+          "contextEndLine": 3326,
+          "contextLines": [
+            {
+              "line": 3309,
+              "lineSha256": "780a9db0c6d870143c97bd515f6d1d6893b7a82d2f17de391b3eabae86bd78b8",
+              "text": "    if(location.hash.replace('#','')!=='peers') return;"
+            },
+            {
+              "line": 3310,
+              "lineSha256": "0eafe1a3f012fb8239ac2a98487c0fdf68b2ccb19f481b57ef2d6cf9fe5929cf",
+              "text": "    const s=await j('/api/v1/hashes').catch(()=>null);"
+            },
+            {
+              "line": 3311,
+              "lineSha256": "8f7d2a0121fb47053f9911aa12d0c1346e3674931a5477fe896b0a6fbd2a016f",
+              "text": "    if(!s) return;"
+            },
+            {
+              "line": 3312,
+              "lineSha256": "a7b9441615d6a75a7579a8a30fd1f5704fbb0eba8c9fcaa01efe832f9b09944b",
+              "text": "    const st=s.seed||{};"
+            },
+            {
+              "line": 3313,
+              "lineSha256": "c9fe9a5861589e10c9b18a6c835e99565207f943888b8451789b971b202fc3ab",
+              "text": "    const live=$('#p-seedlive');"
+            },
+            {
+              "line": 3314,
+              "lineSha256": "c391c66c0fee3d5181da9f831ae445fee0a8c5cbb307eb91a78eee0325bcee20",
+              "text": "    if(!live) return;"
+            },
+            {
+              "line": 3315,
+              "lineSha256": "f6aeb5b61b91e458cfb5819e4f0cd3084c20737690ef05cac83e105474e8e722",
+              "text": "    if(st.running){"
+            },
+            {
+              "line": 3316,
+              "lineSha256": "4dc6ecb93010c1d704efbd600fc84d1e415b9a18ea208cc50d08aa93f6311268",
+              "text": "      live.innerHTML=`<div class=\"panel\" style=\"margin-top:10px\">${interfaceTemplateMarkup('ui.reading-your-library-seen-entries-ch.17d1ca60ec',"
+            },
+            {
+              "line": 3317,
+              "lineSha256": "80582d03d7572fa631eaaa75cf8d87d2974e8d438db3559b4554650d791fe982",
+              "text": "        {seen:fmt(st.seen||0),added:fmt(st.added||0)})}</div>`;"
+            },
+            {
+              "line": 3318,
+              "lineSha256": "33973b7a707e5bedc0414e21c1263bd05e261bfb27fe88394da4fa57d3742290",
+              "text": "      setTimeout(seedPoll,2000);"
+            },
+            {
+              "line": 3319,
+              "lineSha256": "4aec7cf5015b14cdb61723d2b5a9822587e9e8199f35458291023ef80ca1abc2",
+              "text": "    } else if(st.status==='done'&&st.seen){"
+            },
+            {
+              "line": 3320,
+              "lineSha256": "1f440b8a95bf1209be2b5727b3f159f9153333142eb7c390d824d49b06485cc9",
+              "text": "      live.innerHTML=`<div class=\"panel\" style=\"margin-top:10px\">${"
+            },
+            {
+              "line": 3321,
+              "lineSha256": "0129cabd087c84c14fdb3f114c7592d28db07a1fe3789b791f438abe7bbd0542",
+              "text": "      apiMessageMarkup(st.detail,st.detail_template)}</div>`;"
+            },
+            {
+              "line": 3322,
+              "lineSha256": "12ad53d245853de7b9a0a9d0d29a41191d40cde06fbba5f6fdf6e0bde2961932",
+              "text": "    } else if(st.status==='failed'){"
+            },
+            {
+              "line": 3323,
+              "lineSha256": "681eb4ad0ff7c115afdb8544621934c0700909a3a9f32206fca30a324e3d8e6a",
+              "text": "      live.innerHTML=`<div class=\"panel panel-warn\" style=\"margin-top:10px\">${"
+            },
+            {
+              "line": 3324,
+              "lineSha256": "237542bbf7724079a4a7db9f16b9eb8776b4e91bfb0382ed0e545bcec99fffa9",
+              "text": "        (st.error?apiMessageMarkup(st.error,st.error_template)"
+            },
+            {
+              "line": 3325,
+              "lineSha256": "99991085a7bd1eaf677d2282a73e4284ec9bf3b9597c4da90bfb1e8469b22332",
+              "text": "          :appMessageMarkup('The library read failed.'))}</div>`;"
+            },
+            {
+              "line": 3326,
+              "lineSha256": "28d86778615f6af47bb1bc4f40face756749768e5111f114cfa234a5060c25af",
+              "text": "    }"
+            }
+          ],
+          "contextSha256": "703fa9d989716900f92db7cef000145909ee6cacc08476938e411c1379bba497",
+          "contextStartLine": 3309,
+          "endLine": 3325,
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+          "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+          "matchBasis": "seed poll passes detail_template into the localized renderer",
+          "path": "romarr/ui.py",
+          "startLine": 3310
+        }
+      ]
+    },
+    {
+      "group": "opaque-hash-detail-flow",
+      "references": [
+        {
+          "contextEndLine": 6864,
+          "contextLines": [
+            {
+              "line": 6851,
+              "lineSha256": "de35ef9479a56d2c815fde1bbfdca9896ff4db2b4d3a8a845078c694e9ea5477",
+              "text": "                                        \"origin\": service.federation.name})"
+            },
+            {
+              "line": 6852,
+              "lineSha256": "f8098f347ae4ed1d51b2dc0173c461a8022349ec9bb128fba75f741fbb1dc142",
+              "text": "            if route.path == \"/api/v1/hashes\":"
+            },
+            {
+              "line": 6853,
+              "lineSha256": "0d2ba522d6cf2d715da34c2f5d5de674e97341b950fdadc837522ef4a0b2e4e7",
+              "text": "                # What netplay can actually prove. Without this an operator"
+            },
+            {
+              "line": 6854,
+              "lineSha256": "c6dd58ed63ccc73e5840e3429c4feb6edc7505b23d28c0227c26ea6314bbe7a2",
+              "text": "                # has no way to tell \"we disagree on the dump\" apart from"
+            },
+            {
+              "line": 6855,
+              "lineSha256": "af9a317f0399b91bc8c097ee58705f1aef7a963c5386bbf1bd1f3d3f76b4e0a9",
+              "text": "                # \"I never audited that platform\"."
+            },
+            {
+              "line": 6856,
+              "lineSha256": "d1b132ecd2790fd14b519158039e3319d334811982994e22e08407049a00aa05",
+              "text": "                return self._json(200, {"
+            },
+            {
+              "line": 6857,
+              "lineSha256": "ca3c5fc7cabb084241a79f16bdc5349c844565a7550f96eceb4e1cbe4cca7b17",
+              "text": "                    \"count\": len(service.hashes),"
+            },
+            {
+              "line": 6858,
+              "lineSha256": "b921bb50ed128bd9f7eea8ab22c317b396491881243ad32339caac0d443b3767",
+              "text": "                    \"platforms\": service.hashes.platforms(),"
+            },
+            {
+              "line": 6859,
+              "lineSha256": "1db7cb19f9342e80de7c1de5d338b4d33b3be3ada978576c2f4cfd1776397a45",
+              "text": "                    \"seed\": service.seed_status(),"
+            },
+            {
+              "line": 6860,
+              "lineSha256": "9ecfa091be4fd239cad18f2eae4a13c6bf0da7794fa1a2b35f3da653cb9e859d",
+              "text": "                    \"detail\": \"Read from your library server's own hashes, \""
+            },
+            {
+              "line": 6861,
+              "lineSha256": "593b750679d21eff7d2164b5d9d3ca309d207d971476e3a080781e9fe7e4199c",
+              "text": "                              \"and upgraded to verified by an audit or a \""
+            },
+            {
+              "line": 6862,
+              "lineSha256": "5465f7a918c742f92d323c8cc6218dc47f97f756272cbff4629175582acfac48",
+              "text": "                              \"verified import.\"})"
+            },
+            {
+              "line": 6863,
+              "lineSha256": "2fe295a548c7a0087c5a7a161a1d5b6d5245319512c1f43ebd53eb8bacb0c401",
+              "text": "            if route.path == \"/api/v1/friends/shelf\":"
+            },
+            {
+              "line": 6864,
+              "lineSha256": "5ca45372ee33b72a4ec8c1df4a01e1e9d6812d2edf0a3c16e458679cf80f810d",
+              "text": "                # The other direction: I browse THEIR library. Operator"
+            }
+          ],
+          "contextSha256": "6d921999315daac61a61d0bbbf717f141135d037dca3fa9d8dd88f8caca22347",
+          "contextStartLine": 6851,
+          "endLine": 6863,
+          "fileSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+          "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+          "matchBasis": "hash API returns detail without template metadata",
+          "path": "romarr/app.py",
+          "startLine": 6852
+        },
+        {
+          "contextEndLine": 3118,
+          "contextLines": [
+            {
+              "line": 3098,
+              "lineSha256": "8aea5b826973f0d9833c5ea68923b0c8fe2c9bdbe149267fd8afec613c90dcf4",
+              "text": "  const list=d.peers||[];"
+            },
+            {
+              "line": 3099,
+              "lineSha256": "4cc435f83ab5708a0dddaede23a4bb9ca7c457918ed799348588641b39d9139c",
+              "text": "  const hx=await j('/api/v1/hashes').catch(()=>({count:0}));"
+            },
+            {
+              "line": 3100,
+              "lineSha256": "6ec522a2b17a06202900e660c454b7c447065bc1e8b86b4aa73de4fb47389b16",
+              "text": "  const scopeLabel={none:'Nothing',platforms:'Named platforms only',"
+            },
+            {
+              "line": 3101,
+              "lineSha256": "5eeb39f2fb9969a2df30a1c226576c98aea65b378dba67e2a9b081b23ae9781e",
+              "text": "    verified:'Verified dumps only',all:'Everything'};"
+            },
+            {
+              "line": 3102,
+              "lineSha256": "4ba8f913114e73a106b0cf01fb4c7884593a927e5cb55927c9398cece1671007",
+              "text": "  const accessLabel={catalogue:'See titles only',stream:'Play here',"
+            },
+            {
+              "line": 3103,
+              "lineSha256": "fea5ea70deb4fd395791fec9dc22fe91b48a44719ac751c8945fe08b9ad9a78d",
+              "text": "    fetch:'Download from me'};"
+            },
+            {
+              "line": 3104,
+              "lineSha256": "ad90a7fe76a12d3d2a0ddc7bb836b979834ea19cabc7859e3f60ff347394bf7a",
+              "text": "  $('#page').innerHTML=`<div class=\"card\"><h3>Friends</h3>"
+            },
+            {
+              "line": 3105,
+              "lineSha256": "380ab6a1be72e4391304e68e970bb702de6c4399a97629bc4d6ff00cb52d14b0",
+              "text": "      <p class=\"help\">${interfaceMarkup('ui.share-a-library-with-someone-running.81db6ce026')}"
+            },
+            {
+              "line": 3106,
+              "lineSha256": "57b38bd5d5e7f4f22c34f93ebf1ed0a186c0566b6af63524ef6b3467b87fe125",
+              "text": "        <b>Peering shares nothing by itself</b> — ${interfaceMarkup('ui.you-choose-what-each-friend-sees-and.b14fcf4cf5')}</p>"
+            },
+            {
+              "line": 3107,
+              "lineSha256": "6cc5048c1d1d51cece46d4fc7b34651ea79c4af9fd6df77d49f8514b4593b22b",
+              "text": "      <div class=\"row\" style=\"flex-wrap:wrap;gap:8px\">"
+            },
+            {
+              "line": 3108,
+              "lineSha256": "7ba54bc9d0025e5eabbaa82f17ce46e1f712cc8f95a89f48e647ddf594b1af52",
+              "text": "        <button class=\"btn\" id=\"p-invite\">Invite a friend</button>"
+            },
+            {
+              "line": 3109,
+              "lineSha256": "e545e66cb36d16434bc01c2a2c9f0f08328c0dfaa3b39529f6375e8a53d8dbdd",
+              "text": "        <button class=\"btn ghost\" id=\"p-redeem\">I have an invitation</button>"
+            },
+            {
+              "line": 3110,
+              "lineSha256": "d6bebe7cb7f21c1aba6ab8119e37ecbf5a124e74d0c5d0c764fb1d011ff3775a",
+              "text": "        <button class=\"btn ghost\" id=\"p-romm\">Add a RomM server</button>"
+            },
+            {
+              "line": 3111,
+              "lineSha256": "d0e339c0d126d133b9e8c101bd0ccbec051933bff73a98087aa45fdb316b7b74",
+              "text": "      </div>"
+            },
+            {
+              "line": 3112,
+              "lineSha256": "7d00df8714703618fafafbe06f802ceae99c5d4f17994bf41426df8cb3d188d9",
+              "text": "      <p class=\"help\" style=\"margin-top:10px\">${interfaceMarkup(ROMM_FRIEND_HELP)}</p>"
+            },
+            {
+              "line": 3113,
+              "lineSha256": "ab9f613b95ee0ccadfce55a94a8f4c43e625b2338a6b6982addb1c2a39b32122",
+              "text": "      <div id=\"p-out\" style=\"margin-top:12px\"></div></div>"
+            },
+            {
+              "line": 3114,
+              "lineSha256": "650b918bea4275533268cf4920db32d1fe2cf071039ca974234b795776b6d00a",
+              "text": "    <div class=\"card\"><h3>What netplay can prove</h3>"
+            },
+            {
+              "line": 3115,
+              "lineSha256": "e63501e73aa2c1a7366c1bd52b680894c38b467b3ccba3f817824ee79419fa60",
+              "text": "      <p class=\"help\">${interfaceMarkup(NETPLAY_HELP)}</p>"
+            },
+            {
+              "line": 3116,
+              "lineSha256": "351add2625f315620153031a9e98233bbf22a6a5bb70d988e31fc9fbd4ee8aac",
+              "text": "      ${hx.count"
+            },
+            {
+              "line": 3117,
+              "lineSha256": "d28233003231aed50c00cee559c0876a7798b8942f29f86d31fc00bde4fcae8c",
+              "text": "        ? `<div class=\"panel\"><b>${fmt(hx.count)}</b> dump(s) can be"
+            },
+            {
+              "line": 3118,
+              "lineSha256": "753b9e57a603f48da0fa4e196e976ba43d698fe8b7b22e33fcbbd8d0e44a1da3",
+              "text": "             matched, across ${fmt(Object.keys(hx.platforms||{}).length)} platform(s).</div>`"
+            }
+          ],
+          "contextSha256": "550e70d21a4cf0bd800a54172e7b3915fc6afec5a22ab0a7558fbf14bc5b9dc6",
+          "contextStartLine": 3098,
+          "endLine": 3117,
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+          "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+          "matchBasis": "current page uses other fields and does not display detail",
+          "path": "romarr/ui.py",
+          "startLine": 3099
+        }
+      ]
+    },
+    {
+      "group": "opaque-rename-validation-flow",
+      "references": [
+        {
+          "contextEndLine": 1818,
+          "contextLines": [
+            {
+              "line": 1807,
+              "lineSha256": "0bb1fe6bdfd4d66cab57393581126220f9c38f7fb46999500e74238d158f0617",
+              "text": "            raise ValueError(\"Set a shared metadata root before making a rename plan.\")"
+            },
+            {
+              "line": 1808,
+              "lineSha256": "3dd93446ff7841ee069208f486d6aa4bce7366bcf95e26035c9eb4e3394704a4",
+              "text": "        root = self.rom_root.expanduser().resolve(strict=True)"
+            },
+            {
+              "line": 1809,
+              "lineSha256": "ffb17d08a960ad35b4602a28a9cf50fe53de241bb4c11c75e5220b9e278dd876",
+              "text": "        if platform and resolve(platform) is None:"
+            },
+            {
+              "line": 1810,
+              "lineSha256": "f772b1416495174a4627dd4a541b2f53d04ffe809e4f0c56235044c0077f4406",
+              "text": "            raise ValueError(\"Select a supported platform.\")"
+            },
+            {
+              "line": 1811,
+              "lineSha256": "da488a04cf2e34b42ea314cac71e0c659a722f8c6694e21c099e610287f5bcfd",
+              "text": "        try:"
+            },
+            {
+              "line": 1812,
+              "lineSha256": "bfb94a50fea82fd4d6e1b07b5f944146738745afdc4071fb832b53ba061534f0",
+              "text": "            offset = max(0, int(offset))"
+            },
+            {
+              "line": 1813,
+              "lineSha256": "eca8fec803dcae66255525e52f0d1083c085838fd7a22d8bb413ed65211db1f6",
+              "text": "            limit = max(1, min(int(limit), MAX_RENAME_PLAN_BATCH))"
+            },
+            {
+              "line": 1814,
+              "lineSha256": "1958fc8f6da1b7509faa7422888ad16d0a91bc87b6f0c25c8da1b3d164941cd1",
+              "text": "        except (TypeError, ValueError):"
+            },
+            {
+              "line": 1815,
+              "lineSha256": "8a2fe7a9335833dfc3e38be025902a89650d89a8671ae67c44486d6a712081ea",
+              "text": "            raise ValueError(\"Rename batch offset and limit must be integers.\") from None"
+            },
+            {
+              "line": 1816,
+              "lineSha256": "8326281152f473051ea0ba127d4624c6ad51c5decf581cf5319e0c366d0f3fe4",
+              "text": "        requested = resolve(platform).slug if platform else \"\""
+            },
+            {
+              "line": 1817,
+              "lineSha256": "8dcf877bb0c18fbca7e319f8ed3410045a008c89736328c3991e820794b4653c",
+              "text": "        source = self.records(requested, limit=limit, offset=offset)"
+            },
+            {
+              "line": 1818,
+              "lineSha256": "90d71fb792a5efaf9037b7d5b37fbc8103e69c9a651325648601e5ee947731d8",
+              "text": "        if source.get(\"error\"):"
+            }
+          ],
+          "contextSha256": "5b4e75c4fb4b60f584d5521525d1e4f4420cfcd4ae770733b3049afade7462b2",
+          "contextStartLine": 1807,
+          "endLine": 1817,
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+          "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+          "matchBasis": "fixed validation error source",
+          "path": "romarr/organizer.py",
+          "startLine": 1808
+        },
+        {
+          "contextEndLine": 6788,
+          "contextLines": [
+            {
+              "line": 6774,
+              "lineSha256": "668cda50fb4917e1b5abee460bc8cf23ff82b1bd4c05de7b9a21ea6b584e7d7c",
+              "text": "                return self._json(200, result)"
+            },
+            {
+              "line": 6775,
+              "lineSha256": "51045d3009ed4daf44f2d1f54d827650af7ee132a25aa4f43aa9798314fd78f0",
+              "text": "            if route.path == \"/api/v1/organizer/rename-plan\":"
+            },
+            {
+              "line": 6776,
+              "lineSha256": "fc742218801ddbe08cfad234f8a61c4d6bbe28702e061e8d9b4af0292359ab90",
+              "text": "                try:"
+            },
+            {
+              "line": 6777,
+              "lineSha256": "ace2cf5d4ec8fb5b9be8ce217d2dd417cc33b2461b8786aefeda94c2457ae807",
+              "text": "                    plan_offset = int((query.get(\"offset\") or [\"0\"])[0] or 0)"
+            },
+            {
+              "line": 6778,
+              "lineSha256": "24161b9ad64a6f0e92d160d75ce7e4c048b2f84d599b26f5592ec8ad93539874",
+              "text": "                    plan_limit = int((query.get(\"limit\") or [\"200\"])[0] or 200)"
+            },
+            {
+              "line": 6779,
+              "lineSha256": "0d5dd7e00326e875a9d6a8e89abc9cdb6ed00f0f79665fbf81bf2fa36525dcf6",
+              "text": "                    result = service.organizer.rename_plan("
+            },
+            {
+              "line": 6780,
+              "lineSha256": "e5cd33b22800acd62d69ac84b690a6e358e176d19000c9c567cf4c9f6d045584",
+              "text": "                        (query.get(\"platform\") or [\"\"])[0],"
+            },
+            {
+              "line": 6781,
+              "lineSha256": "c169700364564dee14a4ac4b0dd90dba2fbb8b4c0d7b375b7cd0e63c4705014b",
+              "text": "                        offset=plan_offset, limit=plan_limit)"
+            },
+            {
+              "line": 6782,
+              "lineSha256": "848a496b04113788fcb7048653bf6041fc48ee9db96ec301e51df9c2aeb03af4",
+              "text": "                except (ValueError, OSError) as exc:"
+            },
+            {
+              "line": 6783,
+              "lineSha256": "01120191f032ea428e509766c4bf6f88e3cebc2ed6ffeb84409636bd7643304c",
+              "text": "                    return self._json(400, {\"error\": str(exc)})"
+            },
+            {
+              "line": 6784,
+              "lineSha256": "668cda50fb4917e1b5abee460bc8cf23ff82b1bd4c05de7b9a21ea6b584e7d7c",
+              "text": "                return self._json(200, result)"
+            },
+            {
+              "line": 6785,
+              "lineSha256": "a71c5a1b9c574a4ea54f0503f31c5f8f75d358b75fb51303c19049af0538dacd",
+              "text": "            if route.path == \"/api/v1/organizer/art\":"
+            },
+            {
+              "line": 6786,
+              "lineSha256": "fc742218801ddbe08cfad234f8a61c4d6bbe28702e061e8d9b4af0292359ab90",
+              "text": "                try:"
+            },
+            {
+              "line": 6787,
+              "lineSha256": "352de822a805f2b0e4e1c912dfa2ae1a04ea64596448b6762696f6c35d55e668",
+              "text": "                    data, content_type = service.organizer.artwork("
+            },
+            {
+              "line": 6788,
+              "lineSha256": "f67a68b58102d94c4b59e6f50be817e971ccb5603dcc5fd608e6f4477ebb3c58",
+              "text": "                        (query.get(\"identity_id\") or [\"\"])[0])"
+            }
+          ],
+          "contextSha256": "ef40af3834ab020920b4d33dbab4e1b56ac443e363bb264f59905dfed5de59e3",
+          "contextStartLine": 6774,
+          "endLine": 6787,
+          "fileSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+          "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+          "matchBasis": "raw exception is returned without template metadata",
+          "path": "romarr/app.py",
+          "startLine": 6775
+        },
+        {
+          "contextEndLine": 5891,
+          "contextLines": [
+            {
+              "line": 5881,
+              "lineSha256": "18a29af6af702dc88d23f1a5df41a8b57d16297116d7eb2d46c1f4fd3cbb2ad4",
+              "text": "  $('#org-next').onclick=()=>{offset+=limit;loadInventory();};"
+            },
+            {
+              "line": 5882,
+              "lineSha256": "94480e808230b240b82e649094b7bcf6d1cf76de8841ef9f0aafa58afde5db41",
+              "text": "  const previewPlan=async(planOffset)=>{"
+            },
+            {
+              "line": 5883,
+              "lineSha256": "053b17e8970ddbf43d7cea910892f80701589e7b36bd2981f24063bf8b20d9da",
+              "text": "    const query=new URLSearchParams({offset:String(planOffset),limit:String(planLimit)});"
+            },
+            {
+              "line": 5884,
+              "lineSha256": "8506ceacfe97df573d249c3503bd7e06c447e03317a99c443e93bd5e13ff3fc5",
+              "text": "    if(platform())query.set('platform',platform());"
+            },
+            {
+              "line": 5885,
+              "lineSha256": "3d0de0b667146c7578664dd0073e5d3e0b7dd4ed82b06f5c8669f1c444ce8e0c",
+              "text": "    const plan=await j('/api/v1/organizer/rename-plan?'+query.toString())"
+            },
+            {
+              "line": 5886,
+              "lineSha256": "6e3854ab909889bc3c61344997aafbd6e86172433939240f6797f36d975e301c",
+              "text": "      .catch(()=>({error:'Could not create a rename preview.'}));"
+            },
+            {
+              "line": 5887,
+              "lineSha256": "f609008f0f4a46f2053d97662e90f4ac5007e77bc8cef0a7c5d2a646f6096b57",
+              "text": "    currentPlan=plan;"
+            },
+            {
+              "line": 5888,
+              "lineSha256": "9375ae128792d38bf450c081c7ba72f0acb1aa05c9d1d0bad7faeac6d2103eba",
+              "text": "    if(plan.error){messageApi(plan.error,true,plan.error_template);$('#org-plan-result').innerHTML='';return;}"
+            },
+            {
+              "line": 5889,
+              "lineSha256": "6792404db70fa32a31fe447450d564648896df769e222a046ebde88175351368",
+              "text": "    const batch=plan.batch||{offset:planOffset,limit:planLimit,total:0,count:0,has_more:false};"
+            },
+            {
+              "line": 5890,
+              "lineSha256": "692e68d009c91f0fb2e835d8eca3a48581d74af973c13f9b61d43735e6703dc7",
+              "text": "    const first=batch.count?batch.offset+1:0;"
+            },
+            {
+              "line": 5891,
+              "lineSha256": "aa5361a08387a86a0f8e1cdc8dabe6e8f8140b2537a4eec9f6d3103750528a6c",
+              "text": "    const last=batch.offset+batch.count;"
+            }
+          ],
+          "contextSha256": "6caf16d0f960b2af05a1b981a2f9c2012291a99a923caa94984f2d704611e699",
+          "contextStartLine": 5881,
+          "endLine": 5890,
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+          "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+          "matchBasis": "raw error is handed to messageApi",
+          "path": "romarr/ui.py",
+          "startLine": 5882
+        },
+        {
+          "contextEndLine": 1049,
+          "contextLines": [
+            {
+              "line": 1041,
+              "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+              "text": "};"
+            },
+            {
+              "line": 1042,
+              "lineSha256": "222e1101b1448fbc6bb2e2e36ac6088ebdaa4614474e733548e0bfaeae002135",
+              "text": "const apiMessageMarkup=(value,explicitTemplate=null)=>{"
+            },
+            {
+              "line": 1043,
+              "lineSha256": "ee6395c49a1c2145a24150c0cd3ee59ea88bc504bccfce32e8f466a00027c272",
+              "text": "  const explicit=explicitTemplateMarkup(explicitTemplate);"
+            },
+            {
+              "line": 1044,
+              "lineSha256": "65753c85a8536ac2028e103927525ba9b2a6f1edbe6f4ce56d7ac15c3c050df0",
+              "text": "  if(explicit)return explicit;"
+            },
+            {
+              "line": 1045,
+              "lineSha256": "54e679b0df397986474588f990cce074437a8df5da87cf9ce2de24f75baa5b1a",
+              "text": "  if(value===null||value===undefined||value==='')return '';"
+            },
+            {
+              "line": 1046,
+              "lineSha256": "770d46ebee6d35251ed89c83e7003d30827becaf651e6dc58384f79ff2ad2885",
+              "text": "  if(typeof value!=='string'&&typeof value!=='number')return '';"
+            },
+            {
+              "line": 1047,
+              "lineSha256": "0bb1bbf979d19b244f95ee719a0cbb80da4306deaf75dce06aa07bd70957fad7",
+              "text": "  const source=String(value);"
+            },
+            {
+              "line": 1048,
+              "lineSha256": "2a70e2ba5186ace1175242e35fd43c3bda0fa99a99698faac37d1e927e2d2371",
+              "text": "  return '<span lang=\"und\" dir=\"auto\">'+esc(source)+'</span>';"
+            },
+            {
+              "line": 1049,
+              "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+              "text": "};"
+            }
+          ],
+          "contextSha256": "faf4034611b2b4cc177ee1a1ca3f8bd0d4ea44a2d9c969a5a1113f6222ce9bab",
+          "contextStartLine": 1041,
+          "endLine": 1048,
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+          "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+          "matchBasis": "raw API rendering does not infer a localized source template",
+          "path": "romarr/ui.py",
+          "startLine": 1042
+        }
+      ]
+    }
+  ],
+  "tree": "1f8ada1746f53796e2b4a8f43f9a0075150aa5d7"
+}

@@ -1,0 +1,10 @@
+{
+  "branch": "task/localization-translation-review-20261030",
+  "draft": true,
+  "exactMatch": true,
+  "expectedHead": "363601fd2597f0fb97adff97554e651c2bea2d99",
+  "head": "363601fd2597f0fb97adff97554e651c2bea2d99",
+  "remoteBranchHead": "363601fd2597f0fb97adff97554e651c2bea2d99",
+  "remotePullRefHead": "363601fd2597f0fb97adff97554e651c2bea2d99",
+  "state": "open"
+}
