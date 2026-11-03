@@ -1,0 +1,101 @@
+{
+  "artifact": "ROMarrNG PR #70 W405-W424 independent blind review",
+  "schema": "romarrng-blind-review-v1",
+  "reviewBoundary": "Candidate-free input only; no primary or cross-audit packet/proposals were read.",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "liveRefs": {
+    "state": "open",
+    "draft": true,
+    "baseRefName": "main",
+    "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "headRefName": "task/localization-translation-review-20261030",
+    "headOid": "c146189f29db8fbd77d68dff0c33a0ab59a6b601",
+    "headTree": "3db10f8b87577edd1167e4489524e6afbb50d556",
+    "liveMainRefOid": "bc1dee5df3d0dd88cdfe234f39ccc32f6eb86fe3",
+    "livePullHeadRefOid": "c146189f29db8fbd77d68dff0c33a0ab59a6b601",
+    "livePullMergeRefOid": "1d394ba1915d5efa2ca23b9c52951209cc9f4b19",
+    "verifiedAtUtc": "2026-11-03T18:48:35.049685+00:00",
+    "verificationMethods": [
+      "GitHub Pull Request API",
+      "GitHub Commit API tree lookup",
+      "git ls-remote branch and pull refs"
+    ]
+  },
+  "selection": {
+    "basis": "catalog JSON message-key insertion order",
+    "zeroBasedPositions": [
+      405,
+      424
+    ],
+    "oneBasedPositions": [
+      406,
+      425
+    ],
+    "sourceCount": 20,
+    "localeCount": 12,
+    "cellCount": 240,
+    "locales": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "ja",
+      "ko",
+      "pt-BR",
+      "vi",
+      "zh-Hans",
+      "zh-Hant"
+    ]
+  },
+  "dispositionCounts": {
+    "accept-current": 171,
+    "correction": 15,
+    "hold": 48,
+    "refinement": 6
+  },
+  "holdPositions": [
+    405,
+    407,
+    408,
+    416
+  ],
+  "holdCellCount": 48,
+  "carryForwardHoldReattestation": {
+    "cellCount": 288,
+    "sourceAndPositionMatches": true,
+    "currentTargetHashesUnchanged": true,
+    "includedAsEvidenceOnly": true
+  },
+  "checks": {
+    "sourceHashesVerified": true,
+    "currentTargetHashesVerified": true,
+    "currentPlaceholderMismatches": 0,
+    "currentNumericMismatches": 0,
+    "currentProtectedLiteralMismatches": 0,
+    "proposedPlaceholderMismatches": 0,
+    "proposedNumericMismatches": 0,
+    "proposedProtectedLiteralMismatches": 0,
+    "holdsHaveNoProposedTarget": true
+  },
+  "files": [
+    "PR-attestation.json",
+    "README.md",
+    "SHA256SUMS.txt",
+    "candidate-free-provenance.json",
+    "caller-search-audit.json",
+    "catalog-insertion-queue.json",
+    "current-target-cells.jsonl",
+    "dispatch-mechanics.json",
+    "manifest.json",
+    "prior-hold-reattestation-summary.json",
+    "prior-hold-reattestation.jsonl",
+    "review.jsonl",
+    "selection-boundary.jsonl",
+    "selection.json",
+    "source-contexts.jsonl",
+    "verify_packet.py"
+  ]
+}

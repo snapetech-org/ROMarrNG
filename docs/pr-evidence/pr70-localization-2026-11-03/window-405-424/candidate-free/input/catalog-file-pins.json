@@ -1,0 +1,54 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "commit": "c146189f29db8fbd77d68dff0c33a0ab59a6b601",
+  "tree": "3db10f8b87577edd1167e4489524e6afbb50d556",
+  "baseLocale": "en",
+  "activeUniqueSourceIds": 479,
+  "catalogMessageCount": 1836,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogSha256": "77e2ac045c73402be177bc194ab758b9f8d2df70c7c91829089cd99a5a07a985",
+  "sourceQueueSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+  "sourceQueuePath": "romarr/ui-source-messages.json",
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "sourceSnapshotSha256": "e8f580fc3a49da18add0748e8d5312186dc353bc30d3c01bcc94e06d2aaa077d",
+  "callerSourceFilePins": {
+    "romarr/ui-labels.json": {
+      "fileSha256": "77e2ac045c73402be177bc194ab758b9f8d2df70c7c91829089cd99a5a07a985",
+      "gitBlob": "0b7a4b5b22093ff828d8fab5792e6f5632815fa9"
+    },
+    "romarr/ui-source-messages.json": {
+      "fileSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "gitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80"
+    },
+    "romarr/ui-source-snapshot.json": {
+      "fileSha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "gitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2"
+    },
+    "romarr/ui.py": {
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0"
+    },
+    "romarr/organizer.py": {
+      "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390"
+    },
+    "romarr/i18n_runtime.js": {
+      "fileSha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "gitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc"
+    }
+  },
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ]
+}

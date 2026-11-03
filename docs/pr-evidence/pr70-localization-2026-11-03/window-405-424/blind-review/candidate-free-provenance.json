@@ -1,0 +1,19 @@
+{
+  "candidateFreeInputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w405-424-candidate-free-20261103/input",
+  "candidateFreeManifestSha256": "9407fe320bba79cf4fbbdeaa54e4851c90f98d9b946391c11b0d6ac434540602",
+  "candidateFreeSha256SumsFileSha256": "cfb7a47a4b5d208c52bf01cc1bb4972eb179059d975c3df83319d1ab064e915d",
+  "candidateFreeVerifierPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w405-424-candidate-free-20261103/input/verify_input.py",
+  "candidateFreeVerifierResult": "PASS candidate-free W405-W424: exact PR/head/tree refs; catalog slice and 240 cells; 20 live source-context records; current active-registry metadata; 288 carried holds unchanged; 20 prior selected sources reattested; placeholder/numeric/protected literals clean; candidate-free boundary and checksums.",
+  "candidateFreeFileHashes": {
+    "PR-attestation.json": "e40c0852a36c0d9e7735f1dee02af61436806ae57230d0748b936bd685f54c05",
+    "selection.json": "085698840108b64bd4a79ca3970aee18fdad455b674a71bf6ff4ef28cd1b6262",
+    "selection-boundary.jsonl": "c44c8de24e6b5627b839af7ca948eeeb99296b8e822061a4e3e8ce2d1d9e0230",
+    "catalog-insertion-queue.json": "604a21dfa46a3cd4993881beb4d170d81fb36d04a8dd7f5bd6b564846727d182",
+    "current-target-cells.jsonl": "7c57574aee50968fa8fb5a428dd2df8917e5f9c759647c14bafa611bbac4156a",
+    "source-contexts.jsonl": "2d5fdd85d8f8b7efdb0206c1ef2ca89494ce69e58afd7c59a0d41d8a23cea22e",
+    "dispatch-mechanics.json": "3cd72fe3fb77a84847799ea679728e788d9de1251bcd5fa1fd44ad97b2694a0c",
+    "caller-search-audit.json": "21b3e77669f544c9395ce4f3f3bc8aa005e47edf23072ac65fe62459ccec3af6",
+    "prior-hold-reattestation-summary.json": "64737268fcaf8928f2b450400bd3d08c3846b18a54114e6db3bfb2013c709423",
+    "prior-hold-reattestation.jsonl": "17a56c7cffda2b773b21087d171402aff71d24d13fb904cc3768f8526ece2a81"
+  }
+}

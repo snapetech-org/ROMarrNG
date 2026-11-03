@@ -1,0 +1,15 @@
+{
+  "candidateFreeVerifier": "PASS",
+  "candidateFreeInputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w405-424-candidate-free-20261103/input",
+  "candidateFreeInputManifestSha256": "9407fe320bba79cf4fbbdeaa54e4851c90f98d9b946391c11b0d6ac434540602",
+  "candidateFreeInputChecksumListSha256": "cfb7a47a4b5d208c52bf01cc1bb4972eb179059d975c3df83319d1ab064e915d",
+  "head": "c146189f29db8fbd77d68dff0c33a0ab59a6b601",
+  "tree": "3db10f8b87577edd1167e4489524e6afbb50d556",
+  "cellCount": 240,
+  "catalogSha256": "77e2ac045c73402be177bc194ab758b9f8d2df70c7c91829089cd99a5a07a985",
+  "candidateFreeInputCellsSha256": "7c57574aee50968fa8fb5a428dd2df8917e5f9c759647c14bafa611bbac4156a",
+  "candidateFreeCallerContextsSha256": "2d5fdd85d8f8b7efdb0206c1ef2ca89494ce69e58afd7c59a0d41d8a23cea22e",
+  "priorHoldReattestationSha256": "17a56c7cffda2b773b21087d171402aff71d24d13fb904cc3768f8526ece2a81",
+  "priorHoldsUnchanged": true,
+  "packetVerificationOnly": true
+}

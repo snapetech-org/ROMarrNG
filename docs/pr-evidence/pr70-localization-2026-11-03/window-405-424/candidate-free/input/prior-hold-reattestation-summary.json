@@ -1,0 +1,14 @@
+{
+  "predecessor": "W385-W404 rebased candidate-free input at 0afd1d8c150fb96d868394a8d9620371db612185",
+  "predecessorInputSha256SumsFileSha256": "b6dfd70dccfd2ee88baa18b31aac13df7ea6b40af86c4e946ff7e41f4c9c9990",
+  "reattestedCellCount": 288,
+  "sourceAndPositionMatches": true,
+  "allCurrentTargetHashesMatchPriorHoldEvidence": true,
+  "windowCounts": {
+    "W245-W264": 72,
+    "W265-W284": 168,
+    "W285-W304": 24,
+    "W325-W344": 24
+  },
+  "currentTargetChangedCells": 0
+}

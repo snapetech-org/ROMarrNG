@@ -1,0 +1,245 @@
+{
+  "window": "W405-W424",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "primaryDispositionCounts": {
+    "hold": 48,
+    "accept-current": 164,
+    "correction": 21,
+    "refinement": 7
+  },
+  "blindDispositionCounts": {
+    "hold": 48,
+    "accept-current": 171,
+    "refinement": 6,
+    "correction": 15
+  },
+  "adjudicatedDispositionCounts": {
+    "hold": 48,
+    "accept-current": 166,
+    "refinement": 6,
+    "correction": 20
+  },
+  "changeCount": 26,
+  "noOpCount": 166,
+  "holdCells": 48,
+  "holdPositions": [
+    405,
+    407,
+    408,
+    416
+  ],
+  "semanticOrDispositionDisagreements": 12,
+  "targetHashDisagreements": 11,
+  "sameTargetDispositionDisagreements": 1,
+  "sourceOrCurrentHashDisagreements": 0,
+  "callerContextHashDisagreements": 0,
+  "primaryNewHoldsReattested": 48,
+  "primaryNewHoldsConfirmed": 48,
+  "carriedPriorHoldsReattested": 288,
+  "carriedPriorHoldsChanged": 0,
+  "placeholderMismatches": 0,
+  "numericTokenMismatches": 0,
+  "protectedLiteralMismatches": 0,
+  "allProposedPlaceholdersNumericAndProtectedLiteralsPreserved": true,
+  "perPosition": {
+    "405": {
+      "accept-current": 0,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 12
+    },
+    "406": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "407": {
+      "accept-current": 0,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 12
+    },
+    "408": {
+      "accept-current": 0,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 12
+    },
+    "409": {
+      "accept-current": 6,
+      "correction": 4,
+      "refinement": 2,
+      "hold": 0
+    },
+    "410": {
+      "accept-current": 8,
+      "correction": 4,
+      "refinement": 0,
+      "hold": 0
+    },
+    "411": {
+      "accept-current": 8,
+      "correction": 4,
+      "refinement": 0,
+      "hold": 0
+    },
+    "412": {
+      "accept-current": 7,
+      "correction": 5,
+      "refinement": 0,
+      "hold": 0
+    },
+    "413": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "414": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "415": {
+      "accept-current": 8,
+      "correction": 0,
+      "refinement": 4,
+      "hold": 0
+    },
+    "416": {
+      "accept-current": 0,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 12
+    },
+    "417": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "418": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "419": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "420": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "421": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "422": {
+      "accept-current": 11,
+      "correction": 1,
+      "refinement": 0,
+      "hold": 0
+    },
+    "423": {
+      "accept-current": 11,
+      "correction": 1,
+      "refinement": 0,
+      "hold": 0
+    },
+    "424": {
+      "accept-current": 11,
+      "correction": 1,
+      "refinement": 0,
+      "hold": 0
+    }
+  },
+  "perLocale": {
+    "ar": {
+      "accept-current": 15,
+      "correction": 1,
+      "refinement": 0,
+      "hold": 4
+    },
+    "de": {
+      "accept-current": 14,
+      "correction": 2,
+      "refinement": 0,
+      "hold": 4
+    },
+    "es": {
+      "accept-current": 14,
+      "correction": 1,
+      "refinement": 1,
+      "hold": 4
+    },
+    "fr": {
+      "accept-current": 16,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 4
+    },
+    "hi": {
+      "accept-current": 12,
+      "correction": 4,
+      "refinement": 0,
+      "hold": 4
+    },
+    "id": {
+      "accept-current": 15,
+      "correction": 1,
+      "refinement": 0,
+      "hold": 4
+    },
+    "ja": {
+      "accept-current": 16,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 4
+    },
+    "ko": {
+      "accept-current": 13,
+      "correction": 2,
+      "refinement": 1,
+      "hold": 4
+    },
+    "pt-BR": {
+      "accept-current": 13,
+      "correction": 1,
+      "refinement": 2,
+      "hold": 4
+    },
+    "vi": {
+      "accept-current": 14,
+      "correction": 2,
+      "refinement": 0,
+      "hold": 4
+    },
+    "zh-Hans": {
+      "accept-current": 12,
+      "correction": 3,
+      "refinement": 1,
+      "hold": 4
+    },
+    "zh-Hant": {
+      "accept-current": 12,
+      "correction": 3,
+      "refinement": 1,
+      "hold": 4
+    }
+  },
+  "repositoryOrPrEdited": false,
+  "testsBuildCiBrowserRun": false,
+  "liveRefsRecheckedAfter": true
+}

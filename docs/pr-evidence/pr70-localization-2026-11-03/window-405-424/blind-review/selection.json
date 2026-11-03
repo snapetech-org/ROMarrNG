@@ -1,0 +1,266 @@
+{
+  "window": "W405-W424",
+  "method": "Use the exact ordered source ID list provided for this task; independently verify it equals catalog key insertion indices 405 through 424 (zero-based). This is distinct from the active ui-source-messages sort order.",
+  "positions": [
+    405,
+    424
+  ],
+  "catalogInsertionPositionsOneBased": [
+    406,
+    425
+  ],
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "activeUniqueSourceIds": 479,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "catalogMessageCount": 1836,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "selectedSources": [
+    {
+      "position": 405,
+      "catalogZeroBasedIndex": 405,
+      "catalogOneBasedPosition": 406,
+      "sourceId": "ui.enter-the-romarr-url-reachable-from.b7fbd08882",
+      "source": "Enter the ROMarr URL reachable from inside GG Requestz",
+      "sourceSha256": "b7fbd08882a9c7f4c42e141cf7d7d7da4e9eaae2cc821a24d9e3d952eebad083",
+      "activeSourceRegistry": true,
+      "activeSourceRank": 103,
+      "registryLocations": [
+        "romarr/ui.py:4486"
+      ]
+    },
+    {
+      "position": 406,
+      "catalogZeroBasedIndex": 406,
+      "catalogOneBasedPosition": 407,
+      "sourceId": "ui.enter-the-passphrase-used-to-encrypt.5eb0ff3860",
+      "source": "Enter the passphrase used to encrypt this backup.",
+      "sourceSha256": "5eb0ff3860bb97f937a28ce637b1873fe1ae93b380d7f8842fc46e8e43c981fc",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 407,
+      "catalogZeroBasedIndex": 407,
+      "catalogOneBasedPosition": 408,
+      "sourceId": "ui.epic-ea-and-battle-net.119e20a9dc",
+      "source": "Epic, EA and Battle.net",
+      "sourceSha256": "119e20a9dc65c09e575bab0ac86d5fddd8ac32c721267d1988b638252c24a268",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 408,
+      "catalogZeroBasedIndex": 408,
+      "catalogOneBasedPosition": 409,
+      "sourceId": "ui.error.54a0e8c17e",
+      "source": "Error",
+      "sourceSha256": "54a0e8c17ebb21a11f8a25b8042786ef7efe52441e6cc87e92c67e0c4c0c6e78",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 409,
+      "catalogZeroBasedIndex": 409,
+      "catalogOneBasedPosition": 410,
+      "sourceId": "ui.errors-only.30767c1658",
+      "source": "Errors only",
+      "sourceSha256": "30767c1658efced5a79e733761828dd5abf1473d54b6addee7378129d98cdf73",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 410,
+      "catalogZeroBasedIndex": 410,
+      "catalogOneBasedPosition": 411,
+      "sourceId": "ui.event.4e1f49a9c8",
+      "source": "Event",
+      "sourceSha256": "4e1f49a9c8ae8a158434e647c0c410352d718984a4fcd144d26cca3c394caa02",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 411,
+      "catalogZeroBasedIndex": 411,
+      "catalogOneBasedPosition": 412,
+      "sourceId": "ui.events.8d14f6e72d",
+      "source": "Events",
+      "sourceSha256": "8d14f6e72de8f18ab1ee5c5330f00653c0c3ce099e63024454f80af97e72d333",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 412,
+      "catalogZeroBasedIndex": 412,
+      "catalogOneBasedPosition": 413,
+      "sourceId": "ui.every-enabled-plugin-that-declares-c.b262b12d91",
+      "source": "Every enabled plugin that declares {capability} answers Interactive Search alongside your indexers ({plugins}). Grabbing one stages the fetch through the ROM Hub client, then imports it like any other download — DAT verification and naming included.",
+      "sourceSha256": "b262b12d91aeaa47e800de08acd790a31604c308b632392bf942d25264c6ea64",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 413,
+      "catalogZeroBasedIndex": 413,
+      "catalogOneBasedPosition": 414,
+      "sourceId": "ui.every-platform-can-be-downloaded.25abe82cf6",
+      "source": "Every platform can be downloaded.",
+      "sourceSha256": "25abe82cf6da4508f18f72ad95a612d9401dc5c4ff8fcd9863bfcc219434186e",
+      "activeSourceRegistry": true,
+      "activeSourceRank": 105,
+      "registryLocations": [
+        "romarr/ui.py:4633"
+      ]
+    },
+    {
+      "position": 414,
+      "catalogZeroBasedIndex": 414,
+      "catalogOneBasedPosition": 415,
+      "sourceId": "ui.every-release-your-indexers-returned.76d5936486",
+      "source": "Every release your indexers returned, scored, with the reasoning shown — and a Grab button, so you can overrule the ranking when you disagree with it. This is the page to reach for when a request took the wrong release: the reason it outranked the one you wanted is written next to it.",
+      "sourceSha256": "76d5936486b17c680215a13b2d3f45f12e0e2d6291b079bf7f184fe7e81f7415",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 415,
+      "catalogZeroBasedIndex": 415,
+      "catalogOneBasedPosition": 416,
+      "sourceId": "ui.everything.75304cf77d",
+      "source": "Everything",
+      "sourceSha256": "75304cf77db08b6e8386c3101ccc2a49435093ebf86a40bbb2ea3c6b5d24b096",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 416,
+      "catalogZeroBasedIndex": 416,
+      "catalogOneBasedPosition": 417,
+      "sourceId": "ui.everything-in-my-library.3afc676d80",
+      "source": "Everything in my library",
+      "sourceSha256": "3afc676d8043a58f4d709ba73af80d38d2e1988762e00277a77fc2b27181f4a9",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 417,
+      "catalogZeroBasedIndex": 417,
+      "catalogOneBasedPosition": 418,
+      "sourceId": "ui.evidence.03867aea70",
+      "source": "Evidence",
+      "sourceSha256": "03867aea70acaf4c5dce37a76cf5a04dab1716d6ff70bf03761c439daa8be984",
+      "activeSourceRegistry": true,
+      "activeSourceRank": 106,
+      "registryLocations": [
+        "romarr/ui.py:5608"
+      ]
+    },
+    {
+      "position": 418,
+      "catalogZeroBasedIndex": 418,
+      "catalogOneBasedPosition": 419,
+      "sourceId": "ui.exact-dat-checksum-match.91363b80af",
+      "source": "Exact DAT checksum match",
+      "sourceSha256": "91363b80af9704d2b54b0030ed0d515ed9e3263598f8dba9c0d370c9ca15bae0",
+      "activeSourceRegistry": true,
+      "activeSourceRank": 107,
+      "registryLocations": [
+        "romarr/organizer.py:1617"
+      ]
+    },
+    {
+      "position": 419,
+      "catalogZeroBasedIndex": 419,
+      "catalogOneBasedPosition": 420,
+      "sourceId": "ui.exclude-rom-hacks.3141be8d5f",
+      "source": "Exclude ROM hacks",
+      "sourceSha256": "3141be8d5fed2baddde19151ac22d668693de6960fd8b5bf95b4221946ad301a",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 420,
+      "catalogZeroBasedIndex": 420,
+      "catalogOneBasedPosition": 421,
+      "sourceId": "ui.exclude-beta-versions.019e343517",
+      "source": "Exclude beta versions",
+      "sourceSha256": "019e343517a9f779210ab214a667e45edd412846b21bf139afd8fb547d387f2a",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 421,
+      "catalogZeroBasedIndex": 421,
+      "catalogOneBasedPosition": 422,
+      "sourceId": "ui.exclude-demos.3e268c6803",
+      "source": "Exclude demos",
+      "sourceSha256": "3e268c68031c921034872a339150923ddd8c608fd8562e28e90794d5fd3bf3e4",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 422,
+      "catalogZeroBasedIndex": 422,
+      "catalogOneBasedPosition": 423,
+      "sourceId": "ui.exclude-prototypes.4406b5a3cc",
+      "source": "Exclude prototypes",
+      "sourceSha256": "4406b5a3cc5c782609164238fdbbd0a9f37180baa4f973d3d75fe025345167c2",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 423,
+      "catalogZeroBasedIndex": 423,
+      "catalogOneBasedPosition": 424,
+      "sourceId": "ui.exclude-unlicensed-roms.25bdf9372a",
+      "source": "Exclude unlicensed ROMs",
+      "sourceSha256": "25bdf9372a15e9df8fe66d1cea80f75cf837e1f196350c47678a8238c5a58209",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    },
+    {
+      "position": 424,
+      "catalogZeroBasedIndex": 424,
+      "catalogOneBasedPosition": 425,
+      "sourceId": "ui.exclude-published-dumps-only.138f24d77b",
+      "source": "Exclude — published dumps only",
+      "sourceSha256": "138f24d77bf66c9ac7189ae27fdb1aed692297d168540147b20f4a75cfc90389",
+      "activeSourceRegistry": false,
+      "activeSourceRank": null,
+      "registryLocations": []
+    }
+  ],
+  "candidateFree": true,
+  "proposedTargetsIncluded": false,
+  "reviewDecisionsIncluded": false
+}

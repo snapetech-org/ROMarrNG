@@ -1,0 +1,40 @@
+{
+  "selectionBasis": "catalog JSON message-key insertion order",
+  "selectedCatalogZeroBasedIndices": [
+    405,
+    424
+  ],
+  "activeRegistryCount": 479,
+  "selectedIdsInActiveRegistry": 4,
+  "activeRegistryMatches": [
+    {
+      "sourceId": "ui.enter-the-romarr-url-reachable-from.b7fbd08882",
+      "activeRank": 103,
+      "registryLocations": [
+        "romarr/ui.py:4486"
+      ]
+    },
+    {
+      "sourceId": "ui.every-platform-can-be-downloaded.25abe82cf6",
+      "activeRank": 105,
+      "registryLocations": [
+        "romarr/ui.py:4633"
+      ]
+    },
+    {
+      "sourceId": "ui.evidence.03867aea70",
+      "activeRank": 106,
+      "registryLocations": [
+        "romarr/ui.py:5608"
+      ]
+    },
+    {
+      "sourceId": "ui.exact-dat-checksum-match.91363b80af",
+      "activeRank": 107,
+      "registryLocations": [
+        "romarr/organizer.py:1617"
+      ]
+    }
+  ],
+  "lineHintCaveat": "Active registry locations are captured as metadata only and may be stale; exact live caller excerpts and tracked-file pins are authoritative for this review."
+}
