@@ -1,0 +1,95 @@
+{
+  "title": "ROMarrNG PR #70 follow-up caller-bound independent blind semantic review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "e0cb91389334fe534ff44ccfc72cbb2c152a93b4",
+  "tree": "3876dd57816aaf75bb8b1a56a75a5045d216c461",
+  "candidateFreeInputManifestSha256": "857ff470aac96220722ec2c2317bf7c8db3d0b91714a93cee9fed9c3292f915e",
+  "reviewedCellCount": 48,
+  "positions": [
+    226,
+    232,
+    237,
+    241
+  ],
+  "perPositionCounts": {
+    "226": {
+      "SEMANTIC_PASS": 12
+    },
+    "232": {
+      "SEMANTIC_PASS": 12
+    },
+    "237": {
+      "HOLD_PLAYABILITY_CLARITY": 9,
+      "SEMANTIC_PASS": 2,
+      "HOLD_LOCALE_AND_PLAYABILITY_REVIEW": 1
+    },
+    "241": {
+      "SEMANTIC_PASS_FRAGMENT": 9,
+      "HOLD_FRAGMENT_VERB_OMISSION": 1,
+      "HOLD_FRAGMENT_JOIN_AND_VERB": 1,
+      "HOLD_FRAGMENT_VERB_AND_JOIN": 1
+    }
+  },
+  "dispositions": {
+    "SEMANTIC_PASS": 26,
+    "HOLD_PLAYABILITY_CLARITY": 9,
+    "HOLD_LOCALE_AND_PLAYABILITY_REVIEW": 1,
+    "SEMANTIC_PASS_FRAGMENT": 9,
+    "HOLD_FRAGMENT_VERB_OMISSION": 1,
+    "HOLD_FRAGMENT_JOIN_AND_VERB": 1,
+    "HOLD_FRAGMENT_VERB_AND_JOIN": 1
+  },
+  "qualifiedHumanReviewRequired": 13,
+  "releaseApprovedByThisReview": 0,
+  "sourceCallerMismatchesObserved": 0,
+  "placeholderOrMarkupMismatchesObserved": 0,
+  "protectedLiteralFindings": {
+    "No-Intro_preserved": 12,
+    "Redump_preserved": 12,
+    "DAT_preserved": 12
+  },
+  "runtimeFindings": [
+    "Position 226 is a fixed local empty-title error template; no supplied/user title is interpolated.",
+    "Position 232 is ROMarr-owned copy for a fixed missing verdict; peer-authored detail is discarded and the local template has no interpolation values.",
+    "Position 237 is the explicit local origin option; runtime appends the formatted count separately.",
+    "Position 241 is a comma-prefixed composition between the Metadata and Collections links; the translated value must carry the alternative/load action and connect to the following link."
+  ],
+  "specificHolds": [
+    {
+      "position": 237,
+      "locales": [
+        "ar",
+        "de",
+        "es",
+        "hi",
+        "id",
+        "ja",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "finding": "Play-now wording can be read as an action/current playback rather than a local item that is already playable; Indonesian also uses Malay “cakera”."
+    },
+    {
+      "position": 241,
+      "locales": [
+        "hi"
+      ],
+      "finding": "No equivalent of “load” in the linked phrase."
+    },
+    {
+      "position": 241,
+      "locales": [
+        "ja",
+        "ko"
+      ],
+      "finding": "Fragment join can attach to prior Metadata link and does not clearly express loading the DAT before the Collections link."
+    }
+  ],
+  "priorReviewLedgersOrOtherReviewOutputsConsulted": false,
+  "repositoriesOrPullRequestsEdited": false,
+  "testsBuildsScansCIWorkflowsRun": false,
+  "reviewLimit": "Machine semantic review only; no native-speaker approval; no cell is released by this artifact."
+}

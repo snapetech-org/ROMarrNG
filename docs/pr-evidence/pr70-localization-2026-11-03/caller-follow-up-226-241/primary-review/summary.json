@@ -1,0 +1,150 @@
+{
+  "artifact": "ROMarrNG PR #70 caller-follow-up primary semantic review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "e0cb91389334fe534ff44ccfc72cbb2c152a93b4",
+  "tree": "3876dd57816aaf75bb8b1a56a75a5045d216c461",
+  "positions": [
+    226,
+    232,
+    237,
+    241
+  ],
+  "sourceCount": 4,
+  "cellCount": 48,
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "dispositionCounts": {
+    "accept-current": 33,
+    "correction": 9,
+    "refinement": 3,
+    "hold": 3
+  },
+  "holdCells": [
+    {
+      "position": 241,
+      "locale": "hi",
+      "sourceId": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa"
+    },
+    {
+      "position": 241,
+      "locale": "ja",
+      "sourceId": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa"
+    },
+    {
+      "position": 241,
+      "locale": "ko",
+      "sourceId": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa"
+    }
+  ],
+  "candidateCells": [
+    {
+      "position": 237,
+      "locale": "ar",
+      "decision": "correction",
+      "currentTargetSha256": "14a0dffa8a1858e279d5eac1c97a33eea55091f3ee64fa2ed72401e2a01c13bd",
+      "candidateTargetSha256": "43edc5aace8abf1703baa9f57cd8ee57f9adecc4a439076f589e3bce3d41c6d9"
+    },
+    {
+      "position": 237,
+      "locale": "de",
+      "decision": "correction",
+      "currentTargetSha256": "f5ccc5d10789f62c01e202f1fac621cb69c904cd50aa0193b4c8981f15a58863",
+      "candidateTargetSha256": "ef27615286cbf9bc582ea80fee30ce854b0253acf57ab7cea6b76536e8e4a71c"
+    },
+    {
+      "position": 237,
+      "locale": "es",
+      "decision": "correction",
+      "currentTargetSha256": "548fec4992f123368b68e834ebe18c0babfd1fded609598f77dcc8533233c4bd",
+      "candidateTargetSha256": "60ccbf31dab16a28c28373b5dfdff8c32a60dcef84c5be7839755abe98545302"
+    },
+    {
+      "position": 237,
+      "locale": "hi",
+      "decision": "correction",
+      "currentTargetSha256": "f371c85d1fda73d686bc2510589c4d06d07dc442cba2ca497b2628fea10998ea",
+      "candidateTargetSha256": "b9bbd83405233a1633da9001b32fc248209ddbb3457b2179bd3a2e57c34b06ea"
+    },
+    {
+      "position": 237,
+      "locale": "id",
+      "decision": "correction",
+      "currentTargetSha256": "340462f074734b9bb5e9997de961236bacf6b8971f27b61e999e2badb041fa0f",
+      "candidateTargetSha256": "041012882e5c18780566646bf7e1b303befd5dc70dfccc36deadc9b5756270cf"
+    },
+    {
+      "position": 237,
+      "locale": "ja",
+      "decision": "correction",
+      "currentTargetSha256": "75eeca6168a2271471a48af058f2e56a5cfcfc27dc03e0ebd3fe0c98553dd5a5",
+      "candidateTargetSha256": "29224440fe791f2c2bf7d878314c01e609554f2a4058e79762c7c838ba5e2b8b"
+    },
+    {
+      "position": 237,
+      "locale": "pt-BR",
+      "decision": "refinement",
+      "currentTargetSha256": "2e8f6396d83aee23d9b4d1f3b1fdb663a801a7f84128a6aa7605e520e94a9c64",
+      "candidateTargetSha256": "f92ba97cd575a17b9ef4c8577fd74de79789b0bb43f9efe08d91fe41a5e2079b"
+    },
+    {
+      "position": 237,
+      "locale": "vi",
+      "decision": "correction",
+      "currentTargetSha256": "de2f7d7fc39907a7cf270094902e8ff8d783f2f289900c6153a355cc5cd3318a",
+      "candidateTargetSha256": "fa8c6f258e7f33529c8cfc1241490e12253bde92f56549b57fc8ee5e53a7c5d9"
+    },
+    {
+      "position": 237,
+      "locale": "zh-Hans",
+      "decision": "correction",
+      "currentTargetSha256": "f6e7fa0987a8a0d41ee0edc101f254247389ccb563b72e45da0478cd3705b2b9",
+      "candidateTargetSha256": "6978f2fcac4890c902029a3cf2a19cd6ff577995293047b2eac31bf73f3ecd09"
+    },
+    {
+      "position": 237,
+      "locale": "zh-Hant",
+      "decision": "correction",
+      "currentTargetSha256": "009ed46b4f04bb618602aeb04c01d599ef97241093c2a80f9e0970c7683598f2",
+      "candidateTargetSha256": "dbbfb6b706bb808dcc670c5da0d5884c2ef78acde61da3fa36aa022708cb7903"
+    },
+    {
+      "position": 241,
+      "locale": "ar",
+      "decision": "refinement",
+      "currentTargetSha256": "160bc17b518e8ec0ce5c74890cb75241e41b8921420b887e98356b52d2b35439",
+      "candidateTargetSha256": "1dd64889dae98df838302d5e1b13e48bafe5259f83a16e144adfb190e44d6877"
+    },
+    {
+      "position": 241,
+      "locale": "id",
+      "decision": "refinement",
+      "currentTargetSha256": "e4c359e99e690bb3c43d53c996977747c8ca54e8a6cf6f5c05d3ea48d5c1ac40",
+      "candidateTargetSha256": "1d940ffb23983a39d321b52ae37947856fdb0f6ecdee8d5045fa8af63c376cf2"
+    }
+  ],
+  "structuralMismatches": 0,
+  "protectedLiteralMismatches": 0,
+  "callerReferenceCount": 10,
+  "sourceContextReferencesVerified": 10,
+  "runtimeContextBlocksVerified": 7,
+  "candidateFreeInputChecksumFilesVerified": 8,
+  "candidateFreeInputManifestSha256": "857ff470aac96220722ec2c2317bf7c8db3d0b91714a93cee9fed9c3292f915e",
+  "primaryLedgerSha256": "911edf2e49720833c416093cacea158cb62ce88d3621c18dd8a1a8b3abac6e51",
+  "nativeSpeakerApproved": false,
+  "repositoryOrPrChanged": false,
+  "testsBuildsScansCIWorkflowsBrowserMergeReleaseOrTagPerformed": false
+}

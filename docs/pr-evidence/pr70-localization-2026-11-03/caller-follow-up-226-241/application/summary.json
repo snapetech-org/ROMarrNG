@@ -1,0 +1,22 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "baseHead": "e0cb91389334fe534ff44ccfc72cbb2c152a93b4",
+  "baseTree": "3876dd57816aaf75bb8b1a56a75a5045d216c461",
+  "window": "caller follow-up positions 226, 232, 237, and 241",
+  "reviewedCells": 48,
+  "finalDispositionCounts": {
+    "accept-current": 33,
+    "correction": 9,
+    "hold": 3,
+    "refinement": 3
+  },
+  "changedTargets": 12,
+  "changedCatalogFiles": 1,
+  "heldCells": 3,
+  "readbackRows": 48,
+  "readbackMismatches": 0,
+  "translationHashesRecomputed": 12,
+  "nonTargetCatalogChanges": 0,
+  "catalogMessageCount": 1836
+}

@@ -434,11 +434,11 @@
         "ja": "を開いてください。または No-Intro / Redump DAT を",
         "fr": ", ou chargez les DAT No-Intro / Redump dans la section",
         "pt-BR": ", ou carregue os DATs No-Intro / Redump em",
-        "ar": "، أو حمّل ملفات DAT من No-Intro / Redump إلى",
+        "ar": "، أو حمّل ملفات DAT من No-Intro / Redump ضمن",
         "ko": "를 열거나 No-Intro / Redump DAT를",
         "zh-Hant": "，或將 No-Intro / Redump DAT 載入",
         "vi": ", hoặc tải DAT No-Intro / Redump vào",
-        "id": ", atau muat DAT No-Intro / Redump ke"
+        "id": ", atau muat DAT No-Intro / Redump di"
       },
       "translationHashes": {
         "es": "2811666ece8921001b17a98ffb2f850de0d7b9e3ad66139bf6967fe093a69455",
@@ -448,11 +448,11 @@
         "ja": "b60b94ddc01496094bf0f9259ae9ad958638787c01bd4c4287752469ece85382",
         "fr": "056f06b34c4ccf3624f854419c40776329fb18e12786d8b22562b3d527bc907b",
         "pt-BR": "89835b02e537b27adff98cfd4f6c665cae1205a1331ba64ddef7acccbb32f67e",
-        "ar": "ed55443bde0075bd27bb41d6a470c44b1730ff3ff09c7ccfe80279b004517d6a",
+        "ar": "2981cd63c248bfa2fc335f3dbe9d9e34abbed2865f7f59561e314e8b075199d4",
         "ko": "4f6cac07471ddc9bd8afec24c17f59a12b7950b4c8bbacbd8758193f5fffbd8b",
         "zh-Hant": "71e34fa5a1407cea16388c02890accd6e90183bfcfa88eddc16e9ef3b4b11050",
         "vi": "c9b33ead6ce740504d616ca70ad128134555029516da94690241f9ec4b8cb5bd",
-        "id": "3e18af292a99281880bc164ef6de326de1af0f44ec711ce0448d4e1f5d8a129a"
+        "id": "596d01c695fbbda723f667a193fa28e36aa652170479632b783af8ac40c2e5e0"
       },
       "translationStatus": {
         "es": "draft",
@@ -21332,32 +21332,32 @@
       "source": "On disk (plays now)",
       "sourceHash": "325a11ceda6c5379498ece518c46a081019f59b3fd88ba32ea53dbdc653f397b",
       "translations": {
-        "es": "En el disco (jugar ahora)",
-        "zh-Hans": "在磁盘上(现在播放)",
-        "hi": "डिस्क पर (अब खेलते हैं)",
-        "de": "Auf dem Disk (Spielt jetzt)",
-        "ja": "ディスク(現在プレイする)",
+        "es": "En el disco (se puede jugar ahora)",
+        "zh-Hans": "在本地磁盘（可立即游玩）",
+        "hi": "डिस्क पर (अभी खेला जा सकता है)",
+        "de": "Auf der Festplatte (sofort spielbar)",
+        "ja": "ディスク上（すぐにプレイ可能）",
         "fr": "Sur le disque (jouable immédiatement)",
-        "pt-BR": "No disco (joga agora)",
-        "ar": "على القرص (اللعب الآن)",
+        "pt-BR": "No disco (jogável agora)",
+        "ar": "على القرص (قابل للعب الآن)",
         "ko": "디스크에 있음(지금 플레이 가능)",
-        "zh-Hant": "在磁盤上(現在播放)",
-        "vi": "Trên ổ đĩa (chơi ngay)",
-        "id": "Pada cakera (bermain sekarang)"
+        "zh-Hant": "在本機磁碟（可立即遊玩）",
+        "vi": "Trên ổ đĩa (có thể chơi ngay)",
+        "id": "Di disk (langsung dapat dimainkan)"
       },
       "translationHashes": {
-        "es": "9b01a5d55c852bde030e66b2cecda574eb61433290cf06eec42b214d863540d4",
-        "zh-Hans": "c59e65374ea601b64239d83f8d073238d30d52b514524e6d8608da078e56f359",
-        "hi": "fac92ae2ae7e208108b26ef18cc42d38303fd369fd9ab291d2344807ca5fe415",
-        "de": "2c3bc1c324add5ec3d97f7ed59b6a822034711101908267300ccfe10cf0e718a",
-        "ja": "b3f8af058dfa6668ccae8117722496ce17c43bf000ee5f6367c46e1a583957c5",
+        "es": "d387e8213a3f6600cc293e1abfad2e32dd4c4cc1f0529d81ed2ddb4447f1e630",
+        "zh-Hans": "02d06d6c191b6b3cf7a049b3c68dcc53dba2ad4ef68f04e4a9b1eaf03cb25b4f",
+        "hi": "7af060e25092afdffc7bb08a35adbc23d6fe90c251f7afd4a47bf580afe926fc",
+        "de": "677d3d91a1199751b759272351c0e4e3a7861552ff6efe53e8981ca6f00ba7aa",
+        "ja": "0b83afec36dab13474e9ad75b8b7d18d1e6a0fe74208a7a3543a86fe136a6abb",
         "fr": "59d5cecf2c3af085bb154a76595508b51417eba5b2ee24cb72aa8821455bca88",
-        "pt-BR": "62893089389454645d53b0f23028f992f60f340329fde65811f91fbdc7581be7",
-        "ar": "6980bdc939b02fc37f0287d3f2a41b4ccff69bd921d8cebb7fe75d6be24b8fbf",
+        "pt-BR": "581716c84f552f171f90e22cf969922abeef2ac854ad534a0167af44cde4aa9b",
+        "ar": "8ccca90436fd22b1739bedcfc2ee8e51c43eb21ea4cd6acb844f6787f3bdfd4d",
         "ko": "fbd9c11672a321f1be7d28da49697f7f4df93c95b2b8d4ed6dece2b2257fc9f4",
-        "zh-Hant": "1d3a42aff844b20074efbb61e464723344b2e46db6ecd2b205510dd3cefabfd1",
-        "vi": "07da222a05d861e6b841ce850c48cae1c0806b0765133b59bf265ea8a6f7de82",
-        "id": "6c8037f33fc4bc4fc901a67481846e0a2e6b4fdf5b85399e195b25880b8f95e9"
+        "zh-Hant": "42a87da6d1e11d90dada5378f6e85b636290dd877ae6ba66da370685bf44f748",
+        "vi": "a1bc3c1ce678d65703bfbbba54ecb930f15d7e08a0f6f75935e1614aac2b382b",
+        "id": "4d4132863e2cd4398904b5cf6863c61c8ad37e2108a1e45f14c793ecbc278cb9"
       },
       "translationStatus": {
         "es": "draft",
