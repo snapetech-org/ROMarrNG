@@ -1,0 +1,1 @@
+This third-party reconciliation reads only the candidate-free input, primary review, and independent blind review. It is pinned to the exact current draft PR head. The row-level ledger separates caller-path holds from semantic translation decisions and keeps selected targets null for cells blocked by the caller path. See `report.md` for the disposition and rationale summary.

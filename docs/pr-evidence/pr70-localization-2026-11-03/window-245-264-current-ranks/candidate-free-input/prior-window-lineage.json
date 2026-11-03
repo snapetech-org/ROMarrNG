@@ -1,0 +1,203 @@
+{
+  "checksums": [
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/window-226-245/candidate-free-input",
+      "entryCount": 13,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "68f5f2d323b726d78ae5f949e84024ac9ae39dd592a63dab26637d57da945c36",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/window-226-245/primary-review",
+      "entryCount": 8,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "c46f4204f8f22f16cacc2304126017b4691db4e6dcef85f9fe2cd793750dbd69",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/window-226-245/blind-review",
+      "entryCount": 4,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "109daec7d646044b1566b75e05874366a7252526eb45bfd0ee50c8e96e6af056",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/window-226-245/cross-audit",
+      "entryCount": 7,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "fc8357e95807d1d1ff59f11a740e467a03cca33286b87ea10b740e5c8dae508d",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/window-226-245",
+      "entryCount": 46,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "2b06bedc12d81e4fae5ff22a5d3560a2d7bd72ef34b121bfe97f908d49bd8a3c",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/caller-follow-up-226-241/candidate-free-input",
+      "entryCount": 8,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "0de65e3297d73f4688a7582c1f5c9df261c669820e4013b39a506273c1465193",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/caller-follow-up-226-241/independent-blind-review/input",
+      "entryCount": 8,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "0de65e3297d73f4688a7582c1f5c9df261c669820e4013b39a506273c1465193",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/caller-follow-up-226-241/independent-blind-review",
+      "entryCount": 12,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "83864214d777979d9d730d54d6393796911a272db1c92ed4a2f77062468ba827",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/caller-follow-up-226-241/primary-review",
+      "entryCount": 4,
+      "manifest": "PRIMARY-SHA256SUMS.txt",
+      "manifestSha256": "128f9075063bf8deaf1d7eeb80e02c8e71521cda432990d41f42c79c9e975912",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/caller-follow-up-226-241/third-party-cross-audit",
+      "entryCount": 5,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "84e2d7008d3260a4bf1f61c47a7837bc90f109000bb758f1888e4c53a86af89f",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/caller-follow-up-226-241",
+      "entryCount": 34,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "984f40d7728fdfe1a7c95fdcee8e524eda2e66d3b2064b4208109ac38b6cbe24",
+      "passed": true
+    }
+  ],
+  "latestCallerFollowup": {
+    "head": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+    "positions": [
+      226,
+      232,
+      237,
+      241
+    ],
+    "tree": "016587d26f04d2920a30878236f1933a57e27901"
+  },
+  "oldToCurrentLineage": [
+    {
+      "currentPosition": 240,
+      "oldPosition": 240,
+      "oldSourceId": "ui.optional-follow-ups.e3fee9a99c",
+      "presentInActiveCatalog": true
+    },
+    {
+      "currentPosition": 241,
+      "oldPosition": 241,
+      "oldSourceId": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa",
+      "presentInActiveCatalog": true
+    },
+    {
+      "currentPosition": null,
+      "oldPosition": 242,
+      "oldSourceId": "ui.or-load-no-intro-redump-dats-under.22540d7871",
+      "presentInActiveCatalog": false
+    },
+    {
+      "currentPosition": 242,
+      "oldPosition": 243,
+      "oldSourceId": "ui.organize-a-library-you-already-have.61369e08be",
+      "presentInActiveCatalog": true
+    },
+    {
+      "currentPosition": 243,
+      "oldPosition": 244,
+      "oldSourceId": "ui.outside-the-rom-root-and-mount-that.6deae8166d",
+      "presentInActiveCatalog": true
+    },
+    {
+      "currentPosition": 244,
+      "oldPosition": 245,
+      "oldSourceId": "ui.overwrite-an-existing-file.9d5f5484e6",
+      "presentInActiveCatalog": true
+    },
+    {
+      "currentPosition": 245,
+      "oldPosition": 246,
+      "oldSourceId": "ui.owned-check-unavailable.b3cf0beade",
+      "presentInActiveCatalog": true
+    }
+  ],
+  "oldWindow": {
+    "head": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+    "selectedPositions": [
+      226,
+      245
+    ],
+    "tree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc",
+    "uniqueSourceIdOrderSha256": "b3e885dd9b48106f0caa5fd65965d5c2a0540cdd351ecaca8e87080519002c45"
+  },
+  "oldWindowTailAndBoundary": [
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 240,
+      "source": "Optional follow-ups",
+      "sourceId": "ui.optional-follow-ups.e3fee9a99c",
+      "sourceSha256": "e3fee9a99c9bf2af64aa820ad46e1bcf227905c8a3f819ff26dd03db2278c37f"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 241,
+      "source": ", or load No-Intro / Redump DATs under",
+      "sourceId": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa",
+      "sourceSha256": "02eaa58bfa6c824f83791cb11b32f6eba88e517acaa2fe36dcd2333c7d3fe00c"
+    },
+    {
+      "callerReferenceCount": 0,
+      "holdReason": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete.",
+      "position": 242,
+      "source": "or load No-Intro / Redump DATs under",
+      "sourceId": "ui.or-load-no-intro-redump-dats-under.22540d7871",
+      "sourceSha256": "22540d7871a7b8be53a7a9ec9c3092168915e4daac0be59de43b1e09dd3cbbba"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 243,
+      "source": "Organize a library you already have",
+      "sourceId": "ui.organize-a-library-you-already-have.61369e08be",
+      "sourceSha256": "61369e08be38ee4a8b298278f9278fd8740a6f2dcae563c1c4b603c26da824b1"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 244,
+      "source": ", outside the ROM root, and mount that folder on each client. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another provider lookup.",
+      "sourceId": "ui.outside-the-rom-root-and-mount-that.6deae8166d",
+      "sourceSha256": "6deae8166ddbe69392aebb90be5fba8c2901e1e09caa7b27a60c3db82edbd610"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 245,
+      "source": "Overwrite an existing file",
+      "sourceId": "ui.overwrite-an-existing-file.9d5f5484e6",
+      "sourceSha256": "9d5f5484e67157499dde68915b81e50de7605effeb74108ed77452e850f51d1d"
+    },
+    {
+      "historicalSourceOrdinal": null,
+      "position": 246,
+      "role": "next-boundary-W227",
+      "source": "Owned check unavailable",
+      "sourceId": "ui.owned-check-unavailable.b3cf0beade",
+      "sourceSha256": "b3cf0beadeea0b7a55b33c8977e8de71470631743755f2dc19614d83248e90d2"
+    }
+  ],
+  "retiredSourceId": "ui.or-load-no-intro-redump-dats-under.22540d7871"
+}

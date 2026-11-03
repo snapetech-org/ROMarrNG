@@ -1,0 +1,32 @@
+{
+  "browserAcceptanceClaimed": false,
+  "candidateCanonicalHashFailures": 0,
+  "candidateCount": 29,
+  "candidateFreeInputPath": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w245-264-candidate-free-20261103/input",
+  "candidateValuesIncludedOnlyIn": "primary-decisions.jsonl",
+  "canonicalTranslationHashFailures": 0,
+  "cellCount": 240,
+  "complete": true,
+  "currentTargetHashFailures": 0,
+  "dispositionCounts": {
+    "accept-current": 139,
+    "correction": 12,
+    "hold": 72,
+    "refinement": 17
+  },
+  "head": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "heldPositions": [
+    248,
+    249,
+    256,
+    257,
+    258,
+    259
+  ],
+  "localeCount": 12,
+  "nativeSpeakerApproval": false,
+  "sourceCount": 20,
+  "sourceHashFailures": 0,
+  "structuralFailures": 0,
+  "tree": "016587d26f04d2920a30878236f1933a57e27901"
+}

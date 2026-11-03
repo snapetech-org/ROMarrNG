@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "appliedToParentHead": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "parentTree": "016587d26f04d2920a30878236f1933a57e27901",
+  "window": "W245-W264-current-ranks",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "finalDispositionCounts": {
+    "accept-current": 138,
+    "correction": 14,
+    "hold-caller-path": 72,
+    "refinement": 16
+  },
+  "selectedChanges": 30,
+  "readbackMatches": 240,
+  "changedOnlyPlannedTargets": true,
+  "catalogMessageIdsAndKeyOrderPreserved": true,
+  "nonTargetTranslationsAndHashesChanged": 0,
+  "translationStatusMetadataPreserved": true,
+  "callerPathHoldsPreserved": 72,
+  "deferredTranslationIssuesAtCallerHolds": 2,
+  "placeholderMarkupNumericWhitespaceFailures": 0,
+  "qualifiedNativeSpeakerApproval": false,
+  "exactHeadBrowserReview": false,
+  "releaseApproved": false,
+  "crossAuditLedgerSha256": "088bd6112339a87f0fc5eb56b68d6f4ae9aa06c9aedfcee4849406e293fe0f57",
+  "evidencePacketCopies": [
+    "candidate-free-input/",
+    "primary-review/",
+    "blind-review/",
+    "third-party-cross-audit/"
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "state": "open",
+  "draft": true,
+  "head": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "tree": "016587d26f04d2920a30878236f1933a57e27901",
+  "branch": "task/localization-translation-review-20261030",
+  "window": "W245-W264",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "inputChecksumManifestSha256": "285dec16fb9be7081b023d153cddc43ce794478de87c377bc3c4681634491eef",
+  "primaryChecksumManifestSha256": "526a8d46a593471c12ca927d41f91b296ea08c4c0ecf797009781a7ea8f8f8fc",
+  "blindChecksumManifestSha256": "804f2296224b1f2bcdb4bd374faf4f13998bff5ccb19de03ac611e1d4a21e019",
+  "inputChecksums": "pass",
+  "primaryChecksums": "pass",
+  "blindChecksums": "pass",
+  "livePRAndRemoteRefs": "match",
+  "finalDispositionCounts": {
+    "accept-current": 138,
+    "correction": 14,
+    "hold-caller-path": 72,
+    "refinement": 16
+  },
+  "semanticReviewCountsIncludingPathHeldCells": {
+    "accept-current": 208,
+    "correction": 16,
+    "refinement": 16
+  },
+  "callerPathHoldCells": 72,
+  "callerPathHoldPositions": [
+    248,
+    249,
+    256,
+    257,
+    258,
+    259
+  ],
+  "callerPathHeldSemanticCounts": {
+    "accept-current": 70,
+    "correction": 2
+  },
+  "translationLevelHoldCount": 0,
+  "deferredBlindCorrectionsAtCallerPathHolds": [
+    {
+      "position": 259,
+      "locale": "pt-BR",
+      "reason": "Current “não é instalado” describes an installation action rather than the plugin state."
+    },
+    {
+      "position": 259,
+      "locale": "zh-Hant",
+      "reason": "Current “不安裝” describes not installing rather than the plugin state."
+    }
+  ],
+  "selectedCatalogChanges": 30,
+  "selectedCorrections": 14,
+  "selectedRefinements": 16,
+  "primaryBlindDispositionRelationshipCounts": {
+    "accept-vs-change": 19,
+    "both-change-different-severity": 2,
+    "caller-path-axis-separated": 72,
+    "exact-semantic-disposition-agreement": 147
+  },
+  "crossAuditResultCounts": {
+    "both-reviews-accept-current": 137,
+    "caller-path-held-with-separate-translation-review": 72,
+    "cross-audit-added-correction": 2,
+    "primary-proposal-selected": 28,
+    "primary-refinement-declined": 1
+  },
+  "currentSourceIndexHintsReconciled": 16,
+  "staleIndexHintsUsedAsCurrentCallerEvidence": 0,
+  "sourceCurrentCandidateHashFailures": 0,
+  "placeholderMarkupNumericWhitespaceFailures": 0,
+  "qualifiedNativeSpeakerApproval": false,
+  "exactHeadBrowserReview": false,
+  "releaseApproved": false,
+  "noRepositoryEdits": true,
+  "noTestsBuildsScansOrCI": true,
+  "verifiedAtUTC": "2026-11-03T10:28:38.850188+00:00",
+  "crossAuditLedgerSha256": "088bd6112339a87f0fc5eb56b68d6f4ae9aa06c9aedfcee4849406e293fe0f57"
+}
