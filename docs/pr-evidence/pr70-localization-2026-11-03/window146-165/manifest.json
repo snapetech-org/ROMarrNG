@@ -19,14 +19,20 @@
   "nativeSpeakerApproval": false,
   "headedBrowserAcceptance": false,
   "workflowFilesChanged": false,
+  "prePushWorkflowRuns": 0,
   "testsBuildsScansCiBrowserOrReleasesRun": false,
+  "liveDiffPathCounts": {
+    "atInputHead": 262,
+    "afterInitialApplicationPush": 302,
+    "afterEvidenceCorrection": 303
+  },
   "manifestExcludesOwnHash": true,
   "sha256sumsCoversManifestAndEveryPacketFile": true,
   "files": [
     {
       "name": "README.md",
-      "bytes": 3749,
-      "sha256": "3cbed7b583aec9cf8bd89683d0578914b371d7a55b83c948ecf8b86e704c1432"
+      "bytes": 4069,
+      "sha256": "5632992d457f86387ead8e4c35f93d069129530b8f2bc32d73e5ba1f56e95d43"
     },
     {
       "name": "adjudication/README.md",
@@ -135,8 +141,13 @@
     },
     {
       "name": "live-pr-attestation.json",
-      "bytes": 1807,
-      "sha256": "546b4b985a7df89410dfb7cc3c620dd08b4874bedee9a1c8efb54bead9c2fe6d"
+      "bytes": 3046,
+      "sha256": "798a8f961b48b7103b8836fee1438416bb64b6933111cb8727e00fd4b3ec5ff0"
+    },
+    {
+      "name": "live-pr-files-at-input-head.txt",
+      "bytes": 24089,
+      "sha256": "f2aa2b7aad92c67f3befb3e9e76cf3484622f004b76a981a1f1675775aeea718"
     },
     {
       "name": "primary/README.md",

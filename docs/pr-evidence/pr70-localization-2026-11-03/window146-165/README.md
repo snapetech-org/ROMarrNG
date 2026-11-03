@@ -18,7 +18,7 @@ The candidate-free ledger was sealed before any proposed translation text was re
 
 ## Workflow and check effects
 
-The live PR diff at the input head contained 30 changed files and no `.github/workflows` files. The checked-in workflows use tag-only push triggers or manual/workflow-run triggers; none listens to ordinary PR-branch pushes or `pull_request` synchronization. The input head had zero status checks. The pushed branch update is not expected to dispatch a workflow; this is rechecked after delivery.
+The live PR diff at input head `db895a9` contained 262 paths relative to base commit `bcd1eb4`; the first application commit raised that to 302. `live-pr-files-at-input-head.txt` records the full pinned input path list and is checksummed. Neither diff contains `.github/workflows` files. This evidence correction adds one path, yielding 303 total files on the final PR. The checked-in workflows use tag-only push triggers or manual/workflow-run triggers; none listens to ordinary PR-branch pushes or `pull_request` synchronization. Both the input and first pushed heads had zero status checks. The configured read-only pre-push image-alias check passed against stable v0.14.11. The push did not dispatch a workflow.
 
 The repository pre-commit hook runs Semgrep. It was skipped for this commit because this task forbids scans and organization policy requires them to run only on private ephemeral JIT. The configured pre-push hook performs read-only image-alias policy checks; no version tag or release is being pushed. No tests, builds, scans, CI dispatches, browser work, workflow edits, merges, tags, or releases were made for this milestone. The PR remains open and draft.
 
