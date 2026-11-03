@@ -1,0 +1,445 @@
+{
+  "sourceContextCount": 20,
+  "sources": {
+    "ui.rename-failed-and-was-state-error-ty.4b2bacea36": {
+      "sourceId": "ui.rename-failed-and-was-state-error-ty.4b2bacea36",
+      "source": "Rename failed and was {state}: {error_type}",
+      "sourceSha256": "4b2bacea365f5d7064133c76763c3d476c0475cbcb74a94bd373763105f9223b",
+      "category": "ui-error-template",
+      "locations": [
+        "romarr/organizer.py:2004"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/organizer.py:2004",
+          "path": "romarr/organizer.py",
+          "line": 2004,
+          "excerptLineStart": 2002,
+          "excerptLineEnd": 2006,
+          "excerpt": "2002:                     rollback_errors.append(type(rollback_exc).__name__)\n2003:             batch[\"state\"] = \"rolled_back\" if not rollback_errors else \"rollback_incomplete\"\n2004:             batch[\"error\"] = type(exc).__name__\n2005:             batch[\"rollback_errors\"] = rollback_errors\n2006:             batch[\"pending\"] = None",
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64"
+        }
+      ]
+    },
+    "ui.rename-journal-path-contains-a-symli.71d15d82a6": {
+      "sourceId": "ui.rename-journal-path-contains-a-symli.71d15d82a6",
+      "source": "Rename journal path contains a symlink.",
+      "sourceSha256": "71d15d82a6763146e7442291414145209bdf51a8194115a03d1ca610c29cbf22",
+      "category": "ui-error",
+      "locations": [
+        "romarr/organizer.py:1941",
+        "romarr/organizer.py:1945",
+        "romarr/organizer.py:2016"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/organizer.py:1941",
+          "path": "romarr/organizer.py",
+          "line": 1941,
+          "excerptLineStart": 1939,
+          "excerptLineEnd": 1943,
+          "excerpt": "1939:         if metadata_root is None:\n1940:             raise ValueError(\"Shared metadata root is not configured.\")\n1941:         if _path_has_symlink(metadata_root):\n1942:             raise ValueError(\"Shared metadata root contains a symlink.\")\n1943:         metadata_real = metadata_root.resolve(strict=True)",
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64"
+        },
+        {
+          "location": "romarr/organizer.py:1945",
+          "path": "romarr/organizer.py",
+          "line": 1945,
+          "excerptLineStart": 1943,
+          "excerptLineEnd": 1947,
+          "excerpt": "1943:         metadata_real = metadata_root.resolve(strict=True)\n1944:         journal_dir = metadata_real / \".romarr\"\n1945:         if not _no_symlink_path(metadata_real, journal_dir):\n1946:             raise ValueError(\"Rename journal path contains a symlink.\")\n1947:         journal_dir.mkdir(parents=True, exist_ok=True)",
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64"
+        },
+        {
+          "location": "romarr/organizer.py:2016",
+          "path": "romarr/organizer.py",
+          "line": 2016,
+          "excerptLineStart": 2014,
+          "excerptLineEnd": 2018,
+          "excerpt": "2014:         if metadata_root is None:\n2015:             raise ValueError(\"Shared metadata root is not configured.\")\n2016:         if _path_has_symlink(metadata_root):\n2017:             raise ValueError(\"Shared metadata root contains a symlink.\")\n2018:         metadata_real = metadata_root.resolve(strict=True)",
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64"
+        }
+      ]
+    },
+    "ui.rename-on-import.b6261d12c4": {
+      "sourceId": "ui.rename-on-import.b6261d12c4",
+      "source": "Rename on import",
+      "sourceSha256": "b6261d12c4dce48176483b7d350e52ee909bf414542b25f1abaea51644266bfe",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3943"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/ui.py:3943",
+          "path": "romarr/ui.py",
+          "line": 3943,
+          "excerptLineStart": 3941,
+          "excerptLineEnd": 3945,
+          "excerpt": "3941:   openModal(m);\n3942:   m.onclick = e => { if(e.target === m || e.target.dataset.close !== undefined) closeModal(); };\n3943:   m.querySelectorAll('[data-t]').forEach(b => b.onclick = () => {\n3944:     closeModal();\n3945:     editItem(kind, { type: b.dataset.t });",
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+        }
+      ]
+    },
+    "ui.rename-plan-applied.5918c173b4": {
+      "sourceId": "ui.rename-plan-applied.5918c173b4",
+      "source": "Rename plan applied.",
+      "sourceSha256": "5918c173b41d06308ea2d6bfed2914a83e0dc6ab1c1eee7c2ef1675dbdf4ad46",
+      "category": "ui-status",
+      "locations": [
+        "romarr/organizer.py:1982"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/organizer.py:1982",
+          "path": "romarr/organizer.py",
+          "line": 1982,
+          "excerptLineStart": 1980,
+          "excerptLineEnd": 1984,
+          "excerpt": "1980:                 batch[\"operations\"] = list(moved)\n1981:                 batch[\"pending\"] = None\n1982:                 self._save_journal(journal_path, journal, metadata_real)\n1983:             self._update_paths({op[\"from\"]: op[\"to\"] for op in moved})\n1984:             batch[\"state\"] = \"applied\"",
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64"
+        }
+      ]
+    },
+    "ui.rename-preview-ready-safe-safe-renam.4f86f2186a": {
+      "sourceId": "ui.rename-preview-ready-safe-safe-renam.4f86f2186a",
+      "source": "Rename preview ready. {safe} safe renames in this batch; {blocked} entries left alone.",
+      "sourceSha256": "4f86f2186a7641cbd9ff8af597de094f6e61bd13932edcffa04d9c36dd00f22d",
+      "category": "ui-template",
+      "locations": [
+        "romarr/ui.py:5603"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/ui.py:5603",
+          "path": "romarr/ui.py",
+          "line": 5603,
+          "excerptLineStart": 5601,
+          "excerptLineEnd": 5605,
+          "excerpt": "5601:                 +interfaceMarkup('missing')+'</span>'\n5602:               :'<span class=\"pill\">'+interfaceMarkup('present')+'</span>';\n5603:         const clones=(t.discarded||[]).length\n5604:           ?'<details><summary class=\"help\" style=\"margin:0;cursor:pointer\">'\n5605:            +interfaceTemplateMarkup(t.discarded.length===1",
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+        }
+      ]
+    },
+    "ui.request-searches-your-configured-sou.3f429c4868": {
+      "sourceId": "ui.request-searches-your-configured-sou.3f429c4868",
+      "source": "Request searches your configured sources and hands a usable release to your download client. If no usable release is found, ROMarr keeps the title on Wanted.",
+      "sourceSha256": "3f429c4868cc8f01a651a81185ac8a4b40fa0ac3a061c49a2173b9d9c13544bf",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2349"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/ui.py:2349",
+          "path": "romarr/ui.py",
+          "line": 2349,
+          "excerptLineStart": 2347,
+          "excerptLineEnd": 2351,
+          "excerpt": "2347:   });\n2348: }\n2349: function catalogNorm(value){\n2350:   return String(value||'').normalize('NFKD').toLowerCase().replace(/[^a-z0-9]/g,'');\n2351: }",
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+        }
+      ]
+    },
+    "ui.request-selected-max-5.3261b3c2f3": {
+      "sourceId": "ui.request-selected-max-5.3261b3c2f3",
+      "source": "Request selected (max 5)",
+      "sourceSha256": "3261b3c2f3928fdfad6cef741054a8c70900678fddf8f0d129dd1430e324e138",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:2339"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/ui.py:2339",
+          "path": "romarr/ui.py",
+          "line": 2339,
+          "excerptLineStart": 2337,
+          "excerptLineEnd": 2341,
+          "excerpt": "2337:     +'<button class=\"btn '+(active==='catalog'?'':'ghost')+'\" data-list-mode=\"catalog\">'+interfaceMarkup('ui.browse-catalog.4d05dc6da8')+'</button>'\n2338:     +'<button class=\"btn '+(active==='imports'?'':'ghost')+'\" data-list-mode=\"imports\">'+interfaceMarkup('ui.import-lists.cdf54991b2')+'</button>'\n2339:     +'<span style=\"flex:1\"></span>'\n2340:     +'<a class=\"btn ghost\" style=\"text-decoration:none\" href=\"https://github.com/snapetech-org/seerrng\" target=\"_blank\" rel=\"noopener noreferrer\">'+interfaceMarkup('ui.seerrng-discovery.f140768191')+'</a>'\n2341:     +'<a class=\"help\" href=\"https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md\" target=\"_blank\" rel=\"noopener noreferrer\">'+interfaceMarkup('ui.integration-guide.02a0a9e2c2')+'</a>'",
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+        }
+      ]
+    },
+    "ui.requests-in-seerrng.94ac015721": {
+      "sourceId": "ui.requests-in-seerrng.94ac015721",
+      "source": "Requests in SeerrNG ↗",
+      "sourceSha256": "94ac01572121cfa86286c6ebb0f5dddedecbbc35f9cb31754abdc7af6c8834ce",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5633"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/ui.py:5633",
+          "path": "romarr/ui.py",
+          "line": 5633,
+          "excerptLineStart": 5631,
+          "excerptLineEnd": 5635,
+          "excerpt": "5631: const ORGANIZER_FIXED_MATCH_DETAILS=new Set([\n5632:   'Imported from the existing ES-DE gamelist; review before renaming',\n5633:   'Metadata provider title suggestion; confirm before renaming',\n5634:   'Filename only; no verified catalog match',\n5635:   'Title ID found in TitleDB; file bytes are not verified',",
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+        }
+      ]
+    },
+    "ui.requests-per-pass.74961b68a5": {
+      "sourceId": "ui.requests-per-pass.74961b68a5",
+      "source": "Requests per pass:",
+      "sourceSha256": "74961b68a5e0d5655dcbc4058f2547cd78f3f96914196af9685491e4d1f73b13",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5551"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/ui.py:5551",
+          "path": "romarr/ui.py",
+          "line": 5551,
+          "excerptLineStart": 5549,
+          "excerptLineEnd": 5553,
+          "excerpt": "5549:           platform:$('#cplat').value,\n5550:           one_game_one_rom:$('#c1g1r').checked,\n5551:           regions:($('#cregions').value.trim()||'').split(',').filter(Boolean),\n5552:           region_mode:$('#cstrict').checked?'strict':'prefer',\n5553:           translation_policy:$('#ctrans').value,",
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+        }
+      ]
+    },
+    "ui.retire-dead-downloads-and-grab-a-rep.4af313cc1e": {
+      "sourceId": "ui.retire-dead-downloads-and-grab-a-rep.4af313cc1e",
+      "source": "Retire dead downloads and grab a replacement",
+      "sourceSha256": "4af313cc1eca5ee0641611556c74890305cd35695e5311e3dd03304ecaba5e01",
+      "category": "task-label",
+      "locations": [
+        "romarr/app.py:1364"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/app.py:1364",
+          "path": "romarr/app.py",
+          "line": 1364,
+          "excerptLineStart": 1362,
+          "excerptLineEnd": 1366,
+          "excerpt": "1362:         # enough that the replacement searches it triggers are not a hammering.\n1363:         self.scheduler.add(\n1364:             \"FailedDownloads\", \"Retire dead downloads and grab a replacement\",\n1365:             lambda: (900 if self.store.settings.get(\n1366:                 \"blocklist_failed_downloads\", True) else 0),",
+          "fileSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510"
+        }
+      ]
+    },
+    "ui.retired-blocklisted-dead-download-s.5e329a4393": {
+      "sourceId": "ui.retired-blocklisted-dead-download-s.5e329a4393",
+      "source": "retired {blocklisted} dead download(s), grabbed {regrabbed} replacement(s)",
+      "sourceSha256": "5e329a4393ac41e8ff7c8310dfc47533941c4bfc4de12bb9e276cdd475a7685e",
+      "category": "task-result-template",
+      "locations": [
+        "romarr/app.py:2945"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/app.py:2945",
+          "path": "romarr/app.py",
+          "line": 2945,
+          "excerptLineStart": 2943,
+          "excerptLineEnd": 2947,
+          "excerpt": "2943:     def retire_dead_downloads(self) -> dict:\n2944:         \"\"\"Blocklist downloads that died, then grab the next best release.\n2945: \n2946:         The Blocklist has existed since 0.7 and nothing ever added to it on\n2947:         its own, which made a failed download a loop: `best_release` is",
+          "fileSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510"
+        }
+      ]
+    },
+    "ui.rom-hub-filesystem-confinement-could.39a3df62cc": {
+      "sourceId": "ui.rom-hub-filesystem-confinement-could.39a3df62cc",
+      "source": "ROM Hub filesystem confinement could not start ({error_type})",
+      "sourceSha256": "39a3df62ccdac29c455e74c1fca3c927df28359a3a001927d968538749fa9751",
+      "category": "provider-diagnostic-template",
+      "locations": [
+        "romarr/hub.py:581"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/hub.py:581",
+          "path": "romarr/hub.py",
+          "line": 581,
+          "excerptLineStart": 579,
+          "excerptLineEnd": 583,
+          "excerpt": "579:         _install_plugin_runtime_hardening(PluginProcess, _broker_host)\n580:     except Exception as exc:\n581:         return {\"ok\": False,\n582:                 \"error\": f\"ROM Hub filesystem confinement could not start ({type(exc).__name__})\",\n583:                 \"files\": []}",
+          "fileSha256": "4d8207aa01f7a7810dd26f60b105eac14927042b3f652ab3a461a5efdc9bc9a7"
+        }
+      ]
+    },
+    "ui.rom-hub-is-not-installed-detail.65cb63d8cc": {
+      "sourceId": "ui.rom-hub-is-not-installed-detail.65cb63d8cc",
+      "source": "ROM Hub is not installed: {detail}",
+      "sourceSha256": "65cb63d8cc34d360db1e799cb8ac25ab01f921b3dbb1521191aa54fc7ccc9d20",
+      "category": "ui-error-template",
+      "locations": [
+        "romarr/hub.py:136",
+        "romarr/hub.py:519",
+        "romarr/hub.py:576"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/hub.py:136",
+          "path": "romarr/hub.py",
+          "line": 136,
+          "excerptLineStart": 134,
+          "excerptLineEnd": 138,
+          "excerpt": "134:         catalog_sources, registry = _import()\n135:     except Exception as exc:\n136:         return {\"items\": [], \"error\": f\"ROM Hub is not installed: {exc}\"}\n137: \n138:     try:",
+          "fileSha256": "4d8207aa01f7a7810dd26f60b105eac14927042b3f652ab3a461a5efdc9bc9a7"
+        },
+        {
+          "location": "romarr/hub.py:519",
+          "path": "romarr/hub.py",
+          "line": 519,
+          "excerptLineStart": 517,
+          "excerptLineEnd": 521,
+          "excerpt": "517:         from rom_hub.cli import prepare_assets, prepare_secrets\n518:     except Exception as exc:\n519:         return [], f\"ROM Hub is not installed: {exc}\"\n520:     try:\n521:         _install_plugin_runtime_hardening(PluginProcess, _broker_host)",
+          "fileSha256": "4d8207aa01f7a7810dd26f60b105eac14927042b3f652ab3a461a5efdc9bc9a7"
+        },
+        {
+          "location": "romarr/hub.py:576",
+          "path": "romarr/hub.py",
+          "line": 576,
+          "excerptLineStart": 574,
+          "excerptLineEnd": 578,
+          "excerpt": "574:         from rom_hub.cli import prepare_assets, prepare_secrets\n575:     except Exception as exc:\n576:         return {\"ok\": False, \"error\": f\"ROM Hub is not installed: {exc}\",\n577:                 \"files\": []}\n578:     try:",
+          "fileSha256": "4d8207aa01f7a7810dd26f60b105eac14927042b3f652ab3a461a5efdc9bc9a7"
+        }
+      ]
+    },
+    "ui.rom-library-root.4644e972f3": {
+      "sourceId": "ui.rom-library-root.4644e972f3",
+      "source": "ROM library root",
+      "sourceSha256": "4644e972f384d98ad8dad336927b4407f9622b89b234c7319a8843df612a9607",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3918"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/ui.py:3918",
+          "path": "romarr/ui.py",
+          "line": 3918,
+          "excerptLineStart": 3916,
+          "excerptLineEnd": 3920,
+          "excerpt": "3916:       else if(!event.shiftKey&&(document.activeElement===last||!$('#rail').contains(document.activeElement))){event.preventDefault();first.focus();}\n3917:     }\n3918:   }\n3919: });\n3920: ",
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+        }
+      ]
+    },
+    "ui.rom-library.9a43486972": {
+      "sourceId": "ui.rom-library.9a43486972",
+      "source": "ROM library",
+      "sourceSha256": "9a434869722fa7fcec5eda8b8e3f0a40ee88ac97d61fff5dc0e57658694e5506",
+      "category": "ui-status",
+      "locations": [
+        "romarr/ui.py:4327"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/ui.py:4327",
+          "path": "romarr/ui.py",
+          "line": 4327,
+          "excerptLineStart": 4325,
+          "excerptLineEnd": 4329,
+          "excerpt": "4325:         <td><div class=\"rowact\"><button data-edit=\"${i}\">Edit</button></div></td>\n4326:         </tr>`).join('')}</tbody></table>`\n4327:     :`<div class=\"empty\">${interfaceMarkup('ui.romarr-cannot-send-release-grabs-wit.692f2ececf')}<br><button class=\"btn\" id=\"c-add-empty\" data-i18n=\"ui.add.9fd728c66c\">Add</button></div>`}\n4328:   </div>`;\n4329:   $('#c-add').onclick=()=>addItem('downloadclient');",
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+        }
+      ]
+    },
+    "ui.rom-path.126fbde809": {
+      "sourceId": "ui.rom-path.126fbde809",
+      "source": "ROM path",
+      "sourceSha256": "126fbde80917a42b09ddb6c70372f6077b44835a173004b22d0e53737d2ed297",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5505"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/ui.py:5505",
+          "path": "romarr/ui.py",
+          "line": 5505,
+          "excerptLineStart": 5503,
+          "excerptLineEnd": 5507,
+          "excerpt": "5503:       :'<div class=\"empty\">No set is being acquired.</div>';\n5504: \n5505:     cb.querySelectorAll('.cstep').forEach(el=>el.onclick=async e=>{\n5506:       const id=e.target.closest('tr').dataset.id;\n5507:       e.target.disabled=true; e.target.textContent='Running…';",
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+        }
+      ]
+    },
+    "ui.rom-root-is-not-available-path.793283d1d4": {
+      "sourceId": "ui.rom-root-is-not-available-path.793283d1d4",
+      "source": "ROM root is not available: {path}",
+      "sourceSha256": "793283d1d47bf425f38eb6ad0af0a94042717bfc2c9b94b6f9439f74d58645b8",
+      "category": "ui-error-template",
+      "locations": [
+        "romarr/organizer.py:1340"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/organizer.py:1340",
+          "path": "romarr/organizer.py",
+          "line": 1340,
+          "excerptLineStart": 1338,
+          "excerptLineEnd": 1342,
+          "excerpt": "1338:             raise ValueError(\"Shared metadata root contains a symlink.\")\n1339:         if not root.is_dir():\n1340:             raise ValueError(f\"ROM root is not available: {root}\")\n1341:         root_real = root.resolve(strict=True)\n1342:         metadata_real = metadata_root.resolve(strict=False)",
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64"
+        }
+      ]
+    },
+    "ui.rom-root.95251f6ecf": {
+      "sourceId": "ui.rom-root.95251f6ecf",
+      "source": "ROM root",
+      "sourceSha256": "95251f6ecf5d229455f7d1603514e2e723a6c379df6e5360a85c2f70d96363ac",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:5405"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/ui.py:5405",
+          "path": "romarr/ui.py",
+          "line": 5405,
+          "excerptLineStart": 5403,
+          "excerptLineEnd": 5407,
+          "excerpt": "5403:     +'<p class=\"help\">'+interfaceMarkup('ui.romarr-can-also-export-your-library.6d7122989e')\n5404:     +' <a href=\"#status\">'+interfaceMarkup('ui.system.6725e7bbcd')+'</a>.</p>'\n5405:     +(Object.keys(counts).length\n5406:       ?'<h3 style=\"margin-top:18px\">On this install</h3>'\n5407:        +'<table><thead><tr><th></th><th>Route</th><th>What that means</th>'",
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+        }
+      ]
+    },
+    "ui.romarr-cannot-say-which-platforms-it.ba28060e2c": {
+      "sourceId": "ui.romarr-cannot-say-which-platforms-it.ba28060e2c",
+      "source": "ROMarr cannot say which platforms it plays and does not guess.",
+      "sourceSha256": "ba28060e2cdfa32442c1332ed99ffa338ec71335f763d9b291e0798f3809eadc",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:4562"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/ui.py:4562",
+          "path": "romarr/ui.py",
+          "line": 4562,
+          "excerptLineStart": 4560,
+          "excerptLineEnd": 4564,
+          "excerpt": "4560:         +'\\n\\n'+apiMessageMarkup(d.note||'');\n4561:     };\n4562:     $('#g-totpoff').onclick=async()=>{\n4563:       const d=await j('/api/v1/totp/disable',{method:'POST',\n4564:         headers:{'content-type':'application/json'},body:'{}'}).catch(()=>({}));",
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+        }
+      ]
+    },
+    "ui.romarr-checks-the-actual-completed-p.227823654c": {
+      "sourceId": "ui.romarr-checks-the-actual-completed-p.227823654c",
+      "source": "ROMarr checks the actual completed path during import. If that path is not visible inside ROMarr, use the remote path mapping on Media Management; keep the download path and library destination distinct.",
+      "sourceSha256": "227823654c6e647a076a7d5a5479b628ba147ba0573d61a1c558c6055f7ea13e",
+      "category": "ui",
+      "locations": [
+        "romarr/ui.py:3719"
+      ],
+      "callerReferences": [
+        {
+          "location": "romarr/ui.py:3719",
+          "path": "romarr/ui.py",
+          "line": 3719,
+          "excerptLineStart": 3717,
+          "excerptLineEnd": 3721,
+          "excerpt": "3717:   document.querySelectorAll('[data-qretry]').forEach(b=>b.onclick=()=>act(b.dataset.qretry,'retry'));\n3718:   document.querySelectorAll('[data-qremove]').forEach(b=>b.onclick=()=>act(b.dataset.qremove,'remove'));\n3719: };\n3720: \n3721: RENDER.patches=async()=>{",
+          "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+        }
+      ]
+    }
+  }
+}
