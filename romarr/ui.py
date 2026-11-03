@@ -2792,7 +2792,16 @@ RENDER.lists=async()=>{
     const r=await j('/api/v1/launchers/connect',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({name:'Local launchers'})}).catch(()=>({error:'scan failed'}));
-    if(r.error)toastAppMessage(r.error);else if(r.message)toastAppMessage(r.message);else toastLabel('ui.done.11a6767d56');
+    if(r.error){
+      // This exact local launcher-scan response is the only source for this template.
+      const scanFailure=typeof r.error==='string'
+        ?r.error.match(/^scan failed: ([A-Za-z_][A-Za-z0-9_]*)$/):null;
+      if(scanFailure)
+        toastMarkupMessage(interfaceTemplateMarkup(
+          'ui.scan-failed-error-type.e99ccb8157',
+          {error_type:scanFailure[1]}));
+      else toastAppMessage(r.error);
+    }else if(r.message)toastAppMessage(r.message);else toastLabel('ui.done.11a6767d56');
     if(r.ok) go('lists'); else { scanBtn.disabled=false; scanBtn.textContent='Scan this machine'; }
   };
   $('#l-add').onclick=()=>editList({type:'paste'});
@@ -4553,11 +4562,15 @@ RENDER.general=()=>settingsPage('General',
       const d=await j('/api/v1/totp/enroll',{method:'POST',
         headers:{'content-type':'application/json'},body:'{}'}).catch(()=>({}));
       const out=$('#g-totpout'); out.style.display='block';
+      const noteKey='ui.scan-the-uri-or-enter-the-secret-in.612ce1fd46';
+      const note=d.note||'';
+      const noteMarkup=typeof note==='string'&&note===UI_MESSAGES[noteKey]?.source
+        ?interfaceMarkup(noteKey):apiMessageMarkup(note);
       out.innerHTML=interfaceTemplateMarkup('Secret: {secret}',{secret:d.secret||'?'})
         +'\nURI:     '+esc(d.uri||'?')
         +'\n\n'+interfaceMarkup('Backup codes (single use, save them now):')+'\n  '
         +esc((d.backup_codes||[]).join('\n  '))
-        +'\n\n'+apiMessageMarkup(d.note||'');
+        +'\n\n'+noteMarkup;
     };
     $('#g-totpoff').onclick=async()=>{
       const d=await j('/api/v1/totp/disable',{method:'POST',
