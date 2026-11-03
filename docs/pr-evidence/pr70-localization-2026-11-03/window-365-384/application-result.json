@@ -5,7 +5,7 @@
   "branch": "task/localization-translation-review-20261030",
   "reviewedBaseHead": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
   "reviewedBaseTree": "3f42d41fe4bbb8edd921ff161e8298ca66038a91",
-  "status": "catalogs applied locally; commit pin recorded in application-verification.json",
+  "status": "catalogs applied and pushed; commit pin recorded in application-verification.json",
   "cells": 240,
   "decisionCounts": {
     "accept-current": 125,
