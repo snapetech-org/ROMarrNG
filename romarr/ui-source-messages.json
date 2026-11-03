@@ -5,7 +5,7 @@
       "source": ", or load No-Intro / Redump DATs under",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:2434"
+        "romarr/ui.py:2465"
       ],
       "id": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa",
       "sourceHash": "02eaa58bfa6c824f83791cb11b32f6eba88e517acaa2fe36dcd2333c7d3fe00c",
@@ -53,7 +53,7 @@
       "source": ", to browse a catalog here.",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:2434"
+        "romarr/ui.py:2465"
       ],
       "id": "ui.to-browse-a-catalog-here.8df4394282",
       "sourceHash": "8df4394282e3d7bb88baf4330e2d256bcedbc21011c0c1b69d63e9b626af53f5",
@@ -869,7 +869,7 @@
       "source": "Browse games",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:2433"
+        "romarr/ui.py:2464"
       ],
       "id": "ui.browse-games.cf37299e27",
       "sourceHash": "cf37299e27fb28ff23ba23bf3b2a143cb84d25b53db94f8e1efbe109fb12ef92",
@@ -1303,7 +1303,7 @@
       "source": "Connect an IGDB metadata provider under",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:2434"
+        "romarr/ui.py:2465"
       ],
       "id": "ui.connect-an-igdb-metadata-provider-un.94cf3e816e",
       "sourceHash": "94cf3e816e6548a3bd391749cd1640557a07a7a25b2a2d10ed5c42428bc91cf5",
@@ -5165,7 +5165,7 @@
       "source": "ROMarr could not check this source. Check the connection and try again.",
       "category": "ui-error",
       "locations": [
-        "romarr/ui.py:1672"
+        "romarr/ui.py:1901"
       ],
       "id": "ui.romarr-could-not-check-this-source-c.a348d0627e",
       "sourceHash": "a348d0627e421ce9917f94b88b0b5802c960f5256ff4fc881d32f51f531496e0",
@@ -9659,30 +9659,6 @@
       "dynamicPlaceholders": []
     },
     {
-      "source": "or load No-Intro / Redump DATs under",
-      "category": "ui",
-      "locations": [
-        "romarr/ui.py:2227"
-      ],
-      "id": "ui.or-load-no-intro-redump-dats-under.22540d7871",
-      "sourceHash": "22540d7871a7b8be53a7a9ec9c3092168915e4daac0be59de43b1e09dd3cbbba",
-      "pendingLocales": [
-        "ar",
-        "de",
-        "es",
-        "fr",
-        "hi",
-        "id",
-        "ja",
-        "ko",
-        "pt-BR",
-        "vi",
-        "zh-Hans",
-        "zh-Hant"
-      ],
-      "dynamicPlaceholders": []
-    },
-    {
       "source": "plugin '{slug}' is disabled",
       "category": "ui-error-template",
       "locations": [
@@ -11733,10 +11709,10 @@
       "source": "Use {service} for game discovery, game covers, and a shared household request queue.",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:2435",
-        "romarr/ui.py:4926",
-        "romarr/ui.py:5332",
-        "romarr/ui.py:5634"
+        "romarr/ui.py:2466",
+        "romarr/ui.py:4958",
+        "romarr/ui.py:5364",
+        "romarr/ui.py:5666"
       ],
       "id": "ui.use-service-for-game-discovery-game.f3465a1ec2",
       "sourceHash": "f3465a1ec21b9db801b49f626be31a2b24a5c2eb388fd779bf461292507f66a9",
@@ -11762,66 +11738,10 @@
       "source": "The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.",
       "category": "ui",
       "locations": [
-        "romarr/ui.py:2435",
-        "romarr/ui.py:4926",
-        "romarr/ui.py:5332",
-        "romarr/ui.py:5634"
-      ],
-      "id": "ui.the-integration-guide-explains-how-t.59a854ef19",
-      "sourceHash": "59a854ef194752b1bb429e4bc7f58119cc5e0c97283014ea4da3c7abcacce389",
-      "pendingLocales": [
-        "ar",
-        "de",
-        "es",
-        "fr",
-        "hi",
-        "id",
-        "ja",
-        "ko",
-        "pt-BR",
-        "vi",
-        "zh-Hans",
-        "zh-Hant"
-      ],
-      "dynamicPlaceholders": []
-    },
-    {
-      "source": "Use {service} for game discovery, game covers, and a shared household request queue.",
-      "category": "ui",
-      "locations": [
-        "romarr/ui.py:2435",
-        "romarr/ui.py:4926",
-        "romarr/ui.py:5332",
-        "romarr/ui.py:5634"
-      ],
-      "id": "ui.use-service-for-game-discovery-game.f3465a1ec2",
-      "sourceHash": "f3465a1ec21b9db801b49f626be31a2b24a5c2eb388fd779bf461292507f66a9",
-      "pendingLocales": [
-        "ar",
-        "de",
-        "es",
-        "fr",
-        "hi",
-        "id",
-        "ja",
-        "ko",
-        "pt-BR",
-        "vi",
-        "zh-Hans",
-        "zh-Hant"
-      ],
-      "dynamicPlaceholders": [
-        "service"
-      ]
-    },
-    {
-      "source": "The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.",
-      "category": "ui",
-      "locations": [
-        "romarr/ui.py:2435",
-        "romarr/ui.py:4926",
-        "romarr/ui.py:5332",
-        "romarr/ui.py:5634"
+        "romarr/ui.py:2466",
+        "romarr/ui.py:4958",
+        "romarr/ui.py:5364",
+        "romarr/ui.py:5666"
       ],
       "id": "ui.the-integration-guide-explains-how-t.59a854ef19",
       "sourceHash": "59a854ef194752b1bb429e4bc7f58119cc5e0c97283014ea4da3c7abcacce389",
@@ -11846,7 +11766,7 @@
       "category": "ui",
       "locations": [
         "romarr/lists.py:859-861",
-        "romarr/ui.py:2754"
+        "romarr/ui.py:2784"
       ],
       "id": "ui.no-web-api-and-nothing-written-to-a.fefddf8698",
       "sourceHash": "fefddf869833664222ac58789630ae2747f217842f1714d5746f1dcb5157980e",

@@ -1,0 +1,247 @@
+{
+  "baseRef": "main",
+  "baseSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "boundaryFile": "selection-boundary.jsonl",
+  "callerFileCount": 5,
+  "callerFiles": [
+    "romarr/app.py",
+    "romarr/capture.py",
+    "romarr/federation.py",
+    "romarr/lists.py",
+    "romarr/ui.py"
+  ],
+  "callerResolutionNote": "Source-index lines were treated as hints and reconciled against exact current-head production code. Positions 226, 232, and 237 are held for missing localization paths; position 242 is held for a caller gap. See caller-resolution-holds.jsonl.",
+  "candidateFreeInputOnly": true,
+  "cellCount": 240,
+  "head": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "headRef": "task/localization-translation-review-20261030",
+  "headRefOid": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "holds": {
+    "byPosition": {
+      "226": 12,
+      "232": 12,
+      "237": 12,
+      "242": 12
+    },
+    "cells": 48,
+    "positions": [
+      226,
+      232,
+      237,
+      242
+    ]
+  },
+  "isDraft": true,
+  "localWorktree": "/mnt/disks/scratch/task-worktrees/localization-20261103/romarrng-pr70-w226-review-20261103",
+  "localWorktreeBranch": "",
+  "localWorktreeHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "localWorktreeStatusClean": true,
+  "localWorktreeTree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc",
+  "localeCatalogKeyCount": 1837,
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "nativeSpeakerApproval": false,
+  "productionCallerFileCount": 4,
+  "productionCallerFiles": [
+    "romarr/app.py",
+    "romarr/capture.py",
+    "romarr/federation.py",
+    "romarr/ui.py"
+  ],
+  "productionCallerReferenceCount": 25,
+  "proposedTranslationsIncluded": false,
+  "pullRequest": 70,
+  "pullRequestUrl": "https://github.com/snapetech-org/ROMarrNG/pull/70",
+  "remoteBranchHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "remotePullRefHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewDecisionsIncluded": false,
+  "selectedPositions": [
+    226,
+    245
+  ],
+  "selectionRule": "One-based positions 226–245 in the 480 unique active source IDs, sorted lexicographically by source ID. Duplicate source-index records are merged by ID and caller locations are unioned.",
+  "sourceContextRows": 20,
+  "sourceIdOrderHashFormat": "SHA-256 of all 480 sorted unique source IDs, one exact ID per line, trailing newline.",
+  "sourceIdOrderSha256": "b3e885dd9b48106f0caa5fd65965d5c2a0540cdd351ecaca8e87080519002c45",
+  "sourceIds": [
+    {
+      "callerReferenceCount": 3,
+      "holdReason": "The app API error is returned without an error_template and the pinned UI sends it to toastAppMessage, which routes raw API values through apiMessageMarkup as opaque text. The separate capture skip call is not a localized UI message. Hold pending explicit template wiring or confirmation that this key is not user-facing.",
+      "position": 226,
+      "source": "no title",
+      "sourceId": "ui.no-title.8cb9a5c65b",
+      "sourceSha256": "8cb9a5c65bfe9b03180bdfd26ef54ef23c585df29ebe0a63406ae5627b867c51"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 227,
+      "source": "No TitleDB ID",
+      "sourceId": "ui.no-titledb-id.3c3d2f2f0a",
+      "sourceSha256": "3c3d2f2f0a359e288310e9c86bfe0857199e9b9e910947a39c32fced91ac09f7"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 228,
+      "source": "No titles match these filters.",
+      "sourceId": "ui.no-titles-match-these-filters.a0f06fb7bb",
+      "sourceSha256": "a0f06fb7bb2c89040d798bd1f4218640adf4759b41a8b7d30059abea521afd39"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 229,
+      "source": "No web API, and nothing written to a PC to read either. Genuinely paste-only — and the one where DAT-verified acquisition matters most anyway.",
+      "sourceId": "ui.no-web-api-and-nothing-written-to-a.fefddf8698",
+      "sourceSha256": "fefddf869833664222ac58789630ae2747f217842f1714d5746f1dcb5157980e"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 230,
+      "source": "Not available",
+      "sourceId": "ui.not-available.67a926f700",
+      "sourceSha256": "67a926f7008e2b0e7f2b3f7a4b37597834830110be1d51138f425d6f3449bc09"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 231,
+      "source": "Not in library",
+      "sourceId": "ui.not-in-library.c2f9e4fde9",
+      "sourceSha256": "c2f9e4fde96646a1969c0792c3f2688630247adaa25a18812240da6acfacc6ce"
+    },
+    {
+      "callerReferenceCount": 2,
+      "holdReason": "The API detail is displayed via apiMessageMarkup without a detail_template; that renderer marks raw API values opaque and does not localize them. Caller meaning is pinned, but this key currently has no translation path.",
+      "position": 232,
+      "source": "not in this library; the hash identifies exactly which dump to acquire",
+      "sourceId": "ui.not-in-this-library-the-hash-identif.15bd6cace0",
+      "sourceSha256": "15bd6cace0090ff8ebd4f38d2ad9263243191fef39cde2dcff7742e80aaa43a5"
+    },
+    {
+      "callerReferenceCount": 2,
+      "holdReason": null,
+      "position": 233,
+      "source": "nothing finished",
+      "sourceId": "ui.nothing-finished.cd66a4ec32",
+      "sourceSha256": "cd66a4ec32d8b397fb13136b264bc58b8d795246698bdb8785aa78df6f899a0d"
+    },
+    {
+      "callerReferenceCount": 2,
+      "holdReason": null,
+      "position": 234,
+      "source": "nothing wanted, nothing to match",
+      "sourceId": "ui.nothing-wanted-nothing-to-match.d281ab9dfe",
+      "sourceSha256": "d281ab9dfe6ac1c469663d8afd94818021b006f6a5740d3320d45392c57223a1"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 235,
+      "source": "OK",
+      "sourceId": "ui.ok.565339bc4d",
+      "sourceSha256": "565339bc4d33d72817b583024112eb7f5cdf3e5eef0252d6ec1b9c9a94e12bb3"
+    },
+    {
+      "callerReferenceCount": 2,
+      "holdReason": null,
+      "position": 236,
+      "source": "Older than latest listed version",
+      "sourceId": "ui.older-than-latest-listed-version.28e22ad5b5",
+      "sourceSha256": "28e22ad5b5a4f37e4924b402f5a547a3ca0da7ef4cdafc2172383b7f7a073af3"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": "The source is returned as text for a <select> option. The pinned select helper emits no data-i18n key for formatter output, and the automatic text translator explicitly skips descendants of select elements. Caller exists, but this cell has no current localization path.",
+      "position": 237,
+      "source": "On disk (plays now)",
+      "sourceId": "ui.on-disk-plays-now.325a11ceda",
+      "sourceSha256": "325a11ceda6c5379498ece518c46a081019f59b3fd88ba32ea53dbdc653f397b"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 238,
+      "source": "On this day",
+      "sourceId": "ui.on-this-day.d011904834",
+      "sourceSha256": "d011904834fe28b25d7a9d9043c048b00e2b6f0ebf162498850f2105696195d6"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 239,
+      "source": "Optional connections to the rest of the stack. Credentials live in the environment file, not here — this page never shows or stores a secret. Indexers and download clients have their own Settings pages; notifications and metadata connections can be added only when you choose to use them.",
+      "sourceId": "ui.optional-connections-to-the-rest-of.636208f858",
+      "sourceSha256": "636208f8587950df7a309c063bdb973bc221aa53c810889a811ff06f7d9ea8ce"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 240,
+      "source": "Optional follow-ups",
+      "sourceId": "ui.optional-follow-ups.e3fee9a99c",
+      "sourceSha256": "e3fee9a99c9bf2af64aa820ad46e1bcf227905c8a3f819ff26dd03db2278c37f"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 241,
+      "source": ", or load No-Intro / Redump DATs under",
+      "sourceId": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa",
+      "sourceSha256": "02eaa58bfa6c824f83791cb11b32f6eba88e517acaa2fe36dcd2333c7d3fe00c"
+    },
+    {
+      "callerReferenceCount": 0,
+      "holdReason": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete.",
+      "position": 242,
+      "source": "or load No-Intro / Redump DATs under",
+      "sourceId": "ui.or-load-no-intro-redump-dats-under.22540d7871",
+      "sourceSha256": "22540d7871a7b8be53a7a9ec9c3092168915e4daac0be59de43b1e09dd3cbbba"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 243,
+      "source": "Organize a library you already have",
+      "sourceId": "ui.organize-a-library-you-already-have.61369e08be",
+      "sourceSha256": "61369e08be38ee4a8b298278f9278fd8740a6f2dcae563c1c4b603c26da824b1"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 244,
+      "source": ", outside the ROM root, and mount that folder on each client. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another provider lookup.",
+      "sourceId": "ui.outside-the-rom-root-and-mount-that.6deae8166d",
+      "sourceSha256": "6deae8166ddbe69392aebb90be5fba8c2901e1e09caa7b27a60c3db82edbd610"
+    },
+    {
+      "callerReferenceCount": 1,
+      "holdReason": null,
+      "position": 245,
+      "source": "Overwrite an existing file",
+      "sourceId": "ui.overwrite-an-existing-file.9d5f5484e6",
+      "sourceSha256": "9d5f5484e67157499dde68915b81e50de7605effeb74108ed77452e850f51d1d"
+    }
+  ],
+  "sourceIndexRecordCount": 482,
+  "state": "OPEN",
+  "tree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc",
+  "uniqueSourceCount": 480,
+  "window": "W226-W245"
+}

@@ -4790,7 +4790,11 @@ class ROMarr:
         if peer is None:
             return {"ok": False, "error": why}
         if not str(title or "").strip():
-            return {"ok": False, "error": "no title"}
+            return {"ok": False, "error": "no title",
+                    "error_template": {
+                        "key": "ui.no-title.8cb9a5c65b",
+                        "values": {},
+                    }}
         self.store.want(title, platform)
         self.store.record(Event(
             kind="wanted", game=title, platform=platform,
@@ -4854,6 +4858,16 @@ class ROMarr:
                         "detail_template": err_template}
 
         status = str(body.get("status") or "")
+        detail = str(body.get("detail") or "")
+        detail_template = None
+        if status == "missing":
+            # The status is a fixed protocol verdict. Render ROMarr's local
+            # copy; ignore any peer-authored detail or template for this case.
+            detail = ""
+            detail_template = {
+                "key": "ui.not-in-this-library-the-hash-identif.15bd6cace0",
+                "values": {},
+            }
         answer = {
             "ok": status in ("ready", "unverified"),
             "status": status,
@@ -4861,8 +4875,10 @@ class ROMarr:
             "title": entry.name,
             "platform": entry.platform,
             "sha1": entry.sha1,
-            "detail": str(body.get("detail") or ""),
+            "detail": detail,
         }
+        if detail_template:
+            answer["detail_template"] = detail_template
         if answer["ok"]:
             answer["room"] = self.federation.netplay_room(peer.peer_id,
                                                           entry.sha1)

@@ -1,0 +1,1039 @@
+{
+  "additionalHelperContexts": [
+    {
+      "group": "rank-237-select-option",
+      "references": [
+        {
+          "contextEndLine": 2003,
+          "contextLines": [
+            {
+              "line": 1994,
+              "lineSha256": "c051d50183fbe88e4edc0bcab8dc06880b2dcf2a9877403e532a3ff60e5d58f5",
+              "text": "  const f=d.facets||{};"
+            },
+            {
+              "line": 1995,
+              "lineSha256": "4ce19653b96cba8060b76f38500929d7f791797df3a008cecc3e2a9eb7daa26c",
+              "text": "  const sel=(key,label,list,fmt)=>{"
+            },
+            {
+              "line": 1996,
+              "lineSha256": "7b2d6f5481c50856bab26d231500c99d9890306ac7add74bc677ca9ba662d732",
+              "text": "    if(!list||!list.length) return '';"
+            },
+            {
+              "line": 1997,
+              "lineSha256": "22b0b5f92c415fe2dfe8c7ccb7e185f818966e4348131c2d10638c7d406e1a02",
+              "text": "    const filterName=({genre:'Genre',region:'Region',decade:'Decade',origin:'Origin',source:'Source',sort:'Sort by'})[key]||label;"
+            },
+            {
+              "line": 1998,
+              "lineSha256": "2cf2154efecfd99045ee2672e5be0bd6c450fec7f9248fdd86e08eeff4cff515",
+              "text": "    return `<select data-lf=\"${key}\" aria-label=\"${esc(translateLabel(filterName,readInterfaceLanguage()))}\" data-i18n-aria-label=\"${esc(stableLocalizationKey(filterName)||filterName)}\" style=\"padding:4px 8px;font-size:12px\">"
+            },
+            {
+              "line": 1999,
+              "lineSha256": "76e696b99908d6632b0fc97a01162144834c95868192740cccd55f8bac52cb82",
+              "text": "      <option value=\"\" data-i18n-key=\"${esc(stableLocalizationKey(label)||label)}\">${esc(translateLabel(label,readInterfaceLanguage()))}</option>"
+            },
+            {
+              "line": 2000,
+              "lineSha256": "fe9289760fb072428b99a246fc355f02458e6d1f3c7909ae940a0b4efd33de14",
+              "text": "      ${list.map(x=>`<option value=\"${esc(x.value)}\"${LIB[key]===x.value?' selected':''}"
+            },
+            {
+              "line": 2001,
+              "lineSha256": "cfae89d812c6d942319fee6b542ea83c07f7a1373fe051424615c21fe2870f0f",
+              "text": "        >${esc(fmt?fmt(x.value):x.value)} (${num(x.count)})</option>`).join('')}"
+            },
+            {
+              "line": 2002,
+              "lineSha256": "92e922c418823101d79b1c0a77df7d9fc81c6c18c466712b9eb18a5f980529ab",
+              "text": "    </select>`;"
+            },
+            {
+              "line": 2003,
+              "lineSha256": "5c0254acd0251619029b7742ce33ed692f1099571cf182117eb4e87b71bcf031",
+              "text": "  };"
+            }
+          ],
+          "contextSha256": "2b80242fc7fb2d389e0bc9f31f6b634f25a2576f9427c4fae6ff13e517dcce93",
+          "contextStartLine": 1994,
+          "endLine": 2002,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+          "matchBasis": "select option formatter and its missing per-option translation marker",
+          "path": "romarr/ui.py",
+          "startLine": 1995
+        },
+        {
+          "contextEndLine": 2039,
+          "contextLines": [
+            {
+              "line": 2036,
+              "lineSha256": "718d07ebe8a7d0a997d3959a90179b978a34b942da27cc9c2ef3d9e736e770a1",
+              "text": "      ${sel('decade','Any decade',f.decades)}"
+            },
+            {
+              "line": 2037,
+              "lineSha256": "68fca98da23d54eb7c2096f072e309e1747aa1d646a1948f756d6c173af755f7",
+              "text": "      ${(f.origins||[]).length>1?sel('origin','On disk & catalogued',f.origins,"
+            },
+            {
+              "line": 2038,
+              "lineSha256": "87352aefda249496f4914a6211171c0759732d041a143e78c6fbe7513df7b893",
+              "text": "        v=>v==='local'?'On disk (plays now)':'Catalogued (needs fetching)'):''}"
+            },
+            {
+              "line": 2039,
+              "lineSha256": "6e1a819459237b03137c5e80e06b93c4f5c6e65b0975e05290cfa3089a5102b1",
+              "text": "      ${(f.sources||[]).length>1?sel('source','Any source',f.sources,"
+            }
+          ],
+          "contextSha256": "906a3a86ebbfbb41f5ab32272e90e234c78efc0318e4de5c0910b6f23ae18029",
+          "contextStartLine": 2036,
+          "endLine": 2038,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+          "matchBasis": "origin filter creates the “On disk (plays now)” option",
+          "path": "romarr/ui.py",
+          "startLine": 2037
+        }
+      ]
+    },
+    {
+      "group": "rank-238-tab-renderer",
+      "references": [
+        {
+          "contextEndLine": 2953,
+          "contextLines": [
+            {
+              "line": 2943,
+              "lineSha256": "830e708ddbc102007c95cd53e7a90ac9b99bbb52325feb68276eee4860ad902f",
+              "text": "  const webTabs=[['popular','Popular'],['new','New releases'],['upcoming','Upcoming']];"
+            },
+            {
+              "line": 2944,
+              "lineSha256": "e9086a1b00d690b320afa8bd8d001639c2d1fbc6985ca6e905a09afbc68b2cda",
+              "text": "  const tabs=mine?libTabs:webTabs;"
+            },
+            {
+              "line": 2945,
+              "lineSha256": "ca870018f8b26db72153b5f41df8de0e63f4ac48a203bb4852edb025a1a3a1a5",
+              "text": "  if(mine&&!libTabs.some(t=>t[0]===DISC.shelf)) DISC.shelf='top-rated';"
+            },
+            {
+              "line": 2946,
+              "lineSha256": "5c07e5e48694dc174af8ae30537a70548e4d2aeebb9c23cb12c167c1c3c9c362",
+              "text": "  if(!mine&&!webTabs.some(t=>t[0]===DISC.shelf)) DISC.shelf='popular';"
+            },
+            {
+              "line": 2947,
+              "lineSha256": "9705b1961694cb4bd499a603a47818cabcc8abe54dde3197118d71529d8fb41a",
+              "text": "  $('#page').innerHTML=`<div class=\"row\" style=\"margin-bottom:10px;gap:6px;flex-wrap:wrap\">"
+            },
+            {
+              "line": 2948,
+              "lineSha256": "34f6cd504593e381a92d9f55cee1d49a86d17f451f7f42bbc0cb9c2a8a02f850",
+              "text": "      <button class=\"btn ${mine?'':'ghost'}\" data-mode=\"library\">My library</button>"
+            },
+            {
+              "line": 2949,
+              "lineSha256": "75b5e4494e08fbbb39c37609f8f03bd2b6ec124e20d683e736b1669373a4d934",
+              "text": "      <button class=\"btn ${mine?'ghost':''}\" data-mode=\"web\">New releases (web)</button>"
+            },
+            {
+              "line": 2950,
+              "lineSha256": "938d21b16db9ef71b3afa46422ee35662efa47040149976d0f8287aa31c128b2",
+              "text": "      <span style=\"flex:1\"></span>"
+            },
+            {
+              "line": 2951,
+              "lineSha256": "7d65035d49df5899350617e41d4a0ab045abe22e63d7a239e6f0761bfccf7597",
+              "text": "      ${tabs.map(([k,l])=>`<button class=\"btn ${k===DISC.shelf?'':'ghost'}\""
+            },
+            {
+              "line": 2952,
+              "lineSha256": "72f7b0c6aa00e6c988ceeca64b562e731e7b30332a453367736c0d3cce900a1f",
+              "text": "        data-shelf=\"${k}\" style=\"padding:4px 10px;font-size:12px\">${l}</button>`).join('')}"
+            },
+            {
+              "line": 2953,
+              "lineSha256": "7dc8d37d8f9fb3c627639b2506cd6c66f58f02a11047bb736810cee78b249064",
+              "text": "    </div>"
+            }
+          ],
+          "contextSha256": "b683b2177ebf5b5c93fddf7a25a1dd6619eac462f39f77088f7a43487d566190",
+          "contextStartLine": 2943,
+          "endLine": 2952,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+          "matchBasis": "tab labels are rendered into buttons as text",
+          "path": "romarr/ui.py",
+          "startLine": 2944
+        }
+      ]
+    },
+    {
+      "group": "rank-245-checkbox-renderer",
+      "references": [
+        {
+          "contextEndLine": 4088,
+          "contextLines": [
+            {
+              "line": 4085,
+              "lineSha256": "89bd416ce5662b5dc30597301260691553cc75fe1dbaab8ad67aa1a49952ed5e",
+              "text": "  <input type=\"${type}\" id=\"s-${k}\" data-k=\"${k}\" ${extra} value=\"${esc(val)}\"></div>`;"
+            },
+            {
+              "line": 4086,
+              "lineSha256": "0434804412b4e1ba454cd0a4f6d2c38b7461adabea9219673b7c19747d40ad51",
+              "text": "const chk=(k,label,val)=>`<label class=\"check\"><input type=\"checkbox\" data-k=\"${k}\""
+            },
+            {
+              "line": 4087,
+              "lineSha256": "fd1bcc31180eba32599c6f70e06e2061920b6b3e60b2672f2d2cca50609eac87",
+              "text": "  ${val?'checked':''}><span>${label}</span></label>`;"
+            },
+            {
+              "line": 4088,
+              "lineSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "text": ""
+            }
+          ],
+          "contextSha256": "6c0bf9e202798b020594c4e0a75e9bc523737d4e0fa1ccb881f68f3427a0416c",
+          "contextStartLine": 4085,
+          "endLine": 4087,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+          "matchBasis": "checkbox helper renders its label as a text node",
+          "path": "romarr/ui.py",
+          "startLine": 4086
+        }
+      ]
+    },
+    {
+      "group": "rank-242-near-match",
+      "references": [
+        {
+          "contextEndLine": 2437,
+          "contextLines": [
+            {
+              "line": 2433,
+              "lineSha256": "7d55f2664da38608d0f3d9b0df1ba0a27221c36ffc20e0b0b87e00cfcab5185f",
+              "text": "    $('#page').innerHTML=listsNav('catalog')"
+            },
+            {
+              "line": 2434,
+              "lineSha256": "de3dc992f314fb3c8fa3e32fd42d1bdaacbed74ba82e2cce23d16c4d71122a13",
+              "text": "      +'<div class=\"card\"><h3>'+interfaceMarkup('Browse games')+'</h3>'"
+            },
+            {
+              "line": 2435,
+              "lineSha256": "3987d0e60ad5259f4a2e21123e884731a3c5d443a2cd5b1bccdb900b6f076bad",
+              "text": "      +'<p class=\"help\">'+interfaceMarkup('Connect an IGDB metadata provider under')+interfacePhraseSpace()+'<a href=\"#metadata\">'+interfaceMarkup('Metadata')+'</a>'+interfaceMarkup(', or load No-Intro / Redump DATs under')+interfacePhraseSpace()+'<a href=\"#collections\">'+interfaceMarkup('Collections')+'</a>'+interfaceMarkup(', to browse a catalog here.')+'</p>'"
+            },
+            {
+              "line": 2436,
+              "lineSha256": "090b606687c11ae399357739957786fe5ee0fb94bdd2f5d72d6c09aeac19a70e",
+              "text": "      +'<p class=\"help\"><a href=\"https://github.com/snapetech-org/seerrng\" target=\"_blank\" rel=\"noopener noreferrer\">'+interfaceTemplateMarkup('Use {service} for game discovery, game covers, and a shared household request queue.',{service:'SeerrNG'})+'</a>'+interfacePhraseSpace()+'<a href=\"https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md\" target=\"_blank\" rel=\"noopener noreferrer\">'+interfaceMarkup('The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.')+'</a></p></div>';"
+            },
+            {
+              "line": 2437,
+              "lineSha256": "0edaf9d1da566e99f85c8b797eed32bb5dc9534da571738e9143426f90651915",
+              "text": "    wireListNav();"
+            }
+          ],
+          "contextSha256": "b76ccb94731ffb48346c9cad034a12c91d692bc943525163c97af4f9fe1a1213",
+          "contextStartLine": 2433,
+          "endLine": 2436,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+          "matchBasis": "the only occurrence is the comma-prefixed rank-241 source passed to interfaceMarkup",
+          "path": "romarr/ui.py",
+          "startLine": 2434
+        }
+      ]
+    },
+    {
+      "group": "rank-239-stale-index-location",
+      "references": [
+        {
+          "contextEndLine": 4210,
+          "contextLines": [
+            {
+              "line": 4206,
+              "lineSha256": "0bdfd80ec8a6a2203b12a09d383a7fdb14117633ea6bbd1956a9cdfa0689150b",
+              "text": "     <div style=\"color:var(--dim);font-size:11.5px;margin-top:4px\">"
+            },
+            {
+              "line": 4207,
+              "lineSha256": "7c281fb382fb95ad39ef6c3dbd0b424518a4b3fc5e56ec5d86315a18e3797ad6",
+              "text": "       Comma-separated codes, e.g. <code>de, en</code>. Matches scene markers"
+            },
+            {
+              "line": 4208,
+              "lineSha256": "6b279943c5022c2419c16a9512cf9664d7ee8297bfaf0b45ca1eb21487a00d48",
+              "text": "       like <code>[T-De]</code> / <code>[T+Eng]</code>; an unmarked"
+            },
+            {
+              "line": 4209,
+              "lineSha256": "d6a799b26c6f0969d7f31c5ec4947dada59dccab9825c065eae90abbe7b039f4",
+              "text": "       <code>(Translation)</code> counts as English.</div></div>`"
+            },
+            {
+              "line": 4210,
+              "lineSha256": "73c6398954e131caf29298f32e7d7b8a24208a18083f6f9dec9faa65484d483d",
+              "text": "  +sel('region_mode','Region list in 1G1R sets',"
+            }
+          ],
+          "contextSha256": "2e7baee735d6aaa221a0b7a2186b0cf6fd978ec6eefe17aa6efe0c85722d755d",
+          "contextStartLine": 4206,
+          "endLine": 4209,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+          "matchBasis": "the source-index line is now unrelated fan-translation help text",
+          "path": "romarr/ui.py",
+          "startLine": 4207
+        },
+        {
+          "contextEndLine": 4018,
+          "contextLines": [
+            {
+              "line": 4012,
+              "lineSha256": "efcabf281411d19925c4009f469fdf69870f07020f29447fa6f1bf08513043ed",
+              "text": "/* ---------------- settings ---------------- */"
+            },
+            {
+              "line": 4013,
+              "lineSha256": "8c45e3898b1966ffa883b9ecdaae39a0685affa8cfdae6f81bf9fe0a0bc11346",
+              "text": "function settingsPage(title, help, body, after){"
+            },
+            {
+              "line": 4014,
+              "lineSha256": "04fa0686cc0d33f2c6b76107b957307449510717ee72773ab6755fb8bea8b9a1",
+              "text": "  $('#page').innerHTML=`<div class=\"card\"><h3>${title}</h3>"
+            },
+            {
+              "line": 4015,
+              "lineSha256": "3ff7a870c140a92be754557bd0b55148928e7be74c2d2013cc1161f99ae20eb3",
+              "text": "    <p class=\"help\">${help}</p>${body}"
+            },
+            {
+              "line": 4016,
+              "lineSha256": "ed4fbdfa0bfba6375c09ffb0461f0352492346e7958fbdc5d9d8a1d1d84566bc",
+              "text": "    <div id=\"settings-save-status\" class=\"help\" role=\"status\" aria-live=\"polite\" aria-atomic=\"true\"></div>"
+            },
+            {
+              "line": 4017,
+              "lineSha256": "ed11fb22dc1649583b0ed47acbb3fb1ce5738d8a03abdd905c91c760d82bcbb5",
+              "text": "    <button class=\"btn\" id=\"s-save\">Save</button></div>`;"
+            },
+            {
+              "line": 4018,
+              "lineSha256": "69947c813b0de9f09556789bbea4ca16b509924c38261d7a6fc8b06f0d319b9d",
+              "text": "  if(after)after();"
+            }
+          ],
+          "contextSha256": "ec3ad4255d626571b184a06361ea6f28ac5938b232747c6223ef8dcbec1a286d",
+          "contextStartLine": 4012,
+          "endLine": 4017,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+          "matchBasis": "settingsPage inserts the concatenated help string into a paragraph text node",
+          "path": "romarr/ui.py",
+          "startLine": 4013
+        }
+      ]
+    },
+    {
+      "group": "rank-229-stale-index-location",
+      "references": [
+        {
+          "contextEndLine": 862,
+          "contextLines": [
+            {
+              "line": 858,
+              "lineSha256": "f4ef6a8fd951e493cce0fff4ca892e64b0d827ee232df28546d598080870252b",
+              "text": "NO_API_STORES = {"
+            },
+            {
+              "line": 859,
+              "lineSha256": "734238111ac8c416f3a680e8932ba790c0958ca1e8a1e573ca6fd4288a7aeb85",
+              "text": "    \"Nintendo\": \"No web API, and nothing written to a PC to read either. \""
+            },
+            {
+              "line": 860,
+              "lineSha256": "14742574695875b3804182fd80d076460c37dc2d6f79bfaede67caae44d93f55",
+              "text": "                \"Genuinely paste-only — and the one where DAT-verified \""
+            },
+            {
+              "line": 861,
+              "lineSha256": "201f2258454f48b63d1605fbd32c01adeb211d40330c033206a8c77601302bc7",
+              "text": "                \"acquisition matters most anyway.\","
+            },
+            {
+              "line": 862,
+              "lineSha256": "d10b36aa74a59bcf4a88185837f658afaf3646eff2bb16c3928d0e9335e945d2",
+              "text": "}"
+            }
+          ],
+          "contextSha256": "6819520833d5d659bee3845e36ad3774108aed1edabbc3e5ef824df4ebe29b7a",
+          "contextStartLine": 858,
+          "endLine": 861,
+          "fileSha256": "adf7d4e412d94b0796c2671ce14d191fa7e990ed7749fa229d405b38e3580de4",
+          "gitBlob": "c657ce31f5de1aed0da9bc068e45ed2c3f646a98",
+          "matchBasis": "source-index location retained for comparison; current active ID caller is ui.py:2754",
+          "path": "romarr/lists.py",
+          "startLine": 859
+        }
+      ]
+    }
+  ],
+  "callerFile": "romarr/ui.py",
+  "callerFileGitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+  "callerFileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+  "findings": {
+    "ordinaryDOMTextNodes": "applyTranslatedTextTree maps text nodes to source labels and observeInterfaceText processes inserted nodes.",
+    "selectOptions": "applyTranslatedTextNode skips descendants of select. Rank 237 origin formatter output has no data-i18n-key marker from the select helper.",
+    "translatedKeyCalls": "interfaceMarkup emits a data-i18n-key for explicit source and stable-ID calls."
+  },
+  "head": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "runtimeContext": [
+    {
+      "contextEndLine": 884,
+      "contextLines": [
+        {
+          "line": 881,
+          "lineSha256": "f83a01aac9f41078f255e176e31a6c5af58efe7037c5fe0b54cfc8daeaf09a4b",
+          "text": "  shelved:'Shelved',verified:'Verified',bad:'Bad',unknown:'Unknown'};"
+        },
+        {
+          "line": 882,
+          "lineSha256": "4c2964d92c2ddb8c207ac35074307f044a58e2fd66edbf9d9e0fdbe1af9fdf9d",
+          "text": "const interfaceMarkup=source=>'<span data-i18n-key=\"'+esc(stableLocalizationKey(source)||source)+'\">'"
+        },
+        {
+          "line": 883,
+          "lineSha256": "08eb8f7cfe50b6f1f8c487ae0df559ec50ce806087087a8379e6d7a8d9e65dab",
+          "text": "  +esc(translateLabel(source,readInterfaceLanguage()))+'</span>';"
+        },
+        {
+          "line": 884,
+          "lineSha256": "5f753f4edffc7a8b4c24da05043a34ae855beb594de529881e83d61bc8fb21c8",
+          "text": "const interfacePhraseSpace=()=>/^(?:ja|zh)/.test(readInterfaceLanguage())?'':' ';"
+        }
+      ],
+      "contextSha256": "0af865c9e34f97ab98bd7db1053282e2d1c7b496772b5cb1318af67eef83ade0",
+      "contextStartLine": 881,
+      "endLine": 883,
+      "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+      "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+      "matchBasis": "interfaceMarkup lookup and data-i18n-key output",
+      "path": "romarr/ui.py",
+      "startLine": 882
+    },
+    {
+      "contextEndLine": 1048,
+      "contextLines": [
+        {
+          "line": 1039,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        },
+        {
+          "line": 1040,
+          "lineSha256": "222e1101b1448fbc6bb2e2e36ac6088ebdaa4614474e733548e0bfaeae002135",
+          "text": "const apiMessageMarkup=(value,explicitTemplate=null)=>{"
+        },
+        {
+          "line": 1041,
+          "lineSha256": "ee6395c49a1c2145a24150c0cd3ee59ea88bc504bccfce32e8f466a00027c272",
+          "text": "  const explicit=explicitTemplateMarkup(explicitTemplate);"
+        },
+        {
+          "line": 1042,
+          "lineSha256": "65753c85a8536ac2028e103927525ba9b2a6f1edbe6f4ce56d7ac15c3c050df0",
+          "text": "  if(explicit)return explicit;"
+        },
+        {
+          "line": 1043,
+          "lineSha256": "54e679b0df397986474588f990cce074437a8df5da87cf9ce2de24f75baa5b1a",
+          "text": "  if(value===null||value===undefined||value==='')return '';"
+        },
+        {
+          "line": 1044,
+          "lineSha256": "770d46ebee6d35251ed89c83e7003d30827becaf651e6dc58384f79ff2ad2885",
+          "text": "  if(typeof value!=='string'&&typeof value!=='number')return '';"
+        },
+        {
+          "line": 1045,
+          "lineSha256": "0bb1bbf979d19b244f95ee719a0cbb80da4306deaf75dce06aa07bd70957fad7",
+          "text": "  const source=String(value);"
+        },
+        {
+          "line": 1046,
+          "lineSha256": "2a70e2ba5186ace1175242e35fd43c3bda0fa99a99698faac37d1e927e2d2371",
+          "text": "  return '<span lang=\"und\" dir=\"auto\">'+esc(source)+'</span>';"
+        },
+        {
+          "line": 1047,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        },
+        {
+          "line": 1048,
+          "lineSha256": "a0a53c378020a784fc373b0fe8f41d2902f1e77953823829dd1b586c8d5f9c27",
+          "text": "const messagePartsMarkup=parts=>Array.isArray(parts)?parts.map(part=>{"
+        }
+      ],
+      "contextSha256": "36679267d99042b3cca1d6c8667b1d5c4aae1be7bd86f6e00dd26e187847f7bf",
+      "contextStartLine": 1039,
+      "endLine": 1047,
+      "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+      "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+      "matchBasis": "apiMessageMarkup keeps raw API values opaque unless an explicit template is supplied",
+      "path": "romarr/ui.py",
+      "startLine": 1040
+    },
+    {
+      "contextEndLine": 1071,
+      "contextLines": [
+        {
+          "line": 1054,
+          "lineSha256": "3dd842cc88794e85112adfc7b4fb6ed1d1cb5e72a91d41e9d24893f9f8ae5eaa",
+          "text": "}).join(''):'';"
+        },
+        {
+          "line": 1055,
+          "lineSha256": "6cbad5c7e5ab73f9c4d7ca49adc42aff0b149bbd6e86ec3972d9b71707348d22",
+          "text": "const commandResultMarkup=result=>{"
+        },
+        {
+          "line": 1056,
+          "lineSha256": "3c82c45d3fc77d2fd77adda94cd6b5c9d524fb4ffd4ab44a4b848053242c243d",
+          "text": "  if(!result||typeof result!=='object')return apiMessageMarkup(result);"
+        },
+        {
+          "line": 1057,
+          "lineSha256": "1ba55f7266f573d5bc07df515ac1ac5c4a64bcab37eaffd2f8f57f099f968e93",
+          "text": "  const parts=[];"
+        },
+        {
+          "line": 1058,
+          "lineSha256": "bdad3804f3e16f7acc9de3898585cc69adfd4fa718f96e9039e271196d414791",
+          "text": "  if(Array.isArray(result.message_parts))"
+        },
+        {
+          "line": 1059,
+          "lineSha256": "648509797bbfb862e12cc6e16313e4e228a9158c422956ba93f371741cd1766c",
+          "text": "    parts.push(messagePartsMarkup(result.message_parts));"
+        },
+        {
+          "line": 1060,
+          "lineSha256": "6b4fa909b86d4922677044c55a880c4c9d70d6f7d97b8ef9a31f178d86f629da",
+          "text": "  else if(result.message||result.message_template)"
+        },
+        {
+          "line": 1061,
+          "lineSha256": "217e5e9bb88b613c26a4a436584309f0b29a49dc61e85145be2c25251a19010e",
+          "text": "    parts.push(apiMessageMarkup(result.message,result.message_template));"
+        },
+        {
+          "line": 1062,
+          "lineSha256": "5599ef6d6a67fc708835fc07eb57f029ef3591bd70889d19da03d94950d3ec3d",
+          "text": "  for(const failure of Array.isArray(result.library_failures)?result.library_failures:[]){"
+        },
+        {
+          "line": 1063,
+          "lineSha256": "2961119d527630b9e81841e9315c09b49d75e60d7982c8828222eb512ffb06f8",
+          "text": "    if(!failure||typeof failure!=='object')continue;"
+        },
+        {
+          "line": 1064,
+          "lineSha256": "493986c179a779f59dc1fddfd76aca6c3dd5f92ab696ac93a1c2d310daec644c",
+          "text": "    const library=String(failure.library??''),errorType=String(failure.error_type??'');"
+        },
+        {
+          "line": 1065,
+          "lineSha256": "48b6cc1bcc12d778db0d440def122d16b48c2bd8c03b39622b9fc49266882569",
+          "text": "    parts.push('; ',apiMessageMarkup(`${library} unreachable (${errorType})`,{"
+        },
+        {
+          "line": 1066,
+          "lineSha256": "bde01415a44ab21bb33e260c3ef2e01a143fce5cc3d6886f3094c86be62e4d51",
+          "text": "      key:'ui.library-unreachable-error-type.b2611060a9',"
+        },
+        {
+          "line": 1067,
+          "lineSha256": "ef60fe337627886fcee62d4cd50edf07d0fc19b69ca0bba510ca76f3d912976c",
+          "text": "      values:{library,error_type:errorType}"
+        },
+        {
+          "line": 1068,
+          "lineSha256": "1de093e7db36ed3f1d471a554c7b8876e593a0e27ac58790bdc30e66edf8d0f0",
+          "text": "    }));"
+        },
+        {
+          "line": 1069,
+          "lineSha256": "737db166c79ae98e44bbe5ad43e03bf3774f7b3696068842d56a72e863dfeb20",
+          "text": "  }"
+        },
+        {
+          "line": 1070,
+          "lineSha256": "320ff6440b7cd8d3c775be1e5544a577a8feb40b2c3fa334ad40d287e1dafbbb",
+          "text": "  return parts.join('');"
+        },
+        {
+          "line": 1071,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        }
+      ],
+      "contextSha256": "a6fac0972938407a2bbe25a131c17e0f32ddf12b784e2cde4f955677013509c1",
+      "contextStartLine": 1054,
+      "endLine": 1070,
+      "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+      "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+      "matchBasis": "commandResultMarkup forwards explicit message templates but opaque raw values stay untranslated",
+      "path": "romarr/ui.py",
+      "startLine": 1055
+    },
+    {
+      "contextEndLine": 1599,
+      "contextLines": [
+        {
+          "line": 1589,
+          "lineSha256": "d10b36aa74a59bcf4a88185837f658afaf3646eff2bb16c3928d0e9335e945d2",
+          "text": "}"
+        },
+        {
+          "line": 1590,
+          "lineSha256": "0e1cdb1a65f3b73ac5fec7fd62d01b9e9ec9de9aee500725f6d71695df30c9cb",
+          "text": "function toastAppMessage(message,explicitTemplate=null){"
+        },
+        {
+          "line": 1591,
+          "lineSha256": "a000dd47a3162eb9b79187d0304e84af13590afcfcd51caf02f06634524db904",
+          "text": "  toastMarkupMessage(apiMessageMarkup(message,explicitTemplate));"
+        },
+        {
+          "line": 1592,
+          "lineSha256": "d10b36aa74a59bcf4a88185837f658afaf3646eff2bb16c3928d0e9335e945d2",
+          "text": "}"
+        },
+        {
+          "line": 1593,
+          "lineSha256": "77ce87ca5a1034f78aaf0f479d66a28ae88e25761f2bfd271d6c1d405e4a53cd",
+          "text": "function toastSourceMessage(message){"
+        },
+        {
+          "line": 1594,
+          "lineSha256": "a52b6223762c6d6591c6873a8cdba68be5c3179b7018bb4a7b8f9abcb74157a6",
+          "text": "  const source=String(message??'');"
+        },
+        {
+          "line": 1595,
+          "lineSha256": "d0d03bb686eb62b9cdff54f96cd42ddc6e59bfe1424b187755ecdad9701cafff",
+          "text": "  if(source)toastMarkupMessage(appMessageMarkup(source));"
+        },
+        {
+          "line": 1596,
+          "lineSha256": "d10b36aa74a59bcf4a88185837f658afaf3646eff2bb16c3928d0e9335e945d2",
+          "text": "}"
+        },
+        {
+          "line": 1597,
+          "lineSha256": "84b4709a9db8febc82d421b84a4916f856c0c5113ec15ce1b9e54fb1e77a0eec",
+          "text": "function toastCommandMessage(result){"
+        },
+        {
+          "line": 1598,
+          "lineSha256": "47ce3248c80192349a2a32906c8d729ab74cb2b5f2ea2a814483f26897344e2e",
+          "text": "  toastMarkupMessage(commandResultMarkup(result));"
+        },
+        {
+          "line": 1599,
+          "lineSha256": "d10b36aa74a59bcf4a88185837f658afaf3646eff2bb16c3928d0e9335e945d2",
+          "text": "}"
+        }
+      ],
+      "contextSha256": "59ec345f0b6d38e259c07ab5c321537bec4c73cccde8d5f78caabd86c1678a8b",
+      "contextStartLine": 1589,
+      "endLine": 1598,
+      "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+      "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+      "matchBasis": "toastAppMessage uses apiMessageMarkup; toastCommandMessage uses commandResultMarkup",
+      "path": "romarr/ui.py",
+      "startLine": 1590
+    },
+    {
+      "contextEndLine": 1078,
+      "contextLines": [
+        {
+          "line": 1073,
+          "lineSha256": "918b6bca62036d60fa11e0472a4111a711eba854c8930461af2b3a5385d2a186",
+          "text": "// API/provider/peer values go through apiMessageMarkup instead."
+        },
+        {
+          "line": 1074,
+          "lineSha256": "7e89b62a6a1725247890f57600d67599220b11e1c21d2d71bbad618922bbabe3",
+          "text": "const appMessageMarkup=value=>{"
+        },
+        {
+          "line": 1075,
+          "lineSha256": "6092cd751ff61d722872ac9c4e93a7a71e946941b79aba06ade9d8d279cd7a2c",
+          "text": "  const source=String(value??'');"
+        },
+        {
+          "line": 1076,
+          "lineSha256": "96da70f92a3bef82db019d837e3942e31163d2192e423780c7d29e5a856b6f73",
+          "text": "  if(hasLabel(source)) return interfaceMarkup(source);"
+        },
+        {
+          "line": 1077,
+          "lineSha256": "7a03714b491d8e863ad024462644e45708b1c39c0611e4237246ba7ab7583216",
+          "text": "  let match=source.match(/^(\\d+) games across (\\d+) (library|libraries)(?:; ([\\s\\S]*))?$/);"
+        },
+        {
+          "line": 1078,
+          "lineSha256": "9e972907303237d3486c8320064e70cca57522bf5fbb0c0c97b9a4f15b70695c",
+          "text": "  if(match){"
+        }
+      ],
+      "contextSha256": "0bec48ae3ebe5bef33e658ec81ab7d858e34b8e773252df92a648fc8ec187761",
+      "contextStartLine": 1073,
+      "endLine": 1077,
+      "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+      "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+      "matchBasis": "appMessageMarkup translates known app-owned source labels",
+      "path": "romarr/ui.py",
+      "startLine": 1074
+    },
+    {
+      "contextEndLine": 1280,
+      "contextLines": [
+        {
+          "line": 1261,
+          "lineSha256": "86f9740427753309bacb5bba65fecddbe504dcff20a4e17482fb7d39d45a9608",
+          "text": "let translatedAriaLabelSequence=0;"
+        },
+        {
+          "line": 1262,
+          "lineSha256": "7d35627a5f8413dfc7479bec477b5184e6430a1688489e906576e7eb81cb30c3",
+          "text": "const applyTranslatedTextNode=(node,language)=>{"
+        },
+        {
+          "line": 1263,
+          "lineSha256": "71492fc4b2b24862dc6519d9be4ba029a7b09deb8c03e90efa5e7ad88a3db2dd",
+          "text": "  const parent=node.parentElement;"
+        },
+        {
+          "line": 1264,
+          "lineSha256": "4271e57104ba6ccbba64b6e480283add87df2bbb6873a6ba83cece8fe0591906",
+          "text": "  if(!parent||parent.closest('script,style,textarea,input,select,[contenteditable=\"true\"],[lang=\"und\"],[data-i18n],[data-i18n-key]'))return;"
+        },
+        {
+          "line": 1265,
+          "lineSha256": "68c6c6519c9f2c79d002c171a1b773a9393b713241c5ad924d747a8d4be7b4d8",
+          "text": "  const original=translatedTextSources.get(node)||node.data.trim().replace(/\\s+/g,' ');"
+        },
+        {
+          "line": 1266,
+          "lineSha256": "c70e7a576fcc52db02db927346c9500997c22177389fbe6313881abd940a991e",
+          "text": "  if(!hasLabel(original))return;"
+        },
+        {
+          "line": 1267,
+          "lineSha256": "4a575a8d5b7f3439506b6bd5390c6a1b5c97cdb247afb7183e59e685282868c2",
+          "text": "  translatedTextSources.set(node,original);"
+        },
+        {
+          "line": 1268,
+          "lineSha256": "877798610fb73f14c1f139efaee9c37862e22e54681051b8178ddfe453a70f66",
+          "text": "  const leading=node.data.match(/^\\s*/)?.[0]||'',trailing=node.data.match(/\\s*$/)?.[0]||'';"
+        },
+        {
+          "line": 1269,
+          "lineSha256": "461e16407fbce4608c89e19c7549f968e132a573d8953cdfd91eb34f4decc5cd",
+          "text": "  const value=leading+translateLabel(original,language)+trailing;"
+        },
+        {
+          "line": 1270,
+          "lineSha256": "685e368735697dfd8c1e67f4c282091c8c7e4ab7ad4965f0a859516aac92dd7e",
+          "text": "  if(node.data!==value)node.data=value;"
+        },
+        {
+          "line": 1271,
+          "lineSha256": "c354de16470a367ab3d8d2d768d28893926a480f62b0e159887553f11c9f2dbf",
+          "text": "  const translated=Boolean(isTranslated(original,language));"
+        },
+        {
+          "line": 1272,
+          "lineSha256": "fc3708becaa62c7f7f4b898cd9ba3ac305707ed5b4f5b289c2d2dce463a2b7bd",
+          "text": "  parent.lang=translated?language:'en';"
+        },
+        {
+          "line": 1273,
+          "lineSha256": "f16945fb58cb5289c9dda4c27aa1d50ca7d90cc0987ded95f97bbfb0e03962eb",
+          "text": "  parent.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';"
+        },
+        {
+          "line": 1274,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        },
+        {
+          "line": 1275,
+          "lineSha256": "408b5bfe3dc7efd6748d66c48cce4919ff211b77cd2ee445c6ba5b77bbc798ea",
+          "text": "const applyTranslatedTextTree=(root,language)=>{"
+        },
+        {
+          "line": 1276,
+          "lineSha256": "57c50af4e50f443833f61081ae575124524abd7ca635ca9369e1dd08570265d6",
+          "text": "  if(root.nodeType===Node.TEXT_NODE){applyTranslatedTextNode(root,language);return;}"
+        },
+        {
+          "line": 1277,
+          "lineSha256": "6ea29502bb4d90f76377fa9814f09b86aa907ed289ccb64b4de7770a5c620d75",
+          "text": "  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);"
+        },
+        {
+          "line": 1278,
+          "lineSha256": "da75259493eb2d2a62af8781ce33c8f56823f6d77fcfba395f5e5dafe9beeb5e",
+          "text": "  while(walker.nextNode())applyTranslatedTextNode(walker.currentNode,language);"
+        },
+        {
+          "line": 1279,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        },
+        {
+          "line": 1280,
+          "lineSha256": "6a6c749dbf2e9d7e7e0848f335f766bd60f5ce05b5e7a7548f215588156c31e2",
+          "text": "const applyTranslatedAriaLabelTemplate=(el,source,values,language)=>{"
+        }
+      ],
+      "contextSha256": "8e54c7c68c549f7985232318cbf65d99e1f442d9af9c45e723da43da0fb50f4c",
+      "contextStartLine": 1261,
+      "endLine": 1279,
+      "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+      "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+      "matchBasis": "automatic text-node translation; select ancestors are excluded",
+      "path": "romarr/ui.py",
+      "startLine": 1262
+    },
+    {
+      "contextEndLine": 1357,
+      "contextLines": [
+        {
+          "line": 1340,
+          "lineSha256": "42637267a38e3cf052e2123efeb125a003bdca840bfbb269fb8553d96d637938",
+          "text": "let interfaceTextObserver=null;"
+        },
+        {
+          "line": 1341,
+          "lineSha256": "34ab241f8b7814906879be5738078433ed64907284a619e6d1ced17e70d6489b",
+          "text": "const observeInterfaceText=()=>{"
+        },
+        {
+          "line": 1342,
+          "lineSha256": "512e7ac82416d0dae37e4944df215202f7c698b23f04c53658019cfe4958f0bf",
+          "text": "  if(interfaceTextObserver||!document.body)return;"
+        },
+        {
+          "line": 1343,
+          "lineSha256": "e0e6fd099fea79eb8544156d3a40362f4c6bff08d63335b8be41a4a749b25cc8",
+          "text": "  interfaceTextObserver=new MutationObserver(records=>{"
+        },
+        {
+          "line": 1344,
+          "lineSha256": "0b41fe2f3d336b8e71d3cc4373ca49f94bc503be8f525ee99bcc4be0359062d5",
+          "text": "    for(const record of records){"
+        },
+        {
+          "line": 1345,
+          "lineSha256": "a3074a714a595f12e7242ec50e6b09eda156b8870d34e0e07df781dd603af18b",
+          "text": "      if(record.type==='characterData')applyTranslatedTextNode(record.target,readInterfaceLanguage());"
+        },
+        {
+          "line": 1346,
+          "lineSha256": "fd1e78efea4071aead35f97ae87487db06eaf8c0362aa68800530627fda3e0a1",
+          "text": "      for(const node of record.addedNodes){"
+        },
+        {
+          "line": 1347,
+          "lineSha256": "ed5571a9d595c6f0dfea878568133a99b120c70e73c85c1538d87a2fa340f7cf",
+          "text": "        enhanceFormLabels(node);"
+        },
+        {
+          "line": 1348,
+          "lineSha256": "9c28765265d5cf231e05a00915aafaf56059b46a2635ba7d1f7c14c10a9f9a21",
+          "text": "        applyTranslatedLabels(node,readInterfaceLanguage());"
+        },
+        {
+          "line": 1349,
+          "lineSha256": "4549a0967299e9f4596004564d8dfdf324fc1df9e6ca2e8843dee5a0d41eb827",
+          "text": "        applyTranslatedTemplates(node,readInterfaceLanguage());"
+        },
+        {
+          "line": 1350,
+          "lineSha256": "73cfa4db9869a601456713b170f684f8254384916c104bb43b531c91070817b3",
+          "text": "        applyTranslatedTextTree(node,readInterfaceLanguage());"
+        },
+        {
+          "line": 1351,
+          "lineSha256": "f2c1e6a6186e4f2e832a8bafe0fdfc8a036fe55117dcb2abddba14c6f9600d4a",
+          "text": "        applyTranslatedAttributes(node,readInterfaceLanguage());"
+        },
+        {
+          "line": 1352,
+          "lineSha256": "f61f5bbc379fd349ffd484746f91dcd132c4bb0b0a919ca7ec94604bf9ca2435",
+          "text": "      }"
+        },
+        {
+          "line": 1353,
+          "lineSha256": "28d86778615f6af47bb1bc4f40face756749768e5111f114cfa234a5060c25af",
+          "text": "    }"
+        },
+        {
+          "line": 1354,
+          "lineSha256": "8918205c87aec718d8ed26668abe0962b53a36e38887e5434ec02d59639e3ec1",
+          "text": "  });"
+        },
+        {
+          "line": 1355,
+          "lineSha256": "3040855cab7eb5b44df1098e6fd8f2d705a005ab30c93e3dda639c3f0b5ab012",
+          "text": "  interfaceTextObserver.observe(document.body,{subtree:true,childList:true,characterData:true});"
+        },
+        {
+          "line": 1356,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        },
+        {
+          "line": 1357,
+          "lineSha256": "925a09f75094de61a803b901765119346ee6e19564431ee117c1f3ef18df09f4",
+          "text": "let generatedControlId=0;"
+        }
+      ],
+      "contextSha256": "7330d588f6c4b900f296021980c29606140d5c55e97409f7a59d24a1102057f9",
+      "contextStartLine": 1340,
+      "endLine": 1356,
+      "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+      "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+      "matchBasis": "MutationObserver applies translations to inserted UI nodes",
+      "path": "romarr/ui.py",
+      "startLine": 1341
+    },
+    {
+      "contextEndLine": 1420,
+      "contextLines": [
+        {
+          "line": 1402,
+          "lineSha256": "d10b36aa74a59bcf4a88185837f658afaf3646eff2bb16c3928d0e9335e945d2",
+          "text": "}"
+        },
+        {
+          "line": 1403,
+          "lineSha256": "f99cddeb37ad49e8d78598cda63b66677f4d9fbb28df871dc8a7595acb65a993",
+          "text": "const applyInterfaceLanguage=(language=readInterfaceLanguage())=>{"
+        },
+        {
+          "line": 1404,
+          "lineSha256": "b21cbe90c904727690b25a64b8a848dae56eb0440609a66c2ceed121a3487db2",
+          "text": "  document.documentElement.lang=language;"
+        },
+        {
+          "line": 1405,
+          "lineSha256": "71aee7cf5e2d8656faf50a62c2d8b385810a2369ecc832024115a2061d492020",
+          "text": "  document.documentElement.dir=ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';"
+        },
+        {
+          "line": 1406,
+          "lineSha256": "e38eda4f35d4f6249128f4e724178f547cfc8f87761abd1ac0690e8725e93e48",
+          "text": "  applyTranslatedLabels(document,language);"
+        },
+        {
+          "line": 1407,
+          "lineSha256": "9a94f5ac9c30a19ac3a5f894cfd8edea58ba43a127f1c3fd9202e51ba21bf699",
+          "text": "  applyTranslatedTemplates(document,language);"
+        },
+        {
+          "line": 1408,
+          "lineSha256": "2b9f34d2e295729c0d6a39e8ecbfc6111594ec621d50b631da23a90d1f6026f5",
+          "text": "  document.querySelectorAll('[data-i18n-aria-label]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nAriaLabel,'aria-label',language));"
+        },
+        {
+          "line": 1409,
+          "lineSha256": "fc0d1ddb2b07d5f0d19d3fab84dcfd38b5395889426065dc3469b715fa371896",
+          "text": "  document.querySelectorAll('[data-i18n-title]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nTitle,'title',language));"
+        },
+        {
+          "line": 1410,
+          "lineSha256": "a98c44460cf6a3576053f22787283fd9ec14685bc4997179fc7158a2f2cc9c87",
+          "text": "  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{"
+        },
+        {
+          "line": 1411,
+          "lineSha256": "5f280da3d78866adfd1ed9264f4f35b50ac5df8374889863bed83b9a8ebe7639",
+          "text": "    const source=el.dataset.i18nPlaceholder, translated=isTranslated(source,language);"
+        },
+        {
+          "line": 1412,
+          "lineSha256": "b7edf35648cbed4c0185e143f46ce61ea89f4ec1f9ca11d6eed8720ee464408d",
+          "text": "    el.placeholder=translateLabel(source,language);"
+        },
+        {
+          "line": 1413,
+          "lineSha256": "de4159ca9ca4c4886220bb311b0ca891ee74e357f45a15f0eec6c953c0efd267",
+          "text": "    el.lang=translated?language:'en';"
+        },
+        {
+          "line": 1414,
+          "lineSha256": "ab4983343be38a98dbc536d03f4f8f755b575ae7399ea20de2e812a9eb117912",
+          "text": "    el.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';"
+        },
+        {
+          "line": 1415,
+          "lineSha256": "8918205c87aec718d8ed26668abe0962b53a36e38887e5434ec02d59639e3ec1",
+          "text": "  });"
+        },
+        {
+          "line": 1416,
+          "lineSha256": "770b5dd07fd670621e49dff825ca53013ccf8611cf26289cb18c699c38d56770",
+          "text": "  applyTranslatedTextTree(document.body,language);"
+        },
+        {
+          "line": 1417,
+          "lineSha256": "39f0ee67dd4cae1317a1060cc56ace96c63beb5fb7b227bc31e0938817a3e7ca",
+          "text": "  applyTranslatedAttributes(document.body,language);"
+        },
+        {
+          "line": 1418,
+          "lineSha256": "7272400139ee0b157736047755082621da7ac57fb81f30d4382ad2e99e8bad26",
+          "text": "  enhanceFormLabels(document.body);"
+        },
+        {
+          "line": 1419,
+          "lineSha256": "335c2990d8ec2c9b86f892b92b4aff1de25c52488148ec92cbd2974e230b8352",
+          "text": "  observeInterfaceText();"
+        },
+        {
+          "line": 1420,
+          "lineSha256": "8bf21412a0b91bc2aa4cb5001d860da01e70d5ca84adb6da2c14d5cbd3b274a0",
+          "text": "  const selector=$('#interface-language'); if(selector) selector.value=readInterfacePreference();"
+        }
+      ],
+      "contextSha256": "e62147fb558e84ad97fc527024de1405ac42a05e87c92a2d4446e68b4ce77d71",
+      "contextStartLine": 1402,
+      "endLine": 1419,
+      "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+      "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+      "matchBasis": "language application and observer registration",
+      "path": "romarr/ui.py",
+      "startLine": 1403
+    }
+  ],
+  "tree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc"
+}

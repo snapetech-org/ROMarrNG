@@ -1,0 +1,12 @@
+[
+  {
+    "blindDisposition": "accept-current",
+    "cell": [
+      227,
+      "ar"
+    ],
+    "finding": "Primary protected-literal check lists TitleDB only and its proposed Arabic target drops ID. Blind ledger marks both ID and TitleDB protected and accepts current. Cross-audit keeps current until a candidate preserving ID is approved.",
+    "literal": "ID",
+    "primaryCandidate": "لا يوجد معرّف في TitleDB"
+  }
+]

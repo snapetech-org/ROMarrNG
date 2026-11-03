@@ -3,19 +3,19 @@
 ## What is available
 
 ROMarr's Python service renders the dashboard and public sign-in, invitation,
-and connection pages. The catalog contains 1,835 app-owned messages under
-stable IDs. All 22,020 direct target cells are populated across the twelve
-locales. Of these, 16,188 remain `unverified` because their review provenance is
-unknown, and 5,832 are marked `draft`. That draft group includes the 5,808 cells
-from the frozen 484-message source bundle and 24 cells for two newly localized
-integration messages. No target cells currently fall back to English because
-they are missing. Latin American Spanish inherits from Spanish, and Canadian
-French inherits from French.
+and connection pages. The catalog contains 1,836 app-owned messages under
+stable IDs. All 22,032 direct target cells are populated across the twelve
+locales. Of these, 16,176 remain `unverified` because their review provenance is
+unknown, and 5,856 are marked `draft`. That draft group includes the 5,808 cells
+from the frozen 484-message source bundle and 48 cells for four later messages.
+No target cells currently fall back to English because they are missing. Latin
+American Spanish inherits from Spanish, and Canadian French inherits from
+French.
 
 | Locale state | Count | Behavior |
 | --- | ---: | --- |
 | English source | 1 | Always selectable |
-| Direct translations | 12 | Selectable; all 1,835 messages have a target |
+| Direct translations | 12 | Selectable; all 1,836 messages have a target |
 | Regional fallbacks | 2 | Selectable; inherit from `es` or `fr` |
 | Draft locales | 0 currently | Hidden; must be complete and reviewed before selection |
 | Planned translations | 22 | Registered for formatting and future work; not selectable |

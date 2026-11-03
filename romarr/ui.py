@@ -944,6 +944,8 @@ const LOCAL_API_TEMPLATE_KEYS=new Set([
   'ui.no-indexer-could-be-read.ad531cd423',
   'ui.no-library-configured.2f7f2b199a',
   'ui.no-lists-configured.f0f61cd546',
+  'ui.no-title.8cb9a5c65b',
+  'ui.not-in-this-library-the-hash-identif.15bd6cace0',
   'ui.nothing-finished.cd66a4ec32',
   'ui.nothing-wanted-nothing-to-match.d281ab9dfe',
   'ui.retired-blocklisted-dead-download-s.5e329a4393',
@@ -1235,6 +1237,22 @@ const applyTranslatedLabels=(root,language)=>{
   if(root.querySelectorAll)elements.push(...root.querySelectorAll('[data-i18n],[data-i18n-key]'));
   for(const el of elements)applyTranslatedLabel(el,language);
 };
+const applyTranslatedOptionLabels=(root,language)=>{
+  const elements=[];
+  if(root.nodeType===Node.ELEMENT_NODE&&root.matches?.('option[data-i18n-option-key]'))elements.push(root);
+  if(root.querySelectorAll)elements.push(...root.querySelectorAll('option[data-i18n-option-key]'));
+  for(const el of elements){
+    const source=UI_MESSAGES[el.dataset.i18nOptionKey]?.source;
+    if(typeof source!=='string')continue;
+    const rawCount=el.dataset.i18nOptionCount??'—';
+    const count=Number(rawCount);
+    const renderedCount=Number.isFinite(count)?fmt(count):rawCount;
+    const translated=isTranslated(source,language);
+    el.textContent=`${translateLabel(source,language)} (${renderedCount})`;
+    el.lang=translated?language:'en';
+    el.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';
+  }
+};
 const applyTranslatedTemplates=(root,language)=>{
   const elements=[];
   if(root.nodeType===Node.ELEMENT_NODE&&root.matches?.('[data-i18n-template],[data-i18n-template-key]'))elements.push(root);
@@ -1404,6 +1422,7 @@ const applyInterfaceLanguage=(language=readInterfaceLanguage())=>{
   document.documentElement.lang=language;
   document.documentElement.dir=ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';
   applyTranslatedLabels(document,language);
+  applyTranslatedOptionLabels(document,language);
   applyTranslatedTemplates(document,language);
   document.querySelectorAll('[data-i18n-aria-label]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nAriaLabel,'aria-label',language));
   document.querySelectorAll('[data-i18n-title]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nTitle,'title',language));
@@ -1926,6 +1945,10 @@ const SOURCE_LABEL={
   archive:'Archive.org (streams)',
   flashpoint:'Flashpoint (streams)',
   cloud:'Catalogued, source unknown'};
+const ownLabel=(labels,value)=>{
+  const key=String(value);
+  return Object.prototype.hasOwnProperty.call(labels,key)?labels[key]:null;
+};
 let libraryRequest=0;
 RENDER.library=async(renderEpoch=routeEpoch)=>{
   if(renderEpoch!==routeEpoch||location.hash!=='#library')return;
@@ -1992,13 +2015,20 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
       ${mixed?`<span style="color:var(--dim);font-size:11px">${interfaceTemplateMarkup('ui.count-here.ad5e58f564',{count:fmt(disk)})}</span>`:''}</button>`;
   }).join('');
   const f=d.facets||{};
-  const sel=(key,label,list,fmt)=>{
+  const sel=(key,label,list,optionSourceByValue=null)=>{
     if(!list||!list.length) return '';
     const filterName=({genre:'Genre',region:'Region',decade:'Decade',origin:'Origin',source:'Source',sort:'Sort by'})[key]||label;
     return `<select data-lf="${key}" aria-label="${esc(translateLabel(filterName,readInterfaceLanguage()))}" data-i18n-aria-label="${esc(stableLocalizationKey(filterName)||filterName)}" style="padding:4px 8px;font-size:12px">
       <option value="" data-i18n-key="${esc(stableLocalizationKey(label)||label)}">${esc(translateLabel(label,readInterfaceLanguage()))}</option>
-      ${list.map(x=>`<option value="${esc(x.value)}"${LIB[key]===x.value?' selected':''}
-        >${esc(fmt?fmt(x.value):x.value)} (${num(x.count)})</option>`).join('')}
+      ${list.map(x=>{
+        const optionSource=ownLabel(optionSourceByValue||{},x.value)||'';
+        const optionKey=optionSource?stableLocalizationKey(optionSource):'';
+        const rawCount=String(x.count??'—');
+        const marker=optionKey?` data-i18n-option-key="${esc(optionKey)}" data-i18n-option-count="${esc(rawCount)}"`:'';
+        const optionText=optionSource?translateLabel(optionSource,readInterfaceLanguage()):String(x.value);
+        return `<option value="${esc(x.value)}"${LIB[key]===x.value?' selected':''}${marker}
+          >${esc(optionText)} (${num(x.count)})</option>`;
+      }).join('')}
     </select>`;
   };
   const coverage=f.identified&&d.grand_total
@@ -2017,7 +2047,7 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
     </div>
     ${srcRows.length?`<p class="help" style="margin:8px 0 0">
       Catalogued entries by source:
-      ${srcRows.map(x=>`<b>${num(x.count)}</b> ${esc(SOURCE_LABEL[x.value]||x.value)}`)
+      ${srcRows.map(x=>`<b>${num(x.count)}</b> ${esc(ownLabel(SOURCE_LABEL,x.value)??x.value)}`)
         .join(' · ')}. Source is read from the filename each indexer writes,
       so anything ROMarr cannot place stays “source unknown” rather than
       being filed under a guess.</p>`:''}
@@ -2035,9 +2065,9 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
       ${sel('region','Any region',f.regions)}
       ${sel('decade','Any decade',f.decades)}
       ${(f.origins||[]).length>1?sel('origin','On disk & catalogued',f.origins,
-        v=>v==='local'?'On disk (plays now)':'Catalogued (needs fetching)'):''}
+        {local:'On disk (plays now)',cloud:'Catalogued (needs fetching)'}):''}
       ${(f.sources||[]).length>1?sel('source','Any source',f.sources,
-        v=>SOURCE_LABEL[v]||v):''}
+        SOURCE_LABEL):''}
       <select data-lf="sort" aria-label="Sort by" data-i18n-aria-label="ui.sort-by.c9129025bd" style="padding:4px 8px;font-size:12px">
         <option value="" data-i18n="ui.platform-then-name.bb91fdb134"${LIB.sort?'':' selected'}>Platform, then name</option>
         <option value="name" data-i18n="ui.name-az.7ed9662907"${LIB.sort==='name'?' selected':''}>Name A–Z</option>
@@ -2529,7 +2559,7 @@ async function renderGameCatalog(){
         +'<td>'+(Number(game.rating)?'★ '+num(Number(game.rating)/20):'—')+'</td>'
         +'<td><button data-c-request="'+index+'">Request</button></td></tr>').join('')+'</tbody></table></div>';
   }else{
-    resultsMarkup='<div class="empty">'+(data.error?apiMessageMarkup(data.error):'No titles match these filters.')+'</div>';
+    resultsMarkup='<div class="empty">'+(data.error?apiMessageMarkup(data.error):interfaceMarkup('No titles match these filters.'))+'</div>';
   }
   const sources='<div class="row" style="margin-bottom:10px">'
     +(hasIgdb?'<button class="btn '+(source==='igdb'?'':'ghost')+'" data-c-source="igdb">IGDB · covers, genres and ratings</button>':'')
@@ -2949,7 +2979,7 @@ RENDER.discover=async()=>{
       <button class="btn ${mine?'ghost':''}" data-mode="web">New releases (web)</button>
       <span style="flex:1"></span>
       ${tabs.map(([k,l])=>`<button class="btn ${k===DISC.shelf?'':'ghost'}"
-        data-shelf="${k}" style="padding:4px 10px;font-size:12px">${l}</button>`).join('')}
+        data-shelf="${k}" style="padding:4px 10px;font-size:12px">${interfaceMarkup(l)}</button>`).join('')}
     </div>
     <div id="d-genres" style="margin-bottom:10px"></div>
     <div id="d-out"><div class="empty">Browsing…</div></div>`;
@@ -3438,7 +3468,7 @@ async function friendShelf(peerId, opts){
       body:JSON.stringify({peer_id:FSHELF.peer,title:b.dataset.fwant,
         platform:b.dataset.fplat})});
     if(r.ok)toastSourceMessage(r.detail||'added to Wanted -- your indexers will look for it');
-    else if(r.error)toastAppMessage(r.error);else toastLabel('ui.could-not-add.4c45a2e67f');
+    else if(r.error)toastAppMessage(r.error,r.error_template);else toastLabel('ui.could-not-add.4c45a2e67f');
   });
   document.querySelectorAll('[data-fplay]').forEach(b=>b.onclick=async()=>{
     $('#fs-out').innerHTML='<div class="empty">Comparing dumps…</div>';
@@ -3477,7 +3507,7 @@ function netplayVerdict(r){
       ${interfaceTemplateMarkup('ui.compared-on-sha1-sha1-not-the-title.5935055754',{sha1:r.sha1})}</div>`;
   }
   return `<div class="${cls}" style="margin-top:12px"><b>${headMarkup}</b>
-    ${r.detail?`<div style="margin-top:6px">${apiMessageMarkup(r.detail,r.detail_template)}</div>`:''}
+    ${r.detail||r.detail_template?`<div style="margin-top:6px">${apiMessageMarkup(r.detail,r.detail_template)}</div>`:''}
     ${extra}</div>`;
 }
 
@@ -3587,7 +3617,7 @@ RENDER.stats=async()=>{
       <h3>Where the library comes from</h3>
       ${bar(Object.fromEntries(Object.entries(s.library_sources)
         .sort((a,b)=>b[1]-a[1])
-        .map(([k,v])=>[SOURCE_LABEL[k]||k,v])))}
+        .map(([k,v])=>[ownLabel(SOURCE_LABEL,k)??k,v])))}
       <p class="help">These counts come from rows ROMarr read. Each catalogue is identified by the filename written by its indexer. Rows that match neither are labeled “source unknown” instead of being assigned to the larger catalogue.</p></div>`:''}
     <div class="card"><h3>Imports by platform</h3>${bar(s.imported_by_platform)}</div>
     <div class="card"><h3>Grabs by indexer</h3>${bar(s.grabbed_by_indexer)}</div>
@@ -3707,7 +3737,7 @@ RENDER.patches=async()=>{
           <td>${esc(p.kind||'')}</td>
           <td>${esc(v.label||v.version||'—')}</td>
           <td>${esc(p.status||'')}${p.completeness?' · '+esc(p.completeness):''}</td>
-          <td>${(v.base||{}).available?'In library':'<span style="color:var(--dim)">Not in library</span>'}</td></tr>`;
+          <td>${(v.base||{}).available?interfaceMarkup('In library'):'<span style="color:var(--dim)">'+interfaceMarkup('Not in library')+'</span>'}</td></tr>`;
       }).join('')}</tbody></table>`
       :'<div class="empty">No patch projects match. Add a catalogue in Media Management or drop JSON files into the patch-catalog.d folder.</div>';
   };
@@ -4153,7 +4183,7 @@ RENDER.media=()=>settingsPage('Media Management',
   'Where imported ROMs and the shared metadata catalog live. The ROM path must be the path your library server scans. Completed-download paths are reported by the client per item; compare that exact path before import and add a remote path mapping below when ROMarr sees it somewhere else.',
   fld('library_path','ROM library root',SETTINGS.library_path)
   +fld('metadata_path','Shared metadata root',SETTINGS.metadata_path||'')
-  +`<div class="help" style="margin:-6px 0 14px">Use one ROM root with one folder per platform, such as <code>Emulation/roms/ps2</code> and <code>Emulation/roms/snes</code>; you do not need a separate library entry for each system. With EmuDeck, point this at its <code>Emulation/roms</code> folder, not the wider <code>Emulation</code> directory. Keep shared metadata alongside it at <code>Emulation/metadata</code>, outside the ROM root, and mount that folder on each client. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another provider lookup.</div>`
+  +`<div class="help" style="margin:-6px 0 14px">Use one ROM root with one folder per platform, such as <code>Emulation/roms/ps2</code> and <code>Emulation/roms/snes</code>; you do not need a separate library entry for each system. With EmuDeck, point this at its <code>Emulation/roms</code> folder, not the wider <code>Emulation</code> directory. Keep shared metadata alongside it at <code>Emulation/metadata</code>${interfaceMarkup(', outside the ROM root, and mount that folder on each client. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another provider lookup.')}</div>`
   +`<fieldset class="settings-group"><legend>Platform folder names</legend>
     <p class="help" style="margin:4px 0 8px">ROMarr recognizes platform slugs and unambiguous ES-DE system names automatically. Add a mapping only when your existing folder uses another name, such as <code>PS2 Games</code>. Folder names are matched only at the library root.</p>
     <div id="platform-folder-mappings">${platformFolderRows(SETTINGS.platform_folder_mappings)}</div>
@@ -4181,7 +4211,7 @@ RENDER.media=()=>settingsPage('Media Management',
   +`<div class="help" style="margin:-6px 0 12px">Switch IDs and version numbers come from the filename and TitleDB. They classify a likely base game, update or DLC; they do not verify the package bytes. When enabled, only TitleDB identified updates and DLC are routed to the folders below.</div>`
   +fld('switch_updates_dir','Switch updates folder',SETTINGS.switch_updates_dir||'Updates')
   +fld('switch_dlc_dir','Switch DLC folder',SETTINGS.switch_dlc_dir||'DLC')
-  +chk('overwrite_existing','Overwrite an existing file',SETTINGS.overwrite_existing)
+  +chk('overwrite_existing',interfaceMarkup('Overwrite an existing file'),SETTINGS.overwrite_existing)
   +chk('rescan_after_import','Tell your library server to rescan after an import',SETTINGS.rescan_after_import)
   +sel('translation_policy','Fan translations in 1G1R sets',
      [['exclude','Exclude — published dumps only'],
@@ -4441,10 +4471,7 @@ RENDER.indexers=async()=>{
 };
 
 RENDER.general=()=>settingsPage('General',
-  'Optional connections to the rest of the stack. Credentials live in the environment '
-  +'file, not here — this page never shows or stores a secret. Indexers and download '
-  +'clients have their own Settings pages; notifications and metadata connections '
-  +'can be added only when you choose to use them.',
+  interfaceMarkup('Optional connections to the rest of the stack. Credentials live in the environment file, not here — this page never shows or stores a secret. Indexers and download clients have their own Settings pages; notifications and metadata connections can be added only when you choose to use them.'),
   `<div class="field"><label>Prowlarr</label>
      <input type="text" value="${esc(SETTINGS._prowlarr_url||'')}" disabled></div>
    <div class="field"><label>qBittorrent</label>
@@ -4544,7 +4571,7 @@ RENDER.general=()=>settingsPage('General',
 RENDER.status=async()=>{
   const h=await j('/api/v1/system/status');
   const row=(l,ok,extra='')=>`<tr><td>${l}</td>
-    <td><span class="dot ${ok?'up':'down'}"></span>${ok?'OK':'Not available'}</td>
+    <td><span class="dot ${ok?'up':'down'}"></span>${interfaceMarkup(ok?'OK':'Not available')}</td>
     <td style="color:var(--dim)">${apiMessageMarkup(extra)}</td></tr>`;
   const g=h.ggrequestz||{};
   $('#page').innerHTML=`<div class="card"><h3>Health</h3><table><tbody>
@@ -5330,7 +5357,7 @@ RENDER.getstarted=async()=>{
     +'<div class="grid">'
     +'<a class="tile" href="#platforms" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Choose a system or era</div><div class="pf">Browse supported platforms, see how they play, and open the matching catalog.</div></a>'
     +'<a class="tile" href="#manualimport" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">I already have ROMs</div><div class="pf">Import a folder you own and let ROMarr identify and file what is there.</div></a>'
-    +'<a class="tile" href="#organize" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Organize a library you already have</div><div class="pf">Match DATs, cache shared metadata and artwork, and preview safe renames.</div></a>'
+    +'<a class="tile" href="#organize" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">'+interfaceMarkup('Organize a library you already have')+'</div><div class="pf">Match DATs, cache shared metadata and artwork, and preview safe renames.</div></a>'
     +'<a class="tile" href="#lists" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Build a request list</div><div class="pf">Browse catalog titles or connect an import list. Requests use your configured sources and client.</div></a>'
     +'<a class="tile" href="#collections" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Work toward a complete set</div><div class="pf">Load a DAT and see verified titles and collection progress.</div></a>'
     +'</div>'
@@ -5352,7 +5379,7 @@ RENDER.getstarted=async()=>{
        +interfaceMarkup('ui.can-tell-you-what-a-complete-set-is.3fe1fc5db0'))
     +'</div>'
 
-    +'<div class="card" style="margin-top:16px"><h3>Optional follow-ups</h3>'
+    +'<div class="card" style="margin-top:16px"><h3>'+interfaceMarkup('Optional follow-ups')+'</h3>'
     +'<p class="help">'+interfaceMarkup('ui.core-search-grabbing-and-filing-do-n.d6115a1a9e')+'</p>'
     +'<ul class="help">'
     +'<li>'+interfaceMarkup('ui.dat-checks-and-complete-set-progress.73302e5ba1')+' <a href="#collections">'+interfaceMarkup('ui.collections.9f9feade76')+'</a></li>'
@@ -5776,7 +5803,7 @@ const organizerApiMessageMarkup=(value,template=null)=>{
               +(sw.base_title?'<div>'+esc(sw.base_title)+'</div>':'')
               +'<div class="help" style="margin:3px 0">'+(versionDetails?versionDetails+' · ':'')
                 +interfaceMarkup(versionStatusLabel[sw.version_status]||versionStatusLabel.unknown)+'</div>'
-            :'<span class="help">No TitleDB ID</span>';
+            :'<span class="help">'+interfaceMarkup('No TitleDB ID')+'</span>';
           const art=row.cover_path
             ?'<img src="/api/v1/organizer/art?identity_id='+encodeURIComponent(row.identity_id||'')+'" alt="" loading="lazy" style="width:42px;height:58px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-inline-end:8px">'
             :'';

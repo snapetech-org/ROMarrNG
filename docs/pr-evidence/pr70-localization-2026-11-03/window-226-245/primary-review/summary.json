@@ -1,0 +1,67 @@
+{
+  "artifact": "ROMarrNG PR #70 W226–W245 primary semantic localization review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "tree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc",
+  "state": "OPEN",
+  "isDraft": true,
+  "window": "W226–W245",
+  "reviewedCells": 240,
+  "sourceCount": 20,
+  "localeCount": 12,
+  "productionCallerReferences": 25,
+  "decisionCounts": {
+    "hold": 48,
+    "refinement": 12,
+    "accept-current": 160,
+    "correction": 20
+  },
+  "holdsByPosition": {
+    "226": 12,
+    "232": 12,
+    "237": 12,
+    "242": 12
+  },
+  "recommendedCellsByPosition": {
+    "227": 2,
+    "228": 3,
+    "231": 3,
+    "233": 4,
+    "234": 12,
+    "236": 3,
+    "238": 3,
+    "241": 2
+  },
+  "recommendedCellsByLocale": {
+    "ar": 4,
+    "de": 2,
+    "es": 1,
+    "fr": 1,
+    "hi": 1,
+    "id": 3,
+    "ja": 4,
+    "ko": 2,
+    "pt-BR": 3,
+    "vi": 4,
+    "zh-Hans": 3,
+    "zh-Hant": 4
+  },
+  "structuralChecks": {
+    "cellsChecked": 240,
+    "placeholderMismatches": 0,
+    "markupMismatches": 0,
+    "numericTokenMismatches": 0,
+    "edgeWhitespaceMismatches": 0,
+    "protectedLiteralChecks": 108,
+    "protectedLiteralMismatches": 0
+  },
+  "position234Finding": "All 12 current values are identical to the Spanish string “No hay juegos solicitados que comparar”; localized replacement proposals are included for every locale.",
+  "position239Finding": "The packet’s source-index line 4208 is stale. The active caller is verified at romarr/ui.py:4444–4447 and was used for semantic review.",
+  "callerHolds": "Positions 226, 232, 237, and 242 remain held in all 12 locales for the exact caller-path reasons recorded in the packet.",
+  "nativeSpeakerApproval": false,
+  "repositoryOrPREdited": false,
+  "testsBuildsScansCIWorkflowsBrowserMergeReleaseOrTagActions": false,
+  "reviewLimit": "Machine-assisted semantic review against pinned source and callers; not native-speaker approval."
+}
