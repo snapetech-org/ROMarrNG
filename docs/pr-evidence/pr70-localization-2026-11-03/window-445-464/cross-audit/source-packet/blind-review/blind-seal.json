@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "reviewType": "independent blind review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W445-W464",
+  "candidateFreeInputHead": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "candidateFreeInputTree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "latestAttestedHead": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+  "latestAttestedTree": "1b075e050610771fc5651d1a4ca95d7c7b4b8e46",
+  "candidateFreeInputManifestSha256": "91769b07068039d09d2226a507ffc454ae6371a0902e32348f850406df6ef8d6",
+  "blindLedgerSha256": "e88ca037c1e69e4e2a1a81749d4a73bda3d908e3b171be27b20cf25b3ce8e663",
+  "blindSummarySha256": "3b5c1fb8b185251e17eaa3e011b23218d7b76d67439d70c9fdedf5d6018db8d7",
+  "latestHeadAttestationSha256": "102b3c5db69bba3b6b5e511e4457d63769a058717ab9c09f50c4781777065809",
+  "primaryOrCrossOutputsRead": false,
+  "crossReconciliationPerformed": false
+}

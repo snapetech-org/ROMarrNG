@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "window": "W445-W464",
+  "candidateFreeHead": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "candidateFreeTree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "latestAttestedHead": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+  "latestAttestedTree": "1b075e050610771fc5651d1a4ca95d7c7b4b8e46",
+  "primaryCounts": {
+    "accept-current": 183,
+    "correction": 9,
+    "hold": 36,
+    "refinement": 12
+  },
+  "blindCounts": {
+    "accept-current": 200,
+    "correction": 3,
+    "hold": 36,
+    "refinement": 1
+  },
+  "crossAuditCounts": {
+    "accept-current": 183,
+    "correction": 8,
+    "hold": 36,
+    "refinement": 13
+  },
+  "crossRows": 240,
+  "primaryBlindRowReconciliationCount": 58,
+  "rawRowsWithAnyComparedFieldDifference": 58,
+  "primaryBlindDispositionDisagreements": 20,
+  "rawSelectedTargetDifferencesIncludingHoldEncoding": 57,
+  "nonHoldSelectedTargetDisagreements": 21,
+  "callerlessHoldsRepresentedAsNullInPrimaryAndCurrentInBlind": 36,
+  "callerlessHoldPositions": [
+    458,
+    460,
+    462
+  ],
+  "nonHoldReconciliationRows": 22,
+  "substantiveDecisionDisagreementRows": 21,
+  "proposalSelectedConsensusRows": 1,
+  "primaryProposedCells": 21,
+  "blindNonCurrentSelections": 4,
+  "primaryProposalAdoptedCount": 20,
+  "blindSelectionAdoptedCount": 1,
+  "currentTargetDecisionCount": 219,
+  "selectedTokenPlaceholderMismatches": 0,
+  "selectedNumericTokenMismatches": 0,
+  "selectedProtectedLiteralMismatches": 0,
+  "selectedAdditionalNamedTermMismatches": 0,
+  "baselineProtectedLiteralMismatchCount": 1,
+  "baselineProtectedLiteralMismatchResolvedByCrossSelection": true,
+  "carriedPriorSelections": 60,
+  "carriedPriorHolds": 348,
+  "callerLineEvidenceChecked": 319,
+  "uniqueCallerEvidenceLinesChecked": 237,
+  "catalogCurrentTargetCellPreimagesCheckedAtBothHeads": 240,
+  "relevantGitPinsCheckedAtBothHeads": 10,
+  "sourceCatalogCallerDrift": false,
+  "nativeSpeakerReview": "not performed",
+  "browserReview": "not performed",
+  "catalogApplied": false
+}

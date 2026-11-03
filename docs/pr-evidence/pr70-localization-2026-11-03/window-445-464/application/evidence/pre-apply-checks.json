@@ -1,0 +1,42 @@
+{
+  "branch": "task/localization-translation-review-20261030",
+  "branchRef": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+  "head": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+  "heldCellsChecked": 36,
+  "isDraft": true,
+  "observedImmediatelyBeforeEdit": true,
+  "preApplyCatalogFileSha256": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+  "preimageCellsChecked": 240,
+  "pullRef": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+  "selectedEditPreimagesChecked": 21,
+  "sourceAttestation": {
+    "baseRefDivergence": {
+      "aheadBy": 73,
+      "behindBy": 0,
+      "mergeBase": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+      "status": "ahead",
+      "totalCommits": 73
+    },
+    "baseRefName": "main",
+    "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "branch": "task/localization-translation-review-20261030",
+    "branchRef": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+    "commitTitle": "docs: add ROMarrNG W425-W444 review evidence [skip ci]",
+    "head": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+    "isDraft": true,
+    "observedUtc": "2026-11-03T21:27:02.958362+00:00",
+    "parent": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+    "prBodyBytes": 47006,
+    "prBodySha256": "7cc4715f07d60ee5b70e74d605eecb93fcef40cec30072c6c838822a6473dbdb",
+    "pullRef": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+    "pullRequest": 70,
+    "repository": "snapetech-org/ROMarrNG",
+    "state": "OPEN",
+    "tree": "1b075e050610771fc5651d1a4ca95d7c7b4b8e46",
+    "url": "https://github.com/snapetech-org/ROMarrNG/pull/70",
+    "w425W444MarkerCount": 1
+  },
+  "state": "OPEN",
+  "tree": "1b075e050610771fc5651d1a4ca95d7c7b4b8e46",
+  "worktreeCleanBeforeEdit": true
+}

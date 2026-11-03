@@ -1,0 +1,27 @@
+{
+  "observedUtc": "2026-11-03T21:19:38.863255+00:00",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "url": "https://github.com/snapetech-org/ROMarrNG/pull/70",
+  "state": "OPEN",
+  "isDraft": true,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+  "tree": "1b075e050610771fc5651d1a4ca95d7c7b4b8e46",
+  "parent": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "commitTitle": "docs: add ROMarrNG W425-W444 review evidence [skip ci]",
+  "baseRefName": "main",
+  "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "branchRef": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+  "pullRef": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+  "prBodySha256": "7cc4715f07d60ee5b70e74d605eecb93fcef40cec30072c6c838822a6473dbdb",
+  "prBodyBytes": 47006,
+  "w425W444MarkerCount": 1,
+  "baseRefDivergence": {
+    "status": "ahead",
+    "aheadBy": 73,
+    "behindBy": 0,
+    "totalCommits": 73,
+    "mergeBase": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5"
+  }
+}

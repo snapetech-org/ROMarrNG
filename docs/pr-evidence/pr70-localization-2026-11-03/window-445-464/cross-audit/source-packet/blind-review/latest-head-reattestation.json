@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "result": "PASS",
+  "candidateInputCommit": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "candidateInputTree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "latestHead": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+  "latestTree": "1b075e050610771fc5651d1a4ca95d7c7b4b8e46",
+  "latestParent": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "latestCommitTitle": "docs: add ROMarrNG W425-W444 review evidence [skip ci]",
+  "prOpenDraft": true,
+  "branchAndPullRefsMatch": true,
+  "beforeAfterStable": true,
+  "sourceCatalogCallerFilesChecked": 9,
+  "changedPinnedFiles": [],
+  "sourceDefinitionsChecked": 20,
+  "sourceDefinitionChanges": 0,
+  "currentTargetCellsChecked": 240,
+  "currentTargetChanges": 0,
+  "callerContextLinesChecked": 319,
+  "uniqueCallerEvidenceLinesChecked": 237,
+  "callerLineChanges": 0,
+  "canRelyOnD5CandidateFreeSourceCellInputAtLatestHead": true
+}

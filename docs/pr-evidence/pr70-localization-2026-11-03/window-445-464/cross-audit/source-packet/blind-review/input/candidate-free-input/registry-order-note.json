@@ -1,0 +1,54 @@
+{
+  "selectionBasis": "catalog JSON message-key insertion order",
+  "selectedCatalogZeroBasedIndices": [
+    445,
+    464
+  ],
+  "activeRegistryCount": 479,
+  "selectedIdsInActiveRegistry": 6,
+  "activeRegistryMatches": [
+    {
+      "sourceId": "ui.filename-only-review.7ff9deba1a",
+      "activeRank": 114,
+      "registryLocations": [
+        "romarr/ui.py:5501"
+      ]
+    },
+    {
+      "sourceId": "ui.filename-only-no-verified-catalog-ma.c5ef8667b2",
+      "activeRank": 113,
+      "registryLocations": [
+        "romarr/organizer.py:1625"
+      ]
+    },
+    {
+      "sourceId": "ui.folder-name.14d34edf50",
+      "activeRank": 116,
+      "registryLocations": [
+        "romarr/ui.py:3908"
+      ]
+    },
+    {
+      "sourceId": "ui.folder-packages-are-left-intact-to-p.e180bb56ad",
+      "activeRank": 119,
+      "registryLocations": [
+        "romarr/organizer.py:1851"
+      ]
+    },
+    {
+      "sourceId": "ui.for-a-household-catalog-and-request.2ec86400a0",
+      "activeRank": 120,
+      "registryLocations": [
+        "romarr/ui.py:2351"
+      ]
+    },
+    {
+      "sourceId": "ui.found-count-matching-title-s-by-name.a1dfa4d604",
+      "activeRank": 124,
+      "registryLocations": [
+        "romarr/titled.py:479"
+      ]
+    }
+  ],
+  "lineHintCaveat": "Active registry locations are metadata only; exact-head source text/key searches and hashed code excerpts are provided separately."
+}

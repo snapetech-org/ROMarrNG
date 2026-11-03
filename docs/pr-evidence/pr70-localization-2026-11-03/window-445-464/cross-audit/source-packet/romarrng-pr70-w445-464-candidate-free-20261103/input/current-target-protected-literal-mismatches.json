@@ -1,0 +1,14 @@
+{
+  "policy": "Preserve exact source casing for recognized product/acronym/file literals from the candidate-free glossary embedded in build_candidate_free.py.",
+  "mismatchCount": 1,
+  "mismatches": [
+    {
+      "position": 461,
+      "sourceId": "ui.for-an-emudeck-style-layout-set-the.917f18c4e8",
+      "locale": "pt-BR",
+      "missing": [
+        "ROM"
+      ]
+    }
+  ]
+}

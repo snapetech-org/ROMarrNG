@@ -1,0 +1,108 @@
+diff --git a/romarr/ui-labels.json b/romarr/ui-labels.json
+index 9d90862..bfa7485 100644
+--- a/romarr/ui-labels.json
++++ b/romarr/ui-labels.json
+@@ -12723,7 +12723,7 @@
+       "sourceHash": "818e100547bc178d89844ac69b9038c64ed29f0d8a753ac7638dc8ee6e15b2fa",
+       "translations": {
+         "es": "Completar huecos — usar una traducción solo si no existe un dump de una región preferida",
+-        "zh-Hans": "补全缺漏 — 仅在没有首选地区版本时使用译制版",
++        "zh-Hans": "补缺 — 仅在没有首选地区版本时使用民间翻译版",
+         "hi": "अंतर भरें — अनुवाद का उपयोग तभी करें जब पसंदीदा क्षेत्र का डंप उपलब्ध न हो",
+         "de": "Lücken füllen — eine Übersetzung nur verwenden, wenn kein Dump aus einer bevorzugten Region existiert",
+         "ja": "不足分を補完 — 優先地域のダンプがない場合のみ翻訳版を使用",
+@@ -12731,7 +12731,7 @@
+         "pt-BR": "Preencher lacunas — usar uma tradução somente quando não houver dump de uma região preferida",
+         "ar": "سدّ النقص — استخدم ترجمة فقط عند عدم توفر نسخة من منطقة مفضلة",
+         "ko": "빈 항목 채우기 — 선호 지역 덤프가 없을 때만 번역판 사용",
+-        "zh-Hant": "填補缺漏 — 僅在沒有偏好地區版本時使用翻譯版",
++        "zh-Hant": "填補缺漏 — 僅在沒有偏好地區版本時使用民間翻譯版",
+         "vi": "Bù chỗ trống — chỉ dùng bản dịch khi không có bản dump thuộc khu vực ưu tiên",
+         "id": "Isi kekosongan — gunakan terjemahan hanya jika tidak ada dump dari wilayah pilihan"
+       },
+@@ -12754,7 +12754,7 @@
+         "ko": "게임 필터",
+         "zh-Hant": "篩選遊戲",
+         "vi": "Lọc trò chơi",
+-        "id": "Filter game"
++        "id": "Saring permainan"
+       },
+       "translationHashes": {},
+       "translationStatus": {},
+@@ -12806,17 +12806,17 @@
+       "source": "Fix these:",
+       "sourceHash": "e5c50d4696150b927379acb9873d4c38158cc58c281bbe536a0730dfca5b4f81",
+       "translations": {
+-        "es": "Arregla estos:",
+-        "zh-Hans": "修复这些:",
++        "es": "Corrige los siguientes problemas:",
++        "zh-Hans": "请修复以下问题：",
+         "hi": "इन्हें ठीक करें:",
+         "de": "Beheben Sie diese:",
+         "ja": "次の項目を修正してください：",
+-        "fr": "Corriger ceci:",
+-        "pt-BR": "Conserte isso:",
+-        "ar": "أصلح هذه:",
++        "fr": "Problèmes à corriger :",
++        "pt-BR": "Corrija os seguintes problemas:",
++        "ar": "أصلح المشكلات التالية:",
+         "ko": "다음 항목을 수정하세요:",
+-        "zh-Hant": "修復這些:",
+-        "vi": "Sửa những thứ này:",
++        "zh-Hant": "請修復以下問題：",
++        "vi": "Hãy sửa các mục sau:",
+         "id": "Perbaiki ini:"
+       },
+       "translationHashes": {},
+@@ -12834,7 +12834,7 @@
+         "ja": "Flashpoint（ストリーミング）",
+         "fr": "Flashpoint (streaming)",
+         "pt-BR": "Flashpoint (streaming)",
+-        "ar": "Flashpoint (بث مباشر)",
++        "ar": "Flashpoint (البث عبر الإنترنت)",
+         "ko": "Flashpoint (스트리밍)",
+         "zh-Hant": "Flashpoint（串流）",
+         "vi": "Flashpoint (phát trực tuyến)",
+@@ -12850,7 +12850,7 @@
+       "translations": {
+         "es": "Flood usa etiquetas en lugar de categorías; esta es una etiqueta.",
+         "zh-Hans": "Flood 使用标签而不是类别；这里填写一个标签。",
+-        "hi": "Flood में श्रेणियों के बजाय टैग होते हैं; यहाँ एक टैग दें।",
++        "hi": "Flood में श्रेणियों की जगह टैग होते हैं; यह उनमें से एक है।",
+         "de": "Flood verwendet Tags statt Kategorien; dies ist ein Tag.",
+         "ja": "Floodではカテゴリではなくタグを使います。ここにタグを指定します。",
+         "fr": "Flood utilise des étiquettes plutôt que des catégories ; ceci en est une.",
+@@ -12989,16 +12989,16 @@
+       "sourceHash": "641d1ef657bdfd9fa2064ab5ae3f0e44186e5161dcd36b63839f3a76a79883bc",
+       "translations": {
+         "es": "Seguir",
+-        "zh-Hans": "跟随",
+-        "hi": "पालन करना",
++        "zh-Hans": "自动滚动",
++        "hi": "नए लॉग तक स्वतः स्क्रॉल करें",
+         "de": "Folgen",
+-        "ja": "フォロー",
++        "ja": "自動スクロール",
+         "fr": "Suivre",
+-        "pt-BR": "Siga",
+-        "ar": "اتبع",
+-        "ko": "팔로우",
+-        "zh-Hant": "跟隨",
+-        "vi": "Theo",
++        "pt-BR": "Acompanhar",
++        "ar": "متابعة السجل",
++        "ko": "자동 스크롤",
++        "zh-Hant": "自動捲動",
++        "vi": "Theo dõi",
+         "id": "Ikuti"
+       },
+       "translationHashes": {},
+@@ -13162,7 +13162,7 @@
+         "de": "Bei einer EmuDeck-ähnlichen Struktur legst du das ROM-Bibliotheksverzeichnis auf den gemeinsamen Ordner",
+         "ja": "EmuDeck のような構成では、ROM ライブラリのルートを共有フォルダーに設定します",
+         "fr": "Pour une arborescence de type EmuDeck, définissez la racine de la bibliothèque ROM sur le dossier partagé",
+-        "pt-BR": "Em uma estrutura como a do EmuDeck, defina a raiz da biblioteca de ROMs como a pasta compartilhada",
++        "pt-BR": "Em uma estrutura como a do EmuDeck, defina a raiz da biblioteca de arquivos ROM como a pasta compartilhada",
+         "ar": "في بنية تشبه EmuDeck، اجعل مجلد مكتبة ROM هو المجلد المشترك",
+         "ko": "EmuDeck 방식의 구조에서는 ROM 라이브러리 루트를 공유 폴더로 설정하세요",
+         "zh-Hant": "對於 EmuDeck 風格的目錄結構，請將 ROM 媒體庫根目錄設為共用資料夾",

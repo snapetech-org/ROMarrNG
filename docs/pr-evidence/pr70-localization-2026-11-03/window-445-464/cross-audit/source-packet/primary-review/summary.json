@@ -1,0 +1,48 @@
+{
+  "artifact": "ROMarrNG PR #70 W445-W464 primary review",
+  "reviewerRole": "independent primary reviewer; candidate-free input only",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "tree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "candidateFreeInputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w445-464-candidate-free-20261103/input",
+  "candidateFreeInputManifestSha256": "91769b07068039d09d2226a507ffc454ae6371a0902e32348f850406df6ef8d6",
+  "candidateFreeInputChecksumsSha256": "7c3a3d8ac507aaf396bd95936d91889eeae851b5aea9410e553dae7c7da0c05b",
+  "candidateFreeInputVerified": true,
+  "primaryProposalsReadBeforeReview": false,
+  "blindReviewOutputInspected": false,
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "dispositions": {
+    "accept-current": 183,
+    "correction": 9,
+    "hold": 36,
+    "refinement": 12
+  },
+  "proposedCellCount": 21,
+  "newHolds": 36,
+  "holdPositions": [
+    458,
+    460,
+    462
+  ],
+  "holdFindings": {
+    "458": "No active source-registry entry and no exact source-ID or source-text occurrence exists in pinned production code. The fragment ends at “with,” so its rendered continuation cannot be established.",
+    "460": "No active source-registry entry and no exact source-ID or source-text occurrence exists in pinned production code. The fragment ends at “use,” so its rendered continuation cannot be established.",
+    "462": "The entry is present in the active source registry, but neither its exact source ID nor source text occurs in pinned production code. The registry entry alone does not establish a live caller or whether this row is stale, so the count message remains held."
+  },
+  "priorLineageSelectionsReattested": 60,
+  "priorHoldCellsReattested": 348,
+  "sourceContextAvailable": 17,
+  "callerlessCellCount": 36,
+  "callerlessHoldFinding": "All 12 cells at each of positions 458 and 460 remain held because neither source has an active source-registry entry or an exact production caller. All 12 cells at position 462 remain held because the entry is active in the registry but neither its source ID nor text has an exact production-code occurrence.",
+  "currentProtectedLiteralMismatches": 1,
+  "placeholderMismatchesInSelectedTargets": 0,
+  "numericExactMismatchesAfterSemanticReview": 0,
+  "protectedLiteralMismatchesInSelectedTargets": 0,
+  "nativeSpeakerReview": "not performed; this primary machine review does not establish native-speaker approval",
+  "browserReview": "not performed",
+  "createdUtc": "2026-11-03T20:11:16.076085+00:00"
+}
