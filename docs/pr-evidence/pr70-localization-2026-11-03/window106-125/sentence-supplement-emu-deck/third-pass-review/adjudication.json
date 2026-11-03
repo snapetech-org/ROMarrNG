@@ -1,0 +1,271 @@
+{
+  "reviewScope": "Independent third-pass adjudication of 36 target cells across 12 locales using only the primary and blind sentence-context packets.",
+  "sourceSentence": "With EmuDeck, point this at its <code>Emulation/roms</code> folder, not the wider <code>Emulation</code> directory. Keep shared metadata alongside it at <path>.",
+  "locales": [
+    {
+      "locale": "es",
+      "cells": [
+        {
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "proposedTarget": "; no necesitas una entrada de biblioteca distinta para cada sistema. Con EmuDeck, configura esta ruta para que apunte a la carpeta"
+        },
+        {
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "proposedTarget": "y no al directorio más amplio"
+        },
+        {
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "proposedTarget": "que contiene esa carpeta. Mantén los metadatos compartidos junto a esa carpeta en"
+        }
+      ],
+      "assembledRecommendation": "; no necesitas una entrada de biblioteca distinta para cada sistema. Con EmuDeck, configura esta ruta para que apunte a la carpeta <code>Emulation/roms</code> y no al directorio más amplio <code>Emulation</code> que contiene esa carpeta. Mantén los metadatos compartidos junto a esa carpeta en <path>",
+      "reviewNote": "Third-pass adjudication of the sealed primary and blind reviews; no repository or API inspection."
+    },
+    {
+      "locale": "zh-Hans",
+      "cells": [
+        {
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "proposedTarget": "；每个系统不需要单独创建游戏库条目。使用 EmuDeck 时，请将此路径指向它的"
+        },
+        {
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "proposedTarget": "文件夹，而不是更上层的"
+        },
+        {
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "proposedTarget": "目录。请将共享元数据存放在 ROM 文件夹旁，位置如下："
+        }
+      ],
+      "assembledRecommendation": "；每个系统不需要单独创建游戏库条目。使用 EmuDeck 时，请将此路径指向它的 <code>Emulation/roms</code> 文件夹，而不是更上层的 <code>Emulation</code> 目录。请将共享元数据存放在 ROM 文件夹旁，位置如下： <path>",
+      "reviewNote": "Third-pass adjudication of the sealed primary and blind reviews; no repository or API inspection."
+    },
+    {
+      "locale": "hi",
+      "cells": [
+        {
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "proposedTarget": "; हर सिस्टम के लिए अलग लाइब्रेरी एंट्री की ज़रूरत नहीं है। EmuDeck के साथ, इस पथ को"
+        },
+        {
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "proposedTarget": "फ़ोल्डर पर सेट करें, न कि अधिक व्यापक"
+        },
+        {
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "proposedTarget": "डायरेक्टरी पर। साझा मेटाडेटा को ROM फ़ोल्डर के बगल में इस स्थान पर रखें:"
+        }
+      ],
+      "assembledRecommendation": "; हर सिस्टम के लिए अलग लाइब्रेरी एंट्री की ज़रूरत नहीं है। EmuDeck के साथ, इस पथ को <code>Emulation/roms</code> फ़ोल्डर पर सेट करें, न कि अधिक व्यापक <code>Emulation</code> डायरेक्टरी पर। साझा मेटाडेटा को ROM फ़ोल्डर के बगल में इस स्थान पर रखें: <path>",
+      "reviewNote": "Third-pass adjudication of the sealed primary and blind reviews; no repository or API inspection."
+    },
+    {
+      "locale": "de",
+      "cells": [
+        {
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "proposedTarget": "; Sie benötigen keinen eigenen Bibliothekseintrag für jedes System. Richten Sie bei EmuDeck diesen Pfad auf den Ordner"
+        },
+        {
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "proposedTarget": "aus, statt das umfassendere Verzeichnis"
+        },
+        {
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "proposedTarget": "als Ziel zu verwenden. Bewahren Sie die gemeinsamen Metadaten daneben unter"
+        }
+      ],
+      "assembledRecommendation": "; Sie benötigen keinen eigenen Bibliothekseintrag für jedes System. Richten Sie bei EmuDeck diesen Pfad auf den Ordner <code>Emulation/roms</code> aus, statt das umfassendere Verzeichnis <code>Emulation</code> als Ziel zu verwenden. Bewahren Sie die gemeinsamen Metadaten daneben unter <path>",
+      "reviewNote": "Third-pass adjudication of the sealed primary and blind reviews; no repository or API inspection."
+    },
+    {
+      "locale": "ja",
+      "cells": [
+        {
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "proposedTarget": "。システムごとに別のライブラリエントリを作る必要はありません。EmuDeck を使う場合は、このパスを"
+        },
+        {
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "proposedTarget": "フォルダーに指定し、より広い"
+        },
+        {
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "proposedTarget": "ディレクトリは指定しないでください。共有メタデータはROMフォルダーの隣にある次の場所に保存してください："
+        }
+      ],
+      "assembledRecommendation": "。システムごとに別のライブラリエントリを作る必要はありません。EmuDeck を使う場合は、このパスを <code>Emulation/roms</code> フォルダーに指定し、より広い <code>Emulation</code> ディレクトリは指定しないでください。共有メタデータはROMフォルダーの隣にある次の場所に保存してください： <path>",
+      "reviewNote": "Third-pass adjudication of the sealed primary and blind reviews; no repository or API inspection."
+    },
+    {
+      "locale": "fr",
+      "cells": [
+        {
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "proposedTarget": "; vous n’avez pas besoin d’une entrée de bibliothèque distincte pour chaque système. Avec EmuDeck, faites pointer ce chemin vers le dossier"
+        },
+        {
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "proposedTarget": "et non vers le répertoire plus large"
+        },
+        {
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "proposedTarget": "qui contient ce dossier. Conservez les métadonnées partagées à côté du dossier de ROMs, à l’emplacement suivant :"
+        }
+      ],
+      "assembledRecommendation": "; vous n’avez pas besoin d’une entrée de bibliothèque distincte pour chaque système. Avec EmuDeck, faites pointer ce chemin vers le dossier <code>Emulation/roms</code> et non vers le répertoire plus large <code>Emulation</code> qui contient ce dossier. Conservez les métadonnées partagées à côté du dossier de ROMs, à l’emplacement suivant : <path>",
+      "reviewNote": "Third-pass adjudication of the sealed primary and blind reviews; no repository or API inspection."
+    },
+    {
+      "locale": "pt-BR",
+      "cells": [
+        {
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "proposedTarget": "; não é necessário criar uma entrada de biblioteca separada para cada sistema. Com o EmuDeck, aponte este caminho para a pasta"
+        },
+        {
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "proposedTarget": "e não para o diretório mais amplo"
+        },
+        {
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "proposedTarget": "que contém essa pasta. Mantenha os metadados compartilhados ao lado dessa pasta em"
+        }
+      ],
+      "assembledRecommendation": "; não é necessário criar uma entrada de biblioteca separada para cada sistema. Com o EmuDeck, aponte este caminho para a pasta <code>Emulation/roms</code> e não para o diretório mais amplo <code>Emulation</code> que contém essa pasta. Mantenha os metadados compartilhados ao lado dessa pasta em <path>",
+      "reviewNote": "Third-pass adjudication of the sealed primary and blind reviews; no repository or API inspection."
+    },
+    {
+      "locale": "ar",
+      "cells": [
+        {
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "proposedTarget": "؛ لا تحتاج إلى مدخل مستقل في المكتبة لكل نظام. عند استخدام EmuDeck، وجّه هذا المسار إلى مجلد"
+        },
+        {
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "proposedTarget": "وليس إلى المجلد الأوسع"
+        },
+        {
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "proposedTarget": "الذي يحتوي على هذا المجلد. احتفظ بالبيانات الوصفية المشتركة بجوار هذا المجلد في"
+        }
+      ],
+      "assembledRecommendation": "؛ لا تحتاج إلى مدخل مستقل في المكتبة لكل نظام. عند استخدام EmuDeck، وجّه هذا المسار إلى مجلد <code>Emulation/roms</code> وليس إلى المجلد الأوسع <code>Emulation</code> الذي يحتوي على هذا المجلد. احتفظ بالبيانات الوصفية المشتركة بجوار هذا المجلد في <path>",
+      "reviewNote": "Third-pass adjudication of the sealed primary and blind reviews; no repository or API inspection."
+    },
+    {
+      "locale": "ko",
+      "cells": [
+        {
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "proposedTarget": "; 시스템마다 라이브러리 항목을 따로 만들 필요는 없습니다. EmuDeck에서는 이 경로를"
+        },
+        {
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "proposedTarget": "폴더로 지정하고, 더 넓은"
+        },
+        {
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "proposedTarget": "디렉터리는 선택하지 마세요. 공유 메타데이터는 해당 폴더 옆의 다음 위치에 보관하세요:"
+        }
+      ],
+      "assembledRecommendation": "; 시스템마다 라이브러리 항목을 따로 만들 필요는 없습니다. EmuDeck에서는 이 경로를 <code>Emulation/roms</code> 폴더로 지정하고, 더 넓은 <code>Emulation</code> 디렉터리는 선택하지 마세요. 공유 메타데이터는 해당 폴더 옆의 다음 위치에 보관하세요: <path>",
+      "reviewNote": "Third-pass adjudication of the sealed primary and blind reviews; no repository or API inspection."
+    },
+    {
+      "locale": "zh-Hant",
+      "cells": [
+        {
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "proposedTarget": "；每個系統不需要個別的媒體庫項目。使用 EmuDeck 時，請將此路徑指向它的"
+        },
+        {
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "proposedTarget": "資料夾，而不是更上層的"
+        },
+        {
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "proposedTarget": "目錄。請將共用中繼資料存放在 ROM 資料夾旁，位置如下："
+        }
+      ],
+      "assembledRecommendation": "；每個系統不需要個別的媒體庫項目。使用 EmuDeck 時，請將此路徑指向它的 <code>Emulation/roms</code> 資料夾，而不是更上層的 <code>Emulation</code> 目錄。請將共用中繼資料存放在 ROM 資料夾旁，位置如下： <path>",
+      "reviewNote": "Third-pass adjudication of the sealed primary and blind reviews; no repository or API inspection."
+    },
+    {
+      "locale": "vi",
+      "cells": [
+        {
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "proposedTarget": "; bạn không cần mục thư viện riêng cho từng hệ thống. Với EmuDeck, hãy trỏ đường dẫn này đến thư mục"
+        },
+        {
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "proposedTarget": "chứ không phải thư mục cha rộng hơn"
+        },
+        {
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "proposedTarget": "nơi chứa thư mục ROM này. Hãy lưu siêu dữ liệu dùng chung bên cạnh thư mục đó tại"
+        }
+      ],
+      "assembledRecommendation": "; bạn không cần mục thư viện riêng cho từng hệ thống. Với EmuDeck, hãy trỏ đường dẫn này đến thư mục <code>Emulation/roms</code> chứ không phải thư mục cha rộng hơn <code>Emulation</code> nơi chứa thư mục ROM này. Hãy lưu siêu dữ liệu dùng chung bên cạnh thư mục đó tại <path>",
+      "reviewNote": "Third-pass adjudication of the sealed primary and blind reviews; no repository or API inspection."
+    },
+    {
+      "locale": "id",
+      "cells": [
+        {
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "proposedTarget": "; Anda tidak perlu entri pustaka terpisah untuk setiap sistem. Dengan EmuDeck, arahkan jalur ini ke folder"
+        },
+        {
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "proposedTarget": "dan bukan ke direktori yang lebih luas"
+        },
+        {
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "proposedTarget": "yang mencakup folder tersebut. Simpan metadata bersama di samping folder tersebut, di"
+        }
+      ],
+      "assembledRecommendation": "; Anda tidak perlu entri pustaka terpisah untuk setiap sistem. Dengan EmuDeck, arahkan jalur ini ke folder <code>Emulation/roms</code> dan bukan ke direktori yang lebih luas <code>Emulation</code> yang mencakup folder tersebut. Simpan metadata bersama di samping folder tersebut, di <path>",
+      "reviewNote": "Third-pass adjudication of the sealed primary and blind reviews; no repository or API inspection."
+    }
+  ],
+  "limitations": "Machine review only; this does not establish native-speaker approval."
+}

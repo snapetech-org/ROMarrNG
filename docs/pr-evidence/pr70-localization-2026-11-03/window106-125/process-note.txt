@@ -1,0 +1,3 @@
+Coordinator-only note. Do not provide this file to the semantic reviewer.
+I opened the primary packet README before recognizing that it contained review conclusions. It exposed aggregate primary dispositions (144 accept-current, 15 corrections, 9 refinements, 72 holds) and a note about an unapproved Indonesian gamelist.xml capitalization mismatch.
+I did not open primary-review.jsonl or manual-decisions.jsonl. This exposure compromises strict blindness. No semantic decisions or review ledger were produced from the packet. The clean-input directory was reconstructed from exact-head source, catalog, caller, structural, and rendering inputs only; it excludes the README, aggregate review counts, proposals, and dispositions. Assign a fresh reviewer using clean-input only.

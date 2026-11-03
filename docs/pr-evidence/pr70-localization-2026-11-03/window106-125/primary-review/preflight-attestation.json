@@ -1,0 +1,33 @@
+{
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogSha256": "5377a4b6c76137e7a3a9da7096dfbecbb8c90558d92831085ba1fb37c80d1484",
+  "catalogSourceHashMismatches": 0,
+  "exactCodeOccurrences": 22,
+  "head": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+  "independentReviewOutputRead": false,
+  "missingOrBlankTargets": 0,
+  "prApi": {
+    "baseRefName": "main",
+    "headRefName": "task/localization-translation-review-20261030",
+    "headRefOid": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+    "isDraft": true,
+    "state": "OPEN",
+    "url": "https://github.com/snapetech-org/ROMarrNG/pull/70"
+  },
+  "remoteHead": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+  "selectedCellCount": 240,
+  "selectedIdsWithVerifiedCodeOccurrences": 16,
+  "selectedIdsWithoutDirectCodeOccurrence": 4,
+  "selectedSourceCount": 20,
+  "snapshotHashMismatches": 0,
+  "sourceBundlePath": "localization/source-bundles/20261101-connect-instructions.json",
+  "sourceBundleSha256": "a6f047ba685db67ba51fe5fda0e20f6f83b84cdc94f303a68f648bc6540fe7a8",
+  "sourceHashMismatches": 0,
+  "sourceRegistryPath": "romarr/ui-source-messages.json",
+  "sourceRegistrySha256": "612b3a664577c84e3fe60294929f2a97c8f103d2bfd58047aeecc6de348fd134",
+  "sourceSnapshotPath": "romarr/ui-source-snapshot.json",
+  "sourceSnapshotSha256": "b728cfb7d9e5b321b6ee4b99e315120b91fe4f7561b8b38d957189002d41d801",
+  "storedTargetHashMismatches": 0,
+  "tree": "e8668e9c83afa533f8cd6e69e6a7ad96946ed40e",
+  "wrongStatusCount": 0
+}

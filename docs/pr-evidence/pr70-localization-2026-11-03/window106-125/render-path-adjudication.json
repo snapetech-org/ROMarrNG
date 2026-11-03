@@ -1,0 +1,26 @@
+{
+  "before": {
+    "source110": "publish_esde ValueError returned as raw API error; organizer messageApi used apiMessageMarkup without a template.",
+    "source120": "rename_plan returned fixed reason values; UI rendered operation and blocked reasons with apiMessageMarkup."
+  },
+  "after": {
+    "helper": "organizerApiMessageMarkup",
+    "allowlistedKeys": [
+      "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+      "ui.folder-packages-are-left-intact-to-p.e180bb56ad"
+    ],
+    "callSites": [
+      "organizer-page messageApi wrapper",
+      "rename preview operation reason",
+      "rename preview blocked reason"
+    ],
+    "fallback": "Unknown, dynamic, path, provider and peer values remain on apiMessageMarkup escaped as lang=und dir=auto.",
+    "sourceAndCatalogIdsUnchanged": true
+  },
+  "independentCodeReview": {
+    "result": "no material safety finding",
+    "reviewer": "independent subagent",
+    "note": "An arbitrary API value exactly equal to one allowlisted source could also localize; this is an exact-match collision only, not prefix or interpolation matching."
+  },
+  "evidenceSourceHead": "5f0973fb211c24d9b408cdb85c572540a7ab17ff"
+}

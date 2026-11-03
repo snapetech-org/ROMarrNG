@@ -1,0 +1,30 @@
+{
+  "baseRefName": "main",
+  "callerFiles": {
+    "romarr/app.py": {
+      "gitBlob": "1a6067d98a1e5c2c54c5af7c70a7f6cfeecedee5",
+      "sha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231"
+    },
+    "romarr/organizer.py": {
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+      "sha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64"
+    },
+    "romarr/ui.py": {
+      "gitBlob": "2e114d53a518287bd940371ce83625bee002f402",
+      "sha256": "810ccf901f4c7651aaf78602ae6eb69d471da65076cc6749c3a86367aa42d566"
+    }
+  },
+  "catalogBlob": "4a7bd1000b85787c15e5f720f08ab17a7c19a603",
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogSha256": "5377a4b6c76137e7a3a9da7096dfbecbb8c90558d92831085ba1fb37c80d1484",
+  "head": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+  "headRefName": "task/localization-translation-review-20261030",
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "sourceBundleBlob": "0da16cf24d764dbf4b4156c2bc7db5c3ac8b11d5",
+  "sourceBundlePath": "localization/source-bundles/20261101-connect-instructions.json",
+  "sourceBundleSha256": "a6f047ba685db67ba51fe5fda0e20f6f83b84cdc94f303a68f648bc6540fe7a8",
+  "state": "OPEN",
+  "tree": "e8668e9c83afa533f8cd6e69e6a7ad96946ed40e",
+  "url": "https://github.com/snapetech-org/ROMarrNG/pull/70"
+}

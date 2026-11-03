@@ -1,0 +1,311 @@
+{
+  "artifact": "ROMarrNG PR #70 W106–W125 blind semantic review",
+  "createdUtc": "2026-11-03T02:30:00Z",
+  "inputPacket": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w106-125-sanitized-20261103/clean-input",
+  "outputDirectory": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w106-125-sanitized-20261103/clean-review-output",
+  "reviewMode": "independent semantic screen of current draft targets; no target changes applied",
+  "blindness": "The GitHub PR-info response also included the PR body with earlier-window aggregate summaries; no W106–W125-specific claims appeared in the retrieved body, and that body was not used in translation decisions. No contaminated primary packet, README, notes, proposal/decision files, or contamination note was opened or searched.",
+  "livePullRequest": {
+    "repository": "snapetech-org/ROMarrNG",
+    "number": 70,
+    "state": "open",
+    "headRefName": "task/localization-translation-review-20261030",
+    "head": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+    "tree": "e8668e9c83afa533f8cd6e69e6a7ad96946ed40e",
+    "url": "https://github.com/snapetech-org/ROMarrNG/pull/70",
+    "verification": "PR info and exact head commit tree fetched live immediately before sealing."
+  },
+  "cleanInputChecksumVerification": {
+    "status": "pass",
+    "files": {
+      "README.txt": "7ae6fab12ecbd3e884122c122b780c067eb5cde2bcb23554eb9859367b51a1ed",
+      "head-and-file-pins.json": "625443b4b57a3eb991f6cf79fe335b82e232a66159be0def346802ea2277edf8",
+      "render-path-context.jsonl": "337203d5ddc69c57426082b46117421013abb7d39dc293181d1bb7a5fb9a5acf",
+      "review-input.jsonl": "9bf16c83a8c2f8c9faaaf8deea7b6ed4c050250126521ea316d057ef56b2471e",
+      "source-context.jsonl": "d924ee4d49a7319040bc1dd98f94b589a5d67e619c5833cb37467bc4cbdd147a",
+      "source-structure.jsonl": "f2e5520f5bc932f7eefb6f636a05cd517e804a9583d54efd4ce8fedd0526ee72"
+    }
+  },
+  "livePinVerification": {
+    "status": "pass",
+    "filePins": [
+      {
+        "path": "romarr/ui-labels.json",
+        "sha256": "5377a4b6c76137e7a3a9da7096dfbecbb8c90558d92831085ba1fb37c80d1484",
+        "gitBlob": "4a7bd1000b85787c15e5f720f08ab17a7c19a603",
+        "status": "pass"
+      },
+      {
+        "path": "localization/source-bundles/20261101-connect-instructions.json",
+        "sha256": "a6f047ba685db67ba51fe5fda0e20f6f83b84cdc94f303a68f648bc6540fe7a8",
+        "gitBlob": "0da16cf24d764dbf4b4156c2bc7db5c3ac8b11d5",
+        "status": "pass"
+      },
+      {
+        "path": "romarr/app.py",
+        "sha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+        "gitBlob": "1a6067d98a1e5c2c54c5af7c70a7f6cfeecedee5",
+        "status": "pass"
+      },
+      {
+        "path": "romarr/organizer.py",
+        "sha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+        "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+        "status": "pass"
+      },
+      {
+        "path": "romarr/ui.py",
+        "sha256": "810ccf901f4c7651aaf78602ae6eb69d471da65076cc6749c3a86367aa42d566",
+        "gitBlob": "2e114d53a518287bd940371ce83625bee002f402",
+        "status": "pass"
+      }
+    ],
+    "reviewRows": 240,
+    "sourceCurrentCatalogStatusHashRows": 240,
+    "sourceBundleMessageCount": 484,
+    "catalogMessageCount": 1837,
+    "callerReferenceCount": 22,
+    "renderPathRecordCount": 7,
+    "renderPathLineCount": 163,
+    "sourceStructureRecords": 20,
+    "mismatches": 0
+  },
+  "reviewScope": {
+    "sourceIds": 20,
+    "locales": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "ja",
+      "ko",
+      "pt-BR",
+      "vi",
+      "zh-Hans",
+      "zh-Hant"
+    ],
+    "cells": 240,
+    "dispositionCounts": {
+      "accept-current": 184,
+      "refine": 8,
+      "hold-context": 48
+    },
+    "sourceSummary": [
+      {
+        "sourceId": "ui.evidence.03867aea70",
+        "source": "Evidence",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 12
+        },
+        "rationale": "The label refers to supporting evidence for a proposed rename; the target preserves that evidentiary meaning.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.exact-dat-checksum-match.91363b80af",
+        "source": "Exact DAT checksum match",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 12
+        },
+        "rationale": "The status reports an exact DAT checksum match; the target preserves exactness and the DAT identifier.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.existing-es-de-gamelists-folder-opti.1659a3153e",
+        "source": "Existing ES-DE gamelists folder (optional)",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 12
+        },
+        "rationale": "The setting label identifies an already present ES-DE gamelists folder and keeps its optional status.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.existing-es-de-media-folder-optional.dcc4281be8",
+        "source": "Existing ES-DE media folder (optional)",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 11,
+          "refine": 1
+        },
+        "rationale": "The setting label identifies an already present ES-DE media folder and keeps its optional status.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+        "source": "Existing gamelist.xml is invalid; it was left untouched.",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 11,
+          "refine": 1
+        },
+        "rationale": "The error says the existing gamelist.xml is invalid and was left unchanged; only the Japanese target reverses the second clause.",
+        "runtimeNote": "At this head, the API error is passed as opaque text without an explicit translation template; catalog target is not used on this render path."
+      },
+      {
+        "sourceId": "ui.explains-the-connection.9e80ba4652",
+        "source": "explains the connection.",
+        "sourceContextStatus": "unverified-no-source-or-id-in-app-code",
+        "dispositions": {
+          "hold-context": 12
+        },
+        "rationale": "The source is a standalone fragment with no verified caller or antecedent, so the intended relation and sentence role cannot be confirmed.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.explore-more-games-in-this-genre.ca9764a30b",
+        "source": "Explore more games in this genre",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 11,
+          "refine": 1
+        },
+        "rationale": "The attribute invites users to browse more games in the same genre; Traditional Chinese has a simplified-script character in the word for games.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.failed-download-handling-is-off.ad2c9dba83",
+        "source": "failed download handling is off",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 12
+        },
+        "rationale": "The result message states that failed-download handling is disabled.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.filename-only-no-verified-catalog-ma.c5ef8667b2",
+        "source": "Filename only; no verified catalog match",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 11,
+          "refine": 1
+        },
+        "rationale": "The status distinguishes a filename-only identification from a verified catalog match; the Arabic target materially changes that distinction.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.filename-only-review.7ff9deba1a",
+        "source": "Filename only · review",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 12
+        },
+        "rationale": "The label marks a filename-only identification for review.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.folder-and-set-its-game-media-direct.6970455da7",
+        "source": "folder and set its Game media directory to",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 12
+        },
+        "rationale": "In the verified ES-DE help sentence, this segment completes the gamelists-folder instruction and tells users to set the Game media directory to the following path.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.folder-name.14d34edf50",
+        "source": "Folder name",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 12
+        },
+        "rationale": "The label names the user-editable platform folder-name field.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.folder-names-are-matched-only-at-the.a6064d8258",
+        "source": ". Folder names are matched only at the library root.",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 11,
+          "refine": 1
+        },
+        "rationale": "The sentence limits folder-name matching to the library root; the French target omits the source’s opening period.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.folder-not-the-wider.d61c242874",
+        "source": "folder, not the wider",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 9,
+          "refine": 3
+        },
+        "rationale": "In the verified EmuDeck sentence, the contrast is the Emulation/roms folder versus the wider Emulation directory; Hindi drops the width comparison and Japanese and Korean reverse it.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.folder-packages-are-left-intact-to-p.e180bb56ad",
+        "source": "Folder packages are left intact to preserve their contents and references",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 12
+        },
+        "rationale": "The organizer reason says folder packages remain intact to preserve their contents and references.",
+        "runtimeNote": "At this head, rename-plan reason text is passed as opaque text without an explicit translation template; catalog target is not used on this render path."
+      },
+      {
+        "sourceId": "ui.for-a-guided-discovery-and-user-requ.409fbe664a",
+        "source": "For a guided discovery and user request queue, pair ROMarrNG with",
+        "sourceContextStatus": "unverified-no-source-or-id-in-app-code",
+        "dispositions": {
+          "hold-context": 12
+        },
+        "rationale": "This integration sentence fragment has no verified caller; the intended product pairing and wording for “guided discovery” remain unresolved.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.for-a-household-catalog-and-request.2ec86400a0",
+        "source": "For a household catalog and request queue, use",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 12
+        },
+        "rationale": "The verified caller recommends SeerrNG for a household catalog and request queue; the targets preserve that recommendation.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.for-a-shared-catalog-and-household-r.027b0accc2",
+        "source": "For a shared catalog and household request queue, use",
+        "sourceContextStatus": "unverified-no-source-or-id-in-app-code",
+        "dispositions": {
+          "hold-context": 12
+        },
+        "rationale": "This sentence fragment has no verified caller, so the intended shared-versus-household meaning and following product reference remain unresolved.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.for-the-shared-household-request-que.d2ef0c1d6b",
+        "source": "for the shared household request queue; see the",
+        "sourceContextStatus": "unverified-no-source-or-id-in-app-code",
+        "dispositions": {
+          "hold-context": 12
+        },
+        "rationale": "The lower-case fragment ends in “the” but its referent and surrounding sentence are unavailable; hold all locales pending context.",
+        "runtimeNote": null
+      },
+      {
+        "sourceId": "ui.format-and-schema.a697cd2d86",
+        "source": "format and schema",
+        "sourceContextStatus": "verified",
+        "dispositions": {
+          "accept-current": 12
+        },
+        "rationale": "The linked documentation label names the portable catalog’s format and schema.",
+        "runtimeNote": null
+      }
+    ]
+  },
+  "limitations": [
+    "This is not native-speaker approval.",
+    "Cells held for unresolved source context have no semantic disposition.",
+    "Two catalog strings are not translated on the exact current error/reason rendering paths, as noted per cell.",
+    "No repository or PR changes, tests, builds, or CI were performed."
+  ],
+  "repoStatus": "Not inspected or modified; work remained in the sanitized input and this task-scoped scratch output."
+}

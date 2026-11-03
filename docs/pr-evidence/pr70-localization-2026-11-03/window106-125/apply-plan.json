@@ -1,0 +1,403 @@
+{
+  "sourceHead": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+  "sourceTree": "e8668e9c83afa533f8cd6e69e6a7ad96946ed40e",
+  "plannedCells": 44,
+  "changes": [
+    {
+      "id": "ui.existing-es-de-gamelists-folder-opti.1659a3153e",
+      "locale": "ar",
+      "expectedCurrentSha256": "ca121e4310ea41cd9ca022932a2694832e3376d28a42b81860b74125892b888c",
+      "target": "مجلد قوائم ألعاب ES-DE الحالي (اختياري)",
+      "targetSha256": "023163b695194035f7c1e45875de13a1d9a13eb46cbb9ff1b7b503dfb43ce48b",
+      "disposition": "correction",
+      "catalogTranslationHash": "95673d8e76fc551e95b3347ddc6b3a9f0b75c1dc0240738de3aba3d919fe8767"
+    },
+    {
+      "id": "ui.existing-es-de-gamelists-folder-opti.1659a3153e",
+      "locale": "de",
+      "expectedCurrentSha256": "461b3a234ef0d9727b64b44e987a6e429642aa1c33fbad5cc0cc1b6368fcd854",
+      "target": "Vorhandener ES-DE-Gamelistenordner (optional)",
+      "targetSha256": "8ac70a847603dfaf5538607de92e1a5c7ed7ff16a31961a7cb2e0d5e3446a146",
+      "disposition": "correction",
+      "catalogTranslationHash": "c20a824c7c339f53588e51a91f4cf6a9ca1c13c8979ad68a5f941d442c4f9324"
+    },
+    {
+      "id": "ui.existing-es-de-gamelists-folder-opti.1659a3153e",
+      "locale": "fr",
+      "expectedCurrentSha256": "e7390e9b10e360f2d9a7917c3c6543149149edd240173b07a30ce7ff18de942b",
+      "target": "Dossier de listes de jeux ES-DE existant (facultatif)",
+      "targetSha256": "3419088d0609bcf075cff62e2006fcf093a7877c318f00c5a57422235eed1be2",
+      "disposition": "correction",
+      "catalogTranslationHash": "e7d423bf44d612c4c1896b1abce5cfd61a10db1a0dfd03a7e5f0c6c7491780e6"
+    },
+    {
+      "id": "ui.existing-es-de-media-folder-optional.dcc4281be8",
+      "locale": "ja",
+      "expectedCurrentSha256": "ba75415741642406898c570acbdc4b8832dc35e87456da5fa7b613e2aebdb54f",
+      "target": "既存の ES-DE メディアフォルダー（任意）",
+      "targetSha256": "4ce8be3e16c87719eed9fe088d668e52c54abfdc23c26fe59103df39ba283008",
+      "disposition": "refinement",
+      "catalogTranslationHash": "5095a8d93c281fa888e7226089ddcd41f7a5830f69b3d40b297b1896a33aef54"
+    },
+    {
+      "id": "ui.existing-es-de-media-folder-optional.dcc4281be8",
+      "locale": "vi",
+      "expectedCurrentSha256": "9d4a9dffc0940391ef603d282d83d834b7fee68b1c68fd75f3cea0b172aef798",
+      "target": "Thư mục phương tiện ES-DE hiện có (không bắt buộc)",
+      "targetSha256": "5cdbc725bf3e8444e8205819b3de05b5a97872c5abf1989c75c5c5b352663ffc",
+      "disposition": "refinement",
+      "catalogTranslationHash": "7e5e74a911157d777fe9bc40a35158d288a80de1ee7be5981fc165bd954b8604"
+    },
+    {
+      "id": "ui.existing-es-de-media-folder-optional.dcc4281be8",
+      "locale": "zh-Hans",
+      "expectedCurrentSha256": "b53fab3bf1595e64b33151e1f0b1b896d06012b626328737c2c4060c83d14cbf",
+      "target": "现有 ES-DE 媒体文件夹（可选）",
+      "targetSha256": "041bc1b0a5c3bb19d525114b653a201e4074df417ecc1bdf2f8ac93f2f70e54c",
+      "disposition": "refinement",
+      "catalogTranslationHash": "8eae95a7ea89e8b5d8b879604070a45f0e39ed9790915144cc7f80a29b02dfc4"
+    },
+    {
+      "id": "ui.existing-es-de-media-folder-optional.dcc4281be8",
+      "locale": "zh-Hant",
+      "expectedCurrentSha256": "2f6971d5ff551e89b8e2731018537c176520cb0bc9f99532ad17c6ed6c31ff76",
+      "target": "現有 ES-DE 媒體資料夾（選用）",
+      "targetSha256": "032f93d2d99a79837c146fa5d86ffcbcbda3397ae33cdda2cb18ccba1dbc6914",
+      "disposition": "refinement",
+      "catalogTranslationHash": "cdf23f6118f5481ecd99877f394d041b88ddcf6905331bfb63a203fd801b55df"
+    },
+    {
+      "id": "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+      "locale": "ar",
+      "expectedCurrentSha256": "c60dc3144cc9748053921f91151dc03a76ee872cab76c4f3eaa4ad44ef6b9db1",
+      "target": "ملف gamelist.xml الحالي غير صالح؛ تُرك دون تعديل.",
+      "targetSha256": "617f2e2e90c485a5b08d029f14b4d859877af6f9874b590df7042c43bf6af0b4",
+      "disposition": "correction",
+      "catalogTranslationHash": "4ee189e7dfae6d503ac60619544a29e24f905a4c65ef44bc6de047e6f88a774f"
+    },
+    {
+      "id": "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+      "locale": "fr",
+      "expectedCurrentSha256": "0babba5354835864d5df26e3b5b7719492f0a60e82a2450a5d7c0e56059931d0",
+      "target": "Le fichier gamelist.xml existant est invalide ; il a été laissé intact.",
+      "targetSha256": "b59bf6ba425403e292eecc884a558ad786142d9baed97e697e8a58cd491bd316",
+      "disposition": "correction",
+      "catalogTranslationHash": "50c82f6f5b17a0f5eac996d409317485517dcf8b949f89329b8e903710edb9e7"
+    },
+    {
+      "id": "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+      "locale": "id",
+      "expectedCurrentSha256": "2f83a6ee48565fa84c066ab54cb7fb3110f65b3ad949d05ef3bfcd24182aa8f7",
+      "target": "gamelist.xml yang ada tidak valid; dibiarkan tanpa perubahan.",
+      "targetSha256": "e99c6a913280db5015c2e9d4aeede7ec8ff1dc58f4b956bd3d486312eb8706a3",
+      "disposition": "correction",
+      "catalogTranslationHash": "f2f6dd0b104f2664214b409c8b796e057498fd8fa2ae8aa338cee9b4a1fead1b"
+    },
+    {
+      "id": "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+      "locale": "ja",
+      "expectedCurrentSha256": "b9f59fa1f86de09889c4058df1d4ac212a2eddf3dc198521291b36b9a67f04db",
+      "target": "既存の gamelist.xml は無効で、変更せずそのまま残されました。",
+      "targetSha256": "36c4df32fe1f2b367e252cd1e02db7ad1629e50392f5d20135e054a2d9b1e95b",
+      "disposition": "correction",
+      "catalogTranslationHash": "16b1fc4f0b5b7a1d181b82095ebf90b374c39f29eea8139ebce96100892291ad"
+    },
+    {
+      "id": "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+      "locale": "ko",
+      "expectedCurrentSha256": "1bfd02d6ff29cdab91f13312c117d94c2ee02e0ac071c22a6b6568d778cb5b54",
+      "target": "기존 gamelist.xml이 유효하지 않아 수정하지 않고 그대로 두었습니다.",
+      "targetSha256": "1a5e6fed5567895ea2a066812ce1ac32389d826390cb87da94705c2b9ea4b74c",
+      "disposition": "correction",
+      "catalogTranslationHash": "72d1838ce2ccf543c4faa53d03d444847a552780128666111d38094d954aae8d"
+    },
+    {
+      "id": "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+      "locale": "pt-BR",
+      "expectedCurrentSha256": "e65f109b24d067b33887a7a1a9d025cb3b92b64404ec064a7973a265626700f2",
+      "target": "O gamelist.xml existente é inválido; foi deixado intacto.",
+      "targetSha256": "22064eb16f78e7472d493ea866aba8068f1c0075081013f6a61fe27c0919e99a",
+      "disposition": "correction",
+      "catalogTranslationHash": "c97f56d95fbc48acbcb149fa2fa2f585949be750f10e7ddaed0066efc1b8f779"
+    },
+    {
+      "id": "ui.explore-more-games-in-this-genre.ca9764a30b",
+      "locale": "hi",
+      "expectedCurrentSha256": "5723b138c8f138cb8140ff687ef25c03d1795421639101265661bf92acc10a8b",
+      "target": "इस शैली के और खेल देखें",
+      "targetSha256": "27464ba4dafecc4967b813cc66d788cb4bc632162e9539e17b369097b3df5a67",
+      "disposition": "refinement",
+      "catalogTranslationHash": "13dfefdecdcad78478967ac849e91d72796020acad00ca19794b4ebe8d9b970d"
+    },
+    {
+      "id": "ui.explore-more-games-in-this-genre.ca9764a30b",
+      "locale": "ko",
+      "expectedCurrentSha256": "9db371466d47c3ba55bc14d2a07ec38da15d38f9560b163f172f69e3fc1fb18d",
+      "target": "이 장르의 게임 더 둘러보기",
+      "targetSha256": "e8ca987761e0f0d349c1a51a0f32015b5b4a1667b01fab9a736ffac694b2b0ec",
+      "disposition": "correction",
+      "catalogTranslationHash": "b5a30494d2467f6e2416aed86b596c0c826544499df78f042d0fea0cafa868fb"
+    },
+    {
+      "id": "ui.explore-more-games-in-this-genre.ca9764a30b",
+      "locale": "zh-Hant",
+      "expectedCurrentSha256": "7c42203886615d592fd66931c4820dba285a8f509220b0f559d57f1014b08f20",
+      "target": "探索此類型的更多遊戲",
+      "targetSha256": "8ca6fb2cfbb0dd37d7fbb1a58b30b62d2bc5f254ab4f3fe4070176a97665e698",
+      "disposition": "correction",
+      "catalogTranslationHash": "0314f77b4d1243d4f6495aec30349b83429c096908196a8173f2581d2018e31a"
+    },
+    {
+      "id": "ui.filename-only-no-verified-catalog-ma.c5ef8667b2",
+      "locale": "ar",
+      "expectedCurrentSha256": "db39456ac1ad6bdebd6968c9b2691596143857f9512865b5f3990602774b27f9",
+      "target": "اسم الملف فقط؛ لا توجد مطابقة موثّقة في الكتالوج.",
+      "targetSha256": "800e7d23e7715d25501bcd01f642e7256a5a086fa745cd00e9ba4b36edd0957e",
+      "disposition": "correction",
+      "catalogTranslationHash": "e91882fc917be28e9e02da5f326115dfaf837f517230ae48a3b4c8211bfef5b2"
+    },
+    {
+      "id": "ui.filename-only-no-verified-catalog-ma.c5ef8667b2",
+      "locale": "fr",
+      "expectedCurrentSha256": "10a2a41213144ccac4e4ec425e596595d50d7c7267c5adc0a57a2f1eccd4d4d4",
+      "target": "Nom de fichier uniquement ; aucune correspondance vérifiée dans le catalogue.",
+      "targetSha256": "33bc60dc1b8f317e95df14be562d51db0e71d8bb26eefe6c3b0363ff5c8a2ce1",
+      "disposition": "correction",
+      "catalogTranslationHash": "0275088f84f0b6a531e882cca02d6ba7d4146918c6c14067043737ba40e74742"
+    },
+    {
+      "id": "ui.filename-only-no-verified-catalog-ma.c5ef8667b2",
+      "locale": "hi",
+      "expectedCurrentSha256": "b4b9163747fa7d0ef5bde61c2a996327304a8a45745250c5cd5efd9fe79dff12",
+      "target": "केवल फ़ाइल नाम; कैटलॉग में कोई सत्यापित मिलान नहीं",
+      "targetSha256": "6b8ab15a0ab826d611fddc00586bbd087462c0d7d75636936a594204457ef5aa",
+      "disposition": "correction",
+      "catalogTranslationHash": "f2767a67070200369488f55f51fb3c2197fe38540622923163d6b6246c0e0ba4"
+    },
+    {
+      "id": "ui.filename-only-no-verified-catalog-ma.c5ef8667b2",
+      "locale": "ko",
+      "expectedCurrentSha256": "8fb83545464db68f3f47bdd8539e3c11bfc17c81ce3de76859da5869a8dd65f1",
+      "target": "파일명만 있음; 카탈로그에서 확인된 일치 항목 없음",
+      "targetSha256": "e8e7e71f99920d986657cc2aa80564020f62462c5fc2ec39fd65ebbde848aa1d",
+      "disposition": "correction",
+      "catalogTranslationHash": "e2511718c42ed910d124b91b36289ff5df1c4f3668dde707c7a1d116fc0c08ac"
+    },
+    {
+      "id": "ui.filename-only-no-verified-catalog-ma.c5ef8667b2",
+      "locale": "zh-Hans",
+      "expectedCurrentSha256": "99835819ba5b35263dbd513554ffd24448356b1471556cbe648f4d907d1f5139",
+      "target": "仅有文件名；未找到已验证的目录匹配项",
+      "targetSha256": "b56b6df03a34194228d89b01ddf9913986f341ce09fe52327809dfe7f9fe1b96",
+      "disposition": "correction",
+      "catalogTranslationHash": "dcfc9449015ad7f280c058e7c78250466b30001ed7a08d9946ea5dc894b7a44a"
+    },
+    {
+      "id": "ui.filename-only-no-verified-catalog-ma.c5ef8667b2",
+      "locale": "zh-Hant",
+      "expectedCurrentSha256": "89a031f4f2e774467b3dc79d726b1eded98c3742273b36bc05ddf996019f709c",
+      "target": "僅有檔名；找不到已驗證的目錄比對項目",
+      "targetSha256": "c3e2175aab9b24b7d86acb425d6d87ab783ffbb71236ee82de9e8a4f6f2f5f67",
+      "disposition": "correction",
+      "catalogTranslationHash": "5d151e9db940242723851eb4b3a5d0c0eb7dcbc900adc6e5c3b2d615ee10ca19"
+    },
+    {
+      "id": "ui.filename-only-review.7ff9deba1a",
+      "locale": "ar",
+      "expectedCurrentSha256": "f41397c7f0caa5ede4b10e8da8209372cf80d23d63555928553554b8975c54fe",
+      "target": "اسم الملف فقط · يحتاج إلى مراجعة",
+      "targetSha256": "210afe13f094e4fcbe8af904cd91f40a66b64fa85a277a3735706b26239a535d",
+      "disposition": "correction",
+      "catalogTranslationHash": "8a248d426af874b3b56819afafd50b5108e75f12e0ee9ca03777ce44274f44ed"
+    },
+    {
+      "id": "ui.filename-only-review.7ff9deba1a",
+      "locale": "hi",
+      "expectedCurrentSha256": "4f69d54652f8d61643c4ae85c54a2923c8ee002780e76686d29f2c7681391c1e",
+      "target": "केवल फ़ाइल नाम · समीक्षा आवश्यक",
+      "targetSha256": "732f969b99676c7891009d606561b7783df0e971d9ed7f25d02784dac05405de",
+      "disposition": "refinement",
+      "catalogTranslationHash": "5ed05fa92f73c768337f934ab6a428ddc73a71769048fa0dd0a74be496623a97"
+    },
+    {
+      "id": "ui.folder-and-set-its-game-media-direct.6970455da7",
+      "locale": "de",
+      "expectedCurrentSha256": "e7bb45f55065b818cb4ed047c64fa6d7d13a8d2496abe39defb6a9df35eb49e0",
+      "target": "Ordner und setzen Sie das Verzeichnis „Game media“ auf",
+      "targetSha256": "ae1a00148d73127eabde2a4e2105c3447847f3349770abbd17bc59d59a5e07f4",
+      "disposition": "correction",
+      "catalogTranslationHash": "100363501d3c25108645eb3c3ec5afaec01c535d83ef08634f3c7d79bc35a16a"
+    },
+    {
+      "id": "ui.folder-name.14d34edf50",
+      "locale": "hi",
+      "expectedCurrentSha256": "720d1ac5da9ef917539b35cc51274fe79a644585f86c693d7988a226334e3264",
+      "target": "फ़ोल्डर का नाम",
+      "targetSha256": "d812d6ce2b3b331ef36249b48d7429468099dda8d00f728af9169641424c134e",
+      "disposition": "refinement",
+      "catalogTranslationHash": "3c27bcdb8e8fb2ac3c6a08b662878a56e39ef33d204ffc27110ad1dae19b0eb7"
+    },
+    {
+      "id": "ui.folder-not-the-wider.d61c242874",
+      "locale": "ar",
+      "expectedCurrentSha256": "cdb5c31e34ca3cde1bb38e01d811852314453c19f065370c289ceafa80994fb3",
+      "target": "وليس إلى المجلد الأوسع",
+      "targetSha256": "f3842239a3376c8fce3479aa046f7881489608d89f224345a0c30ad6f00bc0df",
+      "disposition": "correction",
+      "catalogTranslationHash": "69724d64a0d7fbfaa0b959176c5d8c81f9f73a236e4af7af06afeedc811fc82e"
+    },
+    {
+      "id": "ui.folder-not-the-wider.d61c242874",
+      "locale": "de",
+      "expectedCurrentSha256": "1bcf78f15bced3cfc65ce48037173815f2b63b12526261bac1689b3ca720ff96",
+      "target": "aus, statt das umfassendere Verzeichnis",
+      "targetSha256": "2700eab750f699840bb48acfa8a4cf3df580540d56599c92d9743d7e3bc9126c",
+      "disposition": "correction",
+      "catalogTranslationHash": "05264a528799a01e4f1afcb2c8f13b0f42c2ccd4e66703ceba0dab1414c085e9"
+    },
+    {
+      "id": "ui.folder-not-the-wider.d61c242874",
+      "locale": "es",
+      "expectedCurrentSha256": "958df007cd6aa5f0affda41a093fae364eb8d0b527eb838d6d511311f0a6b978",
+      "target": "y no al directorio más amplio",
+      "targetSha256": "576ecaaf982e4871718b35eb43ee027be179a2cc4f674ccd93993ae330bd44db",
+      "disposition": "correction",
+      "catalogTranslationHash": "c68532d845b14efdb3b42fc0bc1bbd20c0ccde519f08d99d0d7960fe17656410"
+    },
+    {
+      "id": "ui.folder-not-the-wider.d61c242874",
+      "locale": "fr",
+      "expectedCurrentSha256": "bb3a7291d3748f5277005dd7b2fe67cfc47a9bd10b13eb213eaac7f130a17b69",
+      "target": "et non vers le répertoire plus large",
+      "targetSha256": "e275249764a5f2e091d8f7fa50be2553e7557dc2ab65e49a63b00d2ead9b1ce0",
+      "disposition": "correction",
+      "catalogTranslationHash": "8f3c437d5914b4c5ad579a9eb02c1a189913e81cb12300efdced896ac324a894"
+    },
+    {
+      "id": "ui.folder-not-the-wider.d61c242874",
+      "locale": "hi",
+      "expectedCurrentSha256": "d1e82ce57d4d5dad2ae36247138b73dce43bc736cff1a3f3c5a0870aae335adb",
+      "target": "फ़ोल्डर पर सेट करें, न कि अधिक व्यापक",
+      "targetSha256": "eeca956295615465c3578902c14072dbffa30c805dd2a7a7411260ffc8293b3c",
+      "disposition": "correction",
+      "catalogTranslationHash": "5beb8819c34d3d1c038982fb812582e84493051fa479fef7eecabcf4d785ae95"
+    },
+    {
+      "id": "ui.folder-not-the-wider.d61c242874",
+      "locale": "id",
+      "expectedCurrentSha256": "da10010725d973e5e509d5930d86d1948ff3261abf633d013ab241cc735e2d3c",
+      "target": "dan bukan ke direktori yang lebih luas",
+      "targetSha256": "f2fa6112c84ef79b69d26b688def49362a5cd26723a7507ce4f024117cdf2239",
+      "disposition": "correction",
+      "catalogTranslationHash": "f9173701299faf494df6410876b2aa68675d5f23a45b90c90f4a4096be320246"
+    },
+    {
+      "id": "ui.folder-not-the-wider.d61c242874",
+      "locale": "ja",
+      "expectedCurrentSha256": "bcf16196522dc5af34ae8c0a3b5e464d24095ee7046dfecb8ed26d97713b304f",
+      "target": "フォルダーに指定し、より広い",
+      "targetSha256": "5d7b933c7b9cd0e192cfc042e8e6dbc370cd2b743cb524343a5ee7dbd6dc47bf",
+      "disposition": "correction",
+      "catalogTranslationHash": "4995b4c2cb630b8896224ee8c760e7ad4dff6b51e0aa61a3e925ffc8e9e19a57"
+    },
+    {
+      "id": "ui.folder-not-the-wider.d61c242874",
+      "locale": "ko",
+      "expectedCurrentSha256": "d3220a01812057575640971bf69fe7309bed3f86aedec2ca8ca6d3fbbf2805e8",
+      "target": "폴더로 지정하고, 더 넓은",
+      "targetSha256": "cbd41b775f3e2adfd1e0a5a3b386ca430f84b2c9beb2a71413c45128eb3ff9cf",
+      "disposition": "correction",
+      "catalogTranslationHash": "505b23ef08e1f03015ce6a69bf1ca6ebbafdbfa3558bc4ce9683b4b273962f1d"
+    },
+    {
+      "id": "ui.folder-not-the-wider.d61c242874",
+      "locale": "pt-BR",
+      "expectedCurrentSha256": "fb94826af1b0d95e71a6dc511bbf1b2d97214d09705348f148a4a696a66b4005",
+      "target": "e não para o diretório mais amplo",
+      "targetSha256": "980f738c63406d8bb96422416630ab346cfb507e9de223065066b668b846a7a4",
+      "disposition": "correction",
+      "catalogTranslationHash": "db191454fdf439d2b50b8d39fff9ea40ed13044ed08491334703d9348e795800"
+    },
+    {
+      "id": "ui.folder-not-the-wider.d61c242874",
+      "locale": "vi",
+      "expectedCurrentSha256": "eb4be1e2fc37b86a8d37beb34ab1274b09e4804d1aa369973bc1f7d0ca18df22",
+      "target": "chứ không phải thư mục cha rộng hơn",
+      "targetSha256": "7832085ddd6bbe7db9b75f7d53ff96408910dea90dffb051fc9533a1e405af19",
+      "disposition": "correction",
+      "catalogTranslationHash": "3793d4e37012cd55e059d3a818fd632cb43d85df4104d47aab189d9358b9168a"
+    },
+    {
+      "id": "ui.folder-not-the-wider.d61c242874",
+      "locale": "zh-Hans",
+      "expectedCurrentSha256": "9c5dab90ead194bc6e949b055a88bf6a0d0c78296ff59c3a476ddd975271ae0a",
+      "target": "文件夹，而不是更上层的",
+      "targetSha256": "330a9d8f540886416d0648e2f0d0b8db77394aa2a454799edf754792763ed333",
+      "disposition": "correction",
+      "catalogTranslationHash": "55e3590ef601f774f979d45f61e6ad65e86b2f30aee3b083599b4f22ac14446c"
+    },
+    {
+      "id": "ui.folder-not-the-wider.d61c242874",
+      "locale": "zh-Hant",
+      "expectedCurrentSha256": "1c8df65f6b3d7720c37620ddda4c01a84aae2a257c3afd098117f51c777ef538",
+      "target": "資料夾，而不是更上層的",
+      "targetSha256": "e8e7ad57b0db23d3411ec724f0c6b9a2af583ec806c8586024dc87d9039aca04",
+      "disposition": "correction",
+      "catalogTranslationHash": "5db1b07499f31ea9877ee2a7ffac3f11c1001db94d580cbb2bfc6664c74862b2"
+    },
+    {
+      "id": "ui.folder-packages-are-left-intact-to-p.e180bb56ad",
+      "locale": "de",
+      "expectedCurrentSha256": "6a9267762e869cdc36bc5a82ed7d95000d7ddc72259ee2bc37de56e38502a11b",
+      "target": "Ordnerpakete bleiben intakt, um Inhalte und Verweise zu erhalten.",
+      "targetSha256": "64b1bd3d6b080fd8aadb28013b4c38ae87f8a32a076fc470b504e5583fa7c081",
+      "disposition": "correction",
+      "catalogTranslationHash": "b35c65aee894d574a71e24aa5251d0ec4c82f59c55a64232431cab63700826da"
+    },
+    {
+      "id": "ui.folder-packages-are-left-intact-to-p.e180bb56ad",
+      "locale": "fr",
+      "expectedCurrentSha256": "d7efd4f3c8132350455cd1d008773f306c77ef3bd03ebc09ff2a72dae036ef5f",
+      "target": "Les paquets de dossiers sont laissés intacts afin de préserver leur contenu et leurs références.",
+      "targetSha256": "7b7f921d1052dc1c88861c69475d4dceb41791dfcff4e4642ed4079444442aa8",
+      "disposition": "correction",
+      "catalogTranslationHash": "6ac0ddacba579d34bd68d2faaa07b9a99252371e52b24d48f51a2fa22f056f05"
+    },
+    {
+      "id": "ui.folder-packages-are-left-intact-to-p.e180bb56ad",
+      "locale": "ko",
+      "expectedCurrentSha256": "85e74166f2dbd5c858804ddd0628aad8866655263f41116a02404a37e6172704",
+      "target": "폴더 패키지는 내용과 참조 관계를 보존하기 위해 그대로 둡니다.",
+      "targetSha256": "59e6b0a4d5a2e85d4326f202a881d718a4c2127de202d34176f4d5615afa164d",
+      "disposition": "refinement",
+      "catalogTranslationHash": "6f38a4ef91b38deda4375ce860f9fb811e10e0ff2ec797f1750cbbf03aaccc03"
+    },
+    {
+      "id": "ui.folder-packages-are-left-intact-to-p.e180bb56ad",
+      "locale": "vi",
+      "expectedCurrentSha256": "a1c97fd0690bc39d767a095e0b77e36d9618869fd012c1f0e5e94dd260f83daa",
+      "target": "Các gói thư mục được giữ nguyên để bảo toàn nội dung và các tham chiếu.",
+      "targetSha256": "13af04d3ba653ccfe9ed75f6cf0af2bd3b8e813535838573b6cc4aa13bf4e48f",
+      "disposition": "refinement",
+      "catalogTranslationHash": "55e032eb9d88c83b3bd5569753762987906bf83345cc11f694940d74a4c26bae"
+    },
+    {
+      "id": "ui.for-a-household-catalog-and-request.2ec86400a0",
+      "locale": "de",
+      "expectedCurrentSha256": "1fee1335bd8bacfc069c6a7a654b9a67897f4f29ba35880b82a0171b54267c82",
+      "target": "Für einen Haushaltskatalog und eine Warteschlange für Anfragen nutzen Sie",
+      "targetSha256": "2040bed2db6b6723f49162dfaa6db28fae7e361f6a4c01a9f4fadf12c0385550",
+      "disposition": "refinement",
+      "catalogTranslationHash": "cd356f19e397308bb798c2a149489d44a34a148a888f0b9377d96abe42795a97"
+    },
+    {
+      "id": "ui.format-and-schema.a697cd2d86",
+      "locale": "id",
+      "expectedCurrentSha256": "a27787a816b68b012ac85c040691c800bed9148fcf390510db14ecb7cfc468f7",
+      "target": "format dan skema",
+      "targetSha256": "3b187dd8702b4c0476d320d402261d4e12bf0b4ed00e12a5255cf0a6e3bef195",
+      "disposition": "refinement",
+      "catalogTranslationHash": "ee1015f584df9e15640bc74420c6f2de082e8d26416cd5fbdba1f577e63a0551"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+Clean exact-head input-only packet for a composed EmuDeck help sentence. It contains current source and translation targets for three adjacent text nodes across 12 direct locales, with two inline path literals and exact baseline pins. It contains no translation decisions or proposals. Review the assembled sentence per locale rather than judging each fragment in isolation.

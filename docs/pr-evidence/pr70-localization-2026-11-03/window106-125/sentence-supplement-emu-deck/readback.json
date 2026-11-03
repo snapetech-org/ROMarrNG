@@ -1,0 +1,40 @@
+{
+  "baselineHead": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+  "baselineTree": "e8668e9c83afa533f8cd6e69e6a7ad96946ed40e",
+  "cellsReadBack": 36,
+  "changedCellsReadBack": 32,
+  "allSourceHashesMatch": true,
+  "allBaselineTargetHashesMatch": true,
+  "allFinalTargetHashesMatch": true,
+  "allCatalogTranslationHashesMatch": true,
+  "sourceIdsPreserved": true,
+  "localeKeySetsPreserved": true,
+  "assembledSentencesRetainInlineLiterals": true,
+  "assembledSentences": {
+    "es": "; no necesitas una entrada de biblioteca distinta para cada sistema. Con EmuDeck, configura esta ruta para que apunte a la carpeta <code>Emulation/roms</code> y no al directorio más amplio <code>Emulation</code> que contiene esa carpeta. Mantén los metadatos compartidos junto a esa carpeta en <path>",
+    "zh-Hans": "；每个系统不需要单独创建游戏库条目。使用 EmuDeck 时，请将此路径指向它的 <code>Emulation/roms</code> 文件夹，而不是更上层的 <code>Emulation</code> 目录。请将共享元数据存放在 ROM 文件夹旁，位置如下： <path>",
+    "hi": "; हर सिस्टम के लिए अलग लाइब्रेरी एंट्री की ज़रूरत नहीं है। EmuDeck के साथ, इस पथ को <code>Emulation/roms</code> फ़ोल्डर पर सेट करें, न कि अधिक व्यापक <code>Emulation</code> डायरेक्टरी पर। साझा मेटाडेटा को ROM फ़ोल्डर के बगल में इस स्थान पर रखें: <path>",
+    "de": "; Sie benötigen keinen eigenen Bibliothekseintrag für jedes System. Richten Sie bei EmuDeck diesen Pfad auf den Ordner <code>Emulation/roms</code> aus, statt das umfassendere Verzeichnis <code>Emulation</code> als Ziel zu verwenden. Bewahren Sie die gemeinsamen Metadaten neben dem ROM-Ordner unter folgendem Pfad auf: <path>",
+    "ja": "。システムごとに別のライブラリエントリを作る必要はありません。EmuDeck を使う場合は、このパスを <code>Emulation/roms</code> フォルダーに指定し、より広い <code>Emulation</code> ディレクトリは指定しないでください。共有メタデータはROMフォルダーの隣にある次の場所に保存してください： <path>",
+    "fr": "; vous n’avez pas besoin d’une entrée de bibliothèque distincte pour chaque système. Avec EmuDeck, faites pointer ce chemin vers le dossier <code>Emulation/roms</code> et non vers le répertoire plus large <code>Emulation</code> qui contient ce dossier. Conservez les métadonnées partagées à côté du dossier de ROMs, à l’emplacement suivant : <path>",
+    "pt-BR": "; não é necessário criar uma entrada de biblioteca separada para cada sistema. Com o EmuDeck, aponte este caminho para a pasta <code>Emulation/roms</code> e não para o diretório mais amplo <code>Emulation</code> que contém essa pasta. Mantenha os metadados compartilhados ao lado dessa pasta em <path>",
+    "ar": "؛ لا تحتاج إلى مدخل مستقل في المكتبة لكل نظام. عند استخدام EmuDeck، وجّه هذا المسار إلى مجلد <code>Emulation/roms</code> وليس إلى المجلد الأوسع <code>Emulation</code> الذي يحتوي على هذا المجلد. احتفظ بالبيانات الوصفية المشتركة بجوار هذا المجلد في <path>",
+    "ko": "; 시스템마다 라이브러리 항목을 따로 만들 필요는 없습니다. EmuDeck에서는 이 경로를 <code>Emulation/roms</code> 폴더로 지정하고, 더 넓은 <code>Emulation</code> 디렉터리는 선택하지 마세요. 공유 메타데이터는 해당 폴더 옆의 다음 위치에 보관하세요: <path>",
+    "zh-Hant": "；每個系統不需要個別的媒體庫項目。使用 EmuDeck 時，請將此路徑指向它的 <code>Emulation/roms</code> 資料夾，而不是更上層的 <code>Emulation</code> 目錄。請將共用中繼資料存放在 ROM 資料夾旁，位置如下： <path>",
+    "vi": "; bạn không cần mục thư viện riêng cho từng hệ thống. Với EmuDeck, hãy trỏ đường dẫn này đến thư mục <code>Emulation/roms</code> chứ không phải thư mục cha rộng hơn <code>Emulation</code> nơi chứa thư mục ROM này. Hãy lưu siêu dữ liệu dùng chung bên cạnh thư mục đó tại <path>",
+    "id": "; Anda tidak perlu entri pustaka terpisah untuk setiap sistem. Dengan EmuDeck, arahkan jalur ini ke folder <code>Emulation/roms</code> dan bukan ke direktori yang lebih luas <code>Emulation</code> yang mencakup folder tersebut. Simpan metadata bersama di samping folder tersebut, di <path>"
+  },
+  "priorWorktreeTargetDifferences": [
+    {
+      "locale": "de",
+      "targetOrdinal": 2,
+      "id": "ui.folder-not-the-wider.d61c242874"
+    },
+    {
+      "locale": "hi",
+      "targetOrdinal": 2,
+      "id": "ui.folder-not-the-wider.d61c242874"
+    }
+  ],
+  "nativeSpeakerApproval": false
+}

@@ -5679,8 +5679,20 @@ RENDER.organize=async()=>{
     box.innerHTML=markup?'<div class="panel-note '+(bad?'panel-warn':'')+'" style="margin:12px 0">'+markup+'</div>':'';
   };
   const message=(text,bad)=>renderMessage(text?appMessageMarkup(text):'',bad);
+// These two fixed organizer messages are emitted by local routes. Keep their
+// mapping explicit so arbitrary paths, provider text and peer values stay opaque.
+const ORGANIZER_API_MESSAGE_KEYS=new Set([
+  'ui.existing-gamelist-xml-is-invalid-it.6951c0112d',
+  'ui.folder-packages-are-left-intact-to-p.e180bb56ad',
+]);
+const organizerApiMessageMarkup=(value,template=null)=>{
+  if(typeof value!=='string')return apiMessageMarkup(value,template);
+  const key=stableLocalizationKey(value);
+  return key&&ORGANIZER_API_MESSAGE_KEYS.has(key)
+    ?interfaceMarkup(key):apiMessageMarkup(value,template);
+};
   const messageApi=(text,bad,template=null)=>renderMessage(
-    text?apiMessageMarkup(text,template):'',bad);
+    text?organizerApiMessageMarkup(text,template):'',bad);
   const messageTemplate=(source,values,bad)=>renderMessage(
     source?interfaceTemplateMarkup(source,values):'',bad);
   let lastAnnouncedOrganizerState='';
@@ -5850,8 +5862,8 @@ RENDER.organize=async()=>{
     const batch=plan.batch||{offset:planOffset,limit:planLimit,total:0,count:0,has_more:false};
     const first=batch.count?batch.offset+1:0;
     const last=batch.offset+batch.count;
-      const rows=(plan.operations||[]).map(op=>'<tr><td lang="und" dir="auto">'+esc(op.from)+'</td><td lang="und" dir="auto">'+esc(op.to)+'</td><td>'+apiMessageMarkup(op.reason)+'</td></tr>').join('');
-      const blocked=(plan.blocked||[]).map(op=>'<tr><td>'+esc(op.identity_id||'')+'</td><td>'+apiMessageMarkup(op.reason||'')+'</td></tr>').join('');
+      const rows=(plan.operations||[]).map(op=>'<tr><td lang="und" dir="auto">'+esc(op.from)+'</td><td lang="und" dir="auto">'+esc(op.to)+'</td><td>'+organizerApiMessageMarkup(op.reason)+'</td></tr>').join('');
+      const blocked=(plan.blocked||[]).map(op=>'<tr><td>'+esc(op.identity_id||'')+'</td><td>'+organizerApiMessageMarkup(op.reason||'')+'</td></tr>').join('');
     const safeCount=(plan.operations||[]).length,blockedCount=(plan.blocked||[]).length;
     const planAnnouncement=$('#org-announcement');
     if(planAnnouncement)planAnnouncement.innerHTML=interfaceTemplateMarkup(
