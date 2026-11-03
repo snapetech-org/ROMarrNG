@@ -1,0 +1,26 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W126-W145",
+  "status": "sealed strict-blind root review; primary packet not opened; no repo or PR changes made",
+  "inputHead": "5d999ff7667ae4c5642f1f11b63ad9880d19672c",
+  "inputTree": "93fcf748c46a4c1cef116c2a4ef06305137ecfe4",
+  "inputManifestSha256": "53f63b965589e3da176f035dca41310f696edd446fd3b6a43cb6c187b14c9f77",
+  "cellCount": 240,
+  "sourceCount": 20,
+  "localeCount": 12,
+  "dispositions": {
+    "accept-current": 187,
+    "refinement": 22,
+    "correction": 19,
+    "hold-context": 12
+  },
+  "targetChanges": 41,
+  "placeholderParity": true,
+  "nativeSpeakerReview": false,
+  "contextHolds": {
+    "sourceOrdinal": 130,
+    "source": "games found.",
+    "finding": "The only pinned caller is a different template, “{count} games found.” The review input omits the {count} placeholder, so this source’s 12 translations remain unchanged pending a correctly pinned source/template."
+  }
+}
