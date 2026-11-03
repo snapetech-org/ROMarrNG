@@ -1,0 +1,442 @@
+{
+  "artifact": "ROMarrNG PR #70 W146-W165 independent blind translation review",
+  "reviewedAtUtc": "2026-11-03",
+  "blindBoundary": "This ledger was authored using only the frozen candidate-free input packet. No primary or root-blind decisions were read before this ledger and summary were sealed.",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "db895a97e9871952a0b952e1d119e32e06cf168d",
+  "tree": "f1edf8319eb3dbd29ac5fe1e279216c5b96ecc6a",
+  "branch": "task/localization-translation-review-20261030",
+  "inputPath": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w146-165-20261103/input",
+  "inputSha256": "d649bb321a80fbbf28bf3aae88266db04f4f3e839a4c0f33ab4f84d24d26c83d",
+  "inputRowCount": 240,
+  "sourceCount": 20,
+  "cellCount": 240,
+  "localeOrder": [
+    "es",
+    "zh-Hans",
+    "hi",
+    "de",
+    "ja",
+    "fr",
+    "pt-BR",
+    "ar",
+    "ko",
+    "zh-Hant",
+    "vi",
+    "id"
+  ],
+  "packetChecksumVerification": "passed before review; every SHA256SUMS.txt entry verified",
+  "exactHeadVerification": {
+    "livePrState": "open",
+    "draft": true,
+    "liveHeadRequeried": "passed",
+    "remoteBranchHeadMatches": true,
+    "worktreeHeadAndTreeMatch": true,
+    "worktreeClean": true,
+    "pinnedFilesVerified": 11,
+    "sourceTargetHashAndCallerPinChecks": "passed",
+    "callerCount": 19,
+    "callerMissingOrdinals": [
+      160
+    ],
+    "sourceContextResolvedForAll20": true
+  },
+  "dispositions": {
+    "accept-current": 183,
+    "correction": 34,
+    "refinement": 11,
+    "hold-context": 12
+  },
+  "holds": [
+    {
+      "sourceOrdinal": 160,
+      "id": "ui.integration-guide.6cfa2d0314",
+      "count": 12,
+      "reason": "No current production-code caller exists for the selected lowercase key; the case-distinct Integration guide title has a separate ID and does not satisfy this key’s caller gate."
+    }
+  ],
+  "invariantReview": {
+    "allCurrentTargetsPassPlaceholderAndProtectedLiteralChecks": true,
+    "allProposedTargetsPassPlaceholderAndProtectedLiteralChecks": true,
+    "placeholderCellsReviewed": 36,
+    "sourceMarkupChecks": "packet-declared markup tags checked where present",
+    "sourceVersionLiteralChecks": "packet-declared version literals checked where present",
+    "dynamicCountCells": [
+      153,
+      155
+    ],
+    "countAndPluralBehavior": "reviewed in context of task/status templates; source placeholders preserved"
+  },
+  "dispositionNotes": {
+    "accept-current": "Meaning, context, grammar, register, product terminology, placeholders and protected literals reviewed; current value retained.",
+    "correction": "A material meaning, grammar, script, product-term or technical-language defect is corrected in the independent proposal.",
+    "refinement": "Meaning is retained while clarity or idiomatic quality is improved.",
+    "hold-context": "No translation disposition issued because exact-head caller-existence gate is false."
+  },
+  "changedCells": [
+    {
+      "sourceOrdinal": 146,
+      "id": "ui.igdb-covers-genres-and-ratings.6035ecaefc",
+      "locale": "zh-Hant",
+      "disposition": "correction",
+      "currentTargetSha256": "1698b54af1c17888f2072903d8fa1c1fca4b8fa1bedc46d3a17f4ef10b3f6df5",
+      "decisionTargetSha256": "4434dc403959ee178694fe390de3ed880b359b8f8436606b00e8666c4ff0741d"
+    },
+    {
+      "sourceOrdinal": 146,
+      "id": "ui.igdb-covers-genres-and-ratings.6035ecaefc",
+      "locale": "id",
+      "disposition": "correction",
+      "currentTargetSha256": "96eeb58f62fbe7a2b4528b33069dd8a3ec4c48b0ac5586dc39531270db7caa96",
+      "decisionTargetSha256": "24837e902e6c52f66a9f5d5febe2621afeb3eeab45618c95f0a325531635e340"
+    },
+    {
+      "sourceOrdinal": 147,
+      "id": "ui.import-a-folder-you-own-and-let-roma.a06dc1fe1e",
+      "locale": "es",
+      "disposition": "correction",
+      "currentTargetSha256": "fa4f785b3268944c89d6aa04d5618f82276e533439918bfd4ca6e8850aa1d2b5",
+      "decisionTargetSha256": "78d40f718acb350f3e31affbdc32fa32604000e59652cc3d3ce14b086e599a94"
+    },
+    {
+      "sourceOrdinal": 147,
+      "id": "ui.import-a-folder-you-own-and-let-roma.a06dc1fe1e",
+      "locale": "pt-BR",
+      "disposition": "refinement",
+      "currentTargetSha256": "3e992bf0fa378966cbbce8da53240ed4466be86eb0d1009166af5967caec73c2",
+      "decisionTargetSha256": "a22b27541280f34fbc366e586f0f2c8ffd506e3e1d2b05e01b888420d614b385"
+    },
+    {
+      "sourceOrdinal": 147,
+      "id": "ui.import-a-folder-you-own-and-let-roma.a06dc1fe1e",
+      "locale": "vi",
+      "disposition": "refinement",
+      "currentTargetSha256": "724be5e3307dde13cda179df1b05682a65061bd5bec21f2469b4c50109cb9a80",
+      "decisionTargetSha256": "82aa12c6c671bdae026b945239d337ef4d5593741a33c99c834f3291960e12bc"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "es",
+      "disposition": "refinement",
+      "currentTargetSha256": "970a257b85537f7a8149b1b5b336b0c79bc16ec4b51b4c6d46b9185a951a5460",
+      "decisionTargetSha256": "021c69a156f6daa9ea04bb60929b0e0e4a5a4dc5feee942bba74197ade5c2bcb"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "zh-Hans",
+      "disposition": "correction",
+      "currentTargetSha256": "27c5c5b18213f3d931d597788ed71a9eda94e82fc432e1834792402e9e831a9e",
+      "decisionTargetSha256": "0c8a7bf11c4ee4fa9cd85e70869345d8686c551151be92ec7998cc520c562737"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "hi",
+      "disposition": "correction",
+      "currentTargetSha256": "eb634ad1a19c9a0db012f53502ead2cb9f1ad38cdb922a1eb23b3d926b301cd6",
+      "decisionTargetSha256": "207042a7a1f5c2d4a0a1f96b8c3c5226a4d4cc14d28b6f0ab8eaab082e6ce01a"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "ko",
+      "disposition": "correction",
+      "currentTargetSha256": "544d551ad22f348d0f2ca1fe5fc99a34b46a14df7aa7b7786d5c98ce6f0638ac",
+      "decisionTargetSha256": "e63a44bdacc83c5692015227bb5d430ec8d391e5e2483ea3eee1945ead39f810"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "zh-Hant",
+      "disposition": "correction",
+      "currentTargetSha256": "4ca8794dca706fc199f16cb2dd2e34e406c80c5fa6bca26489144b787be1e967",
+      "decisionTargetSha256": "3f8d7519404419ffa3702fb8c4d36b8fc0addb07110993a586574c84815c1b1f"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "vi",
+      "disposition": "correction",
+      "currentTargetSha256": "d0c4015990d51b02707945a2f6eec686f95166419592410375c091767aa41219",
+      "decisionTargetSha256": "6e1b7bccc1764bc74cd2cc83b00dd53638cb5d53b3866134afe91835862033a4"
+    },
+    {
+      "sourceOrdinal": 149,
+      "id": "ui.import-completed-downloads-automatic.0436b11a02",
+      "locale": "fr",
+      "disposition": "refinement",
+      "currentTargetSha256": "183bf87f10443c227645b9d598e1e2dc595c0ff17f57022a23c43912dd545bd3",
+      "decisionTargetSha256": "6060996d749ec9bce5a6ade9de793506097cc9c582f3bea55ed462dfdb0fd373"
+    },
+    {
+      "sourceOrdinal": 150,
+      "id": "ui.import-completed-downloads.fd1a4510eb",
+      "locale": "zh-Hans",
+      "disposition": "correction",
+      "currentTargetSha256": "4308c2a7f2cf7efcb43969584db15f538dc308930e3dd5a831d3703d7c615887",
+      "decisionTargetSha256": "98ac4b1ea97b0ff8a5db4a21d5e51c1e063bc15b609e0cdfe9c5e5eda3f3b735"
+    },
+    {
+      "sourceOrdinal": 150,
+      "id": "ui.import-completed-downloads.fd1a4510eb",
+      "locale": "hi",
+      "disposition": "correction",
+      "currentTargetSha256": "8de303aec5775117563941b072b03ee605979c3a46181c1af00216c92485db3f",
+      "decisionTargetSha256": "ff3be0f0314771a0fd9def1ef4f1b2699ccb5d0f5bd16ee93fdca0bfbaf6c61f"
+    },
+    {
+      "sourceOrdinal": 150,
+      "id": "ui.import-completed-downloads.fd1a4510eb",
+      "locale": "ja",
+      "disposition": "correction",
+      "currentTargetSha256": "fd8c55070377eaba8c0aa46e702923c887cd2b7259c9ae67bc84951e5f98d042",
+      "decisionTargetSha256": "1533e6ec81aca62b3a0b19352474a086aacb93417729af210e7c5ad0c6b4730b"
+    },
+    {
+      "sourceOrdinal": 150,
+      "id": "ui.import-completed-downloads.fd1a4510eb",
+      "locale": "pt-BR",
+      "disposition": "refinement",
+      "currentTargetSha256": "ba4027c73ad4ec1c41ff64a30c563acda09f2afe4d3e4e8821b9711bfce42922",
+      "decisionTargetSha256": "89bdf6ffedf3db39bf95543db9e22cd43e25454cec729e4b5110cf5b6cb97d39"
+    },
+    {
+      "sourceOrdinal": 150,
+      "id": "ui.import-completed-downloads.fd1a4510eb",
+      "locale": "ko",
+      "disposition": "correction",
+      "currentTargetSha256": "caf65a41b00df0c0421e241bbe6f66058db0ae36481d46d7d6e17c662d2a636e",
+      "decisionTargetSha256": "11870f8de77c5e63e41fd6acbfbc13cdae7709d213d61a4ccf3ad267d76ab930"
+    },
+    {
+      "sourceOrdinal": 150,
+      "id": "ui.import-completed-downloads.fd1a4510eb",
+      "locale": "zh-Hant",
+      "disposition": "correction",
+      "currentTargetSha256": "60914bd12ed1e25eb7df7143d83748b8f0e3aa023b84a3a680c3116a91634cab",
+      "decisionTargetSha256": "f2ef92cd3f8ef7fd04a77b4a179185da9454ebbdf21ae309e66f2f82f489dc8f"
+    },
+    {
+      "sourceOrdinal": 152,
+      "id": "ui.imported-from-the-existing-es-de-gam.5fa9036446",
+      "locale": "pt-BR",
+      "disposition": "refinement",
+      "currentTargetSha256": "ca61110974ef08184004a7900c651b34700b9257d67ba35e4cf5dac1790764f4",
+      "decisionTargetSha256": "9303e403045cd530344e23db428bbb1ce2f5dcda48b37cbd9fd5f762c4f12188"
+    },
+    {
+      "sourceOrdinal": 152,
+      "id": "ui.imported-from-the-existing-es-de-gam.5fa9036446",
+      "locale": "ar",
+      "disposition": "correction",
+      "currentTargetSha256": "2e7ef044096a91411e1035e8d3ebb36e12b3903b937085443fd8f8d9c380db44",
+      "decisionTargetSha256": "8b71b2dbd04be432522f8ce62f733f1051b57a229d46875a02b93b37d0cba29e"
+    },
+    {
+      "sourceOrdinal": 153,
+      "id": "ui.imported-imported-of-total-finished.5726eabd36",
+      "locale": "hi",
+      "disposition": "correction",
+      "currentTargetSha256": "2ea728a0d2db260aefeea1527513b2968f434651b44dcf3332ebd68e2ac75c77",
+      "decisionTargetSha256": "6b3218e114f3c51a908d2c034f6ac5c35e1da587bd35264e283e2d04e7b1b636"
+    },
+    {
+      "sourceOrdinal": 154,
+      "id": "ui.imported-local-metadata-review-title.5db9952dae",
+      "locale": "ar",
+      "disposition": "correction",
+      "currentTargetSha256": "da7ea19a66e83d58dde25caf15c3488754092a947ec6b2614f60489230959954",
+      "decisionTargetSha256": "478a0625934c609844aacd947be362ec829704a2b3b33edffa82f1d590f75a64"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "es",
+      "disposition": "correction",
+      "currentTargetSha256": "fb3871c0309bc222e7575a4478528848d15745c78e0a38d2e8160df28f06d319",
+      "decisionTargetSha256": "2203c1024630b3739055f340fc6871b617fd320286d068b48fd09f3b52c18622"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "zh-Hans",
+      "disposition": "correction",
+      "currentTargetSha256": "968759c03732c35cb6d3d9057ded4d5f3685137c68f6be2e061b2ff3be51194f",
+      "decisionTargetSha256": "ab96513b317f43f58e12a5b5d440f5023b3ec690ad51fb2a1494675da3fad2b1"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "hi",
+      "disposition": "refinement",
+      "currentTargetSha256": "f96c102fc79f18cb252867921fa64c8a8f21aabc53c1b25ad3c2a8aa310dd44f",
+      "decisionTargetSha256": "447b8d90cc967fee38a1edf26e2663c3be198394ee1f9038f8587fbccaa5de34"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "de",
+      "disposition": "refinement",
+      "currentTargetSha256": "c58e853c7897f52ee1cba95d6c9193bfb632012737043c0f2f4aec8f18afa418",
+      "decisionTargetSha256": "2035127be4b8d341a620e7fa0d820433aa5f5ae5328489d58402f3a1b27eb13b"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "ja",
+      "disposition": "correction",
+      "currentTargetSha256": "879d0cccdfda48d8a28f2d153db4f2bbea6f3222deee22fbaba661de0bd354c7",
+      "decisionTargetSha256": "ffca93e97fd0937dce96bf394fa98fcc3d183e369f39e21e695b9350608c5ad3"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "fr",
+      "disposition": "correction",
+      "currentTargetSha256": "576cc8293ea087e04714f0ebf49a22db373ae8ad8bf0ca5e1609664bccc52a75",
+      "decisionTargetSha256": "6840b69a8381be1ca8b949c9d93eb04f1913435365f0ef0bb7551f89c78efa99"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "pt-BR",
+      "disposition": "refinement",
+      "currentTargetSha256": "1f71b4865f522e61d64463faf8766138ff44e48988830b750a49cb68b8d2b667",
+      "decisionTargetSha256": "2dad6aadfe6e41122fc0acad51bf86b9195d53dd5991dd48b37a74e6c78ea153"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "ar",
+      "disposition": "correction",
+      "currentTargetSha256": "e1291f12779f3a824d6c7278fe7caadfa5e9753c16e4ed39febcb211223d036b",
+      "decisionTargetSha256": "d28a0f911ec2fd7fc09c9b63e639b4eef6ecd7bcb3bb25a24a01137a65931072"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "ko",
+      "disposition": "correction",
+      "currentTargetSha256": "aa543074b291ae5336eae837c02cb63827495a9bb2f84ad3781c1a1d8106234e",
+      "decisionTargetSha256": "b7d30cc8fc78b7bb3bcd57323f3157be54147a6eba86f641410fbd70839bde2f"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "zh-Hant",
+      "disposition": "correction",
+      "currentTargetSha256": "c42ba742032ac116ef1ab0106a7f7210df82d32945805477a71f4e95071be735",
+      "decisionTargetSha256": "4b422b1e527d830239e77929ee3277c17a67172c82fb32665c46b5a3d5eba0df"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "id",
+      "disposition": "correction",
+      "currentTargetSha256": "f320d4579f020c11638193801c339d5e9f7ed684f4cbbdf6c749e828d2a9d9b5",
+      "decisionTargetSha256": "2a46325e64e5b4b4bcbf7c23f9b6012ae5f46d2cb569b854caaeac30baae4028"
+    },
+    {
+      "sourceOrdinal": 157,
+      "id": "ui.in-a-game.a0458668e7",
+      "locale": "zh-Hant",
+      "disposition": "correction",
+      "currentTargetSha256": "9e99b56fdcde98fc9173d76282349a966c59c4c8ffe412da40cbb7bd9e3599eb",
+      "decisionTargetSha256": "6f5da704f18b98035d4d930a52ae8e52057b5155db688db01408d8ba591d6b20"
+    },
+    {
+      "sourceOrdinal": 158,
+      "id": "ui.in-library.be6339943d",
+      "locale": "hi",
+      "disposition": "correction",
+      "currentTargetSha256": "c7192b72afdaf4cd435c642beeed95097763f2f2a2da240c28a7f5feea219e47",
+      "decisionTargetSha256": "a9da7813416f4979a80cad040445b3efbc1517bf6ef791755b6b0605d550e7e9"
+    },
+    {
+      "sourceOrdinal": 158,
+      "id": "ui.in-library.be6339943d",
+      "locale": "vi",
+      "disposition": "refinement",
+      "currentTargetSha256": "096dca89920b6afd543adaf2e6fc77bc8bb7145b4304b8668bb9104d212b301e",
+      "decisionTargetSha256": "c60a47e1a3ea83d5556f682e63c684b8c7a60be134cba5327fdee3827b9a9897"
+    },
+    {
+      "sourceOrdinal": 158,
+      "id": "ui.in-library.be6339943d",
+      "locale": "id",
+      "disposition": "correction",
+      "currentTargetSha256": "1cf4144c1545088ba3e400c200f475dec8e4e00d83fbecfb3c4985c09260d1ab",
+      "decisionTargetSha256": "04dbccd1ce0db910e4cba193e1278ea5ca9cbcc84686bca6a808e3cd1f69df38"
+    },
+    {
+      "sourceOrdinal": 159,
+      "id": "ui.integration-guide.02a0a9e2c2",
+      "locale": "de",
+      "disposition": "correction",
+      "currentTargetSha256": "d45eae4a8a03415a80db61dfb6b30b5d92c6134a39031fe7d3b91c14698e5493",
+      "decisionTargetSha256": "375cdc997b27dd6dfca39e68b66837be6ec9358b8e1f0abcf5d99c6ad5ffec5f"
+    },
+    {
+      "sourceOrdinal": 159,
+      "id": "ui.integration-guide.02a0a9e2c2",
+      "locale": "zh-Hant",
+      "disposition": "refinement",
+      "currentTargetSha256": "f98e557259801681fef28113073ee237078f3e1dd42a6c116cf8ced66abd3b51",
+      "decisionTargetSha256": "b0ddb9c79d2634655404f1a32c309e75bf4097d034606578f8c1be3ddb18a7ec"
+    },
+    {
+      "sourceOrdinal": 161,
+      "id": "ui.internet-archive-refused-the-request.515fff2c13",
+      "locale": "de",
+      "disposition": "correction",
+      "currentTargetSha256": "cde3cae8f17a519ebb8a744b15712712adb0ab1df76aad070db7f0e4157887dc",
+      "decisionTargetSha256": "ded6514e677f8897c8f19dee81d43d1068c67c0e76f468922dcf6be71e1d788e"
+    },
+    {
+      "sourceOrdinal": 161,
+      "id": "ui.internet-archive-refused-the-request.515fff2c13",
+      "locale": "ja",
+      "disposition": "correction",
+      "currentTargetSha256": "63a648039a8794a14d5379965c61400ee53328fe402e0e070197574afbdb517e",
+      "decisionTargetSha256": "72d5a688a269d9b5d95f69bf4566f50b063549f486f25a20b9951a44c8a70a1d"
+    },
+    {
+      "sourceOrdinal": 161,
+      "id": "ui.internet-archive-refused-the-request.515fff2c13",
+      "locale": "ko",
+      "disposition": "correction",
+      "currentTargetSha256": "a4927f862b96452ab0c949b1eea882e15d43064ec1abd1f5d2bebc474fa515d1",
+      "decisionTargetSha256": "cff79a1aeef1535d871f54c2e26340bf83bb8b29d98a9c62d86c39e5383f5c59"
+    },
+    {
+      "sourceOrdinal": 162,
+      "id": "ui.invalid-game-identity.0efd907d22",
+      "locale": "ja",
+      "disposition": "correction",
+      "currentTargetSha256": "5a3fcbae7fe3d9e3c30aa3d0ecbb6f9ba96fe315618e807812e8e675d534b693",
+      "decisionTargetSha256": "6203d0b76bfb60781e2c2aeb8980daee5d2edaf6019f735b998f989a171c6607"
+    },
+    {
+      "sourceOrdinal": 162,
+      "id": "ui.invalid-game-identity.0efd907d22",
+      "locale": "fr",
+      "disposition": "correction",
+      "currentTargetSha256": "5cad1bd5d4f52ccce027a9c59968d10bc30f3e8ac33a4b196f18965eae4cd1e0",
+      "decisionTargetSha256": "cef6e4cb40e90c141353f6724e04ed5bce9aba7fff5dc20207c7a2d8158a2d60"
+    },
+    {
+      "sourceOrdinal": 162,
+      "id": "ui.invalid-game-identity.0efd907d22",
+      "locale": "ko",
+      "disposition": "correction",
+      "currentTargetSha256": "3bec56308015c5453c5350f6ab15bae9db92393596eab13baf5b0a0ec860b57b",
+      "decisionTargetSha256": "4ca0f61db6dc4ae513eed0b3c66ced7f3dcb0541472039e375d2daca18c2ccfd"
+    }
+  ],
+  "noRepositoryOrPrChanges": true,
+  "noTestsBuildsScansCiBrowserWorkflowsOrReleases": true,
+  "ledgerPath": "independent-ledger.jsonl"
+}

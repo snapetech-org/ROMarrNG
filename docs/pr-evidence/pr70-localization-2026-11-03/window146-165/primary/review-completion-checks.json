@@ -1,0 +1,17 @@
+{
+  "expectedCellCount": 240,
+  "actualCellCount": 240,
+  "uniqueCellCount": 240,
+  "missingCellCount": 0,
+  "duplicateCellCount": 0,
+  "allStatusesRemainDraft": true,
+  "allPlaceholderChecksPassed": true,
+  "allProtectedLiteralChecksPassed": true,
+  "holdContextCellsOnlyOrdinal160": true,
+  "holdContextHasNoCandidates": true,
+  "suggestedTargetHashesValid": true,
+  "inputHeadTreePinned": true,
+  "cleanInputHashPinned": true,
+  "noRepositoryOrPrMutation": true,
+  "testsBuildsScansCiBrowserNotRun": true
+}

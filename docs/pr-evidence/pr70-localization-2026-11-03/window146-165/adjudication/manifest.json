@@ -1,0 +1,54 @@
+{
+  "artifact": "ROMarrNG PR #70 W146-W165 ratification",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "db895a97e9871952a0b952e1d119e32e06cf168d",
+  "tree": "f1edf8319eb3dbd29ac5fe1e279216c5b96ecc6a",
+  "rows": 240,
+  "manifestExcludesOwnHash": true,
+  "sha256sumsCoversManifestAndEveryArtifact": true,
+  "files": [
+    {
+      "name": "ratified-ledger.jsonl",
+      "bytes": 480783,
+      "sha256": "1e208a117c742f7b54438e3a95ecd31e2bbadc15625b293a778d9df5139f204a"
+    },
+    {
+      "name": "ratified-summary.json",
+      "bytes": 2064,
+      "sha256": "5b85347b839ca992179f658392bcd5db19ed01b045b8afb3497d750b88cac15c"
+    },
+    {
+      "name": "README.md",
+      "bytes": 1712,
+      "sha256": "65cfc2b4e3d05857112c3d3698bceda042cfd5e128b66a5feadb1fb7040af083"
+    },
+    {
+      "name": "ratify.py",
+      "bytes": 21247,
+      "sha256": "fabb4d2549b63af36ecce46648e408b135c6d580c2de088574708fb2b1564ceb"
+    }
+  ],
+  "evidenceInputs": [
+    {
+      "name": "input/review-input.jsonl",
+      "sha256": "d649bb321a80fbbf28bf3aae88266db04f4f3e839a4c0f33ab4f84d24d26c83d"
+    },
+    {
+      "name": "candidate-free/adjudication-ledger.jsonl",
+      "sha256": "8b13bc63f5c79bedcbdd281254c6d5081ddb2fec82a0f9af1cd1cd02896cb11e"
+    },
+    {
+      "name": "primary/review-decisions.jsonl",
+      "sha256": "e6d04b143e06df5b0cf776281bb17d5fbe6e8b69ec13256d0ed903352215a3a4"
+    },
+    {
+      "name": "independent/independent-ledger.jsonl",
+      "sha256": "5c368c75d9874000d182c9938e6ef784a9efa30373c2ab1756c083d242eb8531"
+    },
+    {
+      "name": "root-blind/ledger.jsonl",
+      "sha256": "4b66e140c624f3614e573791f68524dc794e892ffe1cb9424ce3ffd84d82bc72"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "artifact": "ROMarrNG PR #70 W146-W165 primary review packet",
+  "sealed": true,
+  "checksumNote": "manifest.json excludes its own hash and SHA256SUMS.txt; SHA256SUMS.txt covers every packet file except itself.",
+  "createdAtUtc": "2026-11-03T04:43:10.046922+00:00",
+  "files": [
+    {
+      "bytes": 1458,
+      "name": "README.md",
+      "sha256": "534cfbaa1740c1ffe28a2f9c1356a67e095070da9c664e3be13b2e26f23c3486"
+    },
+    {
+      "bytes": 510,
+      "name": "review-completion-checks.json",
+      "sha256": "bc40a3e3d504744cb5e862f25c63d551813c8815f165b49cbdf74ff65aeed433"
+    },
+    {
+      "bytes": 346177,
+      "name": "review-decisions.jsonl",
+      "sha256": "e6d04b143e06df5b0cf776281bb17d5fbe6e8b69ec13256d0ed903352215a3a4"
+    },
+    {
+      "bytes": 2861,
+      "name": "summary.json",
+      "sha256": "5d7896c7b67c2276a36a6a2cf0ec020104f1dd990f6d4921032f81a1ee0c4c33"
+    }
+  ],
+  "head": "db895a97e9871952a0b952e1d119e32e06cf168d",
+  "inputManifestSha256": "96cd78c8596546bd14656b486abd8cc16c70c809d36c7783a39cc1710cc10884",
+  "inputReviewSha256": "d649bb321a80fbbf28bf3aae88266db04f4f3e839a4c0f33ab4f84d24d26c83d",
+  "reviewDecisionsPath": "review-decisions.jsonl",
+  "reviewDecisionRows": 240,
+  "reviewDecisionSha256": "e6d04b143e06df5b0cf776281bb17d5fbe6e8b69ec13256d0ed903352215a3a4",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "tree": "f1edf8319eb3dbd29ac5fe1e279216c5b96ecc6a",
+  "window": {
+    "firstSourceOrdinal": 146,
+    "lastSourceOrdinal": 165,
+    "sourceCount": 20,
+    "locales": 12,
+    "cellCount": 240
+  },
+  "scopeLimits": {
+    "repositoryOrPullRequestEdited": false,
+    "testsBuildsScansCiOrBrowserRun": false,
+    "nativeSpeakerApproved": false
+  },
+  "holdContext": {
+    "sourceOrdinal": 160,
+    "cellCount": 12,
+    "currentCallerExists": false
+  }
+}

@@ -1,0 +1,2338 @@
+{
+  "artifact": "Post-seal comparison of ROMarrNG PR #70 W146-W165 reviews",
+  "independentLedgerWasSealedBeforeOtherReviewsOpened": true,
+  "independentLedgerSha256": "5c368c75d9874000d182c9938e6ef784a9efa30373c2ab1756c083d242eb8531",
+  "independentSummarySha256": "8973232bdcdecfade7792198c22df145e9dd5d059824cb43d73e66f5706d018d",
+  "inputManifestSha256": "96cd78c8596546bd14656b486abd8cc16c70c809d36c7783a39cc1710cc10884",
+  "inputReviewSha256": "d649bb321a80fbbf28bf3aae88266db04f4f3e839a4c0f33ab4f84d24d26c83d",
+  "primaryDecisionsSha256": "e6d04b143e06df5b0cf776281bb17d5fbe6e8b69ec13256d0ed903352215a3a4",
+  "rootBlindLedgerSha256": "4b66e140c624f3614e573791f68524dc794e892ffe1cb9424ce3ffd84d82bc72",
+  "exactHead": "db895a97e9871952a0b952e1d119e32e06cf168d",
+  "exactTree": "f1edf8319eb3dbd29ac5fe1e279216c5b96ecc6a",
+  "comparedCells": 240,
+  "allSourceCurrentCallerPinsMatch": true,
+  "independentDispositionCounts": {
+    "accept-current": 183,
+    "correction": 34,
+    "refinement": 11,
+    "hold-context": 12
+  },
+  "primary": {
+    "dispositionCounts": {
+      "refinement": 22,
+      "accept-current": 164,
+      "correction": 42,
+      "hold-context": 12
+    },
+    "dispositionTypeDisagreements": 31,
+    "candidateOutcomeOrTextDisagreements": 35,
+    "uniqueDisagreementCells": 41,
+    "acceptVersusChangeCells": 21,
+    "bothProposedDifferentTextCells": 14,
+    "differenceCategories": {
+      "independent_accepts_other_proposes": 20,
+      "candidate_vs_no_candidate": 21,
+      "disposition_label": 10,
+      "different_candidate_text": 14,
+      "independent_proposes_other_accepts": 1
+    },
+    "dispositionKeys": [
+      {
+        "sourceOrdinal": 146,
+        "locale": "es",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 147,
+        "locale": "es",
+        "independent": "correction",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 147,
+        "locale": "vi",
+        "independent": "refinement",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "ar",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "de",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "fr",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "hi",
+        "independent": "correction",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "id",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "pt-BR",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "vi",
+        "independent": "correction",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 149,
+        "locale": "fr",
+        "independent": "refinement",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 149,
+        "locale": "id",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 150,
+        "locale": "id",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 150,
+        "locale": "pt-BR",
+        "independent": "refinement",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 152,
+        "locale": "id",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 154,
+        "locale": "es",
+        "independent": "accept-current",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 155,
+        "locale": "hi",
+        "independent": "refinement",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 155,
+        "locale": "pt-BR",
+        "independent": "refinement",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 157,
+        "locale": "ja",
+        "independent": "accept-current",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 157,
+        "locale": "ko",
+        "independent": "accept-current",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 157,
+        "locale": "vi",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 158,
+        "locale": "vi",
+        "independent": "refinement",
+        "other": "accept-current"
+      },
+      {
+        "sourceOrdinal": 159,
+        "locale": "de",
+        "independent": "correction",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 159,
+        "locale": "zh-Hant",
+        "independent": "refinement",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 163,
+        "locale": "ar",
+        "independent": "accept-current",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 163,
+        "locale": "fr",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 163,
+        "locale": "ja",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 163,
+        "locale": "zh-Hans",
+        "independent": "accept-current",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 163,
+        "locale": "zh-Hant",
+        "independent": "accept-current",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 164,
+        "locale": "ja",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 165,
+        "locale": "ja",
+        "independent": "accept-current",
+        "other": "refinement"
+      }
+    ],
+    "candidateKeys": [
+      {
+        "sourceOrdinal": 146,
+        "locale": "es",
+        "independent": null,
+        "other": "IGDB · portadas, géneros y calificaciones"
+      },
+      {
+        "sourceOrdinal": 147,
+        "locale": "pt-BR",
+        "independent": "Importe uma pasta sua e deixe que o ROMarr identifique e organize o que há nela.",
+        "other": "Importar uma pasta que você possui e deixar que ROMarr identifique e organize o conteúdo."
+      },
+      {
+        "sourceOrdinal": 147,
+        "locale": "vi",
+        "independent": "Nhập một thư mục bạn sở hữu và để ROMarr xác định rồi sắp xếp nội dung trong đó.",
+        "other": "Nhập một thư mục của bạn để ROMarr nhận diện và sắp xếp nội dung bên trong."
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "ar",
+        "independent": null,
+        "other": "الفاصل بين فحوص الاستيراد (بالدقائق)"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "de",
+        "independent": null,
+        "other": "Intervall der Importprüfung (Minuten)"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "fr",
+        "independent": null,
+        "other": "Intervalle de vérification de l’importation (minutes)"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "hi",
+        "independent": "आयात जाँच अंतराल (मिनट)",
+        "other": "आयात जाँच का अंतराल (मिनट)"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "id",
+        "independent": null,
+        "other": "Interval pemeriksaan impor (menit)"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "ko",
+        "independent": "가져오기 확인 간격 (분)",
+        "other": "가져오기 확인 간격(분)"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "pt-BR",
+        "independent": null,
+        "other": "Intervalo de verificação da importação (minutos)"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "vi",
+        "independent": "Chu kỳ kiểm tra nhập dữ liệu (phút)",
+        "other": "Khoảng thời gian giữa các lần kiểm tra nhập (phút)"
+      },
+      {
+        "sourceOrdinal": 149,
+        "locale": "id",
+        "independent": null,
+        "other": "Impor unduhan yang telah selesai secara otomatis"
+      },
+      {
+        "sourceOrdinal": 150,
+        "locale": "id",
+        "independent": null,
+        "other": "Impor unduhan yang telah selesai"
+      },
+      {
+        "sourceOrdinal": 152,
+        "locale": "ar",
+        "independent": "مستورد من قائمة ألعاب ES-DE الحالية؛ راجع العنوان قبل إعادة تسميته.",
+        "other": "تم الاستيراد من قائمة ألعاب ES-DE الحالية؛ راجع العنوان قبل إعادة تسميته."
+      },
+      {
+        "sourceOrdinal": 152,
+        "locale": "id",
+        "independent": null,
+        "other": "Diimpor dari gamelist ES-DE yang sudah ada; tinjau judul sebelum mengganti namanya."
+      },
+      {
+        "sourceOrdinal": 154,
+        "locale": "ar",
+        "independent": "بيانات وصفية محلية مستوردة · راجع العنوان",
+        "other": "تم استيراد البيانات الوصفية المحلية · راجع العنوان"
+      },
+      {
+        "sourceOrdinal": 154,
+        "locale": "es",
+        "independent": null,
+        "other": "Metadatos locales importados · revisar el título"
+      },
+      {
+        "sourceOrdinal": 155,
+        "locale": "fr",
+        "independent": "Éléments importés : {total}",
+        "other": "Importés : {total}"
+      },
+      {
+        "sourceOrdinal": 155,
+        "locale": "hi",
+        "independent": "आयात किए गए आइटम: {total}",
+        "other": "आयात किए गए: {total}"
+      },
+      {
+        "sourceOrdinal": 157,
+        "locale": "ja",
+        "independent": null,
+        "other": "ゲーム中"
+      },
+      {
+        "sourceOrdinal": 157,
+        "locale": "ko",
+        "independent": null,
+        "other": "게임 중"
+      },
+      {
+        "sourceOrdinal": 157,
+        "locale": "vi",
+        "independent": null,
+        "other": "Đang chơi game"
+      },
+      {
+        "sourceOrdinal": 157,
+        "locale": "zh-Hant",
+        "independent": "在一個遊戲中",
+        "other": "在遊戲中"
+      },
+      {
+        "sourceOrdinal": 158,
+        "locale": "id",
+        "independent": "di koleksi game",
+        "other": "di pustaka game"
+      },
+      {
+        "sourceOrdinal": 158,
+        "locale": "vi",
+        "independent": "trong thư viện trò chơi",
+        "other": null
+      },
+      {
+        "sourceOrdinal": 161,
+        "locale": "de",
+        "independent": "Internet Archive hat die Anfrage abgelehnt.",
+        "other": "Internet Archive lehnte die Anfrage ab."
+      },
+      {
+        "sourceOrdinal": 161,
+        "locale": "ja",
+        "independent": "Internet Archive がリクエストを拒否しました。",
+        "other": "Internet Archive はリクエストを拒否しました。"
+      },
+      {
+        "sourceOrdinal": 162,
+        "locale": "ja",
+        "independent": "ゲーム識別情報が無効です。",
+        "other": "ゲームの識別情報が無効です。"
+      },
+      {
+        "sourceOrdinal": 163,
+        "locale": "ar",
+        "independent": null,
+        "other": "نتيجة ROM Hub غير صالحة: {detail}"
+      },
+      {
+        "sourceOrdinal": 163,
+        "locale": "fr",
+        "independent": null,
+        "other": "Résultat invalide du hub : {detail}"
+      },
+      {
+        "sourceOrdinal": 163,
+        "locale": "ja",
+        "independent": null,
+        "other": "ハブの結果が無効です: {detail}"
+      },
+      {
+        "sourceOrdinal": 163,
+        "locale": "zh-Hans",
+        "independent": null,
+        "other": "ROM Hub 返回的结果无效：{detail}"
+      },
+      {
+        "sourceOrdinal": 163,
+        "locale": "zh-Hant",
+        "independent": null,
+        "other": "ROM Hub 傳回的結果無效：{detail}"
+      },
+      {
+        "sourceOrdinal": 164,
+        "locale": "ja",
+        "independent": null,
+        "other": "プランのトークンが無効です。"
+      },
+      {
+        "sourceOrdinal": 165,
+        "locale": "ja",
+        "independent": null,
+        "other": "招待 · ROMarr"
+      }
+    ],
+    "details": [
+      {
+        "sourceOrdinal": 146,
+        "id": "ui.igdb-covers-genres-and-ratings.6035ecaefc",
+        "locale": "es",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "IGDB · portadas, géneros y calificaciones",
+          "rationale": "The catalog uses Portada for the standalone Cover label; portadas is more idiomatic for game cover art than the current literal cubiertas."
+        },
+        "currentTargetSha256": "68a84ffd2b94d91de4fcef54858e1b64a9965e624d3799fc81fccb8719bee32c"
+      },
+      {
+        "sourceOrdinal": 147,
+        "id": "ui.import-a-folder-you-own-and-let-roma.a06dc1fe1e",
+        "locale": "es",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "Importa una carpeta tuya y deja que ROMarr identifique y organice su contenido.",
+          "rationale": "The current line mixes informal imperative with the formal-form posee and uses archivar, which suggests archiving instead of organizing the folder contents."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "Importa una carpeta tuya y deja que ROMarr identifique y organice su contenido.",
+          "rationale": "The source describes organizing the contents of an owned folder; archivar can suggest putting the files in an archive, and the current formal posee conflicts with the informal imperative Importa."
+        },
+        "currentTargetSha256": "fa4f785b3268944c89d6aa04d5618f82276e533439918bfd4ca6e8850aa1d2b5"
+      },
+      {
+        "sourceOrdinal": 147,
+        "id": "ui.import-a-folder-you-own-and-let-roma.a06dc1fe1e",
+        "locale": "pt-BR",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "Importe uma pasta sua e deixe que o ROMarr identifique e organize o que há nela.",
+          "rationale": "The source describes organizing the folder contents; organize is clearer here than arquivar, which can mean archive."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "Importar uma pasta que você possui e deixar que ROMarr identifique e organize o conteúdo.",
+          "rationale": "Arquivar can imply making an archive; this onboarding tile means ROMarr identifies and organizes the folder contents."
+        },
+        "currentTargetSha256": "3e992bf0fa378966cbbce8da53240ed4466be86eb0d1009166af5967caec73c2"
+      },
+      {
+        "sourceOrdinal": 147,
+        "id": "ui.import-a-folder-you-own-and-let-roma.a06dc1fe1e",
+        "locale": "vi",
+        "differences": [
+          "disposition_label",
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "Nhập một thư mục bạn sở hữu và để ROMarr xác định rồi sắp xếp nội dung trong đó.",
+          "rationale": "Lưu trữ suggests storing/archiving; sắp xếp communicates filing and organizing the folder contents."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "Nhập một thư mục của bạn để ROMarr nhận diện và sắp xếp nội dung bên trong.",
+          "rationale": "Lưu trữ means store/archive, while file here means organize the imported folder contents."
+        },
+        "currentTargetSha256": "724be5e3307dde13cda179df1b05682a65061bd5bec21f2469b4c50109cb9a80"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "ar",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "الفاصل بين فحوص الاستيراد (بالدقائق)",
+          "rationale": "The caller is an interval setting; الواردات can sound like goods imports, while الاستيراد matches the catalog's software-import term."
+        },
+        "currentTargetSha256": "19a4f36c77aaef001b510b735c90111f634d8d0eff98b1c2b972fb885c62cb34"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "de",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "Intervall der Importprüfung (Minuten)",
+          "rationale": "The caller stores an interval between automatic import checks; this wording makes the numeric field's purpose explicit."
+        },
+        "currentTargetSha256": "20726dba50f2540e6c6e542004b3b6ff7c075c3c259999318d071912870738e7"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "fr",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "Intervalle de vérification de l’importation (minutes)",
+          "rationale": "The caller is a check interval, not a general import verification label."
+        },
+        "currentTargetSha256": "9c857e69001d3d1f94a8577e7f3d779fa62e1ad90e429ba4e41293451952e7fb"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "hi",
+        "differences": [
+          "disposition_label",
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "आयात जाँच अंतराल (मिनट)",
+          "rationale": "The current check uses an English loanword and stray spacing, and omits that this is a scheduled interval."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "आयात जाँच का अंतराल (मिनट)",
+          "rationale": "The field is an interval; जाँच is more natural than the transliteration चेक, and the current space before मिनट is unnecessary."
+        },
+        "currentTargetSha256": "eb634ad1a19c9a0db012f53502ead2cb9f1ad38cdb922a1eb23b3d926b301cd6"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "id",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "Interval pemeriksaan impor (menit)",
+          "rationale": "The value is the interval between checks, not a check measured in minutes."
+        },
+        "currentTargetSha256": "a2e3fb02902cbf418dbf30cdfd9826637e8a012968a38849d3582ee918301547"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "ko",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "가져오기 확인 간격 (분)",
+          "rationale": "수입 normally means importing goods/income; 가져오기 is the UI action for importing files. The caller establishes an interval."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "가져오기 확인 간격(분)",
+          "rationale": "수입 means importing goods. This is a software import check interval; the catalog uses 가져오기 for Import."
+        },
+        "currentTargetSha256": "544d551ad22f348d0f2ca1fe5fc99a34b46a14df7aa7b7786d5c98ce6f0638ac"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "pt-BR",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "Intervalo de verificação da importação (minutos)",
+          "rationale": "The setting is the interval between import checks; the current label does not convey that relation."
+        },
+        "currentTargetSha256": "7e0ca6e086f7a6b565eeddbb45750e99a559f578534d22ab2fdeba6d27735801"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "vi",
+        "differences": [
+          "disposition_label",
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "Chu kỳ kiểm tra nhập dữ liệu (phút)",
+          "rationale": "Kiểm tra nhập is ambiguous as checking an entry; the field is the cycle for scheduled data-import checks."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "Khoảng thời gian giữa các lần kiểm tra nhập (phút)",
+          "rationale": "The current wording is awkward and can read as checking an input; this is the duration between import checks."
+        },
+        "currentTargetSha256": "d0c4015990d51b02707945a2f6eec686f95166419592410375c091767aa41219"
+      },
+      {
+        "sourceOrdinal": 149,
+        "id": "ui.import-completed-downloads-automatic.0436b11a02",
+        "locale": "fr",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "Importer automatiquement les téléchargements terminés",
+          "rationale": "Terminés is the usual term for downloads that have finished; complets can read as complete downloads."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "Importer automatiquement les téléchargements terminés",
+          "rationale": "Complets can mean complete downloads; the source means downloads whose transfers have finished."
+        },
+        "currentTargetSha256": "183bf87f10443c227645b9d598e1e2dc595c0ff17f57022a23c43912dd545bd3"
+      },
+      {
+        "sourceOrdinal": 149,
+        "id": "ui.import-completed-downloads-automatic.0436b11a02",
+        "locale": "id",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "Impor unduhan yang telah selesai secara otomatis",
+          "rationale": "The catalog uses unduhan for download-client labels, and telah selesai clearly marks downloads whose transfers finished."
+        },
+        "currentTargetSha256": "5e82086fc806605188bc3a1c116413411ffe6ec20bb42dc7fcc966763308967b"
+      },
+      {
+        "sourceOrdinal": 150,
+        "id": "ui.import-completed-downloads.fd1a4510eb",
+        "locale": "id",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "Impor unduhan yang telah selesai",
+          "rationale": "This is the task action for completed downloads; unduhan is the catalog's download-client term and telah selesai is clearer than lengkap."
+        },
+        "currentTargetSha256": "2ac07dd79182cecc2c3e2adfa3e20f136ca3253fa9d6a3b14d3bbaeb214ffd7c"
+      },
+      {
+        "sourceOrdinal": 150,
+        "id": "ui.import-completed-downloads.fd1a4510eb",
+        "locale": "pt-BR",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "Importar downloads concluídos",
+          "rationale": "An infinitive task label states the operation more directly than the noun phrase downloads completos."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "Importar downloads concluídos",
+          "rationale": "The current noun phrase describes an import of complete downloads; the task label names the action on downloads that have finished."
+        },
+        "currentTargetSha256": "ba4027c73ad4ec1c41ff64a30c563acda09f2afe4d3e4e8821b9711bfce42922"
+      },
+      {
+        "sourceOrdinal": 152,
+        "id": "ui.imported-from-the-existing-es-de-gam.5fa9036446",
+        "locale": "ar",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "مستورد من قائمة ألعاب ES-DE الحالية؛ راجع العنوان قبل إعادة تسميته.",
+          "rationale": "استيراد states “importing” rather than “imported,” and the current target omits the explicit review of the title before renaming."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "تم الاستيراد من قائمة ألعاب ES-DE الحالية؛ راجع العنوان قبل إعادة تسميته.",
+          "rationale": "The current infinitive/noun phrasing does not say the item was imported and omits the title object of review; this is an organizer status."
+        },
+        "currentTargetSha256": "2e7ef044096a91411e1035e8d3ebb36e12b3903b937085443fd8f8d9c380db44"
+      },
+      {
+        "sourceOrdinal": 152,
+        "id": "ui.imported-from-the-existing-es-de-gam.5fa9036446",
+        "locale": "id",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "Diimpor dari gamelist ES-DE yang sudah ada; tinjau judul sebelum mengganti namanya.",
+          "rationale": "Menggantinya means replacing it; the source specifically asks the user to review the title before changing its name."
+        },
+        "currentTargetSha256": "78705262d31933838f5b7bfe4455203d24b03f0347b1c5c36c97445501ea7a21"
+      },
+      {
+        "sourceOrdinal": 154,
+        "id": "ui.imported-local-metadata-review-title.5db9952dae",
+        "locale": "ar",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "بيانات وصفية محلية مستوردة · راجع العنوان",
+          "rationale": "استيراد means “importing”; the source is a completed-import status followed by an instruction to review the title."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "تم استيراد البيانات الوصفية المحلية · راجع العنوان",
+          "rationale": "البيانات المحلية means local data, not metadata, and the source describes already imported metadata."
+        },
+        "currentTargetSha256": "da7ea19a66e83d58dde25caf15c3488754092a947ec6b2614f60489230959954"
+      },
+      {
+        "sourceOrdinal": 154,
+        "id": "ui.imported-local-metadata-review-title.5db9952dae",
+        "locale": "es",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "Metadatos locales importados · revisar el título",
+          "rationale": "Título de revisión means the title of a review; the source asks the user to review the title."
+        },
+        "currentTargetSha256": "33b13eb266c1364d9abb46f2ceb92aa3b95c4675e5c03591850dcc30b720ca8e"
+      },
+      {
+        "sourceOrdinal": 155,
+        "id": "ui.imported-total.5f100c0878",
+        "locale": "fr",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "Éléments importés : {total}",
+          "rationale": "The current singular masculine Importé does not fit an unspecified plural count; this result label makes the counted items explicit."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "Importés : {total}",
+          "rationale": "The current singular Importé does not agree with a count that can describe multiple imported items."
+        },
+        "currentTargetSha256": "576cc8293ea087e04714f0ebf49a22db373ae8ad8bf0ca5e1609664bccc52a75"
+      },
+      {
+        "sourceOrdinal": 155,
+        "id": "ui.imported-total.5f100c0878",
+        "locale": "hi",
+        "differences": [
+          "disposition_label",
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "आयात किए गए आइटम: {total}",
+          "rationale": "The current adjective plus count is awkward as a result message; the explicit items label makes the count read naturally."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "आयात किए गए: {total}",
+          "rationale": "आयातित {total} is an awkward adjective without a counted noun; this is a result toast reporting the completed action."
+        },
+        "currentTargetSha256": "f96c102fc79f18cb252867921fa64c8a8f21aabc53c1b25ad3c2a8aa310dd44f"
+      },
+      {
+        "sourceOrdinal": 155,
+        "id": "ui.imported-total.5f100c0878",
+        "locale": "pt-BR",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "Importados: {total}",
+          "rationale": "The current noun Importação labels an import operation rather than the completed items reported by this result."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "Importados: {total}",
+          "rationale": "Importação {total} is a noun phrase; the exact caller reports a completed import result."
+        },
+        "currentTargetSha256": "1f71b4865f522e61d64463faf8766138ff44e48988830b750a49cb68b8d2b667"
+      },
+      {
+        "sourceOrdinal": 157,
+        "id": "ui.in-a-game.a0458668e7",
+        "locale": "ja",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "ゲーム中",
+          "rationale": "あるゲームで reads as being in some particular game; this is the concise Moonlight busy-state label paired with Idle."
+        },
+        "currentTargetSha256": "1961b5d0f96d7121501271ebd0beeaf7064620f20069c138786e31ca497bb353"
+      },
+      {
+        "sourceOrdinal": 157,
+        "id": "ui.in-a-game.a0458668e7",
+        "locale": "ko",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "게임 중",
+          "rationale": "한 게임에서 reads as in one game; this is a compact current host state, paired with Idle."
+        },
+        "currentTargetSha256": "a83e1af3a4fffd048a81944bfb286c9455e00c940e9c3c3e8093cf87e06d1661"
+      },
+      {
+        "sourceOrdinal": 157,
+        "id": "ui.in-a-game.a0458668e7",
+        "locale": "vi",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "Đang chơi game",
+          "rationale": "The source is a live host state paired with Idle; this phrasing reads as the host currently playing a game."
+        },
+        "currentTargetSha256": "75385068066e75100e3bb5471752c6953166f93eedcabed2ea871235cf7b1e45"
+      },
+      {
+        "sourceOrdinal": 157,
+        "id": "ui.in-a-game.a0458668e7",
+        "locale": "zh-Hant",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "在一個遊戲中",
+          "rationale": "游戲 contains the Simplified character 戏; replace it with Traditional 遊戲."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "在遊戲中",
+          "rationale": "The current target uses the nonstandard Traditional form 游戲; the catalog's Traditional Chinese game terminology uses 遊戲."
+        },
+        "currentTargetSha256": "9e99b56fdcde98fc9173d76282349a966c59c4c8ffe412da40cbb7bd9e3599eb"
+      },
+      {
+        "sourceOrdinal": 158,
+        "id": "ui.in-library.be6339943d",
+        "locale": "id",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "di koleksi game",
+          "rationale": "Perpustakaan can read as a public library; koleksi game identifies the user’s game collection."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "di pustaka game",
+          "rationale": "The source is availability in the user's configured game collection; perpustakaan suggests a public library, while the catalog uses Pustaka game."
+        },
+        "currentTargetSha256": "1cf4144c1545088ba3e400c200f475dec8e4e00d83fbecfb3c4985c09260d1ab"
+      },
+      {
+        "sourceOrdinal": 158,
+        "id": "ui.in-library.be6339943d",
+        "locale": "vi",
+        "differences": [
+          "independent_proposes_other_accepts",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "trong thư viện trò chơi",
+          "rationale": "Adding trò chơi makes clear that thư viện is the user’s game collection, as required by the project glossary."
+        },
+        "primary": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Patch search base-game availability cell; indicates the base game is present in the user's configured game library. The current wording preserves the source meaning and checked placeholders/protected literals without a clear linguistic defect."
+        },
+        "currentTargetSha256": "096dca89920b6afd543adaf2e6fc77bc8bb7145b4304b8668bb9104d212b301e"
+      },
+      {
+        "sourceOrdinal": 159,
+        "id": "ui.integration-guide.02a0a9e2c2",
+        "locale": "de",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "Integrationsleitfaden",
+          "rationale": "Integrationsführer usually means a person leading an integration; Leitfaden is the guide/document meant by the link."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "Integrationsleitfaden",
+          "rationale": "Integrationsführer can suggest a person or leader; the same catalog uses Integrationsleitfaden for the case-distinct lowercase guide label."
+        },
+        "currentTargetSha256": "d45eae4a8a03415a80db61dfb6b30b5d92c6134a39031fe7d3b91c14698e5493"
+      },
+      {
+        "sourceOrdinal": 159,
+        "id": "ui.integration-guide.02a0a9e2c2",
+        "locale": "zh-Hant",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "整合指南",
+          "rationale": "整合 is the more natural Traditional Chinese term for this project integration guide; 集成 is understandable but less idiomatic here."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "整合指南",
+          "rationale": "集成指南 is the Simplified Chinese rendering; the existing Traditional Chinese integration-guide entry uses 整合指南."
+        },
+        "currentTargetSha256": "f98e557259801681fef28113073ee237078f3e1dd42a6c116cf8ced66abd3b51"
+      },
+      {
+        "sourceOrdinal": 161,
+        "id": "ui.internet-archive-refused-the-request.515fff2c13",
+        "locale": "de",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "Internet Archive hat die Anfrage abgelehnt.",
+          "rationale": "The current verb phrase weigerte die Anfrage is ungrammatical; abgelehnt is the natural verb for refusing a request."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "Internet Archive lehnte die Anfrage ab.",
+          "rationale": "Weigerte die Anfrage is ungrammatical; the German verb weigern is not used transitively this way."
+        },
+        "currentTargetSha256": "cde3cae8f17a519ebb8a744b15712712adb0ab1df76aad070db7f0e4157887dc"
+      },
+      {
+        "sourceOrdinal": 161,
+        "id": "ui.internet-archive-refused-the-request.515fff2c13",
+        "locale": "ja",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "Internet Archive がリクエストを拒否しました。",
+          "rationale": "申請 means an application/request for approval; this is a service request, and the current fragment lacks the sentence predicate."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "Internet Archive はリクエストを拒否しました。",
+          "rationale": "申請 means an application, not an API request; this error is about a refused request."
+        },
+        "currentTargetSha256": "63a648039a8794a14d5379965c61400ee53328fe402e0e070197574afbdb517e"
+      },
+      {
+        "sourceOrdinal": 162,
+        "id": "ui.invalid-game-identity.0efd907d22",
+        "locale": "ja",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "ゲーム識別情報が無効です。",
+          "rationale": "ゲームアイデンティティ is an awkward loanword; the code validates a canonical game identity, naturally expressed as game identity information."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "ゲームの識別情報が無効です。",
+          "rationale": "アイデンティティ is awkward here; the organizer validates a game's identifier, not a person's identity."
+        },
+        "currentTargetSha256": "5a3fcbae7fe3d9e3c30aa3d0ecbb6f9ba96fe315618e807812e8e675d534b693"
+      },
+      {
+        "sourceOrdinal": 163,
+        "id": "ui.invalid-hub-result-detail.4d640652cb",
+        "locale": "ar",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "نتيجة ROM Hub غير صالحة: {detail}",
+          "rationale": "المركز means center; the caller validates a ROM Hub result, so keep Hub as the product term and retain detail."
+        },
+        "currentTargetSha256": "3968d8745d22453f127cc4581868edf88c84367593c35e759fe56f33305ae14b"
+      },
+      {
+        "sourceOrdinal": 163,
+        "id": "ui.invalid-hub-result-detail.4d640652cb",
+        "locale": "fr",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "Résultat invalide du hub : {detail}",
+          "rationale": "French normally uses the article du before this masculine noun; the current de hub phrasing is awkward."
+        },
+        "currentTargetSha256": "63a5d5007a9383827dda829b848d54ec396d75594b091b67c0568ab7609efc1f"
+      },
+      {
+        "sourceOrdinal": 163,
+        "id": "ui.invalid-hub-result-detail.4d640652cb",
+        "locale": "ja",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "ハブの結果が無効です: {detail}",
+          "rationale": "The current compound ハブ結果 is a stiff calque; the caller returns an invalid-result diagnostic."
+        },
+        "currentTargetSha256": "8965f8d69e23acfeb86280c12eb92719cc122818ae713f49786c0a511b190b54"
+      },
+      {
+        "sourceOrdinal": 163,
+        "id": "ui.invalid-hub-result-detail.4d640652cb",
+        "locale": "zh-Hans",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "ROM Hub 返回的结果无效：{detail}",
+          "rationale": "中心 means center and is not the ROM Hub integration named by the caller; preserve the product term and detail placeholder."
+        },
+        "currentTargetSha256": "dc8fcbc914fac94e6d34a44d76dc422a80f27143cab1f0753d794fb6d3456989"
+      },
+      {
+        "sourceOrdinal": 163,
+        "id": "ui.invalid-hub-result-detail.4d640652cb",
+        "locale": "zh-Hant",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "correction",
+          "candidate": "ROM Hub 傳回的結果無效：{detail}",
+          "rationale": "中心 means center and is not the ROM Hub integration named by the caller; preserve the product term and detail placeholder."
+        },
+        "currentTargetSha256": "6ce484acc558817acfcbc95bbbd3b0f7a381ac78530b6e859770bc9117c04337"
+      },
+      {
+        "sourceOrdinal": 164,
+        "id": "ui.invalid-plan-token.6f52b99b6e",
+        "locale": "ja",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "プランのトークンが無効です。",
+          "rationale": "A particle makes the relation between plan and token clearer than the compressed プラントークン compound."
+        },
+        "currentTargetSha256": "c0af46d8861c5412776632cabca3f1dbeb92b9b9be717020fe6002cf9cde036f"
+      },
+      {
+        "sourceOrdinal": 165,
+        "id": "ui.invitation-romarr.6b427c1d21",
+        "locale": "ja",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "primary": {
+          "disposition": "refinement",
+          "candidate": "招待 · ROMarr",
+          "rationale": "招待状 suggests a printed invitation card; the exact caller is the public invitation link page title."
+        },
+        "currentTargetSha256": "9a4ca79f38b0eec0e4e4caaf7c0d93e67b288c7302c4b590cbcfe796d9531d8c"
+      }
+    ]
+  },
+  "rootBlind": {
+    "dispositionCounts": {
+      "refinement": 17,
+      "accept-current": 181,
+      "correction": 30,
+      "hold-context": 12
+    },
+    "dispositionTypeDisagreements": 21,
+    "candidateOutcomeOrTextDisagreements": 30,
+    "uniqueDisagreementCells": 39,
+    "acceptVersusChangeCells": 8,
+    "bothProposedDifferentTextCells": 22,
+    "differenceCategories": {
+      "independent_accepts_other_proposes": 5,
+      "candidate_vs_no_candidate": 8,
+      "disposition_label": 13,
+      "different_candidate_text": 22,
+      "independent_proposes_other_accepts": 3
+    },
+    "dispositionKeys": [
+      {
+        "sourceOrdinal": 146,
+        "locale": "es",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 146,
+        "locale": "zh-Hant",
+        "independent": "correction",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 147,
+        "locale": "vi",
+        "independent": "refinement",
+        "other": "accept-current"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "ar",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "hi",
+        "independent": "correction",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "vi",
+        "independent": "correction",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 149,
+        "locale": "fr",
+        "independent": "refinement",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 150,
+        "locale": "id",
+        "independent": "accept-current",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 150,
+        "locale": "pt-BR",
+        "independent": "refinement",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 152,
+        "locale": "pt-BR",
+        "independent": "refinement",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 155,
+        "locale": "ar",
+        "independent": "correction",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 155,
+        "locale": "es",
+        "independent": "correction",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 155,
+        "locale": "fr",
+        "independent": "correction",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 155,
+        "locale": "id",
+        "independent": "correction",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 156,
+        "locale": "es",
+        "independent": "accept-current",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 156,
+        "locale": "fr",
+        "independent": "accept-current",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 158,
+        "locale": "hi",
+        "independent": "correction",
+        "other": "refinement"
+      },
+      {
+        "sourceOrdinal": 158,
+        "locale": "id",
+        "independent": "correction",
+        "other": "accept-current"
+      },
+      {
+        "sourceOrdinal": 158,
+        "locale": "vi",
+        "independent": "refinement",
+        "other": "accept-current"
+      },
+      {
+        "sourceOrdinal": 159,
+        "locale": "zh-Hant",
+        "independent": "refinement",
+        "other": "correction"
+      },
+      {
+        "sourceOrdinal": 162,
+        "locale": "ja",
+        "independent": "correction",
+        "other": "refinement"
+      }
+    ],
+    "candidateKeys": [
+      {
+        "sourceOrdinal": 146,
+        "locale": "es",
+        "independent": null,
+        "other": "IGDB · carátulas, géneros y calificaciones"
+      },
+      {
+        "sourceOrdinal": 147,
+        "locale": "es",
+        "independent": "Importa una carpeta tuya y deja que ROMarr identifique y organice su contenido.",
+        "other": "Importa una carpeta de tu propiedad y deja que ROMarr identifique y organice el contenido."
+      },
+      {
+        "sourceOrdinal": 147,
+        "locale": "pt-BR",
+        "independent": "Importe uma pasta sua e deixe que o ROMarr identifique e organize o que há nela.",
+        "other": "Importe uma pasta que você possui e deixe o ROMarr identificar e organizar o conteúdo."
+      },
+      {
+        "sourceOrdinal": 147,
+        "locale": "vi",
+        "independent": "Nhập một thư mục bạn sở hữu và để ROMarr xác định rồi sắp xếp nội dung trong đó.",
+        "other": null
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "ar",
+        "independent": null,
+        "other": "التحقق من الاستيراد (دقائق)"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "es",
+        "independent": "Intervalo de comprobación de importación (minutos)",
+        "other": "Comprobación de importación (minutos)"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "hi",
+        "independent": "आयात जाँच अंतराल (मिनट)",
+        "other": "आयात जाँच (मिनट)"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "ko",
+        "independent": "가져오기 확인 간격 (분)",
+        "other": "가져오기 확인 (분)"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "vi",
+        "independent": "Chu kỳ kiểm tra nhập dữ liệu (phút)",
+        "other": "Kiểm tra nhập dữ liệu (phút)"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "zh-Hans",
+        "independent": "导入检查间隔（分钟）",
+        "other": "导入检查（分钟）"
+      },
+      {
+        "sourceOrdinal": 148,
+        "locale": "zh-Hant",
+        "independent": "匯入檢查間隔（分鐘）",
+        "other": "匯入檢查（分鐘）"
+      },
+      {
+        "sourceOrdinal": 150,
+        "locale": "id",
+        "independent": null,
+        "other": "Impor unduhan yang sudah selesai"
+      },
+      {
+        "sourceOrdinal": 152,
+        "locale": "ar",
+        "independent": "مستورد من قائمة ألعاب ES-DE الحالية؛ راجع العنوان قبل إعادة تسميته.",
+        "other": "تم الاستيراد من قائمة الألعاب الحالية في ES-DE؛ راجع العنوان قبل إعادة تسميته."
+      },
+      {
+        "sourceOrdinal": 153,
+        "locale": "hi",
+        "independent": "पूरे हुए {total} डाउनलोड में से {imported} आयात किए गए",
+        "other": "पूरे हो चुके {total} डाउनलोडों में से {imported} आयात किए गए"
+      },
+      {
+        "sourceOrdinal": 154,
+        "locale": "ar",
+        "independent": "بيانات وصفية محلية مستوردة · راجع العنوان",
+        "other": "تم استيراد البيانات الوصفية المحلية · راجع العنوان"
+      },
+      {
+        "sourceOrdinal": 155,
+        "locale": "hi",
+        "independent": "आयात किए गए आइटम: {total}",
+        "other": "कुल {total} आइटम आयात किए गए"
+      },
+      {
+        "sourceOrdinal": 155,
+        "locale": "id",
+        "independent": "Diimpor: {total}",
+        "other": "Berhasil mengimpor {total}"
+      },
+      {
+        "sourceOrdinal": 155,
+        "locale": "ko",
+        "independent": "가져온 항목: {total}",
+        "other": "가져온 항목: {total}개"
+      },
+      {
+        "sourceOrdinal": 155,
+        "locale": "zh-Hans",
+        "independent": "已导入 {total}",
+        "other": "已导入 {total} 项"
+      },
+      {
+        "sourceOrdinal": 155,
+        "locale": "zh-Hant",
+        "independent": "已匯入 {total}",
+        "other": "已匯入 {total} 個項目"
+      },
+      {
+        "sourceOrdinal": 156,
+        "locale": "es",
+        "independent": null,
+        "other": "Mejoras"
+      },
+      {
+        "sourceOrdinal": 156,
+        "locale": "fr",
+        "independent": null,
+        "other": "Améliorations"
+      },
+      {
+        "sourceOrdinal": 157,
+        "locale": "zh-Hant",
+        "independent": "在一個遊戲中",
+        "other": "正在遊戲中"
+      },
+      {
+        "sourceOrdinal": 158,
+        "locale": "id",
+        "independent": "di koleksi game",
+        "other": null
+      },
+      {
+        "sourceOrdinal": 158,
+        "locale": "vi",
+        "independent": "trong thư viện trò chơi",
+        "other": null
+      },
+      {
+        "sourceOrdinal": 161,
+        "locale": "de",
+        "independent": "Internet Archive hat die Anfrage abgelehnt.",
+        "other": "Internet Archive hat die Anfrage abgelehnt"
+      },
+      {
+        "sourceOrdinal": 161,
+        "locale": "ja",
+        "independent": "Internet Archive がリクエストを拒否しました。",
+        "other": "Internet Archive はリクエストを拒否しました"
+      },
+      {
+        "sourceOrdinal": 161,
+        "locale": "ko",
+        "independent": "Internet Archive가 요청을 거부했습니다.",
+        "other": "Internet Archive가 요청을 거부했습니다"
+      },
+      {
+        "sourceOrdinal": 162,
+        "locale": "fr",
+        "independent": "L’identité du jeu n’est pas valide.",
+        "other": "L’identité du jeu est invalide."
+      },
+      {
+        "sourceOrdinal": 162,
+        "locale": "ja",
+        "independent": "ゲーム識別情報が無効です。",
+        "other": "ゲームの識別情報が無効です。"
+      }
+    ],
+    "details": [
+      {
+        "sourceOrdinal": 146,
+        "id": "ui.igdb-covers-genres-and-ratings.6035ecaefc",
+        "locale": "es",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "IGDB · carátulas, géneros y calificaciones",
+          "rationale": "Use the common Spanish term for game cover art."
+        },
+        "currentTargetSha256": "68a84ffd2b94d91de4fcef54858e1b64a9965e624d3799fc81fccb8719bee32c"
+      },
+      {
+        "sourceOrdinal": 146,
+        "id": "ui.igdb-covers-genres-and-ratings.6035ecaefc",
+        "locale": "zh-Hant",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "IGDB · 封面、類型與評分",
+          "rationale": "The current target adds 美術 (artwork) beyond the source’s three items; remove the extra category while retaining IGDB and the correct Traditional Chinese terms."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "IGDB · 封面、類型與評分",
+          "rationale": "Remove the extra “art” concept and use a concise cover/genre/rating list."
+        },
+        "currentTargetSha256": "1698b54af1c17888f2072903d8fa1c1fca4b8fa1bedc46d3a17f4ef10b3f6df5"
+      },
+      {
+        "sourceOrdinal": 147,
+        "id": "ui.import-a-folder-you-own-and-let-roma.a06dc1fe1e",
+        "locale": "es",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "Importa una carpeta tuya y deja que ROMarr identifique y organice su contenido.",
+          "rationale": "The current line mixes informal imperative with the formal-form posee and uses archivar, which suggests archiving instead of organizing the folder contents."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "Importa una carpeta de tu propiedad y deja que ROMarr identifique y organice el contenido.",
+          "rationale": "Fix inconsistent tú/usted forms and make the instruction natural."
+        },
+        "currentTargetSha256": "fa4f785b3268944c89d6aa04d5618f82276e533439918bfd4ca6e8850aa1d2b5"
+      },
+      {
+        "sourceOrdinal": 147,
+        "id": "ui.import-a-folder-you-own-and-let-roma.a06dc1fe1e",
+        "locale": "pt-BR",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "Importe uma pasta sua e deixe que o ROMarr identifique e organize o que há nela.",
+          "rationale": "The source describes organizing the folder contents; organize is clearer here than arquivar, which can mean archive."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "Importe uma pasta que você possui e deixe o ROMarr identificar e organizar o conteúdo.",
+          "rationale": "Use a complete instruction instead of the infinitive fragment."
+        },
+        "currentTargetSha256": "3e992bf0fa378966cbbce8da53240ed4466be86eb0d1009166af5967caec73c2"
+      },
+      {
+        "sourceOrdinal": 147,
+        "id": "ui.import-a-folder-you-own-and-let-roma.a06dc1fe1e",
+        "locale": "vi",
+        "differences": [
+          "independent_proposes_other_accepts",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "Nhập một thư mục bạn sở hữu và để ROMarr xác định rồi sắp xếp nội dung trong đó.",
+          "rationale": "Lưu trữ suggests storing/archiving; sắp xếp communicates filing and organizing the folder contents."
+        },
+        "root": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "No material source/context mismatch found in independent review."
+        },
+        "currentTargetSha256": "724be5e3307dde13cda179df1b05682a65061bd5bec21f2469b4c50109cb9a80"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "ar",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "التحقق من الاستيراد (دقائق)",
+          "rationale": "Use the software-import term rather than imports/goods."
+        },
+        "currentTargetSha256": "19a4f36c77aaef001b510b735c90111f634d8d0eff98b1c2b972fb885c62cb34"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "es",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "Intervalo de comprobación de importación (minutos)",
+          "rationale": "The field is an interval for scheduled import checks; naming the interval makes this short settings label clearer."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "Comprobación de importación (minutos)",
+          "rationale": "Use a standard field-label term for the import check interval."
+        },
+        "currentTargetSha256": "970a257b85537f7a8149b1b5b336b0c79bc16ec4b51b4c6d46b9185a951a5460"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "hi",
+        "differences": [
+          "disposition_label",
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "आयात जाँच अंतराल (मिनट)",
+          "rationale": "The current check uses an English loanword and stray spacing, and omits that this is a scheduled interval."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "आयात जाँच (मिनट)",
+          "rationale": "Remove the stray spacing and use a natural Hindi term for import check."
+        },
+        "currentTargetSha256": "eb634ad1a19c9a0db012f53502ead2cb9f1ad38cdb922a1eb23b3d926b301cd6"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "ko",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "가져오기 확인 간격 (분)",
+          "rationale": "수입 normally means importing goods/income; 가져오기 is the UI action for importing files. The caller establishes an interval."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "가져오기 확인 (분)",
+          "rationale": "Use the software-import verb rather than 수입 (imports/income)."
+        },
+        "currentTargetSha256": "544d551ad22f348d0f2ca1fe5fc99a34b46a14df7aa7b7786d5c98ce6f0638ac"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "vi",
+        "differences": [
+          "disposition_label",
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "Chu kỳ kiểm tra nhập dữ liệu (phút)",
+          "rationale": "Kiểm tra nhập is ambiguous as checking an entry; the field is the cycle for scheduled data-import checks."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "Kiểm tra nhập dữ liệu (phút)",
+          "rationale": "Clarify that this is a data-import check."
+        },
+        "currentTargetSha256": "d0c4015990d51b02707945a2f6eec686f95166419592410375c091767aa41219"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "zh-Hans",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "导入检查间隔（分钟）",
+          "rationale": "进口 is importation of goods; 导入 is the software/file import term. The caller’s help text establishes that the value is an interval."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "导入检查（分钟）",
+          "rationale": "Use 导入 for software import rather than 进口 for importing goods."
+        },
+        "currentTargetSha256": "27c5c5b18213f3d931d597788ed71a9eda94e82fc432e1834792402e9e831a9e"
+      },
+      {
+        "sourceOrdinal": 148,
+        "id": "ui.import-check-minutes.afebe8564c",
+        "locale": "zh-Hant",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "匯入檢查間隔（分鐘）",
+          "rationale": "進口 means importation of goods; 匯入 is the software/file import term. The caller’s help text establishes that the value is an interval."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "匯入檢查（分鐘）",
+          "rationale": "Use the software-import term rather than 進口 (imports/goods)."
+        },
+        "currentTargetSha256": "4ca8794dca706fc199f16cb2dd2e34e406c80c5fa6bca26489144b787be1e967"
+      },
+      {
+        "sourceOrdinal": 149,
+        "id": "ui.import-completed-downloads-automatic.0436b11a02",
+        "locale": "fr",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "Importer automatiquement les téléchargements terminés",
+          "rationale": "Terminés is the usual term for downloads that have finished; complets can read as complete downloads."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "Importer automatiquement les téléchargements terminés",
+          "rationale": "Use terminés for finished downloads; complets means complete/full."
+        },
+        "currentTargetSha256": "183bf87f10443c227645b9d598e1e2dc595c0ff17f57022a23c43912dd545bd3"
+      },
+      {
+        "sourceOrdinal": 150,
+        "id": "ui.import-completed-downloads.fd1a4510eb",
+        "locale": "id",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "Impor unduhan yang sudah selesai",
+          "rationale": "Use “finished” rather than “complete/full” and keep the action as a verb."
+        },
+        "currentTargetSha256": "2ac07dd79182cecc2c3e2adfa3e20f136ca3253fa9d6a3b14d3bbaeb214ffd7c"
+      },
+      {
+        "sourceOrdinal": 150,
+        "id": "ui.import-completed-downloads.fd1a4510eb",
+        "locale": "pt-BR",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "Importar downloads concluídos",
+          "rationale": "An infinitive task label states the operation more directly than the noun phrase downloads completos."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "Importar downloads concluídos",
+          "rationale": "Use “concluídos” for finished downloads, not complete/full."
+        },
+        "currentTargetSha256": "ba4027c73ad4ec1c41ff64a30c563acda09f2afe4d3e4e8821b9711bfce42922"
+      },
+      {
+        "sourceOrdinal": 152,
+        "id": "ui.imported-from-the-existing-es-de-gam.5fa9036446",
+        "locale": "ar",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "مستورد من قائمة ألعاب ES-DE الحالية؛ راجع العنوان قبل إعادة تسميته.",
+          "rationale": "استيراد states “importing” rather than “imported,” and the current target omits the explicit review of the title before renaming."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "تم الاستيراد من قائمة الألعاب الحالية في ES-DE؛ راجع العنوان قبل إعادة تسميته.",
+          "rationale": "Use a complete “imported” status and a clear review instruction."
+        },
+        "currentTargetSha256": "2e7ef044096a91411e1035e8d3ebb36e12b3903b937085443fd8f8d9c380db44"
+      },
+      {
+        "sourceOrdinal": 152,
+        "id": "ui.imported-from-the-existing-es-de-gam.5fa9036446",
+        "locale": "pt-BR",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "Importado da lista de jogos ES-DE existente; revise o título antes de renomear.",
+          "rationale": "The current status fragment is understandable; an explicit imperative better matches the source’s review-before-renaming instruction."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "Importado da lista de jogos ES-DE existente; revise o título antes de renomear.",
+          "rationale": "Turn the noun “revisão” into an instruction and complete the source meaning."
+        },
+        "currentTargetSha256": "ca61110974ef08184004a7900c651b34700b9257d67ba35e4cf5dac1790764f4"
+      },
+      {
+        "sourceOrdinal": 153,
+        "id": "ui.imported-imported-of-total-finished.5726eabd36",
+        "locale": "hi",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "पूरे हुए {total} डाउनलोड में से {imported} आयात किए गए",
+          "rationale": "पूरा हुई disagrees with the masculine plural डाउनलोड; पूरे हुए fixes agreement while preserving both count placeholders."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "पूरे हो चुके {total} डाउनलोडों में से {imported} आयात किए गए",
+          "rationale": "Fix agreement in the finished-download phrase while preserving both count placeholders."
+        },
+        "currentTargetSha256": "2ea728a0d2db260aefeea1527513b2968f434651b44dcf3332ebd68e2ac75c77"
+      },
+      {
+        "sourceOrdinal": 154,
+        "id": "ui.imported-local-metadata-review-title.5db9952dae",
+        "locale": "ar",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "بيانات وصفية محلية مستوردة · راجع العنوان",
+          "rationale": "استيراد means “importing”; the source is a completed-import status followed by an instruction to review the title."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "تم استيراد البيانات الوصفية المحلية · راجع العنوان",
+          "rationale": "Use past tense for Imported and an imperative for review title."
+        },
+        "currentTargetSha256": "da7ea19a66e83d58dde25caf15c3488754092a947ec6b2614f60489230959954"
+      },
+      {
+        "sourceOrdinal": 155,
+        "id": "ui.imported-total.5f100c0878",
+        "locale": "ar",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "تم استيراد {total}",
+          "rationale": "The current noun استيراد means “importing”; the source reports that the items have been imported."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "تم استيراد {total}",
+          "rationale": "Use the completed-action wording for “Imported”."
+        },
+        "currentTargetSha256": "e1291f12779f3a824d6c7278fe7caadfa5e9753c16e4ed39febcb211223d036b"
+      },
+      {
+        "sourceOrdinal": 155,
+        "id": "ui.imported-total.5f100c0878",
+        "locale": "es",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "Se importaron {total}",
+          "rationale": "Importación {total} reads as the noun “import” followed by a number; the source is a completed-result message."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "Se importaron {total}",
+          "rationale": "Use a natural completed-action message with the count."
+        },
+        "currentTargetSha256": "fb3871c0309bc222e7575a4478528848d15745c78e0a38d2e8160df28f06d319"
+      },
+      {
+        "sourceOrdinal": 155,
+        "id": "ui.imported-total.5f100c0878",
+        "locale": "fr",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "Éléments importés : {total}",
+          "rationale": "The current singular masculine Importé does not fit an unspecified plural count; this result label makes the counted items explicit."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "Éléments importés : {total}",
+          "rationale": "Use a natural count label rather than singular “importé”."
+        },
+        "currentTargetSha256": "576cc8293ea087e04714f0ebf49a22db373ae8ad8bf0ca5e1609664bccc52a75"
+      },
+      {
+        "sourceOrdinal": 155,
+        "id": "ui.imported-total.5f100c0878",
+        "locale": "hi",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "आयात किए गए आइटम: {total}",
+          "rationale": "The current adjective plus count is awkward as a result message; the explicit items label makes the count read naturally."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "कुल {total} आइटम आयात किए गए",
+          "rationale": "Use a natural completed-action message with an explicit count noun."
+        },
+        "currentTargetSha256": "f96c102fc79f18cb252867921fa64c8a8f21aabc53c1b25ad3c2a8aa310dd44f"
+      },
+      {
+        "sourceOrdinal": 155,
+        "id": "ui.imported-total.5f100c0878",
+        "locale": "id",
+        "differences": [
+          "disposition_label",
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "Diimpor: {total}",
+          "rationale": "Mengimport is an active infinitive (“to import”); this result reports a completed import."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "Berhasil mengimpor {total}",
+          "rationale": "Use a completed-action message rather than the ongoing-form Mengimport."
+        },
+        "currentTargetSha256": "f320d4579f020c11638193801c339d5e9f7ed684f4cbbdf6c749e828d2a9d9b5"
+      },
+      {
+        "sourceOrdinal": 155,
+        "id": "ui.imported-total.5f100c0878",
+        "locale": "ko",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "가져온 항목: {total}",
+          "rationale": "수입 means goods import/income; this result counts items imported into the game library."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "가져온 항목: {total}개",
+          "rationale": "Use the software-import verb and a natural item-count label."
+        },
+        "currentTargetSha256": "aa543074b291ae5336eae837c02cb63827495a9bb2f84ad3781c1a1d8106234e"
+      },
+      {
+        "sourceOrdinal": 155,
+        "id": "ui.imported-total.5f100c0878",
+        "locale": "zh-Hans",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "已导入 {total}",
+          "rationale": "进口 is importation of goods; the source reports items already imported."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "已导入 {total} 项",
+          "rationale": "Use software-import wording and a natural count unit."
+        },
+        "currentTargetSha256": "968759c03732c35cb6d3d9057ded4d5f3685137c68f6be2e061b2ff3be51194f"
+      },
+      {
+        "sourceOrdinal": 155,
+        "id": "ui.imported-total.5f100c0878",
+        "locale": "zh-Hant",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "已匯入 {total}",
+          "rationale": "進口 is importation of goods; the source reports items already imported."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "已匯入 {total} 個項目",
+          "rationale": "Use the software-import term and a natural count unit."
+        },
+        "currentTargetSha256": "c42ba742032ac116ef1ab0106a7f7210df82d32945805477a71f4e95071be735"
+      },
+      {
+        "sourceOrdinal": 156,
+        "id": "ui.improvements.c3eb9e6f2b",
+        "locale": "es",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "Mejoras",
+          "rationale": "Capitalize the standalone select-option label."
+        },
+        "currentTargetSha256": "c7122fc252bb21ca49b31f6839680f90c21b39d9b9e3b64152efa09dbfa3e9b3"
+      },
+      {
+        "sourceOrdinal": 156,
+        "id": "ui.improvements.c3eb9e6f2b",
+        "locale": "fr",
+        "differences": [
+          "independent_accepts_other_proposes",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "Current target preserves the source meaning in the pinned caller context; grammar/register, product terms, placeholder counts, and protected literals are acceptable."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "Améliorations",
+          "rationale": "Remove the unneeded definite article from this standalone select option."
+        },
+        "currentTargetSha256": "9e53b2fb6ab278e4419da2532021db258b3725ad3a9f028a946fcc24b6c06148"
+      },
+      {
+        "sourceOrdinal": 157,
+        "id": "ui.in-a-game.a0458668e7",
+        "locale": "zh-Hant",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "在一個遊戲中",
+          "rationale": "游戲 contains the Simplified character 戏; replace it with Traditional 遊戲."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "正在遊戲中",
+          "rationale": "Use Traditional Chinese characters and natural in-game status wording."
+        },
+        "currentTargetSha256": "9e99b56fdcde98fc9173d76282349a966c59c4c8ffe412da40cbb7bd9e3599eb"
+      },
+      {
+        "sourceOrdinal": 158,
+        "id": "ui.in-library.be6339943d",
+        "locale": "hi",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "गेम लाइब्रेरी में",
+          "rationale": "पुस्तकालय normally means a public/book library; this label refers to the user’s game collection."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "गेम लाइब्रेरी में",
+          "rationale": "Clarify that “library” is the game library, not a book library."
+        },
+        "currentTargetSha256": "c7192b72afdaf4cd435c642beeed95097763f2f2a2da240c28a7f5feea219e47"
+      },
+      {
+        "sourceOrdinal": 158,
+        "id": "ui.in-library.be6339943d",
+        "locale": "id",
+        "differences": [
+          "independent_proposes_other_accepts",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "di koleksi game",
+          "rationale": "Perpustakaan can read as a public library; koleksi game identifies the user’s game collection."
+        },
+        "root": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "No material source/context mismatch found in independent review."
+        },
+        "currentTargetSha256": "1cf4144c1545088ba3e400c200f475dec8e4e00d83fbecfb3c4985c09260d1ab"
+      },
+      {
+        "sourceOrdinal": 158,
+        "id": "ui.in-library.be6339943d",
+        "locale": "vi",
+        "differences": [
+          "independent_proposes_other_accepts",
+          "candidate_vs_no_candidate"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "trong thư viện trò chơi",
+          "rationale": "Adding trò chơi makes clear that thư viện is the user’s game collection, as required by the project glossary."
+        },
+        "root": {
+          "disposition": "accept-current",
+          "candidate": null,
+          "rationale": "No material source/context mismatch found in independent review."
+        },
+        "currentTargetSha256": "096dca89920b6afd543adaf2e6fc77bc8bb7145b4304b8668bb9104d212b301e"
+      },
+      {
+        "sourceOrdinal": 159,
+        "id": "ui.integration-guide.02a0a9e2c2",
+        "locale": "zh-Hant",
+        "differences": [
+          "disposition_label"
+        ],
+        "independent": {
+          "disposition": "refinement",
+          "candidate": "整合指南",
+          "rationale": "整合 is the more natural Traditional Chinese term for this project integration guide; 集成 is understandable but less idiomatic here."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "整合指南",
+          "rationale": "Use the established Traditional Chinese term for software integration."
+        },
+        "currentTargetSha256": "f98e557259801681fef28113073ee237078f3e1dd42a6c116cf8ced66abd3b51"
+      },
+      {
+        "sourceOrdinal": 161,
+        "id": "ui.internet-archive-refused-the-request.515fff2c13",
+        "locale": "de",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "Internet Archive hat die Anfrage abgelehnt.",
+          "rationale": "The current verb phrase weigerte die Anfrage is ungrammatical; abgelehnt is the natural verb for refusing a request."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "Internet Archive hat die Anfrage abgelehnt",
+          "rationale": "Fix unidiomatic word order and supply the auxiliary verb."
+        },
+        "currentTargetSha256": "cde3cae8f17a519ebb8a744b15712712adb0ab1df76aad070db7f0e4157887dc"
+      },
+      {
+        "sourceOrdinal": 161,
+        "id": "ui.internet-archive-refused-the-request.515fff2c13",
+        "locale": "ja",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "Internet Archive がリクエストを拒否しました。",
+          "rationale": "申請 means an application/request for approval; this is a service request, and the current fragment lacks the sentence predicate."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "Internet Archive はリクエストを拒否しました",
+          "rationale": "Use a complete Japanese sentence and natural app request terminology."
+        },
+        "currentTargetSha256": "63a648039a8794a14d5379965c61400ee53328fe402e0e070197574afbdb517e"
+      },
+      {
+        "sourceOrdinal": 161,
+        "id": "ui.internet-archive-refused-the-request.515fff2c13",
+        "locale": "ko",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "Internet Archive가 요청을 거부했습니다.",
+          "rationale": "The current text is an unfinished predicate; the full polite past-tense error message matches the source."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "Internet Archive가 요청을 거부했습니다",
+          "rationale": "Use a complete Korean sentence rather than a bare verb phrase."
+        },
+        "currentTargetSha256": "a4927f862b96452ab0c949b1eea882e15d43064ec1abd1f5d2bebc474fa515d1"
+      },
+      {
+        "sourceOrdinal": 162,
+        "id": "ui.invalid-game-identity.0efd907d22",
+        "locale": "fr",
+        "differences": [
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "L’identité du jeu n’est pas valide.",
+          "rationale": "The current French fragment lacks a predicate; this is a complete error message."
+        },
+        "root": {
+          "disposition": "correction",
+          "candidate": "L’identité du jeu est invalide.",
+          "rationale": "Supply the missing verb in the complete error sentence."
+        },
+        "currentTargetSha256": "5cad1bd5d4f52ccce027a9c59968d10bc30f3e8ac33a4b196f18965eae4cd1e0"
+      },
+      {
+        "sourceOrdinal": 162,
+        "id": "ui.invalid-game-identity.0efd907d22",
+        "locale": "ja",
+        "differences": [
+          "disposition_label",
+          "different_candidate_text"
+        ],
+        "independent": {
+          "disposition": "correction",
+          "candidate": "ゲーム識別情報が無効です。",
+          "rationale": "ゲームアイデンティティ is an awkward loanword; the code validates a canonical game identity, naturally expressed as game identity information."
+        },
+        "root": {
+          "disposition": "refinement",
+          "candidate": "ゲームの識別情報が無効です。",
+          "rationale": "Use a natural Japanese term for the canonical game identity/identifier."
+        },
+        "currentTargetSha256": "5a3fcbae7fe3d9e3c30aa3d0ecbb6f9ba96fe315618e807812e8e675d534b693"
+      }
+    ]
+  },
+  "holdAgreement": {
+    "ordinal160Cells": 12,
+    "independent": "hold-context",
+    "primary": "hold-context",
+    "rootBlind": "hold-context"
+  },
+  "noDecisionsWereApplied": true
+}

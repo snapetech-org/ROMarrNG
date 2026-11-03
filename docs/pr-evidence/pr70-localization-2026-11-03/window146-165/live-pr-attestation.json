@@ -1,0 +1,66 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "queriedVia": "GitHub PR API / gh pr view",
+  "state": "OPEN",
+  "draft": true,
+  "headRefName": "task/localization-translation-review-20261030",
+  "headSha": "db895a97e9871952a0b952e1d119e32e06cf168d",
+  "headTree": "f1edf8319eb3dbd29ac5fe1e279216c5b96ecc6a",
+  "baseRefName": "main",
+  "updatedAt": "2026-11-03T04:29:28Z",
+  "mergeStateStatus": "CLEAN",
+  "changedFilesAtInputHead": 30,
+  "changedWorkflowPaths": [],
+  "prePushStatusChecks": {
+    "state": "pending",
+    "totalCount": 0,
+    "sha": "db895a97e9871952a0b952e1d119e32e06cf168d"
+  },
+  "workflowInventoryAtInputHead": [
+    {
+      "path": ".github/workflows/dependency-review.yml",
+      "triggers": [
+        "workflow_dispatch"
+      ]
+    },
+    {
+      "path": ".github/workflows/docker.yml",
+      "triggers": [
+        "push tags v*",
+        "workflow_dispatch"
+      ]
+    },
+    {
+      "path": ".github/workflows/gvisor-runner-smoke.yml",
+      "triggers": [
+        "workflow_dispatch"
+      ]
+    },
+    {
+      "path": ".github/workflows/semgrep-community.yml",
+      "triggers": [
+        "push tags **",
+        "workflow_dispatch"
+      ]
+    },
+    {
+      "path": ".github/workflows/sync-unraid-legacy-ghcr.yml",
+      "triggers": [
+        "workflow_dispatch",
+        "workflow_run after docker"
+      ]
+    },
+    {
+      "path": ".github/workflows/trivy-filesystem.yml",
+      "triggers": [
+        "push tags **",
+        "workflow_dispatch"
+      ]
+    }
+  ],
+  "codeQlWorkflowPresent": false,
+  "ordinaryBranchPushWorkflowExpected": false,
+  "pullRequestSynchronizeWorkflowExpected": false,
+  "source": "Live PR queried and source branch fetched from GitHub immediately before application; PR exact head/tree match the frozen ratification pins."
+}

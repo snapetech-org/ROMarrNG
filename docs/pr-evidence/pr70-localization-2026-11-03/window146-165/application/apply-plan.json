@@ -1,0 +1,1831 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W146-W165",
+  "baseHead": "db895a97e9871952a0b952e1d119e32e06cf168d",
+  "baseTree": "f1edf8319eb3dbd29ac5fe1e279216c5b96ecc6a",
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogSha256Before": "2a22dbd87858d646541af1eabef7ef19234af3b5d1c2627378c8430caa8f3252",
+  "catalogSha256After": "bdd28b82dbc9c2b32986c7c53488e54336d944293221afa3bed9b23dd998091e",
+  "catalogMessageCountBefore": 1837,
+  "catalogMessageCountAfter": 1837,
+  "ratifiedLedgerSha256": "1e208a117c742f7b54438e3a95ecd31e2bbadc15625b293a778d9df5139f204a",
+  "targetChangeCount": 60,
+  "heldOrdinal160Count": 12,
+  "translationHashAlgorithm": "SHA-256 of canonical JSON string (UTF-8, ensure_ascii=False, sorted keys, compact separators)",
+  "serialization": "UTF-8 JSON, ensure_ascii=False, indent=2, trailing newline; original key order preserved",
+  "cells": [
+    {
+      "sourceOrdinal": 146,
+      "id": "ui.igdb-covers-genres-and-ratings.6035ecaefc",
+      "locale": "es",
+      "source": "IGDB · covers, genres and ratings",
+      "sourceSha256": "6035ecaefcfac403c95b859ab066eaf7d0843a3fe1aef6a064f4f7b50c5620e2",
+      "currentTarget": "IGDB · cubiertas, géneros y calificaciones",
+      "currentTargetSha256": "68a84ffd2b94d91de4fcef54858e1b64a9965e624d3799fc81fccb8719bee32c",
+      "finalTarget": "IGDB · portadas, géneros y calificaciones",
+      "finalTargetSha256": "fe8a1ac672396f3b58f3ea03a167f8d4e77566e626e379147cfd5e7df48ab8b2",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2535,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "    +(hasIgdb?'<button class=\"btn '+(source==='igdb'?'':'ghost')+'\" data-c-source=\"igdb\">IGDB · covers, genres and ratings</button>':'')",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Use the established Spanish catalog term for game cover art, aligning with the existing Portada/Cover wording.",
+      "finalTargetRawSha256": "e5627b211e2bc473bdeb39fafb30b7eca884f9606bebc45142eb089cb798a98f"
+    },
+    {
+      "sourceOrdinal": 146,
+      "id": "ui.igdb-covers-genres-and-ratings.6035ecaefc",
+      "locale": "zh-Hant",
+      "source": "IGDB · covers, genres and ratings",
+      "sourceSha256": "6035ecaefcfac403c95b859ab066eaf7d0843a3fe1aef6a064f4f7b50c5620e2",
+      "currentTarget": "IGDB · 封面、美術、類型與評分",
+      "currentTargetSha256": "1698b54af1c17888f2072903d8fa1c1fca4b8fa1bedc46d3a17f4ef10b3f6df5",
+      "finalTarget": "IGDB · 封面、類型與評分",
+      "finalTargetSha256": "4434dc403959ee178694fe390de3ed880b359b8f8436606b00e8666c4ff0741d",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2535,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "    +(hasIgdb?'<button class=\"btn '+(source==='igdb'?'':'ghost')+'\" data-c-source=\"igdb\">IGDB · covers, genres and ratings</button>':'')",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Use Traditional Chinese and avoid the redundant 美術 after 封面 already expresses cover art.",
+      "finalTargetRawSha256": "722cbe22558de8a1cd93c7419150f6a9270029aa5814316ae3ced071e0af593a"
+    },
+    {
+      "sourceOrdinal": 146,
+      "id": "ui.igdb-covers-genres-and-ratings.6035ecaefc",
+      "locale": "id",
+      "source": "IGDB · covers, genres and ratings",
+      "sourceSha256": "6035ecaefcfac403c95b859ab066eaf7d0843a3fe1aef6a064f4f7b50c5620e2",
+      "currentTarget": "IGDB · penutup, genre dan rating",
+      "currentTargetSha256": "96eeb58f62fbe7a2b4528b33069dd8a3ec4c48b0ac5586dc39531270db7caa96",
+      "finalTarget": "IGDB · sampul, genre, dan rating",
+      "finalTargetSha256": "24837e902e6c52f66a9f5d5febe2621afeb3eeab45618c95f0a325531635e340",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2535,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "    +(hasIgdb?'<button class=\"btn '+(source==='igdb'?'':'ghost')+'\" data-c-source=\"igdb\">IGDB · covers, genres and ratings</button>':'')",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Penutup means a lid/covering; sampul is the natural term for game cover art.",
+      "finalTargetRawSha256": "6af4a8d86004df802bd59bfd7da71aa317b2fd7b91f31e56088c68ebc14995d4"
+    },
+    {
+      "sourceOrdinal": 147,
+      "id": "ui.import-a-folder-you-own-and-let-roma.a06dc1fe1e",
+      "locale": "es",
+      "source": "Import a folder you own and let ROMarr identify and file what is there.",
+      "sourceSha256": "a06dc1fe1eeab251185918f5b6bf1e25687a3266d3f93df96b7145ad0a1cc8cd",
+      "currentTarget": "Importa una carpeta que posee y deja que ROMarr identifique y archive lo que hay allí.",
+      "currentTargetSha256": "fa4f785b3268944c89d6aa04d5618f82276e533439918bfd4ca6e8850aa1d2b5",
+      "finalTarget": "Importa una carpeta tuya y deja que ROMarr identifique y organice su contenido.",
+      "finalTargetSha256": "78d40f718acb350f3e31affbdc32fa32604000e59652cc3d3ce14b086e599a94",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 5332,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "    +'<a class=\"tile\" href=\"#manualimport\" style=\"text-decoration:none;color:inherit;padding:12px\"><div class=\"nm\">I already have ROMs</div><div class=\"pf\">Import a folder you own and let ROMarr identify and file what is there.</div></a>'",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "The source describes organizing the contents of an owned folder; archivar can suggest putting the files in an archive, and the current formal posee conflicts with the informal imperative Importa.",
+      "finalTargetRawSha256": "0d9c5dcd5b3aad5433c83ebf00c280b0e3da777fd2fdea12b831d1e1c0b24c76"
+    },
+    {
+      "sourceOrdinal": 147,
+      "id": "ui.import-a-folder-you-own-and-let-roma.a06dc1fe1e",
+      "locale": "pt-BR",
+      "source": "Import a folder you own and let ROMarr identify and file what is there.",
+      "sourceSha256": "a06dc1fe1eeab251185918f5b6bf1e25687a3266d3f93df96b7145ad0a1cc8cd",
+      "currentTarget": "Importar uma pasta que você possui e deixar ROMarr identificar e arquivar o que está lá.",
+      "currentTargetSha256": "3e992bf0fa378966cbbce8da53240ed4466be86eb0d1009166af5967caec73c2",
+      "finalTarget": "Importe uma pasta sua e deixe o ROMarr identificar e organizar o conteúdo.",
+      "finalTargetSha256": "f7467f56a794f80e2384037935545258846dae74cf27544b35167c8bf1282085",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 5332,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "    +'<a class=\"tile\" href=\"#manualimport\" style=\"text-decoration:none;color:inherit;padding:12px\"><div class=\"nm\">I already have ROMs</div><div class=\"pf\">Import a folder you own and let ROMarr identify and file what is there.</div></a>'",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Use a complete imperative matching the English instruction and keep the product name unchanged.",
+      "finalTargetRawSha256": "82a52727f2831466838c5868af59a339ceae8c8c03dc649b9260d50313399f3f"
+    },
+    {
+      "sourceOrdinal": 147,
+      "id": "ui.import-a-folder-you-own-and-let-roma.a06dc1fe1e",
+      "locale": "vi",
+      "source": "Import a folder you own and let ROMarr identify and file what is there.",
+      "sourceSha256": "a06dc1fe1eeab251185918f5b6bf1e25687a3266d3f93df96b7145ad0a1cc8cd",
+      "currentTarget": "Nhập một thư mục mà bạn sở hữu và cho phép ROMarr xác định và lưu trữ những gì có.",
+      "currentTargetSha256": "724be5e3307dde13cda179df1b05682a65061bd5bec21f2469b4c50109cb9a80",
+      "finalTarget": "Nhập một thư mục của bạn để ROMarr nhận diện và sắp xếp nội dung bên trong.",
+      "finalTargetSha256": "7257e6a46b570090d8cb93363e0aeb151fb25200d7d40f589df4ad75f53ab54b",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 5332,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "    +'<a class=\"tile\" href=\"#manualimport\" style=\"text-decoration:none;color:inherit;padding:12px\"><div class=\"nm\">I already have ROMs</div><div class=\"pf\">Import a folder you own and let ROMarr identify and file what is there.</div></a>'",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "The current word lưu trữ means store/archive; sắp xếp expresses identifying and organizing the folder contents.",
+      "finalTargetRawSha256": "cf46824b166400ac555267bd3e4a4f382602defc2d5dcad91d59ef1b5f7cab15"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "es",
+      "source": "Import check (minutes)",
+      "sourceSha256": "afebe8564cdbb4c07f4cc0a847eec5a8f8a178563b9a9119a5f5ef48cb3f797d",
+      "currentTarget": "El control de importación (minutos)",
+      "currentTargetSha256": "970a257b85537f7a8149b1b5b336b0c79bc16ec4b51b4c6d46b9185a951a5460",
+      "finalTarget": "Intervalo de comprobación de importación (minutos)",
+      "finalTargetSha256": "021c69a156f6daa9ea04bb60929b0e0e4a5a4dc5feee942bba74197ade5c2bcb",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4469,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  +fld('auto_import_interval_minutes','Import check (minutes)',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "The exact caller is a numeric scheduled interval; name the check interval rather than a generic control.",
+      "finalTargetRawSha256": "eb63fc8a9663dac8a714ae85acc5ce3b21c8f1c1d29b4fe822fe7bd99e28afd2"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "zh-Hans",
+      "source": "Import check (minutes)",
+      "sourceSha256": "afebe8564cdbb4c07f4cc0a847eec5a8f8a178563b9a9119a5f5ef48cb3f797d",
+      "currentTarget": "进口检查(分钟)",
+      "currentTargetSha256": "27c5c5b18213f3d931d597788ed71a9eda94e82fc432e1834792402e9e831a9e",
+      "finalTarget": "导入检查间隔（分钟）",
+      "finalTargetSha256": "0c8a7bf11c4ee4fa9cd85e70869345d8686c551151be92ec7998cc520c562737",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4469,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  +fld('auto_import_interval_minutes','Import check (minutes)',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Use the software term 导入 and clarify that the numeric value is the interval between import checks.",
+      "finalTargetRawSha256": "aef01c6610cfbc5cbfab90b5d73ebd7857e24a66afff4df2f00d2be5b792a3c2"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "hi",
+      "source": "Import check (minutes)",
+      "sourceSha256": "afebe8564cdbb4c07f4cc0a847eec5a8f8a178563b9a9119a5f5ef48cb3f797d",
+      "currentTarget": "आयात चेक ( मिनट)",
+      "currentTargetSha256": "eb634ad1a19c9a0db012f53502ead2cb9f1ad38cdb922a1eb23b3d926b301cd6",
+      "finalTarget": "आयात जाँच का अंतराल (मिनट)",
+      "finalTargetSha256": "7ab3cd1c9d4c947895424f0e38857242a0a9c2b1c49f1f9a5fccbebee882b9a8",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4469,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  +fld('auto_import_interval_minutes','Import check (minutes)',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Remove the mixed English word and malformed spacing; the caller is the import-check interval.",
+      "finalTargetRawSha256": "bb93deffe20bc72f98d1ebbf4ce31930ee7fb3abd9cf26dd90010096898d13f7"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "de",
+      "source": "Import check (minutes)",
+      "sourceSha256": "afebe8564cdbb4c07f4cc0a847eec5a8f8a178563b9a9119a5f5ef48cb3f797d",
+      "currentTarget": "Importprüfung (Minuten)",
+      "currentTargetSha256": "20726dba50f2540e6c6e542004b3b6ff7c075c3c259999318d071912870738e7",
+      "finalTarget": "Intervall der Importprüfung (Minuten)",
+      "finalTargetSha256": "f9aa60f510cba2dadbd935c2577fb5c02040fe48e68bd446672696f28b4c3172",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4469,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  +fld('auto_import_interval_minutes','Import check (minutes)',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "The numeric caller controls the import-check interval; make that interval explicit.",
+      "finalTargetRawSha256": "c93bc8d6f7d9ee56799ab290702cf0958d29b8a4122281e0435e38dd8f60600a"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "fr",
+      "source": "Import check (minutes)",
+      "sourceSha256": "afebe8564cdbb4c07f4cc0a847eec5a8f8a178563b9a9119a5f5ef48cb3f797d",
+      "currentTarget": "Vérification de l’importation (minutes)",
+      "currentTargetSha256": "9c857e69001d3d1f94a8577e7f3d779fa62e1ad90e429ba4e41293451952e7fb",
+      "finalTarget": "Intervalle de vérification de l’importation (minutes)",
+      "finalTargetSha256": "a9996c175b3bfc8b55d494fdddff2552a5cb4738d50182901ed26e55509aca53",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4469,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  +fld('auto_import_interval_minutes','Import check (minutes)',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Clarify that this number is the interval between scheduled import checks.",
+      "finalTargetRawSha256": "b5ab1b280ff5c652bb54ecfde1c72d695a0a922ba5886f2e0baa9eb093eecbb7"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "pt-BR",
+      "source": "Import check (minutes)",
+      "sourceSha256": "afebe8564cdbb4c07f4cc0a847eec5a8f8a178563b9a9119a5f5ef48cb3f797d",
+      "currentTarget": "Verificação de Importação (minutos)",
+      "currentTargetSha256": "7e0ca6e086f7a6b565eeddbb45750e99a559f578534d22ab2fdeba6d27735801",
+      "finalTarget": "Intervalo de verificação da importação (minutos)",
+      "finalTargetSha256": "82266d4ca213dcc6dce4e0e44c53ef9a483b9c656b48d0dfbf4193d775766835",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4469,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  +fld('auto_import_interval_minutes','Import check (minutes)',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Clarify that this numeric field is the interval between import checks.",
+      "finalTargetRawSha256": "419dac27ee60fc01f4af2f86a6b29b0af8b6bc389accba1bd13f4914f986fed2"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "ar",
+      "source": "Import check (minutes)",
+      "sourceSha256": "afebe8564cdbb4c07f4cc0a847eec5a8f8a178563b9a9119a5f5ef48cb3f797d",
+      "currentTarget": "التحقق من الواردات (دقائق)",
+      "currentTargetSha256": "19a4f36c77aaef001b510b735c90111f634d8d0eff98b1c2b972fb885c62cb34",
+      "finalTarget": "الفاصل بين فحوص الاستيراد (بالدقائق)",
+      "finalTargetSha256": "14e691536958e78b3c2b767249490200b16704f978c9b7e5e8f9cb3c65d8fd39",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4469,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  +fld('auto_import_interval_minutes','Import check (minutes)',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "The exact scheduler field is the interval between import checks, not an import verification count.",
+      "finalTargetRawSha256": "e63ac706be4cc0ed348e9ba117c597c425d0e46b0682d3a15696157039c0a86e"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "ko",
+      "source": "Import check (minutes)",
+      "sourceSha256": "afebe8564cdbb4c07f4cc0a847eec5a8f8a178563b9a9119a5f5ef48cb3f797d",
+      "currentTarget": "수입 체크 (분)",
+      "currentTargetSha256": "544d551ad22f348d0f2ca1fe5fc99a34b46a14df7aa7b7786d5c98ce6f0638ac",
+      "finalTarget": "가져오기 확인 간격(분)",
+      "finalTargetSha256": "4b199c46841a629f816953b28311ca77caf5f8f64cf5d6e972bd8501dad009c4",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4469,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  +fld('auto_import_interval_minutes','Import check (minutes)',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Use the software term 가져오기 instead of 수입, which suggests trade imports, and state the interval.",
+      "finalTargetRawSha256": "1789ce7e44b5af2b5417d9974aa4d61ffbbc592d4dc597f717b4945b27c66f82"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "zh-Hant",
+      "source": "Import check (minutes)",
+      "sourceSha256": "afebe8564cdbb4c07f4cc0a847eec5a8f8a178563b9a9119a5f5ef48cb3f797d",
+      "currentTarget": "進口檢查(分鐘)",
+      "currentTargetSha256": "4ca8794dca706fc199f16cb2dd2e34e406c80c5fa6bca26489144b787be1e967",
+      "finalTarget": "匯入檢查間隔（分鐘）",
+      "finalTargetSha256": "3f8d7519404419ffa3702fb8c4d36b8fc0addb07110993a586574c84815c1b1f",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4469,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  +fld('auto_import_interval_minutes','Import check (minutes)',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Use Traditional Chinese 匯入 rather than 進口 and clarify the interval between checks.",
+      "finalTargetRawSha256": "25854e21e98f3edf53d2a6093793140aa74456a201f2e3703b0f69a50d0d45ec"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "vi",
+      "source": "Import check (minutes)",
+      "sourceSha256": "afebe8564cdbb4c07f4cc0a847eec5a8f8a178563b9a9119a5f5ef48cb3f797d",
+      "currentTarget": "Kiểm tra nhập (phút)",
+      "currentTargetSha256": "d0c4015990d51b02707945a2f6eec686f95166419592410375c091767aa41219",
+      "finalTarget": "Khoảng thời gian giữa các lần kiểm tra nhập (phút)",
+      "finalTargetSha256": "e50996d46e3c1495f83531f7519392759fc2ff0e867b4894d22466627de61a4e",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4469,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  +fld('auto_import_interval_minutes','Import check (minutes)',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "The caller is an interval in minutes; express the time between import checks clearly.",
+      "finalTargetRawSha256": "14dc799da30905efc7c8b0a439b1a3f6afb37598449f925ca28117658a1c534c"
+    },
+    {
+      "sourceOrdinal": 148,
+      "id": "ui.import-check-minutes.afebe8564c",
+      "locale": "id",
+      "source": "Import check (minutes)",
+      "sourceSha256": "afebe8564cdbb4c07f4cc0a847eec5a8f8a178563b9a9119a5f5ef48cb3f797d",
+      "currentTarget": "Pemeriksaan impor (menit)",
+      "currentTargetSha256": "a2e3fb02902cbf418dbf30cdfd9826637e8a012968a38849d3582ee918301547",
+      "finalTarget": "Interval pemeriksaan impor (menit)",
+      "finalTargetSha256": "b6463e34e8e024eec2d87f6ff50cce6e23c7f15c22cbf0ed3a85d0db33119b83",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4469,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  +fld('auto_import_interval_minutes','Import check (minutes)',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Clarify that this number is the interval between import checks.",
+      "finalTargetRawSha256": "042eb74bca74d9655ac04d06bb9370d35b69ee679a2d3eee58867ab0bc168484"
+    },
+    {
+      "sourceOrdinal": 149,
+      "id": "ui.import-completed-downloads-automatic.0436b11a02",
+      "locale": "fr",
+      "source": "Import completed downloads automatically",
+      "sourceSha256": "0436b11a02a44a56412042c61699febf7c7515d60c23d953f506db9c7fe2cccf",
+      "currentTarget": "Importer les téléchargements complets automatiquement",
+      "currentTargetSha256": "183bf87f10443c227645b9d598e1e2dc595c0ff17f57022a23c43912dd545bd3",
+      "finalTarget": "Importer automatiquement les téléchargements terminés",
+      "finalTargetSha256": "6060996d749ec9bce5a6ade9de793506097cc9c582f3bea55ed462dfdb0fd373",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4460,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  +chk('auto_import','Import completed downloads automatically',SETTINGS.auto_import)",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Complets can mean complete downloads; the source means downloads whose transfers have finished.",
+      "finalTargetRawSha256": "5dec75f05d33c412bfb5155e2dda5998c008d9454583fa1393146019f9c61aff"
+    },
+    {
+      "sourceOrdinal": 149,
+      "id": "ui.import-completed-downloads-automatic.0436b11a02",
+      "locale": "id",
+      "source": "Import completed downloads automatically",
+      "sourceSha256": "0436b11a02a44a56412042c61699febf7c7515d60c23d953f506db9c7fe2cccf",
+      "currentTarget": "Impor download lengkap secara otomatis",
+      "currentTargetSha256": "5e82086fc806605188bc3a1c116413411ffe6ec20bb42dc7fcc966763308967b",
+      "finalTarget": "Impor unduhan yang telah selesai secara otomatis",
+      "finalTargetSha256": "e3bb8a884b5b12cc67bb8f1c8c922ed4c3401e58b3ea6dd31797edb4f647ca88",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4460,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  +chk('auto_import','Import completed downloads automatically',SETTINGS.auto_import)",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Use Indonesian unduhan for downloads and make completed mean finished rather than complete/whole.",
+      "finalTargetRawSha256": "01e79dfea335a04e68d99ff942be38be3d74f5550f1636e2d034562ad6f9f12d"
+    },
+    {
+      "sourceOrdinal": 150,
+      "id": "ui.import-completed-downloads.fd1a4510eb",
+      "locale": "zh-Hans",
+      "source": "Import completed downloads",
+      "sourceSha256": "fd1a4510eb3f601ce7a793e5515684f9cfde4530ee9bb135363e864aa8096bfc",
+      "currentTarget": "进口完成下载",
+      "currentTargetSha256": "4308c2a7f2cf7efcb43969584db15f538dc308930e3dd5a831d3703d7c615887",
+      "finalTarget": "导入已完成的下载",
+      "finalTargetSha256": "98ac4b1ea97b0ff8a5db4a21d5e51c1e063bc15b609e0cdfe9c5e5eda3f3b735",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 1350,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "            \"ImportCompleted\", \"Import completed downloads\",",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6033,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  const taskNames={ImportCompleted:'Import completed downloads',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Use the software term 导入; 进口 means importing goods/customs.",
+      "finalTargetRawSha256": "b4ee57f37e3d0ef748e11e8e445c00b588b2595964dd56e3d58f52c7ff2c3f0e"
+    },
+    {
+      "sourceOrdinal": 150,
+      "id": "ui.import-completed-downloads.fd1a4510eb",
+      "locale": "hi",
+      "source": "Import completed downloads",
+      "sourceSha256": "fd1a4510eb3f601ce7a793e5515684f9cfde4530ee9bb135363e864aa8096bfc",
+      "currentTarget": "डाउनलोड किए गए आयात",
+      "currentTargetSha256": "8de303aec5775117563941b072b03ee605979c3a46181c1af00216c92485db3f",
+      "finalTarget": "पूरे हो चुके डाउनलोड आयात करें",
+      "finalTargetSha256": "ff3be0f0314771a0fd9def1ef4f1b2699ccb5d0f5bd16ee93fdca0bfbaf6c61f",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 1350,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "            \"ImportCompleted\", \"Import completed downloads\",",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6033,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  const taskNames={ImportCompleted:'Import completed downloads',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "The current wording is garbled; use a clear action for importing finished downloads.",
+      "finalTargetRawSha256": "fb73c31091b1e57892c440936b04a5406a5ede3d892b1898ad2ea9155cab8c6f"
+    },
+    {
+      "sourceOrdinal": 150,
+      "id": "ui.import-completed-downloads.fd1a4510eb",
+      "locale": "ja",
+      "source": "Import completed downloads",
+      "sourceSha256": "fd1a4510eb3f601ce7a793e5515684f9cfde4530ee9bb135363e864aa8096bfc",
+      "currentTarget": "輸入完了ダウンロード",
+      "currentTargetSha256": "fd8c55070377eaba8c0aa46e702923c887cd2b7259c9ae67bc84951e5f98d042",
+      "finalTarget": "完了したダウンロードをインポート",
+      "finalTargetSha256": "1533e6ec81aca62b3a0b19352474a086aacb93417729af210e7c5ad0c6b4730b",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 1350,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "            \"ImportCompleted\", \"Import completed downloads\",",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6033,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  const taskNames={ImportCompleted:'Import completed downloads',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "輸入 means trade imports; use the established software term インポート.",
+      "finalTargetRawSha256": "6d7b9b1662607d690078de04546aaa957af46d55e4a52eca10ad870013f7e15e"
+    },
+    {
+      "sourceOrdinal": 150,
+      "id": "ui.import-completed-downloads.fd1a4510eb",
+      "locale": "pt-BR",
+      "source": "Import completed downloads",
+      "sourceSha256": "fd1a4510eb3f601ce7a793e5515684f9cfde4530ee9bb135363e864aa8096bfc",
+      "currentTarget": "Importação de downloads completos",
+      "currentTargetSha256": "ba4027c73ad4ec1c41ff64a30c563acda09f2afe4d3e4e8821b9711bfce42922",
+      "finalTarget": "Importar downloads concluídos",
+      "finalTargetSha256": "89bdf6ffedf3db39bf95543db9e22cd43e25454cec729e4b5110cf5b6cb97d39",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 1350,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "            \"ImportCompleted\", \"Import completed downloads\",",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6033,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  const taskNames={ImportCompleted:'Import completed downloads',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "The current noun phrase describes an import of complete downloads; the task label names the action on downloads that have finished.",
+      "finalTargetRawSha256": "d4d420ef4fd7b376020d8bb844ccca804e30cc60f2fca7f96a07ed787e96daf0"
+    },
+    {
+      "sourceOrdinal": 150,
+      "id": "ui.import-completed-downloads.fd1a4510eb",
+      "locale": "ko",
+      "source": "Import completed downloads",
+      "sourceSha256": "fd1a4510eb3f601ce7a793e5515684f9cfde4530ee9bb135363e864aa8096bfc",
+      "currentTarget": "수입 완료 다운로드",
+      "currentTargetSha256": "caf65a41b00df0c0421e241bbe6f66058db0ae36481d46d7d6e17c662d2a636e",
+      "finalTarget": "완료된 다운로드 가져오기",
+      "finalTargetSha256": "11870f8de77c5e63e41fd6acbfbc13cdae7709d213d61a4ccf3ad267d76ab930",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 1350,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "            \"ImportCompleted\", \"Import completed downloads\",",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6033,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  const taskNames={ImportCompleted:'Import completed downloads',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Use the software term 가져오기 rather than 수입, which means trade/customs import.",
+      "finalTargetRawSha256": "115276432318ffca9dd5daa3664bd8595d53e10a4f5c8558bc6d877c30c5adcb"
+    },
+    {
+      "sourceOrdinal": 150,
+      "id": "ui.import-completed-downloads.fd1a4510eb",
+      "locale": "zh-Hant",
+      "source": "Import completed downloads",
+      "sourceSha256": "fd1a4510eb3f601ce7a793e5515684f9cfde4530ee9bb135363e864aa8096bfc",
+      "currentTarget": "進口完成下載",
+      "currentTargetSha256": "60914bd12ed1e25eb7df7143d83748b8f0e3aa023b84a3a680c3116a91634cab",
+      "finalTarget": "匯入已完成的下載",
+      "finalTargetSha256": "f2ef92cd3f8ef7fd04a77b4a179185da9454ebbdf21ae309e66f2f82f489dc8f",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 1350,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "            \"ImportCompleted\", \"Import completed downloads\",",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6033,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  const taskNames={ImportCompleted:'Import completed downloads',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Use Traditional Chinese 匯入 rather than 進口, which means importing goods.",
+      "finalTargetRawSha256": "9037ce2912c9a11b1525399b677e7d6c2dad1026fb64fb74bc373ae406df41e9"
+    },
+    {
+      "sourceOrdinal": 150,
+      "id": "ui.import-completed-downloads.fd1a4510eb",
+      "locale": "id",
+      "source": "Import completed downloads",
+      "sourceSha256": "fd1a4510eb3f601ce7a793e5515684f9cfde4530ee9bb135363e864aa8096bfc",
+      "currentTarget": "Impor download lengkap",
+      "currentTargetSha256": "2ac07dd79182cecc2c3e2adfa3e20f136ca3253fa9d6a3b14d3bbaeb214ffd7c",
+      "finalTarget": "Impor unduhan yang telah selesai",
+      "finalTargetSha256": "5a225520eb7cc3ab8b53f1a56bc581b7874f265463182a605cdf20c8da3b11c9",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 1350,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "            \"ImportCompleted\", \"Import completed downloads\",",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6033,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  const taskNames={ImportCompleted:'Import completed downloads',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Use unduhan for downloads and distinguish finished downloads from “complete” downloads.",
+      "finalTargetRawSha256": "dd0ea7733809c0a84a104d16a53407218244cb7adad62436de1edf67e18c3d17"
+    },
+    {
+      "sourceOrdinal": 152,
+      "id": "ui.imported-from-the-existing-es-de-gam.5fa9036446",
+      "locale": "pt-BR",
+      "source": "Imported from the existing ES-DE gamelist; review before renaming",
+      "sourceSha256": "5fa9036446446bd34d53192e5a4d20fb2b361ff2e386192f189716ab2502cbf4",
+      "currentTarget": "Importado da lista de jogos ES-DE existente; revisão antes de renomear",
+      "currentTargetSha256": "ca61110974ef08184004a7900c651b34700b9257d67ba35e4cf5dac1790764f4",
+      "finalTarget": "Importado da lista de jogos ES-DE existente; revise o título antes de renomear.",
+      "finalTargetSha256": "9303e403045cd530344e23db428bbb1ce2f5dcda48b37cbd9fd5f762c4f12188",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/organizer.py",
+          "line": 1623,
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+          "lineText": "                            \"Imported from the existing ES-DE gamelist; review before renaming\"",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5605,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'Imported from the existing ES-DE gamelist; review before renaming',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Complete the review instruction and identify the title as what must be checked before renaming; preserve ES-DE.",
+      "finalTargetRawSha256": "ea7c497732df38bf052592c8b17fbf19b03a8f266ca4524c0f79d4b7f2d06bf6"
+    },
+    {
+      "sourceOrdinal": 152,
+      "id": "ui.imported-from-the-existing-es-de-gam.5fa9036446",
+      "locale": "ar",
+      "source": "Imported from the existing ES-DE gamelist; review before renaming",
+      "sourceSha256": "5fa9036446446bd34d53192e5a4d20fb2b361ff2e386192f189716ab2502cbf4",
+      "currentTarget": "استيراد من قائمة الألعاب ES-DE الحالية؛ مراجعة قبل إعادة تسمية",
+      "currentTargetSha256": "2e7ef044096a91411e1035e8d3ebb36e12b3903b937085443fd8f8d9c380db44",
+      "finalTarget": "تم الاستيراد من قائمة الألعاب الحالية في ES-DE؛ راجع العنوان قبل إعادة تسميته.",
+      "finalTargetSha256": "f7d4877d71a45876ec374da77cfe3f945ff5ac759140349e0bf5481ef4cfa46f",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/organizer.py",
+          "line": 1623,
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+          "lineText": "                            \"Imported from the existing ES-DE gamelist; review before renaming\"",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5605,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'Imported from the existing ES-DE gamelist; review before renaming',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Use a completed-import sentence and make the title the object of the review instruction; preserve ES-DE.",
+      "finalTargetRawSha256": "7829a6f54a045bf041efc583da392f650765758db4908c54eebe3a34bed5de5d"
+    },
+    {
+      "sourceOrdinal": 153,
+      "id": "ui.imported-imported-of-total-finished.5726eabd36",
+      "locale": "hi",
+      "source": "imported {imported} of {total} finished download(s)",
+      "sourceSha256": "5726eabd36e98b027d04d3e62d8c722ceb631846ca91b12e874a53105b3a727a",
+      "currentTarget": "पूरी हुई {total} डाउनलोड में से {imported} आयात किए गए",
+      "currentTargetSha256": "2ea728a0d2db260aefeea1527513b2968f434651b44dcf3332ebd68e2ac75c77",
+      "finalTarget": "पूरे हुए {total} डाउनलोड में से {imported} आयात किए गए",
+      "finalTargetSha256": "6b3218e114f3c51a908d2c034f6ac5c35e1da587bd35264e283e2d04e7b1b636",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 5202,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "            \"message\": f\"imported {ok} of {len(done)} finished download(s)\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5204,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                \"key\": \"ui.imported-imported-of-total-finished.5726eabd36\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 943,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.imported-imported-of-total-finished.5726eabd36',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "Correct the agreement and word order for finished downloads while preserving both numeric placeholders.",
+      "finalTargetRawSha256": "a1f080c5329087cfdef2fdfed5decd7369680b595872e04ab71cb92a4fd24d28"
+    },
+    {
+      "sourceOrdinal": 154,
+      "id": "ui.imported-local-metadata-review-title.5db9952dae",
+      "locale": "es",
+      "source": "Imported local metadata · review title",
+      "sourceSha256": "5db9952dae52d55b551c8003f5559747d05d8c4e853c8e30b734cfe64bf0609c",
+      "currentTarget": "Metadatos locales importados · título de revisión",
+      "currentTargetSha256": "33b13eb266c1364d9abb46f2ceb92aa3b95c4675e5c03591850dcc30b720ca8e",
+      "finalTarget": "Metadatos locales importados · revisar el título",
+      "finalTargetSha256": "d527727536ce0d5b8bf6c92208ddb054825862ac30a71676b5e5eb2aab82faf4",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 5750,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "        local_metadata:'Imported local metadata · review title',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Make the second half an instruction to review the title, rather than the noun phrase “title of review”.",
+      "finalTargetRawSha256": "dd2ecc75b3086af48f5aa398cf5507012a0150c813a75d9e7379d52b57186925"
+    },
+    {
+      "sourceOrdinal": 154,
+      "id": "ui.imported-local-metadata-review-title.5db9952dae",
+      "locale": "ar",
+      "source": "Imported local metadata · review title",
+      "sourceSha256": "5db9952dae52d55b551c8003f5559747d05d8c4e853c8e30b734cfe64bf0609c",
+      "currentTarget": "استيراد البيانات المحلية · مراجعة العنوان",
+      "currentTargetSha256": "da7ea19a66e83d58dde25caf15c3488754092a947ec6b2614f60489230959954",
+      "finalTarget": "تم استيراد البيانات الوصفية المحلية · راجع العنوان",
+      "finalTargetSha256": "1bb1fc66c85a08b0e3075d3dca0951dbaba0694d533c9a96e231013f539edfda",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 5750,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "        local_metadata:'Imported local metadata · review title',",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Use the precise metadata term and express the completed import plus review-title instruction.",
+      "finalTargetRawSha256": "606fbed9e0c28071e19b9958037a4c2ee11321767d6c82c6e75091516f5d20cc"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "es",
+      "source": "Imported {total}",
+      "sourceSha256": "5f100c08788496c6ec6b0a20029b6cca6291d4583b500a5440d82ed2c7aed9a9",
+      "currentTarget": "Importación {total}",
+      "currentTargetSha256": "fb3871c0309bc222e7575a4478528848d15745c78e0a38d2e8160df28f06d319",
+      "finalTarget": "Se importaron {total}",
+      "finalTargetSha256": "2203c1024630b3739055f340fc6871b617fd320286d068b48fd09f3b52c18622",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 5401,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                \"message\": f\"Imported {len(done)}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5403,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                    \"key\": \"ui.imported-total.5f100c0878\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/notify.py",
+          "line": 353,
+          "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+          "lineText": "    return Message(event=event, title=f\"Imported {title}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 936,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.imported-total.5f100c0878',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "Use a natural completed-action count without inventing an item noun.",
+      "finalTargetRawSha256": "95507be4a6f035cc2422884f4fd7c7f52cb8672617811ff15d86f488fa844e65"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "zh-Hans",
+      "source": "Imported {total}",
+      "sourceSha256": "5f100c08788496c6ec6b0a20029b6cca6291d4583b500a5440d82ed2c7aed9a9",
+      "currentTarget": "进口 {total}",
+      "currentTargetSha256": "968759c03732c35cb6d3d9057ded4d5f3685137c68f6be2e061b2ff3be51194f",
+      "finalTarget": "已导入 {total}",
+      "finalTargetSha256": "ab96513b317f43f58e12a5b5d440f5023b3ec690ad51fb2a1494675da3fad2b1",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 5401,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                \"message\": f\"Imported {len(done)}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5403,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                    \"key\": \"ui.imported-total.5f100c0878\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/notify.py",
+          "line": 353,
+          "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+          "lineText": "    return Message(event=event, title=f\"Imported {title}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 936,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.imported-total.5f100c0878',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "Use the software term 导入 and keep the count unit-neutral, as in the source.",
+      "finalTargetRawSha256": "cdd3e3e4e954c1dcf9165a82bfbcdb8503c06394a8b14e2660d8bc2ef8eb26e0"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "hi",
+      "source": "Imported {total}",
+      "sourceSha256": "5f100c08788496c6ec6b0a20029b6cca6291d4583b500a5440d82ed2c7aed9a9",
+      "currentTarget": "आयातित {total}",
+      "currentTargetSha256": "f96c102fc79f18cb252867921fa64c8a8f21aabc53c1b25ad3c2a8aa310dd44f",
+      "finalTarget": "आयात किए गए: {total}",
+      "finalTargetSha256": "ae8ffb677f9ffa32972d5be055f11a56f89f16cc8a7750ccf5e7b17db1ea35c8",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 5401,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                \"message\": f\"Imported {len(done)}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5403,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                    \"key\": \"ui.imported-total.5f100c0878\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/notify.py",
+          "line": 353,
+          "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+          "lineText": "    return Message(event=event, title=f\"Imported {title}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 936,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.imported-total.5f100c0878',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "Use a grammatical completed-action count and avoid adding a generic item noun.",
+      "finalTargetRawSha256": "b96410ca8731755a9b7c2552a120dab7c5b8fc61a4a1c1ed1a9945339179e317"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "de",
+      "source": "Imported {total}",
+      "sourceSha256": "5f100c08788496c6ec6b0a20029b6cca6291d4583b500a5440d82ed2c7aed9a9",
+      "currentTarget": "Importiert {total}",
+      "currentTargetSha256": "c58e853c7897f52ee1cba95d6c9193bfb632012737043c0f2f4aec8f18afa418",
+      "finalTarget": "Importiert: {total}",
+      "finalTargetSha256": "2035127be4b8d341a620e7fa0d820433aa5f5ae5328489d58402f3a1b27eb13b",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 5401,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                \"message\": f\"Imported {len(done)}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5403,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                    \"key\": \"ui.imported-total.5f100c0878\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/notify.py",
+          "line": 353,
+          "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+          "lineText": "    return Message(event=event, title=f\"Imported {title}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 936,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.imported-total.5f100c0878',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "Use punctuation to make the count label clear.",
+      "finalTargetRawSha256": "1bcb193e80c4b4efd9eecee731f43340b1631aa6d6acb9d9a7436fab17b51e81"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "ja",
+      "source": "Imported {total}",
+      "sourceSha256": "5f100c08788496c6ec6b0a20029b6cca6291d4583b500a5440d82ed2c7aed9a9",
+      "currentTarget": "輸入 {total}",
+      "currentTargetSha256": "879d0cccdfda48d8a28f2d153db4f2bbea6f3222deee22fbaba661de0bd354c7",
+      "finalTarget": "インポート済み：{total}",
+      "finalTargetSha256": "f51eb7b56939a3f5bf58f6e5067b20886bc909bac3792e9d4c2eeb1088ec8a56",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 5401,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                \"message\": f\"Imported {len(done)}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5403,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                    \"key\": \"ui.imported-total.5f100c0878\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/notify.py",
+          "line": 353,
+          "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+          "lineText": "    return Message(event=event, title=f\"Imported {title}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 936,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.imported-total.5f100c0878',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "輸入 means importing goods; use the software term and a completed-action count label.",
+      "finalTargetRawSha256": "bed108323a5b67f98e28b2dafb7050f6c3a96159eaab56614d4b06c5a8433116"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "fr",
+      "source": "Imported {total}",
+      "sourceSha256": "5f100c08788496c6ec6b0a20029b6cca6291d4583b500a5440d82ed2c7aed9a9",
+      "currentTarget": "Importé {total}",
+      "currentTargetSha256": "576cc8293ea087e04714f0ebf49a22db373ae8ad8bf0ca5e1609664bccc52a75",
+      "finalTarget": "Importés : {total}",
+      "finalTargetSha256": "c74031b105b26fc35a1c500703a54df996ed822d698d424d04760caa25b9a199",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 5401,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                \"message\": f\"Imported {len(done)}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5403,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                    \"key\": \"ui.imported-total.5f100c0878\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/notify.py",
+          "line": 353,
+          "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+          "lineText": "    return Message(event=event, title=f\"Imported {title}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 936,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.imported-total.5f100c0878',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "Use the plural participle for a count of imported downloads, without adding a generic item noun.",
+      "finalTargetRawSha256": "de32f30fb8d26583da2ee0619c96012686bcb163564b935a710369b0da485c15"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "pt-BR",
+      "source": "Imported {total}",
+      "sourceSha256": "5f100c08788496c6ec6b0a20029b6cca6291d4583b500a5440d82ed2c7aed9a9",
+      "currentTarget": "Importação {total}",
+      "currentTargetSha256": "1f71b4865f522e61d64463faf8766138ff44e48988830b750a49cb68b8d2b667",
+      "finalTarget": "Importados: {total}",
+      "finalTargetSha256": "2dad6aadfe6e41122fc0acad51bf86b9195d53dd5991dd48b37a74e6c78ea153",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 5401,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                \"message\": f\"Imported {len(done)}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5403,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                    \"key\": \"ui.imported-total.5f100c0878\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/notify.py",
+          "line": 353,
+          "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+          "lineText": "    return Message(event=event, title=f\"Imported {title}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 936,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.imported-total.5f100c0878',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "Importação {total} is a noun phrase; the exact caller reports a completed import result.",
+      "finalTargetRawSha256": "373607784bf367396376d62e5ade0e2ef8b4958bb5485194994b3658c3129f93"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "ar",
+      "source": "Imported {total}",
+      "sourceSha256": "5f100c08788496c6ec6b0a20029b6cca6291d4583b500a5440d82ed2c7aed9a9",
+      "currentTarget": "استيراد {total}",
+      "currentTargetSha256": "e1291f12779f3a824d6c7278fe7caadfa5e9753c16e4ed39febcb211223d036b",
+      "finalTarget": "تم استيراد {total}",
+      "finalTargetSha256": "d28a0f911ec2fd7fc09c9b63e639b4eef6ecd7bcb3bb25a24a01137a65931072",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 5401,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                \"message\": f\"Imported {len(done)}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5403,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                    \"key\": \"ui.imported-total.5f100c0878\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/notify.py",
+          "line": 353,
+          "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+          "lineText": "    return Message(event=event, title=f\"Imported {title}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 936,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.imported-total.5f100c0878',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "استيراد {total} is a noun/infinitive, but the caller returns a completed-import result.",
+      "finalTargetRawSha256": "40e391fc63d0b7368c946900898b29afee4a3407cc26914e226522fbaf6c55ef"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "ko",
+      "source": "Imported {total}",
+      "sourceSha256": "5f100c08788496c6ec6b0a20029b6cca6291d4583b500a5440d82ed2c7aed9a9",
+      "currentTarget": "수입 {total}",
+      "currentTargetSha256": "aa543074b291ae5336eae837c02cb63827495a9bb2f84ad3781c1a1d8106234e",
+      "finalTarget": "가져온 수: {total}",
+      "finalTargetSha256": "81f316533e405c5ee6ca9649edd3e4bab34652d8ab00cb6d4f80d64ab274cc51",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 5401,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                \"message\": f\"Imported {len(done)}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5403,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                    \"key\": \"ui.imported-total.5f100c0878\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/notify.py",
+          "line": 353,
+          "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+          "lineText": "    return Message(event=event, title=f\"Imported {title}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 936,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.imported-total.5f100c0878',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "The exact caller passes the number of finished downloads; state the count without adding an unsupported generic item noun.",
+      "finalTargetRawSha256": "a916ddb5e38c877e366fabb93f2ec64ca7acaceb9fa31cfbfa90441f7b3d6f0c"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "zh-Hant",
+      "source": "Imported {total}",
+      "sourceSha256": "5f100c08788496c6ec6b0a20029b6cca6291d4583b500a5440d82ed2c7aed9a9",
+      "currentTarget": "進口 {total}",
+      "currentTargetSha256": "c42ba742032ac116ef1ab0106a7f7210df82d32945805477a71f4e95071be735",
+      "finalTarget": "已匯入 {total}",
+      "finalTargetSha256": "4b422b1e527d830239e77929ee3277c17a67172c82fb32665c46b5a3d5eba0df",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 5401,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                \"message\": f\"Imported {len(done)}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5403,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                    \"key\": \"ui.imported-total.5f100c0878\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/notify.py",
+          "line": 353,
+          "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+          "lineText": "    return Message(event=event, title=f\"Imported {title}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 936,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.imported-total.5f100c0878',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "Use Traditional Chinese 匯入 and keep the count unit-neutral, as in the source.",
+      "finalTargetRawSha256": "a231a2146c67db4476115706d82051eca59297e1b34913586bf82f235852a2d9"
+    },
+    {
+      "sourceOrdinal": 155,
+      "id": "ui.imported-total.5f100c0878",
+      "locale": "id",
+      "source": "Imported {total}",
+      "sourceSha256": "5f100c08788496c6ec6b0a20029b6cca6291d4583b500a5440d82ed2c7aed9a9",
+      "currentTarget": "Mengimport {total}",
+      "currentTargetSha256": "f320d4579f020c11638193801c339d5e9f7ed684f4cbbdf6c749e828d2a9d9b5",
+      "finalTarget": "Diimpor: {total}",
+      "finalTargetSha256": "2a46325e64e5b4b4bcbf7c23f9b6012ae5f46d2cb569b854caaeac30baae4028",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 5401,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                \"message\": f\"Imported {len(done)}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5403,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                    \"key\": \"ui.imported-total.5f100c0878\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/notify.py",
+          "line": 353,
+          "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+          "lineText": "    return Message(event=event, title=f\"Imported {title}\",",
+          "matchType": "dynamic-template-source-pattern"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 936,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.imported-total.5f100c0878',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "Use a completed passive count label rather than the ongoing verb Mengimport.",
+      "finalTargetRawSha256": "202596ca4682cf9b045e43bdd6903a43c947aa4e150245dc025f246281df8db5"
+    },
+    {
+      "sourceOrdinal": 157,
+      "id": "ui.in-a-game.a0458668e7",
+      "locale": "zh-Hant",
+      "source": "In a game",
+      "sourceSha256": "a0458668e766d340ef8a534827ba0a287ada6744b35a4eed8cbfacf1692333f3",
+      "currentTarget": "在一個游戲中",
+      "currentTargetSha256": "9e99b56fdcde98fc9173d76282349a966c59c4c8ffe412da40cbb7bd9e3599eb",
+      "finalTarget": "正在遊戲中",
+      "finalTargetSha256": "81fbba2bc6daf773c443be61647fb5d871ea1c59a99b7e77be20f21de2a73c9a",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4777,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "      <div><b>${m.busy?'In a game':'Idle'}</b><span>State</span></div>",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Use Traditional Chinese 遊戲; the current value contains Simplified 戏. The caller is a live busy-state label.",
+      "finalTargetRawSha256": "274e06bbf465baaf05bfc62994bc80a15a6552ce2321f9d6cddaff6f9d84844d"
+    },
+    {
+      "sourceOrdinal": 158,
+      "id": "ui.in-library.be6339943d",
+      "locale": "hi",
+      "source": "In library",
+      "sourceSha256": "be6339943daa231feab8786b8842338a0b4d255bc44d5ba38d8f76c960d19a0e",
+      "currentTarget": "पुस्तकालय में",
+      "currentTargetSha256": "c7192b72afdaf4cd435c642beeed95097763f2f2a2da240c28a7f5feea219e47",
+      "finalTarget": "गेम लाइब्रेरी में",
+      "finalTargetSha256": "a9da7813416f4979a80cad040445b3efbc1517bf6ef791755b6b0605d550e7e9",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 3710,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "          <td>${(v.base||{}).available?'In library':'<span style=\"color:var(--dim)\">Not in library</span>'}</td></tr>`;",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "The patch search checks for the base game in the user's game collection; पुस्तकालय suggests a public book library and conflicts with existing लाइब्रेरी usage.",
+      "finalTargetRawSha256": "8d7a73f5c379171303430257d9080f170f034061dbc81832d2a0f83a62d4c0b7"
+    },
+    {
+      "sourceOrdinal": 158,
+      "id": "ui.in-library.be6339943d",
+      "locale": "id",
+      "source": "In library",
+      "sourceSha256": "be6339943daa231feab8786b8842338a0b4d255bc44d5ba38d8f76c960d19a0e",
+      "currentTarget": "di perpustakaan",
+      "currentTargetSha256": "1cf4144c1545088ba3e400c200f475dec8e4e00d83fbecfb3c4985c09260d1ab",
+      "finalTarget": "di koleksi game",
+      "finalTargetSha256": "04dbccd1ce0db910e4cba193e1278ea5ca9cbcc84686bca6a808e3cd1f69df38",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 3710,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "          <td>${(v.base||{}).available?'In library':'<span style=\"color:var(--dim)\">Not in library</span>'}</td></tr>`;",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "The glossary defines the library as the user’s game collection; avoid wording that suggests a public library.",
+      "finalTargetRawSha256": "a6a7301ea73e3511748ec42daabd6f7ec77cdb6d706af43e1d41e0246fd52810"
+    },
+    {
+      "sourceOrdinal": 159,
+      "id": "ui.integration-guide.02a0a9e2c2",
+      "locale": "de",
+      "source": "Integration guide",
+      "sourceSha256": "02a0a9e2c23ddca5fd31ec188143d7650492cc327743dfae8200bdc15c8385de",
+      "currentTarget": "Integrationsführer",
+      "currentTargetSha256": "d45eae4a8a03415a80db61dfb6b30b5d92c6134a39031fe7d3b91c14698e5493",
+      "finalTarget": "Integrationsleitfaden",
+      "finalTargetSha256": "375cdc997b27dd6dfca39e68b66837be6ec9358b8e1f0abcf5d99c6ad5ffec5f",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2311,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "    +'<a class=\"help\" href=\"https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md\" target=\"_blank\" rel=\"noopener noreferrer\">'+interfaceMarkup('ui.integration-guide.02a0a9e2c2')+'</a>'",
+          "matchType": "stable-message-id-call-or-template"
+        }
+      ],
+      "rationale": "Integrationsführer can suggest a person or leader; the same catalog uses Integrationsleitfaden for the case-distinct lowercase guide label.",
+      "finalTargetRawSha256": "25a216405c96514998e662a7b50eaa1be37c665bb5a8b57476c21be5aa87aef9"
+    },
+    {
+      "sourceOrdinal": 159,
+      "id": "ui.integration-guide.02a0a9e2c2",
+      "locale": "zh-Hant",
+      "source": "Integration guide",
+      "sourceSha256": "02a0a9e2c23ddca5fd31ec188143d7650492cc327743dfae8200bdc15c8385de",
+      "currentTarget": "集成指南",
+      "currentTargetSha256": "f98e557259801681fef28113073ee237078f3e1dd42a6c116cf8ced66abd3b51",
+      "finalTarget": "整合指南",
+      "finalTargetSha256": "b0ddb9c79d2634655404f1a32c309e75bf4097d034606578f8c1be3ddb18a7ec",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2311,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "    +'<a class=\"help\" href=\"https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md\" target=\"_blank\" rel=\"noopener noreferrer\">'+interfaceMarkup('ui.integration-guide.02a0a9e2c2')+'</a>'",
+          "matchType": "stable-message-id-call-or-template"
+        }
+      ],
+      "rationale": "集成指南 is the Simplified Chinese rendering; the existing Traditional Chinese integration-guide entry uses 整合指南.",
+      "finalTargetRawSha256": "7b5bd491d068b9878b8cc18f6d7aebe8287a6dd68e63cb1c9aefed79455d1ac0"
+    },
+    {
+      "sourceOrdinal": 161,
+      "id": "ui.internet-archive-refused-the-request.515fff2c13",
+      "locale": "de",
+      "source": "Internet Archive refused the request",
+      "sourceSha256": "515fff2c13ae903881f998793afbe7b442fa49c8c18a52f430c9328c3810009a",
+      "currentTarget": "Internet Archive weigerte die Anfrage",
+      "currentTargetSha256": "cde3cae8f17a519ebb8a744b15712712adb0ab1df76aad070db7f0e4157887dc",
+      "finalTarget": "Internet Archive hat die Anfrage abgelehnt.",
+      "finalTargetSha256": "ded6514e677f8897c8f19dee81d43d1068c67c0e76f468922dcf6be71e1d788e",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 2057,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                            \"message\": \"Internet Archive refused the request\",",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 2059,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                                \"key\": \"ui.internet-archive-refused-the-request.515fff2c13\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 971,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.internet-archive-refused-the-request.515fff2c13',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "The current German verb phrase is ungrammatical; use a complete rejection sentence.",
+      "finalTargetRawSha256": "0c6664ce28bb7bf9150aaedb8607c220e0b86bb4039ce2be409ef4a4b2533f30"
+    },
+    {
+      "sourceOrdinal": 161,
+      "id": "ui.internet-archive-refused-the-request.515fff2c13",
+      "locale": "ja",
+      "source": "Internet Archive refused the request",
+      "sourceSha256": "515fff2c13ae903881f998793afbe7b442fa49c8c18a52f430c9328c3810009a",
+      "currentTarget": "Internet Archive 申請を拒否",
+      "currentTargetSha256": "63a648039a8794a14d5379965c61400ee53328fe402e0e070197574afbdb517e",
+      "finalTarget": "Internet Archive はリクエストを拒否しました。",
+      "finalTargetSha256": "346a802d37505e9aef9ac9b5ca71a7b4b84b9f249e8290373db3d1f7649f3137",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 2057,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                            \"message\": \"Internet Archive refused the request\",",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 2059,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                                \"key\": \"ui.internet-archive-refused-the-request.515fff2c13\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 971,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.internet-archive-refused-the-request.515fff2c13',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "Use a complete, natural sentence for this authored refusal message.",
+      "finalTargetRawSha256": "11819d3495f54d520e2db336bd92d1fbac5e5251acf089aca909542d789e6210"
+    },
+    {
+      "sourceOrdinal": 161,
+      "id": "ui.internet-archive-refused-the-request.515fff2c13",
+      "locale": "ko",
+      "source": "Internet Archive refused the request",
+      "sourceSha256": "515fff2c13ae903881f998793afbe7b442fa49c8c18a52f430c9328c3810009a",
+      "currentTarget": "Internet Archive 요청을 거부",
+      "currentTargetSha256": "a4927f862b96452ab0c949b1eea882e15d43064ec1abd1f5d2bebc474fa515d1",
+      "finalTarget": "Internet Archive가 요청을 거부했습니다.",
+      "finalTargetSha256": "cff79a1aeef1535d871f54c2e26340bf83bb8b29d98a9c62d86c39e5383f5c59",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/app.py",
+          "line": 2057,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                            \"message\": \"Internet Archive refused the request\",",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 2059,
+          "fileSha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231",
+          "lineText": "                                \"key\": \"ui.internet-archive-refused-the-request.515fff2c13\",",
+          "matchType": "stable-message-id-in-code"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 971,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "  'ui.internet-archive-refused-the-request.515fff2c13',",
+          "matchType": "stable-message-id-in-code"
+        }
+      ],
+      "rationale": "The current Korean verb is an incomplete stem; use a complete past-tense refusal sentence.",
+      "finalTargetRawSha256": "de95d3758b9b271029ab2241cbbc88134234b6aab60debfa7f2ac134af214a37"
+    },
+    {
+      "sourceOrdinal": 162,
+      "id": "ui.invalid-game-identity.0efd907d22",
+      "locale": "ja",
+      "source": "Invalid game identity.",
+      "sourceSha256": "0efd907d22cebd1800d5df2f3c60dd3d0adb15a8aa6dc2d3969e64d0d31fe331",
+      "currentTarget": "無効なゲームアイデンティティ",
+      "currentTargetSha256": "5a3fcbae7fe3d9e3c30aa3d0ecbb6f9ba96fe315618e807812e8e675d534b693",
+      "finalTarget": "ゲームの識別情報が無効です。",
+      "finalTargetSha256": "ae88c6354e8e8a948c82a39488f029aa4c1dd2cb810504fba638ef9ea5fa02d9",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/organizer.py",
+          "line": 1753,
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+          "lineText": "            raise ValueError(\"Invalid game identity.\")",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/organizer.py",
+          "line": 2208,
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+          "lineText": "            raise ValueError(\"Invalid game identity.\")",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Replace the awkward アイデンティティ loanword with a natural game-identifier error.",
+      "finalTargetRawSha256": "cbb0b2df500343a632b8c45977995fc6aa66cd77f6b057b5477d67c357a63a9b"
+    },
+    {
+      "sourceOrdinal": 162,
+      "id": "ui.invalid-game-identity.0efd907d22",
+      "locale": "fr",
+      "source": "Invalid game identity.",
+      "sourceSha256": "0efd907d22cebd1800d5df2f3c60dd3d0adb15a8aa6dc2d3969e64d0d31fe331",
+      "currentTarget": "L’identité du jeu invalide.",
+      "currentTargetSha256": "5cad1bd5d4f52ccce027a9c59968d10bc30f3e8ac33a4b196f18965eae4cd1e0",
+      "finalTarget": "L’identité du jeu n’est pas valide.",
+      "finalTargetSha256": "cef6e4cb40e90c141353f6724e04ed5bce9aba7fff5dc20207c7a2d8158a2d60",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/organizer.py",
+          "line": 1753,
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+          "lineText": "            raise ValueError(\"Invalid game identity.\")",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/organizer.py",
+          "line": 2208,
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+          "lineText": "            raise ValueError(\"Invalid game identity.\")",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "The current French phrase lacks a verb and is not a complete error message.",
+      "finalTargetRawSha256": "84291d2f29f3cfa260aa713e4dcc9c25e4a8c146303bbe8357e27ded44bf400c"
+    },
+    {
+      "sourceOrdinal": 162,
+      "id": "ui.invalid-game-identity.0efd907d22",
+      "locale": "ko",
+      "source": "Invalid game identity.",
+      "sourceSha256": "0efd907d22cebd1800d5df2f3c60dd3d0adb15a8aa6dc2d3969e64d0d31fe331",
+      "currentTarget": "무효 게임 정체성",
+      "currentTargetSha256": "3bec56308015c5453c5350f6ab15bae9db92393596eab13baf5b0a0ec860b57b",
+      "finalTarget": "게임 식별자가 유효하지 않습니다.",
+      "finalTargetSha256": "c89b11552b7117890d0e1ffd60e6339eea92bcc437a39b8e85815895fb3e083e",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/organizer.py",
+          "line": 1753,
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+          "lineText": "            raise ValueError(\"Invalid game identity.\")",
+          "matchType": "exact-source-literal"
+        },
+        {
+          "path": "romarr/organizer.py",
+          "line": 2208,
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+          "lineText": "            raise ValueError(\"Invalid game identity.\")",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "The caller validates a stable identifier; use 식별자 rather than a person’s identity or broad information.",
+      "finalTargetRawSha256": "a85ff2f38618185de13a4e23205b247437db559fc035522e57190591498fde69"
+    },
+    {
+      "sourceOrdinal": 163,
+      "id": "ui.invalid-hub-result-detail.4d640652cb",
+      "locale": "zh-Hans",
+      "source": "invalid hub result: {detail}",
+      "sourceSha256": "4d640652cb0cf26ccfd324f595eecae85a0ba73340747b375b604728968f162b",
+      "currentTarget": "无效中心结果: {detail}",
+      "currentTargetSha256": "dc8fcbc914fac94e6d34a44d76dc422a80f27143cab1f0753d794fb6d3456989",
+      "finalTarget": "Hub 返回的结果无效：{detail}",
+      "finalTargetSha256": "0c9a382f25f7ed880185c64c734b377c860cb4c1d01394fb24a0b0a57e7c4d39",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/hub.py",
+          "line": 588,
+          "fileSha256": "4d8207aa01f7a7810dd26f60b105eac14927042b3f652ab3a461a5efdc9bc9a7",
+          "lineText": "        return {\"ok\": False, \"error\": f\"invalid hub result: {exc}\", \"files\": []}",
+          "matchType": "dynamic-template-source-pattern"
+        }
+      ],
+      "rationale": "中心 means a physical/central center; the caller parses a software hub result. Preserve the technical Hub term and opaque detail.",
+      "finalTargetRawSha256": "79bf4d5bdbfb74fcf12237a76e62dba10a3418eba731bf9acd2df88344ed4f5e"
+    },
+    {
+      "sourceOrdinal": 163,
+      "id": "ui.invalid-hub-result-detail.4d640652cb",
+      "locale": "ja",
+      "source": "invalid hub result: {detail}",
+      "sourceSha256": "4d640652cb0cf26ccfd324f595eecae85a0ba73340747b375b604728968f162b",
+      "currentTarget": "無効なハブ結果: {detail}",
+      "currentTargetSha256": "8965f8d69e23acfeb86280c12eb92719cc122818ae713f49786c0a511b190b54",
+      "finalTarget": "ハブの結果が無効です：{detail}",
+      "finalTargetSha256": "e24bbc416d3301c9d3ea16713649540782b83abde8db72cdc663f067713b573a",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/hub.py",
+          "line": 588,
+          "fileSha256": "4d8207aa01f7a7810dd26f60b105eac14927042b3f652ab3a461a5efdc9bc9a7",
+          "lineText": "        return {\"ok\": False, \"error\": f\"invalid hub result: {exc}\", \"files\": []}",
+          "matchType": "dynamic-template-source-pattern"
+        }
+      ],
+      "rationale": "Use a natural error sentence for the returned hub result and preserve the opaque detail placeholder.",
+      "finalTargetRawSha256": "dfb7638880d9b448df3e4c9a145748c398fbdb7f24cac4692a1bd80617a196f1"
+    },
+    {
+      "sourceOrdinal": 163,
+      "id": "ui.invalid-hub-result-detail.4d640652cb",
+      "locale": "fr",
+      "source": "invalid hub result: {detail}",
+      "sourceSha256": "4d640652cb0cf26ccfd324f595eecae85a0ba73340747b375b604728968f162b",
+      "currentTarget": "Résultat de hub invalide : {detail}",
+      "currentTargetSha256": "63a5d5007a9383827dda829b848d54ec396d75594b091b67c0568ab7609efc1f",
+      "finalTarget": "Résultat invalide du hub : {detail}",
+      "finalTargetSha256": "939c141e387b3e841855540ad1822a08092fa8a1760938a88730e768c2f23444",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/hub.py",
+          "line": 588,
+          "fileSha256": "4d8207aa01f7a7810dd26f60b105eac14927042b3f652ab3a461a5efdc9bc9a7",
+          "lineText": "        return {\"ok\": False, \"error\": f\"invalid hub result: {exc}\", \"files\": []}",
+          "matchType": "dynamic-template-source-pattern"
+        }
+      ],
+      "rationale": "Add the required article in French and preserve the opaque exception detail.",
+      "finalTargetRawSha256": "3adcb1193612dac17d52990ea79e02e5acaffc98a3fe414907267e14ca154e16"
+    },
+    {
+      "sourceOrdinal": 163,
+      "id": "ui.invalid-hub-result-detail.4d640652cb",
+      "locale": "ar",
+      "source": "invalid hub result: {detail}",
+      "sourceSha256": "4d640652cb0cf26ccfd324f595eecae85a0ba73340747b375b604728968f162b",
+      "currentTarget": "نتيجة المركز غير صالحة: {detail}",
+      "currentTargetSha256": "3968d8745d22453f127cc4581868edf88c84367593c35e759fe56f33305ae14b",
+      "finalTarget": "نتيجة hub غير صالحة: {detail}",
+      "finalTargetSha256": "3e525bc0502b4c9392cdc7d889bdc56347ab84d52bf7a94b908c05a429c1f6a9",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/hub.py",
+          "line": 588,
+          "fileSha256": "4d8207aa01f7a7810dd26f60b105eac14927042b3f652ab3a461a5efdc9bc9a7",
+          "lineText": "        return {\"ok\": False, \"error\": f\"invalid hub result: {exc}\", \"files\": []}",
+          "matchType": "dynamic-template-source-pattern"
+        }
+      ],
+      "rationale": "المركز means a center; use the technical hub term and preserve the opaque detail placeholder.",
+      "finalTargetRawSha256": "846c2e8650a6bfe3709e96dc7cae83dd573af24e5b0ade311d5223e2906a43e5"
+    },
+    {
+      "sourceOrdinal": 163,
+      "id": "ui.invalid-hub-result-detail.4d640652cb",
+      "locale": "zh-Hant",
+      "source": "invalid hub result: {detail}",
+      "sourceSha256": "4d640652cb0cf26ccfd324f595eecae85a0ba73340747b375b604728968f162b",
+      "currentTarget": "無效中心結果: {detail}",
+      "currentTargetSha256": "6ce484acc558817acfcbc95bbbd3b0f7a381ac78530b6e859770bc9117c04337",
+      "finalTarget": "Hub 傳回的結果無效：{detail}",
+      "finalTargetSha256": "abecf13d5fd38a46ead7c4e32d3ed8cf0152756b720813b5f9a863a42ac7e4d3",
+      "finalDisposition": "correction",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/hub.py",
+          "line": 588,
+          "fileSha256": "4d8207aa01f7a7810dd26f60b105eac14927042b3f652ab3a461a5efdc9bc9a7",
+          "lineText": "        return {\"ok\": False, \"error\": f\"invalid hub result: {exc}\", \"files\": []}",
+          "matchType": "dynamic-template-source-pattern"
+        }
+      ],
+      "rationale": "中心 means a physical/central center; use the software hub meaning and Traditional Chinese punctuation.",
+      "finalTargetRawSha256": "0a22865054eb7954843e016aa2684c001a6ad573e63d2fd9ae284a82e5a7a4f8"
+    },
+    {
+      "sourceOrdinal": 164,
+      "id": "ui.invalid-plan-token.6f52b99b6e",
+      "locale": "ja",
+      "source": "Invalid plan token.",
+      "sourceSha256": "6f52b99b6ee2feb0234995673c59ce6c97ec1c9b702573cad9e14a8721650e39",
+      "currentTarget": "プラントークンが無効です。",
+      "currentTargetSha256": "c0af46d8861c5412776632cabca3f1dbeb92b9b9be717020fe6002cf9cde036f",
+      "finalTarget": "プランのトークンが無効です。",
+      "finalTargetSha256": "a47359a4a5236d1d9aa8c295e7a84699a0e1bd452edc92d59528456155e5d558",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/organizer.py",
+          "line": 1930,
+          "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+          "lineText": "            raise ValueError(\"Invalid plan token.\")",
+          "matchType": "exact-source-literal"
+        }
+      ],
+      "rationale": "Separate plan from token to avoid the ambiguous compound プラントークン; the caller validates plan_id.",
+      "finalTargetRawSha256": "bc44eadd0d372acf12ef77518c658216c499d487c65e4178556ea62c27466580"
+    },
+    {
+      "sourceOrdinal": 165,
+      "id": "ui.invitation-romarr.6b427c1d21",
+      "locale": "ja",
+      "source": "Invitation · ROMarr",
+      "sourceSha256": "6b427c1d21f03fe932fa1c8c0d5e39ab0579cc4b2f45f3189914fb702c78fd92",
+      "currentTarget": "招待状 · ROMarr",
+      "currentTargetSha256": "9a4ca79f38b0eec0e4e4caaf7c0d93e67b288c7302c4b590cbcfe796d9531d8c",
+      "finalTarget": "招待 · ROMarr",
+      "finalTargetSha256": "8ea347dd2536c785ad746c857c0a776d968f39e089f2d48270f4a0a49eec8e4e",
+      "finalDisposition": "refinement",
+      "translationStatus": "draft",
+      "callerRefs": [
+        {
+          "path": "romarr/ui.py",
+          "line": 6763,
+          "fileSha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71",
+          "lineText": "<title>Invitation &middot; ROMarr</title>",
+          "matchType": "html-entity-decoded-source-literal"
+        }
+      ],
+      "rationale": "For this active web page title, 招待 is a general invitation; 招待状 suggests a physical invitation card.",
+      "finalTargetRawSha256": "4ad34c9faed410b7c57ea45436b8ce59f238f42060933f4c325c9b2d4a45b1fc"
+    }
+  ]
+}

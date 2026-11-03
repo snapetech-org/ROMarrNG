@@ -1,0 +1,22 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W146-W165",
+  "exactHead": "db895a97e9871952a0b952e1d119e32e06cf168d",
+  "exactTree": "f1edf8319eb3dbd29ac5fe1e279216c5b96ecc6a",
+  "inputManifestSha256": "96cd78c8596546bd14656b486abd8cc16c70c809d36c7783a39cc1710cc10884",
+  "inputReviewSha256": "d649bb321a80fbbf28bf3aae88266db04f4f3e839a4c0f33ab4f84d24d26c83d",
+  "ledgerSha256": "4b66e140c624f3614e573791f68524dc794e892ffe1cb9424ce3ffd84d82bc72",
+  "cells": 240,
+  "dispositions": {
+    "refinement": 17,
+    "accept-current": 181,
+    "correction": 30,
+    "hold-context": 12
+  },
+  "callerGate": {
+    "sourceOrdinal160": false,
+    "heldCells": 12
+  },
+  "nativeSpeakerApproval": false
+}
