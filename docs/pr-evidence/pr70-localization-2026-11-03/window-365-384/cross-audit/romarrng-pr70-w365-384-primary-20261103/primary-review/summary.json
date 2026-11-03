@@ -1,0 +1,43 @@
+{
+  "artifact": "ROMarrNG PR #70 W365-W384 primary semantic review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W365-W384",
+  "head": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "tree": "3f42d41fe4bbb8edd921ff161e8298ca66038a91",
+  "branch": "task/localization-translation-review-20261030",
+  "livePRHead": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "liveBranchRef": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "livePullRef": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "cellCount": 240,
+  "localeCount": 12,
+  "sourceCount": 20,
+  "counts": {
+    "accept-current": 134,
+    "correction": 71,
+    "refinement": 35,
+    "hold": 0
+  },
+  "proposalCount": 106,
+  "priorHeldCellsReattested": 288,
+  "priorHeldCellsUnchanged": 288,
+  "callerResolutionHoldPositions": [],
+  "callerResolutionHoldCells": 0,
+  "callerlessSourcePositions": [],
+  "callerlessCells": 0,
+  "ambiguousCallerPositions": [
+    368
+  ],
+  "ambiguousCallerCells": 12,
+  "ambiguousCallerDisposition": "resolved with a shared action/selection form per locale; Arabic, German, Spanish, and Korean wording adjusted where the current form did not safely cover both checkbox and heading callsites; no holds required.",
+  "inputChecksumListSha256": "22da227c4bbf5bfc0a3215961cf535b6f09df091698b75cf5661454c2e0eb95d",
+  "inputManifestJsonSha256": "99171a7f1eddb944575947e0d059ec816bc97295bad01d780268e8978a8f825c",
+  "inputCurrentTargetCellsSha256": "17e316ed146d77383cd101f6165192e051496b2ca5f33586cfa97db72928207b",
+  "inputSourceContextsSha256": "79d0f01b6ef51c4bc3015ca969cb7441a85fd129c51a645dba54588dce059bee",
+  "nativeSpeakerApproved": false,
+  "headedBrowserAcceptance": false,
+  "blindReviewMaterialsConsultedDuringThisReview": false,
+  "repositoryOrPrMutatedDuringReview": false,
+  "testsBuildsScansCiRun": false,
+  "createdUtc": "2026-11-03T15:54:23.062723+00:00"
+}

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W365-W384",
+  "head": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "tree": "3f42d41fe4bbb8edd921ff161e8298ca66038a91",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "decisionCounts": {
+    "proposal": 240
+  },
+  "proposalCount": 240,
+  "holdCount": 0,
+  "ambiguousPosition368": {
+    "cells": 12,
+    "decision": "proposal",
+    "confidence": "moderate",
+    "rationale": "Uses one concise action form for both the result checkbox label and the selection-column heading; this resolves the pinned dual-use caller, with moderate confidence."
+  },
+  "confidenceCounts": {
+    "high": 180,
+    "moderate": 60
+  },
+  "tokenMismatches": {
+    "placeholder": 0,
+    "numeric": 0,
+    "markup": 0,
+    "protectedLiteral": 0
+  },
+  "blindInputVerifier": "PASS",
+  "candidateFreeOrExistingTargetsAccessed": false,
+  "nativeSpeakerReview": "not performed",
+  "browserReview": "not performed"
+}

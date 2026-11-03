@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/romarrng",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "reviewedBaseHead": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "reviewedBaseTree": "3f42d41fe4bbb8edd921ff161e8298ca66038a91",
+  "status": "catalogs applied locally; commit pin recorded in application-verification.json",
+  "cells": 240,
+  "decisionCounts": {
+    "accept-current": 125,
+    "correction": 75,
+    "refinement": 40
+  },
+  "crossAuditResolutionCounts": {
+    "agreement": 74,
+    "blind_selected": 12,
+    "primary_selected": 154
+  },
+  "changedCells": 115,
+  "updatedCatalogFiles": 1,
+  "catalogFileSha256": "c5e6e3f722cdafb9082e75f7e6253dbb0d1af3f032bbbef52c713dc73b281a1a",
+  "nonTargetChanges": 0,
+  "translationHashMetadataUpdated": 115,
+  "catalogKeyOrderPreserved": true,
+  "priorHoldsPreserved": 288,
+  "newHolds": 0,
+  "rank368CellsReviewed": 12,
+  "workflowFilesTouched": false,
+  "testsBuildsScansCi": "not run",
+  "nativeSpeakerAndBrowserReview": "pending",
+  "mergeReleaseTag": "not performed"
+}

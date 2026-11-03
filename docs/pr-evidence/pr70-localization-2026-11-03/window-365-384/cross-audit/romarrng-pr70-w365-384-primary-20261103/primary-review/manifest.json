@@ -1,0 +1,16 @@
+{
+  "artifact": "ROMarrNG PR #70 W365-W384 primary review seal",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W365-W384",
+  "head": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "tree": "3f42d41fe4bbb8edd921ff161e8298ca66038a91",
+  "inputPath": "../input",
+  "inputChecksumListSha256": "22da227c4bbf5bfc0a3215961cf535b6f09df091698b75cf5661454c2e0eb95d",
+  "inputManifestJsonSha256": "99171a7f1eddb944575947e0d059ec816bc97295bad01d780268e8978a8f825c",
+  "decisionLedger": "review-decisions.jsonl",
+  "cellCount": 240,
+  "manifestExcludesOwnHash": true,
+  "checksumsCoverManifestAndEveryArtifact": true,
+  "createdUtc": "2026-11-03T15:54:23.062723+00:00"
+}

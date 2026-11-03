@@ -1,0 +1,12 @@
+{
+  "priorWindow": "W345-W364",
+  "priorHead": "6bef0c74632067906fd07279fa6bd3fd59159a48",
+  "priorTree": "4fd79e67f37e4c66d0253199418973d965a3fbd6",
+  "currentHead": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "currentTree": "3f42d41fe4bbb8edd921ff161e8298ca66038a91",
+  "currentSourceOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "reattestedSources": 20,
+  "allPriorSourceIdsAndHashesMatchCurrentQueue": true,
+  "priorWindowHoldCells": 0,
+  "priorWindowHoldPositions": []
+}
