@@ -1,0 +1,29 @@
+{
+  "callerSourceRows": 20,
+  "candidateFree": true,
+  "head": "c135c4729582817273c946891186ab4ea87467b5",
+  "heldPositions": [
+    269,
+    270,
+    271,
+    272,
+    273,
+    274,
+    275,
+    276,
+    277,
+    278,
+    279,
+    280,
+    281,
+    282
+  ],
+  "holdsAreNoTarget": true,
+  "method": "Source-index coordinates were treated as search hints. Exact current caller spans were resolved using tracked-source searches and pinned from current production code. Test paths were excluded.",
+  "selectedPositions": [
+    265,
+    284
+  ],
+  "sourceIndexLocationsReconciled": 20,
+  "tree": "32c07150396335a5832b5664fc1e0225d7cebdc1"
+}

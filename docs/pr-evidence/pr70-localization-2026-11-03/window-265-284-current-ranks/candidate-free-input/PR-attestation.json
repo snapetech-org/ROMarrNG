@@ -1,0 +1,19 @@
+{
+  "baseRefName": "main",
+  "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "draft": true,
+  "headRefName": "task/localization-translation-review-20261030",
+  "headRefOid": "c135c4729582817273c946891186ab4ea87467b5",
+  "localWorktree": "/mnt/disks/scratch/task-worktrees/localization-20261103/romarrng-pr70-w245-apply-20261103",
+  "localWorktreeClean": true,
+  "localWorktreeHead": "c135c4729582817273c946891186ab4ea87467b5",
+  "localWorktreeTree": "32c07150396335a5832b5664fc1e0225d7cebdc1",
+  "pullRequest": 70,
+  "remoteBranchHead": "c135c4729582817273c946891186ab4ea87467b5",
+  "remoteBranchRef": "refs/heads/task/localization-translation-review-20261030",
+  "remotePullRef": "refs/pull/70/head",
+  "remotePullRefHead": "c135c4729582817273c946891186ab4ea87467b5",
+  "repository": "snapetech-org/ROMarrNG",
+  "state": "OPEN",
+  "tree": "32c07150396335a5832b5664fc1e0225d7cebdc1"
+}
