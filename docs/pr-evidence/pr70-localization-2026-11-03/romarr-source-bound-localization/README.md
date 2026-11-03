@@ -7,3 +7,5 @@ The local launcher scan caller translates only the exact response shape scan fai
 The TOTP enrollment caller translates the note only when the returned string exactly matches the local English catalog source for ui.scan-the-uri-or-enter-the-secret-in.612ce1fd46. Any unrecognized d.note continues through the opaque API-message renderer.
 
 The baseline pins the app source, callers, catalog, source snapshot, all 12 translations and translation hashes. No catalog edits are expected. Exact PR refs and the post-push verifier are recorded separately. No tests, builds, scans, CI dispatches, workflow changes, merge, release or tag occurred.
+
+Both catalog entries remain marked draft in translationStatus; this source wiring does not claim qualified native-speaker approval.
