@@ -10,6 +10,10 @@
 - **Localization:** Account-connection instructions now use stable locale templates while keeping credential examples, URLs, and provider response examples unchanged.
 - **Localization:** Organizer publish errors and rename-plan reasons now translate exact app-owned catalog messages while unknown API values remain opaque; reviewed ES-DE, import-status, genre, and format labels were refined across the 12 locales.
 
+#### Changed
+
+- **Localization:** Corrected the twelve download-queue status labels and refined the Japanese and Brazilian Portuguese GitHub label plus the Vietnamese file-header diagnostic.
+
 ## [0.14.12] - 2026-10-24
 
 ### User-facing changes
