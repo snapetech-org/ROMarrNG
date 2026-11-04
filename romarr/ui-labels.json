@@ -15879,7 +15879,7 @@
         "ja": "インデクサー",
         "fr": "Indexeur",
         "pt-BR": "Indexador",
-        "ar": "الفهرس",
+        "ar": "المفهرس",
         "ko": "인덱서",
         "zh-Hant": "索引器",
         "vi": "Bộ lập chỉ mục",
@@ -15924,7 +15924,7 @@
         "ar": "مستوى Info وما فوق",
         "ko": "정보 이상",
         "zh-Hant": "Info 及以上",
-        "vi": "Thông tin và lên",
+        "vi": "Mức Info trở lên",
         "id": "Info ke atas"
       },
       "translationHashes": {},
