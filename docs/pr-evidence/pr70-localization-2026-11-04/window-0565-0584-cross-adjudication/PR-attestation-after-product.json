@@ -1,0 +1,57 @@
+{
+  "attestedAtUtc": "2026-11-04T17:14:21.106035+00:00",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": {
+    "number": 70,
+    "state": "OPEN",
+    "draft": true,
+    "mergeable": "MERGEABLE",
+    "headRef": "task/localization-translation-review-20261030",
+    "headSha": "89fcad0d1ecce9610a0c3fc100de814e9e6dc5ac",
+    "headTree": "919e8da45270e8938db8ca0b1634e38028d147a5",
+    "baseRef": "main",
+    "baseApiSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "baseApiTree": "9c471ca6392055839a12ba74a112e49c2cdf03d5"
+  },
+  "refs": {
+    "branch": {
+      "name": "task/localization-translation-review-20261030",
+      "sha": "89fcad0d1ecce9610a0c3fc100de814e9e6dc5ac"
+    },
+    "pullHead": {
+      "ref": "refs/pull/70/head",
+      "sha": "89fcad0d1ecce9610a0c3fc100de814e9e6dc5ac"
+    },
+    "liveMain": {
+      "ref": "refs/heads/main",
+      "sha": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+      "tree": "73a05379aa80fa629f69286338139247d2bfd849"
+    }
+  },
+  "sourceWorktree": {
+    "path": "/mnt/disks/scratch/task-worktrees/localization-20261104/romarrng-pr70-w565-584-apply",
+    "head": "89fcad0d1ecce9610a0c3fc100de814e9e6dc5ac",
+    "tree": "919e8da45270e8938db8ca0b1634e38028d147a5",
+    "clean": true,
+    "statusPorcelain": ""
+  },
+  "baseDrift": {
+    "apiBaseSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "liveMainSha": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+    "apiBaseRefMismatch": true,
+    "compareStatus": "ahead",
+    "aheadBy": 5,
+    "behindBy": 0,
+    "totalCommits": 5,
+    "changedPaths": [
+      ".github/workflows/dependency-review.yml",
+      ".github/workflows/docker.yml",
+      ".github/workflows/gvisor-runner-smoke.yml",
+      ".github/workflows/semgrep-community.yml",
+      ".github/workflows/sync-unraid-legacy-ghcr.yml",
+      ".github/workflows/trivy-filesystem.yml",
+      "AGENTS.md"
+    ]
+  },
+  "expectedProductCommit": "89fcad0d1ecce9610a0c3fc100de814e9e6dc5ac"
+}

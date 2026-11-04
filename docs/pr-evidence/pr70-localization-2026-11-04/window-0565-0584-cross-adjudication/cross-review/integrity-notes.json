@@ -1,0 +1,31 @@
+{
+  "artifact": "ROMarrNG PR #70 W565-W584 input integrity notes",
+  "primaryRootReadme": {
+    "sha256": "624db65a6a2f175f01b31275e94a3bb30f49e48337c845a8d5cebaaeeb2c6564",
+    "claims": "202 accept-current, 2 correction proposals",
+    "conflictsWithVerifiedLedger": true
+  },
+  "verifiedPrimaryRecords": {
+    "rootBundleManifest": {
+      "accept-current": 203,
+      "correction": 1,
+      "hold": 36
+    },
+    "nestedPrimaryReadmeClaims203AcceptCurrentOneCorrection": "203 accepted current and 1 correction",
+    "nestedPrimaryManifest": {
+      "accept-current": 203,
+      "correction": 1,
+      "hold": 36
+    },
+    "nestedPrimarySummary": {
+      "accept-current": 203,
+      "correction": 1,
+      "hold": 36
+    },
+    "verifiedPrimaryLedgerRows": 240,
+    "verifierResult": "PASS"
+  },
+  "disposition": "preserved as a documentation inconsistency; cross-review uses the primary ledger and the nested manifest/summary, which agree and pass the supplied verifier",
+  "rootReadmeTextSha256": "624db65a6a2f175f01b31275e94a3bb30f49e48337c845a8d5cebaaeeb2c6564",
+  "nestedReadmeSha256": "f60d2ca6429080df1d3da706c637c122dc4c3c0677f60b18579473ee23b6bc23"
+}
