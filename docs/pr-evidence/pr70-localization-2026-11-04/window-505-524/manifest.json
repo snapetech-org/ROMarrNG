@@ -1,0 +1,31 @@
+{
+  "artifact": "ROMarrNG PR #70 W505-W524 review and application packet",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "window": "W505-W524",
+  "inputHead": "e958b4fd0d9ddeac9333afc4c95da348b7f67cff",
+  "inputTree": "402026ba276ec4603d86d659766af836d839de55",
+  "catalogCommit": "b248261d5aaa33ec7247023b85d666ed7fc89309",
+  "catalogCommitTree": "08f73a3dec49091e40eef0b006519a6e06c239f4",
+  "catalogSha256": "02779094097e70786d8fb91f9137afea17ca36dffd7d1c0bd7101046dcd157cf",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "reviewedCells": 240,
+  "selectedChanges": 28,
+  "retainedCurrentCells": 140,
+  "textFreeHolds": 72,
+  "callerlessSourcePositions": [505, 511, 513, 514, 515, 523],
+  "canonicalTranslationHashUpdates": 3,
+  "carriedHoldsReattested": 468,
+  "priorSelectedSourcesReattested": 120,
+  "tokenMismatches": {
+    "placeholder": 0,
+    "markup": 0,
+    "numeric": 0,
+    "protectedLiteral": 0
+  },
+  "crossBundleManifestSha256": "e1c1f465d6a1f298a4fe175bdc9dd940b9d3390e96972686a8b1c32c1d65b7ec",
+  "crossBundleChecksumListSha256": "abfb4e22c2d7393d0cf535be37671bbfcbeeccf99502932450814ac394fb9e4c",
+  "expectedPullRequestState": "open-draft"
+}

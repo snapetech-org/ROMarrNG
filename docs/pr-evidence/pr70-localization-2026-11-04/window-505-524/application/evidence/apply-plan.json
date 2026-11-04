@@ -1,0 +1,28 @@
+{
+  "carriedHolds": 468,
+  "catalogBeforeSha256": "874341c2951d5601ea9e653dbe05d4a4c0e42bf38bc52a485a012e32c283a156",
+  "catalogPath": "romarr/ui-labels.json",
+  "crossBundleManifestSha256": "e1c1f465d6a1f298a4fe175bdc9dd940b9d3390e96972686a8b1c32c1d65b7ec",
+  "heldPositions": [
+    505,
+    511,
+    513,
+    514,
+    515,
+    523
+  ],
+  "heldTextInThisPlan": false,
+  "holdCells": 72,
+  "localeCount": 12,
+  "parent": "e958b4fd0d9ddeac9333afc4c95da348b7f67cff",
+  "parentTree": "402026ba276ec4603d86d659766af836d839de55",
+  "priorSelectedSources": 120,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "retainedCurrentCells": 140,
+  "reviewedCells": 240,
+  "selectedChanges": 28,
+  "selectedTargetHashUpdates": 3,
+  "sourceCount": 20,
+  "window": "W505-W524"
+}

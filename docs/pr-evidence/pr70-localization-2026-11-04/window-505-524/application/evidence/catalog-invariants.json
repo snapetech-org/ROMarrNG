@@ -1,0 +1,33 @@
+{
+  "afterSha256": "02779094097e70786d8fb91f9137afea17ca36dffd7d1c0bd7101046dcd157cf",
+  "beforeSha256": "874341c2951d5601ea9e653dbe05d4a4c0e42bf38bc52a485a012e32c283a156",
+  "carriedHoldsUnchanged": 468,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogMessageCount": 1836,
+  "catalogPath": "romarr/ui-labels.json",
+  "holdCellCount": 72,
+  "holdTranslationTextIncludedInHoldLedger": false,
+  "localeOrder": [
+    "es",
+    "zh-Hans",
+    "hi",
+    "de",
+    "ja",
+    "fr",
+    "pt-BR",
+    "ar",
+    "ko",
+    "zh-Hant",
+    "vi",
+    "id"
+  ],
+  "localeOrderUnchanged": true,
+  "priorSelectedSourceRecordsUnchanged": 120,
+  "retainedCurrentCellCount": 140,
+  "selectedTranslationCellCount": 28,
+  "selectedTranslationHashUpdateCount": 3,
+  "sourceAndSourceHashUnchanged": true,
+  "translationReviewUnchanged": true,
+  "translationStatusUnchanged": true,
+  "workflowFilesChanged": false
+}

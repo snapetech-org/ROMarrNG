@@ -1,0 +1,9 @@
+# ROMarrNG PR #70 — W505–W524 review and application
+
+This packet covers 20 catalog messages across 12 locales (240 cells), pinned to the open, draft PR head `e958b4fd0d9ddeac9333afc4c95da348b7f67cff` / tree `402026ba276ec4603d86d659766af836d839de55` on `task/localization-translation-review-20261030`.
+
+Candidate-free input was independently adjudicated before proposal outputs were inspected. The primary and blind reviews were then reconciled against exact caller context. The sealed cross ledger records 28 selected changes, 140 retained current values, and 72 text-free holds at source positions 505, 511, 513, 514, 515, and 523. Placeholder, markup, numeric, and protected-literal checks report zero mismatches. The full candidate-free, review, and cross-review provenance is preserved in [`cross-audit.tar.gz`](cross-audit.tar.gz); its internal checksum manifest is validated by the portable verifier.
+
+The catalog-only application is commit [`b248261d5aaa33ec7247023b85d666ed7fc89309`](https://github.com/snapetech-org/ROMarrNG/commit/b248261d5aaa33ec7247023b85d666ed7fc89309), with input head as its direct parent. It changes exactly 28 translation cells and updates three existing canonical translation hashes; 72 holds and 140 other reviewed values remain unchanged. All 468 carried holds and 120 previously selected source records remain unchanged. See [`application/README.md`](application/README.md) for the exact apply plan and 240-cell readback.
+
+Run `python3 verify_window_bundle.py` from this directory to validate the packet checksums, cross-review verifier, and portable application/readback verifier. No product tests, builds, scans, CI jobs, workflow changes, merges, releases, or tags were performed. Qualified native-speaker review and exact-head browser acceptance are not claimed.
