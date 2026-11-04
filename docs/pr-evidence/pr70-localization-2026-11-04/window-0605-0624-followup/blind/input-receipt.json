@@ -1,0 +1,20 @@
+{
+  "inputDirectory": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w605-624-20261104/candidate-free/candidate-free/input",
+  "candidateFree": true,
+  "candidateFreeManifestSha256": "bbc48d1999f08a8bb99f16df2cf7dd68cbe13b3871bc11e1ae4651c64b341cf3",
+  "candidateFreeChecksumFileSha256": "ead697f65d06ac4f249322f888c37bbf34a9dafbc8c64c4801c58e201e9fc8d8",
+  "head": "872905926887840025ba4c3f17151b96f8d3e6e2",
+  "tree": "d7d762d5f3a5dc31bcbdb6c6c45779101ab0bbd4",
+  "validation": {
+    "candidateFreeChecksumsAndManifest": "PASS",
+    "fullSourceCallerTokenAndLineageVerifier": "PASS",
+    "verifierOrigin": "candidate-free/input/verify_input.py",
+    "pinnedWorktree": "/mnt/disks/scratch/task-worktrees/localization-20261104/romarrng-pr70-w585-604-apply-20261104",
+    "pinnedWorktreeClean": true,
+    "localHeadAndTree": "PASS",
+    "remoteBranchAndPullRequestRefs": "PASS",
+    "adjustment": "Skipped only the verifier assertion requiring a non-detached local branch; the pinned worktree is detached. All other verifier checks ran unchanged and passed."
+  },
+  "reviewDecisionsInInput": false,
+  "proposedTargetsInInput": false
+}

@@ -1,0 +1,68 @@
+{
+  "activeRegistryCount": 479,
+  "activeRegistryMatches": [
+    {
+      "activeRank": 172,
+      "registryLocations": [
+        "romarr/ui.py:5502"
+      ],
+      "sourceId": "ui.likely-multi-disc-set-review.f3a26e13cb"
+    },
+    {
+      "activeRank": 174,
+      "registryLocations": [
+        "romarr/ui.py:4239"
+      ],
+      "sourceId": "ui.list-sync-hours.8c392b5fd2"
+    },
+    {
+      "activeRank": 175,
+      "registryLocations": [
+        "romarr/ui.py:2329"
+      ],
+      "sourceId": "ui.list-view.5d8c3e1b63"
+    },
+    {
+      "activeRank": 176,
+      "registryLocations": [
+        "romarr/ui.py:5099"
+      ],
+      "sourceId": "ui.load-a-dat-and-see-verified-titles-a.6177c2b17c"
+    },
+    {
+      "activeRank": 177,
+      "registryLocations": [
+        "romarr/ui.py:2328"
+      ],
+      "sourceId": "ui.loaded-dats-verified-dump-names.b8c1ccfba0"
+    },
+    {
+      "activeRank": 178,
+      "registryLocations": [
+        "romarr/ui.py:5428"
+      ],
+      "sourceId": "ui.loading-inventory.98a81c2073"
+    },
+    {
+      "activeRank": 179,
+      "registryLocations": [
+        "romarr/ui.py:5476"
+      ],
+      "sourceId": "ui.local-es-de-records-reused-count.54d131e229"
+    },
+    {
+      "activeRank": 182,
+      "registryLocations": [
+        "romarr/ui.py:5980"
+      ],
+      "sourceId": "ui.main-navigation.eb355944b9"
+    }
+  ],
+  "lineHintCaveat": "Active source registry metadata does not substitute for exact literal caller search and excerpt evidence.",
+  "selectedCatalogZeroBasedIndices": [
+    605,
+    624
+  ],
+  "selectedIdsInActiveRegistry": 8,
+  "selectionBasis": "catalog JSON message-key insertion order"
+}

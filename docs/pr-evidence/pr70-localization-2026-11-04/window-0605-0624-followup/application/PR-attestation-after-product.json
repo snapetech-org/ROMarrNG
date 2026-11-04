@@ -1,0 +1,32 @@
+{
+  "activeExactProductRuns": [],
+  "activeRunCount": 0,
+  "catalogSha256": "69d84fe629cac8a113a59bfcfb3e30bfb7290bd3894395f4fda2d1a5b7f6d10d",
+  "checkedUtc": "2026-11-04T20:16:12Z",
+  "prBodyExactOriginalPrefix": true,
+  "prBodySha256": "af8a1923882f96dde5c6cf78ab0828fe8bc855594574eb240b567d8ecd3376ab",
+  "prBodyUtf8Bytes": 60330,
+  "productChanges": {
+    "id": "Log langsung",
+    "vi": "Nhật ký trực tiếp"
+  },
+  "productCommit": "e6e826be77e5057cf88b4bbb49f6ff60f2980c33",
+  "productTree": "4e4381181522c863fc8a5916840233ef4ecb5038",
+  "pullRequest": {
+    "baseRefName": "main",
+    "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "headRefName": "task/localization-translation-review-20261030",
+    "headRefOid": "e6e826be77e5057cf88b4bbb49f6ff60f2980c33",
+    "isDraft": true,
+    "number": 70,
+    "state": "OPEN",
+    "title": "fix: correct verified localization catalog errors",
+    "url": "https://github.com/snapetech-org/ROMarrNG/pull/70"
+  },
+  "recentBranchRuns": [],
+  "refs": {
+    "refs/heads/task/localization-translation-review-20261030": "e6e826be77e5057cf88b4bbb49f6ff60f2980c33",
+    "refs/pull/70/head": "e6e826be77e5057cf88b4bbb49f6ff60f2980c33",
+    "refs/pull/70/merge": "91cec597ef628ee19d193af612c68f18031eaebd"
+  }
+}

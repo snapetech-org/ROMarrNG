@@ -1,0 +1,77 @@
+{
+  "activeExactHeadRuns": [],
+  "activeRunCount": 0,
+  "api": {
+    "baseRefName": "main",
+    "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "headRefName": "task/localization-translation-review-20261030",
+    "headRefOid": "872905926887840025ba4c3f17151b96f8d3e6e2",
+    "isDraft": true,
+    "number": 70,
+    "state": "OPEN",
+    "title": "fix: correct verified localization catalog errors",
+    "url": "https://github.com/snapetech-org/ROMarrNG/pull/70"
+  },
+  "branchPushWorkflowTrigger": false,
+  "checkedUtc": "2026-11-04T20:14:43Z",
+  "productCommit": "e6e826be77e5057cf88b4bbb49f6ff60f2980c33",
+  "productParent": "872905926887840025ba4c3f17151b96f8d3e6e2",
+  "productTree": "4e4381181522c863fc8a5916840233ef4ecb5038",
+  "pullRequestWorkflowTrigger": false,
+  "readyForNonForcePush": true,
+  "recentBranchRuns": [],
+  "remoteRefs": {
+    "refs/heads/task/localization-translation-review-20261030": "872905926887840025ba4c3f17151b96f8d3e6e2",
+    "refs/pull/70/head": "872905926887840025ba4c3f17151b96f8d3e6e2",
+    "refs/pull/70/merge": "00d1af2212df3cfd29c7df49c4196705a60dd035"
+  },
+  "workflowEventTriggers": [
+    {
+      "on": [
+        "  workflow_dispatch: {}"
+      ],
+      "path": ".github/workflows/dependency-review.yml"
+    },
+    {
+      "on": [
+        "  push:",
+        "    tags: [\"v*\"]",
+        "  workflow_dispatch:"
+      ],
+      "path": ".github/workflows/docker.yml"
+    },
+    {
+      "on": [
+        "  workflow_dispatch:"
+      ],
+      "path": ".github/workflows/gvisor-runner-smoke.yml"
+    },
+    {
+      "on": [
+        "  push:",
+        "    tags: ['**']",
+        "  workflow_dispatch:"
+      ],
+      "path": ".github/workflows/semgrep-community.yml"
+    },
+    {
+      "on": [
+        "  workflow_dispatch:",
+        "  workflow_run:",
+        "    workflows:",
+        "      - docker",
+        "    types:",
+        "      - completed"
+      ],
+      "path": ".github/workflows/sync-unraid-legacy-ghcr.yml"
+    },
+    {
+      "on": [
+        "  push:",
+        "    tags: ['**']",
+        "  workflow_dispatch:"
+      ],
+      "path": ".github/workflows/trivy-filesystem.yml"
+    }
+  ]
+}

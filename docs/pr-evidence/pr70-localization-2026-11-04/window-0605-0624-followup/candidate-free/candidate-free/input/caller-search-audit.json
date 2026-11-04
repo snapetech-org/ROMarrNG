@@ -1,0 +1,149 @@
+{
+  "head": "872905926887840025ba4c3f17151b96f8d3e6e2",
+  "productionFilesSearched": 51,
+  "queryCount": 20,
+  "results": [
+    {
+      "callerless": false,
+      "contextSha256": "53c77328b8fbb9876d963122091a6f3ec01983c50d5a2602aa1ff45148026025",
+      "matchCount": 1,
+      "sourceId": "ui.likely-multi-disc-set-review.f3a26e13cb",
+      "sourceSha256": "f3a26e13cbef714786db98c00e7bf3071530131e8058090d118ede3cd3ab6c02"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "3cabba19efcf783929eb1ae5a2d37e7830fe75868be95b0eb21b7f95191d6592",
+      "matchCount": 1,
+      "sourceId": "ui.link-copied.d12860c21e",
+      "sourceSha256": "d12860c21e78baa522ac743ecfbd77fb9cf4558e581e0e54afcace23b3ce1849"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "b17e0026acaf83b50db21f41d4c8c08d739dceab417872186c996ee5604c7816",
+      "matchCount": 3,
+      "sourceId": "ui.list-at-a-url.68f171a9c9",
+      "sourceSha256": "68f171a9c98ffe11ec36d808fb35d0d3daeb0406555caadc46427c7c8e6ba2bc"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "9b70008fc78472893af51eacc16d6617ac251ef2ee886f733d8bd8a7b202850a",
+      "matchCount": 1,
+      "sourceId": "ui.list-sync-hours.8c392b5fd2",
+      "sourceSha256": "8c392b5fd2e1bb51de0b94b726c35780367af539e1fae48cca4c77b8aff16e58"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "f96cecd8af8bd9d1bd348cd9f54defe3eb661f509bccf4cb432e6742ade6a4a2",
+      "matchCount": 1,
+      "sourceId": "ui.list-view.5d8c3e1b63",
+      "sourceSha256": "5d8c3e1b635eed6f3475260c63650062958ebd2f2e2cddd8abc59de76bea7f72"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "6a3554fc96656b3e883868f132e3dddbfa5b3b583bf33f8f1b5430f108612699",
+      "matchCount": 2,
+      "sourceId": "ui.lists.308d5a0903",
+      "sourceSha256": "308d5a0903f2c5714ec7774808fc9a67b92c602a01a69b2084b05bdb2f6ae699"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "6926eabca1b60f1f77423a5f165b706e951c6ff6da052c23c648bad2db727977",
+      "matchCount": 2,
+      "sourceId": "ui.live-log.2cfbcb2b85",
+      "sourceSha256": "2cfbcb2b85a95d745d28c32ab393941cf4e1c28390115ffad97b0dde16a3fec1"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "7e506eb699446e6d1497cfda6987e15e6e714995736b3588db6a617433add389",
+      "matchCount": 1,
+      "sourceId": "ui.load-a-dat-and-see-verified-titles-a.6177c2b17c",
+      "sourceSha256": "6177c2b17c05151b2b5ebaa7f0782d66e3d746a458307fa6e3671c26a12a6a10"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "d1b6316a61c99e97f70bfdcef0fbf5314bfef05e598d15cccb161268e1b3c278",
+      "matchCount": 1,
+      "sourceId": "ui.loaded-dats-verified-dump-names.b8c1ccfba0",
+      "sourceSha256": "b8c1ccfba0eedb01db6377904d88125a49219ad9ad49662937f25e73a24b85b2"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "3d7612422192e2d181bb422ed3cc80e80c3643e1a174d45ac36c14370120a67b",
+      "matchCount": 1,
+      "sourceId": "ui.loaded-cached-of-total-so-far.62330c9573",
+      "sourceSha256": "62330c95739575c364e1d11f5689a2d47d905d58dbd890e07f7694da9665139e"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "bae461fd149582dbb1c5b151975cb13ffa7ea42aa93cf3c6e31b805521e93c6c",
+      "matchCount": 1,
+      "sourceId": "ui.loaded-cached-of-total-so-far-on-dis.9d33678708",
+      "sourceSha256": "9d33678708c7624b7f6d0c4b899310b79b1aff9ac671ed377c733802c1e72193"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "e71c4a2473f1490e97dbf5994273406c7bd4da357fa1abe5bd7993343de90d56",
+      "matchCount": 1,
+      "sourceId": "ui.loading-inventory.98a81c2073",
+      "sourceSha256": "98a81c20730e815ad0c1b184c4c81f0e10410eb022c6ddda70705a0f994b4964"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "4e9a6f48210c4091b797009c823c76d03f6b762873298c6b9ee4c2b23e3e2a5f",
+      "matchCount": 1,
+      "sourceId": "ui.local-es-de-records-reused-count.54d131e229",
+      "sourceSha256": "54d131e22995890c9603f7ea846fe7df3594af8b0de64890d3960bfde893dcc7"
+    },
+    {
+      "callerless": true,
+      "contextSha256": "d83e149e1a8f2d768b52ef7b457501fc098ba00d5ddad050817f4af4872851b8",
+      "matchCount": 0,
+      "sourceId": "ui.local-path.e335847f88",
+      "sourceSha256": "e335847f885ededb491cd84ae6511aca468c9be1c6078836a0e6f9466936e556"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "bf391ec7e5d9c15aab69834d303f0c0bf5808e51281379869e8e2ee0abcbe8a6",
+      "matchCount": 2,
+      "sourceId": "ui.logs.ea2100dc89",
+      "sourceSha256": "ea2100dc89ae9fe21fa9b08ab1bf18662dca1e53a3eebd7d03afebcaf5d57515"
+    },
+    {
+      "callerless": true,
+      "contextSha256": "5c449975dc40c3a58168ae91653ecc77e22f5728c22e279e5cd7376f66992ef3",
+      "matchCount": 0,
+      "sourceId": "ui.lost-the-password-set-romarr-api-key.1eb30ebc52",
+      "sourceSha256": "1eb30ebc525e62b8daaaa95a22d7d61fd38b4b9a61cd88a618e0db74e16870b9"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "b0701dad37afba874f3ec7f8aabfe15855b7115c1ab2d4c3d09bc1cb938d412c",
+      "matchCount": 1,
+      "sourceId": "ui.lower-is-preferred-when-two-indexers.b3657d29b1",
+      "sourceSha256": "b3657d29b1a715415df96e9cf33bae13608cbed01c8fc6c6045cfbe34aac7f72"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "9cdbaa323ebed0f548fc00c1fbff40adaefd01e22bf5394ce8784c6061702c30",
+      "matchCount": 1,
+      "sourceId": "ui.magnet-file-extension.375ebd2cea",
+      "sourceSha256": "375ebd2cea283408c65a16e028946f7c35c7ecd8432a1e82e41003a5eecb65c9"
+    },
+    {
+      "callerless": true,
+      "contextSha256": "b0be885642c168ac8797f5ee71f5c8ae580fc43f4c29849697a9e526c4f1870f",
+      "matchCount": 0,
+      "sourceId": "ui.magnets-only-linksnappy-adds-a-torre.561b2dc8fe",
+      "sourceSha256": "561b2dc8fe5c658559c3c1c73d5317008fe10a4b7858744cd511a4a8937fe9e4"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "50e3e514f2787317d4a6559520f7f87cfc599cce90ca57f8c93746edafe9c1ce",
+      "matchCount": 1,
+      "sourceId": "ui.main-navigation.eb355944b9",
+      "sourceSha256": "eb355944b92d10582856f8aea34b3e319ba465b8aa4c294973cf53f665399a2c"
+    }
+  ],
+  "searchScope": "tracked production source files under romarr; tests, documentation, and locale catalogs excluded",
+  "tree": "d7d762d5f3a5dc31bcbdb6c6c45779101ab0bbd4"
+}

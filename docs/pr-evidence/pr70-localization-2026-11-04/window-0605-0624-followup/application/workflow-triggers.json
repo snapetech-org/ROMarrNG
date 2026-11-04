@@ -1,0 +1,61 @@
+{
+  "branchPushTrigger": false,
+  "branchPushTriggerReason": "The only push triggers are tag filters (`v*` or `**`); there are no branch push filters.",
+  "head": "872905926887840025ba4c3f17151b96f8d3e6e2",
+  "pullRequestTrigger": false,
+  "pushTriggeredWorkflows": {
+    ".github/workflows/docker.yml": "push tags v*; workflow_dispatch",
+    ".github/workflows/semgrep-community.yml": "push tags **; workflow_dispatch",
+    ".github/workflows/sync-unraid-legacy-ghcr.yml": "workflow_dispatch or workflow_run from docker; job filters require successful release-tag docker run",
+    ".github/workflows/trivy-filesystem.yml": "push tags **; workflow_dispatch"
+  },
+  "workflows": [
+    {
+      "on": [
+        "  workflow_dispatch: {}"
+      ],
+      "path": ".github/workflows/dependency-review.yml"
+    },
+    {
+      "on": [
+        "  push:",
+        "    tags: [\"v*\"]",
+        "  workflow_dispatch:"
+      ],
+      "path": ".github/workflows/docker.yml"
+    },
+    {
+      "on": [
+        "  workflow_dispatch:"
+      ],
+      "path": ".github/workflows/gvisor-runner-smoke.yml"
+    },
+    {
+      "on": [
+        "  push:",
+        "    tags: ['**']",
+        "  workflow_dispatch:"
+      ],
+      "path": ".github/workflows/semgrep-community.yml"
+    },
+    {
+      "on": [
+        "  workflow_dispatch:",
+        "  workflow_run:",
+        "    workflows:",
+        "      - docker",
+        "    types:",
+        "      - completed"
+      ],
+      "path": ".github/workflows/sync-unraid-legacy-ghcr.yml"
+    },
+    {
+      "on": [
+        "  push:",
+        "    tags: ['**']",
+        "  workflow_dispatch:"
+      ],
+      "path": ".github/workflows/trivy-filesystem.yml"
+    }
+  ]
+}

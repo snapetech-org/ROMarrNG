@@ -1,0 +1,65 @@
+{
+  "artifact": "ROMarrNG PR #70 W605-W624 cross-review summary",
+  "blindDispositionCounts": {
+    "hold_hash_only": 36,
+    "propose_clear_improvement": 2,
+    "retain_current": 202
+  },
+  "blindProposalCount": 2,
+  "callerfulCellCount": 204,
+  "callerlessHashOnlyCellCount": 36,
+  "callerlessPositions": [
+    618,
+    620,
+    623
+  ],
+  "cellCount": 240,
+  "crossDispositionCounts": {
+    "hold_hash_only": 36,
+    "propose_clear_improvement": 2,
+    "retain_current": 202
+  },
+  "head": "872905926887840025ba4c3f17151b96f8d3e6e2",
+  "lineage": {
+    "appliedCells": 71,
+    "copiedByteIdentically": [
+      "prior-selection-reattestation-summary.json",
+      "prior-selection-reattestation.jsonl",
+      "prior-hold-reattestation-summary.json",
+      "prior-hold-reattestation.jsonl",
+      "prior-applied-cell-reattestation-summary.json",
+      "prior-applied-cell-reattestation.jsonl",
+      "prior-window-cell-hash-reattestation.jsonl",
+      "prior-w565-window-cell-hash-reattestation.jsonl",
+      "prior-w585-window-cell-hash-reattestation.jsonl"
+    ],
+    "holds": 628,
+    "selectedSources": 220,
+    "w585CallerlessHolds": 24,
+    "windowReadbackCells": {
+      "W545-W564": 240,
+      "W565-W584": 240,
+      "W585-W604": 240
+    }
+  },
+  "nativeSpeakerApproval": false,
+  "primaryCallerfulProposalCount": 2,
+  "primaryCallerlessProposalCountHeldHashOnly": 6,
+  "primaryDispositionCounts": {
+    "CHANGE": 8,
+    "KEEP": 232
+  },
+  "primaryProposalCount": 8,
+  "proposalOutcomes": {
+    "accepted_clear_improvement": 2,
+    "held_hash_only_no_caller_context": 6,
+    "rejected_retain_current": 1
+  },
+  "repositoryAndPrEdited": false,
+  "reviewDecisionsAreSuggestionsOnly": true,
+  "sourceCount": 20,
+  "testsBuildScansCiRun": false,
+  "tree": "d7d762d5f3a5dc31bcbdb6c6c45779101ab0bbd4",
+  "uniqueProposalCellCount": 9,
+  "window": "W605-W624"
+}

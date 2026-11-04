@@ -1,0 +1,32 @@
+{
+  "artifact": "W605-W624 primary semantic review output",
+  "cellCount": 240,
+  "dispositionCounts": {
+    "CHANGE": 8,
+    "KEEP": 232
+  },
+  "files": [
+    {
+      "bytes": 117592,
+      "path": "dispositions.jsonl",
+      "sha256": "664c91674e72984a0347a487e85412090a635a27c8b5096c0ad254a61a6e6f91"
+    },
+    {
+      "bytes": 0,
+      "path": "hash-only-holds.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1427,
+      "path": "summary.json",
+      "sha256": "65f8e8bdc3a672314a63f08ee3677eafaa91a1f750043fabde577906663cd4ed"
+    }
+  ],
+  "hashOnlyHoldCount": 0,
+  "head": "872905926887840025ba4c3f17151b96f8d3e6e2",
+  "localeCount": 12,
+  "proposedChangeCount": 8,
+  "sourceCount": 20,
+  "tree": "d7d762d5f3a5dc31bcbdb6c6c45779101ab0bbd4",
+  "window": "W605-W624"
+}

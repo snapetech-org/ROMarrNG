@@ -1,0 +1,73 @@
+{
+  "activeRunCount": 0,
+  "checkedUtc": "2026-11-04T20:23:27Z",
+  "evidenceCommitNotYetCreated": true,
+  "exactProductHeadRuns": [],
+  "prApi": {
+    "baseRefName": "main",
+    "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "headRefName": "task/localization-translation-review-20261030",
+    "headRefOid": "e6e826be77e5057cf88b4bbb49f6ff60f2980c33",
+    "isDraft": true,
+    "number": 70,
+    "state": "OPEN",
+    "url": "https://github.com/snapetech-org/ROMarrNG/pull/70"
+  },
+  "recentBranchRuns": [],
+  "remoteRefs": {
+    "refs/heads/task/localization-translation-review-20261030": "e6e826be77e5057cf88b4bbb49f6ff60f2980c33",
+    "refs/pull/70/head": "e6e826be77e5057cf88b4bbb49f6ff60f2980c33",
+    "refs/pull/70/merge": "91cec597ef628ee19d193af612c68f18031eaebd"
+  },
+  "workflowBranchPushTrigger": false,
+  "workflowPullRequestTrigger": false,
+  "workflowTriggerInventory": [
+    {
+      "on": [
+        "  workflow_dispatch: {}"
+      ],
+      "path": ".github/workflows/dependency-review.yml"
+    },
+    {
+      "on": [
+        "  push:",
+        "    tags: [\"v*\"]",
+        "  workflow_dispatch:"
+      ],
+      "path": ".github/workflows/docker.yml"
+    },
+    {
+      "on": [
+        "  workflow_dispatch:"
+      ],
+      "path": ".github/workflows/gvisor-runner-smoke.yml"
+    },
+    {
+      "on": [
+        "  push:",
+        "    tags: ['**']",
+        "  workflow_dispatch:"
+      ],
+      "path": ".github/workflows/semgrep-community.yml"
+    },
+    {
+      "on": [
+        "  workflow_dispatch:",
+        "  workflow_run:",
+        "    workflows:",
+        "      - docker",
+        "    types:",
+        "      - completed"
+      ],
+      "path": ".github/workflows/sync-unraid-legacy-ghcr.yml"
+    },
+    {
+      "on": [
+        "  push:",
+        "    tags: ['**']",
+        "  workflow_dispatch:"
+      ],
+      "path": ".github/workflows/trivy-filesystem.yml"
+    }
+  ]
+}

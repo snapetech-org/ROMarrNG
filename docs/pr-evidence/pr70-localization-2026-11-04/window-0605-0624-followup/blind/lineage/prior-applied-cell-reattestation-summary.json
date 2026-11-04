@@ -1,0 +1,21 @@
+{
+  "allSelectedTargetHashesMatchCurrentCatalog": true,
+  "applicationCommits": {
+    "W505-W524": "b248261d5aaa33ec7247023b85d666ed7fc89309",
+    "W525-W544": "63224167b0f89978a68977a7996bd06724d06129",
+    "W545-W564": "2a921d8280487f6d172616719f32e3dced243d83",
+    "W565-W584": "89fcad0d1ecce9610a0c3fc100de814e9e6dc5ac",
+    "W585-W604": "d44e61d9960c788412da0fadbb8b67744b70e404"
+  },
+  "changedCells": 0,
+  "currentHead": "872905926887840025ba4c3f17151b96f8d3e6e2",
+  "currentTree": "d7d762d5f3a5dc31bcbdb6c6c45779101ab0bbd4",
+  "priorWindows": {
+    "W505-W524": 28,
+    "W525-W544": 18,
+    "W545-W564": 2,
+    "W565-W584": 1,
+    "W585-W604": 22
+  },
+  "reattestedCellCount": 71
+}

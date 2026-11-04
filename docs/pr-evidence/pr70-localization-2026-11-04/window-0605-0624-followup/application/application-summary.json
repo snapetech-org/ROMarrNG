@@ -1,0 +1,53 @@
+{
+  "appliedCells": [
+    {
+      "locale": "id",
+      "position": 611,
+      "sourceId": "ui.live-log.2cfbcb2b85",
+      "target": "Log langsung",
+      "targetSha256": "e36817eb444f9e731462c23ec1efb0dc673e13da8870b5c80c70cdd8fc273834"
+    },
+    {
+      "locale": "vi",
+      "position": 611,
+      "sourceId": "ui.live-log.2cfbcb2b85",
+      "target": "Nhật ký trực tiếp",
+      "targetSha256": "eb094a0e42b3b207cba2a292b01be07090762a3ff235f1291e65bb1bf8b2e4a1"
+    }
+  ],
+  "artifact": "W605-W624 exact product readback",
+  "baseHead": "872905926887840025ba4c3f17151b96f8d3e6e2",
+  "callerlessPrimaryProposalsHeld": 6,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogSha256": "69d84fe629cac8a113a59bfcfb3e30bfb7290bd3894395f4fda2d1a5b7f6d10d",
+  "cellCount": 240,
+  "counts": {
+    "applied": 2,
+    "hold_hash_only": 36,
+    "retain_current": 202,
+    "total": 240
+  },
+  "messageCount": 1836,
+  "nativeSpeakerApproval": false,
+  "onlyProductPathChanged": "romarr/ui-labels.json",
+  "priorLineage": {
+    "appliedCells": 71,
+    "holds": 628,
+    "readbackCells": {
+      "W545-W564": 240,
+      "W565-W584": 240,
+      "W585-W604": 240
+    },
+    "selectedSources": 220,
+    "w585CallerlessHolds": 24
+  },
+  "productCommit": "e6e826be77e5057cf88b4bbb49f6ff60f2980c33",
+  "productTree": "4e4381181522c863fc8a5916840233ef4ecb5038",
+  "rejectedCallerfulProposal": {
+    "locale": "ar",
+    "outcome": "retain_current",
+    "position": 611
+  },
+  "testsBuildScansCiRun": false,
+  "translationMetadataChanged": false
+}

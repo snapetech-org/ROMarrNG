@@ -1,0 +1,22 @@
+{
+  "artifact": "ROMarrNG PR #70 W605-W624 independent blind semantic review packet",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W605-W624",
+  "head": "872905926887840025ba4c3f17151b96f8d3e6e2",
+  "tree": "d7d762d5f3a5dc31bcbdb6c6c45779101ab0bbd4",
+  "candidateFreeInputManifestSha256": "bbc48d1999f08a8bb99f16df2cf7dd68cbe13b3871bc11e1ae4651c64b341cf3",
+  "candidateFreeInputChecksumFileSha256": "ead697f65d06ac4f249322f888c37bbf34a9dafbc8c64c4801c58e201e9fc8d8",
+  "cellCount": 240,
+  "callerfulCellCount": 204,
+  "callerlessHashOnlyCellCount": 36,
+  "dispositionCounts": {
+    "retain_current": 202,
+    "propose_clear_improvement": 2,
+    "hold_hash_only": 36
+  },
+  "nativeSpeakerApproval": false,
+  "reviewDecisionsAreSuggestionsOnly": true,
+  "repositoryAndPrEdited": false,
+  "sealedUtc": "2026-11-04T19:49:55Z"
+}
