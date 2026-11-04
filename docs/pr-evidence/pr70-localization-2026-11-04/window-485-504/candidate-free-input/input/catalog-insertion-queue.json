@@ -1,0 +1,228 @@
+[
+  {
+    "requestedPosition": 485,
+    "catalogZeroBasedIndex": 485,
+    "catalogOneBasedPosition": 486,
+    "sourceId": "ui.games-installed-on-your-gaming-pc.c4a0ecd6a0",
+    "source": "Games installed on your gaming PC",
+    "sourceSha256": "c4a0ecd6a02ad180d699f2a7b755371575057781d3f493018919debf6d7e7c4d",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 486,
+    "catalogZeroBasedIndex": 486,
+    "catalogOneBasedPosition": 487,
+    "sourceId": "ui.gaseous-logs-in-with-an-email-addres.19172aba31",
+    "source": "Gaseous logs in with an email address",
+    "sourceSha256": "19172aba3147dcb2608e42aa25891b586a919fb80a681eb2ae4315af7a6c3633",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 487,
+    "catalogZeroBasedIndex": 487,
+    "catalogOneBasedPosition": 488,
+    "sourceId": "ui.gaseous-or-retrom.cadafc369f",
+    "source": "Gaseous or Retrom",
+    "sourceSha256": "cadafc369fbe021462a0e326b5c35ba7863c6b18e7fc760f39169334ab0c8be1",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 488,
+    "catalogZeroBasedIndex": 488,
+    "catalogOneBasedPosition": 489,
+    "sourceId": "ui.general.c910d474dc",
+    "source": "General",
+    "sourceSha256": "c910d474dcd724bff83ddedeb06bf1eceaf9fb3af7c76bb282be057f36e6dffa",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 489,
+    "catalogZeroBasedIndex": 489,
+    "catalogOneBasedPosition": 490,
+    "sourceId": "ui.genre.6da795a866",
+    "source": "Genre",
+    "sourceSha256": "6da795a8664f37f696f9855d819ff63ea38a8e81ffbd24d5e7d997b65c9dc8ed",
+    "activeSourceRegistry": true,
+    "activeSourceRank": 131,
+    "registryLocations": [
+      "romarr/ui.py:2716"
+    ]
+  },
+  {
+    "requestedPosition": 490,
+    "catalogZeroBasedIndex": 490,
+    "catalogOneBasedPosition": 491,
+    "sourceId": "ui.genres.3561abfe80",
+    "source": "Genres",
+    "sourceSha256": "3561abfe8067f3c1cdec6de4240f041af78d44a6ba619deee9e1d0735fe73e1e",
+    "activeSourceRegistry": true,
+    "activeSourceRank": 132,
+    "registryLocations": [
+      "romarr/ui.py:2301"
+    ]
+  },
+  {
+    "requestedPosition": 491,
+    "catalogZeroBasedIndex": 491,
+    "catalogOneBasedPosition": 492,
+    "sourceId": "ui.get-started.983f311018",
+    "source": "Get Started",
+    "sourceSha256": "983f311018642b0ae60c71253b5735579906d43d260ea926ebe5e815b1c97abb",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 492,
+    "catalogZeroBasedIndex": 492,
+    "catalogOneBasedPosition": 493,
+    "sourceId": "ui.github.f911e414cf",
+    "source": "GitHub",
+    "sourceSha256": "f911e414cf6bdfc595532ab166b5ba0f63d73c021452fcdacbda363dda6ad8fb",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 493,
+    "catalogZeroBasedIndex": 493,
+    "catalogOneBasedPosition": 494,
+    "sourceId": "ui.give-this-key-to-seerrng-it-can-use.4584bf8ca0",
+    "source": "Give this key to SeerrNG. It can use the SeerrNG integration routes, while your main API key keeps full administrator access.",
+    "sourceSha256": "4584bf8ca0b7e0c3fe860a456218dbbca1cb1793f27824719fbd00eda9ae41fe",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 494,
+    "catalogZeroBasedIndex": 494,
+    "catalogOneBasedPosition": 495,
+    "sourceId": "ui.grab.7d935f2589",
+    "source": "Grab",
+    "sourceSha256": "7d935f258918d1a5b94b12c6509388a466f996c68ca6f254dc1ced2738a38a4b",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 495,
+    "catalogZeroBasedIndex": 495,
+    "catalogOneBasedPosition": 496,
+    "sourceId": "ui.grabbed.cdb5425259",
+    "source": "Grabbed",
+    "sourceSha256": "cdb542525944d27df3ee03f85782c77de90ede57ba80f8096dd8a475208a14eb",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 496,
+    "catalogZeroBasedIndex": 496,
+    "catalogOneBasedPosition": 497,
+    "sourceId": "ui.grabbed-release.94cc8b2735",
+    "source": "Grabbed {release}",
+    "sourceSha256": "94cc8b2735032d613420ec388f1cf56d487ca588cc2677416d321aff9d1b147c",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 497,
+    "catalogZeroBasedIndex": 497,
+    "catalogOneBasedPosition": 498,
+    "sourceId": "ui.grabbing.5ae02b3130",
+    "source": "Grabbing…",
+    "sourceSha256": "5ae02b3130d804f49bab1088be47e897abffde56c5bcdba3ea2a62b392ab7dd0",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 498,
+    "catalogZeroBasedIndex": 498,
+    "catalogOneBasedPosition": 499,
+    "sourceId": "ui.grabs-by-indexer.c76712157e",
+    "source": "Grabs by indexer",
+    "sourceSha256": "c76712157e2d332ade820a9f4276bb5e32458e6f7c2eafd718a0cbaf11b01210",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 499,
+    "catalogZeroBasedIndex": 499,
+    "catalogOneBasedPosition": 500,
+    "sourceId": "ui.group.34ca0e7660",
+    "source": "Group",
+    "sourceSha256": "34ca0e76608842ff3e7d924a455a396a82f471052c15e3f2ed7f090ac702e5c1",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 500,
+    "catalogZeroBasedIndex": 500,
+    "catalogOneBasedPosition": 501,
+    "sourceId": "ui.hacks.fdb80196c5",
+    "source": "Hacks",
+    "sourceSha256": "fdb80196c5198afcfc0a28a5d3de7fcde3a8f2da52624ca0ebc64a4e461e44f2",
+    "activeSourceRegistry": true,
+    "activeSourceRank": 134,
+    "registryLocations": [
+      "romarr/ui.py:3501"
+    ]
+  },
+  {
+    "requestedPosition": 501,
+    "catalogZeroBasedIndex": 501,
+    "catalogOneBasedPosition": 502,
+    "sourceId": "ui.header-says.b5143b147b",
+    "source": "Header says",
+    "sourceSha256": "b5143b147bd13776a171099c34107a5fde0fb74f83632a047526168d6aa2bae0",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 502,
+    "catalogZeroBasedIndex": 502,
+    "catalogOneBasedPosition": 503,
+    "sourceId": "ui.header-says-header.8d0d585548",
+    "source": "Header says {header}",
+    "sourceSha256": "8d0d5855486316c9dc576702c6a3732f4681798c11b74d5f509bd80d3004510e",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 503,
+    "catalogZeroBasedIndex": 503,
+    "catalogOneBasedPosition": 504,
+    "sourceId": "ui.headless-browser.8068167c6a",
+    "source": "Headless Browser",
+    "sourceSha256": "8068167c6af7f07f5c58925ae416d559eac541c8200a5aaf2391cb73856ad24c",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 504,
+    "catalogZeroBasedIndex": 504,
+    "catalogOneBasedPosition": 505,
+    "sourceId": "ui.health.55898449eb",
+    "source": "Health",
+    "sourceSha256": "55898449eb74fb2e348d13e5a5d84ab019bb87ea92687b50b3d3302eb409b784",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  }
+]

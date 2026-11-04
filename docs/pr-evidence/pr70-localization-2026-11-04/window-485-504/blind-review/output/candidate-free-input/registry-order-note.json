@@ -1,0 +1,33 @@
+{
+  "selectionBasis": "catalog JSON message-key insertion order",
+  "selectedCatalogZeroBasedIndices": [
+    485,
+    504
+  ],
+  "activeRegistryCount": 479,
+  "selectedIdsInActiveRegistry": 3,
+  "activeRegistryMatches": [
+    {
+      "sourceId": "ui.genre.6da795a866",
+      "activeRank": 131,
+      "registryLocations": [
+        "romarr/ui.py:2716"
+      ]
+    },
+    {
+      "sourceId": "ui.genres.3561abfe80",
+      "activeRank": 132,
+      "registryLocations": [
+        "romarr/ui.py:2301"
+      ]
+    },
+    {
+      "sourceId": "ui.hacks.fdb80196c5",
+      "activeRank": 134,
+      "registryLocations": [
+        "romarr/ui.py:3501"
+      ]
+    }
+  ],
+  "lineHintCaveat": "Active registry locations are metadata only; exact-head source text/key searches and hashed code excerpts are provided separately."
+}

@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "window": "W485-W504",
+  "cellsReviewed": 240,
+  "acceptCurrent": 201,
+  "corrections": 14,
+  "refinements": 1,
+  "holds": 24,
+  "selectedChanges": 15,
+  "cellsReadBack": 240,
+  "carriedHoldsPreserved": 444,
+  "priorSelectionsPreserved": 100,
+  "catalogMessageCount": 1836,
+  "catalogKeyOrderUnchanged": true,
+  "localeOrderUnchanged": true,
+  "nonTargetValuesAndMetadataUnchanged": true,
+  "workflowFilesChanged": 0
+}

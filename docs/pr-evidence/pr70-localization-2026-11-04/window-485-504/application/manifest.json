@@ -1,0 +1,85 @@
+{
+  "artifact": "ROMarrNG PR #70 W485-W504 application evidence",
+  "parent": "6eb494d362ae19503b9199cd2c05c0767cddbc0e",
+  "parentTree": "b9450b9c6d22c816551fc8d528e8f03413d04595",
+  "catalogCommit": "a662c3620e9b5df35092c9d302846b776638f462",
+  "catalogTree": "a42bc330d836ccebea940366d3fd766dbd710e2d",
+  "catalogPath": "romarr/ui-labels.json",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1270,
+      "sha256": "c58d7db3a31e19d5485fe149d2b0be9b8db693a9f6bacda00cc99c99c5fb8a99"
+    },
+    {
+      "path": "apply.py",
+      "bytes": 13288,
+      "sha256": "32250f8b7f3df11da732d99aff3e300f56a6df87057ffa2cbaa55f6d712af120"
+    },
+    {
+      "path": "evidence/apply-plan.json",
+      "bytes": 13222,
+      "sha256": "ab7810d7b2f41fdd8fb13e3d5f240f152d96481568e6dddc09fe0552b911cb1a"
+    },
+    {
+      "path": "evidence/apply-readback.jsonl",
+      "bytes": 107012,
+      "sha256": "e2afd1dce53a4b478f905b0f926f1e3ea4c673a58f0382dfe502e5256539d8e0"
+    },
+    {
+      "path": "evidence/apply-summary.json",
+      "bytes": 443,
+      "sha256": "3066d852728ef08db8e7352ae0295fb3d2f6fc3295636091ecd6d099e1857430"
+    },
+    {
+      "path": "evidence/catalog-commit.json",
+      "bytes": 500,
+      "sha256": "f52db98596ba1ebd343dfcdc847b46fd770b5a951aebb30144aead6c0002c828"
+    },
+    {
+      "path": "evidence/catalog-invariants.json",
+      "bytes": 1836,
+      "sha256": "2f26c8e91e21d9730c0f424c3a71e6f78667dedddb6e4eb3fa18f83a93e60a99"
+    },
+    {
+      "path": "evidence/live-pr-after-catalog-apply.json",
+      "bytes": 498,
+      "sha256": "72c63628f3154d7878365e6961f9369903c80d3fab7fbe3e34e59357e5d19ca2"
+    },
+    {
+      "path": "evidence/post-apply-ui-labels.json",
+      "bytes": 3011967,
+      "sha256": "874341c2951d5601ea9e653dbe05d4a4c0e42bf38bc52a485a012e32c283a156"
+    },
+    {
+      "path": "evidence/pre-apply-checks.json",
+      "bytes": 437,
+      "sha256": "e6d6d6c34b087b71a1cc0b7ff9922388d271c8bb00c8af24dd51a9cd198a119b"
+    },
+    {
+      "path": "evidence/pre-apply-ui-labels.json",
+      "bytes": 3011765,
+      "sha256": "7615df056775da77c2f559096cb23caa990231c475ce5955f50a732bf68633bb"
+    },
+    {
+      "path": "evidence/prior-hold-reattestation.jsonl",
+      "bytes": 374521,
+      "sha256": "f1424c3522ab298890fad6b9c705ee5767f906d15bd92222bec2a792d253d4fc"
+    },
+    {
+      "path": "evidence/prior-selection-reattestation.jsonl",
+      "bytes": 66461,
+      "sha256": "a31c9618ec5da88be14c42770c06ddadcc3bc607cf6537c41853935e8c2b946b"
+    },
+    {
+      "path": "evidence/selected-change-ledger.jsonl",
+      "bytes": 11510,
+      "sha256": "8e2804dcd6d7dcfb6ade4f26aede644974fc41688f09d6ed639158531d599c7d"
+    },
+    {
+      "path": "verify_apply.py",
+      "bytes": 243,
+      "sha256": "a5b235c31c87ad2c9d030bc4b075c44950016bd19d42a65163ac3e4f7dd11489"
+    }
+  ]
+}

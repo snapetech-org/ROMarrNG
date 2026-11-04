@@ -1,0 +1,49 @@
+{
+  "artifact": "ROMarrNG PR #70 W485-W504 primary semantic review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "baseRefName": "main",
+  "head": "6eb494d362ae19503b9199cd2c05c0767cddbc0e",
+  "tree": "b9450b9c6d22c816551fc8d528e8f03413d04595",
+  "window": "W485-W504",
+  "selectionBasis": "candidate-free catalog insertion indices 485..504",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "dispositions": {
+    "accept-current": 201,
+    "correction": 14,
+    "refinement": 1,
+    "hold": 24
+  },
+  "proposedCellCount": 15,
+  "newHoldCellCount": 24,
+  "holdPositions": [
+    493,
+    502
+  ],
+  "priorSelectedSourceCount": 100,
+  "priorHoldCellCount": 444,
+  "candidateFreeInputManifestSha256": "0319707e6d70515ad6dae3f14cc3fbb993a66d2c619938525bc3915516177bf1",
+  "candidateFreeInputChecksumListSha256": "0424bfdb53551a3d5dce0c21bcf19a684f166864c3bda7d282a7a9b99123678c",
+  "primaryLedgerSha256": "a1b28bb30cdf853a99937f39c9184ba4cc3a76fd9fb1da798128b6113cb7fabb",
+  "summarySha256": "1d0f08bad0f50f273c70c41690439b975fd2a991c57d7eff9bf924feb50604b4",
+  "priorSelectionReattestationSha256": "a31c9618ec5da88be14c42770c06ddadcc3bc607cf6537c41853935e8c2b946b",
+  "priorHoldReattestationSha256": "f1424c3522ab298890fad6b9c705ee5767f906d15bd92222bec2a792d253d4fc",
+  "createdUtc": "2026-11-04T05:00:22.421513+00:00"
+}

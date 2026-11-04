@@ -1,0 +1,87 @@
+{
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogMessageCount": 1836,
+  "beforeSha256": "7615df056775da77c2f559096cb23caa990231c475ce5955f50a732bf68633bb",
+  "afterSha256": "874341c2951d5601ea9e653dbe05d4a4c0e42bf38bc52a485a012e32c283a156",
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "localeOrder": [
+    "es",
+    "zh-Hans",
+    "hi",
+    "de",
+    "ja",
+    "fr",
+    "pt-BR",
+    "ar",
+    "ko",
+    "zh-Hant",
+    "vi",
+    "id"
+  ],
+  "localeOrderUnchanged": true,
+  "sourceAndMetadataUnchanged": true,
+  "changedCellCount": 15,
+  "changedCells": [
+    {
+      "sourceId": "ui.github.f911e414cf",
+      "locale": "ja"
+    },
+    {
+      "sourceId": "ui.github.f911e414cf",
+      "locale": "pt-BR"
+    },
+    {
+      "sourceId": "ui.grabbing.5ae02b3130",
+      "locale": "ar"
+    },
+    {
+      "sourceId": "ui.grabbing.5ae02b3130",
+      "locale": "de"
+    },
+    {
+      "sourceId": "ui.grabbing.5ae02b3130",
+      "locale": "es"
+    },
+    {
+      "sourceId": "ui.grabbing.5ae02b3130",
+      "locale": "fr"
+    },
+    {
+      "sourceId": "ui.grabbing.5ae02b3130",
+      "locale": "hi"
+    },
+    {
+      "sourceId": "ui.grabbing.5ae02b3130",
+      "locale": "id"
+    },
+    {
+      "sourceId": "ui.grabbing.5ae02b3130",
+      "locale": "ja"
+    },
+    {
+      "sourceId": "ui.grabbing.5ae02b3130",
+      "locale": "ko"
+    },
+    {
+      "sourceId": "ui.grabbing.5ae02b3130",
+      "locale": "pt-BR"
+    },
+    {
+      "sourceId": "ui.grabbing.5ae02b3130",
+      "locale": "vi"
+    },
+    {
+      "sourceId": "ui.grabbing.5ae02b3130",
+      "locale": "zh-Hans"
+    },
+    {
+      "sourceId": "ui.grabbing.5ae02b3130",
+      "locale": "zh-Hant"
+    },
+    {
+      "sourceId": "ui.header-says.b5143b147b",
+      "locale": "vi"
+    }
+  ],
+  "workflowFilesChanged": false
+}

@@ -1,0 +1,29 @@
+{
+  "artifact": "ROMarrNG PR #70 W485-W504 localization review and application",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "reviewHead": "6eb494d362ae19503b9199cd2c05c0767cddbc0e",
+  "reviewTree": "b9450b9c6d22c816551fc8d528e8f03413d04595",
+  "catalogCommit": "a662c3620e9b5df35092c9d302846b776638f462",
+  "catalogTree": "a42bc330d836ccebea940366d3fd766dbd710e2d",
+  "catalogPath": "romarr/ui-labels.json",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "dispositions": {
+    "accept-current": 201,
+    "correction": 14,
+    "refinement": 1,
+    "hold": 24
+  },
+  "selectedChanges": 15,
+  "carriedHoldsPreserved": 444,
+  "priorSelectionsPreserved": 100,
+  "nativeSpeakerApproval": false,
+  "exactHeadBrowserAcceptance": false,
+  "deploymentCountAtCatalogHead": 0,
+  "merge": false,
+  "release": false,
+  "tag": false
+}

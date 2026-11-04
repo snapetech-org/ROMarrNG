@@ -1,0 +1,102 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "commit": "6eb494d362ae19503b9199cd2c05c0767cddbc0e",
+  "tree": "b9450b9c6d22c816551fc8d528e8f03413d04595",
+  "baseLocale": "en",
+  "activeUniqueSourceIds": 479,
+  "catalogMessageCount": 1836,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogSha256": "7615df056775da77c2f559096cb23caa990231c475ce5955f50a732bf68633bb",
+  "sourceQueueSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+  "sourceQueuePath": "romarr/ui-source-messages.json",
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "sourceSnapshotSha256": "e8f580fc3a49da18add0748e8d5312186dc353bc30d3c01bcc94e06d2aaa077d",
+  "callerSourceFilePins": {
+    "romarr/ui-labels.json": {
+      "fileSha256": "7615df056775da77c2f559096cb23caa990231c475ce5955f50a732bf68633bb",
+      "gitBlob": "03270030b779e7b3caec1a7c50028c16142410ec"
+    },
+    "romarr/ui-source-messages.json": {
+      "fileSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "gitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80"
+    },
+    "romarr/ui-source-snapshot.json": {
+      "fileSha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "gitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2"
+    },
+    "romarr/app.py": {
+      "fileSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+      "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd"
+    },
+    "romarr/clients.py": {
+      "fileSha256": "200dfae6cb8872bcb63460a757709706c760b0ff8082cb45b9d7ff01bf14b2ad",
+      "gitBlob": "99f36e0704bd896782ff6ff9a254c78b037a4d02"
+    },
+    "romarr/compressatorium.py": {
+      "fileSha256": "a8a9f2e4030c1970357161df4fe47f7b21dff6f2389ce0d66c192d6111124f69",
+      "gitBlob": "4bdd4b0f489cc73653ec5230f0674028332516a7"
+    },
+    "romarr/decompress.py": {
+      "fileSha256": "544275a2f42c94d86661b4b8d0703ec34b7c43481addc5ef6cfeddcf5977b4ba",
+      "gitBlob": "ff350ed0804391d0a398ce810e03b0c680e107cb"
+    },
+    "romarr/downloaders.py": {
+      "fileSha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed",
+      "gitBlob": "65952d7b8361fa3c6af742f675fde805ec361dd2"
+    },
+    "romarr/frontends.py": {
+      "fileSha256": "6c01b8fcfd1afef2fcbd70e96e73b01ca7e5fcf9251507b88b19d9717bec8e95",
+      "gitBlob": "fd36a48837fb7a6ab67b6774a63208b1046da1ce"
+    },
+    "romarr/i18n_runtime.js": {
+      "fileSha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "gitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc"
+    },
+    "romarr/libraries.py": {
+      "fileSha256": "8d41c724588ff01ea3896dcfef4e07d7a2f107a1666070f0c1a688411686fe04",
+      "gitBlob": "af3912e3c0943bc4b442878ff3e0321fc4762600"
+    },
+    "romarr/notify.py": {
+      "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+      "gitBlob": "ef207435d6dedce92e2fd7310898c1a55e95f94e"
+    },
+    "romarr/openapi.py": {
+      "fileSha256": "ec27f89d3d77f9d7f58d30bdcbe7078636d216002ef6701575b392d4344cff15",
+      "gitBlob": "08ceab1157c7a2470e42917976f40998d14ea20c"
+    },
+    "romarr/organizer.py": {
+      "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390"
+    },
+    "romarr/sso.py": {
+      "fileSha256": "5408eda0061ee10ba8c67ea02ee64007e1990b12ef73cfc88613f916ccbac6e0",
+      "gitBlob": "1576fcfd540ee2d1bd5b8321f87fa27d0b03f307"
+    },
+    "romarr/titled.py": {
+      "fileSha256": "55ab32bf6f20c044823429d5ffc34d5c9f3e1a3262b5963e4ee9458e88be301e",
+      "gitBlob": "75139bb370e0a3a473f28a3ac41f7d06edc66756"
+    },
+    "romarr/totp.py": {
+      "fileSha256": "04e31f17e18121747681492b0e31c6e62470b82fb797a2099ca80690c989fe72",
+      "gitBlob": "78abd7704ab7d7fd601d06bd4485202416428b1c"
+    },
+    "romarr/ui.py": {
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0"
+    }
+  },
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ]
+}
