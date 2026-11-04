@@ -1,0 +1,42 @@
+{
+  "artifact": "ROMarrNG PR #70 W585-W604 sealed primary semantic review",
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W585-W604",
+  "branch": "task/localization-translation-review-20261030",
+  "head": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+  "tree": "dcb9c1766831e217ffca7fb77068b97c33b9524e",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "candidateFreeInputManifestSha256": "f06c35a2c66bdd29b5ea8e795d02c718f160ff57b81671beb3e270ab7a4fe7f6",
+  "candidateFreeInputChecksumListSha256": "3534dd5d1e8a4998045f398b93876afcb9f7ba05083d89b37f0fd50f832bf7c5",
+  "preReviewBlindnessManifestSha256": "b00b2a168694e66def9cc05572b390965c33f3144393b9d84d2faff7a09d79c0",
+  "otherW585ReviewDecisionsAccessed": false,
+  "staleW585PrimaryPacketAccessed": false,
+  "priorW585PrimaryDecisionsReused": false,
+  "nativeSpeakerApproval": false,
+  "files": [
+    {
+      "path": "dispositions.jsonl",
+      "bytes": 114238,
+      "sha256": "a39da6f09853bf793ef76ccd59ccda8b3b3d942b0939e7f01b467913f440b8d5"
+    },
+    {
+      "path": "hash-only-holds.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 1298,
+      "sha256": "ce8bfb5a496a68d002a669d83a86dc33f967334def27048a55b5530950ae1146"
+    },
+    {
+      "path": "verify_primary.py",
+      "bytes": 6635,
+      "sha256": "4f9179803f5743eee0a98bb06ec98149136009d7078471aa1122adfbf17a32cc"
+    }
+  ]
+}

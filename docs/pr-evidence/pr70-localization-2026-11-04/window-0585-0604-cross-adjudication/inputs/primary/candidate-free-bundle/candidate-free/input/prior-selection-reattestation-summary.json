@@ -1,0 +1,18 @@
+{
+  "allPriorSelectionsMatchCurrentCatalogAndRegistry": true,
+  "currentHead": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+  "currentTree": "dcb9c1766831e217ffca7fb77068b97c33b9524e",
+  "priorWindows": {
+    "W385-W404": 20,
+    "W405-W424": 20,
+    "W425-W444": 20,
+    "W445-W464": 20,
+    "W465-W484": 20,
+    "W485-W504": 20,
+    "W505-W524": 20,
+    "W525-W544": 20,
+    "W545-W564": 20,
+    "W565-W584": 20
+  },
+  "reattestedSelectedSourceCount": 200
+}

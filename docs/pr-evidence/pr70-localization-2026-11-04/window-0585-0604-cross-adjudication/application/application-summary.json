@@ -1,0 +1,30 @@
+{
+  "callerlessHashOnlyHoldCount": 24,
+  "catalogKeyOrderPreserved": true,
+  "changedCellCount": 22,
+  "keptCurrentCellCount": 194,
+  "localeRegistryOrderPreserved": true,
+  "noOpCellCount": 218,
+  "nonTargetProductFilesChanged": 0,
+  "preCommitSecurityScanHookSkipReason": "The requested task prohibits scans; only the pre-push stable-image policy hook was run.",
+  "preCommitSecurityScanHookSkipped": true,
+  "preHead": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+  "prePushReadOnlyStableImagePolicyHook": "PASS",
+  "preTree": "dcb9c1766831e217ffca7fb77068b97c33b9524e",
+  "productCommit": "d44e61d9960c788412da0fadbb8b67744b70e404",
+  "productParent": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+  "productScope": "romarr/ui-labels.json",
+  "productTree": "2bbb5821bf6beb2b06f689ba0e3c87c6136d42ef",
+  "readbackCellCount": 240,
+  "selectedProposalResolutionCounts": {
+    "blind_only_resolved_by_caller_context": 6,
+    "corroborated_exact_target": 11,
+    "corroborated_meaning_variant": 3,
+    "primary_only_resolved_by_caller_context": 2
+  },
+  "sourceAndCurrentTargetHashesGuarded": true,
+  "testsBuildsScansCiWorkflowEditsMergeReleaseTag": "NONE",
+  "translationMetadataChanged": false,
+  "unresolvedContextualHolds": 0,
+  "window": "W585-W604"
+}

@@ -1,0 +1,45 @@
+{
+  "blindness_at_manifest_creation": {
+    "current_target_cell_text_opened_for_semantic_review": false,
+    "other_task_scratch_files_inspected": false,
+    "prior_w585_review_output_inspected": false,
+    "source_text_opened_for_semantic_review": false,
+    "source_worktree_access_before_manifest": "Git ref, HEAD, tree, status, and remote metadata only; no source file contents"
+  },
+  "blindness_manifest_correction": {
+    "corrected_utc": "2026-11-04T18:11:56Z",
+    "note": "Corrected the checksum-entry count from 25 to 27 after counting the supplied input checksum lines; all 27 had already passed sha256sum verification.",
+    "preCorrectionSha256": "1823439319b958649cba4fa29b9cf80ba9acb823e950a50735b06cca73e16a86"
+  },
+  "candidate_free_input_packet": {
+    "packet_scope": "only the supplied candidate-free/input directory was checked",
+    "path": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w585-604-current-candidate-free-20261104/candidate-free/input",
+    "sha256sums_file_sha256": "3534dd5d1e8a4998045f398b93876afcb9f7ba05083d89b37f0fd50f832bf7c5",
+    "verification": "sha256sum -c SHA256SUMS.txt succeeded for all 27 listed input files"
+  },
+  "created_utc": "2026-11-04T18:00:42Z",
+  "pin": {
+    "branch": "task/localization-translation-review-20261030",
+    "head": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+    "pull_ref": "refs/pull/70/head",
+    "tree": "dcb9c1766831e217ffca7fb77068b97c33b9524e"
+  },
+  "pre_review_reattestation": {
+    "api_base_ref": "main",
+    "api_base_sha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "api_head_ref": "task/localization-translation-review-20261030",
+    "api_head_sha": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+    "api_pr_draft": true,
+    "api_pr_state": "open",
+    "branch_ref_sha": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+    "host": "kspld0",
+    "pull_ref_sha": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+    "repository": "snapetech-org/ROMarrNG",
+    "worktree_head_sha": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+    "worktree_tree_sha": "dcb9c1766831e217ffca7fb77068b97c33b9524e"
+  },
+  "record_type": "pre-review-blindness-manifest",
+  "review": "ROMarrNG PR #70 W585-W604, 240 cells",
+  "review_method": "Independent semantic review of the 20 selected source IDs across 12 locales using pinned caller context. Preserve callerless hash-only holds. No repository or PR mutations, tests, builds, CI, workflow edits, merge, release, or tag.",
+  "reviewer": "independent blind semantic reviewer"
+}

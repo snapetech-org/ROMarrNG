@@ -1,0 +1,24 @@
+{
+  "files": {
+    "blind-decisions.jsonl": "97c384f094670e49d8c21d1e87b13a1bb43548def6158143952e3ab20f6ffe57",
+    "build_blind_packet.py": "9f0d1f88ff8687734bd7e03c29387bfefceb7bc2ba5a1b75bf7cdbfa48eab6fd",
+    "review-summary.json": "bef558373f96f1f368561766ff4f54d895509d8ab7b1d0ce327e1ab334db7832",
+    "verify_blind_packet.py": "5068853bc7ffaab68ff43f3fc9b97bf032714d29c4e2e18a3364b4a9bae1f4e8"
+  },
+  "input": {
+    "blindnessManifestSha256": "88ffcaaa0176e106fe29feb401df787fd5961bcb05a4f8da9b742e35413bb55a",
+    "sha256sumsFileSha256": "3534dd5d1e8a4998045f398b93876afcb9f7ba05083d89b37f0fd50f832bf7c5",
+    "verifiedInputFileCount": 27
+  },
+  "pin": {
+    "branch": "task/localization-translation-review-20261030",
+    "head": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+    "pullRef": "refs/pull/70/head",
+    "pullRequest": 70,
+    "repository": "snapetech-org/ROMarrNG",
+    "tree": "dcb9c1766831e217ffca7fb77068b97c33b9524e"
+  },
+  "recordType": "sealed-blind-review-packet",
+  "schemaVersion": 1,
+  "sealedUtc": "2026-11-04T18:12:29Z"
+}

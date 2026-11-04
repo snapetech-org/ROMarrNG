@@ -1,0 +1,17 @@
+{
+  "changedPaths": [
+    "romarr/ui-labels.json"
+  ],
+  "commitSubject": "fix(i18n): correct ROMarrNG W585-W604 labels",
+  "commitUtc": "2026-11-04T12:43:53-06:00",
+  "parentCommit": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+  "parentTree": "dcb9c1766831e217ffca7fb77068b97c33b9524e",
+  "postCatalogGitBlob": "4b42b9df6818e68e1d9f657880be96e978cdaa65",
+  "postCatalogSha256": "62e269549d311ce8e2142199792490a035671674ba3dd45a4e5d9d2b601767f0",
+  "preCatalogSha256": "5fc391b529ea7553f5c133f38c7faca0f74a08a0c740ae03633383ae8d43fff3",
+  "preCommitSecurityScanHookSkipped": true,
+  "prePushReadOnlyStableImagePolicyHook": "PASS",
+  "productCommit": "d44e61d9960c788412da0fadbb8b67744b70e404",
+  "productPath": "romarr/ui-labels.json",
+  "productTree": "2bbb5821bf6beb2b06f689ba0e3c87c6136d42ef"
+}

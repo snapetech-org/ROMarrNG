@@ -1,0 +1,31 @@
+{
+  "baseDrift": {
+    "apiBaseRefMismatch": true,
+    "liveMainSha": "65d8747e3a068473396227bae5e85ddc71c7d4d8"
+  },
+  "bodyPrefixMatchesBefore": true,
+  "checkedAtUtc": "2026-11-04T18:46:38Z",
+  "pullRequest": {
+    "baseApiSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "baseRef": "main",
+    "bodyChars": 57904,
+    "bodySha256": "a99d2ee0a812f16c39ce632b2c83064917ca02982b31ebd27998b673fb5d4cd2",
+    "draft": true,
+    "headRef": "task/localization-translation-review-20261030",
+    "headRepo": "snapetech-org/ROMarrNG",
+    "headSha": "d44e61d9960c788412da0fadbb8b67744b70e404",
+    "headTree": "2bbb5821bf6beb2b06f689ba0e3c87c6136d42ef",
+    "number": 70,
+    "state": "open"
+  },
+  "refs": {
+    "branchRef": "d44e61d9960c788412da0fadbb8b67744b70e404",
+    "liveMain": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+    "pullHeadRef": "d44e61d9960c788412da0fadbb8b67744b70e404"
+  },
+  "sourceWorktree": {
+    "clean": true,
+    "head": "d44e61d9960c788412da0fadbb8b67744b70e404",
+    "tree": "2bbb5821bf6beb2b06f689ba0e3c87c6136d42ef"
+  }
+}
