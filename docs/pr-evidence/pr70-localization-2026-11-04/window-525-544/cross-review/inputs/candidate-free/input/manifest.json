@@ -1,0 +1,177 @@
+{
+  "activeRegistrySelectedSourceCount": 8,
+  "activeUniqueSourceIdCount": 479,
+  "artifact": "ROMarrNG PR #70 W525-W544 candidate-free input",
+  "baseRefName": "main",
+  "branch": "task/localization-translation-review-20261030",
+  "callerSearchQueryCount": 20,
+  "candidateFree": true,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogMessageCount": 1836,
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogSha256": "02779094097e70786d8fb91f9137afea17ca36dffd7d1c0bd7101046dcd157cf",
+  "cellCount": 240,
+  "createdUtc": "2026-11-04T11:12:06+00:00",
+  "currentTargetMarkupMismatches": 0,
+  "currentTargetMissingCells": 0,
+  "currentTargetNumericMismatches": 0,
+  "currentTargetNumericPresentationDifferences": 0,
+  "currentTargetPlaceholderMismatches": 0,
+  "currentTargetProtectedLiteralMismatches": 0,
+  "files": [
+    {
+      "bytes": 914,
+      "path": "PR-attestation-before.json",
+      "sha256": "3f488bee17a7f51839fadf4842ee854d2709a46dcae16e8abb3ca03832a8f5f1"
+    },
+    {
+      "bytes": 6275,
+      "path": "caller-search-audit.json",
+      "sha256": "2bd7c2ab2291cbf0c5d02bdce960d6ad531017711b52e274353db24590ef2a38"
+    },
+    {
+      "bytes": 10723,
+      "path": "catalog-file-pins.json",
+      "sha256": "cc43084bb159a542e87d0b10dbf15f38ecf08252b3331bde707c4cca172e3c66"
+    },
+    {
+      "bytes": 846497,
+      "path": "catalog-source-inventory.jsonl",
+      "sha256": "107394e1bfb288769dc834918eaafcee0ea19fabe3b91e9c763985b2cac20e7e"
+    },
+    {
+      "bytes": 1331,
+      "path": "continuity-reattestation.json",
+      "sha256": "ffc186b69a24f34473a24feba46da062bb4febed92b5620cfd26e395df2554be"
+    },
+    {
+      "bytes": 342530,
+      "path": "current-target-cells.jsonl",
+      "sha256": "b5a4b33785823423344f112e73177f79da8bcb3b4c27ab46234649c8fc514382"
+    },
+    {
+      "bytes": 140,
+      "path": "current-target-token-mismatches.json",
+      "sha256": "abdf369e9b3d9d0c4c5c46f48f8449bd6ab4dc09bfa2f25778bf1a9a8e36b33f"
+    },
+    {
+      "bytes": 959,
+      "path": "dispatch-mechanics.json",
+      "sha256": "d1b0c852ed94f119f1be93d6251892394645c76c8b8a398e197ba942e8f7c853"
+    },
+    {
+      "bytes": 326,
+      "path": "prior-applied-cell-reattestation-summary.json",
+      "sha256": "d37264707eb454ac87e029b08343f2580be6b5a28679461d4e1439cf07c26226"
+    },
+    {
+      "bytes": 14914,
+      "path": "prior-applied-cell-reattestation.jsonl",
+      "sha256": "8dffc20752bddb017cd0652b98e3731c82e567bb2ccbd8dc0ddab894a84a9449"
+    },
+    {
+      "bytes": 543,
+      "path": "prior-hold-reattestation-summary.json",
+      "sha256": "7f927fff7d443d60ca5649101d2db425d9cd79eab3353b4f58d3e295bc5d7ec9"
+    },
+    {
+      "bytes": 374025,
+      "path": "prior-hold-reattestation.jsonl",
+      "sha256": "7327efba1bb19aa51f2a5a11272bf527afb1db76e79917f9143357988c5f2d92"
+    },
+    {
+      "bytes": 396,
+      "path": "prior-selection-reattestation-summary.json",
+      "sha256": "c98d93fe64cf73325fc010b94b7a1ed86ce000fa65031a82a4115374dd5d4d18"
+    },
+    {
+      "bytes": 54761,
+      "path": "prior-selection-reattestation.jsonl",
+      "sha256": "b59737523f26174c7098166fcfb2025f3b604ded23383f0de0e3825b807c1465"
+    },
+    {
+      "bytes": 1686,
+      "path": "registry-order-note.json",
+      "sha256": "17290dcbc65c9d2ac2e48d845becfe2ce0e2a8fa5213258e7b0133cbba503c2a"
+    },
+    {
+      "bytes": 946,
+      "path": "selection-boundary.jsonl",
+      "sha256": "25c518ba6039d4736858750b8d027173d1b26ee5216ca001f2052a39cff128aa"
+    },
+    {
+      "bytes": 9081,
+      "path": "selection.json",
+      "sha256": "c7e2c6120d1adc4fa58bb40c7038e5ee0633d6c54d09d43f815591d601954d3a"
+    },
+    {
+      "bytes": 42145,
+      "path": "source-contexts.jsonl",
+      "sha256": "8f4c56b71717dc5d46c331a4f5e8683360d1126a2596e8da6a95887eebcc439e"
+    },
+    {
+      "bytes": 11794,
+      "path": "source-file-pins.json",
+      "sha256": "ec1db49a8072f604b7042a96266a3f1bb8853b61ae29864e19d5272900ff87e7"
+    },
+    {
+      "bytes": 6503,
+      "path": "source-inventory-selection.jsonl",
+      "sha256": "96d94658ba3c352ca2b3fc7598b196b101be2a3bfad4c21136e115f74ee8e533"
+    },
+    {
+      "bytes": 273919,
+      "path": "source-queue.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515"
+    },
+    {
+      "bytes": 54961,
+      "path": "source-snapshot.json",
+      "sha256": "b746ba672806c466f8fbc53e515598f00913b1ef96e17c7eb3cfda7548b78e1f"
+    },
+    {
+      "bytes": 17567,
+      "path": "verify_input.py",
+      "sha256": "e159ab8dc36592fb07ac69d58f50f2e7cca19ea92e8d5d9e0bb3eac1265d7ded"
+    }
+  ],
+  "head": "eda48333438591ecc67f829c50ef2d521f1e7a5e",
+  "localeCount": 12,
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "priorAppliedSelectedCellCount": 28,
+  "priorAppliedTargetsUnchanged": true,
+  "priorHoldCellChangedCount": 0,
+  "priorHoldCellCount": 540,
+  "priorHoldTargetsUnchanged": true,
+  "priorSelectedSourceCount": 140,
+  "priorSelectionsUnchanged": true,
+  "proposedTargetsIncluded": false,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewBoundary": "This input contains current catalog targets, exact-head source/caller evidence, and hash-only prior selection/hold reattestation. It contains no proposed targets or current-window review decisions.",
+  "reviewDecisionsIncluded": false,
+  "selectionBasis": "catalog insertion order; exact pinned ui-labels.json message indices 525..544",
+  "sourceContextCount": 20,
+  "sourceCount": 20,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "sourceQueueCurrentHead": "eda48333438591ecc67f829c50ef2d521f1e7a5e",
+  "sourceQueuePath": "romarr/ui-source-messages.json",
+  "sourceQueueSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+  "sourceSnapshotSha256": "e8f580fc3a49da18add0748e8d5312186dc353bc30d3c01bcc94e06d2aaa077d",
+  "tree": "3db18e56d0c7ac08a564a6baff61eba25f0a01da",
+  "w505ContinuityReattestation": "continuity-reattestation.json",
+  "window": "W525-W544"
+}

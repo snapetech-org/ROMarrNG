@@ -1,0 +1,68 @@
+{
+  "activeRegistryCount": 479,
+  "activeRegistryMatches": [
+    {
+      "activeRank": 140,
+      "registryLocations": [
+        "romarr/ui.py:4541"
+      ],
+      "sourceId": "ui.idle.ab0171ca04"
+    },
+    {
+      "activeRank": 144,
+      "registryLocations": [
+        "romarr/ui.py:5096"
+      ],
+      "sourceId": "ui.import-a-folder-you-own-and-let-roma.a06dc1fe1e"
+    },
+    {
+      "activeRank": 145,
+      "registryLocations": [
+        "romarr/ui.py:4233"
+      ],
+      "sourceId": "ui.import-check-minutes.afebe8564c"
+    },
+    {
+      "activeRank": 147,
+      "registryLocations": [
+        "romarr/app.py:1350"
+      ],
+      "sourceId": "ui.import-completed-downloads.fd1a4510eb"
+    },
+    {
+      "activeRank": 146,
+      "registryLocations": [
+        "romarr/ui.py:4224"
+      ],
+      "sourceId": "ui.import-completed-downloads-automatic.0436b11a02"
+    },
+    {
+      "activeRank": 148,
+      "registryLocations": [
+        "romarr/ui.py:2100"
+      ],
+      "sourceId": "ui.import-lists.cdf54991b2"
+    },
+    {
+      "activeRank": 149,
+      "registryLocations": [
+        "romarr/organizer.py:1621"
+      ],
+      "sourceId": "ui.imported-from-the-existing-es-de-gam.5fa9036446"
+    },
+    {
+      "activeRank": 151,
+      "registryLocations": [
+        "romarr/ui.py:5498"
+      ],
+      "sourceId": "ui.imported-local-metadata-review-title.5db9952dae"
+    }
+  ],
+  "lineHintCaveat": "Active source registry metadata does not substitute for the exact literal caller search and excerpt evidence.",
+  "selectedCatalogZeroBasedIndices": [
+    525,
+    544
+  ],
+  "selectedIdsInActiveRegistry": 8,
+  "selectionBasis": "catalog JSON message-key insertion order"
+}

@@ -1,0 +1,40 @@
+{
+  "artifact": "ROMarrNG PR #70 W525-W544 independent cross adjudication",
+  "baseApiLiveMainMismatchDocumented": true,
+  "blindRevisionCount": 18,
+  "browserAcceptance": false,
+  "capturedAtUtc": "2026-11-04T11:57:39.970159+00:00",
+  "cellCount": 240,
+  "crossDecisionCounts": {
+    "hold_callerless": 12,
+    "retain_current": 210,
+    "select_agreed_proposal": 12,
+    "select_blind_proposal": 4,
+    "select_primary_proposal": 2
+  },
+  "head": "eda48333438591ecc67f829c50ef2d521f1e7a5e",
+  "localeCount": 12,
+  "mergeReleaseTag": false,
+  "nativeSpeakerApproval": false,
+  "newTextFreeHolds": 12,
+  "primaryProposalCount": 15,
+  "priorAppliedCellsReattested": 28,
+  "priorHashOnlyHoldsPreserved": 540,
+  "priorSelectedSourcesReattested": 140,
+  "proposalCells": 18,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewConfidence": "moderate",
+  "selectedBy": {
+    "agreed": 12,
+    "blind": 4,
+    "primary": 2
+  },
+  "selectedChanges": 18,
+  "sourceCount": 20,
+  "testsBuildsScansCI": false,
+  "tokenMismatchesInSelectedTargets": 0,
+  "tree": "3db18e56d0c7ac08a564a6baff61eba25f0a01da",
+  "window": "W525-W544",
+  "workflowChanges": 0
+}

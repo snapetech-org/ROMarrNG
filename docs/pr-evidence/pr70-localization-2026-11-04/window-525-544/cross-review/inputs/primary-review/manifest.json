@@ -1,0 +1,48 @@
+{
+  "artifact": "ROMarrNG PR #70 W525-W544 primary semantic review",
+  "files": [
+    {
+      "bytes": 727,
+      "path": "README.md",
+      "sha256": "f479e1de753425456848421baabc23ffc9b476a89044d545472b6ab088b6a5d9"
+    },
+    {
+      "bytes": 16838,
+      "path": "build_primary.py",
+      "sha256": "243c20b78e52ba57a5575f16e90eca23eb764f13bd1c3795a977eb30ed012967"
+    },
+    {
+      "bytes": 7141,
+      "path": "primary-holds.jsonl",
+      "sha256": "ef7e37b6cbd5fb69789fbd902a5c8b05f6f2cd243b0fcdb728029a0f7a885966"
+    },
+    {
+      "bytes": 412973,
+      "path": "primary-ledger.jsonl",
+      "sha256": "1effbba79c9290b888eb4c46980be43bf7fc3addfeee2ad2185fc6f7ed3df3c6"
+    },
+    {
+      "bytes": 11780,
+      "path": "primary-proposals.jsonl",
+      "sha256": "5597fad30f4f34920cc6852cfc63cb8a89e010fdaa38e93603e38061cbfdb4f1"
+    },
+    {
+      "bytes": 843,
+      "path": "provenance.json",
+      "sha256": "124385af0d70aea47052bfa8099bfa90c6ecbc45db8b0d0ce0517ae6cf0e6cd6"
+    },
+    {
+      "bytes": 4627,
+      "path": "summary.json",
+      "sha256": "f9af520f8aa035f392244217757334b339e7deb9ce29cac2142c13129691b5c3"
+    },
+    {
+      "bytes": 9303,
+      "path": "verify_primary.py",
+      "sha256": "e69a3a5c93d0e60a86fde7a135cb0a35696e8bef47eb4532084e9aea6b589c2a"
+    }
+  ],
+  "head": "eda48333438591ecc67f829c50ef2d521f1e7a5e",
+  "tree": "3db18e56d0c7ac08a564a6baff61eba25f0a01da",
+  "window": "W525-W544"
+}

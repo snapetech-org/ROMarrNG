@@ -1,0 +1,9 @@
+fe87877cae3cfdf30046e9854c56f276d18d3c5fbcb68dc48b960302fabedb4c  ./PR-attestation-after-product.json
+33277c229996bbe402cb63b75a9a2c323e6c9911276530c5c5e9b646da399bd0  ./README.md
+4e80877abad36973db2430fe7dd37872c34945794c6514c8883d3328ac228371  ./application-readback.jsonl
+1e357e36657636e9dd0b0c1f3eebd07db2f83adfee36dbe06df8e931ebbe8b9e  ./application-summary.json
+c4944f1e992d1d32171759ee5987ca12c576c4ec0324abba410de865115572d0  ./apply.py
+60c640a3a36336207ab18a1da8735ed97ff83ee60373de4cf2ba7cfa0c04757d  ./catalog-preimage.json
+ca338e03c621a3fa17d51b57bc7d3506b06b9f54bb4d018253be336afb82c9c2  ./selected-update-ledger.jsonl
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./translation-hash-updates.jsonl
+a111d0e99a91da71add2df9107bf11c6b36ad0321c4412187300d825ab7d7cda  ./verify_application.py

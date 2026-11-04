@@ -1,0 +1,101 @@
+{
+  "candidateFreeBaselineTokenMismatches": 0,
+  "cellCount": 240,
+  "exceptions": [],
+  "proposalChecks": [
+    {
+      "locale": "ar",
+      "position": 527,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "ko",
+      "position": 527,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "es",
+      "position": 529,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "fr",
+      "position": 529,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "ar",
+      "position": 537,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "de",
+      "position": 537,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "es",
+      "position": 537,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "fr",
+      "position": 537,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "hi",
+      "position": 537,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "id",
+      "position": 537,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "ja",
+      "position": 537,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "ko",
+      "position": 537,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "pt-BR",
+      "position": 537,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "vi",
+      "position": 537,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "zh-Hans",
+      "position": 537,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "zh-Hant",
+      "position": 537,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "vi",
+      "position": 538,
+      "sourceProtectedLiteralsPreserved": true
+    },
+    {
+      "locale": "ar",
+      "position": 539,
+      "sourceProtectedLiteralsPreserved": true
+    }
+  ],
+  "proposalTokenMismatches": 0,
+  "protectedLiteralProposalMismatches": 0,
+  "schemaVersion": 1,
+  "window": "W525-W544"
+}

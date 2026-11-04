@@ -1,0 +1,183 @@
+{
+  "artifact": "ROMarrNG PR #70 W525-W544 primary semantic review",
+  "branch": "task/localization-translation-review-20261030",
+  "browserReviewClaimed": false,
+  "candidateFreeInputChecksumListSha256": "332e8c0e40c2f49639daba6bf1205fceead897ac3628ae201aaad3cc7db84796",
+  "candidateFreeInputManifestSha256": "1aeaaa80912f59da81e7cab8ac95ae06d44afb3f17d8adb5082365a0185097a0",
+  "candidateFreeInputPath": "../candidate-free/input",
+  "candidateFreeInputVerified": true,
+  "cellCount": 240,
+  "dispositions": {
+    "accept-current": 213,
+    "correction": 15,
+    "hold": 12
+  },
+  "head": "eda48333438591ecc67f829c50ef2d521f1e7a5e",
+  "holdFindings": {
+    "530": "No exact source literal or source-ID caller was found in the exact-head production search; keep all 12 locale cells held text-free."
+  },
+  "holdPositions": [
+    530
+  ],
+  "localeCount": 12,
+  "localeDispositionCounts": {
+    "ar": {
+      "accept-current": 17,
+      "correction": 2,
+      "hold": 1
+    },
+    "de": {
+      "accept-current": 18,
+      "correction": 1,
+      "hold": 1
+    },
+    "es": {
+      "accept-current": 17,
+      "correction": 2,
+      "hold": 1
+    },
+    "fr": {
+      "accept-current": 17,
+      "correction": 2,
+      "hold": 1
+    },
+    "hi": {
+      "accept-current": 18,
+      "correction": 1,
+      "hold": 1
+    },
+    "id": {
+      "accept-current": 18,
+      "correction": 1,
+      "hold": 1
+    },
+    "ja": {
+      "accept-current": 18,
+      "correction": 1,
+      "hold": 1
+    },
+    "ko": {
+      "accept-current": 18,
+      "correction": 1,
+      "hold": 1
+    },
+    "pt-BR": {
+      "accept-current": 18,
+      "correction": 1,
+      "hold": 1
+    },
+    "vi": {
+      "accept-current": 18,
+      "correction": 1,
+      "hold": 1
+    },
+    "zh-Hans": {
+      "accept-current": 18,
+      "correction": 1,
+      "hold": 1
+    },
+    "zh-Hant": {
+      "accept-current": 18,
+      "correction": 1,
+      "hold": 1
+    }
+  },
+  "markupMismatchesInSelectedTargets": 0,
+  "nativeSpeakerApproval": false,
+  "newHolds": 12,
+  "numericMismatchesInSelectedTargets": 0,
+  "placeholderMismatchesInSelectedTargets": 0,
+  "primaryProposalsReadBeforeReview": false,
+  "priorAppliedCellCount": 28,
+  "priorAppliedCellsChanged": 0,
+  "priorHoldCellCount": 540,
+  "priorHoldChangedCells": 0,
+  "priorHoldTargetsUnchanged": true,
+  "priorSelectedSourceCount": 140,
+  "proposedCellCount": 15,
+  "protectedLiteralMismatchesInSelectedTargets": 0,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewConfidence": "moderate",
+  "reviewerRole": "primary semantic reviewer using candidate-free input only",
+  "sealedAtUtc": "2026-11-04T11:23:35+00:00",
+  "selectedProposalCells": [
+    {
+      "disposition": "correction",
+      "locale": "es",
+      "sourceId": "ui.import.2cff9baabf"
+    },
+    {
+      "disposition": "correction",
+      "locale": "fr",
+      "sourceId": "ui.import.2cff9baabf"
+    },
+    {
+      "disposition": "correction",
+      "locale": "ar",
+      "sourceId": "ui.import-completed-now.c8f6c865a3"
+    },
+    {
+      "disposition": "correction",
+      "locale": "de",
+      "sourceId": "ui.import-completed-now.c8f6c865a3"
+    },
+    {
+      "disposition": "correction",
+      "locale": "es",
+      "sourceId": "ui.import-completed-now.c8f6c865a3"
+    },
+    {
+      "disposition": "correction",
+      "locale": "fr",
+      "sourceId": "ui.import-completed-now.c8f6c865a3"
+    },
+    {
+      "disposition": "correction",
+      "locale": "hi",
+      "sourceId": "ui.import-completed-now.c8f6c865a3"
+    },
+    {
+      "disposition": "correction",
+      "locale": "id",
+      "sourceId": "ui.import-completed-now.c8f6c865a3"
+    },
+    {
+      "disposition": "correction",
+      "locale": "ja",
+      "sourceId": "ui.import-completed-now.c8f6c865a3"
+    },
+    {
+      "disposition": "correction",
+      "locale": "ko",
+      "sourceId": "ui.import-completed-now.c8f6c865a3"
+    },
+    {
+      "disposition": "correction",
+      "locale": "pt-BR",
+      "sourceId": "ui.import-completed-now.c8f6c865a3"
+    },
+    {
+      "disposition": "correction",
+      "locale": "vi",
+      "sourceId": "ui.import-completed-now.c8f6c865a3"
+    },
+    {
+      "disposition": "correction",
+      "locale": "zh-Hans",
+      "sourceId": "ui.import-completed-now.c8f6c865a3"
+    },
+    {
+      "disposition": "correction",
+      "locale": "zh-Hant",
+      "sourceId": "ui.import-completed-now.c8f6c865a3"
+    },
+    {
+      "disposition": "correction",
+      "locale": "ar",
+      "sourceId": "ui.import-failed.0a26f41abd"
+    }
+  ],
+  "sourceCount": 20,
+  "tree": "3db18e56d0c7ac08a564a6baff61eba25f0a01da"
+}

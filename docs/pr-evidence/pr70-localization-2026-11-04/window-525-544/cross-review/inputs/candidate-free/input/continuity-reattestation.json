@@ -1,0 +1,34 @@
+{
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogMessageCount": 1836,
+  "currentHead": "eda48333438591ecc67f829c50ef2d521f1e7a5e",
+  "currentTree": "3db18e56d0c7ac08a564a6baff61eba25f0a01da",
+  "expectedChangedCatalog": [
+    "romarr/ui-labels.json"
+  ],
+  "historicalHoldsChanged": 0,
+  "historicalSelectionsChanged": 0,
+  "priorAppliedCells": 28,
+  "priorAppliedCellsChanged": 0,
+  "priorCandidateFreeVerifier": "PASS",
+  "priorHead": "e958b4fd0d9ddeac9333afc4c95da348b7f67cff",
+  "priorHoldCellCount": 540,
+  "priorHoldCellCountUnchanged": true,
+  "priorHoldChangedCellCount": 0,
+  "priorPrimaryVerifier": "PASS",
+  "priorSelectedSourceCount": 140,
+  "priorSelectedSourceCountUnchanged": true,
+  "priorTree": "402026ba276ec4603d86d659766af836d839de55",
+  "priorWindow": "W505-W524",
+  "reattestedAtUtc": "2026-11-04T11:12:06+00:00",
+  "result": "PASS",
+  "sourceCallerFilesChangedSinceW505": [],
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "sourceRegistrySha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+  "sourceSnapshotSha256": "e8f580fc3a49da18add0748e8d5312186dc353bc30d3c01bcc94e06d2aaa077d",
+  "w505SelectedIdsChanged": 0,
+  "w505SelectedPositionsReattested": [
+    505,
+    524
+  ]
+}
