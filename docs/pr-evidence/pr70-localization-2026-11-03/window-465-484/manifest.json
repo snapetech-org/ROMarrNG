@@ -31,8 +31,8 @@
   "files": [
     {
       "path": "README.md",
-      "sha256": "84abf75229c34570433239b5177703ec3b06d648710c37f40db02e434ff0b1a9",
-      "bytes": 1596
+      "sha256": "2276bf3c9bb1e5e4c6941eb82b82f3b8a7e85bd00ea9f8bb68be3537b805f3ce",
+      "bytes": 1658
     },
     {
       "path": "application/README.md",
@@ -533,6 +533,11 @@
       "path": "cross-audit/verify_cross_audit.py",
       "sha256": "0c72412c782ae5fb6e85591d5d774e22eb9d806ea169f2d7c4dc9fb516c95c3c",
       "bytes": 10402
+    },
+    {
+      "path": "verify_committed_bundle.py",
+      "sha256": "114734bb4f564b6314112d2106c427ccc7616f35fdaf6a80ace3940a6a43d3cb",
+      "bytes": 2354
     }
   ]
 }

@@ -16,5 +16,5 @@ Qualified native-speaker and exact-head browser review remain pending. No tests,
 
 - Complete sealed cross-audit packet: cross-audit/
 - Application plan, full readback, invariants, and checksums: application/
-- Portable application verifier: application/verify_apply.py
+- Portable application verifier: application/verify_apply.py; committed-tree manifest verifier: verify_committed_bundle.py
 - Candidate-free, primary, blind, and cross-audit checksums are preserved in cross-audit/.
