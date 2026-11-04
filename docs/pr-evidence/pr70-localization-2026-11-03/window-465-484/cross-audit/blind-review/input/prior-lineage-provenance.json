@@ -1,0 +1,20 @@
+{
+  "sourceCandidateFreeInputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w445-464-candidate-free-20261103/input",
+  "sourceCandidateFreeChecksumListSha256": "7c3a3d8ac507aaf396bd95936d91889eeae851b5aea9410e553dae7c7da0c05b",
+  "sourceCandidateFreeManifestSha256": "91769b07068039d09d2226a507ffc454ae6371a0902e32348f850406df6ef8d6",
+  "sourceCandidateFreeVerifierOutput": "PASS candidate-free W445-W464: exact OPEN/DRAFT PR/branch/pull refs before and after; 20 catalog sources × 12 locales (240 cells); 479-source registry and 1,836-message catalog pins; 60 prior selected sources and 348 carried holds reattested unchanged; 0 placeholder, 0 numeric, 1 protected-literal mismatches recorded; no proposed targets or current-window decisions; checksums and portable evidence verifier pass.",
+  "previousPrimaryLedgerPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w445-464-primary-20261103/primary-ledger.jsonl",
+  "previousPrimaryLedgerSha256": "1a427d711fa35c200bdcbb52a98569a87b880af7858778eaade55812049c8bb4",
+  "previousPrimaryVerifierOutput": "PASS primary W445-W464: exact pinned PR/tree; 240 cells; 183 accept-current, 9 corrections, 12 refinements, 36 caller-context holds; 21 proposals; 60 prior selections and 348 carried holds reattested; all selected placeholders, numeric tokens, protected literals, and named product terms pass; candidate-free input and packet checksums pass.",
+  "previousPrimaryHoldCellCount": 36,
+  "priorSelectionRows": {
+    "W445-W464": 20,
+    "W425-W444": 20,
+    "W405-W424": 20,
+    "W385-W404": 20
+  },
+  "priorHoldRows": {
+    "earlierWindows": 348,
+    "W445-W464": 36
+  }
+}

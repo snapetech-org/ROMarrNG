@@ -1,0 +1,33 @@
+{
+  "artifact": "ROMarrNG PR #70 W465-W484 independent blind localization review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "7640720c5e3b1813725cca8d7aa46b5d968bff43",
+  "tree": "bdee162cc11115256df8756f192b19d4337ed1dc",
+  "branch": "task/localization-translation-review-20261030",
+  "window": "W465-W484",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "dispositionCounts": {
+    "accept-current": 170,
+    "continued-hold": 60,
+    "refine": 7,
+    "correct": 3
+  },
+  "continuedHoldSourceIds": [
+    "ui.from-debrid-link-com-webapp-apikey-t.c4c2ada83e",
+    "ui.from-offcloud-com-account-settings-c.471d7a1b8a",
+    "ui.from-real-debrid-com-apitoken-magnet.1ba10851cc",
+    "ui.from-torbox-app-settings-download-li.966d26504c",
+    "ui.ggrequestz-url-only-adds-and-checks.f888f166d7"
+  ],
+  "currentNumericMismatchCount": 2,
+  "carriedPriorHoldCount": 384,
+  "priorSelectionCount": 80,
+  "primaryReviewRead": false,
+  "catalogChangesApplied": false,
+  "testsBuildsScansCIOrWorkflowChanges": false,
+  "nativeSpeakerSignoff": false,
+  "createdUtc": "2026-11-03T23:36:25+00:00"
+}

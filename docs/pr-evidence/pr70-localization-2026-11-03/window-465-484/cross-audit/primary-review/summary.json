@@ -1,0 +1,73 @@
+{
+  "artifact": "ROMarrNG PR #70 W465-W484 primary review",
+  "reviewerRole": "independent primary reviewer; candidate-free input only",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "7640720c5e3b1813725cca8d7aa46b5d968bff43",
+  "tree": "bdee162cc11115256df8756f192b19d4337ed1dc",
+  "candidateFreeInputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w465-484-candidate-free-20261103/input",
+  "candidateFreeInputManifestSha256": "202b78c2a2842c8c7d458ad2e411f3e81dfed5691b48f7661fa84d1525a6884c",
+  "candidateFreeInputChecksumsSha256": "12049222afa5f598eca8e0e03f6dda5dd477005a1a46077273173a85dcb749e8",
+  "candidateFreeInputVerified": true,
+  "primaryProposalsReadBeforeReview": false,
+  "blindReviewOutputInspected": false,
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "dispositions": {
+    "accept-current": 170,
+    "correction": 6,
+    "hold": 60,
+    "refinement": 4
+  },
+  "proposedCellCount": 10,
+  "newHolds": 60,
+  "holdPositions": [
+    470,
+    471,
+    473,
+    474,
+    477
+  ],
+  "holdFindings": {
+    "470": "No active source-registry entry and no exact source-ID or complete source-text occurrence exists in pinned production code. The catalog entry has no evidenced live translation caller; keep its current targets held.",
+    "471": "No active source-registry entry and no exact source-ID or complete source-text occurrence exists in pinned production code. The catalog entry has no evidenced live translation caller; keep its current targets held.",
+    "473": "No active source-registry entry and no exact source-ID or complete source-text occurrence exists in pinned production code. The catalog entry has no evidenced live translation caller; keep its current targets held.",
+    "474": "No active source-registry entry and no exact source-ID or complete source-text occurrence exists in pinned production code. Keep all locales held. The Japanese and Korean current targets render the source words “three hours” as the semantically equivalent digit 3; with no live caller, do not select a change.",
+    "477": "No active source-registry entry and no exact source-ID or complete source-text occurrence exists in pinned production code. The nearby status template contains similar explanatory text as raw HTML split across lines, without this catalog key, so it does not establish a catalog-backed caller; keep the entry held."
+  },
+  "priorLineageSelectionsReattested": 80,
+  "priorHoldCellsReattested": 384,
+  "sourceContextAvailable": 15,
+  "callerlessCellCount": 60,
+  "callerlessHoldFinding": "All 12 cells at each of positions 470, 471, 473, 474, and 477 remain held because no exact catalog-backed production caller is established. The Japanese and Korean rank-474 current values render “three” as the equivalent digit 3, but remain unselected under that callerless hold.",
+  "currentProtectedLiteralMismatches": 0,
+  "currentTargetNumericMismatches": 2,
+  "numericMismatchCellsHeld": [
+    {
+      "position": 474,
+      "locale": "ja",
+      "sourceNumbers": [],
+      "currentNumbers": [
+        "3"
+      ],
+      "holdReason": "No active source-registry entry and no exact source-ID or complete source-text occurrence exists in pinned production code. Keep all locales held. The Japanese and Korean current targets render the source words “three hours” as the semantically equivalent digit 3; with no live caller, do not select a change."
+    },
+    {
+      "position": 474,
+      "locale": "ko",
+      "sourceNumbers": [],
+      "currentNumbers": [
+        "3"
+      ],
+      "holdReason": "No active source-registry entry and no exact source-ID or complete source-text occurrence exists in pinned production code. Keep all locales held. The Japanese and Korean current targets render the source words “three hours” as the semantically equivalent digit 3; with no live caller, do not select a change."
+    }
+  ],
+  "placeholderMismatchesInSelectedTargets": 0,
+  "numericExactMismatchesAfterSemanticReview": 0,
+  "protectedLiteralMismatchesInSelectedTargets": 0,
+  "nativeSpeakerReview": "not performed; this primary machine review does not establish native-speaker approval",
+  "browserReview": "not performed",
+  "createdUtc": "2026-11-03T23:08:28.801681+00:00"
+}

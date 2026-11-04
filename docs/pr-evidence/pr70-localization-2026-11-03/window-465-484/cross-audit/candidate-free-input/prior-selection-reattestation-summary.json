@@ -1,0 +1,12 @@
+{
+  "priorWindows": {
+    "W385-W404": 20,
+    "W405-W424": 20,
+    "W425-W444": 20,
+    "W445-W464": 20
+  },
+  "reattestedSelectedSourceCount": 80,
+  "allPriorSelectionsMatchCurrentCatalogAndRegistry": true,
+  "currentHead": "7640720c5e3b1813725cca8d7aa46b5d968bff43",
+  "currentTree": "bdee162cc11115256df8756f192b19d4337ed1dc"
+}

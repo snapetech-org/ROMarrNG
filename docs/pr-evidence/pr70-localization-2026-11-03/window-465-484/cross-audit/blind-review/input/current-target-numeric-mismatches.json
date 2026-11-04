@@ -1,0 +1,23 @@
+{
+  "mismatchCount": 2,
+  "mismatches": [
+    {
+      "position": 474,
+      "sourceId": "ui.from-torbox-app-settings-download-li.966d26504c",
+      "locale": "ja",
+      "sourceTokens": [],
+      "targetTokens": [
+        "3"
+      ]
+    },
+    {
+      "position": 474,
+      "sourceId": "ui.from-torbox-app-settings-download-li.966d26504c",
+      "locale": "ko",
+      "sourceTokens": [],
+      "targetTokens": [
+        "3"
+      ]
+    }
+  ]
+}

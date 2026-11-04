@@ -1,0 +1,1826 @@
+{
+  "scope": "all tracked production files romarr/*.py and romarr/*.js at the exact pinned head; exact per-line substring searches for each selected source id and complete source string",
+  "commit": "7640720c5e3b1813725cca8d7aa46b5d968bff43",
+  "tree": "bdee162cc11115256df8756f192b19d4337ed1dc",
+  "filePins": {
+    "romarr/app.py": {
+      "fileSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+      "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd"
+    },
+    "romarr/clients.py": {
+      "fileSha256": "200dfae6cb8872bcb63460a757709706c760b0ff8082cb45b9d7ff01bf14b2ad",
+      "gitBlob": "99f36e0704bd896782ff6ff9a254c78b037a4d02"
+    },
+    "romarr/collections.py": {
+      "fileSha256": "afefa2c09762cfff91396daf2fc3a527870f6b5b48298bc922a9189cff0caadf",
+      "gitBlob": "d2495ef75efe9153bb8f454073061a0165ac770a"
+    },
+    "romarr/connect.py": {
+      "fileSha256": "75aabd8d31edd5874d0b19f2c2f68de9da1e6eeceb6d72e954b3ea04349a8f5a",
+      "gitBlob": "2eedb989971c18f76d8742c413a9f8f224cc1bce"
+    },
+    "romarr/dat.py": {
+      "fileSha256": "b7e002a3046195d4aa64a6413f7e844c906ffb29deb3eae42e3a572ff45a06b2",
+      "gitBlob": "a453111beacc34fc247934931c31c1337d6c1723"
+    },
+    "romarr/dat_catalog.py": {
+      "fileSha256": "b0548332e79550836bbfc2dfc96523ef9dd790f1f6f7ff0b62027fc55b99fd5f",
+      "gitBlob": "5ef97768e8d8d8532c027a4559d314435204efce"
+    },
+    "romarr/decompress.py": {
+      "fileSha256": "544275a2f42c94d86661b4b8d0703ec34b7c43481addc5ef6cfeddcf5977b4ba",
+      "gitBlob": "ff350ed0804391d0a398ce810e03b0c680e107cb"
+    },
+    "romarr/downloaders.py": {
+      "fileSha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed",
+      "gitBlob": "65952d7b8361fa3c6af742f675fde805ec361dd2"
+    },
+    "romarr/ecosystem.py": {
+      "fileSha256": "4faf227274d1ee7e606a6af278841a673e242defe6fdf1af481e8d33690db31b",
+      "gitBlob": "beb743cc9854fc051ad12dd35c53b0202a867012"
+    },
+    "romarr/federation.py": {
+      "fileSha256": "7c27cc8b765bc2d3c9c4a8fe123a2eee5fa629592319aebf16ea542a204ca8a2",
+      "gitBlob": "ec81b84cb9ca8f20f2ec0fcf6049fa87ea6bbc77"
+    },
+    "romarr/frontends.py": {
+      "fileSha256": "6c01b8fcfd1afef2fcbd70e96e73b01ca7e5fcf9251507b88b19d9717bec8e95",
+      "gitBlob": "fd36a48837fb7a6ab67b6774a63208b1046da1ce"
+    },
+    "romarr/launchers.py": {
+      "fileSha256": "8a8a7d9b6959c2e5166b131d426d7a7942037df19bc16cd7ba512621fa07b588",
+      "gitBlob": "c23133f62281a3cc1cd057b9bc471c4e36320a30"
+    },
+    "romarr/libraries.py": {
+      "fileSha256": "8d41c724588ff01ea3896dcfef4e07d7a2f107a1666070f0c1a688411686fe04",
+      "gitBlob": "af3912e3c0943bc4b442878ff3e0321fc4762600"
+    },
+    "romarr/lists.py": {
+      "fileSha256": "adf7d4e412d94b0796c2671ce14d191fa7e990ed7749fa229d405b38e3580de4",
+      "gitBlob": "c657ce31f5de1aed0da9bc068e45ed2c3f646a98"
+    },
+    "romarr/metadata.py": {
+      "fileSha256": "4b838ec909961bee7723d2760f9e7c8d18eff5db18874e9907a4d2d9cb0e5186",
+      "gitBlob": "856e5f1827449b99d2065c32999c4df82aa35978"
+    },
+    "romarr/openapi.py": {
+      "fileSha256": "ec27f89d3d77f9d7f58d30bdcbe7078636d216002ef6701575b392d4344cff15",
+      "gitBlob": "08ceab1157c7a2470e42917976f40998d14ea20c"
+    },
+    "romarr/ops.py": {
+      "fileSha256": "fca53e291f34ad36379d21344ac96bdce09d2e2c5861d8ab95da50112ad72ac2",
+      "gitBlob": "5e12a115effdb514222a4dcbfb0d56c69d273dc1"
+    },
+    "romarr/platforms.py": {
+      "fileSha256": "7766775a203f05c5ee1c51dc8c66487976434a249f4049188c1c6ce743abc7b6",
+      "gitBlob": "854e748596d0b8ee8b5e1a7c505bf02bf5d814b6"
+    },
+    "romarr/playability.py": {
+      "fileSha256": "fc193d93931383cd7202baf8b7696e30c93861e1495a83a05fc2aa3bc85c303d",
+      "gitBlob": "ad2eba5ecb2166ecc3fb837fdea87f97e41fda29"
+    },
+    "romarr/selection.py": {
+      "fileSha256": "4d503ccbb2bf21b3aea0c24596f8c36033248edee2549244b1edc469dbfa9d96",
+      "gitBlob": "c95757f005e2d84fcbc3baba0de85d1e1c2b687f"
+    },
+    "romarr/sniff.py": {
+      "fileSha256": "f8bfd66c7650b00461d3856677cfe296fa9b185a7035529a04584c614e0cbfb2",
+      "gitBlob": "ee261f71427b31e1642af1d3ea992aa40bd26e31"
+    },
+    "romarr/ui.py": {
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0"
+    }
+  },
+  "queries": [
+    {
+      "position": 465,
+      "sourceId": "ui.found-found-releases-accepted-match.65f542cd3e",
+      "queryKind": "source-id",
+      "literal": "ui.found-found-releases-accepted-match.65f542cd3e",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2272,
+          "text": "      <p class=\"help\">${interfaceTemplateMarkup('ui.found-found-releases-accepted-match.65f542cd3e',{found:fmt(d.found),accepted:fmt(d.accepted)})}</p>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 465,
+      "sourceId": "ui.found-found-releases-accepted-match.65f542cd3e",
+      "queryKind": "source-text",
+      "literal": "Found {found} releases; {accepted} match your selection. Rejected results are also shown with the reason for each rejection.",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 466,
+      "sourceId": "ui.franchise.cae83311f5",
+      "queryKind": "source-id",
+      "literal": "ui.franchise.cae83311f5",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 466,
+      "sourceId": "ui.franchise.cae83311f5",
+      "queryKind": "source-text",
+      "literal": "Franchise",
+      "matchCount": 2,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2995,
+          "text": "                 ['by-genre','Genre'],['by-franchise','Franchise'],"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 3034,
+          "text": "      const facetNames={genre:'Genre',franchise:'Franchise',company:'Company'};"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 467,
+      "sourceId": "ui.fri.66dab40cea",
+      "queryKind": "source-id",
+      "literal": "ui.fri.66dab40cea",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 467,
+      "sourceId": "ui.fri.66dab40cea",
+      "queryKind": "source-text",
+      "literal": "Fri",
+      "matchCount": 10,
+      "matches": [
+        {
+          "path": "romarr/app.py",
+          "line": 4533,
+          "text": "        # Sent so the inviter's Friends page can call back. Read fresh from"
+        },
+        {
+          "path": "romarr/federation.py",
+          "line": 396,
+          "text": "        row on the Friends page marked \"awaiting your confirmation\"."
+        },
+        {
+          "path": "romarr/federation.py",
+          "line": 439,
+          "text": "    # Friends page simply came back empty, and a peer that called in was an"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 323,
+          "text": "/* Used by Friends and Discover for an inline block of prose. It had no rule"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 759,
+          "text": "    (\"Hub\",      [(\"hub\", \"Plugins\", None), (\"peers\", \"Friends\", None)]),"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 1684,
+          "text": "    discover:'Discover',patches:'Patches — translations, hacks and improvements',ecosystem:'The Ecosystem',peers:'Friends',"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 3128,
+          "text": "  $('#page').innerHTML=`<div class=\"card\"><h3>Friends</h3>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4506,
+          "text": "   <div class=\"field\"><label>Your public URL (for Friends)</label>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5214,
+          "text": "      +['Mon','Tue','Wed','Thu','Fri','Sat','Sun']"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6779,
+          "text": "    + '<div class=\"note\"><span data-i18n=\"ui.no-romarr-on-this-device-copy-the-li.2d22717ea8\">No ROMarr on this device? Copy the link and paste it into Friends &rarr; I have an invitation on your own server.</span>'"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 468,
+      "sourceId": "ui.friends.bd104d1b98",
+      "queryKind": "source-id",
+      "literal": "ui.friends.bd104d1b98",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 468,
+      "sourceId": "ui.friends.bd104d1b98",
+      "queryKind": "source-text",
+      "literal": "Friends",
+      "matchCount": 9,
+      "matches": [
+        {
+          "path": "romarr/app.py",
+          "line": 4533,
+          "text": "        # Sent so the inviter's Friends page can call back. Read fresh from"
+        },
+        {
+          "path": "romarr/federation.py",
+          "line": 396,
+          "text": "        row on the Friends page marked \"awaiting your confirmation\"."
+        },
+        {
+          "path": "romarr/federation.py",
+          "line": 439,
+          "text": "    # Friends page simply came back empty, and a peer that called in was an"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 323,
+          "text": "/* Used by Friends and Discover for an inline block of prose. It had no rule"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 759,
+          "text": "    (\"Hub\",      [(\"hub\", \"Plugins\", None), (\"peers\", \"Friends\", None)]),"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 1684,
+          "text": "    discover:'Discover',patches:'Patches — translations, hacks and improvements',ecosystem:'The Ecosystem',peers:'Friends',"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 3128,
+          "text": "  $('#page').innerHTML=`<div class=\"card\"><h3>Friends</h3>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4506,
+          "text": "   <div class=\"field\"><label>Your public URL (for Friends)</label>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6779,
+          "text": "    + '<div class=\"note\"><span data-i18n=\"ui.no-romarr-on-this-device-copy-the-li.2d22717ea8\">No ROMarr on this device? Copy the link and paste it into Friends &rarr; I have an invitation on your own server.</span>'"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 469,
+      "sourceId": "ui.from-alldebrid-com-apikeys-magnets-a.1444aa45a4",
+      "queryKind": "source-id",
+      "literal": "ui.from-alldebrid-com-apikeys-magnets-a.1444aa45a4",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 469,
+      "sourceId": "ui.from-alldebrid-com-apikeys-magnets-a.1444aa45a4",
+      "queryKind": "source-text",
+      "literal": "From alldebrid.com/apikeys. Magnets and infohashes only.",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/downloaders.py",
+          "line": 3642,
+          "text": "            \"From alldebrid.com/apikeys. Magnets and infohashes only.\","
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 470,
+      "sourceId": "ui.from-debrid-link-com-webapp-apikey-t.c4c2ada83e",
+      "queryKind": "source-id",
+      "literal": "ui.from-debrid-link-com-webapp-apikey-t.c4c2ada83e",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 470,
+      "sourceId": "ui.from-debrid-link-com-webapp-apikey-t.c4c2ada83e",
+      "queryKind": "source-text",
+      "literal": "From debrid-link.com/webapp/apikey. Takes magnets and .torrent URLs.",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 471,
+      "sourceId": "ui.from-offcloud-com-account-settings-c.471d7a1b8a",
+      "queryKind": "source-id",
+      "literal": "ui.from-offcloud-com-account-settings-c.471d7a1b8a",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 471,
+      "sourceId": "ui.from-offcloud-com-account-settings-c.471d7a1b8a",
+      "queryKind": "source-text",
+      "literal": "From offcloud.com account settings. Cloud downloads need the cloud add-on on the account; without it every add is refused.",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 472,
+      "sourceId": "ui.from-premiumize-me-account-takes-mag.f165d3dc1f",
+      "queryKind": "source-id",
+      "literal": "ui.from-premiumize-me-account-takes-mag.f165d3dc1f",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 472,
+      "sourceId": "ui.from-premiumize-me-account-takes-mag.f165d3dc1f",
+      "queryKind": "source-text",
+      "literal": "From premiumize.me/account. Takes magnets and .torrent URLs.",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/downloaders.py",
+          "line": 3650,
+          "text": "            \"From premiumize.me/account. Takes magnets and .torrent URLs.\","
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 473,
+      "sourceId": "ui.from-real-debrid-com-apitoken-magnet.1ba10851cc",
+      "queryKind": "source-id",
+      "literal": "ui.from-real-debrid-com-apitoken-magnet.1ba10851cc",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 473,
+      "sourceId": "ui.from-real-debrid-com-apitoken-magnet.1ba10851cc",
+      "queryKind": "source-text",
+      "literal": "From real-debrid.com/apitoken. Magnets only -- Real-Debrid takes .torrent files as an upload, which indexers do not offer.",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 474,
+      "sourceId": "ui.from-torbox-app-settings-download-li.966d26504c",
+      "queryKind": "source-id",
+      "literal": "ui.from-torbox-app-settings-download-li.966d26504c",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 474,
+      "sourceId": "ui.from-torbox-app-settings-download-li.966d26504c",
+      "queryKind": "source-text",
+      "literal": "From torbox.app/settings. Download links last three hours, so ROMarr asks for one per file as it fetches it.",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 475,
+      "sourceId": "ui.gg-requestz-page.a391eae98d",
+      "queryKind": "source-id",
+      "literal": "ui.gg-requestz-page.a391eae98d",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 475,
+      "sourceId": "ui.gg-requestz-page.a391eae98d",
+      "queryKind": "source-text",
+      "literal": "GG Requestz page",
+      "matchCount": 2,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4619,
+          "text": "      ${g.configured?row('GG Requestz page',g.ok,"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4621,
+          "text": "        :`<tr><td>GG Requestz page</td><td><span class=\"dot\"></span>not configured</td>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 476,
+      "sourceId": "ui.gg-requestz-requests.8aa58848ec",
+      "queryKind": "source-id",
+      "literal": "ui.gg-requestz-requests.8aa58848ec",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 476,
+      "sourceId": "ui.gg-requestz-requests.8aa58848ec",
+      "queryKind": "source-text",
+      "literal": "GG Requestz requests",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4749,
+          "text": "const ggrequestzCard=g=>`<div class=\"card\"><h3>GG Requestz requests</h3>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 477,
+      "sourceId": "ui.ggrequestz-url-only-adds-and-checks.f888f166d7",
+      "queryKind": "source-id",
+      "literal": "ui.ggrequestz-url-only-adds-and-checks.f888f166d7",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 477,
+      "sourceId": "ui.ggrequestz-url-only-adds-and-checks.f888f166d7",
+      "queryKind": "source-text",
+      "literal": "GGREQUESTZ_URL only adds and checks the front-end link; it does not deliver requests",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 478,
+      "sourceId": "ui.gog-profile.866a5318ca",
+      "queryKind": "source-id",
+      "literal": "ui.gog-profile.866a5318ca",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2850,
+          "text": "        <option value=\"gog\" data-i18n=\"ui.gog-profile.866a5318ca\"${item.type==='gog'?' selected':''}>GOG profile</option>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 478,
+      "sourceId": "ui.gog-profile.866a5318ca",
+      "queryKind": "source-text",
+      "literal": "GOG profile",
+      "matchCount": 3,
+      "matches": [
+        {
+          "path": "romarr/lists.py",
+          "line": 741,
+          "text": "        \"label\": \"GOG profile\","
+        },
+        {
+          "path": "romarr/lists.py",
+          "line": 742,
+          "text": "        \"help\": \"Every game on a public GOG profile. No credential -- the \""
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2850,
+          "text": "        <option value=\"gog\" data-i18n=\"ui.gog-profile.866a5318ca\"${item.type==='gog'?' selected':''}>GOG profile</option>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 479,
+      "sourceId": "ui.gog-username.3639893276",
+      "queryKind": "source-id",
+      "literal": "ui.gog-username.3639893276",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 479,
+      "sourceId": "ui.gog-username.3639893276",
+      "queryKind": "source-text",
+      "literal": "GOG username",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2880,
+          "text": "      <label>GOG username</label>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 480,
+      "sourceId": "ui.game.5c412a2620",
+      "queryKind": "source-id",
+      "literal": "ui.game.5c412a2620",
+      "matchCount": 3,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2207,
+          "text": "      <div class=\"field\" style=\"flex:1;margin:0\"><label data-i18n=\"ui.game.5c412a2620\">Game</label>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2238,
+          "text": "      <div class=\"field\" style=\"flex:1;margin:0\"><label data-i18n=\"ui.game.5c412a2620\">Game</label>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2315,
+          "text": "    ${d.items.length?`<table><thead><tr><th data-i18n=\"ui.game.5c412a2620\">Game</th><th data-i18n=\"ui.platform.c78ffe1957\">Platform</th>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 480,
+      "sourceId": "ui.game.5c412a2620",
+      "queryKind": "source-text",
+      "literal": "Game",
+      "matchCount": 197,
+      "matches": [
+        {
+          "path": "romarr/app.py",
+          "line": 1086,
+          "text": "        # what plays the machines EmulatorJS has no core for -- PS2, GameCube,"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 1354,
+          "text": "            \"MissingGameSearch\", \"Search the Wanted list\","
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 1961,
+          "text": "            # \"New Game Request: <title>\"."
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 3756,
+          "text": "            # The slug, not the display name. See `Game.platform_slug` for"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 3960,
+          "text": "    #: Which `Game` field each `by-*` shelf cuts on. One table rather than a"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 4031,
+          "text": "            # Games that came out this day of the year, any year. The same"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 4071,
+          "text": "    #: Which `Game` field each view reads. `releases` matches on month and day"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 4923,
+          "text": "            # \"Games in library\" was this page's headline number and it was"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 5411,
+          "text": "        if name == \"MissingGameSearch\":"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 8053,
+          "text": "                # Game and platform may arrive as query parameters or as a"
+        },
+        {
+          "path": "romarr/clients.py",
+          "line": 21,
+          "text": "from .libraries import (DEFAULT_BACKGROUND_TIMEOUT, Game,"
+        },
+        {
+          "path": "romarr/clients.py",
+          "line": 714,
+          "text": "            out.append(Game("
+        },
+        {
+          "path": "romarr/collections.py",
+          "line": 29,
+          "text": "from .dat import BAD_DUMP, UNKNOWN, VERIFIED, Dat, Game"
+        },
+        {
+          "path": "romarr/collections.py",
+          "line": 268,
+          "text": "def _best_translation(members: list[Game], order: tuple[str, ...],"
+        },
+        {
+          "path": "romarr/collections.py",
+          "line": 269,
+          "text": "                      langs: tuple[str, ...] = (\"en\",)) -> \"Game | None\":"
+        },
+        {
+          "path": "romarr/collections.py",
+          "line": 311,
+          "text": "def explain(dat: Dat, winner: Game, group: list[Game],"
+        },
+        {
+          "path": "romarr/collections.py",
+          "line": 357,
+          "text": "    groups: dict[str, list[Game]] = {}"
+        },
+        {
+          "path": "romarr/collections.py",
+          "line": 361,
+          "text": "    chosen: dict[str, Game] = (dat.one_game_one_rom(list(policy.regions))"
+        },
+        {
+          "path": "romarr/collections.py",
+          "line": 461,
+          "text": "            normal_members: list[Game] = []"
+        },
+        {
+          "path": "romarr/collections.py",
+          "line": 462,
+          "text": "            translation_members: list[Game] = []"
+        },
+        {
+          "path": "romarr/connect.py",
+          "line": 289,
+          "text": "        \"label\": \"Epic Games\","
+        },
+        {
+          "path": "romarr/dat.py",
+          "line": 60,
+          "text": "class Game:"
+        },
+        {
+          "path": "romarr/dat.py",
+          "line": 228,
+          "text": "    games: dict[str, Game] = field(default_factory=dict)"
+        },
+        {
+          "path": "romarr/dat.py",
+          "line": 290,
+          "text": "        declare them: the No-Intro GameCube datfile on the install this was"
+        },
+        {
+          "path": "romarr/dat.py",
+          "line": 294,
+          "text": "        \"titles\" for that GameCube set, listing \"007 - Agent Under Fire (USA)\","
+        },
+        {
+          "path": "romarr/dat.py",
+          "line": 313,
+          "text": "    def one_game_one_rom(self, regions: list[str]) -> dict[str, Game]:"
+        },
+        {
+          "path": "romarr/dat.py",
+          "line": 325,
+          "text": "        groups: dict[str, list[Game]] = {}"
+        },
+        {
+          "path": "romarr/dat.py",
+          "line": 331,
+          "text": "        def rank(game: Game) -> tuple[int, int, str]:"
+        },
+        {
+          "path": "romarr/dat.py",
+          "line": 347,
+          "text": "    \"\"\"Region words from a No-Intro style name: `Game (USA, Europe)`.\"\"\""
+        },
+        {
+          "path": "romarr/dat.py",
+          "line": 357,
+          "text": "#: `name \"Some Game (USA)\"` or `name Some_Game` -- quoted or bare."
+        },
+        {
+          "path": "romarr/dat.py",
+          "line": 423,
+          "text": "        dat.games[name] = Game(name=name, roms=tuple(roms), cloneof=clone)"
+        },
+        {
+          "path": "romarr/dat.py",
+          "line": 477,
+          "text": "        dat.games[name] = Game(name=name, roms=tuple(roms),"
+        },
+        {
+          "path": "romarr/dat_catalog.py",
+          "line": 16,
+          "text": "from .dat import Dat, Game, base_title"
+        },
+        {
+          "path": "romarr/dat_catalog.py",
+          "line": 36,
+          "text": "    (\"Nintendo - Game Boy Advance\"). Exact ROMarr names remain the strongest"
+        },
+        {
+          "path": "romarr/decompress.py",
+          "line": 74,
+          "text": "    # NKit-shrunk GameCube/Wii images (compound extensions -- matched with"
+        },
+        {
+          "path": "romarr/ecosystem.py",
+          "line": 58,
+          "text": "            \"Gameyfin\","
+        },
+        {
+          "path": "romarr/ecosystem.py",
+          "line": 107,
+          "text": "            \"An open-source implementation of NVIDIA GameStream -- the \""
+        },
+        {
+          "path": "romarr/frontends.py",
+          "line": 46,
+          "text": "    \"gb\": \"Nintendo Game Boy\","
+        },
+        {
+          "path": "romarr/frontends.py",
+          "line": 47,
+          "text": "    \"gbc\": \"Nintendo Game Boy Color\","
+        },
+        {
+          "path": "romarr/frontends.py",
+          "line": 48,
+          "text": "    \"gba\": \"Nintendo Game Boy Advance\","
+        },
+        {
+          "path": "romarr/frontends.py",
+          "line": 51,
+          "text": "    \"ngc\": \"Nintendo GameCube\","
+        },
+        {
+          "path": "romarr/frontends.py",
+          "line": 55,
+          "text": "    \"gamegear\": \"Sega Game Gear\","
+        },
+        {
+          "path": "romarr/frontends.py",
+          "line": 171,
+          "text": "        game = ET.SubElement(root, \"Game\")"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 43,
+          "text": "class LocalGame:"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 85,
+          "text": "def steam_games(steamapps: Path) -> list[LocalGame]:"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 99,
+          "text": "        out.append(LocalGame(name=name, launcher=\"steam\","
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 106,
+          "text": "def epic_games(manifests: Path) -> list[LocalGame]:"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 120,
+          "text": "            out.append(LocalGame(name=name, launcher=\"epic\","
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 127,
+          "text": "def gog_galaxy_games(database: Path) -> list[LocalGame]:"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 145,
+          "text": "            \"SELECT DISTINCT value FROM GamePieces \""
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 146,
+          "text": "            \"JOIN GamePieceTypes ON GamePieces.gamePieceTypeId = GamePieceTypes.id \""
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 147,
+          "text": "            \"WHERE GamePieceTypes.type = 'originalTitle'\","
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 168,
+          "text": "    return [LocalGame(name=n, launcher=\"gog\") for n in sorted(set(names))]"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 206,
+          "text": "def battlenet_games(product_db: Path) -> list[LocalGame]:"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 225,
+          "text": "    return [LocalGame(name=BATTLENET_PRODUCTS[c], launcher=\"battlenet\")"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 235,
+          "text": "def ea_games(roots: list[Path]) -> list[LocalGame]:"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 256,
+          "text": "                out.append(LocalGame(name=name, launcher=\"ea\","
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 261,
+          "text": "# --- Amazon Games -------------------------------------------------------------"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 269,
+          "text": "def amazon_games(database: Path) -> list[LocalGame]:"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 270,
+          "text": "    \"\"\"Installed Amazon Games titles, from the launcher's own SQLite."
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 272,
+          "text": "    `GameInstallInfo.sqlite` is what the Amazon Games app itself reads."
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 312,
+          "text": "    return [LocalGame(name=n, launcher=\"amazon\") for n in sorted(set(names))]"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 351,
+          "text": "def ubisoft_games(install_dirs=None) -> list[LocalGame]:"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 368,
+          "text": "            out.append(LocalGame(name=name, launcher=\"ubisoft\", path=str(raw)))"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 383,
+          "text": "        \"epic\": [program_data / \"Epic\" / \"EpicGamesLauncher\" / \"Data\" / \"Manifests\"],"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 386,
+          "text": "        \"ea\": [d / \"Program Files\" / \"EA Games\" for d in drives]"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 387,
+          "text": "              + [d / \"Program Files (x86)\" / \"Origin Games\" for d in drives]"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 388,
+          "text": "              + [d / \"EA Games\" for d in drives],"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 389,
+          "text": "        \"amazon\": [local / \"Amazon Games\" / \"Data\" / \"Games\" / \"Sql\""
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 390,
+          "text": "                   / \"GameInstallInfo.sqlite\"],"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 396,
+          "text": "def scan_all(locations: dict[str, list[Path]] | None = None) -> list[LocalGame]:"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 403,
+          "text": "    games: list[LocalGame] = []"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 1,
+          "text": "\"\"\"Game libraries ROMarr can hand a finished ROM to."
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 15,
+          "text": "  * Gaseous   -- REST, /api/v1.1/Games. Listing is a POST with a mandatory"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 41,
+          "text": "class Game:"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 148,
+          "text": "#: Flashpoint's launcher names every GameZip `<guid>-<ms>.zip`, and"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 240,
+          "text": "              timeout: int | None = None) -> list[Game]: ..."
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 278,
+          "text": "      * The filter body is not optional. Name, Genre, Theme, GameMode,"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 350,
+          "text": "        \"GameMode\": [],"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 362,
+          "text": "        r = self._session.post(self._url(\"Games\"), json=body, headers=self._headers(),"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 377,
+          "text": "              timeout: int | None = None) -> list[Game]:"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 383,
+          "text": "        out: list[Game] = []"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 390,
+          "text": "            out.append(Game("
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 396,
+          "text": "                cover=_absolute(base, f\"/api/v1.1/Games/{gid}/cover/image\"),"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 454,
+          "text": "    _F_GAMES, _F_METADATA = 1, 2                              # GetGamesResponse"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 455,
+          "text": "    _F_GAME_ID, _F_GAME_PATH, _F_GAME_PLATFORM = 1, 3, 4      # Game"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 456,
+          "text": "    _F_META_GAME_ID, _F_META_NAME, _F_META_COVER = 1, 2, 4    # GameMetadata"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 537,
+          "text": "    def _get_games(self, timeout: int | None) -> list[Game]:"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 542,
+          "text": "        raw = self._rpc(\"GameService/GetGames\", body, timeout)"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 576,
+          "text": "        out: list[Game] = []"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 583,
+          "text": "            out.append(Game("
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 606,
+          "text": "              timeout: int | None = None) -> list[Game]:"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 607,
+          "text": "        # GetGames has no paging of its own, so the window is applied here."
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 777,
+          "text": "              timeout: int | None = None) -> list[Game]:"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 784,
+          "text": "        out: list[Game] = []"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 789,
+          "text": "                out.append(Game("
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 811,
+          "text": "class GameyfinLibrary(FolderLibrary):"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 812,
+          "text": "    \"\"\"Gameyfin, integrated the only way its architecture allows."
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 814,
+          "text": "    Gameyfin v2 is a Vaadin server-side application with no public REST API to"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 818,
+          "text": "    a directory Gameyfin watches, and its own watcher does the rest. Listed as"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 820,
+          "text": "    say Gameyfin plainly and this docstring has somewhere to live."
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 823,
+          "text": "    name = \"Gameyfin\""
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 898,
+          "text": "        \"label\": \"Gameyfin\","
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 900,
+          "text": "        # Same shape as Folder on purpose: Gameyfin watches its library"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 902,
+          "text": "        # GameyfinLibrary for why there is no URL to give it."
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 904,
+          "text": "                   {**f, \"help\": \"A directory Gameyfin watches as a library; \""
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 1061,
+          "text": "        return GameyfinLibrary(FolderConfig(root=cfg.get(\"path\", \"\")))"
+        },
+        {
+          "path": "romarr/lists.py",
+          "line": 216,
+          "text": "                    \"-- opening the Epic Games Launcher once also does it \""
+        },
+        {
+          "path": "romarr/lists.py",
+          "line": 308,
+          "text": "        json={\"query\": 'query { me { ownedGameProducts(locale: \"en\") '"
+        },
+        {
+          "path": "romarr/lists.py",
+          "line": 388,
+          "text": "        name = clean_title(str((game.get(\"localizedGameName\")"
+        },
+        {
+          "path": "romarr/lists.py",
+          "line": 488,
+          "text": "            \"the profile's Game Details to Public, or add a free API key \""
+        },
+        {
+          "path": "romarr/lists.py",
+          "line": 515,
+          "text": "            f\"{STEAM_API}/IPlayerService/GetOwnedGames/v1/\","
+        },
+        {
+          "path": "romarr/lists.py",
+          "line": 734,
+          "text": "                \"vanity name with Game Details set to Public. A Web API key \""
+        },
+        {
+          "path": "romarr/lists.py",
+          "line": 768,
+          "text": "        \"label\": \"Epic Games library\","
+        },
+        {
+          "path": "romarr/lists.py",
+          "line": 842,
+          "text": "                # Games download for a platform; soundtracks and ebooks"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 46,
+          "text": "class GameInfo:"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 106,
+          "text": "#: A No-Intro / Redump name is `Game Name (Region) (Extras)`. The part before"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 153,
+          "text": "def _rawg(cfg: dict, term: str) -> GameInfo:"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 156,
+          "text": "        return GameInfo()"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 163,
+          "text": "        return GameInfo()"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 165,
+          "text": "    return GameInfo("
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 205,
+          "text": "#:     Choicer Voicer\", \"A Weird Game About Sausage\"."
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 598,
+          "text": "        'query games \"SeerrNG Game\" {'"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 608,
+          "text": "                      if item.get(\"name\") == \"SeerrNG Game\""
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 625,
+          "text": "def _igdb(cfg: dict, term: str) -> GameInfo:"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 632,
+          "text": "        return GameInfo()"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 634,
+          "text": "    return GameInfo("
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 687,
+          "text": "    def identify(self, *, verification=None, filename: str = \"\") -> GameInfo:"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 695,
+          "text": "            return GameInfo()"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 711,
+          "text": "                return GameInfo(**{**info.__dict__, \"matched_by\": how})"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 712,
+          "text": "        return GameInfo(matched_by=how)"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 956,
+          "text": "    \"\"\"Games released recently or due soon."
+        },
+        {
+          "path": "romarr/openapi.py",
+          "line": 136,
+          "text": "    \"/api/v1/wanted/missing\": (\"GET\", \"Games wanted but not yet found. DELETE \""
+        },
+        {
+          "path": "romarr/openapi.py",
+          "line": 171,
+          "text": "    \"/api/v1/calendar\": (\"GET\", \"Games released recently or due soon, from \""
+        },
+        {
+          "path": "romarr/openapi.py",
+          "line": 332,
+          "text": "    \"/api/v1/launchers\": (\"GET\", \"Games the launchers installed on this \""
+        },
+        {
+          "path": "romarr/ops.py",
+          "line": 67,
+          "text": "    emit(\"wanted_items\", \"gauge\", \"Games wanted but not yet found.\","
+        },
+        {
+          "path": "romarr/ops.py",
+          "line": 388,
+          "text": "    Game titles contain commas, quotes and the occasional newline --"
+        },
+        {
+          "path": "romarr/platforms.py",
+          "line": 109,
+          "text": "#   GameCube 1.5GB (miniDVD)             4GB"
+        },
+        {
+          "path": "romarr/platforms.py",
+          "line": 131,
+          "text": "    Platform(\"gb\", \"Game Boy\", (\".gb\",), (\"gameboy\", \"game boy\"),"
+        },
+        {
+          "path": "romarr/platforms.py",
+          "line": 133,
+          "text": "    Platform(\"gbc\", \"Game Boy Color\", (\".gbc\",), (\"gameboy color\", \"game boy color\"),"
+        },
+        {
+          "path": "romarr/platforms.py",
+          "line": 135,
+          "text": "    Platform(\"gba\", \"Game Boy Advance\", (\".gba\",), (\"gameboy advance\", \"game boy advance\"),"
+        },
+        {
+          "path": "romarr/platforms.py",
+          "line": 147,
+          "text": "    Platform(\"gamegear\", \"Game Gear\", (\".gg\",), (\"game gear\", \"sega game gear\"),"
+        },
+        {
+          "path": "romarr/platforms.py",
+          "line": 244,
+          "text": "    Platform(\"ngc\", \"Nintendo GameCube\","
+        },
+        {
+          "path": "romarr/platforms.py",
+          "line": 290,
+          "text": "    # \"Xbox 360 (Digital)\" is Vimm's label for the XBLA and Games-on-Demand"
+        },
+        {
+          "path": "romarr/playability.py",
+          "line": 187,
+          "text": "    \"ngc\": \"EmulatorJS ships no GameCube core; Dolphin is server-side only\","
+        },
+        {
+          "path": "romarr/playability.py",
+          "line": 334,
+          "text": "                \"GameCube, Wii, Dreamcast and PS2, which have no core\"),"
+        },
+        {
+          "path": "romarr/playability.py",
+          "line": 769,
+          "text": "    \"\"\"`.swf`, from `game.swf`, `swf`, `.SWF` or `Game (USA) [!].SWF`."
+        },
+        {
+          "path": "romarr/playability.py",
+          "line": 1274,
+          "text": "#: Wolf, Sunshine and NVIDIA's original GameStream all speak this. The base"
+        },
+        {
+          "path": "romarr/playability.py",
+          "line": 1343,
+          "text": "#: safe. Dolphin carries two slugs because Dolphin genuinely is the GameCube"
+        },
+        {
+          "path": "romarr/playability.py",
+          "line": 1366,
+          "text": "    # Mesen 2 also runs SNES, Game Boy and PC Engine, so the name does not"
+        },
+        {
+          "path": "romarr/selection.py",
+          "line": 927,
+          "text": "    (\"Game A (Track 01).bin\"), so a shared stem is the right filter. A"
+        },
+        {
+          "path": "romarr/sniff.py",
+          "line": 25,
+          "text": "#: The Nintendo logo both Game Boy and GBA carry, and the boot ROM checks. Its"
+        },
+        {
+          "path": "romarr/sniff.py",
+          "line": 64,
+          "text": "    # Game Boy and Game Boy Advance both carry a fixed Nintendo logo, at"
+        },
+        {
+          "path": "romarr/sniff.py",
+          "line": 80,
+          "text": "    # Master System and Game Gear share the TMR SEGA signature; which of the"
+        },
+        {
+          "path": "romarr/sniff.py",
+          "line": 86,
+          "text": "                                  f\"(Master System or Game Gear)\")"
+        },
+        {
+          "path": "romarr/sniff.py",
+          "line": 100,
+          "text": "    # Nintendo optical discs carry a magic word in the boot header. GameCube's"
+        },
+        {
+          "path": "romarr/sniff.py",
+          "line": 102,
+          "text": "    # tested first or every Wii disc reads as a GameCube one."
+        },
+        {
+          "path": "romarr/sniff.py",
+          "line": 106,
+          "text": "        return Sniffed(\"ngc\", \"GameCube disc magic at 0x1c\")"
+        },
+        {
+          "path": "romarr/sniff.py",
+          "line": 112,
+          "text": "    # library these are most of the GameCube shelf, and the alternative is"
+        },
+        {
+          "path": "romarr/sniff.py",
+          "line": 119,
+          "text": "                                  f\"(GameCube or Wii)\")"
+        },
+        {
+          "path": "romarr/sniff.py",
+          "line": 197,
+          "text": "    two -- the Master System and Game Gear share a signature, so a Game Gear"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 14,
+          "text": "  * Movies/Series/Artists become Games, and the Calendar has no equivalent at"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 751,
+          "text": "    (\"Library\",  [(\"library\", \"Games\", \"games\"),"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 903,
+          "text": "  match=source.match(/^TMR SEGA signature at (0x[0-9a-f]+) \\(Master System or Game Gear\\)$/);"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 904,
+          "text": "  if(match)return {source:'TMR SEGA signature at {offset} (Master System or Game Gear)',values:{offset:match[1]}};"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 905,
+          "text": "  match=source.match(/^(CISO|RVZ|WIA|GCZ) compressed disc image \\(GameCube or Wii\\)$/);"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 906,
+          "text": "  if(match)return {source:'{format} compressed disc image (GameCube or Wii)',values:{format:match[1]}};"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 1682,
+          "text": "  const titles={library:'Games',add:'Add New Game',search:'Interactive Search',"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2207,
+          "text": "      <div class=\"field\" style=\"flex:1;margin:0\"><label data-i18n=\"ui.game.5c412a2620\">Game</label>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2238,
+          "text": "      <div class=\"field\" style=\"flex:1;margin:0\"><label data-i18n=\"ui.game.5c412a2620\">Game</label>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2315,
+          "text": "    ${d.items.length?`<table><thead><tr><th data-i18n=\"ui.game.5c412a2620\">Game</th><th data-i18n=\"ui.platform.c78ffe1957\">Platform</th>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2331,
+          "text": "      body:JSON.stringify({name:'MissingGameSearch'})});"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2339,
+          "text": "    const game=x.dataset.dropGame, platform=x.dataset.dropPlatform;"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2378,
+          "text": "function catalogPlatformsForGame(game){"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2403,
+          "text": "      : catalogPlatformsForGame(game);"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2431,
+          "text": "  const matches=catalogPlatformsForGame(game);"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2453,
+          "text": "const CATALOG_GENRES=['Action','Adventure','Arcade','Card & Board Game','Fighting',"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2457,
+          "text": "async function renderGameCatalog(){"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2545,
+          "text": "      :catalogPlatformsForGame(game)[0];"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2568,
+          "text": "    resultsMarkup='<div style=\"overflow-x:auto\"><table><thead><tr><th>Select</th><th>Cover</th><th>Game</th><th>Platform</th><th>Genres</th><th>Released</th><th>Rating</th><th></th></tr></thead><tbody>'"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2661,
+          "text": "  if(CATALOG_VIEW.mode==='catalog')return renderGameCatalog();"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2707,
+          "text": "      <h3 style=\"margin-top:18px\">Games installed on your gaming PC</h3>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 3707,
+          "text": "    </div>`+(d.items.length?`<table><thead><tr><th>Game</th>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 3755,
+          "text": "      <th>Game</th><th>Platform</th><th>Kind</th><th>Version</th><th>Status</th>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 3788,
+          "text": "    <th>Game</th><th>Platform</th><th>Release</th><th>Indexer</th></tr></thead><tbody>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4197,
+          "text": "      <input data-platform-folder-name value=\"${esc(folder)}\" placeholder=\"e.g. PS2 Games\">"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4212,
+          "text": "    <p class=\"help\" style=\"margin:4px 0 8px\">ROMarr recognizes platform slugs and unambiguous ES-DE system names automatically. Add a mapping only when your existing folder uses another name, such as <code>PS2 Games</code>. Folder names are matched only at the library root.</p>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4217,
+          "text": "  +`<div class=\"help\" style=\"margin:-6px 0 14px\">Set these only when you want ROMarr to import an existing ES-DE setup visible inside this server. ROMarr publishes shared output to <code>metadata/esde/gamelists</code> and <code>metadata/esde/downloaded_media</code>. Link or configure ES-DE's gamelist directory to the shared <code>gamelists</code> folder and set its Game media directory to <code>downloaded_media</code>. Media files follow ROM names and folders, so artwork remains matched when clients mount the same library at different paths.</div>`"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4627,
+          "text": "           <td style=\"color:var(--dim)\">set STREAM_SERVER_URL to play PS2, GameCube,"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4811,
+          "text": "  if(!m.configured) return `<div class=\"card\"><h3>Game streaming host</h3>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4929,
+          "text": "         server is what plays PS2, GameCube, Wii, Dreamcast and 3DS.`"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5303,
+          "text": "    requestGame(web[Number(b.dataset.calreq)]));"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5308,
+          "text": "async function requestGame(g){"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5823,
+          "text": "        +'<th>Game / evidence</th><th>ROM path</th><th>Switch family</th><th>Metadata</th><th></th>'"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5934,
+          "text": "      +(blocked?'<details style=\"margin-top:10px\"><summary>See blocked items</summary><div style=\"overflow-x:auto\"><table><thead><tr><th>Game</th><th>Reason</th></tr></thead><tbody>'+blocked+'</tbody></table></div></details>':'')"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6092,
+          "text": "    MissingGameSearch:'Search the Wanted list',"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6314,
+          "text": "    <h1 id=\"page-title\" tabindex=\"-1\" data-i18n=\"ui.games.d9dae78103\">Games</h1>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 481,
+      "sourceId": "ui.game-evidence.036c1e0c7e",
+      "queryKind": "source-id",
+      "literal": "ui.game-evidence.036c1e0c7e",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 481,
+      "sourceId": "ui.game-evidence.036c1e0c7e",
+      "queryKind": "source-text",
+      "literal": "Game / evidence",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 5823,
+          "text": "        +'<th>Game / evidence</th><th>ROM path</th><th>Switch family</th><th>Metadata</th><th></th>'"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 482,
+      "sourceId": "ui.game-streaming-host.5205e3b760",
+      "queryKind": "source-id",
+      "literal": "ui.game-streaming-host.5205e3b760",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 482,
+      "sourceId": "ui.game-streaming-host.5205e3b760",
+      "queryKind": "source-text",
+      "literal": "Game streaming host",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4811,
+          "text": "  if(!m.configured) return `<div class=\"card\"><h3>Game streaming host</h3>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 483,
+      "sourceId": "ui.gamecube-disc-magic-at-0x1c.2fdeeaba75",
+      "queryKind": "source-id",
+      "literal": "ui.gamecube-disc-magic-at-0x1c.2fdeeaba75",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 483,
+      "sourceId": "ui.gamecube-disc-magic-at-0x1c.2fdeeaba75",
+      "queryKind": "source-text",
+      "literal": "GameCube disc magic at 0x1c",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/sniff.py",
+          "line": 106,
+          "text": "        return Sniffed(\"ngc\", \"GameCube disc magic at 0x1c\")"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 484,
+      "sourceId": "ui.games.d9dae78103",
+      "queryKind": "source-id",
+      "literal": "ui.games.d9dae78103",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 6314,
+          "text": "    <h1 id=\"page-title\" tabindex=\"-1\" data-i18n=\"ui.games.d9dae78103\">Games</h1>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 484,
+      "sourceId": "ui.games.d9dae78103",
+      "queryKind": "source-text",
+      "literal": "Games",
+      "matchCount": 34,
+      "matches": [
+        {
+          "path": "romarr/app.py",
+          "line": 4031,
+          "text": "            # Games that came out this day of the year, any year. The same"
+        },
+        {
+          "path": "romarr/app.py",
+          "line": 4923,
+          "text": "            # \"Games in library\" was this page's headline number and it was"
+        },
+        {
+          "path": "romarr/connect.py",
+          "line": 289,
+          "text": "        \"label\": \"Epic Games\","
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 261,
+          "text": "# --- Amazon Games -------------------------------------------------------------"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 270,
+          "text": "    \"\"\"Installed Amazon Games titles, from the launcher's own SQLite."
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 272,
+          "text": "    `GameInstallInfo.sqlite` is what the Amazon Games app itself reads."
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 383,
+          "text": "        \"epic\": [program_data / \"Epic\" / \"EpicGamesLauncher\" / \"Data\" / \"Manifests\"],"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 386,
+          "text": "        \"ea\": [d / \"Program Files\" / \"EA Games\" for d in drives]"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 387,
+          "text": "              + [d / \"Program Files (x86)\" / \"Origin Games\" for d in drives]"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 388,
+          "text": "              + [d / \"EA Games\" for d in drives],"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 389,
+          "text": "        \"amazon\": [local / \"Amazon Games\" / \"Data\" / \"Games\" / \"Sql\""
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 15,
+          "text": "  * Gaseous   -- REST, /api/v1.1/Games. Listing is a POST with a mandatory"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 362,
+          "text": "        r = self._session.post(self._url(\"Games\"), json=body, headers=self._headers(),"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 396,
+          "text": "                cover=_absolute(base, f\"/api/v1.1/Games/{gid}/cover/image\"),"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 454,
+          "text": "    _F_GAMES, _F_METADATA = 1, 2                              # GetGamesResponse"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 542,
+          "text": "        raw = self._rpc(\"GameService/GetGames\", body, timeout)"
+        },
+        {
+          "path": "romarr/libraries.py",
+          "line": 607,
+          "text": "        # GetGames has no paging of its own, so the window is applied here."
+        },
+        {
+          "path": "romarr/lists.py",
+          "line": 216,
+          "text": "                    \"-- opening the Epic Games Launcher once also does it \""
+        },
+        {
+          "path": "romarr/lists.py",
+          "line": 515,
+          "text": "            f\"{STEAM_API}/IPlayerService/GetOwnedGames/v1/\","
+        },
+        {
+          "path": "romarr/lists.py",
+          "line": 768,
+          "text": "        \"label\": \"Epic Games library\","
+        },
+        {
+          "path": "romarr/lists.py",
+          "line": 842,
+          "text": "                # Games download for a platform; soundtracks and ebooks"
+        },
+        {
+          "path": "romarr/metadata.py",
+          "line": 956,
+          "text": "    \"\"\"Games released recently or due soon."
+        },
+        {
+          "path": "romarr/openapi.py",
+          "line": 136,
+          "text": "    \"/api/v1/wanted/missing\": (\"GET\", \"Games wanted but not yet found. DELETE \""
+        },
+        {
+          "path": "romarr/openapi.py",
+          "line": 171,
+          "text": "    \"/api/v1/calendar\": (\"GET\", \"Games released recently or due soon, from \""
+        },
+        {
+          "path": "romarr/openapi.py",
+          "line": 332,
+          "text": "    \"/api/v1/launchers\": (\"GET\", \"Games the launchers installed on this \""
+        },
+        {
+          "path": "romarr/ops.py",
+          "line": 67,
+          "text": "    emit(\"wanted_items\", \"gauge\", \"Games wanted but not yet found.\","
+        },
+        {
+          "path": "romarr/platforms.py",
+          "line": 290,
+          "text": "    # \"Xbox 360 (Digital)\" is Vimm's label for the XBLA and Games-on-Demand"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 14,
+          "text": "  * Movies/Series/Artists become Games, and the Calendar has no equivalent at"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 751,
+          "text": "    (\"Library\",  [(\"library\", \"Games\", \"games\"),"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 1682,
+          "text": "  const titles={library:'Games',add:'Add New Game',search:'Interactive Search',"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 2707,
+          "text": "      <h3 style=\"margin-top:18px\">Games installed on your gaming PC</h3>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4197,
+          "text": "      <input data-platform-folder-name value=\"${esc(folder)}\" placeholder=\"e.g. PS2 Games\">"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4212,
+          "text": "    <p class=\"help\" style=\"margin:4px 0 8px\">ROMarr recognizes platform slugs and unambiguous ES-DE system names automatically. Add a mapping only when your existing folder uses another name, such as <code>PS2 Games</code>. Folder names are matched only at the library root.</p>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6314,
+          "text": "    <h1 id=\"page-title\" tabindex=\"-1\" data-i18n=\"ui.games.d9dae78103\">Games</h1>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    }
+  ],
+  "interpretation": "Search results are source evidence only. This candidate-free packet makes no translation accept/correct/refine/hold decisions."
+}

@@ -1,0 +1,139 @@
+{
+  "reviewScope": "Positions 465-484 × 12 locales (240 cells), pinned to PR #70 head/tree.",
+  "method": "Reviewed each current target against source meaning, exact caller context where available, placeholders, numeric tokens, and protected literals. Callerless sources remain hash-only holds.",
+  "dispositionCounts": {
+    "accept-current": 170,
+    "continued-hold": 60,
+    "refine": 7,
+    "correct": 3
+  },
+  "sourceNotes": {
+    "465": {
+      "sourceId": "ui.found-found-releases-accepted-match.65f542cd3e",
+      "callerRefCount": 1,
+      "rationale": "Caller uses this as search-results help text; the count placeholders and accepted/rejected explanation are preserved."
+    },
+    "466": {
+      "sourceId": "ui.franchise.cae83311f5",
+      "callerRefCount": 2,
+      "rationale": "Caller places this as the Discover facet beside Genre and Company; the localized category label fits."
+    },
+    "467": {
+      "sourceId": "ui.fri.66dab40cea",
+      "callerRefCount": 10,
+      "rationale": "Caller uses this in the calendar weekday header; the locale-specific Friday abbreviation fits the compact day column."
+    },
+    "468": {
+      "sourceId": "ui.friends.bd104d1b98",
+      "callerRefCount": 9,
+      "rationale": "Caller uses this for Friends navigation and peering; the localized social label fits."
+    },
+    "469": {
+      "sourceId": "ui.from-alldebrid-com-apikeys-magnets-a.1444aa45a4",
+      "callerRefCount": 1,
+      "rationale": "Caller is AllDebrid credential help; endpoint and magnet/infohash-only constraint are preserved."
+    },
+    "470": {
+      "sourceId": "ui.from-debrid-link-com-webapp-apikey-t.c4c2ada83e",
+      "callerRefCount": 0,
+      "rationale": "No exact production caller is pinned; all 12 locale cells remain hash-only pending product confirmation."
+    },
+    "471": {
+      "sourceId": "ui.from-offcloud-com-account-settings-c.471d7a1b8a",
+      "callerRefCount": 0,
+      "rationale": "No exact production caller is pinned; all 12 locale cells remain hash-only pending product confirmation."
+    },
+    "472": {
+      "sourceId": "ui.from-premiumize-me-account-takes-mag.f165d3dc1f",
+      "callerRefCount": 1,
+      "rationale": "Caller is Premiumize credential help; endpoint and accepted magnet/.torrent URL formats are preserved."
+    },
+    "473": {
+      "sourceId": "ui.from-real-debrid-com-apitoken-magnet.1ba10851cc",
+      "callerRefCount": 0,
+      "rationale": "No exact production caller is pinned; all 12 locale cells remain hash-only pending product confirmation."
+    },
+    "474": {
+      "sourceId": "ui.from-torbox-app-settings-download-li.966d26504c",
+      "callerRefCount": 0,
+      "rationale": "No exact production caller is pinned; all 12 locale cells remain hash-only pending product confirmation."
+    },
+    "475": {
+      "sourceId": "ui.gg-requestz-page.a391eae98d",
+      "callerRefCount": 2,
+      "rationale": "Caller renders this as the configured GG Requestz page row in the integrations status table."
+    },
+    "476": {
+      "sourceId": "ui.gg-requestz-requests.8aa58848ec",
+      "callerRefCount": 1,
+      "rationale": "Caller renders this as the GG Requestz webhook card; nearby source comments say the service pushes requests to ROMarr."
+    },
+    "477": {
+      "sourceId": "ui.ggrequestz-url-only-adds-and-checks.f888f166d7",
+      "callerRefCount": 0,
+      "rationale": "No exact production caller is pinned; all 12 locale cells remain hash-only pending product confirmation."
+    },
+    "478": {
+      "sourceId": "ui.gog-profile.866a5318ca",
+      "callerRefCount": 4,
+      "rationale": "Caller is the GOG list-source type; the list definition says it reads a public GOG profile without credentials."
+    },
+    "479": {
+      "sourceId": "ui.gog-username.3639893276",
+      "callerRefCount": 1,
+      "rationale": "Caller is the GOG username field for a public-profile list."
+    },
+    "480": {
+      "sourceId": "ui.game.5c412a2620",
+      "callerRefCount": 200,
+      "rationale": "Callers use this for the Games library, matching/import controls, and navigation; the localized game label fits."
+    },
+    "481": {
+      "sourceId": "ui.game-evidence.036c1e0c7e",
+      "callerRefCount": 1,
+      "rationale": "Caller uses this as a diagnostic table column beside ROM path, Switch family, and Metadata; evidence means observed matching evidence."
+    },
+    "482": {
+      "sourceId": "ui.game-streaming-host.5205e3b760",
+      "callerRefCount": 1,
+      "rationale": "Caller uses this on the Moonlight setup card; nearby text describes the host GPU and streaming endpoint."
+    },
+    "483": {
+      "sourceId": "ui.gamecube-disc-magic-at-0x1c.2fdeeaba75",
+      "callerRefCount": 1,
+      "rationale": "Caller is the disc-header sniffer diagnostic; hexadecimal offset is preserved and the label names the GameCube disc marker."
+    },
+    "484": {
+      "sourceId": "ui.games.d9dae78103",
+      "callerRefCount": 35,
+      "rationale": "Callers use this as the Games page/navigation label; the localized plural fits."
+    }
+  },
+  "exceptions": [
+    {
+      "sourceId": "ui.from-torbox-app-settings-download-li.966d26504c",
+      "locales": [
+        "ja",
+        "ko"
+      ],
+      "status": "continued hold",
+      "rationale": "The source spells out three hours; the current localized targets use digit 3 and are flagged by the pinned numeric-token scanner. The meaning is equivalent, but token policy remains unresolved."
+    },
+    {
+      "sourceId": "ui.from-real-debrid-com-apitoken-magnet.1ba10851cc",
+      "status": "continued hold",
+      "rationale": "No exact caller is pinned. The current Arabic can read as a download and French can imply upload is required, but replacements wait on product-use confirmation."
+    },
+    {
+      "sourceId": "ui.from-offcloud-com-account-settings-c.471d7a1b8a",
+      "status": "continued hold",
+      "rationale": "No exact caller is pinned. French extension can suggest a browser extension; replacement waits on confirming this source is live."
+    },
+    {
+      "sourceId": "ui.ggrequestz-url-only-adds-and-checks.f888f166d7",
+      "status": "continued hold",
+      "rationale": "No exact caller is pinned. Some current phrasings are awkward or ambiguous; replacement waits on confirming this source is live."
+    }
+  ],
+  "nativeSpeakerReview": "Not obtained; these are machine-review recommendations."
+}

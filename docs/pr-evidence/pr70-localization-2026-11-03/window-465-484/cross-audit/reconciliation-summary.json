@@ -1,0 +1,33 @@
+{
+  "result": "PASS",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W465-W484",
+  "candidateFreeHead": "7640720c5e3b1813725cca8d7aa46b5d968bff43",
+  "candidateFreeTree": "bdee162cc11115256df8756f192b19d4337ed1dc",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "crossDispositionCounts": {
+    "accept-current": 168,
+    "correction": 8,
+    "hold": 60,
+    "refinement": 4
+  },
+  "selectedChanges": 12,
+  "primaryBlindDispositionDisagreements": 9,
+  "callerlessHeldPositions": {
+    "470": 12,
+    "471": 12,
+    "473": 12,
+    "474": 12,
+    "477": 12
+  },
+  "carriedPriorSelectionsReattested": 80,
+  "carriedPriorHoldsReattested": 384,
+  "baselineNumericMismatchesRetainedOnHold": 2,
+  "selectedTargetTokenLiteralFailures": 0,
+  "catalogApplied": false,
+  "nativeSpeakerReview": "pending; machine review does not establish native-speaker approval",
+  "headedBrowserReview": "pending; no deployment exists for exact PR head"
+}

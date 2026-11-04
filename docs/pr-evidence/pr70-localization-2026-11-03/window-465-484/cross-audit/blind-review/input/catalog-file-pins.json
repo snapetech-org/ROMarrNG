@@ -1,0 +1,138 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "commit": "7640720c5e3b1813725cca8d7aa46b5d968bff43",
+  "tree": "bdee162cc11115256df8756f192b19d4337ed1dc",
+  "baseLocale": "en",
+  "activeUniqueSourceIds": 479,
+  "catalogMessageCount": 1836,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogSha256": "86e6b3da1a4b07130678024de822ee4f921c98d587232c4d889e718711423c0b",
+  "sourceQueueSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+  "sourceQueuePath": "romarr/ui-source-messages.json",
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "sourceSnapshotSha256": "e8f580fc3a49da18add0748e8d5312186dc353bc30d3c01bcc94e06d2aaa077d",
+  "callerSourceFilePins": {
+    "romarr/ui-labels.json": {
+      "fileSha256": "86e6b3da1a4b07130678024de822ee4f921c98d587232c4d889e718711423c0b",
+      "gitBlob": "bfa7485c48286463e6e9528e81278b695ee92a19"
+    },
+    "romarr/ui-source-messages.json": {
+      "fileSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "gitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80"
+    },
+    "romarr/ui-source-snapshot.json": {
+      "fileSha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "gitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2"
+    },
+    "romarr/app.py": {
+      "fileSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+      "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd"
+    },
+    "romarr/clients.py": {
+      "fileSha256": "200dfae6cb8872bcb63460a757709706c760b0ff8082cb45b9d7ff01bf14b2ad",
+      "gitBlob": "99f36e0704bd896782ff6ff9a254c78b037a4d02"
+    },
+    "romarr/collections.py": {
+      "fileSha256": "afefa2c09762cfff91396daf2fc3a527870f6b5b48298bc922a9189cff0caadf",
+      "gitBlob": "d2495ef75efe9153bb8f454073061a0165ac770a"
+    },
+    "romarr/connect.py": {
+      "fileSha256": "75aabd8d31edd5874d0b19f2c2f68de9da1e6eeceb6d72e954b3ea04349a8f5a",
+      "gitBlob": "2eedb989971c18f76d8742c413a9f8f224cc1bce"
+    },
+    "romarr/dat.py": {
+      "fileSha256": "b7e002a3046195d4aa64a6413f7e844c906ffb29deb3eae42e3a572ff45a06b2",
+      "gitBlob": "a453111beacc34fc247934931c31c1337d6c1723"
+    },
+    "romarr/dat_catalog.py": {
+      "fileSha256": "b0548332e79550836bbfc2dfc96523ef9dd790f1f6f7ff0b62027fc55b99fd5f",
+      "gitBlob": "5ef97768e8d8d8532c027a4559d314435204efce"
+    },
+    "romarr/decompress.py": {
+      "fileSha256": "544275a2f42c94d86661b4b8d0703ec34b7c43481addc5ef6cfeddcf5977b4ba",
+      "gitBlob": "ff350ed0804391d0a398ce810e03b0c680e107cb"
+    },
+    "romarr/downloaders.py": {
+      "fileSha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed",
+      "gitBlob": "65952d7b8361fa3c6af742f675fde805ec361dd2"
+    },
+    "romarr/ecosystem.py": {
+      "fileSha256": "4faf227274d1ee7e606a6af278841a673e242defe6fdf1af481e8d33690db31b",
+      "gitBlob": "beb743cc9854fc051ad12dd35c53b0202a867012"
+    },
+    "romarr/federation.py": {
+      "fileSha256": "7c27cc8b765bc2d3c9c4a8fe123a2eee5fa629592319aebf16ea542a204ca8a2",
+      "gitBlob": "ec81b84cb9ca8f20f2ec0fcf6049fa87ea6bbc77"
+    },
+    "romarr/frontends.py": {
+      "fileSha256": "6c01b8fcfd1afef2fcbd70e96e73b01ca7e5fcf9251507b88b19d9717bec8e95",
+      "gitBlob": "fd36a48837fb7a6ab67b6774a63208b1046da1ce"
+    },
+    "romarr/i18n_runtime.js": {
+      "fileSha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "gitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc"
+    },
+    "romarr/launchers.py": {
+      "fileSha256": "8a8a7d9b6959c2e5166b131d426d7a7942037df19bc16cd7ba512621fa07b588",
+      "gitBlob": "c23133f62281a3cc1cd057b9bc471c4e36320a30"
+    },
+    "romarr/libraries.py": {
+      "fileSha256": "8d41c724588ff01ea3896dcfef4e07d7a2f107a1666070f0c1a688411686fe04",
+      "gitBlob": "af3912e3c0943bc4b442878ff3e0321fc4762600"
+    },
+    "romarr/lists.py": {
+      "fileSha256": "adf7d4e412d94b0796c2671ce14d191fa7e990ed7749fa229d405b38e3580de4",
+      "gitBlob": "c657ce31f5de1aed0da9bc068e45ed2c3f646a98"
+    },
+    "romarr/metadata.py": {
+      "fileSha256": "4b838ec909961bee7723d2760f9e7c8d18eff5db18874e9907a4d2d9cb0e5186",
+      "gitBlob": "856e5f1827449b99d2065c32999c4df82aa35978"
+    },
+    "romarr/openapi.py": {
+      "fileSha256": "ec27f89d3d77f9d7f58d30bdcbe7078636d216002ef6701575b392d4344cff15",
+      "gitBlob": "08ceab1157c7a2470e42917976f40998d14ea20c"
+    },
+    "romarr/ops.py": {
+      "fileSha256": "fca53e291f34ad36379d21344ac96bdce09d2e2c5861d8ab95da50112ad72ac2",
+      "gitBlob": "5e12a115effdb514222a4dcbfb0d56c69d273dc1"
+    },
+    "romarr/organizer.py": {
+      "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390"
+    },
+    "romarr/platforms.py": {
+      "fileSha256": "7766775a203f05c5ee1c51dc8c66487976434a249f4049188c1c6ce743abc7b6",
+      "gitBlob": "854e748596d0b8ee8b5e1a7c505bf02bf5d814b6"
+    },
+    "romarr/playability.py": {
+      "fileSha256": "fc193d93931383cd7202baf8b7696e30c93861e1495a83a05fc2aa3bc85c303d",
+      "gitBlob": "ad2eba5ecb2166ecc3fb837fdea87f97e41fda29"
+    },
+    "romarr/selection.py": {
+      "fileSha256": "4d503ccbb2bf21b3aea0c24596f8c36033248edee2549244b1edc469dbfa9d96",
+      "gitBlob": "c95757f005e2d84fcbc3baba0de85d1e1c2b687f"
+    },
+    "romarr/sniff.py": {
+      "fileSha256": "f8bfd66c7650b00461d3856677cfe296fa9b185a7035529a04584c614e0cbfb2",
+      "gitBlob": "ee261f71427b31e1642af1d3ea992aa40bd26e31"
+    },
+    "romarr/ui.py": {
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0"
+    }
+  },
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ]
+}

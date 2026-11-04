@@ -1,0 +1,19 @@
+{
+  "catalogPath": "romarr/ui-labels.json",
+  "keyCountBefore": 1836,
+  "keyCountAfter": 1836,
+  "messageKeyOrderSha256": "7ad90eab25de1bd3280c35f3633099fe17ddce54bf3b634ee786133834fdd5e5",
+  "messageKeyOrderPreserved": true,
+  "allTopLevelKeyOrderPreserved": true,
+  "allLocaleKeyOrdersPreserved": true,
+  "selectedTranslationValuesChanged": 12,
+  "selectedTargetsOnly": true,
+  "translationHashesMetadataChanged": false,
+  "currentHoldsPreserved": 60,
+  "carriedPriorHoldsPreserved": 384,
+  "priorSelectedSourceRecordsPreserved": 80,
+  "otherCatalogFieldsPreserved": true,
+  "workflowPathsChanged": false,
+  "preCatalogSha256": "86e6b3da1a4b07130678024de822ee4f921c98d587232c4d889e718711423c0b",
+  "postCatalogSha256": "7615df056775da77c2f559096cb23caa990231c475ce5955f50a732bf68633bb"
+}
