@@ -1,0 +1,19 @@
+{
+  "attestedAtUtc": "2026-11-04T15:13:50+00:00",
+  "baseApiRefMismatch": true,
+  "baseApiSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "baseLiveRefOid": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+  "baseRefName": "main",
+  "branch": "task/localization-translation-review-20261030",
+  "branchRefOid": "ed82a904e85a95a7f350e6f62d8f06139098054b",
+  "checkRuns": [],
+  "checksRerun": false,
+  "deploymentCount": 0,
+  "draft": true,
+  "head": "ed82a904e85a95a7f350e6f62d8f06139098054b",
+  "mergeable": "MERGEABLE",
+  "pullRefOid": "ed82a904e85a95a7f350e6f62d8f06139098054b",
+  "state": "OPEN",
+  "statusContexts": [],
+  "tree": "73afce4882b42b3284c0dcec9be81be17333232b"
+}

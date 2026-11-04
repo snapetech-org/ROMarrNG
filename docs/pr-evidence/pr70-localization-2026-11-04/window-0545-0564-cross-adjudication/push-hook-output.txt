@@ -1,0 +1,15 @@
+Stable image alias policy is consistent with snapetech-org/romarrng.
+0.14.11: sha256:6c569160559d4c667405171280c2f8dcaf382740324e4fe600716b67d3746012 (stable release)
+0.14.11-browser: sha256:d620bc9c84ae91afe503c66f236a927f74f3d69f6a9772c8ba40228a8e8d0cb3 (stable release)
+latest: sha256:6c569160559d4c667405171280c2f8dcaf382740324e4fe600716b67d3746012 (matches 0.14.11)
+main: sha256:6c569160559d4c667405171280c2f8dcaf382740324e4fe600716b67d3746012 (matches 0.14.11)
+master: sha256:6c569160559d4c667405171280c2f8dcaf382740324e4fe600716b67d3746012 (matches 0.14.11)
+stable: sha256:6c569160559d4c667405171280c2f8dcaf382740324e4fe600716b67d3746012 (matches 0.14.11)
+browser: sha256:d620bc9c84ae91afe503c66f236a927f74f3d69f6a9772c8ba40228a8e8d0cb3 (matches 0.14.11-browser)
+main-browser: sha256:d620bc9c84ae91afe503c66f236a927f74f3d69f6a9772c8ba40228a8e8d0cb3 (matches 0.14.11-browser)
+master-browser: sha256:d620bc9c84ae91afe503c66f236a927f74f3d69f6a9772c8ba40228a8e8d0cb3 (matches 0.14.11-browser)
+latest-browser: sha256:d620bc9c84ae91afe503c66f236a927f74f3d69f6a9772c8ba40228a8e8d0cb3 (matches 0.14.11-browser)
+stable-browser: sha256:d620bc9c84ae91afe503c66f236a927f74f3d69f6a9772c8ba40228a8e8d0cb3 (matches 0.14.11-browser)
+All rolling aliases match the stable v0.14.11 image in ghcr.io/snapetech-org/romarrng.
+To https://github.com/snapetech-org/ROMarrNG.git
+   ed82a904..2a921d82  2a921d8280487f6d172616719f32e3dced243d83 -> task/localization-translation-review-20261030
