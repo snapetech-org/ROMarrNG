@@ -13507,17 +13507,17 @@
       "sourceHash": "a391eae98d930796795a8fe48741d1f53dbd179d3de23882124c2e6758d785f3",
       "translations": {
         "es": "Página de GG Requestz",
-        "zh-Hans": "GG Requestz 页 次",
+        "zh-Hans": "GG Requestz 页面",
         "hi": "GG Requestz पृष्ठ",
-        "de": "GG Requestz Seite",
+        "de": "Seite von GG Requestz",
         "ja": "GG Requestzのページ",
         "fr": "Page GG Requestz",
         "pt-BR": "Página da GG Requestz",
         "ar": "صفحة GG Requestz",
         "ko": "GG Requestz 페이지",
-        "zh-Hant": "GG Requestz 頁 次",
+        "zh-Hant": "GG Requestz 頁面",
         "vi": "Trang GG Requestz",
-        "id": "GG Requestz halaman"
+        "id": "Halaman GG Requestz"
       },
       "translationHashes": {},
       "translationStatus": {},
@@ -13530,7 +13530,7 @@
         "es": "Solicitudes de GG Requestz",
         "zh-Hans": "GG Requestz 请求",
         "hi": "GG Requestz अनुरोध",
-        "de": "GG Requestz Anträge",
+        "de": "Anfragen von GG Requestz",
         "ja": "GG Requestzへのリクエスト",
         "fr": "Demandes GG Requestz",
         "pt-BR": "Pedidos da GG Requestz",
@@ -13538,7 +13538,7 @@
         "ko": "GG Requestz 요청",
         "zh-Hant": "GG Requestz 請求",
         "vi": "Yêu cầu của GG Requestz",
-        "id": "GG Requestz permintaan"
+        "id": "Permintaan GG Requestz"
       },
       "translationHashes": {},
       "translationStatus": {},
@@ -13593,15 +13593,15 @@
         "es": "Nombre de usuario GOG",
         "zh-Hans": "GOG 用户名",
         "hi": "GOG उपयोगकर्ता नाम",
-        "de": "GOG Benutzername",
+        "de": "GOG-Benutzername",
         "ja": "GOGのユーザー名",
         "fr": "Nom d'utilisateur GOG",
-        "pt-BR": "GOG nome de usuário",
-        "ar": "GOG اسم المستخدم",
+        "pt-BR": "Nome de usuário do GOG",
+        "ar": "اسم مستخدم GOG",
         "ko": "GOG 사용자 이름",
         "zh-Hant": "GOG 使用者名稱",
         "vi": "Tên người dùng GOG",
-        "id": "GOG nama pengguna"
+        "id": "Nama pengguna GOG"
       },
       "translationHashes": {},
       "translationStatus": {},
@@ -13704,7 +13704,7 @@
       "translations": {
         "es": "Firma de disco de GameCube en 0x1c",
         "zh-Hans": "0x1c 处有 GameCube 光盘标识",
-        "hi": "0x1c पर GameCube डिस्क मैजिक",
+        "hi": "0x1c पर GameCube डिस्क सिग्नेचर",
         "de": "GameCube-Disc-Kennung bei 0x1c",
         "ja": "0x1c に GameCube ディスクのマジック値",
         "fr": "Signature de disque GameCube à 0x1c",
@@ -13713,7 +13713,7 @@
         "ko": "0x1c의 GameCube 디스크 매직 값",
         "zh-Hant": "0x1c 處有 GameCube 光碟識別碼",
         "vi": "Giá trị nhận diện đĩa GameCube tại 0x1c",
-        "id": "Nilai magic cakram GameCube di 0x1c"
+        "id": "Tanda pengenal cakram GameCube pada 0x1c"
       },
       "translationHashes": {},
       "translationStatus": {},
