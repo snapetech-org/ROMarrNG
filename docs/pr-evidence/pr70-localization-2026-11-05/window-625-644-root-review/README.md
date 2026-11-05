@@ -19,6 +19,6 @@ Product commit `86f6161f3069bb3113f8f7a8a763193f15c4e2bc` changes only `romarr/u
 
 ## Evidence and validation
 
-`candidate-free/`, `primary/`, `blind-review/`, `cross-review/`, and `root-application/` retain the input bundles, sealed decisions, hash-bound plans, application records, full-window readback, and portable verifiers. `SHA256SUMS.txt` covers every file in this directory except itself.
+`candidate-free/`, `primary/`, `blind-review/`, `cross-review/`, and `root-application/` retain the input bundles, sealed decisions, hash-bound plans, application records, full-window readback, and portable verifiers. `delivery/` records the exact PR body append and API readback: the original 62,029-byte body remains the exact prefix of the 62,872-byte open, draft body. `SHA256SUMS.txt` covers every file in this directory except itself.
 
 No tests, builds, scans, CI dispatches, merges, releases, or tags were made for this window. No browser or native-speaker review is claimed. The PR remains open and draft.
