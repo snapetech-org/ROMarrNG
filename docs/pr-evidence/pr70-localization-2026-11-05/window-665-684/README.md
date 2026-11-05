@@ -7,7 +7,7 @@ This evidence packet covers source-order positions 665–684 at the exact open P
 - Candidate-free, primary, blind, and independent cross-review packets each cover all 240 source × locale cells.
 - Final dispositions: 139 retain-current values, 29 selected target translations, and 72 callerless hash-only holds.
 - Cross-review chose 20 blind proposals, 5 primary proposals, and 4 primary/blind consensus values. Root review checked all 29 against their exact production caller contexts and approved each selected target.
-- The application changes 29 locale values in `romarr/ui-labels.json` and refreshes 9 existing canonical translation hashes. Product commit: `38718aa6c60e3366aa67ba5372531b77d6539862`. Translation status/review metadata and catalog key order stay unchanged.
+- The application changes 29 locale values in `romarr/ui-labels.json` and refreshes 9 existing canonical translation hashes. Product commit: `{product}`. Evidence commit: `{evidence}`. Translation status/review metadata and catalog key order stay unchanged.
 - Root confidence is moderate. No qualified native-speaker approval or headed product-browser acceptance is claimed.
 
 ## Packet layout
