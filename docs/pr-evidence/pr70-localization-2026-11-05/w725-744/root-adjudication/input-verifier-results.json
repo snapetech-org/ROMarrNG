@@ -1,0 +1,54 @@
+{
+  "artifact": "ROMarrNG W725-W744 pre-application packet verifier results",
+  "candidateFree": {
+    "result": "PASS",
+    "head": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+    "tree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+    "cells": 240,
+    "callerlessHashOnlyCells": 12,
+    "priorSelections": 340,
+    "priorHolds": 952,
+    "priorAppliedCells": 132,
+    "priorReadbackWindows": 8,
+    "w665EvidenceRestored": true
+  },
+  "primary": {
+    "result": "PASS",
+    "head": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+    "tree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+    "cells": 240,
+    "callerlessHashOnlyHolds": 12,
+    "decisionCounts": {
+      "accept-current": 223,
+      "correction": 2,
+      "refinement": 3,
+      "hold-callerless-hash-only": 12
+    },
+    "proposalTokenChecksPassing": true
+  },
+  "blind": {
+    "result": "PASS",
+    "head": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+    "tree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+    "cells": 240,
+    "worktreeCleanAtInputHead": true,
+    "decisionCounts": {
+      "retain": 227,
+      "proposal": 1,
+      "hold": 12
+    },
+    "proposalTokenChecksPassing": 1
+  },
+  "cross": {
+    "result": "PASS",
+    "head": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+    "tree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+    "cells": 240,
+    "callerlessHolds": 12,
+    "rootFlags": 20,
+    "holdIndexSummaryDiscrepancyFlagged": true,
+    "inheritedLineageCaveatsVerified": true,
+    "errors": []
+  },
+  "verificationStage": "pre-application at the exact input worktree head"
+}

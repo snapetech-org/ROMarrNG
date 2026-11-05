@@ -1,0 +1,111 @@
+{
+  "artifact": "ROMarrNG PR #70 W725-W744 independent cross-review",
+  "createdAtUtc": "2026-11-05T15:13:51+00:00",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "tree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+  "window": "W725-W744",
+  "catalogZeroBasedIndices": [
+    725,
+    744
+  ],
+  "catalogOneBasedPositions": [
+    726,
+    745
+  ],
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "callerBackedCellCount": 228,
+  "callerlessHashOnlyHoldCellCount": 12,
+  "callerlessPosition": 732,
+  "callerlessOneBasedPosition": 733,
+  "crossDispositionCounts": {
+    "accept-current": 223,
+    "refinement": 3,
+    "hold-callerless-hash-only": 12,
+    "correction": 2
+  },
+  "primaryDecisionCounts": {
+    "accept-current": 223,
+    "correction": 2,
+    "refinement": 3,
+    "hold-callerless-hash-only": 12
+  },
+  "blindDecisionCounts": {
+    "retain": 227,
+    "proposal": 1,
+    "hold": 12
+  },
+  "reviewerRelationCounts": {
+    "both-retain-current": 223,
+    "primary-only-proposes": 4,
+    "both-hold": 12,
+    "both-propose-same": 1
+  },
+  "primaryBlindDecisionDisagreementCount": 4,
+  "differentTargetTextCount": 4,
+  "bothProposeSameCount": 1,
+  "primaryOnlyProposalCount": 4,
+  "blindOnlyProposalCount": 0,
+  "crossReviewEndorsesAllPrimaryProposals": true,
+  "holdCellIds": [
+    "732::ar",
+    "732::de",
+    "732::es",
+    "732::fr",
+    "732::hi",
+    "732::id",
+    "732::ja",
+    "732::ko",
+    "732::pt-BR",
+    "732::vi",
+    "732::zh-Hans",
+    "732::zh-Hant"
+  ],
+  "holdTextIncluded": false,
+  "callerReferences": 28,
+  "callerContextCount": 20,
+  "callerlessSourceCount": 1,
+  "callerlessSummaryPositionMismatch": {
+    "blindSummaryIndex": 731,
+    "rowLevelIndex": 732,
+    "oneBasedPosition": 733,
+    "decision": "retain all 12 holds at row-level index 732; flag summary off-by-one"
+  },
+  "tokenChecks": {
+    "callerBackedCellsChecked": 228,
+    "placeholderCells": 12,
+    "protectedLiteralCells": 24,
+    "markupCells": 0,
+    "allCurrentPrimaryBlindAndCrossTargetsPass": true,
+    "tokenFailures": []
+  },
+  "mainContextDrift": {
+    "positions": [
+      726,
+      727,
+      729,
+      733,
+      735,
+      738
+    ],
+    "count": 6,
+    "sourceTextChanges": 5,
+    "sourcesMissingFromMain": 5,
+    "sourcesWithNewMainCallers": 1
+  },
+  "inheritedLineage": {
+    "W625CaveatPreserved": true,
+    "W645BlindChecksumPointerWarningPreserved": true,
+    "W665RestorationAttested": true,
+    "priorSelectionsReattested": 340,
+    "priorHoldsReattested": 952,
+    "priorAppliedCellsReattested": 132,
+    "fullReadbackWindows": 8
+  },
+  "nativeSpeakerSignoff": false,
+  "repoEdited": false,
+  "testsBuildsCI": false
+}

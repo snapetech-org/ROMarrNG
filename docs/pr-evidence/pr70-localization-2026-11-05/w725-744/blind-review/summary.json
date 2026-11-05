@@ -1,0 +1,59 @@
+{
+  "artifact": "ROMarrNG PR #70 W725-W744 independent blind semantic review",
+  "schemaVersion": 1,
+  "blindReviewUsed": true,
+  "crossReviewUsed": false,
+  "rootAdjudicationPerformed": false,
+  "inputPacket": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w725-744-20261105/candidate-free",
+  "inputChecksumsFileSha256": "d706d8681b2422151b4d4ba72731c9064b1994168bdbe1fb20588d2123ebe04c",
+  "inputManifestSha256": "d80b6524ea2e8d0ef065f5260a0df41572198639f12f2731e5553ddea56b6589",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "tree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+  "window": "W725-W744",
+  "catalogInsertionIndices": [
+    725,
+    744
+  ],
+  "catalogOneBasedPositions": [
+    726,
+    745
+  ],
+  "cellCount": 240,
+  "callerBackedCellCount": 228,
+  "callerlessHashOnlyHoldCellCount": 12,
+  "decisionCounts": {
+    "retain": 227,
+    "hold": 12,
+    "proposal": 1
+  },
+  "proposalCountsByLocale": {
+    "ar": 1
+  },
+  "inputTokenResults": {
+    "callerBackedCellsChecked": 228,
+    "passingCells": 228,
+    "mismatchingCells": 0,
+    "mismatchCounts": {},
+    "callerlessHoldsNotChecked": 12
+  },
+  "proposalTokenResults": {
+    "proposalsChecked": 1,
+    "passingProposals": 1,
+    "failingProposals": 0,
+    "mismatchCounts": {}
+  },
+  "confidence": "moderate",
+  "confidenceNote": "Caller-backed semantic review includes locale-aware terminology and exact pinned caller context; no native-speaker validation was available.",
+  "textRedaction": "The 12 cells for the callerless source at catalog index 731 remain hash-only holds with source, target, and proposal text omitted.",
+  "inputTokenMismatchSummary": {
+    "markup": 0,
+    "numeric": 0,
+    "numericPresentationDifferences": 0,
+    "placeholder": 0,
+    "protectedLiteral": 0
+  },
+  "worktreeVerification": "worktree-verification.json",
+  "verifier": "verify_blind_packet.py"
+}

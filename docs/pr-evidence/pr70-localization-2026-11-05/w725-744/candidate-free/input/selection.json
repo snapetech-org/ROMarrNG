@@ -1,0 +1,265 @@
+{
+  "activeUniqueSourceIds": 479,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogMessageCount": 1836,
+  "catalogOneBasedPositions": [
+    726,
+    745
+  ],
+  "cellCount": 240,
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "method": "Select catalog message insertion indices 725 through 744 (zero-based) from the exact pinned romarr/ui-labels.json message-key order.",
+  "positions": [
+    725,
+    744
+  ],
+  "selectedSources": [
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 726,
+      "catalogZeroBasedIndex": 725,
+      "position": 725,
+      "registryLocations": [],
+      "source": "No results yet. Your library server fills this in when it identifies a game.",
+      "sourceId": "ui.no-results-yet-your-library-server-f.6082732618",
+      "sourceSha256": "60827326188473a0e73e9dc89e46eb82106dc2e818686415ef8c0eba1ae357ef"
+    },
+    {
+      "activeSourceRank": 222,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 727,
+      "catalogZeroBasedIndex": 726,
+      "position": 726,
+      "registryLocations": [
+        "romarr/organizer.py:1861"
+      ],
+      "source": "No safe canonical title",
+      "sourceId": "ui.no-safe-canonical-title.2968a7e7ba",
+      "sourceSha256": "2968a7e7bad39b710b63ba1af3927b4ceae6badd23e9bdf7e59b1a427628e07b"
+    },
+    {
+      "activeSourceRank": 223,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 728,
+      "catalogZeroBasedIndex": 727,
+      "position": 727,
+      "registryLocations": [
+        "romarr/ui.py:5608"
+      ],
+      "source": "No safe renames are ready in this batch.",
+      "sourceId": "ui.no-safe-renames-are-ready-in-this-ba.45fe5b5767",
+      "sourceSha256": "45fe5b5767b3acc6a30021a1ed6452d45a8ef81035bb9b9f202e6b5567005968"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 729,
+      "catalogZeroBasedIndex": 728,
+      "position": 728,
+      "registryLocations": [],
+      "source": "No set is being acquired.",
+      "sourceId": "ui.no-set-is-being-acquired.4f1fe28285",
+      "sourceSha256": "4f1fe282852803bd222d149d6bf06058d6019672e17147f8b47d242e8159b76d"
+    },
+    {
+      "activeSourceRank": 228,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 730,
+      "catalogZeroBasedIndex": 729,
+      "position": 729,
+      "registryLocations": [
+        "romarr/ui.py:2324"
+      ],
+      "source": "No titles match these filters.",
+      "sourceId": "ui.no-titles-match-these-filters.a0f06fb7bb",
+      "sourceSha256": "a0f06fb7bb2c89040d798bd1f4218640adf4759b41a8b7d30059abea521afd39"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 731,
+      "catalogZeroBasedIndex": 730,
+      "position": 730,
+      "registryLocations": [],
+      "source": "No usable release was found. Checked results: {count}.",
+      "sourceId": "ui.no-usable-release-was-found-checked.eef9a1aaab",
+      "sourceSha256": "eef9a1aaabf9f94828bef85cb21773500cb1281be5cef9414dd22c2bd4669bff"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 732,
+      "catalogZeroBasedIndex": 731,
+      "position": 731,
+      "registryLocations": [],
+      "source": "No-Intro and Redump checksums. With them ROMarr can say a file is the exact known-good dump rather than merely the right size — and",
+      "sourceId": "ui.no-intro-and-redump-checksums-with-t.df6cd186de",
+      "sourceSha256": "df6cd186de8dfe9a59a03ce981d988a7de420dae497f6cacccf7a541a665bbe4"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 733,
+      "catalogZeroBasedIndex": 732,
+      "position": 732,
+      "registryLocations": [],
+      "sourceId": "ui.nobody-has-claimed-this-romarr-yet-s.c9bb03c1de",
+      "sourceSha256": "c9bb03c1de2ab932c379da3508df5618089486aaa694e098de607ca3635739bf",
+      "sourceTextOmitted": true
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 734,
+      "catalogZeroBasedIndex": 733,
+      "position": 733,
+      "registryLocations": [],
+      "source": "Not an invitation",
+      "sourceId": "ui.not-an-invitation.0ac3128cc5",
+      "sourceSha256": "0ac3128cc5d8cc6204f29e7694b8e13f5626b78bdea0a1d4e9aacb590a11f182"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 735,
+      "catalogZeroBasedIndex": 734,
+      "position": 734,
+      "registryLocations": [],
+      "source": "Not announced",
+      "sourceId": "ui.not-announced.b40572aafd",
+      "sourceSha256": "b40572aafd1526f6291b1990c754849361b16ab27adecf4b36a6ce568e568740"
+    },
+    {
+      "activeSourceRank": 230,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 736,
+      "catalogZeroBasedIndex": 735,
+      "position": 735,
+      "registryLocations": [
+        "romarr/ui.py:4311"
+      ],
+      "source": "Not available",
+      "sourceId": "ui.not-available.67a926f700",
+      "sourceSha256": "67a926f7008e2b0e7f2b3f7a4b37597834830110be1d51138f425d6f3449bc09"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 737,
+      "catalogZeroBasedIndex": 736,
+      "position": 736,
+      "registryLocations": [],
+      "source": "Not grabbed",
+      "sourceId": "ui.not-grabbed.c2d3260a1a",
+      "sourceSha256": "c2d3260a1a45a17f938918ebf03826aa38c6ed39f684d23bbe4de2a08c561ca3"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 738,
+      "catalogZeroBasedIndex": 737,
+      "position": 737,
+      "registryLocations": [],
+      "source": "Not identified",
+      "sourceId": "ui.not-identified.2a12f76cae",
+      "sourceSha256": "2a12f76cae18f7d7c4537df0970ca5ceb25893263e324b6c413666d1cb4b5f51"
+    },
+    {
+      "activeSourceRank": 231,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 739,
+      "catalogZeroBasedIndex": 738,
+      "position": 738,
+      "registryLocations": [
+        "romarr/ui.py:3491"
+      ],
+      "source": "Not in library",
+      "sourceId": "ui.not-in-library.c2f9e4fde9",
+      "sourceSha256": "c2f9e4fde96646a1969c0792c3f2688630247adaa25a18812240da6acfacc6ce"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 740,
+      "catalogZeroBasedIndex": 739,
+      "position": 739,
+      "registryLocations": [],
+      "source": "Not in your DAT. Often perfectly fine.",
+      "sourceId": "ui.not-in-your-dat-often-perfectly-fine.d3400979d9",
+      "sourceSha256": "d3400979d9d0ce79429a015d4725bf9adddca634c03a436a0aa50da1d15116ab"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 741,
+      "catalogZeroBasedIndex": 740,
+      "position": 740,
+      "registryLocations": [],
+      "source": "Notes",
+      "sourceId": "ui.notes.8a7525b149",
+      "sourceSha256": "8a7525b1492fb84833f5c4a69b30f4bfbb134f9b666b61a2c1872d63d234c085"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 742,
+      "catalogZeroBasedIndex": 741,
+      "position": 741,
+      "registryLocations": [],
+      "source": "Nothing (peered for netplay only)",
+      "sourceId": "ui.nothing-peered-for-netplay-only.6024bd4d3b",
+      "sourceSha256": "6024bd4d3b40cba37eae9e09290b829b8540b59f6b24af3f65e0f49ca8924049"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 743,
+      "catalogZeroBasedIndex": 742,
+      "position": 742,
+      "registryLocations": [],
+      "source": "Nothing blocked",
+      "sourceId": "ui.nothing-blocked.f73c4a5a85",
+      "sourceSha256": "f73c4a5a85c3d4e56cf2bda22efe9b017bd5014f0cf2f014f563c4599281bb50"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 744,
+      "catalogZeroBasedIndex": 743,
+      "position": 743,
+      "registryLocations": [],
+      "source": "Nothing dated in the future.",
+      "sourceId": "ui.nothing-dated-in-the-future.9647c5497c",
+      "sourceSha256": "9647c5497c311168f5d10552b30a39aa29196467c6a004834dfce586952eb42c"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 745,
+      "catalogZeroBasedIndex": 744,
+      "position": 744,
+      "registryLocations": [],
+      "source": "Nothing found. A search where every indexer fails looks exactly like one that found nothing — check Indexers if this is unexpected.",
+      "sourceId": "ui.nothing-found-a-search-where-every-i.cf40aad291",
+      "sourceSha256": "cf40aad291fce41c3e0045a02972a32643aed2f21d5cfa51bce49c96712d9097"
+    }
+  ],
+  "sourceCount": 20,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "window": "W725-W744"
+}

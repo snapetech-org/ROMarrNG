@@ -1,0 +1,24 @@
+{
+  "result": "PASS",
+  "head": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "tree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+  "cells": 240,
+  "callerlessHolds": 12,
+  "rootFlags": 20,
+  "checks": {
+    "exact-cell-set-and-order": "PASS",
+    "exact-worktree-pin": "PASS",
+    "current-target-and-review-pins": "PASS",
+    "all-token-signatures": "PASS",
+    "12-hash-only-holds": "PASS",
+    "hold-index-summary-discrepancy-flagged": "PASS",
+    "root-flags-cover-20-positions": "PASS",
+    "inherited-lineage-caveats": "PASS",
+    "w665-restoration-attestation": "PASS",
+    "candidate-free-verifier": "PASS",
+    "primary-verifier": "PASS",
+    "blind-verifier": "PASS",
+    "output-checksums": "PASS"
+  },
+  "errors": []
+}

@@ -1,0 +1,20 @@
+{
+  "allFinalTargetHashesMatch": true,
+  "changedTargets": 0,
+  "count": 132,
+  "head": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "tree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+  "windows": {
+    "W505-W524": 28,
+    "W525-W544": 18,
+    "W545-W564": 2,
+    "W565-W584": 1,
+    "W585-W604": 22,
+    "W605-W624": 2,
+    "W625-W644": 3,
+    "W645-W664": 15,
+    "W665-W684": 29,
+    "W685-W704": 7,
+    "W705-W724": 5
+  }
+}

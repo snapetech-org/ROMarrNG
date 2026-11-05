@@ -1,0 +1,112 @@
+{
+  "result": "PASS",
+  "checkedAtUtc": "2026-11-05T15:13:51+00:00",
+  "checks": {
+    "candidateFreeChecksumsAndVerifier": "PASS",
+    "primaryChecksumsAndVerifier": "PASS",
+    "blindChecksumsAndVerifier": "PASS",
+    "blindCopiedInputChecksum": "PASS",
+    "exactWorktreePin": "PASS",
+    "all240CellsAndProposalBindings": "PASS",
+    "all12HashOnlyHoldsPreserved": "PASS",
+    "placeholdersMarkupNumericProtected": "PASS",
+    "W625W645CaveatsPreserved": "PASS",
+    "W665RestorationVerified": "PASS",
+    "callerlessSummaryOffByOneFlagged": "PASS"
+  },
+  "errors": [],
+  "liveHead": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "liveTree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+  "worktreeClean": true,
+  "inputVerifierResults": [
+    {
+      "name": "candidate-free-root-checksums",
+      "command": [
+        "sha256sum",
+        "-c",
+        "SHA256SUMS.txt"
+      ],
+      "exitCode": 0,
+      "stdout": "README.md: OK\nbuild_candidate_free.py: OK\ninput/PR-attestation-after-candidate-free.json: OK\ninput/PR-attestation-before.json: OK\ninput/SHA256SUMS.txt: OK\ninput/caller-search-audit.json: OK\ninput/candidate-free-cells.jsonl: OK\ninput/candidate-free-token-summary.json: OK\ninput/catalog-file-pins.json: OK\ninput/catalog-key-order.jsonl: OK\ninput/main-context-drift.json: OK\ninput/manifest.json: OK\ninput/prior-application-source-pin.json: OK\ninput/prior-applied-cell-reattestation-summary.json: OK\ninput/prior-applied-cell-reattestation.jsonl: OK\ninput/prior-hold-context-reattestation.jsonl: OK\ninput/prior-hold-reattestation-summary.json: OK\ninput/prior-hold-reattestation.jsonl: OK\ninput/prior-selection-reattestation-summary.json: OK\ninput/prior-selection-reattestation.jsonl: OK\ninput/prior-w565w584-cell-hash-reattestation.jsonl: OK\ninput/prior-w585w604-cell-hash-reattestation.jsonl: OK\ninput/prior-w605w624-cell-hash-reattestation.jsonl: OK\ninput/prior-w625w644-cell-hash-reattestation.jsonl: OK\ninput/prior-w645w664-cell-hash-reattestation.jsonl: OK\ninput/prior-w665w684-cell-hash-reattestation.jsonl: OK\ninput/prior-w685w704-cell-hash-reattestation.jsonl: OK\ninput/prior-w705w724-cell-hash-reattestation.jsonl: OK\ninput/prior-window-lineage.json: OK\ninput/registry-order-note.json: OK\ninput/selected-sources.jsonl: OK\ninput/selection-boundary.jsonl: OK\ninput/selection.json: OK\ninput/source-contexts.jsonl: OK\ninput/source-file-pins.json: OK\ninput/source-registry-redacted.json: OK\ninput/source-snapshot-hashes.json: OK\ninput/w705-current-context-reattestation-summary.json: OK\ninput/w705-current-context-reattestation.jsonl: OK\nverify_candidate_free.py: OK",
+      "stderr": ""
+    },
+    {
+      "name": "candidate-free-input-checksums",
+      "command": [
+        "sha256sum",
+        "-c",
+        "SHA256SUMS.txt"
+      ],
+      "exitCode": 0,
+      "stdout": "PR-attestation-after-candidate-free.json: OK\nPR-attestation-before.json: OK\ncaller-search-audit.json: OK\ncandidate-free-cells.jsonl: OK\ncandidate-free-token-summary.json: OK\ncatalog-file-pins.json: OK\ncatalog-key-order.jsonl: OK\nmain-context-drift.json: OK\nmanifest.json: OK\nprior-application-source-pin.json: OK\nprior-applied-cell-reattestation-summary.json: OK\nprior-applied-cell-reattestation.jsonl: OK\nprior-hold-context-reattestation.jsonl: OK\nprior-hold-reattestation-summary.json: OK\nprior-hold-reattestation.jsonl: OK\nprior-selection-reattestation-summary.json: OK\nprior-selection-reattestation.jsonl: OK\nprior-w565w584-cell-hash-reattestation.jsonl: OK\nprior-w585w604-cell-hash-reattestation.jsonl: OK\nprior-w605w624-cell-hash-reattestation.jsonl: OK\nprior-w625w644-cell-hash-reattestation.jsonl: OK\nprior-w645w664-cell-hash-reattestation.jsonl: OK\nprior-w665w684-cell-hash-reattestation.jsonl: OK\nprior-w685w704-cell-hash-reattestation.jsonl: OK\nprior-w705w724-cell-hash-reattestation.jsonl: OK\nprior-window-lineage.json: OK\nregistry-order-note.json: OK\nselected-sources.jsonl: OK\nselection-boundary.jsonl: OK\nselection.json: OK\nsource-contexts.jsonl: OK\nsource-file-pins.json: OK\nsource-registry-redacted.json: OK\nsource-snapshot-hashes.json: OK\nw705-current-context-reattestation-summary.json: OK\nw705-current-context-reattestation.jsonl: OK",
+      "stderr": ""
+    },
+    {
+      "name": "primary-checksums",
+      "command": [
+        "sha256sum",
+        "-c",
+        "SHA256SUMS.txt"
+      ],
+      "exitCode": 0,
+      "stdout": "README.md: OK\nbuild_primary_review.py: OK\nholds.jsonl: OK\nledger.jsonl: OK\nmanifest.json: OK\nproposals.jsonl: OK\nsummary.json: OK\nverify_primary_review.py: OK",
+      "stderr": ""
+    },
+    {
+      "name": "blind-checksums",
+      "command": [
+        "sha256sum",
+        "-c",
+        "SHA256SUMS.txt"
+      ],
+      "exitCode": 0,
+      "stdout": "README.md: OK\ninput-SHA256SUMS.txt: OK\nreview-cells.jsonl: OK\nsummary.json: OK\nverify_blind_packet.py: OK\nworktree-verification.json: OK",
+      "stderr": ""
+    },
+    {
+      "name": "blind-copied-input-checksums",
+      "command": [
+        "sha256sum",
+        "-c",
+        "/mnt/disks/scratch/task-scratch/romarrng-pr70-w725-744-20261105-blind-review-codex/input-SHA256SUMS.txt"
+      ],
+      "exitCode": 0,
+      "stdout": "README.md: OK\nbuild_candidate_free.py: OK\ninput/PR-attestation-after-candidate-free.json: OK\ninput/PR-attestation-before.json: OK\ninput/SHA256SUMS.txt: OK\ninput/caller-search-audit.json: OK\ninput/candidate-free-cells.jsonl: OK\ninput/candidate-free-token-summary.json: OK\ninput/catalog-file-pins.json: OK\ninput/catalog-key-order.jsonl: OK\ninput/main-context-drift.json: OK\ninput/manifest.json: OK\ninput/prior-application-source-pin.json: OK\ninput/prior-applied-cell-reattestation-summary.json: OK\ninput/prior-applied-cell-reattestation.jsonl: OK\ninput/prior-hold-context-reattestation.jsonl: OK\ninput/prior-hold-reattestation-summary.json: OK\ninput/prior-hold-reattestation.jsonl: OK\ninput/prior-selection-reattestation-summary.json: OK\ninput/prior-selection-reattestation.jsonl: OK\ninput/prior-w565w584-cell-hash-reattestation.jsonl: OK\ninput/prior-w585w604-cell-hash-reattestation.jsonl: OK\ninput/prior-w605w624-cell-hash-reattestation.jsonl: OK\ninput/prior-w625w644-cell-hash-reattestation.jsonl: OK\ninput/prior-w645w664-cell-hash-reattestation.jsonl: OK\ninput/prior-w665w684-cell-hash-reattestation.jsonl: OK\ninput/prior-w685w704-cell-hash-reattestation.jsonl: OK\ninput/prior-w705w724-cell-hash-reattestation.jsonl: OK\ninput/prior-window-lineage.json: OK\ninput/registry-order-note.json: OK\ninput/selected-sources.jsonl: OK\ninput/selection-boundary.jsonl: OK\ninput/selection.json: OK\ninput/source-contexts.jsonl: OK\ninput/source-file-pins.json: OK\ninput/source-registry-redacted.json: OK\ninput/source-snapshot-hashes.json: OK\ninput/w705-current-context-reattestation-summary.json: OK\ninput/w705-current-context-reattestation.jsonl: OK\nverify_candidate_free.py: OK",
+      "stderr": ""
+    },
+    {
+      "name": "candidate-free-verifier",
+      "command": [
+        "python3",
+        "/mnt/disks/scratch/task-scratch/romarrng-pr70-w725-744-20261105/candidate-free/verify_candidate_free.py",
+        "--repo",
+        "/home/keith/Documents/code/.task-worktrees/localization-20261105/romarrng-w685"
+      ],
+      "exitCode": 0,
+      "stdout": "{\"callerlessHashOnlyCells\": 12, \"candidateFreeOnly\": true, \"cells\": 240, \"currentCellsRechecked\": 240, \"exactHead\": \"c3f92c45b4b4f8d79a8caa99417f9970ebc42a26\", \"exactTree\": \"3f835643e4f557999d533c3e832fc92036d4b01a\", \"priorAppliedCells\": 132, \"priorAppliedRechecked\": 132, \"priorHolds\": 952, \"priorHoldsRechecked\": 952, \"priorReadbackWindows\": 8, \"priorSelections\": 340, \"priorSelectionsRechecked\": 340, \"repoCleanDetached\": true, \"repoPin\": \"PASS\", \"result\": \"PASS\", \"w665EvidenceRestored\": true}",
+      "stderr": ""
+    },
+    {
+      "name": "primary-verifier",
+      "command": [
+        "python3",
+        "/mnt/disks/scratch/task-scratch/romarrng-pr70-w725-744-20261105/primary-review/verify_primary_review.py"
+      ],
+      "exitCode": 0,
+      "stdout": "{\"blindOrCrossOutputsRead\": false, \"callerlessHashOnlyHolds\": 12, \"candidateFreeOnly\": true, \"cells\": 240, \"decisionCounts\": {\"accept-current\": 223, \"correction\": 2, \"hold-callerless-hash-only\": 12, \"refinement\": 3}, \"head\": \"c3f92c45b4b4f8d79a8caa99417f9970ebc42a26\", \"proposals\": 5, \"result\": \"PASS\", \"tree\": \"3f835643e4f557999d533c3e832fc92036d4b01a\"}",
+      "stderr": ""
+    },
+    {
+      "name": "blind-verifier",
+      "command": [
+        "python3",
+        "/mnt/disks/scratch/task-scratch/romarrng-pr70-w725-744-20261105-blind-review-codex/verify_blind_packet.py",
+        "--repo",
+        "/home/keith/Documents/code/.task-worktrees/localization-20261105/romarrng-w685"
+      ],
+      "exitCode": 0,
+      "stdout": "{\n  \"result\": \"PASS\",\n  \"inputAndOutputChecksums\": \"PASS\",\n  \"head\": \"c3f92c45b4b4f8d79a8caa99417f9970ebc42a26\",\n  \"tree\": \"3f835643e4f557999d533c3e832fc92036d4b01a\",\n  \"worktreeClean\": true,\n  \"callerFilesVerified\": [\n    \"romarr/frontends.py\",\n    \"romarr/organizer.py\",\n    \"romarr/ui.py\"\n  ],\n  \"cells\": 240,\n  \"decisionCounts\": {\n    \"retain\": 227,\n    \"hold\": 12,\n    \"proposal\": 1\n  },\n  \"callerlessTextFreeHolds\": 12,\n  \"proposalTokenChecksPassing\": 1\n}",
+      "stderr": ""
+    }
+  ]
+}
