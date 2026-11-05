@@ -19989,15 +19989,15 @@
       "sourceHash": "c37e0e161c68d46c528e0186890b2f7fd69346a7a9968b9c7ea5d9450595e864",
       "translations": {
         "es": "No hay formatos de frontend disponibles.",
-        "zh-Hans": "没有可用的前端格式 。",
+        "zh-Hans": "没有可用的前端格式。",
         "hi": "कोई फ्रंटेंड प्रारूप उपलब्ध नहीं है।",
         "de": "Keine Frontend-Formate verfügbar.",
         "ja": "利用可能なフロントエンド形式がありません。",
-        "fr": "Aucun format frontal disponible.",
+        "fr": "Aucun format frontend n’est disponible.",
         "pt-BR": "Nenhum formato de frontend disponível.",
-        "ar": "لا توجد صيغ للعرض",
+        "ar": "لا تتوفر أي صيغ للواجهة الأمامية.",
         "ko": "사용 가능한 프런트엔드 형식이 없습니다.",
-        "zh-Hant": "沒有可用的前端格式 。",
+        "zh-Hant": "沒有可用的前端格式。",
         "vi": "Không có định dạng frontend nào khả dụng.",
         "id": "Tidak ada format antarmuka yang tersedia."
       },
@@ -20041,7 +20041,7 @@
         "ko": "라이브러리에서 게임을 찾지 못했습니다.",
         "zh-Hant": "遊戲庫沒有傳回任何遊戲。",
         "vi": "Thư viện không trả về trò chơi nào.",
-        "id": "Pustaka tidak menampilkan game."
+        "id": "Tidak ada game yang dikembalikan oleh pustaka."
       },
       "translationHashes": {},
       "translationStatus": {},
