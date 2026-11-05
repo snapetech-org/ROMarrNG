@@ -1,0 +1,69 @@
+{
+  "artifact": "ROMarrNG PR #70 W625-W644 independent blind semantic review",
+  "context": {
+    "callerSupportedSources": 15,
+    "callerlessCellsHeld": 60,
+    "callerlessSources": 5,
+    "contextMissingAmongCallerSupportedSources": false,
+    "mainContextDriftSourcesInPacket": 6,
+    "reviewContext": "Exact PR-head caller snippets and hashes from candidate-free packet; no live UI or repository app branch read."
+  },
+  "decisions": {
+    "hold": 60,
+    "keep": 177,
+    "revise": 3
+  },
+  "findings": [
+    {
+      "confidence": "low",
+      "decision": "revise",
+      "locale": "ar",
+      "note": "The feed clause is rendered as “index materials,” which may blur the distinction between indexer feeds and the Management API as two separately checked inputs.",
+      "sourceId": "ui.management-api-and-indexer-feeds-are.dad15c1100"
+    },
+    {
+      "confidence": "moderate",
+      "decision": "revise",
+      "locale": "hi",
+      "note": "The Hindi wording uses an active progressive form (“are checking”) where the source says the API and feeds are checked separately; this shifts the stated action/voice.",
+      "sourceId": "ui.management-api-and-indexer-feeds-are.dad15c1100"
+    },
+    {
+      "confidence": "moderate",
+      "decision": "revise",
+      "locale": "es",
+      "note": "The caller places this in a platform table column for media type/format; “contenido multimedia” reads as multimedia content and changes the category.",
+      "sourceId": "ui.media.d357175cfe"
+    }
+  ],
+  "head": "5860fce5d546a772b1df995f8f6321c083ed7d5d",
+  "limitation": "This is a model review and does not confer native-speaker approval.",
+  "locales": 12,
+  "method": "Blind semantic assessment of current target cells against source strings and pinned caller excerpts; exact-token checks are recorded separately. No candidate/proposal file, prior blind output, live UI, or repository app branch was consulted.",
+  "nativeSpeakerClaim": false,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewedCells": 240,
+  "sourceChecks": {
+    "callerContextHashesAndExcerptHashesVerified": true,
+    "candidateFieldsFound": 0,
+    "markupMismatches": 0,
+    "missingCurrentTargets": 0,
+    "numericTokenMismatches": 0,
+    "packetReportedTokenMismatchCounts": {
+      "markup": 0,
+      "missingTarget": 0,
+      "numeric": 0,
+      "numericPresentationDifferences": 0,
+      "placeholder": 0,
+      "protectedLiteral": 0
+    },
+    "placeholderMismatches": 0,
+    "protectedLiteralMismatches": 0,
+    "sourceIdsAndCatalogPositionsPinned": true
+  },
+  "sources": 20,
+  "status": "SEALED",
+  "tree": "561835895972a62e9d3b1f2bfe9bcba01187eb98",
+  "window": "W625-W644"
+}

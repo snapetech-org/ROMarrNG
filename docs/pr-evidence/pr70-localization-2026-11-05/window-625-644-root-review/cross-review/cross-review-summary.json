@@ -1,0 +1,741 @@
+{
+  "artifact": "ROMarrNG PR #70 W625-W644 independent cross-review evidence",
+  "blindRevisions": [
+    {
+      "catalogOneBasedPosition": 630,
+      "confidence": "low",
+      "locale": "ar",
+      "position": 629,
+      "primaryDisposition": "CHANGE",
+      "primaryProposalTargetSha256": "5312ec4478188e1a12f747fb40b08d15a656bb3a65b1029ca54993847856a63f",
+      "semanticNote": "The feed clause is rendered as “index materials,” which may blur the distinction between indexer feeds and the Management API as two separately checked inputs.",
+      "sourceId": "ui.management-api-and-indexer-feeds-are.dad15c1100"
+    },
+    {
+      "catalogOneBasedPosition": 630,
+      "confidence": "moderate",
+      "locale": "hi",
+      "position": 629,
+      "primaryDisposition": "CHANGE",
+      "primaryProposalTargetSha256": "d1086ca6b16c52374d0d7691384ab9d33e71a37caca28ba1902dd1e712d9fa21",
+      "semanticNote": "The Hindi wording uses an active progressive form (“are checking”) where the source says the API and feeds are checked separately; this shifts the stated action/voice.",
+      "sourceId": "ui.management-api-and-indexer-feeds-are.dad15c1100"
+    },
+    {
+      "catalogOneBasedPosition": 639,
+      "confidence": "moderate",
+      "locale": "es",
+      "position": 638,
+      "primaryDisposition": "KEEP",
+      "primaryProposalTargetSha256": null,
+      "semanticNote": "The caller places this in a platform table column for media type/format; “contenido multimedia” reads as multimedia content and changes the category.",
+      "sourceId": "ui.media.d357175cfe"
+    }
+  ],
+  "callerlessAssessment": {
+    "cellCount": 60,
+    "decision": "Preserve all 60 blind holds. No exact production caller is established for any of the five source mappings in the pinned PR tree or the main comparison. The three shortest mappings are ambiguous headings/help fragments; the Prowlarr string has unresolved referents (them/there/this list), and the path mapping references the exact “All download clients” control plus client-specific scope behavior. No caller-independent basis is sufficient to release any proposal from hold.",
+    "exceptionEligibleCount": 0,
+    "primaryProposalsWithoutCallerContext": 15,
+    "sourceCount": 5,
+    "sources": [
+      {
+        "blindDecisionCounts": {
+          "hold": 12
+        },
+        "contextSha256": "c5a2d0c49c875b3d3ba63629d137115f61808eecfd1e3e793a4a9f1ed54f948a",
+        "exceptionEligible": false,
+        "localeCells": 12,
+        "mainCallerCount": 0,
+        "mainCallerless": true,
+        "oneBasedCatalogPosition": 627,
+        "prCallerCount": 0,
+        "primaryChangeLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "zh-Hans",
+          "zh-Hant"
+        ],
+        "source": "Managed in Prowlarr, shown here read-only. Add or remove them there and they appear or disappear from this list.",
+        "sourceId": "ui.managed-in-prowlarr-shown-here-read.15ef28afb0",
+        "sourceSha256": "15ef28afb08371b5f6ac183908b73e9a41f42834ecef1baf5ab0472aff90ae39",
+        "zeroBasedPosition": 626
+      },
+      {
+        "blindDecisionCounts": {
+          "hold": 12
+        },
+        "contextSha256": "c5c3442168ca0c8916249a54a4b0a9209bdc2709a1b83575f773633c479ebf84",
+        "exceptionEligible": false,
+        "localeCells": 12,
+        "mainCallerCount": 0,
+        "mainCallerless": true,
+        "oneBasedCatalogPosition": 628,
+        "prCallerCount": 0,
+        "primaryChangeLocales": [],
+        "source": "Management",
+        "sourceId": "ui.management.e51248773b",
+        "sourceSha256": "e51248773b9a3f59f75fe3ad6e5fe45a760035a7380d0b5ce46076c1dfc3735a",
+        "zeroBasedPosition": 627
+      },
+      {
+        "blindDecisionCounts": {
+          "hold": 12
+        },
+        "contextSha256": "28b2afc3e32890fa5fc68f9df90e528193faaa793ff0714ed60529a5e7e003cb",
+        "exceptionEligible": false,
+        "localeCells": 12,
+        "mainCallerCount": 0,
+        "mainCallerless": true,
+        "oneBasedCatalogPosition": 635,
+        "prCallerCount": 0,
+        "primaryChangeLocales": [
+          "es",
+          "fr",
+          "hi",
+          "pt-BR"
+        ],
+        "source": "Map the path a download client reports to the path ROMarr can see. Choose a client to keep SABnzbd and torrent paths separate, or use All download clients for a shared path. Client-specific mappings take precedence; within a scope, the longest matching prefix wins.",
+        "sourceId": "ui.map-the-path-a-download-client-repor.c6de45b83c",
+        "sourceSha256": "c6de45b83c563beea3de096b422656c2a56ede545d2f264845328210fae3965e",
+        "zeroBasedPosition": 634
+      },
+      {
+        "blindDecisionCounts": {
+          "hold": 12
+        },
+        "contextSha256": "1aea6ecf27f80e6ac584604486eb9e4a7be0eb1267edf873570e343dfc91251e",
+        "exceptionEligible": false,
+        "localeCells": 12,
+        "mainCallerCount": 0,
+        "mainCallerless": true,
+        "oneBasedCatalogPosition": 637,
+        "prCallerCount": 0,
+        "primaryChangeLocales": [],
+        "source": "Match your library server. RomM Structure A files as <root>/<platform>/<rom>; Structure B adds a roms/ level. Per-library overrides live on the Libraries page.",
+        "sourceId": "ui.match-your-library-server-romm-struc.f3b8e22f63",
+        "sourceSha256": "f3b8e22f63dc713fcee049d96d61118bab9aa5866cac75dcfc3eb48596ca1a3e",
+        "zeroBasedPosition": 636
+      },
+      {
+        "blindDecisionCounts": {
+          "hold": 12
+        },
+        "contextSha256": "5c2257df5b6f2f905fcc26a9ec09137c450ca13b49e62107db768c1d889074b0",
+        "exceptionEligible": false,
+        "localeCells": 12,
+        "mainCallerCount": 0,
+        "mainCallerless": true,
+        "oneBasedCatalogPosition": 642,
+        "prCallerCount": 0,
+        "primaryChangeLocales": [],
+        "source": "Messages",
+        "sourceId": "ui.messages.04d7b48339",
+        "sourceSha256": "04d7b48339271ea67d3c8493e07e90bc68dc565485eebe5e0b67c21c1586e3c0",
+        "zeroBasedPosition": 641
+      }
+    ]
+  },
+  "catalogOrder": {
+    "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+    "catalogMessageCount": 1836,
+    "localeOrder": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "ja",
+      "ko",
+      "pt-BR",
+      "vi",
+      "zh-Hans",
+      "zh-Hant"
+    ],
+    "selectedCatalogOneBasedPositions": [
+      626,
+      627,
+      628,
+      629,
+      630,
+      631,
+      632,
+      633,
+      634,
+      635,
+      636,
+      637,
+      638,
+      639,
+      640,
+      641,
+      642,
+      643,
+      644,
+      645
+    ],
+    "selectedCatalogZeroBasedIndices": [
+      625,
+      626,
+      627,
+      628,
+      629,
+      630,
+      631,
+      632,
+      633,
+      634,
+      635,
+      636,
+      637,
+      638,
+      639,
+      640,
+      641,
+      642,
+      643,
+      644
+    ],
+    "selectedSourceOrderMatchesCatalog": true
+  },
+  "cellReconciliation": {
+    "blindRowsMatched": 240,
+    "callerContextHashMatches": 240,
+    "callerRefHashes": "Exact path, line, line hash, excerpt hash, file hash, and git blob fields reconciled to the pinned context for every caller-supported source; zero caller refs for callerless sources.",
+    "cells": 240,
+    "currentTargetHashMatches": 240,
+    "currentTokenAuditPassCells": 240,
+    "locales": 12,
+    "primaryRowsMatched": 240,
+    "sourceContextHashesIndependentlyRecomputed": 20,
+    "sourceHashMatches": 240,
+    "sources": 20
+  },
+  "crossReviewDisposition": {
+    "primaryChangesNotAdoptedDespiteBlindKeep": [
+      {
+        "locales": [
+          "es",
+          "zh-Hans",
+          "zh-Hant"
+        ],
+        "position": 625,
+        "reason": "Proposals clarify or smooth wording, but the exact caller and current target preserve the source meaning; no material error is established."
+      },
+      {
+        "locales": [
+          "ar"
+        ],
+        "position": 628,
+        "reason": "The title reordering is a style refinement; “API الإدارة” preserves the label’s meaning."
+      },
+      {
+        "locales": [
+          "ja"
+        ],
+        "position": 629,
+        "reason": "The proposed wording is a readability refinement; the current Japanese still communicates that the API and feeds are checked separately."
+      },
+      {
+        "locales": [
+          "ar"
+        ],
+        "position": 638,
+        "reason": "The caller supports a media-category heading; the current Arabic general “media” wording is semantically consistent, while the proposal adds “type.”"
+      },
+      {
+        "locales": [
+          "vi"
+        ],
+        "position": 639,
+        "reason": "The alternative term is plausible, but the current Vietnamese section title is understandable in its metadata/media-storage context; no clear semantic error is established."
+      }
+    ],
+    "revise": [
+      {
+        "catalogOneBasedPosition": 630,
+        "locale": "ar",
+        "position": 629,
+        "reason": "Current Arabic renders indexer feeds as indexing materials; exact caller in Prowlarr diagnostics confirms the separate API and feed checks.",
+        "sourceId": "ui.management-api-and-indexer-feeds-are.dad15c1100"
+      },
+      {
+        "catalogOneBasedPosition": 630,
+        "locale": "hi",
+        "position": 629,
+        "reason": "Current Hindi uses an active progressive form for a passive status statement; this shifts what is checked.",
+        "sourceId": "ui.management-api-and-indexer-feeds-are.dad15c1100"
+      },
+      {
+        "catalogOneBasedPosition": 639,
+        "locale": "es",
+        "position": 638,
+        "reason": "The pinned caller is a platform table column showing each platform’s media type; “contenido multimedia” shifts the category toward multimedia content.",
+        "sourceId": "ui.media.d357175cfe"
+      }
+    ]
+  },
+  "crossReviewedAtUtc": "2026-11-05T04:07:28+00:00",
+  "decisionCounts": {
+    "blind": {
+      "hold": 60,
+      "keep": 177,
+      "revise": 3
+    },
+    "crossAdjudication": {
+      "hold": 60,
+      "keep": 177,
+      "revise": 3
+    },
+    "primary": {
+      "CHANGE": 24,
+      "KEEP": 216
+    },
+    "primaryByBlindMatrix": {
+      "CHANGE/hold": 15,
+      "CHANGE/keep": 7,
+      "CHANGE/revise": 2,
+      "KEEP/hold": 45,
+      "KEEP/keep": 170,
+      "KEEP/revise": 1
+    }
+  },
+  "limitations": [
+    "AI cross-review; no native-speaker approval claimed.",
+    "No live browser/UI inspection or live PR claim.",
+    "No repository/catalog/PR edits, tests, builds, scans, CI, commits, or workflow changes were performed."
+  ],
+  "packetIntegrity": {
+    "blindLedgerSha256": "fade88ccef80c03851df8ec342225217685af7ac26021c9047109eab68c29f9e",
+    "blindSealPayloadHashes": "PASS for all 29 listed payloads plus input manifest; manifest and checksum-list hashes, ledger/summary hashes/bytes, and 240 ledger rows verified",
+    "blindSealSha256": "2f0c0c9677eb6fe7f40269ea7b64a6e81ea3d7b8c5f0da266fde3c7445592882",
+    "blindSealStatus": "SEALED",
+    "blindSummarySha256": "0a1a91a2f222ec2cfd66af964848d5e83bd2a15b4a0884a7916c19c4128b5710",
+    "candidateFreeVerifier": "PASS against exact pinned detached worktree",
+    "checksumCountsByPacket": {
+      "blind": 3,
+      "candidateFreeInput": 30,
+      "candidateFreeOuter": 36,
+      "primaryOuter": 46,
+      "primaryOutput": 4
+    },
+    "primaryVerifier": "PASS against exact pinned detached worktree"
+  },
+  "primaryChangeList": [
+    {
+      "blindDecision": "keep",
+      "callerContextAvailable": true,
+      "callerContextSha256": "3db0897f36904a2e4a58dc5e61480e3b033054bfdc255fd6289be4f1d580903a",
+      "catalogOneBasedPosition": 626,
+      "crossAdjudication": "keep",
+      "currentTargetSha256": "40e2adf8ae415db04c81ac33eb06b73f1aaae14cbee972a9fc749f78e465cd46",
+      "locale": "es",
+      "position": 625,
+      "proposedTargetSha256": "440eb9967b4038570e8c3a5130b8e93c27e861ea82cf7da6fe74c944fb6a7f30",
+      "sourceId": "ui.manage-your-video-games-an-open-sour.7e51012df2",
+      "sourceSha256": "7e51012df2ae422b206920895baff49f8edf425caf4d8ebeb9ffac19b049767c"
+    },
+    {
+      "blindDecision": "keep",
+      "callerContextAvailable": true,
+      "callerContextSha256": "3db0897f36904a2e4a58dc5e61480e3b033054bfdc255fd6289be4f1d580903a",
+      "catalogOneBasedPosition": 626,
+      "crossAdjudication": "keep",
+      "currentTargetSha256": "f1dc26651c856ea385f816c3af30a075c5573cad6591a1dd3df6c493cfb53727",
+      "locale": "zh-Hans",
+      "position": 625,
+      "proposedTargetSha256": "611efb3375717dbe182f47bf46a3ecc03c720e018c01ccc983d08e2457c0ef9a",
+      "sourceId": "ui.manage-your-video-games-an-open-sour.7e51012df2",
+      "sourceSha256": "7e51012df2ae422b206920895baff49f8edf425caf4d8ebeb9ffac19b049767c"
+    },
+    {
+      "blindDecision": "keep",
+      "callerContextAvailable": true,
+      "callerContextSha256": "3db0897f36904a2e4a58dc5e61480e3b033054bfdc255fd6289be4f1d580903a",
+      "catalogOneBasedPosition": 626,
+      "crossAdjudication": "keep",
+      "currentTargetSha256": "37093f778d45fe99841b1b5121f8d50a8dbc92de0bb31a4e0b9921c671e160b0",
+      "locale": "zh-Hant",
+      "position": 625,
+      "proposedTargetSha256": "168c9a33919c60cc5befe3a4422102e5f8920513bd99a9650cc63d8cc4fec6e9",
+      "sourceId": "ui.manage-your-video-games-an-open-sour.7e51012df2",
+      "sourceSha256": "7e51012df2ae422b206920895baff49f8edf425caf4d8ebeb9ffac19b049767c"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "c5a2d0c49c875b3d3ba63629d137115f61808eecfd1e3e793a4a9f1ed54f948a",
+      "catalogOneBasedPosition": 627,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "02eacadb8e6fcfce05ab4b4ff41f1a32b0a4fe45f201e9ec2921a56b686ddffd",
+      "locale": "ar",
+      "position": 626,
+      "proposedTargetSha256": "00a19c40753103a9a4c2b9933dcee650ffe12fa0993126786205974cb8f7802d",
+      "sourceId": "ui.managed-in-prowlarr-shown-here-read.15ef28afb0",
+      "sourceSha256": "15ef28afb08371b5f6ac183908b73e9a41f42834ecef1baf5ab0472aff90ae39"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "c5a2d0c49c875b3d3ba63629d137115f61808eecfd1e3e793a4a9f1ed54f948a",
+      "catalogOneBasedPosition": 627,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "8f20348f00acbb7d3b3f3fcb7d1fbc197fdf24d6f2a87485211fa81e29a46f82",
+      "locale": "de",
+      "position": 626,
+      "proposedTargetSha256": "b52cadd19c41bac1fda364ddc68962633f4238f4601e4ac27f488357ad024eb1",
+      "sourceId": "ui.managed-in-prowlarr-shown-here-read.15ef28afb0",
+      "sourceSha256": "15ef28afb08371b5f6ac183908b73e9a41f42834ecef1baf5ab0472aff90ae39"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "c5a2d0c49c875b3d3ba63629d137115f61808eecfd1e3e793a4a9f1ed54f948a",
+      "catalogOneBasedPosition": 627,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "4e76353234c9c4518c1a6ba62c2b77013bcb36031ec7815ff56ba9736e6cc4f5",
+      "locale": "es",
+      "position": 626,
+      "proposedTargetSha256": "15d312c2fac9cd3fd46e430089b98bffb7d05af7e64a202201bd8c593d8cd9a1",
+      "sourceId": "ui.managed-in-prowlarr-shown-here-read.15ef28afb0",
+      "sourceSha256": "15ef28afb08371b5f6ac183908b73e9a41f42834ecef1baf5ab0472aff90ae39"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "c5a2d0c49c875b3d3ba63629d137115f61808eecfd1e3e793a4a9f1ed54f948a",
+      "catalogOneBasedPosition": 627,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "e1e1200d12fc6cb660f6c031cc94b6dcacf5da1d9215bf8c61412bc36b2030a9",
+      "locale": "fr",
+      "position": 626,
+      "proposedTargetSha256": "4287c629a729e157568962f642ed8bf0d877b59f71d1a171a2a8af018cd652a2",
+      "sourceId": "ui.managed-in-prowlarr-shown-here-read.15ef28afb0",
+      "sourceSha256": "15ef28afb08371b5f6ac183908b73e9a41f42834ecef1baf5ab0472aff90ae39"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "c5a2d0c49c875b3d3ba63629d137115f61808eecfd1e3e793a4a9f1ed54f948a",
+      "catalogOneBasedPosition": 627,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "9952a25907786db246d06f35b3f581dff837f1abc8482e0df1f1805c1d45e222",
+      "locale": "hi",
+      "position": 626,
+      "proposedTargetSha256": "32bf99e0533a06004c5982700c11b385054e5491725c50b2e5be6cb59040dc01",
+      "sourceId": "ui.managed-in-prowlarr-shown-here-read.15ef28afb0",
+      "sourceSha256": "15ef28afb08371b5f6ac183908b73e9a41f42834ecef1baf5ab0472aff90ae39"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "c5a2d0c49c875b3d3ba63629d137115f61808eecfd1e3e793a4a9f1ed54f948a",
+      "catalogOneBasedPosition": 627,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "2f188f6e2fc88bbe593a901940909d8ba9714554445ef4f6281bea7a739b07aa",
+      "locale": "id",
+      "position": 626,
+      "proposedTargetSha256": "6177918c5b4cbcf63ebfa589d704b4d8167078158e6c7efb70aaf25d19e0e462",
+      "sourceId": "ui.managed-in-prowlarr-shown-here-read.15ef28afb0",
+      "sourceSha256": "15ef28afb08371b5f6ac183908b73e9a41f42834ecef1baf5ab0472aff90ae39"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "c5a2d0c49c875b3d3ba63629d137115f61808eecfd1e3e793a4a9f1ed54f948a",
+      "catalogOneBasedPosition": 627,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "028d2c3251738b05bbe225b46881b3a3a30937f8b463299571fc80e80ed5df3a",
+      "locale": "ja",
+      "position": 626,
+      "proposedTargetSha256": "1b9ff50309763d82a87c17e25c9d757bd20e48f43f9006772d78f4e21306a18b",
+      "sourceId": "ui.managed-in-prowlarr-shown-here-read.15ef28afb0",
+      "sourceSha256": "15ef28afb08371b5f6ac183908b73e9a41f42834ecef1baf5ab0472aff90ae39"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "c5a2d0c49c875b3d3ba63629d137115f61808eecfd1e3e793a4a9f1ed54f948a",
+      "catalogOneBasedPosition": 627,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "764f45904d6196b6623341d03c65ea3f55d70315b7703854cfeeb6f5f347c782",
+      "locale": "ko",
+      "position": 626,
+      "proposedTargetSha256": "5845c1aaafa0eaf69f1c67ab6ec7275166b34980b1ac41d51dee8dc8d4a12bfb",
+      "sourceId": "ui.managed-in-prowlarr-shown-here-read.15ef28afb0",
+      "sourceSha256": "15ef28afb08371b5f6ac183908b73e9a41f42834ecef1baf5ab0472aff90ae39"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "c5a2d0c49c875b3d3ba63629d137115f61808eecfd1e3e793a4a9f1ed54f948a",
+      "catalogOneBasedPosition": 627,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "c59f08ea236346fb151178e020ea4eee174d767495b02d3b1b597d106cd8d80f",
+      "locale": "pt-BR",
+      "position": 626,
+      "proposedTargetSha256": "6de4b234e0a27410e936de54140836cb441a4dce51f3d9da3482a426f2fee840",
+      "sourceId": "ui.managed-in-prowlarr-shown-here-read.15ef28afb0",
+      "sourceSha256": "15ef28afb08371b5f6ac183908b73e9a41f42834ecef1baf5ab0472aff90ae39"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "c5a2d0c49c875b3d3ba63629d137115f61808eecfd1e3e793a4a9f1ed54f948a",
+      "catalogOneBasedPosition": 627,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "50b471b05e131dfd9c14f12046b1c3756cb57bc1e741ed7401553935aa50b233",
+      "locale": "zh-Hans",
+      "position": 626,
+      "proposedTargetSha256": "af94057e8b3005d5353163a435aec7f2e21fa7311d580fe5225b8e442f86f9d8",
+      "sourceId": "ui.managed-in-prowlarr-shown-here-read.15ef28afb0",
+      "sourceSha256": "15ef28afb08371b5f6ac183908b73e9a41f42834ecef1baf5ab0472aff90ae39"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "c5a2d0c49c875b3d3ba63629d137115f61808eecfd1e3e793a4a9f1ed54f948a",
+      "catalogOneBasedPosition": 627,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "b25f733a206f22f93d14fcbeacc881a555954cc6cdf5fc641ab265b9acfee657",
+      "locale": "zh-Hant",
+      "position": 626,
+      "proposedTargetSha256": "a64fa8f2235a117c7c666244aef030a1ac020ca9c610756f45a2a43eec2e5715",
+      "sourceId": "ui.managed-in-prowlarr-shown-here-read.15ef28afb0",
+      "sourceSha256": "15ef28afb08371b5f6ac183908b73e9a41f42834ecef1baf5ab0472aff90ae39"
+    },
+    {
+      "blindDecision": "keep",
+      "callerContextAvailable": true,
+      "callerContextSha256": "f2abb61225766906ce3a4489324b070a4fdc195b0b751351ca5813361ab8c49e",
+      "catalogOneBasedPosition": 629,
+      "crossAdjudication": "keep",
+      "currentTargetSha256": "a1a4d32849ab657a5b1a69d7c74e72afdf196dd324b9f4350ed8c7bfa80d2494",
+      "locale": "ar",
+      "position": 628,
+      "proposedTargetSha256": "1fba893a1508677664f0b4b212c9bf2a552ff83926a5ca830fa4bf6f5ad9e8db",
+      "sourceId": "ui.management-api.60e425d8c3",
+      "sourceSha256": "60e425d8c33fe555a1444b86808376ce6726dd3d3ec9f4049c6a688cc7e3448c"
+    },
+    {
+      "blindDecision": "revise",
+      "callerContextAvailable": true,
+      "callerContextSha256": "700f53b1cdb40c9df7504c79bcb34b31aa88a5daa639db831b9a5a3f38e54022",
+      "catalogOneBasedPosition": 630,
+      "crossAdjudication": "revise",
+      "currentTargetSha256": "d41d03fb04d43ea9e60d42a46d1a13ab7782e1fbef0bf015d598cb4d86326d8e",
+      "locale": "ar",
+      "position": 629,
+      "proposedTargetSha256": "5312ec4478188e1a12f747fb40b08d15a656bb3a65b1029ca54993847856a63f",
+      "sourceId": "ui.management-api-and-indexer-feeds-are.dad15c1100",
+      "sourceSha256": "dad15c1100a54f7eb215b106467b1c33909a0071cb415b803de24e24d63a4698"
+    },
+    {
+      "blindDecision": "revise",
+      "callerContextAvailable": true,
+      "callerContextSha256": "700f53b1cdb40c9df7504c79bcb34b31aa88a5daa639db831b9a5a3f38e54022",
+      "catalogOneBasedPosition": 630,
+      "crossAdjudication": "revise",
+      "currentTargetSha256": "dac86652e7800f25d84a8982c46055ceca0e437e537f10860e6ca5c7e42da21b",
+      "locale": "hi",
+      "position": 629,
+      "proposedTargetSha256": "d1086ca6b16c52374d0d7691384ab9d33e71a37caca28ba1902dd1e712d9fa21",
+      "sourceId": "ui.management-api-and-indexer-feeds-are.dad15c1100",
+      "sourceSha256": "dad15c1100a54f7eb215b106467b1c33909a0071cb415b803de24e24d63a4698"
+    },
+    {
+      "blindDecision": "keep",
+      "callerContextAvailable": true,
+      "callerContextSha256": "700f53b1cdb40c9df7504c79bcb34b31aa88a5daa639db831b9a5a3f38e54022",
+      "catalogOneBasedPosition": 630,
+      "crossAdjudication": "keep",
+      "currentTargetSha256": "1cbe10fd21be319b2447fef359f0073c5c65506e76eb4e2d149bb6f2b3e2e983",
+      "locale": "ja",
+      "position": 629,
+      "proposedTargetSha256": "95a8389686abeb0dcbcfed06782203f27b0ac4871349599f79712c54040b04ae",
+      "sourceId": "ui.management-api-and-indexer-feeds-are.dad15c1100",
+      "sourceSha256": "dad15c1100a54f7eb215b106467b1c33909a0071cb415b803de24e24d63a4698"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "28b2afc3e32890fa5fc68f9df90e528193faaa793ff0714ed60529a5e7e003cb",
+      "catalogOneBasedPosition": 635,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "6d6814b98822fbaa333a2c8c570856e205ffa9acc8d2b683ecc4b6c801f3129c",
+      "locale": "es",
+      "position": 634,
+      "proposedTargetSha256": "be5e2c5afad5097c26c41047b61d1313cf48eaa894557bcd15b1e78caf2c738a",
+      "sourceId": "ui.map-the-path-a-download-client-repor.c6de45b83c",
+      "sourceSha256": "c6de45b83c563beea3de096b422656c2a56ede545d2f264845328210fae3965e"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "28b2afc3e32890fa5fc68f9df90e528193faaa793ff0714ed60529a5e7e003cb",
+      "catalogOneBasedPosition": 635,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "76b2389f1c57981f3b4de92ade2b7c6b4ca5ae01b4555b640c170203d571fc72",
+      "locale": "fr",
+      "position": 634,
+      "proposedTargetSha256": "eb9810a8f9699789633b2683ee0cfaccc05758120a2e95facb103631244366bc",
+      "sourceId": "ui.map-the-path-a-download-client-repor.c6de45b83c",
+      "sourceSha256": "c6de45b83c563beea3de096b422656c2a56ede545d2f264845328210fae3965e"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "28b2afc3e32890fa5fc68f9df90e528193faaa793ff0714ed60529a5e7e003cb",
+      "catalogOneBasedPosition": 635,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "6eec13d1617c4f17f56c3d3c27d680f0d1544987595f71d5a23394e59762ec77",
+      "locale": "hi",
+      "position": 634,
+      "proposedTargetSha256": "f52aa1000f156b2418071be9d0966f6c03bd16793936bb14227079fa79527818",
+      "sourceId": "ui.map-the-path-a-download-client-repor.c6de45b83c",
+      "sourceSha256": "c6de45b83c563beea3de096b422656c2a56ede545d2f264845328210fae3965e"
+    },
+    {
+      "blindDecision": "hold",
+      "callerContextAvailable": false,
+      "callerContextSha256": "28b2afc3e32890fa5fc68f9df90e528193faaa793ff0714ed60529a5e7e003cb",
+      "catalogOneBasedPosition": 635,
+      "crossAdjudication": "hold",
+      "currentTargetSha256": "c98c26326859471db386190909088bd5fd426318e8175f84455bf3a5212fdc9d",
+      "locale": "pt-BR",
+      "position": 634,
+      "proposedTargetSha256": "012d82a422185ea82f0609b68684fa04cf2dde6b522f4dcd7f7c794c1ce1b0c8",
+      "sourceId": "ui.map-the-path-a-download-client-repor.c6de45b83c",
+      "sourceSha256": "c6de45b83c563beea3de096b422656c2a56ede545d2f264845328210fae3965e"
+    },
+    {
+      "blindDecision": "keep",
+      "callerContextAvailable": true,
+      "callerContextSha256": "0a4861c979daec95b69427005119470509713756c9f6cf0bbefb5debd0ae69bb",
+      "catalogOneBasedPosition": 639,
+      "crossAdjudication": "keep",
+      "currentTargetSha256": "8f3891034265442e918477c512bee2ab3e7cb670b8e4fbf7055d24673e09f1f0",
+      "locale": "ar",
+      "position": 638,
+      "proposedTargetSha256": "c2324cfb7ce6071b939071bd3d18d4b86b3c08174f2aa869cd4f2f34bab4c4ee",
+      "sourceId": "ui.media.d357175cfe",
+      "sourceSha256": "d357175cfe8978d39b0f86552dcd9404973493e2816101d9ff6c05ee248ef6bd"
+    },
+    {
+      "blindDecision": "keep",
+      "callerContextAvailable": true,
+      "callerContextSha256": "13613249f18d8dd808326735ab84fc1a23e175358713fcbfc7a8e2a36444777e",
+      "catalogOneBasedPosition": 640,
+      "crossAdjudication": "keep",
+      "currentTargetSha256": "eaa2506b79dd722bad5f967da8c88c7575d7b5cba0d78f7350fbf1f334be2b67",
+      "locale": "vi",
+      "position": 639,
+      "proposedTargetSha256": "1975f2f748db978971fcadb1c4531d6993472b5ca496d6ad0b435cb20f8a67c2",
+      "sourceId": "ui.media-management.672361697c",
+      "sourceSha256": "672361697c9bb8fbe2f0b6112600ad16b30daf5d9c68c78a6c69cd12c5bbd68d"
+    }
+  ],
+  "primaryChangesByPosition": [
+    {
+      "catalogOneBasedPosition": 626,
+      "locales": [
+        "es",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "position": 625
+    },
+    {
+      "catalogOneBasedPosition": 627,
+      "locales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "position": 626
+    },
+    {
+      "catalogOneBasedPosition": 629,
+      "locales": [
+        "ar"
+      ],
+      "position": 628
+    },
+    {
+      "catalogOneBasedPosition": 630,
+      "locales": [
+        "ar",
+        "hi",
+        "ja"
+      ],
+      "position": 629
+    },
+    {
+      "catalogOneBasedPosition": 635,
+      "locales": [
+        "es",
+        "fr",
+        "hi",
+        "pt-BR"
+      ],
+      "position": 634
+    },
+    {
+      "catalogOneBasedPosition": 639,
+      "locales": [
+        "ar"
+      ],
+      "position": 638
+    },
+    {
+      "catalogOneBasedPosition": 640,
+      "locales": [
+        "vi"
+      ],
+      "position": 639
+    }
+  ],
+  "protectedLiteralAudit": {
+    "candidateFreeCurrentCellsPreservedAllSourceProtectedLiterals": true,
+    "namedProviderProductLiteralsFoundAcrossWindow": {
+      "Prowlarr": 12,
+      "ROMarr": 12,
+      "RomM": 12,
+      "SABnzbd": 12
+    },
+    "namedProviderProductLiteralsPreservedInCurrentAndProposals": true,
+    "primaryProposalProtectedTokenChecksPass": 24,
+    "primaryProposalsCount": 24,
+    "specificEvidence": "Prowlarr, SABnzbd, ROMarr and RomM retain exact case wherever present in source; generic protected literals, including API and DAT, pass the same per-cell checks."
+  },
+  "scope": {
+    "head": "5860fce5d546a772b1df995f8f6321c083ed7d5d",
+    "pullRequest": 70,
+    "repository": "snapetech-org/ROMarrNG",
+    "tree": "561835895972a62e9d3b1f2bfe9bcba01187eb98",
+    "window": "W625-W644"
+  },
+  "sourceWorktree": {
+    "clean": true,
+    "detached": true,
+    "head": "5860fce5d546a772b1df995f8f6321c083ed7d5d",
+    "path": "/mnt/disks/scratch/task-worktrees/localization-20261105/romarrng-pr70-w625-644-pinned",
+    "tree": "561835895972a62e9d3b1f2bfe9bcba01187eb98"
+  }
+}

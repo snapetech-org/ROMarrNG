@@ -1,0 +1,10 @@
+{
+  "source": "Media",
+  "locale": "es",
+  "currentTarget": "Contenido multimedia",
+  "caller": "Technical-details table: <th>Media</th>; rows render p.media categories such as disc, cartridge, computer, package, digital.",
+  "reviewerRecommendation": "Tipo de medio",
+  "confidence": "moderate",
+  "reason": "The current wording means multimedia content; this column labels a media/storage category.",
+  "nativeSpeakerApproval": false
+}

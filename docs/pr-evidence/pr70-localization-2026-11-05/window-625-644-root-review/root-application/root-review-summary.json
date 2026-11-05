@@ -1,0 +1,20 @@
+{
+  "status": "SEALED",
+  "head": "5860fce5d546a772b1df995f8f6321c083ed7d5d",
+  "tree": "561835895972a62e9d3b1f2bfe9bcba01187eb98",
+  "candidateCells": 240,
+  "rootDispositionCounts": {
+    "accept-current": 177,
+    "hold-callerless-hash-only": 60,
+    "accept-correction": 2,
+    "accept-independent-supplemental-correction": 1
+  },
+  "selectedChanges": 3,
+  "changedCatalogPaths": [
+    "romarr/ui-labels.json"
+  ],
+  "callerlessHoldsTextFree": true,
+  "nativeSpeakerApprovalClaimed": false,
+  "browserReviewClaimed": false,
+  "productCodeChanges": false
+}
