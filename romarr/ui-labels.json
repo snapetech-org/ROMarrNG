@@ -19601,7 +19601,7 @@
         "hi": "इस डिवाइस पर ROMarr नहीं है? लिंक कॉपी करें और अपने सर्वर पर मित्र → मेरे पास आमंत्रण है में पेस्ट करें।",
         "de": "Kein ROMarr auf diesem Gerät? Kopiere den Link und füge ihn unter Freunde → Ich habe eine Einladung auf deinem eigenen Server ein.",
         "ja": "このデバイスに ROMarr がありませんか？リンクをコピーし、自分のサーバーの「友達 → 招待を持っています」に貼り付けてください。",
-        "fr": "Pas de ROMarr sur cet appareil ? Copiez le lien et collez-le dans Friends → J'ai une invitation sur votre propre serveur.",
+        "fr": "Pas de ROMarr sur cet appareil ? Copiez le lien et collez-le dans Amis → J’ai une invitation sur votre propre serveur.",
         "pt-BR": "Nenhum ROMarr neste dispositivo? Copie o link e cole em Amigos → Tenho um convite no seu próprio servidor.",
         "ar": "لا يوجد ROMarr على هذا الجهاز؟ انسخ الرابط والصقه في «الأصدقاء ← لدي دعوة» على خادمك.",
         "ko": "이 기기에 ROMarr가 없나요? 링크를 복사해 자신의 서버에서 친구 → 초대가 있어요에 붙여 넣으세요.",
@@ -19718,7 +19718,7 @@
         "ar": "لا إجابة",
         "ko": "답변 없음.",
         "zh-Hant": "沒有回應。",
-        "vi": "Không trả lời.",
+        "vi": "Không có câu trả lời.",
         "id": "Tidak ada jawaban."
       },
       "translationHashes": {},
@@ -19793,16 +19793,16 @@
       "sourceHash": "8697571e96e71c3b3645d1867524e6911d657da1006bb862206ae5366692d426",
       "translations": {
         "es": "No hay conexiones todavía",
-        "zh-Hans": "尚未连接",
+        "zh-Hans": "尚未添加任何连接",
         "hi": "अभी तक कोई कनेक्शन नहीं",
         "de": "Noch keine Verbindungen",
         "ja": "接続はまだありません",
         "fr": "Pas encore de connexions",
         "pt-BR": "Sem conexões ainda.",
-        "ar": "لا وصلات بعد",
+        "ar": "لا توجد اتصالات بعد",
         "ko": "연결 없음",
-        "zh-Hant": "尚未連線",
-        "vi": "Chưa kết nối",
+        "zh-Hant": "尚未新增任何連線",
+        "vi": "Chưa có kết nối nào",
         "id": "Belum ada koneksi"
       },
       "translationHashes": {},
@@ -19894,7 +19894,7 @@
         "ko": "직접 구성된 인덱서가 없습니다. 활성화된 Prowlarr 인덱서는 아래에 표시됩니다.",
         "zh-Hant": "尚未設定直接索引器。下方列出已啟用的 Prowlarr 索引器。",
         "vi": "Chưa cấu hình bộ lập chỉ mục trực tiếp. Các bộ lập chỉ mục Prowlarr đang bật được liệt kê bên dưới.",
-        "id": "Belum ada pengindeks langsung. Pengindeks Prowlarr yang aktif tercantum di bawah."
+        "id": "Tidak ada pengindeks langsung yang dikonfigurasi. Pengindeks Prowlarr yang aktif tercantum di bawah."
       },
       "translationHashes": {},
       "translationStatus": {},
