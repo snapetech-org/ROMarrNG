@@ -1,0 +1,112 @@
+{
+  "callerlessHoldTextIncluded": false,
+  "currentCallerlessStatusCheckedForPriorHeldSources": 64,
+  "currentHead": "8b7589775c526866e474112b4f4168782b02f881",
+  "currentTree": "fb0ba93172f6832c687e001ce6c0fff08b5a33eb",
+  "currentWindowProposalTextIncluded": false,
+  "currentWindowReviewDecisionsIncluded": false,
+  "previousAppliedCellsReattested": 91,
+  "previousCandidateFreeHead": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+  "previousCandidateFreeTree": "d6066baa3d03d3b4c6034e5af061fc4bc278b0f9",
+  "previousHeldCellsReattested": 820,
+  "previousProductCommit": "fee1da731d13c578d1911884a1567d0124187d29",
+  "previousProductTree": "fae55bb1f52f49da93bec989fa4feb86dd87548e",
+  "previousReadbackWindows": {
+    "W565-W584": 240,
+    "W585-W604": 240,
+    "W605-W624": 240,
+    "W625-W644": 240,
+    "W645-W664": 240
+  },
+  "previousSourceSelectionsReattested": 280,
+  "previousWindowAppliedCellCounts": {
+    "W505-W524": 28,
+    "W525-W544": 18,
+    "W545-W564": 2,
+    "W565-W584": 1,
+    "W585-W604": 22,
+    "W605-W624": 2,
+    "W625-W644": 3,
+    "W645-W664": 15
+  },
+  "previousWindowHoldCounts": {
+    "W245-W264": 72,
+    "W265-W284": 168,
+    "W285-W304": 24,
+    "W325-W344": 24,
+    "W405-W424": 48,
+    "W425-W444": 12,
+    "W445-W464": 36,
+    "W465-W484": 60,
+    "W485-W504": 24,
+    "W505-W524": 72,
+    "W525-W544": 12,
+    "W545-W564": 12,
+    "W565-W584": 40,
+    "W585-W604": 24,
+    "W605-W624": 36,
+    "W625-W644": 60,
+    "W645-W664": 96
+  },
+  "previousWindowSelectionCounts": {
+    "W385-W404": 20,
+    "W405-W424": 20,
+    "W425-W444": 20,
+    "W445-W464": 20,
+    "W465-W484": 20,
+    "W485-W504": 20,
+    "W505-W524": 20,
+    "W525-W544": 20,
+    "W545-W564": 20,
+    "W565-W584": 20,
+    "W585-W604": 20,
+    "W605-W624": 20,
+    "W625-W644": 20,
+    "W645-W664": 20
+  },
+  "priorHoldSourcesWithCurrentCallers": 12,
+  "priorReviewSummaryPins": {
+    "applicationChecksumsVerified": true,
+    "applicationReadbackSha256": "8a063c27f1c26173a34fb41addeeab5bce3e27140325b2909db6553fabe456a9",
+    "blindSummarySha256": "6e77807239a007b2dbd59df031095df502b13e3e968cd498ad8b65ef1dd07c73",
+    "candidateFreeChecksumListSha256": "15dd26e7614adb334b2c83ff9da791d56be8e9854a10f80d1200ee719422785c",
+    "candidateFreeManifestSha256": "1b3cb573d404fb83811edaa03a77234f8642e42fd1e994a3fdb08bb4d61e23b2",
+    "crossSummarySha256": "442bf777d92e125e0acede228c94bd500791e3d7ed0c464d11af4d78d067697a",
+    "primarySummarySha256": "12adb37808631ba34024ff501d44fc8096c6570ec4169d32eb201eecc38fb9d5",
+    "rootAdjudicationSummarySha256": "2ed21874374898f93e39229d4e51942eb8bfcf81ea276d0f6ff87b5c12319ebb",
+    "taskScratchApplicationChecksumEntries": 8,
+    "taskScratchUnindexedSidecarCount": 3,
+    "taskScratchUnindexedSidecars": [
+      {
+        "path": "pr-api-before.json",
+        "sha256": "b8202cc8f238896843be04eca212b57a46a9e61f98d0d13bdadda1b9d7d5adcc"
+      },
+      {
+        "path": "pr-body-after.txt",
+        "sha256": "9888ba752e5973210dc8304d5116b2539445ca151522faf16511a36d95436519"
+      },
+      {
+        "path": "pr-body-before.txt",
+        "sha256": "040f4de7fde0712ebbb79650cbbd8400a0b4407683a3301e020a53708129c7e0"
+      }
+    ]
+  },
+  "result": "PASS",
+  "w625EvidenceCaveat": {
+    "description": "The W645 predecessor records 31 W625 bulky stage files absent from the prior committed PR evidence tree. The full W625 readback and final verifier remain hash-bound; the absent PR-tree stage files are not claimed as verified.",
+    "matchesFinalVerifier": true,
+    "missingFromPriorCommittedPrTree": 31,
+    "priorFullReadbackSha256": "8d11e4da3846c10047c2274c3b6e411c4e9f1a94b69d582be9e3d168970a6c07"
+  },
+  "w645AppliedTargetCells": 15,
+  "w645BlindSummaryPinWarning": {
+    "blindChecksumMismatchRecorded": true,
+    "crossReviewResult": "PASS_WITH_BLIND_SUMMARY_PIN_WARNING",
+    "description": "The W645 cross-review records a stale blind top-level checksum pointer and passing row-level binding/proposal-target hash checks. This warning is retained.",
+    "rootOutcome": "ROOT_ADJUDICATION_COMPLETE_APPLICATION_PENDING",
+    "rowLevelBindingsReported": true
+  },
+  "w645CallerContextsReattested": 20,
+  "w645CallerContextsUnchanged": true,
+  "w645CallerlessHashOnlyHolds": 96
+}

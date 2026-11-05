@@ -1,0 +1,21 @@
+{
+  "artifact": "ROMarrNG PR #70 W665-W684 root adjudication",
+  "exactHead": "8b7589775c526866e474112b4f4168782b02f881",
+  "exactTree": "fb0ba93172f6832c687e001ce6c0fff08b5a33eb",
+  "cellCount": 240,
+  "dispositionCounts": {
+    "accept-blind": 20,
+    "accept-current": 139,
+    "accept-primary": 5,
+    "accept-primary-blind": 4,
+    "hold-hash-only": 72
+  },
+  "appliedTargets": 29,
+  "translationHashUpdates": 9,
+  "translationStatusChanges": 0,
+  "translationReviewMetadataChanges": 0,
+  "workflowChanges": 0,
+  "nativeSpeakerApproval": false,
+  "headedBrowserApproval": false,
+  "confidence": "moderate"
+}

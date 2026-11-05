@@ -1,0 +1,33 @@
+{
+  "baseApiRefMismatch": true,
+  "captureLabel": "before-cross-review",
+  "capturedAtUtc": "2026-11-05T10:09:07+00:00",
+  "commands": {
+    "prView": "gh pr view 70 --repo snapetech-org/ROMarrNG --json state,isDraft,baseRefName,headRefName,headRefOid,baseRefOid,url",
+    "remoteRefs": "git ls-remote origin refs/heads/main refs/heads/task/localization-translation-review-20261030 refs/pull/70/head"
+  },
+  "liveMainTree": "73a05379aa80fa629f69286338139247d2bfd849",
+  "localWorktree": {
+    "clean": true,
+    "head": "8b7589775c526866e474112b4f4168782b02f881",
+    "path": "/mnt/disks/scratch/task-worktrees/localization-20261105/romarrng-pr70-w665-684-pinned",
+    "tree": "fb0ba93172f6832c687e001ce6c0fff08b5a33eb"
+  },
+  "pullRequest": 70,
+  "pullRequestApi": {
+    "baseRefName": "main",
+    "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "headRefName": "task/localization-translation-review-20261030",
+    "headRefOid": "8b7589775c526866e474112b4f4168782b02f881",
+    "isDraft": true,
+    "state": "OPEN",
+    "url": "https://github.com/snapetech-org/ROMarrNG/pull/70"
+  },
+  "pullRequestApiBaseTree": "9c471ca6392055839a12ba74a112e49c2cdf03d5",
+  "remoteRefs": {
+    "refs/heads/main": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+    "refs/heads/task/localization-translation-review-20261030": "8b7589775c526866e474112b4f4168782b02f881",
+    "refs/pull/70/head": "8b7589775c526866e474112b4f4168782b02f881"
+  },
+  "repository": "snapetech-org/ROMarrNG"
+}

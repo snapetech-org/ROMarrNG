@@ -1,0 +1,26 @@
+{
+  "artifact": "sealed blind review packet",
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W665-W684",
+  "exactHead": "8b7589775c526866e474112b4f4168782b02f881",
+  "exactTree": "fb0ba93172f6832c687e001ce6c0fff08b5a33eb",
+  "branch": "task/localization-translation-review-20261030",
+  "candidateFreeManifestSha256": "e07d2305da384087d3751c2ee6e7892995f22532f1a41e8f0743cf31e2408454",
+  "ledgerRecords": 240,
+  "proposalRecords": 24,
+  "hashOnlyHoldRecords": 72,
+  "files": [
+    "ledger.jsonl",
+    "proposals.jsonl",
+    "holds.jsonl",
+    "summary.json",
+    "exact-head-before.json",
+    "exact-head-after.json",
+    "verify_blind.py",
+    "README.md",
+    "SHA256SUMS.txt",
+    "manifest.json"
+  ]
+}

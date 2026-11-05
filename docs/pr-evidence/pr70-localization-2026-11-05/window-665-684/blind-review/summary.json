@@ -1,0 +1,72 @@
+{
+  "artifact": "ROMarrNG PR #70 W665-W684 independent blind semantic review",
+  "exactHead": "8b7589775c526866e474112b4f4168782b02f881",
+  "exactTree": "fb0ba93172f6832c687e001ce6c0fff08b5a33eb",
+  "branch": "task/localization-translation-review-20261030",
+  "pullRequest": 70,
+  "state": "OPEN",
+  "isDraft": true,
+  "cellCount": 240,
+  "sourceKeyCount": 20,
+  "localeCount": 12,
+  "callerBackedCellCount": 168,
+  "callerlessHashOnlyHoldCount": 72,
+  "decisions": {
+    "accept-current": 144,
+    "refinement": 19,
+    "correction": 5,
+    "hold-hash-only": 72
+  },
+  "proposalCount": 24,
+  "proposalDecisions": {
+    "refinement": 19,
+    "correction": 5
+  },
+  "proposalConfidence": {
+    "moderate": 19,
+    "high": 5
+  },
+  "reviewConfidence": "Moderate overall; high for clear errors and straightforward labels, moderate for terminology refinements and the long technical paragraph.",
+  "unresolvedCells": 0,
+  "tokenAudit": {
+    "candidateFreeAggregate": {
+      "markup": 0,
+      "numeric": 1,
+      "numericPresentationDifferences": 0,
+      "placeholder": 0,
+      "protectedLiteral": 20
+    },
+    "candidateFreeManifestNumericMismatches": 1,
+    "candidateFreeManifestProtectedLiteralMismatches": 20,
+    "reviewedCellPlaceholderMismatches": 0,
+    "reviewedCellMarkupMismatches": 0,
+    "reviewedCellNumericTokenLosses": 0,
+    "reviewedCellProtectedLiteralMismatchRows": 10,
+    "reviewerDisposition": "The candidate-free aggregate has numeric and protected-literal flags. Caller-backed cell rows show no placeholder, markup, or numeric-token loss. Ten protected-literal row flags are the English plural ROMs rendered as invariant ROM in those locales; this was judged as locale morphology, not an automatic error.",
+    "manualNumericReview": "The long netplay help source spells out four possible ROMs and two incorrect matches followed by desynchronization within seconds. Reviewed translations retain those quantities; explicit digit-token arrays are empty, and no target was changed solely because of the aggregate numeric flag."
+  },
+  "candidateFreeInput": {
+    "path": "../candidate-free/input",
+    "manifestSha256": "e07d2305da384087d3751c2ee6e7892995f22532f1a41e8f0743cf31e2408454",
+    "checksumListSha256": "a17597627179aee511103e00fcb8044503ceff2bb2077f6f1dd4c185665b3f4f",
+    "cellsSha256": "4cfd4a53791ff4bc6f8c973982a4617bfd65b36fde56fc1661b59f0b752316d2",
+    "contextsSha256": "4d8bb93405f5c6ce237ff469243b849df89061067a79b9706e44c9ac3151e828"
+  },
+  "sourceLocaleOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "beforeAttestation": "exact-head-before.json",
+  "afterAttestation": "exact-head-after.json",
+  "scope": "Independent semantic review of candidate-free values and caller context only. No other review outputs read; no repository, catalog, pull request, or workflow changes."
+}
