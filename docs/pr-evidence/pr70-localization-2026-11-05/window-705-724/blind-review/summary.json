@@ -1,0 +1,39 @@
+{
+  "artifact": "ROMarrNG PR #70 W705-W724 independent blind translation review",
+  "schemaVersion": 1,
+  "reviewerMode": "independent blind review; candidate-free inputs only",
+  "exactPrHead": "50e3f8a48a800affff8bad367b5c493cc0fdfd62",
+  "exactPrTree": "22cd46ff4821fcbbe76b4760a15e22d688b3f548",
+  "inputPacketDirectory": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w705-724-20261105/candidate-free/input",
+  "inputSha256": {
+    "candidate-free-cells.jsonl": "25259007a27d8ee439e06f625d926020a31c8a881b359fdfa9d020e2316f3fe6",
+    "source-contexts.jsonl": "1fcf4b1a4b64e60644838e3105076b6bc54311842d1346cf1d3e40ec85b73bd9"
+  },
+  "reviewFile": "review.jsonl",
+  "records": 240,
+  "sourceKeys": 20,
+  "locales": 12,
+  "visibleCellsReviewed": 192,
+  "callerlessHashOnlyHolds": 48,
+  "decisions": {
+    "hold": 48,
+    "accept": 188,
+    "correction": 4
+  },
+  "proposedChanges": 4,
+  "integrityAudit": {
+    "visibleCurrentTargetsChecked": 192,
+    "visibleProposedReplacementsChecked": 4,
+    "placeholderMultisets": "all match",
+    "numericTokens": "all match",
+    "markupTagSequences": "all match",
+    "declaredProtectedLiterals": "all match"
+  },
+  "qualifiedNativeSpeakerApprovalClaimed": false,
+  "notes": [
+    "Only candidate-free inputs were used; no primary or cross-review proposal was accessed before this sealed blind packet.",
+    "The 48 callerless cells are hash-only holds; source ID, source text, and current target text are omitted from their review rows.",
+    "Each visible cell binds source/current text, locale, caller-context digest, and caller source hashes to the candidate-free packet.",
+    "This machine review is not qualified native-speaker approval."
+  ]
+}

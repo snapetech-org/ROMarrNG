@@ -1,0 +1,15 @@
+{
+  "applicationCellCount": 7,
+  "applicationCellHashesReattested": true,
+  "currentCatalogPostimageSha256": "bd253a48c1708d7053f3777155eb9f5baa77dddb8f2851eb21ec3e9ea816e664",
+  "currentHead": "50e3f8a48a800affff8bad367b5c493cc0fdfd62",
+  "currentTree": "22cd46ff4821fcbbe76b4760a15e22d688b3f548",
+  "productCommit": "a26feabfcae338207fae3d9c682425ab9c0d4226",
+  "productCommitAncestor": true,
+  "productParent": "43d2858744ef20cd58462643fed534ac61d2ffad",
+  "productTree": "b0f61607d03924a6e4bff9acebfe9d1dd7af6e8a",
+  "readbackSha256": "dcc75489780e647890dc068585c10fe9eb303d38f471ac35bad7bf94082197f4",
+  "readbackSourcePath": "docs/pr-evidence/pr70-localization-2026-11-05/window-685-704/application/readback-before-commit.json",
+  "sourceHead": "43d2858744ef20cd58462643fed534ac61d2ffad",
+  "sourceTree": "73e8f50d65cb611def996b01bab0b00628b65860"
+}

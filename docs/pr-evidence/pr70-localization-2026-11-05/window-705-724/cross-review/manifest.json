@@ -1,0 +1,25 @@
+{
+  "artifact": "ROMarrNG PR #70 W705-W724 independent cross-review",
+  "exactHead": "50e3f8a48a800affff8bad367b5c493cc0fdfd62",
+  "exactTree": "22cd46ff4821fcbbe76b4760a15e22d688b3f548",
+  "inputDirectories": {
+    "candidateFree": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w705-724-20261105/candidate-free/input",
+    "primaryReview": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w705-724-20261105/primary-review",
+    "blindReview": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w705-724-blind-review-20261105"
+  },
+  "inputChecksums": {
+    "candidateFreeManifest": "0ac88e0c019b47c238916eb1c79018f92e7fba06642d6109403c1b2044038396",
+    "candidateFreeChecksumIndex": "48d61ca228ed659ac892ea87f385aefb35495c1b18bb95a6626dd56e6e15f08a",
+    "primaryManifest": "d417ff317ae37a7fc8cbf5b4b430fa55b277cc0777f055c4e26e928ae9521102",
+    "blindReviewSeal": "c4ee78352134b760e564399487e8dd334d1f109f3790146942d112a4246287bc",
+    "blindReview": "ced6cbd6ada1435a6ff882a5af682996f7473cdef02b56895e4b1be0b473381d"
+  },
+  "outputRows": 240,
+  "counts": {
+    "accept-current": 187,
+    "correction": 5,
+    "hold-callerless-hash-only": 48
+  },
+  "rootFlags": 3,
+  "callerlessSourceOrTargetTextIncluded": false
+}
