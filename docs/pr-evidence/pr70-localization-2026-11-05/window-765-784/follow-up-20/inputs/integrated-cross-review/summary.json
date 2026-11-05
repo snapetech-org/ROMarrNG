@@ -1,0 +1,65 @@
+{
+  "artifact": "ROMarrNG PR #70 W765-W784 integrated independent cross-review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W765-W784",
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "cellCount": 240,
+  "callerBackedCells": 216,
+  "callerReferences": 23,
+  "callerlessHashOnlyCells": 24,
+  "priorActiveHashOnlyHolds": 988,
+  "resultingActiveHashOnlyHolds": 1012,
+  "crossDispositionCounts": {
+    "accept-current": 186,
+    "correction": 23,
+    "refinement": 7,
+    "hold-callerless-hash-only": 24
+  },
+  "primaryProposalCells": 10,
+  "primaryBlindExactTextAgreement": 6,
+  "primaryBlindDifferentWordingButPrimarySupported": 4,
+  "blindProposalQualityFindings": 1,
+  "currentManualLiteralMismatchCells": 20,
+  "blindProposalTokenFailures": 0,
+  "primaryProposalTokenFailures": 0,
+  "priorCrossAuditDispositionDifferences": 20,
+  "priorPrimarySelectedTargetDifferences": 0,
+  "changedRootSelectionsRequired": 20,
+  "rootChangeAdvisories": 20,
+  "changedRootSelectionGroups": {
+    "titleInstructionsMissingPinnedCommentExample": 10,
+    "appriseMissingPinnedURLsLiteral": 10
+  },
+  "conditionalRootChangeNote": "If a root decision selected the blind French long-paragraph alternative, correct plural agreement (“Connexions facultatives”); the pinned current French target is already correct.",
+  "exactTargetSelected": false,
+  "catalogValueApplied": false,
+  "repositoryEdited": false,
+  "nativeSpeakerApproval": false,
+  "headedBrowserReviewPerformed": false,
+  "inputChecksums": {
+    "candidateFreeOuter": "PASS",
+    "candidateFreeInner": "PASS",
+    "primary": "PASS",
+    "blind": "PASS",
+    "priorCrossAudit": "PASS"
+  },
+  "bundledVerifierObservations": {
+    "candidateFree": "FAIL at worktree pin/clean guard",
+    "primary": "FAIL via candidate-free worktree pin/clean guard",
+    "blind": "PASS"
+  },
+  "currentWorktreeSourceContentRead": false,
+  "currentWorktreePinGuardInvokedByBundledInputVerifiers": true,
+  "liveExactHeadSourceReread": false,
+  "reviewLimit": "Cross ledger binds exact pinned source/caller evidence and hashes across the sealed packets; the changed worktree was not read for source text, and native-speaker review was not performed.",
+  "confidence": "moderate",
+  "nextBoundary": {
+    "continuationIndex": 785,
+    "oneBasedPosition": 786,
+    "sourceId": "ui.optional-overrides-the-webhook-s-dis.4116a5e8e4",
+    "sourceSha256": "4116a5e8e4222045299ae89f3577810da389c5c65f51cf8a3b097ecf05ef348e"
+  },
+  "result": "PASS_STATIC_PACKET_RECONCILIATION_WITH_20_ROOT_CHANGE_ADVISORIES_AND_WORKTREE_GUARD_LIMITATION"
+}

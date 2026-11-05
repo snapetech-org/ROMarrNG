@@ -1,0 +1,18 @@
+{
+  "allPreserved": true,
+  "artifact": "ROMarrNG PR #70 W765-W784 independent blind proposal token audit",
+  "callerlessCells": "not token-checked; held text-free by policy",
+  "checks": {
+    "manualProtectedLiterals": 0,
+    "markup": 0,
+    "numbers": 0,
+    "placeholders": 0,
+    "protectedLiterals": 0
+  },
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "manualProtectedLiteralsChecked": true,
+  "proposalCells": 216,
+  "protectedSourceLiteralsChecked": true,
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "window": "W765-W784"
+}

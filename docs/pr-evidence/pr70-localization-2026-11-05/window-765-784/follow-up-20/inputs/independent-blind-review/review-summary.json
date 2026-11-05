@@ -1,0 +1,43 @@
+{
+  "artifact": "ROMarrNG PR #70 W765-W784 independent blind review",
+  "callerBackedCells": 216,
+  "callerReferences": 23,
+  "callerlessHashOnlyCells": 24,
+  "callerlessSourceCount": 2,
+  "candidateFreeInnerChecksums": "PASS",
+  "candidateFreeOfficialVerifier": "FAIL: worktree pin/clean (recorded, not rerun)",
+  "candidateFreeOuterChecksums": "PASS",
+  "cellCount": 240,
+  "changedWorktreeInspected": false,
+  "currentTargetTextsConsulted": false,
+  "dispositions": {
+    "blind_proposal": 216,
+    "hold_hash_only": 24
+  },
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "newHashOnlyHolds": 24,
+  "nextBoundary": {
+    "continuationIndex": 785,
+    "oneBasedPosition": 786,
+    "sourceId": "ui.optional-overrides-the-webhook-s-dis.4116a5e8e4",
+    "sourceSha256": "4116a5e8e4222045299ae89f3577810da389c5c65f51cf8a3b097ecf05ef348e"
+  },
+  "primaryCrossRootEvidenceInspected": false,
+  "priorActiveHolds": 988,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "resultingActiveHashOnlyHolds": 1012,
+  "sourceCount": 20,
+  "tokenAudit": {
+    "mismatchCounts": {
+      "manualProtectedLiterals": 0,
+      "markup": 0,
+      "numbers": 0,
+      "placeholders": 0,
+      "protectedLiterals": 0
+    },
+    "proposalCells": 216
+  },
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "window": "W765-W784"
+}

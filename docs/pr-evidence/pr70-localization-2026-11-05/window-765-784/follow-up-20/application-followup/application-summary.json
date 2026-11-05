@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "window": "W765-W784",
+  "mode": "verify",
+  "inputReviewHead": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "inputReviewTree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "baseProductCommit": "7e101cc0ea5580443d1b3903af084c23fe2134e5",
+  "followupPlanCells": 20,
+  "finalReadbackCells": 240,
+  "callerBackedReadback": 216,
+  "hashOnlyReadback": 24,
+  "changedValuesThisFollowup": 20,
+  "totalChangedValuesFromReviewHead": 30,
+  "finalDispositions": {
+    "accept-current": 186,
+    "correction": 23,
+    "refinement": 7,
+    "hold-callerless-hash-only": 24
+  },
+  "priorActiveHolds": 988,
+  "activeHoldsAfter": 1012,
+  "catalogSha256": "1a204f6f4a5162daa9c9c0eda9d8bfc08636c393360a1cedc38459ced3a728ce",
+  "catalogKeysPreserved": true,
+  "onlySelectedValuesChanged": true,
+  "nativeSpeakerApproval": false,
+  "productCommit": "2e6fb1d9f5bf5a5dc54f7fb62e562cc2a88d3fae",
+  "productTree": "6d09b309493b1d8701989c2c773f010709e63539",
+  "verificationHead": "2e6fb1d9f5bf5a5dc54f7fb62e562cc2a88d3fae"
+}

@@ -1,0 +1,9 @@
+{
+  "result": "PASS",
+  "mode": "preflight",
+  "head": "ec6319e012ee0043be853ee313ff7cbf36e51af1",
+  "tree": "53c33792ee85083d270fe3a914332cf3a9cb5c6e",
+  "planCells": 20,
+  "catalogSha256": "a5f26cbe41de62badc4ea6f4f4246aa8c87162b5e257d6422947cb70ba2a73a5",
+  "trackedAndUntrackedWorktreeClean": true
+}

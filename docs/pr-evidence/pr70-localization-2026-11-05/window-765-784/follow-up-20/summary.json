@@ -1,0 +1,35 @@
+{
+  "result": "PASS_ROOT_FOLLOWUP_ADJUDICATION",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W765-W784",
+  "inputHead": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "inputTree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "crossReviewChecksumListSha256": "45ad89aa23ef002858e25e63f1633ff30e1f2088db3b45b9bc4dd365bb2597e9",
+  "followupDecisionCells": 20,
+  "blindProposalSelections": 19,
+  "rootLanguageRevisions": 1,
+  "changedRootSelectionGroups": {
+    "titleHelpMissingPinnedParserExamples": 10,
+    "appriseHelpMissingPluralURLsLiteral": 10
+  },
+  "allPinnedManualLiteralsPreserved": true,
+  "newHolds": 0,
+  "priorActiveHashOnlyHolds": 988,
+  "resultingActiveHashOnlyHolds": 1012,
+  "finalRootCells": 240,
+  "finalRootDispositionCounts": {
+    "accept-current": 186,
+    "correction": 23,
+    "refinement": 7,
+    "hold-callerless-hash-only": 24
+  },
+  "totalSelectedChanges": 30,
+  "crossFindingErratum": {
+    "cellId": "ui.optional-connections-to-the-rest-of.636208f858::fr",
+    "result": "keep current; the blindProposal string itself is plural-correct; separate erratum resolves stale metadata note"
+  },
+  "nativeSpeakerApproval": false,
+  "headedBrowserAcceptance": false,
+  "testsBuildsScansCI": false
+}

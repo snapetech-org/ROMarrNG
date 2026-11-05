@@ -1,0 +1,14 @@
+{
+  "artifact": "ROMarrNG PR #70 W765-W784 blind proposal freeze",
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "window": "W765-W784",
+  "proposalRows": 216,
+  "proposalSha256": "ad68f4e63e37ee52140bb969747b6aad8dba9f477d7205df62f2bfddd40ff23e",
+  "matrixSha256": "f6894e180c79211de6bb3f86b96bfea2b54cd8517882cdf52d21c5a4d2159c8c",
+  "sourceContextsSha256": "9d244314937105cdd19daf4affe7ce1e474e0587e50e7cd4250fcb7bbb9cb9a1",
+  "selectedSourcesSha256": "52862be45d985e8cdd22a1eadb79a98f87f65c0b626d3d307b251b267f2004b7",
+  "frozenBeforeCurrentCellHashesOpened": true,
+  "currentTargetTextsConsulted": false,
+  "createdAtUtc": "2026-11-05T22:19:41.186332+00:00"
+}
