@@ -6,5 +6,11 @@
   "branch": "task/localization-translation-review-20261030",
   "pullRequest": 70,
   "catalogChanges": 29,
-  "translationHashUpdates": 9
+  "translationHashUpdates": 9,
+  "localSemgrepHook": {
+    "invoked": true,
+    "scope": "staged evidence scripts",
+    "exitCode": 0,
+    "ciDispatch": false
+  }
 }

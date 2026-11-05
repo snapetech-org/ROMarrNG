@@ -19,4 +19,4 @@ This evidence packet covers source-order positions 665–684 at the exact open P
 - `application/` contains the exact-hash application plan, apply/readback output, and portable verifier.
 - `SHA256SUMS.txt` covers every file in this evidence packet; each review subpacket also has its own checksums.
 
-The candidate-free, primary, blind, cross-review, application readback, and checksum verifiers pass. `git diff --check` is clean. No tests, builds, scans, CI dispatches, workflow edits, merge, release, or tag were made for this window.
+The candidate-free, primary, blind, cross-review, application readback, and checksum verifiers pass. `git diff --check` is clean. No tests or CI dispatches were run; no workflow edits, merge, release, or tag were made. The repository pre-commit hook invoked local Semgrep on the staged evidence scripts and completed successfully during the evidence commit.
