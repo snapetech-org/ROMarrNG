@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "inputHead": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "inputTree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "window": "W765-W784",
+  "rootCells": 240,
+  "readbackCells": 240,
+  "readbackCallerBacked": 216,
+  "readbackHashOnly": 24,
+  "changedCatalogCells": 10,
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogSha256Before": "a295380fbd9baff72621c55f40478a5c65fd5200d808eda9cdbb6320812050bb",
+  "catalogSha256After": "a5f26cbe41de62badc4ea6f4f4246aa8c87162b5e257d6422947cb70ba2a73a5",
+  "dispositions": {
+    "accept-current": 206,
+    "correction": 3,
+    "refinement": 7,
+    "hold-callerless-hash-only": 24
+  },
+  "priorActiveHolds": 988,
+  "activeHoldsAfter": 1012,
+  "catalogKeysPreserved": true,
+  "onlySelectedValuesChanged": true,
+  "qualifiedNativeSpeakerApproval": false,
+  "mode": "verify",
+  "productCommit": "7e101cc0ea5580443d1b3903af084c23fe2134e5",
+  "productTree": "d4b2661cd5105d6a18505a7302a13d9295eff39c",
+  "verificationHead": "7e101cc0ea5580443d1b3903af084c23fe2134e5"
+}

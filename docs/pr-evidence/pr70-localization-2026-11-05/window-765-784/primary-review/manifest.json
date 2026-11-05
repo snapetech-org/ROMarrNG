@@ -1,0 +1,24 @@
+{
+  "artifact": "ROMarrNG PR #70 W765-W784 primary review",
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "window": "W765-W784",
+  "cellCount": 240,
+  "decisionCounts": {
+    "accept-current": 206,
+    "correction": 3,
+    "refinement": 7,
+    "hold-callerless-hash-only": 24
+  },
+  "candidateFreeManifestSha256": "560edb5cbc160bc95e74888dee9506de7c37e2bd479ab3164887245253c5977f",
+  "candidateFreeChecksumsSha256": "b551fcc26783d47666e4ec3c35946a314e2bf0b7374cf52acb1df54b027bcfe3",
+  "files": {
+    "README.md": "705ec377d914410e02bedd35886343de3c3cb6697b055fb027f48fa49482b451",
+    "build_primary_review.py": "678a8db21adb12f3dd020257f47fe9f27128e454424fa63d5d98f57cb68bc51c",
+    "holds.jsonl": "42a85d18eaefcc8424e22e64d07606c7ec2e519230748763e95c0d81d2a0f21a",
+    "input-reference.json": "15fb8854ce68ed6c7823593a65ec1129443f4d9d560117dd90add2fab2a85be5",
+    "ledger.jsonl": "c14a7fcded00061fb454444ad5db1f84638b3425f4b05dbfcbacf2f26d81e3c4",
+    "proposals.jsonl": "7524bacc0c02ff84ab5813918546c647f4f253ebe076c275a4dbe01b7a143909",
+    "summary.json": "399595994942e648dfaaf03d1f421bfdf8dc3e5a1bfbfad8ef213eb31f9c4294"
+  }
+}

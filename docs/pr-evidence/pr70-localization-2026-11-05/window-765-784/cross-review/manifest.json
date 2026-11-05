@@ -1,0 +1,40 @@
+{
+  "artifact": "ROMarrNG PR #70 W765-W784 independent third-party cross-review",
+  "cellCount": 240,
+  "crossDispositionCounts": {
+    "accept-current": 206,
+    "correction": 3,
+    "hold-callerless-hash-only": 24,
+    "refinement": 7
+  },
+  "currentCallerlessHolds": 24,
+  "files": {
+    "README.md": "fa2f215a9de54ecb8487598bda18b7d8f8c230ef715d807ceca3031f9ee92f3b",
+    "build_cross_review.py": "73a1baf9acb520a537aa5b3c53ece364d585cf2d6317fc4487eb577d9b18998b",
+    "caller-contexts-pinned.jsonl": "9d244314937105cdd19daf4affe7ce1e474e0587e50e7cd4250fcb7bbb9cb9a1",
+    "candidate-free-SHA256SUMS.txt": "b551fcc26783d47666e4ec3c35946a314e2bf0b7374cf52acb1df54b027bcfe3",
+    "candidate-free-input-SHA256SUMS.txt": "99969b73bc1c66e817385863593bef49d2164ce71a801e64e5021e501842414b",
+    "cross-ledger.jsonl": "6621bd136f9a1f7f16e758133f2b02b5851dc5e476bcdf4245bf492b3c7099b8",
+    "current-window-holds-hash-only.jsonl": "52b384aa34066e75d282f3d2a2e3ed6f4c9faadbc90c3788bf5f959cc0360564",
+    "input-pins.json": "554af0373d780b1c16674040501115cc3366d70b58f7a75aac9df345c2df6c2d",
+    "primary-SHA256SUMS.txt": "86665242ccafb9d73781718d339c691e0e59aadc5b5f78cbfcd070f2eae20c1c",
+    "prior-active-holds-hash-only.jsonl": "74e5d1ea8f974682851605a504823aadeff17a34f67ed9e17dfde6ba7b48eb49",
+    "selected-changes.jsonl": "836db83c6fc36747df908911cd6f749de12dc0488f599465744ba774a2ecd8d5",
+    "summary.json": "5e17bf2a95851c79b268844c435ab3fbe4421b2fd2f52df421f85f2f74fda48f",
+    "verify_cross_review.py": "93dffc269b07da5be0c5b65f40752cda9a33a42d87abab4e10cffe385292a79a"
+  },
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "nextBoundary": {
+    "continuationIndex": 785,
+    "oneBasedPosition": 786,
+    "sourceId": "ui.optional-overrides-the-webhook-s-dis.4116a5e8e4",
+    "sourceSha256": "4116a5e8e4222045299ae89f3577810da389c5c65f51cf8a3b097ecf05ef348e"
+  },
+  "priorActiveHoldsPreserved": 988,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "resultingActiveHolds": 1012,
+  "schemaVersion": 1,
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "window": "W765-W784"
+}

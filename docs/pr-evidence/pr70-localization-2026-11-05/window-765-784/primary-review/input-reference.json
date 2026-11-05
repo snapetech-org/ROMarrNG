@@ -1,0 +1,13 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "window": "W765-W784",
+  "candidateFreePath": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w765-784-20261105/candidate-free",
+  "candidateFreeManifestSha256": "560edb5cbc160bc95e74888dee9506de7c37e2bd479ab3164887245253c5977f",
+  "candidateFreeChecksumListSha256": "b551fcc26783d47666e4ec3c35946a314e2bf0b7374cf52acb1df54b027bcfe3",
+  "candidateFreeCellRowsSha256": "28314a3ed8b00f4db2d793c836d2a855b680ff18cc8c168379f9aee4f11b3c0c",
+  "reviewBasis": "Sealed candidate-free source/current targets and exact pinned caller contexts; no primary proposal targets were copied from other windows.",
+  "provenanceNote": "For packet schema only, the W745 primary builder script was consulted after this candidate-free packet sealed. Its hard-coded W745 proposal targets were not used as evidence or targets; current window decisions were independently reviewed from this packet."
+}

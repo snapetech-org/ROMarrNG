@@ -1,0 +1,47 @@
+{
+  "currentHead": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "currentTree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "previousAppliedCellsReattested": 144,
+  "previousCandidateFreeChecksumsVerified": true,
+  "previousCandidateFreeHead": "68c5c9d4ad13ad5d02b9c455f429d8a5149d363d",
+  "previousCandidateFreeTree": "524db27557a65d64343b15c9983f6ac2f92f90c4",
+  "previousHeldCellsReattested": 988,
+  "previousProductCommit": "32cf17d4ddbb353736e61a30083601fe332ca104",
+  "previousProductReadbackVerified": true,
+  "previousProductTree": "f26047b3e5bc2646cd5a4e51df4bff19eba49a9f",
+  "previousSelectionsReattested": 380,
+  "priorFullReadbackWindows": {
+    "W565-W584": 240,
+    "W585-W604": 240,
+    "W605-W624": 240,
+    "W625-W644": 240,
+    "W645-W664": 240,
+    "W665-W684": 240,
+    "W685-W704": 240,
+    "W705-W724": 240,
+    "W725-W744": 240,
+    "W745-W764": 240
+  },
+  "priorHoldTextIncluded": false,
+  "priorNewCallerlessSources": 86,
+  "priorReviewRecommendationsRead": false,
+  "result": "PASS",
+  "w625EvidenceCaveat": {
+    "description": "The W645 predecessor records 31 W625 bulky stage files absent from the prior committed PR evidence tree. The full W625 readback and final verifier remain hash-bound; the absent PR-tree stage files are not claimed as verified.",
+    "matchesFinalVerifier": true,
+    "missingFromPriorCommittedPrTree": 31,
+    "priorFullReadbackSha256": "8d11e4da3846c10047c2274c3b6e411c4e9f1a94b69d582be9e3d168970a6c07"
+  },
+  "w645BlindSummaryPinWarning": {
+    "blindChecksumMismatchRecorded": true,
+    "crossReviewResult": "PASS_WITH_BLIND_SUMMARY_PIN_WARNING",
+    "description": "The W645 cross-review records a stale blind top-level checksum pointer and passing row-level binding/proposal-target hash checks. This warning is retained.",
+    "rootOutcome": "ROOT_ADJUDICATION_COMPLETE_APPLICATION_PENDING",
+    "rowLevelBindingsReported": true
+  },
+  "w665EvidenceRestoration": {
+    "allCurrentIndexedPayloadsPresentAndHashMatched": true,
+    "currentEvidenceIndexEntries": 77,
+    "restorationCommit": "50e3f8a48a800affff8bad367b5c493cc0fdfd62"
+  }
+}

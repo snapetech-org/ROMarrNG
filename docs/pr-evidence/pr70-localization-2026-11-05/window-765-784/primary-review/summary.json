@@ -1,0 +1,51 @@
+{
+  "artifact": "ROMarrNG PR #70 W765-W784 independent primary semantic review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "window": "W765-W784",
+  "catalogZeroBasedIndices": [
+    765,
+    784
+  ],
+  "catalogOneBasedPositions": [
+    766,
+    785
+  ],
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "callerBackedCells": 216,
+  "callerlessHashOnlyCells": 24,
+  "decisionCounts": {
+    "accept-current": 206,
+    "correction": 3,
+    "refinement": 7,
+    "hold-callerless-hash-only": 24
+  },
+  "proposalCount": 10,
+  "correctionCount": 3,
+  "refinementCount": 7,
+  "priorActiveHoldsReattested": 988,
+  "newWindowHashOnlyHolds": 24,
+  "resultingActiveHashOnlyHolds": 1012,
+  "priorAppliedCellsReattested": 144,
+  "priorFullReadbackWindowCount": 10,
+  "allCandidateFreeBaselineTokensPass": true,
+  "allProposalTokensPass": true,
+  "confidence": "moderate",
+  "nativeSpeakerReviewPerformed": false,
+  "headedBrowserReviewPerformed": false,
+  "priorRecommendationsUsed": false,
+  "processProvenanceNoteIncluded": true,
+  "catalogsEdited": false,
+  "repoEdited": false,
+  "testsBuildsScansCiRun": false,
+  "nextBoundary": {
+    "continuationIndex": 785,
+    "oneBasedPosition": 786,
+    "sourceId": "ui.optional-overrides-the-webhook-s-dis.4116a5e8e4",
+    "sourceSha256": "4116a5e8e4222045299ae89f3577810da389c5c65f51cf8a3b097ecf05ef348e"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "apiCommitTree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "attestedAtUtc": "2026-11-05T21:32:14+00:00",
+  "baseApiSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "baseLiveRefOid": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+  "baseRefName": "main",
+  "bodyBytes": 70793,
+  "bodySha256": "a250310997310ad765bb78b77995285e52f243270f11f7d6be49557b2ed6349a",
+  "branchRefOid": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "checksRerun": false,
+  "draft": true,
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "headRefName": "task/localization-translation-review-20261030",
+  "merged": false,
+  "pullRefOid": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "state": "OPEN",
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41"
+}
