@@ -20,3 +20,7 @@ This evidence packet covers source-order positions 665–684 at the exact open P
 - `SHA256SUMS.txt` covers every file in this evidence packet; each review subpacket also has its own checksums.
 
 The candidate-free, primary, blind, cross-review, application readback, and checksum verifiers pass. `git diff --check` is clean. No tests or CI dispatches were run; no workflow edits, merge, release, or tag were made. The repository pre-commit hook invoked local Semgrep on the staged evidence scripts and completed successfully during the evidence commit.
+
+## Evidence restoration
+
+The original evidence index listed 77 files. Twenty-four payloads were absent from the PR tree: 23 were restored byte-for-byte from task scratch with their recorded hashes intact; the missing root ledger was reconstructed from the verified 240-cell cross-review ledger because its original output was also absent from task scratch. Only the reconstructed root-ledger checksum entry changed. Callerless rows remain text-free.
