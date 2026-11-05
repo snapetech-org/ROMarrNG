@@ -17834,12 +17834,12 @@
       "translations": {
         "es": "La API de administración y los feeds de los indexadores se comprueban por separado.",
         "zh-Hans": "分别检查管理 API 和索引器订阅源。",
-        "hi": "प्रबंधन API और अनुक्रमक फ़ीड अलग से जाँच कर रहे हैं।",
+        "hi": "प्रबंधन API और इंडेक्सर फ़ीड की अलग-अलग जाँच की जाती है।",
         "de": "Die Verwaltungs-API und die Indexer-Feeds werden getrennt überprüft.",
         "ja": "管理 API と インデックスフィードを個別にチェックします。",
         "fr": "L’API de gestion et les flux des indexeurs sont vérifiés séparément.",
         "pt-BR": "A API de gerenciamento e os feeds dos indexadores são verificados separadamente.",
-        "ar": "الإدارة API وتُدقَّق مواد الفهرس بصورة منفصلة.",
+        "ar": "تُفحَص واجهة API للإدارة وخلاصات المفهرسات كلٌّ على حدة.",
         "ko": "관리 API 및 색인기 피드는 별도로 검사됩니다.",
         "zh-Hant": "分別檢查管理 API 和索引器動態消息。",
         "vi": "API quản lý và nguồn cấp dữ liệu của bộ lập chỉ mục được kiểm tra riêng.",
@@ -18133,7 +18133,7 @@
       "source": "Media",
       "sourceHash": "d357175cfe8978d39b0f86552dcd9404973493e2816101d9ff6c05ee248ef6bd",
       "translations": {
-        "es": "Contenido multimedia",
+        "es": "Tipo de medio",
         "zh-Hans": "媒体",
         "hi": "मीडिया",
         "de": "Medien",
