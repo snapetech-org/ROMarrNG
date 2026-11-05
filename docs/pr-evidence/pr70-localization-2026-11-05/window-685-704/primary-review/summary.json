@@ -1,0 +1,57 @@
+{
+  "artifact": "ROMarrNG PR #70 W685-W704 independent primary semantic review",
+  "pullRequest": 70,
+  "exactHead": "43d2858744ef20cd58462643fed534ac61d2ffad",
+  "exactTree": "73e8f50d65cb611def996b01bab0b00628b65860",
+  "reviewedAtUtc": "2026-11-05T12:54:14+00:00",
+  "cellCount": 240,
+  "sourceCount": 20,
+  "localeCount": 12,
+  "callerBackedCells": 228,
+  "callerlessHashOnlyHolds": 12,
+  "callerlessSourceCount": 1,
+  "decisionCounts": {
+    "accept-current": 226,
+    "correction": 1,
+    "hold-hash-only": 12,
+    "refinement": 1
+  },
+  "proposalCount": 2,
+  "proposalCountsByLocale": {
+    "ar": 1,
+    "fr": 1
+  },
+  "proposalCountsByPosition": {
+    "693": 1,
+    "701": 1
+  },
+  "confidenceCounts": {
+    "high": 94,
+    "moderate": 134,
+    "unknown": 12
+  },
+  "tokenAudit": {
+    "candidateFreeReportedCounts": {
+      "markup": 0,
+      "numeric": 0,
+      "numericPresentationDifferences": 0,
+      "placeholder": 0,
+      "protectedLiteral": 0
+    },
+    "allPlaceholderMarkupNumericAndProtectedLiteralChecksPassedForTextBearingCells": true,
+    "candidateFreeReportedMismatches": {
+      "markup": 0,
+      "numeric": 0,
+      "numericPresentationDifferences": 0,
+      "placeholder": 0,
+      "protectedLiteral": 0
+    },
+    "finding": "The candidate-free token audit reports zero placeholder, markup, numeric, numeric-presentation, and protected-literal mismatches."
+  },
+  "hashOnlyHoldPolicy": "Every callerless cell remains a hold and output contains hashes/positions/locales only; source and current target text are omitted.",
+  "independence": "Review used candidate-free input only; no other reviewer proposal or decision was accessed.",
+  "limitations": [
+    "No native-speaker second review or runtime visual review was performed.",
+    "The reviewed caller excerpts are the exact extracted contexts in the candidate-free packet; callerless cells cannot be semantically assessed without text and remain held."
+  ]
+}

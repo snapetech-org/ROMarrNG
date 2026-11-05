@@ -1,0 +1,24 @@
+{
+  "applicationPerformed": false,
+  "artifact": "ROMarrNG W685-W704 root adjudication",
+  "branch": "task/localization-translation-review-20261030",
+  "callerlessHashOnlyHolds": 12,
+  "cellCount": 240,
+  "exactHead": "43d2858744ef20cd58462643fed534ac61d2ffad",
+  "exactTree": "73e8f50d65cb611def996b01bab0b00628b65860",
+  "headedBrowserReviewPerformed": false,
+  "independentCrossReviewDisposition": "PASS",
+  "nativeSpeakerApproval": false,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "result": "ROOT_ADJUDICATION_COMPLETE_APPLICATION_PENDING",
+  "rootDispositionCounts": {
+    "accept-current": 221,
+    "correction": 5,
+    "hold-hash-only": 12,
+    "refinement": 2
+  },
+  "selectedCorrectionCount": 5,
+  "selectedRefinementCount": 2,
+  "selectedTargets": 7
+}

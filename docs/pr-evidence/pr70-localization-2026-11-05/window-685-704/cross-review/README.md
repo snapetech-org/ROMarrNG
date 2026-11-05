@@ -1,0 +1,7 @@
+# ROMarrNG W685–W704 cross-review
+
+This cross-review covers all 240 cells (20 source messages × 12 locales) at PR #70 product head 43d2858744ef20cd58462643fed534ac61d2ffad / tree 73e8f50d65cb611def996b01bab0b00628b65860. The primary review and independent blind review bind to the exact candidate-free source, current-target and caller-context hashes. The blind packet’s candidate-free file pins match the sealed input, and its own verifier passes.
+
+Disposition: 221 accept-current, 5 corrections, 2 refinements, and 12 callerless hash-only holds. The two primary proposals match the blind proposals exactly (French invitation route at position 693 and Arabic notification-connections empty state at position 701). Five additional blind-only proposals are selected after root review against their exact callers: Vietnamese missing-answer fallback; Vietnamese, Simplified Chinese, and Traditional Chinese connection empty states; and the Indonesian direct-indexer configuration state.
+
+The 12 callerless cells remain text-free holds. The 7 selected targets pass the reviewers’ placeholder, markup, number, and protected-literal checks. One absent pyc cache entry was removed from the copied primary checksum index; the source scratch cache remains intact. This machine/assistant review is not qualified native-speaker approval and does not claim headed-browser acceptance. No catalog application is included in this cross-review packet.

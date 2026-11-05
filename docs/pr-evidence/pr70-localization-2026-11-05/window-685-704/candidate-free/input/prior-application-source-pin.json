@@ -1,0 +1,18 @@
+{
+  "applicationChecksumListSha256": "763b5215806aed39e1a44eeac4588ca29f4a05ffcdb89668b936a0834c987719",
+  "applicationPlanSha256": "88f25db888a379cd4294b735ec539854479a3743ae5f8ea84850a5a2d7e5f00b",
+  "applicationReadbackSha256": "8a063c27f1c26173a34fb41addeeab5bce3e27140325b2909db6553fabe456a9",
+  "currentHead": "43d2858744ef20cd58462643fed534ac61d2ffad",
+  "currentTree": "73e8f50d65cb611def996b01bab0b00628b65860",
+  "latestProductCommit": "38718aa6c60e3366aa67ba5372531b77d6539862",
+  "latestProductTree": "d0d3ec426190114e9efb2378f5a9dd44ac81e91f",
+  "latestWindowApplicationPlanSha256": "a516582bd3251e1228e0a50dda065d41acfc7f123b0b9305000b804acda9683a",
+  "latestWindowReadbackSha256": "455251e4b62cfb98e1a53f1571a839b83b0902c48e82d56d8907af2170b864eb",
+  "productCommit": "fee1da731d13c578d1911884a1567d0124187d29",
+  "productCommitAncestor": true,
+  "productCommitRecordSha256": "5591519d00799b5bc4f0d8bd73a4dbef065bc4d65a83aedb338146e5d904a540",
+  "productParent": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+  "productTree": "fae55bb1f52f49da93bec989fa4feb86dd87548e",
+  "sourceHead": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+  "sourceTree": "d6066baa3d03d3b4c6034e5af061fc4bc278b0f9"
+}
