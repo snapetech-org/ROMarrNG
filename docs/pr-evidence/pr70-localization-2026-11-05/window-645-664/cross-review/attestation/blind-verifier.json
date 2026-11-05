@@ -1,0 +1,10 @@
+{
+  "result": "FAIL_RECORDED",
+  "verifier": "blind-review/verify_blind.py",
+  "failure": "SUMMARY.json candidateFreeChecksumListSha256 pin mismatch",
+  "expected": "1ca785d57863dac9f0bb52e60b5966c55f758282cac7f9099c9056b256359ddb",
+  "actual": "15dd26e7614adb334b2c83ff9da791d56be8e9854a10f80d1200ee719422785c",
+  "directCellAndProposalBindings": "PASS",
+  "blindPacketOwnChecksums": "PASS",
+  "blindPacketEdited": false
+}

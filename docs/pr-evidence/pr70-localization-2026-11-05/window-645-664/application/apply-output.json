@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "sourcePin": {
+    "head": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+    "tree": "d6066baa3d03d3b4c6034e5af061fc4bc278b0f9"
+  },
+  "selectedCells": 15,
+  "translationHashUpdates": 10,
+  "changedPaths": [
+    "romarr/ui-labels.json"
+  ],
+  "catalogPreimageSha256": "24d2d776841c3101269e218b48344eede7bafd613d2fd9840e1fb0f92a501715",
+  "catalogPostimageSha256": "98479e4869d855f569a6f1211ef3091726a41c9ff06b9bcb3adeb4bad0961d19",
+  "applicationMessageKeyOrderSha256": "135fb76e314ce4f4157ca0091544c8945bec1bb4e9bcf9a61770c07bcb404ca9",
+  "translationStatusChanges": 0,
+  "translationReviewMetadataChanges": 0,
+  "workflowChanges": 0
+}

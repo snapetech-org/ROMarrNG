@@ -1,0 +1,17 @@
+{
+  "reviewerRole": "cross-review",
+  "candidateFreeExactHeadAndCallerfulCurrentTextReviewed": true,
+  "independentLedgerSealedBeforeInspectingProposalLedgers": true,
+  "primaryAndBlindProposalLedgersInspectedAfterSeal": true,
+  "candidateFreeREADMECountsWereVisibleBeforeIndependentSeal": true,
+  "proposalTargetsWereNotVisibleBeforeIndependentSeal": true,
+  "subagentsUsed": false,
+  "subagentAttempt": "Two shard agents were requested, but all four concurrency slots were occupied; the full independent review was completed directly.",
+  "primaryBlindProposalCounts": {
+    "primary": 12,
+    "blind": 6
+  },
+  "nativeSpeakerApproval": false,
+  "browserReviewPerformed": false,
+  "applicationPerformed": false
+}

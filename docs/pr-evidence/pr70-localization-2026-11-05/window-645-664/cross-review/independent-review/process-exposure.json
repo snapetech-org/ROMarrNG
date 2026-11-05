@@ -1,0 +1,11 @@
+{
+  "reviewerRole": "cross-review independent semantic assessment",
+  "exactHead": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+  "candidateFreeInputOnlyAtAssessmentTime": true,
+  "primaryProposalLedgerReadAtAssessmentTime": false,
+  "blindProposalLedgerReadAtAssessmentTime": false,
+  "primaryOrBlindSummariesExposed": "README summary counts only (primary proposal count 12; blind 3 correction + 3 refinement counts).",
+  "callerlessSourceTextCopiedToReviewLedger": false,
+  "nativeSpeakerApproval": false,
+  "browserSignoff": false
+}

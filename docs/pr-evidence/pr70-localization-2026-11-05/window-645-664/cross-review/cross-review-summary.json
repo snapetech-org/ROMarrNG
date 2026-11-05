@@ -1,0 +1,55 @@
+{
+  "artifact": "ROMarrNG PR #70 W645-W664 cross-review packet",
+  "exactHead": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+  "exactTree": "d6066baa3d03d3b4c6034e5af061fc4bc278b0f9",
+  "candidateFreeInputChecksumListSha256": "15dd26e7614adb334b2c83ff9da791d56be8e9854a10f80d1200ee719422785c",
+  "primaryOuterChecksumListSha256": "4d9306fb55c0918f2538a12a3f4e17845e90dfa58fe30acd7c3bba1e1d4ed451",
+  "primaryOutputChecksumListSha256": "854b2c2b2debfeacf6c663edd1454babd393d4f96476485087001cacf2149381",
+  "blindChecksumListSha256": "c35bf446c78e2a4ff5c60dd1fb0382dbc6776530998cbeac9e45cc923900a808",
+  "cells": 240,
+  "callerfulCells": 144,
+  "callerlessHashOnlyHolds": 96,
+  "crossCounts": {
+    "accept-current": 129,
+    "propose-correction": 12,
+    "text-free-hold": 96,
+    "propose-refinement": 3
+  },
+  "crossProposalCellCount": 15,
+  "primaryBlindUniqueProposalCellCount": 12,
+  "primaryProposalCount": 12,
+  "blindProposalCount": 6,
+  "proposalRecordsReconciled": 18,
+  "primaryBlindTargetDisagreementCells": 4,
+  "primaryBlindRationaleDisagreementCells": 0,
+  "blindTargetRationaleConflictCells": 1,
+  "blindSummaryChecksumPinMismatch": {
+    "expected": "1ca785d57863dac9f0bb52e60b5966c55f758282cac7f9099c9056b256359ddb",
+    "actual": "15dd26e7614adb334b2c83ff9da791d56be8e9854a10f80d1200ee719422785c",
+    "directRowsAndSixProposalTargetsBindToCurrentInput": true
+  },
+  "primaryVerifier": {
+    "callerfulDecisions": 144,
+    "callerlessHashOnlyHolds": 96,
+    "candidateFreeVerifier": "PASS",
+    "cells": 240,
+    "counts": {
+      "CHANGE": 12,
+      "HOLD": 96,
+      "KEEP": 132
+    },
+    "head": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+    "outputFiles": 4,
+    "primaryFiles": 51,
+    "primaryIndependentOfBlindAndCross": true,
+    "repoClean": true,
+    "result": "PASS",
+    "tree": "d6066baa3d03d3b4c6034e5af061fc4bc278b0f9",
+    "window": "W645-W664"
+  },
+  "nativeSpeakerApproval": false,
+  "browserSignoff": false,
+  "applicationPerformed": false,
+  "repoPrWorkflowEdits": false,
+  "result": "PASS_WITH_BLIND_SUMMARY_PIN_WARNING"
+}

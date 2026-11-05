@@ -1,0 +1,25 @@
+{
+  "result": "PASS",
+  "inputHead": "5860fce5d546a772b1df995f8f6321c083ed7d5d",
+  "inputTree": "561835895972a62e9d3b1f2bfe9bcba01187eb98",
+  "head": "86f6161f3069bb3113f8f7a8a763193f15c4e2bc",
+  "tree": "29b85a61d3ef20b73ec15c5aa08c5a23788d32f8",
+  "candidateCells": 240,
+  "observedChangedCells": 3,
+  "dispositionCounts": {
+    "accept-current": 177,
+    "hold-callerless-hash-only": 60,
+    "accept-correction": 2,
+    "accept-independent-supplemental-correction": 1
+  },
+  "changedPaths": [
+    "romarr/ui-labels.json"
+  ],
+  "messageCount": 1836,
+  "messageKeyOrderPreserved": true,
+  "nonTargetCatalogContentPreserved": true,
+  "callerlessHoldsTextFree": true,
+  "workflowChanges": 0,
+  "readbackSha256": "8d11e4da3846c10047c2274c3b6e411c4e9f1a94b69d582be9e3d168970a6c07",
+  "catalogPostimageSha256": "24d2d776841c3101269e218b48344eede7bafd613d2fd9840e1fb0f92a501715"
+}
