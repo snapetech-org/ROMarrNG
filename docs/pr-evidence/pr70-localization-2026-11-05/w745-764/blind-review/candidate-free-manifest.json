@@ -1,0 +1,53 @@
+{
+  "W625MissingStageFileCaveatPreserved": true,
+  "W645StaleBlindChecksumPointerWarningPreserved": true,
+  "W665EvidenceRestorationAttested": true,
+  "W725AppliedTargetCount": 5,
+  "W725ProductReadbackCells": 240,
+  "artifact": "ROMarrNG PR #70 W745-W764 candidate-free exact-head input",
+  "branch": "task/localization-translation-review-20261030",
+  "callerBackedCells": 216,
+  "callerlessHashOnlyCells": 24,
+  "callerlessSourceCount": 2,
+  "catalogSelectionOneBased": [
+    746,
+    765
+  ],
+  "catalogSelectionZeroBased": [
+    745,
+    764
+  ],
+  "cellCount": 240,
+  "currentTokenMismatchCounts": {
+    "markup": 0,
+    "numeric": 0,
+    "numericPresentationDifferences": 0,
+    "placeholder": 0,
+    "protectedLiteral": 0
+  },
+  "directCallerReferences": 27,
+  "head": "68c5c9d4ad13ad5d02b9c455f429d8a5149d363d",
+  "localeCount": 12,
+  "newWindowHashOnlyHolds": 24,
+  "nextBoundary": {
+    "continuationIndex": 765,
+    "oneBasedPosition": 766,
+    "sourceId": "ui.on-this-day.d011904834",
+    "sourceSha256": "d011904834fe28b25d7a9d9043c048b00e2b6f0ebf162498850f2105696195d6"
+  },
+  "priorActiveHoldsReattested": 964,
+  "priorAppliedCellsReattested": 137,
+  "priorFullReadbackWindowCount": 9,
+  "priorSelectionsReattested": 360,
+  "productionCallerFilesSearched": 51,
+  "proposedTargetsIncluded": false,
+  "pullRequest": 70,
+  "repoEdited": false,
+  "repository": "snapetech-org/ROMarrNG",
+  "resultingActiveHashOnlyHolds": 988,
+  "reviewDecisionsIncluded": false,
+  "sourceCount": 20,
+  "testsBuildsScansCiRun": false,
+  "tree": "524db27557a65d64343b15c9983f6ac2f92f90c4",
+  "window": "W745-W764"
+}

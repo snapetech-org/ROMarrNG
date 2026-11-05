@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "exactHead": "68c5c9d4ad13ad5d02b9c455f429d8a5149d363d",
+  "exactTree": "524db27557a65d64343b15c9983f6ac2f92f90c4",
+  "window": "W745-W764",
+  "cells": 240,
+  "rootDispositionCounts": {
+    "accept-current": 209,
+    "hold-callerless-hash-only": 24,
+    "correction": 7
+  },
+  "selectedTargets": 7,
+  "crossReviewChecksumListSha256": "c29343cf02a228b2f6848a69bd97b23f6901f9adabeee91cb76003bdc4d27538",
+  "reviewOnly": true,
+  "catalogsEdited": false,
+  "qualifiedNativeSpeakerApproval": false,
+  "headedBrowserAcceptance": false
+}

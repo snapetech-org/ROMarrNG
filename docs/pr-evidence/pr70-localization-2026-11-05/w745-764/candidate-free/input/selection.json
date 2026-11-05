@@ -1,0 +1,255 @@
+{
+  "catalogOneBasedPositions": [
+    746,
+    765
+  ],
+  "cellCount": 240,
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "positions": [
+    745,
+    764
+  ],
+  "selectedSources": [
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 746,
+      "catalogZeroBasedIndex": 745,
+      "position": 745,
+      "registryLocations": [],
+      "source": "Nothing importable there",
+      "sourceId": "ui.nothing-importable-there.b81b7140c5",
+      "sourceSha256": "b81b7140c5ec9644cd7923bacff9a29c3631f3ec4f1d0a8c3fe682a27f889608"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 747,
+      "catalogZeroBasedIndex": 746,
+      "position": 746,
+      "registryLocations": [],
+      "sourceId": "ui.nothing-in-this-month-page-back-a-li.3a67275d9e",
+      "sourceSha256": "3a67275d9e894af9fa54e1bda3412a3ffc2be3679c5e7bc32e5f9e8520687c1c",
+      "sourceTextOmitted": true
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 748,
+      "catalogZeroBasedIndex": 747,
+      "position": 747,
+      "registryLocations": [],
+      "source": "Nothing matches",
+      "sourceId": "ui.nothing-matches.965b516df3",
+      "sourceSha256": "965b516df3baab79f288a63f58afef1441a9b86b345a87c4f4eb436ca573d279"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 749,
+      "catalogZeroBasedIndex": 748,
+      "position": 748,
+      "registryLocations": [],
+      "source": "Nothing matches. They may not share this platform.",
+      "sourceId": "ui.nothing-matches-they-may-not-share-t.b719f1a84f",
+      "sourceSha256": "b719f1a84f936f3fc4098933be3181e06fcc0aa1a975d5a031f1463e8e5a31f0"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 750,
+      "catalogZeroBasedIndex": 749,
+      "position": 749,
+      "registryLocations": [],
+      "source": "Nothing missing.",
+      "sourceId": "ui.nothing-missing.ec939b22fd",
+      "sourceSha256": "ec939b22fda98d32085056734fbbc5b522cee6f68a3234685dfb41fe3ff83d6e"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 751,
+      "catalogZeroBasedIndex": 750,
+      "position": 750,
+      "registryLocations": [],
+      "source": "Nothing on this day.",
+      "sourceId": "ui.nothing-on-this-day.c110ae4cc4",
+      "sourceSha256": "c110ae4cc45c90b87dc9962b20fb9fb394a60bc68eb7edbbdc43ff91584dea27"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 752,
+      "catalogZeroBasedIndex": 751,
+      "position": 751,
+      "registryLocations": [],
+      "source": "Nothing on this shelf yet.",
+      "sourceId": "ui.nothing-on-this-shelf-yet.337c41f2eb",
+      "sourceSha256": "337c41f2ebc2b43b61e66438d6e3323d8a46cf0281a6d9ad65c72a5893e9e59a"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 753,
+      "catalogZeroBasedIndex": 752,
+      "position": 752,
+      "registryLocations": [],
+      "source": "Nothing to show.",
+      "sourceId": "ui.nothing-to-show.b1cd8bf258",
+      "sourceSha256": "b1cd8bf2581b2e2b8cca83f4e6e40074e2f5b845306762dce41eced0de9911e3"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 754,
+      "catalogZeroBasedIndex": 753,
+      "position": 753,
+      "registryLocations": [],
+      "source": "Nothing was connected.",
+      "sourceId": "ui.nothing-was-connected.e3d14762be",
+      "sourceSha256": "e3d14762be4872c46989998612bb6cb279f372f07e140fe7a2438e1eb7ffd01a"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 755,
+      "catalogZeroBasedIndex": 754,
+      "position": 754,
+      "registryLocations": [],
+      "source": "Nothing yet.",
+      "sourceId": "ui.nothing-yet.e056734eff",
+      "sourceSha256": "e056734effa8d1905527d01e4cd406a82e5193edccf86c5ff0787b8556c6af9c"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 756,
+      "catalogZeroBasedIndex": 755,
+      "position": 755,
+      "registryLocations": [],
+      "source": "OAuth Token",
+      "sourceId": "ui.oauth-token.1869088a28",
+      "sourceSha256": "1869088a28b8a07b28d87deb0bb60d65e4acbc6b461ff61d442748a1e78b5327"
+    },
+    {
+      "activeSourceRank": 235,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 757,
+      "catalogZeroBasedIndex": 756,
+      "position": 756,
+      "registryLocations": [
+        "romarr/ui.py:4302"
+      ],
+      "source": "OK",
+      "sourceId": "ui.ok.565339bc4d",
+      "sourceSha256": "565339bc4d33d72817b583024112eb7f5cdf3e5eef0252d6ec1b9c9a94e12bb3"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 758,
+      "catalogZeroBasedIndex": 757,
+      "position": 757,
+      "registryLocations": [],
+      "source": "Off",
+      "sourceId": "ui.off.ca7981b46e",
+      "sourceSha256": "ca7981b46ecf2c1787b6d76d81d9fd7fa0ca95842e2fcc2a452869891a9334d1"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 759,
+      "catalogZeroBasedIndex": 758,
+      "position": 758,
+      "registryLocations": [],
+      "source": "Omitted — no dump in your regions",
+      "sourceId": "ui.omitted-no-dump-in-your-regions.73a042f723",
+      "sourceSha256": "73a042f72313155ab25b8f9b83fcae7e652dff736663777b0b606d147dd5cc1f"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 760,
+      "catalogZeroBasedIndex": 759,
+      "position": 759,
+      "registryLocations": [],
+      "source": "On Archive.org",
+      "sourceId": "ui.on-archive-org.a21e4bd863",
+      "sourceSha256": "a21e4bd863bfef2cd5a6c0067978daacb4c9b48fce22ed64986b455abe667aad"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 761,
+      "catalogZeroBasedIndex": 760,
+      "position": 760,
+      "registryLocations": [],
+      "source": "On disk & catalogued",
+      "sourceId": "ui.on-disk-catalogued.97de30b17c",
+      "sourceSha256": "97de30b17c2671e29926a94e900fea3c89b9e75bfd27c9222da2c157c6c558fa"
+    },
+    {
+      "activeSourceRank": 237,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 762,
+      "catalogZeroBasedIndex": 761,
+      "position": 761,
+      "registryLocations": [
+        "romarr/ui.py:2068"
+      ],
+      "source": "On disk (plays now)",
+      "sourceId": "ui.on-disk-plays-now.325a11ceda",
+      "sourceSha256": "325a11ceda6c5379498ece518c46a081019f59b3fd88ba32ea53dbdc653f397b"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 763,
+      "catalogZeroBasedIndex": 762,
+      "position": 762,
+      "registryLocations": [],
+      "source": "On disk here",
+      "sourceId": "ui.on-disk-here.6d4649d06e",
+      "sourceSha256": "6d4649d06eef24c3f916cc0dc169fe1e1e3e1186e8056e2c4b28f5656b0cba12"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 764,
+      "catalogZeroBasedIndex": 763,
+      "position": 763,
+      "registryLocations": [],
+      "source": "On disk: {disk} · Catalogued elsewhere: {catalogued}",
+      "sourceId": "ui.on-disk-disk-catalogued-elsewhere-ca.0329505771",
+      "sourceSha256": "03295057710d89efa02cff5bd1329fc71811bd736f055e79fd22fb69b4d3fbb0"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 765,
+      "catalogZeroBasedIndex": 764,
+      "position": 764,
+      "registryLocations": [],
+      "sourceId": "ui.on-the-same-docker-network-this-is-n.be97986423",
+      "sourceSha256": "be97986423ce3d67237b6665fefb8f0ef25cc734fa6fab0f6cf3b5094c7ffb2a",
+      "sourceTextOmitted": true
+    }
+  ],
+  "selectionBasis": "catalog insertion order at exact pinned romarr/ui-labels.json indices 745 through 764 (zero-based)",
+  "sourceCount": 20,
+  "window": "W745-W764"
+}

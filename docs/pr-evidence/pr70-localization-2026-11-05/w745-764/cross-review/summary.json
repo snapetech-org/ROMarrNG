@@ -1,0 +1,59 @@
+{
+  "actionDisagreementCells": 3,
+  "artifact": "ROMarrNG PR #70 W745-W764 independent cross-review",
+  "blindActionCounts": {
+    "correction": 6,
+    "hold": 24,
+    "retain": 210
+  },
+  "callerBackedCells": 216,
+  "callerReferences": 27,
+  "callerlessHashOnlyCells": 24,
+  "catalogOneBasedPositions": [
+    746,
+    765
+  ],
+  "catalogZeroBasedIndices": [
+    745,
+    764
+  ],
+  "catalogsEdited": false,
+  "cells": 240,
+  "crossDispositionCounts": {
+    "accept-current": 209,
+    "correction": 7,
+    "hold-callerless-hash-only": 24
+  },
+  "finalTokenFailures": 0,
+  "head": "68c5c9d4ad13ad5d02b9c455f429d8a5149d363d",
+  "independentlyReconciledCells": 7,
+  "newCallerlessHoldsHashOnly": 24,
+  "nextBoundary": {
+    "continuationIndex": 765,
+    "oneBasedPosition": 766,
+    "sourceId": "ui.on-this-day.d011904834",
+    "sourceSha256": "d011904834fe28b25d7a9d9043c048b00e2b6f0ebf162498850f2105696195d6"
+  },
+  "primaryBlindActionCrossTab": {
+    "correction|correction": 4,
+    "correction|retain": 1,
+    "hold|hold": 24,
+    "retain|correction": 2,
+    "retain|retain": 209
+  },
+  "primaryDecisionCounts": {
+    "accept-current": 211,
+    "correction": 4,
+    "hold-callerless-hash-only": 24,
+    "refinement": 1
+  },
+  "priorActiveHoldsPreservedHashOnly": 964,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "repositoryEdited": false,
+  "result": "PASS",
+  "resultingActiveHolds": 988,
+  "testsBuildsScansCiRun": false,
+  "tree": "524db27557a65d64343b15c9983f6ac2f92f90c4",
+  "window": "W745-W764"
+}

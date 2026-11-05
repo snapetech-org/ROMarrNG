@@ -13,6 +13,7 @@
 #### Changed
 
 - **Localization:** Corrected the twelve download-queue status labels and refined the Japanese and Brazilian Portuguese GitHub label plus the Vietnamese file-header diagnostic.
+- **Localization:** Corrected seven context-reviewed labels for empty search results, the empty Wanted state, and Archive.org origin across five locales.
 
 ## [0.14.12] - 2026-10-24
 
