@@ -1,0 +1,16 @@
+{
+  "callerContextFileSha256": "036c7b756054269799c3cc1ca2e7f44c7c819e232444cc0d68e8615e7f4c0135",
+  "candidateFreeCellFileSha256": "a87a7ad22ef4f0ede423fd5a064e6d218501cc45a968047ece98a976c2805c07",
+  "candidateFreePacketPath": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w805-824-candidate-free-20261105",
+  "head": "551cccd03e0acdce208ce11f571378c1dcdfb805",
+  "inputChecksumListSha256": "503fed84d5932f6daffc3eea87052b904729c11634bad4ce0d0f59a04ed32abb",
+  "inputChecksummedFileCount": 13,
+  "inputManifestSha256": "dabd57ff5da0b2add0db0d07f53e28082cc45749ce58229ba46a8d31b87ea866",
+  "noOtherReviewOutputsConsulted": true,
+  "outerChecksumListSha256": "cf34d5b87ae6e06aa09152a09a87da51025c40e47ed2e18d2237c666e912b8ba",
+  "outerChecksummedFileCount": 21,
+  "predecessorChecksumListSha256": "22532080b96bbfdbeff135423e68477ee5860672dc87204d610f469f4a5c83f9",
+  "predecessorChecksummedFileCount": 3,
+  "tree": "d77f32ac8ec0ab53200d04819869a2e99c6de73c",
+  "window": "W805-W824"
+}

@@ -1,0 +1,25 @@
+{
+  "activeHashOnlyHoldsReattested": 1060,
+  "activeHoldFilesCopiedByteForByte": true,
+  "branch": "task/localization-translation-review-20261030",
+  "catalogQueueBoundaryIndex": 805,
+  "head": "551cccd03e0acdce208ce11f571378c1dcdfb805",
+  "nextBoundary": {
+    "continuationIndex": 825,
+    "oneBasedPosition": 826,
+    "sourceId": "ui.platform-for-game-available-platform.afd580990f",
+    "sourceSha256": "afd580990fe9a12282ffeeeefa2d1a2c8b632f05bdd58b08e3c03a27ac91fb08"
+  },
+  "predecessorCandidateFreeChecksums": "PASS",
+  "predecessorNextBoundaryMatchesCurrentStart": true,
+  "predecessorWindow": "W785-W804",
+  "proposalsOrReviewDecisionsIncluded": false,
+  "pullRequest": 70,
+  "result": "PASS",
+  "selectedCellCount": 240,
+  "selectedSourceCount": 20,
+  "testsBuildsOrCIExecuted": false,
+  "tree": "d77f32ac8ec0ab53200d04819869a2e99c6de73c",
+  "worktree": "/home/keith/Documents/code/.task-worktrees/localization-20261105/romarrng-w685",
+  "worktreeCleanAtBuild": true
+}

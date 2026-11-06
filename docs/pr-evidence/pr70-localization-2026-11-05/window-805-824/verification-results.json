@@ -1,0 +1,25 @@
+{
+  "artifact": "ROMarrNG PR #70 W805-W824 review verification",
+  "inputHead": "551cccd03e0acdce208ce11f571378c1dcdfb805",
+  "inputTree": "d77f32ac8ec0ab53200d04819869a2e99c6de73c",
+  "integratedCrossReview": {
+    "result": "PASS",
+    "command": "python3 -B cross-review/verify_integrated_cross_review.py",
+    "cells": 240,
+    "adoptedChanges": 13,
+    "lowConfidenceLanguageHolds": 10,
+    "priorActiveHashOnlyHolds": 1060,
+    "nativeSpeakerApproval": false
+  },
+  "rootAdjudication": {
+    "result": "PASS",
+    "command": "python3 -B root-adjudication/verify_root_adjudication.py",
+    "cells": 240,
+    "selectedTargets": 13,
+    "lowConfidenceLanguageHolds": 10,
+    "priorActiveHashOnlyHolds": 1060,
+    "nativeSpeakerApproval": false
+  },
+  "productApplicationPerformed": false,
+  "testsBuildsScansCiRun": false
+}

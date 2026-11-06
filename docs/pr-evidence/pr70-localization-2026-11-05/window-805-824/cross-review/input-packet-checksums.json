@@ -1,0 +1,230 @@
+{
+  "inputs": [
+    {
+      "fileCount": 22,
+      "files": [
+        {
+          "byteCount": 1995,
+          "path": "README.md",
+          "sha256": "3dc94a40a73a33ceebf28828d602e0fa51591b2e8ce7a91fccee5660215a0123"
+        },
+        {
+          "byteCount": 2015,
+          "path": "SHA256SUMS.txt",
+          "sha256": "cf34d5b87ae6e06aa09152a09a87da51025c40e47ed2e18d2237c666e912b8ba"
+        },
+        {
+          "byteCount": 23560,
+          "path": "build_candidate_free.py",
+          "sha256": "e074b24e8074ae507c4d4ccc1023fe3943ed98191dec73df20d2ebdf7ddbf7a1"
+        },
+        {
+          "byteCount": 1161,
+          "path": "input/SHA256SUMS.txt",
+          "sha256": "503fed84d5932f6daffc3eea87052b904729c11634bad4ce0d0f59a04ed32abb"
+        },
+        {
+          "byteCount": 237866,
+          "path": "input/candidate-free-cells.jsonl",
+          "sha256": "a87a7ad22ef4f0ede423fd5a064e6d218501cc45a968047ece98a976c2805c07"
+        },
+        {
+          "byteCount": 210,
+          "path": "input/candidate-free-token-summary.json",
+          "sha256": "a69c9a57383bd21dc4705d296d400b538db0ffec4f23ad10a893a70a2c0f3f6d"
+        },
+        {
+          "byteCount": 899,
+          "path": "input/catalog-file-pins.json",
+          "sha256": "0283df0590e12787714acb6a648f838a9183425b694d5110c1652e2665ca411a"
+        },
+        {
+          "byteCount": 298962,
+          "path": "input/catalog-key-order.jsonl",
+          "sha256": "557907a5509b3e4d6c618ddf9f2313de05ac319f7b2588a3c61c06abe260e178"
+        },
+        {
+          "byteCount": 980,
+          "path": "input/input-verification.json",
+          "sha256": "dcc1e447ba57b30d5b8f078876f1067392f1c3b89de7d14418b699b2443f6467"
+        },
+        {
+          "byteCount": 1633,
+          "path": "input/manifest.json",
+          "sha256": "dabd57ff5da0b2add0db0d07f53e28082cc45749ce58229ba46a8d31b87ea866"
+        },
+        {
+          "byteCount": 1119,
+          "path": "input/queue-continuity.json",
+          "sha256": "1486e4cdfd3efcea9c6eed508e13ad50ee0e58df848a78eb3a7a91a45e974219"
+        },
+        {
+          "byteCount": 6199,
+          "path": "input/selected-sources.jsonl",
+          "sha256": "02a3268942e8a44257a0d0e193c3bce36deab1f5c06e587cab1f55484d383d31"
+        },
+        {
+          "byteCount": 937,
+          "path": "input/selection-boundary.jsonl",
+          "sha256": "9ccedecf535018a39f8a2bb16a23d533213ecbac3c9979c8edbd90425273ceae"
+        },
+        {
+          "byteCount": 8375,
+          "path": "input/selection.json",
+          "sha256": "75551d9332f569584e6b2228d05422482271d91ba5ee081cdb98bb2c86302058"
+        },
+        {
+          "byteCount": 66947,
+          "path": "input/source-contexts.jsonl",
+          "sha256": "036c7b756054269799c3cc1ca2e7f44c7c819e232444cc0d68e8615e7f4c0135"
+        },
+        {
+          "byteCount": 11363,
+          "path": "input/source-file-pins.json",
+          "sha256": "3ee095f7327477755d21dcfe1873d65a8834826b3172d324fe3a61ff1ed3a9ea"
+        },
+        {
+          "byteCount": 202767,
+          "path": "input/source-snapshot-hashes.json",
+          "sha256": "dbfeb8bf06b9d5f214b0cae72ca532e00ac600dc13908f200c71bd5477cab4f5"
+        },
+        {
+          "byteCount": 303,
+          "path": "predecessor/SHA256SUMS.txt",
+          "sha256": "22532080b96bbfdbeff135423e68477ee5860672dc87204d610f469f4a5c83f9"
+        },
+        {
+          "byteCount": 1028,
+          "path": "predecessor/active-hold-provenance.json",
+          "sha256": "f0b6002adf1d286f784019f8879fb4897d894593506520cc967d95c673c54aec"
+        },
+        {
+          "byteCount": 646678,
+          "path": "predecessor/prior-active-holds-hash-only.jsonl",
+          "sha256": "36cc2e7f478de47c71f55e52045192b3ea54934139f0d859a4e5a9299af06eb2"
+        },
+        {
+          "byteCount": 26932,
+          "path": "predecessor/w785-current-window-holds-hash-only.jsonl",
+          "sha256": "62913d9e8faaa1344bcf072e36e893704424cd9380887ae94d813988e242323c"
+        },
+        {
+          "byteCount": 16068,
+          "path": "verify_candidate_free.py",
+          "sha256": "94cb4e941ba97f6024fac08c7c5de610bb3a3bc4f3505eee4ffe551a3d491537"
+        }
+      ],
+      "name": "candidate-free",
+      "root": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w805-824-candidate-free-20261105"
+    },
+    {
+      "fileCount": 9,
+      "files": [
+        {
+          "byteCount": 1695,
+          "path": "README.md",
+          "sha256": "1d9aa718263e7ce896ac168c50197ed62e702f0a52245ea0cf9c4f8f1d0931a2"
+        },
+        {
+          "byteCount": 747,
+          "path": "SHA256SUMS.txt",
+          "sha256": "0a6326a038b3f45bc463dc9924887a6346ee90257c92cbdf198c208f4c7ad7fd"
+        },
+        {
+          "byteCount": 17694,
+          "path": "build_primary_review.py",
+          "sha256": "8ee8ee8e9ad4c4e969b5b3bb41a561cd4268114b497b1e453b663e2089d01e4e"
+        },
+        {
+          "byteCount": 891,
+          "path": "hold-lineage.json",
+          "sha256": "6f44ce8fbe3811d3c4ee54e91e02d1f90a6ab003cab3f9f0696d17414574e4b9"
+        },
+        {
+          "byteCount": 646678,
+          "path": "predecessor/prior-active-holds-hash-only.jsonl",
+          "sha256": "36cc2e7f478de47c71f55e52045192b3ea54934139f0d859a4e5a9299af06eb2"
+        },
+        {
+          "byteCount": 26932,
+          "path": "predecessor/w785-current-window-holds-hash-only.jsonl",
+          "sha256": "62913d9e8faaa1344bcf072e36e893704424cd9380887ae94d813988e242323c"
+        },
+        {
+          "byteCount": 613808,
+          "path": "primary-review-ledger.jsonl",
+          "sha256": "4aba86db160f3478dac2b857aa3f4a33a3f041da5ba12233f184c8d0a45c8c58"
+        },
+        {
+          "byteCount": 1391,
+          "path": "summary.json",
+          "sha256": "ea3f40589697168ce654e1c3cfff9d92e7fb87356c3111df62cbbfc66ec0d692"
+        },
+        {
+          "byteCount": 10839,
+          "path": "verify_primary_review.py",
+          "sha256": "22f7141a6f2670944cf1eeac233e3b553cb1974e008c16f906ddaa9e36a83d19"
+        }
+      ],
+      "name": "primary",
+      "root": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w805-824-primary-review-20261105"
+    },
+    {
+      "fileCount": 10,
+      "files": [
+        {
+          "byteCount": 918,
+          "path": "README.md",
+          "sha256": "792c8cb58c9bd9ae77962a7c887bf566d675db1571aceb3b3114a08fed25785e"
+        },
+        {
+          "byteCount": 802,
+          "path": "SHA256SUMS.txt",
+          "sha256": "f911e2c6fd9b0f07c4924c04cf78d8de4e8c238f4398f05beb7aded69c2c921c"
+        },
+        {
+          "byteCount": 570829,
+          "path": "blind-review-ledger.jsonl",
+          "sha256": "c27ec73df59acd94ccf884a2d070b1ee4b8c3e9b6d8f1d9b8926eb7b3f1669f3"
+        },
+        {
+          "byteCount": 15955,
+          "path": "build_blind_review.py",
+          "sha256": "d58bffa1ec2c70869e8301569d6481b7f7efbca9e2022d3ca7b7468389b6a341"
+        },
+        {
+          "byteCount": 986,
+          "path": "input-attestation.json",
+          "sha256": "0ca5f2add753881112a7c1b9ba0bab7fa407ffa7ee0aa6f170565706cc773527"
+        },
+        {
+          "byteCount": 2059,
+          "path": "manifest.json",
+          "sha256": "8628c3aa9bc4d2570da6d1acf84277af6f19699f2df7ec78c2eec0a6e9a864fd"
+        },
+        {
+          "byteCount": 646678,
+          "path": "prior-active-holds-hash-only.jsonl",
+          "sha256": "36cc2e7f478de47c71f55e52045192b3ea54934139f0d859a4e5a9299af06eb2"
+        },
+        {
+          "byteCount": 1067,
+          "path": "summary.json",
+          "sha256": "0d043114e30633e4a47db65dbd1b47f7f689ed31ebe4b36fa129d779cde6cb8f"
+        },
+        {
+          "byteCount": 8303,
+          "path": "verify_blind_review.py",
+          "sha256": "56a04675a26e4ddf5ca36babeeea57803bd2cf4c729ecccb436180f921d29d6d"
+        },
+        {
+          "byteCount": 26932,
+          "path": "w785-current-window-holds-hash-only.jsonl",
+          "sha256": "62913d9e8faaa1344bcf072e36e893704424cd9380887ae94d813988e242323c"
+        }
+      ],
+      "name": "independent-blind",
+      "root": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w805-824-independent-blind-20261105"
+    }
+  ]
+}

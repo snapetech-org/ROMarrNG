@@ -1,0 +1,23 @@
+{
+  "activeHoldCount": 1060,
+  "allSourceAndTargetHashesMatchPinnedCurrentCatalog": true,
+  "byteForByteCopied": true,
+  "groups": [
+    {
+      "origin": "/home/keith/Documents/code/.task-worktrees/localization-20261105/romarrng-w685/docs/pr-evidence/pr70-localization-2026-11-05/window-785-804/candidate-free/input/prior-active-holds-hash-only.jsonl",
+      "path": "prior-active-holds-hash-only.jsonl",
+      "rowCount": 1012,
+      "sha256": "36cc2e7f478de47c71f55e52045192b3ea54934139f0d859a4e5a9299af06eb2"
+    },
+    {
+      "origin": "/home/keith/Documents/code/.task-worktrees/localization-20261105/romarrng-w685/docs/pr-evidence/pr70-localization-2026-11-05/window-785-804/cross-review/current-window-holds-hash-only.jsonl",
+      "path": "w785-current-window-holds-hash-only.jsonl",
+      "rowCount": 48,
+      "sha256": "62913d9e8faaa1344bcf072e36e893704424cd9380887ae94d813988e242323c"
+    }
+  ],
+  "hashOnly": true,
+  "predecessorWindow": "W785-W804",
+  "sourceAndTargetTextOmitted": true,
+  "uniqueCells": 1060
+}

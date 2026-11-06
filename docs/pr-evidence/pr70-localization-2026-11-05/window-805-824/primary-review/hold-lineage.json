@@ -1,0 +1,24 @@
+{
+  "activeHashOnlyHoldCount": 1060,
+  "copiedByteForByte": true,
+  "groups": [
+    {
+      "path": "prior-active-holds-hash-only.jsonl",
+      "rowCount": 1012,
+      "sha256": "36cc2e7f478de47c71f55e52045192b3ea54934139f0d859a4e5a9299af06eb2"
+    },
+    {
+      "path": "w785-current-window-holds-hash-only.jsonl",
+      "rowCount": 48,
+      "sha256": "62913d9e8faaa1344bcf072e36e893704424cd9380887ae94d813988e242323c"
+    }
+  ],
+  "holdTextOmitted": true,
+  "predecessorWindow": "W785-W804",
+  "resultingActiveHashOnlyHolds": 1060,
+  "sourceAndCurrentTargetHashesReattestedInCandidateFreeInput": true,
+  "sourceCandidateFreeChecksumListSha256": "cf34d5b87ae6e06aa09152a09a87da51025c40e47ed2e18d2237c666e912b8ba",
+  "sourceCandidateFreeHead": "551cccd03e0acdce208ce11f571378c1dcdfb805",
+  "sourceCandidateFreeTree": "d77f32ac8ec0ab53200d04819869a2e99c6de73c",
+  "uniqueHoldCells": 1060
+}

@@ -1,0 +1,70 @@
+{
+  "acceptedCurrentCells": 217,
+  "callerBackedCells": 240,
+  "candidateFreeOuterChecksumListSha256": "cf34d5b87ae6e06aa09152a09a87da51025c40e47ed2e18d2237c666e912b8ba",
+  "catalogOneBasedPositionRange": [
+    806,
+    825
+  ],
+  "catalogZeroBasedIndexRange": [
+    805,
+    824
+  ],
+  "cellCount": 240,
+  "files": [
+    {
+      "bytes": 918,
+      "path": "README.md",
+      "sha256": "792c8cb58c9bd9ae77962a7c887bf566d675db1571aceb3b3114a08fed25785e"
+    },
+    {
+      "bytes": 570829,
+      "path": "blind-review-ledger.jsonl",
+      "sha256": "c27ec73df59acd94ccf884a2d070b1ee4b8c3e9b6d8f1d9b8926eb7b3f1669f3"
+    },
+    {
+      "bytes": 15955,
+      "path": "build_blind_review.py",
+      "sha256": "d58bffa1ec2c70869e8301569d6481b7f7efbca9e2022d3ca7b7468389b6a341"
+    },
+    {
+      "bytes": 986,
+      "path": "input-attestation.json",
+      "sha256": "0ca5f2add753881112a7c1b9ba0bab7fa407ffa7ee0aa6f170565706cc773527"
+    },
+    {
+      "bytes": 646678,
+      "path": "prior-active-holds-hash-only.jsonl",
+      "sha256": "36cc2e7f478de47c71f55e52045192b3ea54934139f0d859a4e5a9299af06eb2"
+    },
+    {
+      "bytes": 1067,
+      "path": "summary.json",
+      "sha256": "0d043114e30633e4a47db65dbd1b47f7f689ed31ebe4b36fa129d779cde6cb8f"
+    },
+    {
+      "bytes": 8303,
+      "path": "verify_blind_review.py",
+      "sha256": "56a04675a26e4ddf5ca36babeeea57803bd2cf4c729ecccb436180f921d29d6d"
+    },
+    {
+      "bytes": 26932,
+      "path": "w785-current-window-holds-hash-only.jsonl",
+      "sha256": "62913d9e8faaa1344bcf072e36e893704424cd9380887ae94d813988e242323c"
+    }
+  ],
+  "head": "551cccd03e0acdce208ce11f571378c1dcdfb805",
+  "localeCount": 12,
+  "nativeSpeakerApproval": false,
+  "newCallerlessHolds": 0,
+  "priorActiveHashOnlyHolds": 1060,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "resultingActiveHashOnlyHolds": 1060,
+  "revisedCells": 23,
+  "role": "independent-blind-semantic-review",
+  "schemaVersion": 1,
+  "sourceCount": 20,
+  "tree": "d77f32ac8ec0ab53200d04819869a2e99c6de73c",
+  "window": "W805-W824"
+}

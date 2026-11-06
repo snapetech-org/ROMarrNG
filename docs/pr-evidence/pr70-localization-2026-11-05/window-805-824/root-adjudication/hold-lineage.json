@@ -1,0 +1,24 @@
+{
+  "allRowsTextOmitted": true,
+  "allTargetHashesMatchExactInputHead": true,
+  "artifact": "ROMarrNG W805-W824 inherited active hash-only hold lineage",
+  "byteForByteCopied": true,
+  "groups": [
+    {
+      "path": "prior-active-holds-hash-only.jsonl",
+      "rowCount": 1012,
+      "sha256": "36cc2e7f478de47c71f55e52045192b3ea54934139f0d859a4e5a9299af06eb2",
+      "source": "cross-review/prior-active-holds-hash-only.jsonl"
+    },
+    {
+      "path": "w785-current-window-holds-hash-only.jsonl",
+      "rowCount": 48,
+      "sha256": "62913d9e8faaa1344bcf072e36e893704424cd9380887ae94d813988e242323c",
+      "source": "cross-review/current-window-holds-hash-only.jsonl"
+    }
+  ],
+  "predecessorWindow": "W785-W804",
+  "priorActiveHoldCount": 1012,
+  "totalActiveHashOnlyHoldCount": 1060,
+  "w785CurrentWindowHoldCount": 48
+}
