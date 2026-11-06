@@ -1,0 +1,17 @@
+{
+  "artifact": "ROMarrNG PR #70 W805-W824 product commit",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W805-W824",
+  "productCommit": "7bc17e5ae87e67dd69579c44591337b8e7e7927a",
+  "productTree": "5c20c137424c8fac55850c6b319896241a5761f9",
+  "parentCommit": "db188b5ded679803b055f2c09c0a97ab00e489cd",
+  "inputHead": "551cccd03e0acdce208ce11f571378c1dcdfb805",
+  "inputTree": "d77f32ac8ec0ab53200d04819869a2e99c6de73c",
+  "reviewEvidenceCommit": "db188b5ded679803b055f2c09c0a97ab00e489cd",
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogSha256": "41a1ad830bc56ac2556f29fab2b4f2e8ea6a40fa67d0bd8ae76485ef4f91e3ba",
+  "changedCellCount": 13,
+  "onlyChangedPath": "romarr/ui-labels.json",
+  "skipCiCommit": true
+}
