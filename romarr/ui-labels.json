@@ -22000,7 +22000,7 @@
         "ar": "أو بتنسيق الواجهة الأمامية نفسها:",
         "ko": "또는 프런트엔드 고유 형식으로:",
         "zh-Hant": "或使用前端自有格式：",
-        "vi": "Hoặc xuất theo định dạng riêng của một trình quản lý thư viện game:",
+        "vi": "Hoặc theo định dạng riêng của frontend:",
         "id": "Atau dalam format bawaan frontend:"
       },
       "translationHashes": {},
@@ -22109,18 +22109,18 @@
       "source": "Owned check unavailable",
       "sourceHash": "b3cf0beadeea0b7a55b33c8977e8de71470631743755f2dc19614d83248e90d2",
       "translations": {
-        "es": "La verificación de propiedad no está disponible",
-        "zh-Hans": "所有权检查不可用",
-        "hi": "लाइब्रेरी में मौजूद गेम की जाँच उपलब्ध नहीं है",
+        "es": "No se pudo comprobar qué juegos ya tienes",
+        "zh-Hans": "无法检查已拥有的游戏",
+        "hi": "आपके पास मौजूद गेम की जाँच उपलब्ध नहीं है",
         "de": "Abgleich mit dem eigenen Spielebestand nicht verfügbar",
-        "ja": "所有権の確認を利用できません",
-        "fr": "Vérification des jeux déjà possédés indisponible",
-        "pt-BR": "Verificação de propriedade indisponível",
-        "ar": "التحقق من الملكية غير متاح",
+        "ja": "所持しているゲームを確認できません",
+        "fr": "Impossible de vérifier les jeux que vous possédez",
+        "pt-BR": "Não foi possível verificar os jogos que você possui",
+        "ar": "تعذّر التحقق من الألعاب التي تملكها",
         "ko": "보유 게임을 확인할 수 없습니다",
-        "zh-Hant": "所有權檢查不可用",
-        "vi": "Không thể kiểm tra quyền sở hữu",
-        "id": "Pemeriksaan kepemilikan tidak tersedia"
+        "zh-Hant": "無法檢查已擁有的遊戲",
+        "vi": "Không thể kiểm tra các trò chơi bạn đã có",
+        "id": "Tidak dapat memeriksa game yang sudah Anda miliki"
       },
       "translationHashes": {
         "es": "5ec3b3a9a54dc6beb58bc99889b0046a02c021bdb43b2c1eccf4a8ab4af777a1",
@@ -22179,7 +22179,7 @@
       "source": "PIN from your Moonlight client",
       "sourceHash": "1a127b3ae9cd9377400c354764922a698fabd2500d724a238409b4c1aa655093",
       "translations": {
-        "es": "PIN de su cliente Moonlight",
+        "es": "PIN de tu cliente Moonlight",
         "zh-Hans": "你的 Moonlight 客户端提供的 PIN",
         "hi": "आपके Moonlight क्लाइंट का PIN",
         "de": "PIN von Ihrem Moonlight-Client",
@@ -22187,7 +22187,7 @@
         "fr": "PIN de votre client Moonlight",
         "pt-BR": "PIN de seu cliente Moonlight",
         "ar": "رمز PIN من عميل Moonlight لديك",
-        "ko": "당신의 Moonlight 클라이언트에서 PIN",
+        "ko": "Moonlight 클라이언트에서 받은 PIN",
         "zh-Hant": "你的 Moonlight 用戶端提供的 PIN",
         "vi": "Mã PIN từ ứng dụng Moonlight",
         "id": "PIN dari klien Moonlight Anda"
@@ -22200,17 +22200,17 @@
       "source": "Page could not be loaded",
       "sourceHash": "b4aa008f1c141b110b5b833fd0437a31f8026f695bfd756f99404c0f2428d58b",
       "translations": {
-        "es": "La página no se puede cargar",
-        "zh-Hans": "页面不能加载",
+        "es": "No se pudo cargar la página",
+        "zh-Hans": "无法加载页面",
         "hi": "पृष्ठ लोड नहीं किया जा सकता",
         "de": "Seite kann nicht geladen werden",
         "ja": "ページを読み込めませんでした。",
-        "fr": "La page ne pouvait pas être chargée",
-        "pt-BR": "Página não pode ser carregada",
-        "ar": "لا يمكن تحميل الصفحة",
+        "fr": "Impossible de charger la page",
+        "pt-BR": "Não foi possível carregar a página",
+        "ar": "تعذّر تحميل الصفحة",
         "ko": "페이지를 불러올 수 없습니다.",
-        "zh-Hant": "頁面不能加載",
-        "vi": "Trang không thể tải",
+        "zh-Hant": "無法載入頁面",
+        "vi": "Không thể tải trang",
         "id": "Halaman tidak bisa dimuat"
       },
       "translationHashes": {
@@ -22257,7 +22257,7 @@
         "fr": "Page {page} sur {pages}",
         "pt-BR": "Página {page} de {pages}",
         "ar": "الصفحة {page} من {pages}",
-        "ko": "전체 {pages}페이지 중 {page}페이지",
+        "ko": "총 {pages}페이지 중 {page}페이지",
         "zh-Hant": "第 {page} 頁，共 {pages} 頁",
         "vi": "Trang {page} / {pages}",
         "id": "Halaman {page} dari {pages}"
@@ -22291,7 +22291,7 @@
       "source": "Paired clients",
       "sourceHash": "388740cbd42d6b7f22572f42f1bce939d7a0b724f8c8fb7313ebb9ae18789f19",
       "translations": {
-        "es": "Clientes pareados",
+        "es": "Clientes emparejados",
         "zh-Hans": "已配对的客户端",
         "hi": "युग्मित क्लाइंट",
         "de": "Gekoppelte Clients",
@@ -22314,7 +22314,7 @@
       "translations": {
         "es": "Emparejamiento",
         "zh-Hans": "配对",
-        "hi": "जोड़ी",
+        "hi": "पेयरिंग",
         "de": "Kopplung",
         "ja": "ペアリング",
         "fr": "Appairage",
@@ -22323,7 +22323,7 @@
         "ko": "페어링",
         "zh-Hant": "配對",
         "vi": "Ghép đôi",
-        "id": "Dipasangkan"
+        "id": "Penyandingan"
       },
       "translationHashes": {},
       "translationStatus": {},
@@ -22364,7 +22364,7 @@
         "ar": "مفتاح المرور",
         "ko": "패스키",
         "zh-Hant": "通行金鑰",
-        "vi": "Mã khóa",
+        "vi": "Khóa truy cập",
         "id": "Kunci akses"
       },
       "translationHashes": {},
@@ -22397,15 +22397,15 @@
       "sourceHash": "f21b1e24fc249d2ba803d713fed40307edcd079bfaae45f8e4c2b5b91c38a4ec",
       "translations": {
         "es": "Pégalo aquí.",
-        "zh-Hans": "粘在这里",
+        "zh-Hans": "在这里粘贴",
         "hi": "इसे यहाँ पेस्ट करें",
-        "de": "Füge es hier ein.",
+        "de": "Fügen Sie es hier ein.",
         "ja": "ここに貼り付けてください",
-        "fr": "Colle-le ici.",
-        "pt-BR": "Cola aqui.",
+        "fr": "Collez-le ici.",
+        "pt-BR": "Cole aqui.",
         "ar": "الصقه هنا",
-        "ko": "여기에 붙여넣기",
-        "zh-Hant": "粘在這裡",
+        "ko": "여기에 붙여 넣으세요.",
+        "zh-Hant": "在這裡貼上",
         "vi": "Dán ở đây",
         "id": "Tempel di sini"
       },
