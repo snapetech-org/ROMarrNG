@@ -1,0 +1,18 @@
+{
+  "blindReviewerDidNotInspectProductWorktree": true,
+  "blindReviewerIndependentlyReranCandidateFreeVerifier": false,
+  "candidateFreeCellsSha256": "5446c3d311f1ea384d8007cf5a76f6a2835eb326d2c93240a3b6fa1b9e78ec2d",
+  "candidateFreeChecksumsVerified": true,
+  "candidateFreeDirectory": "../candidate-free",
+  "candidateFreeInputChecksumListSha256": "a6616fdac70085cdfa9964de1cefb4986371dad9330ee537ae678d7ac957dc62",
+  "candidateFreeManifestSha256": "76c61d285ebe7f514acb8cc85329c25ecbca6b5f405e93198e1cf25fa1551404",
+  "candidateFreeOuterChecksumListSha256": "578031892e95e8fcc9226a6b1f502a8a9e4cb18bf82a648ee23e420ad09a9bb7",
+  "candidateFreePriorActiveHoldsSha256": "36cc2e7f478de47c71f55e52045192b3ea54934139f0d859a4e5a9299af06eb2",
+  "candidateFreeProducerVerifier": "PASS (recorded by preparer)",
+  "candidateFreeReviewInputOnly": true,
+  "candidateFreeSourceContextsSha256": "ffa9344957aed15cd9c11d026ce448e6ca9c526dc2eb6bbd2b76cb456690cbfb",
+  "head": "bbbf84d0d83138a23143f6aa6075415ebcb36d3e",
+  "primaryOrOtherProposalPacketsInspected": false,
+  "tree": "fbf9ada4b4fd43a288ce498b24990312f0c32f22",
+  "window": "W785-W804"
+}

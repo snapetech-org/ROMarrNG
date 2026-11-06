@@ -1,0 +1,73 @@
+{
+  "artifact": "ROMarrNG PR #70 W785-W804 verification results",
+  "inputHead": "bbbf84d0d83138a23143f6aa6075415ebcb36d3e",
+  "inputTree": "fbf9ada4b4fd43a288ce498b24990312f0c32f22",
+  "candidateFree": {
+    "result": "PASS",
+    "cells": 240,
+    "callerBacked": 192,
+    "callerlessHashOnly": 48,
+    "priorActiveHolds": 1012,
+    "resultingActiveHolds": 1060,
+    "tokenMismatches": 0,
+    "pinnedGitObject": true
+  },
+  "primaryReview": {
+    "result": "PASS",
+    "cells": 240,
+    "acceptCurrent": 176,
+    "corrections": 3,
+    "refinements": 13,
+    "hashOnlyHolds": 48,
+    "priorActiveHolds": 1012,
+    "resultingActiveHolds": 1060,
+    "nativeSpeakerApproval": false,
+    "worktreeCleanAndPinnedReported": false
+  },
+  "independentBlindReview": {
+    "result": "PASS",
+    "cells": 240,
+    "acceptCurrent": 164,
+    "revised": 28,
+    "hashOnlyHolds": 48,
+    "priorActiveHolds": 1012,
+    "resultingActiveHolds": 1060,
+    "tokenMismatches": 0,
+    "nativeSpeakerApproval": false
+  },
+  "integratedCrossReview": {
+    "result": "PASS",
+    "cells": 240,
+    "uniqueProposals": 31,
+    "proposalOverlap": 13,
+    "primaryOnly": 3,
+    "blindOnly": 15,
+    "hashOnlyHolds": 48,
+    "priorActiveHolds": 1012,
+    "resultingActiveHolds": 1060,
+    "tokenMismatches": 0
+  },
+  "rootAdjudication": {
+    "result": "PASS",
+    "cells": 240,
+    "acceptCurrent": 161,
+    "corrections": 9,
+    "refinements": 22,
+    "hashOnlyHolds": 48,
+    "selectedTargets": 31,
+    "nativeSpeakerApproval": false,
+    "headedBrowserReviewPerformed": false
+  },
+  "productReadback": {
+    "result": "PASS",
+    "changedCells": 31,
+    "readbackCells": 240,
+    "catalogOrderPreserved": true,
+    "allOtherCellsUnchanged": true,
+    "locales": 12,
+    "messagesPerLocale": 1836
+  },
+  "confidence": "moderate; Hindi Pairing target remains low confidence pending native review",
+  "applicationBrowserReviewPerformed": false,
+  "testsBuildsScansOrCIStarted": false
+}

@@ -1,0 +1,18 @@
+{
+  "branch": "task/localization-translation-review-20261030",
+  "catalogQueueBoundaryIndex": 785,
+  "head": "bbbf84d0d83138a23143f6aa6075415ebcb36d3e",
+  "host": "kspld0",
+  "livePROpenDraftUnmerged": true,
+  "nextBoundaryMatchesPredecessor": true,
+  "predecessorCandidateFreeChecksums": "PASS",
+  "predecessorHead": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "predecessorTree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "predecessorWindow": "W765-W784",
+  "pullRequest": 70,
+  "remoteBranchAndPullRefsMatchHead": true,
+  "result": "PASS",
+  "tree": "fbf9ada4b4fd43a288ce498b24990312f0c32f22",
+  "worktree": "/home/keith/Documents/code/.task-worktrees/localization-20261105/romarrng-w685",
+  "worktreeCleanAtBuild": true
+}

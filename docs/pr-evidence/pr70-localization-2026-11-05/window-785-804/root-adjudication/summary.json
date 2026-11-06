@@ -1,0 +1,32 @@
+{
+  "artifact": "ROMarrNG PR #70 W785-W804 root adjudication",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W785-W804",
+  "exactHead": "bbbf84d0d83138a23143f6aa6075415ebcb36d3e",
+  "exactTree": "fbf9ada4b4fd43a288ce498b24990312f0c32f22",
+  "cellCount": 240,
+  "rootDispositionCounts": {
+    "accept-current": 161,
+    "hold-hash-only": 48,
+    "correction": 9,
+    "refinement": 22
+  },
+  "selectedTargetCount": 31,
+  "selectedCorrectionCount": 9,
+  "selectedRefinementCount": 22,
+  "callerlessHashOnlyHolds": 48,
+  "resultingActiveHashOnlyHolds": 1060,
+  "applicationPerformed": false,
+  "nativeSpeakerApproval": false,
+  "headedBrowserReviewPerformed": false,
+  "lowConfidenceSelections": [
+    {
+      "position": 797,
+      "locale": "hi",
+      "sourceId": "ui.pairing.76dfd9f9a3"
+    }
+  ],
+  "confidence": "moderate",
+  "rootAdjudicationPerformed": true
+}

@@ -1,0 +1,19 @@
+{
+  "artifact": "ROMarrNG PR #70 W785-W804 product commit",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W785-W804",
+  "inputHead": "bbbf84d0d83138a23143f6aa6075415ebcb36d3e",
+  "inputTree": "fbf9ada4b4fd43a288ce498b24990312f0c32f22",
+  "productCommit": "24afed4cb5dfafee70a4afd904937246aadf6803",
+  "productTree": "b9ca67db2a76571cb57cefde8340b0541ef804cd",
+  "parent": "bbbf84d0d83138a23143f6aa6075415ebcb36d3e",
+  "changedPaths": [
+    "romarr/ui-labels.json"
+  ],
+  "changedCatalog": "romarr/ui-labels.json",
+  "changedCellCount": 31,
+  "catalogSha256": "4645d70334720e4f806242e567d39ab001ed3053a25d137b888bf99253431811",
+  "nativeSpeakerApproval": false,
+  "headedBrowserReviewPerformed": false
+}
