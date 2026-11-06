@@ -1,0 +1,72 @@
+{
+  "review": "Primary review of the complete composed EmuDeck help sentence across three localized text nodes and two inline path literals.",
+  "pinnedInputs": {
+    "repository": "snapetech-org/ROMarrNG",
+    "pull": 70,
+    "head": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+    "tree": "e8668e9c83afa533f8cd6e69e6a7ad96946ed40e",
+    "locales": [
+      "es",
+      "zh-Hans",
+      "hi",
+      "de",
+      "ja",
+      "fr",
+      "pt-BR",
+      "ar",
+      "ko",
+      "zh-Hant",
+      "vi",
+      "id"
+    ],
+    "sourceIds": [
+      "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+      "ui.folder-not-the-wider.d61c242874",
+      "ui.directory-keep-shared-metadata-along.e2e13b466b"
+    ],
+    "cells": 36,
+    "catalogSourceFileSha256": "5377a4b6c76137e7a3a9da7096dfbecbb8c90558d92831085ba1fb37c80d1484",
+    "uiFileSha256": "810ccf901f4c7651aaf78602ae6eb69d471da65076cc6749c3a86367aa42d566",
+    "uiFileGitBlob": "2e114d53a518287bd940371ce83625bee002f402",
+    "reviewScope": "Composed sentence review across the three adjacent localized text nodes and two inline code literals. No previous primary proposal, decision, or cross-review is included."
+  },
+  "sourceSentence": "With EmuDeck, point this at its <code>Emulation/roms</code> folder, not the wider <code>Emulation</code> directory.",
+  "inlinePathLiterals": [
+    "Emulation/roms",
+    "Emulation"
+  ],
+  "assembledCurrentTranslations": {
+    "es": "; no necesitas una entrada de biblioteca distinta para cada sistema. Con EmuDeck, configura esta ruta para que apunte a su `<code>Emulation/roms</code>` carpeta, no el directorio más amplio `<code>Emulation</code>` directorio. Mantén los metadatos compartidos junto a él en",
+    "zh-Hans": "；每个系统不需要单独创建游戏库条目。使用 EmuDeck 时，请将此路径指向它的 `<code>Emulation/roms</code>` 文件夹,而不是更广泛的 `<code>Emulation</code>` 目录。请将共享元数据与它放在一起，位置在",
+    "hi": "; हर सिस्टम के लिए अलग लाइब्रेरी एंट्री की ज़रूरत नहीं है। EmuDeck के साथ, इस पथ को उसके `<code>Emulation/roms</code>` फ़ोल्डर, विस्तार नहीं `<code>Emulation</code>` डायरेक्टरी। साझा मेटाडेटा को इसके साथ-साथ इस स्थान पर रखें:",
+    "de": "; Sie benötigen keinen eigenen Bibliothekseintrag für jedes System. Richten Sie diesen Pfad bei EmuDeck auf dessen `<code>Emulation/roms</code>` Folder, nicht die breitere `<code>Emulation</code>` Verzeichnis. Bewahre die gemeinsamen Metadaten daneben unter",
+    "ja": "。システムごとに別のライブラリエントリを作る必要はありません。EmuDeck を使う場合は、このパスをその `<code>Emulation/roms</code>` フォルダーではなく、幅広い `<code>Emulation</code>` ディレクトリです。共有メタデータはその隣の次の場所に保管してください:",
+    "fr": "; vous n’avez pas besoin d’une entrée de bibliothèque distincte pour chaque système. Avec EmuDeck, faites pointer ce chemin vers son `<code>Emulation/roms</code>` Le dossier, pas le plus large `<code>Emulation</code>` répertoire. Conservez les métadonnées partagées à côté, à l’emplacement suivant :",
+    "pt-BR": "; não é necessário criar uma entrada de biblioteca separada para cada sistema. Com o EmuDeck, aponte este caminho para a pasta dele `<code>Emulation/roms</code>` pasta, não o diretório mais amplo `<code>Emulation</code>` diretório. Mantenha os metadados compartilhados ao lado dele em",
+    "ar": "؛ لا تحتاج إلى إدخال مكتبة منفصل لكل نظام. عند استخدام EmuDeck، وجّه هذا المسار إلى مجلده `<code>Emulation/roms</code>` المجلد، وليس الأوسع `<code>Emulation</code>` الدليل. احتفظ بالبيانات الوصفية المشتركة بجواره في",
+    "ko": "; 시스템마다 라이브러리 항목을 따로 만들 필요는 없습니다. EmuDeck을 사용하는 경우 이 경로를 해당 폴더로 지정하세요:  `<code>Emulation/roms</code>` 폴더가 아니라 더 넓은 `<code>Emulation</code>` 디렉터리입니다. 공유 메타데이터는 옆의 다음 위치에 보관하세요:",
+    "zh-Hant": "；每個系統不需要個別的媒體庫項目。使用 EmuDeck 時，請將此路徑指向它的 `<code>Emulation/roms</code>` 文件夾,而不是更廣泛的 `<code>Emulation</code>` 目錄。請將共用中繼資料與它放在一起，位置在",
+    "vi": "; bạn không cần mục thư viện riêng cho từng hệ thống. Với EmuDeck, hãy trỏ đường dẫn này đến thư mục `<code>Emulation/roms</code>` thư mục, không phải thư mục cha rộng hơn `<code>Emulation</code>` thư mục. Hãy lưu siêu dữ liệu dùng chung bên cạnh tại",
+    "id": "; Anda tidak perlu entri pustaka terpisah untuk setiap sistem. Dengan EmuDeck, arahkan jalur ini ke folder `<code>Emulation/roms</code>` folder, bukan yang lebih luas `<code>Emulation</code>` direktori. Simpan metadata bersama di sebelahnya pada"
+  },
+  "counts": {
+    "locales": 12,
+    "cells": 36,
+    "dispositions": {
+      "correction": 32,
+      "accept-current": 4
+    }
+  },
+  "validation": {
+    "inputSha256Sums": "verified before serialization",
+    "sourceHashAndCurrentTargetSha256": "recomputed and matched for all 36 cells",
+    "catalogTranslationHash": "preserved verbatim from input packet",
+    "outputSha256Sums": "verified after serialization"
+  },
+  "actions": {
+    "repositoryEdits": 0,
+    "testsRun": 0,
+    "buildsRun": 0,
+    "ciRuns": 0
+  }
+}

@@ -1,0 +1,1 @@
+This copy is the sealed W445-W464 candidate-free source/cell input at d5ba7f1f. It contains no proposed targets or current-window reviewer decisions. Its original verifier and SHA256SUMS.txt remain included; do not use neighboring primary or cross-review outputs for this blind packet.

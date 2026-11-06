@@ -1,0 +1,1339 @@
+{
+  "schemaVersion": 1,
+  "artifact": "ROMarrNG PR #70 W445-W464 exact-head cross-audit",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W445-W464",
+  "branch": "task/localization-translation-review-20261030",
+  "candidateFreeHead": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "candidateFreeTree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "latestAttestedHead": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+  "latestAttestedTree": "1b075e050610771fc5651d1a4ca95d7c7b4b8e46",
+  "state": "OPEN",
+  "isDraft": true,
+  "baseRefName": "main",
+  "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "baseRefDivergence": {
+    "status": "ahead",
+    "aheadBy": 73,
+    "behindBy": 0,
+    "totalCommits": 73,
+    "mergeBase": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5"
+  },
+  "cellCount": 240,
+  "dispositions": {
+    "accept-current": 183,
+    "correction": 8,
+    "hold": 36,
+    "refinement": 13
+  },
+  "reconciliationRows": 58,
+  "carriedPriorSelections": 60,
+  "carriedPriorHolds": 348,
+  "sourceCatalogCallerDrift": false,
+  "catalogApplied": false,
+  "nativeSpeakerReview": "not performed",
+  "browserReview": "not performed",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "7af2d6a10cd205daff741507991579e8fe794870d353112601eaab948b9ca089",
+      "sizeBytes": 3879
+    },
+    {
+      "path": "actual-git-object-reattestation.json",
+      "sha256": "22439a331bd9f177886babb2055729ef0e526217e3fea4f1d5df3e25714897d4",
+      "sizeBytes": 6360
+    },
+    {
+      "path": "blind-review/README.md",
+      "sha256": "43db40ce484bb11c9580775bc6bfd58f34495e44027708d79446bf7df9c064ac",
+      "sizeBytes": 1945
+    },
+    {
+      "path": "blind-review/SHA256SUMS.txt",
+      "sha256": "37b88c123fd475237d3558b8a980c5b81462f0f0367199b1bbec55a170a2f7d2",
+      "sizeBytes": 11913
+    },
+    {
+      "path": "blind-review/blind-ledger.jsonl",
+      "sha256": "e88ca037c1e69e4e2a1a81749d4a73bda3d908e3b171be27b20cf25b3ce8e663",
+      "sizeBytes": 746976
+    },
+    {
+      "path": "blind-review/blind-seal.json",
+      "sha256": "9ff60ffac5716fb4712d83def9f4bc6e6bea534d460a99a2d04922e2b3a9e04c",
+      "sizeBytes": 906
+    },
+    {
+      "path": "blind-review/blind-summary.json",
+      "sha256": "3b5c1fb8b185251e17eaa3e011b23218d7b76d67439d70c9fdedf5d6018db8d7",
+      "sizeBytes": 1355
+    },
+    {
+      "path": "blind-review/build_blind_review.py",
+      "sha256": "a652645e00215de1c3bb315339779b8301bfabe4dc426434bb8cbc4980a63d89",
+      "sizeBytes": 14931
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/build_blind_review.py",
+      "sha256": "5d353a6784be6704fdca184808eeff905f019e9fd59f09810a4b4fa0388d6670",
+      "sizeBytes": 7677
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/current-head-files/docs/pr-evidence/pr70-localization-2026-11-03/romarrng-pr70-w365-384-candidate-free-20261103/input/source-queue.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "sizeBytes": 273919
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/current-head-files/romarr/i18n_runtime.js",
+      "sha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "sizeBytes": 9036
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/current-head-files/romarr/ui-labels.json",
+      "sha256": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+      "sizeBytes": 3011512
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/current-head-files/romarr/ui-source-messages.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "sizeBytes": 273919
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/current-head-files/romarr/ui.py",
+      "sha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "sizeBytes": 408966
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/README.md",
+      "sha256": "ac80a4b9c3daec90ae6efc2f6a8a85f043c6b2ac8d6f0df009136278d272fa94",
+      "sizeBytes": 495
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/caller-context-blocks.jsonl",
+      "sha256": "463b0e75a15e90f5e1f64cfb7fdc71d0547ef13b449ac0f281f6c17bdb9a3084",
+      "sizeBytes": 25614
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/PR-attestation.json",
+      "sha256": "d21025a72bf4157577af55646c5ff83a02dcbd61645dcabc75c71c175ede2012",
+      "sizeBytes": 1510
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/README.md",
+      "sha256": "93736e5f31870cd17f8005b3a155ab7d84b2dab6726a181b942fe140d4d398e5",
+      "sizeBytes": 1381
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/SHA256SUMS.txt",
+      "sha256": "7c3a3d8ac507aaf396bd95936d91889eeae851b5aea9410e553dae7c7da0c05b",
+      "sizeBytes": 2337
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/caller-search-audit.json",
+      "sha256": "8c5253b03b70c578de17b2c08ec7694579246e53f3f16bbc70b2deb77bc90c8f",
+      "sizeBytes": 20304
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/catalog-file-pins.json",
+      "sha256": "c8ab01551b2c03e7a724f27b9a6f0721feef02f767e01022813dc5c1f8965406",
+      "sizeBytes": 2617
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/catalog-insertion-queue.json",
+      "sha256": "31488f4292fee07187c5cb1338678aebece71863584f070e9988d8308bec89fd",
+      "sizeBytes": 8216
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/catalog-source-inventory.jsonl",
+      "sha256": "794674a77b1a359a836d866cc64d37867942ac08d162f3972fed41a049b61af2",
+      "sizeBytes": 453988
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/current-target-cells.jsonl",
+      "sha256": "d39628659b4969c5e174b2bf2fd3b9fd709937f4832989ed0c8694827ced3362",
+      "sizeBytes": 225911
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/current-target-numeric-mismatches.json",
+      "sha256": "043a98c02a2d9ff806d72b03b109a4a597bc4de19a395eb76190b997e8490343",
+      "sizeBytes": 45
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/current-target-placeholder-mismatches.json",
+      "sha256": "043a98c02a2d9ff806d72b03b109a4a597bc4de19a395eb76190b997e8490343",
+      "sizeBytes": 45
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/current-target-protected-literal-mismatches.json",
+      "sha256": "06c9fde4e9103f7689bd2cdf6f73358991970a23edd71561028156c224b0eb19",
+      "sizeBytes": 379
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/dispatch-mechanics.json",
+      "sha256": "bf29cffad93cd16d509c37fa5fd492b03c7b1d3bb0f36c602ee32bffdbdb4b2a",
+      "sizeBytes": 20044
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/manifest.json",
+      "sha256": "91769b07068039d09d2226a507ffc454ae6371a0902e32348f850406df6ef8d6",
+      "sizeBytes": 2073
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/prior-hold-reattestation-summary.json",
+      "sha256": "2e8c1b80081c0d02b0bf02195a7e74d1d6759697b4bf03d1ccc39fa683185613",
+      "sizeBytes": 537
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/prior-hold-reattestation.jsonl",
+      "sha256": "00cf6472752a07e210032fd7488ca50d1ccb5b17b7b47ab6944c6873157beabe",
+      "sizeBytes": 307481
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/prior-lineage-provenance.json",
+      "sha256": "634a07d509283807ca75e52ced443471ed87df8b4ed7040ec6c8ff21305d7311",
+      "sizeBytes": 1696
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/prior-selection-reattestation-summary.json",
+      "sha256": "5ebf926a815edf3190b7f1627885f3358f726985eac67afc9ca98b3f51c2e036",
+      "sizeBytes": 311
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/prior-selection-reattestation.jsonl",
+      "sha256": "f08427b581f62056e0f98b105249a20d159ea86f9b2765cc63a925aa0210ebb4",
+      "sizeBytes": 40446
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/registry-order-note.json",
+      "sha256": "fbe54ae90edd432cd6c70f0cef534fbc18bf502845d72efffca69c1476e3fbb6",
+      "sizeBytes": 1406
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/selection-boundary.jsonl",
+      "sha256": "70ca65f3e9a399bf32611a722b9248e10ec10452f9aec854ecefec312c0ac667",
+      "sizeBytes": 1335
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/selection.json",
+      "sha256": "d05129ca2b182167fc10a0d47e711b155cc51d1a1a8423eb35059c9aca2eb452",
+      "sizeBytes": 9396
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/source-contexts.jsonl",
+      "sha256": "a0d75105538165f0f7ef345a2b682e9503ab99f409734cc8cf2786fa5615db79",
+      "sizeBytes": 54591
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/source-inventory-selection.jsonl",
+      "sha256": "a094ee92af996cc476c29769726bbf4ca1bbc94da137b60f187730415efbff7a",
+      "sizeBytes": 6761
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/source-queue.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "sizeBytes": 273919
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/source-snapshot.json",
+      "sha256": "a39f405efa1bb5e479615ec68634f8dcea2ef1fc6de2bd30dc04f6776ebc2fab",
+      "sizeBytes": 54961
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/candidate-free-input/verify_input.py",
+      "sha256": "85b030d547365809804d1d963c0d590c3226e4512e617675c9a2cdb9f543a781",
+      "sizeBytes": 19048
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/current-target-cells.jsonl",
+      "sha256": "4c98da428ee0477d11625b23a45de4016606fff0966d34348f117888efc7f2fc",
+      "sizeBytes": 139642
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/file-pins.json",
+      "sha256": "f2439869ae666074cf7ddc1506d2e2fe00a7edeed573dc02bed1b779a31ed03b",
+      "sizeBytes": 1622
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/manifest.json",
+      "sha256": "fdebfbe2d9356621924f8925be21c0b08d4a10bb0a7876242c64bd2a278131ff",
+      "sizeBytes": 2695
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/new-head-tree.json",
+      "sha256": "33972d7b3e58dd33d6d725e88353b71abdd99fa6b645e9b3843f19e7c5a3d0b0",
+      "sizeBytes": 556911
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/pr-attestation-after.json",
+      "sha256": "6dd550fb1fc2fb7a0e441774bfd6ea472d4d125e546337a61a8800c4b5a07c0c",
+      "sizeBytes": 740
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/pr-attestation-before.json",
+      "sha256": "6dd550fb1fc2fb7a0e441774bfd6ea472d4d125e546337a61a8800c4b5a07c0c",
+      "sizeBytes": 740
+    },
+    {
+      "path": "blind-review/evidence/preliminary-registry-rank-extraction/input/source-cells.jsonl",
+      "sha256": "aaf04ff77adf51a13910677af79d9e9584bdafdc78fd7ef77110551d69e655ae",
+      "sizeBytes": 8072
+    },
+    {
+      "path": "blind-review/input/README.md",
+      "sha256": "5bff460bb17cad2497c82b23877b1c2c3b6c27969a61898c86fde662bbf214ca",
+      "sizeBytes": 286
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/PR-attestation.json",
+      "sha256": "d21025a72bf4157577af55646c5ff83a02dcbd61645dcabc75c71c175ede2012",
+      "sizeBytes": 1510
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/README.md",
+      "sha256": "93736e5f31870cd17f8005b3a155ab7d84b2dab6726a181b942fe140d4d398e5",
+      "sizeBytes": 1381
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/SHA256SUMS.txt",
+      "sha256": "7c3a3d8ac507aaf396bd95936d91889eeae851b5aea9410e553dae7c7da0c05b",
+      "sizeBytes": 2337
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/caller-search-audit.json",
+      "sha256": "8c5253b03b70c578de17b2c08ec7694579246e53f3f16bbc70b2deb77bc90c8f",
+      "sizeBytes": 20304
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/catalog-file-pins.json",
+      "sha256": "c8ab01551b2c03e7a724f27b9a6f0721feef02f767e01022813dc5c1f8965406",
+      "sizeBytes": 2617
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/catalog-insertion-queue.json",
+      "sha256": "31488f4292fee07187c5cb1338678aebece71863584f070e9988d8308bec89fd",
+      "sizeBytes": 8216
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/catalog-source-inventory.jsonl",
+      "sha256": "794674a77b1a359a836d866cc64d37867942ac08d162f3972fed41a049b61af2",
+      "sizeBytes": 453988
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/current-target-cells.jsonl",
+      "sha256": "d39628659b4969c5e174b2bf2fd3b9fd709937f4832989ed0c8694827ced3362",
+      "sizeBytes": 225911
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/current-target-numeric-mismatches.json",
+      "sha256": "043a98c02a2d9ff806d72b03b109a4a597bc4de19a395eb76190b997e8490343",
+      "sizeBytes": 45
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/current-target-placeholder-mismatches.json",
+      "sha256": "043a98c02a2d9ff806d72b03b109a4a597bc4de19a395eb76190b997e8490343",
+      "sizeBytes": 45
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/current-target-protected-literal-mismatches.json",
+      "sha256": "06c9fde4e9103f7689bd2cdf6f73358991970a23edd71561028156c224b0eb19",
+      "sizeBytes": 379
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/dispatch-mechanics.json",
+      "sha256": "bf29cffad93cd16d509c37fa5fd492b03c7b1d3bb0f36c602ee32bffdbdb4b2a",
+      "sizeBytes": 20044
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/manifest.json",
+      "sha256": "91769b07068039d09d2226a507ffc454ae6371a0902e32348f850406df6ef8d6",
+      "sizeBytes": 2073
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/prior-hold-reattestation-summary.json",
+      "sha256": "2e8c1b80081c0d02b0bf02195a7e74d1d6759697b4bf03d1ccc39fa683185613",
+      "sizeBytes": 537
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/prior-hold-reattestation.jsonl",
+      "sha256": "00cf6472752a07e210032fd7488ca50d1ccb5b17b7b47ab6944c6873157beabe",
+      "sizeBytes": 307481
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/prior-lineage-provenance.json",
+      "sha256": "634a07d509283807ca75e52ced443471ed87df8b4ed7040ec6c8ff21305d7311",
+      "sizeBytes": 1696
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/prior-selection-reattestation-summary.json",
+      "sha256": "5ebf926a815edf3190b7f1627885f3358f726985eac67afc9ca98b3f51c2e036",
+      "sizeBytes": 311
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/prior-selection-reattestation.jsonl",
+      "sha256": "f08427b581f62056e0f98b105249a20d159ea86f9b2765cc63a925aa0210ebb4",
+      "sizeBytes": 40446
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/registry-order-note.json",
+      "sha256": "fbe54ae90edd432cd6c70f0cef534fbc18bf502845d72efffca69c1476e3fbb6",
+      "sizeBytes": 1406
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/selection-boundary.jsonl",
+      "sha256": "70ca65f3e9a399bf32611a722b9248e10ec10452f9aec854ecefec312c0ac667",
+      "sizeBytes": 1335
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/selection.json",
+      "sha256": "d05129ca2b182167fc10a0d47e711b155cc51d1a1a8423eb35059c9aca2eb452",
+      "sizeBytes": 9396
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/source-contexts.jsonl",
+      "sha256": "a0d75105538165f0f7ef345a2b682e9503ab99f409734cc8cf2786fa5615db79",
+      "sizeBytes": 54591
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/source-inventory-selection.jsonl",
+      "sha256": "a094ee92af996cc476c29769726bbf4ca1bbc94da137b60f187730415efbff7a",
+      "sizeBytes": 6761
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/source-queue.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "sizeBytes": 273919
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/source-snapshot.json",
+      "sha256": "a39f405efa1bb5e479615ec68634f8dcea2ef1fc6de2bd30dc04f6776ebc2fab",
+      "sizeBytes": 54961
+    },
+    {
+      "path": "blind-review/input/candidate-free-input/verify_input.py",
+      "sha256": "85b030d547365809804d1d963c0d590c3226e4512e617675c9a2cdb9f543a781",
+      "sizeBytes": 19048
+    },
+    {
+      "path": "blind-review/input-verification.txt",
+      "sha256": "c26f851bca2259b300feb20c443fd5ff3c47a46423f007265dba1bfe50fe7397",
+      "sizeBytes": 417
+    },
+    {
+      "path": "blind-review/latest-head-caller-line-comparison.jsonl",
+      "sha256": "5fa01686f572755f5b255ec56559b473dfe9f892f58cd945aad98661608b1238",
+      "sizeBytes": 150166
+    },
+    {
+      "path": "blind-review/latest-head-cell-preimage-comparison.jsonl",
+      "sha256": "8ac1158e313c20290ccf145afa7a599e6ad7ba2d055eecd251f65216b754b421",
+      "sizeBytes": 203628
+    },
+    {
+      "path": "blind-review/latest-head-files/romarr/downloaders.py",
+      "sha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed",
+      "sizeBytes": 165965
+    },
+    {
+      "path": "blind-review/latest-head-files/romarr/i18n_runtime.js",
+      "sha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "sizeBytes": 9036
+    },
+    {
+      "path": "blind-review/latest-head-files/romarr/launchers.py",
+      "sha256": "8a8a7d9b6959c2e5166b131d426d7a7942037df19bc16cd7ba512621fa07b588",
+      "sizeBytes": 17972
+    },
+    {
+      "path": "blind-review/latest-head-files/romarr/libraries.py",
+      "sha256": "8d41c724588ff01ea3896dcfef4e07d7a2f107a1666070f0c1a688411686fe04",
+      "sizeBytes": 46463
+    },
+    {
+      "path": "blind-review/latest-head-files/romarr/organizer.py",
+      "sha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "sizeBytes": 121857
+    },
+    {
+      "path": "blind-review/latest-head-files/romarr/ui-labels.json",
+      "sha256": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+      "sizeBytes": 3011512
+    },
+    {
+      "path": "blind-review/latest-head-files/romarr/ui-source-messages.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "sizeBytes": 273919
+    },
+    {
+      "path": "blind-review/latest-head-files/romarr/ui-source-snapshot.json",
+      "sha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "sizeBytes": 202767
+    },
+    {
+      "path": "blind-review/latest-head-files/romarr/ui.py",
+      "sha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "sizeBytes": 408966
+    },
+    {
+      "path": "blind-review/latest-head-pinned-file-comparison.jsonl",
+      "sha256": "c9729c5d8d0b64dcd8f3f03b954eb252a1f80971b2687c5a58f221fc9c4f56df",
+      "sizeBytes": 3736
+    },
+    {
+      "path": "blind-review/latest-head-reattestation.json",
+      "sha256": "102b3c5db69bba3b6b5e511e4457d63769a058717ab9c09f50c4781777065809",
+      "sizeBytes": 899
+    },
+    {
+      "path": "blind-review/latest-head-tree.json",
+      "sha256": "f1af8f6d3d29c84bb2db35a00c2ef3697a2503bf5db1fdce11860a9bdd36c467",
+      "sizeBytes": 647937
+    },
+    {
+      "path": "blind-review/latest-live-pr-after.json",
+      "sha256": "764e0450fcb5865dd413007bc2586760662e627972dcd6bd4a36618ad8ad8321",
+      "sizeBytes": 815
+    },
+    {
+      "path": "blind-review/latest-live-pr-before.json",
+      "sha256": "764e0450fcb5865dd413007bc2586760662e627972dcd6bd4a36618ad8ad8321",
+      "sizeBytes": 815
+    },
+    {
+      "path": "blind-review/manifest.json",
+      "sha256": "0b605cd60784cf05f8c838c35f5e05d67f5177e7747061016a22b0fe75e4e52e",
+      "sizeBytes": 17966
+    },
+    {
+      "path": "blind-review/reattest_latest_head.py",
+      "sha256": "ef1a38768aeeb51b5e4725721da66be631d61128879b67e49400c3101ff38fba",
+      "sizeBytes": 7602
+    },
+    {
+      "path": "blind-review/verify_blind_review.py",
+      "sha256": "671af82f413512a08442640ecfaa508b81e1a84edc0740e250c84ac720c10c11",
+      "sizeBytes": 12311
+    },
+    {
+      "path": "cross-audit-ledger.jsonl",
+      "sha256": "39a7b79120f2181b38c517123ab626c117b0f1a09a5f1c426853625a8f146fae",
+      "sizeBytes": 815671
+    },
+    {
+      "path": "live-PR-attestation-after.json",
+      "sha256": "70619f3c80cea5e4acf253a81cd8912024e6aa336756e960f6876380d5424d25",
+      "sizeBytes": 1033
+    },
+    {
+      "path": "live-PR-attestation-before.json",
+      "sha256": "b64aa94a6d85eacf06d4055902013adeee5da1d8b57896f92d3bc1a2c7d5c8cd",
+      "sizeBytes": 1033
+    },
+    {
+      "path": "preselection-reattestation/README.md",
+      "sha256": "248208fbd2bba1db38d198600c7807bb8672bf223ecc550a9a58458a6cce635b",
+      "sizeBytes": 3232
+    },
+    {
+      "path": "preselection-reattestation/SHA256SUMS.txt",
+      "sha256": "1538672e7a2249d9d122b0bc485bdc364b17e2354a21be680935d082c3e8de42",
+      "sizeBytes": 14817
+    },
+    {
+      "path": "preselection-reattestation/SHA256SUMS.txt.sha256",
+      "sha256": "1f055850292c0257fab09fa39e97c365cb1a5241b1847b38dfd4dcbdbac8916c",
+      "sizeBytes": 171
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/README.md",
+      "sha256": "06ee0e9c8f1d49152b20e7d371dd058cfb68085307e4df77df7f5acf44cfe4bf",
+      "sizeBytes": 306
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/PR-attestation.json",
+      "sha256": "d21025a72bf4157577af55646c5ff83a02dcbd61645dcabc75c71c175ede2012",
+      "sizeBytes": 1510
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/README.md",
+      "sha256": "93736e5f31870cd17f8005b3a155ab7d84b2dab6726a181b942fe140d4d398e5",
+      "sizeBytes": 1381
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/SHA256SUMS.txt",
+      "sha256": "7c3a3d8ac507aaf396bd95936d91889eeae851b5aea9410e553dae7c7da0c05b",
+      "sizeBytes": 2337
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/caller-search-audit.json",
+      "sha256": "8c5253b03b70c578de17b2c08ec7694579246e53f3f16bbc70b2deb77bc90c8f",
+      "sizeBytes": 20304
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/catalog-file-pins.json",
+      "sha256": "c8ab01551b2c03e7a724f27b9a6f0721feef02f767e01022813dc5c1f8965406",
+      "sizeBytes": 2617
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/catalog-insertion-queue.json",
+      "sha256": "31488f4292fee07187c5cb1338678aebece71863584f070e9988d8308bec89fd",
+      "sizeBytes": 8216
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/catalog-source-inventory.jsonl",
+      "sha256": "794674a77b1a359a836d866cc64d37867942ac08d162f3972fed41a049b61af2",
+      "sizeBytes": 453988
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/current-target-cells.jsonl",
+      "sha256": "d39628659b4969c5e174b2bf2fd3b9fd709937f4832989ed0c8694827ced3362",
+      "sizeBytes": 225911
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/current-target-numeric-mismatches.json",
+      "sha256": "043a98c02a2d9ff806d72b03b109a4a597bc4de19a395eb76190b997e8490343",
+      "sizeBytes": 45
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/current-target-placeholder-mismatches.json",
+      "sha256": "043a98c02a2d9ff806d72b03b109a4a597bc4de19a395eb76190b997e8490343",
+      "sizeBytes": 45
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/current-target-protected-literal-mismatches.json",
+      "sha256": "06c9fde4e9103f7689bd2cdf6f73358991970a23edd71561028156c224b0eb19",
+      "sizeBytes": 379
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/dispatch-mechanics.json",
+      "sha256": "bf29cffad93cd16d509c37fa5fd492b03c7b1d3bb0f36c602ee32bffdbdb4b2a",
+      "sizeBytes": 20044
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/manifest.json",
+      "sha256": "91769b07068039d09d2226a507ffc454ae6371a0902e32348f850406df6ef8d6",
+      "sizeBytes": 2073
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/prior-hold-reattestation-summary.json",
+      "sha256": "2e8c1b80081c0d02b0bf02195a7e74d1d6759697b4bf03d1ccc39fa683185613",
+      "sizeBytes": 537
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/prior-hold-reattestation.jsonl",
+      "sha256": "00cf6472752a07e210032fd7488ca50d1ccb5b17b7b47ab6944c6873157beabe",
+      "sizeBytes": 307481
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/prior-lineage-provenance.json",
+      "sha256": "634a07d509283807ca75e52ced443471ed87df8b4ed7040ec6c8ff21305d7311",
+      "sizeBytes": 1696
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/prior-selection-reattestation-summary.json",
+      "sha256": "5ebf926a815edf3190b7f1627885f3358f726985eac67afc9ca98b3f51c2e036",
+      "sizeBytes": 311
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/prior-selection-reattestation.jsonl",
+      "sha256": "f08427b581f62056e0f98b105249a20d159ea86f9b2765cc63a925aa0210ebb4",
+      "sizeBytes": 40446
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/registry-order-note.json",
+      "sha256": "fbe54ae90edd432cd6c70f0cef534fbc18bf502845d72efffca69c1476e3fbb6",
+      "sizeBytes": 1406
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/selection-boundary.jsonl",
+      "sha256": "70ca65f3e9a399bf32611a722b9248e10ec10452f9aec854ecefec312c0ac667",
+      "sizeBytes": 1335
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/selection.json",
+      "sha256": "d05129ca2b182167fc10a0d47e711b155cc51d1a1a8423eb35059c9aca2eb452",
+      "sizeBytes": 9396
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/source-contexts.jsonl",
+      "sha256": "a0d75105538165f0f7ef345a2b682e9503ab99f409734cc8cf2786fa5615db79",
+      "sizeBytes": 54591
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/source-inventory-selection.jsonl",
+      "sha256": "a094ee92af996cc476c29769726bbf4ca1bbc94da137b60f187730415efbff7a",
+      "sizeBytes": 6761
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/source-queue.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "sizeBytes": 273919
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/source-snapshot.json",
+      "sha256": "a39f405efa1bb5e479615ec68634f8dcea2ef1fc6de2bd30dc04f6776ebc2fab",
+      "sizeBytes": 54961
+    },
+    {
+      "path": "preselection-reattestation/blind-review-input/candidate-free-input/verify_input.py",
+      "sha256": "85b030d547365809804d1d963c0d590c3226e4512e617675c9a2cdb9f543a781",
+      "sizeBytes": 19048
+    },
+    {
+      "path": "preselection-reattestation/build_reattestation.py",
+      "sha256": "1b89c57d37e21f0a228a5352564a849c17791e3f59815f21af547c4cb7847078",
+      "sizeBytes": 15899
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/PR-attestation.json",
+      "sha256": "d21025a72bf4157577af55646c5ff83a02dcbd61645dcabc75c71c175ede2012",
+      "sizeBytes": 1510
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/README.md",
+      "sha256": "93736e5f31870cd17f8005b3a155ab7d84b2dab6726a181b942fe140d4d398e5",
+      "sizeBytes": 1381
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/SHA256SUMS.txt",
+      "sha256": "7c3a3d8ac507aaf396bd95936d91889eeae851b5aea9410e553dae7c7da0c05b",
+      "sizeBytes": 2337
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/caller-search-audit.json",
+      "sha256": "8c5253b03b70c578de17b2c08ec7694579246e53f3f16bbc70b2deb77bc90c8f",
+      "sizeBytes": 20304
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/catalog-file-pins.json",
+      "sha256": "c8ab01551b2c03e7a724f27b9a6f0721feef02f767e01022813dc5c1f8965406",
+      "sizeBytes": 2617
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/catalog-insertion-queue.json",
+      "sha256": "31488f4292fee07187c5cb1338678aebece71863584f070e9988d8308bec89fd",
+      "sizeBytes": 8216
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/catalog-source-inventory.jsonl",
+      "sha256": "794674a77b1a359a836d866cc64d37867942ac08d162f3972fed41a049b61af2",
+      "sizeBytes": 453988
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/current-target-cells.jsonl",
+      "sha256": "d39628659b4969c5e174b2bf2fd3b9fd709937f4832989ed0c8694827ced3362",
+      "sizeBytes": 225911
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/current-target-numeric-mismatches.json",
+      "sha256": "043a98c02a2d9ff806d72b03b109a4a597bc4de19a395eb76190b997e8490343",
+      "sizeBytes": 45
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/current-target-placeholder-mismatches.json",
+      "sha256": "043a98c02a2d9ff806d72b03b109a4a597bc4de19a395eb76190b997e8490343",
+      "sizeBytes": 45
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/current-target-protected-literal-mismatches.json",
+      "sha256": "06c9fde4e9103f7689bd2cdf6f73358991970a23edd71561028156c224b0eb19",
+      "sizeBytes": 379
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/dispatch-mechanics.json",
+      "sha256": "bf29cffad93cd16d509c37fa5fd492b03c7b1d3bb0f36c602ee32bffdbdb4b2a",
+      "sizeBytes": 20044
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/manifest.json",
+      "sha256": "91769b07068039d09d2226a507ffc454ae6371a0902e32348f850406df6ef8d6",
+      "sizeBytes": 2073
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/prior-hold-reattestation-summary.json",
+      "sha256": "2e8c1b80081c0d02b0bf02195a7e74d1d6759697b4bf03d1ccc39fa683185613",
+      "sizeBytes": 537
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/prior-hold-reattestation.jsonl",
+      "sha256": "00cf6472752a07e210032fd7488ca50d1ccb5b17b7b47ab6944c6873157beabe",
+      "sizeBytes": 307481
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/prior-lineage-provenance.json",
+      "sha256": "634a07d509283807ca75e52ced443471ed87df8b4ed7040ec6c8ff21305d7311",
+      "sizeBytes": 1696
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/prior-selection-reattestation-summary.json",
+      "sha256": "5ebf926a815edf3190b7f1627885f3358f726985eac67afc9ca98b3f51c2e036",
+      "sizeBytes": 311
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/prior-selection-reattestation.jsonl",
+      "sha256": "f08427b581f62056e0f98b105249a20d159ea86f9b2765cc63a925aa0210ebb4",
+      "sizeBytes": 40446
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/registry-order-note.json",
+      "sha256": "fbe54ae90edd432cd6c70f0cef534fbc18bf502845d72efffca69c1476e3fbb6",
+      "sizeBytes": 1406
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/selection-boundary.jsonl",
+      "sha256": "70ca65f3e9a399bf32611a722b9248e10ec10452f9aec854ecefec312c0ac667",
+      "sizeBytes": 1335
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/selection.json",
+      "sha256": "d05129ca2b182167fc10a0d47e711b155cc51d1a1a8423eb35059c9aca2eb452",
+      "sizeBytes": 9396
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/source-contexts.jsonl",
+      "sha256": "a0d75105538165f0f7ef345a2b682e9503ab99f409734cc8cf2786fa5615db79",
+      "sizeBytes": 54591
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/source-inventory-selection.jsonl",
+      "sha256": "a094ee92af996cc476c29769726bbf4ca1bbc94da137b60f187730415efbff7a",
+      "sizeBytes": 6761
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/source-queue.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "sizeBytes": 273919
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/source-snapshot.json",
+      "sha256": "a39f405efa1bb5e479615ec68634f8dcea2ef1fc6de2bd30dc04f6776ebc2fab",
+      "sizeBytes": 54961
+    },
+    {
+      "path": "preselection-reattestation/candidate-free-input/verify_input.py",
+      "sha256": "85b030d547365809804d1d963c0d590c3226e4512e617675c9a2cdb9f543a781",
+      "sizeBytes": 19048
+    },
+    {
+      "path": "preselection-reattestation/head-reattestation.json",
+      "sha256": "668b60515d881beefaf4938865733865a0762fdd3ae2f181f9caafebd82b72b6",
+      "sizeBytes": 49353
+    },
+    {
+      "path": "preselection-reattestation/pinned-source-blobs/docs/pr-evidence/pr70-localization-2026-11-03/romarrng-pr70-w365-384-candidate-free-20261103/input/source-queue.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "sizeBytes": 273919
+    },
+    {
+      "path": "preselection-reattestation/pinned-source-blobs/romarr/downloaders.py",
+      "sha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed",
+      "sizeBytes": 165965
+    },
+    {
+      "path": "preselection-reattestation/pinned-source-blobs/romarr/i18n_runtime.js",
+      "sha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "sizeBytes": 9036
+    },
+    {
+      "path": "preselection-reattestation/pinned-source-blobs/romarr/launchers.py",
+      "sha256": "8a8a7d9b6959c2e5166b131d426d7a7942037df19bc16cd7ba512621fa07b588",
+      "sizeBytes": 17972
+    },
+    {
+      "path": "preselection-reattestation/pinned-source-blobs/romarr/libraries.py",
+      "sha256": "8d41c724588ff01ea3896dcfef4e07d7a2f107a1666070f0c1a688411686fe04",
+      "sizeBytes": 46463
+    },
+    {
+      "path": "preselection-reattestation/pinned-source-blobs/romarr/organizer.py",
+      "sha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "sizeBytes": 121857
+    },
+    {
+      "path": "preselection-reattestation/pinned-source-blobs/romarr/ui-labels.json",
+      "sha256": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+      "sizeBytes": 3011512
+    },
+    {
+      "path": "preselection-reattestation/pinned-source-blobs/romarr/ui-source-messages.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "sizeBytes": 273919
+    },
+    {
+      "path": "preselection-reattestation/pinned-source-blobs/romarr/ui-source-snapshot.json",
+      "sha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "sizeBytes": 202767
+    },
+    {
+      "path": "preselection-reattestation/pinned-source-blobs/romarr/ui.py",
+      "sha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "sizeBytes": 408966
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/build_blind_review.py",
+      "sha256": "5d353a6784be6704fdca184808eeff905f019e9fd59f09810a4b4fa0388d6670",
+      "sizeBytes": 7677
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/current-head-files/docs/pr-evidence/pr70-localization-2026-11-03/romarrng-pr70-w365-384-candidate-free-20261103/input/source-queue.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "sizeBytes": 273919
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/current-head-files/romarr/i18n_runtime.js",
+      "sha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "sizeBytes": 9036
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/current-head-files/romarr/ui-labels.json",
+      "sha256": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+      "sizeBytes": 3011512
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/current-head-files/romarr/ui-source-messages.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "sizeBytes": 273919
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/current-head-files/romarr/ui.py",
+      "sha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "sizeBytes": 408966
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/README.md",
+      "sha256": "ac80a4b9c3daec90ae6efc2f6a8a85f043c6b2ac8d6f0df009136278d272fa94",
+      "sizeBytes": 495
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/caller-context-blocks.jsonl",
+      "sha256": "463b0e75a15e90f5e1f64cfb7fdc71d0547ef13b449ac0f281f6c17bdb9a3084",
+      "sizeBytes": 25614
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/PR-attestation.json",
+      "sha256": "d21025a72bf4157577af55646c5ff83a02dcbd61645dcabc75c71c175ede2012",
+      "sizeBytes": 1510
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/README.md",
+      "sha256": "93736e5f31870cd17f8005b3a155ab7d84b2dab6726a181b942fe140d4d398e5",
+      "sizeBytes": 1381
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/SHA256SUMS.txt",
+      "sha256": "7c3a3d8ac507aaf396bd95936d91889eeae851b5aea9410e553dae7c7da0c05b",
+      "sizeBytes": 2337
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/caller-search-audit.json",
+      "sha256": "8c5253b03b70c578de17b2c08ec7694579246e53f3f16bbc70b2deb77bc90c8f",
+      "sizeBytes": 20304
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/catalog-file-pins.json",
+      "sha256": "c8ab01551b2c03e7a724f27b9a6f0721feef02f767e01022813dc5c1f8965406",
+      "sizeBytes": 2617
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/catalog-insertion-queue.json",
+      "sha256": "31488f4292fee07187c5cb1338678aebece71863584f070e9988d8308bec89fd",
+      "sizeBytes": 8216
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/catalog-source-inventory.jsonl",
+      "sha256": "794674a77b1a359a836d866cc64d37867942ac08d162f3972fed41a049b61af2",
+      "sizeBytes": 453988
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/current-target-cells.jsonl",
+      "sha256": "d39628659b4969c5e174b2bf2fd3b9fd709937f4832989ed0c8694827ced3362",
+      "sizeBytes": 225911
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/current-target-numeric-mismatches.json",
+      "sha256": "043a98c02a2d9ff806d72b03b109a4a597bc4de19a395eb76190b997e8490343",
+      "sizeBytes": 45
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/current-target-placeholder-mismatches.json",
+      "sha256": "043a98c02a2d9ff806d72b03b109a4a597bc4de19a395eb76190b997e8490343",
+      "sizeBytes": 45
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/current-target-protected-literal-mismatches.json",
+      "sha256": "06c9fde4e9103f7689bd2cdf6f73358991970a23edd71561028156c224b0eb19",
+      "sizeBytes": 379
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/dispatch-mechanics.json",
+      "sha256": "bf29cffad93cd16d509c37fa5fd492b03c7b1d3bb0f36c602ee32bffdbdb4b2a",
+      "sizeBytes": 20044
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/manifest.json",
+      "sha256": "91769b07068039d09d2226a507ffc454ae6371a0902e32348f850406df6ef8d6",
+      "sizeBytes": 2073
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/prior-hold-reattestation-summary.json",
+      "sha256": "2e8c1b80081c0d02b0bf02195a7e74d1d6759697b4bf03d1ccc39fa683185613",
+      "sizeBytes": 537
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/prior-hold-reattestation.jsonl",
+      "sha256": "00cf6472752a07e210032fd7488ca50d1ccb5b17b7b47ab6944c6873157beabe",
+      "sizeBytes": 307481
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/prior-lineage-provenance.json",
+      "sha256": "634a07d509283807ca75e52ced443471ed87df8b4ed7040ec6c8ff21305d7311",
+      "sizeBytes": 1696
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/prior-selection-reattestation-summary.json",
+      "sha256": "5ebf926a815edf3190b7f1627885f3358f726985eac67afc9ca98b3f51c2e036",
+      "sizeBytes": 311
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/prior-selection-reattestation.jsonl",
+      "sha256": "f08427b581f62056e0f98b105249a20d159ea86f9b2765cc63a925aa0210ebb4",
+      "sizeBytes": 40446
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/registry-order-note.json",
+      "sha256": "fbe54ae90edd432cd6c70f0cef534fbc18bf502845d72efffca69c1476e3fbb6",
+      "sizeBytes": 1406
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/selection-boundary.jsonl",
+      "sha256": "70ca65f3e9a399bf32611a722b9248e10ec10452f9aec854ecefec312c0ac667",
+      "sizeBytes": 1335
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/selection.json",
+      "sha256": "d05129ca2b182167fc10a0d47e711b155cc51d1a1a8423eb35059c9aca2eb452",
+      "sizeBytes": 9396
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/source-contexts.jsonl",
+      "sha256": "a0d75105538165f0f7ef345a2b682e9503ab99f409734cc8cf2786fa5615db79",
+      "sizeBytes": 54591
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/source-inventory-selection.jsonl",
+      "sha256": "a094ee92af996cc476c29769726bbf4ca1bbc94da137b60f187730415efbff7a",
+      "sizeBytes": 6761
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/source-queue.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "sizeBytes": 273919
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/source-snapshot.json",
+      "sha256": "a39f405efa1bb5e479615ec68634f8dcea2ef1fc6de2bd30dc04f6776ebc2fab",
+      "sizeBytes": 54961
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/candidate-free-input/verify_input.py",
+      "sha256": "85b030d547365809804d1d963c0d590c3226e4512e617675c9a2cdb9f543a781",
+      "sizeBytes": 19048
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/current-target-cells.jsonl",
+      "sha256": "4c98da428ee0477d11625b23a45de4016606fff0966d34348f117888efc7f2fc",
+      "sizeBytes": 139642
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/file-pins.json",
+      "sha256": "f2439869ae666074cf7ddc1506d2e2fe00a7edeed573dc02bed1b779a31ed03b",
+      "sizeBytes": 1622
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/manifest.json",
+      "sha256": "fdebfbe2d9356621924f8925be21c0b08d4a10bb0a7876242c64bd2a278131ff",
+      "sizeBytes": 2695
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/new-head-tree.json",
+      "sha256": "33972d7b3e58dd33d6d725e88353b71abdd99fa6b645e9b3843f19e7c5a3d0b0",
+      "sizeBytes": 556911
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/pr-attestation-after.json",
+      "sha256": "6dd550fb1fc2fb7a0e441774bfd6ea472d4d125e546337a61a8800c4b5a07c0c",
+      "sizeBytes": 740
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/pr-attestation-before.json",
+      "sha256": "6dd550fb1fc2fb7a0e441774bfd6ea472d4d125e546337a61a8800c4b5a07c0c",
+      "sizeBytes": 740
+    },
+    {
+      "path": "preselection-reattestation/preliminary-blind-review/input/source-cells.jsonl",
+      "sha256": "aaf04ff77adf51a13910677af79d9e9584bdafdc78fd7ef77110551d69e655ae",
+      "sizeBytes": 8072
+    },
+    {
+      "path": "preselection-reattestation/primary-review/PR-attestation-after.json",
+      "sha256": "4cd7d378d4aa2b6610b616c0dadcccc10b9927cfcd48e51d457285439c537ae7",
+      "sizeBytes": 660
+    },
+    {
+      "path": "preselection-reattestation/primary-review/PR-attestation-before.json",
+      "sha256": "060b1d5b6d4e63015c672bdf6205ba673e70a912c01bbcf0ec154e520f631853",
+      "sizeBytes": 660
+    },
+    {
+      "path": "preselection-reattestation/primary-review/README.md",
+      "sha256": "7fdb08bed262755fcee8ffec9eb9cfd0b73956509f4b365ec51aec752c8f192c",
+      "sizeBytes": 1081
+    },
+    {
+      "path": "preselection-reattestation/primary-review/SHA256SUMS.txt",
+      "sha256": "6bb78bb4794f2469fcc1baa35776e47dfbc3c0051d89c472108ce278c46d6c96",
+      "sizeBytes": 755
+    },
+    {
+      "path": "preselection-reattestation/primary-review/build_primary.py",
+      "sha256": "11fe2489c6b3884a3bde55067027a92addfc2ba920a9dc5c08326e4442884781",
+      "sizeBytes": 24528
+    },
+    {
+      "path": "preselection-reattestation/primary-review/manifest.json",
+      "sha256": "39567869296f097d4509bf070f8ee6abc26745919d733f5649e89313e6a74eaf",
+      "sizeBytes": 2982
+    },
+    {
+      "path": "preselection-reattestation/primary-review/primary-ledger.jsonl",
+      "sha256": "1a427d711fa35c200bdcbb52a98569a87b880af7858778eaade55812049c8bb4",
+      "sizeBytes": 569509
+    },
+    {
+      "path": "preselection-reattestation/primary-review/seal_packet.py",
+      "sha256": "417a5c5dea9324038b9accac1e330ba29b0975737592eab3b39adc17c079c825",
+      "sizeBytes": 3360
+    },
+    {
+      "path": "preselection-reattestation/primary-review/summary.json",
+      "sha256": "ca0cc362080d19c913a56e5fbd759a4d1d90843f3cd62e93f9467c75cc0a2047",
+      "sizeBytes": 2690
+    },
+    {
+      "path": "preselection-reattestation/primary-review/verify_primary.py",
+      "sha256": "2e1d87d5173369119ecf31f1602411f5623b5d5146d31db145af1c2a7f421c3c",
+      "sizeBytes": 15278
+    },
+    {
+      "path": "preselection-reattestation/verify_primary_portable.py",
+      "sha256": "5480ce4b9cca171dbcbf7732514dac38e2f67f975278cd8528b22f28aae937ca",
+      "sizeBytes": 736
+    },
+    {
+      "path": "preselection-reattestation/verify_reattestation.py",
+      "sha256": "f553786894b8e4770bcef8b34d513eaeac88855edd9094cc5ce09d5fba1317dd",
+      "sizeBytes": 8723
+    },
+    {
+      "path": "primary-blind-reconciliation.jsonl",
+      "sha256": "4441c3c96e877cb639da097e3095cdd999a18f9543ea0410dea65c2dcdc0e3c3",
+      "sizeBytes": 111752
+    },
+    {
+      "path": "primary-review/PR-attestation-after.json",
+      "sha256": "4cd7d378d4aa2b6610b616c0dadcccc10b9927cfcd48e51d457285439c537ae7",
+      "sizeBytes": 660
+    },
+    {
+      "path": "primary-review/PR-attestation-before.json",
+      "sha256": "060b1d5b6d4e63015c672bdf6205ba673e70a912c01bbcf0ec154e520f631853",
+      "sizeBytes": 660
+    },
+    {
+      "path": "primary-review/README.md",
+      "sha256": "7fdb08bed262755fcee8ffec9eb9cfd0b73956509f4b365ec51aec752c8f192c",
+      "sizeBytes": 1081
+    },
+    {
+      "path": "primary-review/SHA256SUMS.txt",
+      "sha256": "6bb78bb4794f2469fcc1baa35776e47dfbc3c0051d89c472108ce278c46d6c96",
+      "sizeBytes": 755
+    },
+    {
+      "path": "primary-review/build_primary.py",
+      "sha256": "11fe2489c6b3884a3bde55067027a92addfc2ba920a9dc5c08326e4442884781",
+      "sizeBytes": 24528
+    },
+    {
+      "path": "primary-review/manifest.json",
+      "sha256": "39567869296f097d4509bf070f8ee6abc26745919d733f5649e89313e6a74eaf",
+      "sizeBytes": 2982
+    },
+    {
+      "path": "primary-review/primary-ledger.jsonl",
+      "sha256": "1a427d711fa35c200bdcbb52a98569a87b880af7858778eaade55812049c8bb4",
+      "sizeBytes": 569509
+    },
+    {
+      "path": "primary-review/seal_packet.py",
+      "sha256": "417a5c5dea9324038b9accac1e330ba29b0975737592eab3b39adc17c079c825",
+      "sizeBytes": 3360
+    },
+    {
+      "path": "primary-review/summary.json",
+      "sha256": "ca0cc362080d19c913a56e5fbd759a4d1d90843f3cd62e93f9467c75cc0a2047",
+      "sizeBytes": 2690
+    },
+    {
+      "path": "primary-review/verify_primary.py",
+      "sha256": "2e1d87d5173369119ecf31f1602411f5623b5d5146d31db145af1c2a7f421c3c",
+      "sizeBytes": 15278
+    },
+    {
+      "path": "reconciliation-summary.json",
+      "sha256": "20f4d9c8ee85ac3dc221c23b09968974d151e0fed80ab3162832ca4964ebb0e3",
+      "sizeBytes": 2005
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/PR-attestation.json",
+      "sha256": "d21025a72bf4157577af55646c5ff83a02dcbd61645dcabc75c71c175ede2012",
+      "sizeBytes": 1510
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/README.md",
+      "sha256": "93736e5f31870cd17f8005b3a155ab7d84b2dab6726a181b942fe140d4d398e5",
+      "sizeBytes": 1381
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/SHA256SUMS.txt",
+      "sha256": "7c3a3d8ac507aaf396bd95936d91889eeae851b5aea9410e553dae7c7da0c05b",
+      "sizeBytes": 2337
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/caller-search-audit.json",
+      "sha256": "8c5253b03b70c578de17b2c08ec7694579246e53f3f16bbc70b2deb77bc90c8f",
+      "sizeBytes": 20304
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/catalog-file-pins.json",
+      "sha256": "c8ab01551b2c03e7a724f27b9a6f0721feef02f767e01022813dc5c1f8965406",
+      "sizeBytes": 2617
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/catalog-insertion-queue.json",
+      "sha256": "31488f4292fee07187c5cb1338678aebece71863584f070e9988d8308bec89fd",
+      "sizeBytes": 8216
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/catalog-source-inventory.jsonl",
+      "sha256": "794674a77b1a359a836d866cc64d37867942ac08d162f3972fed41a049b61af2",
+      "sizeBytes": 453988
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/current-target-cells.jsonl",
+      "sha256": "d39628659b4969c5e174b2bf2fd3b9fd709937f4832989ed0c8694827ced3362",
+      "sizeBytes": 225911
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/current-target-numeric-mismatches.json",
+      "sha256": "043a98c02a2d9ff806d72b03b109a4a597bc4de19a395eb76190b997e8490343",
+      "sizeBytes": 45
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/current-target-placeholder-mismatches.json",
+      "sha256": "043a98c02a2d9ff806d72b03b109a4a597bc4de19a395eb76190b997e8490343",
+      "sizeBytes": 45
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/current-target-protected-literal-mismatches.json",
+      "sha256": "06c9fde4e9103f7689bd2cdf6f73358991970a23edd71561028156c224b0eb19",
+      "sizeBytes": 379
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/dispatch-mechanics.json",
+      "sha256": "bf29cffad93cd16d509c37fa5fd492b03c7b1d3bb0f36c602ee32bffdbdb4b2a",
+      "sizeBytes": 20044
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/manifest.json",
+      "sha256": "91769b07068039d09d2226a507ffc454ae6371a0902e32348f850406df6ef8d6",
+      "sizeBytes": 2073
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/prior-hold-reattestation-summary.json",
+      "sha256": "2e8c1b80081c0d02b0bf02195a7e74d1d6759697b4bf03d1ccc39fa683185613",
+      "sizeBytes": 537
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/prior-hold-reattestation.jsonl",
+      "sha256": "00cf6472752a07e210032fd7488ca50d1ccb5b17b7b47ab6944c6873157beabe",
+      "sizeBytes": 307481
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/prior-lineage-provenance.json",
+      "sha256": "634a07d509283807ca75e52ced443471ed87df8b4ed7040ec6c8ff21305d7311",
+      "sizeBytes": 1696
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/prior-selection-reattestation-summary.json",
+      "sha256": "5ebf926a815edf3190b7f1627885f3358f726985eac67afc9ca98b3f51c2e036",
+      "sizeBytes": 311
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/prior-selection-reattestation.jsonl",
+      "sha256": "f08427b581f62056e0f98b105249a20d159ea86f9b2765cc63a925aa0210ebb4",
+      "sizeBytes": 40446
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/registry-order-note.json",
+      "sha256": "fbe54ae90edd432cd6c70f0cef534fbc18bf502845d72efffca69c1476e3fbb6",
+      "sizeBytes": 1406
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/selection-boundary.jsonl",
+      "sha256": "70ca65f3e9a399bf32611a722b9248e10ec10452f9aec854ecefec312c0ac667",
+      "sizeBytes": 1335
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/selection.json",
+      "sha256": "d05129ca2b182167fc10a0d47e711b155cc51d1a1a8423eb35059c9aca2eb452",
+      "sizeBytes": 9396
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/source-contexts.jsonl",
+      "sha256": "a0d75105538165f0f7ef345a2b682e9503ab99f409734cc8cf2786fa5615db79",
+      "sizeBytes": 54591
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/source-inventory-selection.jsonl",
+      "sha256": "a094ee92af996cc476c29769726bbf4ca1bbc94da137b60f187730415efbff7a",
+      "sizeBytes": 6761
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/source-queue.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "sizeBytes": 273919
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/source-snapshot.json",
+      "sha256": "a39f405efa1bb5e479615ec68634f8dcea2ef1fc6de2bd30dc04f6776ebc2fab",
+      "sizeBytes": 54961
+    },
+    {
+      "path": "romarrng-pr70-w445-464-candidate-free-20261103/input/verify_input.py",
+      "sha256": "85b030d547365809804d1d963c0d590c3226e4512e617675c9a2cdb9f543a781",
+      "sizeBytes": 19048
+    },
+    {
+      "path": "source-pin-attestation.json",
+      "sha256": "7a91aa9b0b00483ac1a0ef44ce612ec6ad59ef9e7ff13ca01471f64066c98dea",
+      "sizeBytes": 11766
+    },
+    {
+      "path": "verify_cross_audit.py",
+      "sha256": "3f767c333b9425960c4a532c998ec23d6ace7cf135148164050ada11db734ff0",
+      "sizeBytes": 14129
+    }
+  ]
+}

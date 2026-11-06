@@ -1,0 +1,112 @@
+{
+  "baseRefName": "main",
+  "callerFiles": {
+    "romarr/app.py": {
+      "bytes": 417785,
+      "gitBlob": "1a6067d98a1e5c2c54c5af7c70a7f6cfeecedee5",
+      "sha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231"
+    },
+    "romarr/connect.py": {
+      "bytes": 19037,
+      "gitBlob": "2eedb989971c18f76d8742c413a9f8f224cc1bce",
+      "sha256": "75aabd8d31edd5874d0b19f2c2f68de9da1e6eeceb6d72e954b3ea04349a8f5a"
+    },
+    "romarr/organizer.py": {
+      "bytes": 121857,
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+      "sha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64"
+    },
+    "romarr/titled.py": {
+      "bytes": 22494,
+      "gitBlob": "75139bb370e0a3a473f28a3ac41f7d06edc66756",
+      "sha256": "55ab32bf6f20c044823429d5ffc34d5c9f3e1a3262b5963e4ee9458e88be301e"
+    },
+    "romarr/ui.py": {
+      "bytes": 405689,
+      "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+      "sha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71"
+    }
+  },
+  "catalogBlob": "4ead4c8399dfa9333f7653be4e7b87f96da351b8",
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogSha256": "c18f14ed0594e985861a7e5143147fa0f139f39cc588cd7fae89d75988aa9c06",
+  "filePins": {
+    "docs/localization-glossary.md": {
+      "bytes": 3031,
+      "gitBlob": "edfe311cb5a0fd66c49a0923a0b410d207fa315f",
+      "sha256": "08f2f2e2ddf722065993a454523e8c353db823c336a6f07e48f9bf215e37ad34"
+    },
+    "docs/pr-evidence/pr70-localization-2026-11-03/window106-125/primary-review/selection.json": {
+      "bytes": 3254,
+      "gitBlob": "55c8474b7a68913585ad6f5dfd1eaaa260f56f81",
+      "sha256": "0b97ecb3a48293a00959d348b6c91678d3bd2b38106d7509822d11c51a0a1c77"
+    },
+    "localization/source-bundles/20261101-connect-instructions.json": {
+      "bytes": 246871,
+      "gitBlob": "0da16cf24d764dbf4b4156c2bc7db5c3ac8b11d5",
+      "sha256": "a6f047ba685db67ba51fe5fda0e20f6f83b84cdc94f303a68f648bc6540fe7a8"
+    },
+    "romarr/app.py": {
+      "bytes": 417785,
+      "gitBlob": "1a6067d98a1e5c2c54c5af7c70a7f6cfeecedee5",
+      "sha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231"
+    },
+    "romarr/connect.py": {
+      "bytes": 19037,
+      "gitBlob": "2eedb989971c18f76d8742c413a9f8f224cc1bce",
+      "sha256": "75aabd8d31edd5874d0b19f2c2f68de9da1e6eeceb6d72e954b3ea04349a8f5a"
+    },
+    "romarr/organizer.py": {
+      "bytes": 121857,
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+      "sha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64"
+    },
+    "romarr/titled.py": {
+      "bytes": 22494,
+      "gitBlob": "75139bb370e0a3a473f28a3ac41f7d06edc66756",
+      "sha256": "55ab32bf6f20c044823429d5ffc34d5c9f3e1a3262b5963e4ee9458e88be301e"
+    },
+    "romarr/ui-labels.json": {
+      "bytes": 3006656,
+      "gitBlob": "4ead4c8399dfa9333f7653be4e7b87f96da351b8",
+      "sha256": "c18f14ed0594e985861a7e5143147fa0f139f39cc588cd7fae89d75988aa9c06"
+    },
+    "romarr/ui-source-messages.json": {
+      "bytes": 275911,
+      "gitBlob": "ea4ff095d4c9d60c175987926b852dddd1f6aa85",
+      "sha256": "612b3a664577c84e3fe60294929f2a97c8f103d2bfd58047aeecc6de348fd134"
+    },
+    "romarr/ui-source-snapshot.json": {
+      "bytes": 202889,
+      "gitBlob": "c6e8f3f93cb8784a25422526730b3c21f3f000a4",
+      "sha256": "b728cfb7d9e5b321b6ee4b99e315120b91fe4f7561b8b38d957189002d41d801"
+    },
+    "romarr/ui.py": {
+      "bytes": 405689,
+      "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+      "sha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71"
+    }
+  },
+  "glossaryBlob": "edfe311cb5a0fd66c49a0923a0b410d207fa315f",
+  "glossaryPath": "docs/localization-glossary.md",
+  "glossarySha256": "08f2f2e2ddf722065993a454523e8c353db823c336a6f07e48f9bf215e37ad34",
+  "head": "5d999ff7667ae4c5642f1f11b63ad9880d19672c",
+  "headRefName": "task/localization-translation-review-20261030",
+  "livePrUpdatedAt": "2026-11-03T03:11:19Z",
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "sourceBundleBlob": "0da16cf24d764dbf4b4156c2bc7db5c3ac8b11d5",
+  "sourceBundlePath": "localization/source-bundles/20261101-connect-instructions.json",
+  "sourceBundleSha256": "a6f047ba685db67ba51fe5fda0e20f6f83b84cdc94f303a68f648bc6540fe7a8",
+  "sourceMessageMapBlob": "ea4ff095d4c9d60c175987926b852dddd1f6aa85",
+  "sourceMessageMapPath": "romarr/ui-source-messages.json",
+  "sourceMessageMapSha256": "612b3a664577c84e3fe60294929f2a97c8f103d2bfd58047aeecc6de348fd134",
+  "sourceSnapshotBlob": "c6e8f3f93cb8784a25422526730b3c21f3f000a4",
+  "sourceSnapshotPath": "romarr/ui-source-snapshot.json",
+  "sourceSnapshotSha256": "b728cfb7d9e5b321b6ee4b99e315120b91fe4f7561b8b38d957189002d41d801",
+  "state": "OPEN",
+  "tree": "93fcf748c46a4c1cef116c2a4ef06305137ecfe4",
+  "url": "https://github.com/snapetech-org/ROMarrNG/pull/70",
+  "verification": "Live PR head/tree, exact-head worktree, catalog/source bundle/snapshot, caller files, and glossary are pinned at this head.",
+  "worktree": "/mnt/disks/scratch/task-worktrees/localization-20261103/romarrng-pr70-w106-apply-20261103"
+}

@@ -1,0 +1,25 @@
+{
+  "description": "Source lookup and locale dispatch are pinned through exact source file hashes; source ownership only.",
+  "head": "5860fce5d546a772b1df995f8f6321c083ed7d5d",
+  "sourceFiles": [
+    {
+      "bytes": 9036,
+      "fileSha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "gitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc",
+      "path": "romarr/i18n_runtime.js"
+    },
+    {
+      "bytes": 273919,
+      "fileSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "gitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "path": "romarr/ui-source-messages.json"
+    },
+    {
+      "bytes": 408966,
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+      "path": "romarr/ui.py"
+    }
+  ],
+  "tree": "561835895972a62e9d3b1f2bfe9bcba01187eb98"
+}

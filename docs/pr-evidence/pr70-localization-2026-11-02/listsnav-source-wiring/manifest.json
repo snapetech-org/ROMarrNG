@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "reviewType": "independent read-only exact-head evidence audit",
+  "capturedAtUtc": "2026-11-02T05:54:20Z",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": {
+    "number": 70,
+    "url": "https://github.com/snapetech-org/ROMarrNG/pull/70",
+    "state": "OPEN",
+    "headRefName": "task/localization-translation-review-20261030",
+    "head": "9c305e322aeccaa8b88102a6085165385636f585",
+    "tree": "e7d96cb8c61e29b64d813bf154153f6d39e4c9c6",
+    "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "expectedHeadBaseline": "9c305e322aeccaa8b88102a6085165385636f585",
+    "expectedBaselineMatched": true
+  },
+  "worktree": {
+    "path": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-pr70-reattest-50bb-20261102",
+    "head": "9c305e322aeccaa8b88102a6085165385636f585",
+    "tree": "e7d96cb8c61e29b64d813bf154153f6d39e4c9c6",
+    "status": "clean; detached HEAD",
+    "sourcePath": "romarr/ui.py",
+    "sourceRawSha256": "c72b97c9ea7572037bd237aab23f9c273031e20d5ea1729746cf5e523035919d",
+    "catalogPath": "romarr/ui-labels.json",
+    "catalogRawSha256": "0619a7597bad7b6602f94db3718c337d492ab200ae2dab41ad8dd0fa76f725aa",
+    "postLocalizationCommits": "730a722a and 9c305e32 are documentation-only descendants of f861b9b7; tracked UI source/catalog are byte-identical to f861b9b7 at reviewed head.",
+    "gitDiffCheck": "git diff --quiet f861b9b7b08cd3fe1012d46d082ef6ec71012074..HEAD -- romarr/ui.py romarr/ui-labels.json exited 0."
+  },
+  "sevenCellReview": {
+    "ledger": "review.jsonl",
+    "rowCount": 7,
+    "uniqueLocaleMessageCells": 7,
+    "messageIds": {
+      "ui.integration-guide.6cfa2d0314": 6,
+      "ui.explains-the-connection.9e80ba4652": 1
+    },
+    "recommendations": {
+      "accept": 7,
+      "refine": 0,
+      "hold": 0
+    },
+    "catalogEditsRecommended": 0,
+    "currentTargetsMatchPriorSuggestions": 7,
+    "currentTargetsMatchPriorSuggestionRawUtf8Hashes": 7,
+    "sourceAndTargetHashesCheckedAgainstLiveCatalog": 7,
+    "pairedTargetsAndFullSentenceTargetsCheckedAgainstLiveCatalog": 14,
+    "currentDirectCallsOfAuditedMessageIdsInRomarrUiPy": 0,
+    "liveFullSentenceMessageId": "ui.the-integration-guide-explains-how-t.59a854ef19",
+    "liveFullSentenceCallerLines": [
+      2436,
+      4927,
+      5333,
+      5635
+    ],
+    "runtimeDisposition": "Hold wiring these old fragments. Current live UI uses the complete sentence at four sites. A similar listsNav title is a distinct case-sensitive source and catalog ID.",
+    "targetHashEncoding": "SHA-256 over raw UTF-8 target string; prior d9 catalogTranslationHash separately uses SHA-256 over UTF-8 json.dumps(target, ensure_ascii=False), as explicitly recorded in that evidence. Both encodings were independently reconciled.",
+    "confidence": "moderate",
+    "nativeSpeakerApproved": false
+  },
+  "priorEvidence": [
+    {
+      "path": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-held-followup-54f1-artifacts-20261101/companion-adjudication-54f1.jsonl",
+      "sha256": "7e578481b50623cf2ee07002023387432000f3c2e7613fd9a836e390c8e4e786",
+      "rows": 24,
+      "retainedCurrentRows": 7,
+      "appliedContextCorrections": 17,
+      "allSevenSuggestionTargetHashesEqualCurrentRawUtf8TargetHashes": true
+    },
+    {
+      "directory": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-independent-companion-review-d9a6e515-20261101",
+      "head": "d9a6e515ae43e3cb4cdffcb205fe9c0bcaaab97d",
+      "tree": "efae98f3db8bb3ebb7fae6cff467a41984a87648",
+      "manifestSha256": "68d8b2275f7e0fcb61e5ae5bde2edb62b77bf0ccbbdd9b94a914acb8b52d6d1e",
+      "selectionSha256": "7b7dc22f9e52ff41f0ee19173b58e97c66d7f3e3697f8472abd4959adb2b90e0",
+      "decisionsSha256": "9efc2edcb99847a9d684964094f9e3daa82923bb0fac959cc36864db9abcedd5",
+      "contextsSha256": "cad8c950802495c58085448ba1baaf9bc1368dbe4cf7466d57535d074396a60c",
+      "reviewOwnershipCensusSha256": "ff95e8a35b78b62a602ec464859a27c70ccbefaf41b849f7b8187072bebd337c",
+      "decisionRows": 7,
+      "allOutcomes": "reviewed_no_definite_issue; correctionNeeded=false; priorDisposition=retain-current",
+      "runtimeWiringAttested": false,
+      "priorCatalogRawSha256": "639d2449119ea25c1f76ccd09b05bffbb87da0373dac8bbe9dcee9547ef499a2",
+      "priorUiRawSha256": "54b6c5b6bcfbf091f3d5b7af9cc121e31298d5d641f294be50f236af100c5938",
+      "interpretation": "Accurate as an older-head review, not current caller evidence. The current head was re-extracted and independently verified."
+    }
+  ],
+  "historicalSourceReconciliation": {
+    "segmentedCallerCommit": "81b5ec7b104b4274da2c476b74c2f11e76658e55",
+    "wholeSentenceLocalizationCommit": "1adc54cb56dd91731b24e402027476855702f04d",
+    "currentCallerState": "The 1adc54c source uses the full sentence; current HEAD retains it at four lines. Audited fragment IDs have no direct caller in romarr/ui.py.",
+    "listsNavCurrentRawTitleLine": 2311,
+    "listsNavCurrentRawTitle": "Integration guide",
+    "listsNavCurrentExactTitleMessageId": "ui.integration-guide.02a0a9e2c2",
+    "auditedTitleMessageId": "ui.integration-guide.6cfa2d0314",
+    "caseDistinctIds": true
+  },
+  "adjacentListsNavFinding": {
+    "ledger": "listsnav-findings.json",
+    "visibleRawTextNodes": 4,
+    "allMapToExistingCatalogMessages": true,
+    "allHave12DirectLocaleTranslations": true,
+    "lines": [
+      2307,
+      2308,
+      2310,
+      2311
+    ],
+    "note": "No other visible text nodes were found inside listsNav. This audit makes no source edit or recommendation to wire them; root separately requested caller reconciliation."
+  },
+  "validationAndLimitations": {
+    "checksPerformed": "Read-only exact-head PR/worktree/tree verification; source and catalog hash recomputation; unique-cell and historical outcome parity; raw UTF-8 and JSON-serialized target hash reconciliation; source caller inspection; listsNav key/12-locale coverage verification.",
+    "testsBuildsCIOrBrowserReview": "Not run; explicitly excluded by task scope.",
+    "sourceCatalogPrChanges": "None.",
+    "languageLimitation": "No native-speaker approval. Linguistic recommendation is a moderate-confidence source-context audit, not native review.",
+    "decisionScope": "The seven current catalog cells are accepted without edits. Hold any attempt to rewire those retired fragments; use the separate exact-case listsNav key for its raw title caller."
+  },
+  "scratchOutputs": [
+    "review.jsonl",
+    "listsnav-findings.json"
+  ]
+}

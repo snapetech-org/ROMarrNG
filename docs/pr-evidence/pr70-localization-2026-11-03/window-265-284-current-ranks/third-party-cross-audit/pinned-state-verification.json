@@ -1,0 +1,132 @@
+{
+  "checksPassed": true,
+  "filePins": [
+    {
+      "byteCount": 3006216,
+      "expectedByteCount": 3006216,
+      "expectedGitBlob": "8cde59bdb640cff73a0e18bf3f14e52848057fab",
+      "expectedLineCount": 52665,
+      "expectedSha256": "706d234ff97979a98c66fdd18d9436146ba501e5ef951116d68be482fa13e387",
+      "gitBlob": "8cde59bdb640cff73a0e18bf3f14e52848057fab",
+      "lineCount": 52665,
+      "matches": true,
+      "path": "romarr/ui-labels.json",
+      "sha256": "706d234ff97979a98c66fdd18d9436146ba501e5ef951116d68be482fa13e387"
+    },
+    {
+      "byteCount": 273919,
+      "expectedByteCount": 273919,
+      "expectedGitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "expectedLineCount": 11790,
+      "expectedSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "gitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "lineCount": 11790,
+      "matches": true,
+      "path": "romarr/ui-source-messages.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515"
+    },
+    {
+      "byteCount": 202767,
+      "expectedByteCount": 202767,
+      "expectedGitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+      "expectedLineCount": 1838,
+      "expectedSha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "gitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+      "lineCount": 1838,
+      "matches": true,
+      "path": "romarr/ui-source-snapshot.json",
+      "sha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3"
+    },
+    {
+      "byteCount": 418446,
+      "expectedByteCount": 418446,
+      "expectedGitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+      "expectedLineCount": 8174,
+      "expectedSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+      "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+      "lineCount": 8174,
+      "matches": true,
+      "path": "romarr/app.py",
+      "sha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510"
+    },
+    {
+      "byteCount": 41044,
+      "expectedByteCount": 41044,
+      "expectedGitBlob": "0257ef9eb77f4e0a3c94ea26b5b58185fb55ac81",
+      "expectedLineCount": 987,
+      "expectedSha256": "f21bab5b203cde629f88558f5a576f7d161b3a55a36e937ef21279ffa30a764e",
+      "gitBlob": "0257ef9eb77f4e0a3c94ea26b5b58185fb55ac81",
+      "lineCount": 987,
+      "matches": true,
+      "path": "romarr/indexers.py",
+      "sha256": "f21bab5b203cde629f88558f5a576f7d161b3a55a36e937ef21279ffa30a764e"
+    },
+    {
+      "byteCount": 41717,
+      "expectedByteCount": 41717,
+      "expectedGitBlob": "856e5f1827449b99d2065c32999c4df82aa35978",
+      "expectedLineCount": 986,
+      "expectedSha256": "4b838ec909961bee7723d2760f9e7c8d18eff5db18874e9907a4d2d9cb0e5186",
+      "gitBlob": "856e5f1827449b99d2065c32999c4df82aa35978",
+      "lineCount": 986,
+      "matches": true,
+      "path": "romarr/metadata.py",
+      "sha256": "4b838ec909961bee7723d2760f9e7c8d18eff5db18874e9907a4d2d9cb0e5186"
+    },
+    {
+      "byteCount": 22100,
+      "expectedByteCount": 22100,
+      "expectedGitBlob": "cb47cd2ae06680ce2d7606bda3fdb3c5ffea43da",
+      "expectedLineCount": 523,
+      "expectedSha256": "d9d6f64686d2ce23399929de46eba2757ae8a9d24e50cdb8bc97e185b0553d32",
+      "gitBlob": "cb47cd2ae06680ce2d7606bda3fdb3c5ffea43da",
+      "lineCount": 523,
+      "matches": true,
+      "path": "romarr/oidc.py",
+      "sha256": "d9d6f64686d2ce23399929de46eba2757ae8a9d24e50cdb8bc97e185b0553d32"
+    },
+    {
+      "byteCount": 407495,
+      "expectedByteCount": 407495,
+      "expectedGitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "expectedLineCount": 6827,
+      "expectedSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "lineCount": 6827,
+      "matches": true,
+      "path": "romarr/ui.py",
+      "sha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+    }
+  ],
+  "head": "c135c4729582817273c946891186ab4ea87467b5",
+  "pullRequest": {
+    "base": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "baseMatchesExpected": true,
+    "branch": "task/localization-translation-review-20261030",
+    "draft": true,
+    "head": "c135c4729582817273c946891186ab4ea87467b5",
+    "headMatchesExpected": true,
+    "openDraft": true,
+    "state": "open"
+  },
+  "remoteRefs": [
+    {
+      "matchesExpected": true,
+      "ref": "refs/heads/task/localization-translation-review-20261030",
+      "sha": "c135c4729582817273c946891186ab4ea87467b5"
+    },
+    {
+      "matchesExpected": true,
+      "ref": "refs/pull/70/head",
+      "sha": "c135c4729582817273c946891186ab4ea87467b5"
+    }
+  ],
+  "repository": "snapetech-org/ROMarrNG",
+  "schemaVersion": 1,
+  "tree": "32c07150396335a5832b5664fc1e0225d7cebdc1",
+  "verifiedAtUtc": "2026-11-03 10:58:29 UTC",
+  "worktree": "/mnt/disks/scratch/task-worktrees/localization-20261103/romarrng-pr70-w245-apply-20261103",
+  "worktreeHead": "c135c4729582817273c946891186ab4ea87467b5",
+  "worktreePorcelain": "",
+  "worktreeTree": "32c07150396335a5832b5664fc1e0225d7cebdc1"
+}

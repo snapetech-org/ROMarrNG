@@ -1,0 +1,15 @@
+{
+  "activeUniqueSourceIds": 479,
+  "catalogGitBlob": "99d6ad5dd761f3740e33ad05ed0218d0d69b611d",
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogMessageCount": 1836,
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogSha256": "2c093e67793e0953f43471b4ed790558750b5d5d3cc96a59517583cc174ed34f",
+  "head": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "sourceQueuePath": "romarr/ui-source-messages.json",
+  "sourceQueueSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+  "sourceSnapshotPath": "romarr/ui-source-snapshot.json",
+  "sourceSnapshotSha256": "c0c139060697bef350c6f90a5f42e8d8e0a1f0b125c82f32a8d392a415ed3328",
+  "tree": "3f835643e4f557999d533c3e832fc92036d4b01a"
+}

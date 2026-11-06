@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "application": "ROMarrNG",
+  "pullRequest": 70,
+  "reviewedHead": "50bb70837512bb5abcf53c89b01031aa9a321321",
+  "reviewedTree": "c88c97301c042747bd5e183daff21d7d255d4cfc",
+  "id": "ui.requests-in-seerrng.94ac015721",
+  "source": "Requests in SeerrNG ↗",
+  "sourceSha256": "94ac01572121cfa86286c6ebb0f5dddedecbbc35f9cb31754abdc7af6c8834ce",
+  "callsite": "romarr/ui.py:5633",
+  "context": "External-link ghost button to the SeerrNG repository/application; preserve ↗.",
+  "counts": {
+    "reviewed": 12,
+    "accepted": 3,
+    "correctionNeeded": 9,
+    "held": 0
+  },
+  "ledger": "requests-button-review.jsonl",
+  "ledgerSha256": "3bc5129b2a1ee481986aa8f3568419f418432ba9b1afaf7f967f9586fbab257f",
+  "nativeSpeakerApproval": false,
+  "repoCatalogOrSourceEdited": false,
+  "testsBuildsCiBrowserRun": false,
+  "findings": "zh-Hans and zh-Hant use 要求 instead of the software feature term 请求/請求; zh-Hant also currently uses Simplified characters. ja 要望 is semantically less suitable than リクエスト. ko 에 대한 expresses “about SeerrNG” rather than “in/on SeerrNG”. Five other correction-needed rows only restore the missing source arrow."
+}

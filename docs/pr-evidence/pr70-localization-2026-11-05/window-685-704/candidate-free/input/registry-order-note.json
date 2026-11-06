@@ -1,0 +1,33 @@
+{
+  "activeRegistryCount": 479,
+  "activeRegistryMatches": [
+    {
+      "activeRank": 210,
+      "registryLocations": [
+        "romarr/app.py:5955"
+      ],
+      "sourceId": "ui.no-dat-catalog-is-loaded-in-romarrng.f57b5eb371"
+    },
+    {
+      "activeRank": 227,
+      "registryLocations": [
+        "romarr/ui.py:5514"
+      ],
+      "sourceId": "ui.no-titledb-id.3c3d2f2f0a"
+    },
+    {
+      "activeRank": 209,
+      "registryLocations": [
+        "romarr/ui.py:2296"
+      ],
+      "sourceId": "ui.no-cover.b2ec3181b3"
+    }
+  ],
+  "lineHintCaveat": "Active source registry metadata does not substitute for exact literal caller search and excerpt evidence.",
+  "selectedCatalogZeroBasedIndices": [
+    685,
+    704
+  ],
+  "selectedIdsInActiveRegistry": 3,
+  "selectionBasis": "catalog JSON message-key insertion order"
+}

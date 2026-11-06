@@ -1,0 +1,25 @@
+{
+  "result": "PASS",
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "window": "W765-W784",
+  "cells": 240,
+  "callerBackedCells": 216,
+  "callerlessHashOnlyCells": 24,
+  "decisionCounts": {
+    "accept-current": 206,
+    "correction": 3,
+    "refinement": 7,
+    "hold-callerless-hash-only": 24
+  },
+  "proposalCount": 10,
+  "priorActiveHolds": 988,
+  "resultingActiveHolds": 1012,
+  "priorAppliedCells": 144,
+  "readbackWindows": 10,
+  "candidateFreeVerifier": "PASS",
+  "proposalTokenChecks": "PASS",
+  "PRState": "OPEN_DRAFT",
+  "worktreeClean": true,
+  "provenanceNoteIncluded": true
+}

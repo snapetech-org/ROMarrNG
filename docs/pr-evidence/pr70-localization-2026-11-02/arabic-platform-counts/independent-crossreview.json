@@ -1,0 +1,62 @@
+{
+  "task": "Independent read-only review of ROMarrNG PR #70 plural runtime and Arabic plural catalog change",
+  "scope": [
+    "romarr/i18n_runtime.js",
+    "romarr/ui-labels.json"
+  ],
+  "pin": {
+    "worktree": "/mnt/disks/scratch/task-worktrees/localization-20261102/romarrng-pr70-browser-20261102",
+    "base_head": "c3bcb5fffb28419f82384ad2202686e97227c4f9",
+    "base_tree": "b7cd0c4948bd8295fc32039072973c13e8ca538a",
+    "working_tree_diff_sha256": "2b32da83ff9a1edccff1bc65a6dc70ca0c1e68cb31a7ce381b24726694b14a0e",
+    "worktree_status": [
+      " M romarr/i18n_runtime.js",
+      " M romarr/ui-labels.json"
+    ]
+  },
+  "verdict": "No material defect found; no correction requested.",
+  "confidence": {
+    "runtime_and_caller_analysis": "high",
+    "Arabic_semantic_assessment": "moderate"
+  },
+  "findings": [],
+  "verification_evidence": {
+    "pin_rechecked": "HEAD, HEAD tree, and `git diff HEAD | sha256sum` match the supplied values.",
+    "caller_and_format_locale": [
+      "romarr/ui.py:1498 defines fmt(n) using Number(n).toLocaleString(getRegionalLocale()).",
+      "romarr/ui.py:862 passes getRegionalLocale() as formatLocale to ROMarrI18n.formatMessage through translateTemplate.",
+      "When regional preference is system, both calls use the browser's default number locale; when selected, both use that selected locale. Thus the formatted platformCount string is parsed using the locale that formatted it.",
+      "romarr/ui.py:2055 supplies platformCount as fmt((d.platforms||[]).length), an integer count, and cached as another fmt-formatted value."
+    ],
+    "runtime_and_catalog_compatibility": [
+      "PluralRules continues to select categories with the translation locale, so Arabic categories remain independent of the number-format preference.",
+      "The Arabic object uses the runtime's supported `kind: plural`, `argument`, and `forms` shape and all six Arabic cardinal categories: zero, one, two, few, many, other.",
+      "scripts/localization_review.py accepts these plural categories and permits the plural argument to be omitted from individual forms while requiring other source placeholders and an `other` form.",
+      "The catalog already contains plural objects, and the shared lookup/formatMessage path returns and formats object-valued translations."
+    ],
+    "number_parser_review": [
+      "parseFormattedNumber accepts numeric inputs directly; for strings it derives group, decimal, and minus tokens from Intl.NumberFormat.formatToParts for the supplied number locale, normalizes the digit ranges used by supported UI locales, strips bidi controls, then parses the normalized number.",
+      "The current caller formats and parses using the same regional locale, including the browser-default case. No placeholder, grouping, or Arabic-digit mismatch was found in this flow."
+    ],
+    "arabic_translation": {
+      "source": "{cached} cached across {platformCount} platforms",
+      "source_hash": "55b169ed05f40592bef9353a7c4d6e4fe3c48d135ed2807cb75d08ca67d76b45",
+      "target": {
+        "kind": "plural",
+        "argument": "platformCount",
+        "forms": {
+          "zero": "تم تخزين {cached} مؤقتًا دون أي منصة",
+          "one": "تم تخزين {cached} مؤقتًا عبر منصة واحدة",
+          "two": "تم تخزين {cached} مؤقتًا عبر منصتين",
+          "few": "تم تخزين {cached} مؤقتًا عبر {platformCount} منصات",
+          "many": "تم تخزين {cached} مؤقتًا عبر {platformCount} منصة",
+          "other": "تم تخزين {cached} مؤقتًا عبر {platformCount} منصة"
+        }
+      },
+      "target_canonical_json_sha256": "f72af54b035c7180cd699698d540c4ec35acbed6e0fc7d572160431234dff4a9",
+      "placeholder_check": "Every form preserves {cached}; the count argument is intentionally spelled out for zero, one, and two, and retained for few, many, and other.",
+      "assessment": "The forms express the cached count across zero, one, two, few, and many platforms. No semantic correction was warranted."
+    },
+    "execution": "Static source/catalog review only. No repository edits, tests, or CI were run."
+  }
+}

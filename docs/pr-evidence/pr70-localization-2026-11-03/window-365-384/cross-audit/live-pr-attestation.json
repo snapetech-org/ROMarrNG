@@ -1,0 +1,20 @@
+{
+  "baseRefName": "main",
+  "headRefName": "task/localization-translation-review-20261030",
+  "headRefOid": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "headTree": "3f42d41fe4bbb8edd921ff161e8298ca66038a91",
+  "isDraft": true,
+  "liveBranchRefOid": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "livePullRefOid": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "pullRequest": 70,
+  "queriedAtUtc": "2026-11-03T16:24:44.768682+00:00",
+  "queryCommands": [
+    "gh pr view 70 --repo snapetech-org/ROMarrNG --json number,state,headRefName,headRefOid,baseRefName,url,isDraft",
+    "gh api repos/snapetech-org/ROMarrNG/git/matching-refs/heads/task/localization-translation-review-20261030 --jq .[0].object.sha",
+    "gh api repos/snapetech-org/ROMarrNG/pulls/70 --jq .head.sha",
+    "gh api repos/snapetech-org/ROMarrNG/commits/d1698b94781c3c84e91faf03c75e8c308dc39c34 --jq .commit.tree.sha"
+  ],
+  "repository": "snapetech-org/ROMarrNG",
+  "state": "OPEN",
+  "url": "https://github.com/snapetech-org/ROMarrNG/pull/70"
+}

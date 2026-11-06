@@ -1,0 +1,102 @@
+{
+  "baseRef": "main",
+  "draft": true,
+  "head": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "headRef": "task/localization-translation-review-20261030",
+  "headRefOid": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "latestBodySectionFile": "latest-pr-body-section.md",
+  "latestBodySectionSha256": "d177aba2666dda1378dda6b68617fbd15122d3f347ed949d0679c6e90f407fd2",
+  "localWorktree": "/mnt/disks/scratch/task-worktrees/localization-20261103/romarrng-pr70-w226-review-20261103",
+  "localWorktreeBranch": "",
+  "localWorktreeHead": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "localWorktreeStatusClean": true,
+  "localWorktreeTree": "016587d26f04d2920a30878236f1933a57e27901",
+  "prBodySha256": "c5468552abb267fc11e3459073a1f55b0c126171f77822582c2cdaaeee91c6d0",
+  "previousWindowChecksumChecks": [
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/window-226-245/candidate-free-input",
+      "entryCount": 13,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "68f5f2d323b726d78ae5f949e84024ac9ae39dd592a63dab26637d57da945c36",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/window-226-245/primary-review",
+      "entryCount": 8,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "c46f4204f8f22f16cacc2304126017b4691db4e6dcef85f9fe2cd793750dbd69",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/window-226-245/blind-review",
+      "entryCount": 4,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "109daec7d646044b1566b75e05874366a7252526eb45bfd0ee50c8e96e6af056",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/window-226-245/cross-audit",
+      "entryCount": 7,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "fc8357e95807d1d1ff59f11a740e467a03cca33286b87ea10b740e5c8dae508d",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/window-226-245",
+      "entryCount": 46,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "2b06bedc12d81e4fae5ff22a5d3560a2d7bd72ef34b121bfe97f908d49bd8a3c",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/caller-follow-up-226-241/candidate-free-input",
+      "entryCount": 8,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "0de65e3297d73f4688a7582c1f5c9df261c669820e4013b39a506273c1465193",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/caller-follow-up-226-241/independent-blind-review/input",
+      "entryCount": 8,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "0de65e3297d73f4688a7582c1f5c9df261c669820e4013b39a506273c1465193",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/caller-follow-up-226-241/independent-blind-review",
+      "entryCount": 12,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "83864214d777979d9d730d54d6393796911a272db1c92ed4a2f77062468ba827",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/caller-follow-up-226-241/primary-review",
+      "entryCount": 4,
+      "manifest": "PRIMARY-SHA256SUMS.txt",
+      "manifestSha256": "128f9075063bf8deaf1d7eeb80e02c8e71521cda432990d41f42c79c9e975912",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/caller-follow-up-226-241/third-party-cross-audit",
+      "entryCount": 5,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "84e2d7008d3260a4bf1f61c47a7837bc90f109000bb758f1888e4c53a86af89f",
+      "passed": true
+    },
+    {
+      "directory": "docs/pr-evidence/pr70-localization-2026-11-03/caller-follow-up-226-241",
+      "entryCount": 34,
+      "manifest": "SHA256SUMS.txt",
+      "manifestSha256": "984f40d7728fdfe1a7c95fdcee8e524eda2e66d3b2064b4208109ac38b6cbe24",
+      "passed": true
+    }
+  ],
+  "pullRequest": 70,
+  "remoteBranchHead": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "remotePullRefHead": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "repository": "snapetech-org/ROMarrNG",
+  "state": "OPEN",
+  "title": "fix: correct verified localization catalog errors",
+  "tree": "016587d26f04d2920a30878236f1933a57e27901",
+  "url": "https://github.com/snapetech-org/ROMarrNG/pull/70"
+}

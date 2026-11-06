@@ -1,0 +1,6 @@
+a8c527bd890f8b28a2f60a13d07827db6fddf3f6dc39c88dda5b0c980dbdac7b  ./build_root_adjudication.py
+fe903f9fea2393970b189d310130cc34a44d442d6f3ff6b1b8beb2b3acf8b972  ./input-attestation.json
+13eac10ae7ddef81847b6c263bd5b175296d6677bb35c54460c80b5f61927020  ./input-verifier-results.json
+4a7da9669ed599b41c0bda0c9190e5e180895d2ec720e85f94648d97ed0d72f2  ./root-disposition-ledger.jsonl
+36f0baf59a543bef612559dfc8eae8d2b9d462898000fec317f19107d2fbf15b  ./selected-targets.jsonl
+714b1536184e90ddd0094d4190fca44921d9373be21e4162c585676ef346e5ad  ./summary.json

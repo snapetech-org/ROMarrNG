@@ -1,0 +1,16 @@
+{
+  "productCommit": "38718aa6c60e3366aa67ba5372531b77d6539862",
+  "productTree": "d0d3ec426190114e9efb2378f5a9dd44ac81e91f",
+  "evidenceCommit": "68d4f0c9a69d956ff237b5bee6978619bff59e40",
+  "evidenceTree": "cc18b3f9de3db7c0e88aaf5473d06eade652a106",
+  "branch": "task/localization-translation-review-20261030",
+  "pullRequest": 70,
+  "catalogChanges": 29,
+  "translationHashUpdates": 9,
+  "localSemgrepHook": {
+    "invoked": true,
+    "scope": "staged evidence scripts",
+    "exitCode": 0,
+    "ciDispatch": false
+  }
+}

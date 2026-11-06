@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "result": "PASS",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W445-W464",
+  "candidateFreeInputCommit": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "candidateFreeInputTree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "latestAttestedHead": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+  "latestAttestedTree": "1b075e050610771fc5651d1a4ca95d7c7b4b8e46",
+  "latestHeadReattestation": "PASS",
+  "cellsReviewed": 240,
+  "sourcesReviewed": 20,
+  "localesReviewed": 12,
+  "dispositionCounts": {
+    "accept-current": 200,
+    "correction": 3,
+    "hold": 36,
+    "refinement": 1
+  },
+  "selectedTargetChanges": 4,
+  "placeholderFailures": 0,
+  "numericFailures": 0,
+  "protectedLiteralFailures": 0,
+  "namedLiteralFailures": 0,
+  "sourceRowsWithCallerContext": 17,
+  "callerlessSourcePositionsHeld": [
+    458,
+    460,
+    462
+  ],
+  "callerlessHoldCells": 36,
+  "baselineProtectedLiteralOmissionsCorrected": 1,
+  "baselineLiteralCorrection": {
+    "position": 461,
+    "locale": "pt-BR",
+    "literal": "ROM"
+  },
+  "inputPriorSelectionSourcesReattested": 60,
+  "inputCarriedHoldsReattested": 348,
+  "nativeSpeakerReviewClaimed": false,
+  "candidateOrPrimaryOutputsRead": false,
+  "crossReconciliationPerformed": false,
+  "repositoryOrPRChanged": false,
+  "testsBuildsScansCIorBrowserRun": false
+}

@@ -1,0 +1,186 @@
+{
+  "window": "W345-W364",
+  "method": "Sort all unique active IDs lexicographically by stable ID; reattest W325-W344; select the immediate next 20 IDs.",
+  "activeUniqueSourceIds": 479,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "priorWindow": "W325-W344",
+  "priorWindowPositions": [
+    325,
+    344
+  ],
+  "priorWindowSelectionReattested": true,
+  "positions": [
+    345,
+    364
+  ],
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "boundaries": [
+    {
+      "position": 344,
+      "role": "previous-window-final",
+      "sourceId": "ui.saving-settings.67c658e70a",
+      "source": "Saving settings…",
+      "sourceSha256": "67c658e70aaa2f64d9d46997444ccfeb26144a089a11ff8e262a01613255cdc9"
+    },
+    {
+      "position": 345,
+      "role": "selected-start",
+      "sourceId": "ui.scan-complete.bd35a52d0a",
+      "source": "Scan complete",
+      "sourceSha256": "bd35a52d0ac8c44e7a7ae2ae6c2cab36c1330ab2c1b1daa95ca273e1b75b8e9d"
+    },
+    {
+      "position": 364,
+      "role": "selected-end",
+      "sourceId": "ui.seerrng-discovery.f140768191",
+      "source": "SeerrNG discovery",
+      "sourceSha256": "f140768191c3906cad20b63ec4dab1f87e06db44c678a2ad2c9879fd92ebcf94"
+    },
+    {
+      "position": 365,
+      "role": "next-window-first",
+      "sourceId": "ui.select-a-supported-platform-or-all-p.b323a213be",
+      "source": "Select a supported platform or All platforms.",
+      "sourceSha256": "b323a213beacefcce94a9f8da89bde1859860ff2aaf99d5864b72afc741d12b3"
+    }
+  ],
+  "selectedSources": [
+    {
+      "position": 345,
+      "sourceId": "ui.scan-complete.bd35a52d0a",
+      "source": "Scan complete",
+      "sourceSha256": "bd35a52d0ac8c44e7a7ae2ae6c2cab36c1330ab2c1b1daa95ca273e1b75b8e9d"
+    },
+    {
+      "position": 346,
+      "sourceId": "ui.scan-failed-error-type.e99ccb8157",
+      "source": "scan failed: {error_type}",
+      "sourceSha256": "e99ccb815768abb38ba67f230aea12fe9a2b3823fedd9ae097572802b7f7155f"
+    },
+    {
+      "position": 347,
+      "sourceId": "ui.scan-failed.4a490e4bdc",
+      "source": "Scan failed",
+      "sourceSha256": "4a490e4bdcc95463a12f2996b9b8e7f9cc73fa5386be39990a4fa07eb9403305"
+    },
+    {
+      "position": 348,
+      "sourceId": "ui.scan-library.1f5ec92645",
+      "source": "Scan library",
+      "sourceSha256": "1f5ec92645d3d2cc7e633d6df27e23d31c0d2e4fa103f2f38205c0f3a41a7044"
+    },
+    {
+      "position": 349,
+      "sourceId": "ui.scan-reached-its-safety-limit.0d2401c522",
+      "source": "Scan reached its safety limit",
+      "sourceSha256": "0d2401c522495a6d4ea8b5c6474ba413ec9f16f096cbfa2213b0135ac3fa15e2"
+    },
+    {
+      "position": 350,
+      "sourceId": "ui.scan-the-uri-or-enter-the-secret-in.612ce1fd46",
+      "source": "Scan the URI or enter the secret in any TOTP app. Codes are asked for at sign-in from now on; the backup codes are single-use.",
+      "sourceSha256": "612ce1fd463f6f3a9767a66a0090d2aea1b459b10b33d69f239dc89a0b32e120"
+    },
+    {
+      "position": 351,
+      "sourceId": "ui.scan-this-platform-before-publishing.1d09921c52",
+      "source": "Scan this platform before publishing its ES-DE gamelist.",
+      "sourceSha256": "1d09921c52db67c0bc9767d30bd2f8813dbc9b96420807c0e31f1134fa4a4ceb"
+    },
+    {
+      "position": 352,
+      "sourceId": "ui.scanning.474ad819c8",
+      "source": "Scanning",
+      "sourceSha256": "474ad819c8baf68afb6e6ea375fd1543d36a124df10c68d4d94f8c6fc261ef8d"
+    },
+    {
+      "position": 353,
+      "sourceId": "ui.search-patch-projects.6428423995",
+      "source": "Search patch projects",
+      "sourceSha256": "6428423995e7685816ae0a74bf62877d914695c5a0dc5ab09ec0ef5d299b32ed"
+    },
+    {
+      "position": 354,
+      "sourceId": "ui.search-platforms.b8e0cffddc",
+      "source": "Search platforms",
+      "sourceSha256": "b8e0cffddc9bf0cf8bd546ebef808923495c1cd419bbd8d5e6f09ec4b37d527a"
+    },
+    {
+      "position": 355,
+      "sourceId": "ui.search-plugins.df08b7498d",
+      "source": "Search plugins",
+      "sourceSha256": "df08b7498d9a1be739b5bec4ec1205e5c9350f66faf66ce0b26784d94031ca73"
+    },
+    {
+      "position": 356,
+      "sourceId": "ui.search-the-wanted-list.db632dc353",
+      "source": "Search the Wanted list",
+      "sourceSha256": "db632dc35374bf96d504c18f0beae8baca6f7b3b66ac9be643fd1f7317038451"
+    },
+    {
+      "position": 357,
+      "sourceId": "ui.search-this-catalog.382dda31b7",
+      "source": "Search this catalog",
+      "sourceSha256": "382dda31b759fc132f505843261c0f84f0941a2b49dd2aade75e2c23d1c2c89e"
+    },
+    {
+      "position": 358,
+      "sourceId": "ui.search-titles.fc85598751",
+      "source": "Search titles",
+      "sourceSha256": "fc85598751044a5ba931ebe218ff81b467dca0d65d0ed2bca79c6df4f4f079c0"
+    },
+    {
+      "position": 359,
+      "sourceId": "ui.searched-searched-grabbed-grabbed-sk.8d691039ba",
+      "source": "Searched {searched}, grabbed {grabbed}, {skipped} waiting out backoff",
+      "sourceSha256": "8d691039baf89feed23c5448712c11a381f0c0f812c86f2b9838ba9aa3bbf16c"
+    },
+    {
+      "position": 360,
+      "sourceId": "ui.searched-searched-grabbed-grabbed.bff6322b8e",
+      "source": "Searched {searched}, grabbed {grabbed}",
+      "sourceSha256": "bff6322b8eca0650ad33f4df1d2563acaddce616b6071525f5485fdd7bc43d98"
+    },
+    {
+      "position": 361,
+      "sourceId": "ui.secret-secret.fde930878d",
+      "source": "Secret: {secret}",
+      "sourceSha256": "fde930878dcabf2154b5144937c3c0e48d2cca522652aac173ab6239edb6610c"
+    },
+    {
+      "position": 362,
+      "sourceId": "ui.see-blocked-items.a4a019f8d4",
+      "source": "See blocked items",
+      "sourceSha256": "a4a019f8d49ebe3a49f2be66da3d4af7a408ef59bb95104395745fcfb4d72340"
+    },
+    {
+      "position": 363,
+      "sourceId": "ui.see-how-they-connect.c54069210e",
+      "source": "See how they connect",
+      "sourceSha256": "c54069210e0fbcd82db152c630198d0afe498d1d9659900f6735803c30dc2e3e"
+    },
+    {
+      "position": 364,
+      "sourceId": "ui.seerrng-discovery.f140768191",
+      "source": "SeerrNG discovery",
+      "sourceSha256": "f140768191c3906cad20b63ec4dab1f87e06db44c678a2ad2c9879fd92ebcf94"
+    }
+  ],
+  "priorCallerlessHoldCellsReattested": 288
+}

@@ -1,0 +1,20 @@
+{
+  "verification": "passed",
+  "head": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "parentHead": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "window": "W325-W344",
+  "cells": 240,
+  "updates": 57,
+  "corrections": 43,
+  "refinements": 14,
+  "retained": 159,
+  "callerlessHolds": 24,
+  "nonTargetChanges": 0,
+  "placeholderNumericMarkupProtectedLiterals": "passed",
+  "orderedCatalogStructure": "unchanged",
+  "translationReviewMetadata": "unchanged",
+  "candidateFree": "PASS: candidate-free W325-W344 input, exact PR pins, prior selection, 240 cells, protected-literal baseline, placeholders, numeric tokens, and 24 callerless holds.",
+  "primary": "PASS: primary review reattaches to candidate-free input; 240 cells; 57 selected (43 corrections, 14 refinements); 159 accepted; 24 callerless holds; token and protected-literal checks pass.",
+  "blind": "PASS: 240 cells; 34 corrections, 18 refinements, 164 retains, 24 mandatory holds; input/live pins, callers, placeholders, numeric/protected literals, markup, ledger hashes, and review checksums verified.",
+  "crossAudit": "PASS: 240 cells; 57 proposed updates; 24 required callerless holds; 42 disagreements adjudicated; all input/output checksums, pins, targets, and token checks verified."
+}

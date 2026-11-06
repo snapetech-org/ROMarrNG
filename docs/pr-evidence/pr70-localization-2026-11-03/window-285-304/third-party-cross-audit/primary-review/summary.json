@@ -1,0 +1,31 @@
+{
+  "candidateFreeInputChecksumListSha256": "1047511955ef60dc180a49bdaef7a86452c70e9196fd681174732e98d408f338",
+  "candidateFreeInputManifestJsonSha256": "561d10943ebd3aa1f091942b7a83b408c0157e4bd2ae665d44397986d4d45610",
+  "cellCount": 240,
+  "crossAudit": false,
+  "dispositions": {
+    "accept-current": 171,
+    "correction": 26,
+    "hold": 24,
+    "refinement": 19
+  },
+  "head": "363601fd2597f0fb97adff97554e651c2bea2d99",
+  "holdsByRank": {
+    "286": 12,
+    "304": 12
+  },
+  "holdsReason": "Rank 286 has no connected localized display path; rank 304 is raw rename validation API text without an explicit localized template.",
+  "independentBlindReview": false,
+  "localeCount": 12,
+  "placeholderMismatches": 0,
+  "pullRequest": 70,
+  "qualifiedBrowserReview": false,
+  "qualifiedNativeSpeakerApproval": false,
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewUsesCandidateFreeInputOnly": true,
+  "schemaVersion": 1,
+  "selectedChanges": 45,
+  "sourceCount": 20,
+  "tree": "1f8ada1746f53796e2b4a8f43f9a0075150aa5d7",
+  "window": "W285-W304"
+}

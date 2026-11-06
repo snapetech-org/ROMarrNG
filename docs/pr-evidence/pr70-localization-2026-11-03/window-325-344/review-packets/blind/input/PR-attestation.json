@@ -1,0 +1,19 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "state": "OPEN",
+  "isDraft": true,
+  "baseRefName": "main",
+  "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "headRefName": "task/localization-translation-review-20261030",
+  "headRefOid": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "liveBranchRefOid": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "livePullRefOid": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "headTree": "c13dc4fc091565318d11a19ad9e851215a5f917e",
+  "checkedAtUtc": "2026-11-03T13:22:13.906120+00:00",
+  "sourceQueuePath": "romarr/ui-source-messages.json",
+  "sourceQueueGitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogGitBlob": "e519df466e891fed6be58ce9c65e3004bb1693aa",
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94"
+}

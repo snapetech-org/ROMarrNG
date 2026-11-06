@@ -1,0 +1,1148 @@
+{
+  "schemaVersion": 1,
+  "artifact": "ROMarrNG PR #70 W445-W464 preselection exact-head reattestation",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "candidateFreePrimaryBaseHead": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "candidateFreePrimaryBaseTree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "latestLiveHead": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+  "latestLiveTree": "1b075e050610771fc5651d1a4ca95d7c7b4b8e46",
+  "latestParent": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "liveState": "OPEN",
+  "isDraft": true,
+  "branchAndPullRefsBefore": {
+    "refs/heads/task/localization-translation-review-20261030": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+    "refs/pull/70/head": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26"
+  },
+  "branchAndPullRefsAfter": {
+    "refs/heads/task/localization-translation-review-20261030": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+    "refs/pull/70/head": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26"
+  },
+  "prBaseRefName": "main",
+  "prBaseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "prBodyEvidenceLinks": {
+    "sha256": "7cc4715f07d60ee5b70e74d605eecb93fcef40cec30072c6c838822a6473dbdb",
+    "appliedMarkerCount": 1,
+    "w425W444ReadmeLinkPresent": true,
+    "w425W444VerifierLinkPresent": true
+  },
+  "candidateFreeVerifier": "PASS",
+  "primaryVerifier": "PASS",
+  "candidateFreeCells": 240,
+  "primaryCells": 240,
+  "candidateFreePrimaryCurrentTargetsAligned": true,
+  "blindInputCandidateFreeCopyByteIdentical": true,
+  "blindFinalReviewLedgerAvailable": false,
+  "blindFinalReviewLedgerPaths": [],
+  "blindPreliminaryRegistryRankExtraction": {
+    "path": "evidence/preliminary-registry-rank-extraction/input/source-cells.jsonl",
+    "fileSha256": "aaf04ff77adf51a13910677af79d9e9584bdafdc78fd7ef77110551d69e655ae",
+    "cellRows": 20,
+    "samePositionSourceIdMatches": 0,
+    "sourceIdOverlapCount": 0,
+    "useForCrossAudit": false,
+    "reason": "It is labeled preliminary-registry-rank-extraction and does not align with the catalog-insertion candidate-free source set; only the copied candidate-free input is authoritative for the pending blind review."
+  },
+  "relevantGitPinCount": 10,
+  "relevantGitPins": [
+    {
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/romarrng-pr70-w365-384-candidate-free-20261103/input/source-queue.json",
+      "sources": [
+        "blind preliminary file-pins",
+        "blind preliminary file-pins.json"
+      ],
+      "bytes": 273919,
+      "pinnedSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "pinnedGitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "baseSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "latestSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "baseGitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "latestGitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "rawBytesMatch": true,
+      "pinnedShaMatches": true,
+      "pinnedBlobMatches": true,
+      "latestShaMatches": true,
+      "latestBlobMatches": true
+    },
+    {
+      "path": "romarr/downloaders.py",
+      "sources": [
+        "blind preliminary candidate-free-input/source-contexts.jsonl",
+        "candidate-free catalog-file-pins",
+        "candidate-free source-contexts.jsonl",
+        "primary primary-ledger.jsonl"
+      ],
+      "bytes": 165965,
+      "pinnedSha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed",
+      "pinnedGitBlob": "65952d7b8361fa3c6af742f675fde805ec361dd2",
+      "baseSha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed",
+      "latestSha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed",
+      "baseGitBlob": "65952d7b8361fa3c6af742f675fde805ec361dd2",
+      "latestGitBlob": "65952d7b8361fa3c6af742f675fde805ec361dd2",
+      "rawBytesMatch": true,
+      "pinnedShaMatches": true,
+      "pinnedBlobMatches": true,
+      "latestShaMatches": true,
+      "latestBlobMatches": true
+    },
+    {
+      "path": "romarr/i18n_runtime.js",
+      "sources": [
+        "blind preliminary candidate-free-input/dispatch-mechanics.json",
+        "blind preliminary file-pins",
+        "blind preliminary file-pins.json",
+        "candidate-free catalog-file-pins",
+        "candidate-free dispatch-mechanics.json"
+      ],
+      "bytes": 9036,
+      "pinnedSha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "pinnedGitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc",
+      "baseSha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "latestSha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "baseGitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc",
+      "latestGitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc",
+      "rawBytesMatch": true,
+      "pinnedShaMatches": true,
+      "pinnedBlobMatches": true,
+      "latestShaMatches": true,
+      "latestBlobMatches": true
+    },
+    {
+      "path": "romarr/launchers.py",
+      "sources": [
+        "blind preliminary candidate-free-input/source-contexts.jsonl",
+        "candidate-free catalog-file-pins",
+        "candidate-free source-contexts.jsonl",
+        "primary primary-ledger.jsonl"
+      ],
+      "bytes": 17972,
+      "pinnedSha256": "8a8a7d9b6959c2e5166b131d426d7a7942037df19bc16cd7ba512621fa07b588",
+      "pinnedGitBlob": "c23133f62281a3cc1cd057b9bc471c4e36320a30",
+      "baseSha256": "8a8a7d9b6959c2e5166b131d426d7a7942037df19bc16cd7ba512621fa07b588",
+      "latestSha256": "8a8a7d9b6959c2e5166b131d426d7a7942037df19bc16cd7ba512621fa07b588",
+      "baseGitBlob": "c23133f62281a3cc1cd057b9bc471c4e36320a30",
+      "latestGitBlob": "c23133f62281a3cc1cd057b9bc471c4e36320a30",
+      "rawBytesMatch": true,
+      "pinnedShaMatches": true,
+      "pinnedBlobMatches": true,
+      "latestShaMatches": true,
+      "latestBlobMatches": true
+    },
+    {
+      "path": "romarr/libraries.py",
+      "sources": [
+        "blind preliminary candidate-free-input/source-contexts.jsonl",
+        "candidate-free catalog-file-pins",
+        "candidate-free source-contexts.jsonl",
+        "primary primary-ledger.jsonl"
+      ],
+      "bytes": 46463,
+      "pinnedSha256": "8d41c724588ff01ea3896dcfef4e07d7a2f107a1666070f0c1a688411686fe04",
+      "pinnedGitBlob": "af3912e3c0943bc4b442878ff3e0321fc4762600",
+      "baseSha256": "8d41c724588ff01ea3896dcfef4e07d7a2f107a1666070f0c1a688411686fe04",
+      "latestSha256": "8d41c724588ff01ea3896dcfef4e07d7a2f107a1666070f0c1a688411686fe04",
+      "baseGitBlob": "af3912e3c0943bc4b442878ff3e0321fc4762600",
+      "latestGitBlob": "af3912e3c0943bc4b442878ff3e0321fc4762600",
+      "rawBytesMatch": true,
+      "pinnedShaMatches": true,
+      "pinnedBlobMatches": true,
+      "latestShaMatches": true,
+      "latestBlobMatches": true
+    },
+    {
+      "path": "romarr/organizer.py",
+      "sources": [
+        "blind preliminary candidate-free-input/dispatch-mechanics.json",
+        "blind preliminary candidate-free-input/source-contexts.jsonl",
+        "candidate-free catalog-file-pins",
+        "candidate-free dispatch-mechanics.json",
+        "candidate-free source-contexts.jsonl",
+        "primary primary-ledger.jsonl"
+      ],
+      "bytes": 121857,
+      "pinnedSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "pinnedGitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+      "baseSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "latestSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "baseGitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+      "latestGitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+      "rawBytesMatch": true,
+      "pinnedShaMatches": true,
+      "pinnedBlobMatches": true,
+      "latestShaMatches": true,
+      "latestBlobMatches": true
+    },
+    {
+      "path": "romarr/ui-labels.json",
+      "sources": [
+        "blind preliminary file-pins",
+        "blind preliminary file-pins.json",
+        "candidate-free catalog-file-pins"
+      ],
+      "bytes": 3011512,
+      "pinnedSha256": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+      "pinnedGitBlob": "9d908628a34f0f4b9e1e01457b6a932e19d14061",
+      "baseSha256": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+      "latestSha256": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+      "baseGitBlob": "9d908628a34f0f4b9e1e01457b6a932e19d14061",
+      "latestGitBlob": "9d908628a34f0f4b9e1e01457b6a932e19d14061",
+      "rawBytesMatch": true,
+      "pinnedShaMatches": true,
+      "pinnedBlobMatches": true,
+      "latestShaMatches": true,
+      "latestBlobMatches": true
+    },
+    {
+      "path": "romarr/ui-source-messages.json",
+      "sources": [
+        "blind preliminary file-pins",
+        "blind preliminary file-pins.json",
+        "candidate-free catalog-file-pins",
+        "candidate-free source queue"
+      ],
+      "bytes": 273919,
+      "pinnedSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "pinnedGitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "baseSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "latestSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "baseGitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "latestGitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "rawBytesMatch": true,
+      "pinnedShaMatches": true,
+      "pinnedBlobMatches": true,
+      "latestShaMatches": true,
+      "latestBlobMatches": true
+    },
+    {
+      "path": "romarr/ui-source-snapshot.json",
+      "sources": [
+        "candidate-free catalog-file-pins"
+      ],
+      "bytes": 202767,
+      "pinnedSha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "pinnedGitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+      "baseSha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "latestSha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "baseGitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+      "latestGitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+      "rawBytesMatch": true,
+      "pinnedShaMatches": true,
+      "pinnedBlobMatches": true,
+      "latestShaMatches": true,
+      "latestBlobMatches": true
+    },
+    {
+      "path": "romarr/ui.py",
+      "sources": [
+        "blind preliminary candidate-free-input/dispatch-mechanics.json",
+        "blind preliminary candidate-free-input/source-contexts.jsonl",
+        "blind preliminary file-pins",
+        "blind preliminary file-pins.json",
+        "candidate-free catalog-file-pins",
+        "candidate-free dispatch-mechanics.json",
+        "candidate-free source-contexts.jsonl",
+        "primary primary-ledger.jsonl"
+      ],
+      "bytes": 408966,
+      "pinnedSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "pinnedGitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+      "baseSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "latestSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "baseGitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+      "latestGitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+      "rawBytesMatch": true,
+      "pinnedShaMatches": true,
+      "pinnedBlobMatches": true,
+      "latestShaMatches": true,
+      "latestBlobMatches": true
+    }
+  ],
+  "sourceContextReferenceCount": 29,
+  "changedPathsBaseToLatest": [
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/SHA256SUMS.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/SHA256SUMS.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/apply-readback.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/commit-before-push.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/committed-translation-catalog.patch"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/cross-audit-SHA256SUMS.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/cross-audit-ledger.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/cross-audit-ledger.sha256"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/cross-audit-provenance.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/cross-audit-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/git-after-push.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/live-pr-after-apply.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/live-pr-before-apply.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/post-apply-ui-labels.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/pr-body-after.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/pr-body-at-update-before.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/pr-body-before.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/pr-body-update.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/pre-apply-checks.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/pre-apply-ui-labels.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/prior-hold-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/prior-selection-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/selected-change-ledger.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/supplemental-caller-evidence.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/evidence/translation-catalog.patch"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/application/verify_apply.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/PR-attestation.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/SHA256SUMS.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/caller-search-audit.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/catalog-file-pins.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/catalog-insertion-queue.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/catalog-source-inventory.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/current-target-cells.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/current-target-numeric-mismatches.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/current-target-placeholder-mismatches.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/current-target-protected-literal-mismatches.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/dispatch-mechanics.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/prior-hold-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/prior-hold-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/prior-lineage-provenance.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/prior-selection-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/prior-selection-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/registry-order-note.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/selection-boundary.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/selection.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/source-contexts.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/source-inventory-selection.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/source-queue.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/source-snapshot.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/candidate-free-input/verify_input.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/SHA256SUMS.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/audit-ledger.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/SHA256SUMS.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/candidate-free-input-verification.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/cell-review.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/change-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/PR-attestation.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/PR-attestation.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/SHA256SUMS.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/caller-search-audit.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/catalog-file-pins.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/catalog-insertion-queue.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/catalog-source-inventory.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/current-target-cells.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/current-target-numeric-mismatches.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/current-target-placeholder-mismatches.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/current-target-protected-literal-mismatches.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/dispatch-mechanics.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/prior-hold-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/prior-hold-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/prior-lineage-provenance.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/prior-selection-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/prior-selection-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/registry-order-note.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/selection-boundary.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/selection.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/source-contexts.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/source-inventory-selection.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/source-queue.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/source-snapshot.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/candidate-free-input/verify_input.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/catalog-file-pins.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/current-target-cells.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/dispatch-mechanics.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/prior-hold-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/prior-hold-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/prior-selection-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/prior-selection-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/evidence/source-contexts.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/live-pr-attestation.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/prior-hold-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/prior-hold-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/prior-selection-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/prior-selection-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/record_live_after.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/source-context-interpretation.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/blind-review/verify_blind.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/PR-attestation.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/SHA256SUMS.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/caller-search-audit.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/catalog-file-pins.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/catalog-insertion-queue.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/catalog-source-inventory.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/current-target-cells.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/current-target-numeric-mismatches.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/current-target-placeholder-mismatches.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/current-target-protected-literal-mismatches.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/dispatch-mechanics.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/prior-hold-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/prior-hold-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/prior-lineage-provenance.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/prior-selection-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/prior-selection-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/registry-order-note.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/selection-boundary.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/selection.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/source-contexts.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/source-inventory-selection.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/source-queue.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/source-snapshot.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/candidate-free-input/verify_input.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/pinned-source/romarr/ui-labels.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/pinned-source/romarr/ui-source-messages.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/pinned-source/romarr/ui.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/primary-review/PR-attestation-after.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/primary-review/PR-attestation-before.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/primary-review/README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/primary-review/SHA256SUMS.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/primary-review/build_primary.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/primary-review/manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/primary-review/primary-ledger.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/primary-review/seal_packet.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/primary-review/summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/evidence/primary-review/verify_primary.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/input-packet-verification.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/live-pr-after.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/live-pr-before.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/source-catalog-drift-check.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/supplemental-caller-evidence.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/cross-audit/verify_cross_audit.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/SHA256SUMS.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/candidate-free-input-verification.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/cell-review.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/change-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/PR-attestation.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/PR-attestation.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/SHA256SUMS.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/caller-search-audit.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/catalog-file-pins.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/catalog-insertion-queue.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/catalog-source-inventory.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/current-target-cells.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/current-target-numeric-mismatches.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/current-target-placeholder-mismatches.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/current-target-protected-literal-mismatches.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/dispatch-mechanics.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/prior-hold-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/prior-hold-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/prior-lineage-provenance.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/prior-selection-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/prior-selection-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/registry-order-note.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/selection-boundary.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/selection.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/source-contexts.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/source-inventory-selection.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/source-queue.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/source-snapshot.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/candidate-free-input/verify_input.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/catalog-file-pins.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/current-target-cells.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/dispatch-mechanics.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/prior-hold-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/prior-hold-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/prior-selection-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/prior-selection-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/evidence/source-contexts.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/live-pr-attestation.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/prior-hold-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/prior-hold-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/prior-selection-reattestation-summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/prior-selection-reattestation.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/record_live_after.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/source-context-interpretation.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/independent-review/verify_blind.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/primary-review/PR-attestation-after.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/primary-review/PR-attestation-before.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/primary-review/README.md"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/primary-review/SHA256SUMS.txt"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/primary-review/build_primary.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/primary-review/manifest.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/primary-review/primary-ledger.jsonl"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/primary-review/seal_packet.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/primary-review/summary.json"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/primary-review/verify_primary.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/verify_primary_portable.py"
+    },
+    {
+      "status": "A",
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/window-425-444/verify_window_bundle.py"
+    }
+  ],
+  "changedPathCount": 218,
+  "allChangesConfinedToNewW425W444Evidence": true,
+  "catalogStructure": {
+    "catalogPath": "romarr/ui-labels.json",
+    "sha256Base": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+    "sha256Latest": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+    "messageCount": 1836,
+    "orderedSourceIdsSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+    "all240CurrentTargetHashesReattestedAtBothHeads": true
+  },
+  "reattestationResult": "PASS",
+  "selectionGate": "Await a sealed blind decision ledger; do not adjudicate or apply W445-W464 yet."
+}

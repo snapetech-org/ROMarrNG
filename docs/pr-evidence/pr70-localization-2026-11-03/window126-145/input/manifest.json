@@ -1,0 +1,80 @@
+{
+  "artifact": "ROMarrNG PR #70 W126–W145 clean localization review input",
+  "checksumNote": "manifest.json excludes its own hash and SHA256SUMS.txt; SHA256SUMS.txt covers every packet file except itself.",
+  "createdAtUtc": "2026-11-03T04:17:25.017215+00:00",
+  "files": [
+    {
+      "bytes": 992,
+      "name": "README.txt",
+      "sha256": "f77764835d696aab4134a52be2763317663b8afa85265340040d8c3246f56194"
+    },
+    {
+      "bytes": 5121,
+      "name": "head-and-file-pins.json",
+      "sha256": "08a451d7f46ad29582a7df75c56809c1ef26e2319b6a05aedcdc6c85fe842cc3"
+    },
+    {
+      "bytes": 4693,
+      "name": "render-path-context.jsonl",
+      "sha256": "1d901a4de6270f485a5295a47e73d9c7436be87deb73bab352c76365ac088b33"
+    },
+    {
+      "bytes": 132718,
+      "name": "review-input.jsonl",
+      "sha256": "b070579c035d3e395b2922daa740c969b9780f70bcc360c1ae5862c4ab5952ff"
+    },
+    {
+      "bytes": 2813,
+      "name": "selection.json",
+      "sha256": "51105d48afd655c905ff7a3a971fc2cd2674c81c0f4c645544c56ddd639ce9dd"
+    },
+    {
+      "bytes": 40825,
+      "name": "source-context.jsonl",
+      "sha256": "6261071c72a435fcd7959a0650a724a8a7b13c1df4e7f24a343810e4acca8b91"
+    },
+    {
+      "bytes": 5782,
+      "name": "source-structure.jsonl",
+      "sha256": "7d6039215a8ec98a62927653fbaf7168a261cb8aff81d5fdf8adb23cbbc0ce22"
+    }
+  ],
+  "head": "5d999ff7667ae4c5642f1f11b63ad9880d19672c",
+  "inputPath": "review-input.jsonl",
+  "inputRows": 240,
+  "inputSha256": "b070579c035d3e395b2922daa740c969b9780f70bcc360c1ae5862c4ab5952ff",
+  "pullRequest": 70,
+  "renderPathEvidenceRows": 4,
+  "repository": "snapetech-org/ROMarrNG",
+  "scopeLimits": {
+    "containsCurrentTargets": true,
+    "containsReviewDispositions": false,
+    "containsTranslationCandidates": false,
+    "repositoryOrPullRequestEdited": false,
+    "testsBuildsScansCiOrBrowserRun": false
+  },
+  "selectionPath": "selection.json",
+  "sourceContextRows": 20,
+  "sourceStructureRows": 20,
+  "tree": "93fcf748c46a4c1cef116c2a4ef06305137ecfe4",
+  "window": {
+    "cellCount": 240,
+    "firstSourceOrdinal": 126,
+    "lastSourceOrdinal": 145,
+    "locales": [
+      "es",
+      "zh-Hans",
+      "hi",
+      "de",
+      "ja",
+      "fr",
+      "pt-BR",
+      "ar",
+      "ko",
+      "zh-Hant",
+      "vi",
+      "id"
+    ],
+    "sourceCount": 20
+  }
+}

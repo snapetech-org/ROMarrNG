@@ -1,0 +1,226 @@
+[
+  {
+    "requestedPosition": 465,
+    "catalogZeroBasedIndex": 465,
+    "catalogOneBasedPosition": 466,
+    "sourceId": "ui.found-found-releases-accepted-match.65f542cd3e",
+    "source": "Found {found} releases; {accepted} match your selection. Rejected results are also shown with the reason for each rejection.",
+    "sourceSha256": "65f542cd3eaa97d72146391b608cc8b07591f6a245b66fb1e1df49ac9e4b4e8e",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 466,
+    "catalogZeroBasedIndex": 466,
+    "catalogOneBasedPosition": 467,
+    "sourceId": "ui.franchise.cae83311f5",
+    "source": "Franchise",
+    "sourceSha256": "cae83311f5ab2f27220741ec46d3900cded1577220aaf5542d9ab69f8408feee",
+    "activeSourceRegistry": true,
+    "activeSourceRank": 125,
+    "registryLocations": [
+      "romarr/ui.py:2725"
+    ]
+  },
+  {
+    "requestedPosition": 467,
+    "catalogZeroBasedIndex": 467,
+    "catalogOneBasedPosition": 468,
+    "sourceId": "ui.fri.66dab40cea",
+    "source": "Fri",
+    "sourceSha256": "66dab40cea1dea5c070c83f775b1ebc2b612b1b9cca1c62ad38815c4ff47b25d",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 468,
+    "catalogZeroBasedIndex": 468,
+    "catalogOneBasedPosition": 469,
+    "sourceId": "ui.friends.bd104d1b98",
+    "source": "Friends",
+    "sourceSha256": "bd104d1b98d032274986497eeb7997c44a1d674b29140e43cd525d33468ecb6e",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 469,
+    "catalogZeroBasedIndex": 469,
+    "catalogOneBasedPosition": 470,
+    "sourceId": "ui.from-alldebrid-com-apikeys-magnets-a.1444aa45a4",
+    "source": "From alldebrid.com/apikeys. Magnets and infohashes only.",
+    "sourceSha256": "1444aa45a4eb1718f87db62766b47a3c46d6ea60761b8ba96c745933da31bee8",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 470,
+    "catalogZeroBasedIndex": 470,
+    "catalogOneBasedPosition": 471,
+    "sourceId": "ui.from-debrid-link-com-webapp-apikey-t.c4c2ada83e",
+    "source": "From debrid-link.com/webapp/apikey. Takes magnets and .torrent URLs.",
+    "sourceSha256": "c4c2ada83e0067becc3d804d9ba53c1613a6ec2a8d0b30f329dff14c9cb2eb97",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 471,
+    "catalogZeroBasedIndex": 471,
+    "catalogOneBasedPosition": 472,
+    "sourceId": "ui.from-offcloud-com-account-settings-c.471d7a1b8a",
+    "source": "From offcloud.com account settings. Cloud downloads need the cloud add-on on the account; without it every add is refused.",
+    "sourceSha256": "471d7a1b8a2c214de8bc80b5658c90c156f4375bbc548d687867ada87bcfc951",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 472,
+    "catalogZeroBasedIndex": 472,
+    "catalogOneBasedPosition": 473,
+    "sourceId": "ui.from-premiumize-me-account-takes-mag.f165d3dc1f",
+    "source": "From premiumize.me/account. Takes magnets and .torrent URLs.",
+    "sourceSha256": "f165d3dc1f882ef6f39b23c001aca2643f828b71abd89bb0e16e73720b7c88ca",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 473,
+    "catalogZeroBasedIndex": 473,
+    "catalogOneBasedPosition": 474,
+    "sourceId": "ui.from-real-debrid-com-apitoken-magnet.1ba10851cc",
+    "source": "From real-debrid.com/apitoken. Magnets only -- Real-Debrid takes .torrent files as an upload, which indexers do not offer.",
+    "sourceSha256": "1ba10851ccf35bfe5a768ee40b3c079eb342c7fd9b4ce0ffb744de37f471cd9c",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 474,
+    "catalogZeroBasedIndex": 474,
+    "catalogOneBasedPosition": 475,
+    "sourceId": "ui.from-torbox-app-settings-download-li.966d26504c",
+    "source": "From torbox.app/settings. Download links last three hours, so ROMarr asks for one per file as it fetches it.",
+    "sourceSha256": "966d26504ca380b879158e14d03f79c9d92334be09c0b1989b955f8e0c01d72c",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 475,
+    "catalogZeroBasedIndex": 475,
+    "catalogOneBasedPosition": 476,
+    "sourceId": "ui.gg-requestz-page.a391eae98d",
+    "source": "GG Requestz page",
+    "sourceSha256": "a391eae98d930796795a8fe48741d1f53dbd179d3de23882124c2e6758d785f3",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 476,
+    "catalogZeroBasedIndex": 476,
+    "catalogOneBasedPosition": 477,
+    "sourceId": "ui.gg-requestz-requests.8aa58848ec",
+    "source": "GG Requestz requests",
+    "sourceSha256": "8aa58848ec5caba580ecdf74a80598f0a07e2d1f3cc10cc5562c2466ad5f0f14",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 477,
+    "catalogZeroBasedIndex": 477,
+    "catalogOneBasedPosition": 478,
+    "sourceId": "ui.ggrequestz-url-only-adds-and-checks.f888f166d7",
+    "source": "GGREQUESTZ_URL only adds and checks the front-end link; it does not deliver requests",
+    "sourceSha256": "f888f166d7612d9633abe6d14d2597d4f909521f75be284a8c8b86e8f416c8d4",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 478,
+    "catalogZeroBasedIndex": 478,
+    "catalogOneBasedPosition": 479,
+    "sourceId": "ui.gog-profile.866a5318ca",
+    "source": "GOG profile",
+    "sourceSha256": "866a5318cad04638f3a8d9967940d9ea7ecaf2571be6cc5a3e6e8481b81808b5",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 479,
+    "catalogZeroBasedIndex": 479,
+    "catalogOneBasedPosition": 480,
+    "sourceId": "ui.gog-username.3639893276",
+    "source": "GOG username",
+    "sourceSha256": "36398932760dc11fefb2e18bc5584dec5f08efaf146883dcc51c481c82038f0d",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 480,
+    "catalogZeroBasedIndex": 480,
+    "catalogOneBasedPosition": 481,
+    "sourceId": "ui.game.5c412a2620",
+    "source": "Game",
+    "sourceSha256": "5c412a262086b9701cda06302f6667f9265b1807d0368fcec6cc03bf64fc250b",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 481,
+    "catalogZeroBasedIndex": 481,
+    "catalogOneBasedPosition": 482,
+    "sourceId": "ui.game-evidence.036c1e0c7e",
+    "source": "Game / evidence",
+    "sourceSha256": "036c1e0c7e391bffcf38ca288a936372248eaa08dae47ca4fb66e6758c615c9f",
+    "activeSourceRegistry": true,
+    "activeSourceRank": 126,
+    "registryLocations": [
+      "romarr/ui.py:5505"
+    ]
+  },
+  {
+    "requestedPosition": 482,
+    "catalogZeroBasedIndex": 482,
+    "catalogOneBasedPosition": 483,
+    "sourceId": "ui.game-streaming-host.5205e3b760",
+    "source": "Game streaming host",
+    "sourceSha256": "5205e3b760151388fcb4a4adc8cd6e49eef2b603ae056e2d1d00108cb861e2cc",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 483,
+    "catalogZeroBasedIndex": 483,
+    "catalogOneBasedPosition": 484,
+    "sourceId": "ui.gamecube-disc-magic-at-0x1c.2fdeeaba75",
+    "source": "GameCube disc magic at 0x1c",
+    "sourceSha256": "2fdeeaba75095007ff6e6f8b3a227dc0b9b86632ac539bba7c956e3484ebf9d8",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  },
+  {
+    "requestedPosition": 484,
+    "catalogZeroBasedIndex": 484,
+    "catalogOneBasedPosition": 485,
+    "sourceId": "ui.games.d9dae78103",
+    "source": "Games",
+    "sourceSha256": "d9dae78103ad099379d5d31c54b12de14dd342225794c6f3df11b3c4f67b9e06",
+    "activeSourceRegistry": false,
+    "activeSourceRank": null,
+    "registryLocations": []
+  }
+]

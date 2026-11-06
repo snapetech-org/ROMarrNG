@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "tree": "016587d26f04d2920a30878236f1933a57e27901",
+  "window": "W245-W264",
+  "candidateFreeInputChecksumFileSha256": "285dec16fb9be7081b023d153cddc43ce794478de87c377bc3c4681634491eef",
+  "blindLedgerSha256": "c1561f521230e6a9bc7715caad2c10864ab0707bba7d649efb717de6efae8c59",
+  "summarySha256": "43fe7cb2b46101b3b35c10372e1e78c6c03ef01021d631f3e13fefaad394badb",
+  "cellCount": 240,
+  "candidateProposalsIncluded": false,
+  "nativeSpeakerApproval": false,
+  "releaseApproved": false
+}

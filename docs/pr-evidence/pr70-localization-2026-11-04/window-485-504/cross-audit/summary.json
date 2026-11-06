@@ -1,0 +1,95 @@
+{
+  "artifact": "ROMarrNG PR #70 W485-W504 third-party exact-hash cross-audit",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "state": "OPEN",
+  "draft": true,
+  "head": "6eb494d362ae19503b9199cd2c05c0767cddbc0e",
+  "tree": "b9450b9c6d22c816551fc8d528e8f03413d04595",
+  "selectionBasis": "catalog insertion order; exact pinned ui-labels.json indices 485..504",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "dispositions": {
+    "accept-current": 201,
+    "correction": 14,
+    "refinement": 1,
+    "hold": 24
+  },
+  "proposalCells": 15,
+  "primaryBlindDispositionConflicts": 0,
+  "primaryBlindTargetConflicts": 0,
+  "crossAdjudicationChangesToProposals": 0,
+  "holdPositions": [
+    493,
+    502
+  ],
+  "holdCellCount": 24,
+  "holdProposalTextCells": 0,
+  "callerlessHoldPolicy": "all 12 locales at positions 493 and 502 remain held; cross ledger omits current/proposed/selected target text on holds and retains only current-target hashes",
+  "priorSelectedSourceCount": 100,
+  "priorHoldCellCount": 444,
+  "inputPinsSha256": "9660fbc6d34873dbfea50ac5c5db469f5e4486d02347808227cdb373e8391551",
+  "crossLedgerSha256": "3aff76a5fbe977997ece620bcd3f07ce6560be707cbdc2022747f7c146e011a4",
+  "decisions": [
+    {
+      "position": 492,
+      "locale": "ja",
+      "disposition": "correction",
+      "selectedTarget": "GitHub",
+      "rationale": "Standalone external link label; remove the locative particle."
+    },
+    {
+      "position": 492,
+      "locale": "pt-BR",
+      "disposition": "refinement",
+      "selectedTarget": "GitHub",
+      "rationale": "Standalone external link label; remove unsupported terminal punctuation."
+    },
+    {
+      "position": 497,
+      "locales": [
+        "ar",
+        "de",
+        "es",
+        "fr",
+        "hi",
+        "id",
+        "ja",
+        "ko",
+        "pt-BR",
+        "vi",
+        "zh-Hans",
+        "zh-Hant"
+      ],
+      "disposition": "correction",
+      "rationale": "The pending request is an add-to-downloads/queue action; neighboring “Grabbed” translations confirm that terminology."
+    },
+    {
+      "position": 501,
+      "locale": "vi",
+      "disposition": "correction",
+      "selectedTarget": "Đầu tệp cho biết",
+      "rationale": "Caller displays a file-header diagnostic; current wording reads as file title."
+    }
+  ],
+  "nativeSpeakerApproval": false,
+  "stateMachineBehaviorValidated": false,
+  "browserAcceptance": false,
+  "confidence": "moderate overall; high on exact callerless holds and standalone GitHub labels"
+}

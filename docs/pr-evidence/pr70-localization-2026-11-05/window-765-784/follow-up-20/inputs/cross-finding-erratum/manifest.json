@@ -1,0 +1,12 @@
+{
+  "artifact": "ROMarrNG W765-W784 French finding erratum",
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "originalCrossPacketChecksumListSha256": "45ad89aa23ef002858e25e63f1633ff30e1f2088db3b45b9bc4dd365bb2597e9",
+  "files": {
+    "README.md": "aabc6ccf94aaacdaca7d3224e125f629e8ed948177bc1c422407f9253899b14e",
+    "erratum.json": "f0bc5bf1cdc8ad95092790e0918804a541d059cb628a7f79a8524f390efed099",
+    "evidence-rows.jsonl": "bef7caa4cb9ab7d1fb72c0273e40e64149c148bb29535dca24067ecf13a52786",
+    "verify_erratum.py": "a5e41a21588805bc7da00b76a7ee80041aadb3264845e220e4f3c614eb4811b6"
+  }
+}

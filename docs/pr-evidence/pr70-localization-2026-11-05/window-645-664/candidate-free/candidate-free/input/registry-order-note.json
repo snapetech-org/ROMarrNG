@@ -1,0 +1,47 @@
+{
+  "activeRegistryCount": 479,
+  "activeRegistryMatches": [
+    {
+      "activeRank": 192,
+      "registryLocations": [
+        "romarr/ui.py:4024"
+      ],
+      "sourceId": "ui.minimum-seeders.a78f3d2116"
+    },
+    {
+      "activeRank": 194,
+      "registryLocations": [
+        "romarr/playability.py:1409"
+      ],
+      "sourceId": "ui.moonlight-pairing-cannot-be-automate.e1a9d014f9"
+    },
+    {
+      "activeRank": 196,
+      "registryLocations": [
+        "romarr/ui.py:5412"
+      ],
+      "sourceId": "ui.mount-it-on-each-client-and-point-es.a021b4cc73"
+    },
+    {
+      "activeRank": 197,
+      "registryLocations": [
+        "romarr/organizer.py:1855"
+      ],
+      "sourceId": "ui.multi-disc-set-is-grouped-for-metada.86db33ad47"
+    },
+    {
+      "activeRank": 198,
+      "registryLocations": [
+        "romarr/ui.py:2724"
+      ],
+      "sourceId": "ui.multiplayer.563370a7b0"
+    }
+  ],
+  "lineHintCaveat": "Active source registry metadata does not substitute for exact literal caller search and excerpt evidence.",
+  "selectedCatalogZeroBasedIndices": [
+    645,
+    664
+  ],
+  "selectedIdsInActiveRegistry": 5,
+  "selectionBasis": "catalog JSON message-key insertion order"
+}

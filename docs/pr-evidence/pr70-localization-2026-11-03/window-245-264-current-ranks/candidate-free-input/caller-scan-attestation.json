@@ -1,0 +1,514 @@
+{
+  "allExactCallRefsIncluded": true,
+  "head": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "messages": [
+    {
+      "exactLiteralHitCount": 1,
+      "exactLiteralHits": [
+        {
+          "line": 2582,
+          "lineText": "+(ownedError?' · '+interfaceMarkup('Owned check unavailable')+': '+apiMessageMarkup(ownedError):'')",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "position": 245,
+      "resolvedCallers": [
+        "romarr/ui.py:2383-2410",
+        "romarr/ui.py:2578-2584"
+      ],
+      "sourceId": "ui.owned-check-unavailable.b3cf0beade"
+    },
+    {
+      "exactLiteralHitCount": 1,
+      "exactLiteralHits": [
+        {
+          "line": 1692,
+          "lineText": "+'<h2>Page could not be loaded</h2><p class=\"help\">ROMarr could not finish loading this page. Check the connection and try again.</p>'",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "position": 246,
+      "resolvedCallers": [
+        "romarr/ui.py:1688-1694"
+      ],
+      "sourceId": "ui.page-could-not-be-loaded.b4aa008f1c"
+    },
+    {
+      "exactLiteralHitCount": 1,
+      "exactLiteralHits": [
+        {
+          "line": 4226,
+          "lineText": "+fld('patch_catalog_url','Patch catalogue URL (optional)',SETTINGS.patch_catalog_url||'')",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "position": 247,
+      "resolvedCallers": [
+        "romarr/ui.py:4114-4117",
+        "romarr/ui.py:4222-4228"
+      ],
+      "sourceId": "ui.patch-catalogue-url-optional.da0d568bab"
+    },
+    {
+      "exactLiteralHitCount": 0,
+      "exactLiteralHits": [],
+      "position": 248,
+      "resolvedCallers": [
+        "romarr/app.py:1800-1824",
+        "romarr/app.py:1833-1845",
+        "romarr/ui.py:4364-4368",
+        "romarr/ui.py:1042-1049"
+      ],
+      "sourceId": "ui.path-does-not-exist-in-this-containe.794119b508"
+    },
+    {
+      "exactLiteralHitCount": 0,
+      "exactLiteralHits": [],
+      "position": 249,
+      "resolvedCallers": [
+        "romarr/app.py:1800-1824",
+        "romarr/app.py:1833-1845",
+        "romarr/ui.py:4364-4368",
+        "romarr/ui.py:1042-1049"
+      ],
+      "sourceId": "ui.path-does-not-exist-in-this-containe.b930479dc1"
+    },
+    {
+      "exactLiteralHitCount": 1,
+      "exactLiteralHits": [
+        {
+          "line": 4135,
+          "lineText": "?{source:'Path mapping for {path}',values:{path:m.remote}}",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "position": 250,
+      "resolvedCallers": [
+        "romarr/ui.py:4134-4141",
+        "romarr/ui.py:895-897",
+        "romarr/ui.py:1298-1315"
+      ],
+      "sourceId": "ui.path-mapping-for-path.4d05308441"
+    },
+    {
+      "exactLiteralHitCount": 1,
+      "exactLiteralHits": [
+        {
+          "line": 5356,
+          "lineText": "+'<p class=\"help\">Pick one route. You can return here and add the other pieces later.</p>'",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "position": 251,
+      "resolvedCallers": [
+        "romarr/ui.py:5355-5360"
+      ],
+      "sourceId": "ui.pick-one-route-you-can-return-here-a.3424d84932"
+    },
+    {
+      "exactLiteralHitCount": 1,
+      "exactLiteralHits": [
+        {
+          "line": 4165,
+          "lineText": "?{source:'Platform folder mapping for {folder}',values:{folder}}",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "position": 252,
+      "resolvedCallers": [
+        "romarr/ui.py:4161-4179",
+        "romarr/ui.py:895-897",
+        "romarr/ui.py:1298-1315"
+      ],
+      "sourceId": "ui.platform-folder-mapping-for-folder.5ddc81c9dd"
+    },
+    {
+      "exactLiteralHitCount": 1,
+      "exactLiteralHits": [
+        {
+          "line": 4187,
+          "lineText": "+`<fieldset class=\"settings-group\"><legend>Platform folder names</legend>",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "position": 253,
+      "resolvedCallers": [
+        "romarr/ui.py:4182-4190"
+      ],
+      "sourceId": "ui.platform-folder-names.4486e3993b"
+    },
+    {
+      "exactLiteralHitCount": 1,
+      "exactLiteralHits": [
+        {
+          "line": 4956,
+          "lineText": "$('#page').innerHTML='<div class=\"card\"><h3>'+interfaceMarkup('Platforms, by era')+'</h3>'",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "position": 254,
+      "resolvedCallers": [
+        "romarr/ui.py:4953-4958"
+      ],
+      "sourceId": "ui.platforms-by-era.f61faf3b5f"
+    },
+    {
+      "exactLiteralHitCount": 1,
+      "exactLiteralHits": [
+        {
+          "line": 5823,
+          "lineText": "+(discGroup.manifest_path?'<div class=\"help\" style=\"margin:4px 0\">Playlist: <span lang=\"und\" dir=\"auto\">'+esc(discGroup.manifest_path)+'</span></div>':'')",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "position": 255,
+      "resolvedCallers": [
+        "romarr/ui.py:5820-5825"
+      ],
+      "sourceId": "ui.playlist.0901ed5364"
+    },
+    {
+      "exactLiteralHitCount": 0,
+      "exactLiteralHits": [],
+      "position": 256,
+      "resolvedCallers": [
+        "romarr/downloaders.py:3325-3353",
+        "romarr/app.py:5553-5572",
+        "romarr/app.py:6540-6542",
+        "romarr/hub.py:608-626",
+        "romarr/ui.py:3683-3690",
+        "romarr/ui.py:1042-1049"
+      ],
+      "sourceId": "ui.plugin-fetch-failed-error-type.2cd1f793d7"
+    },
+    {
+      "exactLiteralHitCount": 1,
+      "exactLiteralHits": [
+        {
+          "line": 616,
+          "lineText": "raise ValueError(\"plugin output escapes the staging directory\")",
+          "path": "romarr/hub.py"
+        }
+      ],
+      "position": 257,
+      "resolvedCallers": [
+        "romarr/hub.py:613-626"
+      ],
+      "sourceId": "ui.plugin-output-escapes-the-staging-di.e14e2cda8d"
+    },
+    {
+      "exactLiteralHitCount": 0,
+      "exactLiteralHits": [],
+      "position": 258,
+      "resolvedCallers": [
+        "romarr/hub.py:584-598",
+        "romarr/hub.py:608-626",
+        "romarr/downloaders.py:3330-3353",
+        "romarr/app.py:5553-5572",
+        "romarr/app.py:6540-6542",
+        "romarr/ui.py:3683-3690"
+      ],
+      "sourceId": "ui.plugin-slug-is-disabled.c2cc567d69"
+    },
+    {
+      "exactLiteralHitCount": 0,
+      "exactLiteralHits": [],
+      "position": 259,
+      "resolvedCallers": [
+        "romarr/hub.py:584-598",
+        "romarr/hub.py:608-626",
+        "romarr/downloaders.py:3330-3353",
+        "romarr/app.py:5553-5572",
+        "romarr/app.py:6540-6542",
+        "romarr/ui.py:3683-3690"
+      ],
+      "sourceId": "ui.plugin-slug-is-not-installed-detail.7b9e5fbd47"
+    },
+    {
+      "exactLiteralHitCount": 7,
+      "exactLiteralHits": [
+        {
+          "line": 200,
+          "lineText": "#: Popularity type 4, \"Played\": how many IGDB users have logged playing the",
+          "path": "romarr/metadata.py"
+        },
+        {
+          "line": 216,
+          "lineText": "#: a canon, which is what a Popular shelf is for, and the nearest thing IGDB",
+          "path": "romarr/metadata.py"
+        },
+        {
+          "line": 833,
+          "lineText": "\"\"\"The Popular shelf, which costs two requests rather than one.",
+          "path": "romarr/metadata.py"
+        },
+        {
+          "line": 852,
+          "lineText": "# asked for. Reapplied here, because a Popular shelf silently sorted by",
+          "path": "romarr/metadata.py"
+        },
+        {
+          "line": 62,
+          "lineText": "\"/api/integration/seerrng/v1/catalog/popular\": (\"GET\", \"Popular IGDB titles.\"),",
+          "path": "romarr/openapi.py"
+        },
+        {
+          "line": 63,
+          "lineText": "\"/api/integration/seerrng/v1/catalog/popular-page\": (\"GET\", \"Popular IGDB titles with offset pagination and optional filters.\"),",
+          "path": "romarr/openapi.py"
+        },
+        {
+          "line": 2973,
+          "lineText": "const webTabs=[['popular','Popular'],['new','New releases'],['upcoming','Upcoming']];",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "position": 260,
+      "resolvedCallers": [
+        "romarr/ui.py:2973-2983"
+      ],
+      "sourceId": "ui.popular.76327dec9a"
+    },
+    {
+      "exactLiteralHitCount": 2,
+      "exactLiteralHits": [
+        {
+          "line": 5905,
+          "lineText": "+(batch.has_more?'<button class=\"btn ghost\" id=\"org-next-plan\" style=\"margin:12px 0 0 8px\">Preview next batch</button>':'')+'</div>';",
+          "path": "romarr/ui.py"
+        },
+        {
+          "line": 5926,
+          "lineText": "?'<div class=\"card\"><span class=\"help\">Batch applied. Continue when ready.</span> <button class=\"btn ghost\" id=\"org-continue-plan\">Preview next batch</button></div>':'';",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "position": 261,
+      "resolvedCallers": [
+        "romarr/ui.py:5900-5910",
+        "romarr/ui.py:5922-5929"
+      ],
+      "sourceId": "ui.preview-next-batch.da5ef387bb"
+    },
+    {
+      "exactLiteralHitCount": 1,
+      "exactLiteralHits": [
+        {
+          "line": 5683,
+          "lineText": "+'<button class=\"btn ghost\" id=\"org-plan\" '+(!SETTINGS.metadata_path?'disabled':'')+'>Preview safe renames</button>'",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "position": 262,
+      "resolvedCallers": [
+        "romarr/ui.py:5679-5686"
+      ],
+      "sourceId": "ui.preview-safe-renames.b22bfffeca"
+    },
+    {
+      "exactLiteralHitCount": 1,
+      "exactLiteralHits": [
+        {
+          "line": 5748,
+          "lineText": "+'<span class=\"help\" style=\"margin:0\">'+interfaceTemplateMarkup('{processed} / {total} files checked',",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "position": 263,
+      "resolvedCallers": [
+        "romarr/ui.py:5740-5751",
+        "romarr/ui.py:885-890"
+      ],
+      "sourceId": "ui.processed-total-files-checked.12551d7ec5"
+    },
+    {
+      "exactLiteralHitCount": 35,
+      "exactLiteralHits": [
+        {
+          "line": 4637,
+          "lineText": "Projected to exactly the ROMarr peer fields on purpose: the rest of",
+          "path": "romarr/app.py"
+        },
+        {
+          "line": 28,
+          "lineText": "class Project:",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 41,
+          "lineText": "ECOSYSTEM: dict[str, list[Project]] = {",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 43,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 48,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 53,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 57,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 64,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 69,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 75,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 82,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 88,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 93,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 100,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 105,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 111,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 118,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 124,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 130,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 134,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 139,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 143,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 148,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 154,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 160,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 165,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 171,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 176,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 183,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 188,
+          "lineText": "Project(",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 209,
+          "lineText": "def all_projects() -> list[Project]:",
+          "path": "romarr/ecosystem.py"
+        },
+        {
+          "line": 172,
+          "lineText": "\"\"\"Projects from `<dir>/patch-catalog.d/*.json` and an optional remote.\"\"\"",
+          "path": "romarr/patches.py"
+        },
+        {
+          "line": 3730,
+          "lineText": "$('#patch-results').innerHTML=rows.length?`<table><thead><tr><th>Project</th>",
+          "path": "romarr/ui.py"
+        },
+        {
+          "line": 3745,
+          "lineText": "Projects come from your own catalogue only. Completeness is what a project",
+          "path": "romarr/ui.py"
+        },
+        {
+          "line": 4229,
+          "lineText": "improvement projects, refreshed every 12 hours. Projects in a",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "position": 264,
+      "resolvedCallers": [
+        "romarr/ui.py:3728-3743"
+      ],
+      "sourceId": "ui.project.9859597853"
+    }
+  ],
+  "method": "UTF-8 exact source-string substring search per production Python line. Dynamic f-string templates are resolved by pinned source construction contexts.",
+  "resolvedProductionCallerReferences": 49,
+  "scanRoot": "romarr/**/*.py",
+  "tree": "016587d26f04d2920a30878236f1933a57e27901"
+}

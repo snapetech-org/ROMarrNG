@@ -1,0 +1,19 @@
+{
+  "sealed": true,
+  "sealedDate": "2026-11-03",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "e0cb91389334fe534ff44ccfc72cbb2c152a93b4",
+  "tree": "3876dd57816aaf75bb8b1a56a75a5045d216c461",
+  "candidateFreeInputManifestSha256": "857ff470aac96220722ec2c2317bf7c8db3d0b91714a93cee9fed9c3292f915e",
+  "runtimeContextSha256": "b9c1c9c5fee6747f076dd55774935c3077e051ff0286554a7207710b77ff9f8a",
+  "inputPacketSha256SumsFileSha256": "0de65e3297d73f4688a7582c1f5c9df261c669820e4013b39a506273c1465193",
+  "blindLedger": "blind-ledger.jsonl",
+  "blindLedgerSha256": "46a21c4335cda9e73ab7b558fa83726c30966b9d5e2affb7454b6b6a55a036d7",
+  "blindLedgerRows": 48,
+  "blindSummary": "blind-summary.json",
+  "blindSummarySha256": "74180fbac626cc7e340ca6e8b301a501accbc70e7cd6468b296e11b8a9c96e44",
+  "otherReviewOutputsConsultedBeforeSeal": false,
+  "otherReviewOutputsConsultedAfterSeal": false,
+  "sealScope": "Candidate-free input plus pinned production/runtime context only; independent semantic review, no release approval."
+}

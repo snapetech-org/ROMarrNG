@@ -1,0 +1,23 @@
+{
+  "artifact": "ROMarrNG W645-W664 product catalog commit",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "productCommit": "fee1da731d13c578d1911884a1567d0124187d29",
+  "productTree": "fae55bb1f52f49da93bec989fa4feb86dd87548e",
+  "parent": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+  "path": "romarr/ui-labels.json",
+  "sourcePreimageHead": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+  "sourcePreimageTree": "d6066baa3d03d3b4c6034e5af061fc4bc278b0f9",
+  "selectedCells": 15,
+  "corrections": 12,
+  "refinements": 3,
+  "translationHashUpdates": 10,
+  "translationStatusChanges": 0,
+  "translationReviewMetadataChanges": 0,
+  "readbackCells": 240,
+  "catalogMessageCount": 1836,
+  "workflowChanges": 0,
+  "testsBuildsScansCi": false,
+  "releaseTagMerge": false
+}

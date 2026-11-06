@@ -1,0 +1,16 @@
+{
+  "applyPerformed": false,
+  "artifact": "ROMarrNG PR #70 W645-W664 primary review packet",
+  "blindReviewUsed": false,
+  "callerlessHashOnlyHoldCount": 96,
+  "candidateFreeBundle": "candidate-free-bundle",
+  "candidateFreeInputManifestSha256": "1b3cb573d404fb83811edaa03a77234f8642e42fd1e994a3fdb08bb4d61e23b2",
+  "candidateFreeVerifier": "PASS",
+  "createdUtc": "2026-11-05T05:27:17+00:00",
+  "crossReviewUsed": false,
+  "head": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+  "primaryDecisionCount": 144,
+  "proposedChangeCount": 12,
+  "tree": "d6066baa3d03d3b4c6034e5af061fc4bc278b0f9",
+  "window": "W645-W664"
+}

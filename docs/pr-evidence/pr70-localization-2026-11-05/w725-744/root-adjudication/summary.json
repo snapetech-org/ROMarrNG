@@ -1,0 +1,24 @@
+{
+  "artifact": "ROMarrNG W725-W744 root adjudication",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W725-W744",
+  "exactHead": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "exactTree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+  "cellCount": 240,
+  "rootDispositionCounts": {
+    "accept-current": 223,
+    "refinement": 3,
+    "hold-hash-only": 12,
+    "correction": 2
+  },
+  "selectedTargetCount": 5,
+  "selectedCorrectionCount": 2,
+  "selectedRefinementCount": 3,
+  "callerlessHashOnlyHolds": 12,
+  "applicationPerformed": false,
+  "nativeSpeakerApproval": false,
+  "headedBrowserReviewPerformed": false,
+  "confidence": "moderate",
+  "rootAdjudicationPerformed": true
+}

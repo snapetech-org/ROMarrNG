@@ -51,19 +51,31 @@ def test_catalog_is_stable_complete_and_marks_unfinished_locales() -> None:
     assert len(UI_MESSAGES) == len(UI_SOURCE_TO_ID) == len(UI_LABELS)
     assert set(UI_CATALOG["availableLocales"]) == set(UI_AVAILABLE_LOCALES)
 
+    direct_locales = {
+        code for code in UI_AVAILABLE_LOCALES
+        if code != "en" and UI_CATALOG["locales"][code]["status"] == "available"
+    }
+    inherited = {"es-419": "es", "fr-CA": "fr"}
     for key, message in UI_MESSAGES.items():
         source = message["source"]
         assert key.startswith("ui.")
         assert UI_SOURCE_TO_ID[source] == key
         assert message["sourceHash"] == hashlib.sha256(source.encode()).hexdigest()
-        assert set(UI_LABELS[source]) == set(UI_AVAILABLE_LOCALES) - {"en"}
+        pending = set(message.get("translationPending", []))
+        assert pending <= direct_locales
+        assert set(message["translations"]) - {"en"} == direct_locales - pending
+        expected_labels = direct_locales - pending
+        expected_labels.update(
+            locale for locale, parent in inherited.items() if parent not in pending
+        )
+        assert set(UI_LABELS[source]) == expected_labels
         translation_status = message["translationStatus"]
         assert not translation_status
         assert not message["translationReview"]
         assert not message["translationHashes"]
         assert all(
             translation_status.get(locale, "unverified") == "unverified"
-            for locale in UI_AVAILABLE_LOCALES if locale != "en"
+            for locale in direct_locales - pending
         )
         source_tokens = set(PLACEHOLDER.findall(source))
         for locale, translation in message["translations"].items():
@@ -87,10 +99,22 @@ def test_language_picker_and_rtl_shell_use_catalogue_metadata() -> None:
     assert selector
     offered = set(re.findall(r'<option value="([^"]+)"', selector.group(1)))
     assert offered == {"system", *UI_AVAILABLE_LOCALES}
+    for code in UI_AVAILABLE_LOCALES:
+        locale = UI_CATALOG["locales"][code]
+        option_label = locale["nativeName"]
+        if locale["englishName"] != locale["nativeName"]:
+            option_label += f" — {locale['englishName']}"
+        assert f">{option_label}</option>" in selector.group(1)
     assert 'data-i18n-key="ui.library.' in rendered
     assert "document.documentElement.dir=ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr'" in rendered
     assert "[dir=rtl] #rail{transform:translateX(105%)}" in rendered
     assert "data-i18n-key=\"ui.use-browser-settings." in rendered
+
+    public_page = login_page(claimed=False)
+    assert "locale.nativeName===locale.englishName" in public_page
+    assert "`${locale.nativeName} — ${locale.englishName}`" in public_page
+    assert "option.textContent=name" in public_page
+    assert "picker.replaceChildren(system,...options)" in public_page
 
 
 def test_public_localization_pages_have_safe_script_catalogs() -> None:
@@ -145,6 +169,351 @@ def test_localization_checker_accepts_repository_catalog() -> None:
     assert result.returncode == 0, result.stderr
     assert "12 directly translated locales" in result.stdout
     assert "22 locales awaiting translation" in result.stdout
+    assert "source-only fallbacks: 452 messages / 5,424 locale cells" in result.stdout
+
+
+def test_source_bundle_freezes_only_pending_english_sources() -> None:
+    spec = importlib.util.spec_from_file_location(
+        "romarr_localization_review", ROOT / "scripts" / "localization_review.py"
+    )
+    assert spec and spec.loader
+    review = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(review)
+
+    bundle = review.export_source_bundle(
+        UI_CATALOG,
+        "cedcbb66443891d0702954be5733fa6749f12155",
+        "f" * 40,
+    )
+    assert bundle["messageCount"] == 452
+    assert bundle["directPendingCells"] == 5_424
+    assert re.fullmatch(r"[0-9a-f]{64}", bundle["manifestHash"])
+    assert all("translation" not in row for row in bundle["messages"])
+    assert all(
+        set(row["translationPending"]) == {
+            code for code in UI_CATALOG["availableLocales"]
+            if code != "en" and UI_CATALOG["locales"][code]["status"] == "available"
+        }
+        for row in bundle["messages"]
+    )
+
+
+def test_source_coverage_guard_detects_authored_copy_and_exempt_values() -> None:
+    spec = importlib.util.spec_from_file_location(
+        "romarr_ui_source_coverage", ROOT / "scripts" / "check_ui_source_coverage.py"
+    )
+    assert spec and spec.loader
+    guard = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(guard)
+
+    with tempfile.TemporaryDirectory() as directory:
+        temp_root = Path(directory)
+        ui_path = temp_root / "ui.py"
+        manifest_path = temp_root / "manifest.json"
+        guard.ROOT = temp_root
+        guard.UI_PATH = ui_path
+        guard.MANIFEST_PATH = manifest_path
+        app_path = temp_root / "app.py"
+        guard.APP_PATH = app_path
+        manifest_path.write_text(json.dumps({"messages": []}), encoding="utf-8")
+        app_path.write_text(
+            'class ROMarr:\n'
+            '    def search_missing(self):\n'
+            '        return {"message": "Uncatalogued task result"}\n'
+            '    def list_sync(self):\n'
+            '        return {"message": provider_exception}\n',
+            encoding="utf-8",
+        )
+        catalog = {
+            "availableLocales": ["en", "es"],
+            "locales": {"es": {"status": "available"}},
+            "messages": {},
+        }
+
+        ui_path.write_text(
+            '<p>Uncatalogued fixed message</p>\n'
+            '<span lang="und">Fixed authored fallback text</span>\n'
+            '<select><option>Unmarked source label</option></select>\n'
+            '<span lang="und">${esc(provider_detail)}</span>'
+            '<code>downloaded_media</code>\n',
+            encoding="utf-8",
+        )
+        errors = guard.coverage_errors(catalog)
+        assert any("Uncatalogued fixed message" in error for error in errors)
+        assert any("Fixed authored fallback text" in error for error in errors)
+        assert any("Unmarked source label" in error for error in errors)
+        assert any("Uncatalogued task result" in error for error in errors)
+        assert not any("provider_detail" in error for error in errors)
+        assert not any("provider_exception" in error for error in errors)
+        assert not any("downloaded_media" in error for error in errors)
+
+        ui_path.write_text(
+            "appMessageMarkup('Uncatalogued UI error fallback');\n"
+            "interfaceTemplateMarkup('Uncatalogued HTTP {status}.',{status:code});\n"
+            "message(result.message||'Uncatalogued organizer result.',false);\n",
+            encoding="utf-8",
+        )
+        errors = guard.coverage_errors(catalog)
+        assert any("Uncatalogued UI error fallback" in error for error in errors)
+        assert any("Uncatalogued HTTP {status}." in error for error in errors)
+        assert any("Uncatalogued organizer result." in error for error in errors)
+
+        ui_path.write_text(
+            '<p>Unmarked source label</p>\n'
+            '<select><option>Unmarked source label</option></select>',
+            encoding="utf-8",
+        )
+        app_path.write_text(
+            'class ROMarr:\n'
+            '    def list_sync(self):\n'
+            '        return {"message": provider_exception}\n',
+            encoding="utf-8",
+        )
+        source = "Unmarked source label"
+        message_id = guard._stable_id(source)
+        catalog["messages"] = {message_id: {"source": source}}
+        manifest_path.write_text(json.dumps({"messages": []}), encoding="utf-8")
+        errors = guard.coverage_errors(catalog)
+        assert not any("missing from the catalog" in error for error in errors)
+        assert any("select option bypasses localization" in error for error in errors)
+
+        inline_app = temp_root / "romarr" / "app.py"
+        inline_app.parent.mkdir(parents=True)
+        inline_app.write_text(
+            'if route.path == "/api/v1/metadataprovider/test":\n'
+            '    return {"ok": False}\n',
+            encoding="utf-8",
+        )
+        guard.VISIBLE_MESSAGE_METHODS = {}
+        ui_path.write_text("", encoding="utf-8")
+        errors = guard.coverage_errors(catalog)
+        assert any("UI message coverage routes changed" in error for error in errors)
+        assert any("UI message coverage fields changed" in error for error in errors)
+
+
+def test_ui_consumed_api_and_organizer_messages_stay_catalogued() -> None:
+    spec = importlib.util.spec_from_file_location(
+        "romarr_ui_source_coverage", ROOT / "scripts" / "check_ui_source_coverage.py"
+    )
+    assert spec and spec.loader
+    guard = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(guard)
+
+    visible_sources = guard._visible_api_message_sources()
+    assert "a URL is required" in visible_sources
+    assert "Connected, {indexers} indexer(s), {private} private" in visible_sources
+    assert "{error_type}: {detail}" in visible_sources
+    assert "Unsafe destination or unable to verify source" in visible_sources
+    assert "Verified: {display_name}" in visible_sources
+    assert "bad dump: the file is the size of a known ROM but its hash does not match. Import anyway only if you know why -- a patch, a hack or a translation will look exactly like this." in visible_sources
+    assert "no URL given" in visible_sources
+    assert "must be https -- plain http lets anyone on the network choose what code you run" in visible_sources
+    assert "no host in the URL" in visible_sources
+    assert "that is a host, not a repository" in visible_sources
+    assert "{host} is not an allowed source. Allowed: {allowed}. Add it under Settings if you host your own forge." in visible_sources
+    assert "repository: {reason}" in visible_sources
+    assert "unknown provider" in visible_sources
+    assert "lookup failed: {error_type}" in visible_sources
+    assert "found Chrono Trigger -- the key works" in visible_sources
+    assert "the provider answered but found nothing -- check the key" in visible_sources
+    assert "unknown connection type" in visible_sources
+    assert "missing required field: {labels}" in visible_sources
+    assert "delivery raised {error_type}" in visible_sources
+    assert "test notification delivered" in visible_sources
+    assert "delivery failed; check the connection settings" in visible_sources
+    assert "Title ID found in TitleDB; file bytes are not verified" in visible_sources
+    assert "{url} answered HTTP {status_code}" in visible_sources
+    assert "IGDB catalog is not configured" in visible_sources
+    assert "IGDB catalog request failed" in visible_sources
+    assert "No DAT catalog is loaded in ROMarrNG" in visible_sources
+    assert "library is still loading" in visible_sources
+    assert all(
+        any(location.startswith("romarr/app.py:") for location in visible_sources[source])
+        for source in (
+            "IGDB catalog is not configured",
+            "IGDB catalog request failed",
+            "No DAT catalog is loaded in ROMarrNG",
+            "library is still loading",
+        )
+    )
+    assert "Read {seen} entries and found {added} with a hash. Netplay can match those. The other {without} are catalogued entries your library has never scanned off a disk, so there is nothing to match them on. None matched a DAT, so all are unverified -- check the DAT directory under Settings." in visible_sources
+    assert "added from {name}'s shelf" not in visible_sources
+    api_added_sources = {
+        "Prowlarr feed could not be reached ({error_type}).",
+        "Prowlarr feed returned HTTP {status_code}.",
+        "Prowlarr feed returned an HTML page instead of an indexer response.",
+        "Prowlarr feed returned an indexer error response.",
+        "Prowlarr indexer inventory returned HTTP {status_code}.",
+        "Prowlarr management API could not be read ({error_type}).",
+        "Prowlarr management API returned HTTP {status_code}.",
+        "Prowlarr returned an invalid indexer inventory.",
+        "Prowlarr returned an invalid system status.",
+        "ROM Hub filesystem confinement could not start ({error_type})",
+        "ROMarr has not hashed this game yet, so it cannot prove which dump you have. Run an audit of this platform under Tasks and try again.",
+        "ROMarr has not hashed this game yet, so it cannot prove which dump you have. Run an audit of {platform} under Tasks and try again.",
+        "Read from your library server's own hashes, and upgraded to verified by an audit or a verified import.",
+        "You both have this exact dump, but EmulatorJS has no core for {platform} -- you will need a native emulator that can join a room.",
+        "could not fetch the list: {error_type}",
+        "could not reach {name}: {detail}",
+        "could not read {name}: {detail}",
+        "invalid hub result: {detail}",
+        "no such friend",
+        "no such peer",
+        "not in this library; the hash identifies exactly which dump to acquire",
+        "plugin '{slug}' is disabled",
+        "plugin '{slug}' is not installed: {detail}",
+        "plugin fetch failed ({error_type})",
+        "plugin output escapes the staging directory",
+        "the bytes match, but one side has not verified this dump against a DAT",
+        "the invitation carried no hash, so the dump cannot be matched -- ROMarr will not start a session it cannot prove",
+        "this friend is not confirmed yet -- confirm them before asking their server for anything",
+        "this friend's invitation carried no address, so there is nowhere to call. Ask them to set their public URL and send a fresh invitation.",
+        "you both have this game and they are different dumps -- netplay would desync within seconds, which usually gets blamed on the connection",
+        "{name} answered HTTP {status_code}",
+        "{name} refused the credential -- they may have removed you, or not confirmed you yet",
+        "{name} sent something that was not JSON",
+    }
+    assert api_added_sources <= set(visible_sources)
+
+    direct_locales = {
+        code for code in UI_AVAILABLE_LOCALES
+        if code != "en" and UI_CATALOG["locales"][code]["status"] == "available"
+    }
+    for source, kind in {
+        "a URL is required": "ui-error",
+        "Connected, {indexers} indexer(s), {private} private": "ui-status-template",
+        "{error_type}: {detail}": "ui-error-template",
+        "unknown provider": "ui-error",
+        "lookup failed: {error_type}": "ui-error-template",
+        "found Chrono Trigger -- the key works": "ui-status",
+        "the provider answered but found nothing -- check the key": "ui-error",
+        "unknown connection type": "ui-error",
+        "missing required field: {labels}": "ui-error-template",
+        "delivery raised {error_type}": "ui-error-template",
+        "test notification delivered": "ui-status",
+        "delivery failed; check the connection settings": "ui-error",
+        "Title ID found in TitleDB; file bytes are not verified": "ui-status",
+        "{url} answered HTTP {status_code}": "ui-error-template",
+        "bad dump: the file is the size of a known ROM but its hash does not match. Import anyway only if you know why -- a patch, a hack or a translation will look exactly like this.": "ui-error",
+        "Read {seen} entries and found {added} with a hash. Netplay can match those. The other {without} are catalogued entries your library has never scanned off a disk, so there is nothing to match them on. None matched a DAT, so all are unverified -- check the DAT directory under Settings.": "library-status-template",
+        "IGDB catalog is not configured": "api-error",
+        "IGDB catalog request failed": "api-error",
+        "No DAT catalog is loaded in ROMarrNG": "api-error",
+        "library is still loading": "api-error",
+        "Catalog could not be loaded": "ui-error",
+        "library ownership is unavailable": "ui-error",
+        "Owned check unavailable": "ui-status",
+        "Title mapping saved. This game is now eligible for a safe rename preview.": "ui-status",
+        "Rename batch applied.": "ui-status",
+        "Undid {count} rename(s).": "ui-status-template",
+        "Choose one platform before publishing its ES-DE gamelist.": "ui-error",
+        "Published {count} ES-DE entries.": "ui-status-template",
+        "Could not remove this list.": "ui-error",
+        "Could not remove this entry.": "ui-error",
+        "Could not remove this list (HTTP {status}).": "ui-error-template",
+        "Could not remove this entry (HTTP {status}).": "ui-error-template",
+        "Prowlarr feed could not be reached ({error_type}).": "provider-diagnostic-template",
+        "Prowlarr feed returned HTTP {status_code}.": "provider-diagnostic-template",
+        "Prowlarr feed returned an HTML page instead of an indexer response.": "provider-diagnostic",
+        "Prowlarr feed returned an indexer error response.": "provider-diagnostic",
+        "Prowlarr indexer inventory returned HTTP {status_code}.": "provider-diagnostic-template",
+        "Prowlarr management API could not be read ({error_type}).": "provider-diagnostic-template",
+        "Prowlarr management API returned HTTP {status_code}.": "provider-diagnostic-template",
+        "Prowlarr returned an invalid indexer inventory.": "provider-diagnostic",
+        "Prowlarr returned an invalid system status.": "provider-diagnostic",
+        "ROM Hub filesystem confinement could not start ({error_type})": "provider-diagnostic-template",
+        "ROMarr has not hashed this game yet, so it cannot prove which dump you have. Run an audit of this platform under Tasks and try again.": "ui-status",
+        "ROMarr has not hashed this game yet, so it cannot prove which dump you have. Run an audit of {platform} under Tasks and try again.": "ui-status-template",
+        "Read from your library server's own hashes, and upgraded to verified by an audit or a verified import.": "ui-status",
+        "You both have this exact dump, but EmulatorJS has no core for {platform} -- you will need a native emulator that can join a room.": "ui-status-template",
+        "could not fetch the list: {error_type}": "provider-diagnostic-template",
+        "could not reach {name}: {detail}": "ui-error-template",
+        "could not read {name}: {detail}": "ui-error-template",
+        "invalid hub result: {detail}": "provider-diagnostic-template",
+        "no such friend": "ui-error",
+        "no such peer": "ui-error",
+        "not in this library; the hash identifies exactly which dump to acquire": "ui-status",
+        "plugin '{slug}' is disabled": "ui-error-template",
+        "plugin '{slug}' is not installed: {detail}": "provider-diagnostic-template",
+        "plugin fetch failed ({error_type})": "provider-diagnostic-template",
+        "plugin output escapes the staging directory": "ui-error",
+        "the bytes match, but one side has not verified this dump against a DAT": "ui-status",
+        "the invitation carried no hash, so the dump cannot be matched -- ROMarr will not start a session it cannot prove": "ui-status",
+        "this friend is not confirmed yet -- confirm them before asking their server for anything": "ui-error",
+        "this friend's invitation carried no address, so there is nowhere to call. Ask them to set their public URL and send a fresh invitation.": "ui-error",
+        "you both have this game and they are different dumps -- netplay would desync within seconds, which usually gets blamed on the connection": "ui-status",
+        "{name} answered HTTP {status_code}": "ui-error-template",
+        "{name} refused the credential -- they may have removed you, or not confirmed you yet": "ui-error-template",
+        "{name} sent something that was not JSON": "ui-error-template",
+    }.items():
+        entry = UI_CATALOG["messages"][UI_SOURCE_TO_ID[source]]
+        assert entry["sourceKind"] == kind
+        assert entry["translations"] == {}
+        assert set(entry["translationPending"]) == direct_locales
+
+    source_manifest = json.loads(
+        (ROOT / "romarr" / "ui-source-messages.json").read_text()
+    )
+    source_rows = {row["source"]: row for row in source_manifest["messages"]}
+    added_sources = {
+        "IGDB catalog is not configured",
+        "IGDB catalog request failed",
+        "No DAT catalog is loaded in ROMarrNG",
+        "library is still loading",
+        "Catalog could not be loaded",
+        "library ownership is unavailable",
+        "Owned check unavailable",
+        "Title mapping saved. This game is now eligible for a safe rename preview.",
+        "Rename batch applied.",
+        "Undid {count} rename(s).",
+        "Choose one platform before publishing its ES-DE gamelist.",
+        "Published {count} ES-DE entries.",
+        "Could not remove this list.",
+        "Could not remove this entry.",
+        "Could not remove this list (HTTP {status}).",
+        "Could not remove this entry (HTTP {status}).",
+    }
+    assert len(source_manifest["messages"]) == 452
+    assert set(source_rows) >= added_sources | api_added_sources
+    for source in added_sources | api_added_sources:
+        assert set(source_rows[source]["dynamicPlaceholders"]) == set(
+            re.findall(r"\{([A-Za-z][A-Za-z0-9_]*)\}", source)
+        )
+
+    ui_source = (ROOT / "romarr" / "ui.py").read_text(encoding="utf-8")
+    assert "appMessageMarkup(msg)" in ui_source
+    assert "line(r.ok, r.message || (r.ok ? 'Connected' : 'Failed'))" in ui_source
+    assert "problems.map(submissionProblemMarkup)" in ui_source
+    assert "interfaceMarkup('Repository')+': '+appMessageMarkup(repository[1])" in ui_source
+    assert "organizerMatchDetailsMarkup(row.match_details,row.confidence,row.match_details_source)" in ui_source
+    assert "interfaceMarkup('Owned check unavailable')+': '+appMessageMarkup(ownedError)" in ui_source
+    assert "interfaceTemplateMarkup(\n        'Could not remove this list (HTTP {status}).'" in ui_source
+    assert "interfaceTemplateMarkup(\n        'Could not remove this entry (HTTP {status}).'" in ui_source
+    assert "messageTemplate('Undid {count} rename(s).'" in ui_source
+    assert "messageTemplate('Published {count} ES-DE entries.'" in ui_source
+    assert "appMessageMarkup(data.error)" in ui_source
+    assert "appMessageMarkup(ownedError)" in ui_source
+    assert "'<span lang=\"und\" dir=\"auto\">'+esc(pl.description)+'</span>'" in ui_source
+    assert ":interfaceMarkup('No description supplied.')" in ui_source
+    assert guard._runtime_template_covers("repository: {reason}", set(UI_SOURCE_TO_ID))
+    assert guard.coverage_errors(UI_CATALOG) == []
+
+    catalog = json.loads(json.dumps(UI_CATALOG))
+    catalog["messages"].pop(UI_SOURCE_TO_ID["a URL is required"])
+    errors = guard.coverage_errors(catalog)
+    assert any(
+        "fixed UI-consumed API message is missing from the catalog"
+        in error and "a URL is required" in error
+        for error in errors
+    )
+    catalog = json.loads(json.dumps(UI_CATALOG))
+    catalog["messages"].pop(UI_SOURCE_TO_ID["IGDB catalog request failed"])
+    errors = guard.coverage_errors(catalog)
+    assert any(
+        "fixed UI-consumed API message is missing from the catalog"
+        in error and "IGDB catalog request failed" in error
+        for error in errors
+    )
 
 
 def test_runtime_resolves_canonical_locale_tags_rtl_and_plural_messages() -> None:
@@ -247,6 +616,12 @@ class LocalizationTests(unittest.TestCase):
 
     def test_runtime(self) -> None:
         test_runtime_resolves_canonical_locale_tags_rtl_and_plural_messages()
+
+    def test_source_bundle(self) -> None:
+        test_source_bundle_freezes_only_pending_english_sources()
+
+    def test_source_coverage_guard(self) -> None:
+        test_source_coverage_guard_detects_authored_copy_and_exempt_values()
 
     def test_migration_review_evidence(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

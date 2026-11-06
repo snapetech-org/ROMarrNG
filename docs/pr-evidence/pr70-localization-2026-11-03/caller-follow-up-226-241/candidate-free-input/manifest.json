@@ -1,0 +1,42 @@
+{
+  "allSelectedSourceSnapshotsMatch": true,
+  "allSourceAndTargetHashesRecomputed": true,
+  "callerFileCount": 3,
+  "callerReferenceCount": 10,
+  "candidateFree": true,
+  "cellCount": 48,
+  "containsProposedTranslations": false,
+  "containsSemanticDecisions": false,
+  "head": "e0cb91389334fe534ff44ccfc72cbb2c152a93b4",
+  "knownSourceLocationFollowup": "Ranks 226 and 237 were corrected at e0cb91389334fe534ff44ccfc72cbb2c152a93b4; this packet pins the exact current locations.",
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "nativeSpeakerApproval": false,
+  "positions": [
+    226,
+    232,
+    237,
+    241
+  ],
+  "pullRequest": 70,
+  "recordCount": 479,
+  "repository": "snapetech-org/ROMarrNG",
+  "selectionRule": "One-based positions in the 479 unique active source IDs sorted by stable ID.",
+  "sourceCount": 4,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "tree": "3876dd57816aaf75bb8b1a56a75a5045d216c461",
+  "uniqueSourceCount": 479,
+  "window": "caller-follow-up positions 226, 232, 237, and 241"
+}

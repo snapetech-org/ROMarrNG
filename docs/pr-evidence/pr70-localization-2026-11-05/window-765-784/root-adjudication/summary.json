@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "reviewHead": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "reviewTree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "pullRequest": 70,
+  "window": "W765-W784",
+  "cells": 240,
+  "rootReviewedCells": 240,
+  "rootOverrides": 10,
+  "dispositions": {
+    "accept-current": 206,
+    "correction": 3,
+    "refinement": 7,
+    "hold-callerless-hash-only": 24
+  },
+  "callerlessHashOnlyHolds": 24,
+  "priorActiveHolds": 988,
+  "resultingActiveHolds": 1012,
+  "qualifiedNativeSpeakerApproval": false,
+  "manualAdjudication": "The ten selected edits were individually checked against the source meaning and pinned callers; all other caller-backed decisions retain cross-reviewed current targets, while callerless cells remain text-free holds."
+}

@@ -1,0 +1,474 @@
+{
+  "cellCount": 240,
+  "dispositionCounts": {
+    "accept-current": 203,
+    "correction/refinement proposal": 25,
+    "hold": 12
+  },
+  "head": "bef31ca8a94f21273b11303524d79bd9c5344305",
+  "holdCount": 12,
+  "holds": [
+    {
+      "confidence": "low",
+      "currentTarget": "لا يوجد موفّر بيانات وصفية مُعدّ قادر على {what}؛ أضف {offer} من الإعدادات ← البيانات الوصفية",
+      "holdEvidence": {
+        "offerIsComputedFromProviderMetadata": true,
+        "whatValuesAtPinnedCallers": [
+          "browse",
+          "answer for a date range"
+        ]
+      },
+      "locale": "ar",
+      "position": 218,
+      "rationale": "The exact callers supply `what` as the English action phrases “browse” and “answer for a date range”. The packet does not establish whether those inserted values are localized before this sentence is displayed. The target wording depends on the grammar of `{what}`, so I cannot safely approve or rewrite it without that placeholder-localization contract.",
+      "sourceId": "ui.no-metadata-provider-that-can-what-i.55f272fb94"
+    },
+    {
+      "confidence": "low",
+      "currentTarget": "Es ist kein Metadatenanbieter eingerichtet, der {what} kann – fügen Sie {offer} unter Einstellungen → Metadaten hinzu",
+      "holdEvidence": {
+        "offerIsComputedFromProviderMetadata": true,
+        "whatValuesAtPinnedCallers": [
+          "browse",
+          "answer for a date range"
+        ]
+      },
+      "locale": "de",
+      "position": 218,
+      "rationale": "The exact callers supply `what` as the English action phrases “browse” and “answer for a date range”. The packet does not establish whether those inserted values are localized before this sentence is displayed. The target wording depends on the grammar of `{what}`, so I cannot safely approve or rewrite it without that placeholder-localization contract.",
+      "sourceId": "ui.no-metadata-provider-that-can-what-i.55f272fb94"
+    },
+    {
+      "confidence": "low",
+      "currentTarget": "No hay ningún proveedor de metadatos configurado que pueda {what}; añade {offer} en Configuración → Metadatos",
+      "holdEvidence": {
+        "offerIsComputedFromProviderMetadata": true,
+        "whatValuesAtPinnedCallers": [
+          "browse",
+          "answer for a date range"
+        ]
+      },
+      "locale": "es",
+      "position": 218,
+      "rationale": "The exact callers supply `what` as the English action phrases “browse” and “answer for a date range”. The packet does not establish whether those inserted values are localized before this sentence is displayed. The target wording depends on the grammar of `{what}`, so I cannot safely approve or rewrite it without that placeholder-localization contract.",
+      "sourceId": "ui.no-metadata-provider-that-can-what-i.55f272fb94"
+    },
+    {
+      "confidence": "low",
+      "currentTarget": "Aucun fournisseur de métadonnées capable de {what} n’est configuré ; ajoutez {offer} dans Paramètres → Métadonnées",
+      "holdEvidence": {
+        "offerIsComputedFromProviderMetadata": true,
+        "whatValuesAtPinnedCallers": [
+          "browse",
+          "answer for a date range"
+        ]
+      },
+      "locale": "fr",
+      "position": 218,
+      "rationale": "The exact callers supply `what` as the English action phrases “browse” and “answer for a date range”. The packet does not establish whether those inserted values are localized before this sentence is displayed. The target wording depends on the grammar of `{what}`, so I cannot safely approve or rewrite it without that placeholder-localization contract.",
+      "sourceId": "ui.no-metadata-provider-that-can-what-i.55f272fb94"
+    },
+    {
+      "confidence": "low",
+      "currentTarget": "ऐसा कोई मेटाडेटा प्रदाता कॉन्फ़िगर नहीं है जो {what} कर सके—सेटिंग → मेटाडेटा में {offer} जोड़ें",
+      "holdEvidence": {
+        "offerIsComputedFromProviderMetadata": true,
+        "whatValuesAtPinnedCallers": [
+          "browse",
+          "answer for a date range"
+        ]
+      },
+      "locale": "hi",
+      "position": 218,
+      "rationale": "The exact callers supply `what` as the English action phrases “browse” and “answer for a date range”. The packet does not establish whether those inserted values are localized before this sentence is displayed. The target wording depends on the grammar of `{what}`, so I cannot safely approve or rewrite it without that placeholder-localization contract.",
+      "sourceId": "ui.no-metadata-provider-that-can-what-i.55f272fb94"
+    },
+    {
+      "confidence": "low",
+      "currentTarget": "Belum ada penyedia metadata yang dikonfigurasi dan mampu {what}; tambahkan {offer} di Pengaturan → Metadata",
+      "holdEvidence": {
+        "offerIsComputedFromProviderMetadata": true,
+        "whatValuesAtPinnedCallers": [
+          "browse",
+          "answer for a date range"
+        ]
+      },
+      "locale": "id",
+      "position": 218,
+      "rationale": "The exact callers supply `what` as the English action phrases “browse” and “answer for a date range”. The packet does not establish whether those inserted values are localized before this sentence is displayed. The target wording depends on the grammar of `{what}`, so I cannot safely approve or rewrite it without that placeholder-localization contract.",
+      "sourceId": "ui.no-metadata-provider-that-can-what-i.55f272fb94"
+    },
+    {
+      "confidence": "low",
+      "currentTarget": "{what}ができるメタデータプロバイダーが設定されていません。「設定」→「メタデータ」で{offer}を追加してください",
+      "holdEvidence": {
+        "offerIsComputedFromProviderMetadata": true,
+        "whatValuesAtPinnedCallers": [
+          "browse",
+          "answer for a date range"
+        ]
+      },
+      "locale": "ja",
+      "position": 218,
+      "rationale": "The exact callers supply `what` as the English action phrases “browse” and “answer for a date range”. The packet does not establish whether those inserted values are localized before this sentence is displayed. The target wording depends on the grammar of `{what}`, so I cannot safely approve or rewrite it without that placeholder-localization contract.",
+      "sourceId": "ui.no-metadata-provider-that-can-what-i.55f272fb94"
+    },
+    {
+      "confidence": "low",
+      "currentTarget": "{what} 기능을 제공하는 메타데이터 제공자가 설정되어 있지 않습니다. 설정 → 메타데이터에서 {offer}를 추가하세요",
+      "holdEvidence": {
+        "offerIsComputedFromProviderMetadata": true,
+        "whatValuesAtPinnedCallers": [
+          "browse",
+          "answer for a date range"
+        ]
+      },
+      "locale": "ko",
+      "position": 218,
+      "rationale": "The exact callers supply `what` as the English action phrases “browse” and “answer for a date range”. The packet does not establish whether those inserted values are localized before this sentence is displayed. The target wording depends on the grammar of `{what}`, so I cannot safely approve or rewrite it without that placeholder-localization contract.",
+      "sourceId": "ui.no-metadata-provider-that-can-what-i.55f272fb94"
+    },
+    {
+      "confidence": "low",
+      "currentTarget": "Nenhum provedor de metadados capaz de {what} está configurado — adicione {offer} em Configurações → Metadados",
+      "holdEvidence": {
+        "offerIsComputedFromProviderMetadata": true,
+        "whatValuesAtPinnedCallers": [
+          "browse",
+          "answer for a date range"
+        ]
+      },
+      "locale": "pt-BR",
+      "position": 218,
+      "rationale": "The exact callers supply `what` as the English action phrases “browse” and “answer for a date range”. The packet does not establish whether those inserted values are localized before this sentence is displayed. The target wording depends on the grammar of `{what}`, so I cannot safely approve or rewrite it without that placeholder-localization contract.",
+      "sourceId": "ui.no-metadata-provider-that-can-what-i.55f272fb94"
+    },
+    {
+      "confidence": "low",
+      "currentTarget": "Chưa cấu hình nhà cung cấp siêu dữ liệu nào có thể {what}; hãy thêm {offer} trong Cài đặt → Siêu dữ liệu",
+      "holdEvidence": {
+        "offerIsComputedFromProviderMetadata": true,
+        "whatValuesAtPinnedCallers": [
+          "browse",
+          "answer for a date range"
+        ]
+      },
+      "locale": "vi",
+      "position": 218,
+      "rationale": "The exact callers supply `what` as the English action phrases “browse” and “answer for a date range”. The packet does not establish whether those inserted values are localized before this sentence is displayed. The target wording depends on the grammar of `{what}`, so I cannot safely approve or rewrite it without that placeholder-localization contract.",
+      "sourceId": "ui.no-metadata-provider-that-can-what-i.55f272fb94"
+    },
+    {
+      "confidence": "low",
+      "currentTarget": "尚未配置能够{what}的元数据提供商；请在“设置”→“元数据”中添加{offer}",
+      "holdEvidence": {
+        "offerIsComputedFromProviderMetadata": true,
+        "whatValuesAtPinnedCallers": [
+          "browse",
+          "answer for a date range"
+        ]
+      },
+      "locale": "zh-Hans",
+      "position": 218,
+      "rationale": "The exact callers supply `what` as the English action phrases “browse” and “answer for a date range”. The packet does not establish whether those inserted values are localized before this sentence is displayed. The target wording depends on the grammar of `{what}`, so I cannot safely approve or rewrite it without that placeholder-localization contract.",
+      "sourceId": "ui.no-metadata-provider-that-can-what-i.55f272fb94"
+    },
+    {
+      "confidence": "low",
+      "currentTarget": "尚未設定可{what}的中繼資料提供者；請在「設定」→「中繼資料」中新增{offer}",
+      "holdEvidence": {
+        "offerIsComputedFromProviderMetadata": true,
+        "whatValuesAtPinnedCallers": [
+          "browse",
+          "answer for a date range"
+        ]
+      },
+      "locale": "zh-Hant",
+      "position": 218,
+      "rationale": "The exact callers supply `what` as the English action phrases “browse” and “answer for a date range”. The packet does not establish whether those inserted values are localized before this sentence is displayed. The target wording depends on the grammar of `{what}`, so I cannot safely approve or rewrite it without that placeholder-localization contract.",
+      "sourceId": "ui.no-metadata-provider-that-can-what-i.55f272fb94"
+    }
+  ],
+  "inputChecksumListSha256": "7b019520a87edfb21794b1566cffe22fd91f0cc431c805d140e95d3239703975",
+  "inputFiles": {
+    "PR-attestation.json": "e0a006662dcb3e1c2e319bee1d9ba435498702fc7945786b56b0bd48db33667e",
+    "README.md": "aa8954bc795ad77ed42347aeead1dacbcd49fb51ffc5b472e51ef8dc35e24af7",
+    "catalog-file-pins.json": "75faf7a509fcd2d720307496c65fbdcf6b6d61dcee7bf199b56bcee6d133f5bd",
+    "current-target-cells.jsonl": "27969ce32728d9e77b3712bd032ca21d948e2cc1957bfe6cb528bf1cf75e52c2",
+    "manifest.json": "0a93fb84778e8e6e483d57e57a985be3dcb0d100ad095e14b2b47169cc040f4f",
+    "source-contexts.jsonl": "b31c9c081f70851a646ae15aa75fdb0a11e9bebf5ea7f36464d958b0a3a71c9c"
+  },
+  "inputPacket": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w206-225-primary-20261103/clean-input",
+  "limitations": [
+    "Machine semantic review is not native-speaker approval.",
+    "The 12 `what`-placeholder cells for position 218 are held because the pinned callers pass English action phrases and the input packet does not establish whether those inserted values are localized before display."
+  ],
+  "localeCount": 12,
+  "nativeSpeakerApproval": false,
+  "placeholderCheckCount": 240,
+  "proposalClassCounts": {
+    "correction": 19,
+    "refinement": 6
+  },
+  "proposalCount": 25,
+  "proposals": [
+    {
+      "confidence": "moderate",
+      "currentTarget": "أحدث من أحدث النسخة المذكورة",
+      "locale": "ar",
+      "position": 206,
+      "proposalType": "correction",
+      "proposedTarget": "أحدث من أحدث إصدار مُدرج",
+      "rationale": "The current phrase is awkward and does not cleanly express the listed version as the comparison point; this keeps the “newer than the latest listed version” relation.",
+      "sourceId": "ui.newer-than-latest-listed-version.debaae0993"
+    },
+    {
+      "confidence": "high",
+      "currentTarget": "Neuer als neueste aufgeführte Version",
+      "locale": "de",
+      "position": 206,
+      "proposalType": "correction",
+      "proposedTarget": "Neuer als die neueste aufgeführte Version",
+      "rationale": "The comparison target needs the definite article in German; the current wording reads like a missing-article fragment.",
+      "sourceId": "ui.newer-than-latest-listed-version.debaae0993"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "Plus récent que la dernière version enregistrée",
+      "locale": "fr",
+      "position": 206,
+      "proposalType": "refinement",
+      "proposedTarget": "Plus récent que la dernière version répertoriée",
+      "rationale": "“Répertoriée” matches a version being listed more precisely than “enregistrée”; the masculine comparison refers to the current item.",
+      "sourceId": "ui.newer-than-latest-listed-version.debaae0993"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "최신으로 등록된 버전보다 최신입니다",
+      "locale": "ko",
+      "position": 206,
+      "proposalType": "correction",
+      "proposedTarget": "목록에 표시된 최신 버전보다 더 새로운 버전입니다.",
+      "rationale": "The current wording repeats “latest” and does not clearly say that this item is a newer version than the latest one listed.",
+      "sourceId": "ui.newer-than-latest-listed-version.debaae0993"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "Mais recente do que a versão listada",
+      "locale": "pt-BR",
+      "position": 206,
+      "proposalType": "correction",
+      "proposedTarget": "Mais recente que a versão mais recente listada",
+      "rationale": "The current text omits that the comparison version is the latest one listed.",
+      "sourceId": "ui.newer-than-latest-listed-version.debaae0993"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "Mới hơn phiên bản mới nhất",
+      "locale": "vi",
+      "position": 206,
+      "proposalType": "correction",
+      "proposedTarget": "Mới hơn phiên bản mới nhất trong danh sách.",
+      "rationale": "The current text omits the “listed” qualifier, which distinguishes this status from a comparison against any latest version.",
+      "sourceId": "ui.newer-than-latest-listed-version.debaae0993"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "أحدث إطلاق",
+      "locale": "ar",
+      "position": 207,
+      "proposalType": "correction",
+      "proposedTarget": "أحدث إصدار",
+      "rationale": "“إطلاق” means a launch; “إصدار” is the appropriate release/version label for the release-year sort option.",
+      "sourceId": "ui.newest-release.8736254705"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "Neueste Release",
+      "locale": "de",
+      "position": 207,
+      "proposalType": "correction",
+      "proposedTarget": "Neueste Veröffentlichung",
+      "rationale": "The current phrase uses the English noun “Release” with awkward German inflection; “Veröffentlichung” is clear and idiomatic for this sort label.",
+      "sourceId": "ui.newest-release.8736254705"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "Le plus récent",
+      "locale": "fr",
+      "position": 208,
+      "proposalType": "refinement",
+      "proposedTarget": "Les plus récents",
+      "rationale": "This is a shelf tab for the newest games, so the plural label fits the collection better than the current singular “Le plus récent”.",
+      "sourceId": "ui.newest.d15efa178c"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "Pas de couverture",
+      "locale": "fr",
+      "position": 209,
+      "proposalType": "refinement",
+      "proposedTarget": "Aucune jaquette",
+      "rationale": "The caller uses this as the placeholder inside a game-cover art area; “jaquette” identifies the game cover more clearly than the broader “couverture”.",
+      "sourceId": "ui.no-cover.b2ec3181b3"
+    },
+    {
+      "confidence": "high",
+      "currentTarget": "Kein DAT Katalog wird in ROMarrNG geladen",
+      "locale": "de",
+      "position": 210,
+      "proposalType": "correction",
+      "proposedTarget": "In ROMarrNG ist kein DAT-Katalog geladen.",
+      "rationale": "The current passive construction says that no catalog is being loaded; the source describes the current state that none is loaded.",
+      "sourceId": "ui.no-dat-catalog-is-loaded-in-romarrng.f57b5eb371"
+    },
+    {
+      "confidence": "high",
+      "currentTarget": "Aucun catalogue DAT est chargé dans ROMarrNG",
+      "locale": "fr",
+      "position": 210,
+      "proposalType": "correction",
+      "proposedTarget": "Aucun catalogue DAT n’est chargé dans ROMarrNG.",
+      "rationale": "French requires “n’est” after “Aucun”; the current translation omits the negative particle.",
+      "sourceId": "ui.no-dat-catalog-is-loaded-in-romarrng.f57b5eb371"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "Nenhum catálogo DAT é carregado em ROMarrNG",
+      "locale": "pt-BR",
+      "position": 210,
+      "proposalType": "refinement",
+      "proposedTarget": "Nenhum catálogo DAT está carregado em ROMarrNG.",
+      "rationale": "“Está carregado” describes the current loaded state; “é carregado” reads as a general passive process.",
+      "sourceId": "ui.no-dat-catalog-is-loaded-in-romarrng.f57b5eb371"
+    },
+    {
+      "confidence": "high",
+      "currentTarget": "Không tìm thấy thư viện khởi động trên máy này",
+      "locale": "vi",
+      "position": 215,
+      "proposalType": "correction",
+      "proposedTarget": "Không tìm thấy thư viện nào của trình khởi chạy trên máy này.",
+      "rationale": "“Thư viện khởi động” means a startup/boot library; this source means a game launcher’s library.",
+      "sourceId": "ui.no-launcher-libraries-found-on-this.bbbd98d024"
+    },
+    {
+      "confidence": "high",
+      "currentTarget": "keine PIN gegeben",
+      "locale": "de",
+      "position": 220,
+      "proposalType": "correction",
+      "proposedTarget": "Keine PIN angegeben",
+      "rationale": "“PIN angegeben” is the idiomatic German wording for a missing supplied PIN; the current “PIN gegeben” is awkward.",
+      "sourceId": "ui.no-pin-given.fca565efd1"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "Tidak ada PIN diberikan",
+      "locale": "id",
+      "position": 220,
+      "proposalType": "correction",
+      "proposedTarget": "PIN tidak diberikan",
+      "rationale": "The current word order is unidiomatic Indonesian; this says directly that no PIN was provided.",
+      "sourceId": "ui.no-pin-given.fca565efd1"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "không PIN được cung cấp",
+      "locale": "vi",
+      "position": 220,
+      "proposalType": "correction",
+      "proposedTarget": "Chưa cung cấp PIN",
+      "rationale": "The current word order is awkward Vietnamese; this is a natural concise error detail for a PIN that was not supplied.",
+      "sourceId": "ui.no-pin-given.fca565efd1"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "कोई सुरक्षित कैननिक शीर्षक नहीं",
+      "locale": "hi",
+      "position": 222,
+      "proposalType": "correction",
+      "proposedTarget": "कोई सुरक्षित मानक शीर्षक नहीं",
+      "rationale": "The current transliteration “कैननिक” is not a natural Hindi rendering of “canonical”; “मानक” conveys the standard/canonical title in this metadata context.",
+      "sourceId": "ui.no-safe-canonical-title.2968a7e7ba"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "安全なカノニックタイトルなし",
+      "locale": "ja",
+      "position": 222,
+      "proposalType": "refinement",
+      "proposedTarget": "安全な正規タイトルがありません",
+      "rationale": "“正規タイトル” is the standard Japanese term for a canonical title; the current “カノニック” is an awkward transliteration.",
+      "sourceId": "ui.no-safe-canonical-title.2968a7e7ba"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "Không có tiêu đề canonic an toàn",
+      "locale": "vi",
+      "position": 222,
+      "proposalType": "correction",
+      "proposedTarget": "Không có tiêu đề chuẩn hóa an toàn",
+      "rationale": "The current “canonic” is an English-like form; “chuẩn hóa” conveys a normalized/canonical title in Vietnamese.",
+      "sourceId": "ui.no-safe-canonical-title.2968a7e7ba"
+    },
+    {
+      "confidence": "high",
+      "currentTarget": "Keine sicheren Renames sind in diesem Paket bereit.",
+      "locale": "de",
+      "position": 223,
+      "proposalType": "correction",
+      "proposedTarget": "Für diesen Stapel liegen keine sicheren Umbenennungen vor.",
+      "rationale": "The current text leaves “Renames” in English and uses “Paket” for “batch”; this uses idiomatic German for safe rename operations in a batch.",
+      "sourceId": "ui.no-safe-renames-are-ready-in-this-ba.45fe5b5767"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "No hay renombrados seguros preparados en este grupo.",
+      "locale": "es",
+      "position": 223,
+      "proposalType": "correction",
+      "proposedTarget": "No hay cambios de nombre seguros listos en este lote.",
+      "rationale": "“Renombrados” is an awkward noun here; “cambios de nombre” clearly describes the ready rename operations.",
+      "sourceId": "ui.no-safe-renames-are-ready-in-this-ba.45fe5b5767"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "没有安全的改名在这个包装中准备好。",
+      "locale": "zh-Hans",
+      "position": 223,
+      "proposalType": "correction",
+      "proposedTarget": "此批次没有可执行的安全重命名操作。",
+      "rationale": "The current “包装” means packaging/package, not a batch, and the sentence structure is unnatural; this names safe rename operations for the batch.",
+      "sourceId": "ui.no-safe-renames-are-ready-in-this-ba.45fe5b5767"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "沒有安全的改名在這個包裝中準備好。",
+      "locale": "zh-Hant",
+      "position": 223,
+      "proposalType": "correction",
+      "proposedTarget": "此批次沒有可執行的安全重新命名作業。",
+      "rationale": "The current “包裝” means packaging/package, not a batch, and the sentence structure is unnatural; this names safe rename operations for the batch.",
+      "sourceId": "ui.no-safe-renames-are-ready-in-this-ba.45fe5b5767"
+    },
+    {
+      "confidence": "moderate",
+      "currentTarget": "그런 친구가 없어",
+      "locale": "ko",
+      "position": 224,
+      "proposalType": "refinement",
+      "proposedTarget": "그런 친구가 없습니다.",
+      "rationale": "The current wording is casual; the polite form better fits a user-facing API error and matches the formal register used by nearby Korean error translations.",
+      "sourceId": "ui.no-such-friend.0ce32b32e5"
+    }
+  ],
+  "protectedLiteralCheckCount": 240,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewType": "primary semantic review",
+  "schemaVersion": 1,
+  "sourceCount": 20,
+  "tree": "7616d96ddd3a1bfe8078d43492eb5bea7213f080",
+  "window": "W206-W225"
+}

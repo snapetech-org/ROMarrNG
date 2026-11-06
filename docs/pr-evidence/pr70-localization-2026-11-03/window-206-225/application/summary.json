@@ -1,0 +1,23 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W206-W225",
+  "baseHead": "bef31ca8a94f21273b11303524d79bd9c5344305",
+  "baseTree": "7616d96ddd3a1bfe8078d43492eb5bea7213f080",
+  "inputManifestSha256": "0a93fb84778e8e6e483d57e57a985be3dcb0d100ad095e14b2b47169cc040f4f",
+  "baselineCatalogSha256": "15a3893bc95cfd35a61a44fe881b2f793bda26dc32eaba277c4186d69acb536b",
+  "finalCatalogSha256": "18c9280bff2392dc5cbca82f0b02696b7f644c79165e802e242c81ac239c9366",
+  "cellsReadBack": 240,
+  "mismatches": 0,
+  "changes": 34,
+  "rootDispositions": {
+    "correction": 22,
+    "accept-current": 194,
+    "refinement": 12,
+    "hold": 12
+  },
+  "messageKeys": 1837,
+  "orderedMessageKeysUnchanged": true,
+  "translationStatusPreserved": "draft",
+  "workflowsChanged": false
+}

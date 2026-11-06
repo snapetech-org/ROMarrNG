@@ -1,0 +1,124 @@
+{
+  "exactHead": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "exactTree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+  "inheritedCaveats": [
+    {
+      "window": "W625-W644",
+      "status": "preserved-caveat",
+      "flag": "missing-stage-files-readback-hash-bound",
+      "detail": "The lineage records 31 bulky W625 stage files absent from the prior committed PR evidence tree. The full readback and final verifier remain hash-bound; the absent stage files are not claimed as verified."
+    },
+    {
+      "window": "W645-W664",
+      "status": "preserved-warning",
+      "flag": "stale-blind-summary-checksum-pointer",
+      "detail": "The lineage retains the stale blind top-level checksum-pointer warning. W645 row-level bindings/proposal-target hashes passed and its cross-review status was PASS_WITH_BLIND_SUMMARY_PIN_WARNING. Current W725-W744 blind inputs/outputs were independently checksum-verified; that does not clear the historical W645 warning."
+    },
+    {
+      "window": "W665-W684",
+      "status": "restoration-attested-complete",
+      "flag": "evidence-restored",
+      "detail": "The current attestation records 77/77 indexed payloads present and hash-matching, no mismatches or missing files, 24 previously missing payloads, 23 restored byte-for-byte from task scratch, and the root ledger reconstructed from the verified cross-review ledger."
+    }
+  ],
+  "priorStateReattestation": {
+    "selections": 340,
+    "holds": 952,
+    "appliedCells": 132,
+    "readbackWindows": 8,
+    "allSelectionTargetsAndHoldTargetsUnchanged": true,
+    "allAppliedFinalTargetHashesMatch": true
+  },
+  "currentBlindAndCrossReviewScope": "This W725-W744 cross-review uses only the exact candidate-free, primary, and blind packets listed in this output. It does not open W625/W645/W665 blind-review payloads.",
+  "mainContextDrift": {
+    "count": 6,
+    "positions": [
+      726,
+      727,
+      729,
+      733,
+      735,
+      738
+    ],
+    "mainHead": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+    "mainTree": "73a05379aa80fa629f69286338139247d2bfd849",
+    "sourceTextChanges": 5,
+    "sourcesMissingFromMain": 5,
+    "sourcesWithNewMainCallers": 1,
+    "perPosition": {
+      "726": [
+        {
+          "sourceId": "ui.no-safe-canonical-title.2968a7e7ba",
+          "mainSourcePresent": false,
+          "sourceSame": false,
+          "mainCallerCount": 0,
+          "prCallerCount": 1,
+          "newMainCallerCount": 0,
+          "prOnlyCallerCount": 1
+        }
+      ],
+      "727": [
+        {
+          "sourceId": "ui.no-safe-renames-are-ready-in-this-ba.45fe5b5767",
+          "mainSourcePresent": false,
+          "sourceSame": false,
+          "mainCallerCount": 0,
+          "prCallerCount": 1,
+          "newMainCallerCount": 0,
+          "prOnlyCallerCount": 1
+        }
+      ],
+      "729": [
+        {
+          "sourceId": "ui.no-titles-match-these-filters.a0f06fb7bb",
+          "mainSourcePresent": false,
+          "sourceSame": false,
+          "mainCallerCount": 0,
+          "prCallerCount": 1,
+          "newMainCallerCount": 0,
+          "prOnlyCallerCount": 1
+        }
+      ],
+      "733": [
+        {
+          "sourceId": "ui.not-an-invitation.0ac3128cc5",
+          "mainSourcePresent": true,
+          "sourceSame": true,
+          "mainCallerCount": 1,
+          "prCallerCount": 2,
+          "newMainCallerCount": 1,
+          "prOnlyCallerCount": 2
+        }
+      ],
+      "735": [
+        {
+          "sourceId": "ui.not-available.67a926f700",
+          "mainSourcePresent": false,
+          "sourceSame": false,
+          "mainCallerCount": 0,
+          "prCallerCount": 1,
+          "newMainCallerCount": 0,
+          "prOnlyCallerCount": 1
+        }
+      ],
+      "738": [
+        {
+          "sourceId": "ui.not-in-library.c2f9e4fde9",
+          "mainSourcePresent": false,
+          "sourceSame": false,
+          "mainCallerCount": 0,
+          "prCallerCount": 1,
+          "newMainCallerCount": 0,
+          "prOnlyCallerCount": 1
+        }
+      ]
+    }
+  },
+  "callerlessHoldSummaryDiscrepancy": {
+    "blindSummaryClaimsCatalogIndex": 731,
+    "candidatePrimaryAndBlindRowsCatalogIndex": 732,
+    "oneBasedPosition": 733,
+    "holdCells": 12,
+    "rowBindingsAgree": true
+  }
+}

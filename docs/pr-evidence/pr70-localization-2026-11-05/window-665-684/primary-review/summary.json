@@ -1,0 +1,66 @@
+{
+  "artifact": "ROMarrNG PR #70 W665-W684 independent primary semantic review",
+  "pullRequest": 70,
+  "exactHead": "8b7589775c526866e474112b4f4168782b02f881",
+  "exactTree": "fb0ba93172f6832c687e001ce6c0fff08b5a33eb",
+  "reviewedAtUtc": "2026-11-05T08:00:54+00:00",
+  "cellCount": 240,
+  "sourceCount": 20,
+  "localeCount": 12,
+  "callerBackedCells": 168,
+  "callerlessHashOnlyHolds": 72,
+  "callerlessSourceCount": 6,
+  "decisionCounts": {
+    "accept-current": 153,
+    "correction": 9,
+    "hold-hash-only": 72,
+    "refinement": 6
+  },
+  "proposalCount": 15,
+  "proposalCountsByLocale": {
+    "ar": 2,
+    "es": 1,
+    "fr": 2,
+    "ja": 1,
+    "ko": 3,
+    "pt-BR": 1,
+    "vi": 1,
+    "zh-Hans": 2,
+    "zh-Hant": 2
+  },
+  "proposalCountsByPosition": {
+    "667": 2,
+    "671": 2,
+    "672": 1,
+    "678": 3,
+    "679": 5,
+    "682": 1,
+    "684": 1
+  },
+  "confidenceCounts": {
+    "high": 71,
+    "moderate": 97,
+    "unknown": 72
+  },
+  "tokenAudit": {
+    "candidateFreeReportedCounts": {
+      "markup": 0,
+      "numeric": 1,
+      "numericPresentationDifferences": 0,
+      "placeholder": 0,
+      "protectedLiteral": 20
+    },
+    "allPlaceholderAndMarkupChecksPassedForTextBearingCells": true,
+    "numericAlertReviewed": true,
+    "numericFinding": "No numeric value is lost: four ROMs and two mismatches are represented in all locales; Japanese uses digit 4 for four. No numeric proposal is needed.",
+    "protectedLiteralAlertReviewed": true,
+    "protectedLiteralFinding": "The flagged English plural ROMs is reduced to invariant ROM in some locales; ROMarr, SHA1, and Super Mario Kart remain intact. The plural is expressed by local grammar and numeral context, so the flagged targets are accepted as current.",
+    "protectedLiteralAlertInputCount": 20
+  },
+  "hashOnlyHoldPolicy": "Every callerless cell remains a hold and output contains hashes/positions/locales only; source and current target text are omitted.",
+  "independence": "Review used candidate-free input only; no other reviewer proposal or decision was accessed.",
+  "limitations": [
+    "No native-speaker second review or runtime visual review was performed.",
+    "The reviewed caller excerpts are the exact extracted contexts in the candidate-free packet; callerless cells cannot be semantically assessed without text and remain held."
+  ]
+}

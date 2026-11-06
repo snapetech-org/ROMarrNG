@@ -1,0 +1,263 @@
+{
+  "activeUniqueSourceIds": 479,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogMessageCount": 1836,
+  "catalogOneBasedPositions": [
+    666,
+    685
+  ],
+  "cellCount": 240,
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "method": "Select catalog message insertion indices 665 through 684 (zero-based) from the exact pinned romarr/ui-labels.json message-key order.",
+  "positions": [
+    665,
+    684
+  ],
+  "selectedSources": [
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 666,
+      "catalogZeroBasedIndex": 665,
+      "position": 665,
+      "registryLocations": [],
+      "source": "Named per line",
+      "sourceId": "ui.named-per-line.7a0401d477",
+      "sourceSha256": "7a0401d477b9345f414811ec0112114a4a5479a37b592efd2d93157130d7bafd"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 667,
+      "catalogZeroBasedIndex": 666,
+      "position": 666,
+      "registryLocations": [],
+      "sourceId": "ui.navigation.3db65f8c2a",
+      "sourceSha256": "3db65f8c2a7d1861b4bca37da3adec5aa7905931eb6faddbc595a35f75e6ca40",
+      "sourceTextOmitted": true
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 668,
+      "catalogZeroBasedIndex": 667,
+      "position": 667,
+      "registryLocations": [],
+      "source": "Need a known platform",
+      "sourceId": "ui.need-a-known-platform.730519de98",
+      "sourceSha256": "730519de983aae8c64a48cd58c2cc563cb0ac2de86c67c13d394b3dda0798987"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 669,
+      "catalogZeroBasedIndex": 668,
+      "position": 668,
+      "registryLocations": [],
+      "source": "Needs",
+      "sourceId": "ui.needs.5f9bbdd124",
+      "sourceSha256": "5f9bbdd124f822a2501a2c3fffb9d44602d007e4405afd743fab476c968885a0"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 670,
+      "catalogZeroBasedIndex": 669,
+      "position": 669,
+      "registryLocations": [],
+      "sourceId": "ui.needs-biglybt-s-transmission-rpc-plu.61750e74a5",
+      "sourceSha256": "61750e74a5e341628e296269dc0e55dd8c5ebedf09384a1ca70c2c1b5c9b77fb",
+      "sourceTextOmitted": true
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 671,
+      "catalogZeroBasedIndex": 670,
+      "position": 670,
+      "registryLocations": [],
+      "sourceId": "ui.needs-vuze-s-transmission-rpc-plugin.5849df38ef",
+      "sourceSha256": "5849df38efc286159a68adbbc4550adbca582f7d6b1321958dab8bdfbef47506",
+      "sourceTextOmitted": true
+    },
+    {
+      "activeSourceRank": 202,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 672,
+      "catalogZeroBasedIndex": 671,
+      "position": 671,
+      "registryLocations": [
+        "romarr/ui.py:5417"
+      ],
+      "source": "Needs review",
+      "sourceId": "ui.needs-review.07297fa94a",
+      "sourceSha256": "07297fa94a997d0f807bd37c61993a8821ca406b5e4498e4f0759e50ab154dd4"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 673,
+      "catalogZeroBasedIndex": 672,
+      "position": 672,
+      "registryLocations": [],
+      "source": "Needs the Label plugin; ignored when it is not enabled",
+      "sourceId": "ui.needs-the-label-plugin-ignored-when.8717dad61f",
+      "sourceSha256": "8717dad61f88a4fb7b782e05122287c4d3cc5ade28c1cf85613fbe91b0cc731c"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 674,
+      "catalogZeroBasedIndex": 673,
+      "position": 673,
+      "registryLocations": [],
+      "sourceId": "ui.netplay-matches-roms-by-sha1-not-by.75843f7a8b",
+      "sourceSha256": "75843f7a8b261609645e190e5143388dddd4ce2525684abf9f62569998c0f5c1",
+      "sourceTextOmitted": true
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 675,
+      "catalogZeroBasedIndex": 674,
+      "position": 674,
+      "registryLocations": [],
+      "source": "Netplay matches each ROM by its SHA1, not by its title. “Super Mario Kart” can refer to four different ROMs; two incorrect matches may desync within seconds and look like lag. ROMarr can match only games whose hashes it knows.",
+      "sourceId": "ui.netplay-matches-each-rom-by-its-sha1.b7c6f7d73a",
+      "sourceSha256": "b7c6f7d73a639523398f07d20166241deae1a9fbb2668f02f1fef157955a4688"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 676,
+      "catalogZeroBasedIndex": 675,
+      "position": 675,
+      "registryLocations": [],
+      "sourceId": "ui.network.1744b96470",
+      "sourceSha256": "1744b96470b51bf30935e2748b237a708d226a0430063f92accf90961cd28d86",
+      "sourceTextOmitted": true
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 677,
+      "catalogZeroBasedIndex": 676,
+      "position": 676,
+      "registryLocations": [],
+      "sourceId": "ui.new-activity.f7573bf001",
+      "sourceSha256": "f7573bf001d513a8119fe82f67d55d7e6f804e6200b80aa9884b99e6b1da4f82",
+      "sourceTextOmitted": true
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 678,
+      "catalogZeroBasedIndex": 677,
+      "position": 677,
+      "registryLocations": [],
+      "source": "New password",
+      "sourceId": "ui.new-password.3dd9df4441",
+      "sourceSha256": "3dd9df4441fb348f669bdae9739d50a873549c30e3344415f6ea098d9050db81"
+    },
+    {
+      "activeSourceRank": 205,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 679,
+      "catalogZeroBasedIndex": 678,
+      "position": 678,
+      "registryLocations": [
+        "romarr/ui.py:2727"
+      ],
+      "source": "New releases",
+      "sourceId": "ui.new-releases.136dfb88fd",
+      "sourceSha256": "136dfb88fd85c566c3010fc1a4e19aef020ec76c17278d6eaf6ae65801d1bc5b"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 680,
+      "catalogZeroBasedIndex": 679,
+      "position": 679,
+      "registryLocations": [],
+      "source": "New releases (web)",
+      "sourceId": "ui.new-releases-web.222cab20a1",
+      "sourceSha256": "222cab20a117cb2fbe759ee9d801394448949adcdf3ddafd018a412fb81c9443"
+    },
+    {
+      "activeSourceRank": 208,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 681,
+      "catalogZeroBasedIndex": 680,
+      "position": 680,
+      "registryLocations": [
+        "romarr/ui.py:2722"
+      ],
+      "source": "Newest",
+      "sourceId": "ui.newest.d15efa178c",
+      "sourceSha256": "d15efa178cf65ae16596a270671aa320bc9d2a5f18d78ecc5d479f73b3ffd51e"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 682,
+      "catalogZeroBasedIndex": 681,
+      "position": 681,
+      "registryLocations": [],
+      "source": "Newest first",
+      "sourceId": "ui.newest-first.ffb6f5764b",
+      "sourceSha256": "ffb6f5764bddb68c49177c75a9b4a9638878f862bd5d3b1375b8eb1d40538e15"
+    },
+    {
+      "activeSourceRank": 207,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 683,
+      "catalogZeroBasedIndex": 682,
+      "position": 682,
+      "registryLocations": [
+        "romarr/ui.py:2333"
+      ],
+      "source": "Newest release",
+      "sourceId": "ui.newest-release.8736254705",
+      "sourceSha256": "8736254705933c03b3bdc8ebf5a96654c5c0dcb4b5b7ba8d20309a99e2edf9d9"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 684,
+      "catalogZeroBasedIndex": 683,
+      "position": 683,
+      "registryLocations": [],
+      "source": "Newznab category ids, comma separated",
+      "sourceId": "ui.newznab-category-ids-comma-separated.49b76ab714",
+      "sourceSha256": "49b76ab7144ff4d5e631fec20fa096a5c187aaa44f140b55871743cac7a9649b"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 685,
+      "catalogZeroBasedIndex": 684,
+      "position": 684,
+      "registryLocations": [],
+      "source": "Next",
+      "sourceId": "ui.next.1ff57a29d7",
+      "sourceSha256": "1ff57a29d7c9d11bdf61c1b80f2b289b44c1ea844824d4b94a0d52b6ba5fc858"
+    }
+  ],
+  "sourceCount": 20,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "window": "W665-W684"
+}

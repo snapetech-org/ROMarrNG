@@ -1,0 +1,74 @@
+{
+  "artifact": "ROMarrNG PR #70 W625-W644 root-adjudicated application plan",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "sourcePin": {
+    "head": "5860fce5d546a772b1df995f8f6321c083ed7d5d",
+    "tree": "561835895972a62e9d3b1f2bfe9bcba01187eb98"
+  },
+  "window": "W625-W644",
+  "candidateCells": 240,
+  "rootDispositionCounts": {
+    "accept-current": 177,
+    "hold-callerless-hash-only": 60,
+    "accept-correction": 2,
+    "accept-independent-supplemental-correction": 1
+  },
+  "callerlessHolds": 60,
+  "nativeSpeakerApproval": false,
+  "browserReviewAtThisHead": false,
+  "workflowChanges": false,
+  "catalogs": [
+    {
+      "path": "romarr/ui-labels.json",
+      "preimageSha256": "69d84fe629cac8a113a59bfcfb3e30bfb7290bd3894395f4fda2d1a5b7f6d10d",
+      "messageCount": 1836,
+      "messageKeyOrderSha256": "135fb76e314ce4f4157ca0091544c8945bec1bb4e9bcf9a61770c07bcb404ca9"
+    }
+  ],
+  "changes": [
+    {
+      "position": 629,
+      "locale": "ar",
+      "sourceId": "ui.management-api-and-indexer-feeds-are.dad15c1100",
+      "path": "romarr/ui-labels.json",
+      "sourceText": "Management API and indexer feeds are checked separately.",
+      "sourceSha256": "dad15c1100a54f7eb215b106467b1c33909a0071cb415b803de24e24d63a4698",
+      "callerContextSha256": "700f53b1cdb40c9df7504c79bcb34b31aa88a5daa639db831b9a5a3f38e54022",
+      "currentTarget": "الإدارة API وتُدقَّق مواد الفهرس بصورة منفصلة.",
+      "currentTargetSha256": "d41d03fb04d43ea9e60d42a46d1a13ab7782e1fbef0bf015d598cb4d86326d8e",
+      "finalTarget": "تُفحَص واجهة API للإدارة وخلاصات المفهرسات كلٌّ على حدة.",
+      "finalTargetSha256": "5312ec4478188e1a12f747fb40b08d15a656bb3a65b1029ca54993847856a63f",
+      "rootDisposition": "accept-correction"
+    },
+    {
+      "position": 629,
+      "locale": "hi",
+      "sourceId": "ui.management-api-and-indexer-feeds-are.dad15c1100",
+      "path": "romarr/ui-labels.json",
+      "sourceText": "Management API and indexer feeds are checked separately.",
+      "sourceSha256": "dad15c1100a54f7eb215b106467b1c33909a0071cb415b803de24e24d63a4698",
+      "callerContextSha256": "700f53b1cdb40c9df7504c79bcb34b31aa88a5daa639db831b9a5a3f38e54022",
+      "currentTarget": "प्रबंधन API और अनुक्रमक फ़ीड अलग से जाँच कर रहे हैं।",
+      "currentTargetSha256": "dac86652e7800f25d84a8982c46055ceca0e437e537f10860e6ca5c7e42da21b",
+      "finalTarget": "प्रबंधन API और इंडेक्सर फ़ीड की अलग-अलग जाँच की जाती है।",
+      "finalTargetSha256": "d1086ca6b16c52374d0d7691384ab9d33e71a37caca28ba1902dd1e712d9fa21",
+      "rootDisposition": "accept-correction"
+    },
+    {
+      "position": 638,
+      "locale": "es",
+      "sourceId": "ui.media.d357175cfe",
+      "path": "romarr/ui-labels.json",
+      "sourceText": "Media",
+      "sourceSha256": "d357175cfe8978d39b0f86552dcd9404973493e2816101d9ff6c05ee248ef6bd",
+      "callerContextSha256": "0a4861c979daec95b69427005119470509713756c9f6cf0bbefb5debd0ae69bb",
+      "currentTarget": "Contenido multimedia",
+      "currentTargetSha256": "c7a3293497101b2f5e78c74632b5c7c3252825fcd8e97d949405a23579a91f36",
+      "finalTarget": "Tipo de medio",
+      "finalTargetSha256": "8af01f07a7d5df3becab5bd9a21d48a10e584491ca04cc72dd4823583802e809",
+      "rootDisposition": "accept-independent-supplemental-correction"
+    }
+  ]
+}

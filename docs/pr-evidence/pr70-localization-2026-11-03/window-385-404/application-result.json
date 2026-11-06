@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "baseHead": "0afd1d8c150fb96d868394a8d9620371db612185",
+  "baseTree": "0ba717d05c49356d8b1f55ac4a6b8844c161a402",
+  "window": "W385-W404",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "reviewedCells": 240,
+  "updates": 29,
+  "noOps": 211,
+  "newHolds": 0,
+  "carriedHolds": 288,
+  "reconciledDispositions": {
+    "accept-current": 211,
+    "correction": 25,
+    "refinement": 4
+  },
+  "disagreementsResolved": 27,
+  "newlyRenderableCellsReviewed": 48,
+  "newlyRenderableCellsUpdated": 5,
+  "candidateFreePrimaryBlindCrossVerifiers": "passed",
+  "browserReview": "pending exact-head headed VM review",
+  "qualifiedNativeSpeakerReview": "pending",
+  "testsBuildsScansCI": "not run",
+  "releasesTagsMerges": "not performed",
+  "workflowFiles": "untouched"
+}

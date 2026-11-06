@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "pinnedHead": "50bb70837512bb5abcf53c89b01031aa9a321321",
+  "pinnedTree": "c88c97301c042747bd5e183daff21d7d255d4cfc",
+  "sourcePath": "romarr/ui.py",
+  "baseSourceBlob": "8d104f5bf09c5005895d9973f1843f6f5c838e6c",
+  "candidateWorktreeSourceSha256": "5587ca39f263715f14e3f050c411177412df7f1dcf183edc4ef598370b5ed6c8",
+  "candidateDiffSha256": "14fae8c026a3f951c78fb7553a77313ad6f40e7d028421d7848a8c45687c6486",
+  "callsiteContexts": [
+    {
+      "lineStart": 2432,
+      "lineStop": 2434,
+      "lines": [
+        {
+          "line": 2432,
+          "text": "      +'<div class=\"card\"><h3>'+interfaceMarkup('Browse games')+'</h3>'"
+        },
+        {
+          "line": 2433,
+          "text": "      +'<p class=\"help\">'+interfaceMarkup('Connect an IGDB metadata provider under')+interfacePhraseSpace()+'<a href=\"#metadata\">'+interfaceMarkup('Metadata')+'</a>'+interfaceMarkup(', or load No-Intro / Redump DATs under')+interfacePhraseSpace()+'<a href=\"#collections\">'+interfaceMarkup('Collections')+'</a>'+interfaceMarkup(', to browse a catalog here.')+'</p>'"
+        },
+        {
+          "line": 2434,
+          "text": "      +'<p class=\"help\"><a href=\"https://github.com/snapetech-org/seerrng\" target=\"_blank\" rel=\"noopener noreferrer\">'+interfaceTemplateMarkup('Use {service} for game discovery, game covers, and a shared household request queue.',{service:'SeerrNG'})+'</a>'+interfacePhraseSpace()+'<a href=\"https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md\" target=\"_blank\" rel=\"noopener noreferrer\">'+interfaceMarkup('The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.')+'</a></p></div>';"
+        }
+      ]
+    },
+    {
+      "lineStart": 4923,
+      "lineStop": 4925,
+      "lines": [
+        {
+          "line": 4923,
+          "text": "  $('#page').innerHTML='<div class=\"card\"><h3>'+interfaceMarkup('Platforms, by era')+'</h3>'"
+        },
+        {
+          "line": 4924,
+          "text": "    +'<p class=\"help\">'+interfaceMarkup('Choose a generation you remember, search by name, then open its catalog. The playback label shows how this install handles each system.')+'</p>'"
+        },
+        {
+          "line": 4925,
+          "text": "    +'<p class=\"help\"><a href=\"https://github.com/snapetech-org/seerrng\" target=\"_blank\" rel=\"noopener noreferrer\">'+interfaceTemplateMarkup('Use {service} for game discovery, game covers, and a shared household request queue.',{service:'SeerrNG'})+'</a>'+interfacePhraseSpace()+'<a href=\"https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md\" target=\"_blank\" rel=\"noopener noreferrer\">'+interfaceMarkup('The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.')+'</a></p>'"
+        }
+      ]
+    },
+    {
+      "lineStart": 5630,
+      "lineStop": 5632,
+      "lines": [
+        {
+          "line": 5630,
+          "text": "    +'<div style=\"flex:1\"><h3>'+interfaceMarkup('Identify & Organize')+'</h3>'"
+        },
+        {
+          "line": 5631,
+          "text": "    +'<p class=\"help\">'+interfaceMarkup('Build a portable inventory, reuse existing ES-DE metadata, match exact DAT dumps, and review safe name changes. Scanning is read only. ROMarr changes files only after you preview and apply a plan.')+'</p></div>'"
+        },
+        {
+          "line": 5632,
+          "text": "    +'<a class=\"btn ghost\" href=\"https://github.com/snapetech-org/seerrng\" target=\"_blank\" rel=\"noopener noreferrer\">'+interfaceMarkup('Requests in SeerrNG ↗')+'</a></div>'"
+        }
+      ]
+    }
+  ],
+  "note": "Callsite lines are read-only candidate changes in the worktree diff against pinned base; no source file was edited by this review."
+}

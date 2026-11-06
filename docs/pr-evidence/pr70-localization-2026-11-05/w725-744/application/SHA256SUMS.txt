@@ -1,0 +1,5 @@
+32f68958ee12a0aaad10212df2a0a7c0c2e668eb9b6bedb79b5ce30d6a56effc  ./apply_and_readback.py
+a8f20d04830ee450a35aac953fb89420457aa4a38580adfb0aa3bcf1a6188582  ./finalize_readback.py
+305c6482930fbd48f7d650014e1e166420a419107af5afcc435b84aedafc5cf7  ./readback-before-commit.json
+ccc64cb6c0b03a68c5b1e3634dc0a9e789bcfcd27ac78f2a9a9c638ef0298bf3  ./readback.json
+75bc38dd582cc9e3e4f28a7701b183f59536911d87718965fd9a8f6a32d9f041  ./verification-results.json

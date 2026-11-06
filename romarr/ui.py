@@ -40,6 +40,14 @@ def _ui_key(source: str) -> str:
 
 UI_LOCALE_OPTIONS = UI_CATALOG["locales"]
 UI_AVAILABLE_LOCALES = UI_CATALOG["availableLocales"]
+
+
+def _locale_option_label(locale: dict[str, str]) -> str:
+    native = locale["nativeName"]
+    english = locale["englishName"]
+    return native if native == english else f"{native} — {english}"
+
+
 # Kept as a source-keyed compatibility view for Python callers. Regional
 # choices expose their actual inherited text so older callers see the same
 # complete coverage as the browser runtime. The browser embeds stable IDs.
@@ -156,6 +164,7 @@ a:hover{text-decoration:underline;text-underline-offset:2px}
 #rail{position:fixed;inset-inline-start:0;top:0;bottom:0;width:222px;background:var(--rail);
   border-inline-end:1px solid var(--line);z-index:20;
   display:flex;flex-direction:column;overflow:hidden}
+[dir=rtl] #rail{left:auto;right:0}
 /* No gap: the brand is one word split into two nodes so that "arr" can
    carry the accent colour, and a flex gap renders it as "ROM arr". */
 #brand{display:flex;align-items:center;gap:0;padding:17px 18px 16px;
@@ -711,7 +720,7 @@ def _theme_control_html() -> str:
         for value, name in ACCENTS
     )
     language_options = '<option value="system" data-i18n-key="ui.use-browser-settings.02d22d3f39">Use browser settings</option>' + ''.join(
-        f'<option value="{code}" lang="{code}" dir="{item["direction"]}">{item["nativeName"]}</option>'
+        f'<option value="{code}" lang="{code}" dir="{item["direction"]}">{html.escape(_locale_option_label(item))}</option>'
         for code in UI_AVAILABLE_LOCALES
         for item in (UI_LOCALE_OPTIONS[code],)
     )
@@ -806,7 +815,39 @@ const readInterfaceLanguage=()=>{
   return preference==='system'?browserInterfaceLanguage():preference;
 };
 const stableLocalizationKey=source=>Object.hasOwn(UI_MESSAGES,source)?source:(UI_SOURCE_TO_KEY[source]||'');
-const hasLabel=source=>Boolean(stableLocalizationKey(source));
+const hasLabel=source=>{
+  const key=stableLocalizationKey(source);
+  return Boolean(key&&UI_MESSAGES[key]?.sourceKind!=='ui-help-template');
+};
+const APP_MESSAGE_TEMPLATE_KINDS=new Set(['ui-error','ui-error-template','task-result',
+  'task-result-template','provider-diagnostic-template','library-status-template',
+  'ui-status-template']);
+const APP_MESSAGE_TEMPLATES=Object.values(UI_MESSAGES)
+  .filter(message=>APP_MESSAGE_TEMPLATE_KINDS.has(message.sourceKind)
+    &&typeof message.source==='string'&&message.source.includes('{'))
+  .map(message=>{
+    const names=[];
+    const escaped=message.source.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')
+      .replace(/\\\{([A-Za-z][A-Za-z0-9_]*)\\\}/g,(_,name)=>{names.push(name);return '([\\s\\S]+?)';});
+    return {source:message.source,names,pattern:new RegExp('^'+escaped+'$')};
+  }).sort((a,b)=>b.source.length-a.source.length);
+const matchAppMessageTemplate=value=>{
+  let matched=null;
+  for(const entry of APP_MESSAGE_TEMPLATES){
+    const match=entry.pattern.exec(String(value??''));
+    if(match){
+      // Free-form values can make two distinct templates fit the same raw
+      // message (for example a peer name and an invitation URL). Do not let
+      // catalog ordering decide which meaning the user sees; callers that
+      // authored an ambiguous message attach its stable template explicitly.
+      if(matched&&matched.source!==entry.source)return null;
+      const values={};
+      entry.names.forEach((name,index)=>{values[name]=match[index+1]});
+      matched={source:entry.source,values};
+    }
+  }
+  return matched;
+};
 const translationInfo=(source,language)=>ROMarrI18n.lookup(UI_CATALOG,source,language);
 const isTranslated=(source,language)=>translationInfo(source,language).translated;
 const translateLegacyLabel=(source,language)=>{
@@ -820,6 +861,11 @@ const translateLabel=(source,language)=>{
 const translateTemplate=(source,values,language=readInterfaceLanguage())=>
   ROMarrI18n.formatMessage(translationInfo(source,language).value,values,language,
     getRegionalLocale(),(nested,nestedValues)=>translateTemplate(nested,nestedValues,language));
+const translatedTemplateMarkup=(source,values,language=readInterfaceLanguage())=>
+  translateTemplate(source,values,language).split(/\u2068([\s\S]*?)\u2069/g)
+    .map((part,index)=>index%2
+      ?'<bdi lang="und" dir="auto">'+esc(part)+'</bdi>'
+      :esc(part)).join('');
 const ACCOUNT_IMPORT_HELP=`Steam is a true one-click: Steam's own "Sign in through Steam", no key, no app registration — it comes straight back with your library connected. Epic, EA and Battle.net pull your owned library through the same web APIs Playnite uses — none of them issues an application key, so each opens the page your signed-in browser already has and takes one paste. GOG needs only your public profile name.`;
 const GGR_WEBHOOK_HELP=`Restart GG Requestz after changing its environment. In GG Requestz 1.5+, the webhook fires when a request becomes approved; enable request.auto_approve or approve it manually. A successful delivery now receives HTTP 202. Rejected payloads receive HTTP 422 and are named in both applications' logs.`;
 const ROMM_FRIEND_HELP=`Your friend does not need to run ROMarr. If they use RomM, ask them for an account and choose Add a RomM server. RomM publishes a hash for every ROM, so browsing and netplay matching work without installing anything on their server. The account gets the access their RomM grants; ROMarr cannot narrow it.`;
@@ -835,11 +881,19 @@ const DOWNLOAD_STATE_LABELS={queued:'Queued',grabbed:'Grabbed',imported:'Importe
   shelved:'Shelved',verified:'Verified',bad:'Bad',unknown:'Unknown'};
 const interfaceMarkup=source=>'<span data-i18n-key="'+esc(stableLocalizationKey(source)||source)+'">'
   +esc(translateLabel(source,readInterfaceLanguage()))+'</span>';
-const interfaceTemplateMarkup=(source,values)=>'<span data-i18n-template-key="'+esc(stableLocalizationKey(source)||source)
-  +'" data-i18n-values="'+esc(JSON.stringify(values))+'">'
-  +esc(translateTemplate(source,values))+'</span>';
+const interfacePhraseSpace=()=>/^(?:ja|zh)/.test(readInterfaceLanguage())?'':' ';
+const interfaceTemplateMarkup=(source,values)=>{
+  const language=readInterfaceLanguage(),translated=isTranslated(source,language);
+  return '<span lang="'+(translated?esc(language):'en')+'" dir="'
+    +(translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr')+'" data-i18n-template-key="'
+    +esc(stableLocalizationKey(source)||source)+'" data-i18n-values="'+esc(JSON.stringify(values))+'">'
+    +translatedTemplateMarkup(source,values,language)+'</span>';
+};
 const interfaceTitleTemplate=(source,values)=>'title="'+esc(translateTemplate(source,values))
   +'" data-i18n-title-template-key="'+esc(stableLocalizationKey(source)||source)+'" data-i18n-title-values="'
+  +esc(JSON.stringify(values))+'"';
+const interfaceAriaLabelTemplate=(source,values)=>'data-i18n-aria-label-template-key="'
+  +esc(stableLocalizationKey(source)||source)+'" data-i18n-aria-label-values="'
   +esc(JSON.stringify(values))+'"';
 const sniffedMessageTemplate=value=>{
   const source=String(value??'');
@@ -868,10 +922,188 @@ const manualDiagnosticTitle=value=>{
   return parsed?interfaceTitleTemplate(parsed.source,parsed.values)
     :'title="'+esc(source)+'" lang="und" dir="auto"';
 };
+// These keys are attached by local app.py routes. Peer responses are not
+// allowed to supply template authority for their own text.
+const LOCAL_API_TEMPLATE_KEYS=new Set([
+  'ui.could-not-reach-url-detail.521369cf6f',
+  'ui.url-answered-http-status-code.462fe89da5',
+  'ui.could-not-read-name-detail.243b61096e',
+  'ui.could-not-reach-name-detail.9fc06e87fc',
+  'ui.name-refused-the-credential-they-may.dfa9c11bed',
+  'ui.name-answered-http-status-code.2a5471f26b',
+  'ui.name-sent-something-that-was-not-jso.4b46f86ff4',
+  'ui.already-reading-your-library.aa167f8f1a',
+  'ui.imported-total.5f100c0878',
+  'ui.reading-your-library-in-the-backgrou.c77eb7ff59',
+  'ui.searched-searched-grabbed-grabbed.bff6322b8e',
+  'ui.searched-searched-grabbed-grabbed-sk.8d691039ba',
+  'ui.added-count-to-wanted.6f8ee97f5d',
+  'ui.failed-download-handling-is-off.ad2c9dba83',
+  'ui.github-com-answered-without-a-tag.5f20c86070',
+  'ui.imported-imported-of-total-finished.5726eabd36',
+  'ui.no-indexer-could-be-read.ad531cd423',
+  'ui.no-library-configured.2f7f2b199a',
+  'ui.no-lists-configured.f0f61cd546',
+  'ui.no-title.8cb9a5c65b',
+  'ui.not-in-this-library-the-hash-identif.15bd6cace0',
+  'ui.nothing-finished.cd66a4ec32',
+  'ui.nothing-wanted-nothing-to-match.d281ab9dfe',
+  'ui.retired-blocklisted-dead-download-s.5e329a4393',
+  'ui.up-to-date-version.34ba92ea5c',
+  'ui.count-already-added-before.e957b67cbe',
+  'ui.count-kept-aside-with-no-rom-platfor.c9223eb266',
+  'ui.items-feed-item-s-from-sources-sourc.2cf1cff247',
+  'ui.latest-is-available-running-version.2d3ed5b75c',
+  'ui.read-seen-entries-and-found-added-wi.ca302edb9e',
+  'ui.read-seen-entries-and-found-added-wi.9304d58175',
+  'ui.stopped-after-seen-entries-truncated.fc5c0496ad',
+  'ui.the-attached-library-server-does-not.3a4dc1f14e',
+  'ui.games-games-across-count-library.f0b5160790',
+  'ui.games-games-across-count-libraries.6f3af8400b',
+  'ui.library-unreachable-error-type.b2611060a9',
+  'ui.could-not-reach-github-com-error-typ.188d9cd896',
+  'ui.lookup-failed-error-type.6d33ec9b4f',
+  'ui.could-not-fetch-the-list-error-type.f2f965f9db',
+  'ui.a-url-is-required.985ecfc33e',
+  'ui.connected.22965568d2',
+  'ui.connected-indexers-indexer-s-private.5277d9b7ff',
+  'ui.connected-but-no-library-path-is-set.22fe97e9f2',
+  'ui.connected-but-path-does-not-exist-he.f513312bc1',
+  'ui.could-not-connect-or-authenticate.e998092980',
+  'ui.internet-archive-refused-the-request.515fff2c13',
+  'ui.rejected-the-api-key.119a3d3e36',
+  'ui.unknown-indexer-type-kind.fb6e3d15a4',
+  'ui.unknown-client-type-kind.65382dc90b',
+  'ui.unknown-library-type-kind.fcd0b2d006',
+  'ui.testing.407b7a0466',
+  'ui.connecting.72021eb70e',
+  'ui.failed.031a8f0f65',
+  'ui.the-claim-code-is-missing-it-travels.924decc4df',
+  'ui.that-server-completed-the-handshake.b1a5c997c1',
+  'ui.library-read-failed-detail.4ae2084070',
+  'ui.reading-the-library-from-where.f6d252e9c7',
+  'ui.metadata-root-not-configured.d22feb8b9c',
+]);
+// This narrower allowlist is only for the local /connect/sources response.
+// Do not let generic API/provider text acquire template authority by matching
+// one of these instruction messages.
+const CONNECT_HOW_TEMPLATE_KEYS=new Set([
+  'ui.signed-in-to-playstation-com-this-pa.acf50352eb',
+  'ui.click-button-there-and-approve-with.9fb68901fb',
+  'ui.generate-a-key-on-that-page-and-copy.9a9b11d5bf',
+  'ui.signed-in-to-gog-that-page-shows-exa.3512fe96cf',
+  'ui.sign-in-there-the-page-ends-up-showi.aa5efe7dd3',
+  'ui.sign-in-if-asked-the-page-then-shows.e3615cbaf6',
+  'ui.signed-in-to-blizzard-that-page-is-a.7c3d547316',
+  'ui.humble-s-api-answers-to-your-browser.6ee3516476',
+  'ui.amazon-s-only-api-needs-full-device.5661d650da',
+  'ui.same-story-no-token-page-no-key-prog.7e3daf7ba1',
+]);
+const explicitTemplateMarkup=template=>{
+  if(!template||!LOCAL_API_TEMPLATE_KEYS.has(template.key))return '';
+  const message=UI_MESSAGES[template.key];
+  if(!message)return '';
+  // Older catalog literals predate sourceKind metadata. They remain safe here
+  // only because the exact key is locally allowlisted and has no placeholders.
+  const legacyLiteral=!message.sourceKind&&typeof message.source==='string'
+    &&!message.source.includes('{');
+  const allowlistedStatus=message.sourceKind==='ui-status';
+  if(!APP_MESSAGE_TEMPLATE_KINDS.has(message.sourceKind)
+      &&!allowlistedStatus&&!legacyLiteral)return '';
+  const supplied=template.values??{};
+  if(!supplied||typeof supplied!=='object'||Array.isArray(supplied))return '';
+  const names=[...message.source.matchAll(/\{([A-Za-z][A-Za-z0-9_]*)\}/g)].map(match=>match[1]);
+  if(Object.keys(supplied).length!==names.length||names.some(name=>!Object.hasOwn(supplied,name)))return '';
+  const values={...(template.values||{})};
+  for(const [key,value] of Object.entries(values)){
+    if(typeof value==='number'&&Number.isFinite(value))values[key]=fmt(value);
+    else if(typeof value!=='string')return '';
+  }
+  return interfaceTemplateMarkup(template.key,values);
+};
+const connectHowMarkup=spec=>{
+  const fallback=apiMessageMarkup(spec?.how);
+  const template=spec?.how_template;
+  if(!template||typeof template!=='object'||Array.isArray(template)
+      ||!CONNECT_HOW_TEMPLATE_KEYS.has(template.key))return fallback;
+  const message=UI_MESSAGES[template.key];
+  if(!message||message.sourceKind!=='ui-help-template'
+      ||template.source!==message.source)return fallback;
+  const supplied=template.values??{};
+  if(!supplied||typeof supplied!=='object'||Array.isArray(supplied))return fallback;
+  const names=[...message.source.matchAll(/\{([A-Za-z][A-Za-z0-9_]*)\}/g)]
+    .map(match=>match[1]);
+  if(Object.keys(supplied).length!==names.length
+      ||names.some(name=>!Object.hasOwn(supplied,name)))return fallback;
+  const values={...supplied};
+  if(Object.values(values).some(value=>typeof value!=='string'))return fallback;
+  return interfaceTemplateMarkup(template.key,values);
+};
+const apiMessageMarkup=(value,explicitTemplate=null)=>{
+  const explicit=explicitTemplateMarkup(explicitTemplate);
+  if(explicit)return explicit;
+  if(value===null||value===undefined||value==='')return '';
+  if(typeof value!=='string'&&typeof value!=='number')return '';
+  const source=String(value);
+  return '<span lang="und" dir="auto">'+esc(source)+'</span>';
+};
+// Only app-owned fixed Moonlight branches attach these IDs. Check both the
+// exact allowlist and the catalog source before rendering through interfaceMarkup.
+const MOONLIGHT_API_MESSAGE_KEYS=new Set([
+  'ui.submitted-the-host-does-not-report-w.9ba72a4bcd',
+  'ui.sunshine-has-no-endpoint-that-lists.06228315a7',
+  'ui.sunshine-refused-it-no-moonlight-cli.fb8441c69d',
+]);
+const moonlightApiMessageMarkup=(value,sourceId)=>{
+  if(typeof value!=='string'||typeof sourceId!=='string'
+      ||!MOONLIGHT_API_MESSAGE_KEYS.has(sourceId))
+    return apiMessageMarkup(value);
+  const message=UI_MESSAGES[sourceId];
+  return message&&message.source===value
+    ?interfaceMarkup(sourceId):apiMessageMarkup(value);
+};
+const messagePartsMarkup=parts=>Array.isArray(parts)?parts.map(part=>{
+  if(part&&typeof part==='object'&&part.template)
+    return explicitTemplateMarkup(part.template);
+  if(part&&typeof part==='object'&&typeof part.opaque==='string')
+    return apiMessageMarkup(part.opaque);
+  return '';
+}).join(''):'';
+const commandResultMarkup=result=>{
+  if(!result||typeof result!=='object')return apiMessageMarkup(result);
+  const parts=[];
+  if(Array.isArray(result.message_parts))
+    parts.push(messagePartsMarkup(result.message_parts));
+  else if(result.message||result.message_template)
+    parts.push(apiMessageMarkup(result.message,result.message_template));
+  for(const failure of Array.isArray(result.library_failures)?result.library_failures:[]){
+    if(!failure||typeof failure!=='object')continue;
+    const library=String(failure.library??''),errorType=String(failure.error_type??'');
+    parts.push('; ',apiMessageMarkup(`${library} unreachable (${errorType})`,{
+      key:'ui.library-unreachable-error-type.b2611060a9',
+      values:{library,error_type:errorType}
+    }));
+  }
+  return parts.join('');
+};
+// Use only for source-owned app copy or diagnostics with an app-owned format.
+// API/provider/peer values go through apiMessageMarkup instead.
 const appMessageMarkup=value=>{
   const source=String(value??'');
   if(hasLabel(source)) return interfaceMarkup(source);
-  let match=source.match(/^(.+) — confirmed by the header$/s);
+  let match=source.match(/^(\d+) games across (\d+) (library|libraries)(?:; ([\s\S]*))?$/);
+  if(match){
+    const template=match[3]==='library'
+      ?'{games} games across {count} library'
+      :'{games} games across {count} libraries';
+    const parts=[interfaceTemplateMarkup(template,
+      {games:fmt(Number(match[1])),count:fmt(Number(match[2]))})];
+    if(match[4])parts.push('; ',match[4].includes(', ')
+      ?'<span lang="und" dir="auto">'+esc(match[4])+'</span>'
+      :appMessageMarkup(match[4]));
+    return parts.join('');
+  }
+  match=source.match(/^(.+) — confirmed by the header$/s);
   if(match){
     const reason=sniffedMessageTemplate(match[1]);
     if(reason)return interfaceTemplateMarkup('ui.reason-confirmed-by-the-header.28b2925292',{reason});
@@ -971,7 +1203,16 @@ const appMessageMarkup=value=>{
   if(match)return interfaceTemplateMarkup('ui.language-translation-preferred-over.af52539e78',{language:match[1],name:match[2]});
   match=source.match(/^(.+) translation added to the set$/);
   if(match)return interfaceTemplateMarkup('ui.language-translation-added-to-the-se.28bfcbdfa9',{language:match[1]});
+  const catalogTemplate=matchAppMessageTemplate(source);
+  if(catalogTemplate)
+    return interfaceTemplateMarkup(catalogTemplate.source,catalogTemplate.values);
   return '<span lang="und" dir="auto">'+esc(source)+'</span>';
+};
+const submissionProblemMarkup=value=>{
+  const source=String(value??''),repository=source.match(/^repository: ([\s\S]+)$/s);
+  return repository
+    ?interfaceMarkup('Repository')+': '+apiMessageMarkup(repository[1])
+    :appMessageMarkup(source);
 };
 const searchReasonMarkup=value=>{
   const source=String(value??''),scored=source.match(/^([+-])(\d+)\s+(.+)$/s);
@@ -993,11 +1234,11 @@ const collectionReasonMarkup=value=>{
     return interfaceMarkup(source);
   return appMessageMarkup(source);
 };
-const statusMarkup=value=>{
+const statusMarkup=(value,explicitTemplate=null,explicitParts=null)=>{
   const raw=String(value??''),source=DOWNLOAD_STATE_LABELS[raw];
-  return source
-    ? interfaceMarkup(source)
-    : '<span lang="und" dir="auto">'+esc(raw)+'</span>';
+  if(source)return interfaceMarkup(source);
+  if(Array.isArray(explicitParts))return messagePartsMarkup(explicitParts);
+  return apiMessageMarkup(raw,explicitTemplate);
 };
 const applyTranslatedLabel=(el,language)=>{
   const source=el.dataset.i18nKey||el.dataset.i18n, translated=isTranslated(source,language);
@@ -1011,6 +1252,22 @@ const applyTranslatedLabels=(root,language)=>{
   if(root.querySelectorAll)elements.push(...root.querySelectorAll('[data-i18n],[data-i18n-key]'));
   for(const el of elements)applyTranslatedLabel(el,language);
 };
+const applyTranslatedOptionLabels=(root,language)=>{
+  const elements=[];
+  if(root.nodeType===Node.ELEMENT_NODE&&root.matches?.('option[data-i18n-option-key]'))elements.push(root);
+  if(root.querySelectorAll)elements.push(...root.querySelectorAll('option[data-i18n-option-key]'));
+  for(const el of elements){
+    const source=UI_MESSAGES[el.dataset.i18nOptionKey]?.source;
+    if(typeof source!=='string')continue;
+    const rawCount=el.dataset.i18nOptionCount??'—';
+    const count=Number(rawCount);
+    const renderedCount=Number.isFinite(count)?fmt(count):rawCount;
+    const translated=isTranslated(source,language);
+    el.textContent=`${translateLabel(source,language)} (${renderedCount})`;
+    el.lang=translated?language:'en';
+    el.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';
+  }
+};
 const applyTranslatedTemplates=(root,language)=>{
   const elements=[];
   if(root.nodeType===Node.ELEMENT_NODE&&root.matches?.('[data-i18n-template],[data-i18n-template-key]'))elements.push(root);
@@ -1020,7 +1277,7 @@ const applyTranslatedTemplates=(root,language)=>{
     try{values=JSON.parse(el.dataset.i18nValues||'{}')}catch(_){continue}
     const source=el.dataset.i18nTemplateKey||el.dataset.i18nTemplate;
     const translated=isTranslated(source,language);
-    el.textContent=translateTemplate(source,values,language);
+    el.innerHTML=translatedTemplateMarkup(source,values,language);
     el.lang=translated?language:'en';
     el.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';
   }
@@ -1033,6 +1290,8 @@ const applyTranslatedAttribute=(el,source,attribute,language)=>{
 };
 const translatedTextSources=new WeakMap();
 const translatedAttributeSources=new WeakMap();
+const translatedAriaLabelNodes=new WeakMap();
+let translatedAriaLabelSequence=0;
 const applyTranslatedTextNode=(node,language)=>{
   const parent=node.parentElement;
   if(!parent||parent.closest('script,style,textarea,input,select,[contenteditable="true"],[lang="und"],[data-i18n],[data-i18n-key]'))return;
@@ -1051,18 +1310,41 @@ const applyTranslatedTextTree=(root,language)=>{
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);
   while(walker.nextNode())applyTranslatedTextNode(walker.currentNode,language);
 };
+const applyTranslatedAriaLabelTemplate=(el,source,values,language)=>{
+  let label=translatedAriaLabelNodes.get(el);
+  if(!label){
+    label=document.createElement('span');
+    label.id='romarr-interface-aria-label-'+(++translatedAriaLabelSequence);
+    label.style.position='absolute';label.style.width='1px';label.style.height='1px';
+    label.style.padding='0';label.style.margin='-1px';label.style.overflow='hidden';
+    label.style.clip='rect(0, 0, 0, 0)';label.style.whiteSpace='nowrap';label.style.border='0';
+    el.appendChild(label);translatedAriaLabelNodes.set(el,label);
+  }
+  label.dataset.i18nTemplateKey=source;label.dataset.i18nValues=JSON.stringify(values);
+  label.innerHTML=translatedTemplateMarkup(source,values,language);
+  const localized=Boolean(isTranslated(source,language));
+  label.lang=localized?language:'en';
+  label.dir=localized&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';
+  const references=(el.getAttribute('aria-labelledby')||'').split(/\s+/).filter(id=>id&&id!==label.id);
+  references.push(label.id);el.setAttribute('aria-labelledby',references.join(' '));
+  el.removeAttribute('aria-label');
+};
 const keepPlaceholderLiteral=source=>/^(?:https?:\/\/|[a-z]+\.[a-z.]+\/|[A-Z0-9_-]{5,}$|[a-z0-9_-]+(?:,\s*[a-z0-9_-]+)+$)/i.test(source)
   ||['Dave\'s RomM','K7RM-9TFQ','Phantasy Star IV','Super Mario World','Your Plugin','your-plugin','search, importer','snes, n64'].includes(source);
 const applyTranslatedAttributes=(root,language)=>{
   const elements=[];
   if(root.nodeType===Node.ELEMENT_NODE)elements.push(root);
-  if(root.querySelectorAll)elements.push(...root.querySelectorAll('[title],[aria-label],[placeholder],[data-i18n-title],[data-i18n-aria-label],[data-i18n-placeholder],[data-i18n-title-template],[data-i18n-title-template-key]'));
+  if(root.querySelectorAll)elements.push(...root.querySelectorAll('[title],[aria-label],[placeholder],[data-i18n-title],[data-i18n-aria-label],[data-i18n-placeholder],[data-i18n-title-template],[data-i18n-title-template-key],[data-i18n-aria-label-template-key]'));
   for(const el of elements){
     for(const [attribute,marker] of [['title','data-i18n-title'],['aria-label','data-i18n-aria-label'],['placeholder','data-i18n-placeholder']]){
       const template=el.getAttribute(marker+'-template-key')??el.getAttribute(marker+'-template');
       if(template!==null){
         let values={};
         try{values=JSON.parse(el.getAttribute(marker+'-values')||'{}')}catch(_){continue}
+        if(attribute==='aria-label'){
+          applyTranslatedAriaLabelTemplate(el,template,values,language);
+          continue;
+        }
         el.setAttribute(attribute,translateTemplate(template,values,language));
         const localized=Boolean(isTranslated(template,language));
         el.lang=localized?language:'en';
@@ -1155,6 +1437,7 @@ const applyInterfaceLanguage=(language=readInterfaceLanguage())=>{
   document.documentElement.lang=language;
   document.documentElement.dir=ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';
   applyTranslatedLabels(document,language);
+  applyTranslatedOptionLabels(document,language);
   applyTranslatedTemplates(document,language);
   document.querySelectorAll('[data-i18n-aria-label]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nAriaLabel,'aria-label',language));
   document.querySelectorAll('[data-i18n-title]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nTitle,'title',language));
@@ -1324,10 +1607,29 @@ function toastMessage(source,values={}){
   const language=readInterfaceLanguage(), translated=Boolean(isTranslated(source,language));
   toast(translateTemplate(source,values,language),translated?language:'en',translated&&language==='ar'?'rtl':'ltr');
 }
-function toastAppMessage(message){
+function toastMarkupMessage(markup){
+  if(!markup)return;
+  const holder=document.createElement('div');
+  holder.innerHTML=markup;
+  const language=readInterfaceLanguage();
+  applyTranslatedLabels(holder,language);
+  applyTranslatedTemplates(holder,language);
+  const rendered=holder.firstElementChild;
+  if(rendered&&rendered.hasAttribute('data-i18n-key'))
+    toast(holder.textContent,rendered.lang||'en',rendered.dir||'ltr');
+  else if(rendered&&rendered.hasAttribute('data-i18n-template-key'))
+    toast(holder.textContent,rendered.lang||'en',rendered.dir||'ltr');
+  else toast(holder.textContent,'und','auto');
+}
+function toastAppMessage(message,explicitTemplate=null){
+  toastMarkupMessage(apiMessageMarkup(message,explicitTemplate));
+}
+function toastSourceMessage(message){
   const source=String(message??'');
-  if(hasLabel(source))toastLabel(source);
-  else if(source)toast(source,'und','auto');
+  if(source)toastMarkupMessage(appMessageMarkup(source));
+}
+function toastCommandMessage(result){
+  toastMarkupMessage(commandResultMarkup(result));
 }
 function confirmMessage(source,values={}){
   return window.confirm(translateTemplate(source,values,readInterfaceLanguage()));
@@ -1433,7 +1735,7 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
         +'processes. Network requests go through ROMarr and can reach only '
         +'declared hosts.</div>'
       : '<div class="panel-note panel-warn"><b>Plugins run with no '
-        +'confinement.</b> '+appMessageMarkup(hs.sandbox_detail||'')+' A plugin you install '
+        +'confinement.</b> '+apiMessageMarkup(hs.sandbox_detail||'')+' A plugin you install '
         +'may run without one or both boundaries if you explicitly override '
         +'this check; check the missing capability before allowing it.</div>');
   // What enabling a searchable plugin actually does now, said out loud:
@@ -1448,7 +1750,7 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
           {capability:'search',plugins:(hs.searchable_plugins||[]).join(', ')})
         +'</div>'
       : '<div class="panel-note panel-warn"><b>Plugins are installed but not '
-        +'part of search yet.</b> '+appMessageMarkup(acq)
+        +'part of search yet.</b> '+apiMessageMarkup(acq)
         +'. '+interfaceMarkup('ui.add-a-rom-hub-download-client-downlo.bf65f18682')
         +' '
         +'<code>rom-hub search</code> / <code>rom-hub import</code> '
@@ -1485,7 +1787,9 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
     return '<div class="pcard'+(pl.installed?' installed':'')+'">'
       +'<h4>'+esc(pl.name)+(pl.author?'<span class="by">'
         +interfaceTemplateMarkup('ui.by-author.c63374c540',{author:pl.author})+'</span>':'')+'</h4>'
-      +'<div class="desc">'+esc(pl.description||'No description supplied.')+'</div>'
+       +'<div class="desc">'+(pl.description
+        ?'<span lang="und" dir="auto">'+esc(pl.description)+'</span>'
+        :interfaceMarkup('No description supplied.'))+'</div>'
       +'<div class="meta">'+(caps||'<span class="help" style="margin:0">no capabilities declared</span>')+'</div>'
       +'<div class="foot">'+action
       +(net?'<span class="net">'+interfaceTemplateMarkup('ui.reaches-hosts.ad1513043f',{hosts:net})+'</span>':'')+'</div></div>';
@@ -1512,7 +1816,7 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
       +'<button type="button" class="chip'+(inst==='1'?' on':'')+'" aria-pressed="'+String(inst==='1')+'" data-inst="1">Installed</button>'
       +'<button type="button" class="chip'+(inst==='0'?' on':'')+'" aria-pressed="'+String(inst==='0')+'" data-inst="0">Available</button>'
       +chips+'</div>' 
-      +(d.error?'<div class="panel-note panel-warn" role="alert" aria-live="assertive">'+appMessageMarkup(d.error)+'</div>':'')
+      +(d.error?'<div class="panel-note panel-warn" role="alert" aria-live="assertive">'+apiMessageMarkup(d.error)+'</div>':'')
       +(actionError?'<div id="hub-action-error" class="panel-note panel-warn" role="alert" aria-live="assertive">'+(actionError.source
         ?interfaceTemplateMarkup(actionError.source,actionError.values)
         :'<span lang="und" dir="auto">'+esc(actionError.raw)+'</span>')+'</div>':'')
@@ -1606,10 +1910,10 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
         msg.setAttribute('aria-live',ok?'polite':'assertive');
         msg.innerHTML='<div class="panel-note'+(ok?'':' panel-warn')+'">'
           +(ok?interfaceTemplateMarkup('ui.source-accepted-host-installing.06bc7327df',{host:d.host})
-            :appMessageMarkup(d.reason||d.error||'Could not check this plugin source.'))+'</div>';
+            :(d.reason||d.error?apiMessageMarkup(d.reason||d.error):appMessageMarkup('Could not check this plugin source.')))+'</div>';
       }catch(_){
         msg.setAttribute('role','alert');msg.setAttribute('aria-live','assertive');
-        msg.textContent='ROMarr could not check this source. Check the connection and try again.';
+        msg.innerHTML=appMessageMarkup('ROMarr could not check this source. Check the connection and try again.');
       }finally{button.disabled=false;}
     };
 
@@ -1628,7 +1932,7 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
         msg.setAttribute('aria-live',problems.length?'assertive':'polite');
         if(problems.length){
           msg.innerHTML='<div class="panel-note panel-warn"><b>'+interfaceMarkup('ui.fix-these.e5c50d4696')+'</b><br>'
-            +problems.map(appMessageMarkup).join('<br>')+'</div>';
+            +problems.map(submissionProblemMarkup).join('<br>')+'</div>';
         }else{
           msg.innerHTML='<div class="panel-note">'+interfaceMarkup('ui.ready.e20846d20b')+' '
             +'<a href="'+esc(d.submit_url)+'" target="_blank" rel="noopener noreferrer">'
@@ -1637,7 +1941,7 @@ RENDER.hub=async(renderEpoch=routeEpoch)=>{
         }
       }catch(_){
         msg.setAttribute('role','alert');msg.setAttribute('aria-live','assertive');
-        msg.textContent='ROMarr could not prepare the submission. Check the connection and try again.';
+        msg.innerHTML=appMessageMarkup('ROMarr could not prepare the submission. Check the connection and try again.');
       }finally{button.disabled=false;}
     };
   };
@@ -1656,6 +1960,10 @@ const SOURCE_LABEL={
   archive:'Archive.org (streams)',
   flashpoint:'Flashpoint (streams)',
   cloud:'Catalogued, source unknown'};
+const ownLabel=(labels,value)=>{
+  const key=String(value);
+  return Object.prototype.hasOwnProperty.call(labels,key)?labels[key]:null;
+};
 let libraryRequest=0;
 RENDER.library=async(renderEpoch=routeEpoch)=>{
   if(renderEpoch!==routeEpoch||location.hash!=='#library')return;
@@ -1681,8 +1989,8 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
     // The first fetch has not landed yet. Say so, rather than showing an
     // empty grid that reads as "your library is empty".
     p.innerHTML=`<div class="card"><h3 data-i18n="ui.reading-the-library.fe68286704">Reading the library</h3>
-      <p class="help">${d.message?appMessageMarkup(d.message):'<span data-i18n="ui.fetching-from-romm.24384ccda6">Fetching from RomM…</span>'}
-      ${d.error?` <span data-i18n="ui.last-attempt.3ec078252b">Last attempt:</span> <b>${appMessageMarkup(d.error)}</b>. <span data-i18n="ui.retrying-with-backoff.06028a831f">Retrying with backoff.</span>`:''}</p></div>`;
+      <p class="help">${d.message?apiMessageMarkup(d.message,d.message_template):'<span data-i18n="ui.fetching-from-romm.24384ccda6">Fetching from RomM…</span>'}
+      ${d.error?` <span data-i18n="ui.last-attempt.3ec078252b">Last attempt:</span> <b>${apiMessageMarkup(d.error,d.error_template)}</b>. <span data-i18n="ui.retrying-with-backoff.06028a831f">Retrying with backoff.</span>`:''}</p></div>`;
     applyInterfaceLanguage();
     return;
   }
@@ -1722,13 +2030,20 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
       ${mixed?`<span style="color:var(--dim);font-size:11px">${interfaceTemplateMarkup('ui.count-here.ad5e58f564',{count:fmt(disk)})}</span>`:''}</button>`;
   }).join('');
   const f=d.facets||{};
-  const sel=(key,label,list,fmt)=>{
+  const sel=(key,label,list,optionSourceByValue=null)=>{
     if(!list||!list.length) return '';
     const filterName=({genre:'Genre',region:'Region',decade:'Decade',origin:'Origin',source:'Source',sort:'Sort by'})[key]||label;
     return `<select data-lf="${key}" aria-label="${esc(translateLabel(filterName,readInterfaceLanguage()))}" data-i18n-aria-label="${esc(stableLocalizationKey(filterName)||filterName)}" style="padding:4px 8px;font-size:12px">
       <option value="" data-i18n-key="${esc(stableLocalizationKey(label)||label)}">${esc(translateLabel(label,readInterfaceLanguage()))}</option>
-      ${list.map(x=>`<option value="${esc(x.value)}"${LIB[key]===x.value?' selected':''}
-        >${esc(fmt?fmt(x.value):x.value)} (${num(x.count)})</option>`).join('')}
+      ${list.map(x=>{
+        const optionSource=ownLabel(optionSourceByValue||{},x.value)||'';
+        const optionKey=optionSource?stableLocalizationKey(optionSource):'';
+        const rawCount=String(x.count??'—');
+        const marker=optionKey?` data-i18n-option-key="${esc(optionKey)}" data-i18n-option-count="${esc(rawCount)}"`:'';
+        const optionText=optionSource?translateLabel(optionSource,readInterfaceLanguage()):String(x.value);
+        return `<option value="${esc(x.value)}"${LIB[key]===x.value?' selected':''}${marker}
+          >${esc(optionText)} (${num(x.count)})</option>`;
+      }).join('')}
     </select>`;
   };
   const coverage=f.identified&&d.grand_total
@@ -1747,7 +2062,7 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
     </div>
     ${srcRows.length?`<p class="help" style="margin:8px 0 0">
       Catalogued entries by source:
-      ${srcRows.map(x=>`<b>${num(x.count)}</b> ${esc(SOURCE_LABEL[x.value]||x.value)}`)
+      ${srcRows.map(x=>`<b>${num(x.count)}</b> ${esc(ownLabel(SOURCE_LABEL,x.value)??x.value)}`)
         .join(' · ')}. Source is read from the filename each indexer writes,
       so anything ROMarr cannot place stays “source unknown” rather than
       being filed under a guess.</p>`:''}
@@ -1765,9 +2080,9 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
       ${sel('region','Any region',f.regions)}
       ${sel('decade','Any decade',f.decades)}
       ${(f.origins||[]).length>1?sel('origin','On disk & catalogued',f.origins,
-        v=>v==='local'?'On disk (plays now)':'Catalogued (needs fetching)'):''}
+        {local:'On disk (plays now)',cloud:'Catalogued (needs fetching)'}):''}
       ${(f.sources||[]).length>1?sel('source','Any source',f.sources,
-        v=>SOURCE_LABEL[v]||v):''}
+        SOURCE_LABEL):''}
       <select data-lf="sort" aria-label="Sort by" data-i18n-aria-label="ui.sort-by.c9129025bd" style="padding:4px 8px;font-size:12px">
         <option value="" data-i18n="ui.platform-then-name.bb91fdb134"${LIB.sort?'':' selected'}>Platform, then name</option>
         <option value="name" data-i18n="ui.name-az.7ed9662907"${LIB.sort==='name'?' selected':''}>Name A–Z</option>
@@ -1784,7 +2099,7 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
       ${LIB.platform?` ${interfaceTemplateMarkup('ui.on-platform.351081c667',{platform:LIB.platform})}`:''}${q?` ${interfaceTemplateMarkup('ui.matching-query.12aacdc131',{query:q})}`:''}
       · ${interfaceTemplateMarkup('ui.cached-cached-across-platformcount-p.55b169ed05',{cached:fmt(d.grand_total),platformCount:fmt((d.platforms||[]).length)})}
       ${d.partial?` · <b>${interfaceMarkup('ui.still-loading-from-the-library-serve.4b07f1a4b9')}</b>`:''}
-      ${d.error?` · ${interfaceMarkup('ui.last-refresh.519ad138a1')} ${appMessageMarkup(d.error)}`:''}</p>`;
+      ${d.error?` · ${interfaceMarkup('ui.last-refresh.519ad138a1')} ${apiMessageMarkup(d.error)}`:''}</p>`;
 
   if(!items.length){
     p.innerHTML=head+`<div class="empty">
@@ -1816,7 +2131,8 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
   p.innerHTML=head+grid+more;
   if(q||d.error){
     const live=$('#app-announcement');
-    if(live)live.textContent=d.error?'Could not load the game library.':fmt(d.total||0)+' games found.';
+    if(live)live.innerHTML=d.error?appMessageMarkup('Could not load the game library.')
+      :interfaceTemplateMarkup('{count} games found.',{count:fmt(d.total||0)});
   }
   applyInterfaceLanguage();
   bindLibraryChips(p);
@@ -1908,7 +2224,7 @@ RENDER.add=async()=>{
       ? `<div class="card" style="margin:0"><h3 data-i18n="ui.grabbed.cdb5425259">Grabbed</h3>
          <p class="help"><span lang="und" dir="auto">${esc(r.release)}</span> — ${interfaceTemplateMarkup('ui.seeders-count.c31e318db5',{count:num(r.seeders)})}</p></div>`
        : `<div class="card" style="margin:0"><h3 data-i18n="ui.not-grabbed.c2d3260a1a">Not grabbed</h3>
-         <p class="help">${appMessageMarkup(r.error||'no usable release')}</p></div>`;
+         <p class="help">${(r.error?apiMessageMarkup(r.error):appMessageMarkup('no usable release'))}</p></div>`;
     applyInterfaceLanguage();
     refreshCounts();
   };
@@ -1940,7 +2256,7 @@ RENDER.search=async()=>{
     const d=await j(`/api/v1/release?game=${encodeURIComponent(game)}`
       +`&platform=${encodeURIComponent(platform)}`);
     if(d.error){
-      $('#s-out').innerHTML=`<p class="help" style="color:var(--warn)">${appMessageMarkup(d.error)}</p>`;
+      $('#s-out').innerHTML=`<p class="help" style="color:var(--warn)">${apiMessageMarkup(d.error)}</p>`;
       return;
     }
     if(!d.items.length){
@@ -1948,12 +2264,10 @@ RENDER.search=async()=>{
       applyInterfaceLanguage();
       return;
     }
-  const indexerTitle=r=>r.indexer
-    ? `title="${esc(translateTemplate('Open on {indexer}',{indexer:r.indexer}))}"
-       data-i18n-title-template-key="ui.open-on-indexer.202e1ad5f5"
-       data-i18n-title-values="${esc(JSON.stringify({indexer:r.indexer}))}"`
-    : `title="${esc(translateLabel('ui.open-on-the-indexer.4766c56d0d',readInterfaceLanguage()))}"
-       data-i18n-title="ui.open-on-the-indexer.4766c56d0d"`;
+  const indexerTitle=r=>`title="${esc(translateLabel('ui.open-on-the-indexer.4766c56d0d',readInterfaceLanguage()))}"
+    data-i18n-title="ui.open-on-the-indexer.4766c56d0d" ${r.indexer
+      ? interfaceAriaLabelTemplate('Open on {indexer}',{indexer:r.indexer})
+      : interfaceAriaLabelTemplate('Open on the indexer',{})}`;
     $('#s-out').innerHTML=`
       <p class="help">${interfaceTemplateMarkup('ui.found-found-releases-accepted-match.65f542cd3e',{found:fmt(d.found),accepted:fmt(d.accepted)})}</p>
       <table><thead><tr><th data-i18n="ui.score.38e5a46cbc">Score</th><th data-i18n="ui.release.e020e3c67b">Release</th><th data-i18n="ui.size.1af8519073">Size</th>
@@ -2035,11 +2349,11 @@ RENDER.missing=async()=>{
 
 function listsNav(active){
   return '<div class="row" style="margin-bottom:12px">'
-    +'<button class="btn '+(active==='catalog'?'':'ghost')+'" data-list-mode="catalog">Browse catalog</button>'
-    +'<button class="btn '+(active==='imports'?'':'ghost')+'" data-list-mode="imports">Import lists</button>'
+    +'<button class="btn '+(active==='catalog'?'':'ghost')+'" data-list-mode="catalog">'+interfaceMarkup('ui.browse-catalog.4d05dc6da8')+'</button>'
+    +'<button class="btn '+(active==='imports'?'':'ghost')+'" data-list-mode="imports">'+interfaceMarkup('ui.import-lists.cdf54991b2')+'</button>'
     +'<span style="flex:1"></span>'
-    +'<a class="btn ghost" style="text-decoration:none" href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG discovery</a>'
-    +'<a class="help" href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">Integration guide</a>'
+    +'<a class="btn ghost" style="text-decoration:none" href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('ui.seerrng-discovery.f140768191')+'</a>'
+    +'<a class="help" href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('ui.integration-guide.02a0a9e2c2')+'</a>'
     +'</div>';
 }
 function wireListNav(){
@@ -2102,7 +2416,7 @@ async function catalogOwnedRows(rows){
     const result=await j('/api/v1/catalog/ownership',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({games:batch.map(x=>({title:x.title,platform:x.platform}))})
-    }).catch(error=>({error:error.message||'ownership lookup failed'}));
+    }).catch(error=>({error:error.message||'library ownership is unavailable'}));
     if(result.error)throw new Error(result.error);
     (result.owned||[]).forEach(i=>{
       if(batch[i])owned.add(batch[i].index);
@@ -2162,9 +2476,9 @@ async function renderGameCatalog(){
   if(!hasIgdb&&!hasDat){
     CATALOG_VIEW.rows=[];
     $('#page').innerHTML=listsNav('catalog')
-      +'<div class="card"><h3>Browse games</h3>'
-      +'<p class="help">Connect an IGDB metadata provider under <a href="#metadata">Metadata</a>, or load No-Intro / Redump DATs under <a href="#collections">Collections</a>, to browse a catalog here.</p>'
-      +'<p class="help">For a guided discovery and user request queue, pair ROMarrNG with <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a>. ROMarr handles release search, verification and filing; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a>.</p></div>';
+      +'<div class="card"><h3>'+interfaceMarkup('Browse games')+'</h3>'
+      +'<p class="help">'+interfaceMarkup('Connect an IGDB metadata provider under')+interfacePhraseSpace()+'<a href="#metadata">'+interfaceMarkup('Metadata')+'</a>'+interfaceMarkup(', or load No-Intro / Redump DATs under')+interfacePhraseSpace()+'<a href="#collections">'+interfaceMarkup('Collections')+'</a>'+interfaceMarkup(', to browse a catalog here.')+'</p>'
+      +'<p class="help"><a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">'+interfaceTemplateMarkup('Use {service} for game discovery, game covers, and a shared household request queue.',{service:'SeerrNG'})+'</a>'+interfacePhraseSpace()+'<a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.')+'</a></p></div>';
     wireListNav();
     return;
   }
@@ -2260,7 +2574,7 @@ async function renderGameCatalog(){
         +'<td>'+(Number(game.rating)?'★ '+num(Number(game.rating)/20):'—')+'</td>'
         +'<td><button data-c-request="'+index+'">Request</button></td></tr>').join('')+'</tbody></table></div>';
   }else{
-    resultsMarkup='<div class="empty">'+(data.error?appMessageMarkup(data.error):'No titles match these filters.')+'</div>';
+    resultsMarkup='<div class="empty">'+(data.error?apiMessageMarkup(data.error):interfaceMarkup('No titles match these filters.'))+'</div>';
   }
   const sources='<div class="row" style="margin-bottom:10px">'
     +(hasIgdb?'<button class="btn '+(source==='igdb'?'':'ghost')+'" data-c-source="igdb">IGDB · covers, genres and ratings</button>':'')
@@ -2268,8 +2582,8 @@ async function renderGameCatalog(){
     +'<span style="flex:1"></span><button class="btn ghost" id="c-grid">Cover view</button><button class="btn ghost" id="c-list">List view</button></div>';
   const filters='<div class="row" style="align-items:end;margin-bottom:12px">'
     +'<div style="flex:2;min-width:210px"><label for="c-query">Search titles</label><input id="c-query" type="search" value="'+esc(CATALOG_VIEW.query)+'" placeholder="Search this catalog"></div>'
-    +'<div style="flex:1;min-width:190px"><label for="c-platform">Platform</label><select id="c-platform"><option value="">All supported platforms</option>'+sourcePlatforms+'</select></div>'
-    +(source==='igdb'?'<div style="flex:1;min-width:150px"><label for="c-genre">Genre</label><select id="c-genre"><option value="">All genres</option>'+genreOptions+'</select></div><div style="width:115px"><label for="c-year">Release year</label><input id="c-year" type="number" min="1950" max="2200" value="'+esc(CATALOG_VIEW.year)+'" placeholder="Any"></div><div style="width:190px"><label for="c-sort">Sort this page</label><select id="c-sort"><option value="popular">Recommended · IGDB popular</option><option value="name"'+(CATALOG_VIEW.sort==='name'?' selected':'')+'>Title A–Z</option><option value="rating"'+(CATALOG_VIEW.sort==='rating'?' selected':'')+'>Highest rated</option><option value="year"'+(CATALOG_VIEW.sort==='year'?' selected':'')+'>Newest release</option></select></div>':'')
+      +'<div style="flex:1;min-width:190px"><label for="c-platform">Platform</label><select id="c-platform"><option value="" data-i18n-key="'+esc(stableLocalizationKey('All supported platforms'))+'">All supported platforms</option>'+sourcePlatforms+'</select></div>'
+      +(source==='igdb'?'<div style="flex:1;min-width:150px"><label for="c-genre">Genre</label><select id="c-genre"><option value="" data-i18n-key="'+esc(stableLocalizationKey('All genres'))+'">All genres</option>'+genreOptions+'</select></div><div style="width:115px"><label for="c-year">Release year</label><input id="c-year" type="number" min="1950" max="2200" value="'+esc(CATALOG_VIEW.year)+'" placeholder="Any"></div><div style="width:190px"><label for="c-sort">Sort this page</label><select id="c-sort"><option value="popular" data-i18n-key="'+esc(stableLocalizationKey('Recommended · IGDB popular'))+'">Recommended · IGDB popular</option><option value="name" data-i18n-key="'+esc(stableLocalizationKey('Title A–Z'))+'"'+(CATALOG_VIEW.sort==='name'?' selected':'')+'>Title A–Z</option><option value="rating" data-i18n-key="'+esc(stableLocalizationKey('Highest rated'))+'"'+(CATALOG_VIEW.sort==='rating'?' selected':'')+'>Highest rated</option><option value="year" data-i18n-key="'+esc(stableLocalizationKey('Newest release'))+'"'+(CATALOG_VIEW.sort==='year'?' selected':'')+'>Newest release</option></select></div>':'')
     +'<label class="check" style="margin:0 0 8px"><input id="c-hide-owned" type="checkbox"'+(CATALOG_VIEW.hideOwned?' checked':'')+'> Hide owned</label>'
     +'<button class="btn" id="c-search">Search</button></div>';
   const pageInfo='<div class="row" style="margin:12px 0"><span class="help">'
@@ -2280,7 +2594,7 @@ async function renderGameCatalog(){
     +'<button class="btn ghost" id="c-next"'+(CATALOG_VIEW.next===null?' disabled':'')+'>Next</button></div>';
   const status='<p class="help">'+visible.length+' shown on this page'
     +(owned.size?' · '+owned.size+' already in your library hidden':'')
-    +(ownedError?' · owned check unavailable: '+esc(ownedError):'')
+    +(ownedError?' · '+interfaceMarkup('Owned check unavailable')+': '+apiMessageMarkup(ownedError):'')
     +(CATALOG_VIEW.platform?' · '+esc((PLATFORMS.find(p=>p.slug===CATALOG_VIEW.platform)||{}).name||''):'')
     +'</p>';
   $('#page').innerHTML=listsNav('catalog')+sources
@@ -2412,7 +2726,7 @@ RENDER.lists=async()=>{
     const spec=(s.paste_sources||{})[b.dataset.paste];
     if(!spec){toastLabel('ui.unknown-store.e7ff0236d5');return;}
     window.open(spec.open,'_blank','noopener');
-    toastAppMessage(spec.how);
+    toastMarkupMessage(connectHowMarkup(spec));
     editList({type:'paste',name:spec.label+' library'});
   });
   document.querySelectorAll('[data-token]').forEach(b=>b.onclick=async()=>{
@@ -2420,6 +2734,9 @@ RENDER.lists=async()=>{
     const spec=(s.token_sources||{})[b.dataset.token];
     if(!spec){toastLabel('ui.unknown-store.e7ff0236d5');return;}
     window.open(spec.open,'_blank','noopener');
+    const howPrefix=interfaceTemplateMarkup(
+      'ui.a-tab-just-opened-how.e4de8fcadf',{how:''});
+    const howMarkup=connectHowMarkup(spec);
     // A modal, not an inline panel: window.open moves the person to another
     // tab, and when they come back a box further down the page is a box
     // they never see. This one is in front of them and focused.
@@ -2427,8 +2744,7 @@ RENDER.lists=async()=>{
     m.className='modal';
     m.innerHTML=`<div class="box">
       <h3>${interfaceTemplateMarkup('ui.connect-to-service.bb9d648886',{service:spec.label})}</h3>
-      <div class="sub">${interfaceTemplateMarkup('ui.a-tab-just-opened-how.e4de8fcadf',
-        {how:spec.how||''})}</div>
+      <div class="sub">${howPrefix}${howMarkup}</div>
       <div class="field"><label>Paste it here</label>
         <textarea id="tok-v" rows="4" autocomplete="off" spellcheck="false"
           placeholder='paste the whole thing — {"npsso":"..."} is fine'
@@ -2452,13 +2768,13 @@ RENDER.lists=async()=>{
       const body={name:spec.label+' library',type:b.dataset.token,
                   platform:'',enable:true};
       body[spec.field]=value;
-      const line=(ok,msg)=>{
+      const line=(ok,msg,explicitTemplate=null)=>{
         const el=m.querySelector('#testline');
         el.className='testline '+(ok?'ok':'bad');
         el.setAttribute('role',ok?'status':'alert');el.setAttribute('aria-live',ok?'polite':'assertive');
-        el.innerHTML=appMessageMarkup(msg);
+        el.innerHTML=apiMessageMarkup(msg,explicitTemplate);
       };
-      line(true,'Connecting…');
+      line(true,'Connecting…',{key:'ui.connecting.72021eb70e',values:{}});
       try{
         const saved=await j('/api/v1/importlist',{method:'POST',
           headers:{'content-type':'application/json'},body:JSON.stringify(body)});
@@ -2478,8 +2794,12 @@ RENDER.lists=async()=>{
   j('/api/v1/importlist/schema').then(s=>{
     const el=$('#l-noapi'); if(!el) return;   // page may have changed
     const rows=Object.entries(s.no_api||{});
-    el.innerHTML=rows.map(([store,why])=>
-      `<p style="margin:6px 0"><b>${esc(store)}</b> — ${esc(why)}</p>`).join('');
+    el.innerHTML=rows.map(([store,why])=>{
+      const reason=store==='Nintendo'
+        ?interfaceMarkup('ui.no-web-api-and-nothing-written-to-a.fefddf8698')
+        :esc(why);
+      return `<p style="margin:6px 0"><b>${esc(store)}</b> — ${reason}</p>`;
+    }).join('');
   }).catch(()=>{});
   const scanBtn=$('#l-scan');
   if(scanBtn) scanBtn.onclick=async()=>{
@@ -2487,7 +2807,16 @@ RENDER.lists=async()=>{
     const r=await j('/api/v1/launchers/connect',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({name:'Local launchers'})}).catch(()=>({error:'scan failed'}));
-    if(r.error)toastAppMessage(r.error);else if(r.message)toastAppMessage(r.message);else toastLabel('ui.done.11a6767d56');
+    if(r.error){
+      // This exact local launcher-scan response is the only source for this template.
+      const scanFailure=typeof r.error==='string'
+        ?r.error.match(/^scan failed: ([A-Za-z_][A-Za-z0-9_]*)$/):null;
+      if(scanFailure)
+        toastMarkupMessage(interfaceTemplateMarkup(
+          'ui.scan-failed-error-type.e99ccb8157',
+          {error_type:scanFailure[1]}));
+      else toastAppMessage(r.error);
+    }else if(r.message)toastAppMessage(r.message);else toastLabel('ui.done.11a6767d56');
     if(r.ok) go('lists'); else { scanBtn.disabled=false; scanBtn.textContent='Scan this machine'; }
   };
   $('#l-add').onclick=()=>editList({type:'paste'});
@@ -2611,7 +2940,7 @@ function editList(item){
     e.target.disabled=true; line(true,interfaceMarkup('ui.reading.874bfa5bed'));
     const r=await j('/api/v1/importlist/preview',{method:'POST',
       headers:{'content-type':'application/json'},body:JSON.stringify(payload())});
-    if(r.error){ line(false,appMessageMarkup(r.error)); }
+    if(r.error){ line(false,apiMessageMarkup(r.error,r.error_template)); }
     else{
       const unresolved=r.items.filter(x=>x.unresolved).length;
       const summary=unresolved
@@ -2630,7 +2959,7 @@ function editList(item){
     try{
       const saved=await j('/api/v1/importlist',{method:'POST',
         headers:{'content-type':'application/json'},body:JSON.stringify(payload())});
-      if(saved.error){line(false,appMessageMarkup(saved.error));button.disabled=false;return;}
+      if(saved.error){line(false,apiMessageMarkup(saved.error));button.disabled=false;return;}
       closeModal(); toastLabel('ui.saved.b5c120b316'); go('lists',true);
     }catch(_){
       line(false,appMessageMarkup('Could not save this list. Check the connection and try again.'));
@@ -2645,9 +2974,12 @@ function editList(item){
     try{
       const response=await fetch(`/api/v1/importlist/${item.id}`,{method:'DELETE'});
       const result=await response.json().catch(()=>({}));
-      if(!response.ok||result.error)throw new Error(result.error||`Could not remove this list (HTTP ${response.status}).`);
+      if(result.error){line(false,apiMessageMarkup(result.error));del.disabled=false;return;}
+      if(!response.ok){line(false,interfaceTemplateMarkup(
+        'Could not remove this list (HTTP {status}).',{status:fmt(response.status)}));
+        del.disabled=false;return;}
       closeModal(); toastLabel('ui.removed.4118fb4fed'); go('lists',true);
-    }catch(error){line(false,appMessageMarkup(error.message||'Could not remove this list.'));del.disabled=false;}
+    }catch(_){line(false,appMessageMarkup('Could not remove this list.'));del.disabled=false;}
   };
 }
 
@@ -2671,7 +3003,7 @@ RENDER.discover=async()=>{
       <button class="btn ${mine?'ghost':''}" data-mode="web">New releases (web)</button>
       <span style="flex:1"></span>
       ${tabs.map(([k,l])=>`<button class="btn ${k===DISC.shelf?'':'ghost'}"
-        data-shelf="${k}" style="padding:4px 10px;font-size:12px">${l}</button>`).join('')}
+        data-shelf="${k}" style="padding:4px 10px;font-size:12px">${interfaceMarkup(l)}</button>`).join('')}
     </div>
     <div id="d-genres" style="margin-bottom:10px"></div>
     <div id="d-out"><div class="empty">Browsing…</div></div>`;
@@ -2700,7 +3032,7 @@ RENDER.discover=async()=>{
     const items=d.items||[];
     if(!items.length){
       const facetNames={genre:'Genre',franchise:'Franchise',company:'Company'};
-      const emptyCopy=d.error?appMessageMarkup(d.error)
+      const emptyCopy=d.error?apiMessageMarkup(d.error)
         :facet&&!DISC.genre?interfaceTemplateMarkup('ui.pick-a-facet-above.95ff025720',{
           facet:translateLabel(facetNames[facet[0]]||facet[0],readInterfaceLanguage())})
         :interfaceMarkup('ui.nothing-on-this-shelf-yet.337c41f2eb');
@@ -2733,7 +3065,7 @@ RENDER.discover=async()=>{
     // providers are configured and which credential is blank; a fixed line
     // here naming one provider is how somebody with a working IGDB setup
     // gets told to go and register for RAWG.
-    $('#d-out').innerHTML=`<div class="empty">${appMessageMarkup(d.error||'Nothing to show.')}</div>`;
+    $('#d-out').innerHTML=`<div class="empty">${d.error?apiMessageMarkup(d.error):appMessageMarkup('Nothing to show.')}</div>`;
     return;
   }
   const src=d.provider_label||'';
@@ -2853,8 +3185,8 @@ RENDER.peers=async()=>{
     const claimCodeMessage='This claim code is a secret. Send it separately from the link, for example by saying it aloud, texting it, or using another app. It works once and expires in {minutes} minutes.';
     $('#p-out').innerHTML=`<div class="card" style="margin:0">
       <h3>Send your friend two things</h3>
-      ${r.note?`<p class="help">${appMessageMarkup(r.note)}</p>`:''}
-      ${r.warning?`<div class="panel panel-warn">${appMessageMarkup(r.warning)}</div>`:''}
+      ${r.note?`<p class="help">${apiMessageMarkup(r.note)}</p>`:''}
+      ${r.warning?`<div class="panel panel-warn">${apiMessageMarkup(r.warning)}</div>`:''}
       ${r.link?`<div class="field"><label>1. The link — send it anywhere</label>
         <input type="text" id="p-link" readonly value="${esc(r.link)}"
           style="width:100%;font:12px/1.5 ui-monospace,Menlo,monospace">
@@ -2946,7 +3278,7 @@ RENDER.peers=async()=>{
         body:JSON.stringify({link:$('#p-link-in').value.trim(),
                              code:$('#p-code-in').value.trim()})});
       b.disabled=false; b.textContent='Become friends';
-      if(!r.ok){ if(r.error)toastAppMessage(r.error);else toastLabel('ui.that-invitation-was-refused.dbe525c91c'); return; }
+      if(!r.ok){ if(r.error)toastAppMessage(r.error,r.error_template);else toastLabel('ui.that-invitation-was-refused.dbe525c91c'); return; }
       if(r.warning) toastAppMessage(r.warning);
       if(r.name&&r.detail)toastMessage('ui.connected-to-friend-they-confirm-you.d27741887e',
         {friend:r.name});
@@ -3010,10 +3342,11 @@ RENDER.peers=async()=>{
       setTimeout(seedPoll,2000);
     } else if(st.status==='done'&&st.seen){
       live.innerHTML=`<div class="panel" style="margin-top:10px">${
-      appMessageMarkup(st.detail||'')}</div>`;
+      apiMessageMarkup(st.detail,st.detail_template)}</div>`;
     } else if(st.status==='failed'){
       live.innerHTML=`<div class="panel panel-warn" style="margin-top:10px">${
-        appMessageMarkup(st.error||'The library read failed.')}</div>`;
+        (st.error?apiMessageMarkup(st.error,st.error_template)
+          :appMessageMarkup('The library read failed.'))}</div>`;
     }
   };
   seedPoll();
@@ -3024,7 +3357,7 @@ RENDER.peers=async()=>{
     const r=await j('/api/v1/hashes/seed',{method:'POST',
       headers:{'content-type':'application/json'},body:'{}'});
     b.disabled=false; b.textContent='Read them again now';
-    toastAppMessage(r.detail||r.error||'');
+    toastAppMessage(r.detail||r.error||'',r.detail?r.detail_template:r.error_template);
     seedPoll();
   };
 
@@ -3061,7 +3394,7 @@ RENDER.peers=async()=>{
         body:JSON.stringify({url:val('url'),username:val('username'),
           password:val('password'),name:val('name')})});
       btn.disabled=false; btn.textContent='Connect';
-      if(r.error){ toastAppMessage(r.error); return; }
+      if(r.error){ toastAppMessage(r.error,r.error_template); return; }
       close();
       if(r.name&&Number.isFinite(Number(r.titles))){
         const source='Connected to {friend}: {count} title with hashes ROMarr can match on.';
@@ -3088,7 +3421,7 @@ async function friendShelf(peerId, opts){
   const r=await j('/api/v1/friends/shelf?'+p.toString()).catch(()=>({}));
   if(!r.ok){
     out.innerHTML=`<div class="panel panel-warn" style="margin-top:14px">${
-      appMessageMarkup(r.error||'Could not reach that friend.')}</div>`;
+      (r.error?apiMessageMarkup(r.error,r.error_template):appMessageMarkup('Could not reach that friend.'))}</div>`;
     return;
   }
   const rows=r.items||[];
@@ -3102,7 +3435,7 @@ async function friendShelf(peerId, opts){
   const accessMarkup=r.access==='catalogue'
     ?interfaceMarkup('ui.you-can-add-anything-here-to-your-ow.3972ab31c3')
     :interfaceMarkup('ui.they-allow.293deba9f6')+' '+(accessLabels[r.access]
-      ?interfaceMarkup(accessLabels[r.access]):appMessageMarkup(r.access||'—'));
+      ?interfaceMarkup(accessLabels[r.access]):apiMessageMarkup(r.access||'—'));
   out.innerHTML=`<div style="margin-top:18px;border-top:1px solid var(--line);
       padding-top:16px">
     <h3 style="margin:0 0 4px">${friendTitle}</h3>
@@ -3158,8 +3491,8 @@ async function friendShelf(peerId, opts){
       headers:{'content-type':'application/json'},
       body:JSON.stringify({peer_id:FSHELF.peer,title:b.dataset.fwant,
         platform:b.dataset.fplat})});
-    if(r.ok)toastMessage('ui.added-detail.96268cbde3',{detail:r.detail||''});
-    else if(r.error)toastAppMessage(r.error);else toastLabel('ui.could-not-add.4c45a2e67f');
+    if(r.ok)toastSourceMessage(r.detail||'added to Wanted -- your indexers will look for it');
+    else if(r.error)toastAppMessage(r.error,r.error_template);else toastLabel('ui.could-not-add.4c45a2e67f');
   });
   document.querySelectorAll('[data-fplay]').forEach(b=>b.onclick=async()=>{
     $('#fs-out').innerHTML='<div class="empty">Comparing dumps…</div>';
@@ -3176,15 +3509,17 @@ async function friendShelf(peerId, opts){
 //: evening blaming on their connection.
 function netplayVerdict(r){
   const cls=r.ok?'panel':'panel panel-warn';
-  const head={
+  const knownHeadSources={
     ready:'Ready — you both have the same dump',
     unverified:'Playable, with a caveat',
     mismatch:'Same game, different dumps',
     missing:'They do not have this dump',
     unhashed:'ROMarr has not hashed your copy yet',
     error:'Could not ask'
-  }[r.status]||r.status||'No answer';
-  const headMarkup=appMessageMarkup(head);
+  };
+  const knownHead=Object.hasOwn(knownHeadSources,r.status)
+    ?knownHeadSources[r.status]:null;
+  const headMarkup=knownHead?appMessageMarkup(knownHead):apiMessageMarkup(r.status||'No answer');
   let extra='';
   if(r.room){
     extra=`<div style="margin-top:8px">${interfaceMarkup('ui.room.911ea89c43')} <code>${esc(r.room)}</code>
@@ -3196,7 +3531,7 @@ function netplayVerdict(r){
       ${interfaceTemplateMarkup('ui.compared-on-sha1-sha1-not-the-title.5935055754',{sha1:r.sha1})}</div>`;
   }
   return `<div class="${cls}" style="margin-top:12px"><b>${headMarkup}</b>
-    ${r.detail?`<div style="margin-top:6px">${appMessageMarkup(r.detail)}</div>`:''}
+    ${r.detail||r.detail_template?`<div style="margin-top:6px">${apiMessageMarkup(r.detail,r.detail_template)}</div>`:''}
     ${extra}</div>`;
 }
 
@@ -3306,7 +3641,7 @@ RENDER.stats=async()=>{
       <h3>Where the library comes from</h3>
       ${bar(Object.fromEntries(Object.entries(s.library_sources)
         .sort((a,b)=>b[1]-a[1])
-        .map(([k,v])=>[SOURCE_LABEL[k]||k,v])))}
+        .map(([k,v])=>[ownLabel(SOURCE_LABEL,k)??k,v])))}
       <p class="help">These counts come from rows ROMarr read. Each catalogue is identified by the filename written by its indexer. Rows that match neither are labeled “source unknown” instead of being assigned to the larger catalogue.</p></div>`:''}
     <div class="card"><h3>Imports by platform</h3>${bar(s.imported_by_platform)}</div>
     <div class="card"><h3>Grabs by indexer</h3>${bar(s.grabbed_by_indexer)}</div>
@@ -3374,7 +3709,7 @@ RENDER.queue=async()=>{
     ${d.items.map((i,n)=>`<tr><td>${esc(i.game)}</td><td>${esc(i.platform)}</td>
       <td>${esc(i.release||'—')}</td><td>${num(i.seeders)}</td>
       <td><span class="pill ${esc(i.state)}">${statusMarkup(i.state)}</span>
-      ${i.detail?`<div style="color:var(--dim);font-size:11.5px">${appMessageMarkup(i.detail)}</div>`:''}
+      ${i.detail?`<div style="color:var(--dim);font-size:11.5px">${apiMessageMarkup(i.detail)}</div>`:''}
       </td><td style="text-align:end"><div class="rowact">
         ${i.state==='failed'?`<button data-qretry="${n}">Retry</button>`:''}
         <button data-qremove="${n}">Remove</button></div></td></tr>`).join('')}
@@ -3426,7 +3761,7 @@ RENDER.patches=async()=>{
           <td>${esc(p.kind||'')}</td>
           <td>${esc(v.label||v.version||'—')}</td>
           <td>${esc(p.status||'')}${p.completeness?' · '+esc(p.completeness):''}</td>
-          <td>${(v.base||{}).available?'In library':'<span style="color:var(--dim)">Not in library</span>'}</td></tr>`;
+          <td>${(v.base||{}).available?interfaceMarkup('In library'):'<span style="color:var(--dim)">'+interfaceMarkup('Not in library')+'</span>'}</td></tr>`;
       }).join('')}</tbody></table>`
       :'<div class="empty">No patch projects match. Add a catalogue in Media Management or drop JSON files into the patch-catalog.d folder.</div>';
   };
@@ -3435,9 +3770,9 @@ RENDER.patches=async()=>{
       states, never a guess. Requests come from SeerrNG.</div>
     <div class="field" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
       <input type="search" id="patch-q" aria-label="Search patch projects" placeholder="Search">
-      <select id="patch-kind" aria-label="Kind"><option value="">All kinds</option>
-        <option value="translation">Translations</option><option value="hack">Hacks</option>
-        <option value="improvement">Improvements</option></select>
+      <select id="patch-kind" aria-label="Kind"><option value="" data-i18n-key="${esc(stableLocalizationKey('All kinds'))}">All kinds</option>
+        <option value="translation" data-i18n-key="${esc(stableLocalizationKey('Translations'))}">Translations</option><option value="hack" data-i18n-key="${esc(stableLocalizationKey('Hacks'))}">Hacks</option>
+        <option value="improvement" data-i18n-key="${esc(stableLocalizationKey('Improvements'))}">Improvements</option></select>
       <label class="check"><input type="checkbox" id="patch-complete"><span>Complete only</span></label>
     </div>
     <div id="patch-results" aria-live="polite"></div>`;
@@ -3650,10 +3985,10 @@ async function editItem(kind, item){
   m.className = 'modal';
   const clientPathContext = kind === 'downloadclient'
     ? `<div class="panel-note"><b>Container path check</b><br>
-      ROMarr library destination: <code>${esc(SETTINGS.library_path||'not configured')}</code>.<br>
+      ${interfaceTemplateMarkup('ROMarr library destination: {path}.',{path:SETTINGS.library_path||'not configured'})}<br>
       ${item.save_path
-        ? `Configured client save path: <code>${esc(item.save_path)}</code>.`
-        : 'This client reports the completed path for each download.'}
+        ? interfaceTemplateMarkup('Configured client save path: {path}.',{path:item.save_path})
+        : interfaceMarkup('This client reports the completed path for each download.')}
       ROMarr checks the actual completed path during import. If that path is not
       visible inside ROMarr, use the remote path mapping on Media Management;
       keep the download path and library destination distinct.</div>`
@@ -3674,21 +4009,26 @@ async function editItem(kind, item){
   m.onclick = e => { if(e.target === m || e.target.dataset.close !== undefined) closeModal(); };
 
   const payload = () => ({ ...readForm(), type: item.type, id: item.id });
-  const line = (ok, msg) => {
+  const line = (ok, msg, explicitTemplate=null) => {
     const status=m.querySelector('#testline');
     status.className = 'testline ' + (ok ? 'ok' : 'bad');
     status.setAttribute('role',ok?'status':'alert');
     status.setAttribute('aria-live',ok?'polite':'assertive');
-    status.innerHTML = appMessageMarkup(msg);
+    status.innerHTML = apiMessageMarkup(msg,explicitTemplate);
   };
 
   m.querySelector('#m-test').onclick = async (e) => {
-    e.target.disabled = true; line(true, 'Testing…');
+    e.target.disabled = true;
+    line(true, 'Testing…', {key:'ui.testing.407b7a0466',values:{}});
     try{
       const r = await j(`/api/v1/${kind}/test`, {
         method: 'POST', headers: { 'content-type': 'application/json' },
         body: JSON.stringify(payload()) });
-      line(r.ok, r.message || (r.ok ? 'Connected' : 'Failed'));
+      const fallbackTemplate=r.ok
+        ?{key:'ui.connected.22965568d2',values:{}}
+        :{key:'ui.failed.031a8f0f65',values:{}};
+      line(r.ok, r.message || (r.ok ? 'Connected' : 'Failed'),
+        r.message_template||fallbackTemplate);
     }catch(_){line(false,'Could not reach ROMarr. Check the connection and try again.');}
     e.target.disabled = false;
   };
@@ -3714,9 +4054,12 @@ async function editItem(kind, item){
     try{
       const response=await fetch(`/api/v1/${kind}/${item.id}`, { method: 'DELETE' });
       const result=await response.json().catch(()=>({}));
-      if(!response.ok||result.error)throw new Error(result.error||`Could not remove this entry (HTTP ${response.status}).`);
+      if(result.error){status.innerHTML=apiMessageMarkup(result.error);del.disabled=false;return;}
+      if(!response.ok){status.innerHTML=interfaceTemplateMarkup(
+        'Could not remove this entry (HTTP {status}).',{status:fmt(response.status)});
+        del.disabled=false;return;}
       closeModal(); toastLabel('ui.removed.4118fb4fed'); go((KINDS[kind] || {}).page || 'clients',true);
-    }catch(error){line(false,error.message||'Could not remove this entry.');del.disabled=false;}
+    }catch(_){line(false,appMessageMarkup('Could not remove this entry.'));del.disabled=false;}
   };
 }
 
@@ -3730,7 +4073,7 @@ function settingsPage(title, help, body, after){
   const reportSettingsError=(message,control)=>{
     const status=$('#settings-save-status');
     status.setAttribute('role','alert');status.setAttribute('aria-live','assertive');
-    status.textContent=message;
+    status.innerHTML=apiMessageMarkup(message);
     control?.setAttribute('aria-invalid','true');
     control?.focus({preventScroll:false});
   };
@@ -3786,7 +4129,9 @@ function settingsPage(title, help, body, after){
       SETTINGS=saved;status.textContent='Settings saved.';toastLabel('ui.saved.b5c120b316');
     }catch(error){
       status.setAttribute('role','alert');status.setAttribute('aria-live','assertive');
-      status.textContent=String(error&&error.message||'Settings could not be saved. Try again.');
+      status.innerHTML=error&&error.message
+        ?apiMessageMarkup(error.message)
+        :appMessageMarkup('Settings could not be saved. Try again.');
     }finally{button.disabled=false;}
   };
 }
@@ -3810,8 +4155,13 @@ const pathMappingRow=m=>{
     String(c.id||''),`${c.name||c.type||'Download client'} · ${c.type||'client'} · ${c.host||'local'}${c.port?':'+c.port:''}`])];
   if(clientId&&!clients.some(c=>String(c.id||'')===clientId))
     options.push([clientId,`Unavailable download client · ${clientId}`]);
-  const rowName=m.remote?`Path mapping for ${m.remote}`:'New path mapping';
-  return `<div data-mapping-row class="mapping-row path-map" role="group" aria-label="${esc(rowName)}">
+  const rowName=m.remote
+    ?{source:'Path mapping for {path}',values:{path:m.remote}}
+    :{source:'New path mapping',values:{}};
+  const removeName=m.remote
+    ?{source:'Remove path mapping for {path}',values:{path:m.remote}}
+    :{source:'Remove this path mapping',values:{}};
+  return `<div data-mapping-row class="mapping-row path-map" role="group" ${interfaceAriaLabelTemplate(rowName.source,rowName.values)}>
     <label class="mapping-field">Download client
       <select data-map-client>${options.map(([value,label])=>{
         const unavailable=value===clientId&&!clients.some(c=>String(c.id||'')===clientId);
@@ -3828,23 +4178,28 @@ const pathMappingRow=m=>{
     <label class="mapping-field">Local path
       <input data-map-local value="${esc(m.local||'')}" placeholder="Path visible to ROMarr">
     </label>
-    <button class="btn ghost" type="button" data-mapping-remove aria-label="Remove ${esc(rowName)}">Remove</button>
+    <button class="btn ghost" type="button" data-mapping-remove ${interfaceAriaLabelTemplate(removeName.source,removeName.values)}>Remove</button>
   </div>`;
 };
 const pathMappingRows=m=>(Array.isArray(m)&&m.length?m:[{}]).map(pathMappingRow).join('');
 const platformFolderRow=m=>{
   m=m||{};
   const folder=String(m.folder||'');
-  const rowName=folder?`Platform folder mapping for ${folder}`:'New platform folder mapping';
+  const rowName=folder
+    ?{source:'Platform folder mapping for {folder}',values:{folder}}
+    :{source:'New platform folder mapping',values:{}};
+  const removeName=folder
+    ?{source:'Remove platform folder mapping for {folder}',values:{folder}}
+    :{source:'Remove this platform folder mapping',values:{}};
   const options=(PLATFORMS||[]).map(p=>`<option value="${esc(p.slug)}"${String(m.platform||'')===String(p.slug)?' selected':''}>${esc(p.name||p.slug)}</option>`).join('');
-  return `<div data-platform-folder-row class="mapping-row platform-folder" role="group" aria-label="${esc(rowName)}">
+  return `<div data-platform-folder-row class="mapping-row platform-folder" role="group" ${interfaceAriaLabelTemplate(rowName.source,rowName.values)}>
     <label class="mapping-field">Folder name
       <input data-platform-folder-name value="${esc(folder)}" placeholder="e.g. PS2 Games">
     </label>
     <label class="mapping-field">Platform
-      <select data-platform-folder-slug><option value="">Choose a platform</option>${options}</select>
+      <select data-platform-folder-slug><option value="" data-i18n-key="${esc(stableLocalizationKey('Choose a platform'))}">Choose a platform</option>${options}</select>
     </label>
-    <button class="btn ghost" type="button" data-platform-folder-remove aria-label="Remove ${esc(rowName)}">Remove</button>
+    <button class="btn ghost" type="button" data-platform-folder-remove ${interfaceAriaLabelTemplate(removeName.source,removeName.values)}>Remove</button>
   </div>`;
 };
 const platformFolderRows=m=>Object.entries(m&&typeof m==='object'&&!Array.isArray(m)?m:{}).map(([folder,platform])=>platformFolderRow({folder,platform})).join('');
@@ -3852,7 +4207,7 @@ RENDER.media=()=>settingsPage('Media Management',
   'Where imported ROMs and the shared metadata catalog live. The ROM path must be the path your library server scans. Completed-download paths are reported by the client per item; compare that exact path before import and add a remote path mapping below when ROMarr sees it somewhere else.',
   fld('library_path','ROM library root',SETTINGS.library_path)
   +fld('metadata_path','Shared metadata root',SETTINGS.metadata_path||'')
-  +`<div class="help" style="margin:-6px 0 14px">Use one ROM root with one folder per platform, such as <code>Emulation/roms/ps2</code> and <code>Emulation/roms/snes</code>; you do not need a separate library entry for each system. With EmuDeck, point this at its <code>Emulation/roms</code> folder, not the wider <code>Emulation</code> directory. Keep shared metadata alongside it at <code>Emulation/metadata</code>, outside the ROM root, and mount that folder on each client. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another provider lookup.</div>`
+  +`<div class="help" style="margin:-6px 0 14px">Use one ROM root with one folder per platform, such as <code>Emulation/roms/ps2</code> and <code>Emulation/roms/snes</code>; you do not need a separate library entry for each system. With EmuDeck, point this at its <code>Emulation/roms</code> folder, not the wider <code>Emulation</code> directory. Keep shared metadata alongside it at <code>Emulation/metadata</code>${interfaceMarkup(', outside the ROM root, and mount that folder on each client. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another provider lookup.')}</div>`
   +`<fieldset class="settings-group"><legend>Platform folder names</legend>
     <p class="help" style="margin:4px 0 8px">ROMarr recognizes platform slugs and unambiguous ES-DE system names automatically. Add a mapping only when your existing folder uses another name, such as <code>PS2 Games</code>. Folder names are matched only at the library root.</p>
     <div id="platform-folder-mappings">${platformFolderRows(SETTINGS.platform_folder_mappings)}</div>
@@ -3880,7 +4235,7 @@ RENDER.media=()=>settingsPage('Media Management',
   +`<div class="help" style="margin:-6px 0 12px">Switch IDs and version numbers come from the filename and TitleDB. They classify a likely base game, update or DLC; they do not verify the package bytes. When enabled, only TitleDB identified updates and DLC are routed to the folders below.</div>`
   +fld('switch_updates_dir','Switch updates folder',SETTINGS.switch_updates_dir||'Updates')
   +fld('switch_dlc_dir','Switch DLC folder',SETTINGS.switch_dlc_dir||'DLC')
-  +chk('overwrite_existing','Overwrite an existing file',SETTINGS.overwrite_existing)
+  +chk('overwrite_existing',interfaceMarkup('Overwrite an existing file'),SETTINGS.overwrite_existing)
   +chk('rescan_after_import','Tell your library server to rescan after an import',SETTINGS.rescan_after_import)
   +sel('translation_policy','Fan translations in 1G1R sets',
      [['exclude','Exclude — published dumps only'],
@@ -4033,7 +4388,7 @@ RENDER.libraries=async()=>{
     ${noDefault?`<p class="help" style="color:var(--warn)">${interfaceMarkup('ui.no-library-is-marked-default-so-anyt.60146a85ac')}</p>`:''}
     ${unmounted.map(l=>`<p class="help" style="color:var(--warn)">
       ${interfaceTemplateMarkup('ui.name-answers-but-nothing-can-be-impo.2992263c10',
-        {name:l.name||''})} ${esc(l.path_hint||'')}</p>
+        {name:l.name||''})} ${apiMessageMarkup(l.path_hint||'')}</p>
       ${l.readable===false?`<p class="panel-note panel-warn">${esc(l.detail||'')}</p>`:''}`).join('')}
     ${d.items.length?`<table><thead><tr><th>Library</th><th>Type</th>
       <th>Address</th><th>Path</th><th>Platforms</th><th>Status</th><th></th></tr>
@@ -4099,7 +4454,7 @@ RENDER.indexers=async()=>{
         <td><span class="dot ${i.enable?'up':'down'}"></span>${i.enable?'yes':'no'}</td>
         </tr>`).join('')}</tbody></table></div><div id="i-diagnostics"></div>`
     :(d.error?`<div class="card"><h3>Via Prowlarr</h3>
-        <p class="help" style="color:var(--warn)">${appMessageMarkup(d.error)}</p>
+        <p class="help" style="color:var(--warn)">${apiMessageMarkup(d.error)}</p>
         <div class="row" style="justify-content:flex-end">
           <button class="btn ghost" id="i-diagnose">Test indexers</button></div>
         </div><div id="i-diagnostics"></div>`:'')}`;
@@ -4108,7 +4463,7 @@ RENDER.indexers=async()=>{
   if(emptyAdd)emptyAdd.onclick=()=>addItem('indexer');
   const test=$('#i-diagnose');
   if(test)test.onclick=async()=>{
-    test.disabled=true;test.textContent='Testing…';
+    test.disabled=true;test.innerHTML=interfaceMarkup('Testing…');
     try{
       const report=await j('/api/v1/indexer/diagnose',{method:'POST',
         headers:{'Content-Type':'application/json'},body:'{}'});
@@ -4120,30 +4475,27 @@ RENDER.indexers=async()=>{
           <b>Management API</b> — ${interfaceMarkup(management.success?'Connected':'Failed')}
           ${management.status?' · HTTP '+esc(management.status):''}
           ${management.version?' · '+esc(management.version):''}</p>
-    ${management.error?`<p class="help" style="color:var(--warn)">${appMessageMarkup(management.error)}</p>`:''}
+    ${management.error?`<p class="help" style="color:var(--warn)">${apiMessageMarkup(management.error)}</p>`:''}
         ${rows.length?`<table><thead><tr><th>Indexer</th><th>Feed</th><th>Details</th>
           </tr></thead><tbody>${rows.map(item=>`<tr>
             <td>${esc(item.name||'Indexer')}</td>
             <td><span class="dot ${item.success?'up':'down'}"></span>
               ${interfaceMarkup(item.success?'Connected':'Failed')}${item.status?' · HTTP '+esc(item.status):''}</td>
-            <td style="color:var(--dim)">${appMessageMarkup(item.error||item.recentFailure||'—')}
+            <td style="color:var(--dim)">${apiMessageMarkup(item.error||item.recentFailure||'—')}
               ${item.disabledUntil?`<br>${interfaceTemplateMarkup('ui.disabled-until-date.9bb80884d5',{date:regionalDateTime(item.disabledUntil)})}`:''}</td>
             </tr>`).join('')}</tbody></table>`
           :'<p class="help">No enabled torrent or usenet indexers were found.</p>'}
         </div>`;
     }catch(e){
-      $('#i-diagnostics').innerHTML=`<div class="card"><p class="help" style="color:var(--warn)">${appMessageMarkup(e.message||'Diagnostics failed')}</p></div>`;
-    }finally{test.disabled=false;test.textContent='Test indexers';}
+      $('#i-diagnostics').innerHTML=`<div class="card"><p class="help" style="color:var(--warn)">${apiMessageMarkup(e.message||'Diagnostics failed')}</p></div>`;
+    }finally{test.disabled=false;test.innerHTML=interfaceMarkup('Test indexers');}
   };
   document.querySelectorAll('[data-iedit]').forEach(b=>b.onclick=()=>
     editItem('indexer', d.items[Number(b.dataset.iedit)]));
 };
 
 RENDER.general=()=>settingsPage('General',
-  'Optional connections to the rest of the stack. Credentials live in the environment '
-  +'file, not here — this page never shows or stores a secret. Indexers and download '
-  +'clients have their own Settings pages; notifications and metadata connections '
-  +'can be added only when you choose to use them.',
+  interfaceMarkup('Optional connections to the rest of the stack. Credentials live in the environment file, not here — this page never shows or stores a secret. Indexers and download clients have their own Settings pages; notifications and metadata connections can be added only when you choose to use them.'),
   `<div class="field"><label>Prowlarr</label>
      <input type="text" value="${esc(SETTINGS._prowlarr_url||'')}" disabled></div>
    <div class="field"><label>qBittorrent</label>
@@ -4225,11 +4577,15 @@ RENDER.general=()=>settingsPage('General',
       const d=await j('/api/v1/totp/enroll',{method:'POST',
         headers:{'content-type':'application/json'},body:'{}'}).catch(()=>({}));
       const out=$('#g-totpout'); out.style.display='block';
-      out.textContent='Secret:  '+(d.secret||'?')
-        +'\nURI:     '+(d.uri||'?')
-        +'\n\nBackup codes (single use, save them now):\n  '
-        +((d.backup_codes||[]).join('\n  '))
-        +'\n\n'+(d.note||'');
+      const noteKey='ui.scan-the-uri-or-enter-the-secret-in.612ce1fd46';
+      const note=d.note||'';
+      const noteMarkup=typeof note==='string'&&note===UI_MESSAGES[noteKey]?.source
+        ?interfaceMarkup(noteKey):apiMessageMarkup(note);
+      out.innerHTML=interfaceTemplateMarkup('Secret: {secret}',{secret:d.secret||'?'})
+        +'\nURI:     '+esc(d.uri||'?')
+        +'\n\n'+interfaceMarkup('Backup codes (single use, save them now):')+'\n  '
+        +esc((d.backup_codes||[]).join('\n  '))
+        +'\n\n'+noteMarkup;
     };
     $('#g-totpoff').onclick=async()=>{
       const d=await j('/api/v1/totp/disable',{method:'POST',
@@ -4243,8 +4599,8 @@ RENDER.general=()=>settingsPage('General',
 RENDER.status=async()=>{
   const h=await j('/api/v1/system/status');
   const row=(l,ok,extra='')=>`<tr><td>${l}</td>
-    <td><span class="dot ${ok?'up':'down'}"></span>${ok?'OK':'Not available'}</td>
-    <td style="color:var(--dim)">${esc(extra)}</td></tr>`;
+    <td><span class="dot ${ok?'up':'down'}"></span>${interfaceMarkup(ok?'OK':'Not available')}</td>
+    <td style="color:var(--dim)">${apiMessageMarkup(extra)}</td></tr>`;
   const g=h.ggrequestz||{};
   $('#page').innerHTML=`<div class="card"><h3>Health</h3><table><tbody>
       ${row('Prowlarr',h.prowlarr,h.prowlarr_url)}
@@ -4344,7 +4700,7 @@ RENDER.status=async()=>{
       const blob=new Blob([JSON.stringify(encrypted,null,2)],{type:'application/json'});
       const url=URL.createObjectURL(blob); save(url,'romarr-backup-encrypted.json');
       setTimeout(()=>URL.revokeObjectURL(url),1000); msg(true,interfaceMarkup('ui.encrypted-backup-downloaded.d15118586e'));
-    }catch(err){ msg(false,appMessageMarkup(err.message||'Could not encrypt backup.')); }
+    }catch(err){ msg(false,(err.message?apiMessageMarkup(err.message):appMessageMarkup('Could not encrypt backup.'))); }
   };
   $('#bk-dls').onclick=()=>{
     if(confirmMessage('ui.this-file-will-contain-your-api-key.bfeea73fc6'))
@@ -4364,8 +4720,8 @@ RENDER.status=async()=>{
         headers['X-ROMarr-Backup-Passphrase']=pass;
       }
       const r=await j('/api/v1/restore',{method:'POST',headers,body:JSON.stringify(backup)});
-      msg(!r.error,r.error?appMessageMarkup(r.error)
-        :(r.warning?appMessageMarkup(r.warning):interfaceMarkup('ui.restored.54fb6e453c'))
+      msg(!r.error,r.error?apiMessageMarkup(r.error)
+        :(r.warning?apiMessageMarkup(r.warning):interfaceMarkup('ui.restored.54fb6e453c'))
           +' '+interfaceMarkup('ui.reloading.ea456dcf3d'));
       if(!r.error) setTimeout(()=>location.reload(),1200);
     }catch(_){ msg(false,interfaceMarkup('ui.that-file-is-not-a-romarr-backup.4e556a59e7')); }
@@ -4379,7 +4735,7 @@ RENDER.status=async()=>{
   const feRow=$('#fe-row'); if(!feRow) return;   // navigated away mid-fetch
   feRow.innerHTML=(fe.formats||[]).map(f=>
     '<button class="btn ghost fe-btn" data-f="'+esc(f.name||f)+'" data-filename="'+esc(f.filename||('romarr-'+(f.name||f)+'.export'))+'">'
-    +esc(f.label||f.name||f)+'</button>').join('')
+    +apiMessageMarkup(f.label||f.name||f)+'</button>').join('')
     ||'<span class="help" style="margin:0">No frontend formats available.</span>';
   feRow.querySelectorAll('.fe-btn').forEach(b=>b.onclick=()=>
     save('/api/v1/frontend/export?format='+encodeURIComponent(b.dataset.f),
@@ -4453,16 +4809,16 @@ const wireGGRequestz=()=>{
 // failure.
 const moonlightCard=m=>{
   if(!m.configured) return `<div class="card"><h3>Game streaming host</h3>
-    <p class="help">${esc(m.hint||'')}. A Moonlight host renders a real
+    <p class="help">${m.hint?apiMessageMarkup(m.hint):''}. A Moonlight host renders a real
     desktop emulator on the host's GPU and sends video &mdash; which is how
     machines with no browser core get played. ROMarr reports what it can
     verify about one and never guesses the rest.</p>
-    <p class="help">${esc(m.manual||'')}</p></div>`;
+    <p class="help">${apiMessageMarkup(m.manual||'')}</p></div>`;
 
   if(!m.ok) return `<div class="card"><h3>${esc(m.kind_label||'Moonlight')}</h3>
     <p class="testline bad">${interfaceTemplateMarkup('ui.no-answer-from-host-port.d291802598',
       {host:m.host||'',port:String(m.port||'')})}
-    &mdash; ${m.problem?appMessageMarkup(m.problem):interfaceMarkup('ui.unreachable.abaa46adb4')}</p>
+    &mdash; ${m.problem?apiMessageMarkup(m.problem):interfaceMarkup('ui.unreachable.abaa46adb4')}</p>
     <p class="help">${interfaceTemplateMarkup('ui.romarr-checks-path-on-the-moonlight.e63082c6ce',{path:'/serverinfo'})}</p></div>`;
 
   const slugs=Object.keys(m.platforms||{});
@@ -4495,19 +4851,20 @@ const moonlightCard=m=>{
               {count:fmt((m.apps||[]).length)})}</p>`)
       : `<p class="help"><b>Reachable, but its app list could not be read</b>,
          so ROMarr cannot say which platforms it plays and does not guess.
-         ${esc(m.apps_problem||'')}</p>`}
+         ${apiMessageMarkup(m.apps_problem||'')}</p>`}
     ${(m.apps||[]).length?`<p class="help">Apps: ${
       (m.apps||[]).map(a=>'<span class="pill">'+esc(a)+'</span>').join(' ')}</p>`:''}
 
     <h4 style="margin:18px 0 6px">Pairing</h4>
-    <p class="help">${esc((m.pairing||{}).manual||'')}</p>
+    <p class="help">${apiMessageMarkup((m.pairing||{}).manual||'')}</p>
     ${canList
       ? (pend.length
           ? `<p class="help">${interfaceTemplateMarkup(
               pend.length===1?'{count} client waiting:':'{count} clients waiting:',
               {count:fmt(pend.length)})}</p>`
           : `<p class="help">${interfaceTemplateMarkup('ui.no-moonlight-client-is-waiting-to-pa.baaa9b58a1',{host:m.host||''})}</p>`)
-      : `<p class="help">${esc((m.pairing||{}).detail||'')}</p>`}
+      : `<p class="help">${moonlightApiMessageMarkup(
+          (m.pairing||{}).detail||'',(m.pairing||{}).detail_source_id)}</p>`}
     <div class="row" style="flex-wrap:wrap;gap:8px;align-items:center">
       ${canList&&pend.length
         ? `<select id="ml-secret">${pend.map(p=>
@@ -4547,7 +4904,8 @@ const wireMoonlight=m=>{
     // request is outstanding (LizardByte/Sunshine#3944) -- so the strongest
     // honest word is "accepted", and the check is the paired-client count.
     out.className='testline '+(r.ok?'ok':'bad');
-    out.innerHTML=appMessageMarkup(r.detail||(r.ok?'Accepted.':'Refused.'));
+    out.innerHTML=(r.detail?moonlightApiMessageMarkup(
+      r.detail,r.detail_source_id):appMessageMarkup(r.ok?'Accepted.':'Refused.'));
     if(r.ok) setTimeout(()=>RENDER.status(),1500);
   };
 };
@@ -4625,9 +4983,9 @@ RENDER.platforms=async()=>{
       +'<div style="margin-top:auto"><button class="btn ghost" data-platform-browse="'+esc(p.slug)+'"'+(canBrowse?'':' disabled')+' style="width:100%">'+(canBrowse?'Browse games':'Catalog unavailable')+'</button></div>'
       +'</article>';
   }).join('');
-  $('#page').innerHTML='<div class="card"><h3>Platforms, by era</h3>'
-    +'<p class="help">Choose a generation you remember, search by name, then open its catalog. The playback label shows how this install handles each system.</p>'
-    +'<p class="help">ROMarr acquires, verifies and files games. For household discovery, covers and a request queue, pair it with <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a>; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a>.</p>'
+  $('#page').innerHTML='<div class="card"><h3>'+interfaceMarkup('Platforms, by era')+'</h3>'
+    +'<p class="help">'+interfaceMarkup('Choose a generation you remember, search by name, then open its catalog. The playback label shows how this install handles each system.')+'</p>'
+    +'<p class="help"><a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">'+interfaceTemplateMarkup('Use {service} for game discovery, game covers, and a shared household request queue.',{service:'SeerrNG'})+'</a>'+interfacePhraseSpace()+'<a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.')+'</a></p>'
     +'<div class="row" style="gap:6px;margin-bottom:12px;flex-wrap:wrap">'+eraButtons+'</div>'
     +'<div class="row" style="margin-bottom:14px"><input id="platform-filter" type="search" value="'+esc(PLATFORM_VIEW.query)+'" placeholder="Search platforms" style="max-width:340px"><span class="help">'+fmt(filtered.length)+' platforms</span></div>'
     +(cards?'<div class="grid">'+cards+'</div>':'<div class="empty">No platforms match this filter.</div>')
@@ -4843,7 +5201,7 @@ RENDER.calendar=async()=>{
       +' data-calview="'+k+'" style="padding:4px 10px;font-size:12px">'
       +l+'</button>').join('')
     +'</div>'
-      +(d.error?'<div class="panel-note panel-warn">'+appMessageMarkup(d.error)+'</div>':'')
+      +(d.error?'<div class="panel-note panel-warn">'+apiMessageMarkup(d.error)+'</div>':'')
     +(d.note?'<p class="help">'+esc(d.note)+'</p>':'')
     +(d.view!=='upcoming'&&d.month
       ?'<div class="row" style="align-items:center;gap:8px;margin:4px 0 8px">'
@@ -4940,7 +5298,7 @@ RENDER.calendar=async()=>{
       +'<div class="desc">'+esc((g.platforms||[]).slice(0,4).join(', '))+'</div>'
       +'<div class="rowact" style="margin-top:6px"><button data-calreq="'+n+'">Request</button></div>'
       +'</div>').join('')+'</div>'
-    :'<div class="empty">'+appMessageMarkup(w.error||'No provider configured.')+'</div>';
+    :'<div class="empty">'+(w.error?apiMessageMarkup(w.error):appMessageMarkup('No provider configured.'))+'</div>';
   document.querySelectorAll('[data-calreq]').forEach(b=>b.onclick=()=>
     requestGame(web[Number(b.dataset.calreq)]));
 };
@@ -5019,7 +5377,7 @@ RENDER.getstarted=async()=>{
     +'<div style="font-family:ui-monospace,monospace;font-size:12.5px;'
     +'background:var(--bg);border:1px solid var(--line);border-radius:6px;'
     +'padding:14px;overflow-x:auto;line-height:1.9">'
-    +'<b>Acquire</b> → <b>Verify</b> → <b>File</b> → <b>Scan</b> → <b>Play</b><br>'
+    +'<b>Acquire</b> → <b>Verify</b> → <b>'+interfaceMarkup('ui.add-to-library.2bf9ea0e46')+'</b> → <b>Scan</b> → <b>Play</b><br>'
     +'<span style="color:var(--dim)">'+interfaceMarkup('ui.indexers-dat-hashes-library-root-lib.6a5d3af601')+'</span><br>'
     +'<span style="color:var(--dim)">'+interfaceMarkup('ui.romarr-does-the-first-four-you-choos.88f6a36ef9')+'</span>'
     +'</div></div>'
@@ -5029,11 +5387,11 @@ RENDER.getstarted=async()=>{
     +'<div class="grid">'
     +'<a class="tile" href="#platforms" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Choose a system or era</div><div class="pf">Browse supported platforms, see how they play, and open the matching catalog.</div></a>'
     +'<a class="tile" href="#manualimport" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">I already have ROMs</div><div class="pf">Import a folder you own and let ROMarr identify and file what is there.</div></a>'
-    +'<a class="tile" href="#organize" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Organize a library you already have</div><div class="pf">Match DATs, cache shared metadata and artwork, and preview safe renames.</div></a>'
+    +'<a class="tile" href="#organize" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">'+interfaceMarkup('Organize a library you already have')+'</div><div class="pf">Match DATs, cache shared metadata and artwork, and preview safe renames.</div></a>'
     +'<a class="tile" href="#lists" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Build a request list</div><div class="pf">Browse catalog titles or connect an import list. Requests use your configured sources and client.</div></a>'
     +'<a class="tile" href="#collections" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Work toward a complete set</div><div class="pf">Load a DAT and see verified titles and collection progress.</div></a>'
     +'</div>'
-    +'<p class="help" style="margin-top:12px">For a shared catalog and household request queue, use <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a>. ROMarr handles release search, verification and filing; the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a> explains the connection.</p></div>'
+    +'<p class="help" style="margin-top:12px"><a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">'+interfaceTemplateMarkup('Use {service} for game discovery, game covers, and a shared household request queue.',{service:'SeerrNG'})+'</a>'+interfacePhraseSpace()+'<a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.')+'</a></p></div>'
     +'<div class="card" style="margin-top:16px"><h3>Your setup</h3>'
     +step(1,'An indexer',indexerOk,
        interfaceMarkup('ui.prowlarr-or-torznab-newznab-indexers.529ec79be7')
@@ -5051,7 +5409,7 @@ RENDER.getstarted=async()=>{
        +interfaceMarkup('ui.can-tell-you-what-a-complete-set-is.3fe1fc5db0'))
     +'</div>'
 
-    +'<div class="card" style="margin-top:16px"><h3>Optional follow-ups</h3>'
+    +'<div class="card" style="margin-top:16px"><h3>'+interfaceMarkup('Optional follow-ups')+'</h3>'
     +'<p class="help">'+interfaceMarkup('ui.core-search-grabbing-and-filing-do-n.d6115a1a9e')+'</p>'
     +'<ul class="help">'
     +'<li>'+interfaceMarkup('ui.dat-checks-and-complete-set-progress.73302e5ba1')+' <a href="#collections">'+interfaceMarkup('ui.collections.9f9feade76')+'</a></li>'
@@ -5060,7 +5418,7 @@ RENDER.getstarted=async()=>{
     +'<li>'+interfaceMarkup('ui.streaming-hosts-and-browser-players.16b5157dac')+' <a href="#platforms">'+interfaceMarkup('ui.platforms.ab9bd7584a')+'</a> · <a href="#status">'+interfaceMarkup('ui.system.6725e7bbcd')+'</a></li>'
     +'</ul></div>'
 
-    +'<div class="card" style="margin-top:16px"><h3>Where you actually play</h3>'
+    +'<div class="card" style="margin-top:16px"><h3>'+interfaceMarkup('ui.where-you-actually-play.7bee154f1c')+'</h3>'
     +'<p class="help">'+interfaceMarkup('ui.romarr-files-the-rom-one-of-these-ru.2b6fa916bb')+'</p>'
     +'<table><thead><tr><th>If your library is</th><th>You play in</th></tr></thead><tbody>'
     +'<tr><td>RomM</td><td>RomM\'s built-in EmulatorJS, in the browser</td></tr>'
@@ -5146,7 +5504,7 @@ RENDER.collections=async()=>{
        +'there is no list of what a complete set contains.</div>')
     +'<div id="cswitch" hidden><p class="help">Switch uses catalogue IDs and filename versions, not checksum verification. DAT region and translation controls do not apply. Name searches need TITLED_NAMES=1.</p>'
     +'<label>Switch title name or ID <input id="csquery" placeholder="Title name or ID"></label>'
-    +'<label> Include <select id="cskinds"><option value="base" data-i18n="ui.base-games.6462a63d20">Base games</option><option value="update" data-i18n="ui.updates.22e2bada8f">Updates</option><option value="dlc">DLC</option><option value="base,update,dlc" data-i18n="ui.all-three.10243133c1">All three</option></select></label>'
+    +'<label> Include <select id="cskinds"><option value="base" data-i18n="ui.base-games.6462a63d20">Base games</option><option value="update" data-i18n="ui.updates.22e2bada8f">Updates</option><option value="dlc" data-i18n-key="'+esc(stableLocalizationKey('DLC'))+'">DLC</option><option value="base,update,dlc" data-i18n="ui.all-three.10243133c1">All three</option></select></label>'
     +'<label><input type="checkbox" id="cslatest" checked> Latest listed version only</label></div>'
     +'<div id="cres" style="margin-top:16px"></div></div>'
     +'<div class="card" style="margin-top:16px"><h3>Batches</h3>'
@@ -5203,7 +5561,7 @@ RENDER.collections=async()=>{
   switchControls();
   planBtn.onclick=async()=>{
     const out=$('#cres');
-    out.innerHTML='<div class="empty">Planning…</div>';
+    out.innerHTML='<div class="empty">'+interfaceMarkup('Planning…')+'</div>';
     const ex=[...document.querySelectorAll('.cex')].filter(c=>c.checked)
       .map(c=>c.value).join(',');
     const q='dat='+encodeURIComponent($('#cdat').value)
@@ -5228,9 +5586,9 @@ RENDER.collections=async()=>{
           translation_langs:($('#ctranslangs').value.trim()||'').split(',').map(s=>s.trim()).filter(Boolean),
           exclude:ex.split(',').filter(Boolean)};
     const d=await j('/api/v1/collection/plan?'+q).catch(()=>({error:'plan failed'}));
-    if(d.error){out.innerHTML='<div class="panel-note panel-warn">'+appMessageMarkup(d.error)+'</div>';return;}
+    if(d.error){out.innerHTML='<div class="panel-note panel-warn">'+apiMessageMarkup(d.error)+'</div>';return;}
     const c=d.counts;
-    const tile=(n,label,colour)=>'<div style="flex:1;min-width:110px;padding:10px 12px;'
+    const tile=(n,label,colour)=>'<div style="min-width:0;box-sizing:border-box;padding:10px 12px;'
       +'background:var(--bg);border:1px solid var(--line);border-radius:6px">'
       +'<div style="font-size:22px;font-weight:600;color:'+colour+'">'+fmt(n)+'</div>'
       +'<div class="help" style="margin:0">'+label+'</div></div>';
@@ -5244,7 +5602,7 @@ RENDER.collections=async()=>{
     const strictMarkup=d.policy.region_mode==='strict'
       ? ' '+interfaceMarkup('ui.strict-titles-without-a-matching-reg.ce5799c1e8')
       : '';
-    out.innerHTML='<div class="row" style="gap:10px;flex-wrap:wrap">'
+    out.innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,160px),1fr));gap:10px">'
       +tile(c.expected,interfaceMarkup('ui.in-the-set.6ac2ef8855'),'var(--fg)')
       +tile(c.have,interfaceMarkup('ui.you-have.af3f12e161'),'var(--ok)')
       +tile(c.missing,interfaceMarkup('ui.missing.6be36ca49e'),'var(--warn)')
@@ -5255,19 +5613,23 @@ RENDER.collections=async()=>{
       +'<p class="help">'+datMarkup+' — '+policyMarkup+strictMarkup+'.</p>'
       +'<div class="row"><button class="btn" id="cstart">'
       +interfaceTemplateMarkup('ui.request-count-missing.fbb85426ea',{count:fmt(c.missing)})+'</button>'
-      +'<label class="help" style="margin:0">at <input id="cpp" type="number" '
+      +'<label class="help" style="margin:0">'+interfaceMarkup('Requests per pass:')+' <input id="cpp" type="number" '
       +'min="1" max="50" value="5" style="width:60px;padding:5px;background:var(--bg);'
-      +'color:var(--fg);border:1px solid var(--line);border-radius:4px"> per pass</label></div>'
-      +'<table style="margin-top:14px"><thead><tr><th>Title</th><th>Status</th>'
-      +'<th>Why this dump</th></tr></thead><tbody>'
+      +'color:var(--fg);border:1px solid var(--line);border-radius:4px"> '
+      +'</label></div>'
+      +'<table style="margin-top:14px"><thead><tr><th>'+interfaceMarkup('Title')+'</th><th>'
+      +interfaceMarkup('Status')+'</th><th>'+interfaceMarkup('Why this dump')+'</th></tr></thead><tbody>'
       +d.titles.slice(0,300).map(t=>{
         const pill=t.status==='verified'
-          ?'<span class="pill" style="background:var(--ok);color:var(--ok-ink)">verified</span>'
+          ?'<span class="pill" style="background:var(--ok);color:var(--ok-ink)">'
+            +interfaceMarkup('verified')+'</span>'
           :t.status==='bad'
-            ?'<span class="pill" style="background:var(--bad);color:var(--bad-ink)">bad dump</span>'
+            ?'<span class="pill" style="background:var(--bad);color:var(--bad-ink)">'
+              +interfaceMarkup('bad dump')+'</span>'
             :t.status==='missing'
-              ?'<span class="pill" style="background:var(--warn);color:var(--warn-ink)">missing</span>'
-              :'<span class="pill">present</span>';
+              ?'<span class="pill" style="background:var(--warn);color:var(--warn-ink)">'
+                +interfaceMarkup('missing')+'</span>'
+              :'<span class="pill">'+interfaceMarkup('present')+'</span>';
         const clones=(t.discarded||[]).length
           ?'<details><summary class="help" style="margin:0;cursor:pointer">'
            +interfaceTemplateMarkup(t.discarded.length===1
@@ -5276,14 +5638,16 @@ RENDER.collections=async()=>{
              '<li class="help" style="margin:0">'+esc(x.name)+' — '+collectionReasonMarkup(x.why)+'</li>').join('')
            +'</ul></details>':'';
         return '<tr><td>'+esc(t.name)
-          +(t.outside_preference?' <span class="pill" title="No dump in your preferred regions; kept so the game is not lost">outside regions</span>':'')
+          +(t.outside_preference?' <span class="pill" '
+            +interfaceTitleTemplate('No dump in your preferred regions; kept so the game is not lost',{})+'>'
+            +interfaceMarkup('outside regions')+'</span>':'')
           +'</td><td>'+pill+'</td><td class="help" style="margin:0">'+collectionReasonMarkup(t.why)
           +clones+'</td></tr>';
       }).join('')+'</tbody></table>'
       +(d.titles.length>300?'<p class="help">'+interfaceTemplateMarkup('ui.showing-the-first-limit-of-count.94b5cbae9f',{limit:fmt(300),count:fmt(d.titles.length)})+'</p>':'');
 
     $('#cstart').onclick=async e=>{
-      e.target.disabled=true; e.target.textContent='Queueing…';
+      e.target.disabled=true; e.target.innerHTML=interfaceMarkup('Queueing…');
       const r=await j('/api/v1/collection/start',{method:'POST',
         headers:{'Content-Type':'application/json'},
         body:JSON.stringify({...planned, per_pass:parseInt($('#cpp').value,10)||5})});
@@ -5294,6 +5658,24 @@ RENDER.collections=async()=>{
   };
 };
 
+const ORGANIZER_FIXED_MATCH_DETAILS=new Set([
+  'Imported from the existing ES-DE gamelist; review before renaming',
+  'Metadata provider title suggestion; confirm before renaming',
+  'Filename only; no verified catalog match',
+  'Title ID found in TitleDB; file bytes are not verified',
+  'Manually confirmed by the library owner.',
+  'Grouped from explicit numbered disc filenames; original files stay intact.',
+  'Grouped from a local M3U playlist and its contained disc references; files stay intact.'
+]);
+const organizerMatchDetailsMarkup=(value,confidence,sourceCopy)=>{
+  const source=String(value??'');
+  // DAT game names and other provider values stay opaque. TitleDB's values are
+  // app-authored diagnostics with dynamic IDs/names represented by templates.
+  if((sourceCopy==='Exact DAT checksum match')
+      ||confidence==='title_id_catalog'||ORGANIZER_FIXED_MATCH_DETAILS.has(source))
+    return appMessageMarkup(source);
+  return '<span lang="und" dir="auto">'+esc(source)+'</span>';
+};
 RENDER.organize=async()=>{
   const p=$('#page');
   const token=(window._organizeViewToken||0)+1;
@@ -5304,17 +5686,21 @@ RENDER.organize=async()=>{
   let currentPlan=null;
   let nextPlanOffset=0;
   const planLimit=200;
-  const platformOptions='<option value="">All platforms</option>'
+  const platformOptions='<option value="" data-i18n-key="ui.all-platforms.6d46bb346f">All platforms</option>'
     +PLATFORMS.map(x=>'<option value="'+esc(x.slug)+'">'+esc(x.name)+'</option>').join('');
   p.innerHTML=
     '<div class="card"><div class="row" style="align-items:flex-start;gap:12px">'
-    +'<div style="flex:1"><h3>Identify &amp; Organize</h3>'
-    +'<p class="help">Build a portable inventory, reuse existing ES-DE metadata, match exact DAT dumps, and review safe name changes. Scanning is read only. ROMarr changes files only after you preview and apply a plan.</p></div>'
-    +'<a class="btn ghost" href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">Requests in SeerrNG ↗</a></div>'
-    +'<p class="help" style="margin:0">Use <a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">SeerrNG</a> for the shared household request queue; see the <a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">integration guide</a> to connect the services.</p>'
+    +'<div style="flex:1"><h3>'+interfaceMarkup('Identify & Organize')+'</h3>'
+    +'<p class="help">'+interfaceMarkup('Build a portable inventory, reuse existing ES-DE metadata, match exact DAT dumps, and review safe name changes. Scanning is read only. ROMarr changes files only after you preview and apply a plan.')+'</p></div>'
+    +'<a class="btn ghost" href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('Requests in SeerrNG ↗')+'</a></div>'
+    +'<p class="help" style="margin:0"><a href="https://github.com/snapetech-org/seerrng" target="_blank" rel="noopener noreferrer">'+interfaceTemplateMarkup('Use {service} for game discovery, game covers, and a shared household request queue.',{service:'SeerrNG'})+'</a>'+interfacePhraseSpace()+'<a href="https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md" target="_blank" rel="noopener noreferrer">'+interfaceMarkup('The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.')+'</a></p>'
     +'<div class="st" style="margin-top:12px">'
-    +'<div><b>ROM root</b><span lang="und" dir="auto">'+esc(SETTINGS.library_path||'not configured')+'</span></div>'
-    +'<div><b>Shared metadata</b><span lang="und" dir="auto">'+esc(SETTINGS.metadata_path||'not configured')+'</span></div></div>'
+    +'<div><b>ROM root</b>'+(SETTINGS.library_path
+      ?'<span lang="und" dir="auto">'+esc(SETTINGS.library_path)+'</span>'
+      :interfaceMarkup('not configured'))+'</div>'
+    +'<div><b>Shared metadata</b>'+(SETTINGS.metadata_path
+      ?'<span lang="und" dir="auto">'+esc(SETTINGS.metadata_path)+'</span>'
+      :interfaceMarkup('not configured'))+'</div></div>'
     +(!SETTINGS.metadata_path
       ?'<div class="panel-note panel-warn" style="margin-top:12px">Set a shared metadata root in <a href="#media">Media Management</a>. Mount it on each client and point ES-DE at its shared gamelists and media folders.</div>'
       :'')
@@ -5337,18 +5723,36 @@ RENDER.organize=async()=>{
     +'<button class="btn ghost" id="org-prev" disabled>Previous</button><button class="btn ghost" id="org-next" disabled>Next</button></div></div>';
   applyInterfaceLanguage();
 
-  const message=(text,bad)=>{
+  const renderMessage=(markup,bad)=>{
     const box=$('#org-message');
     if(!box)return;
-    if(text){
+    if(markup){
       box.setAttribute('role',bad?'alert':'status');
       box.setAttribute('aria-live',bad?'assertive':'polite');
       box.setAttribute('aria-atomic','true');
     }else{
       box.removeAttribute('role');box.removeAttribute('aria-live');
     }
-    box.innerHTML=text?'<div class="panel-note '+(bad?'panel-warn':'')+'" style="margin:12px 0">'+esc(text)+'</div>':'';
+    box.innerHTML=markup?'<div class="panel-note '+(bad?'panel-warn':'')+'" style="margin:12px 0">'+markup+'</div>':'';
   };
+  const message=(text,bad)=>renderMessage(text?appMessageMarkup(text):'',bad);
+// These two fixed organizer messages are emitted by local routes. Keep their
+// mapping explicit so arbitrary paths, provider text and peer values stay opaque.
+const ORGANIZER_API_MESSAGE_KEYS=new Set([
+  'ui.existing-gamelist-xml-is-invalid-it.6951c0112d',
+  'ui.folder-packages-are-left-intact-to-p.e180bb56ad',
+  'ui.source-file-is-missing-or-is-a-symli.ca704e4514',
+]);
+const organizerApiMessageMarkup=(value,template=null)=>{
+  if(typeof value!=='string')return apiMessageMarkup(value,template);
+  const key=stableLocalizationKey(value);
+  return key&&ORGANIZER_API_MESSAGE_KEYS.has(key)
+    ?interfaceMarkup(key):apiMessageMarkup(value,template);
+};
+  const messageApi=(text,bad,template=null)=>renderMessage(
+    text?organizerApiMessageMarkup(text,template):'',bad);
+  const messageTemplate=(source,values,bad)=>renderMessage(
+    source?interfaceTemplateMarkup(source,values):'',bad);
   let lastAnnouncedOrganizerState='';
   const platform=()=>($('#org-platform')||{}).value||'';
   const loadInventory=async()=>{
@@ -5364,29 +5768,36 @@ RENDER.organize=async()=>{
     const stateLabel={idle:'Ready to scan',scanning:'Scanning',complete:'Scan complete',partial:'Scan reached its safety limit',failed:'Scan failed',unavailable:'Status unavailable'}[status.state]||status.state||'Unknown';
     if(['complete','partial','failed'].includes(status.state)&&lastAnnouncedOrganizerState!==status.state){
       const announcement=$('#org-announcement');
-      if(announcement)announcement.textContent=stateLabel+'. '+fmt(status.processed||0)+' of '+fmt(status.total||0)+' files checked.';
+      if(announcement)announcement.innerHTML=interfaceTemplateMarkup(
+        '{state}. {processed} of {total} files checked.',
+        {state:{source:stateLabel,values:{}},processed:fmt(status.processed||0),
+          total:fmt(status.total||0)});
     }
     lastAnnouncedOrganizerState=status.state||'';
     $('#org-status').innerHTML='<div class="card"><div class="row" style="align-items:center">'
-      +'<b>'+esc(stateLabel)+'</b><span class="help" style="margin:0">'+fmt(status.processed||0)+' / '+fmt(status.total||0)+' files checked</span>'
-      +'<span class="help" style="margin:0">DAT verified '+fmt(status.verified||0)+'</span>'
-      +'<span class="help" style="margin:0">TitleDB catalogued '+fmt(status.catalogued||0)+'</span>'
-      +'<span class="help" style="margin:0">Suggestions '+fmt(status.suggested||0)+'</span>'
-      +'<span class="help" style="margin:0">Local ES-DE records reused '+fmt(status.local_metadata_imported||0)+'</span>'
-      +'<span class="help" style="margin:0">Unmatched '+fmt(status.unmatched||0)+'</span>'
-      +'<span class="help" style="margin:0">Switch versions behind catalog '+fmt(status.switch_outdated||0)+'</span></div>'
+      +'<b>'+interfaceMarkup(stateLabel)+'</b>'
+      +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('{processed} / {total} files checked',
+        {processed:fmt(status.processed||0),total:fmt(status.total||0)})+'</span>'
+      +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('DAT verified {count}',{count:fmt(status.verified||0)})+'</span>'
+      +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('TitleDB catalogued {count}',{count:fmt(status.catalogued||0)})+'</span>'
+      +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('Suggestions {count}',{count:fmt(status.suggested||0)})+'</span>'
+      +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('Local ES-DE records reused {count}',{count:fmt(status.local_metadata_imported||0)})+'</span>'
+      +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('Unmatched {count}',{count:fmt(status.unmatched||0)})+'</span>'
+      +'<span class="help" style="margin:0">'+interfaceTemplateMarkup('Switch versions behind catalog {count}',{count:fmt(status.switch_outdated||0)})+'</span></div>'
       +(status.truncated?'<p class="help" style="margin:8px 0 0">This scan was bounded at 50,000 entries. Filter to a platform and scan again to continue.</p>':'')
-      +(status.error?'<p class="help" style="margin:8px 0 0;color:var(--warn)">'+esc(status.error)+'</p>':'')
+      +(status.error?'<p class="help" style="margin:8px 0 0;color:var(--warn)">'+apiMessageMarkup(status.error)+'</p>':'')
       +'</div>';
     const items=data.items||[];
     const start=data.total?offset+1:0;
     const end=Math.min(data.total||0,offset+items.length);
-    $('#org-page-label').textContent=fmt(start)+'–'+fmt(end)+' of '+fmt(data.total||0);
+    $('#org-page-label').innerHTML=interfaceTemplateMarkup(
+      'Showing {start}–{end} of {total}',
+      {start:fmt(start),end:fmt(end),total:fmt(data.total||0)});
     $('#org-prev').disabled=offset<=0;
     $('#org-next').disabled=offset+limit>=(data.total||0);
     const target=$('#org-items');
     if(data.error){
-      target.innerHTML='<div class="panel-note panel-warn">'+esc(data.error)+'</div>';
+      target.innerHTML='<div class="panel-note panel-warn">'+apiMessageMarkup(data.error,data.error_template)+'</div>';
     }else if(!items.length){
       target.innerHTML='<div class="empty">No inventory entries yet. Scan a configured ROM library to begin.</div>';
     }else{
@@ -5400,17 +5811,30 @@ RENDER.organize=async()=>{
         filename_only:'Filename only · review',
         multi_disc:'Likely multi-disc set · review'
       };
+      const versionStatusLabel={
+        unlabelled:'Version not labelled',
+        'not-applicable':'Version check not applicable',
+        unknown:'Version status unknown',
+        outdated:'Older than latest listed version',
+        future:'Newer than latest listed version',
+        current:'Up to date'
+      };
       target.innerHTML='<div style="overflow-x:auto"><table><thead><tr>'
         +'<th>Game / evidence</th><th>ROM path</th><th>Switch family</th><th>Metadata</th><th></th>'
         +'</tr></thead><tbody>'+items.map(row=>{
           const sw=row.switch||{};
           const metadata=row.metadata||{};
-          const ver=sw.file_version===null||sw.file_version===undefined?'':'v'+esc(sw.file_version)+' / latest '+esc(sw.latest_version||0);
+          const versionDetails=sw.file_version===null||sw.file_version===undefined?''
+            :Number(sw.latest_version)>0
+              ?interfaceTemplateMarkup('Version {current} · latest listed version {latest}',
+                {current:sw.file_version,latest:sw.latest_version})
+              :interfaceTemplateMarkup('Version {current}',{current:sw.file_version});
           const switchLine=sw.title_id
             ?'<div lang="und" dir="ltr">'+esc(sw.kind||'title')+' · '+esc(sw.title_id)+'</div>'
               +(sw.base_title?'<div>'+esc(sw.base_title)+'</div>':'')
-              +(ver?'<div class="help" style="margin:3px 0">'+ver+' · '+esc(sw.version_status||'unknown')+'</div>':'')
-            :'<span class="help">No TitleDB ID</span>';
+              +'<div class="help" style="margin:3px 0">'+(versionDetails?versionDetails+' · ':'')
+                +interfaceMarkup(versionStatusLabel[sw.version_status]||versionStatusLabel.unknown)+'</div>'
+            :'<span class="help">'+interfaceMarkup('No TitleDB ID')+'</span>';
           const art=row.cover_path
             ?'<img src="/api/v1/organizer/art?identity_id='+encodeURIComponent(row.identity_id||'')+'" alt="" loading="lazy" style="width:42px;height:58px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-inline-end:8px">'
             :'';
@@ -5419,20 +5843,25 @@ RENDER.organize=async()=>{
           const discGroup=row.disc_group||{};
           const manifestInfo=(row.manifests||[]).map(manifest=>
             '<details style="margin-top:5px"><summary class="help" style="cursor:pointer">'
-              +'Manifest '+esc(manifest.path||'')+' · '+fmt((manifest.references||[]).length)+' linked file(s)'
+              +interfaceTemplateMarkup('Manifest {path} · {count} linked file',
+                {path:String(manifest.path||''),count:(manifest.references||[]).length})
               +'</summary><div class="help" style="margin:4px 0">'+(manifest.references||[]).map(path=>
                 '<div lang="und" dir="auto">'+esc(path)+'</div>').join('')+'</div></details>'
           ).join('');
           const pathCell=discGroup.id
-            ?'<span class="pill">Likely '+fmt(discGroup.disc_count||0)+'-disc set</span>'
+            ?'<span class="pill">'+interfaceTemplateMarkup('Likely {count}-disc set',
+              {count:discGroup.disc_count||0})+'</span>'
               +(discGroup.manifest_path?'<div class="help" style="margin:4px 0">Playlist: <span lang="und" dir="auto">'+esc(discGroup.manifest_path)+'</span></div>':'')
               +'<div class="help" style="margin:4px 0">'+(discGroup.members||[]).map(member=>
                 '<div lang="und" dir="auto">'+esc(member.relative_path||'')+'</div>').join('')+'</div>'
               +manifestInfo
             :'<span lang="und" dir="auto">'+esc(row.relative_path||'')+'</span>'+manifestInfo;
           return '<tr data-identity="'+esc(row.identity_id||'')+'"><td>'+art+'<b>'+esc(title)+'</b>'
-            +'<div class="help" style="margin:4px 0">'+esc(confidenceLabel[row.confidence]||row.confidence||'Unknown')+'</div>'
-            +'<div class="help" style="margin:0">'+esc(row.match_details||'')+'</div>'
+            +'<div class="help" style="margin:4px 0">'+(confidenceLabel[row.confidence]
+              ?interfaceMarkup(confidenceLabel[row.confidence])
+              :row.confidence?'<span lang="und" dir="auto">'+esc(row.confidence)+'</span>'
+                :interfaceMarkup('Unknown'))+'</div>'
+            +'<div class="help" style="margin:0">'+organizerMatchDetailsMarkup(row.match_details,row.confidence,row.match_details_source)+'</div>'
             +(canMap?'<button type="button" class="btn ghost org-map" style="margin-top:7px">Confirm or edit title</button>':'')
             +'</td><td>'+pathCell+'</td><td>'+switchLine+'</td>'
             +'<td>'+esc(metadata.source||'')+(metadata.released?'<div>'+esc(metadata.released)+'</div>':'')
@@ -5451,7 +5880,7 @@ RENDER.organize=async()=>{
           headers:{'Content-Type':'application/json'},
           body:JSON.stringify({identity_id:identity,title:title,platform:platform()})})
           .catch(()=>({error:'Could not save this mapping.'}));
-        if(result.error){message(result.error,true);return;}
+        if(result.error){messageApi(result.error,true,result.error_template);return;}
         message('Title mapping saved. This game is now eligible for a safe rename preview.',false);
         await loadInventory();
       });
@@ -5472,7 +5901,7 @@ RENDER.organize=async()=>{
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({platform:platform(),force:!!force})})
       .catch(()=>({error:'Could not start the library scan.'}));
-    if(result.error){message(result.error,true);return;}
+    if(result.error){messageApi(result.error,true,result.error_template);return;}
     await loadInventory();
   };
   $('#org-scan').onclick=()=>startScan(false);
@@ -5487,15 +5916,17 @@ RENDER.organize=async()=>{
     const plan=await j('/api/v1/organizer/rename-plan?'+query.toString())
       .catch(()=>({error:'Could not create a rename preview.'}));
     currentPlan=plan;
-    if(plan.error){message(plan.error,true);$('#org-plan-result').innerHTML='';return;}
+    if(plan.error){messageApi(plan.error,true,plan.error_template);$('#org-plan-result').innerHTML='';return;}
     const batch=plan.batch||{offset:planOffset,limit:planLimit,total:0,count:0,has_more:false};
     const first=batch.count?batch.offset+1:0;
     const last=batch.offset+batch.count;
-    const rows=(plan.operations||[]).map(op=>'<tr><td lang="und" dir="auto">'+esc(op.from)+'</td><td lang="und" dir="auto">'+esc(op.to)+'</td><td>'+esc(op.reason)+'</td></tr>').join('');
-    const blocked=(plan.blocked||[]).map(op=>'<tr><td>'+esc(op.identity_id||'')+'</td><td>'+esc(op.reason||'')+'</td></tr>').join('');
+      const rows=(plan.operations||[]).map(op=>'<tr><td lang="und" dir="auto">'+esc(op.from)+'</td><td lang="und" dir="auto">'+esc(op.to)+'</td><td>'+organizerApiMessageMarkup(op.reason)+'</td></tr>').join('');
+      const blocked=(plan.blocked||[]).map(op=>'<tr><td>'+esc(op.identity_id||'')+'</td><td>'+organizerApiMessageMarkup(op.reason||'')+'</td></tr>').join('');
     const safeCount=(plan.operations||[]).length,blockedCount=(plan.blocked||[]).length;
     const planAnnouncement=$('#org-announcement');
-    if(planAnnouncement)planAnnouncement.textContent='Rename preview ready. '+fmt(safeCount)+' safe renames in this batch; '+fmt(blockedCount)+' entries left alone.';
+    if(planAnnouncement)planAnnouncement.innerHTML=interfaceTemplateMarkup(
+      'Rename preview ready. {safe} safe renames in this batch; {blocked} entries left alone.',
+      {safe:fmt(safeCount),blocked:fmt(blockedCount)});
     $('#org-plan-result').innerHTML='<div class="card"><h3>Rename preview · '+fmt(first)+'–'+fmt(last)+' of '+fmt(batch.total||0)+'</h3><p class="help">'
       +fmt(safeCount)+' safe rename(s) in this batch. '+fmt(blockedCount)+' matching entries were left alone.'
       +(batch.has_more?' More entries will be reviewed in the next batch.':'')+'</p>'
@@ -5517,8 +5948,9 @@ RENDER.organize=async()=>{
         body:JSON.stringify({plan_id:appliedPlan.plan_id,platform:platform(),
           offset:batch.offset,limit:batch.limit})})
         .catch(()=>({error:'Could not apply the rename plan.'}));
-      if(result.error){message(result.error,true);return;}
-      message(result.message||'Rename batch applied.',false);
+      if(result.error){messageApi(result.error,true,result.error_template);return;}
+      if(result.message)messageApi(result.message,false,result.message_template);
+      else message('Rename batch applied.',false);
       currentPlan=null;
       nextPlanOffset=batch.has_more?batch.next_offset:0;
       $('#org-plan-result').innerHTML=batch.has_more
@@ -5537,8 +5969,8 @@ RENDER.organize=async()=>{
     const result=await j('/api/v1/organizer/rename/undo',{method:'POST',
       headers:{'Content-Type':'application/json'},body:'{}'})
       .catch(()=>({error:'Could not undo the last rename batch.'}));
-    if(result.error){message(result.error,true);return;}
-    message('Undid '+fmt(result.undone||0)+' rename(s).',false);
+    if(result.error){messageApi(result.error,true,result.error_template);return;}
+    messageTemplate('Undid {count} rename(s).',{count:fmt(result.undone||0)},false);
     await loadInventory();
   };
   $('#org-esde').onclick=async()=>{
@@ -5547,8 +5979,10 @@ RENDER.organize=async()=>{
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({platform:platform()})})
       .catch(()=>({error:'Could not publish the ES-DE gamelist.'}));
-    if(result.error){message(result.error,true);return;}
-    message(result.message||('Published '+fmt(result.games||0)+' ES-DE entries.'),!result.written);
+    if(result.error){messageApi(result.error,true,result.error_template);return;}
+    if(result.message)message(result.message,!result.written);
+    else messageTemplate('Published {count} ES-DE entries.',
+      {count:fmt(result.games||0)},!result.written);
   };
   await loadInventory();
 };
@@ -5595,7 +6029,7 @@ RENDER.manualimport=async()=>{
       return;
     }
     const bad=(d.refused||[])[0]||{};
-    st.innerHTML='<span style="color:var(--bad)">'+appMessageMarkup(bad.reason||'refused')+'</span>';
+    st.innerHTML='<span style="color:var(--bad)">'+apiMessageMarkup(bad.reason||'refused')+'</span>';
     btn.disabled=false;
     if(bad.needs_force){
       // Never a silent reinterpretation: forcing is a second, separate act,
@@ -5613,7 +6047,7 @@ RENDER.manualimport=async()=>{
     out.innerHTML='<div class="empty">'+interfaceMarkup('ui.scanning.38d96da6e8')+'</div>';
     const d=await j('/api/v1/manualimport?path='
       +encodeURIComponent($('#mipath').value)).catch(()=>({error:'scan failed'}));
-    if(d.error){out.innerHTML='<div class="panel-note panel-warn">'+appMessageMarkup(d.error)+'</div>';return;}
+    if(d.error){out.innerHTML='<div class="panel-note panel-warn">'+apiMessageMarkup(d.error)+'</div>';return;}
     const c=d.candidates||[];
     out.innerHTML='<p class="help">'+interfaceTemplateMarkup('ui.importable-importable-skipped-skippe.7567d58f0d',
       {importable:fmt(c.length),skipped:fmt(d.skipped||0)})+'</p>'
@@ -5626,7 +6060,7 @@ RENDER.manualimport=async()=>{
            +'data-verdict="'+esc(x.verdict)+'">'
            +'<td><span lang="und" dir="auto">'+esc(x.filename)+'</span></td>'
            +'<td><select class="mi-pf">'+opts(x.platform)+'</select></td>'
-           +'<td class="help" style="margin:0">'+appMessageMarkup(x.reason)+'</td>'
+           +'<td class="help" style="margin:0">'+apiMessageMarkup(x.reason)+'</td>'
            +'<td>'+(x.hollow?'<span class="pill" lang="und" dir="auto" style="background:var(--bad);color:var(--bad-ink)" '+manualDiagnosticTitle(x.hollow)+'>'+interfaceMarkup('ui.empty-file.0045fa2e36')+'</span><br>':'')+verdict(x.verdict)+(x.header_says?'<br><span class="pill" lang="und" dir="auto" style="background:var(--warn);color:var(--warn-ink)" '+manualDiagnosticTitle(x.header_detail||'')+'>'+interfaceMarkup('ui.header-says.b5143b147b')+' <span lang="und" dir="auto">'+esc(x.header_says)+'</span></span>':'')+'</td>'
            +'<td><button class="btn mi-go">'+interfaceMarkup('ui.import.2cff9baabf')+'</button></td>'
            +'<td class="mi-st help" style="margin:0"></td></tr>').join('')
@@ -5654,6 +6088,14 @@ RENDER.manualimport=async()=>{
 
 RENDER.tasks=async()=>{
   const d=await j('/api/v1/system/tasks').catch(()=>({items:[]}));
+  const taskNames={ImportCompleted:'Import completed downloads',
+    MissingGameSearch:'Search the Wanted list',
+    RssSync:'Watch indexer feeds for wanted games',
+    FailedDownloads:'Retire dead downloads and grab a replacement',
+    ListSync:'Sync import lists into Wanted',
+    UpdateCheck:'Check github.com for a newer ROMarr',
+    HashIndex:'Read ROM hashes from the library for netplay',
+    RefreshLibrary:'Refresh library',Decompress:'Decompress'};
   const every=s=>!s?interfaceMarkup('ui.off.ca7981b46e')
     :s%3600===0?interfaceTemplateMarkup('ui.interval-count-h.c4dc89c3ad',{count:fmt(s/3600)})
     :s%60===0?interfaceTemplateMarkup('ui.interval-count-min.f79e014946',{count:fmt(s/60)})
@@ -5671,11 +6113,11 @@ RENDER.tasks=async()=>{
     <table><thead><tr><th data-i18n="ui.task.4bc74b2135">Task</th><th data-i18n="ui.schedule.f4830a1dae">Schedule</th><th data-i18n="ui.last-ran.2e024dc014">Last ran</th>
       <th data-i18n="ui.result.6e7d50e84f">Result</th><th></th></tr></thead><tbody>
     ${scheduled.concat(manualOnly).map(([n,label,t])=>{
-      const source=n==='RefreshLibrary'?'Refresh library':n==='Decompress'?'Decompress':null;
+      const source=taskNames[n];
       const nameMarkup=source?interfaceMarkup(source):'<span lang="und" dir="auto">'+esc(n)+'</span>';
       const detailMarkup=label?(hasLabel(label)?interfaceMarkup(label):'<span lang="und" dir="auto">'+esc(label)+'</span>'):'';
-      const result=t&&t.last_error?`<span lang="und" dir="auto" style="color:var(--warn)">${esc(t.last_error)}</span>`
-        :t&&t.last_result?statusMarkup(t.last_result):'—';
+      const result=t&&t.last_error?`<span style="color:var(--warn)">${apiMessageMarkup(t.last_error)}</span>`
+        :t&&t.last_result?statusMarkup(t.last_result,t.last_result_template,t.last_result_parts):'—';
       return `<tr><td><b>${nameMarkup}</b>
       <div style="color:var(--dim);font-size:12px">${detailMarkup}</div></td>
       <td>${t?every(t.interval_seconds):interfaceMarkup('ui.manual-only.be1016ce6d')}</td>
@@ -5695,7 +6137,7 @@ RENDER.tasks=async()=>{
     const r=await j('/api/v1/command',{method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify(body)});
-    if(r.message)toastAppMessage(r.message);
+    if(r.message)toastCommandMessage(r);
     else if(r.scanned!==undefined)toastMessage('ui.scanned-count-dry-run.442c1ab947',{count:fmt(r.scanned)});
     else toastLabel('ui.done.11a6767d56');
     go('tasks'); refreshCounts();
@@ -5860,7 +6302,7 @@ def page() -> str:
 <style>{CSS}</style><script>{THEME_BOOT}</script></head><body>
 <a class="skip-link" href="#main-content" data-i18n-key="ui.skip-to-content.ac576a66d4">Skip to content</a>
 <aside id="rail" aria-label="ROMarr sidebar">
-  <div id="brand">ROM<span>arr</span></div>
+  <div id="brand" lang="en" dir="ltr">ROM<span>arr</span></div>
   <nav id="navwrap" aria-label="Main navigation">{_nav_html()}</nav>
   {_theme_control_html()}
 </aside>
@@ -5951,27 +6393,90 @@ body{display:flex;align-items:center;justify-content:center;min-height:100vh;
 PUBLIC_I18N_JS = r"""
 (()=>{
 const catalog=__UI_CATALOG__,core=window.ROMarrI18n,key='romarrng.interface-language';
-const languages=catalog.availableLocales.map(code=>[code,catalog.locales[code].nativeName]);
+const languages=catalog.availableLocales.map(code=>{
+  const locale=catalog.locales[code];
+  const name=locale.nativeName===locale.englishName
+    ?locale.nativeName:`${locale.nativeName} — ${locale.englishName}`;
+  return {code,name,direction:locale.direction};
+});
 const detect=()=>core.resolveLocale(navigator.languages?.length?navigator.languages:[navigator.language],catalog,catalog.availableLocales);
 const preference=()=>{try{const value=localStorage.getItem(key);return value&&catalog.availableLocales.includes(value)?value:'system'}catch(_){return'system'}};
 let active=preference()==='system'?detect():preference();
 const lookup=source=>core.lookup(catalog,source,active);
 const translate=source=>core.translate(catalog,source,active);
-const messageInfo=(source,values={})=>{const found=lookup(source);return{text:core.formatMessage(found.value,values,active,undefined,(nested,args)=>message(nested,args)),translated:found.translated,locale:found.locale}};
+const messageInfo=(source,values={})=>{const found=lookup(source);return{text:core.formatMessage(found.value,values,active,undefined,(nested,args)=>message(nested,args)),translated:found.translated,locale:found.locale,source,values}};
 const message=(source,values={})=>messageInfo(source,values).text;
+const ariaTemplateLabels=new WeakMap();let ariaTemplateSequence=0;
+const renderMessageTemplate=(el,source,values)=>{
+  const parts=message(source,values).split(/\u2068([\s\S]*?)\u2069/g);
+  el.replaceChildren(...parts.map((part,index)=>{
+    if(index%2===0)return document.createTextNode(part);
+    const value=document.createElement('bdi');value.lang='und';value.dir='auto';value.textContent=part;return value;
+  }));
+};
 const has=source=>lookup(source).key!==null;
 const localized=source=>lookup(source).translated;
 const sources=new WeakMap();
-const text=(node)=>{const parent=node.parentElement;if(!parent||parent.closest('script,style,textarea,input,select,code,[contenteditable="true"],[lang="und"],[data-i18n],[data-i18n-key]'))return;const source=sources.get(node)||node.data.replace(/\s+/g,' ').trim();if(!has(source))return;sources.set(node,source);const left=node.data.match(/^\s*/)?.[0]||'',right=node.data.match(/\s*$/)?.[0]||'',value=left+translate(source)+right;if(value!==node.data)node.data=value;parent.lang=localized(source)?active:'en';parent.dir=localized(source)&&core.isRTL(active,catalog)?'rtl':'ltr'};
+const text=(node)=>{const parent=node.parentElement;if(!parent||parent.closest('script,style,textarea,input,select,code,[contenteditable="true"],[lang="und"],[data-i18n],[data-i18n-key],[data-i18n-template-key]'))return;const source=sources.get(node)||node.data.replace(/\s+/g,' ').trim();if(!has(source))return;sources.set(node,source);const left=node.data.match(/^\s*/)?.[0]||'',right=node.data.match(/\s*$/)?.[0]||'',value=left+translate(source)+right;if(value!==node.data)node.data=value;parent.lang=localized(source)?active:'en';parent.dir=localized(source)&&core.isRTL(active,catalog)?'rtl':'ltr'};
 const tree=root=>{if(root.nodeType===Node.TEXT_NODE){text(root);return}const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);while(walker.nextNode())text(walker.currentNode)};
-const apply=()=>{document.documentElement.lang=active;document.documentElement.dir=core.isRTL(active,catalog)?'rtl':'ltr';document.querySelectorAll('[data-i18n],[data-i18n-key]').forEach(el=>{const source=el.dataset.i18nKey||el.dataset.i18n,done=localized(source);el.textContent=translate(source);el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const source=el.dataset.i18nPlaceholder,done=localized(source);el.placeholder=translate(source);el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});for(const [marker,attribute] of [['data-i18n-aria-label','aria-label'],['data-i18n-title','title']])document.querySelectorAll('['+marker+']').forEach(el=>{const source=el.getAttribute(marker),done=localized(source);el.setAttribute(attribute,translate(source));el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});tree(document.body);const selector=document.querySelector('#public-language-select');if(selector)selector.value=preference();document.title=translate(document.body.dataset.title||'ROMarr')+' · ROMarr'};
-const picker=document.querySelector('#public-language-select');if(picker){picker.innerHTML='<option value="system" data-i18n-key="ui.use-browser-settings.02d22d3f39">Use browser settings</option>'+languages.map(([code,name])=>'<option value="'+code+'" lang="'+code+'" dir="'+(core.isRTL(code,catalog)?'rtl':'ltr')+'">'+name+'</option>').join('');picker.value=preference();picker.addEventListener('change',()=>{try{if(picker.value==='system')localStorage.removeItem(key);else localStorage.setItem(key,picker.value)}catch(_){}active=picker.value==='system'?detect():picker.value;apply()})}
+const applyTemplates=root=>{
+  const textNodes=[];
+  if(root.nodeType===Node.ELEMENT_NODE&&root.matches('[data-i18n-template-key]'))textNodes.push(root);
+  if(root.querySelectorAll)textNodes.push(...root.querySelectorAll('[data-i18n-template-key]'));
+  for(const el of textNodes){
+    let values={};try{values=JSON.parse(el.getAttribute('data-i18n-values')||'{}')}catch(_){continue}
+    const source=el.getAttribute('data-i18n-template-key'),done=localized(source);
+    renderMessageTemplate(el,source,values);el.lang=done?active:'en';
+    el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr';
+  }
+  for(const [marker,attribute] of [['data-i18n-aria-label-template-key','aria-label'],['data-i18n-title-template-key','title']]){
+    const elements=[];
+    if(root.nodeType===Node.ELEMENT_NODE&&root.hasAttribute(marker))elements.push(root);
+    if(root.querySelectorAll)elements.push(...root.querySelectorAll('['+marker+']'));
+    for(const el of elements){
+      let values={};try{values=JSON.parse(el.getAttribute(marker.replace('-template-key','-values'))||'{}')}catch(_){continue}
+      const source=el.getAttribute(marker),done=localized(source);
+      if(attribute==='aria-label'){
+        let label=ariaTemplateLabels.get(el);
+        if(!label){
+          label=document.createElement('span');label.id='romarr-public-aria-label-'+(++ariaTemplateSequence);
+          label.style.position='absolute';label.style.width='1px';label.style.height='1px';
+          label.style.padding='0';label.style.margin='-1px';label.style.overflow='hidden';
+          label.style.clip='rect(0, 0, 0, 0)';label.style.whiteSpace='nowrap';label.style.border='0';
+          el.appendChild(label);ariaTemplateLabels.set(el,label);
+        }
+        label.setAttribute('data-i18n-template-key',source);
+        label.setAttribute('data-i18n-values',JSON.stringify(values));
+        renderMessageTemplate(label,source,values);label.lang=done?active:'en';
+        label.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr';
+        const references=(el.getAttribute('aria-labelledby')||'').split(/\s+/).filter(id=>id&&id!==label.id);
+        references.push(label.id);el.setAttribute('aria-labelledby',references.join(' '));
+        el.removeAttribute('aria-label');continue;
+      }
+      el.setAttribute(attribute,message(source,values));el.lang=done?active:'en';
+      el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr';
+    }
+  }
+};
+const apply=()=>{document.documentElement.lang=active;document.documentElement.dir=core.isRTL(active,catalog)?'rtl':'ltr';document.querySelectorAll('[data-i18n],[data-i18n-key]').forEach(el=>{const source=el.dataset.i18nKey||el.dataset.i18n,done=localized(source);el.textContent=translate(source);el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const source=el.dataset.i18nPlaceholder,done=localized(source);el.placeholder=translate(source);el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});for(const [marker,attribute] of [['data-i18n-aria-label','aria-label'],['data-i18n-title','title']])document.querySelectorAll('['+marker+']').forEach(el=>{const source=el.getAttribute(marker),done=localized(source);el.setAttribute(attribute,translate(source));el.lang=done?active:'en';el.dir=done&&core.isRTL(active,catalog)?'rtl':'ltr'});applyTemplates(document);tree(document.body);const selector=document.querySelector('#public-language-select');if(selector)selector.value=preference();document.title=translate(document.body.dataset.title||'ROMarr')+' · ROMarr'};
+const picker=document.querySelector('#public-language-select');if(picker){
+  const system=document.createElement('option');
+  system.value='system';system.dataset.i18nKey='ui.use-browser-settings.02d22d3f39';
+  system.textContent='Use browser settings';
+  const options=languages.map(({code,name,direction})=>{
+    const option=document.createElement('option');
+    option.value=code;option.lang=code;option.dir=direction;option.textContent=name;
+    return option;
+  });
+  picker.replaceChildren(system,...options);picker.value=preference();
+  picker.addEventListener('change',()=>{try{if(picker.value==='system')localStorage.removeItem(key);else localStorage.setItem(key,picker.value)}catch(_){}active=picker.value==='system'?detect():picker.value;apply()})
+}
 const api=Object.assign({},core,{translate,message,messageInfo,has,apply,
   isRTLForLocale:locale=>core.isRTL(locale,catalog)});
 Object.defineProperty(api,'language',{get:()=>active});
 window.ROMarrI18n=api;
 apply();
-new MutationObserver(records=>{for(const record of records){if(record.type==='characterData')text(record.target);for(const node of record.addedNodes)tree(node)}}).observe(document.body,{subtree:true,childList:true,characterData:true});
+new MutationObserver(records=>{for(const record of records){if(record.type==='characterData')text(record.target);for(const node of record.addedNodes){applyTemplates(node);tree(node)}}}).observe(document.body,{subtree:true,childList:true,characterData:true});
 window.addEventListener('languagechange',()=>{if(preference()==='system'){active=detect();apply()}});
 window.addEventListener('storage',event=>{if(event.key!==key&&event.key!==null)return;active=preference()==='system'?detect():preference();apply()});
 })()
@@ -5983,6 +6488,34 @@ def _public_language_picker() -> str:
             'data-i18n-key="ui.interface-language.8027f432a7">Interface language</label>'
             '<select id="public-language-select" aria-label="Interface language" '
             'data-i18n-aria-label="ui.interface-language.8027f432a7"></select></div>')
+
+
+def _public_i18n_template(source: str, values: dict[str, str]) -> str:
+    payload = html.escape(json.dumps(values, ensure_ascii=False, separators=(",", ":")), quote=True)
+    rendered = source
+    for name, value in values.items():
+        rendered = rendered.replace("{" + name + "}", str(value))
+    return (
+        f'<span data-i18n-template-key="{html.escape(_ui_key(source), quote=True)}" '
+        f'data-i18n-values="{payload}">{html.escape(rendered)}</span>'
+    )
+
+
+def _public_i18n_attribute_template(attribute: str, source: str,
+                                    values: dict[str, str]) -> str:
+    markers = {"aria-label": "data-i18n-aria-label", "title": "data-i18n-title"}
+    if attribute not in markers:
+        raise ValueError("unsupported public localization attribute")
+    payload = html.escape(json.dumps(values, ensure_ascii=False, separators=(",", ":")), quote=True)
+    rendered = source
+    for name, value in values.items():
+        rendered = rendered.replace("{" + name + "}", str(value))
+    marker = markers[attribute]
+    return (
+        f'{attribute}="{html.escape(rendered, quote=True)}" '
+        f'{marker}-template-key="{html.escape(_ui_key(source), quote=True)}" '
+        f'{marker}-values="{payload}"'
+    )
 
 
 def login_page(*, claimed: bool, totp: bool = False,
@@ -6000,15 +6533,17 @@ def login_page(*, claimed: bool, totp: bool = False,
             provider_label, provider_icon, provider_setup_url = (
                 oidc_provider_presentation(oidc_provider)
             )
+            provider_values = {"provider": provider_label}
             oidc_entry = (
                 '<a class="oidc-login" href="/auth/oidc/login">'
                 '<svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18">'
                 f'<use href="/oidc-provider-icons.svg#oidc-{provider_icon}"></use></svg>'
-                f'Continue with {provider_label}</a>'
+                f'{_public_i18n_template("Continue with {provider}", provider_values)}</a>'
                 f'<a class="oidc-provider-help" href="{provider_setup_url}" '
-                f'aria-label="{provider_label} identity provider setup guide (opens in a new tab)" '
+                f'{_public_i18n_attribute_template("aria-label", "{provider} identity provider setup guide (opens in a new tab)", provider_values)} '
                 'target="_blank" rel="noopener noreferrer">'
-                f'Setup guide for {provider_label} <span aria-hidden="true">↗</span></a>'
+                f'{_public_i18n_template("Setup guide for {provider}", provider_values)} '
+                '<span aria-hidden="true">↗</span></a>'
             )
         else:
             oidc_entry = ""
@@ -6053,10 +6588,10 @@ def login_page(*, claimed: bool, totp: bool = False,
 <style>{CSS}{LOGIN_CSS}</style><script>{THEME_BOOT}</script></head><body data-title="{html.escape(title_key, quote=True)}">
 {_public_language_picker()}
 <form class="box" id="f" autocomplete="on">
-  <h1>ROM<span>arr</span></h1>
+  <h1 lang="en" dir="ltr">ROM<span>arr</span></h1>
   <div class="sub" data-i18n-key="{html.escape(title_key, quote=True)}">{html.escape(title)}</div>
   {fields}
-  <button type="submit" id="go">{action}</button>
+  <button type="submit" id="go" data-i18n-key="{html.escape(_ui_key(action), quote=True)}">{html.escape(action)}</button>
   <div class="err{' on' if oidc_error else ''}" id="err" role="alert" aria-live="assertive">{oidc_error}</div>
   {oidc_entry}
   <div class="note" data-i18n-key="{html.escape(note_key, quote=True)}">{html.escape(note)}</div>
@@ -6073,15 +6608,28 @@ if (keylink) keylink.onclick = function() {{
   document.getElementById('apikey').focus();
 }};
 function fail(m, raw) {{
+  var isInfo = m && typeof m === 'object' && typeof m.text === 'string';
+  var source = raw ? null : (isInfo ? m.source : String(m));
+  var values = raw ? {{}} : (isInfo ? (m.values || {{}}) : {{}});
   var localized = raw ? null :
-    (m && typeof m === 'object' && typeof m.text === 'string'
+    (isInfo
       ? m : window.ROMarrI18n.messageInfo(m));
+  if (source && window.ROMarrI18n.has(source)) {{
+    err.setAttribute('data-i18n-template-key', source);
+    err.setAttribute('data-i18n-values', JSON.stringify(values));
+  }} else {{
+    err.removeAttribute('data-i18n-template-key');
+    err.removeAttribute('data-i18n-values');
+  }}
   err.textContent = raw ? String(m) : localized.text;
   err.lang = raw ? 'und' : (localized.translated ? localized.locale : 'en');
   err.dir = raw ? 'auto' : (localized.translated
     && window.ROMarrI18n.isRTLForLocale(localized.locale) ? 'rtl' : 'ltr');
   err.className = 'err on'; go.disabled = false;
-  go.textContent = window.ROMarrI18n.translate(claimed ? 'Sign in' : 'Create password');
+  var action = claimed ? 'Sign in' : 'Create password';
+  go.setAttribute('data-i18n-key', action);
+  go.textContent = window.ROMarrI18n.translate(action);
+  window.ROMarrI18n.apply();
 }}
 f.onsubmit = async function(e) {{
   e.preventDefault();
@@ -6101,7 +6649,9 @@ f.onsubmit = async function(e) {{
     url = '/api/v1/setup';
     body = {{password: pw}};
   }}
-  go.disabled = true; go.textContent = 'Working…';
+  go.disabled = true;
+  go.setAttribute('data-i18n-key', 'Working…');
+  go.textContent = window.ROMarrI18n.translate('Working…');
   try {{
     var r = await fetch(url, {{method: 'POST',
       headers: {{'Content-Type': 'application/json'}},
@@ -6186,9 +6736,10 @@ var box = document.getElementById('box');
 var f = frag(), here = location.origin;
 
 function bad(msg) {
-  box.innerHTML = '<h1>ROM<span>arr</span></h1>'
-    + '<div class="sub">Not an invitation</div>'
-    + '<div class="note">' + esc(window.ROMarrI18n.translate(msg)) + '</div>';
+  box.innerHTML = '<h1 lang="en" dir="ltr">ROM<span>arr</span></h1>'
+    + '<div class="sub" data-i18n="Not an invitation">Not an invitation</div>'
+    + '<div class="note" data-i18n="' + esc(msg) + '">' + esc(msg) + '</div>';
+  window.ROMarrI18n.apply();
 }
 
 /* Home. The fragment was rehomed onto this host, so this IS the recipient's
@@ -6213,7 +6764,7 @@ function away() {
   try { mine = localStorage.getItem('romarr-home') || ''; } catch (_) {}
   var link = here + '/link#i=' + encodeURIComponent(f.i)
     + (f.n ? '&n=' + encodeURIComponent(f.n) : '');
-  box.innerHTML = '<h1>ROM<span>arr</span></h1>'
+  box.innerHTML = '<h1 lang="en" dir="ltr">ROM<span>arr</span></h1>'
     + '<div class="sub">You have been invited to peer</div>'
     + '<div class="who" lang="und" dir="auto">' + esc(f.n || here) + '</div>'
     + '<div class="id" lang="und" dir="auto">' + esc(here) + '</div>'
@@ -6228,6 +6779,7 @@ function away() {
     + '<div class="note"><span data-i18n="ui.no-romarr-on-this-device-copy-the-li.2d22717ea8">No ROMarr on this device? Copy the link and paste it into Friends &rarr; I have an invitation on your own server.</span>'
     + '<br><br><code>' + esc(link) + '</code>'
     + '<button class="copy" id="copy">Copy the link</button></div>';
+  window.ROMarrI18n.apply();
   document.getElementById('copy').onclick = function () {
     var b = document.getElementById('copy');
     navigator.clipboard.writeText(link).then(
@@ -6272,7 +6824,7 @@ def link_page() -> str:
 <style>{CSS}{LOGIN_CSS}{LINK_CSS}</style></head><body data-title="Invitation">
 {_public_language_picker()}
 <div class="box" id="box">
-  <h1>ROM<span>arr</span></h1>
+  <h1 lang="en" dir="ltr">ROM<span>arr</span></h1>
   <div class="sub" data-i18n="ui.checking-this-invitation.9246131855">Checking this invitation&hellip;</div>
 </div>
 <script>{I18N_RUNTIME}</script><script>{PUBLIC_I18N_JS}</script>

@@ -1,0 +1,556 @@
+{
+  "scope": "all tracked production files romarr/*.py and romarr/*.js at the exact pinned head; exact per-line substring searches for each selected source id and complete source string",
+  "commit": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "tree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "filePins": {
+    "romarr/downloaders.py": {
+      "fileSha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed",
+      "gitBlob": "65952d7b8361fa3c6af742f675fde805ec361dd2"
+    },
+    "romarr/launchers.py": {
+      "fileSha256": "8a8a7d9b6959c2e5166b131d426d7a7942037df19bc16cd7ba512621fa07b588",
+      "gitBlob": "c23133f62281a3cc1cd057b9bc471c4e36320a30"
+    },
+    "romarr/libraries.py": {
+      "fileSha256": "8d41c724588ff01ea3896dcfef4e07d7a2f107a1666070f0c1a688411686fe04",
+      "gitBlob": "af3912e3c0943bc4b442878ff3e0321fc4762600"
+    },
+    "romarr/organizer.py": {
+      "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390"
+    },
+    "romarr/ui.py": {
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0"
+    }
+  },
+  "queries": [
+    {
+      "position": 445,
+      "sourceId": "ui.filename-only-review.7ff9deba1a",
+      "queryKind": "source-id",
+      "literal": "ui.filename-only-review.7ff9deba1a",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 445,
+      "sourceId": "ui.filename-only-review.7ff9deba1a",
+      "queryKind": "source-text",
+      "literal": "Filename only · review",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 5811,
+          "text": "        filename_only:'Filename only · review',"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 446,
+      "sourceId": "ui.filename-only-no-verified-catalog-ma.c5ef8667b2",
+      "queryKind": "source-id",
+      "literal": "ui.filename-only-no-verified-catalog-ma.c5ef8667b2",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 446,
+      "sourceId": "ui.filename-only-no-verified-catalog-ma.c5ef8667b2",
+      "queryKind": "source-text",
+      "literal": "Filename only; no verified catalog match",
+      "matchCount": 2,
+      "matches": [
+        {
+          "path": "romarr/organizer.py",
+          "line": 1627,
+          "text": "                            \"Filename only; no verified catalog match\""
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5664,
+          "text": "  'Filename only; no verified catalog match',"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 447,
+      "sourceId": "ui.fill-gaps-use-a-translation-only-whe.818e100547",
+      "queryKind": "source-id",
+      "literal": "ui.fill-gaps-use-a-translation-only-whe.818e100547",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 447,
+      "sourceId": "ui.fill-gaps-use-a-translation-only-whe.818e100547",
+      "queryKind": "source-text",
+      "literal": "Fill gaps — use a translation only when no preferred-region dump exists",
+      "matchCount": 2,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4242,
+          "text": "      ['fill','Fill gaps — use a translation only when no preferred-region dump exists'],"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 5490,
+          "text": "         ['fill','Fill gaps — use a translation only when no preferred-region dump exists'],"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 448,
+      "sourceId": "ui.filter-games.32633ce2ef",
+      "queryKind": "source-id",
+      "literal": "ui.filter-games.32633ce2ef",
+      "matchCount": 2,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 6315,
+          "text": "    <label class=\"sr-only\" for=\"search\" data-i18n-key=\"ui.filter-games.32633ce2ef\">Filter games</label>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6317,
+          "text": "      aria-label=\"Filter games\" data-i18n-aria-label=\"ui.filter-games.32633ce2ef\" autocomplete=\"off\" lang=\"und\" dir=\"auto\"></header>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 448,
+      "sourceId": "ui.filter-games.32633ce2ef",
+      "queryKind": "source-text",
+      "literal": "Filter games",
+      "matchCount": 2,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 6315,
+          "text": "    <label class=\"sr-only\" for=\"search\" data-i18n-key=\"ui.filter-games.32633ce2ef\">Filter games</label>"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6317,
+          "text": "      aria-label=\"Filter games\" data-i18n-aria-label=\"ui.filter-games.32633ce2ef\" autocomplete=\"off\" lang=\"und\" dir=\"auto\"></header>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 449,
+      "sourceId": "ui.filter.be331aa8d8",
+      "queryKind": "source-id",
+      "literal": "ui.filter.be331aa8d8",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 6316,
+          "text": "    <input id=\"search\" data-i18n-placeholder=\"ui.filter.be331aa8d8\" placeholder=\"Filter…\""
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 449,
+      "sourceId": "ui.filter.be331aa8d8",
+      "queryKind": "source-text",
+      "literal": "Filter…",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 6316,
+          "text": "    <input id=\"search\" data-i18n-placeholder=\"ui.filter.be331aa8d8\" placeholder=\"Filter…\""
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 450,
+      "sourceId": "ui.first.e7b9cb3d54",
+      "queryKind": "source-id",
+      "literal": "ui.first.e7b9cb3d54",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2951,
+          "text": "        ?' '+interfaceMarkup('ui.first.e7b9cb3d54')+' <span lang=\"und\" dir=\"auto\">'"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 450,
+      "sourceId": "ui.first.e7b9cb3d54",
+      "queryKind": "source-text",
+      "literal": "First:",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 451,
+      "sourceId": "ui.fix-these.e5c50d4696",
+      "queryKind": "source-id",
+      "literal": "ui.fix-these.e5c50d4696",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 1934,
+          "text": "          msg.innerHTML='<div class=\"panel-note panel-warn\"><b>'+interfaceMarkup('ui.fix-these.e5c50d4696')+'</b><br>'"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 451,
+      "sourceId": "ui.fix-these.e5c50d4696",
+      "queryKind": "source-text",
+      "literal": "Fix these:",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 452,
+      "sourceId": "ui.flashpoint-streams.833230cb85",
+      "queryKind": "source-id",
+      "literal": "ui.flashpoint-streams.833230cb85",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 452,
+      "sourceId": "ui.flashpoint-streams.833230cb85",
+      "queryKind": "source-text",
+      "literal": "Flashpoint (streams)",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 1961,
+          "text": "  flashpoint:'Flashpoint (streams)',"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 453,
+      "sourceId": "ui.flood-has-tags-rather-than-categorie.3354953105",
+      "queryKind": "source-id",
+      "literal": "ui.flood-has-tags-rather-than-categorie.3354953105",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 453,
+      "sourceId": "ui.flood-has-tags-rather-than-categorie.3354953105",
+      "queryKind": "source-text",
+      "literal": "Flood has tags rather than categories; this is one",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/downloaders.py",
+          "line": 3581,
+          "text": "                  help=\"Flood has tags rather than categories; this is one\"),"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 454,
+      "sourceId": "ui.folder-name.14d34edf50",
+      "queryKind": "source-id",
+      "literal": "ui.folder-name.14d34edf50",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 454,
+      "sourceId": "ui.folder-name.14d34edf50",
+      "queryKind": "source-text",
+      "literal": "Folder name",
+      "matchCount": 2,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 4196,
+          "text": "    <label class=\"mapping-field\">Folder name"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4212,
+          "text": "    <p class=\"help\" style=\"margin:4px 0 8px\">ROMarr recognizes platform slugs and unambiguous ES-DE system names automatically. Add a mapping only when your existing folder uses another name, such as <code>PS2 Games</code>. Folder names are matched only at the library root.</p>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 455,
+      "sourceId": "ui.folder-packages-are-left-intact-to-p.e180bb56ad",
+      "queryKind": "source-id",
+      "literal": "ui.folder-packages-are-left-intact-to-p.e180bb56ad",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 5743,
+          "text": "  'ui.folder-packages-are-left-intact-to-p.e180bb56ad',"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 455,
+      "sourceId": "ui.folder-packages-are-left-intact-to-p.e180bb56ad",
+      "queryKind": "source-text",
+      "literal": "Folder packages are left intact to preserve their contents and references",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/organizer.py",
+          "line": 1857,
+          "text": "                                \"reason\": \"Folder packages are left intact to preserve their contents and references\"})"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 456,
+      "sourceId": "ui.folder-structure.4dee0b3f5c",
+      "queryKind": "source-id",
+      "literal": "ui.folder-structure.4dee0b3f5c",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 456,
+      "sourceId": "ui.folder-structure.4dee0b3f5c",
+      "queryKind": "source-text",
+      "literal": "Folder structure",
+      "matchCount": 2,
+      "matches": [
+        {
+          "path": "romarr/libraries.py",
+          "line": 851,
+          "text": "    _FIELD(\"layout\", \"Folder structure\", \"select\", \"\","
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 4227,
+          "text": "  +sel('library_layout','Folder structure',"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 457,
+      "sourceId": "ui.follow.641d1ef657",
+      "queryKind": "source-id",
+      "literal": "ui.follow.641d1ef657",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 6162,
+          "text": "        checked><span data-i18n=\"ui.follow.641d1ef657\">Follow</span></label>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 457,
+      "sourceId": "ui.follow.641d1ef657",
+      "queryKind": "source-text",
+      "literal": "Follow",
+      "matchCount": 3,
+      "matches": [
+        {
+          "path": "romarr/downloaders.py",
+          "line": 826,
+          "text": "    anybody cares about is a different one, linked by `followedBy`. Following"
+        },
+        {
+          "path": "romarr/launchers.py",
+          "line": 407,
+          "text": "            # Follow Steam's own library index, so libraries on other drives"
+        },
+        {
+          "path": "romarr/ui.py",
+          "line": 6162,
+          "text": "        checked><span data-i18n=\"ui.follow.641d1ef657\">Follow</span></label>"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 458,
+      "sourceId": "ui.for-a-guided-discovery-and-user-requ.409fbe664a",
+      "queryKind": "source-id",
+      "literal": "ui.for-a-guided-discovery-and-user-requ.409fbe664a",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 458,
+      "sourceId": "ui.for-a-guided-discovery-and-user-requ.409fbe664a",
+      "queryKind": "source-text",
+      "literal": "For a guided discovery and user request queue, pair ROMarrNG with",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 459,
+      "sourceId": "ui.for-a-household-catalog-and-request.2ec86400a0",
+      "queryKind": "source-id",
+      "literal": "ui.for-a-household-catalog-and-request.2ec86400a0",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 459,
+      "sourceId": "ui.for-a-household-catalog-and-request.2ec86400a0",
+      "queryKind": "source-text",
+      "literal": "For a household catalog and request queue, use",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2604,
+          "text": "    +'<p class=\"help\">For a household catalog and request queue, use <a href=\"https://github.com/snapetech-org/seerrng\" target=\"_blank\" rel=\"noopener noreferrer\">SeerrNG</a>. ROMarrNG handles acquiring, verifying and filing. <a href=\"https://github.com/snapetech-org/ROMarrNG/blob/main/docs/SEERRNG-INTEGRATION.md\" target=\"_blank\" rel=\"noopener noreferrer\">See how they connect</a>.</p></div>';"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 460,
+      "sourceId": "ui.for-a-shared-catalog-and-household-r.027b0accc2",
+      "queryKind": "source-id",
+      "literal": "ui.for-a-shared-catalog-and-household-r.027b0accc2",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 460,
+      "sourceId": "ui.for-a-shared-catalog-and-household-r.027b0accc2",
+      "queryKind": "source-text",
+      "literal": "For a shared catalog and household request queue, use",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 461,
+      "sourceId": "ui.for-an-emudeck-style-layout-set-the.917f18c4e8",
+      "queryKind": "source-id",
+      "literal": "ui.for-an-emudeck-style-layout-set-the.917f18c4e8",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 5429,
+          "text": "    +interfaceMarkup('ui.for-an-emudeck-style-layout-set-the.917f18c4e8')+' <code>Emulation/roms</code> '+interfaceMarkup('ui.folder-and-keep.011b3ce5f5')+' <code>Emulation/metadata</code> '+interfaceMarkup('ui.beside-it-add-a-platform-folder-mapp.6425999b49')"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 461,
+      "sourceId": "ui.for-an-emudeck-style-layout-set-the.917f18c4e8",
+      "queryKind": "source-text",
+      "literal": "For an EmuDeck-style layout, set the ROM library root to the shared",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 462,
+      "sourceId": "ui.found-count-matching-title-s-by-name.a1dfa4d604",
+      "queryKind": "source-id",
+      "literal": "ui.found-count-matching-title-s-by-name.a1dfa4d604",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 462,
+      "sourceId": "ui.found-count-matching-title-s-by-name.a1dfa4d604",
+      "queryKind": "source-text",
+      "literal": "Found {count} matching title(s) by name",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 463,
+      "sourceId": "ui.found-count-titles.4c3d13d187",
+      "queryKind": "source-id",
+      "literal": "ui.found-count-titles.4c3d13d187",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2949,
+          "text": "        :interfaceTemplateMarkup('ui.found-count-titles.4c3d13d187',{count:fmt(r.total)});"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 463,
+      "sourceId": "ui.found-count-titles.4c3d13d187",
+      "queryKind": "source-text",
+      "literal": "Found {count} titles.",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 464,
+      "sourceId": "ui.found-count-titles-unresolved-have-n.c72ecee544",
+      "queryKind": "source-id",
+      "literal": "ui.found-count-titles-unresolved-have-n.c72ecee544",
+      "matchCount": 1,
+      "matches": [
+        {
+          "path": "romarr/ui.py",
+          "line": 2947,
+          "text": "        ?interfaceTemplateMarkup('ui.found-count-titles-unresolved-have-n.c72ecee544',"
+        }
+      ],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    },
+    {
+      "position": 464,
+      "sourceId": "ui.found-count-titles-unresolved-have-n.c72ecee544",
+      "queryKind": "source-text",
+      "literal": "Found {count} titles; {unresolved} have no resolvable platform.",
+      "matchCount": 0,
+      "matches": [],
+      "scanScope": "all tracked romarr/*.py and romarr/*.js, exact per-line substring"
+    }
+  ],
+  "interpretation": "Search results are source evidence only. This candidate-free packet makes no translation accept/correct/refine/hold decisions."
+}

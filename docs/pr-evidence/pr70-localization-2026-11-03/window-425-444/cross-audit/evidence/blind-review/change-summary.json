@@ -1,0 +1,312 @@
+{
+  "artifact": "Blind review proposed target delta summary",
+  "head": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+  "tree": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d",
+  "changeCount": 26,
+  "changes": [
+    {
+      "position": 425,
+      "sourceId": "ui.excluded-by-policy.fee2bad0b3",
+      "locale": "fr",
+      "currentTarget": "Exclus selon la règle",
+      "currentTargetSha256": "7ebc23f4537bdd821ee559368ce64c52c5e628248f302fa3416ac8eda9f3e430",
+      "disposition": "correction",
+      "proposedTarget": "Exclus par la politique",
+      "proposedTargetSha256": "f369675b465f0cc8319565e6463e2165c563c1c8bb327508960a8eaa941f78c0",
+      "reviewReason": "“Politique” is the source meaning; “règle” narrows it to a rule."
+    },
+    {
+      "position": 425,
+      "sourceId": "ui.excluded-by-policy.fee2bad0b3",
+      "locale": "zh-Hans",
+      "currentTarget": "按规则排除",
+      "currentTargetSha256": "4c879daba3c780c2a771ef7282506664b004f5571d1b85fa66e3d20cb9cd2d26",
+      "disposition": "correction",
+      "proposedTarget": "按政策排除",
+      "proposedTargetSha256": "b8aa4ef7b2836e46068a0092193cd0a243f0d84ba1acf6bc1b3f0d2dc153ffa8",
+      "reviewReason": "“政策” preserves policy; “规则” means a rule and weakens the source label."
+    },
+    {
+      "position": 425,
+      "sourceId": "ui.excluded-by-policy.fee2bad0b3",
+      "locale": "zh-Hant",
+      "currentTarget": "依規則排除",
+      "currentTargetSha256": "fe493b6153227f3fcc0e51a2de19cc1abe194eba7512d07cde9e9c6c5a311e1c",
+      "disposition": "correction",
+      "proposedTarget": "依政策排除",
+      "proposedTargetSha256": "d679cc9a85c86984b5da32977a84fefabd138fdcd10d13da841e99914caee8f5",
+      "reviewReason": "“政策” preserves policy; “規則” means a rule and weakens the source label."
+    },
+    {
+      "position": 430,
+      "sourceId": "ui.export.3664895579",
+      "locale": "ar",
+      "currentTarget": "الصادرات",
+      "currentTargetSha256": "c394f7154bb6b732480a12dd3b16d5097ad08b4560bc900262b122412ec6f97e",
+      "disposition": "correction",
+      "proposedTarget": "تصدير",
+      "proposedTargetSha256": "4fa0ad254538f7d28507033368404b3cc99f9115fe7d2626ebc59102e5865ea8",
+      "reviewReason": "The current plural noun means exports; this source is an export action button."
+    },
+    {
+      "position": 430,
+      "sourceId": "ui.export.3664895579",
+      "locale": "es",
+      "currentTarget": "Exportación",
+      "currentTargetSha256": "6fbcfef156ad424e36a88c828e2863e9bd9207a92c6df077afc9e1e566d6af6b",
+      "disposition": "refinement",
+      "proposedTarget": "Exportar",
+      "proposedTargetSha256": "292f20ee64bce44a53d271581fdac3cfe764a5d6ab3a4e5214cfff7f223ce64c",
+      "reviewReason": "The current noun is understandable, but the export control is an action; the infinitive reads more directly."
+    },
+    {
+      "position": 430,
+      "sourceId": "ui.export.3664895579",
+      "locale": "fr",
+      "currentTarget": "Exportation",
+      "currentTargetSha256": "6fee11d3db2c29e0916419d4c65928b542b92b2d1a553f660327f8b977a18c54",
+      "disposition": "refinement",
+      "proposedTarget": "Exporter",
+      "proposedTargetSha256": "c0cc1fe8ff230c673653d8bb3728f5578472f27a42a2e2978202860e5b039865",
+      "reviewReason": "The current noun is understandable, but the export control is an action; the infinitive reads more directly."
+    },
+    {
+      "position": 431,
+      "sourceId": "ui.export-the-library-itself-for-a-spre.5674054b64",
+      "locale": "ko",
+      "currentTarget": "스프레드 시트 또는 다른 도구에 대한 라이브러리 자체 내보내기 :",
+      "currentTargetSha256": "9afcc942445774b0e659d1895969f1aaef400a7a8755896bc98a89f2910070ce",
+      "disposition": "refinement",
+      "proposedTarget": "스프레드시트나 다른 도구에서 사용할 수 있도록 라이브러리 자체를 내보냅니다:",
+      "proposedTargetSha256": "944bdfa76927e67c6b71a96eec981878b45f6d89300ce11821264a8b89868d84",
+      "reviewReason": "The current construction is awkward and splits “spreadsheet”; this gives the help sentence a natural purpose clause and removes the stray space before the colon."
+    },
+    {
+      "position": 431,
+      "sourceId": "ui.export-the-library-itself-for-a-spre.5674054b64",
+      "locale": "vi",
+      "currentTarget": "Xuất thư viện ra, cho bảng tính hay công cụ khác:",
+      "currentTargetSha256": "810b616dfb5d8a3f4d12f9ea7075ea5234d81080b1a1f6961df2d4e98a0c5d79",
+      "disposition": "refinement",
+      "proposedTarget": "Xuất thư viện để dùng trong bảng tính hoặc công cụ khác:",
+      "proposedTargetSha256": "8af491e6d2554214801046a607674f64469e3495114706487a486a3938492b5d",
+      "reviewReason": "The current comma interrupts the purpose phrase; the revision reads as a direct export instruction."
+    },
+    {
+      "position": 431,
+      "sourceId": "ui.export-the-library-itself-for-a-spre.5674054b64",
+      "locale": "zh-Hans",
+      "currentTarget": "导出库本身, 用于电子表格或另一个工具 :",
+      "currentTargetSha256": "fd0d296b12f4489b970cd8c65eb7d5e3e16fbe8536cffa101f0086deb1933ce3",
+      "disposition": "refinement",
+      "proposedTarget": "导出库本身，供电子表格或其他工具使用：",
+      "proposedTargetSha256": "ef34906e9c129c965fd97f5e8448eed85a883c64fbaca52eb71527edd73dc269",
+      "reviewReason": "Use Chinese punctuation and a natural purpose clause instead of the ASCII comma and spaced colon."
+    },
+    {
+      "position": 431,
+      "sourceId": "ui.export-the-library-itself-for-a-spre.5674054b64",
+      "locale": "zh-Hant",
+      "currentTarget": "匯出庫本身, 用於電子表格或另一個工具 :",
+      "currentTargetSha256": "0c7e81669d32326f355cc7415fde5ab48ebd738738bab9fa457ba3d5f8c47d4e",
+      "disposition": "refinement",
+      "proposedTarget": "匯出庫本身，供試算表或其他工具使用：",
+      "proposedTargetSha256": "a96465c6ac40ddb5d067a80e6cd131f6498ad02f0d7295b49929dcde536e809f",
+      "reviewReason": "Use Chinese punctuation and a natural purpose clause instead of the ASCII comma and spaced colon."
+    },
+    {
+      "position": 432,
+      "sourceId": "ui.extensions.fe3436af86",
+      "locale": "ja",
+      "currentTarget": "エクステンション",
+      "currentTargetSha256": "de2637594ed3d5c8075f1311cf5aa4015183a9ec5ffe2914b73d25f92d0c5cfc",
+      "disposition": "correction",
+      "proposedTarget": "拡張子",
+      "proposedTargetSha256": "50a87326c6db1e1183556c82b90f99b0cf2c2969c3320ee8a8a62acfe78177d6",
+      "reviewReason": "This table column contains filename suffixes; 拡張子 is the file-extension term, while エクステンション is ambiguous."
+    },
+    {
+      "position": 432,
+      "sourceId": "ui.extensions.fe3436af86",
+      "locale": "ko",
+      "currentTarget": "확장 기능",
+      "currentTargetSha256": "57034cd6a399deb6abdf273d8753a58da8a856cee7da0d089b7a2b7edbd0de82",
+      "disposition": "correction",
+      "proposedTarget": "파일 확장자",
+      "proposedTargetSha256": "b6f4503d6edd72c0ea149c1868c7dbf5fff4f6c8c057fa809a11cd3bfd62bd70",
+      "reviewReason": "The following column values are filename suffixes; 확장 기능 reads as an added feature."
+    },
+    {
+      "position": 432,
+      "sourceId": "ui.extensions.fe3436af86",
+      "locale": "vi",
+      "currentTarget": "Phần mở rộng",
+      "currentTargetSha256": "5d14d5d512d5688fc123f05b07530399796ae2814f5f71f38fbf2bdd0ca4894b",
+      "disposition": "correction",
+      "proposedTarget": "Phần mở rộng của tệp",
+      "proposedTargetSha256": "76e3bd41ce2daf50b14a2438778adbd6902e3c40697071061ae5ee5e0fc4fb50",
+      "reviewReason": "The table lists filename suffixes; adding “of the file” disambiguates it from a feature or general expansion."
+    },
+    {
+      "position": 432,
+      "sourceId": "ui.extensions.fe3436af86",
+      "locale": "zh-Hans",
+      "currentTarget": "扩展",
+      "currentTargetSha256": "99a4e1e59743908ff1f3d5dc31a5fb7d24fbb1c2bf1ed85e25f44095206529fb",
+      "disposition": "correction",
+      "proposedTarget": "文件扩展名",
+      "proposedTargetSha256": "4d92d67892c610f060d0b24884f12bcca20aaf7822412492e8cd5a1b3b1e92f4",
+      "reviewReason": "The following values are filename suffixes; this is the precise file-extension term."
+    },
+    {
+      "position": 432,
+      "sourceId": "ui.extensions.fe3436af86",
+      "locale": "zh-Hant",
+      "currentTarget": "擴充套件",
+      "currentTargetSha256": "254fd823378faf8229a9bd5d72f1b1b61a2f50f0112b311e8b3eb392c86a2cd2",
+      "disposition": "correction",
+      "proposedTarget": "副檔名",
+      "proposedTargetSha256": "5a9eb27f0861dae6af86e78b133dc7e264181bae1b16779fa26d5a0cdd312498",
+      "reviewReason": "The following values are filename suffixes; this is the precise Traditional Chinese file-extension term."
+    },
+    {
+      "position": 434,
+      "sourceId": "ui.failures.7bd31a025d",
+      "locale": "de",
+      "currentTarget": "Ausfälle",
+      "currentTargetSha256": "7d32348693c4752b43e25797d73388788b90eac6a3bff9d13e3e8ccf75117fb8",
+      "disposition": "correction",
+      "proposedTarget": "Fehlschläge",
+      "proposedTargetSha256": "78963ec37b6abd50207d16dafe188307b85daf7370c952625572854d41ecaa51",
+      "reviewReason": "Ausfälle commonly describes outages; this dashboard count is failed events/tasks."
+    },
+    {
+      "position": 434,
+      "sourceId": "ui.failures.7bd31a025d",
+      "locale": "hi",
+      "currentTarget": "विफलता",
+      "currentTargetSha256": "d6bb332bc3d9d773bc5e8740fbf0abecfe373f937ef2646a979e0358377eeb7a",
+      "disposition": "correction",
+      "proposedTarget": "विफलताएँ",
+      "proposedTargetSha256": "b5db68c58c18ed09b8f03f11421d79867ccc1c47920855f8436b40296deffcf6",
+      "reviewReason": "The dashboard counts failures, so the countable plural fits better than the current singular category noun."
+    },
+    {
+      "position": 434,
+      "sourceId": "ui.failures.7bd31a025d",
+      "locale": "id",
+      "currentTarget": "Gagal",
+      "currentTargetSha256": "ba86c6156725f1de2ff6e47123b1e6dbe69cc9cbc63f4e9fae1b1f00a1462cdc",
+      "disposition": "correction",
+      "proposedTarget": "Kegagalan",
+      "proposedTargetSha256": "9b4543edf93387c756de4f973bedd11f6f21bef73b3b224ea55d5b0d956f2a84",
+      "reviewReason": "The current Gagal is “failed/fail”; the statistic label needs the noun “failures.”"
+    },
+    {
+      "position": 434,
+      "sourceId": "ui.failures.7bd31a025d",
+      "locale": "vi",
+      "currentTarget": "Lỗi",
+      "currentTargetSha256": "e68991b7854214b02f47d3205f649ad2c74b7bede3270fcd1536e64ce16322b2",
+      "disposition": "correction",
+      "proposedTarget": "Thất bại",
+      "proposedTargetSha256": "710b8dc0a898001db62518cca2052b9065ea55150b109e34ace8cc2c0b0686c7",
+      "reviewReason": "The current Lỗi means errors; the source label counts failures."
+    },
+    {
+      "position": 435,
+      "sourceId": "ui.fan-translations.33094b18a1",
+      "locale": "de",
+      "currentTarget": "Fan Übersetzungen",
+      "currentTargetSha256": "a1955762b1b5af0245a407e8ceb5542ac4502597d3ccd0510fe955dcbc0c2d68",
+      "disposition": "correction",
+      "proposedTarget": "Fan-Übersetzungen",
+      "proposedTargetSha256": "e8d62ef049867921799daa097a1f5c21e27500467578c33463a2e5c250f12a3a",
+      "reviewReason": "German compounds require a hyphen here; the separated form is not idiomatic as a label."
+    },
+    {
+      "position": 435,
+      "sourceId": "ui.fan-translations.33094b18a1",
+      "locale": "id",
+      "currentTarget": "Fan terjemahan",
+      "currentTargetSha256": "8733fb1b94150d32ab1f4119d36a58e076dfcf2d25f5b3a89e4c7b384dc2d33b",
+      "disposition": "refinement",
+      "proposedTarget": "Terjemahan penggemar",
+      "proposedTargetSha256": "19cabdffaabbd77246fdc3408cfc36799508486a2b30ddcc4abc2aa8d40ba4c9",
+      "reviewReason": "The current mixed-English word order is awkward; this is a natural Indonesian noun phrase."
+    },
+    {
+      "position": 437,
+      "sourceId": "ui.feed.396c3cb18f",
+      "locale": "vi",
+      "currentTarget": "Nguồn dữ liệu",
+      "currentTargetSha256": "947bc62c71f286a9ecf3ff9b4214f459b2f13f1070ee87544e938e5b3e719b07",
+      "disposition": "correction",
+      "proposedTarget": "Nguồn cấp dữ liệu",
+      "proposedTargetSha256": "d869a82656a7754c54f6dc3920be9beb8cdf8a0552bb8e5119813f08ed5063fa",
+      "reviewReason": "This is the RSS/indexer feed-status column, not a generic data source."
+    },
+    {
+      "position": 437,
+      "sourceId": "ui.feed.396c3cb18f",
+      "locale": "zh-Hans",
+      "currentTarget": "数据源",
+      "currentTargetSha256": "186be2232e2c9bb0319afc1c326eda2303be3b290185f9da0a6de60f2c166d5f",
+      "disposition": "correction",
+      "proposedTarget": "订阅源",
+      "proposedTargetSha256": "04c8a9046b83479ffcbd20e63618a412e0659280f9e3301f37b31573a1161fc0",
+      "reviewReason": "The indexer diagnostics column is an RSS feed; 数据源 is broader than the source term."
+    },
+    {
+      "position": 437,
+      "sourceId": "ui.feed.396c3cb18f",
+      "locale": "zh-Hant",
+      "currentTarget": "資料來源",
+      "currentTargetSha256": "f4aa7ec53e29d031ccbc43d62e37d06ccd54d13b741edcf4a650cd0364265a7f",
+      "disposition": "correction",
+      "proposedTarget": "訂閱來源",
+      "proposedTargetSha256": "98526ad947653def0317b0b1d2ac3f17875046c76bb6bc5a8fd1fcacd5f73b50",
+      "reviewReason": "The indexer diagnostics column is an RSS feed; 資料來源 is broader than the source term."
+    },
+    {
+      "position": 441,
+      "sourceId": "ui.fetched-count-at-date.82745b0bd9",
+      "locale": "id",
+      "currentTarget": "Mengambil {count} pada {date}",
+      "currentTargetSha256": "27977cae94c812d380c44e915aeb9a20e7727fb49bc2a506b2eb3ebf9cbd00f3",
+      "disposition": "refinement",
+      "proposedTarget": "Telah mengambil {count} pada {date}",
+      "proposedTargetSha256": "1e0cf613f1adcfa69bfad479af2e789b70897562dbe241c1e01c3ffc85969297",
+      "reviewReason": "The source reports a completed fetch; Telah marks the completed action more clearly than the unmarked current verb."
+    },
+    {
+      "position": 444,
+      "sourceId": "ui.filename.971b974235",
+      "locale": "hi",
+      "currentTarget": "फाईल का नाम",
+      "currentTargetSha256": "22fc274f3eec743afb9ac29d1f35a2e5eb05057397529d1de75a3a4a18721e2c",
+      "disposition": "refinement",
+      "proposedTarget": "फ़ाइल का नाम",
+      "proposedTargetSha256": "2cad7b103327ed97be3c5c61e52d20bfffe95ef24f1a5264848a88daa9aa2965",
+      "reviewReason": "Use the same standard फ़ाइल spelling as the neighboring File label; the current फाईल is a spelling variant."
+    }
+  ],
+  "currentWindowHoldCount": 0,
+  "carriedHoldCount": 336,
+  "numericMismatches": [
+    {
+      "position": 439,
+      "locale": "zh-Hans",
+      "disposition": "accept-current",
+      "currentTargetSha256": "91d0642a2158256f62d98ae0f5c1c2a401bf32ee4a90dffff4438dfa97dac728",
+      "semanticResolution": "百大 (“top 100”) is idiomatic and preserves the numeric quantity."
+    },
+    {
+      "position": 439,
+      "locale": "zh-Hant",
+      "disposition": "accept-current",
+      "currentTargetSha256": "afc37897a79f6ed7241a73ebc03fd9dc9b161ce6c82ff874afbbf8744d4d405c",
+      "semanticResolution": "百大 (“top 100”) is idiomatic and preserves the numeric quantity."
+    }
+  ]
+}

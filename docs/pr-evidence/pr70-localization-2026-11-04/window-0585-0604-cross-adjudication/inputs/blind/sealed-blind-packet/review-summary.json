@@ -1,0 +1,89 @@
+{
+  "coverage": {
+    "callerlessHashOnlyHoldCells": 24,
+    "callerlessSources": [
+      "ui.last-refresh-error.479c8c6d09",
+      "ui.lidarr.01a6f87c38"
+    ],
+    "pinnedDirectCallerReferencesConsulted": 37,
+    "sourcesWithPinnedCallerContextReviewed": 18
+  },
+  "dispositions": {
+    "holdHashOnly": 24,
+    "proposalCountsBySourceId": {
+      "ui.ko-fi.76c38e42cf": 1,
+      "ui.last-ran.2e024dc014": 2,
+      "ui.last-refresh.519ad138a1": 2,
+      "ui.latest-listed-version-only.1df61faba4": 2,
+      "ui.left.58eb9032e3": 12,
+      "ui.lynx-header.83b04c6319": 1
+    },
+    "proposeRefinement": 20,
+    "retainCurrent": 196,
+    "total": 240
+  },
+  "input": {
+    "blindnessManifestSha256": "88ffcaaa0176e106fe29feb401df787fd5961bcb05a4f8da9b742e35413bb55a",
+    "candidateFreeInputVerifierResult": {
+      "callerlessCells": 24,
+      "callerlessSources": 2,
+      "directCallerRefs": 37,
+      "tokenMismatches": {
+        "markup": 0,
+        "missingTarget": 0,
+        "numeric": 0,
+        "numericPresentationDifferences": 0,
+        "placeholder": 0,
+        "protectedLiteral": 0
+      }
+    },
+    "cellCount": 240,
+    "inputSha256SumsSha256": "3534dd5d1e8a4998045f398b93876afcb9f7ba05083d89b37f0fd50f832bf7c5",
+    "localeCount": 12,
+    "localeOrder": [
+      "ar",
+      "de",
+      "es",
+      "fr",
+      "hi",
+      "id",
+      "ja",
+      "ko",
+      "pt-BR",
+      "vi",
+      "zh-Hans",
+      "zh-Hant"
+    ],
+    "path": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w585-604-current-candidate-free-20261104/candidate-free/input",
+    "sourceCount": 20,
+    "verifier": "PASS"
+  },
+  "limitations": {
+    "nativeSpeakerApproval": false,
+    "note": "This is an independent model-assisted semantic pass, not native-speaker approval. Retain-current means no definite correction was identified from the supplied pinned context.",
+    "overallConfidence": "moderate"
+  },
+  "mutations": {
+    "mergeReleaseOrTag": 0,
+    "pullRequestEdits": 0,
+    "repositoryEdits": 0,
+    "testsBuildsOrCI": 0,
+    "workflowEdits": 0
+  },
+  "pin": {
+    "baseRef": "main",
+    "baseSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "branch": "task/localization-translation-review-20261030",
+    "draft": true,
+    "head": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+    "postReviewReattestation": "pass; API, branch ref, pull ref, and worktree head/tree matched the pin after review",
+    "pullRef": "refs/pull/70/head",
+    "pullRequest": 70,
+    "repository": "snapetech-org/ROMarrNG",
+    "state": "open",
+    "tree": "dcb9c1766831e217ffca7fb77068b97c33b9524e"
+  },
+  "review": "ROMarrNG PR #70 W585-W604 strict blind semantic review",
+  "reviewedUtc": "2026-11-04T18:09:56Z",
+  "schemaVersion": 1
+}

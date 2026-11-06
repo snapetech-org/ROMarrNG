@@ -1,0 +1,47 @@
+{
+  "activeRegistryCount": 479,
+  "activeRegistryMatches": [
+    {
+      "activeRank": 186,
+      "registryLocations": [
+        "romarr/ui.py:5500"
+      ],
+      "sourceId": "ui.manually-confirmed.9b66efab12"
+    },
+    {
+      "activeRank": 185,
+      "registryLocations": [
+        "romarr/organizer.py:1769"
+      ],
+      "sourceId": "ui.manually-confirmed-by-the-library-ow.5b75fab860"
+    },
+    {
+      "activeRank": 187,
+      "registryLocations": [
+        "romarr/ui.py:5097"
+      ],
+      "sourceId": "ui.match-dats-cache-shared-metadata-and.1454c1af0c"
+    },
+    {
+      "activeRank": 188,
+      "registryLocations": [
+        "romarr/ui.py:4025"
+      ],
+      "sourceId": "ui.maximum-size-mb.02998adaa9"
+    },
+    {
+      "activeRank": 190,
+      "registryLocations": [
+        "romarr/organizer.py:1625"
+      ],
+      "sourceId": "ui.metadata-provider-title-suggestion-c.f44517c58a"
+    }
+  ],
+  "lineHintCaveat": "Active source registry metadata does not substitute for exact literal caller search and excerpt evidence.",
+  "selectedCatalogZeroBasedIndices": [
+    625,
+    644
+  ],
+  "selectedIdsInActiveRegistry": 5,
+  "selectionBasis": "catalog JSON message-key insertion order"
+}

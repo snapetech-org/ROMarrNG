@@ -1,0 +1,23 @@
+{
+  "observedImmediatelyBeforeEdit": true,
+  "head": "7640720c5e3b1813725cca8d7aa46b5d968bff43",
+  "tree": "bdee162cc11115256df8756f192b19d4337ed1dc",
+  "branch": "task/localization-translation-review-20261030",
+  "branchRef": "7640720c5e3b1813725cca8d7aa46b5d968bff43",
+  "pullRef": "7640720c5e3b1813725cca8d7aa46b5d968bff43",
+  "state": "OPEN",
+  "isDraft": true,
+  "preimageCellsChecked": 240,
+  "selectedChanges": 12,
+  "currentHoldsChecked": 60,
+  "carriedHoldsChecked": 384,
+  "priorSelectionsChecked": 80,
+  "catalogMessageCount": 1836,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogFileSha256": "86e6b3da1a4b07130678024de822ee4f921c98d587232c4d889e718711423c0b",
+  "catalogGitBlob": "bfa7485c48286463e6e9528e81278b695ee92a19",
+  "pinnedSourceCallerFilesChecked": 27,
+  "crossAuditVerifier": "PASS",
+  "crossAuditLedgerSha256": "3f5b67dc7ff2eda276a1ef43257ce1defcfe5146217b30b2ee1e9874e777787d",
+  "verifiedAtUTC": "2026-11-04T00:04:26.825501+00:00"
+}

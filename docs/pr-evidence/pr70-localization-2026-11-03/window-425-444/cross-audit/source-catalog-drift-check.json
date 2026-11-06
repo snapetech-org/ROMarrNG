@@ -1,0 +1,251 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "commit": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+  "tree": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d",
+  "treeTruncated": false,
+  "pinnedFileCount": 23,
+  "allExpectedTreeBlobsMatch": true,
+  "allRawFileSha256AndGitBlobHashesMatch": true,
+  "driftCount": 0,
+  "files": [
+    {
+      "path": "romarr/app.py",
+      "expectedFileSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+      "observedFileSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+      "expectedGitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+      "treeGitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+      "blobApiSha": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+      "computedGitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/browser.py",
+      "expectedFileSha256": "4856dc48bbf77781399481468ad979c86fd2120d23c8724df3b5f2cbc2e9bb66",
+      "observedFileSha256": "4856dc48bbf77781399481468ad979c86fd2120d23c8724df3b5f2cbc2e9bb66",
+      "expectedGitBlob": "9fe5a80f8683909b36281cfc60778ce365a67d1b",
+      "treeGitBlob": "9fe5a80f8683909b36281cfc60778ce365a67d1b",
+      "blobApiSha": "9fe5a80f8683909b36281cfc60778ce365a67d1b",
+      "computedGitBlob": "9fe5a80f8683909b36281cfc60778ce365a67d1b",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/dat.py",
+      "expectedFileSha256": "b7e002a3046195d4aa64a6413f7e844c906ffb29deb3eae42e3a572ff45a06b2",
+      "observedFileSha256": "b7e002a3046195d4aa64a6413f7e844c906ffb29deb3eae42e3a572ff45a06b2",
+      "expectedGitBlob": "a453111beacc34fc247934931c31c1337d6c1723",
+      "treeGitBlob": "a453111beacc34fc247934931c31c1337d6c1723",
+      "blobApiSha": "a453111beacc34fc247934931c31c1337d6c1723",
+      "computedGitBlob": "a453111beacc34fc247934931c31c1337d6c1723",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/decompress.py",
+      "expectedFileSha256": "544275a2f42c94d86661b4b8d0703ec34b7c43481addc5ef6cfeddcf5977b4ba",
+      "observedFileSha256": "544275a2f42c94d86661b4b8d0703ec34b7c43481addc5ef6cfeddcf5977b4ba",
+      "expectedGitBlob": "ff350ed0804391d0a398ce810e03b0c680e107cb",
+      "treeGitBlob": "ff350ed0804391d0a398ce810e03b0c680e107cb",
+      "blobApiSha": "ff350ed0804391d0a398ce810e03b0c680e107cb",
+      "computedGitBlob": "ff350ed0804391d0a398ce810e03b0c680e107cb",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/downloaders.py",
+      "expectedFileSha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed",
+      "observedFileSha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed",
+      "expectedGitBlob": "65952d7b8361fa3c6af742f675fde805ec361dd2",
+      "treeGitBlob": "65952d7b8361fa3c6af742f675fde805ec361dd2",
+      "blobApiSha": "65952d7b8361fa3c6af742f675fde805ec361dd2",
+      "computedGitBlob": "65952d7b8361fa3c6af742f675fde805ec361dd2",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/frontends.py",
+      "expectedFileSha256": "6c01b8fcfd1afef2fcbd70e96e73b01ca7e5fcf9251507b88b19d9717bec8e95",
+      "observedFileSha256": "6c01b8fcfd1afef2fcbd70e96e73b01ca7e5fcf9251507b88b19d9717bec8e95",
+      "expectedGitBlob": "fd36a48837fb7a6ab67b6774a63208b1046da1ce",
+      "treeGitBlob": "fd36a48837fb7a6ab67b6774a63208b1046da1ce",
+      "blobApiSha": "fd36a48837fb7a6ab67b6774a63208b1046da1ce",
+      "computedGitBlob": "fd36a48837fb7a6ab67b6774a63208b1046da1ce",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/i18n_runtime.js",
+      "expectedFileSha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "observedFileSha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "expectedGitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc",
+      "treeGitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc",
+      "blobApiSha": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc",
+      "computedGitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/indexers.py",
+      "expectedFileSha256": "f21bab5b203cde629f88558f5a576f7d161b3a55a36e937ef21279ffa30a764e",
+      "observedFileSha256": "f21bab5b203cde629f88558f5a576f7d161b3a55a36e937ef21279ffa30a764e",
+      "expectedGitBlob": "0257ef9eb77f4e0a3c94ea26b5b58185fb55ac81",
+      "treeGitBlob": "0257ef9eb77f4e0a3c94ea26b5b58185fb55ac81",
+      "blobApiSha": "0257ef9eb77f4e0a3c94ea26b5b58185fb55ac81",
+      "computedGitBlob": "0257ef9eb77f4e0a3c94ea26b5b58185fb55ac81",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/launchers.py",
+      "expectedFileSha256": "8a8a7d9b6959c2e5166b131d426d7a7942037df19bc16cd7ba512621fa07b588",
+      "observedFileSha256": "8a8a7d9b6959c2e5166b131d426d7a7942037df19bc16cd7ba512621fa07b588",
+      "expectedGitBlob": "c23133f62281a3cc1cd057b9bc471c4e36320a30",
+      "treeGitBlob": "c23133f62281a3cc1cd057b9bc471c4e36320a30",
+      "blobApiSha": "c23133f62281a3cc1cd057b9bc471c4e36320a30",
+      "computedGitBlob": "c23133f62281a3cc1cd057b9bc471c4e36320a30",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/library.py",
+      "expectedFileSha256": "2508bff50e8aa31ffc25c976cc061d396dedb975525e7cae640d84272a2bbcf3",
+      "observedFileSha256": "2508bff50e8aa31ffc25c976cc061d396dedb975525e7cae640d84272a2bbcf3",
+      "expectedGitBlob": "72b049ecf75c6736b985dc2439cda7054155d208",
+      "treeGitBlob": "72b049ecf75c6736b985dc2439cda7054155d208",
+      "blobApiSha": "72b049ecf75c6736b985dc2439cda7054155d208",
+      "computedGitBlob": "72b049ecf75c6736b985dc2439cda7054155d208",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/metadata.py",
+      "expectedFileSha256": "4b838ec909961bee7723d2760f9e7c8d18eff5db18874e9907a4d2d9cb0e5186",
+      "observedFileSha256": "4b838ec909961bee7723d2760f9e7c8d18eff5db18874e9907a4d2d9cb0e5186",
+      "expectedGitBlob": "856e5f1827449b99d2065c32999c4df82aa35978",
+      "treeGitBlob": "856e5f1827449b99d2065c32999c4df82aa35978",
+      "blobApiSha": "856e5f1827449b99d2065c32999c4df82aa35978",
+      "computedGitBlob": "856e5f1827449b99d2065c32999c4df82aa35978",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/notify.py",
+      "expectedFileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+      "observedFileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+      "expectedGitBlob": "ef207435d6dedce92e2fd7310898c1a55e95f94e",
+      "treeGitBlob": "ef207435d6dedce92e2fd7310898c1a55e95f94e",
+      "blobApiSha": "ef207435d6dedce92e2fd7310898c1a55e95f94e",
+      "computedGitBlob": "ef207435d6dedce92e2fd7310898c1a55e95f94e",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/organizer.py",
+      "expectedFileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "observedFileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "expectedGitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+      "treeGitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+      "blobApiSha": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+      "computedGitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/patches.py",
+      "expectedFileSha256": "a004fee71b18831816726083dbd7ffabbe670c61d6800f027d857217ecdb42eb",
+      "observedFileSha256": "a004fee71b18831816726083dbd7ffabbe670c61d6800f027d857217ecdb42eb",
+      "expectedGitBlob": "631e84907846c7fc3ceef2e49f28ed7de4c9a8eb",
+      "treeGitBlob": "631e84907846c7fc3ceef2e49f28ed7de4c9a8eb",
+      "blobApiSha": "631e84907846c7fc3ceef2e49f28ed7de4c9a8eb",
+      "computedGitBlob": "631e84907846c7fc3ceef2e49f28ed7de4c9a8eb",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/platforms.py",
+      "expectedFileSha256": "7766775a203f05c5ee1c51dc8c66487976434a249f4049188c1c6ce743abc7b6",
+      "observedFileSha256": "7766775a203f05c5ee1c51dc8c66487976434a249f4049188c1c6ce743abc7b6",
+      "expectedGitBlob": "854e748596d0b8ee8b5e1a7c505bf02bf5d814b6",
+      "treeGitBlob": "854e748596d0b8ee8b5e1a7c505bf02bf5d814b6",
+      "blobApiSha": "854e748596d0b8ee8b5e1a7c505bf02bf5d814b6",
+      "computedGitBlob": "854e748596d0b8ee8b5e1a7c505bf02bf5d814b6",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/playability.py",
+      "expectedFileSha256": "fc193d93931383cd7202baf8b7696e30c93861e1495a83a05fc2aa3bc85c303d",
+      "observedFileSha256": "fc193d93931383cd7202baf8b7696e30c93861e1495a83a05fc2aa3bc85c303d",
+      "expectedGitBlob": "ad2eba5ecb2166ecc3fb837fdea87f97e41fda29",
+      "treeGitBlob": "ad2eba5ecb2166ecc3fb837fdea87f97e41fda29",
+      "blobApiSha": "ad2eba5ecb2166ecc3fb837fdea87f97e41fda29",
+      "computedGitBlob": "ad2eba5ecb2166ecc3fb837fdea87f97e41fda29",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/selection.py",
+      "expectedFileSha256": "4d503ccbb2bf21b3aea0c24596f8c36033248edee2549244b1edc469dbfa9d96",
+      "observedFileSha256": "4d503ccbb2bf21b3aea0c24596f8c36033248edee2549244b1edc469dbfa9d96",
+      "expectedGitBlob": "c95757f005e2d84fcbc3baba0de85d1e1c2b687f",
+      "treeGitBlob": "c95757f005e2d84fcbc3baba0de85d1e1c2b687f",
+      "blobApiSha": "c95757f005e2d84fcbc3baba0de85d1e1c2b687f",
+      "computedGitBlob": "c95757f005e2d84fcbc3baba0de85d1e1c2b687f",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/sniff.py",
+      "expectedFileSha256": "f8bfd66c7650b00461d3856677cfe296fa9b185a7035529a04584c614e0cbfb2",
+      "observedFileSha256": "f8bfd66c7650b00461d3856677cfe296fa9b185a7035529a04584c614e0cbfb2",
+      "expectedGitBlob": "ee261f71427b31e1642af1d3ea992aa40bd26e31",
+      "treeGitBlob": "ee261f71427b31e1642af1d3ea992aa40bd26e31",
+      "blobApiSha": "ee261f71427b31e1642af1d3ea992aa40bd26e31",
+      "computedGitBlob": "ee261f71427b31e1642af1d3ea992aa40bd26e31",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/store.py",
+      "expectedFileSha256": "7923e65e7a34e911b3eb99363566320492d98ef39286cfd4dd976ec98e9efc29",
+      "observedFileSha256": "7923e65e7a34e911b3eb99363566320492d98ef39286cfd4dd976ec98e9efc29",
+      "expectedGitBlob": "ea21251c9951e86f99e57337b52c2b36e3b5cfdb",
+      "treeGitBlob": "ea21251c9951e86f99e57337b52c2b36e3b5cfdb",
+      "blobApiSha": "ea21251c9951e86f99e57337b52c2b36e3b5cfdb",
+      "computedGitBlob": "ea21251c9951e86f99e57337b52c2b36e3b5cfdb",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/ui-labels.json",
+      "expectedFileSha256": "d99f6636fefae13497849d8a88046d0bd6bb62c0d906fc030b2cc6946d6cd603",
+      "observedFileSha256": "d99f6636fefae13497849d8a88046d0bd6bb62c0d906fc030b2cc6946d6cd603",
+      "expectedGitBlob": "d8b9a8fb9ab2f134132061a1740c41d572fb998b",
+      "treeGitBlob": "d8b9a8fb9ab2f134132061a1740c41d572fb998b",
+      "blobApiSha": "d8b9a8fb9ab2f134132061a1740c41d572fb998b",
+      "computedGitBlob": "d8b9a8fb9ab2f134132061a1740c41d572fb998b",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/ui-source-messages.json",
+      "expectedFileSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "observedFileSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "expectedGitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "treeGitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "blobApiSha": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "computedGitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/ui-source-snapshot.json",
+      "expectedFileSha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "observedFileSha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "expectedGitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+      "treeGitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+      "blobApiSha": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+      "computedGitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+      "status": "PASS"
+    },
+    {
+      "path": "romarr/ui.py",
+      "expectedFileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "observedFileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "expectedGitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+      "treeGitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+      "blobApiSha": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+      "computedGitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+      "status": "PASS"
+    }
+  ],
+  "finalPreSealRecheckUtc": "2026-11-03T19:54:08.986462+00:00",
+  "finalTreeRecheck": {
+    "sha": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d",
+    "truncated": false,
+    "pinnedFileCount": 23,
+    "changedPaths": [],
+    "status": "PASS"
+  },
+  "liveMainRefAtFinalRecheck": "bc1dee5df3d0dd88cdfe234f39ccc32f6eb86fe3"
+}

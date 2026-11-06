@@ -1,0 +1,15 @@
+{
+  "baseRefName": "main",
+  "candidateFreeInputHead": "bef31ca8a94f21273b11303524d79bd9c5344305",
+  "candidateFreeInputTree": "7616d96ddd3a1bfe8078d43492eb5bea7213f080",
+  "headRefName": "task/localization-translation-review-20261030",
+  "headRefOid": "bef31ca8a94f21273b11303524d79bd9c5344305",
+  "isDraft": true,
+  "pullRequest": 70,
+  "remoteBranch": "task/localization-translation-review-20261030",
+  "remoteBranchHead": "bef31ca8a94f21273b11303524d79bd9c5344305",
+  "repository": "snapetech-org/ROMarrNG",
+  "state": "OPEN",
+  "tree": "7616d96ddd3a1bfe8078d43492eb5bea7213f080",
+  "verification": "passed"
+}

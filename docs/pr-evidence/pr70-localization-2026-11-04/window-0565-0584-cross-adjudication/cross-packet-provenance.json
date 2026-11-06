@@ -1,0 +1,20 @@
+{
+  "artifact": "ROMarrNG PR #70 W565-W584 cross-packet provenance",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "candidateFreeInputManifestSha256": "da150c7a23be6506b2203b2357a45cc7a420c56e4944826dc8ef276462daba60",
+  "candidateFreeInputChecksumListSha256": "1dc7022503bfc6082af1c1e9f02a6686e8074e34c34c8989e04bc73925d17c7e",
+  "primaryManifestSha256": "6123f3535692fa048ad3ef185b1a555770d903a8d951de48e473e01936c33bdb",
+  "primaryLedgerSha256": "c9aaecd93df6de93ec6e219391d97076f44d4bbbf12e6c8e460ce213efab51e0",
+  "blindReviewPacketSha256": "937514344b84d989b3c302c1cfd6c9211813138a2de0d94803d1e43da29da915",
+  "blindReviewCellsSha256": "06b3d47814f8fb565c7e1bb64e9e50567ac79e13d7f3cf12d6de1f6989e67acf",
+  "crossPacketDirectory": "cross-review",
+  "crossPacketVerifierResult": "PASS",
+  "crossPacketSummarySha256": "84443c75e1135931192d9d52e03a0c932f135f6967b96a13f97aaf58d6b62304",
+  "crossPacketChecksumListSha256": "07612ec8c5892e4ca3d5c8c628eb085df392b00171de304db2bf29a27b15834c",
+  "inputIntegrityNote": "The primary packet root README count differs from its nested manifest/summary/ledger/verifier; the discrepancy is preserved in cross-review/integrity-notes.json.",
+  "selectedChangeCount": 1,
+  "textFreeHoldCount": 40,
+  "sourceCandidateFree": true,
+  "nativeSpeakerReview": false
+}

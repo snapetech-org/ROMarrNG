@@ -1,0 +1,56 @@
+{
+  "reviewType": "blind sentence-composition review",
+  "inputDirectory": "/mnt/disks/scratch/task-scratch/romarrng-pr70-emu-deck-sentence-supplement-primary-20261103/clean-input",
+  "inputChecksumsVerified": true,
+  "inputSha256": {
+    "README.txt": "62bfdd6c2aeb23ee266332fea66f4ffa9e1b6181777bfef3ab64a19af72ee693",
+    "head-and-file-pins.json": "187d55a1ad0378568e52c8f69b9752fe12058d46767abafe04bc26541cc2bfb1",
+    "review-input.jsonl": "c61fd495ee687347d19264baeef194e98ea646ee848a15b3dab18b41fe4e3aaf"
+  },
+  "prPins": {
+    "repository": "snapetech-org/ROMarrNG",
+    "pull": 70,
+    "head": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+    "tree": "e8668e9c83afa533f8cd6e69e6a7ad96946ed40e",
+    "catalogSourceFileSha256": "5377a4b6c76137e7a3a9da7096dfbecbb8c90558d92831085ba1fb37c80d1484",
+    "uiFileSha256": "810ccf901f4c7651aaf78602ae6eb69d471da65076cc6749c3a86367aa42d566",
+    "uiFileGitBlob": "2e114d53a518287bd940371ce83625bee002f402"
+  },
+  "sourceIds": [
+    "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+    "ui.folder-not-the-wider.d61c242874",
+    "ui.directory-keep-shared-metadata-along.e2e13b466b"
+  ],
+  "cellCount": 36,
+  "localeOrder": [
+    "es",
+    "zh-Hans",
+    "hi",
+    "de",
+    "ja",
+    "fr",
+    "pt-BR",
+    "ar",
+    "ko",
+    "zh-Hant",
+    "vi",
+    "id"
+  ],
+  "internalPinChecks": {
+    "allSourceFragmentHashesMatch": true,
+    "sourceIdsMatchHashPrefixes": true,
+    "allCurrentTargetSha256Match": true,
+    "currentAssembliesReproducePacket": true,
+    "repoOrAPIRevalidation": "not performed; scope restricted to clean-input and repository/source inspection was prohibited"
+  },
+  "decisionCounts": {
+    "correction": 23,
+    "accept-current": 5,
+    "refinement": 8
+  },
+  "outputFiles": [
+    "ledger.json",
+    "review-manifest.json",
+    "SHA256SUMS.txt"
+  ]
+}

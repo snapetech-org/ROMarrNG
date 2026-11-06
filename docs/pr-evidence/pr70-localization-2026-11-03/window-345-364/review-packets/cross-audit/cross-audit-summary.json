@@ -1,0 +1,189 @@
+{
+  "blindReview": {
+    "checksumListSha256": "13c69b28856fc51c7574c96249336460be333daafbfd8783658f24b1b4e7557e",
+    "counts": {
+      "accept-current": 120,
+      "correction": 90,
+      "refinement": 30
+    },
+    "ledgerSha256": "acc25c4d5134f269e3569ff14e8fc0077b33c0c2c92ecda3a77af3ca3527722d",
+    "path": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w345-364-blind-20261103/blind-review",
+    "summarySha256": "6bb18900a812b7a827081c1c615c375456be85eb9d27735f1e30e995a940ff07"
+  },
+  "branch": "task/localization-translation-review-20261030",
+  "callerlessHolds": {
+    "cellsInCurrentWindow": 0,
+    "priorCallerlessHoldCellsReattested": 288,
+    "priorCallerlessHoldTargetsUnchanged": true
+  },
+  "candidateFreeInput": {
+    "candidateFree": true,
+    "checksumListSha256": "588e185b10c8246eed10f46d457a149d46845d614805e714f4c2ac217a7836c3",
+    "currentTargetCellsSha256": "fb62827e21ca847040356e4ebfcda320b984216e80d39ad7164e284dfed0af1e",
+    "manifestSha256": "9290f5add4353ae65e4431d09c85a040b1d3a79830bfbce310c7399dd861ad5d",
+    "path": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w345-364-primary-20261103/input",
+    "priorHoldReattestationSha256": "7704546bffe23260a4fd026c7fdadf70acaf2d90cd94bc5c39cb1ea33d9819ed",
+    "sourceContextsSha256": "2e9543bdbee264eb52d3185b614553f516707259f0899ebf4fc344fb7f97014f"
+  },
+  "cellCount": 240,
+  "checkedAtUtc": "2026-11-03T15:23:57.395482+00:00",
+  "comparison": {
+    "combinedDifferingCellCount": 112,
+    "differingBothTargetAndDisposition": 73,
+    "dispositionAgreementCount": 158,
+    "dispositionDisagreementCount": 82,
+    "dispositionOnlyDisagreementCount": 9,
+    "targetAgreementCount": 137,
+    "targetDisagreementCount": 103,
+    "targetOnlyDisagreementCount": 30
+  },
+  "crossAudit": {
+    "confidence": "moderate",
+    "dispositions": {
+      "accept-current": 96,
+      "correction": 93,
+      "refinement": 51
+    },
+    "dispositionsByLocale": {
+      "ar": {
+        "accept-current": 7,
+        "correction": 9,
+        "refinement": 4
+      },
+      "de": {
+        "accept-current": 9,
+        "correction": 5,
+        "refinement": 6
+      },
+      "es": {
+        "accept-current": 11,
+        "correction": 4,
+        "refinement": 5
+      },
+      "fr": {
+        "accept-current": 10,
+        "correction": 7,
+        "refinement": 3
+      },
+      "hi": {
+        "accept-current": 6,
+        "correction": 9,
+        "refinement": 5
+      },
+      "id": {
+        "accept-current": 4,
+        "correction": 14,
+        "refinement": 2
+      },
+      "ja": {
+        "accept-current": 11,
+        "correction": 5,
+        "refinement": 4
+      },
+      "ko": {
+        "accept-current": 5,
+        "correction": 11,
+        "refinement": 4
+      },
+      "pt-BR": {
+        "accept-current": 7,
+        "correction": 10,
+        "refinement": 3
+      },
+      "vi": {
+        "accept-current": 10,
+        "correction": 10
+      },
+      "zh-Hans": {
+        "accept-current": 10,
+        "correction": 4,
+        "refinement": 6
+      },
+      "zh-Hant": {
+        "accept-current": 6,
+        "correction": 5,
+        "refinement": 9
+      }
+    },
+    "nativeSpeakerApproval": false,
+    "nativeSpeakerReviewSuggested": true,
+    "selectedTargetChangedFromCurrent": 144,
+    "selectedTargetCount": 240,
+    "selectedTargetSourceCounts": {
+      "blind": 46,
+      "primary": 57,
+      "primary+blind": 137
+    }
+  },
+  "headSha": "6bef0c74632067906fd07279fa6bd3fd59159a48",
+  "liveHeadAttestationSha256": "da41f3d6d6bf37c55ae947589ca47238ffd3498688d953f54aae885515fcdeae",
+  "localeCount": 12,
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "operationalScope": {
+    "headedBrowserAcceptance": false,
+    "kspls0FreeBytesBeforeWrite": 286968184832,
+    "mergeReleaseTag": false,
+    "repositoryOrPullRequestChanged": false,
+    "sourceOrCallerPinsChanged": false,
+    "taskScratchPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w345-364-crossaudit-20261103",
+    "testsBuildsScansCI": false,
+    "writtenOnlyToTaskScratch": true
+  },
+  "outputFiles": {
+    "README.md": "2d6ba14b65021a236dfb8ce26ade7658f1aa7660e2afd84037c4da5fd7bc3172",
+    "create_cross_audit.py": "9bccf8dc327533b19a1eb8c620a1e07d703d5e855ec36821ebe424e9a96161cf",
+    "cross-audit-ledger.jsonl": "9011787954d0cc4648525afb8732f9d7e51d7f86e7fb4e4a373b59a7d9d48f0e",
+    "live-head-attestation.json": "da41f3d6d6bf37c55ae947589ca47238ffd3498688d953f54aae885515fcdeae",
+    "verify_cross_audit.py": "1ed14e57497f362e01e06d8b0782fe91b7ce81a7e7d4d339afb6c9e8658bd9cb"
+  },
+  "primaryReview": {
+    "checksumListSha256": "2f82b13c4c82ccbcc676e4cd46f47d6a7398d9f7462aef2de0fadf240ff1c8e2",
+    "counts": {
+      "accept-current": 122,
+      "correction": 78,
+      "refinement": 40
+    },
+    "ledgerSha256": "e62c7e05bde4cc25b3a7f8121b28faaf74c7e9515e515540501e2e78a8ed8aa2",
+    "path": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w345-364-primary-20261103/primary-review",
+    "summarySha256": "67e2eda2afc7592bd21a7e60acc493924e8d5f644c4fdf61ea7d428aadb26d90"
+  },
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "sourceCount": 20,
+  "status": "exact-head-cross-audit-complete",
+  "translationDispatchFollowups": [
+    {
+      "position": 346,
+      "rendererRef": "romarr/ui.py:1042-1049; 1609-1611",
+      "required": true,
+      "sourceId": "ui.scan-failed-error-type.e99ccb8157",
+      "sourceRef": "romarr/app.py:5245-5260",
+      "status": "Catalog text-quality only; app-authored launcher error toast currently passes through apiMessageMarkup as opaque text; separate source-bound runtime dispatch fix required.",
+      "uiCallerRef": "romarr/ui.py:2789-2797"
+    },
+    {
+      "position": 350,
+      "rendererRef": "romarr/ui.py:1042-1049",
+      "required": true,
+      "sourceId": "ui.scan-the-uri-or-enter-the-secret-in.612ce1fd46",
+      "sourceRef": "romarr/app.py:7503-7518",
+      "status": "Catalog text-quality only; app-authored TOTP note currently passes through apiMessageMarkup as opaque text; separate source-bound runtime dispatch fix required.",
+      "uiCallerRef": "romarr/ui.py:4551-4560"
+    }
+  ],
+  "treeSha": "4fd79e67f37e4c66d0253199418973d965a3fbd6",
+  "window": "W345-W364"
+}

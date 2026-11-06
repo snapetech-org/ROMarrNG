@@ -1,0 +1,619 @@
+{
+  "head": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "tree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "filePins": {
+    "romarr/i18n_runtime.js": {
+      "fileSha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "gitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc"
+    },
+    "romarr/organizer.py": {
+      "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390"
+    },
+    "romarr/ui.py": {
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0"
+    }
+  },
+  "evidence": [
+    {
+      "path": "romarr/ui.py",
+      "lineStart": 815,
+      "lineEnd": 840,
+      "contextLines": [
+        {
+          "line": 815,
+          "text": "  return preference==='system'?browserInterfaceLanguage():preference;"
+        },
+        {
+          "line": 816,
+          "text": "};"
+        },
+        {
+          "line": 817,
+          "text": "const stableLocalizationKey=source=>Object.hasOwn(UI_MESSAGES,source)?source:(UI_SOURCE_TO_KEY[source]||'');"
+        },
+        {
+          "line": 818,
+          "text": "const hasLabel=source=>{"
+        },
+        {
+          "line": 819,
+          "text": "  const key=stableLocalizationKey(source);"
+        },
+        {
+          "line": 820,
+          "text": "  return Boolean(key&&UI_MESSAGES[key]?.sourceKind!=='ui-help-template');"
+        },
+        {
+          "line": 821,
+          "text": "};"
+        },
+        {
+          "line": 822,
+          "text": "const APP_MESSAGE_TEMPLATE_KINDS=new Set(['ui-error','ui-error-template','task-result',"
+        },
+        {
+          "line": 823,
+          "text": "  'task-result-template','provider-diagnostic-template','library-status-template',"
+        },
+        {
+          "line": 824,
+          "text": "  'ui-status-template']);"
+        },
+        {
+          "line": 825,
+          "text": "const APP_MESSAGE_TEMPLATES=Object.values(UI_MESSAGES)"
+        },
+        {
+          "line": 826,
+          "text": "  .filter(message=>APP_MESSAGE_TEMPLATE_KINDS.has(message.sourceKind)"
+        },
+        {
+          "line": 827,
+          "text": "    &&typeof message.source==='string'&&message.source.includes('{'))"
+        },
+        {
+          "line": 828,
+          "text": "  .map(message=>{"
+        },
+        {
+          "line": 829,
+          "text": "    const names=[];"
+        },
+        {
+          "line": 830,
+          "text": "    const escaped=message.source.replace(/[.*+?^${}()|[\\]\\\\]/g,'\\\\$&')"
+        },
+        {
+          "line": 831,
+          "text": "      .replace(/\\\\\\{([A-Za-z][A-Za-z0-9_]*)\\\\\\}/g,(_,name)=>{names.push(name);return '([\\\\s\\\\S]+?)';});"
+        },
+        {
+          "line": 832,
+          "text": "    return {source:message.source,names,pattern:new RegExp('^'+escaped+'$')};"
+        },
+        {
+          "line": 833,
+          "text": "  }).sort((a,b)=>b.source.length-a.source.length);"
+        },
+        {
+          "line": 834,
+          "text": "const matchAppMessageTemplate=value=>{"
+        },
+        {
+          "line": 835,
+          "text": "  let matched=null;"
+        },
+        {
+          "line": 836,
+          "text": "  for(const entry of APP_MESSAGE_TEMPLATES){"
+        },
+        {
+          "line": 837,
+          "text": "    const match=entry.pattern.exec(String(value??''));"
+        },
+        {
+          "line": 838,
+          "text": "    if(match){"
+        },
+        {
+          "line": 839,
+          "text": "      // Free-form values can make two distinct templates fit the same raw"
+        },
+        {
+          "line": 840,
+          "text": "      // message (for example a peer name and an invitation URL). Do not let"
+        }
+      ],
+      "contextSha256": "857e8d79deaab2eac30e3e6e12a2cb9b7e6d803b6be378dc6f142318c61ad5d3",
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+      "role": "stable catalog key lookup and template/markup helpers",
+      "anchor": "const stableLocalizationKey=source=>",
+      "anchorOccurrences": 1
+    },
+    {
+      "path": "romarr/ui.py",
+      "lineStart": 1255,
+      "lineEnd": 1274,
+      "contextLines": [
+        {
+          "line": 1255,
+          "text": "const applyTranslatedOptionLabels=(root,language)=>{"
+        },
+        {
+          "line": 1256,
+          "text": "  const elements=[];"
+        },
+        {
+          "line": 1257,
+          "text": "  if(root.nodeType===Node.ELEMENT_NODE&&root.matches?.('option[data-i18n-option-key]'))elements.push(root);"
+        },
+        {
+          "line": 1258,
+          "text": "  if(root.querySelectorAll)elements.push(...root.querySelectorAll('option[data-i18n-option-key]'));"
+        },
+        {
+          "line": 1259,
+          "text": "  for(const el of elements){"
+        },
+        {
+          "line": 1260,
+          "text": "    const source=UI_MESSAGES[el.dataset.i18nOptionKey]?.source;"
+        },
+        {
+          "line": 1261,
+          "text": "    if(typeof source!=='string')continue;"
+        },
+        {
+          "line": 1262,
+          "text": "    const rawCount=el.dataset.i18nOptionCount??'—';"
+        },
+        {
+          "line": 1263,
+          "text": "    const count=Number(rawCount);"
+        },
+        {
+          "line": 1264,
+          "text": "    const renderedCount=Number.isFinite(count)?fmt(count):rawCount;"
+        },
+        {
+          "line": 1265,
+          "text": "    const translated=isTranslated(source,language);"
+        },
+        {
+          "line": 1266,
+          "text": "    el.textContent=`${translateLabel(source,language)} (${renderedCount})`;"
+        },
+        {
+          "line": 1267,
+          "text": "    el.lang=translated?language:'en';"
+        },
+        {
+          "line": 1268,
+          "text": "    el.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';"
+        },
+        {
+          "line": 1269,
+          "text": "  }"
+        },
+        {
+          "line": 1270,
+          "text": "};"
+        },
+        {
+          "line": 1271,
+          "text": "const applyTranslatedTemplates=(root,language)=>{"
+        },
+        {
+          "line": 1272,
+          "text": "  const elements=[];"
+        },
+        {
+          "line": 1273,
+          "text": "  if(root.nodeType===Node.ELEMENT_NODE&&root.matches?.('[data-i18n-template],[data-i18n-template-key]'))elements.push(root);"
+        },
+        {
+          "line": 1274,
+          "text": "  if(root.querySelectorAll)elements.push(...root.querySelectorAll('[data-i18n-template],[data-i18n-template-key]'));"
+        }
+      ],
+      "contextSha256": "ca51a1fc58f364ad36a307d1577c79415c6e1eeda126892091772eec36ab377d",
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+      "role": "option translation requires data-i18n-option-key marker",
+      "anchor": "const applyTranslatedOptionLabels=(root,language)=>",
+      "anchorOccurrences": 1
+    },
+    {
+      "path": "romarr/ui.py",
+      "lineStart": 1295,
+      "lineEnd": 1308,
+      "contextLines": [
+        {
+          "line": 1295,
+          "text": "const applyTranslatedTextNode=(node,language)=>{"
+        },
+        {
+          "line": 1296,
+          "text": "  const parent=node.parentElement;"
+        },
+        {
+          "line": 1297,
+          "text": "  if(!parent||parent.closest('script,style,textarea,input,select,[contenteditable=\"true\"],[lang=\"und\"],[data-i18n],[data-i18n-key]'))return;"
+        },
+        {
+          "line": 1298,
+          "text": "  const original=translatedTextSources.get(node)||node.data.trim().replace(/\\s+/g,' ');"
+        },
+        {
+          "line": 1299,
+          "text": "  if(!hasLabel(original))return;"
+        },
+        {
+          "line": 1300,
+          "text": "  translatedTextSources.set(node,original);"
+        },
+        {
+          "line": 1301,
+          "text": "  const leading=node.data.match(/^\\s*/)?.[0]||'',trailing=node.data.match(/\\s*$/)?.[0]||'';"
+        },
+        {
+          "line": 1302,
+          "text": "  const value=leading+translateLabel(original,language)+trailing;"
+        },
+        {
+          "line": 1303,
+          "text": "  if(node.data!==value)node.data=value;"
+        },
+        {
+          "line": 1304,
+          "text": "  const translated=Boolean(isTranslated(original,language));"
+        },
+        {
+          "line": 1305,
+          "text": "  parent.lang=translated?language:'en';"
+        },
+        {
+          "line": 1306,
+          "text": "  parent.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';"
+        },
+        {
+          "line": 1307,
+          "text": "};"
+        },
+        {
+          "line": 1308,
+          "text": "const applyTranslatedTextTree=(root,language)=>{"
+        }
+      ],
+      "contextSha256": "18eb5becc73cd330b8fffd86c908a3d2a7eed0c85a6c4b63388a637071aa032e",
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+      "role": "raw text translation and skip boundaries include select and explicit-key parents",
+      "anchor": "const applyTranslatedTextNode=(node,language)=>",
+      "anchorOccurrences": 1
+    },
+    {
+      "path": "romarr/ui.py",
+      "lineStart": 1376,
+      "lineEnd": 1390,
+      "contextLines": [
+        {
+          "line": 1376,
+          "text": "  interfaceTextObserver=new MutationObserver(records=>{"
+        },
+        {
+          "line": 1377,
+          "text": "    for(const record of records){"
+        },
+        {
+          "line": 1378,
+          "text": "      if(record.type==='characterData')applyTranslatedTextNode(record.target,readInterfaceLanguage());"
+        },
+        {
+          "line": 1379,
+          "text": "      for(const node of record.addedNodes){"
+        },
+        {
+          "line": 1380,
+          "text": "        enhanceFormLabels(node);"
+        },
+        {
+          "line": 1381,
+          "text": "        applyTranslatedLabels(node,readInterfaceLanguage());"
+        },
+        {
+          "line": 1382,
+          "text": "        applyTranslatedTemplates(node,readInterfaceLanguage());"
+        },
+        {
+          "line": 1383,
+          "text": "        applyTranslatedTextTree(node,readInterfaceLanguage());"
+        },
+        {
+          "line": 1384,
+          "text": "        applyTranslatedAttributes(node,readInterfaceLanguage());"
+        },
+        {
+          "line": 1385,
+          "text": "      }"
+        },
+        {
+          "line": 1386,
+          "text": "    }"
+        },
+        {
+          "line": 1387,
+          "text": "  });"
+        },
+        {
+          "line": 1388,
+          "text": "  interfaceTextObserver.observe(document.body,{subtree:true,childList:true,characterData:true});"
+        },
+        {
+          "line": 1389,
+          "text": "};"
+        },
+        {
+          "line": 1390,
+          "text": "let generatedControlId=0;"
+        }
+      ],
+      "contextSha256": "d2a8c06823064249753942c31c6930df4e4c8667d4f45d8290e29cd72ff7aa61",
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+      "role": "dynamic text nodes translated on insertion",
+      "anchor": "interfaceTextObserver=new MutationObserver(records=>",
+      "anchorOccurrences": 1
+    },
+    {
+      "path": "romarr/ui.py",
+      "lineStart": 861,
+      "lineEnd": 868,
+      "contextLines": [
+        {
+          "line": 861,
+          "text": "const translateTemplate=(source,values,language=readInterfaceLanguage())=>"
+        },
+        {
+          "line": 862,
+          "text": "  ROMarrI18n.formatMessage(translationInfo(source,language).value,values,language,"
+        },
+        {
+          "line": 863,
+          "text": "    getRegionalLocale(),(nested,nestedValues)=>translateTemplate(nested,nestedValues,language));"
+        },
+        {
+          "line": 864,
+          "text": "const translatedTemplateMarkup=(source,values,language=readInterfaceLanguage())=>"
+        },
+        {
+          "line": 865,
+          "text": "  translateTemplate(source,values,language).split(/\\u2068([\\s\\S]*?)\\u2069/g)"
+        },
+        {
+          "line": 866,
+          "text": "    .map((part,index)=>index%2"
+        },
+        {
+          "line": 867,
+          "text": "      ?'<bdi lang=\"und\" dir=\"auto\">'+esc(part)+'</bdi>'"
+        },
+        {
+          "line": 868,
+          "text": "      :esc(part)).join('');"
+        }
+      ],
+      "contextSha256": "68808904ecea8df8ee2053b5e5f7beff2f2502977e17f49e02dcde8baaffff4f",
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+      "role": "template caller and opaque value formatter",
+      "anchor": "const translateTemplate=(source,values,language=readInterfaceLanguage())=>",
+      "anchorOccurrences": 1
+    },
+    {
+      "path": "romarr/i18n_runtime.js",
+      "lineStart": 120,
+      "lineEnd": 147,
+      "contextLines": [
+        {
+          "line": 120,
+          "text": "  function formatMessage(template, values, locale, formatLocale, resolveNested) {"
+        },
+        {
+          "line": 121,
+          "text": "    const args = values && typeof values === 'object' ? values : {};"
+        },
+        {
+          "line": 122,
+          "text": "    const plural = template && typeof template === 'object' && template.kind === 'plural';"
+        },
+        {
+          "line": 123,
+          "text": "    let source = template;"
+        },
+        {
+          "line": 124,
+          "text": "    let renderedArgs = args;"
+        },
+        {
+          "line": 125,
+          "text": "    if (plural) {"
+        },
+        {
+          "line": 126,
+          "text": "      const argument = String(template.argument || 'count');"
+        },
+        {
+          "line": 127,
+          "text": "      const numberLocale = formatLocale || new Intl.NumberFormat().resolvedOptions().locale || 'en';"
+        },
+        {
+          "line": 128,
+          "text": "      const number = parseFormattedNumber(args[argument], numberLocale);"
+        },
+        {
+          "line": 129,
+          "text": "      const forms = template.forms && typeof template.forms === 'object' ? template.forms : {};"
+        },
+        {
+          "line": 130,
+          "text": "      const exact = Number.isFinite(number) ? forms['=' + number] : null;"
+        },
+        {
+          "line": 131,
+          "text": "      const category = Number.isFinite(number)"
+        },
+        {
+          "line": 132,
+          "text": "        ? new Intl.PluralRules(locale || 'en').select(number) : 'other';"
+        },
+        {
+          "line": 133,
+          "text": "      source = exact || forms[category] || forms.other || '';"
+        },
+        {
+          "line": 134,
+          "text": "      if (Number.isFinite(number)) {"
+        },
+        {
+          "line": 135,
+          "text": "        const formatted = new Intl.NumberFormat(numberLocale).format(number);"
+        },
+        {
+          "line": 136,
+          "text": "        source = String(source).replace(/#/g, isolate(formatted));"
+        },
+        {
+          "line": 137,
+          "text": "        renderedArgs = {...args, [argument]: formatted};"
+        },
+        {
+          "line": 138,
+          "text": "      }"
+        },
+        {
+          "line": 139,
+          "text": "    }"
+        },
+        {
+          "line": 140,
+          "text": "    if (typeof source !== 'string') return '';"
+        },
+        {
+          "line": 141,
+          "text": "    return source.replace(/\\{([A-Za-z][A-Za-z0-9_]*)\\}/g, (token, name) => {"
+        },
+        {
+          "line": 142,
+          "text": "      if (!Object.hasOwn(renderedArgs, name)) return token;"
+        },
+        {
+          "line": 143,
+          "text": "      const value = renderedArgs[name];"
+        },
+        {
+          "line": 144,
+          "text": "      if (value && typeof value === 'object' && typeof value.source === 'string') {"
+        },
+        {
+          "line": 145,
+          "text": "        const nested = resolveNested"
+        },
+        {
+          "line": 146,
+          "text": "          ? resolveNested(value.source, value.values || {}) : value.source;"
+        },
+        {
+          "line": 147,
+          "text": "        return isolate(nested);"
+        }
+      ],
+      "contextSha256": "41733858396c0d9d351cdfa55b27d88077081fa998e0ded369a746bf4ef32d32",
+      "fileSha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "gitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc",
+      "role": "dynamic values inserted as isolated opaque values",
+      "anchor": "function formatMessage(template, values, locale, formatLocale, resolveNested)",
+      "anchorOccurrences": 1
+    },
+    {
+      "path": "romarr/organizer.py",
+      "lineStart": 1619,
+      "lineEnd": 1634,
+      "contextLines": [
+        {
+          "line": 1619,
+          "text": "                            str(getattr(dat_match, \"game\", \"\") or \"Exact DAT checksum match\")"
+        },
+        {
+          "line": 1620,
+          "text": "                            if confidence == \"dat_verified\" else"
+        },
+        {
+          "line": 1621,
+          "text": "                            str(switch.get(\"details\") or \"Title ID found in TitleDB; file bytes are not verified\")"
+        },
+        {
+          "line": 1622,
+          "text": "                            if confidence == \"title_id_catalog\" else"
+        },
+        {
+          "line": 1623,
+          "text": "                            \"Imported from the existing ES-DE gamelist; review before renaming\""
+        },
+        {
+          "line": 1624,
+          "text": "                            if confidence == \"local_metadata\" else"
+        },
+        {
+          "line": 1625,
+          "text": "                            \"Metadata provider title suggestion; confirm before renaming\""
+        },
+        {
+          "line": 1626,
+          "text": "                            if confidence in (\"provider_suggestion\", \"ambiguous_name\") else"
+        },
+        {
+          "line": 1627,
+          "text": "                            \"Filename only; no verified catalog match\""
+        },
+        {
+          "line": 1628,
+          "text": "                        ),"
+        },
+        {
+          "line": 1629,
+          "text": "                        \"match_details_source\": ("
+        },
+        {
+          "line": 1630,
+          "text": "                            \"Exact DAT checksum match\""
+        },
+        {
+          "line": 1631,
+          "text": "                            if confidence == \"dat_verified\""
+        },
+        {
+          "line": 1632,
+          "text": "                            and not str(getattr(dat_match, \"game\", \"\") or \"\") else \"\""
+        },
+        {
+          "line": 1633,
+          "text": "                        ),"
+        },
+        {
+          "line": 1634,
+          "text": "                        \"dat\": str(getattr(dat_match, \"dat\", \"\") or \"\"),"
+        }
+      ],
+      "contextSha256": "3a6007996b9c59869e0e61a0c7948fbb2b903bc38e33fbbbf4e648a3be202419",
+      "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+      "role": "organizer exact match detail source field",
+      "anchor": "str(getattr(dat_match, \"game\", \"\") or \"Exact DAT checksum match\")",
+      "anchorOccurrences": 1
+    }
+  ]
+}

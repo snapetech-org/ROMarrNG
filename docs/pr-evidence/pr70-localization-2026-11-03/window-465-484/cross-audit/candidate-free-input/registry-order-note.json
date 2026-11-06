@@ -1,0 +1,26 @@
+{
+  "selectionBasis": "catalog JSON message-key insertion order",
+  "selectedCatalogZeroBasedIndices": [
+    465,
+    484
+  ],
+  "activeRegistryCount": 479,
+  "selectedIdsInActiveRegistry": 2,
+  "activeRegistryMatches": [
+    {
+      "sourceId": "ui.franchise.cae83311f5",
+      "activeRank": 125,
+      "registryLocations": [
+        "romarr/ui.py:2725"
+      ]
+    },
+    {
+      "sourceId": "ui.game-evidence.036c1e0c7e",
+      "activeRank": 126,
+      "registryLocations": [
+        "romarr/ui.py:5505"
+      ]
+    }
+  ],
+  "lineHintCaveat": "Active registry locations are metadata only; exact-head source text/key searches and hashed code excerpts are provided separately."
+}

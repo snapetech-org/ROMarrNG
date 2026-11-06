@@ -1,0 +1,187 @@
+{
+  "activeUniqueSourceIds": 479,
+  "boundaries": [
+    {
+      "position": 304,
+      "role": "previous-window-final",
+      "source": "Rename batch offset and limit must be integers.",
+      "sourceId": "ui.rename-batch-offset-and-limit-must-b.831c95032c",
+      "sourceSha256": "831c95032c272aa6d64af3fe1c789d72a8097d7d580363ed4f2a71603d201eee"
+    },
+    {
+      "position": 305,
+      "role": "selected-start",
+      "source": "Rename failed and was {state}: {error_type}",
+      "sourceId": "ui.rename-failed-and-was-state-error-ty.4b2bacea36",
+      "sourceSha256": "4b2bacea365f5d7064133c76763c3d476c0475cbcb74a94bd373763105f9223b"
+    },
+    {
+      "position": 324,
+      "role": "selected-end",
+      "source": "ROMarr checks the actual completed path during import. If that path is not visible inside ROMarr, use the remote path mapping on Media Management; keep the download path and library destination distinct.",
+      "sourceId": "ui.romarr-checks-the-actual-completed-p.227823654c",
+      "sourceSha256": "227823654c6e647a076a7d5a5479b628ba147ba0573d61a1c558c6055f7ea13e"
+    },
+    {
+      "position": 325,
+      "role": "next-window-first",
+      "source": "ROMarr could not check this source. Check the connection and try again.",
+      "sourceId": "ui.romarr-could-not-check-this-source-c.a348d0627e",
+      "sourceSha256": "a348d0627e421ce9917f94b88b0b5802c960f5256ff4fc881d32f51f531496e0"
+    }
+  ],
+  "cellCount": 240,
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "method": "Sort all 479 unique active source IDs lexicographically; verify W285-W304 candidate-free selection records match current positions 285-304; select the immediate next 20 IDs.",
+  "noExistingW305EvidenceDirectory": true,
+  "positions": [
+    305,
+    324
+  ],
+  "priorWindow": "W285-W304",
+  "priorWindowPositions": [
+    285,
+    304
+  ],
+  "priorWindowSelectedIdsMatchCurrentOrder": true,
+  "selectedSources": [
+    {
+      "position": 305,
+      "source": "Rename failed and was {state}: {error_type}",
+      "sourceId": "ui.rename-failed-and-was-state-error-ty.4b2bacea36",
+      "sourceSha256": "4b2bacea365f5d7064133c76763c3d476c0475cbcb74a94bd373763105f9223b"
+    },
+    {
+      "position": 306,
+      "source": "Rename journal path contains a symlink.",
+      "sourceId": "ui.rename-journal-path-contains-a-symli.71d15d82a6",
+      "sourceSha256": "71d15d82a6763146e7442291414145209bdf51a8194115a03d1ca610c29cbf22"
+    },
+    {
+      "position": 307,
+      "source": "Rename on import",
+      "sourceId": "ui.rename-on-import.b6261d12c4",
+      "sourceSha256": "b6261d12c4dce48176483b7d350e52ee909bf414542b25f1abaea51644266bfe"
+    },
+    {
+      "position": 308,
+      "source": "Rename plan applied.",
+      "sourceId": "ui.rename-plan-applied.5918c173b4",
+      "sourceSha256": "5918c173b41d06308ea2d6bfed2914a83e0dc6ab1c1eee7c2ef1675dbdf4ad46"
+    },
+    {
+      "position": 309,
+      "source": "Rename preview ready. {safe} safe renames in this batch; {blocked} entries left alone.",
+      "sourceId": "ui.rename-preview-ready-safe-safe-renam.4f86f2186a",
+      "sourceSha256": "4f86f2186a7641cbd9ff8af597de094f6e61bd13932edcffa04d9c36dd00f22d"
+    },
+    {
+      "position": 310,
+      "source": "Request searches your configured sources and hands a usable release to your download client. If no usable release is found, ROMarr keeps the title on Wanted.",
+      "sourceId": "ui.request-searches-your-configured-sou.3f429c4868",
+      "sourceSha256": "3f429c4868cc8f01a651a81185ac8a4b40fa0ac3a061c49a2173b9d9c13544bf"
+    },
+    {
+      "position": 311,
+      "source": "Request selected (max 5)",
+      "sourceId": "ui.request-selected-max-5.3261b3c2f3",
+      "sourceSha256": "3261b3c2f3928fdfad6cef741054a8c70900678fddf8f0d129dd1430e324e138"
+    },
+    {
+      "position": 312,
+      "source": "Requests in SeerrNG ↗",
+      "sourceId": "ui.requests-in-seerrng.94ac015721",
+      "sourceSha256": "94ac01572121cfa86286c6ebb0f5dddedecbbc35f9cb31754abdc7af6c8834ce"
+    },
+    {
+      "position": 313,
+      "source": "Requests per pass:",
+      "sourceId": "ui.requests-per-pass.74961b68a5",
+      "sourceSha256": "74961b68a5e0d5655dcbc4058f2547cd78f3f96914196af9685491e4d1f73b13"
+    },
+    {
+      "position": 314,
+      "source": "Retire dead downloads and grab a replacement",
+      "sourceId": "ui.retire-dead-downloads-and-grab-a-rep.4af313cc1e",
+      "sourceSha256": "4af313cc1eca5ee0641611556c74890305cd35695e5311e3dd03304ecaba5e01"
+    },
+    {
+      "position": 315,
+      "source": "retired {blocklisted} dead download(s), grabbed {regrabbed} replacement(s)",
+      "sourceId": "ui.retired-blocklisted-dead-download-s.5e329a4393",
+      "sourceSha256": "5e329a4393ac41e8ff7c8310dfc47533941c4bfc4de12bb9e276cdd475a7685e"
+    },
+    {
+      "position": 316,
+      "source": "ROM Hub filesystem confinement could not start ({error_type})",
+      "sourceId": "ui.rom-hub-filesystem-confinement-could.39a3df62cc",
+      "sourceSha256": "39a3df62ccdac29c455e74c1fca3c927df28359a3a001927d968538749fa9751"
+    },
+    {
+      "position": 317,
+      "source": "ROM Hub is not installed: {detail}",
+      "sourceId": "ui.rom-hub-is-not-installed-detail.65cb63d8cc",
+      "sourceSha256": "65cb63d8cc34d360db1e799cb8ac25ab01f921b3dbb1521191aa54fc7ccc9d20"
+    },
+    {
+      "position": 318,
+      "source": "ROM library root",
+      "sourceId": "ui.rom-library-root.4644e972f3",
+      "sourceSha256": "4644e972f384d98ad8dad336927b4407f9622b89b234c7319a8843df612a9607"
+    },
+    {
+      "position": 319,
+      "source": "ROM library",
+      "sourceId": "ui.rom-library.9a43486972",
+      "sourceSha256": "9a434869722fa7fcec5eda8b8e3f0a40ee88ac97d61fff5dc0e57658694e5506"
+    },
+    {
+      "position": 320,
+      "source": "ROM path",
+      "sourceId": "ui.rom-path.126fbde809",
+      "sourceSha256": "126fbde80917a42b09ddb6c70372f6077b44835a173004b22d0e53737d2ed297"
+    },
+    {
+      "position": 321,
+      "source": "ROM root is not available: {path}",
+      "sourceId": "ui.rom-root-is-not-available-path.793283d1d4",
+      "sourceSha256": "793283d1d47bf425f38eb6ad0af0a94042717bfc2c9b94b6f9439f74d58645b8"
+    },
+    {
+      "position": 322,
+      "source": "ROM root",
+      "sourceId": "ui.rom-root.95251f6ecf",
+      "sourceSha256": "95251f6ecf5d229455f7d1603514e2e723a6c379df6e5360a85c2f70d96363ac"
+    },
+    {
+      "position": 323,
+      "source": "ROMarr cannot say which platforms it plays and does not guess.",
+      "sourceId": "ui.romarr-cannot-say-which-platforms-it.ba28060e2c",
+      "sourceSha256": "ba28060e2cdfa32442c1332ed99ffa338ec71335f763d9b291e0798f3809eadc"
+    },
+    {
+      "position": 324,
+      "source": "ROMarr checks the actual completed path during import. If that path is not visible inside ROMarr, use the remote path mapping on Media Management; keep the download path and library destination distinct.",
+      "sourceId": "ui.romarr-checks-the-actual-completed-p.227823654c",
+      "sourceSha256": "227823654c6e647a076a7d5a5479b628ba147ba0573d61a1c558c6055f7ea13e"
+    }
+  ],
+  "selectionRule": "One-based positions 305–324 among all active unique source IDs sorted lexicographically by stable ID.",
+  "sourceCount": 20,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "window": "W305-W324"
+}

@@ -1,0 +1,59 @@
+{
+  "artifact": "ROMarrNG PR #70 W605-W624 cross-review input receipt",
+  "blind": {
+    "checksumFileSha256": "6f57b092e34a0077a176bf86509e0ed0a1c088bbcd06ac300194290e35b3645b",
+    "manifestSha256": "80fae25d934bd11ad9592282d91d603b40a10b56307d1c4ad56124562afdf11c",
+    "path": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w605-624-blind-20261104"
+  },
+  "candidateFreeInput": {
+    "candidateFree": true,
+    "checksumFileSha256": "ead697f65d06ac4f249322f888c37bbf34a9dafbc8c64c4801c58e201e9fc8d8",
+    "manifestSha256": "bbc48d1999f08a8bb99f16df2cf7dd68cbe13b3871bc11e1ae4651c64b341cf3",
+    "path": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w605-624-20261104/candidate-free/candidate-free/input",
+    "proposedTargetsIncluded": false,
+    "reviewDecisionsIncluded": false
+  },
+  "liveSnapshot": {
+    "checkedUtc": "2026-11-04T20:01:32Z",
+    "prApi": {
+      "baseRefName": "main",
+      "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+      "headRefName": "task/localization-translation-review-20261030",
+      "headRefOid": "872905926887840025ba4c3f17151b96f8d3e6e2",
+      "isDraft": true,
+      "number": 70,
+      "state": "OPEN",
+      "title": "fix: correct verified localization catalog errors",
+      "url": "https://github.com/snapetech-org/ROMarrNG/pull/70"
+    },
+    "remoteRefs": {
+      "refs/heads/task/localization-translation-review-20261030": "872905926887840025ba4c3f17151b96f8d3e6e2",
+      "refs/pull/70/head": "872905926887840025ba4c3f17151b96f8d3e6e2",
+      "refs/pull/70/merge": "00d1af2212df3cfd29c7df49c4196705a60dd035"
+    },
+    "sourceWorktree": {
+      "branch": "",
+      "clean": true,
+      "detached": true,
+      "head": "872905926887840025ba4c3f17151b96f8d3e6e2",
+      "path": "/mnt/disks/scratch/task-worktrees/localization-20261104/romarrng-pr70-w585-604-apply-20261104",
+      "tree": "d7d762d5f3a5dc31bcbdb6c6c45779101ab0bbd4"
+    }
+  },
+  "primary": {
+    "outputChecksumFileSha256": "d5e1806791f4cdedda57d83a42b2dddfaeaed6cd3661b3953e46e4217b53394e",
+    "outputManifestSha256": "4a35e6cf6c9414e39d72361724d77f096c8726e62caeffa8815952e9c3cb0825",
+    "path": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w605-624-20261104/primary",
+    "rootChecksumFileSha256": "e3a0353145fafe4abe78dcff81b1a7d427e1b0ce38d79884925ffe2ccda7efa8"
+  },
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "sealValidation": {
+    "blindPacket": "PASS",
+    "blindVsInput": "PASS",
+    "candidateFreeBundle": "PASS",
+    "primaryPacket": "PASS",
+    "primaryVsInput": "PASS"
+  },
+  "window": "W605-W624"
+}

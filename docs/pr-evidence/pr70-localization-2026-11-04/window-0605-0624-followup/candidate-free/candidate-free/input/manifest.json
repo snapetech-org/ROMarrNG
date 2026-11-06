@@ -1,0 +1,203 @@
+{
+  "activeRegistrySelectedSourceCount": 8,
+  "activeUniqueSourceIdCount": 479,
+  "artifact": "ROMarrNG PR #70 W605-W624 candidate-free input",
+  "baseRefName": "main",
+  "branch": "task/localization-translation-review-20261030",
+  "callerSearchQueryCount": 20,
+  "callerlessCurrentTargetCellCount": 36,
+  "callerlessSourceCount": 3,
+  "candidateFree": true,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogMessageCount": 1836,
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogSha256": "62e269549d311ce8e2142199792490a035671674ba3dd45a4e5d9d2b601767f0",
+  "cellCount": 240,
+  "createdUtc": "2026-11-04T19:25:33+00:00",
+  "currentTargetMarkupMismatches": 0,
+  "currentTargetMissingCells": 0,
+  "currentTargetNumericMismatches": 0,
+  "currentTargetNumericPresentationDifferences": 0,
+  "currentTargetPlaceholderMismatches": 0,
+  "currentTargetProtectedLiteralMismatches": 0,
+  "directCallerRefCount": 22,
+  "files": [
+    {
+      "bytes": 867,
+      "path": "PR-attestation-after-candidate-free.json",
+      "sha256": "ff7dcdfbedb21aeb5c1bbe414c8f0d7aa55eb17f5d55dc8c8fda3e993728a667"
+    },
+    {
+      "bytes": 867,
+      "path": "PR-attestation-before.json",
+      "sha256": "7911187d04bbe812f8e159a2296fe65d4918bee41186b599fb7a8c8343a5c77d"
+    },
+    {
+      "bytes": 6305,
+      "path": "caller-search-audit.json",
+      "sha256": "f86e8bc884174e2aebf50a60ded49f9d5b44f01df7626fd82f4f4ed561e2469e"
+    },
+    {
+      "bytes": 10723,
+      "path": "catalog-file-pins.json",
+      "sha256": "298073cae7b1d33d4c68c3900cf7ef6893dd286dbf087f0b1efb5b67179df7a8"
+    },
+    {
+      "bytes": 846527,
+      "path": "catalog-source-inventory.jsonl",
+      "sha256": "27691935762dacea7dfaa9553ddb567076ff8a69538b70c4f96d6e11b707e212"
+    },
+    {
+      "bytes": 2289,
+      "path": "continuity-reattestation.json",
+      "sha256": "ef6d286837dbed79e48896b3bba565e60fadc959215bf3616715cdec10cad4de"
+    },
+    {
+      "bytes": 338515,
+      "path": "current-target-cells.jsonl",
+      "sha256": "7a3ab759688498dd7b94d9a0bcf7acfd1486dfc179964c4f5a2f5634ce819100"
+    },
+    {
+      "bytes": 140,
+      "path": "current-target-token-mismatches.json",
+      "sha256": "abdf369e9b3d9d0c4c5c46f48f8449bd6ab4dc09bfa2f25778bf1a9a8e36b33f"
+    },
+    {
+      "bytes": 924,
+      "path": "dispatch-mechanics.json",
+      "sha256": "dc77ef6f24278ab320ca028f5e8fc66870eb947c160ca7a6b51a7b445c1f2677"
+    },
+    {
+      "bytes": 691,
+      "path": "prior-applied-cell-reattestation-summary.json",
+      "sha256": "4391f01066e57977466d29df9050b17a4bd10e7173179ee2bc7168ea9315fefe"
+    },
+    {
+      "bytes": 46232,
+      "path": "prior-applied-cell-reattestation.jsonl",
+      "sha256": "f974bf551ab2af386b425ff30fb6b3b5dd0f095b97553736ea42106f08a662d4"
+    },
+    {
+      "bytes": 627,
+      "path": "prior-hold-reattestation-summary.json",
+      "sha256": "ede0e762cc352b3d94444a5d6154bb5c120bd77e134e1bc8d11bba3959762246"
+    },
+    {
+      "bytes": 435590,
+      "path": "prior-hold-reattestation.jsonl",
+      "sha256": "a544e30b5dde70e658cb7b213ddd17e600ff06fd059befaa34d1d4160acd46fa"
+    },
+    {
+      "bytes": 480,
+      "path": "prior-selection-reattestation-summary.json",
+      "sha256": "b88c71b990ae1bf22b375363e7378c55a21f2b8fd1178f8f4281f532a88359a6"
+    },
+    {
+      "bytes": 121014,
+      "path": "prior-selection-reattestation.jsonl",
+      "sha256": "0eca30dbcb7554673b73d515b04b3fc38d9b5b105bd6308a9eaf17252d58ff2b"
+    },
+    {
+      "bytes": 191835,
+      "path": "prior-w565-window-cell-hash-reattestation.jsonl",
+      "sha256": "bfd00fc0734521f111ab404b0490e3d7e741b79e57462b63a0b4e447301f5f3c"
+    },
+    {
+      "bytes": 189202,
+      "path": "prior-w585-window-cell-hash-reattestation.jsonl",
+      "sha256": "175ce1e15e0eb598916bcdcdf1b8bf4736d496ed35c1e00945fb481e281e5ed2"
+    },
+    {
+      "bytes": 189690,
+      "path": "prior-window-cell-hash-reattestation.jsonl",
+      "sha256": "141ba3b61b7167f7f1d1758fdc383d6823d5503ff56cb0970439d5dcefe59254"
+    },
+    {
+      "bytes": 1651,
+      "path": "registry-order-note.json",
+      "sha256": "e1de23f3a2266be1d5fce359551ae4427c499efbbfc65726ba6bf77a7f484aea"
+    },
+    {
+      "bytes": 987,
+      "path": "selection-boundary.jsonl",
+      "sha256": "08513fcb7432a43cb6b1c6f4f2d0755d86028b1eee38669ea1113113f3bc13e8"
+    },
+    {
+      "bytes": 9311,
+      "path": "selection.json",
+      "sha256": "536ff014b4124c5665fcce123ece8022741733206901c39f898e5954e039f6ca"
+    },
+    {
+      "bytes": 38293,
+      "path": "source-contexts.jsonl",
+      "sha256": "7f8d42665bc4495123b5f0e6431a4c3dedff530a890d8cd6309fdc421f4de08f"
+    },
+    {
+      "bytes": 11794,
+      "path": "source-file-pins.json",
+      "sha256": "ba8b9ba1b1494e2cd14b6040985d8cc38e16ca95642e62092a1ca9385854f891"
+    },
+    {
+      "bytes": 6733,
+      "path": "source-inventory-selection.jsonl",
+      "sha256": "66cfbf79d5a0bccfe552a69894459d6968948296dd44011b7399d96e30d08968"
+    },
+    {
+      "bytes": 273919,
+      "path": "source-queue.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515"
+    },
+    {
+      "bytes": 54961,
+      "path": "source-snapshot.json",
+      "sha256": "b746ba672806c466f8fbc53e515598f00913b1ef96e17c7eb3cfda7548b78e1f"
+    },
+    {
+      "bytes": 13957,
+      "path": "verify_input.py",
+      "sha256": "19c5f91ac7d70a7715dfb97453daccc910e9f60cde4cb14491d4476fbb4e13c5"
+    }
+  ],
+  "head": "872905926887840025ba4c3f17151b96f8d3e6e2",
+  "localeCount": 12,
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "priorAppliedSelectedCellCount": 71,
+  "priorAppliedTargetsUnchanged": true,
+  "priorHoldCellChangedCount": 0,
+  "priorHoldCellCount": 628,
+  "priorHoldTargetsUnchanged": true,
+  "priorSelectedSourceCount": 220,
+  "priorSelectionsUnchanged": true,
+  "priorW545FullCellHashReadbackCount": 240,
+  "priorW565FullCellHashReadbackCount": 240,
+  "priorW585CallerlessHoldCellCount": 24,
+  "priorW585ChangedAppliedCellCount": 22,
+  "priorW585FullCellHashReadbackCount": 240,
+  "proposedTargetsIncluded": false,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewBoundary": "Fresh exact-head input with source inventory, target cells, caller context, token checks, and hash-only reattestation of all prior selected sources, holds, applied cells, and W545/W565/W585 readbacks. No current-window proposal or decision is included.",
+  "reviewDecisionsIncluded": false,
+  "selectionBasis": "catalog insertion order; exact pinned ui-labels.json message indices 605..624",
+  "sourceContextCount": 20,
+  "sourceCount": 20,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "sourceQueuePath": "romarr/ui-source-messages.json",
+  "sourceQueueSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+  "sourceSnapshotSha256": "e8f580fc3a49da18add0748e8d5312186dc353bc30d3c01bcc94e06d2aaa077d",
+  "tree": "d7d762d5f3a5dc31bcbdb6c6c45779101ab0bbd4",
+  "window": "W605-W624"
+}

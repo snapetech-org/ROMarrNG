@@ -1,0 +1,84 @@
+{
+  "artifact": "ROMarrNG PR #70 W665-W684 independent semantic cross-review",
+  "baseApiRefMismatch": true,
+  "branch": "task/localization-translation-review-20261030",
+  "callerBackedCells": 168,
+  "callerlessHashOnlyHolds": 72,
+  "cellCount": 240,
+  "conflictResolutions": [
+    {
+      "cell": "ui.need-a-known-platform.730519de98::es",
+      "selected": "Se necesita una plataforma reconocida",
+      "why": "Impersonal system toast; recognized platform matches catalog lookup context."
+    },
+    {
+      "cell": "ui.need-a-known-platform.730519de98::pt-BR",
+      "selected": "É necessária uma plataforma reconhecida",
+      "why": "Impersonal system toast; recognized platform matches catalog lookup context."
+    },
+    {
+      "cell": "ui.new-releases-web.222cab20a1::zh-Hans",
+      "selected": "新发行（网络）",
+      "why": "Choose the blind wording because it retains the source’s release meaning; full-width punctuation."
+    },
+    {
+      "cell": "ui.new-releases-web.222cab20a1::zh-Hant",
+      "selected": "新發行（網路）",
+      "why": "Choose the blind wording because it retains the source’s release meaning; full-width punctuation."
+    },
+    {
+      "cell": "ui.needs-the-label-plugin-ignored-when.8717dad61f::vi",
+      "selected": "Cần plugin Label; sẽ bị bỏ qua nếu chưa bật",
+      "why": "Reject the primary candidate “Cần rà soát”; it omits the plugin dependency and disabled-plugin behavior."
+    }
+  ],
+  "currentAcceptedCells": 139,
+  "dispositionCounts": {
+    "accept-blind": 20,
+    "accept-current": 139,
+    "accept-primary": 5,
+    "accept-primary-blind": 4,
+    "hold-hash-only": 72
+  },
+  "exactHead": "8b7589775c526866e474112b4f4168782b02f881",
+  "exactTree": "fb0ba93172f6832c687e001ce6c0fff08b5a33eb",
+  "holdCells": 72,
+  "inputVerifierResults": {
+    "blind": "PASS: 240 cells, 24 proposals, 72 text-free holds, checksums and exact-head attestations.",
+    "candidateFree": "PASS: 240 cells, 72 callerless hashes, exact repo pin and prior selections/readbacks rechecked.",
+    "primary": "PASS: 240 cells, 168 caller-backed, 72 redacted holds, 15 proposals, exact repo pin."
+  },
+  "isDraft": true,
+  "limitations": [
+    "No native-speaker second review or runtime visual review was performed.",
+    "The current PR base API ref is stale relative to live main; all decisions remain bound to the exact unchanged PR head/tree and the base/main mismatch is preserved explicitly."
+  ],
+  "liveMainOid": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+  "proposalRecordsReconciled": 39,
+  "pullRequest": 70,
+  "pullRequestApiBaseOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "selectedCandidatesByLane": {
+    "blind": 20,
+    "primary": 5,
+    "primary+blind": 4
+  },
+  "selectedProposalCells": 29,
+  "state": "OPEN",
+  "tokenReview": {
+    "candidateFreeReportedCounts": {
+      "markup": 0,
+      "numeric": 1,
+      "numericPresentationDifferences": 0,
+      "placeholder": 0,
+      "protectedLiteral": 20
+    },
+    "numericAlertReviewed": true,
+    "numericFinding": "The sole numeric alert is in the long netplay paragraph: four possible ROMs and two incorrect matches are preserved in all locales; Japanese uses 4 as an equivalent digit presentation.",
+    "numericTokenLossesInReviewedTargets": 0,
+    "placeholderOrMarkupLossesInReviewedTargets": 0,
+    "proposalTokenChecksAllPass": true,
+    "protectedLiteralAlertReviewed": true,
+    "protectedLiteralFinding": "The 20 scanner flags concern English plural ROMs rendered as invariant ROM in some locales. ROMarr, SHA1, and Super Mario Kart remain; locale grammar and numeral context express plurality. Newznab remains unchanged and intact."
+  },
+  "uniqueProposedCells": 30
+}

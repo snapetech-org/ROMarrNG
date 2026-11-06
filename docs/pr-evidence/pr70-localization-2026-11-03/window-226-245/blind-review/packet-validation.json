@@ -1,0 +1,106 @@
+{
+  "inputChecksumListSha256": "68f5f2d323b726d78ae5f949e84024ac9ae39dd592a63dab26637d57da945c36",
+  "allInputChecksumsMatch": true,
+  "verifiedInputFiles": [
+    {
+      "path": "PR-attestation.json",
+      "expectedSha256": "52b17bc2a7f49182896fd1f2e897fe390f289ebfe7c5d5d9c3e3ae91cc4f6775",
+      "actualSha256": "52b17bc2a7f49182896fd1f2e897fe390f289ebfe7c5d5d9c3e3ae91cc4f6775",
+      "matches": true
+    },
+    {
+      "path": "README.md",
+      "expectedSha256": "1185a218079f54f1d17c43834ba2543864d588c1e0184ae40e896998963f9656",
+      "actualSha256": "1185a218079f54f1d17c43834ba2543864d588c1e0184ae40e896998963f9656",
+      "matches": true
+    },
+    {
+      "path": "caller-location-reconciliation.jsonl",
+      "expectedSha256": "9618b38e5223e21fbedb0854a6fb8041c01a87c1542b21d488c16d595a24a3fc",
+      "actualSha256": "9618b38e5223e21fbedb0854a6fb8041c01a87c1542b21d488c16d595a24a3fc",
+      "matches": true
+    },
+    {
+      "path": "caller-near-matches.jsonl",
+      "expectedSha256": "1e07bc2dc10843ed14bf691f1bda05db3e06d67d191ce31d9f4a054da04693dc",
+      "actualSha256": "1e07bc2dc10843ed14bf691f1bda05db3e06d67d191ce31d9f4a054da04693dc",
+      "matches": true
+    },
+    {
+      "path": "caller-resolution-holds.jsonl",
+      "expectedSha256": "a2a86ec36fd3852b505a0fd8ff5818a7242097066955ce20b575cdcaec41a306",
+      "actualSha256": "a2a86ec36fd3852b505a0fd8ff5818a7242097066955ce20b575cdcaec41a306",
+      "matches": true
+    },
+    {
+      "path": "caller-scan-attestation.json",
+      "expectedSha256": "0084a07d76491d08db5fb9c2a891724fa9a1122cff31ca66036479c3fe8fe613",
+      "actualSha256": "0084a07d76491d08db5fb9c2a891724fa9a1122cff31ca66036479c3fe8fe613",
+      "matches": true
+    },
+    {
+      "path": "catalog-file-pins.json",
+      "expectedSha256": "78ab5bb5f1c858bd1a0c52f4711d16d946c2c35ff93c7e40d650e71001285718",
+      "actualSha256": "78ab5bb5f1c858bd1a0c52f4711d16d946c2c35ff93c7e40d650e71001285718",
+      "matches": true
+    },
+    {
+      "path": "current-target-cells.jsonl",
+      "expectedSha256": "d40135dc20accf20767e55841fe71ae687b5a2c39c56d0021267fa17e70b260b",
+      "actualSha256": "d40135dc20accf20767e55841fe71ae687b5a2c39c56d0021267fa17e70b260b",
+      "matches": true
+    },
+    {
+      "path": "final-live-pr-verification.json",
+      "expectedSha256": "79c9e082d57670b18d64b04241ae76d3f6fa017b6c559609461868b853a6c541",
+      "actualSha256": "79c9e082d57670b18d64b04241ae76d3f6fa017b6c559609461868b853a6c541",
+      "matches": true
+    },
+    {
+      "path": "localization-runtime-context.json",
+      "expectedSha256": "f84a785843c578132fdf3dda4d78e653181d98ed69236834d08c42a53c929afc",
+      "actualSha256": "f84a785843c578132fdf3dda4d78e653181d98ed69236834d08c42a53c929afc",
+      "matches": true
+    },
+    {
+      "path": "manifest.json",
+      "expectedSha256": "fac20199a018c937e36da8eab6640b19679025197c0321cc3773b970590623d6",
+      "actualSha256": "fac20199a018c937e36da8eab6640b19679025197c0321cc3773b970590623d6",
+      "matches": true
+    },
+    {
+      "path": "selection-boundary.jsonl",
+      "expectedSha256": "76887154904a5f1ff141fae62480aa8ec83f531c57784fa01017ad772a323c6b",
+      "actualSha256": "76887154904a5f1ff141fae62480aa8ec83f531c57784fa01017ad772a323c6b",
+      "matches": true
+    },
+    {
+      "path": "source-contexts.jsonl",
+      "expectedSha256": "964c9f2d4249d2a50d914394cf9349d8cc91f65ffd24d0c16dca0f6d02c5b75b",
+      "actualSha256": "964c9f2d4249d2a50d914394cf9349d8cc91f65ffd24d0c16dca0f6d02c5b75b",
+      "matches": true
+    }
+  ],
+  "livePr": {
+    "state": "open",
+    "draft": true,
+    "head": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+    "tree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc",
+    "baseRef": "main",
+    "baseSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "remoteBranchHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+    "remotePullRefHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c"
+  },
+  "headTreeMatch": true,
+  "sourceHashRecomputeMismatches": 0,
+  "currentTargetHashRecomputeMismatches": 0,
+  "catalogPinMismatches": 0,
+  "coverage": {
+    "sourceContexts": 20,
+    "cells": 240,
+    "uniqueCellKeys": 240,
+    "callerRefs": 25
+  },
+  "candidateFree": true,
+  "primaryReviewArtifactsOpened": false
+}

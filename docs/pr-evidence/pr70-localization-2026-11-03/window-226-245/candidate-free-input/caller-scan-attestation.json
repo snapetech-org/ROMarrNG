@@ -1,0 +1,21 @@
+{
+  "allExactCallRefsIncluded": true,
+  "callerSourceRows": 20,
+  "candidateFree": true,
+  "head": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "method": "Exact source-literal and stable-source-ID search over tracked production files under romarr; test paths excluded. Dynamic concatenated source fragments inspected at the recorded exact callsites.",
+  "resolvedProductionCallerReferences": 25,
+  "selectedPositions": [
+    226,
+    245
+  ],
+  "specialCallerGapPositions": [
+    226,
+    232,
+    237
+  ],
+  "tree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc",
+  "zeroCallerPositions": [
+    242
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "blind-review": {
+    "returnCode": 0,
+    "stderr": "",
+    "stdout": "{\n  \"pass\": true,\n  \"blindInputVerifier\": \"PASS\",\n  \"checksumVerifier\": \"PASS\",\n  \"cells\": 240,\n  \"decisions\": {\n    \"proposal\": 240\n  },\n  \"confidenceCounts\": {\n    \"high\": 180,\n    \"moderate\": 60\n  },\n  \"tokenMismatches\": {\n    \"placeholder\": 0,\n    \"numeric\": 0,\n    \"markup\": 0,\n    \"protectedLiteral\": 0\n  },\n  \"ambiguousPosition368\": \"12 action-form proposals; moderate confidence\",\n  \"head\": \"d1698b94781c3c84e91faf03c75e8c308dc39c34\",\n  \"tree\": \"3f42d41fe4bbb8edd921ff161e8298ca66038a91\"\n}"
+  },
+  "candidate-free-input": {
+    "returnCode": 0,
+    "stderr": "",
+    "stdout": "PASS: W365-W384 candidate-free input; exact head/tree; 240 current cells; 288 prior holds unchanged; 20 pinned caller contexts; position 368 marked ambiguous; no callerless source; no review decisions or blind material."
+  },
+  "primary-review": {
+    "returnCode": 0,
+    "stderr": "",
+    "stdout": "PASS: primary W365-W384 ledger covers 240 cells, exact candidate-free source/target/context pins, all token/markup checks, and 288 unchanged prior holds; rank 368 dual-use context reviewed per locale."
+  }
+}

@@ -1,0 +1,531 @@
+{
+  "scope": "Independent blind review of all 36 localized targets. Each locale was reviewed as the composed string from three adjacent text nodes plus the two packet-specified inline path literals.",
+  "sourceSentence": "With EmuDeck, point this at its <code>Emulation/roms</code> folder, not the wider <code>Emulation</code> directory.",
+  "sourceTextNodes": [
+    "; you do not need a separate library entry for each system. With EmuDeck, point this at its",
+    "folder, not the wider",
+    "directory. Keep shared metadata alongside it at"
+  ],
+  "inlineLiterals": [
+    "`<code>Emulation/roms</code>`",
+    "`<code>Emulation</code>`"
+  ],
+  "locales": [
+    {
+      "locale": "es",
+      "assembledCurrentTranslation": "; no necesitas una entrada de biblioteca distinta para cada sistema. Con EmuDeck, configura esta ruta para que apunte a su `<code>Emulation/roms</code>` carpeta, no el directorio más amplio `<code>Emulation</code>` directorio. Mantén los metadatos compartidos junto a él en",
+      "assembledProposedTranslation": "; no necesitas una entrada de biblioteca distinta para cada sistema. Con EmuDeck, configura esta ruta para que apunte a la carpeta `<code>Emulation/roms</code>` y no al directorio más amplio `<code>Emulation</code>` que contiene esa carpeta. Mantén los metadatos compartidos junto a esa carpeta en",
+      "cells": [
+        {
+          "locale": "es",
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "sourceFragment": "; you do not need a separate library entry for each system. With EmuDeck, point this at its",
+          "currentTarget": "; no necesitas una entrada de biblioteca distinta para cada sistema. Con EmuDeck, configura esta ruta para que apunte a su",
+          "decision": "correction",
+          "proposedTarget": "; no necesitas una entrada de biblioteca distinta para cada sistema. Con EmuDeck, configura esta ruta para que apunte a la carpeta",
+          "effectiveTarget": "; no necesitas una entrada de biblioteca distinta para cada sistema. Con EmuDeck, configura esta ruta para que apunte a la carpeta",
+          "confidence": "high",
+          "rationale": "In the composed sentence, the current 'a su' before the path literal and 'carpeta' after it yields an awkward possessive construction. Place 'la carpeta' before the literal."
+        },
+        {
+          "locale": "es",
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "sourceFragment": "folder, not the wider",
+          "currentTarget": "carpeta, no el directorio más amplio",
+          "decision": "correction",
+          "proposedTarget": "y no al directorio más amplio",
+          "effectiveTarget": "y no al directorio más amplio",
+          "confidence": "high",
+          "rationale": "The current fragment repeats the folder label after the first path. The conjunction avoids punctuation immediately after the inline literal and introduces the wider directory before the second literal."
+        },
+        {
+          "locale": "es",
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "sourceFragment": "directory. Keep shared metadata alongside it at",
+          "currentTarget": "directorio. Mantén los metadatos compartidos junto a él en",
+          "decision": "correction",
+          "proposedTarget": "que contiene esa carpeta. Mantén los metadatos compartidos junto a esa carpeta en",
+          "effectiveTarget": "que contiene esa carpeta. Mantén los metadatos compartidos junto a esa carpeta en",
+          "confidence": "high",
+          "rationale": "The current node repeats 'directorio' after the second path literal. The relative clause explains that Emulation contains the ROM folder, then the metadata instruction follows."
+        }
+      ]
+    },
+    {
+      "locale": "zh-Hans",
+      "assembledCurrentTranslation": "；每个系统不需要单独创建游戏库条目。使用 EmuDeck 时，请将此路径指向它的 `<code>Emulation/roms</code>` 文件夹,而不是更广泛的 `<code>Emulation</code>` 目录。请将共享元数据与它放在一起，位置在",
+      "assembledProposedTranslation": "；每个系统不需要单独创建游戏库条目。使用 EmuDeck 时，请将此路径指向它的 `<code>Emulation/roms</code>` 文件夹，而不是更上层的 `<code>Emulation</code>` 目录。请将共享元数据放在它旁边，位置如下：",
+      "cells": [
+        {
+          "locale": "zh-Hans",
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "sourceFragment": "; you do not need a separate library entry for each system. With EmuDeck, point this at its",
+          "currentTarget": "；每个系统不需要单独创建游戏库条目。使用 EmuDeck 时，请将此路径指向它的",
+          "decision": "accept-current",
+          "proposedTarget": null,
+          "effectiveTarget": "；每个系统不需要单独创建游戏库条目。使用 EmuDeck 时，请将此路径指向它的",
+          "confidence": "moderate",
+          "rationale": "Together with the inline literal and classifier after it, '它的…文件夹' is understandable and grammatical in this sentence."
+        },
+        {
+          "locale": "zh-Hans",
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "sourceFragment": "folder, not the wider",
+          "currentTarget": "文件夹,而不是更广泛的",
+          "decision": "refinement",
+          "proposedTarget": "文件夹，而不是更上层的",
+          "effectiveTarget": "文件夹，而不是更上层的",
+          "confidence": "moderate",
+          "rationale": "The assembled contrast is clear, but replace the ASCII comma with Chinese punctuation and use 上层 to identify Emulation as the parent directory."
+        },
+        {
+          "locale": "zh-Hans",
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "sourceFragment": "directory. Keep shared metadata alongside it at",
+          "currentTarget": "目录。请将共享元数据与它放在一起，位置在",
+          "decision": "refinement",
+          "proposedTarget": "目录。请将共享元数据放在它旁边，位置如下：",
+          "effectiveTarget": "目录。请将共享元数据放在它旁边，位置如下：",
+          "confidence": "moderate",
+          "rationale": "The current '与它放在一起，位置在' is wordy and awkward. This keeps the beside-it relationship and introduces the following location naturally."
+        }
+      ]
+    },
+    {
+      "locale": "hi",
+      "assembledCurrentTranslation": "; हर सिस्टम के लिए अलग लाइब्रेरी एंट्री की ज़रूरत नहीं है। EmuDeck के साथ, इस पथ को उसके `<code>Emulation/roms</code>` फ़ोल्डर, विस्तार नहीं `<code>Emulation</code>` डायरेक्टरी। साझा मेटाडेटा को इसके साथ-साथ इस स्थान पर रखें:",
+      "assembledProposedTranslation": "; हर सिस्टम के लिए अलग लाइब्रेरी एंट्री की ज़रूरत नहीं है। EmuDeck के साथ, इस पथ को `<code>Emulation/roms</code>` फ़ोल्डर पर सेट करें, न कि अधिक व्यापक `<code>Emulation</code>` डायरेक्टरी। साझा मेटाडेटा को इसके साथ-साथ इस स्थान पर रखें:",
+      "cells": [
+        {
+          "locale": "hi",
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "sourceFragment": "; you do not need a separate library entry for each system. With EmuDeck, point this at its",
+          "currentTarget": "; हर सिस्टम के लिए अलग लाइब्रेरी एंट्री की ज़रूरत नहीं है। EmuDeck के साथ, इस पथ को उसके",
+          "decision": "correction",
+          "proposedTarget": "; हर सिस्टम के लिए अलग लाइब्रेरी एंट्री की ज़रूरत नहीं है। EmuDeck के साथ, इस पथ को",
+          "effectiveTarget": "; हर सिस्टम के लिए अलग लाइब्रेरी एंट्री की ज़रूरत नहीं है। EmuDeck के साथ, इस पथ को",
+          "confidence": "moderate",
+          "rationale": "The current 'उसके' makes the code literal read as a possessive modifier before a postposed folder noun. Removing it lets the next node complete the path-to-folder construction."
+        },
+        {
+          "locale": "hi",
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "sourceFragment": "folder, not the wider",
+          "currentTarget": "फ़ोल्डर, विस्तार नहीं",
+          "decision": "correction",
+          "proposedTarget": "फ़ोल्डर पर सेट करें, न कि अधिक व्यापक",
+          "effectiveTarget": "फ़ोल्डर पर सेट करें, न कि अधिक व्यापक",
+          "confidence": "moderate",
+          "rationale": "In context, the current phrase lacks the action needed after the literal and leaves 'विस्तार नहीं' ungrammatical. The proposal states the folder target and contrast."
+        },
+        {
+          "locale": "hi",
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "sourceFragment": "directory. Keep shared metadata alongside it at",
+          "currentTarget": "डायरेक्टरी। साझा मेटाडेटा को इसके साथ-साथ इस स्थान पर रखें:",
+          "decision": "accept-current",
+          "proposedTarget": null,
+          "effectiveTarget": "डायरेक्टरी। साझा मेटाडेटा को इसके साथ-साथ इस स्थान पर रखें:",
+          "confidence": "moderate",
+          "rationale": "After the second literal, 'डायरेक्टरी पर' completes the contrast and the metadata instruction reads clearly with its following location."
+        }
+      ]
+    },
+    {
+      "locale": "de",
+      "assembledCurrentTranslation": "; Sie benötigen keinen eigenen Bibliothekseintrag für jedes System. Richten Sie diesen Pfad bei EmuDeck auf dessen `<code>Emulation/roms</code>` Folder, nicht die breitere `<code>Emulation</code>` Verzeichnis. Bewahre die gemeinsamen Metadaten daneben unter",
+      "assembledProposedTranslation": "; Sie benötigen keinen eigenen Bibliothekseintrag für jedes System. Richten Sie bei EmuDeck diesen Pfad auf den Ordner `<code>Emulation/roms</code>` aus, statt das umfassendere Verzeichnis `<code>Emulation</code>` als Ziel zu verwenden. Bewahren Sie die gemeinsamen Metadaten daneben unter",
+      "cells": [
+        {
+          "locale": "de",
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "sourceFragment": "; you do not need a separate library entry for each system. With EmuDeck, point this at its",
+          "currentTarget": "; Sie benötigen keinen eigenen Bibliothekseintrag für jedes System. Richten Sie diesen Pfad bei EmuDeck auf dessen",
+          "decision": "correction",
+          "proposedTarget": "; Sie benötigen keinen eigenen Bibliothekseintrag für jedes System. Richten Sie bei EmuDeck diesen Pfad auf den Ordner",
+          "effectiveTarget": "; Sie benötigen keinen eigenen Bibliothekseintrag für jedes System. Richten Sie bei EmuDeck diesen Pfad auf den Ordner",
+          "confidence": "high",
+          "rationale": "The current 'dessen … Folder' followed by a separate noun is awkward. Put the correctly inflected German noun before the first path literal and let the next node complete 'richten … aus'."
+        },
+        {
+          "locale": "de",
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "sourceFragment": "folder, not the wider",
+          "currentTarget": "Folder, nicht die breitere",
+          "decision": "correction",
+          "proposedTarget": "aus, statt das umfassendere Verzeichnis",
+          "effectiveTarget": "aus, statt das umfassendere Verzeichnis",
+          "confidence": "high",
+          "rationale": "The current English 'Folder' and feminine 'breitere' do not agree with 'Verzeichnis'. This also completes 'richten … aus' and frames the broader directory as the alternative destination."
+        },
+        {
+          "locale": "de",
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "sourceFragment": "directory. Keep shared metadata alongside it at",
+          "currentTarget": "Verzeichnis. Bewahre die gemeinsamen Metadaten daneben unter",
+          "decision": "correction",
+          "proposedTarget": "als Ziel zu verwenden. Bewahren Sie die gemeinsamen Metadaten daneben unter",
+          "effectiveTarget": "als Ziel zu verwenden. Bewahren Sie die gemeinsamen Metadaten daneben unter",
+          "confidence": "high",
+          "rationale": "The current informal imperative 'Bewahre' conflicts with formal 'Sie'. After the second path, this phrase completes the 'statt … zu verwenden' construction without placing punctuation directly after the inline literal."
+        }
+      ]
+    },
+    {
+      "locale": "ja",
+      "assembledCurrentTranslation": "。システムごとに別のライブラリエントリを作る必要はありません。EmuDeck を使う場合は、このパスをその `<code>Emulation/roms</code>` フォルダーではなく、幅広い `<code>Emulation</code>` ディレクトリです。共有メタデータはその隣の次の場所に保管してください:",
+      "assembledProposedTranslation": "。システムごとに別のライブラリエントリを作る必要はありません。EmuDeck を使う場合は、このパスを `<code>Emulation/roms</code>` フォルダーに指定し、より広い `<code>Emulation</code>` ディレクトリは指定しないでください。共有メタデータはその隣にある次の場所に保存してください:",
+      "cells": [
+        {
+          "locale": "ja",
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "sourceFragment": "; you do not need a separate library entry for each system. With EmuDeck, point this at its",
+          "currentTarget": "。システムごとに別のライブラリエントリを作る必要はありません。EmuDeck を使う場合は、このパスをその",
+          "decision": "correction",
+          "proposedTarget": "。システムごとに別のライブラリエントリを作る必要はありません。EmuDeck を使う場合は、このパスを",
+          "effectiveTarget": "。システムごとに別のライブラリエントリを作る必要はありません。EmuDeck を使う場合は、このパスを",
+          "confidence": "moderate",
+          "rationale": "The current 'その' before the first literal creates an unnecessary possessive, while the surrounding nodes make the folder predicate fail. The path can be the direct object of the instruction."
+        },
+        {
+          "locale": "ja",
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "sourceFragment": "folder, not the wider",
+          "currentTarget": "フォルダーではなく、幅広い",
+          "decision": "correction",
+          "proposedTarget": "フォルダーに指定し、より広い",
+          "effectiveTarget": "フォルダーに指定し、より広い",
+          "confidence": "moderate",
+          "rationale": "The assembled sentence needs a positive target followed by a contrasting broader directory; the current 'ではなく' lacks a matching predicate."
+        },
+        {
+          "locale": "ja",
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "sourceFragment": "directory. Keep shared metadata alongside it at",
+          "currentTarget": "ディレクトリです。共有メタデータはその隣の次の場所に保管してください:",
+          "decision": "refinement",
+          "proposedTarget": "ディレクトリは指定しないでください。共有メタデータはその隣にある次の場所に保存してください:",
+          "effectiveTarget": "ディレクトリは指定しないでください。共有メタデータはその隣にある次の場所に保存してください:",
+          "confidence": "moderate",
+          "rationale": "This completes the negative contrast and clarifies that the broader directory should not be selected. The metadata wording is smoother while preserving the following-location slot."
+        }
+      ]
+    },
+    {
+      "locale": "fr",
+      "assembledCurrentTranslation": "; vous n’avez pas besoin d’une entrée de bibliothèque distincte pour chaque système. Avec EmuDeck, faites pointer ce chemin vers son `<code>Emulation/roms</code>` Le dossier, pas le plus large `<code>Emulation</code>` répertoire. Conservez les métadonnées partagées à côté, à l’emplacement suivant :",
+      "assembledProposedTranslation": "; vous n’avez pas besoin d’une entrée de bibliothèque distincte pour chaque système. Avec EmuDeck, faites pointer ce chemin vers le dossier `<code>Emulation/roms</code>` et non vers le répertoire plus large `<code>Emulation</code>` qui contient ce dossier. Conservez les métadonnées partagées à côté, à l’emplacement suivant :",
+      "cells": [
+        {
+          "locale": "fr",
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "sourceFragment": "; you do not need a separate library entry for each system. With EmuDeck, point this at its",
+          "currentTarget": "; vous n’avez pas besoin d’une entrée de bibliothèque distincte pour chaque système. Avec EmuDeck, faites pointer ce chemin vers son",
+          "decision": "correction",
+          "proposedTarget": "; vous n’avez pas besoin d’une entrée de bibliothèque distincte pour chaque système. Avec EmuDeck, faites pointer ce chemin vers le dossier",
+          "effectiveTarget": "; vous n’avez pas besoin d’une entrée de bibliothèque distincte pour chaque système. Avec EmuDeck, faites pointer ce chemin vers le dossier",
+          "confidence": "high",
+          "rationale": "The current 'son' before the literal followed by 'Le dossier' duplicates and misorders the noun phrase. Introduce 'le dossier' before the path."
+        },
+        {
+          "locale": "fr",
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "sourceFragment": "folder, not the wider",
+          "currentTarget": "Le dossier, pas le plus large",
+          "decision": "correction",
+          "proposedTarget": "et non vers le répertoire plus large",
+          "effectiveTarget": "et non vers le répertoire plus large",
+          "confidence": "high",
+          "rationale": "The current capitalized 'Le dossier' after the first literal and 'le plus large … répertoire' produce an unidiomatic contrast. This keeps the directory noun before its literal and avoids punctuation directly after the preceding code."
+        },
+        {
+          "locale": "fr",
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "sourceFragment": "directory. Keep shared metadata alongside it at",
+          "currentTarget": "répertoire. Conservez les métadonnées partagées à côté, à l’emplacement suivant :",
+          "decision": "refinement",
+          "proposedTarget": "qui contient ce dossier. Conservez les métadonnées partagées à côté, à l’emplacement suivant :",
+          "effectiveTarget": "qui contient ce dossier. Conservez les métadonnées partagées à côté, à l’emplacement suivant :",
+          "confidence": "high",
+          "rationale": "The current node repeats 'répertoire' after the second literal. The relative clause clarifies the parent-directory relation and leaves the existing metadata location wording intact."
+        }
+      ]
+    },
+    {
+      "locale": "pt-BR",
+      "assembledCurrentTranslation": "; não é necessário criar uma entrada de biblioteca separada para cada sistema. Com o EmuDeck, aponte este caminho para a pasta dele `<code>Emulation/roms</code>` pasta, não o diretório mais amplo `<code>Emulation</code>` diretório. Mantenha os metadados compartilhados ao lado dele em",
+      "assembledProposedTranslation": "; não é necessário criar uma entrada de biblioteca separada para cada sistema. Com o EmuDeck, aponte este caminho para a pasta `<code>Emulation/roms</code>` e não para o diretório mais amplo `<code>Emulation</code>` que contém essa pasta. Mantenha os metadados compartilhados ao lado dessa pasta em",
+      "cells": [
+        {
+          "locale": "pt-BR",
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "sourceFragment": "; you do not need a separate library entry for each system. With EmuDeck, point this at its",
+          "currentTarget": "; não é necessário criar uma entrada de biblioteca separada para cada sistema. Com o EmuDeck, aponte este caminho para a pasta dele",
+          "decision": "correction",
+          "proposedTarget": "; não é necessário criar uma entrada de biblioteca separada para cada sistema. Com o EmuDeck, aponte este caminho para a pasta",
+          "effectiveTarget": "; não é necessário criar uma entrada de biblioteca separada para cada sistema. Com o EmuDeck, aponte este caminho para a pasta",
+          "confidence": "high",
+          "rationale": "The current 'pasta dele' followed by the path and another 'pasta' duplicates the noun. Put the classifier before the first literal."
+        },
+        {
+          "locale": "pt-BR",
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "sourceFragment": "folder, not the wider",
+          "currentTarget": "pasta, não o diretório mais amplo",
+          "decision": "correction",
+          "proposedTarget": "e não para o diretório mais amplo",
+          "effectiveTarget": "e não para o diretório mais amplo",
+          "confidence": "high",
+          "rationale": "The current contrast omits a parallel destination phrase and then repeats 'diretório' in the next node. This yields a grammatical contrast before the second literal."
+        },
+        {
+          "locale": "pt-BR",
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "sourceFragment": "directory. Keep shared metadata alongside it at",
+          "currentTarget": "diretório. Mantenha os metadados compartilhados ao lado dele em",
+          "decision": "correction",
+          "proposedTarget": "que contém essa pasta. Mantenha os metadados compartilhados ao lado dessa pasta em",
+          "effectiveTarget": "que contém essa pasta. Mantenha os metadados compartilhados ao lado dessa pasta em",
+          "confidence": "high",
+          "rationale": "The current node repeats 'diretório' after the second literal. The relative clause identifies Emulation as the parent of the ROM folder and starts the metadata instruction naturally."
+        }
+      ]
+    },
+    {
+      "locale": "ar",
+      "assembledCurrentTranslation": "؛ لا تحتاج إلى إدخال مكتبة منفصل لكل نظام. عند استخدام EmuDeck، وجّه هذا المسار إلى مجلده `<code>Emulation/roms</code>` المجلد، وليس الأوسع `<code>Emulation</code>` الدليل. احتفظ بالبيانات الوصفية المشتركة بجواره في",
+      "assembledProposedTranslation": "؛ لا تحتاج إلى إدخال مكتبة منفصل لكل نظام. عند استخدام EmuDeck، وجّه هذا المسار إلى مجلد `<code>Emulation/roms</code>` وليس إلى المجلد الأوسع `<code>Emulation</code>` الذي يحتوي على هذا المجلد. احتفظ بالبيانات الوصفية المشتركة بجوار هذا المجلد في",
+      "cells": [
+        {
+          "locale": "ar",
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "sourceFragment": "; you do not need a separate library entry for each system. With EmuDeck, point this at its",
+          "currentTarget": "؛ لا تحتاج إلى إدخال مكتبة منفصل لكل نظام. عند استخدام EmuDeck، وجّه هذا المسار إلى مجلده",
+          "decision": "correction",
+          "proposedTarget": "؛ لا تحتاج إلى إدخال مكتبة منفصل لكل نظام. عند استخدام EmuDeck، وجّه هذا المسار إلى مجلد",
+          "effectiveTarget": "؛ لا تحتاج إلى إدخال مكتبة منفصل لكل نظام. عند استخدام EmuDeck، وجّه هذا المسار إلى مجلد",
+          "confidence": "moderate",
+          "rationale": "The current 'مجلده' before the literal and 'المجلد' after it duplicate the folder label. Introduce the folder noun before the first literal."
+        },
+        {
+          "locale": "ar",
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "sourceFragment": "folder, not the wider",
+          "currentTarget": "المجلد، وليس الأوسع",
+          "decision": "correction",
+          "proposedTarget": "وليس إلى المجلد الأوسع",
+          "effectiveTarget": "وليس إلى المجلد الأوسع",
+          "confidence": "moderate",
+          "rationale": "The current fragment repeats 'المجلد' after the first literal and does not form a parallel destination contrast. This connects the two destinations without punctuation directly after the inline literal."
+        },
+        {
+          "locale": "ar",
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "sourceFragment": "directory. Keep shared metadata alongside it at",
+          "currentTarget": "الدليل. احتفظ بالبيانات الوصفية المشتركة بجواره في",
+          "decision": "correction",
+          "proposedTarget": "الذي يحتوي على هذا المجلد. احتفظ بالبيانات الوصفية المشتركة بجوار هذا المجلد في",
+          "effectiveTarget": "الذي يحتوي على هذا المجلد. احتفظ بالبيانات الوصفية المشتركة بجوار هذا المجلد في",
+          "confidence": "moderate",
+          "rationale": "The current node repeats 'الدليل' after the second literal and can read as guide. The relative clause makes the parent-folder relation explicit before the metadata instruction."
+        }
+      ]
+    },
+    {
+      "locale": "ko",
+      "assembledCurrentTranslation": "; 시스템마다 라이브러리 항목을 따로 만들 필요는 없습니다. EmuDeck을 사용하는 경우 이 경로를 해당 폴더로 지정하세요:  `<code>Emulation/roms</code>` 폴더가 아니라 더 넓은 `<code>Emulation</code>` 디렉터리입니다. 공유 메타데이터는 옆의 다음 위치에 보관하세요:",
+      "assembledProposedTranslation": "; 시스템마다 라이브러리 항목을 따로 만들 필요는 없습니다. EmuDeck에서는 이 경로를 `<code>Emulation/roms</code>` 폴더로 지정하고, 더 넓은 `<code>Emulation</code>` 디렉터리는 선택하지 마세요. 공유 메타데이터는 해당 폴더 옆의 다음 위치에 보관하세요:",
+      "cells": [
+        {
+          "locale": "ko",
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "sourceFragment": "; you do not need a separate library entry for each system. With EmuDeck, point this at its",
+          "currentTarget": "; 시스템마다 라이브러리 항목을 따로 만들 필요는 없습니다. EmuDeck을 사용하는 경우 이 경로를 해당 폴더로 지정하세요: ",
+          "decision": "correction",
+          "proposedTarget": "; 시스템마다 라이브러리 항목을 따로 만들 필요는 없습니다. EmuDeck에서는 이 경로를",
+          "effectiveTarget": "; 시스템마다 라이브러리 항목을 따로 만들 필요는 없습니다. EmuDeck에서는 이 경로를",
+          "confidence": "moderate",
+          "rationale": "The current '해당 폴더로 지정하세요:' is followed by the path and a second folder label, making the assembled instruction redundant and awkward."
+        },
+        {
+          "locale": "ko",
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "sourceFragment": "folder, not the wider",
+          "currentTarget": "폴더가 아니라 더 넓은",
+          "decision": "correction",
+          "proposedTarget": "폴더로 지정하고, 더 넓은",
+          "effectiveTarget": "폴더로 지정하고, 더 넓은",
+          "confidence": "moderate",
+          "rationale": "With the first literal before this node, this phrasing completes the target-folder instruction and introduces the broader alternative in parallel."
+        },
+        {
+          "locale": "ko",
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "sourceFragment": "directory. Keep shared metadata alongside it at",
+          "currentTarget": "디렉터리입니다. 공유 메타데이터는 옆의 다음 위치에 보관하세요:",
+          "decision": "refinement",
+          "proposedTarget": "디렉터리는 선택하지 마세요. 공유 메타데이터는 해당 폴더 옆의 다음 위치에 보관하세요:",
+          "effectiveTarget": "디렉터리는 선택하지 마세요. 공유 메타데이터는 해당 폴더 옆의 다음 위치에 보관하세요:",
+          "confidence": "moderate",
+          "rationale": "The current declarative '디렉터리입니다' does not express the instruction not to choose the broader directory. The proposed wording completes that contrast and makes the next location clearer."
+        }
+      ]
+    },
+    {
+      "locale": "zh-Hant",
+      "assembledCurrentTranslation": "；每個系統不需要個別的媒體庫項目。使用 EmuDeck 時，請將此路徑指向它的 `<code>Emulation/roms</code>` 文件夾,而不是更廣泛的 `<code>Emulation</code>` 目錄。請將共用中繼資料與它放在一起，位置在",
+      "assembledProposedTranslation": "；每個系統不需要個別的媒體庫項目。使用 EmuDeck 時，請將此路徑指向它的 `<code>Emulation/roms</code>` 文件夾，而不是更上層的 `<code>Emulation</code>` 目錄。請將共用中繼資料放在它旁邊，位置如下：",
+      "cells": [
+        {
+          "locale": "zh-Hant",
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "sourceFragment": "; you do not need a separate library entry for each system. With EmuDeck, point this at its",
+          "currentTarget": "；每個系統不需要個別的媒體庫項目。使用 EmuDeck 時，請將此路徑指向它的",
+          "decision": "accept-current",
+          "proposedTarget": null,
+          "effectiveTarget": "；每個系統不需要個別的媒體庫項目。使用 EmuDeck 時，請將此路徑指向它的",
+          "confidence": "moderate",
+          "rationale": "In the full sentence, '它的…文件夾' is understandable and grammatically acceptable around the first path literal."
+        },
+        {
+          "locale": "zh-Hant",
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "sourceFragment": "folder, not the wider",
+          "currentTarget": "文件夾,而不是更廣泛的",
+          "decision": "refinement",
+          "proposedTarget": "文件夾，而不是更上層的",
+          "effectiveTarget": "文件夾，而不是更上層的",
+          "confidence": "moderate",
+          "rationale": "The meaning is clear, but Chinese punctuation should replace the ASCII comma and 上層 more precisely describes the parent directory."
+        },
+        {
+          "locale": "zh-Hant",
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "sourceFragment": "directory. Keep shared metadata alongside it at",
+          "currentTarget": "目錄。請將共用中繼資料與它放在一起，位置在",
+          "decision": "refinement",
+          "proposedTarget": "目錄。請將共用中繼資料放在它旁邊，位置如下：",
+          "effectiveTarget": "目錄。請將共用中繼資料放在它旁邊，位置如下：",
+          "confidence": "moderate",
+          "rationale": "The current '與它放在一起，位置在' is cumbersome. This retains the adjacent-location meaning and introduces the following location naturally."
+        }
+      ]
+    },
+    {
+      "locale": "vi",
+      "assembledCurrentTranslation": "; bạn không cần mục thư viện riêng cho từng hệ thống. Với EmuDeck, hãy trỏ đường dẫn này đến thư mục `<code>Emulation/roms</code>` thư mục, không phải thư mục cha rộng hơn `<code>Emulation</code>` thư mục. Hãy lưu siêu dữ liệu dùng chung bên cạnh tại",
+      "assembledProposedTranslation": "; bạn không cần mục thư viện riêng cho từng hệ thống. Với EmuDeck, hãy trỏ đường dẫn này đến thư mục `<code>Emulation/roms</code>` chứ không phải thư mục cha rộng hơn `<code>Emulation</code>` chứa thư mục đó. Hãy lưu siêu dữ liệu dùng chung bên cạnh thư mục đó tại",
+      "cells": [
+        {
+          "locale": "vi",
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "sourceFragment": "; you do not need a separate library entry for each system. With EmuDeck, point this at its",
+          "currentTarget": "; bạn không cần mục thư viện riêng cho từng hệ thống. Với EmuDeck, hãy trỏ đường dẫn này đến thư mục",
+          "decision": "accept-current",
+          "proposedTarget": null,
+          "effectiveTarget": "; bạn không cần mục thư viện riêng cho từng hệ thống. Với EmuDeck, hãy trỏ đường dẫn này đến thư mục",
+          "confidence": "moderate",
+          "rationale": "The first node ends with 'đến thư mục', which correctly places the folder classifier before the first path literal in Vietnamese."
+        },
+        {
+          "locale": "vi",
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "sourceFragment": "folder, not the wider",
+          "currentTarget": "thư mục, không phải thư mục cha rộng hơn",
+          "decision": "correction",
+          "proposedTarget": "chứ không phải thư mục cha rộng hơn",
+          "effectiveTarget": "chứ không phải thư mục cha rộng hơn",
+          "confidence": "moderate",
+          "rationale": "The current fragment repeats 'thư mục' after the first literal. This starts a direct contrast with the parent folder."
+        },
+        {
+          "locale": "vi",
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "sourceFragment": "directory. Keep shared metadata alongside it at",
+          "currentTarget": "thư mục. Hãy lưu siêu dữ liệu dùng chung bên cạnh tại",
+          "decision": "correction",
+          "proposedTarget": "chứa thư mục đó. Hãy lưu siêu dữ liệu dùng chung bên cạnh thư mục đó tại",
+          "effectiveTarget": "chứa thư mục đó. Hãy lưu siêu dữ liệu dùng chung bên cạnh thư mục đó tại",
+          "confidence": "moderate",
+          "rationale": "The current node repeats 'thư mục' after the second literal and 'bên cạnh tại' lacks an object. The relative phrase identifies the parent directory, and the next clause names the folder holding the metadata."
+        }
+      ]
+    },
+    {
+      "locale": "id",
+      "assembledCurrentTranslation": "; Anda tidak perlu entri pustaka terpisah untuk setiap sistem. Dengan EmuDeck, arahkan jalur ini ke folder `<code>Emulation/roms</code>` folder, bukan yang lebih luas `<code>Emulation</code>` direktori. Simpan metadata bersama di sebelahnya pada",
+      "assembledProposedTranslation": "; Anda tidak perlu entri pustaka terpisah untuk setiap sistem. Dengan EmuDeck, arahkan jalur ini ke folder `<code>Emulation/roms</code>` dan bukan ke direktori yang lebih luas `<code>Emulation</code>` yang mencakup folder tersebut. Simpan metadata bersama di samping folder tersebut, di",
+      "cells": [
+        {
+          "locale": "id",
+          "targetOrdinal": 1,
+          "sourceId": "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+          "sourceFragment": "; you do not need a separate library entry for each system. With EmuDeck, point this at its",
+          "currentTarget": "; Anda tidak perlu entri pustaka terpisah untuk setiap sistem. Dengan EmuDeck, arahkan jalur ini ke folder",
+          "decision": "accept-current",
+          "proposedTarget": null,
+          "effectiveTarget": "; Anda tidak perlu entri pustaka terpisah untuk setiap sistem. Dengan EmuDeck, arahkan jalur ini ke folder",
+          "confidence": "moderate",
+          "rationale": "The first node's 'ke folder' works with the following path literal as the folder name."
+        },
+        {
+          "locale": "id",
+          "targetOrdinal": 2,
+          "sourceId": "ui.folder-not-the-wider.d61c242874",
+          "sourceFragment": "folder, not the wider",
+          "currentTarget": "folder, bukan yang lebih luas",
+          "decision": "correction",
+          "proposedTarget": "dan bukan ke direktori yang lebih luas",
+          "effectiveTarget": "dan bukan ke direktori yang lebih luas",
+          "confidence": "moderate",
+          "rationale": "The current contrast lacks a parallel destination and the next node repeats 'direktori'. This introduces the parent directory before its literal and avoids a comma directly after the first path."
+        },
+        {
+          "locale": "id",
+          "targetOrdinal": 3,
+          "sourceId": "ui.directory-keep-shared-metadata-along.e2e13b466b",
+          "sourceFragment": "directory. Keep shared metadata alongside it at",
+          "currentTarget": "direktori. Simpan metadata bersama di sebelahnya pada",
+          "decision": "refinement",
+          "proposedTarget": "yang mencakup folder tersebut. Simpan metadata bersama di samping folder tersebut, di",
+          "effectiveTarget": "yang mencakup folder tersebut. Simpan metadata bersama di samping folder tersebut, di",
+          "confidence": "moderate",
+          "rationale": "The current node repeats 'direktori' after the second literal and leaves the referent less clear. The relative clause clarifies the parent relationship; the location phrase remains ready for the following path."
+        }
+      ]
+    }
+  ]
+}

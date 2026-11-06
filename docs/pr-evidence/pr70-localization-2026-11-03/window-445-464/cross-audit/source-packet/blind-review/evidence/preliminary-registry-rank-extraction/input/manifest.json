@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "purpose": "independent blind review source/cell inputs",
+  "head": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "tree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "files": [
+    {
+      "path": "build_blind_review.py",
+      "sha256": "5d353a6784be6704fdca184808eeff905f019e9fd59f09810a4b4fa0388d6670",
+      "byteCount": 7677
+    },
+    {
+      "path": "current-head-files/docs/pr-evidence/pr70-localization-2026-11-03/romarrng-pr70-w365-384-candidate-free-20261103/input/source-queue.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "byteCount": 273919
+    },
+    {
+      "path": "current-head-files/romarr/i18n_runtime.js",
+      "sha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "byteCount": 9036
+    },
+    {
+      "path": "current-head-files/romarr/ui-labels.json",
+      "sha256": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+      "byteCount": 3011512
+    },
+    {
+      "path": "current-head-files/romarr/ui-source-messages.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "byteCount": 273919
+    },
+    {
+      "path": "current-head-files/romarr/ui.py",
+      "sha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "byteCount": 408966
+    },
+    {
+      "path": "input/README.md",
+      "sha256": "ac80a4b9c3daec90ae6efc2f6a8a85f043c6b2ac8d6f0df009136278d272fa94",
+      "byteCount": 495
+    },
+    {
+      "path": "input/caller-context-blocks.jsonl",
+      "sha256": "463b0e75a15e90f5e1f64cfb7fdc71d0547ef13b449ac0f281f6c17bdb9a3084",
+      "byteCount": 25614
+    },
+    {
+      "path": "input/current-target-cells.jsonl",
+      "sha256": "4c98da428ee0477d11625b23a45de4016606fff0966d34348f117888efc7f2fc",
+      "byteCount": 139642
+    },
+    {
+      "path": "input/file-pins.json",
+      "sha256": "f2439869ae666074cf7ddc1506d2e2fe00a7edeed573dc02bed1b779a31ed03b",
+      "byteCount": 1622
+    },
+    {
+      "path": "input/new-head-tree.json",
+      "sha256": "33972d7b3e58dd33d6d725e88353b71abdd99fa6b645e9b3843f19e7c5a3d0b0",
+      "byteCount": 556911
+    },
+    {
+      "path": "input/pr-attestation-after.json",
+      "sha256": "6dd550fb1fc2fb7a0e441774bfd6ea472d4d125e546337a61a8800c4b5a07c0c",
+      "byteCount": 740
+    },
+    {
+      "path": "input/pr-attestation-before.json",
+      "sha256": "6dd550fb1fc2fb7a0e441774bfd6ea472d4d125e546337a61a8800c4b5a07c0c",
+      "byteCount": 740
+    },
+    {
+      "path": "input/source-cells.jsonl",
+      "sha256": "aaf04ff77adf51a13910677af79d9e9584bdafdc78fd7ef77110551d69e655ae",
+      "byteCount": 8072
+    }
+  ]
+}

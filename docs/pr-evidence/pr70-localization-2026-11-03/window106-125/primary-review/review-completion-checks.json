@@ -1,0 +1,49 @@
+{
+  "allApprovedCandidatesPass": true,
+  "approvedMarkupMismatches": 0,
+  "approvedPlaceholderMismatches": 0,
+  "approvedProtectedLiteralMismatches": 0,
+  "candidateCanonicalHashMismatches": 0,
+  "dispositions": {
+    "accept-current": 144,
+    "correction": 15,
+    "hold": 72,
+    "refinement": 9
+  },
+  "head": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+  "heldExistingStructuralMismatchCount": 1,
+  "heldExistingStructuralMismatches": [
+    {
+      "id": "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+      "literal": "gamelist.xml",
+      "locale": "id"
+    }
+  ],
+  "heldSourceEvidenceRecordCount": 6,
+  "holdSourceCount": 6,
+  "independentReviewOutputRead": false,
+  "localeRows": {
+    "ar": 20,
+    "de": 20,
+    "es": 20,
+    "fr": 20,
+    "hi": 20,
+    "id": 20,
+    "ja": 20,
+    "ko": 20,
+    "pt-BR": 20,
+    "vi": 20,
+    "zh-Hans": 20,
+    "zh-Hant": 20
+  },
+  "nativeSpeakerApprovalClaimed": false,
+  "renderEvidenceRecordCount": 7,
+  "repositoryChangesMade": false,
+  "selectedCellCount": 240,
+  "selectedSourceCount": 20,
+  "sourceCallerFileHashMismatches": 0,
+  "sourceCallerLineMismatches": 0,
+  "sourceCurrentTargetHashesReattested": true,
+  "testsBuildsScansCiBrowserRun": false,
+  "tree": "e8668e9c83afa533f8cd6e69e6a7ad96946ed40e"
+}

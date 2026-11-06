@@ -1,0 +1,185 @@
+{
+  "window": "W365-W384",
+  "method": "Sort all unique active IDs lexicographically by stable ID; reattest W345-W364; select the immediate next 20 IDs.",
+  "activeUniqueSourceIds": 479,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "priorWindow": "W345-W364",
+  "priorWindowPositions": [
+    345,
+    364
+  ],
+  "priorWindowSelectionReattested": true,
+  "positions": [
+    365,
+    384
+  ],
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "boundaries": [
+    {
+      "position": 364,
+      "role": "previous-window-final",
+      "source": "SeerrNG discovery",
+      "sourceId": "ui.seerrng-discovery.f140768191",
+      "sourceSha256": "f140768191c3906cad20b63ec4dab1f87e06db44c678a2ad2c9879fd92ebcf94"
+    },
+    {
+      "position": 365,
+      "role": "selected-start",
+      "source": "Select a supported platform or All platforms.",
+      "sourceId": "ui.select-a-supported-platform-or-all-p.b323a213be",
+      "sourceSha256": "b323a213beacefcce94a9f8da89bde1859860ff2aaf99d5864b72afc741d12b3"
+    },
+    {
+      "position": 384,
+      "role": "selected-end",
+      "source": "Shared metadata",
+      "sourceId": "ui.shared-metadata.fb4cb78bf2",
+      "sourceSha256": "fb4cb78bf2f2fa2b468e7126216af14e7657a0771ea46e098c14e95d6be441bd"
+    },
+    {
+      "position": 385,
+      "role": "next-source",
+      "source": "Sign in if asked; the page then shows {example}. Copy the token. EA issues no application keys, so this is the same credential Playnite uses. It is short-lived — re-paste when a sync says it expired. If EA answers {provider_message} it is blocking the sign-in itself, usually because of a VPN or unfamiliar IP — turn the VPN off for this one sign-in and try again.",
+      "sourceId": "ui.sign-in-if-asked-the-page-then-shows.e3615cbaf6",
+      "sourceSha256": "e3615cbaf6bc1e7c6d7f51eb8208319504867c4d06dd25a98e159febf899bbc6"
+    }
+  ],
+  "selectedSources": [
+    {
+      "position": 365,
+      "sourceId": "ui.select-a-supported-platform-or-all-p.b323a213be",
+      "source": "Select a supported platform or All platforms.",
+      "sourceSha256": "b323a213beacefcce94a9f8da89bde1859860ff2aaf99d5864b72afc741d12b3"
+    },
+    {
+      "position": 366,
+      "sourceId": "ui.select-a-supported-platform.db05980cc0",
+      "source": "Select a supported platform.",
+      "sourceSha256": "db05980cc0a9455caf885bfb011561ff3316b66fef027fb421175b904b84ab72"
+    },
+    {
+      "position": 367,
+      "sourceId": "ui.select-base-dlc-and-or-update-title.a6df813736",
+      "source": "Select base, dlc and/or update title kinds.",
+      "sourceSha256": "a6df813736391e065895ab802d7c44cba0b68e3fe8898c3948664d1e32fd3a98"
+    },
+    {
+      "position": 368,
+      "sourceId": "ui.select.2a78025de6",
+      "source": "Select",
+      "sourceSha256": "2a78025de6aae5e7ff88e5a951bb3a78ddd67388913529cf9e2dd9653e62b02d"
+    },
+    {
+      "position": 369,
+      "sourceId": "ui.set-a-safe-shared-metadata-root-befo.192587ef8f",
+      "source": "Set a safe shared metadata root before publishing ES-DE data.",
+      "sourceSha256": "192587ef8f5d7af86040d863f65bb656ee200673b502c813cacdeba36a810d46"
+    },
+    {
+      "position": 370,
+      "sourceId": "ui.set-a-shared-metadata-root-before-ma.a29034f503",
+      "source": "Set a shared metadata root before making a rename plan.",
+      "sourceSha256": "a29034f5037968dd9474066a377a799db7bb716da454b3009b4cac45ce0bbf59"
+    },
+    {
+      "position": 371,
+      "sourceId": "ui.set-a-shared-metadata-root-in.8684390491",
+      "source": "Set a shared metadata root in",
+      "sourceSha256": "868439049133ce4bef40e9c6f5f449890cef4a93302a6ac0ab3b59dd52536285"
+    },
+    {
+      "position": 372,
+      "sourceId": "ui.set-a-shared-metadata-root-under-set.fd7934bdaa",
+      "source": "Set a shared metadata root under Settings → Media Management first.",
+      "sourceSha256": "fd7934bdaa7b40271971b700327ca346984c9cc6a2d46c3f91ec4ee6ae48c2d1"
+    },
+    {
+      "position": 373,
+      "sourceId": "ui.set-these-only-when-you-want-romarr.2f1841a46b",
+      "source": "Set these only when you want ROMarr to import an existing ES-DE setup visible inside this server. ROMarr publishes shared output to",
+      "sourceSha256": "2f1841a46bf4890386de9ab2f5bf51ba12660f46bf87e6ce64fd417b38c0cab2"
+    },
+    {
+      "position": 374,
+      "sourceId": "ui.settings-could-not-be-saved-http-sta.cc1bb02976",
+      "source": "Settings could not be saved (HTTP {status}).",
+      "sourceSha256": "cc1bb02976668b71fa83798d4e06e514f3a2d568454aa901bf99b70be37ef4e4"
+    },
+    {
+      "position": 375,
+      "sourceId": "ui.settings-could-not-be-saved-try-agai.c6cc6f474d",
+      "source": "Settings could not be saved. Try again.",
+      "sourceSha256": "c6cc6f474dfe21e5c0cab4ab1d9f6954a9832b8931bf63128c4da24107460397"
+    },
+    {
+      "position": 376,
+      "sourceId": "ui.settings-saved.ae493e21cd",
+      "source": "Settings saved.",
+      "sourceSha256": "ae493e21cd43411d56e1c55c6851d820ce32fb9104e69c0c72a2e1270c7a02c5"
+    },
+    {
+      "position": 377,
+      "sourceId": "ui.setup-guide-for-provider.6f8c625366",
+      "source": "Setup guide for {provider}",
+      "sourceSha256": "6f8c625366fabff37f0a026c594b12a6734c4f6df9558d12bd65d6d48d479268"
+    },
+    {
+      "position": 378,
+      "sourceId": "ui.setup-scripts-that-install-and-confi.8a6558132f",
+      "source": "Setup scripts that install and configure emulators and frontends for supported gaming devices.",
+      "sourceSha256": "8a6558132f4946d2157b6980c92f89e852999a63d43f25072a8513186354f074"
+    },
+    {
+      "position": 379,
+      "sourceId": "ui.shared-metadata-root-contains-a-syml.ce5703e28a",
+      "source": "Shared metadata root contains a symlink.",
+      "sourceSha256": "ce5703e28a6b22f4363dc3c94fea4cc73a3299e8edd19d4a14c923a8d4561bf6"
+    },
+    {
+      "position": 380,
+      "sourceId": "ui.shared-metadata-root-is-not-a-direct.ea308fa308",
+      "source": "Shared metadata root is not a directory.",
+      "sourceSha256": "ea308fa30871fb46bfda85a949e2561f2ce48ef50f196f4bec9a24f04ee72ad0"
+    },
+    {
+      "position": 381,
+      "sourceId": "ui.shared-metadata-root-is-not-configur.15d503238b",
+      "source": "Shared metadata root is not configured.",
+      "sourceSha256": "15d503238b124af30ec1ef4e586d979956b27094a5ba54f8cd8f9829e9872ef6"
+    },
+    {
+      "position": 382,
+      "sourceId": "ui.shared-metadata-root-was-removed.cf29003534",
+      "source": "Shared metadata root was removed.",
+      "sourceSha256": "cf29003534d276a56130e999ba15bd11dd6cf60c6e01a62639eda5406f2f523a"
+    },
+    {
+      "position": 383,
+      "sourceId": "ui.shared-metadata-root.31c1ead8c0",
+      "source": "Shared metadata root",
+      "sourceSha256": "31c1ead8c01f1ca40d1fea520a715c8c964d551af9fb55242df02c18df7c8617"
+    },
+    {
+      "position": 384,
+      "sourceId": "ui.shared-metadata.fb4cb78bf2",
+      "source": "Shared metadata",
+      "sourceSha256": "fb4cb78bf2f2fa2b468e7126216af14e7657a0771ea46e098c14e95d6be441bd"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "cells": 240,
+  "acceptedCurrent": 148,
+  "corrections": 33,
+  "refinements": 11,
+  "holds": 48,
+  "changedTargets": 44,
+  "sourceIdsChanged": 12,
+  "reviewedTargetKeysPreserved": true,
+  "localeKeySetsChanged": false,
+  "nativeSpeakerApproval": false,
+  "sentenceContextSupplementCells": 36,
+  "uniqueReviewedCellsIncludingSupplement": 264,
+  "netNewChangedTargetsFromSupplement": 20,
+  "combinedChangedTargets": 64,
+  "combinedChangedSourceIds": 14
+}

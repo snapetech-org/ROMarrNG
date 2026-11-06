@@ -1,0 +1,26 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "reviewInputHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "reviewInputTree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc",
+  "catalogMessagesBefore": 1837,
+  "catalogMessagesAfter": 1836,
+  "reviewedCells": 240,
+  "dispositionCounts": {
+    "accept-current": 171,
+    "correction": 17,
+    "refinement": 14,
+    "hold": 26,
+    "retire-source-entry": 12
+  },
+  "appliedTargets": 31,
+  "heldCellsUnchanged": 26,
+  "retiredOrphanCells": 12,
+  "readbackRows": 240,
+  "actualChangedTranslationCellsMatchSelectedTargets": true,
+  "noNonTargetTranslationValuesChanged": true,
+  "retiredSourceId": "ui.or-load-no-intro-redump-dats-under.22540d7871",
+  "postApplyCatalogSha256": "6ba159bf5f585c3992e1fa7a322f7e777e9b0dd3a00ab6f010384ced5d628844",
+  "postApplyCatalogGitBlob": "9e6bd2e81ff0a5088d5a3962c5b267004ead5a8c",
+  "primaryBlindCrossAuditPinsVerified": true
+}

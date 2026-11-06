@@ -1,0 +1,171 @@
+{
+  "callerlessCellCount": 48,
+  "callerlessSourceCount": 4,
+  "head": "50e3f8a48a800affff8bad367b5c493cc0fdfd62",
+  "productionFilesSearched": 51,
+  "queryCount": 20,
+  "results": [
+    {
+      "callerless": true,
+      "contextSha256": "7cad7623e2c66db0bebb5c07d2a9d875cf2e19c92ebf359bb80cc1978a19723b",
+      "matchCount": 0,
+      "sourceId": "ui.no-download-clients-are-configured-y.2ede5d6918",
+      "sourceSha256": "2ede5d691889baa6452f9253ba7ff20289c521909842c53388472068594711ac",
+      "sourceTextOmitted": true
+    },
+    {
+      "callerless": false,
+      "contextSha256": "af1b0dcfee4ee10f20060072a69fc35ee179197e73e4ee4b5034ed6efd42873e",
+      "matchCount": 1,
+      "sourceId": "ui.no-dump-in-your-preferred-regions-ke.36088bbb81",
+      "sourceSha256": "36088bbb814048d625fdd81e9633b1bc9c6659ca7a02a2d5675a700f9c09b852",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "22cb785eb89dd21a1701671f29e515bfa0a8403aaf4274e0348dcbf3391eca67",
+      "matchCount": 1,
+      "sourceId": "ui.no-enabled-torrent-or-usenet-indexer.b68ad00dad",
+      "sourceSha256": "b68ad00dad0453cb71b7f32872743b2e9e2be597f2d0211d0c2b70cbb6395bb4",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "529c5102b89827a348725558e436bbb0a147215a95be2b8b5bc1860bd69ac177",
+      "matchCount": 1,
+      "sourceId": "ui.no-friends-yet-invite-someone-or-pas.c5a18233c2",
+      "sourceSha256": "c5a18233c2f74e80ee435d25f05c9fd5077593850c0cadd1326ec95a8949fc28",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "2dcf8264efe8bd8960b32f9ae9deda8eded891b4c08014f9d16df1bbf173c75d",
+      "matchCount": 1,
+      "sourceId": "ui.no-frontend-formats-available.c37e0e161c",
+      "sourceSha256": "c37e0e161c68d46c528e0186890b2f7fd69346a7a9968b9c7ea5d9450595e864",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "df266d58de85bea97bf01d37b8c6e2f9f76f223987908cc1df3a4ebb5e8911b7",
+      "matchCount": 2,
+      "sourceId": "ui.no-game-matches-that.0cda910221",
+      "sourceSha256": "0cda910221cb8ad46adadb731ad0c358a362df2e5a183dce0adcbe73a2e8fc85",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "2b7a9868cc627ec04af1bc98bde22f15483cedba73e4478ea5dfdee522218ca2",
+      "matchCount": 2,
+      "sourceId": "ui.no-games-returned-by-the-library.342cfd2c29",
+      "sourceSha256": "342cfd2c2931bc53a466e3f43fd552823357507845cffed3f1c7ae0f13c844fc",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": true,
+      "contextSha256": "61a078aa08fb0fcb6fcd77b94e19b5a0dac4c4a05f1d82a948a4f7031d9e01d3",
+      "matchCount": 0,
+      "sourceId": "ui.no-hashes-are-recorded-yet-so-netpla.b758dfee92",
+      "sourceSha256": "b758dfee929ce53181da9df6e90fd19ef5335018cb34cbb7438f517615cdac03",
+      "sourceTextOmitted": true
+    },
+    {
+      "callerless": false,
+      "contextSha256": "4c41514ba8bf432d4c3b15be937e808e9dc21ae9e3b8a247aad2ef7697b5baab",
+      "matchCount": 1,
+      "sourceId": "ui.no-hashes-have-been-recorded-yet-so.d0e7d37e6c",
+      "sourceSha256": "d0e7d37e6c9f7aa0d8d8dbd5f80133e32095c40f4822216b25d12ba8a18d6a12",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "a1d60f7dbd7ceb2107afbaf72d61df9e0c108c5991d4a17cb96458f83a93ed23",
+      "matchCount": 1,
+      "sourceId": "ui.no-history-yet.15f6e9920d",
+      "sourceSha256": "15f6e9920d44475cdf8b7fd8145c25869c54d9b68d528d4dd0abda5e893329ee",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": true,
+      "contextSha256": "560618625e1f93b481d98a2a258744472aecd00281a1be5f48200c0c3be812fb",
+      "matchCount": 0,
+      "sourceId": "ui.no-indexers-configured.696e6e393f",
+      "sourceSha256": "696e6e393fe1111f2ccb85d430b93072c3d2d388d5f0c0313b0e9d9264ef4beb",
+      "sourceTextOmitted": true
+    },
+    {
+      "callerless": false,
+      "contextSha256": "c42c861587810b97057ee757ebbc222ad1ebef86f38729d563a98c3014a88797",
+      "matchCount": 1,
+      "sourceId": "ui.no-inventory-entries-yet-scan-a-conf.acb0dacd79",
+      "sourceSha256": "acb0dacd79a0138ef576c9abe95aa0c96bb41c86aa650bc70b6fca7ccb7b0f91",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "6b6dc4d02a23389a99b3c85579457ca673922fd51617b9bed6d1351b8cd23121",
+      "matchCount": 1,
+      "sourceId": "ui.no-library-is-marked-default-so-anyt.60146a85ac",
+      "sourceSha256": "60146a85ac028ed25232c81ceb51cf48b843172a5dad143b0f916851d44c9e85",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "a2faa5d3c811c5e27363a614af810e5bd732d748e5ecfc68dbf1eb2ce49ecfa2",
+      "matchCount": 1,
+      "sourceId": "ui.no-library-yet-add-one-or-nothing-ca.8c5e768c14",
+      "sourceSha256": "8c5e768c149c93a86d9f5e4cdeaf1bd25ac2e37858a86930dae1cbecf90d6aaa",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "a1677c4fecd176b1912314b5ba5525dc00f3a4928369ef189cfb06cc8927c4a5",
+      "matchCount": 1,
+      "sourceId": "ui.no-link.9563affc02",
+      "sourceSha256": "9563affc022e1d8d5afed520bdfa2f7b17183575b08b25123827c190942f4842",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "9f6706251bd7e1373be1580c40fa28c6a6977a14c1ea674af556396b95af5a4a",
+      "matchCount": 2,
+      "sourceId": "ui.no-lists-yet-paste-one-or-connect-an.944f40a607",
+      "sourceSha256": "944f40a6074bdcb73c289b31801508be4d0f53b7589fc55c8ec085720f88bb81",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "8edfb6648c7a932e35fc4d110f75cc3bd5771d5579665362e53df0f8b9b4131d",
+      "matchCount": 1,
+      "sourceId": "ui.no-patch-projects-match-add-a-catalo.c81829dd8f",
+      "sourceSha256": "c81829dd8ff59f0602dfda4a130dd59078d9d01c05a17bcdc2ec158bdf1c380c",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "b5e1ac3827adcb625e0d2c46c0cf93cb1d125ffe66b2930a78d55c29c34ff5e8",
+      "matchCount": 1,
+      "sourceId": "ui.no-platforms-match-this-filter.a9e7efc40f",
+      "sourceSha256": "a9e7efc40fea05c6389c0e22ee10378b7208611a1dc836b495141184d97c3ca6",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": true,
+      "contextSha256": "93d9a46825ff099396c6e09c863a5a87694b148e1c0be9458dded14bfafa9a3d",
+      "matchCount": 0,
+      "sourceId": "ui.no-provider-configured-yet-covers-di.3a6e9e30fa",
+      "sourceSha256": "3a6e9e30fa458788c560fc5e700a073ccfc259d77e7e702e2697424322372105",
+      "sourceTextOmitted": true
+    },
+    {
+      "callerless": false,
+      "contextSha256": "d96aef3badb8324109ed72895fafa885f09756938591a644b9302c54e312c4af",
+      "matchCount": 1,
+      "sourceId": "ui.no-provider-configured.1f09accdb4",
+      "sourceSha256": "1f09accdb464240894485dc119911b5e72879123e249478dfc9f3e2049b60053",
+      "sourceTextOmitted": false
+    }
+  ],
+  "searchScope": "tracked production source files under romarr; tests, docs, locale catalogs, and workflows excluded",
+  "tree": "22cd46ff4821fcbbe76b4760a15e22d688b3f548"
+}

@@ -1,0 +1,35 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "worktree": "/home/keith/Documents/code/.task-worktrees/localization-20261105/romarrng-w685",
+  "head": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "tree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+  "clean": true,
+  "verifiedFiles": [
+    {
+      "path": "romarr/ui-labels.json",
+      "bytes": 3012634,
+      "sha256": "2c093e67793e0953f43471b4ed790558750b5d5d3cc96a59517583cc174ed34f",
+      "gitBlob": "99d6ad5dd761f3740e33ad05ed0218d0d69b611d"
+    },
+    {
+      "path": "romarr/ui-source-messages.json",
+      "bytes": 273919,
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "gitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80"
+    },
+    {
+      "path": "romarr/ui-source-snapshot.json",
+      "bytes": 202767,
+      "sha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "gitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2"
+    }
+  ],
+  "callerFilesVerified": [
+    "romarr/frontends.py",
+    "romarr/organizer.py",
+    "romarr/ui.py"
+  ],
+  "callerExcerptLinesVerified": 196,
+  "callerlessSourceTextRead": false,
+  "method": "Git head/tree/status, pinned file SHA-256 and Git blob IDs, and exact caller excerpt lines; no callerless source or target strings were accessed."
+}

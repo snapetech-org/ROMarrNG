@@ -1,0 +1,67 @@
+{
+  "applicationPlanSha256": "e0ef2e3a7cb080e42e79ed9e3be7ea9cba653c345196b2a23b86f068ee8c5f9b",
+  "artifact": "ROMarrNG PR #70 W325-W344 application readback",
+  "branch": "task/localization-translation-review-20261030",
+  "browserAcceptanceAtExactHead": false,
+  "catalogAfterSha256": "292bf0ce42fda2de87a379d9efaae8fdc831e5c6d0fcab28318a7c85d933941d",
+  "catalogBeforeSha256": "9c5e76009d59c0bcb3f83178c18a8687cfbaee31eb76f29c77e0e24495e11f76",
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogStructurePreserved": true,
+  "cellCount": 240,
+  "corrections": 43,
+  "directLocales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "holdPositions": [
+    329,
+    330
+  ],
+  "holds": 24,
+  "nativeSpeakerApproval": false,
+  "nativeSpeakerReviewSuggestedCells": [
+    {
+      "locale": "fr",
+      "position": 339
+    },
+    {
+      "locale": "zh-Hans",
+      "position": 343
+    },
+    {
+      "locale": "zh-Hant",
+      "position": 343
+    }
+  ],
+  "nonTargetCellChanges": 0,
+  "parentHead": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "parentTree": "c13dc4fc091565318d11a19ad9e851215a5f917e",
+  "pullRequest": 70,
+  "refinements": 14,
+  "releaseApproved": false,
+  "repository": "snapetech-org/ROMarrNG",
+  "retainedCurrentValues": 159,
+  "reviewedPackets": {
+    "blindPacketSha256": "0ede74df768bb6fc5635951d14196ab1efb2a1413d90b2860128c87e6c501b46",
+    "candidateFreeInputSha256": "7d3d5e424cae914d46815229598b430154b0965defe2e7e3a371608df4ca1c5a",
+    "crossAuditPacketSha256": "b5b118d8ca8811ed9a396f33048371ddfbaac8ac0eb4bdc4d537118fa0e625df",
+    "primaryPacketSha256": "6e140fe03834f6e31831d3ecab00a570f50b824f5b6db0dd46dbc2108b589080"
+  },
+  "selectedUpdates": 57,
+  "sourcePositions": [
+    325,
+    344
+  ],
+  "translationHashesStatusesAndReviewMetadata": "preserved unchanged; no qualified human review was recorded",
+  "window": "W325-W344"
+}

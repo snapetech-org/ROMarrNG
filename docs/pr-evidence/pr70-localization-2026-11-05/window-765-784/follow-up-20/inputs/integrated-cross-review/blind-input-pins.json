@@ -1,0 +1,36 @@
+{
+  "artifact": "ROMarrNG PR #70 W765-W784 blind review input pins",
+  "candidateFreeDirectory": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w765-784-20261105/candidate-free",
+  "candidateFreeInputChecksumListSha256": "99969b73bc1c66e817385863593bef49d2164ce71a801e64e5021e501842414b",
+  "candidateFreeManifestSha256": "560edb5cbc160bc95e74888dee9506de7c37e2bd479ab3164887245253c5977f",
+  "candidateFreeOfficialVerifierObservation": "FAIL: worktree pin/clean; not rerun because task prohibits reading the changed worktree",
+  "candidateFreeOuterChecksumListSha256": "b551fcc26783d47666e4ec3c35946a314e2bf0b7374cf52acb1df54b027bcfe3",
+  "candidateFreeStaticInputHashes": {
+    "PR-attestation-after.json": "9295383b78a10f6933c142e3decfdff81c3e20f29ab162e79f7d5fbe59312414",
+    "PR-attestation-before.json": "746a126d38239e4f15c4b7dc431cfc0bfc2e1ae2d0a787be51ad6f8e720ab0eb",
+    "candidate-free-cells.jsonl": "28314a3ed8b00f4db2d793c836d2a855b680ff18cc8c168379f9aee4f11b3c0c",
+    "manifest.json": "560edb5cbc160bc95e74888dee9506de7c37e2bd479ab3164887245253c5977f",
+    "prior-hold-context-reattestation.jsonl": "1d5593b105c121d2df5793b16e7a52163654858d8c13d57a3cde17d827c5a5e1",
+    "prior-hold-reattestation-summary.json": "db53103cef6c1bacac0977f0a7cf0762b0fa4da9c13144e7900eaf0aff10cb15",
+    "prior-hold-reattestation.jsonl": "28a3a50b216f9994ef57fccf1af47f55c8dc53af37772bb24b0205c58b65e91c",
+    "selected-sources.jsonl": "52862be45d985e8cdd22a1eadb79a98f87f65c0b626d3d307b251b267f2004b7",
+    "selection.json": "29b3565c369ba14538a65615ee2c469dee30ca33c4745125a5381bec5a0d8861",
+    "source-contexts.jsonl": "9d244314937105cdd19daf4affe7ce1e474e0587e50e7cd4250fcb7bbb9cb9a1"
+  },
+  "changedWorktreeInspected": false,
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "innerChecksumValidation": "PASS",
+  "nextBoundary": {
+    "continuationIndex": 785,
+    "oneBasedPosition": 786,
+    "sourceId": "ui.optional-overrides-the-webhook-s-dis.4116a5e8e4",
+    "sourceSha256": "4116a5e8e4222045299ae89f3577810da389c5c65f51cf8a3b097ecf05ef348e"
+  },
+  "outerChecksumValidation": "PASS",
+  "primaryCrossRootEvidenceInspected": false,
+  "proposalDecisionsUsedCurrentTargets": false,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "window": "W765-W784"
+}

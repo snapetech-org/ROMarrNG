@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "sourcePin": {
+    "head": "5860fce5d546a772b1df995f8f6321c083ed7d5d",
+    "tree": "561835895972a62e9d3b1f2bfe9bcba01187eb98"
+  },
+  "selectedCells": 3,
+  "changedPaths": [
+    "romarr/ui-labels.json"
+  ],
+  "catalogPreimageSha256": "69d84fe629cac8a113a59bfcfb3e30bfb7290bd3894395f4fda2d1a5b7f6d10d",
+  "catalogPostimageSha256": "24d2d776841c3101269e218b48344eede7bafd613d2fd9840e1fb0f92a501715",
+  "catalogKeyOrderSha256": "135fb76e314ce4f4157ca0091544c8945bec1bb4e9bcf9a61770c07bcb404ca9",
+  "workflowChanges": 0
+}

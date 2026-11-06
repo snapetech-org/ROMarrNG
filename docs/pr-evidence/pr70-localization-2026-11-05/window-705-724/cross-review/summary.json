@@ -1,0 +1,93 @@
+{
+  "artifact": "ROMarrNG PR #70 W705-W724 independent cross-review",
+  "exactHead": "50e3f8a48a800affff8bad367b5c493cc0fdfd62",
+  "exactTree": "22cd46ff4821fcbbe76b4760a15e22d688b3f548",
+  "window": "W705-W724",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "callerBackedCells": 192,
+  "callerlessHashOnlyHolds": 48,
+  "primaryCounts": {
+    "accept-current": 188,
+    "correction": 3,
+    "refinement": 1,
+    "hold-callerless-hash-only": 48
+  },
+  "blindCounts": {
+    "accept": 188,
+    "correction": 4,
+    "hold": 48
+  },
+  "crossCounts": {
+    "accept-current": 187,
+    "correction": 5,
+    "hold-callerless-hash-only": 48
+  },
+  "proposalComparisons": {
+    "blind-only": 1,
+    "both-keep": 187,
+    "conflicting-targets": 1,
+    "exact-agreement": 2,
+    "primary-only": 1
+  },
+  "rootAdjudicationFlagCount": 3,
+  "rootAdjudicationCells": [
+    {
+      "position": 709,
+      "locale": "ar"
+    },
+    {
+      "position": 709,
+      "locale": "fr"
+    },
+    {
+      "position": 711,
+      "locale": "id"
+    }
+  ],
+  "selectedCorrections": [
+    {
+      "position": 709,
+      "locale": "ar",
+      "target": "لا تتوفر أي صيغ للواجهة الأمامية.",
+      "selectionSource": "blind",
+      "confidence": "moderate"
+    },
+    {
+      "position": 709,
+      "locale": "fr",
+      "target": "Aucun format frontend n’est disponible.",
+      "selectionSource": "blind",
+      "confidence": "moderate"
+    },
+    {
+      "position": 709,
+      "locale": "zh-Hans",
+      "target": "没有可用的前端格式。",
+      "selectionSource": "both",
+      "confidence": "high"
+    },
+    {
+      "position": 709,
+      "locale": "zh-Hant",
+      "target": "沒有可用的前端格式。",
+      "selectionSource": "both",
+      "confidence": "high"
+    },
+    {
+      "position": 711,
+      "locale": "id",
+      "target": "Tidak ada game yang dikembalikan oleh pustaka.",
+      "selectionSource": "primary",
+      "confidence": "moderate"
+    }
+  ],
+  "tokenFindings": {
+    "placeholderMarkupNumericProtectedLiteralMismatches": 0
+  },
+  "callerlessTextExposure": false,
+  "testsBuildsScansCiRun": false,
+  "repositoryEdited": false,
+  "confidence": "moderate overall; simple Chinese punctuation repairs high confidence; no native-speaker signoff"
+}

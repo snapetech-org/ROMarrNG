@@ -1,0 +1,26 @@
+{
+  "repo": "snapetech-org/ROMarrNG",
+  "pr": 70,
+  "window": "W325-W344",
+  "head": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "tree": "c13dc4fc091565318d11a19ad9e851215a5f917e",
+  "cells": 240,
+  "counts": {
+    "correction": 34,
+    "retain": 164,
+    "hold": 24,
+    "refinement": 18
+  },
+  "selectedChanges": 52,
+  "mandatoryCallerlessHoldPositions": [
+    329,
+    330
+  ],
+  "mandatoryCallerlessHoldCells": 24,
+  "additionalHolds": 0,
+  "nativeSpeakerSignoff": false,
+  "blindReviewIndependentOfPrimaryAndCrossAudit": true,
+  "candidateFreeOnly": true,
+  "candidateFreeManifestSha256": "dc3b9295a3fd0e35cf6047deaeca5c39528a79097187158ece508c2e1c5e40dc",
+  "candidateFreeChecksumListSha256": "7d3d5e424cae914d46815229598b430154b0965defe2e7e3a371608df4ca1c5a"
+}

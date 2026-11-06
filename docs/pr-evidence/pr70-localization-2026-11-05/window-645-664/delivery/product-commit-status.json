@@ -1,0 +1,13 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "productCommit": "fee1da731d13c578d1911884a1567d0124187d29",
+  "branchRef": "task/localization-translation-review-20261030",
+  "branchHead": "fee1da731d13c578d1911884a1567d0124187d29",
+  "pullRefHead": "fee1da731d13c578d1911884a1567d0124187d29",
+  "deploymentsAtProductCommit": [],
+  "status": "pending",
+  "statusContexts": [],
+  "exactHeadProductBrowserAcceptance": "unverified; no deployment exists at this commit",
+  "qualifiedNativeSpeakerApproval": false
+}

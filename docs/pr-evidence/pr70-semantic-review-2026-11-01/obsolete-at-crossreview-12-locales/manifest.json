@@ -1,0 +1,127 @@
+{
+  "artifact": "ROMarrNG PR #70 ui.at numeric-control cross-review",
+  "artifactFiles": {
+    "README.md": "6d51c9466e8df37467d7fe7b317fb9385c66f9666bd9e0a627663291b41e1a72",
+    "callsite-inventory.json": "2d9c275f12e638fe74d5d87ae27c4395e00067d61126dfc355261411c0d7d593",
+    "review-decisions.jsonl": "70c2d353f920e07ccc96da47a7d778c2620e6022afd8e864d86ae0f74aa2645a",
+    "review-input.jsonl": "f16bf29dab9c81918abef8534b2574bbc0827baf9142735dc454cb7e3f95b06d",
+    "source-context.txt": "43ea2b7a52240ecb889c299688237373297dd525c6d32270870570272b763476",
+    "verify_evidence.py": "51b526cee9eff7accac73071cd5869809b2fb859e886f32cd4d17f346ff0ce3b"
+  },
+  "createdAtUtc": "2026-11-01T22:48:00Z",
+  "currentCallsite": {
+    "controlId": "cpp",
+    "default": 5,
+    "helperCallCounts": {
+      "Requests per pass:": 1,
+      "at": 0,
+      "per pass": 0
+    },
+    "lineEnd": 5558,
+    "lineStart": 5552,
+    "maximum": 50,
+    "minimum": 1,
+    "path": "romarr/ui.py",
+    "searchScope": "romarr/**/*.py",
+    "sha256": "b5a15e1497bc62c2fdc37410ca463e1134736568e952e8460446d195b8a8b2e6"
+  },
+  "currentReplacementPhraseEvidence": {
+    "checksumsSha256": "be03bc3187b3dc2704f66265800f5184af82ecea619426f76c9ebcc4df142752",
+    "currentLabelCells": 12,
+    "decision": "accepted_unchanged across all 12 locales",
+    "decisionsSha256": "6a7ef9feaadfe1f4db622bfe8014740432b41c2f244fb1c41c0d24a728e2f395",
+    "directory": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-next-window-a1278acd-20261101",
+    "inputSha256": "6abae2656d1011e083c4f3897f0b272256ea54c8e95bdf8f825426483a251bad",
+    "manifestSha256": "7e31cb69607c63e2fd9da3230d9c84adf1f017a1a44173821cd9f30dacc79f95"
+  },
+  "frozenFiles": {
+    "romarr/ui-labels.json": {
+      "bytes": 2988218,
+      "path": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-pr70-head-review-20261101/romarr/ui-labels.json",
+      "sha256": "639d2449119ea25c1f76ccd09b05bffbb87da0373dac8bbe9dcee9547ef499a2"
+    },
+    "romarr/ui-source-messages.json": {
+      "bytes": 276885,
+      "path": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-pr70-head-review-20261101/romarr/ui-source-messages.json",
+      "sha256": "ba11bdfa7f8a282dea83d7367e1156ce716ad79aabafbdd72b7e887df647bec5"
+    },
+    "romarr/ui.py": {
+      "bytes": 403843,
+      "path": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-pr70-head-review-20261101/romarr/ui.py",
+      "sha256": "028e05f27f1fad6137494c85b1fa8847512a2d11db37c9fa44c4b611a2e797ad"
+    }
+  },
+  "livePullRequestHeadVerified": true,
+  "priorOverlap": {
+    "adjudicationPath": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-review-08689f3e/moderate-uncertain-adjudication.jsonl",
+    "adjudicationSha256": "b73d08762d249f2d05b5a4ab6854892191f880b84e5c6cd7a598bcd03df0e87f",
+    "initialReviewedHead": "08689f3e5b3bb01e3fd7974d4ffb66136a6ca0872",
+    "overlapKind": "intentional re-cross-review; original unresolved rows used older callsite context",
+    "priorDispositionCounts": {
+      "acceptable": 3,
+      "confirm correction": 5,
+      "unresolved": 4
+    },
+    "reviewedCellsPath": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-review-08689f3e/reviewed-cells.jsonl",
+    "reviewedCellsSha256": "d6d49ae07c89d8aa51cb6f777de6b2389e8e9e33e2075c8c3929762e171fd43c",
+    "uiAtRows": 12,
+    "uncertainCellsPath": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-review-08689f3e/uncertain-cells.jsonl",
+    "uncertainCellsSha256": "f2baee2345c206ab6da68dc7ff2bdf06d94364e3437eb8c312f83e14a452db1b",
+    "unresolvedLocales": [
+      "zh-Hans",
+      "ja",
+      "ko",
+      "zh-Hant"
+    ]
+  },
+  "pullRequest": 70,
+  "pullRequestStateAtPreflight": "OPEN",
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewLimits": {
+    "atFragmentVerdict": "no context-specific verdict because the fragment is not referenced by the current renderer",
+    "browserRenderedReview": "not performed",
+    "modelCalls": 0,
+    "nativeHumanReview": "not performed",
+    "priorUnresolvedAtCells": "superseded for the current visible control; still unresolved as catalog values",
+    "repositoryEdits": false,
+    "sharedModelLock": "not acquired or contended for; qwen-model.lock was held by Seerr PID 596882",
+    "testsBuildsScansCiRun": false
+  },
+  "reviewedHead": "a1278acda1cea823443d7d6b712ed6ace8a99694",
+  "reviewedTree": "1e8a8d4fb191490a20bc443fb2b7bf24f05fa294",
+  "schemaVersion": 1,
+  "window": {
+    "catalogCellsCrossReviewed": 12,
+    "currentAtCellsReferencedByUiSource": 0,
+    "currentNumericLabelCellsContextReviewed": 12,
+    "currentNumericLabelDecisions": {
+      "accepted_unchanged": 12
+    },
+    "currentNumericLabelSourceId": "ui.requests-per-pass.74961b68a5",
+    "locales": [
+      "es",
+      "zh-Hans",
+      "hi",
+      "de",
+      "ja",
+      "fr",
+      "pt-BR",
+      "ar",
+      "ko",
+      "zh-Hant",
+      "vi",
+      "id"
+    ],
+    "placeholderMismatches": 0,
+    "priorAtDispositionCounts": {
+      "acceptable": 3,
+      "confirm correction": 5,
+      "unresolved": 4
+    },
+    "priorUnresolvedCells": 4,
+    "source": "at",
+    "sourceId": "ui.at.b1d6b91b67"
+  },
+  "worktree": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-pr70-head-review-20261101",
+  "worktreeCleanAtPreflight": true
+}

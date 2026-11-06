@@ -1,0 +1,69 @@
+{
+  "artifact": "ROMarrNG PR #70 W545-W564 cross-selected application evidence",
+  "changedCellCount": 2,
+  "files": [
+    {
+      "bytes": 676,
+      "path": "PR-attestation-after-product.json",
+      "sha256": "a372cdb1384ef4279d0a137b69f9cbd6fd4f4f88de6f6e75856f1572274b445d"
+    },
+    {
+      "bytes": 676,
+      "path": "PR-attestation-before.json",
+      "sha256": "307385ed0c9f51defe8c50a4789451120a5678a5360cb875513db4508a250968"
+    },
+    {
+      "bytes": 1130,
+      "path": "README.md",
+      "sha256": "32798a4056d8e0aaf1cd3292e1c92352d9a7933f990b15dcf8066ad96becfd99"
+    },
+    {
+      "bytes": 151936,
+      "path": "application-readback.jsonl",
+      "sha256": "87a04fbddb778e755562373dde8dbb34993610abff5be27171a18498d0ed5711"
+    },
+    {
+      "bytes": 2350,
+      "path": "application-summary.json",
+      "sha256": "642b7fb41380a04abf19ede5a9eee1db95a612866caa80a53646b7eef6efee5b"
+    },
+    {
+      "bytes": 1294,
+      "path": "catalog-pins.json",
+      "sha256": "3f16d72222704610c345364f6ad2bf949174dc89f93eceda3bda21f6cf99bdec"
+    },
+    {
+      "bytes": 1653,
+      "path": "cross-packet-provenance.json",
+      "sha256": "51dcbbfe648ec2e9f698e0dee030e581bc80143337983253e431e9c94d3ae7e7"
+    },
+    {
+      "bytes": 9853,
+      "path": "holds.jsonl",
+      "sha256": "931ba158f79a7bdf1b33680712c4d8d6e6c7dbc6a3037f56e41206bb5ca68049"
+    },
+    {
+      "bytes": 1473,
+      "path": "push-hook-output.txt",
+      "sha256": "e5437fece0cf417d6567d4bdb1bef13f7343337aeb4186e798c2406d1ba3c673"
+    },
+    {
+      "bytes": 1691,
+      "path": "selected-changes.jsonl",
+      "sha256": "e314b4886b0bca249edbe51f9997dc70cc88c68ff904fe2786d06fd207483711"
+    },
+    {
+      "bytes": 10026,
+      "path": "verify_application.py",
+      "sha256": "13eed8b198e4388c25bc675fd24d92ec396934b34774348e855985238eb7c15a"
+    }
+  ],
+  "head": "ed82a904e85a95a7f350e6f62d8f06139098054b",
+  "keptCurrentCellCount": 226,
+  "preHead": "ed82a904e85a95a7f350e6f62d8f06139098054b",
+  "productCommit": "2a921d8280487f6d172616719f32e3dced243d83",
+  "productTree": "21996ad9dcfcc6535e52920b36d74c8a9357279f",
+  "readbackCellCount": 240,
+  "textFreeHoldCount": 12,
+  "window": "W545-W564"
+}

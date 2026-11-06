@@ -1,0 +1,62 @@
+{
+  "artifact": "ROMarrNG PR #70 W805-W824 candidate-free exact-head input",
+  "branch": "task/localization-translation-review-20261030",
+  "callerBackedCells": 240,
+  "callerBackedSourceCount": 20,
+  "callerlessHashOnlyCells": 0,
+  "callerlessSourceCount": 0,
+  "catalogSelectionOneBased": [
+    806,
+    825
+  ],
+  "catalogSelectionZeroBased": [
+    805,
+    824
+  ],
+  "cellCount": 240,
+  "currentTokenMismatchCounts": {
+    "markup": 0,
+    "numeric": 0,
+    "numericPresentationDifferences": 0,
+    "placeholder": 0,
+    "protectedLiteral": 0
+  },
+  "directCallerReferences": 45,
+  "expectedBranch": "task/localization-translation-review-20261030",
+  "head": "551cccd03e0acdce208ce11f571378c1dcdfb805",
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "nextBoundary": {
+    "continuationIndex": 825,
+    "oneBasedPosition": 826,
+    "sourceId": "ui.platform-for-game-available-platform.afd580990f",
+    "sourceSha256": "afd580990fe9a12282ffeeeefa2d1a2c8b632f05bdd58b08e3c03a27ac91fb08"
+  },
+  "predecessorWindow": "W785-W804",
+  "priorActiveHashOnlyHoldsCopiedByteForByte": 1060,
+  "priorActiveHashOnlyHoldsReattested": 1060,
+  "productionCallerFilesSearched": 51,
+  "proposedTargetsIncluded": false,
+  "pullRequest": 70,
+  "repoEdited": false,
+  "repository": "snapetech-org/ROMarrNG",
+  "resultingActiveHashOnlyHolds": 1060,
+  "reviewDecisionsIncluded": false,
+  "sourceCount": 20,
+  "testsBuildsScansCiRun": false,
+  "tree": "d77f32ac8ec0ab53200d04819869a2e99c6de73c",
+  "window": "W805-W824"
+}

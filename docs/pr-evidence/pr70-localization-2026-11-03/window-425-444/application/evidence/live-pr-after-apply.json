@@ -1,0 +1,19 @@
+{
+  "capturedUtc": "2026-11-03T20:00:30.205141+00:00",
+  "pr": {
+    "state": "OPEN",
+    "isDraft": true,
+    "headRefOid": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+    "headRefName": "task/localization-translation-review-20261030",
+    "baseRefOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "baseRefName": "main",
+    "url": "https://github.com/snapetech-org/ROMarrNG/pull/70"
+  },
+  "refs": {
+    "refs/heads/task/localization-translation-review-20261030": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+    "refs/pull/70/head": "d5ba7f1f268501f45227388c46d5f938ed0c9191"
+  },
+  "tree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "bodyMarker": "<!-- ROMARRNG-PR70-W425-W444-APPLIED: d5ba7f1f268501f45227388c46d5f938ed0c9191 -->",
+  "bodyMarkerCount": 1
+}

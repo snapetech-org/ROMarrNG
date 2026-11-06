@@ -1,0 +1,134 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "55ee760ea9600f71cc27cba35e098a082445dac8",
+  "tree": "dbc192813f6347f4307ff8417d505624958eb321",
+  "window": [
+    186,
+    205
+  ],
+  "nextWindow": [
+    206,
+    225
+  ],
+  "cellCount": 240,
+  "primaryCounts": {
+    "correction": 23,
+    "accept-current": 137,
+    "hold-context": 60,
+    "refinement": 20
+  },
+  "blindCounts": {
+    "refinement": 8,
+    "accept-current": 159,
+    "hold": 60,
+    "correction": 13
+  },
+  "crossAuditCounts": {
+    "accept-current": 137,
+    "correction": 17,
+    "hold": 60,
+    "refinement": 26
+  },
+  "proposalComparison": {
+    "primaryProposalCells": 43,
+    "blindProposalCells": 21,
+    "bothPropose": 20,
+    "sameExactCandidate": 8,
+    "differentCandidates": 12,
+    "primaryOnlyProposals": 23,
+    "blindOnlyProposals": 1,
+    "bothHolds": 60,
+    "bothAcceptCurrent": 136
+  },
+  "holds": [
+    {
+      "sourceOrdinal": 188,
+      "id": "ui.manual-mapping-confirmed.bc63310ebc",
+      "localeCells": 12,
+      "callerReason": "The source is returned as a rename-preview operation reason and rendered by organizerApiMessageMarkup. Its key is not in ORGANIZER_API_MESSAGE_KEYS, so the helper returns opaque lang=und content.",
+      "holdConfirmed": true
+    },
+    {
+      "sourceOrdinal": 197,
+      "id": "ui.missing-required-field-labels.cd47426c9f",
+      "localeCells": 12,
+      "callerReason": "send_test returns the missing-field message as a plain API message; the UI passes it to apiMessageMarkup without the catalog template key or values, which renders the message as opaque lang=und content.",
+      "holdConfirmed": true
+    },
+    {
+      "sourceOrdinal": 198,
+      "id": "ui.moonlight-pairing-cannot-be-automate.e1a9d014f9",
+      "localeCells": 12,
+      "callerReason": "The exact static source is emitted in the API `manual` property and rendered through apiMessageMarkup, which escapes it as opaque lang=und text rather than mapping the source ID to a locale.",
+      "holdConfirmed": true
+    },
+    {
+      "sourceOrdinal": 200,
+      "id": "ui.mount-it-on-each-client-and-point-es.a021b4cc73",
+      "localeCells": 12,
+      "callerReason": "The source is only a substring of the rendered text node, whose exact source is ordinal 199 including the leading period. The text-node lookup cannot match this distinct message ID.",
+      "holdConfirmed": true
+    },
+    {
+      "sourceOrdinal": 201,
+      "id": "ui.multi-disc-set-is-grouped-for-metada.86db33ad47",
+      "localeCells": 12,
+      "callerReason": "The source is returned as a blocked rename-preview reason and rendered by organizerApiMessageMarkup. Its key is not in ORGANIZER_API_MESSAGE_KEYS, so the helper returns opaque lang=und content.",
+      "holdConfirmed": true
+    }
+  ],
+  "notableDisagreements": [
+    {
+      "cells": [
+        "186/es"
+      ],
+      "finding": "Same target; primary labels correction, blind labels refinement. Cross audit adopts the target as a correction."
+    },
+    {
+      "cells": [
+        "189/ar",
+        "189/id",
+        "189/vi",
+        "189/zh-Hant",
+        "195/id",
+        "195/vi",
+        "196/zh-Hans",
+        "196/zh-Hant",
+        "205/fr",
+        "205/hi",
+        "205/ko",
+        "205/zh-Hans",
+        "205/zh-Hant"
+      ],
+      "finding": "The reviews proposed different strings. Cross-audit choices and reasons are recorded per cell."
+    },
+    {
+      "cells": [
+        "194/id"
+      ],
+      "finding": "Blind proposed “konfirmasikan”; primary accepted current. Cross audit keeps current because it already reads as a compact Indonesian instruction."
+    },
+    {
+      "cells": [
+        "204/fr"
+      ],
+      "finding": "Primary changes “removed you” to “deleted your account,” which over-specifies the source. Cross audit uses a third phrasing that preserves the person as object."
+    },
+    {
+      "cells": [
+        "202/zh-Hant"
+      ],
+      "finding": "“多人遊戲” is preferred, but the primary rationale is incorrect: 戲 is traditional, not simplified; 遊 is the locale-style difference."
+    },
+    {
+      "cells": [
+        "203/ko"
+      ],
+      "finding": "Primary Korean suggestion is accepted as a clarity refinement, not a correction; current wording is semantically sound."
+    }
+  ],
+  "nativeSpeakerApproval": false,
+  "crossAuditIndependentOfPrimary": true,
+  "primaryPacketReadAfterBlindLedgerSeal": true
+}

@@ -1,0 +1,4 @@
+{"catalogZeroBasedIndex":524,"position":524,"role":"catalog-before-selected-start","source":"Identify","sourceId":"ui.identify.4786cd5110","sourceSha256":"4786cd5110a4a25d7f290ecdc62053c3e521475e725dcee6df863e0e86fd9c60"}
+{"catalogZeroBasedIndex":525,"position":525,"role":"selected-start","source":"Identify & Organize","sourceId":"ui.identify-organize.e2a72a6310","sourceSha256":"e2a72a63108866bd40c7efeec74f0ad0aaa6ead9b415d8a1c9d9dcafdb8c157f"}
+{"catalogZeroBasedIndex":544,"position":544,"role":"selected-end","source":"Imported local metadata · review title","sourceId":"ui.imported-local-metadata-review-title.5db9952dae","sourceSha256":"5db9952dae52d55b551c8003f5559747d05d8c4e853c8e30b734cfe64bf0609c"}
+{"catalogZeroBasedIndex":545,"position":545,"role":"catalog-after-selected-end","source":"Imported {total}","sourceId":"ui.imported-total.5f100c0878","sourceSha256":"5f100c08788496c6ec6b0a20029b6cca6291d4583b500a5440d82ed2c7aed9a9"}

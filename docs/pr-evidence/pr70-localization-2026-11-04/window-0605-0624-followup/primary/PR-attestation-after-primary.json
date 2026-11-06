@@ -1,0 +1,13 @@
+{
+  "attestedAtUtc": "2026-11-04T19:33:48+00:00",
+  "bodyBytes": 60330,
+  "bodySha256": "af8a1923882f96dde5c6cf78ab0828fe8bc855594574eb240b567d8ecd3376ab",
+  "branchRef": "872905926887840025ba4c3f17151b96f8d3e6e2",
+  "draft": true,
+  "head": "872905926887840025ba4c3f17151b96f8d3e6e2",
+  "headRef": "task/localization-translation-review-20261030",
+  "pullRef": "872905926887840025ba4c3f17151b96f8d3e6e2",
+  "result": "PASS",
+  "state": "OPEN",
+  "tree": "d7d762d5f3a5dc31bcbdb6c6c45779101ab0bbd4"
+}

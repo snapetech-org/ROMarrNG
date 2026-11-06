@@ -1,0 +1,56 @@
+{
+  "candidateFreeInput": {
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w186-205-primary-20261103/input",
+    "manifestSha256": "4d1140d40351c1767e05aaed19894ba07c8b9860174942075619ed3bf1c83f5b",
+    "reviewInputSha256": "e1f03c2d2874a81ab6c224cdd4a9ef36ebf4810b5ff9c4ecf2f86db67fc3fb5d",
+    "manifestFilesVerified": 7,
+    "checksumsValidated": true
+  },
+  "primaryPacket": {
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w186-205-primary-20261103/primary-private",
+    "manifestSha256": "59121f8a2a552a926a4ff35a32ff4584e8f2f4e36bc6a735f046a566897a4422",
+    "reviewDecisionsSha256": "07567886babe96d41ad33b913883a180a667def321921ddd4f69d59481d991f7",
+    "inputManifestPinMatched": true,
+    "inputReviewPinMatched": true,
+    "checksumsValidated": true
+  },
+  "blindPacket": {
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w186-205-independent-blind-20261103",
+    "manifestSha256": "8d541d59f17eaa1b4fe8bb6dade479fc6992f636afb953efb0818f80efb19302",
+    "blindLedgerSha256": "da7b3abd1c5abb550e648ca3756a76d6d2fa85e30716037dccf812f144423117",
+    "inputManifestPinMatched": true,
+    "inputReviewPinMatched": true,
+    "checksumsValidated": true
+  },
+  "livePr": {
+    "repository": "snapetech-org/ROMarrNG",
+    "pullRequest": 70,
+    "state": "OPEN",
+    "draft": true,
+    "branch": "task/localization-translation-review-20261030",
+    "head": "55ee760ea9600f71cc27cba35e098a082445dac8",
+    "tree": "dbc192813f6347f4307ff8417d505624958eb321",
+    "remoteBranchHead": "55ee760ea9600f71cc27cba35e098a082445dac8"
+  },
+  "exactHeadFilePins": {
+    "count": 56,
+    "gitBlobMatches": 56,
+    "sha256Matches": 56,
+    "byteSizeMatches": 56,
+    "mismatches": 0
+  },
+  "cellVerification": {
+    "inputCells": 240,
+    "primaryCells": 240,
+    "blindCells": 240,
+    "crossAuditCells": 240,
+    "uniqueCells": 240,
+    "sourceAndCurrentPinsMatched": 240,
+    "placeholderProtectedChecksPassed": 240,
+    "primaryCandidateHashesVerified": 43,
+    "blindCandidateHashesVerified": 21
+  },
+  "primaryOutputReadAfterBlindLedgerSealed": true,
+  "repositoryOrPrChanged": false,
+  "testsBuildsCiRun": false
+}

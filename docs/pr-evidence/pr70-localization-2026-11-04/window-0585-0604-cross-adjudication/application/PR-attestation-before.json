@@ -1,0 +1,24 @@
+{
+  "baseDrift": {
+    "apiBaseRefMismatch": true
+  },
+  "bodyMatchesOriginalSnapshot": true,
+  "checkedAtUtc": "2026-11-04T18:41:14Z",
+  "pullRequest": {
+    "baseApiSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "baseRef": "main",
+    "bodySha256": "a99d2ee0a812f16c39ce632b2c83064917ca02982b31ebd27998b673fb5d4cd2",
+    "draft": true,
+    "headRef": "task/localization-translation-review-20261030",
+    "headRepo": "snapetech-org/ROMarrNG",
+    "headSha": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+    "headTree": "dcb9c1766831e217ffca7fb77068b97c33b9524e",
+    "number": 70,
+    "state": "open"
+  },
+  "refs": {
+    "branchRef": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+    "liveMain": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+    "pullHeadRef": "01da053f0e6a47e7184fb86da77f66b7b6719653"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "artifact": "ROMarrNG PR #70 W405-W424 blind/primary cross-audit and apply plan",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "c146189f29db8fbd77d68dff0c33a0ab59a6b601",
+  "tree": "3db10f8b87577edd1167e4489524e6afbb50d556",
+  "candidateFreeInput": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w405-424-candidate-free-20261103/input",
+  "primaryPacket": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w405-424-primary-20261103/primary-review",
+  "blindPacket": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w405-424-blind-20261103",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "disagreements": 12,
+  "changeCount": 26,
+  "holdCells": 48,
+  "carriedHoldsReattested": 288,
+  "createdUtc": "2026-11-03T18:52:03.124330+00:00",
+  "noRepositoryOrPrEdits": true,
+  "noTestsBuildCiBrowser": true,
+  "liveRefsRecheckedAfter": true
+}

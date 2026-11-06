@@ -1,0 +1,362 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "baseRef": "main",
+  "reviewedBaseHead": "6eb40719ea270bb3cae024d771665e7006a85822",
+  "reviewedBaseTree": "55031e7e234a7035de7682d0b49f2f60882164f6",
+  "prState": "open",
+  "draft": true,
+  "files": {
+    "romarr/ui.py": {
+      "bytes": 407495,
+      "sha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722"
+    },
+    "romarr/app.py": {
+      "bytes": 418446,
+      "sha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+      "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd"
+    },
+    "romarr/ui-labels.json": {
+      "bytes": 3010503,
+      "sha256": "c5e6e3f722cdafb9082e75f7e6253dbb0d1af3f032bbbef52c713dc73b281a1a",
+      "gitBlob": "0fa7a15a1db50bd24166516fefa1e2166274d04c"
+    },
+    "romarr/ui-source-snapshot.json": {
+      "bytes": 202767,
+      "sha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "gitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2"
+    }
+  },
+  "callerLines": {
+    "romarr/app.py:return {\"items\": [], \"error\": f\"scan failed: {exc.__class__.__name__}\"}": {
+      "line": 5260,
+      "needle": "return {\"items\": [], \"error\": f\"scan failed: {exc.__class__.__name__}\"}",
+      "lineText": "            return {\"items\": [], \"error\": f\"scan failed: {exc.__class__.__name__}\"}",
+      "lineSha256": "73e3183e48e322668bcabde4963331db1f87981539bc461b8efabe7f3a1cf893",
+      "contextLines": [
+        {
+          "line": 5259,
+          "text": "            log.warning(\"launcher scan failed: %s\", exc)",
+          "sha256": "bd1ab57cb98b0a094c17825e2f8e985ac407d324a74217d2bc719132ed986478"
+        },
+        {
+          "line": 5260,
+          "text": "            return {\"items\": [], \"error\": f\"scan failed: {exc.__class__.__name__}\"}",
+          "sha256": "73e3183e48e322668bcabde4963331db1f87981539bc461b8efabe7f3a1cf893"
+        },
+        {
+          "line": 5261,
+          "text": "        counts: dict[str, int] = {}",
+          "sha256": "8f02bda716acc8038163f0d9e3cd1de30b6c50783610436238236e4b04c92596"
+        },
+        {
+          "line": 5262,
+          "text": "        for game in games:",
+          "sha256": "48ddb5b83363ea62b08186316709578fc5eaa340acb35337574ffd66527dceac"
+        }
+      ]
+    },
+    "romarr/app.py:\"note\": \"Scan the URI or enter the secret in any TOTP \"": {
+      "line": 7516,
+      "needle": "\"note\": \"Scan the URI or enter the secret in any TOTP \"",
+      "lineText": "                    \"note\": \"Scan the URI or enter the secret in any TOTP \"",
+      "lineSha256": "328c5c7dc5d30134ad5aef4fcc9edaaad173469d502460716cecfafbfb168767",
+      "contextLines": [
+        {
+          "line": 7515,
+          "text": "                    \"backup_codes\": codes,",
+          "sha256": "6d80aec591de0924fc7b80d2cf0409326a15bcd7bdcf3e461eac9d14abd4964c"
+        },
+        {
+          "line": 7516,
+          "text": "                    \"note\": \"Scan the URI or enter the secret in any TOTP \"",
+          "sha256": "328c5c7dc5d30134ad5aef4fcc9edaaad173469d502460716cecfafbfb168767"
+        },
+        {
+          "line": 7517,
+          "text": "                            \"app. Codes are asked for at sign-in from now \"",
+          "sha256": "2cb11a54ec01b1bc1cab6c760036b836fb82fe12058ef8d0c098ff8cfbb445a9"
+        },
+        {
+          "line": 7518,
+          "text": "                            \"on; the backup codes are single-use.\"})",
+          "sha256": "8f06da5944f0ee62d4440b00c23bbf2412abe93e20045527ce996e624260d45e"
+        }
+      ]
+    },
+    "romarr/ui.py:/api/v1/launchers/connect": {
+      "line": 2792,
+      "needle": "/api/v1/launchers/connect",
+      "lineText": "    const r=await j('/api/v1/launchers/connect',{method:'POST',",
+      "lineSha256": "d0bb4808a54f822d12a10f5e77ade80d32e7b9943cbfc70178b7088478e1e0a4",
+      "contextLines": [
+        {
+          "line": 2791,
+          "text": "    scanBtn.disabled=true; scanBtn.textContent='Scanning…';",
+          "sha256": "3e2f74adb1d50ce2566db688b7566e5c203c64438a13494cf8ff71dea5b70dab"
+        },
+        {
+          "line": 2792,
+          "text": "    const r=await j('/api/v1/launchers/connect',{method:'POST',",
+          "sha256": "d0bb4808a54f822d12a10f5e77ade80d32e7b9943cbfc70178b7088478e1e0a4"
+        },
+        {
+          "line": 2793,
+          "text": "      headers:{'content-type':'application/json'},",
+          "sha256": "fdba0fc6f2f31a1d4bd37d0a49ef3d376dc4244a6630da7a51d99b72c7929a38"
+        },
+        {
+          "line": 2794,
+          "text": "      body:JSON.stringify({name:'Local launchers'})}).catch(()=>({error:'scan failed'}));",
+          "sha256": "1380dadc3012932ddc1a30b1f4fc493ece9fa3bba623116835e66209d9b25797"
+        }
+      ]
+    },
+    "romarr/ui.py:toastAppMessage(r.error);else if(r.message)toastAppMessage(r.message)": {
+      "line": 2795,
+      "needle": "toastAppMessage(r.error);else if(r.message)toastAppMessage(r.message)",
+      "lineText": "    if(r.error)toastAppMessage(r.error);else if(r.message)toastAppMessage(r.message);else toastLabel('ui.done.11a6767d56');",
+      "lineSha256": "6861b7373129376537ec17876e1ae0ee5c66ecda225c885f4544f49845f02baf",
+      "contextLines": [
+        {
+          "line": 2794,
+          "text": "      body:JSON.stringify({name:'Local launchers'})}).catch(()=>({error:'scan failed'}));",
+          "sha256": "1380dadc3012932ddc1a30b1f4fc493ece9fa3bba623116835e66209d9b25797"
+        },
+        {
+          "line": 2795,
+          "text": "    if(r.error)toastAppMessage(r.error);else if(r.message)toastAppMessage(r.message);else toastLabel('ui.done.11a6767d56');",
+          "sha256": "6861b7373129376537ec17876e1ae0ee5c66ecda225c885f4544f49845f02baf"
+        },
+        {
+          "line": 2796,
+          "text": "    if(r.ok) go('lists'); else { scanBtn.disabled=false; scanBtn.textContent='Scan this machine'; }",
+          "sha256": "3a736d6968cdeba0f11c4d31b14b95e23b0abb1949bf2d0465aca4bdfce0fc52"
+        },
+        {
+          "line": 2797,
+          "text": "  };",
+          "sha256": "5c0254acd0251619029b7742ce33ed692f1099571cf182117eb4e87b71bcf031"
+        }
+      ]
+    },
+    "romarr/ui.py:/api/v1/totp/enroll": {
+      "line": 4553,
+      "needle": "/api/v1/totp/enroll",
+      "lineText": "      const d=await j('/api/v1/totp/enroll',{method:'POST',",
+      "lineSha256": "91a4212c1de57886a91b3b707f98c1ae1e621f6eef50cb0a49ff32ed565f5c1f",
+      "contextLines": [
+        {
+          "line": 4552,
+          "text": "      if(!confirmMessage('ui.enable-two-factor-sign-in-you-will-n.5fa605c62e')) return;",
+          "sha256": "c75a95b471497959f73331ccf7d9145511fe7fcfada49232ba4ab4a4d9433f48"
+        },
+        {
+          "line": 4553,
+          "text": "      const d=await j('/api/v1/totp/enroll',{method:'POST',",
+          "sha256": "91a4212c1de57886a91b3b707f98c1ae1e621f6eef50cb0a49ff32ed565f5c1f"
+        },
+        {
+          "line": 4554,
+          "text": "        headers:{'content-type':'application/json'},body:'{}'}).catch(()=>({}));",
+          "sha256": "cf623c96d81bbb178ab0409ca3ccb49dd3d14f38f6efbdeed904bac87dd13917"
+        },
+        {
+          "line": 4555,
+          "text": "      const out=$('#g-totpout'); out.style.display='block';",
+          "sha256": "60818ecf13b4abdb115ee446d114e44caee820822d9eda8f98281cb953432b84"
+        }
+      ]
+    },
+    "romarr/ui.py:apiMessageMarkup(d.note||'')": {
+      "line": 4560,
+      "needle": "apiMessageMarkup(d.note||'')",
+      "lineText": "        +'\\n\\n'+apiMessageMarkup(d.note||'');",
+      "lineSha256": "5ee387d2430252a65e2b6e3b41d524580949db1e2c18bc6773327706c1026652",
+      "contextLines": [
+        {
+          "line": 4559,
+          "text": "        +esc((d.backup_codes||[]).join('\\n  '))",
+          "sha256": "7e4f199b8e841da26aaff530f334633e75c9a402a9fc77ec97723f1a7095ba1a"
+        },
+        {
+          "line": 4560,
+          "text": "        +'\\n\\n'+apiMessageMarkup(d.note||'');",
+          "sha256": "5ee387d2430252a65e2b6e3b41d524580949db1e2c18bc6773327706c1026652"
+        },
+        {
+          "line": 4561,
+          "text": "    };",
+          "sha256": "ede9befdbd87a8cea21015f1acf497959cad3bf8838112193d98a02a47fa6137"
+        },
+        {
+          "line": 4562,
+          "text": "    $('#g-totpoff').onclick=async()=>{",
+          "sha256": "9a6b046bcf0ab9c1aab1bd7b5d342081b1795730500cbe38e287de6fa89f8fe2"
+        }
+      ]
+    }
+  },
+  "sourceSnapshotHashes": {
+    "ui.scan-failed-error-type.e99ccb8157": "e99ccb815768abb38ba67f230aea12fe9a2b3823fedd9ae097572802b7f7155f",
+    "ui.scan-the-uri-or-enter-the-secret-in.612ce1fd46": "612ce1fd463f6f3a9767a66a0090d2aea1b459b10b33d69f239dc89a0b32e120"
+  },
+  "sourceKeys": {
+    "ui.scan-failed-error-type.e99ccb8157": {
+      "source": "scan failed: {error_type}",
+      "sourceHash": "e99ccb815768abb38ba67f230aea12fe9a2b3823fedd9ae097572802b7f7155f",
+      "sourceKind": "ui-error-template",
+      "translationStatus": {
+        "es": "draft",
+        "zh-Hans": "draft",
+        "hi": "draft",
+        "de": "draft",
+        "ja": "draft",
+        "fr": "draft",
+        "pt-BR": "draft",
+        "ar": "draft",
+        "ko": "draft",
+        "zh-Hant": "draft",
+        "vi": "draft",
+        "id": "draft"
+      },
+      "translations": {
+        "es": {
+          "value": "Falló el escaneo: {error_type}",
+          "translationHash": "91deeda43cff9c471a69ebd772187bbee4e29bb04c04976bc2c84fef009a4291"
+        },
+        "zh-Hans": {
+          "value": "扫描失败：{error_type}",
+          "translationHash": "5981c7dc467e46a4d889c20b4595f64165385c4f448b01717cb834739e8f790a"
+        },
+        "hi": {
+          "value": "स्कैन विफल: {error_type}",
+          "translationHash": "c6aa87695d955b612893cf30d21fe36a207eaf1ff64cd463715633521866f540"
+        },
+        "de": {
+          "value": "Scan fehlgeschlagen: {error_type}",
+          "translationHash": "0330c3bd93c74e9ad2783e5228e5d623daae860480b2b6c745af924842f874e2"
+        },
+        "ja": {
+          "value": "スキャン失敗: {error_type}",
+          "translationHash": "99d19a295d7679ca73bbea239163d237d8c4b2096c603065027e2f137d4a6c79"
+        },
+        "fr": {
+          "value": "Échec de l’analyse : {error_type}",
+          "translationHash": "f681e2cee5ae28164d636ad7e584d66eb2aa504d01ccbaa5a732ef7f4a1a92c3"
+        },
+        "pt-BR": {
+          "value": "Falha ao escanear: {error_type}",
+          "translationHash": "941ab421dcda2f455f5b8fb2bbabc5af8305d09ecb56998eb1b32ba185a686fd"
+        },
+        "ar": {
+          "value": "فشل الفحص: {error_type}",
+          "translationHash": "03d198f22c26a2095276d2f2f3b18e86adfcf420db5a4b502866544eb1468201"
+        },
+        "ko": {
+          "value": "스캔 실패: {error_type}",
+          "translationHash": "bf719e0b6cd58d4d85f3e7772d0b73ba3e328a2d09640fee0280f839b6dea0eb"
+        },
+        "zh-Hant": {
+          "value": "掃描失敗：{error_type}",
+          "translationHash": "f82b62124fde52162b70f37386a161454421c87e25e6d2d7568bc6b8b163a197"
+        },
+        "vi": {
+          "value": "Quét thất bại: {error_type}",
+          "translationHash": "584d55541032dea0cac4d39cb78fd2840ea5f15b6be032361ad30a247fd2456e"
+        },
+        "id": {
+          "value": "Pemindaian gagal: {error_type}",
+          "translationHash": "af7d125210efe4046321de0c743a948fd57be03e0ccbb1c9e1c554c6feb82da4"
+        }
+      }
+    },
+    "ui.scan-the-uri-or-enter-the-secret-in.612ce1fd46": {
+      "source": "Scan the URI or enter the secret in any TOTP app. Codes are asked for at sign-in from now on; the backup codes are single-use.",
+      "sourceHash": "612ce1fd463f6f3a9767a66a0090d2aea1b459b10b33d69f239dc89a0b32e120",
+      "sourceKind": "ui",
+      "translationStatus": {
+        "es": "draft",
+        "zh-Hans": "draft",
+        "hi": "draft",
+        "de": "draft",
+        "ja": "draft",
+        "fr": "draft",
+        "pt-BR": "draft",
+        "ar": "draft",
+        "ko": "draft",
+        "zh-Hant": "draft",
+        "vi": "draft",
+        "id": "draft"
+      },
+      "translations": {
+        "es": {
+          "value": "Escanea el URI o introduce el secreto en cualquier aplicación TOTP. A partir de ahora se pedirán códigos al iniciar sesión; los códigos de respaldo solo se pueden usar una vez.",
+          "translationHash": "7c9d14deafd3327282f93e7274924f18d695afbfa0db2c07c60184ccf939c102"
+        },
+        "zh-Hans": {
+          "value": "扫描 URI，或在任意 TOTP 应用中输入密钥。从现在起，登录时会要求输入验证码；备用码只能使用一次。",
+          "translationHash": "c3d2a803970bcc67352e3f4a20752291f8db683c0eb30af1626b77920c383da7"
+        },
+        "hi": {
+          "value": "URI स्कैन करें या किसी भी TOTP ऐप में सीक्रेट दर्ज करें। अब से साइन इन करते समय कोड मांगे जाएंगे; बैकअप कोड केवल एक बार इस्तेमाल किए जा सकते हैं।",
+          "translationHash": "67ca4d856bc65362b403aad36dbf643dd491c82f2faf4667a235b0b0f517e5f7"
+        },
+        "de": {
+          "value": "Scanne den URI oder gib das Geheimnis in einer beliebigen TOTP-App ein. Ab jetzt werden die Codes bei der Anmeldung abgefragt; Backup-Codes können nur einmal verwendet werden.",
+          "translationHash": "f138cde84b60ef1eb51b2c2c9f495cec65a6d873b967c467a453d3f538e858d8"
+        },
+        "ja": {
+          "value": "URI をスキャンするか、任意の TOTP アプリにシークレットを入力してください。以後、サインイン時にコードの入力が求められます。バックアップコードは一度しか使用できません。",
+          "translationHash": "8a4be27e5247c9d794049876a4c72bdb6cbf6b279d526ff9b806c29c03442f2d"
+        },
+        "fr": {
+          "value": "Scannez l’URI ou saisissez le secret dans n’importe quelle application TOTP. À partir de maintenant, les codes seront demandés à la connexion ; les codes de secours ne sont utilisables qu’une seule fois.",
+          "translationHash": "d2e10fa0d468fab405a69e4586b0a92c02cc7770b381a4b678dd17d70486f1ad"
+        },
+        "pt-BR": {
+          "value": "Escaneie o URI ou insira o segredo em qualquer aplicativo TOTP. A partir de agora, os códigos serão solicitados ao fazer login; cada código de backup só pode ser usado uma vez.",
+          "translationHash": "32f925d261ead6da40b2024db57706c39a2ad363233c055bde5be7176dc2c6c1"
+        },
+        "ar": {
+          "value": "امسح رمز URI ضوئيًا أو أدخل المفتاح السري في أي تطبيق TOTP. سيُطلب منك إدخال الرموز عند تسجيل الدخول من الآن فصاعدًا؛ ولا يمكن استخدام رموز النسخ الاحتياطي إلا مرة واحدة.",
+          "translationHash": "19a6cac37986176a65449938934c888c91c7969f795c761e8dc76420fbb4ea67"
+        },
+        "ko": {
+          "value": "URI를 스캔하거나 아무 TOTP 앱에 비밀 키를 입력하세요. 이제부터 로그인할 때 코드를 입력해야 합니다. 백업 코드는 한 번만 사용할 수 있습니다.",
+          "translationHash": "d714cf98652e3b7b79ec0267f8a2cd3c63cb22cbb935522a4395140f95afb804"
+        },
+        "zh-Hant": {
+          "value": "掃描 URI，或在任何 TOTP 應用程式中輸入密鑰。從現在起，登入時會要求輸入驗證碼；備用碼只能使用一次。",
+          "translationHash": "e40f81684eada7e724cb8f2e24bcd9653db3674e94f560c013fe32614b421969"
+        },
+        "vi": {
+          "value": "Quét URI hoặc nhập bí mật vào bất kỳ ứng dụng TOTP nào. Từ nay, mã sẽ được yêu cầu khi đăng nhập; mã dự phòng chỉ dùng được một lần.",
+          "translationHash": "9efa310f3397acb056cce307bccf87e231dcd7dc9604191971c54c8eb15b4898"
+        },
+        "id": {
+          "value": "Pindai URI atau masukkan rahasia ke aplikasi TOTP apa pun. Mulai sekarang, kode akan diminta saat masuk; kode cadangan hanya dapat digunakan sekali.",
+          "translationHash": "37ce60b5e08e4c71c30c23142cf4382c9c5b78b7a2bc5efafa723de94fb24b64"
+        }
+      }
+    }
+  },
+  "targetLocales": [
+    "es",
+    "zh-Hans",
+    "hi",
+    "de",
+    "ja",
+    "fr",
+    "pt-BR",
+    "ar",
+    "ko",
+    "zh-Hant",
+    "vi",
+    "id"
+  ],
+  "translationHashAlgorithm": "SHA256(compact sorted-key JSON serialization of target string)"
+}

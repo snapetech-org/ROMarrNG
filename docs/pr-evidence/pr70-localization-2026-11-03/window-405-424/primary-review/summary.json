@@ -1,0 +1,226 @@
+{
+  "window": "W405-W424",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "dispositionCounts": {
+    "hold": 48,
+    "accept-current": 164,
+    "correction": 21,
+    "refinement": 7
+  },
+  "changeCount": 28,
+  "proposalCount": 28,
+  "holdPositions": [
+    405,
+    407,
+    408,
+    416
+  ],
+  "holdCells": 48,
+  "perPosition": {
+    "405": {
+      "accept-current": 0,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 12
+    },
+    "406": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "407": {
+      "accept-current": 0,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 12
+    },
+    "408": {
+      "accept-current": 0,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 12
+    },
+    "409": {
+      "accept-current": 5,
+      "correction": 6,
+      "refinement": 1,
+      "hold": 0
+    },
+    "410": {
+      "accept-current": 8,
+      "correction": 4,
+      "refinement": 0,
+      "hold": 0
+    },
+    "411": {
+      "accept-current": 8,
+      "correction": 4,
+      "refinement": 0,
+      "hold": 0
+    },
+    "412": {
+      "accept-current": 7,
+      "correction": 5,
+      "refinement": 0,
+      "hold": 0
+    },
+    "413": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "414": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "415": {
+      "accept-current": 7,
+      "correction": 0,
+      "refinement": 5,
+      "hold": 0
+    },
+    "416": {
+      "accept-current": 0,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 12
+    },
+    "417": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "418": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "419": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "420": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "421": {
+      "accept-current": 12,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 0
+    },
+    "422": {
+      "accept-current": 11,
+      "correction": 0,
+      "refinement": 1,
+      "hold": 0
+    },
+    "423": {
+      "accept-current": 11,
+      "correction": 1,
+      "refinement": 0,
+      "hold": 0
+    },
+    "424": {
+      "accept-current": 11,
+      "correction": 1,
+      "refinement": 0,
+      "hold": 0
+    }
+  },
+  "perLocale": {
+    "ar": {
+      "accept-current": 14,
+      "correction": 1,
+      "refinement": 1,
+      "hold": 4
+    },
+    "de": {
+      "accept-current": 14,
+      "correction": 2,
+      "refinement": 0,
+      "hold": 4
+    },
+    "es": {
+      "accept-current": 14,
+      "correction": 2,
+      "refinement": 0,
+      "hold": 4
+    },
+    "fr": {
+      "accept-current": 16,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 4
+    },
+    "hi": {
+      "accept-current": 12,
+      "correction": 4,
+      "refinement": 0,
+      "hold": 4
+    },
+    "id": {
+      "accept-current": 15,
+      "correction": 1,
+      "refinement": 0,
+      "hold": 4
+    },
+    "ja": {
+      "accept-current": 16,
+      "correction": 0,
+      "refinement": 0,
+      "hold": 4
+    },
+    "ko": {
+      "accept-current": 13,
+      "correction": 2,
+      "refinement": 1,
+      "hold": 4
+    },
+    "pt-BR": {
+      "accept-current": 13,
+      "correction": 1,
+      "refinement": 2,
+      "hold": 4
+    },
+    "vi": {
+      "accept-current": 13,
+      "correction": 2,
+      "refinement": 1,
+      "hold": 4
+    },
+    "zh-Hans": {
+      "accept-current": 12,
+      "correction": 3,
+      "refinement": 1,
+      "hold": 4
+    },
+    "zh-Hant": {
+      "accept-current": 12,
+      "correction": 3,
+      "refinement": 1,
+      "hold": 4
+    }
+  },
+  "newHoldsBeyondCarried": 48,
+  "carriedHoldsUnchanged": 288,
+  "placeholdersPreservedInAllProposals": true,
+  "numericTokensPreservedInAllProposals": true,
+  "protectedLiteralsPreservedInAllProposals": true,
+  "nativeSpeakerReviewPerformed": false,
+  "browserReviewPerformed": false,
+  "reviewConfidence": "moderate overall; exact orthography and caller-route checks high where marked",
+  "noRepositoryOrPRChanges": true
+}

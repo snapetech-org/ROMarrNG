@@ -1,0 +1,32 @@
+{
+  "activePriorHashOnlyHoldsPreserved": 1060,
+  "artifact": "ROMarrNG PR #70 W805-W824 root adjudication",
+  "cellCount": 240,
+  "confidence": "moderate",
+  "exactHead": "551cccd03e0acdce208ce11f571378c1dcdfb805",
+  "exactTree": "d77f32ac8ec0ab53200d04819869a2e99c6de73c",
+  "lowConfidenceLanguageHolds": 10,
+  "nativeSpeakerApproval": false,
+  "newCallerlessHolds": 0,
+  "nextBoundary": {
+    "continuationIndex": 825,
+    "oneBasedPosition": 826,
+    "sourceId": "ui.platform-for-game-available-platform.afd580990f",
+    "sourceSha256": "afd580990fe9a12282ffeeeefa2d1a2c8b632f05bdd58b08e3c03a27ac91fb08"
+  },
+  "productApplicationPerformed": false,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "resultingActiveHashOnlyHolds": 1060,
+  "rootAdjudicationPerformed": true,
+  "rootDispositionCounts": {
+    "accept-current": 217,
+    "correction": 6,
+    "hold-low-confidence-current": 10,
+    "refinement": 7
+  },
+  "selectedCorrectionCount": 6,
+  "selectedRefinementCount": 7,
+  "selectedTargetCount": 13,
+  "window": "W805-W824"
+}

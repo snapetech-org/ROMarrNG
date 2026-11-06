@@ -1,0 +1,25 @@
+{
+  "artifact": "ROMarrNG PR #70 W645-W664 independent blind semantic review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+  "tree": "d6066baa3d03d3b4c6034e5af061fc4bc278b0f9",
+  "candidateFreeChecksumListSha256": "1ca785d57863dac9f0bb52e60b5966c55f758282cac7f9099c9056b256359ddb",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "callerBackedCellCount": 144,
+  "counts": {
+    "accept-current": 138,
+    "propose-correction": 3,
+    "propose-refinement": 3,
+    "text-free-hold": 96
+  },
+  "proposalCount": 6,
+  "holdCount": 96,
+  "allCallerBackedCellsIndependentlyReviewed": true,
+  "placeholderMarkupNumericProtectedLiteralReview": true,
+  "nativeSpeakerSignoff": false,
+  "browserReviewPerformed": false,
+  "createdAtUtc": "2026-11-05T05:17:26+00:00"
+}

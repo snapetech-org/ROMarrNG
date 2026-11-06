@@ -1,0 +1,64 @@
+# Primary-selected changes
+
+- **265 / de / ui.projects-come-from-your-own-catalogu.82063d8e45** — Projekte kommen nur aus Ihrem eigenen Katalog. Vollständigkeit ist, was ein Projekt sagt, niemals eine Vorstellung. Anfragen kommen von SeerrNG. → Projekte stammen ausschließlich aus Ihrem eigenen Katalog. Die Vollständigkeit richtet sich danach, was ein Projekt angibt; sie wird niemals geschätzt. Anfragen kommen von SeerrNG.
+  - “Vorstellung” means an idea/imagination rather than a guess; this replaces it with “geschätzt” and preserves the project-stated completeness distinction.
+- **265 / hi / ui.projects-come-from-your-own-catalogu.82063d8e45** — परियोजनाएं केवल अपने स्वयं के कैटलॉग से आती हैं. पूर्णता यह है कि एक परियोजना क्या कहती है, कभी एक अनुमान नहीं है. अनुरोध SeerrNG से आते हैं. → परियोजनाएँ केवल आपके अपने कैटलॉग से आती हैं। पूर्णता परियोजना के बताए अनुसार ही होती है; इसका अनुमान नहीं लगाया जाता। अनुरोध SeerrNG से आते हैं।
+  - Replaces the awkward literal completeness sentence and ASCII sentence stops with idiomatic wording and standard Hindi punctuation.
+- **265 / id / ui.projects-come-from-your-own-catalogu.82063d8e45** — Proyek datang dari katalog Anda sendiri saja. kesempurnaan adalah apa yang ditunjukkan oleh proyek, tidak pernah satu teka-teki. permintaan datang dari SeerrNG. → Proyek hanya berasal dari katalog Anda sendiri. Kelengkapan ditentukan oleh keterangan proyek, bukan perkiraan. Permintaan berasal dari SeerrNG.
+  - “Kesempurnaan” means perfection and “teka-teki” means riddle; both distort completeness and guess, and the original also drops sentence capitalization.
+- **265 / ja / ui.projects-come-from-your-own-catalogu.82063d8e45** — プロジェクトはあなたの独自のカタログから来るだけです 完全性はプロジェクトが述べているものです 決して推測ではありません リクエストはSeerrNGから来ています。 → プロジェクトはご自身のカタログに登録されたものだけです。完全性は各プロジェクトが示す内容に基づき、推測しません。リクエストはSeerrNGから届きます。
+  - Adds the missing sentence boundaries and makes the project-stated completeness/no-guess distinction explicit.
+- **265 / zh-Hans / ui.projects-come-from-your-own-catalogu.82063d8e45** — 项目仅来自您自己的目录. 完整性是项目所说的,永远不会猜测. 请求来自 SeerrNG。 → 项目仅来自您自己的目录。完整性以项目所声明的内容为准，绝不靠猜测。请求来自 SeerrNG。
+  - Refines the literal “what the project says” construction and uses Chinese sentence punctuation.
+- **265 / zh-Hant / ui.projects-come-from-your-own-catalogu.82063d8e45** — 項目僅來自您自己的目錄. 完整性是項目所說的,永遠不會猜測. 請求來自 SeerrNG。 → 專案僅來自您自己的目錄。完整性以專案所述為準，絕不靠猜測。請求來自 SeerrNG。
+  - Refines the literal “what the project says” construction and uses Traditional Chinese sentence punctuation.
+- **266 / ar / ui.proposed-path.0e656434e8** — الطريق المقترح → المسار المقترح
+  - The table context is a filesystem rename preview; “الطريق” is a road/way, while “المسار” is the path label.
+- **266 / de / ui.proposed-path.0e656434e8** — vorgeschlagene Pfad → Vorgeschlagener Pfad
+  - Uses a grammatical German column heading with the required noun capitalization.
+- **266 / es / ui.proposed-path.0e656434e8** — El camino propuesto → Ruta propuesta
+  - “Camino” usually means a road/way; the current path in a rename preview is a file path, for which “ruta” is clearer.
+- **266 / fr / ui.proposed-path.0e656434e8** — Le chemin proposé → Chemin proposé
+  - Drops the unnecessary article for a concise table-column heading.
+- **266 / hi / ui.proposed-path.0e656434e8** — प्रस्तावित मार्ग → प्रस्तावित फ़ाइल पथ
+  - Clarifies that the path is a filesystem path, not a route.
+- **266 / id / ui.proposed-path.0e656434e8** — Jalan yang diusulkan → Jalur berkas yang diusulkan
+  - “Jalan” means a road; this table shows a filesystem path.
+- **266 / ja / ui.proposed-path.0e656434e8** — 提案された道 → 提案されたパス
+  - Uses the technical file-path term パス instead of 道 (“road/way”).
+- **266 / vi / ui.proposed-path.0e656434e8** — Con đường đề xuất → Đường dẫn đề xuất
+  - “Con đường” reads as a road; “đường dẫn” is the filesystem-path term.
+- **267 / ar / ui.provider-identity-provider-setup-gui.e0aaaa0ccd** — {provider} دليل إعداد مزود الهوية (يفتح في علامة التبويب الجديدة) → دليل إعداد موفّر الهوية {provider} (يُفتح في علامة تبويب جديدة)
+  - Reorders the noun phrase so the dynamic provider name is attached to the identity-provider setup guide; preserves the opaque {provider} value.
+- **267 / ja / ui.provider-identity-provider-setup-gui.e0aaaa0ccd** — {provider} アイデンティティ プロバイダーの設定ガイド(新しいタブで開きます) → {provider} のIDプロバイダー設定ガイド（新しいタブで開きます）
+  - Uses the standard technical term IDプロバイダー and a natural guide label; preserves the provider value.
+- **267 / ko / ui.provider-identity-provider-setup-gui.e0aaaa0ccd** — {provider} 정체성 공급자 설정 가이드 (새 탭에서 열립니다) → {provider} ID 공급자 설정 가이드 (새 탭에서 열립니다)
+  - Uses the established technical “ID provider” term; the current literal “정체성 공급자” is unnatural in an OIDC label.
+- **267 / vi / ui.provider-identity-provider-setup-gui.e0aaaa0ccd** — {provider} hướng dẫn cài đặt nhà cung cấp danh tính (mở trong tab mới) → Hướng dẫn thiết lập nhà cung cấp danh tính {provider} (mở trong tab mới)
+  - Moves the dynamic provider name into a grammatical Vietnamese noun phrase and preserves it unchanged.
+- **267 / zh-Hant / ui.provider-identity-provider-setup-gui.e0aaaa0ccd** — {provider} 身份提供商設置指南(在新選項卡中打開) → {provider} 身分提供者設定指南（在新分頁中開啟）
+  - Corrects Simplified Chinese forms in the Traditional Chinese catalog and uses a natural tab label; preserves the provider value.
+- **268 / de / ui.provider-suggestion-review.0111b979ee** — Anbieter Vorschlag · Bewertung → Anbietervorschlag · prüfen
+  - Corrects the separated compound and uses an action label for the review state.
+- **268 / es / ui.provider-suggestion-review.0111b979ee** — Proveedor sugerencia · revisión → Sugerencia del proveedor · revisar
+  - Corrects the malformed “Proveedor sugerencia” phrase and preserves the review action.
+- **268 / pt-BR / ui.provider-suggestion-review.0111b979ee** — Provedor sugestão · revisão → Sugestão do provedor · revisar
+  - Corrects the malformed noun order while retaining the review action.
+- **268 / vi / ui.provider-suggestion-review.0111b979ee** — Nhà cung cấp đề xuất · đánh giá → Đề xuất từ nhà cung cấp · cần xem xét
+  - Makes the label read naturally as a provider suggestion that needs review.
+- **283 / ar / ui.publish-es-de-data.0e81c10a08** — نشر ES-DE البيانات → نشر بيانات ES-DE
+  - Corrects Arabic object order (“publish ES-DE data”) and keeps ES-DE unchanged.
+- **283 / de / ui.publish-es-de-data.0e81c10a08** — ES-DE Daten veröffentlichen → ES-DE-Daten veröffentlichen
+  - Adds the required compound hyphens in the German label.
+- **284 / ar / ui.published-count-es-de-entries.8e45db116a** — نشر {count} ES-DE الإدخالات. → تم نشر عناصر ES-DE: {count}.
+  - Rephrases the malformed article/plural construction and preserves the numeric placeholder.
+- **284 / es / ui.published-count-es-de-entries.8e45db116a** — Publicado {count} ES-DE entradas. → Se publicaron {count} entradas de ES-DE.
+  - Corrects agreement and word order for feminine entradas.
+- **284 / fr / ui.published-count-es-de-entries.8e45db116a** — Publié {count} ES-DE entrées. → Publication de {count} entrées ES-DE terminée.
+  - Corrects gender agreement and makes the completion toast grammatical.
+- **284 / id / ui.published-count-es-de-entries.8e45db116a** — Dipublikasikan {count} ES-DE entri. → Sebanyak {count} entri ES-DE dipublikasikan.
+  - Reorders the quantity and verb into natural Indonesian.
+- **284 / ko / ui.published-count-es-de-entries.8e45db116a** — 출판된 {count} ES-DE 항목. → ES-DE 항목 {count}개를 게시했습니다.
+  - Replaces the fragment “published entries” with a complete Korean status sentence.
+- **284 / pt-BR / ui.published-count-es-de-entries.8e45db116a** — Publicado {count} ES-DE entradas. → Foram publicados {count} itens do ES-DE.
+  - Corrects the current feminine/masculine agreement problem by using the grammatical masculine noun itens.

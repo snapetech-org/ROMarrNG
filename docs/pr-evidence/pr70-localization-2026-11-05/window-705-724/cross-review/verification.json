@@ -1,0 +1,36 @@
+{
+  "result": "PASS",
+  "verifier": "independent-cross-review",
+  "head": "50e3f8a48a800affff8bad367b5c493cc0fdfd62",
+  "tree": "22cd46ff4821fcbbe76b4760a15e22d688b3f548",
+  "cells": 240,
+  "callerBacked": 192,
+  "callerlessHashOnlyHolds": 48,
+  "dispositions": {
+    "hold-callerless-hash-only": 48,
+    "accept-current": 187,
+    "correction": 5
+  },
+  "proposalComparisons": {
+    "both-keep": 187,
+    "blind-only": 1,
+    "conflicting-targets": 1,
+    "exact-agreement": 2,
+    "primary-only": 1
+  },
+  "rootAdjudicationFlags": [
+    {
+      "position": 709,
+      "locale": "ar"
+    },
+    {
+      "position": 709,
+      "locale": "fr"
+    },
+    {
+      "position": 711,
+      "locale": "id"
+    }
+  ],
+  "callerlessTextExposed": false
+}

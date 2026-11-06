@@ -1,0 +1,26 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W126-W145",
+  "status": "ratified translation adjudication; no repository or PR changes applied",
+  "inputHead": "5d999ff7667ae4c5642f1f11b63ad9880d19672c",
+  "inputTree": "93fcf748c46a4c1cef116c2a4ef06305137ecfe4",
+  "inputManifestSha256": "53f63b965589e3da176f035dca41310f696edd446fd3b6a43cb6c187b14c9f77",
+  "rootBlindLedgerSha256": "42f353053885ecc60be90df172a3ad4ebb4b4b5d65e9d1bda263c413f47c064d",
+  "primaryLedgerSha256": "e30ed2089942fcbd44d49c0a19a15507fcb78a0b034cbfae794c77cdf33babc2",
+  "independentLedgerSha256": "cb6754bc8f09909f97abef120219f0f155367be9c4adad36c4d0436d47329e4c",
+  "cellCount": 240,
+  "sourceCount": 20,
+  "localeCount": 12,
+  "targetChanges": 58,
+  "finalDispositions": {
+    "accept-current": 182,
+    "refinement": 31,
+    "correction": 27
+  },
+  "placeholderParity": true,
+  "holds": 0,
+  "sourceOrdinal130Resolution": "The catalog has a separate placeholder-free “games found.” entry and a distinct “{count} games found.” template. Static text nodes use exact-source lookup, so translate the fragment as written; do not add {count}.",
+  "nativeSpeakerReview": false,
+  "repoOrPrMutated": false
+}

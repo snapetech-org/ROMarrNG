@@ -1,0 +1,23 @@
+{
+  "allCurrentTargetHashesMatchPriorHoldEvidence": true,
+  "allSourcesAndSelectionPositionsMatchCurrentSnapshot": true,
+  "currentHead": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+  "currentTargetChangedCells": 0,
+  "currentTree": "dcb9c1766831e217ffca7fb77068b97c33b9524e",
+  "reattestedCellCount": 604,
+  "windowCounts": {
+    "W245-W264": 72,
+    "W265-W284": 168,
+    "W285-W304": 24,
+    "W325-W344": 24,
+    "W405-W424": 48,
+    "W425-W444": 12,
+    "W445-W464": 36,
+    "W465-W484": 60,
+    "W485-W504": 24,
+    "W505-W524": 72,
+    "W525-W544": 12,
+    "W545-W564": 12,
+    "W565-W584": 40
+  }
+}

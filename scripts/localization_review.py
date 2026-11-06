@@ -16,6 +16,7 @@ from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / "romarr" / "ui-labels.json"
+SOURCE_MESSAGES_PATH = ROOT / "romarr" / "ui-source-messages.json"
 PLACEHOLDER = re.compile(r"\{([A-Za-z][A-Za-z0-9_]*)\}")
 PLURAL_CATEGORIES = {"zero", "one", "two", "few", "many", "other"}
 MAX_REVIEW_BUNDLE_BYTES = 10 * 1024 * 1024
@@ -72,7 +73,8 @@ def export_bundle(catalog: dict[str, Any], locale: str,
     messages = []
     for key, entry in catalog["messages"].items():
         translation = entry.get("translations", {}).get(locale)
-        if translation is None and info.get("status") == "available":
+        if (translation is None and info.get("status") == "available"
+                and locale not in entry.get("translationPending", [])):
             raise ValueError(f"{key}/{locale}: direct locale is missing a translation")
         translation = "" if translation is None else translation
         status = entry.get("translationStatus", {}).get(
@@ -101,6 +103,50 @@ def export_bundle(catalog: dict[str, Any], locale: str,
             "Import rejects stale source or translation fingerprints.",
         ],
         "messages": messages,
+    }
+
+
+def export_source_bundle(catalog: dict[str, Any], base_commit: str,
+                         head_commit: str) -> dict[str, Any]:
+    """Freeze new source strings without generating target-language text."""
+    if not re.fullmatch(r"[0-9a-f]{40}", base_commit):
+        raise ValueError("base commit must be a full lowercase Git hash")
+    if not re.fullmatch(r"[0-9a-f]{40}", head_commit):
+        raise ValueError("head commit must be a full lowercase Git hash")
+    source_messages = []
+    pending_cells = 0
+    for key, entry in sorted(catalog["messages"].items()):
+        source_kind = entry.get("sourceKind")
+        if not source_kind:
+            continue
+        pending = entry.get("translationPending", [])
+        source = entry["source"]
+        if any(code in entry.get("translations", {}) for code in pending):
+            raise ValueError(f"{key}: source bundle cannot contain pending translations")
+        pending_cells += len(pending)
+        source_messages.append({
+            "id": key,
+            "source": source,
+            "sourceHash": entry["sourceHash"],
+            "sourceKind": source_kind,
+            "placeholders": sorted(PLACEHOLDER.findall(source)),
+            "translationPending": sorted(pending),
+        })
+    manifest_hash = content_hash(source_messages)
+    return {
+        "sourceBundleVersion": 1,
+        "catalogSchemaVersion": catalog.get("schemaVersion"),
+        "baseCommit": base_commit,
+        "headCommit": head_commit,
+        "messageCount": len(source_messages),
+        "directPendingCells": pending_cells,
+        "manifestHash": manifest_hash,
+        "instructions": [
+            "This bundle freezes English source text only; it contains no generated translations.",
+            "Keep provider, library, path, version, status, exception, and user values in their placeholders unchanged.",
+            "Review the source wording in the ROMarr UI before translating. Preserve each stable ID and source hash.",
+        ],
+        "messages": source_messages,
     }
 
 
@@ -168,6 +214,9 @@ def apply_review_bundle(catalog: dict[str, Any], bundle: dict[str, Any],
             "reviewer": reviewer.strip(),
             "reviewedAt": reviewed_at,
         }
+        pending = target.get("translationPending", [])
+        if locale in pending:
+            target["translationPending"] = [code for code in pending if code != locale]
         reviewed_count += 1
 
     all_translated = all(
@@ -238,10 +287,25 @@ def main() -> int:
     import_cmd.add_argument("--reviewed-at", required=True)
     import_cmd.add_argument("--apply", action="store_true",
                             help="write the validated changes to the catalog")
+    source_cmd = commands.add_parser(
+        "source-export", help="freeze new English source messages without translations"
+    )
+    source_cmd.add_argument("--base-commit", required=True)
+    source_cmd.add_argument("--head-commit", required=True)
+    source_cmd.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
 
     try:
         catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
+        if args.command == "source-export":
+            bundle = export_source_bundle(catalog, args.base_commit, args.head_commit)
+            write_atomic(args.output, bundle)
+            print(
+                f"Exported {bundle['messageCount']} source messages / "
+                f"{bundle['directPendingCells']} pending locale cells to {args.output}; "
+                f"manifest {bundle['manifestHash']}"
+            )
+            return 0
         if args.command == "export":
             bundle = export_bundle(catalog, args.locale,
                                    include_reviewed=args.include_reviewed)

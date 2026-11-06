@@ -1,0 +1,76 @@
+{
+  "candidateFreeInputOnly": true,
+  "head": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "inputChecksumManifestSha256": "285dec16fb9be7081b023d153cddc43ce794478de87c377bc3c4681634491eef",
+  "inputFiles": [
+    {
+      "name": "PR-attestation.json",
+      "sha256": "bd75976c59277b481f218f819825714578763fedf72088a4a662bfbe9bca1ab0"
+    },
+    {
+      "name": "README.md",
+      "sha256": "dfccb0cf23c35f84875e8c69eb71fc336a4d934bcadaa67622ca7534e9b45903"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "sha256": "285dec16fb9be7081b023d153cddc43ce794478de87c377bc3c4681634491eef"
+    },
+    {
+      "name": "caller-location-reconciliation.jsonl",
+      "sha256": "8b0bd497942393ad534881f5c1a76f2030227f73b217a3272ef2d80beb0f7fd8"
+    },
+    {
+      "name": "caller-resolution-holds.jsonl",
+      "sha256": "1eaebe351bbd2a4894e8a41205dc557993070f5ec0771c151248e148089a7488"
+    },
+    {
+      "name": "caller-scan-attestation.json",
+      "sha256": "aed38a7d6dc9f4809f96a20151fa4e9485047f520683207c781c08b7ec5e08b0"
+    },
+    {
+      "name": "catalog-file-pins.json",
+      "sha256": "fa83d6cda6b85be500fba5ea4939c420f774e4985433668fac467ab140c7dc05"
+    },
+    {
+      "name": "current-target-cells.jsonl",
+      "sha256": "32411c2314503a311790912fbbfacb438655c93675c87d4cdd1fcebe2a8bd740"
+    },
+    {
+      "name": "final-live-pr-verification.json",
+      "sha256": "a8d0b47d74659f8a3f8cdf8a360c26fba8b32cd6425d95f8354ff5d553fd5590"
+    },
+    {
+      "name": "latest-pr-body-section.md",
+      "sha256": "d177aba2666dda1378dda6b68617fbd15122d3f347ed949d0679c6e90f407fd2"
+    },
+    {
+      "name": "localization-runtime-context.json",
+      "sha256": "3de8ee23176a0675a269e69fcea4254f7f501b1558a5ffc20730cf78a246b048"
+    },
+    {
+      "name": "manifest.json",
+      "sha256": "068270fe3c4f2cef98c537d0978d5586fcaa6a418e4ad2d7ca2cb6439db133f6"
+    },
+    {
+      "name": "prior-window-lineage.json",
+      "sha256": "67a254d1798828f79b8f5d95d38f0223b93398c7f566eddbe7623a6288a7b31f"
+    },
+    {
+      "name": "selection-boundary.jsonl",
+      "sha256": "61d31539d893969074b413838068c6ab446e3abc1f515c9f59203adf07dc3053"
+    },
+    {
+      "name": "source-contexts.jsonl",
+      "sha256": "6ae929a8d47c02f5012520b81c3b9fcb098c66587d94e8f3e30d7852766aabff"
+    }
+  ],
+  "inputManifestSha256": "068270fe3c4f2cef98c537d0978d5586fcaa6a418e4ad2d7ca2cb6439db133f6",
+  "livePRHead": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "pullRequest": 70,
+  "remoteBranchHead": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "remotePullRefHead": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "repository": "snapetech-org/ROMarrNG",
+  "sha256sumCheckOutput": "PR-attestation.json: OK\nREADME.md: OK\ncaller-location-reconciliation.jsonl: OK\ncaller-resolution-holds.jsonl: OK\ncaller-scan-attestation.json: OK\ncatalog-file-pins.json: OK\ncurrent-target-cells.jsonl: OK\nfinal-live-pr-verification.json: OK\nlatest-pr-body-section.md: OK\nlocalization-runtime-context.json: OK\nmanifest.json: OK\nprior-window-lineage.json: OK\nselection-boundary.jsonl: OK\nsource-contexts.jsonl: OK",
+  "tree": "016587d26f04d2920a30878236f1933a57e27901",
+  "verificationPassed": true
+}

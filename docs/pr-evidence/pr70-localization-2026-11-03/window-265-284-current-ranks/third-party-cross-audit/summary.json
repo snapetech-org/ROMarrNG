@@ -1,0 +1,721 @@
+{
+  "callerPathHoldCells": 168,
+  "callerPathHoldPositions": [
+    269,
+    270,
+    271,
+    272,
+    273,
+    274,
+    275,
+    276,
+    277,
+    278,
+    279,
+    280,
+    281,
+    282
+  ],
+  "cellCount": 240,
+  "directCallerBackedCells": 72,
+  "directCallerBackedPositions": [
+    265,
+    266,
+    267,
+    268,
+    283,
+    284
+  ],
+  "dispositionCounts": {
+    "accept-current": 38,
+    "correction": 33,
+    "hold": 168,
+    "refinement": 1
+  },
+  "head": "c135c4729582817273c946891186ab4ea87467b5",
+  "inputLineage": {
+    "anomaly": null,
+    "blindChecksumListHashMatchesCurrentInput": true,
+    "blindDeclaredChecksumListSha256": "6a9a1ccec32c9598788c46f06a7edeff7211fb22b8e74cf0c777962e8ac67aae",
+    "blindDeclaredManifestJsonSha256": "d8c2d6ce7a0e4c146702cb25d4ba42bbb5eddb813790a4e27a49017f4fc9123d",
+    "blindLedgerSha256": "8354ae6e8e0bd0fc2ceacc6d876bbd152dcfe5f4ec046b8591fd0e07d990970d",
+    "blindManifestJsonHashMatchesCurrentInput": true,
+    "blindPerRowCallerContextHashesMatched": 240,
+    "blindPerRowInputHashMatches": true,
+    "blindPerRowInputRowsMatched": 240,
+    "blindProvenanceHashesMatchCurrentInput": true,
+    "blindSealSha256": "9c67ab24a62f7fa5b81ee51806d44a3d9f98e082f153290a428f292ae271161c",
+    "candidateFreeChecksumListSha256": "6a9a1ccec32c9598788c46f06a7edeff7211fb22b8e74cf0c777962e8ac67aae",
+    "candidateFreeInputDirectory": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w265-284-candidate-free-20261103/input",
+    "candidateFreeManifestSha256": "d8c2d6ce7a0e4c146702cb25d4ba42bbb5eddb813790a4e27a49017f4fc9123d",
+    "primaryLedgerSha256": "7d27d3ddf56abb10be0df27db44be8169dda941248018d7956f55207d2893330"
+  },
+  "localeCount": 12,
+  "metadataValidation": {
+    "candidateFreeRowsChecked": 240,
+    "localeMetadataRowsChecked": 240,
+    "metadataChanged": false,
+    "reviewDecisionRowsChecked": 240,
+    "sourceAndTargetMarkupMetadataRowsChecked": 240
+  },
+  "pinnedStateVerificationSha256": "573784511247bca7344945070d104076017ee8a5f35c0f06fef59e72e02e257c",
+  "placeholderValidation": {
+    "currentCellsChecked": 240,
+    "dynamicProviderPlaceholderRows": 12,
+    "heldCellsRemainUntouched": 168,
+    "opaqueProviderPlaceholderPreserved": true,
+    "placeholderMismatches": 0,
+    "reconciledTargetsChecked": 72
+  },
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewComparison": {
+    "directCallerCellCount": 72,
+    "disagreementCellCount": 24,
+    "disagreementRows": [
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "Projekte stammen ausschließlich aus Ihrem eigenen Katalog. Als vollständig gilt, was ein Projekt angibt; es wird nichts geraten. Anfragen kommen von SeerrNG.",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "Projekte stammen ausschließlich aus Ihrem eigenen Katalog. Die Vollständigkeit richtet sich danach, was ein Projekt angibt; sie wird niemals geschätzt. Anfragen kommen von SeerrNG.",
+        "locale": "de",
+        "position": 265,
+        "primaryDisposition": "correction",
+        "primaryTarget": "Projekte stammen ausschließlich aus Ihrem eigenen Katalog. Die Vollständigkeit richtet sich danach, was ein Projekt angibt; sie wird niemals geschätzt. Anfragen kommen von SeerrNG.",
+        "rationale": "“Vorstellung” means an idea or imagination, not a guess. This keeps the project-declared completeness rule and corrects the German meaning.",
+        "sourceId": "ui.projects-come-from-your-own-catalogu.82063d8e45"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "परियोजनाएँ केवल आपके अपने कैटलॉग से आती हैं। पूर्णता वही है जो परियोजना बताती है; इसका कभी अनुमान नहीं लगाया जाता। अनुरोध SeerrNG से आते हैं।",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "परियोजनाएँ केवल आपके अपने कैटलॉग से आती हैं। पूर्णता परियोजना के बताए अनुसार ही होती है; इसका अनुमान नहीं लगाया जाता। अनुरोध SeerrNG से आते हैं।",
+        "locale": "hi",
+        "position": 265,
+        "primaryDisposition": "refinement",
+        "primaryTarget": "परियोजनाएँ केवल आपके अपने कैटलॉग से आती हैं। पूर्णता परियोजना के बताए अनुसार ही होती है; इसका अनुमान नहीं लगाया जाता। अनुरोध SeerrNG से आते हैं।",
+        "rationale": "The current Hindi is awkward and does not clearly express project-declared completeness without guessing. The revised copy preserves both clauses and uses Hindi punctuation.",
+        "sourceId": "ui.projects-come-from-your-own-catalogu.82063d8e45"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "Proyek hanya berasal dari katalog Anda sendiri. Kelengkapan mengikuti apa yang dinyatakan proyek, bukan tebakan. Permintaan berasal dari SeerrNG.",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "Proyek hanya berasal dari katalog Anda sendiri. Kelengkapan ditentukan oleh keterangan proyek, bukan perkiraan. Permintaan berasal dari SeerrNG.",
+        "locale": "id",
+        "position": 265,
+        "primaryDisposition": "correction",
+        "primaryTarget": "Proyek hanya berasal dari katalog Anda sendiri. Kelengkapan ditentukan oleh keterangan proyek, bukan perkiraan. Permintaan berasal dari SeerrNG.",
+        "rationale": "The current Indonesian mistranslates completeness as perfection and guess as a riddle. The revision restores the project-declared completeness meaning.",
+        "sourceId": "ui.projects-come-from-your-own-catalogu.82063d8e45"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "プロジェクトはご自身のカタログからのみ取得されます。完全性は各プロジェクトの申告に基づき、決して推測しません。リクエストは SeerrNG から届きます。",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "プロジェクトはご自身のカタログに登録されたものだけです。完全性は各プロジェクトが示す内容に基づき、推測しません。リクエストはSeerrNGから届きます。",
+        "locale": "ja",
+        "position": 265,
+        "primaryDisposition": "correction",
+        "primaryTarget": "プロジェクトはご自身のカタログに登録されたものだけです。完全性は各プロジェクトが示す内容に基づき、推測しません。リクエストはSeerrNGから届きます。",
+        "rationale": "The current Japanese lacks sentence boundaries and reads awkwardly. The revision makes the catalog-only and project-declared completeness statements clear.",
+        "sourceId": "ui.projects-come-from-your-own-catalogu.82063d8e45"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "项目仅来自您自己的目录。完整性以项目声明为准，绝不靠猜测。请求来自 SeerrNG。",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "项目仅来自您自己的目录。完整性以项目所声明的内容为准，绝不靠猜测。请求来自 SeerrNG。",
+        "locale": "zh-Hans",
+        "position": 265,
+        "primaryDisposition": "refinement",
+        "primaryTarget": "项目仅来自您自己的目录。完整性以项目所声明的内容为准，绝不靠猜测。请求来自 SeerrNG。",
+        "rationale": "The current copy uses non-Chinese punctuation and an awkward literal clause. The revision expresses the declared-completeness rule naturally.",
+        "sourceId": "ui.projects-come-from-your-own-catalogu.82063d8e45"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "項目僅來自您自己的目錄。完整性以專案聲明為準，絕不靠猜測。請求來自 SeerrNG。",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "專案僅來自您自己的目錄。完整性以專案所述為準，絕不靠猜測。請求來自 SeerrNG。",
+        "locale": "zh-Hant",
+        "position": 265,
+        "primaryDisposition": "refinement",
+        "primaryTarget": "專案僅來自您自己的目錄。完整性以專案所述為準，絕不靠猜測。請求來自 SeerrNG。",
+        "rationale": "The current Traditional Chinese uses Simplified punctuation and literal wording. The revision uses Traditional forms and preserves the source meaning.",
+        "sourceId": "ui.projects-come-from-your-own-catalogu.82063d8e45"
+      },
+      {
+        "blindDisposition": "accept-current",
+        "blindTarget": "Le chemin proposé",
+        "crossAuditDisposition": "accept-current",
+        "crossAuditTarget": "Le chemin proposé",
+        "locale": "fr",
+        "position": 266,
+        "primaryDisposition": "refinement",
+        "primaryTarget": "Chemin proposé",
+        "rationale": "The current target preserves the pinned source meaning and caller semantics; no change is selected.",
+        "sourceId": "ui.proposed-path.0e656434e8"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "प्रस्तावित पथ",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "प्रस्तावित फ़ाइल पथ",
+        "locale": "hi",
+        "position": 266,
+        "primaryDisposition": "refinement",
+        "primaryTarget": "प्रस्तावित फ़ाइल पथ",
+        "rationale": "The caller shows a filesystem path. The revised label makes that meaning explicit instead of suggesting a route.",
+        "sourceId": "ui.proposed-path.0e656434e8"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "Jalur yang diusulkan",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "Jalur berkas yang diusulkan",
+        "locale": "id",
+        "position": 266,
+        "primaryDisposition": "correction",
+        "primaryTarget": "Jalur berkas yang diusulkan",
+        "rationale": "The current “Jalan” means a road. This table shows a file path, so use “jalur berkas”.",
+        "sourceId": "ui.proposed-path.0e656434e8"
+      },
+      {
+        "blindDisposition": "refinement",
+        "blindTarget": "دليل إعداد موفّر الهوية {provider} (يفتح في علامة تبويب جديدة)",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "دليل إعداد موفّر الهوية {provider} (يُفتح في علامة تبويب جديدة)",
+        "locale": "ar",
+        "position": 267,
+        "primaryDisposition": "correction",
+        "primaryTarget": "دليل إعداد موفّر الهوية {provider} (يُفتح في علامة تبويب جديدة)",
+        "rationale": "This accessible OIDC help-link label should attach the opaque {provider} value to the identity-provider setup guide. The exact placeholder is preserved.",
+        "sourceId": "ui.provider-identity-provider-setup-gui.e0aaaa0ccd"
+      },
+      {
+        "blindDisposition": "refinement",
+        "blindTarget": "Guía de configuración del proveedor de identidad {provider} (se abre en una pestaña nueva)",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "Guía de configuración del proveedor de identidad {provider} (se abre en una pestaña nueva)",
+        "locale": "es",
+        "position": 267,
+        "primaryDisposition": "accept-current",
+        "primaryTarget": "{provider} Guía de configuración del proveedor de identidad (se abre en una pestaña nueva)",
+        "rationale": "The pinned OIDC help link needs a grammatical Spanish label with the provider value after the noun phrase; the exact placeholder is preserved.",
+        "sourceId": "ui.provider-identity-provider-setup-gui.e0aaaa0ccd"
+      },
+      {
+        "blindDisposition": "refinement",
+        "blindTarget": "ID プロバイダー {provider} の設定ガイド（新しいタブで開く）",
+        "crossAuditDisposition": "refinement",
+        "crossAuditTarget": "{provider} のIDプロバイダー設定ガイド（新しいタブで開きます）",
+        "locale": "ja",
+        "position": 267,
+        "primaryDisposition": "refinement",
+        "primaryTarget": "{provider} のIDプロバイダー設定ガイド（新しいタブで開きます）",
+        "rationale": "Use the standard technical term IDプロバイダー and a natural accessible-link label. Preserve the opaque provider value exactly.",
+        "sourceId": "ui.provider-identity-provider-setup-gui.e0aaaa0ccd"
+      },
+      {
+        "blindDisposition": "refinement",
+        "blindTarget": "ID 공급자 {provider} 설정 가이드 (새 탭에서 열립니다)",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "{provider} ID 공급자 설정 가이드 (새 탭에서 열립니다)",
+        "locale": "ko",
+        "position": 267,
+        "primaryDisposition": "correction",
+        "primaryTarget": "{provider} ID 공급자 설정 가이드 (새 탭에서 열립니다)",
+        "rationale": "The current literal “정체성 공급자” is unnatural for OIDC. Use ID 공급자 and preserve the opaque value.",
+        "sourceId": "ui.provider-identity-provider-setup-gui.e0aaaa0ccd"
+      },
+      {
+        "blindDisposition": "refinement",
+        "blindTarget": "Hướng dẫn thiết lập nhà cung cấp danh tính {provider} (mở trong tab mới)",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "Hướng dẫn thiết lập nhà cung cấp danh tính {provider} (mở trong tab mới)",
+        "locale": "vi",
+        "position": 267,
+        "primaryDisposition": "correction",
+        "primaryTarget": "Hướng dẫn thiết lập nhà cung cấp danh tính {provider} (mở trong tab mới)",
+        "rationale": "Move the dynamic provider value into a grammatical Vietnamese noun phrase and preserve it exactly.",
+        "sourceId": "ui.provider-identity-provider-setup-gui.e0aaaa0ccd"
+      },
+      {
+        "blindDisposition": "refinement",
+        "blindTarget": "身份提供者 {provider} 設定指南（在新分頁中開啟）",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "{provider} 身分提供者設定指南（在新分頁中開啟）",
+        "locale": "zh-Hant",
+        "position": 267,
+        "primaryDisposition": "correction",
+        "primaryTarget": "{provider} 身分提供者設定指南（在新分頁中開啟）",
+        "rationale": "The current target uses Simplified Chinese forms in a Traditional Chinese locale. Use Traditional terminology and punctuation; preserve the provider placeholder.",
+        "sourceId": "ui.provider-identity-provider-setup-gui.e0aaaa0ccd"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "Vorschlag des Anbieters · prüfen",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "Anbietervorschlag · prüfen",
+        "locale": "de",
+        "position": 268,
+        "primaryDisposition": "correction",
+        "primaryTarget": "Anbietervorschlag · prüfen",
+        "rationale": "The pinned confidence badge means provider-suggested content requiring review, not a provider rating. Use a concise review action.",
+        "sourceId": "ui.provider-suggestion-review.0111b979ee"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "प्रदाता का सुझाव · समीक्षा आवश्यक",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "प्रदाता का सुझाव · समीक्षा आवश्यक",
+        "locale": "hi",
+        "position": 268,
+        "primaryDisposition": "accept-current",
+        "primaryTarget": "प्रदाता सुझाव · समीक्षा",
+        "rationale": "The badge marks a provider suggestion that needs human review, not a provider rating. State the review requirement clearly.",
+        "sourceId": "ui.provider-suggestion-review.0111b979ee"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "プロバイダーの提案 · 要確認",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "プロバイダーの提案 · 要確認",
+        "locale": "ja",
+        "position": 268,
+        "primaryDisposition": "accept-current",
+        "primaryTarget": "プロバイダーの提案 · レビュー",
+        "rationale": "The badge means the provider suggested this match and it needs review. 要確認 conveys that status more clearly than the loanword レビュー.",
+        "sourceId": "ui.provider-suggestion-review.0111b979ee"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "공급자 제안 · 검토 필요",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "공급자 제안 · 검토 필요",
+        "locale": "ko",
+        "position": 268,
+        "primaryDisposition": "accept-current",
+        "primaryTarget": "공급자 제안 · 리뷰",
+        "rationale": "The badge means provider-suggested content needs human review, not a provider rating.",
+        "sourceId": "ui.provider-suggestion-review.0111b979ee"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "Đề xuất của nhà cung cấp · cần xem xét",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "Đề xuất của nhà cung cấp · cần xem xét",
+        "locale": "vi",
+        "position": 268,
+        "primaryDisposition": "refinement",
+        "primaryTarget": "Đề xuất từ nhà cung cấp · cần xem xét",
+        "rationale": "The current “đánh giá” can suggest a rating. The badge requires review of provider-suggested content.",
+        "sourceId": "ui.provider-suggestion-review.0111b979ee"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "تم نشر {count} من إدخالات ES-DE.",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "تم نشر {count} من إدخالات ES-DE.",
+        "locale": "ar",
+        "position": 284,
+        "primaryDisposition": "correction",
+        "primaryTarget": "تم نشر عناصر ES-DE: {count}.",
+        "rationale": "This count-bearing completion message needs grammatical Arabic word order. Preserve {count} exactly.",
+        "sourceId": "ui.published-count-es-de-entries.8e45db116a"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "{count} entrées ES-DE publiées.",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "Publication de {count} entrées ES-DE terminée.",
+        "locale": "fr",
+        "position": 284,
+        "primaryDisposition": "correction",
+        "primaryTarget": "Publication de {count} entrées ES-DE terminée.",
+        "rationale": "The source is a completion toast. Use grammatical feminine agreement for publication and preserve {count}.",
+        "sourceId": "ui.published-count-es-de-entries.8e45db116a"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "Sebanyak {count} entri ES-DE telah diterbitkan.",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "Sebanyak {count} entri ES-DE telah dipublikasikan.",
+        "locale": "id",
+        "position": 284,
+        "primaryDisposition": "correction",
+        "primaryTarget": "Sebanyak {count} entri ES-DE dipublikasikan.",
+        "rationale": "Reorder the quantity and verb into natural Indonesian. Preserve {count} and the meaning “entries”.",
+        "sourceId": "ui.published-count-es-de-entries.8e45db116a"
+      },
+      {
+        "blindDisposition": "correction",
+        "blindTarget": "Foram publicadas {count} entradas de ES-DE.",
+        "crossAuditDisposition": "correction",
+        "crossAuditTarget": "Foram publicadas {count} entradas de ES-DE.",
+        "locale": "pt-BR",
+        "position": 284,
+        "primaryDisposition": "correction",
+        "primaryTarget": "Foram publicados {count} itens do ES-DE.",
+        "rationale": "Preserve “entries” as entradas and use feminine agreement. Keep {count} exact.",
+        "sourceId": "ui.published-count-es-de-entries.8e45db116a"
+      }
+    ],
+    "dispositionDisagreementCellCount": 14,
+    "fullyMatchingDecisionCellCount": 48,
+    "targetDisagreementCellCount": 23
+  },
+  "reviewLimitations": [
+    "Machine-assisted language review is not qualified native-speaker approval.",
+    "No browser visual review is asserted by this cross-audit packet.",
+    "No repository edits, translations, PR updates, tests, builds, scans, CI, merges, releases or tags were performed."
+  ],
+  "reviewerDispositionCounts": {
+    "crossAudit": {
+      "accept-current": 38,
+      "correction": 33,
+      "hold": 168,
+      "refinement": 1
+    },
+    "independentBlind": {
+      "accept-current": 38,
+      "correction": 28,
+      "hold": 168,
+      "refinement": 6
+    },
+    "primary": {
+      "accept-current": 41,
+      "correction": 24,
+      "hold": 168,
+      "refinement": 7
+    }
+  },
+  "schemaVersion": 1,
+  "selectedChangeCount": 34,
+  "selectedChanges": [
+    {
+      "currentTarget": "Projekte kommen nur aus Ihrem eigenen Katalog. Vollständigkeit ist, was ein Projekt sagt, niemals eine Vorstellung. Anfragen kommen von SeerrNG.",
+      "locale": "de",
+      "position": 265,
+      "sourceId": "ui.projects-come-from-your-own-catalogu.82063d8e45",
+      "target": "Projekte stammen ausschließlich aus Ihrem eigenen Katalog. Die Vollständigkeit richtet sich danach, was ein Projekt angibt; sie wird niemals geschätzt. Anfragen kommen von SeerrNG.",
+      "targetSha256": "8b782fcccd6c6974aa5807633e0c95fb69cf5c032528605ee59f00891041d78d"
+    },
+    {
+      "currentTarget": "परियोजनाएं केवल अपने स्वयं के कैटलॉग से आती हैं. पूर्णता यह है कि एक परियोजना क्या कहती है, कभी एक अनुमान नहीं है. अनुरोध SeerrNG से आते हैं.",
+      "locale": "hi",
+      "position": 265,
+      "sourceId": "ui.projects-come-from-your-own-catalogu.82063d8e45",
+      "target": "परियोजनाएँ केवल आपके अपने कैटलॉग से आती हैं। पूर्णता परियोजना के बताए अनुसार ही होती है; इसका अनुमान नहीं लगाया जाता। अनुरोध SeerrNG से आते हैं।",
+      "targetSha256": "08b5a655c93257995f935ec71c8875f57c2b30196329725073fc56e10b8a5d57"
+    },
+    {
+      "currentTarget": "Proyek datang dari katalog Anda sendiri saja. kesempurnaan adalah apa yang ditunjukkan oleh proyek, tidak pernah satu teka-teki. permintaan datang dari SeerrNG.",
+      "locale": "id",
+      "position": 265,
+      "sourceId": "ui.projects-come-from-your-own-catalogu.82063d8e45",
+      "target": "Proyek hanya berasal dari katalog Anda sendiri. Kelengkapan ditentukan oleh keterangan proyek, bukan perkiraan. Permintaan berasal dari SeerrNG.",
+      "targetSha256": "f4e5c2da84f8cb4c5bd4e85505832b0b541bf9cf6ce1f7010bd27426413dbac1"
+    },
+    {
+      "currentTarget": "プロジェクトはあなたの独自のカタログから来るだけです 完全性はプロジェクトが述べているものです 決して推測ではありません リクエストはSeerrNGから来ています。",
+      "locale": "ja",
+      "position": 265,
+      "sourceId": "ui.projects-come-from-your-own-catalogu.82063d8e45",
+      "target": "プロジェクトはご自身のカタログに登録されたものだけです。完全性は各プロジェクトが示す内容に基づき、推測しません。リクエストはSeerrNGから届きます。",
+      "targetSha256": "68fecaedc641125d05d70e7ff9ff6ad2c980d6145640a13300fd6fc0d499894f"
+    },
+    {
+      "currentTarget": "项目仅来自您自己的目录. 完整性是项目所说的,永远不会猜测. 请求来自 SeerrNG。",
+      "locale": "zh-Hans",
+      "position": 265,
+      "sourceId": "ui.projects-come-from-your-own-catalogu.82063d8e45",
+      "target": "项目仅来自您自己的目录。完整性以项目所声明的内容为准，绝不靠猜测。请求来自 SeerrNG。",
+      "targetSha256": "b5a26ae746d4dcadc026f0532c376dac5a55bc00d27e26040918629f07da7c82"
+    },
+    {
+      "currentTarget": "項目僅來自您自己的目錄. 完整性是項目所說的,永遠不會猜測. 請求來自 SeerrNG。",
+      "locale": "zh-Hant",
+      "position": 265,
+      "sourceId": "ui.projects-come-from-your-own-catalogu.82063d8e45",
+      "target": "專案僅來自您自己的目錄。完整性以專案所述為準，絕不靠猜測。請求來自 SeerrNG。",
+      "targetSha256": "1a3ff8ce152c25802deb5b6500060a912fd4ca6b26ed51aeef54e1428006562c"
+    },
+    {
+      "currentTarget": "الطريق المقترح",
+      "locale": "ar",
+      "position": 266,
+      "sourceId": "ui.proposed-path.0e656434e8",
+      "target": "المسار المقترح",
+      "targetSha256": "ac43d468d805bd13fcafec2141640b21d46e25982fd63da2f6af31214cf4f7bd"
+    },
+    {
+      "currentTarget": "vorgeschlagene Pfad",
+      "locale": "de",
+      "position": 266,
+      "sourceId": "ui.proposed-path.0e656434e8",
+      "target": "Vorgeschlagener Pfad",
+      "targetSha256": "0231cf8c3e0a1e779b56820969f1351d4c5e8b452c9a2d51fab36718fda5904e"
+    },
+    {
+      "currentTarget": "El camino propuesto",
+      "locale": "es",
+      "position": 266,
+      "sourceId": "ui.proposed-path.0e656434e8",
+      "target": "Ruta propuesta",
+      "targetSha256": "61af3e0c177a903dddfaaf208d8e673607df1150d68f0879283d1ea651ad674e"
+    },
+    {
+      "currentTarget": "प्रस्तावित मार्ग",
+      "locale": "hi",
+      "position": 266,
+      "sourceId": "ui.proposed-path.0e656434e8",
+      "target": "प्रस्तावित फ़ाइल पथ",
+      "targetSha256": "9dbae7821ee42ebdaf033e347f601b2c9e595c5368f4809b1c20b9aa80bb3121"
+    },
+    {
+      "currentTarget": "Jalan yang diusulkan",
+      "locale": "id",
+      "position": 266,
+      "sourceId": "ui.proposed-path.0e656434e8",
+      "target": "Jalur berkas yang diusulkan",
+      "targetSha256": "57fa559f0853184467b5c1ee3d59a283ae026df26fd8e6fc197fe7d6312a798e"
+    },
+    {
+      "currentTarget": "提案された道",
+      "locale": "ja",
+      "position": 266,
+      "sourceId": "ui.proposed-path.0e656434e8",
+      "target": "提案されたパス",
+      "targetSha256": "1d093a9e84c5409ed788bb7e75a6427f3767067ab36231f0921e6a64dd2e6114"
+    },
+    {
+      "currentTarget": "Con đường đề xuất",
+      "locale": "vi",
+      "position": 266,
+      "sourceId": "ui.proposed-path.0e656434e8",
+      "target": "Đường dẫn đề xuất",
+      "targetSha256": "b1988c6edf062ed9a947fe6605e8e425af9c8998401f34a452ec8639d5eb315c"
+    },
+    {
+      "currentTarget": "{provider} دليل إعداد مزود الهوية (يفتح في علامة التبويب الجديدة)",
+      "locale": "ar",
+      "position": 267,
+      "sourceId": "ui.provider-identity-provider-setup-gui.e0aaaa0ccd",
+      "target": "دليل إعداد موفّر الهوية {provider} (يُفتح في علامة تبويب جديدة)",
+      "targetSha256": "2e53826297dbdb055a3e83e3a16c94310f353fc84a8eb9880e93b21795d7a29f"
+    },
+    {
+      "currentTarget": "{provider} Guía de configuración del proveedor de identidad (se abre en una pestaña nueva)",
+      "locale": "es",
+      "position": 267,
+      "sourceId": "ui.provider-identity-provider-setup-gui.e0aaaa0ccd",
+      "target": "Guía de configuración del proveedor de identidad {provider} (se abre en una pestaña nueva)",
+      "targetSha256": "6ea3872ac972e15a2f1802666f5184c575b9ed88e7fd7d2a51f220c210a32e54"
+    },
+    {
+      "currentTarget": "{provider} アイデンティティ プロバイダーの設定ガイド(新しいタブで開きます)",
+      "locale": "ja",
+      "position": 267,
+      "sourceId": "ui.provider-identity-provider-setup-gui.e0aaaa0ccd",
+      "target": "{provider} のIDプロバイダー設定ガイド（新しいタブで開きます）",
+      "targetSha256": "2d54341d05c28ce26694473d44f203bcba0e10270d3485a70c250230cbe3c7ee"
+    },
+    {
+      "currentTarget": "{provider} 정체성 공급자 설정 가이드 (새 탭에서 열립니다)",
+      "locale": "ko",
+      "position": 267,
+      "sourceId": "ui.provider-identity-provider-setup-gui.e0aaaa0ccd",
+      "target": "{provider} ID 공급자 설정 가이드 (새 탭에서 열립니다)",
+      "targetSha256": "84ef85e1024932e82a7c244f8c2a25f9b54a8f29d3de4f23fcdeb9eae984d9c6"
+    },
+    {
+      "currentTarget": "{provider} hướng dẫn cài đặt nhà cung cấp danh tính (mở trong tab mới)",
+      "locale": "vi",
+      "position": 267,
+      "sourceId": "ui.provider-identity-provider-setup-gui.e0aaaa0ccd",
+      "target": "Hướng dẫn thiết lập nhà cung cấp danh tính {provider} (mở trong tab mới)",
+      "targetSha256": "8fafde09f1dcdd00a716638129dab8db106598a928410cd39a39e2f59eba1738"
+    },
+    {
+      "currentTarget": "{provider} 身份提供商設置指南(在新選項卡中打開)",
+      "locale": "zh-Hant",
+      "position": 267,
+      "sourceId": "ui.provider-identity-provider-setup-gui.e0aaaa0ccd",
+      "target": "{provider} 身分提供者設定指南（在新分頁中開啟）",
+      "targetSha256": "0238e401f0e84f8ac70b5641215c93376988067cb2f867d3da5ac77eeb740bb9"
+    },
+    {
+      "currentTarget": "Anbieter Vorschlag · Bewertung",
+      "locale": "de",
+      "position": 268,
+      "sourceId": "ui.provider-suggestion-review.0111b979ee",
+      "target": "Anbietervorschlag · prüfen",
+      "targetSha256": "29820608ce3307c4802bb718389df645d2d2b38c46a43046b3e879898113bd85"
+    },
+    {
+      "currentTarget": "Proveedor sugerencia · revisión",
+      "locale": "es",
+      "position": 268,
+      "sourceId": "ui.provider-suggestion-review.0111b979ee",
+      "target": "Sugerencia del proveedor · revisar",
+      "targetSha256": "4a8b614e559c1daf9e5db77afdeb4fae91eb4bac8817e6f4ae12f3d1cceddc80"
+    },
+    {
+      "currentTarget": "प्रदाता सुझाव · समीक्षा",
+      "locale": "hi",
+      "position": 268,
+      "sourceId": "ui.provider-suggestion-review.0111b979ee",
+      "target": "प्रदाता का सुझाव · समीक्षा आवश्यक",
+      "targetSha256": "aceb255ce1139a29e892ae7cf0fb3ffebae7c6cc85f02543d93996e827d332e2"
+    },
+    {
+      "currentTarget": "プロバイダーの提案 · レビュー",
+      "locale": "ja",
+      "position": 268,
+      "sourceId": "ui.provider-suggestion-review.0111b979ee",
+      "target": "プロバイダーの提案 · 要確認",
+      "targetSha256": "1cd7a01f53b501399365b72cf35f5b8cf836ba846b133df8c7cc2bffa8397513"
+    },
+    {
+      "currentTarget": "공급자 제안 · 리뷰",
+      "locale": "ko",
+      "position": 268,
+      "sourceId": "ui.provider-suggestion-review.0111b979ee",
+      "target": "공급자 제안 · 검토 필요",
+      "targetSha256": "2435d68381402d195d746c44c332edade37d608c9387bd6dd0d819c759f1b6d1"
+    },
+    {
+      "currentTarget": "Provedor sugestão · revisão",
+      "locale": "pt-BR",
+      "position": 268,
+      "sourceId": "ui.provider-suggestion-review.0111b979ee",
+      "target": "Sugestão do provedor · revisar",
+      "targetSha256": "c6565bce0d7cc226267ffff407cb7b58842ba247539617e0dfdd995c6f7be97b"
+    },
+    {
+      "currentTarget": "Nhà cung cấp đề xuất · đánh giá",
+      "locale": "vi",
+      "position": 268,
+      "sourceId": "ui.provider-suggestion-review.0111b979ee",
+      "target": "Đề xuất của nhà cung cấp · cần xem xét",
+      "targetSha256": "60322b03c6071611db53d3a0a060d4cb7d8a16f62e6f4fac227e392d6fc69bc0"
+    },
+    {
+      "currentTarget": "نشر ES-DE البيانات",
+      "locale": "ar",
+      "position": 283,
+      "sourceId": "ui.publish-es-de-data.0e81c10a08",
+      "target": "نشر بيانات ES-DE",
+      "targetSha256": "f2e07b887e3a2de2538a2bac82f88b77845e494804cd683b086d48f81fc52edc"
+    },
+    {
+      "currentTarget": "ES-DE Daten veröffentlichen",
+      "locale": "de",
+      "position": 283,
+      "sourceId": "ui.publish-es-de-data.0e81c10a08",
+      "target": "ES-DE-Daten veröffentlichen",
+      "targetSha256": "e5217bf08b297e57921be2574998a79806de3fa214b3e92312f1418e02678e13"
+    },
+    {
+      "currentTarget": "نشر {count} ES-DE الإدخالات.",
+      "locale": "ar",
+      "position": 284,
+      "sourceId": "ui.published-count-es-de-entries.8e45db116a",
+      "target": "تم نشر {count} من إدخالات ES-DE.",
+      "targetSha256": "fae78afe08e6957e7b237a7a5784de985bb0f5d7016f3c3254b4db3406752609"
+    },
+    {
+      "currentTarget": "Publicado {count} ES-DE entradas.",
+      "locale": "es",
+      "position": 284,
+      "sourceId": "ui.published-count-es-de-entries.8e45db116a",
+      "target": "Se publicaron {count} entradas de ES-DE.",
+      "targetSha256": "507deaaa7b206eaaac39e8ddf62f6222fb0d55b6b6b605b8f7c6f0484fe4cdcb"
+    },
+    {
+      "currentTarget": "Publié {count} ES-DE entrées.",
+      "locale": "fr",
+      "position": 284,
+      "sourceId": "ui.published-count-es-de-entries.8e45db116a",
+      "target": "Publication de {count} entrées ES-DE terminée.",
+      "targetSha256": "2c9c453fbf61392582b1a56e4e3d877cc4c09d7984d81daddb035fc69b1c2bf4"
+    },
+    {
+      "currentTarget": "Dipublikasikan {count} ES-DE entri.",
+      "locale": "id",
+      "position": 284,
+      "sourceId": "ui.published-count-es-de-entries.8e45db116a",
+      "target": "Sebanyak {count} entri ES-DE telah dipublikasikan.",
+      "targetSha256": "1fb2bef063cbf467a30da3e082495347bc45e7ac9f193c0e86eeca664a350d86"
+    },
+    {
+      "currentTarget": "출판된 {count} ES-DE 항목.",
+      "locale": "ko",
+      "position": 284,
+      "sourceId": "ui.published-count-es-de-entries.8e45db116a",
+      "target": "ES-DE 항목 {count}개를 게시했습니다.",
+      "targetSha256": "32ffa08b8c121f18d0659dcee031d35618507d962c08b969e0ffaf37e1be9b2d"
+    },
+    {
+      "currentTarget": "Publicado {count} ES-DE entradas.",
+      "locale": "pt-BR",
+      "position": 284,
+      "sourceId": "ui.published-count-es-de-entries.8e45db116a",
+      "target": "Foram publicadas {count} entradas de ES-DE.",
+      "targetSha256": "904f6e5c30424db94d3c189bfadd5cd82c7bd333d8f44dc42ebecb7b33e62ac5"
+    }
+  ],
+  "selectedChangesByPosition": {
+    "265": [
+      "de",
+      "hi",
+      "id",
+      "ja",
+      "zh-Hans",
+      "zh-Hant"
+    ],
+    "266": [
+      "ar",
+      "de",
+      "es",
+      "hi",
+      "id",
+      "ja",
+      "vi"
+    ],
+    "267": [
+      "ar",
+      "es",
+      "ja",
+      "ko",
+      "vi",
+      "zh-Hant"
+    ],
+    "268": [
+      "de",
+      "es",
+      "hi",
+      "ja",
+      "ko",
+      "pt-BR",
+      "vi"
+    ],
+    "283": [
+      "ar",
+      "de"
+    ],
+    "284": [
+      "ar",
+      "es",
+      "fr",
+      "id",
+      "ko",
+      "pt-BR"
+    ]
+  },
+  "sourceCount": 20,
+  "tree": "32c07150396335a5832b5664fc1e0225d7cebdc1",
+  "window": "W265-W284"
+}

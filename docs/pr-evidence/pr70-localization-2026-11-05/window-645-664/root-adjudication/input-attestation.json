@@ -1,0 +1,27 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+  "tree": "d6066baa3d03d3b4c6034e5af061fc4bc278b0f9",
+  "window": "W645-W664",
+  "cellCount": 240,
+  "candidateFreeInputChecksumListSha256": "15dd26e7614adb334b2c83ff9da791d56be8e9854a10f80d1200ee719422785c",
+  "candidateFreeInputManifestSha256": "1b3cb573d404fb83811edaa03a77234f8642e42fd1e994a3fdb08bb4d61e23b2",
+  "primaryOuterChecksumListSha256": "4d9306fb55c0918f2538a12a3f4e17845e90dfa58fe30acd7c3bba1e1d4ed451",
+  "primaryOutputChecksumListSha256": "854b2c2b2debfeacf6c663edd1454babd393d4f96476485087001cacf2149381",
+  "blindChecksumListSha256": "c35bf446c78e2a4ff5c60dd1fb0382dbc6776530998cbeac9e45cc923900a808",
+  "crossReviewChecksumListSha256": "0aa12cadb86c64b919ec492e6495b16e01cd52966d4f78f1d3f25eb69d58bbed",
+  "blindInputPinWarning": {
+    "blindSummaryCandidateFreeChecksumListSha256": "1ca785d57863dac9f0bb52e60b5966c55f758282cac7f9099c9056b256359ddb",
+    "currentCandidateFreeChecksumListSha256": "15dd26e7614adb334b2c83ff9da791d56be8e9854a10f80d1200ee719422785c",
+    "mismatch": true,
+    "blindPacketOwnChecksums": "PASS",
+    "all240BlindRowsBindToCurrentCandidateFreeInputs": true,
+    "allSixBlindProposalTargetsHashVerified": true,
+    "blindVerifier": "FAIL at candidate-free checksum-list equality assertion",
+    "crossReviewVerifier": "PASS_WITH_RECORDED_BLIND_INPUT_PIN_WARNING",
+    "disposition": "Keep the sealed blind packet unchanged. Record the stale top-level checksum pointer; use verified row-level source, current-target and caller hashes as documented by the independent cross-review."
+  },
+  "blindBindingFailures": []
+}

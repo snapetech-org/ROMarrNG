@@ -1,0 +1,24 @@
+{
+  "candidateFreeInput": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w405-424-candidate-free-20261103/input",
+  "candidateFreeManifestSha256": "9407fe320bba79cf4fbbdeaa54e4851c90f98d9b946391c11b0d6ac434540602",
+  "candidateFreeChecksumListSha256": "cfb7a47a4b5d208c52bf01cc1bb4972eb179059d975c3df83319d1ab064e915d",
+  "primaryPacket": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w405-424-primary-20261103/primary-review",
+  "primaryManifestSha256": "813dff8d7e14b77934219b3d14945d7bc75d14cdfbd469b509ff0bdd3c5e1311",
+  "primaryChecksumListSha256": "e140989af4f6af6a4fa5bc650067ebe4e6a415dafc6bc8ed3b035477d0462413",
+  "primaryLedgerSha256": "7eb951b21f0c1a04b6b691297ad909cb1cdec3d5e33bb73e963ad02c1907e9e2",
+  "blindPacket": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w405-424-blind-20261103",
+  "blindManifestSha256": "0a55b3089050faa6268ce3c59fc2803febe363a145b749a2dfa7b27e72581877",
+  "blindChecksumListSha256": "4ec66fa7b79953aa8cea3a63ed4d23b06d689dda1c357d39723fd07e59a2a172",
+  "blindLedgerSha256": "b35ca578bdeeabd0351823aa212f7cfa3200be736a056da8c356a21d722b4e63",
+  "head": "c146189f29db8fbd77d68dff0c33a0ab59a6b601",
+  "tree": "3db10f8b87577edd1167e4489524e6afbb50d556",
+  "catalogSha256": "77e2ac045c73402be177bc194ab758b9f8d2df70c7c91829089cd99a5a07a985",
+  "candidateFreeCurrentCellsSha256": "7c57574aee50968fa8fb5a428dd2df8917e5f9c759647c14bafa611bbac4156a",
+  "candidateFreeSourceContextsSha256": "2d5fdd85d8f8b7efdb0206c1ef2ca89494ce69e58afd7c59a0d41d8a23cea22e",
+  "primaryAndBlindSourceCurrentAndCallerHashesMatchCandidateFree": true,
+  "packetVerifiersBeforeAdjudication": {
+    "candidateFree": "PASS",
+    "primary": "PASS",
+    "blind": "PASS"
+  }
+}

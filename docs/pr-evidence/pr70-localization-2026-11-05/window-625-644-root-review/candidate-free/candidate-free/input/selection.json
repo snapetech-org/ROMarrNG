@@ -1,0 +1,265 @@
+{
+  "activeUniqueSourceIds": 479,
+  "catalogInsertionPositionsOneBased": [
+    626,
+    645
+  ],
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogMessageCount": 1836,
+  "cellCount": 240,
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "method": "Select catalog message insertion indices 625 through 644 (zero-based) from exact pinned ui-labels.json message key order; this differs from active source registry sort.",
+  "positions": [
+    625,
+    644
+  ],
+  "selectedSources": [
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 626,
+      "catalogZeroBasedIndex": 625,
+      "position": 625,
+      "registryLocations": [],
+      "source": "Manage your video games -- an open-source game library manager.",
+      "sourceId": "ui.manage-your-video-games-an-open-sour.7e51012df2",
+      "sourceSha256": "7e51012df2ae422b206920895baff49f8edf425caf4d8ebeb9ffac19b049767c"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 627,
+      "catalogZeroBasedIndex": 626,
+      "position": 626,
+      "registryLocations": [],
+      "source": "Managed in Prowlarr, shown here read-only. Add or remove them there and they appear or disappear from this list.",
+      "sourceId": "ui.managed-in-prowlarr-shown-here-read.15ef28afb0",
+      "sourceSha256": "15ef28afb08371b5f6ac183908b73e9a41f42834ecef1baf5ab0472aff90ae39"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 628,
+      "catalogZeroBasedIndex": 627,
+      "position": 627,
+      "registryLocations": [],
+      "source": "Management",
+      "sourceId": "ui.management.e51248773b",
+      "sourceSha256": "e51248773b9a3f59f75fe3ad6e5fe45a760035a7380d0b5ce46076c1dfc3735a"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 629,
+      "catalogZeroBasedIndex": 628,
+      "position": 628,
+      "registryLocations": [],
+      "source": "Management API",
+      "sourceId": "ui.management-api.60e425d8c3",
+      "sourceSha256": "60e425d8c33fe555a1444b86808376ce6726dd3d3ec9f4049c6a688cc7e3448c"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 630,
+      "catalogZeroBasedIndex": 629,
+      "position": 629,
+      "registryLocations": [],
+      "source": "Management API and indexer feeds are checked separately.",
+      "sourceId": "ui.management-api-and-indexer-feeds-are.dad15c1100",
+      "sourceSha256": "dad15c1100a54f7eb215b106467b1c33909a0071cb415b803de24e24d63a4698"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 631,
+      "catalogZeroBasedIndex": 630,
+      "position": 630,
+      "registryLocations": [],
+      "source": "Manual Import",
+      "sourceId": "ui.manual-import.3b797ce5ae",
+      "sourceSha256": "3b797ce5aed155876df1051d1112490bbaf483187b87985e588f29d01a0567fb"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 632,
+      "catalogZeroBasedIndex": 631,
+      "position": 631,
+      "registryLocations": [],
+      "source": "Manual only",
+      "sourceId": "ui.manual-only.be1016ce6d",
+      "sourceSha256": "be1016ce6ded1a1d0c3ef50b965cc567e44aac82cba0d31a58df0a9175a7163e"
+    },
+    {
+      "activeSourceRank": 186,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 633,
+      "catalogZeroBasedIndex": 632,
+      "position": 632,
+      "registryLocations": [
+        "romarr/ui.py:5500"
+      ],
+      "source": "Manually confirmed",
+      "sourceId": "ui.manually-confirmed.9b66efab12",
+      "sourceSha256": "9b66efab12024e48bf0614d34b730a43252b1354287573c34ef8e07b71eab45a"
+    },
+    {
+      "activeSourceRank": 185,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 634,
+      "catalogZeroBasedIndex": 633,
+      "position": 633,
+      "registryLocations": [
+        "romarr/organizer.py:1769"
+      ],
+      "source": "Manually confirmed by the library owner.",
+      "sourceId": "ui.manually-confirmed-by-the-library-ow.5b75fab860",
+      "sourceSha256": "5b75fab8606953804c43cbaccd24f6f2496a24aece688946994c7a74636d5483"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 635,
+      "catalogZeroBasedIndex": 634,
+      "position": 634,
+      "registryLocations": [],
+      "source": "Map the path a download client reports to the path ROMarr can see. Choose a client to keep SABnzbd and torrent paths separate, or use All download clients for a shared path. Client-specific mappings take precedence; within a scope, the longest matching prefix wins.",
+      "sourceId": "ui.map-the-path-a-download-client-repor.c6de45b83c",
+      "sourceSha256": "c6de45b83c563beea3de096b422656c2a56ede545d2f264845328210fae3965e"
+    },
+    {
+      "activeSourceRank": 187,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 636,
+      "catalogZeroBasedIndex": 635,
+      "position": 635,
+      "registryLocations": [
+        "romarr/ui.py:5097"
+      ],
+      "source": "Match DATs, cache shared metadata and artwork, and preview safe renames.",
+      "sourceId": "ui.match-dats-cache-shared-metadata-and.1454c1af0c",
+      "sourceSha256": "1454c1af0caf22766a11c0b98d0c1483fbdccfa19c485164dadeb9059ff1f3d1"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 637,
+      "catalogZeroBasedIndex": 636,
+      "position": 636,
+      "registryLocations": [],
+      "source": "Match your library server. RomM Structure A files as <root>/<platform>/<rom>; Structure B adds a roms/ level. Per-library overrides live on the Libraries page.",
+      "sourceId": "ui.match-your-library-server-romm-struc.f3b8e22f63",
+      "sourceSha256": "f3b8e22f63dc713fcee049d96d61118bab9aa5866cac75dcfc3eb48596ca1a3e"
+    },
+    {
+      "activeSourceRank": 188,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 638,
+      "catalogZeroBasedIndex": 637,
+      "position": 637,
+      "registryLocations": [
+        "romarr/ui.py:4025"
+      ],
+      "source": "Maximum size (MB)",
+      "sourceId": "ui.maximum-size-mb.02998adaa9",
+      "sourceSha256": "02998adaa9f35753f72dbf661e2d0807feccc21b76ee19b7c03fe1c1fd4e5bef"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 639,
+      "catalogZeroBasedIndex": 638,
+      "position": 638,
+      "registryLocations": [],
+      "source": "Media",
+      "sourceId": "ui.media.d357175cfe",
+      "sourceSha256": "d357175cfe8978d39b0f86552dcd9404973493e2816101d9ff6c05ee248ef6bd"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 640,
+      "catalogZeroBasedIndex": 639,
+      "position": 639,
+      "registryLocations": [],
+      "source": "Media Management",
+      "sourceId": "ui.media-management.672361697c",
+      "sourceSha256": "672361697c9bb8fbe2f0b6112600ad16b30daf5d9c68c78a6c69cd12c5bbd68d"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 641,
+      "catalogZeroBasedIndex": 640,
+      "position": 640,
+      "registryLocations": [],
+      "source": "Menu",
+      "sourceId": "ui.menu.99af6606ff",
+      "sourceSha256": "99af6606ff9d6cd5154d4d4e9c21e325086d3e904677cdb41d363c8a3480f862"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 642,
+      "catalogZeroBasedIndex": 641,
+      "position": 641,
+      "registryLocations": [],
+      "source": "Messages",
+      "sourceId": "ui.messages.04d7b48339",
+      "sourceSha256": "04d7b48339271ea67d3c8493e07e90bc68dc565485eebe5e0b67c21c1586e3c0"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 643,
+      "catalogZeroBasedIndex": 642,
+      "position": 642,
+      "registryLocations": [],
+      "source": "Metadata",
+      "sourceId": "ui.metadata.9eddf573cb",
+      "sourceSha256": "9eddf573cb509f1f62df633e25c052ac1b2a0ff9241e70223c77c73e834c0045"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 644,
+      "catalogZeroBasedIndex": 643,
+      "position": 643,
+      "registryLocations": [],
+      "source": "Metadata provider",
+      "sourceId": "ui.metadata-provider.fe3de0c7fb",
+      "sourceSha256": "fe3de0c7fbda30f73dc259f491e8d52c9e4e3cbe2b91a77d1c35df2f844ab7ea"
+    },
+    {
+      "activeSourceRank": 190,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 645,
+      "catalogZeroBasedIndex": 644,
+      "position": 644,
+      "registryLocations": [
+        "romarr/organizer.py:1625"
+      ],
+      "source": "Metadata provider title suggestion; confirm before renaming",
+      "sourceId": "ui.metadata-provider-title-suggestion-c.f44517c58a",
+      "sourceSha256": "f44517c58aec183e756d9236b9829c326ae70ec823bf00ead74c8687135c44d2"
+    }
+  ],
+  "sourceCount": 20,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "window": "W625-W644"
+}

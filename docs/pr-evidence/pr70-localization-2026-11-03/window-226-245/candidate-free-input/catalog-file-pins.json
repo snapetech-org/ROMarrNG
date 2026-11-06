@@ -1,0 +1,77 @@
+{
+  "callerFiles": {
+    "romarr/app.py": {
+      "byteCount": 417785,
+      "gitBlob": "1a6067d98a1e5c2c54c5af7c70a7f6cfeecedee5",
+      "lineCount": 8158,
+      "path": "romarr/app.py",
+      "sha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231"
+    },
+    "romarr/capture.py": {
+      "byteCount": 16480,
+      "gitBlob": "5a55c0767c8d036f69ebe1118bb65a26758e170d",
+      "lineCount": 395,
+      "path": "romarr/capture.py",
+      "sha256": "5b48057a80bf78ad8f16945dced479f26cfaa2cff80bc35e4b74cfeeeb7d6732"
+    },
+    "romarr/federation.py": {
+      "byteCount": 28125,
+      "gitBlob": "ec81b84cb9ca8f20f2ec0fcf6049fa87ea6bbc77",
+      "lineCount": 622,
+      "path": "romarr/federation.py",
+      "sha256": "7c27cc8b765bc2d3c9c4a8fe123a2eee5fa629592319aebf16ea542a204ca8a2"
+    },
+    "romarr/lists.py": {
+      "byteCount": 37191,
+      "gitBlob": "c657ce31f5de1aed0da9bc068e45ed2c3f646a98",
+      "lineCount": 862,
+      "path": "romarr/lists.py",
+      "sha256": "adf7d4e412d94b0796c2671ce14d191fa7e990ed7749fa229d405b38e3580de4"
+    },
+    "romarr/ui.py": {
+      "byteCount": 405689,
+      "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+      "lineCount": 6800,
+      "path": "romarr/ui.py",
+      "sha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71"
+    }
+  },
+  "clientCatalog": {
+    "byteCount": 3008156,
+    "gitBlob": "fa5d406b6391d49b55da4f227c19b131f001fa23",
+    "lineCount": 52714,
+    "path": "romarr/ui-labels.json",
+    "sha256": "18c9280bff2392dc5cbca82f0b02696b7f644c79165e802e242c81ac239c9366"
+  },
+  "head": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "schemaVersion": 1,
+  "sourceMessageIndex": {
+    "byteCount": 275911,
+    "gitBlob": "ea4ff095d4c9d60c175987926b852dddd1f6aa85",
+    "lineCount": 11870,
+    "path": "romarr/ui-source-messages.json",
+    "sha256": "612b3a664577c84e3fe60294929f2a97c8f103d2bfd58047aeecc6de348fd134"
+  },
+  "sourceSnapshot": {
+    "byteCount": 202889,
+    "gitBlob": "c6e8f3f93cb8784a25422526730b3c21f3f000a4",
+    "lineCount": 1839,
+    "path": "romarr/ui-source-snapshot.json",
+    "sha256": "b728cfb7d9e5b321b6ee4b99e315120b91fe4f7561b8b38d957189002d41d801"
+  },
+  "tree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc"
+}

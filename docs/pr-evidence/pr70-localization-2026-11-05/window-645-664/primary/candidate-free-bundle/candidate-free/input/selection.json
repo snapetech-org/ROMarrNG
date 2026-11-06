@@ -1,0 +1,265 @@
+{
+  "activeUniqueSourceIds": 479,
+  "catalogInsertionPositionsOneBased": [
+    646,
+    665
+  ],
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogMessageCount": 1836,
+  "cellCount": 240,
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "method": "Select catalog message insertion indices 645 through 664 (zero-based) from the exact pinned romarr/ui-labels.json message-key order; the catalog order is distinct from the active source registry sort.",
+  "positions": [
+    645,
+    664
+  ],
+  "selectedSources": [
+    {
+      "activeSourceRank": 192,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 646,
+      "catalogZeroBasedIndex": 645,
+      "position": 645,
+      "registryLocations": [
+        "romarr/ui.py:4024"
+      ],
+      "source": "Minimum seeders",
+      "sourceId": "ui.minimum-seeders.a78f3d2116",
+      "sourceSha256": "a78f3d21169ba99d3ca34fb9fed030e3d78261fd3758c4716f296c7d4a1b315e"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 647,
+      "catalogZeroBasedIndex": 646,
+      "position": 646,
+      "registryLocations": [],
+      "source": "Missing",
+      "sourceId": "ui.missing.6be36ca49e",
+      "sourceSha256": "6be36ca49ee85210c5d1ad9c377d90a9859c66d889110a2a5b0dccd390d12e20"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 648,
+      "catalogZeroBasedIndex": 647,
+      "position": 647,
+      "registryLocations": [],
+      "source": "Mon",
+      "sourceId": "ui.mon.f40d7f51f6",
+      "sourceSha256": "f40d7f51f69edfaffa29c42910fbc6af6a822f1279162d486b4a7e11c3e0ae9b"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 649,
+      "catalogZeroBasedIndex": 648,
+      "position": 648,
+      "registryLocations": [],
+      "source": "Moonlight host",
+      "sourceId": "ui.moonlight-host.52839edd11",
+      "sourceSha256": "52839edd11674b9527cf4f3dc29d462400aca65a1bafcb492f9c5a781c1087a7"
+    },
+    {
+      "activeSourceRank": 194,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 650,
+      "catalogZeroBasedIndex": 649,
+      "position": 649,
+      "registryLocations": [
+        "romarr/playability.py:1409"
+      ],
+      "source": "Moonlight pairing cannot be automated. The PIN is created by your Moonlight client, on your device -- no host API can produce it or skip it. Start pairing in Moonlight, read the PIN it shows you, and type it here.",
+      "sourceId": "ui.moonlight-pairing-cannot-be-automate.e1a9d014f9",
+      "sourceSha256": "e1a9d014f9e91246a933e83539213339eb3167c2e061e968133d6b2ed41da063"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 651,
+      "catalogZeroBasedIndex": 650,
+      "position": 650,
+      "registryLocations": [],
+      "source": "More",
+      "sourceId": "ui.more.d47d7cb0e4",
+      "sourceSha256": "d47d7cb0e4f8fd2be5ee07826694c18917d83ca77d0a01698582d05f432db996"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 652,
+      "catalogZeroBasedIndex": 651,
+      "position": 651,
+      "registryLocations": [],
+      "source": "More navigation options",
+      "sourceId": "ui.more-navigation-options.35329d50b4",
+      "sourceSha256": "35329d50b42eef12861b148c0181b812fb1a7da8b969284b916d08fc84dfefbe"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 653,
+      "catalogZeroBasedIndex": 652,
+      "position": 652,
+      "registryLocations": [],
+      "source": "More player options",
+      "sourceId": "ui.more-player-options.20bb9a4a10",
+      "sourceSha256": "20bb9a4a10d39df9a0e4b6623cc620ec313ef3c06a1108f5b61a6e946e6caa94"
+    },
+    {
+      "activeSourceRank": 196,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 654,
+      "catalogZeroBasedIndex": 653,
+      "position": 653,
+      "registryLocations": [
+        "romarr/ui.py:5412"
+      ],
+      "source": "Mount it on each client and point ES-DE at its shared gamelists and media folders.",
+      "sourceId": "ui.mount-it-on-each-client-and-point-es.a021b4cc73",
+      "sourceSha256": "a021b4cc73a632dac21b1ca25ef6a1bea8fc45473de69376569501417b5e785b"
+    },
+    {
+      "activeSourceRank": 197,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 655,
+      "catalogZeroBasedIndex": 654,
+      "position": 654,
+      "registryLocations": [
+        "romarr/organizer.py:1855"
+      ],
+      "source": "Multi-disc set is grouped for metadata; its disc files stay together",
+      "sourceId": "ui.multi-disc-set-is-grouped-for-metada.86db33ad47",
+      "sourceSha256": "86db33ad47d9baa6436ee1e7c92eb0b1386c5423f8d30e2b22df2555a3f0dc05"
+    },
+    {
+      "activeSourceRank": 198,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 656,
+      "catalogZeroBasedIndex": 655,
+      "position": 655,
+      "registryLocations": [
+        "romarr/ui.py:2724"
+      ],
+      "source": "Multiplayer",
+      "sourceId": "ui.multiplayer.563370a7b0",
+      "sourceSha256": "563370a7b0ef8fea32b1e01b441b507bcd6bae0b924205512c30c54ac1beca62"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 657,
+      "catalogZeroBasedIndex": 656,
+      "position": 656,
+      "registryLocations": [],
+      "source": "My library",
+      "sourceId": "ui.my-library.fbc3b89e6a",
+      "sourceSha256": "fbc3b89e6a661f7c5bec9c04eab3810a70357f5c80f041dd7520a614b289b1e8"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 658,
+      "catalogZeroBasedIndex": 657,
+      "position": 657,
+      "registryLocations": [],
+      "source": "NPSSO token",
+      "sourceId": "ui.npsso-token.11efa49e40",
+      "sourceSha256": "11efa49e40c9a0e17e037dea6feee272a142b5fb54a3020088811c969d44f259"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 659,
+      "catalogZeroBasedIndex": 658,
+      "position": 658,
+      "registryLocations": [],
+      "source": "NZB Folder",
+      "sourceId": "ui.nzb-folder.2135b64c1c",
+      "sourceSha256": "2135b64c1c048969172bd50b131abd809c1668a27c694bd7c44bf938bc979bf1"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 660,
+      "catalogZeroBasedIndex": 659,
+      "position": 659,
+      "registryLocations": [],
+      "source": "NZBHydra2's Newznab endpoint. Use /torznab/api instead if you want its torrent results.",
+      "sourceId": "ui.nzbhydra2-s-newznab-endpoint-use-tor.e3a412a0fa",
+      "sourceSha256": "e3a412a0fa56251ec46eacd516049e7701e9d42587cd7a9f95c9a6338c15bc6a"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 661,
+      "catalogZeroBasedIndex": 660,
+      "position": 660,
+      "registryLocations": [],
+      "source": "NZBVortex calls categories groups. The group must already exist.",
+      "sourceId": "ui.nzbvortex-calls-categories-groups-th.b96c9738db",
+      "sourceSha256": "b96c9738db0df83d99cae1acd44e4f0ed178a2c30c5bbcbe7c9c8f532cc34e59"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 662,
+      "catalogZeroBasedIndex": 661,
+      "position": 661,
+      "registryLocations": [],
+      "source": "NZBVortex serves HTTPS with a certificate it made for itself, so this is off by default. Turn it on if you have put a real certificate in front of it.",
+      "sourceId": "ui.nzbvortex-serves-https-with-a-certif.f26b57e15b",
+      "sourceSha256": "f26b57e15baf04fc23f97305225ae75379b5d828b7223fe656d0fe7f30b2b1e2"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 663,
+      "catalogZeroBasedIndex": 662,
+      "position": 662,
+      "registryLocations": [],
+      "source": "NZBVortex → Preferences → API. It is never sent: it is hashed with a nonce from each side.",
+      "sourceId": "ui.nzbvortex-preferences-api-it-is-neve.8dc5509444",
+      "sourceSha256": "8dc55094445f937ac1894d9ededbbf2c556e71100eb59eed413f9a4f987b6cdc"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 664,
+      "catalogZeroBasedIndex": 663,
+      "position": 663,
+      "registryLocations": [],
+      "source": "Name",
+      "sourceId": "ui.name.dcd1d5223f",
+      "sourceSha256": "dcd1d5223f73b3a965c07e3ff5dbee3eedcfedb806686a05b9b3868a2c3d6d50"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 665,
+      "catalogZeroBasedIndex": 664,
+      "position": 664,
+      "registryLocations": [],
+      "source": "Name A–Z",
+      "sourceId": "ui.name-az.7ed9662907",
+      "sourceSha256": "7ed96629073e830595066fabbde534505207b7da69f935d0a8c6a9daa0ff14ed"
+    }
+  ],
+  "sourceCount": 20,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "window": "W645-W664"
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/romarrng",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "reviewedBaseHead": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "applicationCommit": "e3d843b6c190f03ad8e5292bc60bfffb912ab9fe",
+  "applicationTree": "166cf0cb82d990ca86f32f62f2cd24963abed882",
+  "livePullRequestHead": "e3d843b6c190f03ad8e5292bc60bfffb912ab9fe",
+  "verificationMode": "exact-head post-push ref check",
+  "verifiedCells": 240,
+  "decisionCounts": {
+    "accept-current": 125,
+    "correction": 75,
+    "refinement": 40
+  },
+  "crossAuditResolutionCounts": {
+    "agreement": 74,
+    "blind_selected": 12,
+    "primary_selected": 154
+  },
+  "updatedCells": 115,
+  "updatedCatalogFiles": 1,
+  "priorHoldsPreserved": 288,
+  "newHolds": 0,
+  "rank368CellsReviewed": 12,
+  "nonTargetChanges": 0,
+  "catalogKeyOrderPreserved": true,
+  "catalogFileSha256": "c5e6e3f722cdafb9082e75f7e6253dbb0d1af3f032bbbef52c713dc73b281a1a",
+  "workflowFilesTouched": false,
+  "testsBuildsScansCi": "not run",
+  "browserAndNativeSpeakerReview": "pending",
+  "mergeReleaseTag": "not performed",
+  "diffCheckNote": "Sealed cross-audit builder retained byte-for-byte; one EOF blank line warning is documented in README."
+}

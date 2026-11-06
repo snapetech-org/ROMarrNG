@@ -1,0 +1,14 @@
+{
+  "repo": "snapetech-org/ROMarrNG",
+  "pr": 70,
+  "baseHead": "50bb70837512bb5abcf53c89b01031aa9a321321",
+  "baseTree": "c88c97301c042747bd5e183daff21d7d255d4cfc",
+  "candidateFileSha256": "ba620cd2695f361e118da395b4d490e9560093326dcae4e82043fbabc6acfc99",
+  "agentCrossReviewSha256": "9d7d1e331b1e21e6628a3d7fbc896fefa78269d4dcb519cb2947f762a22e8ed4",
+  "reviewedCells": 24,
+  "accepted": 21,
+  "refined": 3,
+  "held": 0,
+  "allTargetHashesAndPlaceholders": "matched",
+  "nativeSpeakerApproval": false
+}

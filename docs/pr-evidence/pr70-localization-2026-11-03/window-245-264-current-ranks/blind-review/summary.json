@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "tree": "016587d26f04d2920a30878236f1933a57e27901",
+  "window": "W245-W264",
+  "candidateFreeInputChecksumFileSha256": "285dec16fb9be7081b023d153cddc43ce794478de87c377bc3c4681634491eef",
+  "cellCount": 240,
+  "sourceCount": 20,
+  "localeCount": 12,
+  "semanticDispositions": {
+    "accept-current": 224,
+    "correction": 14,
+    "refinement": 2
+  },
+  "callerPathHoldCells": 72,
+  "callerPathHoldPositions": [
+    248,
+    249,
+    256,
+    257,
+    258,
+    259
+  ],
+  "callerPathHoldsDoNotEqualSemanticHolds": true,
+  "semanticHoldCount": 0,
+  "placeholderTokenMultisetMismatchCount": 0,
+  "placeholderOrderChangedCount": 4,
+  "candidateProposalsIncluded": false,
+  "candidateProposalSeen": false,
+  "qualifiedNativeSpeakerApproval": false,
+  "releaseApproved": false,
+  "method": "Independent blind assessment of current catalog values against the candidate-free pinned source/caller/runtime packet; no primary ledger or candidate target was read."
+}

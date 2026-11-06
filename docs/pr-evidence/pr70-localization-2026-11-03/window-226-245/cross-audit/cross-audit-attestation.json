@@ -1,0 +1,94 @@
+{
+  "blind": {
+    "checksumManifestMatchesSeal": true,
+    "checksumManifestSha256": "109daec7d646044b1566b75e05874366a7252526eb45bfd0ee50c8e96e6af056",
+    "checksumsPass": true,
+    "decisionsSha256": "8abe8a3b79659b5bb55a06dd09a94ff15235aa94bdb60b67d5e36d2769d6a4c6",
+    "directory": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w226-245-blind-20261103",
+    "outputManifestMatchesSeal": true,
+    "summary": {
+      "accept-current": 168,
+      "correction/refinement proposal": 24,
+      "hold": 48
+    }
+  },
+  "candidateFreePacket": {
+    "checksumManifestSha256": "68f5f2d323b726d78ae5f949e84024ac9ae39dd592a63dab26637d57da945c36",
+    "checksumsPass": true,
+    "directory": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w226-245-candidate-free-20261103/input",
+    "manifestHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+    "manifestTree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc"
+  },
+  "counts": {
+    "accept-current": 171,
+    "correction": 17,
+    "hold": 26,
+    "refinement": 14,
+    "retire-source-entry": 12
+  },
+  "date": "2026-11-03",
+  "diffEvidence": "worktree.diff",
+  "host": "kspld0",
+  "limitations": [
+    "No tests/builds/CI were run.",
+    "Language recommendations remain machine-assisted; no native-speaker approval is claimed.",
+    "Worktree has pre-existing uncommitted changes; this audit made no repository or PR edits."
+  ],
+  "livePR": {
+    "branch": "task/localization-translation-review-20261030",
+    "draft": true,
+    "head": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+    "number": 70,
+    "remoteBranchHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+    "remotePullRefHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+    "state": "OPEN",
+    "tree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc",
+    "verifiedBy": [
+      "gh pr view 70 --repo snapetech-org/ROMarrNG",
+      "git ls-remote origin refs/heads/task/localization-translation-review-20261030 refs/pull/70/head"
+    ]
+  },
+  "primary": {
+    "checksumManifestSha256": "c46f4204f8f22f16cacc2304126017b4691db4e6dcef85f9fe2cd793750dbd69",
+    "checksumsPass": true,
+    "decisionsSha256": "7e6839ad907ba5ec86121b76bc53a6d88327582f0b64dad7d320b5749e4c35e5",
+    "directory": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w226-245-primary-20261103",
+    "summary": {
+      "accept-current": 160,
+      "correction": 20,
+      "hold": 48,
+      "refinement": 12
+    }
+  },
+  "recordType": "cross-audit-attestation",
+  "validation": {
+    "blindRows": 240,
+    "crossAuditRows": 240,
+    "currentTargetHashMismatches": [],
+    "inputRows": 240,
+    "pinMismatches": [],
+    "primaryBlindProposalAgreementCount": 4,
+    "primaryRows": 240,
+    "proposalHashMismatches": [],
+    "protectedLiteralDiscrepancies": [
+      {
+        "blindDisposition": "accept-current",
+        "cell": [
+          227,
+          "ar"
+        ],
+        "finding": "Primary protected-literal check lists TitleDB only and its proposed Arabic target drops ID. Blind ledger marks both ID and TitleDB protected and accepts current. Cross-audit keeps current until a candidate preserving ID is approved.",
+        "literal": "ID",
+        "primaryCandidate": "لا يوجد معرّف في TitleDB"
+      }
+    ],
+    "recommendationConflictCount": 34,
+    "structuralMismatchesReportedByLedgers": 0,
+    "uniqueCells": 240
+  },
+  "worktree": "/mnt/disks/scratch/task-worktrees/localization-20261103/romarrng-pr70-w226-review-20261103",
+  "worktreeDiffSha256": "fe626fe75602d505a6e3e51234edea26dc1a85d467eeb6d9810d00eda67587e8",
+  "worktreeHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "worktreeStatus": "## HEAD (no branch)\n M romarr/app.py\n M romarr/federation.py\n M romarr/ui.py",
+  "worktreeTree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc"
+}

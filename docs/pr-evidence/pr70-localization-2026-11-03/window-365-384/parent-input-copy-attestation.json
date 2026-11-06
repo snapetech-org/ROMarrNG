@@ -1,0 +1,8 @@
+{
+  "canonicalInput": "window-365-384/candidate-free-input/",
+  "primaryVerifierInput": "../romarrng-pr70-w365-384-candidate-free-20261103/input/",
+  "head": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "tree": "3f42d41fe4bbb8edd921ff161e8298ca66038a91",
+  "reason": "The sealed primary verifier resolves its designated input at this sibling path.",
+  "byteForByteIdentical": true
+}

@@ -1,0 +1,89 @@
+{
+  "artifact": "ROMarrNG PR #70 W186-W205 clean localization review input",
+  "sealed": true,
+  "checksumNote": "manifest.json excludes itself and SHA256SUMS.txt; SHA256SUMS.txt covers every other packet file.",
+  "createdAtUtc": "2026-11-03T06:32:37.616891+00:00",
+  "files": [
+    {
+      "name": "README.txt",
+      "bytes": 792,
+      "sha256": "3c539914f7650bd101ec6360a4e6cfe69ea23be3ddb4a0c8872d8f5d2e11581a"
+    },
+    {
+      "name": "head-and-file-pins.json",
+      "bytes": 13834,
+      "sha256": "a35ba9d695ba54645f06dc0597fed0dc936c36c3ed7840164a579ff388ca678b"
+    },
+    {
+      "name": "next-window-boundary.json",
+      "bytes": 11785,
+      "sha256": "4d23d233ed0047efa2f81d5558c408c82149243dbeee88361258568f413d8b07"
+    },
+    {
+      "name": "review-input.jsonl",
+      "bytes": 161422,
+      "sha256": "e1f03c2d2874a81ab6c224cdd4a9ef36ebf4810b5ff9c4ecf2f86db67fc3fb5d"
+    },
+    {
+      "name": "selection.json",
+      "bytes": 3714,
+      "sha256": "687dc975793abd695794cb1410110ac9fb4efea9f4920d901e450b67124dd7c4"
+    },
+    {
+      "name": "source-context.jsonl",
+      "bytes": 55380,
+      "sha256": "3cd358b0f7c39525fb2d287047b625e4955bae85705a44cda083873434be70e7"
+    },
+    {
+      "name": "source-structure.jsonl",
+      "bytes": 6496,
+      "sha256": "a88ddc76538a917e6792c32251d1dcb4bfa4aecfa17487d2b36cebf28336e32c"
+    }
+  ],
+  "head": "55ee760ea9600f71cc27cba35e098a082445dac8",
+  "tree": "dbc192813f6347f4307ff8417d505624958eb321",
+  "inputPath": "review-input.jsonl",
+  "inputRows": 240,
+  "inputSha256": "e1f03c2d2874a81ab6c224cdd4a9ef36ebf4810b5ff9c4ecf2f86db67fc3fb5d",
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "sourceReferenceSearchUsed": true,
+  "searchedProductionCodeFileCount": 51,
+  "sourceContextRows": 20,
+  "sourceStructureRows": 20,
+  "scopeLimits": {
+    "containsCurrentTargets": true,
+    "containsReviewDispositions": false,
+    "containsTranslationCandidates": false,
+    "repositoryOrPullRequestEdited": false,
+    "automatedTestsBuildsScansCiOrBrowserRun": false
+  },
+  "window": {
+    "firstSourceOrdinal": 186,
+    "lastSourceOrdinal": 205,
+    "sourceCount": 20,
+    "locales": [
+      "es",
+      "zh-Hans",
+      "hi",
+      "de",
+      "ja",
+      "fr",
+      "pt-BR",
+      "ar",
+      "ko",
+      "zh-Hant",
+      "vi",
+      "id"
+    ],
+    "cellCount": 240
+  },
+  "callerContext": {
+    "resolvedAtExactHead": true,
+    "callerPresentSourceCount": 20,
+    "callerAbsentOrdinals": [],
+    "callerExistenceGatePassed": true
+  },
+  "nativeSpeakerApproved": false,
+  "automatedSecurityScanRun": false
+}

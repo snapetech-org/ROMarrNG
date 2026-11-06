@@ -1,0 +1,14 @@
+{
+  "pr": "https://github.com/snapetech-org/ROMarrNG/pull/70",
+  "state": "open",
+  "isDraft": true,
+  "headSha": "82dab5891702d9cef0adaa8199cc809c3b74fff9",
+  "actualBytes": 62872,
+  "actualSha256": "040f4de7fde0712ebbb79650cbbd8400a0b4407683a3301e020a53708129c7e0",
+  "expectedBytes": 62872,
+  "expectedSha256": "040f4de7fde0712ebbb79650cbbd8400a0b4407683a3301e020a53708129c7e0",
+  "actualMatchesExpected": true,
+  "originalBytes": 62029,
+  "originalSha256": "c41c2c61dddec362b8b3ccf73f5a5cb9311a7e3ad2daa8f32a8df3683245052b",
+  "originalIsExactPrefix": true
+}

@@ -1,0 +1,25 @@
+{
+  "capturedUtc": "2026-11-03T19:59:32.438649+00:00",
+  "commit": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "tree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "parent": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+  "subject": "Apply reviewed UI translations W425-W444",
+  "changedPaths": [
+    "romarr/ui-labels.json"
+  ],
+  "remoteBranchRef": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "pullRef": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "localHead": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "localTree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "localStatusClean": true,
+  "diffNumstat": "d5ba7f1f268501f45227388c46d5f938ed0c9191\n46\t46\tromarr/ui-labels.json",
+  "prState": "OPEN",
+  "isDraft": true,
+  "bodyMarker": "<!-- ROMARRNG-PR70-W425-W444-APPLIED: d5ba7f1f268501f45227388c46d5f938ed0c9191 -->",
+  "bodyMarkerCount": 1,
+  "finalRemoteRecheckUtc": "2026-11-03T20:00:30.205141+00:00",
+  "remoteTreeSha": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "remoteTreePathBlob": "9d908628a34f0f4b9e1e01457b6a932e19d14061",
+  "catalogFileBlob": "9d908628a34f0f4b9e1e01457b6a932e19d14061",
+  "catalogFileSha256": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7"
+}

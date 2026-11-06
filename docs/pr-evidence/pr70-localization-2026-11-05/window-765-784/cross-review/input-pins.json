@@ -1,0 +1,44 @@
+{
+  "candidateFree": {
+    "checksumListSha256": "b551fcc26783d47666e4ec3c35946a314e2bf0b7374cf52acb1df54b027bcfe3",
+    "fileCount": 39,
+    "manifestSha256": "560edb5cbc160bc95e74888dee9506de7c37e2bd479ab3164887245253c5977f",
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w765-784-20261105/candidate-free"
+  },
+  "candidateFreeCellsSha256": "28314a3ed8b00f4db2d793c836d2a855b680ff18cc8c168379f9aee4f11b3c0c",
+  "candidateFreeInput": {
+    "checksumListSha256": "99969b73bc1c66e817385863593bef49d2164ce71a801e64e5021e501842414b",
+    "fileCount": 35,
+    "manifestSha256": "560edb5cbc160bc95e74888dee9506de7c37e2bd479ab3164887245253c5977f",
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w765-784-20261105/candidate-free/input"
+  },
+  "catalogOneBasedPositions": [
+    766,
+    785
+  ],
+  "catalogZeroBasedIndices": [
+    765,
+    784
+  ],
+  "exactCallerFilesRechecked": true,
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "primaryInputReferenceSha256": "15fb8854ce68ed6c7823593a65ec1129443f4d9d560117dd90add2fab2a85be5",
+  "primaryLedgerSha256": "c14a7fcded00061fb454444ad5db1f84638b3425f4b05dbfcbacf2f26d81e3c4",
+  "primaryManifestSha256": "3b316071a2643934714a6e3f116ba34e49a49dd6bb02b0680b355a30cdea9424",
+  "primaryProposalsSha256": "7524bacc0c02ff84ab5813918546c647f4f253ebe076c275a4dbe01b7a143909",
+  "primaryReview": {
+    "checksumListSha256": "86665242ccafb9d73781718d339c691e0e59aadc5b5f78cbfcd070f2eae20c1c",
+    "fileCount": 10,
+    "manifestSha256": "3b316071a2643934714a6e3f116ba34e49a49dd6bb02b0680b355a30cdea9424",
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w765-784-20261105/primary-review"
+  },
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewBasis": "Candidate-free exact-head current values and caller contexts independently adjudicated against the sealed primary ledger; no earlier-window recommendations were used.",
+  "schemaVersion": 1,
+  "sourceContextsSha256": "9d244314937105cdd19daf4affe7ce1e474e0587e50e7cd4250fcb7bbb9cb9a1",
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "window": "W765-W784",
+  "worktree": "/home/keith/Documents/code/.task-worktrees/localization-20261105/romarrng-w685",
+  "worktreeClean": true
+}

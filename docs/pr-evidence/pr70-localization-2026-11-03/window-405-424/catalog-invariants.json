@@ -1,0 +1,296 @@
+{
+  "baseHead": "c146189f29db8fbd77d68dff0c33a0ab59a6b601",
+  "baseTree": "3db10f8b87577edd1167e4489524e6afbb50d556",
+  "baseCatalogSha256": "77e2ac045c73402be177bc194ab758b9f8d2df70c7c91829089cd99a5a07a985",
+  "appliedCatalogSha256": "d99f6636fefae13497849d8a88046d0bd6bb62c0d906fc030b2cc6946d6cd603",
+  "catalogMessageCount": 1836,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "localeOrder": {
+    "en": {
+      "englishName": "English",
+      "nativeName": "English",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "source"
+    },
+    "ar": {
+      "englishName": "Arabic",
+      "nativeName": "العربية",
+      "direction": "rtl",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "az": {
+      "englishName": "Azerbaijani",
+      "nativeName": "Azərbaycanca",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "bg": {
+      "englishName": "Bulgarian",
+      "nativeName": "Български",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "bn": {
+      "englishName": "Bengali",
+      "nativeName": "বাংলা",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "cs": {
+      "englishName": "Czech",
+      "nativeName": "Čeština",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "da": {
+      "englishName": "Danish",
+      "nativeName": "Dansk",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "de": {
+      "englishName": "German",
+      "nativeName": "Deutsch",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "es": {
+      "englishName": "Spanish",
+      "nativeName": "Español",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "es-419": {
+      "englishName": "Latin American Spanish",
+      "nativeName": "Español (Latinoamérica)",
+      "direction": "ltr",
+      "status": "inherited",
+      "translationReview": "inherited"
+    },
+    "fa": {
+      "englishName": "Persian",
+      "nativeName": "فارسی",
+      "direction": "rtl",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "fr": {
+      "englishName": "French",
+      "nativeName": "Français",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "fr-CA": {
+      "englishName": "Canadian French",
+      "nativeName": "Français canadien",
+      "direction": "ltr",
+      "status": "inherited",
+      "translationReview": "inherited"
+    },
+    "he": {
+      "englishName": "Hebrew",
+      "nativeName": "עברית",
+      "direction": "rtl",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "hi": {
+      "englishName": "Hindi",
+      "nativeName": "हिन्दी",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "hu": {
+      "englishName": "Hungarian",
+      "nativeName": "Magyar",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "id": {
+      "englishName": "Indonesian",
+      "nativeName": "Bahasa Indonesia",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "it": {
+      "englishName": "Italian",
+      "nativeName": "Italiano",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "ja": {
+      "englishName": "Japanese",
+      "nativeName": "日本語",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "kk": {
+      "englishName": "Kazakh",
+      "nativeName": "Қазақша",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "ko": {
+      "englishName": "Korean",
+      "nativeName": "한국어",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "ms": {
+      "englishName": "Malay",
+      "nativeName": "Bahasa Melayu",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "nb": {
+      "englishName": "Norwegian Bokmål",
+      "nativeName": "Norsk bokmål",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "nl": {
+      "englishName": "Dutch",
+      "nativeName": "Nederlands",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "pl": {
+      "englishName": "Polish",
+      "nativeName": "Polski",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "pt": {
+      "englishName": "Portuguese",
+      "nativeName": "Português",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "pt-BR": {
+      "englishName": "Brazilian Portuguese",
+      "nativeName": "Português (Brasil)",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "pt-PT": {
+      "englishName": "European Portuguese",
+      "nativeName": "Português (Portugal)",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "ru": {
+      "englishName": "Russian",
+      "nativeName": "Русский",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "sv": {
+      "englishName": "Swedish",
+      "nativeName": "Svenska",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "th": {
+      "englishName": "Thai",
+      "nativeName": "ไทย",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "tr": {
+      "englishName": "Turkish",
+      "nativeName": "Türkçe",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "uk": {
+      "englishName": "Ukrainian",
+      "nativeName": "Українська",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "uz": {
+      "englishName": "Uzbek",
+      "nativeName": "Oʻzbekcha",
+      "direction": "ltr",
+      "status": "planned",
+      "translationReview": "not started"
+    },
+    "vi": {
+      "englishName": "Vietnamese",
+      "nativeName": "Tiếng Việt",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "zh-Hans": {
+      "englishName": "Simplified Chinese",
+      "nativeName": "简体中文",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "zh-Hant": {
+      "englishName": "Traditional Chinese",
+      "nativeName": "繁體中文",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    }
+  },
+  "availableLocales": [
+    "en",
+    "ar",
+    "de",
+    "es",
+    "es-419",
+    "fr",
+    "fr-CA",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "changedTranslationCellCount": 26,
+  "expectedChangeCount": 26,
+  "changedTranslationHashes": "none; draft rows retain existing review metadata exactly",
+  "translationStatusUnchanged": true,
+  "translationReviewUnchanged": true,
+  "translationHashesUnchanged": true,
+  "sourceAndSourceHashUnchanged": true,
+  "workflowsUnchanged": true,
+  "priorCarryHoldCount": 288,
+  "currentHoldCount": 48
+}

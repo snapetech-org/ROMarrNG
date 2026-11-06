@@ -1,0 +1,21 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W146-W165",
+  "head": "db895a97e9871952a0b952e1d119e32e06cf168d",
+  "tree": "f1edf8319eb3dbd29ac5fe1e279216c5b96ecc6a",
+  "inputSha256": "d649bb321a80fbbf28bf3aae88266db04f4f3e839a4c0f33ab4f84d24d26c83d",
+  "rows": 240,
+  "dispositions": {
+    "refinement": 19,
+    "accept-current": 178,
+    "correction": 31,
+    "hold-context": 12
+  },
+  "callerAbsentHoldCells": 12,
+  "proposalCells": 50,
+  "placeholderMismatches": 0,
+  "protectedLiteralMismatches": 0,
+  "blindBoundary": "Candidate-free review completed before inspecting any proposed translation text or review ledgers. Aggregate summaries and changed-cell source/hash metadata were inadvertently displayed before review; see disclosure in every row. Strict blinding is not claimed.",
+  "repoOrPrMutated": false
+}

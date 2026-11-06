@@ -1,0 +1,19 @@
+# ROMarrNG cross-review source context
+
+Pinned catalog/source commit: 1adc54cb56dd91731b24e402027476855702f04d
+Tree: 76792bcafecfb1c9243a1352f638e2f21c0bad0b
+
+`romarr/app.py:1566-1572` returns `loading: True` and the message `Reading the library from {where}…` while the cached game list is not loaded. `where` is the configured library server name(s) or the configured game library name. This is a loading status, not an imperative.
+
+`romarr/app.py:5420-5425` returns the message `no library configured` when `self.game_libraries` is empty. The adjacent source is explicitly the game's configured library list, not a public/book library.
+
+`romarr/ui.py:5317-5319` renders the visible `Acquire → Verify → File → Scan → Play` pipeline. The exact line with `File` is 5317 (the candidate pointer's stated 5319 is two lines lower in this pinned source). `romarr/ui.py:5326` describes importing a folder and letting ROMarr identify and file its contents; `romarr/ui.py:5327` describes organizing a library; these clarify `File` as a process step that stores/organizes identified games in the library.
+
+`romarr/ui.py:5329` renders the `Work toward a complete set` card title, with the adjacent description `Load a DAT and see verified titles and collection progress.` This is a goal to complete a DAT-defined game set, not a generic set/collection.
+
+Pinned source file hashes:
+- `romarr/ui-labels.json`, Git blob `cd790e50d5183962fa90ec7de2058894af12b9aa`, SHA-256 `a9ed76e98a6e22d4974e164aa1d99e3914afd954eee0a9d91701e79d46d90359`.
+- `romarr/app.py`, Git blob `00efadefa23d905d8af3330a85ca3436c4c6128d`, SHA-256 `acd980b3e651dc0ea371e71ac66092c65f3375aa9aa83504897e9b8d7d6eeb08`.
+- `romarr/ui.py`, Git blob `aed3576f6b8508f6530fd45a0bbd79e4c3176998`, SHA-256 `5587ca39f263715f14e3f050c411177412df7f1dcf183edc4ef598370b5ed6c8`.
+
+No ROMarr files were changed. The candidate packet's adjacent state file was not copied into this evidence bundle.

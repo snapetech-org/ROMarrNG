@@ -1,0 +1,39 @@
+{
+  "blindLedgerSha256": "46a21c4335cda9e73ab7b558fa83726c30966b9d5e2affb7454b6b6a55a036d7",
+  "blindSealSha256": "a4e23d38cd477f263a0779ba836a6182c100b420d8555dc62ef5013005a26093",
+  "candidateFreeChecksumsFileSha256": "0de65e3297d73f4688a7582c1f5c9df261c669820e4013b39a506273c1465193",
+  "candidateFreeManifestSha256": "857ff470aac96220722ec2c2317bf7c8db3d0b91714a93cee9fed9c3292f915e",
+  "changedTargetRecommendations": 12,
+  "crossAuditLedgerSha256": "8dabd92989fe4859cd9bb57222af3988f64749b56814f5546f9c05c929aed785",
+  "divergences": 12,
+  "divergencesByPosition": {
+    "237": 10,
+    "241": 2
+  },
+  "finalDispositionCounts": {
+    "accept-current": 33,
+    "correction": 9,
+    "hold": 3,
+    "refinement": 3
+  },
+  "head": "e0cb91389334fe534ff44ccfc72cbb2c152a93b4",
+  "nativeSpeakerApproval": false,
+  "placeholderMarkupOrNumericMismatches": 0,
+  "preservedCallerFragmentHolds": 3,
+  "primaryLedgerSha256": "911edf2e49720833c416093cacea158cb62ce88d3621c18dd8a1a8b3abac6e51",
+  "protectedLiteralChecksPassed": 36,
+  "protectedLiteralCounts": {
+    "DAT": 12,
+    "No-Intro": 12,
+    "Redump": 12
+  },
+  "pullRequest": 70,
+  "recordType": "third-party-cross-audit-summary",
+  "releaseApproved": false,
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewedCells": 48,
+  "schemaVersion": 1,
+  "sourceCallerMismatches": 0,
+  "tree": "3876dd57816aaf75bb8b1a56a75a5045d216c461",
+  "window": "caller-follow-up positions 226, 232, 237, and 241"
+}

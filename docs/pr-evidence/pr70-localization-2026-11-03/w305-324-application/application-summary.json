@@ -1,0 +1,46 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W305-W324",
+  "baseHead": "9ecde2b300fea97e52846f274fbcae19cff1fcc5",
+  "baseTree": "df77009a42ee07366803f7553f6dcab25b62c638",
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogBeforeSha256": "ce7e12ffe1bcf520295dd7edbccf77ca992bb5d481b77d2a4daebd9b492ed690",
+  "catalogAfterSha256": "9c5e76009d59c0bcb3f83178c18a8687cfbaee31eb76f29c77e0e24495e11f76",
+  "sourceMessagesSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+  "sourceWindowCount": 20,
+  "directLocales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "cellCount": 240,
+  "selectedUpdates": 105,
+  "retainedCurrentValues": 135,
+  "holds": 0,
+  "nonTargetChanges": 0,
+  "placeholderMarkupNumericProtectedLiteralChecks": "passed",
+  "catalogStructureAndOrderedKeySets": "identical for root, all 1,836 message keys, all message field keys, and every translations locale-key sequence",
+  "inputs": {
+    "selectedChangesSha256": "6c43ed72b4736668be4a058549958d6998dff70690b2319146a55ffb9e56f5d4",
+    "rootApplicationAuthorizationSha256": "2cd0a8e1fea37c7434ebaf0c16726a4dd9d95c030f5a5a694938dc01a6aed5f6",
+    "reviewedPacketDigests": {
+      "candidateFreeChecksumListSha256": "fbb70c6cdfcae9d03afa3d9395c859b35f9db14f43c9cf3383cfd85a9c1a2b69",
+      "primaryChecksumListSha256": "e1532d00a015144be5f2b2ae50b318c7495b24a3975de2197324c7c1c1706db6",
+      "blindChecksumListSha256": "33d57dd82785d97c1da3112716a2f64c22dc294da82cce112b969e81ca3ab106",
+      "crossAuditLedgerSha256": "d0946d3421227f2bb247c605c6194b3e693d1cc523cb35d700b6ba5523da116d"
+    }
+  },
+  "nativeSpeakerApproval": false,
+  "browserReview": "pending",
+  "testsBuildsScansCI": "not run by instruction"
+}

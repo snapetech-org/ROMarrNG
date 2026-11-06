@@ -1,0 +1,344 @@
+{
+  "baseApiRefMismatch": true,
+  "baseApiSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "comparison": "same stable source IDs and exact quoted source/source-ID/HTML text searches over tracked production files under romarr; tests, docs, catalogs, and workflows excluded",
+  "mainHead": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+  "mainTree": "73a05379aa80fa629f69286338139247d2bfd849",
+  "prHead": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "prTree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+  "repository": "snapetech-org/ROMarrNG",
+  "results": [
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "60827326188473a0e73e9dc89e46eb82106dc2e818686415ef8c0eba1ae357ef",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "60827326188473a0e73e9dc89e46eb82106dc2e818686415ef8c0eba1ae357ef",
+      "sourceId": "ui.no-results-yet-your-library-server-f.6082732618",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": true,
+      "mainCallerCount": 0,
+      "mainCallerless": true,
+      "mainSourcePresent": false,
+      "mainSourceSha256": null,
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [
+        {
+          "lineText": "blocked.append({\"identity_id\": row.get(\"identity_id\"), \"reason\": \"No safe canonical title\"})",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/organizer.py"
+        }
+      ],
+      "prSourceSha256": "2968a7e7bad39b710b63ba1af3927b4ceae6badd23e9bdf7e59b1a427628e07b",
+      "sourceId": "ui.no-safe-canonical-title.2968a7e7ba",
+      "sourceSame": false
+    },
+    {
+      "contextDrift": true,
+      "mainCallerCount": 0,
+      "mainCallerless": true,
+      "mainSourcePresent": false,
+      "mainSourceSha256": null,
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [
+        {
+          "lineText": "+(rows?'<div style=\"overflow-x:auto\"><table><thead><tr><th>Current path</th><th>Proposed path</th><th>Evidence</th></tr></thead><tbody>'+rows+'</tbody></table></div>':'<p class=\"empty\">No safe renames are ready in this batch.</p>')",
+          "matchKind": "exact HTML text node",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "prSourceSha256": "45fe5b5767b3acc6a30021a1ed6452d45a8ef81035bb9b9f202e6b5567005968",
+      "sourceId": "ui.no-safe-renames-are-ready-in-this-ba.45fe5b5767",
+      "sourceSame": false
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "4f1fe282852803bd222d149d6bf06058d6019672e17147f8b47d242e8159b76d",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "4f1fe282852803bd222d149d6bf06058d6019672e17147f8b47d242e8159b76d",
+      "sourceId": "ui.no-set-is-being-acquired.4f1fe28285",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": true,
+      "mainCallerCount": 0,
+      "mainCallerless": true,
+      "mainSourcePresent": false,
+      "mainSourceSha256": null,
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [
+        {
+          "lineText": "resultsMarkup='<div class=\"empty\">'+(data.error?apiMessageMarkup(data.error):interfaceMarkup('No titles match these filters.'))+'</div>';",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "prSourceSha256": "a0f06fb7bb2c89040d798bd1f4218640adf4759b41a8b7d30059abea521afd39",
+      "sourceId": "ui.no-titles-match-these-filters.a0f06fb7bb",
+      "sourceSame": false
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 2,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "eef9a1aaabf9f94828bef85cb21773500cb1281be5cef9414dd22c2bd4669bff",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 2,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "eef9a1aaabf9f94828bef85cb21773500cb1281be5cef9414dd22c2bd4669bff",
+      "sourceId": "ui.no-usable-release-was-found-checked.eef9a1aaab",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "df6cd186de8dfe9a59a03ce981d988a7de420dae497f6cacccf7a541a665bbe4",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "df6cd186de8dfe9a59a03ce981d988a7de420dae497f6cacccf7a541a665bbe4",
+      "sourceId": "ui.no-intro-and-redump-checksums-with-t.df6cd186de",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 0,
+      "mainCallerless": true,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "c9bb03c1de2ab932c379da3508df5618089486aaa694e098de607ca3635739bf",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 0,
+      "prCallerless": true,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "c9bb03c1de2ab932c379da3508df5618089486aaa694e098de607ca3635739bf",
+      "sourceId": "ui.nobody-has-claimed-this-romarr-yet-s.c9bb03c1de",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": true,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "0ac3128cc5d8cc6204f29e7694b8e13f5626b78bdea0a1d4e9aacb590a11f182",
+      "newMainCallerSignatures": [
+        {
+          "lineText": "+ '<div class=\"sub\">Not an invitation</div>'",
+          "matchKind": "exact HTML text node",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "prCallerCount": 2,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [
+        {
+          "lineText": "+ '<div class=\"sub\" data-i18n=\"Not an invitation\">Not an invitation</div>'",
+          "matchKind": "exact HTML text node",
+          "path": "romarr/ui.py"
+        },
+        {
+          "lineText": "+ '<div class=\"sub\" data-i18n=\"Not an invitation\">Not an invitation</div>'",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "prSourceSha256": "0ac3128cc5d8cc6204f29e7694b8e13f5626b78bdea0a1d4e9aacb590a11f182",
+      "sourceId": "ui.not-an-invitation.0ac3128cc5",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "b40572aafd1526f6291b1990c754849361b16ab27adecf4b36a6ce568e568740",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "b40572aafd1526f6291b1990c754849361b16ab27adecf4b36a6ce568e568740",
+      "sourceId": "ui.not-announced.b40572aafd",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": true,
+      "mainCallerCount": 0,
+      "mainCallerless": true,
+      "mainSourcePresent": false,
+      "mainSourceSha256": null,
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [
+        {
+          "lineText": "<td><span class=\"dot ${ok?'up':'down'}\"></span>${interfaceMarkup(ok?'OK':'Not available')}</td>",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "prSourceSha256": "67a926f7008e2b0e7f2b3f7a4b37597834830110be1d51138f425d6f3449bc09",
+      "sourceId": "ui.not-available.67a926f700",
+      "sourceSame": false
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 2,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "c2d3260a1a45a17f938918ebf03826aa38c6ed39f684d23bbe4de2a08c561ca3",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 2,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "c2d3260a1a45a17f938918ebf03826aa38c6ed39f684d23bbe4de2a08c561ca3",
+      "sourceId": "ui.not-grabbed.c2d3260a1a",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "2a12f76cae18f7d7c4537df0970ca5ceb25893263e324b6c413666d1cb4b5f51",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "2a12f76cae18f7d7c4537df0970ca5ceb25893263e324b6c413666d1cb4b5f51",
+      "sourceId": "ui.not-identified.2a12f76cae",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": true,
+      "mainCallerCount": 0,
+      "mainCallerless": true,
+      "mainSourcePresent": false,
+      "mainSourceSha256": null,
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [
+        {
+          "lineText": "<td>${(v.base||{}).available?interfaceMarkup('In library'):'<span style=\"color:var(--dim)\">'+interfaceMarkup('Not in library')+'</span>'}</td></tr>`;",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "prSourceSha256": "c2f9e4fde96646a1969c0792c3f2688630247adaa25a18812240da6acfacc6ce",
+      "sourceId": "ui.not-in-library.c2f9e4fde9",
+      "sourceSame": false
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 2,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "d3400979d9d0ce79429a015d4725bf9adddca634c03a436a0aa50da1d15116ab",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 2,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "d3400979d9d0ce79429a015d4725bf9adddca634c03a436a0aa50da1d15116ab",
+      "sourceId": "ui.not-in-your-dat-often-perfectly-fine.d3400979d9",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 5,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "8a7525b1492fb84833f5c4a69b30f4bfbb134f9b666b61a2c1872d63d234c085",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 5,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "8a7525b1492fb84833f5c4a69b30f4bfbb134f9b666b61a2c1872d63d234c085",
+      "sourceId": "ui.notes.8a7525b149",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "6024bd4d3b40cba37eae9e09290b829b8540b59f6b24af3f65e0f49ca8924049",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "6024bd4d3b40cba37eae9e09290b829b8540b59f6b24af3f65e0f49ca8924049",
+      "sourceId": "ui.nothing-peered-for-netplay-only.6024bd4d3b",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "f73c4a5a85c3d4e56cf2bda22efe9b017bd5014f0cf2f014f563c4599281bb50",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "f73c4a5a85c3d4e56cf2bda22efe9b017bd5014f0cf2f014f563c4599281bb50",
+      "sourceId": "ui.nothing-blocked.f73c4a5a85",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "9647c5497c311168f5d10552b30a39aa29196467c6a004834dfce586952eb42c",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "9647c5497c311168f5d10552b30a39aa29196467c6a004834dfce586952eb42c",
+      "sourceId": "ui.nothing-dated-in-the-future.9647c5497c",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 2,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "cf40aad291fce41c3e0045a02972a32643aed2f21d5cfa51bce49c96712d9097",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 2,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "cf40aad291fce41c3e0045a02972a32643aed2f21d5cfa51bce49c96712d9097",
+      "sourceId": "ui.nothing-found-a-search-where-every-i.cf40aad291",
+      "sourceSame": true
+    }
+  ],
+  "selectedSourceCount": 20,
+  "sourceTextChanges": 5,
+  "sourcesMissingFromMain": 5,
+  "sourcesWithCallerContextDrift": 6,
+  "sourcesWithNewMainCallers": 1
+}

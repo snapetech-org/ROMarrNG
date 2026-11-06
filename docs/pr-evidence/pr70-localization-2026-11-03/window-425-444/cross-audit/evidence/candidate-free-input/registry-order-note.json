@@ -1,0 +1,40 @@
+{
+  "selectionBasis": "catalog JSON message-key insertion order",
+  "selectedCatalogZeroBasedIndices": [
+    425,
+    444
+  ],
+  "activeRegistryCount": 479,
+  "selectedIdsInActiveRegistry": 4,
+  "activeRegistryMatches": [
+    {
+      "sourceId": "ui.existing-es-de-gamelists-folder-opti.1659a3153e",
+      "activeRank": 108,
+      "registryLocations": [
+        "romarr/ui.py:3925"
+      ]
+    },
+    {
+      "sourceId": "ui.existing-es-de-media-folder-optional.dcc4281be8",
+      "activeRank": 109,
+      "registryLocations": [
+        "romarr/ui.py:3926"
+      ]
+    },
+    {
+      "sourceId": "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+      "activeRank": 110,
+      "registryLocations": [
+        "romarr/organizer.py:2275"
+      ]
+    },
+    {
+      "sourceId": "ui.explore-more-games-in-this-genre.ca9764a30b",
+      "activeRank": 111,
+      "registryLocations": [
+        "romarr/ui.py:2301"
+      ]
+    }
+  ],
+  "lineHintCaveat": "Active registry locations are metadata only; exact-head source text/key searches and hashed code excerpts are provided separately."
+}

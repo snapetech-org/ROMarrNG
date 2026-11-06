@@ -1,0 +1,13 @@
+{
+  "catalogFileBlob": "bfa7485c48286463e6e9528e81278b695ee92a19",
+  "catalogFileSha256": "86e6b3da1a4b07130678024de822ee4f921c98d587232c4d889e718711423c0b",
+  "changedPaths": [
+    "romarr/ui-labels.json"
+  ],
+  "commit": "cece9856c8886ad5f07d2358e9399075da8b5254",
+  "localStatusClean": true,
+  "parent": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+  "subject": "fix(i18n): apply ROMarrNG W445 localization [skip ci]",
+  "tree": "2b73ed0326786296a08270fd74a4d7f71217265e",
+  "worktreeStatusScope": "after catalog commit was pushed and before the docs evidence directory was created"
+}

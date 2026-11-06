@@ -1,0 +1,72 @@
+{
+  "activeUniqueSourceIdCount": 479,
+  "baseRef": "main",
+  "baseSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "boundaryPositions": [
+    284,
+    305
+  ],
+  "callerFileCount": 3,
+  "callerFiles": [
+    "romarr/app.py",
+    "romarr/organizer.py",
+    "romarr/ui.py"
+  ],
+  "callerPathHolds": {
+    "cells": 24,
+    "cellsByPosition": {
+      "286": 12,
+      "304": 12
+    },
+    "positions": [
+      286,
+      304
+    ]
+  },
+  "candidateFreeInputOnly": true,
+  "catalogMessageCount": 1836,
+  "cellCount": 240,
+  "currentTargetPlaceholderMismatches": 0,
+  "draft": true,
+  "head": "363601fd2597f0fb97adff97554e651c2bea2d99",
+  "headRef": "task/localization-translation-review-20261030",
+  "localWorktree": "/mnt/disks/scratch/task-worktrees/localization-20261103/romarrng-pr70-w265-apply-20261103",
+  "localWorktreeBranch": "",
+  "localWorktreeClean": true,
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "nativeSpeakerApproval": false,
+  "proposedTargetsIncluded": false,
+  "pullRequest": 70,
+  "pullRequestUrl": "https://github.com/snapetech-org/ROMarrNG/pull/70",
+  "remoteBranchHead": "363601fd2597f0fb97adff97554e651c2bea2d99",
+  "remotePullRefHead": "363601fd2597f0fb97adff97554e651c2bea2d99",
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewDecisionsIncluded": false,
+  "schemaVersion": 1,
+  "selectedPositions": [
+    285,
+    304
+  ],
+  "selectionRule": "Current one-based positions 285–304 among all 479 unique active source IDs sorted lexicographically by ID. Duplicate IDs are allowed only after exact source/hash agreement and caller-location union.",
+  "sourceContextRows": 20,
+  "sourceCount": 20,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "sourceIndexRecordCount": 479,
+  "state": "OPEN",
+  "tree": "1f8ada1746f53796e2b4a8f43f9a0075150aa5d7",
+  "window": "W285-W304"
+}

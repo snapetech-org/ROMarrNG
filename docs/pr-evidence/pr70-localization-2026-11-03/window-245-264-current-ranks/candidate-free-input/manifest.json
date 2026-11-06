@@ -1,0 +1,177 @@
+{
+  "activeUniqueSourceIdCount": 479,
+  "baseRef": "main",
+  "boundaryPositions": [
+    244,
+    265
+  ],
+  "callerFileCount": 4,
+  "callerFiles": [
+    "romarr/app.py",
+    "romarr/downloaders.py",
+    "romarr/hub.py",
+    "romarr/ui.py"
+  ],
+  "candidateFreeInputOnly": true,
+  "catalogMessageCount": 1836,
+  "cellCount": 240,
+  "currentSelectedPositions": [
+    245,
+    264
+  ],
+  "currentSelectedSourceCount": 20,
+  "filePins": [
+    {
+      "byteCount": 418446,
+      "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+      "lineCount": 8174,
+      "path": "romarr/app.py",
+      "sha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510"
+    },
+    {
+      "byteCount": 165965,
+      "gitBlob": "65952d7b8361fa3c6af742f675fde805ec361dd2",
+      "lineCount": 4044,
+      "path": "romarr/downloaders.py",
+      "sha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed"
+    },
+    {
+      "byteCount": 28457,
+      "gitBlob": "6260dd6cfe469eed9a593ea3f7c9967b92b4656b",
+      "lineCount": 683,
+      "path": "romarr/hub.py",
+      "sha256": "4d8207aa01f7a7810dd26f60b105eac14927042b3f652ab3a461a5efdc9bc9a7"
+    },
+    {
+      "byteCount": 3006046,
+      "gitBlob": "3b2de10075204ae35bdae5603892c207a7fdd74c",
+      "lineCount": 52665,
+      "path": "romarr/ui-labels.json",
+      "sha256": "06a18e32b5c22341e3b52b29bcf65182aee43842a2c427ad6443f4e3ad176173"
+    },
+    {
+      "byteCount": 273919,
+      "gitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+      "lineCount": 11790,
+      "path": "romarr/ui-source-messages.json",
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515"
+    },
+    {
+      "byteCount": 202767,
+      "gitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+      "lineCount": 1838,
+      "path": "romarr/ui-source-snapshot.json",
+      "sha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3"
+    },
+    {
+      "byteCount": 407495,
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "lineCount": 6827,
+      "path": "romarr/ui.py",
+      "sha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+    }
+  ],
+  "head": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "headRef": "task/localization-translation-review-20261030",
+  "holds": {
+    "byPosition": {
+      "248": 12,
+      "249": 12,
+      "256": 12,
+      "257": 12,
+      "258": 12,
+      "259": 12
+    },
+    "cells": 72,
+    "positions": [
+      248,
+      249,
+      256,
+      257,
+      258,
+      259
+    ]
+  },
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "nativeSpeakerApproval": false,
+  "previousWindowHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "previousWindowSelectedPositions": [
+    226,
+    245
+  ],
+  "previousWindowTree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc",
+  "previousWindowUniqueSourceCount": 480,
+  "proposedTranslationsIncluded": false,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "retiredOldRank": 242,
+  "retiredSourceId": "ui.or-load-no-intro-redump-dats-under.22540d7871",
+  "reviewDecisionsIncluded": false,
+  "schemaVersion": 1,
+  "selectionLineage": "The sealed old W226–W245 packet selected 226–245 from 480 unique IDs. Its old rank 242 was retired orphan no-comma DAT source ui.or-load-no-intro-redump-dats-under.22540d7871. The prior packet next-boundary old rank 246, Owned check unavailable, is the first unreviewed active ID at current rank 245.",
+  "selectionRule": "Current one-based active source-ID positions 245–264 at exact pinned head, sorted lexicographically by ID; duplicate IDs are merged only after identity/hash verification.",
+  "sourceContextRows": 20,
+  "sourceIdOrderHashFormat": "SHA-256 over all sorted unique active source IDs, one ID per line plus trailing newline.",
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "sourceIndexPath": "romarr/ui-source-messages.json",
+  "sourceIndexRecordCount": 479,
+  "sourceOrderLineage": [
+    {
+      "currentPosition": 240,
+      "oldPosition": 240,
+      "oldSourceId": "ui.optional-follow-ups.e3fee9a99c",
+      "presentInActiveCatalog": true
+    },
+    {
+      "currentPosition": 241,
+      "oldPosition": 241,
+      "oldSourceId": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa",
+      "presentInActiveCatalog": true
+    },
+    {
+      "currentPosition": null,
+      "oldPosition": 242,
+      "oldSourceId": "ui.or-load-no-intro-redump-dats-under.22540d7871",
+      "presentInActiveCatalog": false
+    },
+    {
+      "currentPosition": 242,
+      "oldPosition": 243,
+      "oldSourceId": "ui.organize-a-library-you-already-have.61369e08be",
+      "presentInActiveCatalog": true
+    },
+    {
+      "currentPosition": 243,
+      "oldPosition": 244,
+      "oldSourceId": "ui.outside-the-rom-root-and-mount-that.6deae8166d",
+      "presentInActiveCatalog": true
+    },
+    {
+      "currentPosition": 244,
+      "oldPosition": 245,
+      "oldSourceId": "ui.overwrite-an-existing-file.9d5f5484e6",
+      "presentInActiveCatalog": true
+    },
+    {
+      "currentPosition": 245,
+      "oldPosition": 246,
+      "oldSourceId": "ui.owned-check-unavailable.b3cf0beade",
+      "presentInActiveCatalog": true
+    }
+  ],
+  "tree": "016587d26f04d2920a30878236f1933a57e27901"
+}

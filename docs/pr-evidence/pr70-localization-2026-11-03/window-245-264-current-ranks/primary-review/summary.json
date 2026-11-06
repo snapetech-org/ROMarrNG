@@ -1,0 +1,38 @@
+{
+  "candidateCounts": {
+    "correction": 12,
+    "refinement": 17
+  },
+  "cellCount": 240,
+  "confidenceCounts": {
+    "high": 12,
+    "low": 72,
+    "moderate": 156
+  },
+  "dispositionCounts": {
+    "accept-current": 139,
+    "correction": 12,
+    "hold": 72,
+    "refinement": 17
+  },
+  "exactHeadBrowserReview": false,
+  "head": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "holdCellCount": 72,
+  "holdPositions": [
+    248,
+    249,
+    256,
+    257,
+    258,
+    259
+  ],
+  "localeCount": 12,
+  "nativeSpeakerApproval": false,
+  "pinnedCallerReferenceCount": 49,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "sourceCount": 20,
+  "sourceIndexLocationMismatches": 16,
+  "tree": "016587d26f04d2920a30878236f1933a57e27901",
+  "window": "W245–W264"
+}

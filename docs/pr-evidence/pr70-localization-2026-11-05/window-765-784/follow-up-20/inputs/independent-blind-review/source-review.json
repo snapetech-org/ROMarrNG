@@ -1,0 +1,643 @@
+{
+  "artifact": "ROMarrNG PR #70 W765-W784 independent blind source/context review",
+  "callerReferenceCount": 23,
+  "callerlessSourceCount": 2,
+  "candidateFreeInputChecksumListSha256": "99969b73bc1c66e817385863593bef49d2164ce71a801e64e5021e501842414b",
+  "candidateFreeManifestSha256": "560edb5cbc160bc95e74888dee9506de7c37e2bd479ab3164887245253c5977f",
+  "cellCount": 240,
+  "cellProposalCount": 216,
+  "changedWorktreeConsulted": false,
+  "currentTargetsConsulted": false,
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "independentProposalMatrixSha256": "f6894e180c79211de6bb3f86b96bfea2b54cd8517882cdf52d21c5a4d2159c8c",
+  "localeCount": 12,
+  "nativeSpeakerApproval": false,
+  "newHashOnlyHolds": 24,
+  "nextBoundary": {
+    "continuationIndex": 785,
+    "oneBasedPosition": 786,
+    "sourceId": "ui.optional-overrides-the-webhook-s-dis.4116a5e8e4",
+    "sourceSha256": "4116a5e8e4222045299ae89f3577810da389c5c65f51cf8a3b097ecf05ef348e"
+  },
+  "primaryCrossRootConsulted": false,
+  "priorActiveHoldsReattested": 988,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "resultingActiveHashOnlyHolds": 1012,
+  "reviewConfidence": "moderate",
+  "sourceCount": 18,
+  "sources": [
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "3b5ede23309ec070bc53ded8ecb43d1e5eb964c27426f9b6e067c2f0122ce8f1",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 2994,
+          "lineSha256": "f35821d60b997f1313755e2b28e3215740d1dff20f30970ebef1356ef40a8874",
+          "lineText": "                 ['multiplayer','Multiplayer'],['anniversary','On this day'],",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 766,
+      "catalogZeroBasedIndex": 765,
+      "manualProtectedLiteralsRequired": [],
+      "position": 765,
+      "semanticMeaning": "Anniversary tab for games associated with this calendar day.",
+      "source": "On this day",
+      "sourceContextSha256": "44d08f60de47d0dbfa434c681cc9f32c8a0b53cd61bd84fce947d127abaea026",
+      "sourceId": "ui.on-this-day.d011904834",
+      "sourceSha256": "d011904834fe28b25d7a9d9043c048b00e2b6f0ebf162498850f2105696195d6",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": []
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "44edabc47ba6dda663ce4dbfbabbf1ebed76b7f7fd2d2834478a7c0a9d22c0c0",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 5436,
+          "lineSha256": "d611280308499a9a61253c3b90eaa6597385490606612d734fd674d9e7e87213",
+          "lineText": "      ?'<h3 style=\"margin-top:18px\">On this install</h3>'",
+          "matchKind": "exact HTML text node",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 767,
+      "catalogZeroBasedIndex": 766,
+      "manualProtectedLiteralsRequired": [],
+      "position": 766,
+      "semanticMeaning": "Heading for routes available on the currently running installation.",
+      "source": "On this install",
+      "sourceContextSha256": "5ea0bf156c700ee76a5387def2826fe919e3d26fd9b9255e3a20cec776d00cde",
+      "sourceId": "ui.on-this-install.ca75d54e64",
+      "sourceSha256": "ca75d54e647569058a06c1c866cb70caabe8a1a204af3c628fe93134fd5275fe",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": []
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "67b47191d2ddbe9c407ab54dc194384c61a8a5239a6f2013b3b4fbb491009a27",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 5471,
+          "lineSha256": "ad7aaf3463527746dd08a650b48bf826f6aadc1efe05753925e1b1e67d31c6e2",
+          "lineText": "       +interfaceMarkup('ui.one-game-one-rom.3372b0856c')+'</label>'",
+          "matchKind": "exact source ID reference",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 768,
+      "catalogZeroBasedIndex": 767,
+      "manualProtectedLiteralsRequired": [],
+      "position": 767,
+      "semanticMeaning": "Checkbox label for a one-game/one-ROM rule in a collection workflow.",
+      "source": "One game, one ROM",
+      "sourceContextSha256": "b7940e5f9e8a2208b7b820b36c899044cc20c6e8a880ca8a6e47a5a3ff8e08a3",
+      "sourceId": "ui.one-game-one-rom.3372b0856c",
+      "sourceSha256": "3372b0856c4c3a068fbbc0275941a4ae05eaf1be02ce3bf52d8071d7dfe9da41",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": [
+          "ROM"
+        ]
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "b6bb336b8d424b6179a68fd52778a6d2ff10a6994235822e6987b179ab2554d7",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 5636,
+          "lineSha256": "89ef4aa29885b855ca3306fab5b9795aa0bf8f2a052234f8245de475ccfebbb1",
+          "lineText": "             ?'One other dump':'{count} other dumps',{count:fmt(t.discarded.length)})+'</summary>'",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 769,
+      "catalogZeroBasedIndex": 768,
+      "manualProtectedLiteralsRequired": [],
+      "position": 768,
+      "semanticMeaning": "Singular disclosure summary for one additional ROM dump among discarded alternatives.",
+      "source": "One other dump",
+      "sourceContextSha256": "6d3c45a2ea593768da23968fe0120ebab0146b22aa02a9b822376b932b4848a6",
+      "sourceId": "ui.one-other-dump.6710e50b16",
+      "sourceSha256": "6710e50b1667ad6e261699e9f4181b7f8f0bc161da04fe8389f8faf307965522",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": []
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "bdcb6d04d5ac077a3da257c9f22ebeb5cf9c88dad62165edab625aee3f3853d7",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 2841,
+          "lineSha256": "6321c7399f65f4ec10432a3e8cd2ab74be4026dcdaf0beb24c886122f6f541a5",
+          "lineText": "    <div class=\"sub\" data-i18n=\"ui.one-title-per-line-comments-ranking.8c54c86102\">One title per line. '# comments', ranking numbers and",
+          "matchKind": "exact source ID reference",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 770,
+      "catalogZeroBasedIndex": 769,
+      "manualProtectedLiteralsRequired": [
+        "# comments",
+        "Title →tab← platform"
+      ],
+      "position": 769,
+      "semanticMeaning": "Help explaining the accepted multiline title-list syntax, comments, ranking numbers, and tab-separated title/platform form.",
+      "source": "One title per line. '# comments', ranking numbers and 'Title →tab← platform' lines are understood.",
+      "sourceContextSha256": "4857745cda77f04c036db60f920045801c97572c4c3aecc3f6b1b226ca40bc6e",
+      "sourceId": "ui.one-title-per-line-comments-ranking.8c54c86102",
+      "sourceSha256": "8c54c861021e7cdbda1af91a4f59acf28227c50ad10f82e81a9ae8bdbab74f79",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": []
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "f99ae92007e63beea7d28e886b766e7e8baf88e13e76e22e5151c200a9205467",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 3549,
+          "lineSha256": "2974906a5a35110bc8b1c8568682b07a9fead3e3f91bc8424cc8c7dce7ab798d",
+          "lineText": "        ${opt('verified',peer.scope,'Only DAT-verified dumps')}",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 771,
+      "catalogZeroBasedIndex": 770,
+      "manualProtectedLiteralsRequired": [],
+      "position": 770,
+      "semanticMeaning": "Peer visibility scope that includes only dumps verified by DAT.",
+      "source": "Only DAT-verified dumps",
+      "sourceContextSha256": "437b7aff2f9acceaa70f4aec13d3372c5efe4e85ee5ad035882e85aeb1f4ffd5",
+      "sourceId": "ui.only-dat-verified-dumps.a372d56f1d",
+      "sourceSha256": "a372d56f1d8ec290af3c799111955b061d1c51d48a479e5784553c5d4a4a9560",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": [
+          "DAT"
+        ]
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "3a9c86b14c367c10619ad7e97dfba717ee75a0754bca4704ac37e011699e5d72",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 5477,
+          "lineSha256": "81c4d8ae3304496e872a36d6ed448699c4771df1c86e38fee457e2aece563658",
+          "lineText": "       +interfaceMarkup('ui.only-selected-regions.e257690d2c')+'</label>'",
+          "matchKind": "exact source ID reference",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 773,
+      "catalogZeroBasedIndex": 772,
+      "manualProtectedLiteralsRequired": [],
+      "position": 772,
+      "semanticMeaning": "Strict region allowlist; a title is omitted if no dump matches a selected region.",
+      "source": "Only selected regions",
+      "sourceContextSha256": "78ca900bb2ad176487b4ef20b7383ec824094cc2dd7cec49b4458af2a076639e",
+      "sourceId": "ui.only-selected-regions.e257690d2c",
+      "sourceSha256": "e257690d2c8b1c6a309536819c6f87b9b70f715585fca5ae33db4bb459679d4d",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": []
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "838b56833d3e0d88752d8c99fe2651b5dd398a860a98fa1db23e6645797173e9",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 3548,
+          "lineSha256": "5cae0876c431d62ee14d5ff694bcfe08d546077a4f92cf26f5f6b32173c58145",
+          "lineText": "        ${opt('platforms',peer.scope,'Only the platforms I name')}",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 774,
+      "catalogZeroBasedIndex": 773,
+      "manualProtectedLiteralsRequired": [],
+      "position": 773,
+      "semanticMeaning": "Peer scope limited to the platforms explicitly selected by the user.",
+      "source": "Only the platforms I name",
+      "sourceContextSha256": "3a5ae5b744498bd219ec760c65f4997e3fb1b162b019e8972fb74f97ec8f4fa9",
+      "sourceId": "ui.only-the-platforms-i-name.a25a55c6dd",
+      "sourceSha256": "a25a55c6dd4399b8bb0366262325691568f60a3ac4ce488b615843d5de56fc88",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": []
+      }
+    },
+    {
+      "callerCount": 4,
+      "callers": [
+        {
+          "excerptSha256": "459e1e21260b22f1e50577bdd4c9b231262c9c5e70f36821a012343322727a9f",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 1662,
+          "lineSha256": "ae8013ddbd6751e0b78d148ce13b028a633cbe8198f20069996fee9d46a5feae",
+          "lineText": "    toggle.dataset.i18nAriaLabel='ui.open-navigation.0ed77fd261';",
+          "matchKind": "exact source ID reference",
+          "path": "romarr/ui.py"
+        },
+        {
+          "excerptSha256": "239dbf351ecc76907ae92300744672fb56a65411aec0b6b021dc35a721f824d4",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 1663,
+          "lineSha256": "44314818fe4aea100da99847551d33a70c41bade80c109abfb1d8ef55bbcff56",
+          "lineText": "    toggle.setAttribute('aria-label',translateLabel('ui.open-navigation.0ed77fd261',readInterfaceLanguage()));",
+          "matchKind": "exact source ID reference",
+          "path": "romarr/ui.py"
+        },
+        {
+          "excerptSha256": "44e1a4cecccae5cb5c70c7253ec979ac26ecf06fb055735d5c876a89ed928c02",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 6313,
+          "lineSha256": "979e713db3ae3e2cb27db640e8566437c959e51a0a47b754c2e8e9b9472f75d0",
+          "lineText": "    aria-controls=\"navwrap\" aria-expanded=\"false\" aria-label=\"Open navigation\" data-i18n-aria-label=\"ui.open-navigation.0ed77fd261\" data-i18n-key=\"ui.menu.99af6606ff\">Menu</button>",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        },
+        {
+          "excerptSha256": "44e1a4cecccae5cb5c70c7253ec979ac26ecf06fb055735d5c876a89ed928c02",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 6313,
+          "lineSha256": "979e713db3ae3e2cb27db640e8566437c959e51a0a47b754c2e8e9b9472f75d0",
+          "lineText": "    aria-controls=\"navwrap\" aria-expanded=\"false\" aria-label=\"Open navigation\" data-i18n-aria-label=\"ui.open-navigation.0ed77fd261\" data-i18n-key=\"ui.menu.99af6606ff\">Menu</button>",
+          "matchKind": "exact source ID reference",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 776,
+      "catalogZeroBasedIndex": 775,
+      "manualProtectedLiteralsRequired": [],
+      "position": 775,
+      "semanticMeaning": "Accessible name for the control that opens the navigation rail.",
+      "source": "Open navigation",
+      "sourceContextSha256": "e094186862973d2f01009691bd1fd742ef89deecabf987eb646d93efe401893c",
+      "sourceId": "ui.open-navigation.0ed77fd261",
+      "sourceSha256": "0ed77fd2619ba8ab3e1cce72c8e61d887d551ca1220164b88ab1aa66bba7177d",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": []
+      }
+    },
+    {
+      "callerCount": 3,
+      "callers": [
+        {
+          "excerptSha256": "dff98619a47476ab6a9bfe246e5ba17f5a1f8a0427d827a4a5261b6e31ccd095",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 2267,
+          "lineSha256": "ac9eb648e7e5c4cf727cdb38257f0807288ec181b399c273c8b40ebcf0f8bd80",
+          "lineText": "  const indexerTitle=r=>`title=\"${esc(translateLabel('ui.open-on-the-indexer.4766c56d0d',readInterfaceLanguage()))}\"",
+          "matchKind": "exact source ID reference",
+          "path": "romarr/ui.py"
+        },
+        {
+          "excerptSha256": "f4a4c286d4d08f02636fddc50b64e4ac208b971d5351fa97d1d0eae82183dc6f",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 2268,
+          "lineSha256": "83f48c45f329d985eb1b3ac859ef968648bed36648f5162866acacefe45c995f",
+          "lineText": "    data-i18n-title=\"ui.open-on-the-indexer.4766c56d0d\" ${r.indexer",
+          "matchKind": "exact source ID reference",
+          "path": "romarr/ui.py"
+        },
+        {
+          "excerptSha256": "5bcda30442612dfc50badcdc0f4878a34c5a8afca13d0777d6b7cac8f676c2bb",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 2270,
+          "lineSha256": "cd361833e57b9db32d54dd41b9ab9cb16e7297cc28d8498c74f1f8342a8d6544",
+          "lineText": "      : interfaceAriaLabelTemplate('Open on the indexer',{})}`;",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 777,
+      "catalogZeroBasedIndex": 776,
+      "manualProtectedLiteralsRequired": [],
+      "position": 776,
+      "semanticMeaning": "Tooltip/accessible label for opening a release on its indexer.",
+      "source": "Open on the indexer",
+      "sourceContextSha256": "bc84d51650e95ebda87edfda5514052cf468b1ff3cc48b96924bcad301f91a03",
+      "sourceId": "ui.open-on-the-indexer.4766c56d0d",
+      "sourceSha256": "4766c56d0d12725d8f0725e73339e46da36214f72cdc97b35163f72e30507529",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": []
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "e755b3cf950753fc9348a9b152a1cd6bd4e56a3ac53629b1ff9e0affaadf632b",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 2269,
+          "lineSha256": "6ac530e215689b3f79c470fd7a71444f6b60bffe51719426de4ab748274b86aa",
+          "lineText": "      ? interfaceAriaLabelTemplate('Open on {indexer}',{indexer:r.indexer})",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 778,
+      "catalogZeroBasedIndex": 777,
+      "manualProtectedLiteralsRequired": [],
+      "position": 777,
+      "semanticMeaning": "Parameterized tooltip/accessible label naming the indexer.",
+      "source": "Open on {indexer}",
+      "sourceContextSha256": "21e0205625afddbc5ce493e28abbf98825ee73e34e108f5c580cf27e4c5e2f06",
+      "sourceId": "ui.open-on-indexer.202e1ad5f5",
+      "sourceSha256": "202e1ad5f57a71a2bb0058c1a69a859ee0321854b095df2e5099703f5a009b5f",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [
+          "{indexer}"
+        ],
+        "protectedLiterals": []
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "3a8fd4178e38f551cbbc9cc72ecd9f4c7701da6993e57fb27780a3f045c13414",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 1939,
+          "lineSha256": "1fa8a9a48ad793125aa3ebd4a409ddc2fb86e714f2c835b19c4b99e8c2d794ce",
+          "lineText": "            +interfaceMarkup('ui.open-the-submission.4a863bf1dd')+'</a> '",
+          "matchKind": "exact source ID reference",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 779,
+      "catalogZeroBasedIndex": 778,
+      "manualProtectedLiteralsRequired": [],
+      "position": 778,
+      "semanticMeaning": "Link to open a submission for the user to review and post.",
+      "source": "Open the submission",
+      "sourceContextSha256": "78d7ebeec0aec343d757752a5a9dfbec7dc46f19e6368022c12c6a42e4d54162",
+      "sourceId": "ui.open-the-submission.4a863bf1dd",
+      "sourceSha256": "4a863bf1dd1a9dc48d0ae4b1a32fc0e755afd3f6c0b13ae52f47b0f76ddb67f5",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": []
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "c706cbcd1259a0fa7296075ed8fb9fa67a2c4a8c42058bf91db633ae6c9e97cc",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 6777,
+          "lineSha256": "0b0ce8a693f80406b28ed0f975912fe9368b9aa14b8a1009b14402cefa336135",
+          "lineText": "    + '<button id=\"go\">Open this invitation on my ROMarr</button>'",
+          "matchKind": "exact HTML text node",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 780,
+      "catalogZeroBasedIndex": 779,
+      "manualProtectedLiteralsRequired": [],
+      "position": 779,
+      "semanticMeaning": "Button on the invitation landing page to open the invitation on the user’s own ROMarr.",
+      "source": "Open this invitation on my ROMarr",
+      "sourceContextSha256": "d389854678b629e3103cb9adc7a7c5425de2a52600410ca565fe345fe26971ec",
+      "sourceId": "ui.open-this-invitation-on-my-romarr.b76952fe51",
+      "sourceSha256": "b76952fe514e16a067011a015a960c086aa06daf286213b962f5a1d626a5a814",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": [
+          "ROMarr"
+        ]
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "b9bd2fee312edf91d463b7261e3520c48dadea75caccac058bf78903ff4f6caf",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 2884,
+          "lineSha256": "54be7ffa11831601776fe7f09dd0ab35320773ff95cdb9291bd4dfe986994186",
+          "lineText": "      <div class=\"field\"><label>OpenXBL API key</label>",
+          "matchKind": "exact HTML text node",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 781,
+      "catalogZeroBasedIndex": 780,
+      "manualProtectedLiteralsRequired": [
+        "OpenXBL",
+        "API"
+      ],
+      "position": 780,
+      "semanticMeaning": "Label for the OpenXBL API credential field.",
+      "source": "OpenXBL API key",
+      "sourceContextSha256": "0cb9e0488f2023ff77163eb82fa34c3025314963bb9f4e5dc01b3eeb8b7ea60a",
+      "sourceId": "ui.openxbl-api-key.90ea47aa7f",
+      "sourceSha256": "90ea47aa7fe73c1c0e25f790b0867920e49e7cef6dae9cb77776657ac4c44d1d",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": [
+          "API"
+        ]
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "75845eead477bb68b3c485e0726c573ae5992c399cea2a12a8d9c127128f72d9",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 4498,
+          "lineSha256": "0e9bf774372b38a9af4a8d1a50751b26827eb59d89049cfe20336881b95e082c",
+          "lineText": "  interfaceMarkup('Optional connections to the rest of the stack. Credentials live in the environment file, not here — this page never shows or stores a secret. Indexers and download clients have their own Settings pages; notifications and metadata connections can be added only when you choose to use them.'),",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 782,
+      "catalogZeroBasedIndex": 781,
+      "manualProtectedLiteralsRequired": [],
+      "position": 781,
+      "semanticMeaning": "General-settings description of optional integrations and the secret-handling boundary.",
+      "source": "Optional connections to the rest of the stack. Credentials live in the environment file, not here — this page never shows or stores a secret. Indexers and download clients have their own Settings pages; notifications and metadata connections can be added only when you choose to use them.",
+      "sourceContextSha256": "5f5680c682cccb99beee44fe6c3fc2452b646bd52fa425d9480f2ca7f3b49ee2",
+      "sourceId": "ui.optional-connections-to-the-rest-of.636208f858",
+      "sourceSha256": "636208f8587950df7a309c063bdb973bc221aa53c810889a811ff06f7d9ea8ce",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": []
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "63601cbc4eb114ae504a027e2819008921b0014c9a467bce7b779c66209f34ff",
+          "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+          "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+          "line": 5412,
+          "lineSha256": "c7e4c391dee3e28e93e9075445ae9f7ccc8ea4962e5808a28629d426252fae85",
+          "lineText": "    +'<div class=\"card\" style=\"margin-top:16px\"><h3>'+interfaceMarkup('Optional follow-ups')+'</h3>'",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "catalogOneBasedPosition": 783,
+      "catalogZeroBasedIndex": 782,
+      "manualProtectedLiteralsRequired": [],
+      "position": 782,
+      "semanticMeaning": "Card heading for additional optional actions after core search/grab/file steps.",
+      "source": "Optional follow-ups",
+      "sourceContextSha256": "32c4e383e33cb8fcd000b6957caf6133f2df8a8ac945c063f1401393a3520980",
+      "sourceId": "ui.optional-follow-ups.e3fee9a99c",
+      "sourceSha256": "e3fee9a99c9bf2af64aa820ad46e1bcf227905c8a3f819ff26dd03db2278c37f",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": []
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "94690ba15e08415f5cc4b164d087316c06a8f40b4b306c41d95ab0ec7cd7080d",
+          "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+          "gitBlob": "ef207435d6dedce92e2fd7310898c1a55e95f94e",
+          "line": 242,
+          "lineSha256": "7aa5ed3437d3bea4ebd75199177de27f3ac9c85f399bf95d964347815babef3e",
+          "lineText": "    \"priority\": \"Optional message priority.\",",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/notify.py"
+        }
+      ],
+      "catalogOneBasedPosition": 784,
+      "catalogZeroBasedIndex": 783,
+      "manualProtectedLiteralsRequired": [],
+      "position": 783,
+      "semanticMeaning": "Notification webhook field help stating that message priority is optional.",
+      "source": "Optional message priority.",
+      "sourceContextSha256": "b5d9f68acb31e58fa7f62fa076af39ed69cb6a2c4d6db325143d67a3f0caf118",
+      "sourceId": "ui.optional-message-priority.dbcf318711",
+      "sourceSha256": "dbcf318711231b21fd87732a3067487e48bce23470d12614525c05921e7c27e4",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": []
+      }
+    },
+    {
+      "callerCount": 1,
+      "callers": [
+        {
+          "excerptSha256": "311125c9135f32c174fef1098861fc48c94401b7afd652303d0b8b62ca7f9cb8",
+          "fileSha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69",
+          "gitBlob": "ef207435d6dedce92e2fd7310898c1a55e95f94e",
+          "line": 245,
+          "lineSha256": "50f8dc769554597de17794c2455f73d6ca5ce9baacc4c13e795bf8088e65e359",
+          "lineText": "    \"urls\": \"Optional. Apprise URLs to notify, one per line or comma separated.\",",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/notify.py"
+        }
+      ],
+      "catalogOneBasedPosition": 785,
+      "catalogZeroBasedIndex": 784,
+      "manualProtectedLiteralsRequired": [
+        "Apprise",
+        "URLs"
+      ],
+      "position": 784,
+      "semanticMeaning": "Notification field help for optional Apprise destination URLs and accepted list separators.",
+      "source": "Optional. Apprise URLs to notify, one per line or comma separated.",
+      "sourceContextSha256": "dcf4a7e7d796ee8d4dcbb370b6ec87366264d2f2b0d34c9772bbb7466070e246",
+      "sourceId": "ui.optional-apprise-urls-to-notify-one.8ef42d4f02",
+      "sourceSha256": "8ef42d4f02bd13528193393af96fc76d1e0f14a35d6c32c8f5de2c65eb77ef93",
+      "sourceTokenSignature": {
+        "markup": [],
+        "numbers": [],
+        "placeholders": [],
+        "protectedLiterals": []
+      }
+    }
+  ],
+  "summary": "216 caller-backed target proposals reviewed independently from pinned source and caller evidence. 24 callerless cells remain hash-only holds.",
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "window": "W765-W784"
+}

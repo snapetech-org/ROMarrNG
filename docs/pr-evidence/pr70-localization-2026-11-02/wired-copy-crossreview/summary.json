@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "pinnedHead": "50bb70837512bb5abcf53c89b01031aa9a321321",
+  "pinnedTree": "c88c97301c042747bd5e183daff21d7d255d4cfc",
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogBlob": "dadc655dc014c094c93d85fb2dc677cc118f504a",
+  "catalogFileSha256": "639d2449119ea25c1f76ccd09b05bffbb87da0373dac8bbe9dcee9547ef499a2",
+  "reviewedEntries": 10,
+  "reviewedLocales": 12,
+  "reviewedCells": 120,
+  "dispositions": {
+    "accepted": 90,
+    "correctionNeeded": 30,
+    "held": 0
+  },
+  "correctionCountsBySource": {
+    "browse": 1,
+    "connector1": 8,
+    "connector2": 4,
+    "connector3": 2,
+    "metadata": 0,
+    "collections": 0,
+    "platforms": 11,
+    "generation": 1,
+    "identify": 0,
+    "safety": 3
+  },
+  "correctionCountsByLocale": {
+    "es": 1,
+    "zh-Hans": 1,
+    "hi": 3,
+    "de": 2,
+    "ja": 4,
+    "fr": 3,
+    "pt-BR": 2,
+    "ar": 2,
+    "ko": 4,
+    "zh-Hant": 2,
+    "vi": 3,
+    "id": 3
+  },
+  "composition": "Full guidance is recomposed in composed-guidance.json using interfacePhraseSpace(): empty for ja/zh, one ASCII space for other locales. The current Hindi render contains `संग्रहमें`; proposed segment changes separate the link and restore Hindi object/destination order.",
+  "nativeSpeakerReview": "not provided",
+  "catalogChanged": false,
+  "testsBuildCi": false,
+  "callerRefs": "Candidate source callsites in the worktree diff: romarr/ui.py lines 2433-2434 (Browse games and IGDB/DAT fragments), 4923-4925 (Platforms and generation/playback), 5631-5632 (Identify & Organize and safety paragraph).",
+  "candidateSourceFileSha256": "5587ca39f263715f14e3f050c411177412df7f1dcf183edc4ef598370b5ed6c8",
+  "candidateSourceDiffSha256": "14fae8c026a3f951c78fb7553a77313ad6f40e7d028421d7848a8c45687c6486",
+  "baseSourceBlob": "8d104f5bf09c5005895d9973f1843f6f5c838e6c"
+}

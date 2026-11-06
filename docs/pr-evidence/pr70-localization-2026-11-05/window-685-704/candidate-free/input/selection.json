@@ -1,0 +1,261 @@
+{
+  "activeUniqueSourceIds": 479,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogMessageCount": 1836,
+  "catalogOneBasedPositions": [
+    686,
+    705
+  ],
+  "cellCount": 240,
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "method": "Select catalog message insertion indices 685 through 704 (zero-based) from the exact pinned romarr/ui-labels.json message-key order.",
+  "positions": [
+    685,
+    704
+  ],
+  "selectedSources": [
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 686,
+      "catalogZeroBasedIndex": 685,
+      "position": 685,
+      "registryLocations": [],
+      "source": "Nintendo 64 magic, {order}",
+      "sourceId": "ui.nintendo-64-magic-order.cb89b046b7",
+      "sourceSha256": "cb89b046b7bf906ea2f8fa9a21b79077282539a94a0d81615a8bde949161484f"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 687,
+      "catalogZeroBasedIndex": 686,
+      "position": 686,
+      "registryLocations": [],
+      "source": "Nintendo logo at 0x04",
+      "sourceId": "ui.nintendo-logo-at-0x04.000b47560e",
+      "sourceSha256": "000b47560e048556db3d33029b909571dadd13f590a8e2d5e33e801c59def230"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 688,
+      "catalogZeroBasedIndex": 687,
+      "position": 687,
+      "registryLocations": [],
+      "source": "Nintendo logo at 0x104",
+      "sourceId": "ui.nintendo-logo-at-0x104.8adfb98316",
+      "sourceSha256": "8adfb98316de96f2aef94cdaf1131943ce0afc6294336a96207134cce0e1abc7"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 689,
+      "catalogZeroBasedIndex": 688,
+      "position": 688,
+      "registryLocations": [],
+      "source": "Nintendo logo at 0x104, CGB flag set",
+      "sourceId": "ui.nintendo-logo-at-0x104-cgb-flag-set.85913d8dd9",
+      "sourceSha256": "85913d8dd9b18de123c0b0de08b890d404bd99737483e67f3f4baffcf0390c7f"
+    },
+    {
+      "activeSourceRank": 210,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 690,
+      "catalogZeroBasedIndex": 689,
+      "position": 689,
+      "registryLocations": [
+        "romarr/app.py:5955"
+      ],
+      "source": "No DAT catalog is loaded in ROMarrNG",
+      "sourceId": "ui.no-dat-catalog-is-loaded-in-romarrng.f57b5eb371",
+      "sourceSha256": "f57b5eb3711069f82aca2152aa1af8f6aef26cdd5eb743d013d7733ec2e5f534"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 691,
+      "catalogZeroBasedIndex": 690,
+      "position": 690,
+      "registryLocations": [],
+      "source": "No DAT loaded",
+      "sourceId": "ui.no-dat-loaded.3c44dc8796",
+      "sourceSha256": "3c44dc87961b6d07e7334de59905447d887d831024f6a31a3ff2397559878285"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 692,
+      "catalogZeroBasedIndex": 691,
+      "position": 691,
+      "registryLocations": [],
+      "source": "No Moonlight client is waiting to pair right now. Open Moonlight, add {host}, and select it. Then come back here and enter the PIN shown in Moonlight.",
+      "sourceId": "ui.no-moonlight-client-is-waiting-to-pa.baaa9b58a1",
+      "sourceSha256": "baaa9b58a105a2dbae7713a05741e7ec1e3dffa795027b8bf965efa0a1d4cdd5"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 693,
+      "catalogZeroBasedIndex": 692,
+      "position": 692,
+      "registryLocations": [],
+      "source": "No ROM platform",
+      "sourceId": "ui.no-rom-platform.cfcbe9e79b",
+      "sourceSha256": "cfcbe9e79b9d8e51087331c9abc24243ec6cff48fe1a7c459c1672681c2ce792"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 694,
+      "catalogZeroBasedIndex": 693,
+      "position": 693,
+      "registryLocations": [],
+      "source": "No ROMarr on this device? Copy the link and paste it into Friends → I have an invitation on your own server.",
+      "sourceId": "ui.no-romarr-on-this-device-copy-the-li.2d22717ea8",
+      "sourceSha256": "2d22717ea81cc7946274d65c5869cc1c89adb746cb5da93c65d46ebcb722c9b1"
+    },
+    {
+      "activeSourceRank": 227,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 695,
+      "catalogZeroBasedIndex": 694,
+      "position": 694,
+      "registryLocations": [
+        "romarr/ui.py:5514"
+      ],
+      "source": "No TitleDB ID",
+      "sourceId": "ui.no-titledb-id.3c3d2f2f0a",
+      "sourceSha256": "3c3d2f2f0a359e288310e9c86bfe0857199e9b9e910947a39c32fced91ac09f7"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 696,
+      "catalogZeroBasedIndex": 695,
+      "position": 695,
+      "registryLocations": [],
+      "source": "No answer",
+      "sourceId": "ui.no-answer.7e49c68db3",
+      "sourceSha256": "7e49c68db30e39dc72d346ee51ddc7e9a283ce3ad6ece4fa786612919313d8ab"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 697,
+      "catalogZeroBasedIndex": 696,
+      "position": 696,
+      "registryLocations": [],
+      "source": "No answer from {host}:{port}",
+      "sourceId": "ui.no-answer-from-host-port.d291802598",
+      "sourceSha256": "d2918025986a10e220e53a94845b46f0451a9dc04283742270dca0abb694b94f"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 698,
+      "catalogZeroBasedIndex": 697,
+      "position": 697,
+      "registryLocations": [],
+      "source": "No answer.",
+      "sourceId": "ui.no-answer.a000b95555",
+      "sourceSha256": "a000b9555567d6361fd291a3fbed8da0ee9d2e88dfdaf70cdd05450fd850b102"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 699,
+      "catalogZeroBasedIndex": 698,
+      "position": 698,
+      "registryLocations": [],
+      "sourceId": "ui.no-client-configured-for.3aec48e12b",
+      "sourceSha256": "3aec48e12b16eb265a75fa80c410bde58cb629232e047b822ee2bdfd9ca4388d",
+      "sourceTextOmitted": true
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 700,
+      "catalogZeroBasedIndex": 699,
+      "position": 699,
+      "registryLocations": [],
+      "source": "No client configured for: {protocols}. Those results will be found and then refused.",
+      "sourceId": "ui.no-client-configured-for-protocols-t.b8c34cba49",
+      "sourceSha256": "b8c34cba498d42ec06f05c46cd1cfd21f4ad1d90f63fabeb83ca8aece5720ccc"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 701,
+      "catalogZeroBasedIndex": 700,
+      "position": 700,
+      "registryLocations": [],
+      "source": "No connections configured.",
+      "sourceId": "ui.no-connections-configured.0132bcd2e2",
+      "sourceSha256": "0132bcd2e24692286727fc79c9026e1a7f3a0a8cf5b80ca4af7acd4fd36d7919"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 702,
+      "catalogZeroBasedIndex": 701,
+      "position": 701,
+      "registryLocations": [],
+      "source": "No connections yet",
+      "sourceId": "ui.no-connections-yet.8697571e96",
+      "sourceSha256": "8697571e96e71c3b3645d1867524e6911d657da1006bb862206ae5366692d426"
+    },
+    {
+      "activeSourceRank": 209,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 703,
+      "catalogZeroBasedIndex": 702,
+      "position": 702,
+      "registryLocations": [
+        "romarr/ui.py:2296"
+      ],
+      "source": "No cover",
+      "sourceId": "ui.no-cover.b2ec3181b3",
+      "sourceSha256": "b2ec3181b360d0347d8658cb177771e904d6bae9c4b80974be48cff505d1d600"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 704,
+      "catalogZeroBasedIndex": 703,
+      "position": 703,
+      "registryLocations": [],
+      "source": "No description supplied.",
+      "sourceId": "ui.no-description-supplied.904f49f8ed",
+      "sourceSha256": "904f49f8ed1778c1fc5cb6750cb42fa924227fa9636df7ccb219b4a62bf25819"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 705,
+      "catalogZeroBasedIndex": 704,
+      "position": 704,
+      "registryLocations": [],
+      "source": "No direct indexers are configured. Enabled Prowlarr indexers are listed below.",
+      "sourceId": "ui.no-direct-indexers-are-configured-en.2b1068cf98",
+      "sourceSha256": "2b1068cf9800f3d08a96a71fce2f476dca0e618cab4abe0f731b0a773fbad678"
+    }
+  ],
+  "sourceCount": 20,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "window": "W685-W704"
+}

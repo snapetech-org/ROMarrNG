@@ -1,0 +1,37 @@
+{
+  "scope": "tracked production romarr/*.py and romarr/*.js at exact head",
+  "commit": "c146189f29db8fbd77d68dff0c33a0ab59a6b601",
+  "tree": "3db10f8b87577edd1167e4489524e6afbb50d556",
+  "filePins": {
+    "romarr/ui.py": {
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0"
+    },
+    "romarr/organizer.py": {
+      "fileSha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390"
+    },
+    "romarr/i18n_runtime.js": {
+      "fileSha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+      "gitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc"
+    }
+  },
+  "queries": [
+    {
+      "literal": "ui.error.54a0e8c17e",
+      "matchCount": 0,
+      "matches": []
+    },
+    {
+      "literal": "'Error'",
+      "matchCount": 0,
+      "matches": []
+    },
+    {
+      "literal": "\"Error\"",
+      "matchCount": 0,
+      "matches": []
+    }
+  ],
+  "interpretation": "The standalone Error catalog key has no exact runtime key/source-string callsite in production source. Generic exception classes/phrases are not treated as a source-bound UI caller."
+}

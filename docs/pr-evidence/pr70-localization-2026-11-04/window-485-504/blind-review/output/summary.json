@@ -1,0 +1,100 @@
+{
+  "artifact": "ROMarrNG PR #70 W485-W504 independent clean blind review",
+  "reviewerRole": "clean blind semantic reviewer; candidate-free input only",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "6eb494d362ae19503b9199cd2c05c0767cddbc0e",
+  "tree": "b9450b9c6d22c816551fc8d528e8f03413d04595",
+  "window": "W485-W504",
+  "candidateFreeInputCopied": true,
+  "candidateFreeInputManifestSha256": "0319707e6d70515ad6dae3f14cc3fbb993a66d2c619938525bc3915516177bf1",
+  "candidateFreeInputChecksumListSha256": "0424bfdb53551a3d5dce0c21bcf19a684f166864c3bda7d282a7a9b99123678c",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "dispositions": {
+    "accept-current": 201,
+    "correction": 14,
+    "refinement": 1,
+    "hold": 24
+  },
+  "proposedCellCount": 15,
+  "newHolds": 24,
+  "holdPositions": [
+    493,
+    502
+  ],
+  "holdFinding": "Positions 493 and 502 have no exact source-ID or complete source-text caller matches; keep their 24 locale cells held without target proposals.",
+  "priorSelectedSourceCount": 100,
+  "priorHoldCellCount": 444,
+  "priorReattestationsCopiedByteForByte": true,
+  "placeholderMismatchesInSelectedTargets": 0,
+  "numericMismatchesInSelectedTargets": 0,
+  "protectedLiteralMismatchesInSelectedTargets": 0,
+  "localeDispositionCounts": {
+    "ar": {
+      "accept-current": 17,
+      "hold": 2,
+      "correction": 1
+    },
+    "de": {
+      "accept-current": 17,
+      "hold": 2,
+      "correction": 1
+    },
+    "es": {
+      "accept-current": 17,
+      "hold": 2,
+      "correction": 1
+    },
+    "fr": {
+      "accept-current": 17,
+      "hold": 2,
+      "correction": 1
+    },
+    "hi": {
+      "accept-current": 17,
+      "hold": 2,
+      "correction": 1
+    },
+    "id": {
+      "accept-current": 17,
+      "hold": 2,
+      "correction": 1
+    },
+    "ja": {
+      "accept-current": 16,
+      "correction": 2,
+      "hold": 2
+    },
+    "ko": {
+      "accept-current": 17,
+      "hold": 2,
+      "correction": 1
+    },
+    "pt-BR": {
+      "accept-current": 16,
+      "refinement": 1,
+      "hold": 2,
+      "correction": 1
+    },
+    "vi": {
+      "accept-current": 16,
+      "hold": 2,
+      "correction": 2
+    },
+    "zh-Hans": {
+      "accept-current": 17,
+      "hold": 2,
+      "correction": 1
+    },
+    "zh-Hant": {
+      "accept-current": 17,
+      "hold": 2,
+      "correction": 1
+    }
+  },
+  "overallConfidence": "moderate",
+  "createdUtc": "2026-11-04T05:14:34.942629+00:00"
+}

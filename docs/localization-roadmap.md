@@ -3,18 +3,21 @@
 ## What is available
 
 ROMarr's Python service renders the dashboard and public sign-in, invitation,
-and connection pages. The localization catalog contains 1,348 app-owned
-messages under stable IDs. English is the source language. Twelve other locales
-have direct translations; Latin American Spanish inherits from Spanish, and
-Canadian French inherits from French. Missing translations fall back to
-English on a message-by-message basis.
+and connection pages. The catalog contains 1,836 app-owned messages under
+stable IDs. All 22,032 direct target cells are populated across the twelve
+locales. Of these, 16,176 remain `unverified` because their review provenance is
+unknown, and 5,856 are marked `draft`. That draft group includes the 5,808 cells
+from the frozen 484-message source bundle and 48 cells for four later messages.
+No target cells currently fall back to English because they are missing. Latin
+American Spanish inherits from Spanish, and Canadian French inherits from
+French.
 
 | Locale state | Count | Behavior |
 | --- | ---: | --- |
 | English source | 1 | Always selectable |
-| Direct translations | 12 | Selectable; full catalog coverage |
+| Direct translations | 12 | Selectable; all 1,836 messages have a target |
 | Regional fallbacks | 2 | Selectable; inherit from `es` or `fr` |
-| Draft translations | 0 currently | Hidden; must be complete and reviewed before selection |
+| Draft locales | 0 currently | Hidden; must be complete and reviewed before selection |
 | Planned translations | 22 | Registered for formatting and future work; not selectable |
 
 The 37 registered locales are Arabic, Azerbaijani, Bulgarian, Bengali, Czech,
@@ -28,16 +31,55 @@ Portuguese, Vietnamese, Simplified Chinese, and Traditional Chinese have direct
 translations. The remaining registered locales stay out of the picker until
 their translations exist and pass the catalog checks.
 
-The existing translation text was carried over without changing its wording.
-Each message now records review status separately for every direct locale;
-existing text is `unverified` because its provenance is unknown. Regional
-entries are marked `inherited`. A message can be marked `reviewed` only with a
-reviewer and review date. A complete native review and RTL visual review have
-not been done. ROMarr therefore does not claim translation quality parity
-with PlezyNG, even though the catalog and runtime now support a broader locale
-workflow. Unverified is the default and is stored sparsely; regional inheritance
-comes from the locale parent table. Fingerprints are stored only for draft or
-reviewed overrides, keeping the runtime catalog compact.
+Language choices show each locale's native name and English name. When both
+names are the same, the selector displays the name once.
+
+The source additions cover authored route copy, task labels and results, form
+labels, stable application error/status templates, connect-source instructions,
+and integration-screen copy. A checked source manifest records each exact
+message, dynamic placeholder boundary, and source location. The connect-source
+instructions use stable templates, with credential examples, URLs, and provider
+responses kept as opaque placeholders. A scoped source guard checks rendered UI
+literals, task results, UI-consumed API messages, and organizer confidence and
+reason fields. The October 31 source bundle remains frozen. The November 1
+source bundle preserves its 291 messages, and its successor freezes 484
+messages (5,808 direct locale cells), including eight mapping-row templates and
+ten connect-source templates. The 175 IDs and 2,100 cells added after the
+October 31 snapshot, the 96 mapping-row cells, and the 120 connect-source cells
+have since been populated as drafts. The latest source update adds two
+integration messages at four production call sites, with 24 additional draft
+cells. These sentences localize SeerrNG and integration-guide copy on the
+catalog-empty, platform, getting-started, and organize screens. Provider
+replies, library names and paths, versions, exception bodies, and user values
+stay opaque inside their existing boundaries. The successor bundle
+[20261101-connect-instructions.json](../localization/source-bundles/20261101-connect-instructions.json)
+is a frozen source-only snapshot; it contains no generated translations. No
+English target text is seeded as a translation.
+
+The existing translation text was carried over, with targeted high-confidence
+corrections across all 12 direct locales for ROM-dump false friends,
+game-library and set terminology, DAT/hash status labels, protocol names, and
+other contextual interface copy. A focused semantic pass checked 272
+glossary-related source messages across 12 locales (3,264 locale cells), plus
+the 377 locale cells across 95 messages whose translation exactly matched the
+English source; those groups overlap. The exact-match scan found only expected
+brands, identifiers, technical terms, and cognates after the remaining
+Wanted-list text was localized. A Unicode-script mismatch scan of all
+16,176 previously translated direct locale cells found no remaining candidates
+after correcting two stray Chinese full stops in Hindi. The 3,492 direct
+locale cells in the frozen October 31 bundle and 2,100 cells added since that
+snapshot were not part of that scan; they have since been populated as drafts
+and remain outside the focused semantic pass. This focused pass is not a
+native-speaker
+review of the whole catalog. Each message records review status separately for
+every direct locale; existing text remains `unverified` because its provenance
+is unknown. Regional entries are marked `inherited`. A message can be marked
+`reviewed` only with a reviewer and review date. Native-speaker review and
+Arabic RTL visual review have not been completed. This pass does not certify
+translation quality or establish RTL signoff. Unverified is the default and is
+stored sparsely; regional inheritance comes from the locale parent table.
+Fingerprints are stored only for draft or reviewed overrides, keeping the
+runtime catalog compact.
 
 ## Runtime behavior
 

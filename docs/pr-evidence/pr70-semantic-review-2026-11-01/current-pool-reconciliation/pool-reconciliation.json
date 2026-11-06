@@ -1,0 +1,92 @@
+{
+  "artifact": "ROMarrNG PR #70 exact-current-hash populated-catalog disposition reconciliation",
+  "eligibleSourceKeys": 0,
+  "eligibleUnaccountedCells": 0,
+  "evidenceInputSha256": {
+    "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-held-followup-54f1-artifacts-20261101/companion-adjudication-54f1.jsonl": "7e578481b50623cf2ee07002023387432000f3c2e7613fd9a836e390c8e4e786",
+    "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-held-followup-54f1-artifacts-20261101/final-application-summary-54f1.json": "e68e9a5e8501e358e6df2495a91fb55b38bc87ca5b0a48971ef0741ade1e30fa",
+    "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-held-followup-54f1-artifacts-20261101/held-correction-review-54f1.jsonl": "2eb3437d2d0e2aeb70c6a5ea17e2020af3f597c4a9f75ce9442eda1450284c34",
+    "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-next-window-a1278acd-20261101/manifest.json": "7e31cb69607c63e2fd9da3230d9c84adf1f017a1a44173821cd9f30dacc79f95",
+    "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-next-window-a1278acd-20261101/review-decisions.jsonl": "6a7ef9feaadfe1f4db622bfe8014740432b41c2f244fb1c41c0d24a728e2f395",
+    "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-review-08689f3e/findings.jsonl": "c94f1eb59fb9959b1e9319c9b804f620b30349677d01a51132ce7ecdd9f1ed02",
+    "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-review-08689f3e/manifest.json": "17aeb650190c3e21c9ed6f484098136e619fc2a6bac2191d2a5f80878e81d3d3",
+    "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-review-08689f3e/moderate-uncertain-adjudication.jsonl": "b73d08762d249f2d05b5a4ab6854892191f880b84e5c6cd7a598bcd03df0e87f",
+    "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-review-08689f3e/reviewed-cells.jsonl": "d6d49ae07c89d8aa51cb6f777de6b2389e8e9e33e2075c8c3929762e171fd43c",
+    "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-review-79b144e3-20261101/romarr-missing-cell-review-5808-2026-11-01.jsonl": "105e2716cab807915964fb66be5b89856c9d4c6e6e5a17ad2bc4ab6cea983473",
+    "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-semantic-review-79b144e3-20261101/romarr-missing-cell-review-summary-2026-11-01.json": "95925321d88a78ffa62b602fbf659fa9709bd84ff7e8d2fbd67d89e29e9457b6"
+  },
+  "exactCurrentHashPartition": {
+    "54f1-followup-correction-target": 38,
+    "a127-current-head-window": 12,
+    "baseline-correction-target": 300,
+    "baseline-current-target": 15876,
+    "new-cells-accepted-unchanged": 2462,
+    "new-cells-correction-target": 3308
+  },
+  "livePrPreflight": {
+    "branch": "task/localization-translation-review-20261030",
+    "head": "a1278acda1cea823443d7d6b712ed6ace8a99694",
+    "isDraft": true,
+    "state": "OPEN",
+    "tree": "1e8a8d4fb191490a20bc443fb2b7bf24f05fa294"
+  },
+  "nextAction": "No next disjoint populated-catalog source key exists at this head under the exact-hash exclusion rule. Recompute the pool after any catalog/head change; otherwise a new pass would overlap existing exact-hash dispositions.",
+  "partitionTotal": 21996,
+  "result": "no eligible new disjoint semantic window at this frozen head",
+  "reviewLimits": {
+    "browserRenderedReviewPerformed": false,
+    "catalogOrSourceEdits": false,
+    "modelCalls": 0,
+    "nativeSpeakerReview": "not performed; native validation remains required for the full catalog",
+    "newReviewDecisionsCreated": 0,
+    "prBodyOrBranchEdits": false,
+    "sharedQwenLockAcquired": false,
+    "testsBuildsCi": false
+  },
+  "scope": {
+    "catalogMessages": 1833,
+    "cellsPerLocale": {
+      "ar": 1833,
+      "de": 1833,
+      "es": 1833,
+      "fr": 1833,
+      "hi": 1833,
+      "id": 1833,
+      "ja": 1833,
+      "ko": 1833,
+      "pt-BR": 1833,
+      "vi": 1833,
+      "zh-Hans": 1833,
+      "zh-Hant": 1833
+    },
+    "directLocaleCells": 21996,
+    "directLocales": [
+      "es",
+      "zh-Hans",
+      "hi",
+      "de",
+      "ja",
+      "fr",
+      "pt-BR",
+      "ar",
+      "ko",
+      "zh-Hant",
+      "vi",
+      "id"
+    ]
+  },
+  "sharedWorktreeNote": "Only tracked inputs are required for this frozen hash audit. The shared review worktree currently contains untracked docs/pr-evidence files from another agent; this task created no files there.",
+  "unmatchedDirectCellIds": [],
+  "worktree": {
+    "frozenFileSha256": {
+      "romarr/ui-labels.json": "639d2449119ea25c1f76ccd09b05bffbb87da0373dac8bbe9dcee9547ef499a2",
+      "romarr/ui-source-messages.json": "ba11bdfa7f8a282dea83d7367e1156ce716ad79aabafbdd72b7e887df647bec5",
+      "romarr/ui.py": "028e05f27f1fad6137494c85b1fa8847512a2d11db37c9fa44c4b611a2e797ad"
+    },
+    "head": "a1278acda1cea823443d7d6b712ed6ace8a99694",
+    "path": "/mnt/disks/scratch/task-worktrees/localization-20261030/romarrng-pr70-head-review-20261101",
+    "trackedFilesClean": true,
+    "tree": "1e8a8d4fb191490a20bc443fb2b7bf24f05fa294",
+    "untrackedPathsAtAudit": []
+  }
+}

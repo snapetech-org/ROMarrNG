@@ -1,0 +1,86 @@
+{
+  "artifact": "ROMarrNG PR #70 W465-W484 primary review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "7640720c5e3b1813725cca8d7aa46b5d968bff43",
+  "tree": "bdee162cc11115256df8756f192b19d4337ed1dc",
+  "window": "W465-W484",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "dispositions": {
+    "accept-current": 170,
+    "correction": 6,
+    "hold": 60,
+    "refinement": 4
+  },
+  "proposedCellCount": 10,
+  "holdPositions": [
+    470,
+    471,
+    473,
+    474,
+    477
+  ],
+  "priorLineageSelectionsReattested": 80,
+  "priorHoldCellsReattested": 384,
+  "sourceContextAvailable": 15,
+  "callerlessCellCount": 60,
+  "candidateFreeInputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w465-484-candidate-free-20261103/input",
+  "candidateFreeInputRelativePath": "../romarrng-pr70-w465-484-candidate-free-20261103/input",
+  "candidateFreeInputManifestSha256": "202b78c2a2842c8c7d458ad2e411f3e81dfed5691b48f7661fa84d1525a6884c",
+  "candidateFreeInputChecksumsSha256": "12049222afa5f598eca8e0e03f6dda5dd477005a1a46077273173a85dcb749e8",
+  "catalogMessageCount": 1836,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "activeSourceRegistryCount": 479,
+  "currentProtectedLiteralMismatches": 0,
+  "placeholderMismatchesInSelectedTargets": 0,
+  "numericExactMismatchesAfterSemanticReview": 0,
+  "protectedLiteralMismatchesInSelectedTargets": 0,
+  "nativeSpeakerReview": "not performed",
+  "browserReview": "not performed",
+  "reviewBoundary": "Independent primary review from candidate-free source/caller evidence only; no blind or cross-review output inspected.",
+  "files": [
+    {
+      "path": "PR-attestation-after.json",
+      "sha256": "47e5d0ddfc1b7a085b47abab53a7c21c78a7cf5e390cadc212630a9521018ff4",
+      "sizeBytes": 660
+    },
+    {
+      "path": "PR-attestation-before.json",
+      "sha256": "9a50dd263c4d44a41c069276ad776fdaa25c998f888fe9402053186aacf840c4",
+      "sizeBytes": 660
+    },
+    {
+      "path": "README.md",
+      "sha256": "437930ceecd39d1665c5ee256be2e127a052fe1d6a801f76423a3d6db298df3b",
+      "sizeBytes": 1090
+    },
+    {
+      "path": "build_primary.py",
+      "sha256": "f4411d578c9e724678920a82da763f9029a6ba513dff881c0880d955f0345e4c",
+      "sizeBytes": 23280
+    },
+    {
+      "path": "primary-ledger.jsonl",
+      "sha256": "f3a38af2e75259089d48d9cc2e36fcc41a5f379a6795e7ceb06bf6187978c07f",
+      "sizeBytes": 1521345
+    },
+    {
+      "path": "seal_packet.py",
+      "sha256": "b824e9d5fbb1ee4ff239f6943f861c454daf78cd2b49e8e7e9d5dd6d712d7976",
+      "sizeBytes": 3360
+    },
+    {
+      "path": "summary.json",
+      "sha256": "39d7f4cd6a99457a60b9c46c8e6eec68c8a71bc2f4ed000ad2634eaf9a70a133",
+      "sizeBytes": 4338
+    },
+    {
+      "path": "verify_primary.py",
+      "sha256": "cfa615c5c6e1a0664973c7b67de49d7d1e1c1b06c28926a4fca4c2e053b1f8a0",
+      "sizeBytes": 16318
+    }
+  ]
+}

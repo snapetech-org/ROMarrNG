@@ -1,0 +1,48 @@
+{
+  "artifact": "ROMarrNG W765-W784 integrated cross input pins",
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "candidateFree": {
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w765-784-20261105/candidate-free",
+    "checksumListSha256": "b551fcc26783d47666e4ec3c35946a314e2bf0b7374cf52acb1df54b027bcfe3",
+    "manifestSha256": null,
+    "fileCount": 39
+  },
+  "candidateFreeInner": {
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w765-784-20261105/candidate-free/input",
+    "checksumListSha256": "99969b73bc1c66e817385863593bef49d2164ce71a801e64e5021e501842414b",
+    "manifestSha256": "560edb5cbc160bc95e74888dee9506de7c37e2bd479ab3164887245253c5977f",
+    "fileCount": 35
+  },
+  "primary": {
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w765-784-20261105/primary-review",
+    "checksumListSha256": "86665242ccafb9d73781718d339c691e0e59aadc5b5f78cbfcd070f2eae20c1c",
+    "manifestSha256": "3b316071a2643934714a6e3f116ba34e49a49dd6bb02b0680b355a30cdea9424",
+    "fileCount": 10
+  },
+  "independentBlind": {
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w765-784-independent-blind-20261105/blind-review",
+    "checksumListSha256": "bd04db544a64f81b827d90ed4de93b1806d9efc61ad77d2d15fcf6427bf2651d",
+    "manifestSha256": null,
+    "fileCount": 19
+  },
+  "priorCrossAuditOnly": {
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w765-784-third-party-cross-review-20261105",
+    "checksumListSha256": "ddb3fbd83f2da73863958546b5290cacbf0a68086d6364bb4df4f5e79a224ad8",
+    "manifestSha256": "ea3b32add87d8f01aeed58328c267b486e18fd720fe93c0a9bfba70985d1a9de",
+    "fileCount": 14
+  },
+  "candidateFreeManifestSha256": "560edb5cbc160bc95e74888dee9506de7c37e2bd479ab3164887245253c5977f",
+  "primaryManifestSha256": "3b316071a2643934714a6e3f116ba34e49a49dd6bb02b0680b355a30cdea9424",
+  "blindInputPinsSha256": "e66ef8ab9cd64f0c20869e8fc0755b6403faf551ee2e6b28ba98767aa5074e8d",
+  "candidateFreeCellsSha256": "28314a3ed8b00f4db2d793c836d2a855b680ff18cc8c168379f9aee4f11b3c0c",
+  "candidateFreeSourceContextsSha256": "9d244314937105cdd19daf4affe7ce1e474e0587e50e7cd4250fcb7bbb9cb9a1",
+  "primaryLedgerSha256": "c14a7fcded00061fb454444ad5db1f84638b3425f4b05dbfcbacf2f26d81e3c4",
+  "primaryProposalsSha256": "7524bacc0c02ff84ab5813918546c647f4f253ebe076c275a4dbe01b7a143909",
+  "blindLocaleReviewSha256": "ad68f4e63e37ee52140bb969747b6aad8dba9f477d7205df62f2bfddd40ff23e",
+  "blindDispositionsSha256": "44ff9b71e81e50601231e7f088a2bcf55db35e012de1e652ca3728918f0c8e1e",
+  "priorCrossLedgerSha256AuditOnly": "6621bd136f9a1f7f16e758133f2b02b5851dc5e476bcdf4245bf492b3c7099b8",
+  "priorSelectedChangesSha256AuditOnly": "836db83c6fc36747df908911cd6f749de12dc0488f599465744ba774a2ecd8d5",
+  "priorActiveHoldFileSha256": "28a3a50b216f9994ef57fccf1af47f55c8dc53af37772bb24b0205c58b65e91c",
+  "worktreeInspection": "No source/catalog file contents were read. Bundled pin/clean verifiers queried only the worktree pin/clean guard and failed there; this cross verifier uses sealed packets only."
+}

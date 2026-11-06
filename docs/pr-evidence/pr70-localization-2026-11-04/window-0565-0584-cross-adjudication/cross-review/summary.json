@@ -1,0 +1,55 @@
+{
+  "artifact": "ROMarrNG PR #70 W565-W584 independent cross-review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W565-W584",
+  "head": "726db9138af2fc716056c7c36a9e842de04265e0",
+  "tree": "6669dc9117dbbbe6587d4183ec5bd0184c87e983",
+  "cellCount": 240,
+  "sourceCount": 20,
+  "localeCount": 12,
+  "primaryDispositions": {
+    "accept-current": 203,
+    "correction": 1,
+    "hold": 36
+  },
+  "blindDispositions": {
+    "accept_current": 199,
+    "hold": 40,
+    "revise": 1
+  },
+  "crossRecommendations": {
+    "accept-current": 199,
+    "recommend-change": 1,
+    "hold-text-free": 40
+  },
+  "holdReasonCounts": {
+    "CONTEXTUAL_DYNAMIC_ARABIC_NUMBER_AGREEMENT": 3,
+    "CALLERLESS_SOURCE_NO_PRODUCTION_CALLER": 36,
+    "CONTEXTUAL_ARABIC_COUNT_DUAL_PLURAL": 1
+  },
+  "callerlessHoldCount": 36,
+  "contextualHoldCount": 4,
+  "agreementOnProposalCount": 1,
+  "selectedChangeCount": 1,
+  "selectedChange": {
+    "catalogZeroBasedIndex": 573,
+    "locale": "de",
+    "recommendedTargetSha256": "15e886c77b59ef4dd0ba00c871ce40a5ad52ee5724a143976085465fdb2e0631"
+  },
+  "candidateFreeInputVerified": true,
+  "primaryInputVerified": true,
+  "blindInputVerified": true,
+  "sourceWorktree": "/mnt/disks/scratch/task-worktrees/localization-20261104/romarrng-pr70-w565-584-source",
+  "baseApiRefMismatch": true,
+  "baseDriftReconciliation": {
+    "base": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "liveMain": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+    "aheadBy": 5,
+    "behindBy": 0,
+    "onlyWorkflowAndAgentInstructionChanges": true
+  },
+  "nativeSpeakerReview": false,
+  "browserReview": false,
+  "testsBuildsCiRun": false
+}

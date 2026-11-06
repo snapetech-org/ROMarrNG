@@ -1,0 +1,89 @@
+{
+  "artifact": "ROMarrNG PR #70 W146-W165 clean localization review input",
+  "sealed": true,
+  "checksumNote": "manifest.json excludes its own hash and SHA256SUMS.txt; SHA256SUMS.txt covers every packet file except itself.",
+  "createdAtUtc": "2026-11-03T04:43:09.984701+00:00",
+  "files": [
+    {
+      "bytes": 1778,
+      "name": "README.txt",
+      "sha256": "317bda5b575d8710502531b37128ab8e243a29d7328a1f0ff57316e1224b88f2"
+    },
+    {
+      "bytes": 4331,
+      "name": "head-and-file-pins.json",
+      "sha256": "daf3db734a0383722e58f546623ceddfbdaabec26c75bdd887f0446bfa0d5cc2"
+    },
+    {
+      "bytes": 4693,
+      "name": "render-path-context.jsonl",
+      "sha256": "538566bbc1c8617eb19366b840de4e84adf833a2a6f3d5c87aa163d35d63deeb"
+    },
+    {
+      "bytes": 143494,
+      "name": "review-input.jsonl",
+      "sha256": "d649bb321a80fbbf28bf3aae88266db04f4f3e839a4c0f33ab4f84d24d26c83d"
+    },
+    {
+      "bytes": 3290,
+      "name": "selection.json",
+      "sha256": "d997f97b5d4bf1acef55f3840c6ce730c3f3d4fe8aab9d37e0b756174fe9e40c"
+    },
+    {
+      "bytes": 39274,
+      "name": "source-context.jsonl",
+      "sha256": "33827cdfd1441ffd2c4ed841a1481f8bbeb0197d08cd898f4711587c285911e6"
+    },
+    {
+      "bytes": 5836,
+      "name": "source-structure.jsonl",
+      "sha256": "0b19ea07b69c2fa2b909079e0e0f0f3ecd7cf2adc6a4d1c4f4be813a2a2065ef"
+    }
+  ],
+  "head": "db895a97e9871952a0b952e1d119e32e06cf168d",
+  "inputPath": "review-input.jsonl",
+  "inputRows": 240,
+  "inputSha256": "d649bb321a80fbbf28bf3aae88266db04f4f3e839a4c0f33ab4f84d24d26c83d",
+  "pullRequest": 70,
+  "renderPathEvidenceRows": 4,
+  "repository": "snapetech-org/ROMarrNG",
+  "scopeLimits": {
+    "containsCurrentTargets": true,
+    "containsReviewDispositions": false,
+    "containsTranslationCandidates": false,
+    "repositoryOrPullRequestEdited": false,
+    "testsBuildsScansCiOrBrowserRun": false
+  },
+  "selectionPath": "selection.json",
+  "sourceContextRows": 20,
+  "sourceStructureRows": 20,
+  "tree": "f1edf8319eb3dbd29ac5fe1e279216c5b96ecc6a",
+  "window": {
+    "cellCount": 240,
+    "firstSourceOrdinal": 146,
+    "lastSourceOrdinal": 165,
+    "locales": [
+      "es",
+      "zh-Hans",
+      "hi",
+      "de",
+      "ja",
+      "fr",
+      "pt-BR",
+      "ar",
+      "ko",
+      "zh-Hant",
+      "vi",
+      "id"
+    ],
+    "sourceCount": 20
+  },
+  "callerContext": {
+    "resolvedAtExactHead": true,
+    "callerPresentSourceCount": 19,
+    "callerAbsentOrdinals": [
+      160
+    ],
+    "callerExistenceGatePassed": false
+  }
+}

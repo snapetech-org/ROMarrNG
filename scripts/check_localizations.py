@@ -11,6 +11,10 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT / "scripts") not in sys.path:
+    sys.path.insert(0, str(ROOT / "scripts"))
+from check_ui_source_coverage import coverage_errors
+
 CATALOG_PATH = ROOT / "romarr" / "ui-labels.json"
 SNAPSHOT_PATH = ROOT / "romarr" / "ui-source-snapshot.json"
 UI_PATH = ROOT / "romarr" / "ui.py"
@@ -120,6 +124,19 @@ def validate() -> list[str]:
         if message.get("sourceHash") != source_hash:
             errors.append(f"{key}: sourceHash does not match source text")
         translations = message.get("translations", {})
+        pending = message.get("translationPending", [])
+        if not isinstance(pending, list) or any(not isinstance(code, str) for code in pending):
+            errors.append(f"{key}: translationPending must be an array of locale tags")
+            pending = []
+        if len(pending) != len(set(pending)):
+            errors.append(f"{key}: translationPending contains duplicates")
+        pending_set = set(pending)
+        unknown_pending = pending_set - direct_locales
+        if unknown_pending:
+            errors.append(f"{key}: translationPending references non-direct locales {sorted(unknown_pending)}")
+        overlap_pending = pending_set & set(translations)
+        if overlap_pending:
+            errors.append(f"{key}: pending locales already have translations {sorted(overlap_pending)}")
         hashes = message.get("translationHashes")
         if not isinstance(hashes, dict):
             hashes = {}
@@ -151,6 +168,12 @@ def validate() -> list[str]:
                 "unverified" if locale_status == "available" else "fallback"
             )
             state = statuses.get(code, default_state)
+            if locale_status == "available" and code in pending_set:
+                if code in statuses:
+                    errors.append(f"{key}/{code}: pending fallback must not have a translation status")
+                if code in review_evidence:
+                    errors.append(f"{key}/{code}: pending fallback must not have reviewer evidence")
+                continue
             if locale_status == "draft" and not has_translation:
                 if code in statuses:
                     errors.append(f"{key}/{code}: fallback message must not have a review override")
@@ -185,7 +208,7 @@ def validate() -> list[str]:
             elif code in review_evidence:
                 errors.append(f"{key}/{code}: reviewer evidence requires reviewed status")
         for code, parent in inherited_locales.items():
-            if parent not in translations:
+            if parent not in translations and parent not in pending_set:
                 errors.append(f"{key}/{code}: inherited parent {parent} has no translation")
         extra_evidence = set(review_evidence) - reviewable_locales
         if extra_evidence:
@@ -221,8 +244,14 @@ def validate() -> list[str]:
                     errors.append(f"{key}/{code}/{form}: placeholders differ from English")
 
         for code in direct_locales:
-            if code not in translations:
+            if code not in translations and code not in pending_set:
                 errors.append(f"{key}: missing direct translation for {code}")
+        missing_direct = direct_locales - set(translations)
+        if pending_set != missing_direct:
+            errors.append(
+                f"{key}: translationPending must exactly match missing direct locales "
+                f"(expected {sorted(missing_direct)}, found {sorted(pending_set)})"
+            )
         for code, locale in locales.items():
             if locale["status"] == "planned" and code in translations:
                 errors.append(f"{key}: planned locale {code} has text but is not marked draft")
@@ -259,6 +288,8 @@ def validate() -> list[str]:
         elif value not in source_to_id:
             errors.append(f"{attribute} source is missing from catalog: {value[:100]!r}")
 
+    errors.extend(coverage_errors(catalog))
+
     return errors
 
 
@@ -276,11 +307,20 @@ def main() -> int:
     inherited = sum(locales[code]["status"] == "inherited" for code in available)
     drafted_locales = sum(locale["status"] == "draft" for locale in locales.values())
     planned = sum(locale["status"] == "planned" for locale in locales.values())
+    pending_cells = sum(
+        len(message.get("translationPending", []))
+        for message in catalog["messages"].values()
+    )
+    pending_messages = sum(
+        bool(message.get("translationPending"))
+        for message in catalog["messages"].values()
+    )
     review_counts = Counter(
         message.get("translationStatus", {}).get(code, "unverified")
         for message in catalog["messages"].values()
         for code in available
         if locales[code]["status"] == "available" and code != "en"
+        and code not in message.get("translationPending", [])
     )
     direct_messages = sum(review_counts.values())
     print(f"Valid: {len(catalog['messages']):,} stable messages, "
@@ -289,7 +329,9 @@ def main() -> int:
           f"{planned} locales awaiting translation. "
           f"Reviewed strings: {review_counts['reviewed']:,}/{direct_messages:,}; "
           f"drafts: {review_counts['draft']:,}; "
-          f"unverified: {review_counts['unverified']:,}.")
+          f"unverified: {review_counts['unverified']:,}; "
+          f"source-only fallbacks: {pending_messages:,} messages / "
+          f"{pending_cells:,} locale cells.")
     return 0
 
 

@@ -1,0 +1,38 @@
+{
+  "alternativeTargets": 13,
+  "artifact": "ROMarrNG PR #70 W805-W824 primary translation review",
+  "blindOrCrossReviewMaterialUsed": false,
+  "callerBackedCells": 240,
+  "callerlessHashOnlyCells": 0,
+  "candidateFreePath": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w805-824-candidate-free-20261105",
+  "candidateFreeSha256SumsListSha256": "cf34d5b87ae6e06aa09152a09a87da51025c40e47ed2e18d2237c666e912b8ba",
+  "catalogValuesApplied": false,
+  "cells": 240,
+  "confidenceCounts": {
+    "moderate": 240
+  },
+  "correctionOrRefinementCells": 13,
+  "dispositions": {
+    "accept_current": 227,
+    "correction": 6,
+    "refinement": 7
+  },
+  "head": "551cccd03e0acdce208ce11f571378c1dcdfb805",
+  "localeCount": 12,
+  "nativeSpeakerApproval": false,
+  "nextBoundary": {
+    "continuationIndex": 825,
+    "oneBasedPosition": 826,
+    "sourceId": "ui.platform-for-game-available-platform.afd580990f",
+    "sourceSha256": "afd580990fe9a12282ffeeeefa2d1a2c8b632f05bdd58b08e3c03a27ac91fb08"
+  },
+  "priorActiveHashOnlyHoldsCopiedByteForByte": 1060,
+  "productWorktreeEdited": false,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "resultingActiveHashOnlyHolds": 1060,
+  "reviewType": "primary machine semantic review from candidate-free source/caller evidence",
+  "testsBuildsScansCiRun": false,
+  "tree": "d77f32ac8ec0ab53200d04819869a2e99c6de73c",
+  "window": "W805-W824"
+}

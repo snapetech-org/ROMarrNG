@@ -1,0 +1,56 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W146-W165",
+  "head": "db895a97e9871952a0b952e1d119e32e06cf168d",
+  "tree": "f1edf8319eb3dbd29ac5fe1e279216c5b96ecc6a",
+  "inputReviewSha256": "d649bb321a80fbbf28bf3aae88266db04f4f3e839a4c0f33ab4f84d24d26c83d",
+  "candidateFreeLedgerSha256": "8b13bc63f5c79bedcbdd281254c6d5081ddb2fec82a0f9af1cd1cd02896cb11e",
+  "ratifiedCells": 240,
+  "dispositions": {
+    "refinement": 23,
+    "accept-current": 168,
+    "correction": 37,
+    "hold-context": 12
+  },
+  "changedCells": 60,
+  "changedCellsByOrdinal": {
+    "146": 3,
+    "147": 3,
+    "148": 11,
+    "149": 2,
+    "150": 7,
+    "152": 2,
+    "153": 1,
+    "154": 2,
+    "155": 11,
+    "157": 1,
+    "158": 2,
+    "159": 2,
+    "161": 3,
+    "162": 3,
+    "163": 5,
+    "164": 1,
+    "165": 1
+  },
+  "callerAbsentOrdinal160HeldAll12": true,
+  "placeholderMismatches": 0,
+  "protectedLiteralMismatches": 0,
+  "nativeSpeakerApproved": false,
+  "headedBrowserAcceptance": false,
+  "blindBoundary": "Candidate-free ledger was sealed before reading candidate texts. Aggregate summaries and changed-cell source/hash metadata were visible before sealing, so strict blinding is not claimed.",
+  "repositoryOrPrMutatedDuringAdjudication": false,
+  "applicationPerformedAfterAdjudication": true,
+  "applicationRecord": "../application/apply-summary.json",
+  "testsBuildsScansCiBrowserOrWorkflowChanges": false,
+  "hashMethods": {
+    "source": "SHA-256 of source UTF-8 text",
+    "currentTarget": "SHA-256 of canonical JSON string (UTF-8, ensure_ascii=False, sorted keys, compact separators), matching the pinned catalog translationHashes",
+    "finalTarget": "SHA-256 of canonical JSON string (UTF-8, ensure_ascii=False, sorted keys, compact separators)"
+  },
+  "comparisonLedgerSha256": {
+    "primary": "e6d04b143e06df5b0cf776281bb17d5fbe6e8b69ec13256d0ed903352215a3a4",
+    "independent": "5c368c75d9874000d182c9938e6ef784a9efa30373c2ab1756c083d242eb8531",
+    "root": "4b66e140c624f3614e573791f68524dc794e892ffe1cb9424ce3ffd84d82bc72"
+  }
+}

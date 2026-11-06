@@ -1,0 +1,59 @@
+{
+  "modifiedFiles": [
+    "romarr/app.py",
+    "romarr/federation.py",
+    "romarr/ui.py"
+  ],
+  "position226": {
+    "currentLines": [
+      "romarr/app.py:4792-4797",
+      "romarr/app.py:7714-7720",
+      "romarr/ui.py:3445-3451",
+      "romarr/ui.py:947-948",
+      "romarr/ui.py:1002-1022",
+      "romarr/ui.py:1042-1048"
+    ],
+    "disposition": "safe-local-template-path",
+    "finding": "Only the local empty-title case attaches the exact allowlisted source key with empty values. Explicit template validation requires exact key and exact empty value set; output uses catalog template markup. Non-template API strings are escaped inside lang=und. No external values enter the localized template.",
+    "recommendation": "Accept position 226 translations after preserving this exact-source/empty-values boundary."
+  },
+  "position232": {
+    "currentLines": [
+      "romarr/federation.py:609-615",
+      "romarr/app.py:4835-4852",
+      "romarr/app.py:4860-4869",
+      "romarr/ui.py:3452-3458",
+      "romarr/ui.py:3486-3488"
+    ],
+    "disposition": "hold",
+    "finding": "Local Federation.netplay_answer returns the static detail template. netplay_invite creates answer using body.detail and drops detail_template. Remote-peer branch can return arbitrary body.detail; it does not currently forward peer templates, which prevents external template authority.",
+    "recommendation": "For peer.kind == romm and the local static missing verdict only, copy the locally authored exact allowlisted detail template into answer. Keep peer-supplied templates discarded; render unknown detail through escaped opaque fallback."
+  },
+  "position237": {
+    "currentLines": [
+      "romarr/ui.py:1997-2009",
+      "romarr/ui.py:2044-2045",
+      "romarr/ui.py:1228-1232",
+      "romarr/ui.py:1405-1410",
+      "romarr/ui.py:2093-2100",
+      "romarr/app.py:3847-3873"
+    ],
+    "disposition": "hold",
+    "finding": "The origin formatter returns the app-authored label “On disk (plays now)” for internal value local; the marker resolves the locale key and language updates traverse option elements. However applyTranslatedLabel sets the option textContent to only the translation, deleting the appended “(count)” on initial library render and language change. The helper also runs exact localization lookup for unformatted genre/region/decade/source values; arbitrary values stay unchanged unless they exactly collide with a catalog source. This is a correctness risk for external metadata.",
+    "recommendation": "Preserve the count as a separate stored numeric suffix and reformat on label refresh. Apply translations only to explicit app-authored labels from a trusted formatter/map; render raw metadata as escaped opaque text without source lookup."
+  },
+  "position242": {
+    "currentLines": [
+      "romarr/ui-source-messages.json stale location romarr/ui.py:2227",
+      "romarr/ui.py:4451 current help caller",
+      "romarr/ui.py:2442 comma-prefixed rank-241 caller"
+    ],
+    "disposition": "propose-retire-active-entry",
+    "finding": "No production call uses the exact no-comma source ID; source metadata points to a current return statement. Production code uses the distinct comma-prefixed rank-241 source. Active metadata/catalog/snapshot retain the orphan.",
+    "recommendation": "Retire exact no-comma ID from active source index, catalog, and current source snapshot; preserve historical source bundles. Recompute the sorted source inventory and next window boundaries after removal."
+  },
+  "recordType": "implementation-cross-audit",
+  "worktreeDiffSha256": "fe626fe75602d505a6e3e51234edea26dc1a85d467eeb6d9810d00eda67587e8",
+  "worktreeHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "worktreeTree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc"
+}

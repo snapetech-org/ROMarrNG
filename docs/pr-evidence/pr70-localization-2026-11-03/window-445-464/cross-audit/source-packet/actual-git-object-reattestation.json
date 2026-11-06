@@ -1,0 +1,178 @@
+{
+  "schemaVersion": 1,
+  "result": "PASS",
+  "candidateFreeHead": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "candidateFreeTree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "latestHead": "81a499b7c022bde61a63dbd8c68c0b1ca39adf26",
+  "latestTree": "1b075e050610771fc5651d1a4ca95d7c7b4b8e46",
+  "sourceRepoCloneShallow": true,
+  "liveObjectsReadOnly": true,
+  "relevantGitPinsComparedAtBothCommits": 10,
+  "relevantPins": [
+    {
+      "path": "docs/pr-evidence/pr70-localization-2026-11-03/romarrng-pr70-w365-384-candidate-free-20261103/input/source-queue.json",
+      "base": {
+        "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+        "gitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+        "byteCount": 273919,
+        "matchesPinnedRawBytes": true
+      },
+      "latest": {
+        "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+        "gitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+        "byteCount": 273919,
+        "matchesPinnedRawBytes": true
+      },
+      "unchanged": true
+    },
+    {
+      "path": "romarr/downloaders.py",
+      "base": {
+        "sha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed",
+        "gitBlob": "65952d7b8361fa3c6af742f675fde805ec361dd2",
+        "byteCount": 165965,
+        "matchesPinnedRawBytes": true
+      },
+      "latest": {
+        "sha256": "4ef4b7ef99ceb962a2bb48ec6f8947537e4bf5139b251816bfc3a8fae413b0ed",
+        "gitBlob": "65952d7b8361fa3c6af742f675fde805ec361dd2",
+        "byteCount": 165965,
+        "matchesPinnedRawBytes": true
+      },
+      "unchanged": true
+    },
+    {
+      "path": "romarr/i18n_runtime.js",
+      "base": {
+        "sha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+        "gitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc",
+        "byteCount": 9036,
+        "matchesPinnedRawBytes": true
+      },
+      "latest": {
+        "sha256": "47b4e568d58ce5674df4eae00c75e3f60ee3626f6653e0c51f0e4433fbabe45a",
+        "gitBlob": "7542b0d51fd9826c4783ae5a23f00d78ec9503bc",
+        "byteCount": 9036,
+        "matchesPinnedRawBytes": true
+      },
+      "unchanged": true
+    },
+    {
+      "path": "romarr/launchers.py",
+      "base": {
+        "sha256": "8a8a7d9b6959c2e5166b131d426d7a7942037df19bc16cd7ba512621fa07b588",
+        "gitBlob": "c23133f62281a3cc1cd057b9bc471c4e36320a30",
+        "byteCount": 17972,
+        "matchesPinnedRawBytes": true
+      },
+      "latest": {
+        "sha256": "8a8a7d9b6959c2e5166b131d426d7a7942037df19bc16cd7ba512621fa07b588",
+        "gitBlob": "c23133f62281a3cc1cd057b9bc471c4e36320a30",
+        "byteCount": 17972,
+        "matchesPinnedRawBytes": true
+      },
+      "unchanged": true
+    },
+    {
+      "path": "romarr/libraries.py",
+      "base": {
+        "sha256": "8d41c724588ff01ea3896dcfef4e07d7a2f107a1666070f0c1a688411686fe04",
+        "gitBlob": "af3912e3c0943bc4b442878ff3e0321fc4762600",
+        "byteCount": 46463,
+        "matchesPinnedRawBytes": true
+      },
+      "latest": {
+        "sha256": "8d41c724588ff01ea3896dcfef4e07d7a2f107a1666070f0c1a688411686fe04",
+        "gitBlob": "af3912e3c0943bc4b442878ff3e0321fc4762600",
+        "byteCount": 46463,
+        "matchesPinnedRawBytes": true
+      },
+      "unchanged": true
+    },
+    {
+      "path": "romarr/organizer.py",
+      "base": {
+        "sha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+        "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+        "byteCount": 121857,
+        "matchesPinnedRawBytes": true
+      },
+      "latest": {
+        "sha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+        "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+        "byteCount": 121857,
+        "matchesPinnedRawBytes": true
+      },
+      "unchanged": true
+    },
+    {
+      "path": "romarr/ui-labels.json",
+      "base": {
+        "sha256": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+        "gitBlob": "9d908628a34f0f4b9e1e01457b6a932e19d14061",
+        "byteCount": 3011512,
+        "matchesPinnedRawBytes": true
+      },
+      "latest": {
+        "sha256": "98acdc5457febade45684f43c204cfae2f7eca15ebd70e5d9d254327020f99a7",
+        "gitBlob": "9d908628a34f0f4b9e1e01457b6a932e19d14061",
+        "byteCount": 3011512,
+        "matchesPinnedRawBytes": true
+      },
+      "unchanged": true
+    },
+    {
+      "path": "romarr/ui-source-messages.json",
+      "base": {
+        "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+        "gitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+        "byteCount": 273919,
+        "matchesPinnedRawBytes": true
+      },
+      "latest": {
+        "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+        "gitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+        "byteCount": 273919,
+        "matchesPinnedRawBytes": true
+      },
+      "unchanged": true
+    },
+    {
+      "path": "romarr/ui-source-snapshot.json",
+      "base": {
+        "sha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+        "gitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+        "byteCount": 202767,
+        "matchesPinnedRawBytes": true
+      },
+      "latest": {
+        "sha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+        "gitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+        "byteCount": 202767,
+        "matchesPinnedRawBytes": true
+      },
+      "unchanged": true
+    },
+    {
+      "path": "romarr/ui.py",
+      "base": {
+        "sha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+        "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+        "byteCount": 408966,
+        "matchesPinnedRawBytes": true
+      },
+      "latest": {
+        "sha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+        "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0",
+        "byteCount": 408966,
+        "matchesPinnedRawBytes": true
+      },
+      "unchanged": true
+    }
+  ],
+  "latestPinnedFileComparisonsRecomputed": 9,
+  "sourceDefinitionsAndCurrentTargetPreimagesRecomputed": 240,
+  "callerLineComparisonsRecomputedAtBothCommits": 319,
+  "uniqueCallerLineCount": 237,
+  "sourceCatalogCallerDrift": false
+}

@@ -1,0 +1,1440 @@
+{
+  "artifact": "ROMarrNG PR #70 W186-W205 exact-hash apply plan",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "55ee760ea9600f71cc27cba35e098a082445dac8",
+  "tree": "dbc192813f6347f4307ff8417d505624958eb321",
+  "window": {
+    "firstSourceOrdinal": 186,
+    "lastSourceOrdinal": 205,
+    "cellCount": 240
+  },
+  "catalogFile": "romarr/ui-labels.json",
+  "catalogFileSha256": "1c44d22778868622c0da959d677bd59dc87d45b739f6a60d27a4800d9ba45b0f",
+  "catalogGitBlob": "70da7ee71178e7bf03bff16fa9fc9287be3e2d5e",
+  "catalogBytes": 3007625,
+  "inputManifestSha256": "4d1140d40351c1767e05aaed19894ba07c8b9860174942075619ed3bf1c83f5b",
+  "rootLedgerSha256": "14a1a8672a95740af672df25b1c331eb2421af2e839822c5df06ca9b75bb13b7",
+  "sourceCount": 20,
+  "locales": [
+    "es",
+    "zh-Hans",
+    "hi",
+    "de",
+    "ja",
+    "fr",
+    "pt-BR",
+    "ar",
+    "ko",
+    "zh-Hant",
+    "vi",
+    "id"
+  ],
+  "reviewedCellCount": 240,
+  "changeCount": 43,
+  "changeCounts": {
+    "correction": 17,
+    "refinement": 26
+  },
+  "holdCount": 60,
+  "holdOrdinals": [
+    188,
+    197,
+    198,
+    200,
+    201
+  ],
+  "translationStatus": "draft",
+  "items": [
+    {
+      "sourceOrdinal": 186,
+      "id": "ui.main-navigation.eb355944b9",
+      "locale": "es",
+      "sourceSha256": "eb355944b92d10582856f8aea34b3e319ba465b8aa4c294973cf53f665399a2c",
+      "currentTarget": "La principal navegación",
+      "currentTargetSha256": "e446f647bc861b1ad21c1e51df5fef4b7089b825995c5e579c77060178972ed2",
+      "target": "Navegación principal",
+      "targetSha256": "7d4fe4c518b7eb478a69687dfb64b73add932ad02af1f378374782ba6a5e75d1",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: Both reviews propose the same concise target. The current adjective-before-noun phrasing is awkward in Spanish for this short UI label, so the change is corrective.",
+      "caller": {
+        "resolved": true,
+        "reason": "The server navigation builder maps this exact source through UI_SOURCE_TO_ID into data-i18n-key.",
+        "sourceContextEntrySha256": "d50397798e92f932f52de217f3230bc4d8552af54c0c61f28cb56dd1249b16ae",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 6248,
+            "matchType": "exact-source-literal",
+            "lineText": "  <nav id=\"navwrap\" aria-label=\"Main navigation\">{_nav_html()}</nav>"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 189,
+      "id": "ui.manually-confirmed-by-the-library-ow.5b75fab860",
+      "locale": "es",
+      "sourceSha256": "5b75fab8606953804c43cbaccd24f6f2496a24aece688946994c7a74636d5483",
+      "currentTarget": "confirmado manualmente por el propietario de la biblioteca.",
+      "currentTargetSha256": "c46ffbe9ea13c98347a6423fb47809134088d653bd42927ecae128733de35580",
+      "target": "Confirmado manualmente por el propietario de la biblioteca.",
+      "targetSha256": "0639638a45cab507893497f4f82cc9073e1a31cf92a4fecd7dbe1e9f0bb74450",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: The shared candidate adds expected sentence-initial capitalization. The current meaning is clear; this is a presentation refinement.",
+      "caller": {
+        "resolved": true,
+        "reason": "The organizer match-detail renderer allows this fixed app-authored source through appMessageMarkup, which resolves the catalog source key.",
+        "sourceContextEntrySha256": "c4ef9568aa2a19f92e418ec691f1f5e4fc9db9c5d903a084e3f0aeec37b2c656",
+        "references": [
+          {
+            "path": "romarr/organizer.py",
+            "line": 1776,
+            "matchType": "exact-source-literal",
+            "lineText": "                \"match_details\": \"Manually confirmed by the library owner.\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 5609,
+            "matchType": "exact-source-literal",
+            "lineText": "  'Manually confirmed by the library owner.',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 189,
+      "id": "ui.manually-confirmed-by-the-library-ow.5b75fab860",
+      "locale": "pt-BR",
+      "sourceSha256": "5b75fab8606953804c43cbaccd24f6f2496a24aece688946994c7a74636d5483",
+      "currentTarget": "Manual confirmado pelo proprietário da biblioteca.",
+      "currentTargetSha256": "9c20da41e601c9b57cecf10a9e1ef85d481f65a7c773d24b395880dff9ddc3db",
+      "target": "Confirmado manualmente pelo proprietário da biblioteca.",
+      "targetSha256": "b45e498b57aea6a68a10f00b1d2837e18d3702c606d79821eaf5da80f6cbacc5",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: The shared candidate changes “manual confirmado” (a manual that was confirmed) to “confirmado manualmente” (confirmed manually), restoring the source meaning.",
+      "caller": {
+        "resolved": true,
+        "reason": "The organizer match-detail renderer allows this fixed app-authored source through appMessageMarkup, which resolves the catalog source key.",
+        "sourceContextEntrySha256": "c4ef9568aa2a19f92e418ec691f1f5e4fc9db9c5d903a084e3f0aeec37b2c656",
+        "references": [
+          {
+            "path": "romarr/organizer.py",
+            "line": 1776,
+            "matchType": "exact-source-literal",
+            "lineText": "                \"match_details\": \"Manually confirmed by the library owner.\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 5609,
+            "matchType": "exact-source-literal",
+            "lineText": "  'Manually confirmed by the library owner.',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 189,
+      "id": "ui.manually-confirmed-by-the-library-ow.5b75fab860",
+      "locale": "ar",
+      "sourceSha256": "5b75fab8606953804c43cbaccd24f6f2496a24aece688946994c7a74636d5483",
+      "currentTarget": "تأكيد يدويا من قبل صاحب المكتبة.",
+      "currentTargetSha256": "1d9a8e34b0b952f369822e24cb20fe80910cd2bb01872f3f70a0d2e0edde499f",
+      "target": "تم تأكيده يدويًا من قِبل مالك المكتبة.",
+      "targetSha256": "2f5264c5ea740bd11686f5f00918e7b05a5be8026c034c9f1c621c04db0f6d15",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: Both suggestions repair the broken current phrase. Prefer the primary passive with an explicit object pronoun; it reads as the mapping having been manually confirmed by its owner.",
+      "caller": {
+        "resolved": true,
+        "reason": "The organizer match-detail renderer allows this fixed app-authored source through appMessageMarkup, which resolves the catalog source key.",
+        "sourceContextEntrySha256": "c4ef9568aa2a19f92e418ec691f1f5e4fc9db9c5d903a084e3f0aeec37b2c656",
+        "references": [
+          {
+            "path": "romarr/organizer.py",
+            "line": 1776,
+            "matchType": "exact-source-literal",
+            "lineText": "                \"match_details\": \"Manually confirmed by the library owner.\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 5609,
+            "matchType": "exact-source-literal",
+            "lineText": "  'Manually confirmed by the library owner.',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 189,
+      "id": "ui.manually-confirmed-by-the-library-ow.5b75fab860",
+      "locale": "zh-Hant",
+      "sourceSha256": "5b75fab8606953804c43cbaccd24f6f2496a24aece688946994c7a74636d5483",
+      "currentTarget": "由遊戲媒體庫擁有者手動確認。",
+      "currentTargetSha256": "ce3e014a395e884bb1541c85572a49baf7facbe087ade74a6a1d46aaa825a38d",
+      "target": "由遊戲庫擁有者手動確認。",
+      "targetSha256": "acf1d1d3ab8121c77ebe2c827e726ade2b1ecc4c1cbfc3ffdd3cf1a899c1d313",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: “遊戲庫” is a more concise match for the ROM/game library context than “遊戲媒體庫”; the existing wording is understandable.",
+      "caller": {
+        "resolved": true,
+        "reason": "The organizer match-detail renderer allows this fixed app-authored source through appMessageMarkup, which resolves the catalog source key.",
+        "sourceContextEntrySha256": "c4ef9568aa2a19f92e418ec691f1f5e4fc9db9c5d903a084e3f0aeec37b2c656",
+        "references": [
+          {
+            "path": "romarr/organizer.py",
+            "line": 1776,
+            "matchType": "exact-source-literal",
+            "lineText": "                \"match_details\": \"Manually confirmed by the library owner.\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 5609,
+            "matchType": "exact-source-literal",
+            "lineText": "  'Manually confirmed by the library owner.',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 189,
+      "id": "ui.manually-confirmed-by-the-library-ow.5b75fab860",
+      "locale": "vi",
+      "sourceSha256": "5b75fab8606953804c43cbaccd24f6f2496a24aece688946994c7a74636d5483",
+      "currentTarget": "Được xác nhận bằng tay bởi chủ sở hữu thư viện.",
+      "currentTargetSha256": "214f40322857cceedc789d322df311042db2e92b8499de41fcafcc6fc427ed14",
+      "target": "Được xác nhận thủ công bởi chủ sở hữu thư viện.",
+      "targetSha256": "440d39641acd72f3dd750e1b131597a42eb7ec6ba490e934d06d79a566d0a654",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: Both reviews repair the literal “bằng tay.” The primary word order is concise and uses “thủ công” for manual confirmation.",
+      "caller": {
+        "resolved": true,
+        "reason": "The organizer match-detail renderer allows this fixed app-authored source through appMessageMarkup, which resolves the catalog source key.",
+        "sourceContextEntrySha256": "c4ef9568aa2a19f92e418ec691f1f5e4fc9db9c5d903a084e3f0aeec37b2c656",
+        "references": [
+          {
+            "path": "romarr/organizer.py",
+            "line": 1776,
+            "matchType": "exact-source-literal",
+            "lineText": "                \"match_details\": \"Manually confirmed by the library owner.\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 5609,
+            "matchType": "exact-source-literal",
+            "lineText": "  'Manually confirmed by the library owner.',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 189,
+      "id": "ui.manually-confirmed-by-the-library-ow.5b75fab860",
+      "locale": "id",
+      "sourceSha256": "5b75fab8606953804c43cbaccd24f6f2496a24aece688946994c7a74636d5483",
+      "currentTarget": "Ditegaskan secara manual oleh pemilik perpustakaan.",
+      "currentTargetSha256": "20fb27dbba36bcd1400d2e3f41dbb8e561c849eefa28d05f03f8f3b6418c871f",
+      "target": "Dikonfirmasi secara manual oleh pemilik koleksi game.",
+      "targetSha256": "27ac84549dcf457d2268b2257e8c550f64871f1ba25b2980f9ff6922747d88b5",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: Prefer “pemilik koleksi game” over “pemilik perpustakaan”: the caller concerns a game library/collection, and this avoids implying a public library. “Dikonfirmasi” correctly replaces “ditegaskan.”",
+      "caller": {
+        "resolved": true,
+        "reason": "The organizer match-detail renderer allows this fixed app-authored source through appMessageMarkup, which resolves the catalog source key.",
+        "sourceContextEntrySha256": "c4ef9568aa2a19f92e418ec691f1f5e4fc9db9c5d903a084e3f0aeec37b2c656",
+        "references": [
+          {
+            "path": "romarr/organizer.py",
+            "line": 1776,
+            "matchType": "exact-source-literal",
+            "lineText": "                \"match_details\": \"Manually confirmed by the library owner.\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 5609,
+            "matchType": "exact-source-literal",
+            "lineText": "  'Manually confirmed by the library owner.',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 190,
+      "id": "ui.manually-confirmed.9b66efab12",
+      "locale": "ar",
+      "sourceSha256": "9b66efab12024e48bf0614d34b730a43252b1354287573c34ef8e07b71eab45a",
+      "currentTarget": "تأكيد يدوي",
+      "currentTargetSha256": "fe27a76a2e856f5716a87a97caa07844f07401822c3c1abd4a400bf6683e6e30",
+      "target": "تم التأكيد يدويًا",
+      "targetSha256": "062a6c315d0e66d246bfdb74e38a984b111d233f986aa93ff24034a3e2c668f5",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: The current noun phrase “manual confirmation” is usable as a badge, but the primary wording more directly states the source status “manually confirmed.”",
+      "caller": {
+        "resolved": true,
+        "reason": "The organizer confidence label is rendered through interfaceMarkup.",
+        "sourceContextEntrySha256": "6f9b7ca6e042134bc161c32351d32e201e14f93a0232783e24703dea7df844d3",
+        "references": [
+          {
+            "path": "romarr/organizer.py",
+            "line": 1776,
+            "matchType": "exact-source-literal",
+            "lineText": "                \"match_details\": \"Manually confirmed by the library owner.\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 5609,
+            "matchType": "exact-source-literal",
+            "lineText": "  'Manually confirmed by the library owner.',"
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 5752,
+            "matchType": "exact-source-literal",
+            "lineText": "        manual:'Manually confirmed',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 190,
+      "id": "ui.manually-confirmed.9b66efab12",
+      "locale": "id",
+      "sourceSha256": "9b66efab12024e48bf0614d34b730a43252b1354287573c34ef8e07b71eab45a",
+      "currentTarget": "Manual dikonfirmasi",
+      "currentTargetSha256": "433658b2c4cef1f30222967f325af7ae6ad37e73a19e1e6ee8b1d7292c73a131",
+      "target": "Dikonfirmasi secara manual",
+      "targetSha256": "c352b4f8be4af75a6a0c083e3d6419f3f16df3bef1acdf6118b0fbb152c13f67",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: Both reviews identify the awkward “Manual dikonfirmasi”; “Dikonfirmasi secara manual” is the natural passive status.",
+      "caller": {
+        "resolved": true,
+        "reason": "The organizer confidence label is rendered through interfaceMarkup.",
+        "sourceContextEntrySha256": "6f9b7ca6e042134bc161c32351d32e201e14f93a0232783e24703dea7df844d3",
+        "references": [
+          {
+            "path": "romarr/organizer.py",
+            "line": 1776,
+            "matchType": "exact-source-literal",
+            "lineText": "                \"match_details\": \"Manually confirmed by the library owner.\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 5609,
+            "matchType": "exact-source-literal",
+            "lineText": "  'Manually confirmed by the library owner.',"
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 5752,
+            "matchType": "exact-source-literal",
+            "lineText": "        manual:'Manually confirmed',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 192,
+      "id": "ui.maximum-size-mb.02998adaa9",
+      "locale": "zh-Hans",
+      "sourceSha256": "02998adaa9f35753f72dbf661e2d0807feccc21b76ee19b7c03fe1c1fd4e5bef",
+      "currentTarget": "最大尺寸(MB)",
+      "currentTargetSha256": "7d8da0d43ccfecfbdb61eb9cfd9c627bc51ec25c1ed0390ebb236d5a525de448",
+      "target": "最大文件大小（MB）",
+      "targetSha256": "51a42eeee02be37f63354748f48c84feb985b8c6a4ea5d96f3b4c84918df5573",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: “文件大小” makes clear that MB measures file size rather than physical dimensions; the current target is understandable with the unit.",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "54fb2378eab02dc57b9472c19ac116abe99be673fd4004f0de104923aae15003",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 4261,
+            "matchType": "exact-source-literal",
+            "lineText": "  +fld('max_size_mb','Maximum size (MB)',SETTINGS.max_size_mb,'number'));"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 192,
+      "id": "ui.maximum-size-mb.02998adaa9",
+      "locale": "ja",
+      "sourceSha256": "02998adaa9f35753f72dbf661e2d0807feccc21b76ee19b7c03fe1c1fd4e5bef",
+      "currentTarget": "最大サイズ(MB)",
+      "currentTargetSha256": "f69229b941393edf861b531f490c9d8029d0a31a6e645e50046694abc50945b1",
+      "target": "最大ファイルサイズ（MB）",
+      "targetSha256": "1f48225999972351935d6c5a35436af6ad844858c87d822a692a0b17a9d2fcb8",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: The setting is a file-size limit; naming the file makes the field meaning explicit. The MB unit already makes the current wording understandable.",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "54fb2378eab02dc57b9472c19ac116abe99be673fd4004f0de104923aae15003",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 4261,
+            "matchType": "exact-source-literal",
+            "lineText": "  +fld('max_size_mb','Maximum size (MB)',SETTINGS.max_size_mb,'number'));"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 192,
+      "id": "ui.maximum-size-mb.02998adaa9",
+      "locale": "ko",
+      "sourceSha256": "02998adaa9f35753f72dbf661e2d0807feccc21b76ee19b7c03fe1c1fd4e5bef",
+      "currentTarget": "최대 크기 (MB)",
+      "currentTargetSha256": "c6af79a53394aeb7b8fa7a82366280da18b670de5e2bdbc074abff9f9354552e",
+      "target": "최대 파일 크기 (MB)",
+      "targetSha256": "214764603b516790b3e5fe06e69633ca458b930f165897f580fa781195d5db90",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: The setting is file size, and the primary wording names that quantity explicitly. The unit makes the current wording understandable.",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "54fb2378eab02dc57b9472c19ac116abe99be673fd4004f0de104923aae15003",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 4261,
+            "matchType": "exact-source-literal",
+            "lineText": "  +fld('max_size_mb','Maximum size (MB)',SETTINGS.max_size_mb,'number'));"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 192,
+      "id": "ui.maximum-size-mb.02998adaa9",
+      "locale": "zh-Hant",
+      "sourceSha256": "02998adaa9f35753f72dbf661e2d0807feccc21b76ee19b7c03fe1c1fd4e5bef",
+      "currentTarget": "最大尺寸(MB)",
+      "currentTargetSha256": "7d8da0d43ccfecfbdb61eb9cfd9c627bc51ec25c1ed0390ebb236d5a525de448",
+      "target": "最大檔案大小（MB）",
+      "targetSha256": "75638c77f8805c580abe1c2e00f547e54639d366bcc0c01d4b93d54e812408f8",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: “檔案大小” makes clear that MB measures file size rather than physical dimensions; the current target is understandable with the unit.",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "54fb2378eab02dc57b9472c19ac116abe99be673fd4004f0de104923aae15003",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 4261,
+            "matchType": "exact-source-literal",
+            "lineText": "  +fld('max_size_mb','Maximum size (MB)',SETTINGS.max_size_mb,'number'));"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 194,
+      "id": "ui.metadata-provider-title-suggestion-c.f44517c58a",
+      "locale": "pt-BR",
+      "sourceSha256": "f44517c58aec183e756d9236b9829c326ae70ec823bf00ead74c8687135c44d2",
+      "currentTarget": "Sugestão de título do fornecedor de metadados; confirmação antes de renomear",
+      "currentTargetSha256": "423f502faf59bc426f8b3fe38ae9cf19bcf451420f3531402f9c875e099d9324",
+      "target": "Sugestão de título do fornecedor de metadados; confirme antes de renomear",
+      "targetSha256": "a7860f36c586f710fccff179c6e155dd682da97648287dfcd3e8adf9143638c7",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: Both reviews select the same imperative. It better matches the source instruction to confirm before renaming; the existing nominal phrase still conveys the general requirement.",
+      "caller": {
+        "resolved": true,
+        "reason": "The organizer match-detail renderer allows this fixed app-authored source through appMessageMarkup, which resolves the catalog source key.",
+        "sourceContextEntrySha256": "890c25764f05086fe8cf226a20929ff21391136f6bff1008482d2810358c1cdb",
+        "references": [
+          {
+            "path": "romarr/organizer.py",
+            "line": 1625,
+            "matchType": "exact-source-literal",
+            "lineText": "                            \"Metadata provider title suggestion; confirm before renaming\""
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 5606,
+            "matchType": "exact-source-literal",
+            "lineText": "  'Metadata provider title suggestion; confirm before renaming',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 195,
+      "id": "ui.metadata-root-not-configured.d22feb8b9c",
+      "locale": "hi",
+      "sourceSha256": "d22feb8b9caa97136225b1c05046853fc5ccc08bf0b21e926c5f8aeb3de29a4d",
+      "currentTarget": "मेटाडेटा रूट कॉन्फ़िगर नहीं है",
+      "currentTargetSha256": "3915e5572cbdaeb1c1d736ef2733ace8c5c2ccc1cd88b51972f419232ae1167e",
+      "target": "मेटाडेटा का मूल फ़ोल्डर कॉन्फ़िगर नहीं है",
+      "targetSha256": "24756ec21e90261fd620a275d7ee4d0dde6fb5d1a075b9cb9dab512f691d8eb9",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: “मूल फ़ोल्डर” localizes “root folder” more clearly than the current technical transliteration “रूट.”",
+      "caller": {
+        "resolved": true,
+        "reason": "The local API includes the explicit ui.metadata-root-not-configured template key and empty values; explicitTemplateMarkup allowlists that stable key.",
+        "sourceContextEntrySha256": "91241a56652a52b537e711cbc1dfe02d374f2ee1c64dee5b9efe36399913f191",
+        "references": [
+          {
+            "path": "romarr/organizer.py",
+            "line": 1709,
+            "matchType": "exact-source-literal",
+            "lineText": "                    \"error\": \"metadata root not configured\","
+          },
+          {
+            "path": "romarr/organizer.py",
+            "line": 1711,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                        \"key\": \"ui.metadata-root-not-configured.d22feb8b9c\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 983,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.metadata-root-not-configured.d22feb8b9c',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 195,
+      "id": "ui.metadata-root-not-configured.d22feb8b9c",
+      "locale": "pt-BR",
+      "sourceSha256": "d22feb8b9caa97136225b1c05046853fc5ccc08bf0b21e926c5f8aeb3de29a4d",
+      "currentTarget": "Rota de metadados não configurada",
+      "currentTargetSha256": "91232ee03488352b87757cb579939851984348b9a350960bfc31048fe9aa9ff5",
+      "target": "Raiz de metadados não configurada",
+      "targetSha256": "d90f39d4fb072337a356c5e1e181789460b5f8bbaef3257c45642dc3336da948",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: “Rota” means route/path; “Raiz” correctly names the metadata root directory.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local API includes the explicit ui.metadata-root-not-configured template key and empty values; explicitTemplateMarkup allowlists that stable key.",
+        "sourceContextEntrySha256": "91241a56652a52b537e711cbc1dfe02d374f2ee1c64dee5b9efe36399913f191",
+        "references": [
+          {
+            "path": "romarr/organizer.py",
+            "line": 1709,
+            "matchType": "exact-source-literal",
+            "lineText": "                    \"error\": \"metadata root not configured\","
+          },
+          {
+            "path": "romarr/organizer.py",
+            "line": 1711,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                        \"key\": \"ui.metadata-root-not-configured.d22feb8b9c\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 983,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.metadata-root-not-configured.d22feb8b9c',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 195,
+      "id": "ui.metadata-root-not-configured.d22feb8b9c",
+      "locale": "vi",
+      "sourceSha256": "d22feb8b9caa97136225b1c05046853fc5ccc08bf0b21e926c5f8aeb3de29a4d",
+      "currentTarget": "Metadata root không được cấu hình",
+      "currentTargetSha256": "85987e1bc15d2dca0ab247e96a8b53d7bd6059f96b6faff5651469ffe8cd7f57",
+      "target": "Thư mục gốc siêu dữ liệu chưa được cấu hình",
+      "targetSha256": "2d880550a985cea7e8e33db754a47d19c7ebe2830727e81569bb60614fccfc85",
+      "disposition": "correction",
+      "winnerSource": "blind",
+      "rationale": "Ratify blind winner as correction: The blind suggestion explicitly names the root folder, which fits the configured metadata directory and is clearer than the primary’s bare “root of metadata.”",
+      "caller": {
+        "resolved": true,
+        "reason": "The local API includes the explicit ui.metadata-root-not-configured template key and empty values; explicitTemplateMarkup allowlists that stable key.",
+        "sourceContextEntrySha256": "91241a56652a52b537e711cbc1dfe02d374f2ee1c64dee5b9efe36399913f191",
+        "references": [
+          {
+            "path": "romarr/organizer.py",
+            "line": 1709,
+            "matchType": "exact-source-literal",
+            "lineText": "                    \"error\": \"metadata root not configured\","
+          },
+          {
+            "path": "romarr/organizer.py",
+            "line": 1711,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                        \"key\": \"ui.metadata-root-not-configured.d22feb8b9c\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 983,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.metadata-root-not-configured.d22feb8b9c',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 195,
+      "id": "ui.metadata-root-not-configured.d22feb8b9c",
+      "locale": "id",
+      "sourceSha256": "d22feb8b9caa97136225b1c05046853fc5ccc08bf0b21e926c5f8aeb3de29a4d",
+      "currentTarget": "Metadata root tidak terkonfigurasi",
+      "currentTargetSha256": "de05de9a316493b3d269514fa910acef755baf220eaedca94e87973163089535",
+      "target": "Direktori akar metadata belum dikonfigurasi",
+      "targetSha256": "ffd0310f9df3dbe9b4ea97ba59d36fc2ea93fc762c4379193703d4616daa51c4",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: Prefer “akar” (root) over the blind suggestion “utama” (main/primary); the source is a filesystem metadata root, not merely the main directory.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local API includes the explicit ui.metadata-root-not-configured template key and empty values; explicitTemplateMarkup allowlists that stable key.",
+        "sourceContextEntrySha256": "91241a56652a52b537e711cbc1dfe02d374f2ee1c64dee5b9efe36399913f191",
+        "references": [
+          {
+            "path": "romarr/organizer.py",
+            "line": 1709,
+            "matchType": "exact-source-literal",
+            "lineText": "                    \"error\": \"metadata root not configured\","
+          },
+          {
+            "path": "romarr/organizer.py",
+            "line": 1711,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                        \"key\": \"ui.metadata-root-not-configured.d22feb8b9c\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 983,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.metadata-root-not-configured.d22feb8b9c',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 196,
+      "id": "ui.minimum-seeders.a78f3d2116",
+      "locale": "es",
+      "sourceSha256": "a78f3d21169ba99d3ca34fb9fed030e3d78261fd3758c4716f296c7d4a1b315e",
+      "currentTarget": "Mínimo de semillas",
+      "currentTargetSha256": "ff096533c39cf717ef177f5ea5a60ea619562ab7e7b510d07757b970e290d443",
+      "target": "Número mínimo de seeders",
+      "targetSha256": "6a0e20c5387eb146edd008d061cd8d590b135a5b9993fef19865e3d9979d735b",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: The source is a numeric minimum of torrent seeder peers. “Número mínimo de seeders” makes the counted quantity explicit; current “semillas” is recognizable torrent terminology.",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "299e4c71108e112944f16a34a594e1a097b5ec66a95d5b7ffc0b5dc0da6fd822",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 4260,
+            "matchType": "exact-source-literal",
+            "lineText": "  +fld('min_seeders','Minimum seeders',SETTINGS.min_seeders,'number')"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 196,
+      "id": "ui.minimum-seeders.a78f3d2116",
+      "locale": "zh-Hans",
+      "sourceSha256": "a78f3d21169ba99d3ca34fb9fed030e3d78261fd3758c4716f296c7d4a1b315e",
+      "currentTarget": "最低种子",
+      "currentTargetSha256": "02a40bb1e4b635eb523f8d82dcc1c4e0204015800be2a44fec4661b2d12f105f",
+      "target": "最少种子数",
+      "targetSha256": "e97ca7b26ea1f3ca67eb06291954d3147076736040ea107211f19717337c597e",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: Prefer the concise torrent UI form “最少种子数” over the blind suggestion’s more literal “做种者数”; both express the count, but the former is more conventional. Terminology confidence is moderate.",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "299e4c71108e112944f16a34a594e1a097b5ec66a95d5b7ffc0b5dc0da6fd822",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 4260,
+            "matchType": "exact-source-literal",
+            "lineText": "  +fld('min_seeders','Minimum seeders',SETTINGS.min_seeders,'number')"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 196,
+      "id": "ui.minimum-seeders.a78f3d2116",
+      "locale": "hi",
+      "sourceSha256": "a78f3d21169ba99d3ca34fb9fed030e3d78261fd3758c4716f296c7d4a1b315e",
+      "currentTarget": "न्यूनतम सीडर",
+      "currentTargetSha256": "93483c3c2bd310894264b5555750d45617ca16280e5f21fa5d9dc3bb6e2be999",
+      "target": "सीडर की न्यूनतम संख्या",
+      "targetSha256": "34360fb4214770611fcd9c8b76cab0f3d53d9d083f0da6d36c8063c1ca273832",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: The primary wording says “minimum number of seeders”; the current singular label omits the count unit.",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "299e4c71108e112944f16a34a594e1a097b5ec66a95d5b7ffc0b5dc0da6fd822",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 4260,
+            "matchType": "exact-source-literal",
+            "lineText": "  +fld('min_seeders','Minimum seeders',SETTINGS.min_seeders,'number')"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 196,
+      "id": "ui.minimum-seeders.a78f3d2116",
+      "locale": "ja",
+      "sourceSha256": "a78f3d21169ba99d3ca34fb9fed030e3d78261fd3758c4716f296c7d4a1b315e",
+      "currentTarget": "最低種子",
+      "currentTargetSha256": "66a53e8c65e340ea76287f5b652d5585e3ebfe05ec0dfe8241854901d8281979",
+      "target": "最小シーダー数",
+      "targetSha256": "0e668eacc1c9f3382969790f40af6a31ac702648bb3e6a032e488f182ac58535",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: The shared candidate names the seeder count. Current “最低種子” reads as seeds and omits the count unit.",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "299e4c71108e112944f16a34a594e1a097b5ec66a95d5b7ffc0b5dc0da6fd822",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 4260,
+            "matchType": "exact-source-literal",
+            "lineText": "  +fld('min_seeders','Minimum seeders',SETTINGS.min_seeders,'number')"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 196,
+      "id": "ui.minimum-seeders.a78f3d2116",
+      "locale": "pt-BR",
+      "sourceSha256": "a78f3d21169ba99d3ca34fb9fed030e3d78261fd3758c4716f296c7d4a1b315e",
+      "currentTarget": "Mínimo de sementes",
+      "currentTargetSha256": "fdb26f1b1bc26634e843bb08b2f0493684cd29a6bfe874716e9a01d58fb108fc",
+      "target": "Número mínimo de seeders",
+      "targetSha256": "6a0e20c5387eb146edd008d061cd8d590b135a5b9993fef19865e3d9979d735b",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: The primary wording makes the minimum peer count explicit. “Sementes” is understandable torrent jargon, so this is a clarity refinement.",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "299e4c71108e112944f16a34a594e1a097b5ec66a95d5b7ffc0b5dc0da6fd822",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 4260,
+            "matchType": "exact-source-literal",
+            "lineText": "  +fld('min_seeders','Minimum seeders',SETTINGS.min_seeders,'number')"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 196,
+      "id": "ui.minimum-seeders.a78f3d2116",
+      "locale": "zh-Hant",
+      "sourceSha256": "a78f3d21169ba99d3ca34fb9fed030e3d78261fd3758c4716f296c7d4a1b315e",
+      "currentTarget": "最低種子",
+      "currentTargetSha256": "66a53e8c65e340ea76287f5b652d5585e3ebfe05ec0dfe8241854901d8281979",
+      "target": "最少種子數",
+      "targetSha256": "12016d37357396fa1a2363da518a66fd327b8305771eede5f38ae2b813fa345f",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: Prefer the concise torrent UI form “最少種子數” over the blind suggestion’s more literal “做種者數”; both express the count, but the former is more conventional. Terminology confidence is moderate.",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "299e4c71108e112944f16a34a594e1a097b5ec66a95d5b7ffc0b5dc0da6fd822",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 4260,
+            "matchType": "exact-source-literal",
+            "lineText": "  +fld('min_seeders','Minimum seeders',SETTINGS.min_seeders,'number')"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 202,
+      "id": "ui.multiplayer.563370a7b0",
+      "locale": "es",
+      "sourceSha256": "563370a7b0ef8fea32b1e01b441b507bcd6bae0b924205512c30c54ac1beca62",
+      "currentTarget": "multijugador",
+      "currentTargetSha256": "690f339aa6d663971222e1df3cc1d75ec3689a6e84f49d3522f5163feee8c352",
+      "target": "Multijugador",
+      "targetSha256": "563ac13b7dec708046e34bbd4e10c8c96f2896f91cd0da164d302d8557d71b84",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: Capitalize the start of this shelf-tab label; the lexical translation is already correct.",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "ffac8aafeb2c2e1a449e6106278712a4fc3247eef40ec2076b43c42a047b0d13",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 2940,
+            "matchType": "exact-source-literal",
+            "lineText": "                 ['multiplayer','Multiplayer'],['anniversary','On this day'],"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 202,
+      "id": "ui.multiplayer.563370a7b0",
+      "locale": "fr",
+      "sourceSha256": "563370a7b0ef8fea32b1e01b441b507bcd6bae0b924205512c30c54ac1beca62",
+      "currentTarget": "multijoueur",
+      "currentTargetSha256": "e85198c0304c0e459ab912694a0e19023f2f295dcef8996a2c9b9daa3fada15e",
+      "target": "Multijoueur",
+      "targetSha256": "94d13775d71d7fee4643c35d067ef265e45b3aa9b03fc89b778d208363189a0c",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: Capitalize the start of this shelf-tab label; the lexical translation is already correct.",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "ffac8aafeb2c2e1a449e6106278712a4fc3247eef40ec2076b43c42a047b0d13",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 2940,
+            "matchType": "exact-source-literal",
+            "lineText": "                 ['multiplayer','Multiplayer'],['anniversary','On this day'],"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 202,
+      "id": "ui.multiplayer.563370a7b0",
+      "locale": "ko",
+      "sourceSha256": "563370a7b0ef8fea32b1e01b441b507bcd6bae0b924205512c30c54ac1beca62",
+      "currentTarget": "멀티 플레이어",
+      "currentTargetSha256": "acb2e85fe32b86c4e2547e13bc5eab077b32dd13bc38923cacae0436d26696d7",
+      "target": "멀티플레이어",
+      "targetSha256": "2e093092e773291c8a4fbebd9a05924504e2df86a7354d397061fe1639653960",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: The joined compound “멀티플레이어” is the more standard single-word UI label; the spaced form remains understandable.",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "ffac8aafeb2c2e1a449e6106278712a4fc3247eef40ec2076b43c42a047b0d13",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 2940,
+            "matchType": "exact-source-literal",
+            "lineText": "                 ['multiplayer','Multiplayer'],['anniversary','On this day'],"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 202,
+      "id": "ui.multiplayer.563370a7b0",
+      "locale": "zh-Hant",
+      "sourceSha256": "563370a7b0ef8fea32b1e01b441b507bcd6bae0b924205512c30c54ac1beca62",
+      "currentTarget": "多人游戲",
+      "currentTargetSha256": "185f429af8aaaaf2192c5052b6ad0b4879a5feda7e502358fa7b9d4ced3c70f8",
+      "target": "多人遊戲",
+      "targetSha256": "c063f1f50096aeefd5712b329d43a2be10217d6ee0ce571767a2332cdd35c56b",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: Prefer the standard Traditional Chinese form “遊戲.” The primary target is better, but its rationale is wrong: “戲” is traditional, not simplified; the difference is “游” versus “遊.”",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "ffac8aafeb2c2e1a449e6106278712a4fc3247eef40ec2076b43c42a047b0d13",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 2940,
+            "matchType": "exact-source-literal",
+            "lineText": "                 ['multiplayer','Multiplayer'],['anniversary','On this day'],"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 202,
+      "id": "ui.multiplayer.563370a7b0",
+      "locale": "id",
+      "sourceSha256": "563370a7b0ef8fea32b1e01b441b507bcd6bae0b924205512c30c54ac1beca62",
+      "currentTarget": "Multiplayer",
+      "currentTargetSha256": "4dc0e13eb617ebd74fe082a1ea80141ea9e9f27ae65b7a1742ddd11eb26b0b63",
+      "target": "Multipemain",
+      "targetSha256": "a9098238de7c7b28f36b9cd9a18f4106d647c3ed41e3de222fa81e2f6592928a",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: “Multipemain” localizes the user-facing game category; the current English label is not translated.",
+      "caller": {
+        "resolved": true,
+        "reason": "The exact source is a standalone DOM text node (tile copy, field label, help sentence, or tab label); the public i18n text-node walker resolves exact catalog strings on initial and mutation updates.",
+        "sourceContextEntrySha256": "ffac8aafeb2c2e1a449e6106278712a4fc3247eef40ec2076b43c42a047b0d13",
+        "references": [
+          {
+            "path": "romarr/ui.py",
+            "line": 2940,
+            "matchType": "exact-source-literal",
+            "lineText": "                 ['multiplayer','Multiplayer'],['anniversary','On this day'],"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 203,
+      "id": "ui.name-answered-http-status-code.2a5471f26b",
+      "locale": "zh-Hans",
+      "sourceSha256": "2a5471f26b949094f9d39c0c8a1c8d2b10443df47e71bc876c4e198365c29536",
+      "currentTarget": "{name} 回复 HTTP {status_code}",
+      "currentTargetSha256": "f6fac6b46acdf2b5e266875f14499b27d2032bf0e3d45f6bb2e9cbcb302a1467",
+      "target": "{name} 返回了 HTTP {status_code}",
+      "targetSha256": "77221ce430cb3796492c6ae6c7a6227f16cc375741ee3ffb00ab52ac21d435ac",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: “返回” is more precise for a server returning a status code than “回复”; the current target still communicates a response.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local peer response attaches ui.name-answered-http-status-code with {name,status_code}; the UI passes the explicit template to apiMessageMarkup.",
+        "sourceContextEntrySha256": "353fd5e5b826783c39b51915c3d277616f82156266899512bc98f89e2205bf35",
+        "references": [
+          {
+            "path": "romarr/app.py",
+            "line": 4703,
+            "matchType": "dynamic-template-source-pattern",
+            "lineText": "            return None, f\"{peer.name} answered HTTP {response.status_code}\", {"
+          },
+          {
+            "path": "romarr/app.py",
+            "line": 4704,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                \"key\": \"ui.name-answered-http-status-code.2a5471f26b\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 933,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.name-answered-http-status-code.2a5471f26b',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 203,
+      "id": "ui.name-answered-http-status-code.2a5471f26b",
+      "locale": "ko",
+      "sourceSha256": "2a5471f26b949094f9d39c0c8a1c8d2b10443df47e71bc876c4e198365c29536",
+      "currentTarget": "{name}이(가) HTTP {status_code} 응답을 보냈습니다",
+      "currentTargetSha256": "78100c03e8806d7d7c3a4653394f85fd07f0803a00afc98811bfc0684253dfa2",
+      "target": "{name}에서 HTTP 상태 코드 {status_code}를 반환했습니다",
+      "targetSha256": "6156f15750c5859570413e835e241ace0e85c516016f8ef115a94a855c1548ad",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: The current wording is semantically sound. The primary form avoids displaying the optional “이(가)” pair next to a dynamic name and states the returned status code explicitly; this is a clarity refinement, not a required correction.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local peer response attaches ui.name-answered-http-status-code with {name,status_code}; the UI passes the explicit template to apiMessageMarkup.",
+        "sourceContextEntrySha256": "353fd5e5b826783c39b51915c3d277616f82156266899512bc98f89e2205bf35",
+        "references": [
+          {
+            "path": "romarr/app.py",
+            "line": 4703,
+            "matchType": "dynamic-template-source-pattern",
+            "lineText": "            return None, f\"{peer.name} answered HTTP {response.status_code}\", {"
+          },
+          {
+            "path": "romarr/app.py",
+            "line": 4704,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                \"key\": \"ui.name-answered-http-status-code.2a5471f26b\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 933,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.name-answered-http-status-code.2a5471f26b',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 203,
+      "id": "ui.name-answered-http-status-code.2a5471f26b",
+      "locale": "vi",
+      "sourceSha256": "2a5471f26b949094f9d39c0c8a1c8d2b10443df47e71bc876c4e198365c29536",
+      "currentTarget": "{name} trả lời HTTP {status_code}",
+      "currentTargetSha256": "d3a1df316891df254773856571dda71ac0f45e002f8b2f0b36f989102e3ca412",
+      "target": "{name} trả về HTTP {status_code}",
+      "targetSha256": "b06fc4e2b788ca986e64565e18d2f00663c1660de85417a1a244b5370f0b3efa",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: “Trả về” describes a server returning an HTTP status code more precisely than “trả lời”; the current wording remains understandable.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local peer response attaches ui.name-answered-http-status-code with {name,status_code}; the UI passes the explicit template to apiMessageMarkup.",
+        "sourceContextEntrySha256": "353fd5e5b826783c39b51915c3d277616f82156266899512bc98f89e2205bf35",
+        "references": [
+          {
+            "path": "romarr/app.py",
+            "line": 4703,
+            "matchType": "dynamic-template-source-pattern",
+            "lineText": "            return None, f\"{peer.name} answered HTTP {response.status_code}\", {"
+          },
+          {
+            "path": "romarr/app.py",
+            "line": 4704,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                \"key\": \"ui.name-answered-http-status-code.2a5471f26b\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 933,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.name-answered-http-status-code.2a5471f26b',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 203,
+      "id": "ui.name-answered-http-status-code.2a5471f26b",
+      "locale": "id",
+      "sourceSha256": "2a5471f26b949094f9d39c0c8a1c8d2b10443df47e71bc876c4e198365c29536",
+      "currentTarget": "{name} merespons dengan HTTP {status_code}",
+      "currentTargetSha256": "84a05ae5664d6a0c670e4e49280e24ac5d6d88e9021678653569cc9edbc0f2cd",
+      "target": "{name} mengembalikan kode HTTP {status_code}",
+      "targetSha256": "413777d7bddf72cea8502ceda6117c1123d9e2c8c0f14bf5addcc158003bf403",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: The primary wording makes explicit that the peer returned an HTTP code. The current “merespons dengan HTTP” is understandable but less specific.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local peer response attaches ui.name-answered-http-status-code with {name,status_code}; the UI passes the explicit template to apiMessageMarkup.",
+        "sourceContextEntrySha256": "353fd5e5b826783c39b51915c3d277616f82156266899512bc98f89e2205bf35",
+        "references": [
+          {
+            "path": "romarr/app.py",
+            "line": 4703,
+            "matchType": "dynamic-template-source-pattern",
+            "lineText": "            return None, f\"{peer.name} answered HTTP {response.status_code}\", {"
+          },
+          {
+            "path": "romarr/app.py",
+            "line": 4704,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                \"key\": \"ui.name-answered-http-status-code.2a5471f26b\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 933,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.name-answered-http-status-code.2a5471f26b',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 204,
+      "id": "ui.name-refused-the-credential-they-may.dfa9c11bed",
+      "locale": "fr",
+      "sourceSha256": "dfa9c11bed6a4adef2def54ad593587c9f2ea9b6371491c481a5d5a6e5dee7fa",
+      "currentTarget": "{name} a refusé les identifiants d’accès ; il se peut qu’on vous ait supprimé ou pas encore confirmé",
+      "currentTargetSha256": "be49314e9d2087dfab872f6ad6a42ee80c5c578f03fc3710af6c4dafface0efb",
+      "target": "{name} a refusé les identifiants d’accès ; cette personne vous a peut-être supprimé ou ne vous a pas encore confirmé",
+      "targetSha256": "b487a3f1e7c13dec6756f049dc11758d5d7978f3676212f7a5a0fd3ee03102d7",
+      "disposition": "refinement",
+      "winnerSource": "third-party",
+      "rationale": "Ratify third-party winner as refinement: Reject the primary suggestion’s “supprimé votre compte”: the source says the peer may have removed the user, not deleted the account. This phrasing preserves the person as object, names the peer as actor, and makes the coordination explicit.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local peer response attaches ui.name-refused-the-credential with {name}; the UI passes the explicit template to apiMessageMarkup.",
+        "sourceContextEntrySha256": "4f1a4025ba8c990bd852d5c8d2b88fe0e89ca1ddf60902bdf87b439e254ddb2d",
+        "references": [
+          {
+            "path": "romarr/app.py",
+            "line": 4699,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                \"key\": \"ui.name-refused-the-credential-they-may.dfa9c11bed\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 932,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.name-refused-the-credential-they-may.dfa9c11bed',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 204,
+      "id": "ui.name-refused-the-credential-they-may.dfa9c11bed",
+      "locale": "pt-BR",
+      "sourceSha256": "dfa9c11bed6a4adef2def54ad593587c9f2ea9b6371491c481a5d5a6e5dee7fa",
+      "currentTarget": "{name} recusou a credencial de acesso; talvez tenha removido você ou ainda não tenha confirmado você",
+      "currentTargetSha256": "10fc6fc40cf1768173c5ddc00535e3bc3cbed1b19789ef462ba9da4fc400ea4b",
+      "target": "{name} recusou a credencial de acesso; talvez tenha removido você ou ainda não tenha confirmado seu acesso",
+      "targetSha256": "fdc5ff9296759396e192205238f31dd0beb9bbc5e0d739d465d15d3cc3a17c6b",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: “Confirmado você” is unnatural here. “Confirmado seu acesso” is clearer in the credential-refusal context, though it narrows the source slightly; treat as a contextual refinement, not a literal correction.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local peer response attaches ui.name-refused-the-credential with {name}; the UI passes the explicit template to apiMessageMarkup.",
+        "sourceContextEntrySha256": "4f1a4025ba8c990bd852d5c8d2b88fe0e89ca1ddf60902bdf87b439e254ddb2d",
+        "references": [
+          {
+            "path": "romarr/app.py",
+            "line": 4699,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                \"key\": \"ui.name-refused-the-credential-they-may.dfa9c11bed\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 932,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.name-refused-the-credential-they-may.dfa9c11bed',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 205,
+      "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+      "locale": "zh-Hans",
+      "sourceSha256": "4b46f86ff4cbb0ec40a502b910293e5406669ab2759747946e455e3d627c17ae",
+      "currentTarget": "{name} 发送不 JSON 的东西",
+      "currentTargetSha256": "9faca5188c44bc346d4b5ce96c3d61ddb9d344426a9b6e15fb90a58490786f62",
+      "target": "{name} 发送的内容不是 JSON",
+      "targetSha256": "2285645a3c88247cc5d2b298b44a9ee154729005c61feda4e3d0f230247353d8",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: Both suggestions repair the ungrammatical current wording. Prefer the primary’s direct “the content sent by {name} is not JSON” construction.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local peer response attaches ui.name-sent-something-that-was-not-json with {name}; the UI passes the explicit template to apiMessageMarkup.",
+        "sourceContextEntrySha256": "c9aabcd9a0e3fe046ef644cdee7109eb33d696c21d95193b4312d47bdca3d5e1",
+        "references": [
+          {
+            "path": "romarr/app.py",
+            "line": 4711,
+            "matchType": "dynamic-template-source-pattern",
+            "lineText": "            return None, f\"{peer.name} sent something that was not JSON\", {"
+          },
+          {
+            "path": "romarr/app.py",
+            "line": 4712,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                \"key\": \"ui.name-sent-something-that-was-not-jso.4b46f86ff4\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 934,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.name-sent-something-that-was-not-jso.4b46f86ff4',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 205,
+      "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+      "locale": "hi",
+      "sourceSha256": "4b46f86ff4cbb0ec40a502b910293e5406669ab2759747946e455e3d627c17ae",
+      "currentTarget": "{name} कुछ भेजा जो JSON नहीं था",
+      "currentTargetSha256": "611b7cea878db6ec0814e1cfcbe2e0a89302f0e6d863632ab5314c1efb409aef",
+      "target": "{name} ने ऐसी सामग्री भेजी जो JSON प्रारूप में नहीं थी",
+      "targetSha256": "1f2b447a4d23fca9e19de0d444f5a7bd6439f59bed3cdc3221fc9134dc96ee74",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: Both candidates repair the missing ergative construction. The primary wording explicitly names content that is not in JSON format, which fits this API error.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local peer response attaches ui.name-sent-something-that-was-not-json with {name}; the UI passes the explicit template to apiMessageMarkup.",
+        "sourceContextEntrySha256": "c9aabcd9a0e3fe046ef644cdee7109eb33d696c21d95193b4312d47bdca3d5e1",
+        "references": [
+          {
+            "path": "romarr/app.py",
+            "line": 4711,
+            "matchType": "dynamic-template-source-pattern",
+            "lineText": "            return None, f\"{peer.name} sent something that was not JSON\", {"
+          },
+          {
+            "path": "romarr/app.py",
+            "line": 4712,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                \"key\": \"ui.name-sent-something-that-was-not-jso.4b46f86ff4\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 934,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.name-sent-something-that-was-not-jso.4b46f86ff4',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 205,
+      "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+      "locale": "fr",
+      "sourceSha256": "4b46f86ff4cbb0ec40a502b910293e5406669ab2759747946e455e3d627c17ae",
+      "currentTarget": "{name} envoie quelque chose qui n'était pas JSON",
+      "currentTargetSha256": "992e059e4ece9b4b1630da61938b5ae0aacb5894d1b4f982e004c282e2d7f45b",
+      "target": "{name} a envoyé un contenu qui n’était pas au format JSON",
+      "targetSha256": "517e0a10e13f91cc48743a154dc71530468f38d974bd99025bd027bf3e3b461d",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: Both suggestions fix the present/past mismatch. Prefer “un contenu” for the non-JSON response body; it is a natural technical rendering of “something.”",
+      "caller": {
+        "resolved": true,
+        "reason": "The local peer response attaches ui.name-sent-something-that-was-not-json with {name}; the UI passes the explicit template to apiMessageMarkup.",
+        "sourceContextEntrySha256": "c9aabcd9a0e3fe046ef644cdee7109eb33d696c21d95193b4312d47bdca3d5e1",
+        "references": [
+          {
+            "path": "romarr/app.py",
+            "line": 4711,
+            "matchType": "dynamic-template-source-pattern",
+            "lineText": "            return None, f\"{peer.name} sent something that was not JSON\", {"
+          },
+          {
+            "path": "romarr/app.py",
+            "line": 4712,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                \"key\": \"ui.name-sent-something-that-was-not-jso.4b46f86ff4\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 934,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.name-sent-something-that-was-not-jso.4b46f86ff4',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 205,
+      "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+      "locale": "ar",
+      "sourceSha256": "4b46f86ff4cbb0ec40a502b910293e5406669ab2759747946e455e3d627c17ae",
+      "currentTarget": "{name} أرسلت شيئا لم يكن JSON",
+      "currentTargetSha256": "e0d558fb8894df6fe7c90296ecdd99ec98d5868bf84c79255e4da4d4a0789804",
+      "target": "المحتوى الذي أرسله {name} ليس بصيغة JSON",
+      "targetSha256": "3c88892159555877f9c3ee2d5f97fe49ab65c0e411bbe6b96bcccfe3ba5d6a56",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: The shared candidate avoids the feminine verb form on a variable sender name, so it works for names of any gender.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local peer response attaches ui.name-sent-something-that-was-not-json with {name}; the UI passes the explicit template to apiMessageMarkup.",
+        "sourceContextEntrySha256": "c9aabcd9a0e3fe046ef644cdee7109eb33d696c21d95193b4312d47bdca3d5e1",
+        "references": [
+          {
+            "path": "romarr/app.py",
+            "line": 4711,
+            "matchType": "dynamic-template-source-pattern",
+            "lineText": "            return None, f\"{peer.name} sent something that was not JSON\", {"
+          },
+          {
+            "path": "romarr/app.py",
+            "line": 4712,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                \"key\": \"ui.name-sent-something-that-was-not-jso.4b46f86ff4\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 934,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.name-sent-something-that-was-not-jso.4b46f86ff4',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 205,
+      "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+      "locale": "ko",
+      "sourceSha256": "4b46f86ff4cbb0ec40a502b910293e5406669ab2759747946e455e3d627c17ae",
+      "currentTarget": "{name}는 JSON가 아닌 것을 보냈습니다.",
+      "currentTargetSha256": "349fecbcfca8943e8425f08deca011d72348ff7e7cba1523f0656eb4b90ebae1",
+      "target": "{name}에서 JSON 형식이 아닌 내용을 보냈습니다",
+      "targetSha256": "3745aaaa2ead6ae0d8e4ef55fec13e06b35c47aad9c2c201e91be3d3d108917c",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: Both suggestions fix the invalid particle after JSON. Prefer the primary wording with “에서” for the named peer as source and an explicit non-JSON format description; it avoids a visible allomorph pair after the dynamic name.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local peer response attaches ui.name-sent-something-that-was-not-json with {name}; the UI passes the explicit template to apiMessageMarkup.",
+        "sourceContextEntrySha256": "c9aabcd9a0e3fe046ef644cdee7109eb33d696c21d95193b4312d47bdca3d5e1",
+        "references": [
+          {
+            "path": "romarr/app.py",
+            "line": 4711,
+            "matchType": "dynamic-template-source-pattern",
+            "lineText": "            return None, f\"{peer.name} sent something that was not JSON\", {"
+          },
+          {
+            "path": "romarr/app.py",
+            "line": 4712,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                \"key\": \"ui.name-sent-something-that-was-not-jso.4b46f86ff4\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 934,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.name-sent-something-that-was-not-jso.4b46f86ff4',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 205,
+      "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+      "locale": "zh-Hant",
+      "sourceSha256": "4b46f86ff4cbb0ec40a502b910293e5406669ab2759747946e455e3d627c17ae",
+      "currentTarget": "{name} 發送不 JSON 的東西",
+      "currentTargetSha256": "d39fa99e3f686b3605b44c48ed737c103bf4eeb4ea09998f50862613713d2d22",
+      "target": "{name} 傳送的內容不是 JSON",
+      "targetSha256": "84769a08162c168ad16be516a52ca152d607080acaa01c241c9b235e9837ef01",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: Both suggestions repair the ungrammatical current wording. Prefer the primary’s direct “the content sent by {name} is not JSON” construction.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local peer response attaches ui.name-sent-something-that-was-not-json with {name}; the UI passes the explicit template to apiMessageMarkup.",
+        "sourceContextEntrySha256": "c9aabcd9a0e3fe046ef644cdee7109eb33d696c21d95193b4312d47bdca3d5e1",
+        "references": [
+          {
+            "path": "romarr/app.py",
+            "line": 4711,
+            "matchType": "dynamic-template-source-pattern",
+            "lineText": "            return None, f\"{peer.name} sent something that was not JSON\", {"
+          },
+          {
+            "path": "romarr/app.py",
+            "line": 4712,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                \"key\": \"ui.name-sent-something-that-was-not-jso.4b46f86ff4\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 934,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.name-sent-something-that-was-not-jso.4b46f86ff4',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 205,
+      "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+      "locale": "vi",
+      "sourceSha256": "4b46f86ff4cbb0ec40a502b910293e5406669ab2759747946e455e3d627c17ae",
+      "currentTarget": "{name} gửi một cái gì đó không phải JSON",
+      "currentTargetSha256": "5594b43dbe023b73c10beeee84fd16af68de52f389142121b1962871fcab0631",
+      "target": "{name} đã gửi nội dung không ở định dạng JSON",
+      "targetSha256": "9dd0f1ee1b093755ea856aa7ed451badf5ad500bae66b7b2d95de9e1a30af898",
+      "disposition": "refinement",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as refinement: The primary wording is more concise and idiomatic for an API response body. The current colloquial “một cái gì đó” remains semantically understandable.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local peer response attaches ui.name-sent-something-that-was-not-json with {name}; the UI passes the explicit template to apiMessageMarkup.",
+        "sourceContextEntrySha256": "c9aabcd9a0e3fe046ef644cdee7109eb33d696c21d95193b4312d47bdca3d5e1",
+        "references": [
+          {
+            "path": "romarr/app.py",
+            "line": 4711,
+            "matchType": "dynamic-template-source-pattern",
+            "lineText": "            return None, f\"{peer.name} sent something that was not JSON\", {"
+          },
+          {
+            "path": "romarr/app.py",
+            "line": 4712,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                \"key\": \"ui.name-sent-something-that-was-not-jso.4b46f86ff4\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 934,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.name-sent-something-that-was-not-jso.4b46f86ff4',"
+          }
+        ]
+      }
+    },
+    {
+      "sourceOrdinal": 205,
+      "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+      "locale": "id",
+      "sourceSha256": "4b46f86ff4cbb0ec40a502b910293e5406669ab2759747946e455e3d627c17ae",
+      "currentTarget": "{name} mengirimkan sesuatu yang tidak JSON",
+      "currentTargetSha256": "63ad6bcc8dfa3d5a6d4256c66255e6c3499d34bbd27fad6a5283c7d4952ef2ea",
+      "target": "{name} mengirim sesuatu yang bukan JSON",
+      "targetSha256": "c5abff0d24054febaa2d04d400d5003c39c3d8353826ab0d597ca0ebe202d6e4",
+      "disposition": "correction",
+      "winnerSource": "primary",
+      "rationale": "Ratify primary winner as correction: The current “tidak JSON” is an unnatural negation of a noun/category. “Bukan JSON” is the natural Indonesian form.",
+      "caller": {
+        "resolved": true,
+        "reason": "The local peer response attaches ui.name-sent-something-that-was-not-json with {name}; the UI passes the explicit template to apiMessageMarkup.",
+        "sourceContextEntrySha256": "c9aabcd9a0e3fe046ef644cdee7109eb33d696c21d95193b4312d47bdca3d5e1",
+        "references": [
+          {
+            "path": "romarr/app.py",
+            "line": 4711,
+            "matchType": "dynamic-template-source-pattern",
+            "lineText": "            return None, f\"{peer.name} sent something that was not JSON\", {"
+          },
+          {
+            "path": "romarr/app.py",
+            "line": 4712,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "                \"key\": \"ui.name-sent-something-that-was-not-jso.4b46f86ff4\","
+          },
+          {
+            "path": "romarr/ui.py",
+            "line": 934,
+            "matchType": "stable-message-id-in-code",
+            "lineText": "  'ui.name-sent-something-that-was-not-jso.4b46f86ff4',"
+          }
+        ]
+      }
+    }
+  ],
+  "scope": "Update only selected translations and corresponding translationHashes for ratified correction/refinement cells; retain all accepts and holds unchanged."
+}

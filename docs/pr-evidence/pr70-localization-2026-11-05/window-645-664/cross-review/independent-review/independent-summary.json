@@ -1,0 +1,23 @@
+{
+  "artifact": "ROMarrNG PR #70 W645-W664 independent cross assessment",
+  "exactHead": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+  "exactTree": "d6066baa3d03d3b4c6034e5af061fc4bc278b0f9",
+  "candidateFreeInputSha256": "15dd26e7614adb334b2c83ff9da791d56be8e9854a10f80d1200ee719422785c",
+  "cells": 240,
+  "callerfulCells": 144,
+  "callerlessHashOnlyHolds": 96,
+  "counts": {
+    "accept-current": 133,
+    "propose-refinement": 3,
+    "propose-correction": 8,
+    "text-free-hold": 96
+  },
+  "independentProposalCount": 11,
+  "candidateFreeReviewedBeforeProposalLedgers": true,
+  "proposalExposureBeforeSeal": "Only primary/blind README summary counts were read; no target proposals, per-cell decisions, or proposal rationales were inspected.",
+  "nativeSpeakerApproval": false,
+  "browserReviewPerformed": false,
+  "repoPrWorkflowEdits": false,
+  "applicationPerformed": false,
+  "result": "PASS"
+}

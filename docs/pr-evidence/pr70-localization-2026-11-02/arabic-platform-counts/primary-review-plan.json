@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "exactHead": "c3bcb5fffb28419f82384ad2202686e97227c4f9",
+  "exactTree": "b7cd0c4948bd8295fc32039072973c13e8ca538a",
+  "sourceId": "ui.cached-cached-across-platformcount-p.55b169ed05",
+  "source": "{cached} cached across {platformCount} platforms",
+  "sourceSha256": "55b169ed05f40592bef9353a7c4d6e4fe3c48d135ed2807cb75d08ca67d76b45",
+  "currentTarget": "تم تخزين {cached} مؤقتًا عبر {platformCount} منصة",
+  "currentTargetSha256": "ea9c9677b896308a5134de2fd7533a5da3af6a0e4d5ee58955739a420d74a416",
+  "proposedTarget": {
+    "kind": "plural",
+    "argument": "platformCount",
+    "forms": {
+      "zero": "تم تخزين {cached} مؤقتًا دون أي منصة",
+      "one": "تم تخزين {cached} مؤقتًا عبر منصة واحدة",
+      "two": "تم تخزين {cached} مؤقتًا عبر منصتين",
+      "few": "تم تخزين {cached} مؤقتًا عبر {platformCount} منصات",
+      "many": "تم تخزين {cached} مؤقتًا عبر {platformCount} منصة",
+      "other": "تم تخزين {cached} مؤقتًا عبر {platformCount} منصة"
+    }
+  },
+  "proposedTargetCanonicalJsonSha256": "f72af54b035c7180cd699698d540c4ec35acbed6e0fc7d572160431234dff4a9",
+  "targetPlaceholders": [
+    "cached",
+    "platformCount"
+  ],
+  "pluralArgument": "platformCount",
+  "regionalFormat": "use resolved system/browser locale when `formatLocale` is undefined; preserve explicit regional format otherwise",
+  "runtimeFiles": {
+    "romarr/i18n_runtime.js": "43dd57091eedb5a1d44f76891253522c086dcee3a9a86612fb2e4d4becefb6f0",
+    "romarr/ui.py": "b110af999efbe7bf22e8a1ee98be8cf6b4dee92f8f3b3fff606b59e38f9f527e"
+  },
+  "reviewerAssessment": {
+    "reviewer": "independent agent A",
+    "confidence": "high for parsing fix; moderate-high for Arabic plural forms",
+    "scope": "read-only design review before implementation",
+    "note": "Plural selection must parse localized formatting, including digits and group separators; output formatting must use the same regional locale as fmt()."
+  },
+  "noTestsBuildsScansCi": true
+}

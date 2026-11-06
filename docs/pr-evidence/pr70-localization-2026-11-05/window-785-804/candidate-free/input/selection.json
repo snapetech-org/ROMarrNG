@@ -1,0 +1,259 @@
+{
+  "catalogOneBasedPositions": [
+    786,
+    805
+  ],
+  "cellCount": 240,
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "positions": [
+    785,
+    804
+  ],
+  "selectedSources": [
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 786,
+      "catalogZeroBasedIndex": 785,
+      "position": 785,
+      "registryLocations": [],
+      "source": "Optional. Overrides the webhook's display name.",
+      "sourceId": "ui.optional-overrides-the-webhook-s-dis.4116a5e8e4",
+      "sourceSha256": "4116a5e8e4222045299ae89f3577810da389c5c65f51cf8a3b097ecf05ef348e"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 787,
+      "catalogZeroBasedIndex": 786,
+      "position": 786,
+      "registryLocations": [],
+      "sourceId": "ui.options.d0db8b5e36",
+      "sourceSha256": "d0db8b5e364b6989e4b8f38a2b3846b87d99a51c1592ebf35d21cc66405a8e39",
+      "sourceTextOmitted": true
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 788,
+      "catalogZeroBasedIndex": 787,
+      "position": 787,
+      "registryLocations": [],
+      "source": "Or as a frontend's own format:",
+      "sourceId": "ui.or-as-a-frontend-s-own-format.3a0f4bbdc6",
+      "sourceSha256": "3a0f4bbdc61ca61ea2b7e30f3aeeea9223e41e2f1d63121ba5762ea6bbf554c4"
+    },
+    {
+      "activeSourceRank": 242,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 789,
+      "catalogZeroBasedIndex": 788,
+      "position": 788,
+      "registryLocations": [
+        "romarr/ui.py:5097"
+      ],
+      "source": "Organize a library you already have",
+      "sourceId": "ui.organize-a-library-you-already-have.61369e08be",
+      "sourceSha256": "61369e08be38ee4a8b298278f9278fd8740a6f2dcae563c1c4b603c26da824b1"
+    },
+    {
+      "activeSourceRank": 244,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 790,
+      "catalogZeroBasedIndex": 789,
+      "position": 789,
+      "registryLocations": [
+        "romarr/ui.py:3948"
+      ],
+      "source": "Overwrite an existing file",
+      "sourceId": "ui.overwrite-an-existing-file.9d5f5484e6",
+      "sourceSha256": "9d5f5484e67157499dde68915b81e50de7605effeb74108ed77452e850f51d1d"
+    },
+    {
+      "activeSourceRank": 245,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 791,
+      "catalogZeroBasedIndex": 790,
+      "position": 790,
+      "registryLocations": [
+        "romarr/ui.py:2344"
+      ],
+      "source": "Owned check unavailable",
+      "sourceId": "ui.owned-check-unavailable.b3cf0beade",
+      "sourceSha256": "b3cf0beadeea0b7a55b33c8977e8de71470631743755f2dc19614d83248e90d2"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 792,
+      "catalogZeroBasedIndex": 791,
+      "position": 791,
+      "registryLocations": [],
+      "source": "Owned games",
+      "sourceId": "ui.owned-games.6092613ad5",
+      "sourceSha256": "6092613ad59fbe9761d8eca6f032e0a090cc2f6a480e00e1efb95f3082f4f2bc"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 793,
+      "catalogZeroBasedIndex": 792,
+      "position": 792,
+      "registryLocations": [],
+      "source": "PIN from your Moonlight client",
+      "sourceId": "ui.pin-from-your-moonlight-client.1a127b3ae9",
+      "sourceSha256": "1a127b3ae9cd9377400c354764922a698fabd2500d724a238409b4c1aa655093"
+    },
+    {
+      "activeSourceRank": 246,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 794,
+      "catalogZeroBasedIndex": 793,
+      "position": 793,
+      "registryLocations": [
+        "romarr/ui.py:1465"
+      ],
+      "source": "Page could not be loaded",
+      "sourceId": "ui.page-could-not-be-loaded.b4aa008f1c",
+      "sourceSha256": "b4aa008f1c141b110b5b833fd0437a31f8026f695bfd756f99404c0f2428d58b"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 795,
+      "catalogZeroBasedIndex": 794,
+      "position": 794,
+      "registryLocations": [],
+      "source": "Page {page} of {pages}",
+      "sourceId": "ui.page-page-of-pages.240ab6d8dc",
+      "sourceSha256": "240ab6d8dc2cbb5ede8e1e708f5812d1129644348c3a28d3aaf8d5b97a4cfaef"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 796,
+      "catalogZeroBasedIndex": 795,
+      "position": 795,
+      "registryLocations": [],
+      "sourceId": "ui.pages.9046da16ae",
+      "sourceSha256": "9046da16aea909ba75a36cec13b56cb2144dc2ede45cde361e99a8d79802eabf",
+      "sourceTextOmitted": true
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 797,
+      "catalogZeroBasedIndex": 796,
+      "position": 796,
+      "registryLocations": [],
+      "source": "Paired clients",
+      "sourceId": "ui.paired-clients.388740cbd4",
+      "sourceSha256": "388740cbd42d6b7f22572f42f1bce939d7a0b724f8c8fb7313ebb9ae18789f19"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 798,
+      "catalogZeroBasedIndex": 797,
+      "position": 797,
+      "registryLocations": [],
+      "source": "Pairing",
+      "sourceId": "ui.pairing.76dfd9f9a3",
+      "sourceSha256": "76dfd9f9a399a76a13b092e0ce512519b8fc0cfef720142556a8350f70a040ab"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 799,
+      "catalogZeroBasedIndex": 798,
+      "position": 798,
+      "registryLocations": [],
+      "sourceId": "ui.passed-as-aria2-s-dir-leave-blank-to.c2adc03112",
+      "sourceSha256": "c2adc031126a10382debf71412ee2284453e2cca1b0dc734676fb8b051432a72",
+      "sourceTextOmitted": true
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 800,
+      "catalogZeroBasedIndex": 799,
+      "position": 799,
+      "registryLocations": [],
+      "source": "Passkey",
+      "sourceId": "ui.passkey.904c9aa9ba",
+      "sourceSha256": "904c9aa9baaef704c95f5153f30483149053b5a63b01317bef437b30a9618e70"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 801,
+      "catalogZeroBasedIndex": 800,
+      "position": 800,
+      "registryLocations": [],
+      "source": "Password",
+      "sourceId": "ui.password.e7cf3ef4f1",
+      "sourceSha256": "e7cf3ef4f17c3999a94f2c6f612e8a888e5b1026878e4e19398b23bd38ec221a"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 802,
+      "catalogZeroBasedIndex": 801,
+      "position": 801,
+      "registryLocations": [],
+      "source": "Paste it here",
+      "sourceId": "ui.paste-it-here.f21b1e24fc",
+      "sourceSha256": "f21b1e24fc249d2ba803d713fed40307edcd079bfaae45f8e4c2b5b91c38a4ec"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 803,
+      "catalogZeroBasedIndex": 802,
+      "position": 802,
+      "registryLocations": [],
+      "sourceId": "ui.paste-the-entire-page-if-you-like-ro.db06002ffb",
+      "sourceSha256": "db06002ffb2f7948db00e9b95de246b3fb1fa4ead41a44d352d393a2d5650475",
+      "sourceTextOmitted": true
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 804,
+      "catalogZeroBasedIndex": 803,
+      "position": 803,
+      "registryLocations": [],
+      "source": "Paste the value first",
+      "sourceId": "ui.paste-the-value-first.51526abffc",
+      "sourceSha256": "51526abffc20cdec2f3e53983ca314dcb050d384f3e501c68cd01cfbfb19c0bf"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 805,
+      "catalogZeroBasedIndex": 804,
+      "position": 804,
+      "registryLocations": [],
+      "source": "Pasted list",
+      "sourceId": "ui.pasted-list.80a83ed456",
+      "sourceSha256": "80a83ed4564b41c219e271e7f6f2f8308e4e62a0e20e6273acd74d31da047721"
+    }
+  ],
+  "selectionBasis": "catalog insertion order at exact pinned romarr/ui-labels.json indices 785 through 804 (zero-based)",
+  "sourceCount": 20,
+  "window": "W785-W804"
+}

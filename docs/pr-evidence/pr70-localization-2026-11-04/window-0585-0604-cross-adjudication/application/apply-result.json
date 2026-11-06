@@ -1,0 +1,15 @@
+{
+  "callerfulKeepCurrentCount": 194,
+  "callerlessHashOnlyHoldCount": 24,
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogPath": "romarr/ui-labels.json",
+  "head": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+  "localeRegistryOrderPreserved": true,
+  "noOpCellCount": 218,
+  "onlyProductPathChanged": "romarr/ui-labels.json",
+  "postCatalogSha256": "62e269549d311ce8e2142199792490a035671674ba3dd45a4e5d9d2b601767f0",
+  "preCatalogSha256": "5fc391b529ea7553f5c133f38c7faca0f74a08a0c740ae03633383ae8d43fff3",
+  "result": "APPLIED_LOCALLY",
+  "selectedCellCount": 22,
+  "tree": "dcb9c1766831e217ffca7fb77068b97c33b9524e"
+}

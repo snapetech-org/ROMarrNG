@@ -1,0 +1,9 @@
+{
+  "priorWindow": "W385-W404 active-source queue slice",
+  "priorHead": "0afd1d8c150fb96d868394a8d9620371db612185",
+  "currentHead": "c146189f29db8fbd77d68dff0c33a0ab59a6b601",
+  "currentTree": "3db10f8b87577edd1167e4489524e6afbb50d556",
+  "reattestedSources": 20,
+  "allPriorSourceIdsAndHashesMatchCurrentCatalogAndRegistry": true,
+  "note": "The current requested W405-W424 list is separately pinned to catalog insertion order; no active-source sort continuity is claimed."
+}

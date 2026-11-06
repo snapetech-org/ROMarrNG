@@ -1,0 +1,149 @@
+{
+  "head": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+  "productionFilesSearched": 51,
+  "queryCount": 20,
+  "results": [
+    {
+      "callerless": false,
+      "contextSha256": "2bce78445b28d170874c60200542bfc4597e6c018f47408d2c348754b722f39b",
+      "matchCount": 1,
+      "sourceId": "ui.known-dumps.d89b2bcfcf",
+      "sourceSha256": "d89b2bcfcf1c3f6741e75379ee21604f011872ef4944707c43c2b0582bf5dafc"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "066e72054fbfa5c9b7c04a39af236401bffb033855ba8f45c0d73092cc8f1094",
+      "matchCount": 1,
+      "sourceId": "ui.ko-fi.76c38e42cf",
+      "sourceSha256": "76c38e42cf40e957992b9c703923af7198922f5f21a9fcb8f143389aa45443d4"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "98e3b8321086586e82fe0b7c1046672569a05f961bd3fab3cc44507f71e6fa43",
+      "matchCount": 1,
+      "sourceId": "ui.lynx-header.83b04c6319",
+      "sourceSha256": "83b04c631928c50819a256bbd87cc8510236ff50aee334a725ce5f9588a3fad8"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "efe0b0063d36ded1ff9e4665360e15f579f406b947a64bb5bfa101df4d90276a",
+      "matchCount": 7,
+      "sourceId": "ui.label.0e66373f45",
+      "sourceSha256": "0e66373f45dcf3dd656151e519f7ee5e3d558d9c22cb87df339bbdd2b6c6a3c1"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "32467fec7eecdd5b97c61ad58b65833efab84b4e4cc833fbfacd8574cab6678e",
+      "matchCount": 2,
+      "sourceId": "ui.last-attempt.3ec078252b",
+      "sourceSha256": "3ec078252bd7efa0371c046aa9b1f9e905c53190f660a600bc50765e1d9d2cf3"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "3ef660dcf96c30d0d9659530afea996d079220c180a2e0d1d917bfda22b5d36f",
+      "matchCount": 2,
+      "sourceId": "ui.last-error.5488d837f5",
+      "sourceSha256": "5488d837f5f65d6f0774b85c0f2bccacbfdd3e94b976c5ed423021da341bdd96"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "e38119fccc4cd202f1763c9bc836d4394557d7e25f6f6a60a0dc14df2949fbb8",
+      "matchCount": 2,
+      "sourceId": "ui.last-ran.2e024dc014",
+      "sourceSha256": "2e024dc0140ebe3c6bd3f6482b9e24d998b1a7c509a0449ad2de2f207ac1d9d4"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "2460229bfab268d231b629a9b006c1b8f23bd6f095492593eba66732e8e675d8",
+      "matchCount": 1,
+      "sourceId": "ui.last-refresh.519ad138a1",
+      "sourceSha256": "519ad138a13989b6a8c2c5d6f71360a20ac260aa77f403b6d36eec590b2e66e1"
+    },
+    {
+      "callerless": true,
+      "contextSha256": "d57e6872233ca7e25d04335b2acba14ac8f4b3015cd5c2f6f24512f26da0d102",
+      "matchCount": 0,
+      "sourceId": "ui.last-refresh-error.479c8c6d09",
+      "sourceSha256": "479c8c6d095dc100a0dfcca71b2c1c9d174d5bcff9c9fe9920b9448cd22c5d62"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "a8c5c6421a41407bb26adf442106fdc3fb17814aa913fbaf1de88e869c944a38",
+      "matchCount": 1,
+      "sourceId": "ui.latest-listed-version-only.1df61faba4",
+      "sourceSha256": "1df61faba400e03cee501fce4d526b344496b2d36821d84b8e5c7f62a259bb52"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "5ce996ef9f6ca9a2ba62df8a220ec224235080d0a6a8c71dd26e44226c6bad51",
+      "matchCount": 1,
+      "sourceId": "ui.latest-listed-versions.0d1f9a2512",
+      "sourceSha256": "0d1f9a2512b7427eca9812a307714853b7a56706501387a7a70c4ea193edd809"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "76082bd6472e2c5ffd42cd1ce5595dff5fec86f9e8e67dbead09e69f2baf7147",
+      "matchCount": 1,
+      "sourceId": "ui.left.58eb9032e3",
+      "sourceSha256": "58eb9032e3bb83f0e39d644ebc87ca254117b95bf458483bec7379bea0b419d0"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "88d118da5913840ea791f4c0b552eaabb7a71a628ffa24359ea34d2ded2cf989",
+      "matchCount": 4,
+      "sourceId": "ui.libraries.62ef6fd92e",
+      "sourceSha256": "62ef6fd92ee145d9f000697f85abd4c680d9754e96c988ec7fe2b1072240df92"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "73b365c00cff8d6fb11dd68fbb7fe80231e30551fddfd32ea0037bee0ece3bff",
+      "matchCount": 5,
+      "sourceId": "ui.library.dc20b3d5d2",
+      "sourceSha256": "dc20b3d5d2cddf82fad332821ca5e9a4efdcede4a273aa193d2b495bdcc92825"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "7c7529e6be7b55a865b7ca22979411726b1329c29cc033ce28b65d18a2cbd9c2",
+      "matchCount": 1,
+      "sourceId": "ui.library-audit.c90ff05e07",
+      "sourceSha256": "c90ff05e07e4266405a3e405a3419942e26b2c3caeeb1f1422a7d04e14cb70bc"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "0f7541920c7cb9163557479844aa17680e10a3bac311fb4630fcd00c47c7495d",
+      "matchCount": 1,
+      "sourceId": "ui.library-inventory.18d033ce16",
+      "sourceSha256": "18d033ce16489e237be785604f6e6ca3edcc6dff3e4c92f016f5ede5f8d8e4c1"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "98f4637814f8fcfde8b24342f5ea58addc1a9dd1f79a2aa6e7600e289b75fd99",
+      "matchCount": 1,
+      "sourceId": "ui.library-path.2e74747456",
+      "sourceSha256": "2e747474560f788876b54197fe8a0b76e7ca0b80f4698230194bfaab47642715"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "86ec12c432f79be325bdb73fcc0e919a0a6d2e6826a8239227b70df6bb1971f6",
+      "matchCount": 1,
+      "sourceId": "ui.library-servers-where-your-games-liv.c6ecf254ba",
+      "sourceSha256": "c6ecf254bae2e76b2f9f31d308605f95432608d45f62151b1529085f97cbc735"
+    },
+    {
+      "callerless": true,
+      "contextSha256": "5a3db238cce2e61cc1dc12c039c5340c37d1c0604692736108da9e6011bd040b",
+      "matchCount": 0,
+      "sourceId": "ui.lidarr.01a6f87c38",
+      "sourceSha256": "01a6f87c38cf6f9acfdbd0d5e9096f945a84099ae4358bfe744293ba52eea3bd"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "1f474a4cd1672df8a6dc837d4a6b0ce1856307c8871bc24e633381efaa4b6be7",
+      "matchCount": 4,
+      "sourceId": "ui.light.dbcd5e7bb7",
+      "sourceSha256": "dbcd5e7bb7a0f538810de44c3efbd813037ee3fa358747bb71fa58e157af45f7"
+    }
+  ],
+  "searchScope": "tracked production source files under romarr; tests, documentation, and locale catalogs excluded",
+  "tree": "dcb9c1766831e217ffca7fb77068b97c33b9524e"
+}

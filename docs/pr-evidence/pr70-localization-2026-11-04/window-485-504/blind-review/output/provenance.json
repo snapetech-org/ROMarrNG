@@ -1,0 +1,14 @@
+{
+  "artifact": "ROMarrNG PR #70 W485-W504 clean blind provenance",
+  "candidateFreeInputDirectory": "candidate-free-input/",
+  "candidateFreeInputHead": "6eb494d362ae19503b9199cd2c05c0767cddbc0e",
+  "candidateFreeInputTree": "b9450b9c6d22c816551fc8d528e8f03413d04595",
+  "candidateFreeInputManifestSha256": "0319707e6d70515ad6dae3f14cc3fbb993a66d2c619938525bc3915516177bf1",
+  "candidateFreeInputChecksumListSha256": "0424bfdb53551a3d5dce0c21bcf19a684f166864c3bda7d282a7a9b99123678c",
+  "priorSelectionReattestationSha256": "a31c9618ec5da88be14c42770c06ddadcc3bc607cf6537c41853935e8c2b946b",
+  "priorSelectionReattestationCount": 100,
+  "priorHoldReattestationSha256": "f1424c3522ab298890fad6b9c705ee5767f906d15bd92222bec2a792d253d4fc",
+  "priorHoldReattestationCount": 444,
+  "priorReattestationsMatchCopiedInput": true,
+  "reviewUsedOnlyCopiedCandidateFreeInput": true
+}

@@ -1,0 +1,27 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pull_request": 70,
+  "input_head": "65a3f8a8feee1b041c8c547250feeae6900337f5",
+  "input_tree": "654f9065dcdd9c7f580df6909071f38278f44d61",
+  "message_ids_reviewed": 3,
+  "locale_cells_reviewed": 36,
+  "dispositions": {
+    "accept-current": 35,
+    "refine": 1,
+    "correction": 0,
+    "hold": 0
+  },
+  "applied_corrections": 1,
+  "changed_locale_cells": 1,
+  "catalog_message_count": 1836,
+  "source_current_and_target_raw_hashes_reverified": true,
+  "translation_content_hash_algorithm": "scripts/localization_review.py content_hash",
+  "new_translation_hash": "d852124d81b8382111794068d0ca0691f4b14d82fc96e2776b0f6e7ed17bf128",
+  "translation_status": "draft",
+  "translation_review_status": "unchanged; native-speaker approval not recorded",
+  "caller_lines_reattested": 144,
+  "stale_location_pins_reconciled": 8,
+  "native_speaker_approval": false,
+  "current_head_browser_review": false,
+  "tests_builds_scans_ci_workflows_releases_tags_merges": false
+}

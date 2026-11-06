@@ -1,0 +1,51 @@
+{
+  "artifact": "ROMarrNG PR #70 W585-W604 primary semantic review summary",
+  "reviewedAtUtc": "2026-11-04T17:55:50Z",
+  "head": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+  "tree": "dcb9c1766831e217ffca7fb77068b97c33b9524e",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "dispositionCounts": {
+    "KEEP": 224,
+    "CHANGE": 16
+  },
+  "proposedChangeCount": 16,
+  "proposedChangeCountsByPosition": {
+    "586": 3,
+    "587": 1,
+    "596": 12
+  },
+  "proposedChangeCountsByLocale": {
+    "ar": 1,
+    "de": 1,
+    "es": 1,
+    "fr": 1,
+    "hi": 2,
+    "id": 1,
+    "ja": 2,
+    "ko": 1,
+    "pt-BR": 2,
+    "vi": 2,
+    "zh-Hans": 1,
+    "zh-Hant": 1
+  },
+  "hashOnlyHoldCount": 0,
+  "callerCoverage": {
+    "sourcesWithCallers": 18,
+    "callerlessSources": 2,
+    "callerlessCells": 24,
+    "proposedChangesWithCallerContext": 16,
+    "proposedChangesWithoutCallerContext": 0
+  },
+  "hashOnlyHoldFile": "hash-only-holds.jsonl",
+  "limitations": [
+    "AI semantic review; no native-speaker approval.",
+    "Callerless strings were reviewed from source text and current targets without runtime caller context."
+  ],
+  "blindness": {
+    "otherW585ReviewDecisionsAccessed": false,
+    "staleW585PrimaryPacketAccessed": false,
+    "priorW585PrimaryDecisionsReused": false
+  }
+}

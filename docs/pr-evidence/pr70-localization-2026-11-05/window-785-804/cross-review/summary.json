@@ -1,0 +1,47 @@
+{
+  "artifact": "ROMarrNG PR #70 W785-W804 integrated cross-review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W785-W804",
+  "head": "bbbf84d0d83138a23143f6aa6075415ebcb36d3e",
+  "tree": "fbf9ada4b4fd43a288ce498b24990312f0c32f22",
+  "cellCount": 240,
+  "localeCount": 12,
+  "callerBackedCells": 192,
+  "callerlessHashOnlyCells": 48,
+  "primaryProposalCells": 16,
+  "independentBlindProposalCells": 28,
+  "proposalOverlapCells": 13,
+  "primaryOnlyProposalCells": 3,
+  "blindOnlyProposalCells": 15,
+  "uniqueProposalCells": 31,
+  "identicalOverlapCells": 10,
+  "divergentOverlapCellsResolvedByCrossReview": 3,
+  "integratedOrigins": {
+    "blind": 16,
+    "candidate-current": 161,
+    "consensus": 10,
+    "hold_hash_only": 48,
+    "primary": 5
+  },
+  "priorActiveHashOnlyHoldsCopied": 1012,
+  "resultingActiveHashOnlyHolds": 1060,
+  "tokenMismatches": {
+    "placeholders": 0,
+    "markup": 0,
+    "numeric": 0,
+    "protectedLiterals": 0
+  },
+  "confidence": "moderate",
+  "nativeSpeakerApproval": false,
+  "approvalCaveat": "Integrated wording choices and proposals are not native-speaker-approved. The Hindi Pairing choice is low confidence and especially needs native review.",
+  "reviewScope": "Candidate-free, primary, and independent blind packets only; no product worktree/repository/PR was modified; no native-speaker channels were inspected.",
+  "inputVerifierResults": {
+    "candidateFreeOuterChecksums": "PASS",
+    "candidateFreeInnerChecksums": "PASS",
+    "primaryReviewVerifier": "PASS (packet-only; no repo argument)",
+    "independentBlindVerifier": "PASS (packet-only)"
+  },
+  "nextBoundary": "Locale native-speaker review of the 31 proposed target changes (especially Hindi Pairing), followed by a separate decision before any proposal is applied.",
+  "createdAtUtc": "2026-11-06T00:05:24+00:00"
+}

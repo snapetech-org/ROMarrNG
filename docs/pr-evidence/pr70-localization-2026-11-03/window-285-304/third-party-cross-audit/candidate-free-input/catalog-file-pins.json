@@ -1,0 +1,62 @@
+{
+  "callerFiles": [
+    {
+      "byteCount": 418446,
+      "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+      "lineCount": 8174,
+      "path": "romarr/app.py",
+      "sha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510"
+    },
+    {
+      "byteCount": 121857,
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+      "lineCount": 2466,
+      "path": "romarr/organizer.py",
+      "sha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64"
+    },
+    {
+      "byteCount": 407495,
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "lineCount": 6827,
+      "path": "romarr/ui.py",
+      "sha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+    }
+  ],
+  "catalog": {
+    "byteCount": 3006359,
+    "gitBlob": "acbaa68665ceba8f68ddc42d42d25ec582a83131",
+    "lineCount": 52665,
+    "path": "romarr/ui-labels.json",
+    "sha256": "cd3f1c00d9421d325aa51d074eb21f1ec277d98e4856d9b616b49a602acd17d6"
+  },
+  "head": "363601fd2597f0fb97adff97554e651c2bea2d99",
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "sourceIndex": {
+    "byteCount": 273919,
+    "gitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80",
+    "lineCount": 11790,
+    "path": "romarr/ui-source-messages.json",
+    "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515"
+  },
+  "sourceSnapshot": {
+    "byteCount": 202767,
+    "gitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2",
+    "lineCount": 1838,
+    "path": "romarr/ui-source-snapshot.json",
+    "sha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3"
+  },
+  "tree": "1f8ada1746f53796e2b4a8f43f9a0075150aa5d7"
+}

@@ -1,0 +1,30 @@
+{
+  "allTargetHashesMatch": true,
+  "callerlessW645Cells": 96,
+  "callerlessW665Cells": 72,
+  "changedTargets": 0,
+  "count": 892,
+  "head": "43d2858744ef20cd58462643fed534ac61d2ffad",
+  "textInHoldRows": false,
+  "tree": "73e8f50d65cb611def996b01bab0b00628b65860",
+  "windows": {
+    "W245-W264": 72,
+    "W265-W284": 168,
+    "W285-W304": 24,
+    "W325-W344": 24,
+    "W405-W424": 48,
+    "W425-W444": 12,
+    "W445-W464": 36,
+    "W465-W484": 60,
+    "W485-W504": 24,
+    "W505-W524": 72,
+    "W525-W544": 12,
+    "W545-W564": 12,
+    "W565-W584": 40,
+    "W585-W604": 24,
+    "W605-W624": 36,
+    "W625-W644": 60,
+    "W645-W664": 96,
+    "W665-W684": 72
+  }
+}

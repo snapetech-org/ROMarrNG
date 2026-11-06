@@ -1,0 +1,10 @@
+{
+  "commit": "d5ba7f1f268501f45227388c46d5f938ed0c9191",
+  "tree": "2f8ce1af963b315108f668fc31c94ca90ecd1351",
+  "parent": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+  "subject": "Apply reviewed UI translations W425-W444",
+  "changedPaths": [
+    "romarr/ui-labels.json"
+  ],
+  "capturedUtc": "2026-11-03T19:58:01.646651+00:00"
+}

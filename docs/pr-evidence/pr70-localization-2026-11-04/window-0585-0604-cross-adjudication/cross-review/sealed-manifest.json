@@ -1,0 +1,136 @@
+{
+  "counts": {
+    "blindDispositionCounts": {
+      "hold_hash_only": 24,
+      "propose_refinement": 20,
+      "retain_current": 196
+    },
+    "callerfulKeepCurrent": 194,
+    "callerlessHashOnlyHolds": 24,
+    "cells": 240,
+    "crossResolutionCounts": {
+      "blind_only_resolved_by_caller_context": 6,
+      "corroborated_exact_target": 11,
+      "corroborated_meaning_variant": 3,
+      "primary_only_resolved_by_caller_context": 2
+    },
+    "noOps": 218,
+    "primaryDispositionCounts": {
+      "CHANGE": 16,
+      "KEEP": 224
+    },
+    "selectedByLocale": {
+      "ar": 1,
+      "de": 1,
+      "es": 1,
+      "fr": 1,
+      "hi": 3,
+      "id": 2,
+      "ja": 3,
+      "ko": 2,
+      "pt-BR": 2,
+      "vi": 4,
+      "zh-Hans": 1,
+      "zh-Hant": 1
+    },
+    "selectedBySourceId": {
+      "ui.ko-fi.76c38e42cf": 3,
+      "ui.last-ran.2e024dc014": 2,
+      "ui.last-refresh.519ad138a1": 2,
+      "ui.latest-listed-version-only.1df61faba4": 2,
+      "ui.left.58eb9032e3": 12,
+      "ui.lynx-header.83b04c6319": 1
+    },
+    "selectedProposals": 22,
+    "unresolvedContextualHolds": 0
+  },
+  "files": {
+    "README.md": {
+      "bytes": 1283,
+      "sha256": "9b5097cee5e4407258033acb46cb1d8a65afe19ede5c5fcf8f74a3b419e1c100"
+    },
+    "build_cross_packet.py": {
+      "bytes": 40178,
+      "sha256": "d0206e2badc6b96c3a903e94b1fc16d1d111c7d9d21f91002d9dc2ac2e978479"
+    },
+    "cross-manifest.json": {
+      "bytes": 4019,
+      "sha256": "8e0d0c0acbfeb5b067e99c95813230fda7b7890b1d2fe4b9e03c95c8363c66f8"
+    },
+    "cross-report.json": {
+      "bytes": 2184,
+      "sha256": "13e322333304fd943e2308f30159bff9ee230344a16a7205f9d17efa5a4d2d39"
+    },
+    "cross-report.md": {
+      "bytes": 4354,
+      "sha256": "f9a9f84c98971ceffb229ca87834bdc8c430912b0a6fe395ff6befb3eba4f270"
+    },
+    "no-op-ledger.jsonl": {
+      "bytes": 168102,
+      "sha256": "41ab6c37a8098d11edb0c53a57106b60137d1a9cdf8da2a2ef4cd4aba9eeedca"
+    },
+    "selected-proposals.jsonl": {
+      "bytes": 42374,
+      "sha256": "5f59727ec32dae55e5d21b0d37a73046bd03aaa4474c3ee02d13705fb85dd8b1"
+    },
+    "source-evidence.jsonl": {
+      "bytes": 19177,
+      "sha256": "ea0099b5302149b95ad738b0f729361fd360ab4bdef5c4e16adddc0c2f134595"
+    },
+    "verify_cross_packet.py": {
+      "bytes": 10936,
+      "sha256": "d9c20e0e43a6ec3238f9e2a142d6f3c4af5293f495b6ed67ab8dd76d406d0d31"
+    }
+  },
+  "inputAttestations": {
+    "blindReview": {
+      "blindDecisionsSha256": "97c384f094670e49d8c21d1e87b13a1bb43548def6158143952e3ab20f6ffe57",
+      "blindnessManifestSha256": "88ffcaaa0176e106fe29feb401df787fd5961bcb05a4f8da9b742e35413bb55a",
+      "pathAtReview": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w585-604-blind-review-20261104/sealed-blind-packet",
+      "sealedManifestSha256": "384d709375bc45b50f1ef7bae7b58f0e5e8c92b6daefb900befe272b214e0b9b",
+      "sealedManifestSidecarSha256": "9b7589aaa434baec61c3e23a88402580a026b56ea8627064f696fadad2ab4ff6",
+      "summarySha256": "bef558373f96f1f368561766ff4f54d895509d8ab7b1d0ce327e1ab334db7832",
+      "verification": "PASS"
+    },
+    "candidateFreeBundle": {
+      "bundleChecksumListSha256": "5cf33aef14eb8de492cb63098331522fe7aa0495ea112a4016144b35b4fbcea3",
+      "bundleManifestSha256": "3f4a0272b7c6cec1d486e9877304b38f791c941e12f4ad1c0e55da8fd7b75bed",
+      "candidateFree": true,
+      "inputChecksumListSha256": "3534dd5d1e8a4998045f398b93876afcb9f7ba05083d89b37f0fd50f832bf7c5",
+      "inputManifestSha256": "f06c35a2c66bdd29b5ea8e795d02c718f160ff57b81671beb3e270ab7a4fe7f6",
+      "pathAtReview": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w585-604-current-candidate-free-20261104",
+      "proposedTargetsIncluded": false,
+      "verification": "PASS"
+    },
+    "primaryReview": {
+      "dispositionsSha256": "a39da6f09853bf793ef76ccd59ccda8b3b3d942b0939e7f01b467913f440b8d5",
+      "nativeSpeakerApproval": false,
+      "pathAtReview": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w585-604-primary-fresh-20261104",
+      "preReviewManifestSha256": "b00b2a168694e66def9cc05572b390965c33f3144393b9d84d2faff7a09d79c0",
+      "primaryManifestSha256": "8e281364b4dd472a896e3d741030a522b50e7e6070c010f9b10fc9735bb1691d",
+      "reviewerHadNotAccessedOtherW585Decisions": true,
+      "summarySha256": "ce8bfb5a496a68d002a669d83a86dc33f967334def27048a55b5530950ae1146",
+      "verification": "PASS"
+    }
+  },
+  "pin": {
+    "branch": "task/localization-translation-review-20261030",
+    "catalogOneBasedPositions": [
+      586,
+      605
+    ],
+    "catalogPath": "romarr/ui-labels.json",
+    "head": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+    "positions": [
+      585,
+      604
+    ],
+    "pullRequest": 70,
+    "repository": "snapetech-org/ROMarrNG",
+    "tree": "dcb9c1766831e217ffca7fb77068b97c33b9524e",
+    "window": "W585-W604"
+  },
+  "recordType": "sealed-cross-audit-packet",
+  "schemaVersion": 1,
+  "sealedUtc": "2026-11-04T18:30:16Z"
+}

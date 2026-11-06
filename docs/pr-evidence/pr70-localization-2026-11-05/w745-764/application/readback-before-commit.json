@@ -1,0 +1,96 @@
+{
+  "artifact": "ROMarrNG PR #70 W745-W764 product application readback",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W745-W764",
+  "inputHead": "68c5c9d4ad13ad5d02b9c455f429d8a5149d363d",
+  "inputTree": "524db27557a65d64343b15c9983f6ac2f92f90c4",
+  "changedCatalogPath": "romarr/ui-labels.json",
+  "changedCellCount": 7,
+  "expectedChangedCellCount": 7,
+  "catalogKeyOrderPreserved": true,
+  "allOtherCatalogCellsUnchanged": true,
+  "localeCount": 12,
+  "messageCountPerLocale": 1836,
+  "candidateFreeInputSha256": "74bed22724be5ed82f0aad4c8b4172fdde4d8617c1a51b0e353b47f48077ac46",
+  "rootDispositionInputSha256": "61277a7b9fb1a15cae7aab860b2ff6563351dac62974118ddb86ebbe628fec62",
+  "targetReadback": [
+    {
+      "position": 747,
+      "locale": "de",
+      "sourceId": "ui.nothing-matches.965b516df3",
+      "before": "Nichts passt zusammen",
+      "beforeSha256": "2419182b352d7530be40db210e09846a7352c2c73fecd93ae9ed9282b4714881",
+      "after": "Keine Treffer",
+      "afterSha256": "6df7e9f71b5f9a1dab88588215d5d71d00d78ca0885941236fdb995778262bf4",
+      "callerContextSha256": "fa1c8e503bf4ad68105ac4f69638541cb4a50c83ce8b3eefee2d4212d6ad45ba"
+    },
+    {
+      "position": 747,
+      "locale": "hi",
+      "sourceId": "ui.nothing-matches.965b516df3",
+      "before": "कुछ मैच नहीं",
+      "beforeSha256": "f20411ac9be5cef4f1541039a72121554001b9fef7efbe7f3ada16f26f94409c",
+      "after": "कोई परिणाम नहीं मिला",
+      "afterSha256": "dffe0fc07fa147e2a7241f0c309677e23f74a8f522ae89b4e462ee443c0152c2",
+      "callerContextSha256": "fa1c8e503bf4ad68105ac4f69638541cb4a50c83ce8b3eefee2d4212d6ad45ba"
+    },
+    {
+      "position": 747,
+      "locale": "ko",
+      "sourceId": "ui.nothing-matches.965b516df3",
+      "before": "아무것도 일치",
+      "beforeSha256": "abb8cdb78bfe51dca74f688160ad627cd10d4b1744bbb1f896c9e060db2328e4",
+      "after": "일치하는 항목이 없습니다",
+      "afterSha256": "fc6f9b0aa6dbbc4355e18e451d76ce9e6193c8cb1f40061a37fa8ba87baa9443",
+      "callerContextSha256": "fa1c8e503bf4ad68105ac4f69638541cb4a50c83ce8b3eefee2d4212d6ad45ba"
+    },
+    {
+      "position": 747,
+      "locale": "pt-BR",
+      "sourceId": "ui.nothing-matches.965b516df3",
+      "before": "Nada combina.",
+      "beforeSha256": "a1dd08fab8b4449af5b48896e0827037a61c1340e60514ef143326e3c7390fc9",
+      "after": "Nenhum resultado encontrado.",
+      "afterSha256": "850fd1a8260e002d0c47cc73afca71d5f5aaa9400f341c35dd6f81bae65cc4b5",
+      "callerContextSha256": "fa1c8e503bf4ad68105ac4f69638541cb4a50c83ce8b3eefee2d4212d6ad45ba"
+    },
+    {
+      "position": 747,
+      "locale": "vi",
+      "sourceId": "ui.nothing-matches.965b516df3",
+      "before": "Không khớp",
+      "beforeSha256": "eb89d7394383ce953c1f59f8048b551fa6082a6f934f8e326a54cfe3233b45c4",
+      "after": "Không có kết quả phù hợp",
+      "afterSha256": "4787308b99444327e2233a1505b0e75c4a4aead0445cfa5a43ea98c10c32d106",
+      "callerContextSha256": "fa1c8e503bf4ad68105ac4f69638541cb4a50c83ce8b3eefee2d4212d6ad45ba"
+    },
+    {
+      "position": 749,
+      "locale": "hi",
+      "sourceId": "ui.nothing-missing.ec939b22fd",
+      "before": "कुछ भी बाकी नहीं है।",
+      "beforeSha256": "cd4785d8f39415b31a6d9c71e496d3781ef52440dc8787256997e2e0e9f3b630",
+      "after": "कुछ भी गायब नहीं है।",
+      "afterSha256": "abe8cdb045e1a5f0c915f3fad7f50e0b2249982ba91c0c7e69e928ddea539fee",
+      "callerContextSha256": "6788de0b370c06810d5daa4ce8919198234cb435e853a78fe0c5c375132fa387"
+    },
+    {
+      "position": 759,
+      "locale": "de",
+      "sourceId": "ui.on-archive-org.a21e4bd863",
+      "before": "Über Archive.org",
+      "beforeSha256": "da28bf8d7c37a1aad85f7d8d3475b6d7c4afa0da429ff3936f42be1d748c0a71",
+      "after": "Auf Archive.org",
+      "afterSha256": "fbe5f9d95477f49eda9c3ae453af0b1af09c3714a97e1f4d26df779e93b79e37",
+      "callerContextSha256": "2f121a94261a8cc25234b2531e7e943a36618b6951b17b33e52d1cb3e7078da1"
+    }
+  ],
+  "catalogSha256After": "a295380fbd9baff72621c55f40478a5c65fd5200d808eda9cdbb6320812050bb",
+  "productDiffNames": [
+    "romarr/ui-labels.json"
+  ],
+  "qualifiedNativeSpeakerApproval": false,
+  "headedBrowserAcceptance": false,
+  "productCommitPending": true
+}

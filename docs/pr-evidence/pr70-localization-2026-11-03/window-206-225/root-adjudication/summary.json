@@ -1,0 +1,24 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W206-W225",
+  "exactHead": "bef31ca8a94f21273b11303524d79bd9c5344305",
+  "exactTree": "7616d96ddd3a1bfe8078d43492eb5bea7213f080",
+  "cells": 240,
+  "localeCount": 12,
+  "callerReferencesVerified": 26,
+  "dispositions": {
+    "correction": 22,
+    "accept-current": 194,
+    "refinement": 12,
+    "hold": 12
+  },
+  "catalogChanges": 34,
+  "catalogFilesChanged": 1,
+  "placeholderMarkupMismatchCount": 0,
+  "protectedLiteralViolations": 0,
+  "nativeSpeakerApproval": false,
+  "headedBrowserAcceptance": false,
+  "testsBuildsScansCIWorkflowChanges": false,
+  "targetHashScheme": "Current/final decision hashes are SHA-256 of raw UTF-8 text; the app catalog translationHashes leaf is SHA-256 of its canonical JSON string."
+}

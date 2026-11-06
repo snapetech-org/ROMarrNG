@@ -1,0 +1,55 @@
+{
+  "blindLedgerSha256": "b528ff980113d9c05a2c9c0291b34ba1f7be561c63188198564ecef79f55f327",
+  "candidateFree": {
+    "checksumListSha256": "bc99c8fd73157fe9189df4ddd78e13023f5836a469862aed06d91639b7b686ab",
+    "fileCount": 38,
+    "manifestSha256": "a13f593f5fca0a19456b5d4f6ae172da3b2eac5f544f3bd5d079a402a318cfd3",
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w745-764-20261105/candidate-free"
+  },
+  "candidateFreeCellsSha256": "74bed22724be5ed82f0aad4c8b4172fdde4d8617c1a51b0e353b47f48077ac46",
+  "candidateFreeInput": {
+    "checksumListSha256": "399fcc85f7abb9b415af49c856b00bba4f5cdeeb9e6826cb900dbddcbd8149cf",
+    "fileCount": 34,
+    "manifestSha256": "a13f593f5fca0a19456b5d4f6ae172da3b2eac5f544f3bd5d079a402a318cfd3",
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w745-764-20261105/candidate-free/input"
+  },
+  "catalogOneBasedPositions": [
+    746,
+    765
+  ],
+  "catalogZeroBasedIndices": [
+    745,
+    764
+  ],
+  "exactCallerFilesRechecked": true,
+  "head": "68c5c9d4ad13ad5d02b9c455f429d8a5149d363d",
+  "independentBlind": {
+    "checksumListSha256": "7803debcc09477d22363ba75196b92033123fabbdaaf6a15a22ddd666a6fa560",
+    "fileCount": 9,
+    "manifestSha256": "7d08ff35d6ba47c462d4f2278484cdf52e836ccd65891893f51c219de997ae06",
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w745-764-independent-blind-20261105"
+  },
+  "inputReviewNote": "Independent cross-review reconciled candidate-free current cells with the separately pinned primary and blind ledgers. No prior cross-review packet was used.",
+  "primaryInputReferenceSha256": "c7efaa148aea7097a637d304713c42666a3803d8db78c6b39b68a28ff12beba9",
+  "primaryManifestSha256": "e877640a581cc2b17441c95e981ccff87d82e8e45f7dfb9d47b6a78e5afacca6",
+  "primaryProposalsSha256": "279ecbc197b792c714589d1a2026ab695cdb3aeae45ce96a7d9b16bdb78561e2",
+  "primaryReview": {
+    "checksumListSha256": "ed72ff7ac87dc3e197233344c93041265bab04481bd7925389089727c9485bc0",
+    "fileCount": 9,
+    "manifestSha256": "e877640a581cc2b17441c95e981ccff87d82e8e45f7dfb9d47b6a78e5afacca6",
+    "path": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w745-764-20261105/primary-review"
+  },
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "schemaVersion": 1,
+  "tree": "524db27557a65d64343b15c9983f6ac2f92f90c4",
+  "window": "W745-W764",
+  "worktree": "/home/keith/Documents/code/.task-worktrees/localization-20261105/romarrng-w685",
+  "worktreeClean": true,
+  "rootAdjudicationInputs": {
+    "crossReviewDirectory": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w745-764-cross-review-20261105",
+    "crossReviewChecksumListSha256": "c29343cf02a228b2f6848a69bd97b23f6901f9adabeee91cb76003bdc4d27538",
+    "exactHead": "68c5c9d4ad13ad5d02b9c455f429d8a5149d363d",
+    "exactTree": "524db27557a65d64343b15c9983f6ac2f92f90c4"
+  }
+}

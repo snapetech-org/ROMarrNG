@@ -1,0 +1,19 @@
+{
+  "applicationCellCount": 5,
+  "applicationCellHashesReattested": true,
+  "applicationSummaryPath": "docs/pr-evidence/pr70-localization-2026-11-05/window-705-724/application/application-summary.json",
+  "applicationSummarySha256": "e351dfffdd44d44c107546457eb77e0c784fe6183cb95bba46595bde3fe19126",
+  "currentCatalogPostimageSha256": "2c093e67793e0953f43471b4ed790558750b5d5d3cc96a59517583cc174ed34f",
+  "currentHead": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "currentTree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+  "finalReadbackPath": "docs/pr-evidence/pr70-localization-2026-11-05/window-705-724/application/final-head-readback.jsonl",
+  "finalReadbackSha256": "d46a98250fed10fc7bc3fc552e3368f056f26a729729b40538b67ffccb49f9a9",
+  "productCommit": "453d9755dc442cde05ebbd4561c4b22d76d6906f",
+  "productCommitAncestor": true,
+  "productParent": "50e3f8a48a800affff8bad367b5c493cc0fdfd62",
+  "productTree": "4c51a1ab7d592feb75f250b831b5a6cd4225ccb1",
+  "selectedTargetsPath": "docs/pr-evidence/pr70-localization-2026-11-05/window-705-724/application/selected-targets.jsonl",
+  "selectedTargetsSha256": "1a4c5d85ec99ec5ada04f7fe700fe8225d2dae1d3230bdebe756ad51c10f7017",
+  "sourceHead": "50e3f8a48a800affff8bad367b5c493cc0fdfd62",
+  "sourceTree": "22cd46ff4821fcbbe76b4760a15e22d688b3f548"
+}

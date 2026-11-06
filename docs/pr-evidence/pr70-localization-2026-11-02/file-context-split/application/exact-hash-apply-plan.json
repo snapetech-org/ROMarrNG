@@ -1,0 +1,281 @@
+{
+  "inputCatalogSha256": "9c7a40251e51dc9904a3825e6bebc551d9db5313aa98bde62ffdeac32ffd7cd0",
+  "inputHead": "9b56b5fde40daf59aa61a7ce2d14e6bf7b37bf9d",
+  "inputSnapshotSha256": "cb211e588fcf66a116236fe9cdcda9ef947735855ec9f6879ef2ff8454a16030",
+  "inputTree": "117fb2a8cc208c958ac62d00927cc65defe6530d",
+  "inputUiSha256": "b110af999efbe7bf22e8a1ee98be8cf6b4dee92f8f3b3fff606b59e38f9f527e",
+  "operations": [
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "Organizar",
+      "expectedOldRawSha256": "40dd592aa3333e8aabe6ca68ed889751746e9d7fa4fc860c7391fc031a4bd07b",
+      "locale": "es",
+      "messageId": "ui.file.50009ce1da",
+      "source": "File",
+      "target": "Archivo",
+      "targetCatalogSha256": "b41c5fc1a6d2be6249954e58c1dacc562e87e7210c692418b6e8dacaa0f92fe0",
+      "targetRawSha256": "75d6b4579e1d29eb63434c20563ac1113686a449ae5928f2956a28a61672d440"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "<absent>",
+      "expectedOldRawSha256": null,
+      "locale": "es",
+      "messageId": "ui.add-to-library.2bf9ea0e46",
+      "source": "Add to library",
+      "target": "Añadir a la biblioteca",
+      "targetCatalogSha256": "bfbb5e8d415c005d4bdb85c9eb46c29f3d5ab2c751c17e5f2535990f8f6a092a",
+      "targetRawSha256": "87183ea6a5566da0c1d7f334f2c2fb97f863daa25b45f618da385199b3fa54a9"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "整理",
+      "expectedOldRawSha256": "ff0934736802c998a6a8eb845853214b403e7726df157329d0abd68b5e551398",
+      "locale": "zh-Hans",
+      "messageId": "ui.file.50009ce1da",
+      "source": "File",
+      "target": "文件",
+      "targetCatalogSha256": "e440b80981289a48106a399afbf4bedd3298064b1d40ae78a43d53332550d8ea",
+      "targetRawSha256": "39932f24fe11a6baf55145a8ea05e1abd8f773d4a98a0785ca27183f2ececedb"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "<absent>",
+      "expectedOldRawSha256": null,
+      "locale": "zh-Hans",
+      "messageId": "ui.add-to-library.2bf9ea0e46",
+      "source": "Add to library",
+      "target": "添加到游戏库",
+      "targetCatalogSha256": "4d2d33bfdf0b9c0f90b4c99c1a5860ccf669b877da486b400d56c0b48f10ba5c",
+      "targetRawSha256": "45cc0505139d9013271db47c358d7d55cad0f3c427470c81fa25fb1e23552177"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "सहेजें",
+      "expectedOldRawSha256": "a539ca94d76d178480fb0a8d6f8ec7c1468d970cb5d0f17031dd076381120cdf",
+      "locale": "hi",
+      "messageId": "ui.file.50009ce1da",
+      "source": "File",
+      "target": "फ़ाइल",
+      "targetCatalogSha256": "af2e8958d74d32fd64f6065281a713706bb199a6e2ee9aa31969afae4d5e2699",
+      "targetRawSha256": "e3cfd9fa28ca2237a4d4bdc23ba70c82c7f2bc981bc32b791b1b66a86488b7b8"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "<absent>",
+      "expectedOldRawSha256": null,
+      "locale": "hi",
+      "messageId": "ui.add-to-library.2bf9ea0e46",
+      "source": "Add to library",
+      "target": "लाइब्रेरी में जोड़ें",
+      "targetCatalogSha256": "cb1da090a18b28adbc08777c7aec3d58f03b61ff22d36022f9ecac8e40c458b8",
+      "targetRawSha256": "b72e4d281b8ed508e7a8ca343c25c22b75a5f162348f592422dbe86fe9617ec9"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "Einordnen",
+      "expectedOldRawSha256": "9004cf4803cf44116f4099aa92913c01dfec8e8214aefa4d35e105c627c57057",
+      "locale": "de",
+      "messageId": "ui.file.50009ce1da",
+      "source": "File",
+      "target": "Datei",
+      "targetCatalogSha256": "5843eae74ee3cc65f649410090df7c0c206de620a45ca6f7cc0731105e2f37b7",
+      "targetRawSha256": "e9028a569297f9f3f12231cea5ab723631acc83b7d0b52fdd9079ba5c3ee3143"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "<absent>",
+      "expectedOldRawSha256": null,
+      "locale": "de",
+      "messageId": "ui.add-to-library.2bf9ea0e46",
+      "source": "Add to library",
+      "target": "Zur Bibliothek hinzufügen",
+      "targetCatalogSha256": "048af030cc0f8b835bf421775a2cfdea4560a57a0336cf8c0c7535ddd2773c70",
+      "targetRawSha256": "f6d70d29c35a468199f2c3381fc5f6c08510feaae2a054fff80a308d783079b1"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "整理",
+      "expectedOldRawSha256": "ff0934736802c998a6a8eb845853214b403e7726df157329d0abd68b5e551398",
+      "locale": "ja",
+      "messageId": "ui.file.50009ce1da",
+      "source": "File",
+      "target": "ファイル",
+      "targetCatalogSha256": "939faf155f9adf15d2cfff6492ce43dad1ac00c8d66d66ea75fe5cfff1194049",
+      "targetRawSha256": "2b39ec3da17eef3982b84bc544c1ee0010438b9f7480914d7382fad80c8504d1"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "<absent>",
+      "expectedOldRawSha256": null,
+      "locale": "ja",
+      "messageId": "ui.add-to-library.2bf9ea0e46",
+      "source": "Add to library",
+      "target": "ライブラリに追加",
+      "targetCatalogSha256": "d2bebe46f5e8e60b3666212f3146067f6d419b8a3da204adea62c6fbf2e8054d",
+      "targetRawSha256": "3e6ab436ffdd2374bcd59f53116597e8a14ef718ac79d329871d6f8150a66354"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "Classer",
+      "expectedOldRawSha256": "08878e1e10d07b7b21d01eaf0800dc9632e8b4955abbbcea576f8341ca823edf",
+      "locale": "fr",
+      "messageId": "ui.file.50009ce1da",
+      "source": "File",
+      "target": "Fichier",
+      "targetCatalogSha256": "27f927c6c7e078ea108f0b598b4c4291314361ab5f602744e1fa23f94ee81219",
+      "targetRawSha256": "07ceb51d3a38741e46ebb4389e2a891900efcbc7edc6c5745a7ffd135d3961bc"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "<absent>",
+      "expectedOldRawSha256": null,
+      "locale": "fr",
+      "messageId": "ui.add-to-library.2bf9ea0e46",
+      "source": "Add to library",
+      "target": "Ajouter à la bibliothèque",
+      "targetCatalogSha256": "e3ccfbe63041e195b16785f840175cb1ffa7314cb59b4aa9d0cf2608473e6a4b",
+      "targetRawSha256": "b3299ac49520cf8718fd2f647b52a7364261d290f13598bd74b14bff7c809871"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "Organizar",
+      "expectedOldRawSha256": "40dd592aa3333e8aabe6ca68ed889751746e9d7fa4fc860c7391fc031a4bd07b",
+      "locale": "pt-BR",
+      "messageId": "ui.file.50009ce1da",
+      "source": "File",
+      "target": "Arquivo",
+      "targetCatalogSha256": "8bbb6e20d79ac2d31f3b7bb1314e5244c9e729d27af4058aa96731d8567265e6",
+      "targetRawSha256": "ba8a452f2f839371722410d4a2f267f75f1f1366bdd754030a073391704a6ff5"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "<absent>",
+      "expectedOldRawSha256": null,
+      "locale": "pt-BR",
+      "messageId": "ui.add-to-library.2bf9ea0e46",
+      "source": "Add to library",
+      "target": "Adicionar à biblioteca",
+      "targetCatalogSha256": "2ea834c094ac684bdd3d23dccd15c107698b1a8411f9dc59b51b88a0ea1d0e21",
+      "targetRawSha256": "86fd7c4bc85bfdbac2c221cd1859ed48ee8ca1d9045f41d06f32e868b24ac997"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "حفظ",
+      "expectedOldRawSha256": "ddfcaf9d0144513ebf80d1e46b6bc491b94f136e7152f4b3ebdd4a78b8b19585",
+      "locale": "ar",
+      "messageId": "ui.file.50009ce1da",
+      "source": "File",
+      "target": "ملف",
+      "targetCatalogSha256": "696d7cf3d4a1c49c0162783348beca24d9fdb884dae4f84422ffa48a7a3a4053",
+      "targetRawSha256": "b0984be77b5fdc4788477a6ce74e5d4ad13ab159ca2fbe2dd95cf48898621d97"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "<absent>",
+      "expectedOldRawSha256": null,
+      "locale": "ar",
+      "messageId": "ui.add-to-library.2bf9ea0e46",
+      "source": "Add to library",
+      "target": "أضف إلى المكتبة",
+      "targetCatalogSha256": "31a9ea83d6c1d1ba3e17afcadec6774921619188249999f59d7b777846e4e5c4",
+      "targetRawSha256": "482185a218a78992b5cbaa955bb7f8e7deb3eb8debf3b5b00736530c42e787c7"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "정리",
+      "expectedOldRawSha256": "829a277fc72022a6ce357df65f7c43ed810117b2f8e2cf2d66087f0ac2fca10e",
+      "locale": "ko",
+      "messageId": "ui.file.50009ce1da",
+      "source": "File",
+      "target": "파일",
+      "targetCatalogSha256": "5d89d15309460b88b5d73acc984243effea1ff17ca5b5053fe71e316502c93d1",
+      "targetRawSha256": "0c8354d0e51a08b2736d7f2f10f61d6badc76252de2609d2c7df9b8d85670187"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "<absent>",
+      "expectedOldRawSha256": null,
+      "locale": "ko",
+      "messageId": "ui.add-to-library.2bf9ea0e46",
+      "source": "Add to library",
+      "target": "라이브러리에 추가",
+      "targetCatalogSha256": "173c7b87c58eea1bfcc9888bc7c9403c323a201b8c0582fa66e595be00aadea9",
+      "targetRawSha256": "e7eba355f8ad01485e127a137a5c37708d22b89e373dceaf037e018b33babd9c"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "整理",
+      "expectedOldRawSha256": "ff0934736802c998a6a8eb845853214b403e7726df157329d0abd68b5e551398",
+      "locale": "zh-Hant",
+      "messageId": "ui.file.50009ce1da",
+      "source": "File",
+      "target": "檔案",
+      "targetCatalogSha256": "e0dfbdaed68251e91461a61aab75fa2c1a29c410c916a9abbd9ecc8c4888d7a1",
+      "targetRawSha256": "a11ac5efe91d04d2016660dc10df5a7ca22d85329a8948c7d69cf07214a82ebe"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "<absent>",
+      "expectedOldRawSha256": null,
+      "locale": "zh-Hant",
+      "messageId": "ui.add-to-library.2bf9ea0e46",
+      "source": "Add to library",
+      "target": "新增至遊戲庫",
+      "targetCatalogSha256": "6a88ee4d8497855e1b4fb8459109d3cfce36516473211e47569700a6511ccc0e",
+      "targetRawSha256": "efd439bf818c836d22dd628b192d8059262c2d2acc775fcfc6247349031e7415"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "Sắp xếp",
+      "expectedOldRawSha256": "4dc94c536302976c17574c237c0d3e8ab2c6f03e2d681c73011e695b57f60a5f",
+      "locale": "vi",
+      "messageId": "ui.file.50009ce1da",
+      "source": "File",
+      "target": "Tệp",
+      "targetCatalogSha256": "10c89b2847a1c26fa6effd3dbb7de5060c1f98a0308eabfc79753a9ab180a547",
+      "targetRawSha256": "b3ed274aad9bcab95d3bf5935066ddf6c98c3e1cd570ed671e4f0e7d20d0a1d6"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "<absent>",
+      "expectedOldRawSha256": null,
+      "locale": "vi",
+      "messageId": "ui.add-to-library.2bf9ea0e46",
+      "source": "Add to library",
+      "target": "Thêm vào thư viện",
+      "targetCatalogSha256": "5392408f9b87305c00bea51192adcf710eb5f663cd58ae7d21b5dc779caa05f1",
+      "targetRawSha256": "cc27dafcd99b8c74119d4285107ce3c34dbd57d7377f0abc9cb750c9474e3deb"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "Simpan",
+      "expectedOldRawSha256": "051093df9158bde084fefb92d82ad75181e788e85664891f0ede4c6b60991cab",
+      "locale": "id",
+      "messageId": "ui.file.50009ce1da",
+      "source": "File",
+      "target": "Berkas",
+      "targetCatalogSha256": "6b842bd7f83eee9a1fd3acf178d5e673f3da25ea8b2775860e67782282d9abf0",
+      "targetRawSha256": "1f289f75c0a9f5aa42ad2fdeadf100039bbfb9d48421f848375dd3a1edab0456"
+    },
+    {
+      "disposition": "accepted-by-primary-and-independent-cross-review",
+      "expectedOld": "<absent>",
+      "expectedOldRawSha256": null,
+      "locale": "id",
+      "messageId": "ui.add-to-library.2bf9ea0e46",
+      "source": "Add to library",
+      "target": "Tambahkan ke pustaka",
+      "targetCatalogSha256": "6ee45132291294b2204526b881b961871f281b2e82a9f106168addb4414f89b1",
+      "targetRawSha256": "e6738cd9cb6aa26dce71ecc86425c99b3dae3dcde84f0d41bc6813f27743db76"
+    }
+  ],
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "sourceEdit": {
+    "newLiteral": "'<b>Acquire</b> → <b>Verify</b> → <b>'+interfaceMarkup('ui.add-to-library.2bf9ea0e46')+'</b> → <b>Scan</b> → <b>Play</b><br>'",
+    "occurrences": 1,
+    "oldLiteral": "'<b>Acquire</b> → <b>Verify</b> → <b>File</b> → <b>Scan</b> → <b>Play</b><br>'",
+    "path": "romarr/ui.py"
+  }
+}

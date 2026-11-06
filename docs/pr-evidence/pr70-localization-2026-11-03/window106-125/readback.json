@@ -1,0 +1,27 @@
+{
+  "sourceHead": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+  "sourceTree": "e8668e9c83afa533f8cd6e69e6a7ad96946ed40e",
+  "cellsReadBack": 240,
+  "changedCellsReadBack": 44,
+  "keySetPreserved": true,
+  "sourceIdsPreserved": true,
+  "rawTargetHashesMatch": true,
+  "catalogTranslationHashesMatch": true,
+  "statusCounts": {
+    "accept-current": 148,
+    "correction": 33,
+    "refinement": 11,
+    "hold": 48
+  },
+  "heldSourceOrdinals": [
+    111,
+    121,
+    123,
+    124
+  ],
+  "allNativeSpeakerApproval": false,
+  "sentenceContextSupplementCells": 36,
+  "uniqueReviewedCellsIncludingSupplement": 264,
+  "combinedChangedCells": 64,
+  "combinedChangedSourceIds": 14
+}

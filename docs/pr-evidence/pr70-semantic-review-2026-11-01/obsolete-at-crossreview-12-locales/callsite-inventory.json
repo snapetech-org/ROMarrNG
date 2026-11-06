@@ -1,0 +1,19 @@
+{
+  "occurrences": {
+    "Requests per pass:": [
+      {
+        "line": 5554,
+        "path": "romarr/ui.py",
+        "text": "+'<label class=\"help\" style=\"margin:0\">'+interfaceMarkup('Requests per pass:')+' <input id=\"cpp\" type=\"number\" '"
+      }
+    ],
+    "at": [],
+    "per pass": []
+  },
+  "patterns": {
+    "Requests per pass:": "interface(?:Template)?Markup\\(\\s*(['\\\"])Requests per pass:\\1\\s*\\)",
+    "at": "interface(?:Template)?Markup\\(\\s*(['\\\"])at\\1\\s*\\)",
+    "per pass": "interface(?:Template)?Markup\\(\\s*(['\\\"])per pass\\1\\s*\\)"
+  },
+  "searchedRoot": "romarr/**/*.py"
+}

@@ -1,0 +1,12 @@
+{
+  "priorWindow": "W305-W324",
+  "priorHead": "9ecde2b300fea97e52846f274fbcae19cff1fcc5",
+  "priorTree": "df77009a42ee07366803f7553f6dcab25b62c638",
+  "priorInputChecksumListSha256": "fbb70c6cdfcae9d03afa3d9395c859b35f9db14f43c9cf3383cfd85a9c1a2b69",
+  "priorSelectionSha256": "4f4b6767ec23629a0ed5af0ae27a90af12a6ed64cc231ab7dd8ff72dedc7d950",
+  "currentHead": "018937dc98d451ddd04d2d0942bca2777ef64dd3",
+  "currentTree": "c13dc4fc091565318d11a19ad9e851215a5f917e",
+  "currentSourceOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "reattestedSources": 20,
+  "allPriorSourceIdsAndHashesMatchCurrentQueue": true
+}

@@ -1,0 +1,20 @@
+{
+  "artifact": "ROMarrNG PR #70 W385-W404 independent blind review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "0afd1d8c150fb96d868394a8d9620371db612185",
+  "tree": "0ba717d05c49356d8b1f55ac4a6b8844c161a402",
+  "inputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w385-404-rebased-candidate-free-20261103/input",
+  "inputManifestSha256": "4ba5c2b547d62dc952f7013c19a1d4b5a444b82d9490b6800d4ecb788fcc4e2c",
+  "inputChecksumListSha256": "b6dfd70dccfd2ee88baa18b31aac13df7ea6b40af86c4e946ff7e41f4c9c9990",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "blind": "yes",
+  "candidateFreeOnly": "yes",
+  "primaryReviewAccessed": "no",
+  "carriedHoldCellCount": 288,
+  "carriedHoldCellsReattested": "yes",
+  "createdUtc": "2026-11-03T18:00:42Z"
+}

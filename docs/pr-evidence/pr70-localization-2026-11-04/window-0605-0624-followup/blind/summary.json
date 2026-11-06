@@ -1,0 +1,63 @@
+{
+  "artifact": "ROMarrNG PR #70 W605-W624 independent blind semantic review",
+  "head": "872905926887840025ba4c3f17151b96f8d3e6e2",
+  "tree": "d7d762d5f3a5dc31bcbdb6c6c45779101ab0bbd4",
+  "window": "W605-W624",
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "selectedSourceCount": 20,
+  "cellCount": 240,
+  "callerfulCellCount": 204,
+  "callerlessCellCount": 36,
+  "callerlessPositions": [
+    618,
+    620,
+    623
+  ],
+  "dispositions": {
+    "retain_current": 202,
+    "propose_clear_improvement": 2,
+    "hold_hash_only": 36
+  },
+  "nativeSpeakerApproval": false,
+  "proposals": [
+    {
+      "position": 611,
+      "locale": "id",
+      "currentTarget": "Log hidup",
+      "proposedTarget": "Log langsung",
+      "confidence": "moderate"
+    },
+    {
+      "position": 611,
+      "locale": "vi",
+      "currentTarget": "Bản ghi trực tiếp",
+      "proposedTarget": "Nhật ký trực tiếp",
+      "confidence": "moderate"
+    }
+  ],
+  "priorLineageFilesCopiedByteIdentically": [
+    "prior-selection-reattestation-summary.json",
+    "prior-selection-reattestation.jsonl",
+    "prior-hold-reattestation-summary.json",
+    "prior-hold-reattestation.jsonl",
+    "prior-applied-cell-reattestation-summary.json",
+    "prior-applied-cell-reattestation.jsonl",
+    "prior-window-cell-hash-reattestation.jsonl",
+    "prior-w565-window-cell-hash-reattestation.jsonl",
+    "prior-w585-window-cell-hash-reattestation.jsonl"
+  ],
+  "reviewBasis": "Candidate-free input bundle only; exact pinned source and caller excerpts are embedded for every callerful cell. Callerless cells contain hashes and positional identity only."
+}

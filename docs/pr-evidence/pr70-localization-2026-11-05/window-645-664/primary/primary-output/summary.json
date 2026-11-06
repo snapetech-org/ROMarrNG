@@ -1,0 +1,61 @@
+{
+  "artifact": "ROMarrNG PR #70 W645-W664 primary semantic review summary",
+  "blindness": {
+    "blindOutputInspected": false,
+    "candidateFreeInputManifestSha256": "1b3cb573d404fb83811edaa03a77234f8642e42fd1e994a3fdb08bb4d61e23b2",
+    "crossReviewOutputInspected": false,
+    "otherW645ReviewDecisionsAccessed": false,
+    "priorW645PrimaryDecisionsReused": false
+  },
+  "callerCoverage": {
+    "callerlessCells": 96,
+    "callerlessSources": 8,
+    "proposedChangesWithCallerContext": 12,
+    "proposedChangesWithoutCallerContext": 0,
+    "sourcesWithCallers": 12
+  },
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogSha256": "24d2d776841c3101269e218b48344eede7bafd613d2fd9840e1fb0f92a501715",
+  "cellCount": 240,
+  "changeTypes": {
+    "correction": 9,
+    "refinement": 3
+  },
+  "dispositionCounts": {
+    "CHANGE": 12,
+    "HOLD": 96,
+    "KEEP": 132
+  },
+  "hashOnlyHoldCount": 96,
+  "hashOnlyHoldFile": "hash-only-holds.jsonl",
+  "head": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+  "limitations": [
+    "AI semantic review; no native-speaker approval.",
+    "96 callerless cells are retained as hash-only holds with source and target text omitted.",
+    "Independent blind review and cross-adjudication remain pending."
+  ],
+  "localeCount": 12,
+  "proposedChangeCount": 12,
+  "proposedChangeCountsByLocale": {
+    "ar": 2,
+    "de": 1,
+    "es": 1,
+    "hi": 2,
+    "id": 2,
+    "ja": 1,
+    "ko": 1,
+    "pt-BR": 2
+  },
+  "proposedChangeCountsByPosition": {
+    "646": 2,
+    "648": 1,
+    "654": 7,
+    "656": 2
+  },
+  "reviewedAtUtc": "2026-11-05T05:27:17+00:00",
+  "sourceCount": 20,
+  "sourceQueueSha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+  "sourceSnapshotSha256": "e8f580fc3a49da18add0748e8d5312186dc353bc30d3c01bcc94e06d2aaa077d",
+  "tree": "d6066baa3d03d3b4c6034e5af061fc4bc278b0f9",
+  "window": "W645-W664"
+}

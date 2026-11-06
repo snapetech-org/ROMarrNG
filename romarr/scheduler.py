@@ -37,6 +37,28 @@ def _now_iso() -> str:
 
 
 @dataclass
+class TaskResult:
+    """A task's unchanged plain-text result plus trusted local presentation metadata."""
+
+    message: str
+    message_template: dict | None = None
+    message_parts: list[dict] | None = None
+
+    @classmethod
+    def from_response(cls, response, *, message_field="message",
+                      template_field="message_template"):
+        if isinstance(response, cls):
+            return response
+        if isinstance(response, dict):
+            return cls(
+                str(response.get(message_field) or "done"),
+                response.get(template_field),
+                response.get("message_parts"),
+            )
+        return cls(str(response or "done"))
+
+
+@dataclass
 class Job:
     """One recurring task and what happened last time it ran."""
 
@@ -46,6 +68,8 @@ class Job:
     run: object          # () -> str, a one-line summary for the Tasks page
     last_run: str = ""
     last_result: str = ""
+    last_result_template: dict | None = None
+    last_result_parts: list[dict] | None = None
     last_error: str = ""
     #: monotonic time of the last start, so due-ness never trusts wall-clock
     #: changes (a container whose clock steps at boot would otherwise fire
@@ -119,7 +143,15 @@ class Scheduler:
         job._last_started = time.monotonic()
         job.last_run = _now_iso()
         try:
-            job.last_result = str(job.run() or "done")
+            result = job.run()
+            if isinstance(result, TaskResult):
+                job.last_result = result.message or "done"
+                job.last_result_template = result.message_template
+                job.last_result_parts = result.message_parts
+            else:
+                job.last_result = str(result or "done")
+                job.last_result_template = None
+                job.last_result_parts = None
             job.last_error = ""
         except Exception as exc:
             # The job failed; the scheduler must not. Recorded where the
@@ -127,6 +159,8 @@ class Scheduler:
             # timer is a feature that "sometimes doesn't work".
             job.last_error = f"{exc.__class__.__name__}: {exc}"
             job.last_result = ""
+            job.last_result_template = None
+            job.last_result_parts = None
             log.warning("scheduled %s failed: %s", job.name, job.last_error)
 
     # -- surface -------------------------------------------------------------
@@ -145,7 +179,7 @@ class Scheduler:
             seconds = float(job.interval() or 0)
         except Exception:
             seconds = 0
-        return {
+        status = {
             "name": job.name,
             "label": job.label,
             "interval_seconds": int(seconds),
@@ -154,6 +188,11 @@ class Scheduler:
             "last_result": job.last_result,
             "last_error": job.last_error,
         }
+        if job.last_result_template is not None:
+            status["last_result_template"] = job.last_result_template
+        if job.last_result_parts is not None:
+            status["last_result_parts"] = job.last_result_parts
+        return status
 
     def status(self) -> list[dict]:
         return [self.describe(j) for j in self._jobs]

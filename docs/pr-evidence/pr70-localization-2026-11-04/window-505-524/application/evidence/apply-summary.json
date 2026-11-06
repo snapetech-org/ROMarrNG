@@ -1,0 +1,20 @@
+{
+  "acceptCurrent": 140,
+  "callerlessSources": 6,
+  "carriedHoldsReattested": 468,
+  "catalogKeyOrderUnchanged": true,
+  "catalogMessageCount": 1836,
+  "cellsReadBack": 240,
+  "cellsReviewed": 240,
+  "holds": 72,
+  "localeOrderUnchanged": true,
+  "otherTranslationMetadataUnchanged": true,
+  "priorSelectedSourcesReattested": 120,
+  "result": "PASS",
+  "selectedChanges": 28,
+  "translationHashMetadataUpdates": 3,
+  "translationReviewMetadataUnchanged": true,
+  "translationStatusUnchanged": true,
+  "window": "W505-W524",
+  "workflowFilesChanged": 0
+}

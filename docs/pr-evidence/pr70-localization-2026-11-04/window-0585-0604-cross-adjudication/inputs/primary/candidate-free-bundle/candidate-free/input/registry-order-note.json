@@ -1,0 +1,19 @@
+{
+  "activeRegistryCount": 479,
+  "activeRegistryMatches": [
+    {
+      "activeRank": 166,
+      "registryLocations": [
+        "romarr/ui.py:5427"
+      ],
+      "sourceId": "ui.library-inventory.18d033ce16"
+    }
+  ],
+  "lineHintCaveat": "Active source registry metadata does not substitute for the exact literal caller search and excerpt evidence.",
+  "selectedCatalogZeroBasedIndices": [
+    585,
+    604
+  ],
+  "selectedIdsInActiveRegistry": 1,
+  "selectionBasis": "catalog JSON message-key insertion order"
+}

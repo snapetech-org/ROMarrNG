@@ -1,0 +1,38 @@
+{
+  "artifact": "ROMarrNG PR #70 W805-W824 verification results",
+  "inputHead": "551cccd03e0acdce208ce11f571378c1dcdfb805",
+  "inputTree": "d77f32ac8ec0ab53200d04819869a2e99c6de73c",
+  "reviewEvidenceCommit": "db188b5ded679803b055f2c09c0a97ab00e489cd",
+  "productCommit": "7bc17e5ae87e67dd69579c44591337b8e7e7927a",
+  "productTree": "5c20c137424c8fac55850c6b319896241a5761f9",
+  "integratedCrossReview": {
+    "result": "PASS",
+    "cells": 240,
+    "adoptedChanges": 13,
+    "lowConfidenceLanguageHolds": 10,
+    "priorActiveHashOnlyHolds": 1060,
+    "nativeSpeakerApproval": false
+  },
+  "rootAdjudication": {
+    "result": "PASS",
+    "cells": 240,
+    "selectedTargets": 13,
+    "lowConfidenceLanguageHolds": 10,
+    "priorActiveHashOnlyHolds": 1060,
+    "nativeSpeakerApproval": false
+  },
+  "productReadback": {
+    "result": "PASS",
+    "changedCells": 13,
+    "readbackCells": 240,
+    "lowConfidenceCurrentTargetsRetained": 10,
+    "activeHashOnlyHoldsUnchanged": 1060,
+    "catalogKeyOrderPreserved": true,
+    "allOtherReviewedCellsUnchanged": true,
+    "all12LocalesHave1836NonemptyMessages": true,
+    "nativeSpeakerApproval": false
+  },
+  "testsBuildsScansCiRun": false,
+  "browserWorkPerformed": false,
+  "workflowChangesMade": false
+}

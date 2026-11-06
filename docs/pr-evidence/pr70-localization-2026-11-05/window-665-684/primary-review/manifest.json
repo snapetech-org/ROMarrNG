@@ -1,0 +1,32 @@
+{
+  "artifact": "primary-review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "exactHead": "8b7589775c526866e474112b4f4168782b02f881",
+  "exactTree": "fb0ba93172f6832c687e001ce6c0fff08b5a33eb",
+  "branch": "task/localization-translation-review-20261030",
+  "candidateFreeInputPath": "../candidate-free/input/",
+  "candidateFreeManifestSha256": "e07d2305da384087d3751c2ee6e7892995f22532f1a41e8f0743cf31e2408454",
+  "candidateFreeChecksumIndexSha256": "fbaf67ba9221eff40c4d479b495338528511d5116f6ad3e02b1d337adeea0f16",
+  "cellCount": 240,
+  "callerBackedCells": 168,
+  "hashOnlyHolds": 72,
+  "proposalCount": 15,
+  "decisionCounts": {
+    "accept-current": 153,
+    "correction": 9,
+    "hold-hash-only": 72,
+    "refinement": 6
+  },
+  "candidateFreeOnly": true,
+  "otherReviewOutputsUsed": false,
+  "textFreeHoldRows": true,
+  "allRecommendedTargetsTokenChecked": true,
+  "fileHashes": {
+    "ledger.jsonl": "171723967ed1be710be2c7fbe2b328a1c22bf79ad510e333e9cc17bc15cb1280",
+    "proposals.jsonl": "3655375350e459f050510a88b5098697394508cd2d717592e0a198a04b8fb818",
+    "holds.jsonl": "7415f0bbeeb54e0949fe20dc29442beb8aed4226635608bd6b7e425c66621077",
+    "summary.json": "ddea804ef379f929415542aec63ddcef0f051c77c49ee46c0f397079ffed7a8b"
+  },
+  "createdAtUtc": "2026-11-05T08:00:54+00:00"
+}

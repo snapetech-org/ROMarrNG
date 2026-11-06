@@ -1,0 +1,11 @@
+{
+  "commit": "b248261d5aaa33ec7247023b85d666ed7fc89309",
+  "tree": "08f73a3dec49091e40eef0b006519a6e06c239f4",
+  "parent": "e958b4fd0d9ddeac9333afc4c95da348b7f67cff",
+  "parentTree": "402026ba276ec4603d86d659766af836d839de55",
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogSha256": "02779094097e70786d8fb91f9137afea17ca36dffd7d1c0bd7101046dcd157cf",
+  "selectedTranslationCells": 28,
+  "canonicalTranslationHashUpdates": 3,
+  "commitFiles": ["romarr/ui-labels.json"]
+}

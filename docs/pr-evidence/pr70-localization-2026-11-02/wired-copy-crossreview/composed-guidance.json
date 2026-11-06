@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "pinnedHead": "50bb70837512bb5abcf53c89b01031aa9a321321",
+  "pinnedTree": "c88c97301c042747bd5e183daff21d7d255d4cfc",
+  "callsite": "romarr/ui.py:2433-2434",
+  "composition": [
+    {
+      "locale": "es",
+      "currentRenderedCopy": "Conecta un proveedor de metadatos IGDB en Metadatos, o carga los DAT de No-Intro / Redump en Colecciones, para explorar un catálogo aquí.",
+      "reviewedRenderedCopy": "Conecta un proveedor de metadatos IGDB en Metadatos, o carga los DAT de No-Intro / Redump en Colecciones, para explorar un catálogo aquí.",
+      "localeSpaceHelper": "single ASCII space"
+    },
+    {
+      "locale": "zh-Hans",
+      "currentRenderedCopy": "如需连接 IGDB 元数据提供方，请前往元数据，或将 No-Intro / Redump DAT 加载到合集，然后即可在此浏览目录。",
+      "reviewedRenderedCopy": "如需连接 IGDB 元数据提供方，请前往元数据，或将 No-Intro / Redump DAT 加载到合集，然后即可在此浏览目录。",
+      "localeSpaceHelper": "empty"
+    },
+    {
+      "locale": "hi",
+      "currentRenderedCopy": "IGDB मेटाडेटा प्रदाता जोड़ने के लिए यहाँ जाएँ: मेटाडेटा, या No-Intro / Redump DAT लोड करें संग्रहमें, ताकि यहां कैटलॉग ब्राउज़ किया जा सके।",
+      "reviewedRenderedCopy": "IGDB मेटाडेटा प्रदाता जोड़ने के लिए यहाँ जाएँ: मेटाडेटा, या No-Intro / Redump DAT को संग्रह में लोड करें, ताकि यहाँ कैटलॉग ब्राउज़ किया जा सके।",
+      "localeSpaceHelper": "single ASCII space"
+    },
+    {
+      "locale": "de",
+      "currentRenderedCopy": "Verbinden Sie einen IGDB Metadatenanbieter unter Metadaten, oder laden Sie No-Intro-/Redump-DATs in Sammlungen, um hier einen Katalog zu durchsuchen.",
+      "reviewedRenderedCopy": "Verbinden Sie einen IGDB-Metadatenanbieter unter Metadaten, oder laden Sie No-Intro-/Redump-DATs in Sammlungen, um hier einen Katalog zu durchsuchen.",
+      "localeSpaceHelper": "single ASCII space"
+    },
+    {
+      "locale": "ja",
+      "currentRenderedCopy": "IGDB メタデータプロバイダーを設定するには、次を開いてください：メタデータ、または No-Intro / Redump DAT をコレクションに読み込んで、ここでカタログを閲覧します。",
+      "reviewedRenderedCopy": "IGDB メタデータプロバイダーを接続するにはメタデータを開いてください。または No-Intro / Redump DAT をコレクションに読み込むと、ここでカタログを閲覧できます。",
+      "localeSpaceHelper": "empty"
+    },
+    {
+      "locale": "fr",
+      "currentRenderedCopy": "Connectez un fournisseur de métadonnées IGDB dans Métadonnées, ou chargez les DAT No-Intro / Redump dans Collections, afin de parcourir un catalogue ici.",
+      "reviewedRenderedCopy": "Connectez un fournisseur de métadonnées IGDB dans la section Métadonnées, ou chargez les DAT No-Intro / Redump dans la section Collections, afin de parcourir un catalogue ici.",
+      "localeSpaceHelper": "single ASCII space"
+    },
+    {
+      "locale": "pt-BR",
+      "currentRenderedCopy": "Conecte um fornecedor de metadados IGDB abaixo Metadados, ou carregue os DATs No-Intro / Redump em Coleções, para navegar por um catálogo aqui.",
+      "reviewedRenderedCopy": "Conecte um fornecedor de metadados do IGDB na seção Metadados, ou carregue os DATs No-Intro / Redump em Coleções, para navegar por um catálogo aqui.",
+      "localeSpaceHelper": "single ASCII space"
+    },
+    {
+      "locale": "ar",
+      "currentRenderedCopy": "اتصل بـ IGDB مزود البيانات تحت البيانات الوصفية، أو حمّل ملفات DAT من No-Intro / Redump إلى المجموعات، ثم تصفح كتالوجًا هنا.",
+      "reviewedRenderedCopy": "اربط موفّر بيانات IGDB من قسم البيانات الوصفية، أو حمّل ملفات DAT من No-Intro / Redump إلى المجموعات، ثم تصفح كتالوجًا هنا.",
+      "localeSpaceHelper": "single ASCII space"
+    },
+    {
+      "locale": "ko",
+      "currentRenderedCopy": "IGDB 메타데이터 제공자를 연결하려면 다음으로 이동하세요: 메타데이터, 또는 No-Intro / Redump DAT를 컬렉션에 불러와 여기에서 카탈로그를 둘러보세요.",
+      "reviewedRenderedCopy": "IGDB 메타데이터 제공자를 연결하려면 메타데이터를 열거나 No-Intro / Redump DAT를 컬렉션에 불러와 여기에서 카탈로그를 둘러보세요.",
+      "localeSpaceHelper": "single ASCII space"
+    },
+    {
+      "locale": "zh-Hant",
+      "currentRenderedCopy": "如需連接 IGDB 中繼資料提供者，請前往中繼資料，或將 No-Intro / Redump DAT 載入合集，然後即可在此瀏覽目錄。",
+      "reviewedRenderedCopy": "如需連接 IGDB 中繼資料提供者，請前往中繼資料，或將 No-Intro / Redump DAT 載入合集，然後即可在此瀏覽目錄。",
+      "localeSpaceHelper": "empty"
+    },
+    {
+      "locale": "vi",
+      "currentRenderedCopy": "Kết nối với nhà cung cấp dữ liệu IGDB dưới đây: Siêu dữ liệu, hoặc tải DAT No-Intro / Redump vào Bộ sưu tập để duyệt danh mục tại đây.",
+      "reviewedRenderedCopy": "Để kết nối nhà cung cấp siêu dữ liệu IGDB, hãy mở mục Siêu dữ liệu, hoặc tải DAT No-Intro / Redump vào Bộ sưu tập để duyệt danh mục tại đây.",
+      "localeSpaceHelper": "single ASCII space"
+    },
+    {
+      "locale": "id",
+      "currentRenderedCopy": "Menghubungkan penyedia metadata IGDB di bawah Metadata, atau muat DAT No-Intro / Redump ke Koleksi untuk menelusuri katalog di sini.",
+      "reviewedRenderedCopy": "Hubungkan penyedia metadata IGDB di bagian Metadata, atau muat DAT No-Intro / Redump ke Koleksi untuk menelusuri katalog di sini.",
+      "localeSpaceHelper": "single ASCII space"
+    }
+  ]
+}

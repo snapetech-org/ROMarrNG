@@ -1,0 +1,701 @@
+{
+  "findings": [
+    {
+      "behavior": "interfaceMarkup and interfaceTemplateMarkup attach stable keys and translated output.",
+      "lines": "882-890"
+    },
+    {
+      "behavior": "apiMessageMarkup returns raw API text as escaped lang=und content unless an explicit template is supplied.",
+      "lines": "1042-1049"
+    },
+    {
+      "behavior": "automatic text translation resolves source text and excludes select and lang=und descendants.",
+      "lines": "1280-1297"
+    },
+    {
+      "behavior": "new DOM nodes pass through label, template, text-node, and attribute localization.",
+      "lines": "1358-1370"
+    },
+    {
+      "behavior": "initial locale application walks existing page text and attributes.",
+      "lines": "1420-1436"
+    },
+    {
+      "behavior": "aria-label templates are translated using current locale values.",
+      "lines": "1298-1315"
+    }
+  ],
+  "head": "e7f8d0dcb11d8d94c8a89c37cb9ab451d72810a6",
+  "references": [
+    {
+      "contextEndLine": 891,
+      "contextLines": [
+        {
+          "line": 881,
+          "lineSha256": "f83a01aac9f41078f255e176e31a6c5af58efe7037c5fe0b54cfc8daeaf09a4b",
+          "text": "  shelved:'Shelved',verified:'Verified',bad:'Bad',unknown:'Unknown'};"
+        },
+        {
+          "line": 882,
+          "lineSha256": "4c2964d92c2ddb8c207ac35074307f044a58e2fd66edbf9d9e0fdbe1af9fdf9d",
+          "text": "const interfaceMarkup=source=>'<span data-i18n-key=\"'+esc(stableLocalizationKey(source)||source)+'\">'"
+        },
+        {
+          "line": 883,
+          "lineSha256": "08eb8f7cfe50b6f1f8c487ae0df559ec50ce806087087a8379e6d7a8d9e65dab",
+          "text": "  +esc(translateLabel(source,readInterfaceLanguage()))+'</span>';"
+        },
+        {
+          "line": 884,
+          "lineSha256": "5f753f4edffc7a8b4c24da05043a34ae855beb594de529881e83d61bc8fb21c8",
+          "text": "const interfacePhraseSpace=()=>/^(?:ja|zh)/.test(readInterfaceLanguage())?'':' ';"
+        },
+        {
+          "line": 885,
+          "lineSha256": "6aa6d0dd460cd27ea1d2e7b858c1b3e77ff5e93ca8bbbca71810dff0104fe524",
+          "text": "const interfaceTemplateMarkup=(source,values)=>{"
+        },
+        {
+          "line": 886,
+          "lineSha256": "47bb902778ed4b36f0dd9220bae1d7ac6d3ab23123427ac286b6985d6eacd7f0",
+          "text": "  const language=readInterfaceLanguage(),translated=isTranslated(source,language);"
+        },
+        {
+          "line": 887,
+          "lineSha256": "46bec4049f326cb72fd04921a99acce525723ec10002b683ecd60347a3d6cb4a",
+          "text": "  return '<span lang=\"'+(translated?esc(language):'en')+'\" dir=\"'"
+        },
+        {
+          "line": 888,
+          "lineSha256": "79d1d2116a507167ff497eac129b1f7982976d57d39775908c03ca9675434e13",
+          "text": "    +(translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr')+'\" data-i18n-template-key=\"'"
+        },
+        {
+          "line": 889,
+          "lineSha256": "b45f15cf2a0f611b7b388fc4eff8698edfc18430d664554b2455bcb756710d9d",
+          "text": "    +esc(stableLocalizationKey(source)||source)+'\" data-i18n-values=\"'+esc(JSON.stringify(values))+'\">'"
+        },
+        {
+          "line": 890,
+          "lineSha256": "295ed47294730853c91182e145134d352995b4da2bc04c8165f6ee99fdb54369",
+          "text": "    +translatedTemplateMarkup(source,values,language)+'</span>';"
+        },
+        {
+          "line": 891,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        }
+      ],
+      "contextSha256": "92f535de54444a25f476fc4990f9f2bf207fd065a556516e04a1b8ce9d8a83a3",
+      "contextStartLine": 881,
+      "endLine": 890,
+      "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "matchBasis": "explicit stable-key label and template renderers",
+      "path": "romarr/ui.py",
+      "startLine": 882
+    },
+    {
+      "contextEndLine": 898,
+      "contextLines": [
+        {
+          "line": 894,
+          "lineSha256": "6472a8fda9062677d283a6ba51ae2974d6150d50fcbff5ffa3ebbe4f948fb4f6",
+          "text": "  +esc(JSON.stringify(values))+'\"';"
+        },
+        {
+          "line": 895,
+          "lineSha256": "359b3794b1ca874a58afb3020d87b924a1c152e6ba71c7b8f4925bbdb559fc04",
+          "text": "const interfaceAriaLabelTemplate=(source,values)=>'data-i18n-aria-label-template-key=\"'"
+        },
+        {
+          "line": 896,
+          "lineSha256": "144124ded650a0b2ae9cb06990204054029baad52edaf3ce5e5778e888cf2083",
+          "text": "  +esc(stableLocalizationKey(source)||source)+'\" data-i18n-aria-label-values=\"'"
+        },
+        {
+          "line": 897,
+          "lineSha256": "6472a8fda9062677d283a6ba51ae2974d6150d50fcbff5ffa3ebbe4f948fb4f6",
+          "text": "  +esc(JSON.stringify(values))+'\"';"
+        },
+        {
+          "line": 898,
+          "lineSha256": "c21a98c5fb8b782fb99e96bd30f4a90c41b80e2a4173fc5284755d6b142cab03",
+          "text": "const sniffedMessageTemplate=value=>{"
+        }
+      ],
+      "contextSha256": "661f6b341cd16e5d8ec2db1ef51919766cdb17bc3dd73eedee7dfc3665a76630",
+      "contextStartLine": 894,
+      "endLine": 897,
+      "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "matchBasis": "accessible-name template marker",
+      "path": "romarr/ui.py",
+      "startLine": 895
+    },
+    {
+      "contextEndLine": 1050,
+      "contextLines": [
+        {
+          "line": 1041,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        },
+        {
+          "line": 1042,
+          "lineSha256": "222e1101b1448fbc6bb2e2e36ac6088ebdaa4614474e733548e0bfaeae002135",
+          "text": "const apiMessageMarkup=(value,explicitTemplate=null)=>{"
+        },
+        {
+          "line": 1043,
+          "lineSha256": "ee6395c49a1c2145a24150c0cd3ee59ea88bc504bccfce32e8f466a00027c272",
+          "text": "  const explicit=explicitTemplateMarkup(explicitTemplate);"
+        },
+        {
+          "line": 1044,
+          "lineSha256": "65753c85a8536ac2028e103927525ba9b2a6f1edbe6f4ce56d7ac15c3c050df0",
+          "text": "  if(explicit)return explicit;"
+        },
+        {
+          "line": 1045,
+          "lineSha256": "54e679b0df397986474588f990cce074437a8df5da87cf9ce2de24f75baa5b1a",
+          "text": "  if(value===null||value===undefined||value==='')return '';"
+        },
+        {
+          "line": 1046,
+          "lineSha256": "770d46ebee6d35251ed89c83e7003d30827becaf651e6dc58384f79ff2ad2885",
+          "text": "  if(typeof value!=='string'&&typeof value!=='number')return '';"
+        },
+        {
+          "line": 1047,
+          "lineSha256": "0bb1bbf979d19b244f95ee719a0cbb80da4306deaf75dce06aa07bd70957fad7",
+          "text": "  const source=String(value);"
+        },
+        {
+          "line": 1048,
+          "lineSha256": "2a70e2ba5186ace1175242e35fd43c3bda0fa99a99698faac37d1e927e2d2371",
+          "text": "  return '<span lang=\"und\" dir=\"auto\">'+esc(source)+'</span>';"
+        },
+        {
+          "line": 1049,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        },
+        {
+          "line": 1050,
+          "lineSha256": "a0a53c378020a784fc373b0fe8f41d2902f1e77953823829dd1b586c8d5f9c27",
+          "text": "const messagePartsMarkup=parts=>Array.isArray(parts)?parts.map(part=>{"
+        }
+      ],
+      "contextSha256": "36679267d99042b3cca1d6c8667b1d5c4aae1be7bd86f6e00dd26e187847f7bf",
+      "contextStartLine": 1041,
+      "endLine": 1049,
+      "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "matchBasis": "opaque API rendering path",
+      "path": "romarr/ui.py",
+      "startLine": 1042
+    },
+    {
+      "contextEndLine": 1239,
+      "contextLines": [
+        {
+          "line": 1227,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        },
+        {
+          "line": 1228,
+          "lineSha256": "13a565e41637536901179c8f7f3e922b2563773b9ecd9b5fb0492e78b1d72976",
+          "text": "const applyTranslatedLabel=(el,language)=>{"
+        },
+        {
+          "line": 1229,
+          "lineSha256": "9118a2ac7ff26078a308f5621045e7ce0b6b057799acbb906d5fb328bb21ce29",
+          "text": "  const source=el.dataset.i18nKey||el.dataset.i18n, translated=isTranslated(source,language);"
+        },
+        {
+          "line": 1230,
+          "lineSha256": "d5c0776fc1fcc0dbdd0b3e319934433db8609515ca0d075fb087031b43c3d078",
+          "text": "  el.textContent=translateLabel(source,language);"
+        },
+        {
+          "line": 1231,
+          "lineSha256": "79502f0e9c034f17da574b92195ab30d7c74a11b7b400c038a98c8c5972df9c6",
+          "text": "  el.lang=translated?language:'en';"
+        },
+        {
+          "line": 1232,
+          "lineSha256": "2650712959c9b472e699a8984c6cd2eb48be8e5e03ce4b8f381ff1c62b383d94",
+          "text": "  el.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';"
+        },
+        {
+          "line": 1233,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        },
+        {
+          "line": 1234,
+          "lineSha256": "f1af1bf93b0cf285717e011aae47f61f1e5bfb4e76a6aea983e625f17968da75",
+          "text": "const applyTranslatedLabels=(root,language)=>{"
+        },
+        {
+          "line": 1235,
+          "lineSha256": "22a7c9a02e3dd2b55c838234c865389725f3ab32aca15e9aea9e6eced7d10bb2",
+          "text": "  const elements=[];"
+        },
+        {
+          "line": 1236,
+          "lineSha256": "0d65a4f464bc0cca0da4e317085a0319f857b3918a654ca023511955088f06aa",
+          "text": "  if(root.nodeType===Node.ELEMENT_NODE&&root.matches?.('[data-i18n],[data-i18n-key]'))elements.push(root);"
+        },
+        {
+          "line": 1237,
+          "lineSha256": "838c59908817070e296359a80170defdd8f6edb7df97dc921078cf6d261dff36",
+          "text": "  if(root.querySelectorAll)elements.push(...root.querySelectorAll('[data-i18n],[data-i18n-key]'));"
+        },
+        {
+          "line": 1238,
+          "lineSha256": "709b7f19bdbd1364935c819fae11095672150066d4f1a69022a88bcdb6597978",
+          "text": "  for(const el of elements)applyTranslatedLabel(el,language);"
+        },
+        {
+          "line": 1239,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        }
+      ],
+      "contextSha256": "7b965293d70d974fca583f798f78cb456d4ef8889f009acc245f24a7f0a0f7b3",
+      "contextStartLine": 1227,
+      "endLine": 1238,
+      "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "matchBasis": "explicit text label application",
+      "path": "romarr/ui.py",
+      "startLine": 1228
+    },
+    {
+      "contextEndLine": 1298,
+      "contextLines": [
+        {
+          "line": 1279,
+          "lineSha256": "86f9740427753309bacb5bba65fecddbe504dcff20a4e17482fb7d39d45a9608",
+          "text": "let translatedAriaLabelSequence=0;"
+        },
+        {
+          "line": 1280,
+          "lineSha256": "7d35627a5f8413dfc7479bec477b5184e6430a1688489e906576e7eb81cb30c3",
+          "text": "const applyTranslatedTextNode=(node,language)=>{"
+        },
+        {
+          "line": 1281,
+          "lineSha256": "71492fc4b2b24862dc6519d9be4ba029a7b09deb8c03e90efa5e7ad88a3db2dd",
+          "text": "  const parent=node.parentElement;"
+        },
+        {
+          "line": 1282,
+          "lineSha256": "4271e57104ba6ccbba64b6e480283add87df2bbb6873a6ba83cece8fe0591906",
+          "text": "  if(!parent||parent.closest('script,style,textarea,input,select,[contenteditable=\"true\"],[lang=\"und\"],[data-i18n],[data-i18n-key]'))return;"
+        },
+        {
+          "line": 1283,
+          "lineSha256": "68c6c6519c9f2c79d002c171a1b773a9393b713241c5ad924d747a8d4be7b4d8",
+          "text": "  const original=translatedTextSources.get(node)||node.data.trim().replace(/\\s+/g,' ');"
+        },
+        {
+          "line": 1284,
+          "lineSha256": "c70e7a576fcc52db02db927346c9500997c22177389fbe6313881abd940a991e",
+          "text": "  if(!hasLabel(original))return;"
+        },
+        {
+          "line": 1285,
+          "lineSha256": "4a575a8d5b7f3439506b6bd5390c6a1b5c97cdb247afb7183e59e685282868c2",
+          "text": "  translatedTextSources.set(node,original);"
+        },
+        {
+          "line": 1286,
+          "lineSha256": "877798610fb73f14c1f139efaee9c37862e22e54681051b8178ddfe453a70f66",
+          "text": "  const leading=node.data.match(/^\\s*/)?.[0]||'',trailing=node.data.match(/\\s*$/)?.[0]||'';"
+        },
+        {
+          "line": 1287,
+          "lineSha256": "461e16407fbce4608c89e19c7549f968e132a573d8953cdfd91eb34f4decc5cd",
+          "text": "  const value=leading+translateLabel(original,language)+trailing;"
+        },
+        {
+          "line": 1288,
+          "lineSha256": "685e368735697dfd8c1e67f4c282091c8c7e4ab7ad4965f0a859516aac92dd7e",
+          "text": "  if(node.data!==value)node.data=value;"
+        },
+        {
+          "line": 1289,
+          "lineSha256": "c354de16470a367ab3d8d2d768d28893926a480f62b0e159887553f11c9f2dbf",
+          "text": "  const translated=Boolean(isTranslated(original,language));"
+        },
+        {
+          "line": 1290,
+          "lineSha256": "fc3708becaa62c7f7f4b898cd9ba3ac305707ed5b4f5b289c2d2dce463a2b7bd",
+          "text": "  parent.lang=translated?language:'en';"
+        },
+        {
+          "line": 1291,
+          "lineSha256": "f16945fb58cb5289c9dda4c27aa1d50ca7d90cc0987ded95f97bbfb0e03962eb",
+          "text": "  parent.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';"
+        },
+        {
+          "line": 1292,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        },
+        {
+          "line": 1293,
+          "lineSha256": "408b5bfe3dc7efd6748d66c48cce4919ff211b77cd2ee445c6ba5b77bbc798ea",
+          "text": "const applyTranslatedTextTree=(root,language)=>{"
+        },
+        {
+          "line": 1294,
+          "lineSha256": "57c50af4e50f443833f61081ae575124524abd7ca635ca9369e1dd08570265d6",
+          "text": "  if(root.nodeType===Node.TEXT_NODE){applyTranslatedTextNode(root,language);return;}"
+        },
+        {
+          "line": 1295,
+          "lineSha256": "6ea29502bb4d90f76377fa9814f09b86aa907ed289ccb64b4de7770a5c620d75",
+          "text": "  const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);"
+        },
+        {
+          "line": 1296,
+          "lineSha256": "da75259493eb2d2a62af8781ce33c8f56823f6d77fcfba395f5e5dafe9beeb5e",
+          "text": "  while(walker.nextNode())applyTranslatedTextNode(walker.currentNode,language);"
+        },
+        {
+          "line": 1297,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        },
+        {
+          "line": 1298,
+          "lineSha256": "6a6c749dbf2e9d7e7e0848f335f766bd60f5ce05b5e7a7548f215588156c31e2",
+          "text": "const applyTranslatedAriaLabelTemplate=(el,source,values,language)=>{"
+        }
+      ],
+      "contextSha256": "8e54c7c68c549f7985232318cbf65d99e1f442d9af9c45e723da43da0fb50f4c",
+      "contextStartLine": 1279,
+      "endLine": 1297,
+      "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "matchBasis": "automatic text-node lookup and traversal; select and lang=und areas are excluded",
+      "path": "romarr/ui.py",
+      "startLine": 1280
+    },
+    {
+      "contextEndLine": 1316,
+      "contextLines": [
+        {
+          "line": 1297,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        },
+        {
+          "line": 1298,
+          "lineSha256": "6a6c749dbf2e9d7e7e0848f335f766bd60f5ce05b5e7a7548f215588156c31e2",
+          "text": "const applyTranslatedAriaLabelTemplate=(el,source,values,language)=>{"
+        },
+        {
+          "line": 1299,
+          "lineSha256": "bbf67933ae1183aa12c30cef4f1c949de0204b5d0a769f2a210cff0060567a19",
+          "text": "  let label=translatedAriaLabelNodes.get(el);"
+        },
+        {
+          "line": 1300,
+          "lineSha256": "6a2d65d4e87969c46e4acb3cb47ee175deec735a397c9684c216cbfd386c9a9e",
+          "text": "  if(!label){"
+        },
+        {
+          "line": 1301,
+          "lineSha256": "731ad8243ca0537614de3a4fd1d685c7b113def9272b1836a27bc19e1ac312ff",
+          "text": "    label=document.createElement('span');"
+        },
+        {
+          "line": 1302,
+          "lineSha256": "98f947a348bb49bba934a05138e1023080a25a18175c3746e386c163dee159ba",
+          "text": "    label.id='romarr-interface-aria-label-'+(++translatedAriaLabelSequence);"
+        },
+        {
+          "line": 1303,
+          "lineSha256": "0d2d22a28e6641df87ca2efa91cd8dbb0f4de4a59664ad5a9ae98a9aed7a9a87",
+          "text": "    label.style.position='absolute';label.style.width='1px';label.style.height='1px';"
+        },
+        {
+          "line": 1304,
+          "lineSha256": "62ac76ac3d8fc4849e3fb2790a2f2edf590266b279ca8ef204ef0a1a194fcad1",
+          "text": "    label.style.padding='0';label.style.margin='-1px';label.style.overflow='hidden';"
+        },
+        {
+          "line": 1305,
+          "lineSha256": "a4906e5fd1a4aaaec067baca3fcaac4ee0bc8ae3593d71a34bb21d90f218ef1e",
+          "text": "    label.style.clip='rect(0, 0, 0, 0)';label.style.whiteSpace='nowrap';label.style.border='0';"
+        },
+        {
+          "line": 1306,
+          "lineSha256": "3b701093c6bbef79a55f59540a43a6b7cc4bc22c7e2dfb0103fc1411d0b15c58",
+          "text": "    el.appendChild(label);translatedAriaLabelNodes.set(el,label);"
+        },
+        {
+          "line": 1307,
+          "lineSha256": "737db166c79ae98e44bbe5ad43e03bf3774f7b3696068842d56a72e863dfeb20",
+          "text": "  }"
+        },
+        {
+          "line": 1308,
+          "lineSha256": "f0765962b683e5e864419032c296a6d8c017718d726124206b8026ab355c7a14",
+          "text": "  label.dataset.i18nTemplateKey=source;label.dataset.i18nValues=JSON.stringify(values);"
+        },
+        {
+          "line": 1309,
+          "lineSha256": "9e697c80e9f637ce40de88b1ca0a8a72b1538c9ca053ae3fdc1daa663e6df5da",
+          "text": "  label.innerHTML=translatedTemplateMarkup(source,values,language);"
+        },
+        {
+          "line": 1310,
+          "lineSha256": "dae72414b1ebaa3529dfa681925c9720be5d5c2d9bfce88650d8118f4610d2fb",
+          "text": "  const localized=Boolean(isTranslated(source,language));"
+        },
+        {
+          "line": 1311,
+          "lineSha256": "05cf03a66d9734119b641a9dd292fc133fa7de1d5a5934b3e2f0de6c477f57c0",
+          "text": "  label.lang=localized?language:'en';"
+        },
+        {
+          "line": 1312,
+          "lineSha256": "6f8c2d314d88fff8e066b4732ae23f1ab168b56d85b5c8360591f94edd1a4fa9",
+          "text": "  label.dir=localized&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';"
+        },
+        {
+          "line": 1313,
+          "lineSha256": "77e044d3347b54939f83b0971fe392ea281c88e0f4ce28ad55d4f8d6867dbd41",
+          "text": "  const references=(el.getAttribute('aria-labelledby')||'').split(/\\s+/).filter(id=>id&&id!==label.id);"
+        },
+        {
+          "line": 1314,
+          "lineSha256": "18a5d71f5eba4ef76944a673346b9742b0d8eb3fc55c88f9da3c82d0953bd3a3",
+          "text": "  references.push(label.id);el.setAttribute('aria-labelledby',references.join(' '));"
+        },
+        {
+          "line": 1315,
+          "lineSha256": "f3899f126a77d044e23e9f1af9ca41b5f4c82c9944b81d6d4ae866d2db02b0c6",
+          "text": "  el.removeAttribute('aria-label');"
+        },
+        {
+          "line": 1316,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        }
+      ],
+      "contextSha256": "c02126a92e229ce0bbc4288a33f332775fcdcdac9c579ac944c826c1c5dd1d40",
+      "contextStartLine": 1297,
+      "endLine": 1315,
+      "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "matchBasis": "accessible-name template application",
+      "path": "romarr/ui.py",
+      "startLine": 1298
+    },
+    {
+      "contextEndLine": 1371,
+      "contextLines": [
+        {
+          "line": 1357,
+          "lineSha256": "df3982fd610173599241fca93c7c866683f58f541eced1c2098102145477164c",
+          "text": "};"
+        },
+        {
+          "line": 1358,
+          "lineSha256": "42637267a38e3cf052e2123efeb125a003bdca840bfbb269fb8553d96d637938",
+          "text": "let interfaceTextObserver=null;"
+        },
+        {
+          "line": 1359,
+          "lineSha256": "34ab241f8b7814906879be5738078433ed64907284a619e6d1ced17e70d6489b",
+          "text": "const observeInterfaceText=()=>{"
+        },
+        {
+          "line": 1360,
+          "lineSha256": "512e7ac82416d0dae37e4944df215202f7c698b23f04c53658019cfe4958f0bf",
+          "text": "  if(interfaceTextObserver||!document.body)return;"
+        },
+        {
+          "line": 1361,
+          "lineSha256": "e0e6fd099fea79eb8544156d3a40362f4c6bff08d63335b8be41a4a749b25cc8",
+          "text": "  interfaceTextObserver=new MutationObserver(records=>{"
+        },
+        {
+          "line": 1362,
+          "lineSha256": "0b41fe2f3d336b8e71d3cc4373ca49f94bc503be8f525ee99bcc4be0359062d5",
+          "text": "    for(const record of records){"
+        },
+        {
+          "line": 1363,
+          "lineSha256": "a3074a714a595f12e7242ec50e6b09eda156b8870d34e0e07df781dd603af18b",
+          "text": "      if(record.type==='characterData')applyTranslatedTextNode(record.target,readInterfaceLanguage());"
+        },
+        {
+          "line": 1364,
+          "lineSha256": "fd1e78efea4071aead35f97ae87487db06eaf8c0362aa68800530627fda3e0a1",
+          "text": "      for(const node of record.addedNodes){"
+        },
+        {
+          "line": 1365,
+          "lineSha256": "ed5571a9d595c6f0dfea878568133a99b120c70e73c85c1538d87a2fa340f7cf",
+          "text": "        enhanceFormLabels(node);"
+        },
+        {
+          "line": 1366,
+          "lineSha256": "9c28765265d5cf231e05a00915aafaf56059b46a2635ba7d1f7c14c10a9f9a21",
+          "text": "        applyTranslatedLabels(node,readInterfaceLanguage());"
+        },
+        {
+          "line": 1367,
+          "lineSha256": "4549a0967299e9f4596004564d8dfdf324fc1df9e6ca2e8843dee5a0d41eb827",
+          "text": "        applyTranslatedTemplates(node,readInterfaceLanguage());"
+        },
+        {
+          "line": 1368,
+          "lineSha256": "73cfa4db9869a601456713b170f684f8254384916c104bb43b531c91070817b3",
+          "text": "        applyTranslatedTextTree(node,readInterfaceLanguage());"
+        },
+        {
+          "line": 1369,
+          "lineSha256": "f2c1e6a6186e4f2e832a8bafe0fdfc8a036fe55117dcb2abddba14c6f9600d4a",
+          "text": "        applyTranslatedAttributes(node,readInterfaceLanguage());"
+        },
+        {
+          "line": 1370,
+          "lineSha256": "f61f5bbc379fd349ffd484746f91dcd132c4bb0b0a919ca7ec94604bf9ca2435",
+          "text": "      }"
+        },
+        {
+          "line": 1371,
+          "lineSha256": "28d86778615f6af47bb1bc4f40face756749768e5111f114cfa234a5060c25af",
+          "text": "    }"
+        }
+      ],
+      "contextSha256": "facb666bc7e48b132ed42eaaab7b90b4388fc6f4cc2707f74890d9b0ba7a5373",
+      "contextStartLine": 1357,
+      "endLine": 1370,
+      "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "matchBasis": "MutationObserver localizes newly inserted DOM nodes",
+      "path": "romarr/ui.py",
+      "startLine": 1358
+    },
+    {
+      "contextEndLine": 1437,
+      "contextLines": [
+        {
+          "line": 1419,
+          "lineSha256": "737db166c79ae98e44bbe5ad43e03bf3774f7b3696068842d56a72e863dfeb20",
+          "text": "  }"
+        },
+        {
+          "line": 1420,
+          "lineSha256": "d10b36aa74a59bcf4a88185837f658afaf3646eff2bb16c3928d0e9335e945d2",
+          "text": "}"
+        },
+        {
+          "line": 1421,
+          "lineSha256": "f99cddeb37ad49e8d78598cda63b66677f4d9fbb28df871dc8a7595acb65a993",
+          "text": "const applyInterfaceLanguage=(language=readInterfaceLanguage())=>{"
+        },
+        {
+          "line": 1422,
+          "lineSha256": "b21cbe90c904727690b25a64b8a848dae56eb0440609a66c2ceed121a3487db2",
+          "text": "  document.documentElement.lang=language;"
+        },
+        {
+          "line": 1423,
+          "lineSha256": "71aee7cf5e2d8656faf50a62c2d8b385810a2369ecc832024115a2061d492020",
+          "text": "  document.documentElement.dir=ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';"
+        },
+        {
+          "line": 1424,
+          "lineSha256": "e38eda4f35d4f6249128f4e724178f547cfc8f87761abd1ac0690e8725e93e48",
+          "text": "  applyTranslatedLabels(document,language);"
+        },
+        {
+          "line": 1425,
+          "lineSha256": "76399c9af6a922363bc20076b22c3f49a8d03b2bde9414f924de25e1b4680801",
+          "text": "  applyTranslatedOptionLabels(document,language);"
+        },
+        {
+          "line": 1426,
+          "lineSha256": "9a94f5ac9c30a19ac3a5f894cfd8edea58ba43a127f1c3fd9202e51ba21bf699",
+          "text": "  applyTranslatedTemplates(document,language);"
+        },
+        {
+          "line": 1427,
+          "lineSha256": "2b9f34d2e295729c0d6a39e8ecbfc6111594ec621d50b631da23a90d1f6026f5",
+          "text": "  document.querySelectorAll('[data-i18n-aria-label]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nAriaLabel,'aria-label',language));"
+        },
+        {
+          "line": 1428,
+          "lineSha256": "fc0d1ddb2b07d5f0d19d3fab84dcfd38b5395889426065dc3469b715fa371896",
+          "text": "  document.querySelectorAll('[data-i18n-title]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nTitle,'title',language));"
+        },
+        {
+          "line": 1429,
+          "lineSha256": "a98c44460cf6a3576053f22787283fd9ec14685bc4997179fc7158a2f2cc9c87",
+          "text": "  document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{"
+        },
+        {
+          "line": 1430,
+          "lineSha256": "5f280da3d78866adfd1ed9264f4f35b50ac5df8374889863bed83b9a8ebe7639",
+          "text": "    const source=el.dataset.i18nPlaceholder, translated=isTranslated(source,language);"
+        },
+        {
+          "line": 1431,
+          "lineSha256": "b7edf35648cbed4c0185e143f46ce61ea89f4ec1f9ca11d6eed8720ee464408d",
+          "text": "    el.placeholder=translateLabel(source,language);"
+        },
+        {
+          "line": 1432,
+          "lineSha256": "de4159ca9ca4c4886220bb311b0ca891ee74e357f45a15f0eec6c953c0efd267",
+          "text": "    el.lang=translated?language:'en';"
+        },
+        {
+          "line": 1433,
+          "lineSha256": "ab4983343be38a98dbc536d03f4f8f755b575ae7399ea20de2e812a9eb117912",
+          "text": "    el.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';"
+        },
+        {
+          "line": 1434,
+          "lineSha256": "8918205c87aec718d8ed26668abe0962b53a36e38887e5434ec02d59639e3ec1",
+          "text": "  });"
+        },
+        {
+          "line": 1435,
+          "lineSha256": "770b5dd07fd670621e49dff825ca53013ccf8611cf26289cb18c699c38d56770",
+          "text": "  applyTranslatedTextTree(document.body,language);"
+        },
+        {
+          "line": 1436,
+          "lineSha256": "39f0ee67dd4cae1317a1060cc56ace96c63beb5fb7b227bc31e0938817a3e7ca",
+          "text": "  applyTranslatedAttributes(document.body,language);"
+        },
+        {
+          "line": 1437,
+          "lineSha256": "7272400139ee0b157736047755082621da7ac57fb81f30d4382ad2e99e8bad26",
+          "text": "  enhanceFormLabels(document.body);"
+        }
+      ],
+      "contextSha256": "f08470067b4afa91441c0f12e4ac8695a344d7333c0ba64e9c50aa1779a97db8",
+      "contextStartLine": 1419,
+      "endLine": 1436,
+      "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "matchBasis": "language application walks existing page text",
+      "path": "romarr/ui.py",
+      "startLine": 1420
+    }
+  ],
+  "tree": "016587d26f04d2920a30878236f1933a57e27901"
+}

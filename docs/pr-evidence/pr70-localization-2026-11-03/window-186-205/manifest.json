@@ -1,0 +1,202 @@
+{
+  "artifact": "ROMarrNG PR #70 W186-W205 complete application evidence",
+  "sealed": true,
+  "checksumNote": "manifest.json and SHA256SUMS.txt are excluded from the manifest; SHA256SUMS.txt covers every file except those two top-level files.",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "inputHead": "55ee760ea9600f71cc27cba35e098a082445dac8",
+  "inputTree": "dbc192813f6347f4307ff8417d505624958eb321",
+  "fileCount": 38,
+  "files": [
+    {
+      "name": "README.md",
+      "bytes": 2353,
+      "sha256": "debf25434f42b37c1753c14559f5f37108ae716bfa6e755a56b2c5f9e5c5951f"
+    },
+    {
+      "name": "apply-plan.json",
+      "bytes": 72805,
+      "sha256": "a4c89a9fde85312e6663334f698d12af2ef975210ef2d7e0a905ab37fc08b302"
+    },
+    {
+      "name": "apply_catalog_values.py",
+      "bytes": 10541,
+      "sha256": "a3369e6395f6d24a456d9c5c6cdc46673a2f24f5b49a33aa5217068f91469547"
+    },
+    {
+      "name": "cross-audit-packet/README.md",
+      "bytes": 1339,
+      "sha256": "1081f69dd1e473dc1089d19a590c234d34d66a866ac7255d719ab7ba763d6e8e"
+    },
+    {
+      "name": "cross-audit-packet/SHA256SUMS.txt",
+      "bytes": 408,
+      "sha256": "5af7dbc52d4747059c6a40fe59abe6b90ef01c5af227a66062f2b4142bd5058a"
+    },
+    {
+      "name": "cross-audit-packet/cross-audit.jsonl",
+      "bytes": 387409,
+      "sha256": "451fd1a68a84d956bdc123bc1bf766513a7a4a803fb38d88fa4d458f77914639"
+    },
+    {
+      "name": "cross-audit-packet/input-attestation.json",
+      "bytes": 2144,
+      "sha256": "7cb5a281af37e08f1fa28b68d2acc06d72d7dea9b575c0e5ce263f10b0b268f4"
+    },
+    {
+      "name": "cross-audit-packet/manifest.json",
+      "bytes": 1200,
+      "sha256": "7142ae8e0f06e0a96fd60c63af0882f9fc222c7e68de1f2e85134ad3c3c06666"
+    },
+    {
+      "name": "cross-audit-packet/summary.json",
+      "bytes": 4434,
+      "sha256": "739d12a9004e60d29f8b048ae71dbb4ce250f1d8605bc990f073cb342abea2fc"
+    },
+    {
+      "name": "delivery-validation.json",
+      "bytes": 947,
+      "sha256": "42f6cca91cc0cc2230db671121ef1b1d7e4436911ac9f00e033fd4c99b6874d7"
+    },
+    {
+      "name": "independent-blind-packet/README.md",
+      "bytes": 1566,
+      "sha256": "70ac7c808e5d7798c9ae58d515e73e8e5cef31e272b21ff1868c7bf00709d247"
+    },
+    {
+      "name": "independent-blind-packet/SHA256SUMS.txt",
+      "bytes": 409,
+      "sha256": "044cdcbb6a11ec373ffda93e5503fc4b78e4fc66784c8ad79c7a301a1325b344"
+    },
+    {
+      "name": "independent-blind-packet/blind-ledger.jsonl",
+      "bytes": 555690,
+      "sha256": "da7b3abd1c5abb550e648ca3756a76d6d2fa85e30716037dccf812f144423117"
+    },
+    {
+      "name": "independent-blind-packet/input-attestation.json",
+      "bytes": 2093,
+      "sha256": "b31074d12ab0f85926cc64e4949fa8437483caea37a1c60dc48688645c89177b"
+    },
+    {
+      "name": "independent-blind-packet/manifest.json",
+      "bytes": 1200,
+      "sha256": "8d541d59f17eaa1b4fe8bb6dade479fc6992f636afb953efb0818f80efb19302"
+    },
+    {
+      "name": "independent-blind-packet/summary.json",
+      "bytes": 15546,
+      "sha256": "a546bac4b21d38b7d712930e8b15d3e9ba5000691a77976a3774e0e215cae36f"
+    },
+    {
+      "name": "input/README.txt",
+      "bytes": 792,
+      "sha256": "3c539914f7650bd101ec6360a4e6cfe69ea23be3ddb4a0c8872d8f5d2e11581a"
+    },
+    {
+      "name": "input/SHA256SUMS.txt",
+      "bytes": 681,
+      "sha256": "c2899dbe432a9e651d71f7052a7a22e0f97698e5d4a1e5c325522cd4b34db362"
+    },
+    {
+      "name": "input/head-and-file-pins.json",
+      "bytes": 13834,
+      "sha256": "a35ba9d695ba54645f06dc0597fed0dc936c36c3ed7840164a579ff388ca678b"
+    },
+    {
+      "name": "input/manifest.json",
+      "bytes": 2595,
+      "sha256": "4d1140d40351c1767e05aaed19894ba07c8b9860174942075619ed3bf1c83f5b"
+    },
+    {
+      "name": "input/next-window-boundary.json",
+      "bytes": 11785,
+      "sha256": "4d23d233ed0047efa2f81d5558c408c82149243dbeee88361258568f413d8b07"
+    },
+    {
+      "name": "input/review-input.jsonl",
+      "bytes": 161422,
+      "sha256": "e1f03c2d2874a81ab6c224cdd4a9ef36ebf4810b5ff9c4ecf2f86db67fc3fb5d"
+    },
+    {
+      "name": "input/selection.json",
+      "bytes": 3714,
+      "sha256": "687dc975793abd695794cb1410110ac9fb4efea9f4920d901e450b67124dd7c4"
+    },
+    {
+      "name": "input/source-context.jsonl",
+      "bytes": 55380,
+      "sha256": "3cd358b0f7c39525fb2d287047b625e4955bae85705a44cda083873434be70e7"
+    },
+    {
+      "name": "input/source-structure.jsonl",
+      "bytes": 6496,
+      "sha256": "a88ddc76538a917e6792c32251d1dcb4bfa4aecfa17487d2b36cebf28336e32c"
+    },
+    {
+      "name": "primary-packet/primary-private/README.md",
+      "bytes": 810,
+      "sha256": "583fc2b4bd4a4b01fae4fb60926f2f502aa004f158d0c4687cad7d8f713144fb"
+    },
+    {
+      "name": "primary-packet/primary-private/SHA256SUMS.txt",
+      "bytes": 420,
+      "sha256": "b3e5ad0cadc9272d25f5b27c2175e4aa92bb77731e5e23e4e2b8ae06b4157eb4"
+    },
+    {
+      "name": "primary-packet/primary-private/manifest.json",
+      "bytes": 1701,
+      "sha256": "59121f8a2a552a926a4ff35a32ff4584e8f2f4e36bc6a735f046a566897a4422"
+    },
+    {
+      "name": "primary-packet/primary-private/review-completion-checks.json",
+      "bytes": 603,
+      "sha256": "fe54772321e799f90d225c0f1b2e45dc7d07fb2fce6bd8308e8bed9a1040968d"
+    },
+    {
+      "name": "primary-packet/primary-private/review-decisions.jsonl",
+      "bytes": 310935,
+      "sha256": "07567886babe96d41ad33b913883a180a667def321921ddd4f69d59481d991f7"
+    },
+    {
+      "name": "primary-packet/primary-private/summary.json",
+      "bytes": 1379,
+      "sha256": "40bd1b819742ca2552eeb78d4999ca7072d3e1195b732f0646eeca7fce9ab501"
+    },
+    {
+      "name": "readback.json",
+      "bytes": 230671,
+      "sha256": "93d5b30f103661d34a0e142d6356e48082b0b338e3e0c613d33bc248fe2ebfb3"
+    },
+    {
+      "name": "root-adjudication/SHA256SUMS.txt",
+      "bytes": 444,
+      "sha256": "91da3de9aa441cb6aea80306a6c0e65957307faefcce41918508c587a4a47a34"
+    },
+    {
+      "name": "root-adjudication/disputed-recommendations.json",
+      "bytes": 22160,
+      "sha256": "59ae0ddd61135a879aab62b0d44f5c5ea54da1e16cabfea083cefb752432db10"
+    },
+    {
+      "name": "root-adjudication/input-validation.json",
+      "bytes": 15285,
+      "sha256": "7442b49982c314886f090491466e550a9fbffacf8df77719f5cb40c0592aecb9"
+    },
+    {
+      "name": "root-adjudication/ratified-ledger.jsonl",
+      "bytes": 701558,
+      "sha256": "14a1a8672a95740af672df25b1c331eb2421af2e839822c5df06ca9b75bb13b7"
+    },
+    {
+      "name": "root-adjudication/summary.json",
+      "bytes": 2964,
+      "sha256": "6c37cb65e5aa5cf0db6948f55fb10f1a9c413f73b647b6801d8c4ba6bced1428"
+    },
+    {
+      "name": "root-adjudication/validate_and_adjudicate.py",
+      "bytes": 12292,
+      "sha256": "603d9ae92774e8ecb6273b79e157cf4d3aa6b2b73a7b58e64ff6e88b91578b76"
+    }
+  ]
+}

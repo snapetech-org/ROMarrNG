@@ -1,0 +1,54 @@
+{
+  "artifact": "ROMarrNG PR #70 W725-W744 independent primary semantic review",
+  "callerBackedCells": 228,
+  "callerlessHashOnlyHolds": 12,
+  "callerlessSourceCount": 1,
+  "cellCount": 240,
+  "confidenceCounts": {
+    "high": 2,
+    "moderate": 226,
+    "unknown": 12
+  },
+  "decisionCounts": {
+    "accept-current": 223,
+    "correction": 2,
+    "hold-callerless-hash-only": 12,
+    "refinement": 3
+  },
+  "exactHead": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "exactTree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+  "hashOnlyHoldPolicy": "All 12 callerless cells remain holds and contain hashes, positions, locales, and caller-context hashes only; source and current-target text are omitted.",
+  "independence": "The primary review used only the sealed candidate-free input. No blind, cross-review, or other reviewer output was read.",
+  "limitations": [
+    "No qualified native-speaker second review or runtime visual review was performed.",
+    "Callerless cells cannot be semantically assessed without text and remain held."
+  ],
+  "localeCount": 12,
+  "proposalCount": 5,
+  "proposalCountsByLocale": {
+    "ar": 1,
+    "de": 3,
+    "ko": 1
+  },
+  "proposalCountsByPosition": {
+    "728": 1,
+    "734": 1,
+    "735": 1,
+    "740": 1,
+    "743": 1
+  },
+  "pullRequest": 70,
+  "reviewedAtUtc": "2026-11-05T14:45:47+00:00",
+  "sourceCount": 20,
+  "tokenAudit": {
+    "allRecommendedTargetsPassPlaceholderMarkupNumericAndProtectedLiteralChecks": true,
+    "candidateFreeReportedCounts": {
+      "markup": 0,
+      "numeric": 0,
+      "numericPresentationDifferences": 0,
+      "placeholder": 0,
+      "protectedLiteral": 0
+    },
+    "finding": "The candidate-free token audit reports zero placeholder, markup, numeric, numeric-presentation, and protected-literal mismatches."
+  }
+}

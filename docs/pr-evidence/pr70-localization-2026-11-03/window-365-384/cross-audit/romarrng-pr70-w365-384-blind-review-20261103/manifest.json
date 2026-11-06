@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "artifact": "ROMarrNG PR #70 W365-W384 blind translation review",
+  "reviewType": "blind-translation",
+  "sealed": true,
+  "blindInputOnly": true,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W365-W384",
+  "head": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "tree": "3f42d41fe4bbb8edd921ff161e8298ca66038a91",
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "inputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w365-384-candidate-free-20261103/blind-input",
+  "inputManifestSha256": "3fcde6c80725d3a546ecb860df4cb2cfc5f32cd61e82fb50c0fa64373762c5d1",
+  "inputChecksumListSha256": "8fcb42e4e5a77dc1ebf9a83f4e50d66ce6a27a434119b62b1d7b900f2d28b231",
+  "decisionCounts": {
+    "proposal": 240
+  },
+  "proposalCount": 240,
+  "holdCount": 0,
+  "candidateFreeOrExistingTargetsAccessed": false,
+  "nativeSpeakerReview": "not performed",
+  "browserReview": "not performed",
+  "createdAtUtc": "2026-11-03T15:55:34.425682+00:00",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 921,
+      "sha256": "0936df7ae18821d75f56c0ffc6b69b9e690c29437cf04efbbf0c7e11e514c3fc"
+    },
+    {
+      "path": "blind-ledger.jsonl",
+      "bytes": 1731912,
+      "sha256": "b984b4833d8bf9f0ab2203de23d777658cb606e9beebf73cb6ad72650e3a1307"
+    },
+    {
+      "path": "build_blind_review.py",
+      "bytes": 25938,
+      "sha256": "b310fec32e556008530624b0dbb2368862e18ced35f0e453e861a430ed10b622"
+    },
+    {
+      "path": "input-verification.txt",
+      "bytes": 205,
+      "sha256": "b3a96ea403e1adcd7dceb3eb8bcc4762105ab25701cf853863a9f832cbf8ef8f"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 1002,
+      "sha256": "2d0ea840411988332d1ccedbb6369662a6dec19f34004006e7e67f8c7690e575"
+    },
+    {
+      "path": "verify_blind_review.py",
+      "bytes": 4321,
+      "sha256": "e239ca8ce346502522467415c554a129cfdea93179f120d3e10c7ab38df356e5"
+    }
+  ]
+}

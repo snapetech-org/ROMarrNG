@@ -1,0 +1,18 @@
+{
+  "sourceCandidateFreeInputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w405-424-candidate-free-20261103/input",
+  "sourceCandidateFreeChecksumListSha256": "cfb7a47a4b5d208c52bf01cc1bb4972eb179059d975c3df83319d1ab064e915d",
+  "sourceCandidateFreeManifestSha256": "9407fe320bba79cf4fbbdeaa54e4851c90f98d9b946391c11b0d6ac434540602",
+  "sourceCandidateFreeVerifierOutput": "PASS candidate-free W405-W424: exact PR/head/tree refs; catalog slice and 240 cells; 20 live source-context records; current active-registry metadata; 288 carried holds unchanged; 20 prior selected sources reattested; placeholder/numeric/protected literals clean; candidate-free boundary and checksums.",
+  "W405CurrentHoldPlanCommit": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+  "W405CurrentHoldPlanPath": "docs/pr-evidence/pr70-localization-2026-11-03/window-405-424/hold-plan.jsonl",
+  "W405CurrentHoldPlanSha256": "691e3e4831f590f4d128b38a8887d266385a50f7328c9ce4aee20f6d01a7e5c9",
+  "W405CurrentHoldPlanGitBlob": "250eb89d5d4498c2b6f1cdd555b513623b27d6b8",
+  "priorSelectionRows": {
+    "W405-W424": 20,
+    "W385-W404": 20
+  },
+  "priorHoldRows": {
+    "inherited": 288,
+    "W405-W424": 48
+  }
+}

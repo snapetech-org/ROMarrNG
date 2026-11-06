@@ -1,0 +1,78 @@
+{
+  "artifact": "ROMarrNG PR #70 W585-W604 sealed exact-head primary/blind cross-audit",
+  "counts": {
+    "blindDispositionCounts": {
+      "hold_hash_only": 24,
+      "propose_refinement": 20,
+      "retain_current": 196
+    },
+    "callerfulKeepCurrent": 194,
+    "callerlessHashOnlyHolds": 24,
+    "cells": 240,
+    "crossResolutionCounts": {
+      "blind_only_resolved_by_caller_context": 6,
+      "corroborated_exact_target": 11,
+      "corroborated_meaning_variant": 3,
+      "primary_only_resolved_by_caller_context": 2
+    },
+    "noOps": 218,
+    "primaryDispositionCounts": {
+      "CHANGE": 16,
+      "KEEP": 224
+    },
+    "selectedByLocale": {
+      "ar": 1,
+      "de": 1,
+      "es": 1,
+      "fr": 1,
+      "hi": 3,
+      "id": 2,
+      "ja": 3,
+      "ko": 2,
+      "pt-BR": 2,
+      "vi": 4,
+      "zh-Hans": 1,
+      "zh-Hant": 1
+    },
+    "selectedBySourceId": {
+      "ui.ko-fi.76c38e42cf": 3,
+      "ui.last-ran.2e024dc014": 2,
+      "ui.last-refresh.519ad138a1": 2,
+      "ui.latest-listed-version-only.1df61faba4": 2,
+      "ui.left.58eb9032e3": 12,
+      "ui.lynx-header.83b04c6319": 1
+    },
+    "selectedProposals": 22,
+    "unresolvedContextualHolds": 0
+  },
+  "pin": {
+    "branch": "task/localization-translation-review-20261030",
+    "catalogOneBasedPositions": [
+      586,
+      605
+    ],
+    "catalogPath": "romarr/ui-labels.json",
+    "head": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+    "positions": [
+      585,
+      604
+    ],
+    "pullRequest": 70,
+    "repository": "snapetech-org/ROMarrNG",
+    "tree": "dcb9c1766831e217ffca7fb77068b97c33b9524e",
+    "window": "W585-W604"
+  },
+  "scratch": {
+    "outputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w585-604-cross-audit-20261104"
+  },
+  "verification": {
+    "blindSealedManifestAndRows": "PASS (27 input files, 240 decisions)",
+    "candidateFreeBundleChecksums": "PASS",
+    "candidateFreeInputChecksums": "PASS (27 files)",
+    "candidateFreeVerifier": "PASS",
+    "primaryExactPinAndLiveRefs": "PASS",
+    "primaryOutputChecksums": "PASS (5 files)",
+    "sourceWorktree": "PASS (clean, exact HEAD/tree)",
+    "testsBuildsCiBrowserNativeSpeakerClaims": "NONE"
+  }
+}

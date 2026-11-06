@@ -1,0 +1,315 @@
+{
+  "schemaVersion": 1,
+  "reviewHead": "50bb70837512bb5abcf53c89b01031aa9a321321",
+  "reviewTree": "c88c97301c042747bd5e183daff21d7d255d4cfc",
+  "reviewedCells": 120,
+  "acceptedUnchanged": 90,
+  "correctionCandidates": 30,
+  "rootAccepted": 29,
+  "rootRefined": 1,
+  "held": 0,
+  "appliedCells": 30,
+  "changes": [
+    {
+      "sourceId": "ui.browse-games.cf37299e27",
+      "locale": "zh-Hant",
+      "sourceHash": "cf37299e27fb28ff23ba23bf3b2a143cb84d25b53db94f8e1efbe109fb12ef92",
+      "beforeTarget": "瀏覽游戲",
+      "beforeTranslationHash": "fc7a985ac06da013f57dc36230628a090d374c85066e07c098f2222ba7d39320",
+      "afterTarget": "瀏覽遊戲",
+      "afterTranslationHash": "e97488b88e93fba47e1de7ae9e342abf4b83688a34e3491beef2892e944dbf3c",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.connect-an-igdb-metadata-provider-un.94cf3e816e",
+      "locale": "de",
+      "sourceHash": "94cf3e816e6548a3bd391749cd1640557a07a7a25b2a2d10ed5c42428bc91cf5",
+      "beforeTarget": "Verbinden Sie einen IGDB Metadatenanbieter unter",
+      "beforeTranslationHash": "3d6efa04d178434598213888d1e38ecaec77e593bece034822bf546b20968e0b",
+      "afterTarget": "Verbinden Sie einen IGDB-Metadatenanbieter unter",
+      "afterTranslationHash": "1bd309692e82c2342031dfa56fd4c42f95de0259d07801941cb71e3d8a7f43a4",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.connect-an-igdb-metadata-provider-un.94cf3e816e",
+      "locale": "ja",
+      "sourceHash": "94cf3e816e6548a3bd391749cd1640557a07a7a25b2a2d10ed5c42428bc91cf5",
+      "beforeTarget": "IGDB メタデータプロバイダーを設定するには、次を開いてください：",
+      "beforeTranslationHash": "263219caa82841b192f5bd58f386e83160eb0dc436e171cdb70e7eb5189fbe9c",
+      "afterTarget": "IGDB メタデータプロバイダーを接続するには",
+      "afterTranslationHash": "83660168d0ef4dfea14185a4d537a6fc647c6adf95fa12657bb0a6c27395f971",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.connect-an-igdb-metadata-provider-un.94cf3e816e",
+      "locale": "fr",
+      "sourceHash": "94cf3e816e6548a3bd391749cd1640557a07a7a25b2a2d10ed5c42428bc91cf5",
+      "beforeTarget": "Connectez un fournisseur de métadonnées IGDB dans",
+      "beforeTranslationHash": "0edf151383ec938803c38905e296ef380bed8123f0bb5ef819fb579800e52c61",
+      "afterTarget": "Connectez un fournisseur de métadonnées IGDB dans la section",
+      "afterTranslationHash": "073692618f0aaa2395a6e33b3fce085704c0a47bc527f65b5eecc058befbc8b7",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.connect-an-igdb-metadata-provider-un.94cf3e816e",
+      "locale": "pt-BR",
+      "sourceHash": "94cf3e816e6548a3bd391749cd1640557a07a7a25b2a2d10ed5c42428bc91cf5",
+      "beforeTarget": "Conecte um fornecedor de metadados IGDB abaixo",
+      "beforeTranslationHash": "78daacb36ee6857f9b4a5ad22331e5a7e34139969a4df1a32bb50ed6e2b162b6",
+      "afterTarget": "Conecte um fornecedor de metadados do IGDB na seção",
+      "afterTranslationHash": "24a2ed762ba615b6037c744d25dc31595dba8b1a3d986077e6211005afa429df",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.connect-an-igdb-metadata-provider-un.94cf3e816e",
+      "locale": "ar",
+      "sourceHash": "94cf3e816e6548a3bd391749cd1640557a07a7a25b2a2d10ed5c42428bc91cf5",
+      "beforeTarget": "اتصل بـ IGDB مزود البيانات تحت",
+      "beforeTranslationHash": "6c8370757ebd503d158b2b03fa67f3417b6ee034d82fcf868540a7a09bea027a",
+      "afterTarget": "اربط موفّر بيانات IGDB من قسم",
+      "afterTranslationHash": "d6ed38f7a42515a22de8b9715b11ff9b6b0c471a0d9311f8ae4dce94051cdf34",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.connect-an-igdb-metadata-provider-un.94cf3e816e",
+      "locale": "ko",
+      "sourceHash": "94cf3e816e6548a3bd391749cd1640557a07a7a25b2a2d10ed5c42428bc91cf5",
+      "beforeTarget": "IGDB 메타데이터 제공자를 연결하려면 다음으로 이동하세요:",
+      "beforeTranslationHash": "8a6d80f00deb9c38f54bf7e23fd55fbf46452210a9e20b0d2c72041c7045cb0d",
+      "afterTarget": "IGDB 메타데이터 제공자를 연결하려면",
+      "afterTranslationHash": "cf797c4d2f0fb1a9870ff460950127b072a59f9723ed6c0f5a203e081fc9affd",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.connect-an-igdb-metadata-provider-un.94cf3e816e",
+      "locale": "vi",
+      "sourceHash": "94cf3e816e6548a3bd391749cd1640557a07a7a25b2a2d10ed5c42428bc91cf5",
+      "beforeTarget": "Kết nối với nhà cung cấp dữ liệu IGDB dưới đây:",
+      "beforeTranslationHash": "9d4ee1d1233d1dc4c269af056854677c67f68a606d5fc8a19629f9f3caf90d8d",
+      "afterTarget": "Để kết nối nhà cung cấp siêu dữ liệu IGDB, hãy mở mục",
+      "afterTranslationHash": "b433101221a62602e90056b2e5b2abcfb6a0804914f0ca3d20ce22b350c77e83",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.connect-an-igdb-metadata-provider-un.94cf3e816e",
+      "locale": "id",
+      "sourceHash": "94cf3e816e6548a3bd391749cd1640557a07a7a25b2a2d10ed5c42428bc91cf5",
+      "beforeTarget": "Menghubungkan penyedia metadata IGDB di bawah",
+      "beforeTranslationHash": "756fe2623cfd9b666e851fe4427ebecc7b0ca1adff9f0cdd4b8c928bbf2e7ba9",
+      "afterTarget": "Hubungkan penyedia metadata IGDB di bagian",
+      "afterTranslationHash": "39adfae4f5cd594149e93185b70b06778356cb9c628c566622191c698af85ecb",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa",
+      "locale": "hi",
+      "sourceHash": "02eaa58bfa6c824f83791cb11b32f6eba88e517acaa2fe36dcd2333c7d3fe00c",
+      "beforeTarget": ", या No-Intro / Redump DAT लोड करें",
+      "beforeTranslationHash": "0b10d5694d4f4dfda1f2a5e0291fca4c908d119c50a64281853b42315ba13661",
+      "afterTarget": ", या No-Intro / Redump DAT को",
+      "afterTranslationHash": "b800c0ab07726dbac28afd470fe0b7b5b62bb72a7b7f1cb4343e1a2185b5b5a4",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa",
+      "locale": "ja",
+      "sourceHash": "02eaa58bfa6c824f83791cb11b32f6eba88e517acaa2fe36dcd2333c7d3fe00c",
+      "beforeTarget": "、または No-Intro / Redump DAT を",
+      "beforeTranslationHash": "eec6c3f9b6f19a6b91fa92cfa8149fc1e4f54f4b692f0059ab0b5bc23c90d49d",
+      "afterTarget": "を開いてください。または No-Intro / Redump DAT を",
+      "afterTranslationHash": "b60b94ddc01496094bf0f9259ae9ad958638787c01bd4c4287752469ece85382",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa",
+      "locale": "fr",
+      "sourceHash": "02eaa58bfa6c824f83791cb11b32f6eba88e517acaa2fe36dcd2333c7d3fe00c",
+      "beforeTarget": ", ou chargez les DAT No-Intro / Redump dans",
+      "beforeTranslationHash": "55f65ee122119fc2dd7ae19b0bfaab6e79e4caab75d52d419bb0b07dcea65d5d",
+      "afterTarget": ", ou chargez les DAT No-Intro / Redump dans la section",
+      "afterTranslationHash": "056f06b34c4ccf3624f854419c40776329fb18e12786d8b22562b3d527bc907b",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa",
+      "locale": "ko",
+      "sourceHash": "02eaa58bfa6c824f83791cb11b32f6eba88e517acaa2fe36dcd2333c7d3fe00c",
+      "beforeTarget": ", 또는 No-Intro / Redump DAT를",
+      "beforeTranslationHash": "2ab692788b9d90a9dbbdfb0d18592c6cea6934e97d4bbbedccbfc04a74e37466",
+      "afterTarget": "를 열거나 No-Intro / Redump DAT를",
+      "afterTranslationHash": "4f6cac07471ddc9bd8afec24c17f59a12b7950b4c8bbacbd8758193f5fffbd8b",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.to-browse-a-catalog-here.8df4394282",
+      "locale": "hi",
+      "sourceHash": "8df4394282e3d7bb88baf4330e2d256bcedbc21011c0c1b69d63e9b626af53f5",
+      "beforeTarget": "में, ताकि यहां कैटलॉग ब्राउज़ किया जा सके।",
+      "beforeTranslationHash": "cd6db5f455e8bbc55ea54d9275dd62f2a9641fedc8d499f80f2b32f813b95d7f",
+      "afterTarget": " में लोड करें, ताकि यहाँ कैटलॉग ब्राउज़ किया जा सके।",
+      "afterTranslationHash": "872ccad108e17518695a6e8a7e9a02352ac489b6256081b55f3c7dce3d8e67de",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.to-browse-a-catalog-here.8df4394282",
+      "locale": "ja",
+      "sourceHash": "8df4394282e3d7bb88baf4330e2d256bcedbc21011c0c1b69d63e9b626af53f5",
+      "beforeTarget": "に読み込んで、ここでカタログを閲覧します。",
+      "beforeTranslationHash": "95d02288fc429f2ea2af9d926fb6f41b72c97158d1bed01fa1ca0a5680355487",
+      "afterTarget": "に読み込むと、ここでカタログを閲覧できます。",
+      "afterTranslationHash": "6c42a360e77c37db82c8636cfcf5c93f84996380da30af5c884d97449caa9b6d",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.platforms-by-era.f61faf3b5f",
+      "locale": "es",
+      "sourceHash": "f61faf3b5fe3fdc0403b20261fbf029a3deec34cca6a9acfe9d7307ea8b7ac97",
+      "beforeTarget": "Las plataformas, por la era",
+      "beforeTranslationHash": "6d8bcc60274dff577c14775f6db41fcabac3a9d5dc9c1ff02b842fe5e9abeb1c",
+      "afterTarget": "Plataformas por época",
+      "afterTranslationHash": "04d3342e3a714aed37f5765baeccc22944e72ad99111b2cca95bd0cda0939dae",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.platforms-by-era.f61faf3b5f",
+      "locale": "zh-Hans",
+      "sourceHash": "f61faf3b5fe3fdc0403b20261fbf029a3deec34cca6a9acfe9d7307ea8b7ac97",
+      "beforeTarget": "基于时代的平台",
+      "beforeTranslationHash": "0eb59c0a712b698c697c4265096bff02531d6743ff3e279b042eeee0c21f870d",
+      "afterTarget": "按时代划分的平台",
+      "afterTranslationHash": "c06775ab90004ddc2354f691402c43d5ebd4360ff3e3ba4c5173b751bd12e035",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.platforms-by-era.f61faf3b5f",
+      "locale": "de",
+      "sourceHash": "f61faf3b5fe3fdc0403b20261fbf029a3deec34cca6a9acfe9d7307ea8b7ac97",
+      "beforeTarget": "Plattformen, nach Ära",
+      "beforeTranslationHash": "da629861b313ee36a2573005dd15e94e7d701fd62390caef7ebd63c407b6bf7b",
+      "afterTarget": "Plattformen nach Ära",
+      "afterTranslationHash": "48d8badee45535eb69592e892a2817c456bd68e2e4384e9b983ecc5149ed1a36",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.platforms-by-era.f61faf3b5f",
+      "locale": "ja",
+      "sourceHash": "f61faf3b5fe3fdc0403b20261fbf029a3deec34cca6a9acfe9d7307ea8b7ac97",
+      "beforeTarget": "プラットフォーム、時代によって",
+      "beforeTranslationHash": "31cb716876dc9ef49f7ae075bbf4473b4d1349c32d70e378cd1106fea403e140",
+      "afterTarget": "時代別プラットフォーム",
+      "afterTranslationHash": "c33a3eabed21c69a68117fcbbcdd998fedbc7d3815e97f9076faed4d60a5d35e",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.platforms-by-era.f61faf3b5f",
+      "locale": "fr",
+      "sourceHash": "f61faf3b5fe3fdc0403b20261fbf029a3deec34cca6a9acfe9d7307ea8b7ac97",
+      "beforeTarget": "Les plateformes, par époque",
+      "beforeTranslationHash": "11cd69e6c929fc32c0f646f78c67d5baf4850fa00fea54e72628e78f52d9cc6e",
+      "afterTarget": "Plateformes par époque",
+      "afterTranslationHash": "8e3814370f25ccbe04145c845cf5fbde1bb6c155fba71fc6604a7815c39a264c",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.platforms-by-era.f61faf3b5f",
+      "locale": "pt-BR",
+      "sourceHash": "f61faf3b5fe3fdc0403b20261fbf029a3deec34cca6a9acfe9d7307ea8b7ac97",
+      "beforeTarget": "As plataformas, por época",
+      "beforeTranslationHash": "3a56413823b52e526d729e70de44fe9eba50749e8835b87eada00df8cd79d2bb",
+      "afterTarget": "Plataformas por época",
+      "afterTranslationHash": "04d3342e3a714aed37f5765baeccc22944e72ad99111b2cca95bd0cda0939dae",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.platforms-by-era.f61faf3b5f",
+      "locale": "ar",
+      "sourceHash": "f61faf3b5fe3fdc0403b20261fbf029a3deec34cca6a9acfe9d7307ea8b7ac97",
+      "beforeTarget": "المنصات، حسب العصر",
+      "beforeTranslationHash": "f26421ad555180ab24a4cc8bc3296b79bd4dc602c816bae1dfe0fee4594365c4",
+      "afterTarget": "المنصات حسب العصر",
+      "afterTranslationHash": "fa6814c0651f3b639b264ee5e200af0b209f2aca8187b5bde503df23c2bd9b89",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.platforms-by-era.f61faf3b5f",
+      "locale": "ko",
+      "sourceHash": "f61faf3b5fe3fdc0403b20261fbf029a3deec34cca6a9acfe9d7307ea8b7ac97",
+      "beforeTarget": "플랫폼, 시대에 따라",
+      "beforeTranslationHash": "99c39bf0abca46c875d7c81b0159acc55cb0387fbe36a81cc1503733973bffc5",
+      "afterTarget": "시대별 플랫폼",
+      "afterTranslationHash": "86778d05fb2f6ae091c9cb558badd676168f21c0ef5d380c22b70426b6edfe56",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.platforms-by-era.f61faf3b5f",
+      "locale": "zh-Hant",
+      "sourceHash": "f61faf3b5fe3fdc0403b20261fbf029a3deec34cca6a9acfe9d7307ea8b7ac97",
+      "beforeTarget": "基於時代的平台",
+      "beforeTranslationHash": "f94933b215dc54eacf4679f2d1095a564da8adc9e956c1388e14696b91588178",
+      "afterTarget": "按時代劃分的平台",
+      "afterTranslationHash": "f575d651a6f1f9912044b9d4b6f882b01d73081396c0dfb213289597887dd9e9",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.platforms-by-era.f61faf3b5f",
+      "locale": "vi",
+      "sourceHash": "f61faf3b5fe3fdc0403b20261fbf029a3deec34cca6a9acfe9d7307ea8b7ac97",
+      "beforeTarget": "Các nền tảng, theo thời đại",
+      "beforeTranslationHash": "4421eaf8353bb4f55d3eb5d04153fd614e1da631d51891891cb8d8bc7b278185",
+      "afterTarget": "Nền tảng theo thời đại",
+      "afterTranslationHash": "77a1d31acdb812e607c39af124b1b0842792b42430a2dde183421b18c6855049",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.platforms-by-era.f61faf3b5f",
+      "locale": "id",
+      "sourceHash": "f61faf3b5fe3fdc0403b20261fbf029a3deec34cca6a9acfe9d7307ea8b7ac97",
+      "beforeTarget": "Platform, oleh era",
+      "beforeTranslationHash": "c7bbf3f9d6b882f8fd18e88ba9e24ce1417d89cb7a79d7eda09bffbfb8f1af5f",
+      "afterTarget": "Platform berdasarkan era",
+      "afterTranslationHash": "8fb06d1088706d17c49368d44f8f4a64dd91ae8f660330dd1e881793669c7573",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.choose-a-generation-you-remember-sea.58d6be3f1f",
+      "locale": "hi",
+      "sourceHash": "58d6be3f1f35990eb280d0f325006bc93be13a92f18985d9172e21e620259a0e",
+      "beforeTarget": "एक पीढ़ी चुनें जिसे आप याद करते हैं, नाम के अनुसार खोजें, फिर इसके कैटलॉग खोलें. प्लेबैक लेबल दिखाता है कि यह स्थापना प्रत्येक सिस्टम को कैसे संभालती है.",
+      "beforeTranslationHash": "b594ea43a5ec0c6e7c95e439603277514b94fcc90e49510f2a49f6ac32c77464",
+      "afterTarget": "अपनी यादों से जुड़ा गेमिंग युग चुनें, नाम से खोजें और उसका कैटलॉग खोलें। प्लेबैक लेबल बताता है कि यह इंस्टॉलेशन हर सिस्टम को कैसे संभालता है।",
+      "afterTranslationHash": "2a40e9335e6e97e98fa6a0f829b6782a240406fb7698da73377d23785ce8e83a",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.build-a-portable-inventory-reuse-exi.da369004a7",
+      "locale": "ko",
+      "sourceHash": "da369004a775dcd05292cb9134cb40b94b7c884be893203b4f826c1f6c4d2549",
+      "beforeTarget": "이식 가능한 인벤토리를 만들고 기존 ES-DE 메타데이터를 재사용하며 DAT 덤프와 정확히 대조하고 안전한 이름 변경을 검토하세요. 검사는 읽기 전용입니다. ROMarr는 계획을 미리 보고 적용한 뒤에만 파일을 변경합니다.",
+      "beforeTranslationHash": "9121121292b910ff5adfdf13ac249c449740ad71b0227d40ac701073b210b8c0",
+      "afterTarget": "다른 시스템으로 옮겨 사용할 수 있는 인벤토리를 만들고, 기존 ES-DE 메타데이터를 재사용하고, DAT 덤프와 정확히 대조하며 안전한 이름 변경을 검토하세요. 검사는 읽기 전용입니다. ROMarr는 계획을 미리 확인하고 적용한 후에만 파일을 변경합니다.",
+      "afterTranslationHash": "a8759b281ee9a090fe576e552008f1440fdfe85d279e67fde82a089055686a3f",
+      "rootDisposition": "accept"
+    },
+    {
+      "sourceId": "ui.build-a-portable-inventory-reuse-exi.da369004a7",
+      "locale": "vi",
+      "sourceHash": "da369004a775dcd05292cb9134cb40b94b7c884be893203b4f826c1f6c4d2549",
+      "beforeTarget": "Tạo kho kiểm kê có thể di chuyển, dùng lại siêu dữ liệu ES-DE hiện có, đối chiếu chính xác các bản dump DAT và xem xét những thay đổi tên an toàn. Quét chỉ đọc. ROMarr chỉ thay đổi tệp sau khi bạn xem trước và áp dụng một kế hoạch.",
+      "beforeTranslationHash": "9fb878470443f75bca2ba72842c96bfa62f572469193e8caef5f56adb74e54f0",
+      "afterTarget": "Tạo bản kiểm kê có thể mang sang hệ thống khác, tái sử dụng siêu dữ liệu ES-DE hiện có, đối chiếu chính xác các bản dump DAT và xem xét những thay đổi tên an toàn. Việc quét chỉ đọc. ROMarr chỉ sửa đổi tệp sau khi bạn xem trước và áp dụng kế hoạch.",
+      "afterTranslationHash": "48e8a5c68b2f46a172471542e5eabfb1fbb36ac6f175989291a77c680032c2a8",
+      "rootDisposition": "refine"
+    },
+    {
+      "sourceId": "ui.build-a-portable-inventory-reuse-exi.da369004a7",
+      "locale": "id",
+      "sourceHash": "da369004a775dcd05292cb9134cb40b94b7c884be893203b4f826c1f6c4d2549",
+      "beforeTarget": "Buat inventaris portabel, gunakan kembali metadata ES-DE yang ada, cocokkan dump DAT secara tepat, dan tinjau perubahan nama yang aman. Pemindaian hanya-baca. ROMarr hanya mengubah file setelah Anda meninjau pratinjau dan menerapkan rencana.",
+      "beforeTranslationHash": "ba1d911be40e705e862b192338d4e779b351a2bcc0d848d1ee1a218e8ec63af4",
+      "afterTarget": "Buat inventaris portabel, gunakan kembali metadata ES-DE yang ada, cocokkan dump DAT secara tepat, dan tinjau perubahan nama yang aman. Pemindaian hanya-baca. ROMarr hanya mengubah file setelah Anda melihat pratinjau dan menerapkan rencana.",
+      "afterTranslationHash": "872667eb96133b3057c6c3be67d79b745e4070858f5a22414fe0195b97b01420",
+      "rootDisposition": "accept"
+    }
+  ],
+  "nativeSpeakerApproval": false
+}

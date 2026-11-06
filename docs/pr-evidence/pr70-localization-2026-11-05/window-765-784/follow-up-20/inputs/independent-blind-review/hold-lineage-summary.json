@@ -1,0 +1,18 @@
+{
+  "allHoldRowsTextFree": true,
+  "artifact": "ROMarrNG PR #70 W765-W784 hash-only hold continuity",
+  "callerlessPositions": [
+    771,
+    774
+  ],
+  "head": "9714d7cf69c687685b4f65cbd9627a56830bab85",
+  "newHoldSources": 2,
+  "newWindowHashOnlyHolds": 24,
+  "priorActiveHashOnlyHolds": 988,
+  "priorContextRows": 86,
+  "priorHoldHashesUnchanged": true,
+  "priorHoldRowsCopiedByteForByte": true,
+  "resultingActiveHashOnlyHolds": 1012,
+  "tree": "c8eb66573f10b2390a02df05033f5133425d5e41",
+  "window": "W765-W784"
+}

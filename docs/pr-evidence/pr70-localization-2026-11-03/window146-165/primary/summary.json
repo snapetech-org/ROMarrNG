@@ -1,0 +1,120 @@
+{
+  "artifact": "ROMarrNG PR #70 W146-W165 primary semantic/context review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "db895a97e9871952a0b952e1d119e32e06cf168d",
+  "tree": "f1edf8319eb3dbd29ac5fe1e279216c5b96ecc6a",
+  "window": "W146-W165",
+  "inputManifestPath": "../input/manifest.json",
+  "inputManifestSha256": "96cd78c8596546bd14656b486abd8cc16c70c809d36c7783a39cc1710cc10884",
+  "inputReviewPath": "../input/review-input.jsonl",
+  "inputReviewSha256": "d649bb321a80fbbf28bf3aae88266db04f4f3e839a4c0f33ab4f84d24d26c83d",
+  "sourceIds": 20,
+  "locales": 12,
+  "cells": 240,
+  "callerPresentSourceCount": 19,
+  "callerAbsentSourceOrdinals": [
+    160
+  ],
+  "dispositions": {
+    "accept-current": 164,
+    "correction": 42,
+    "hold-context": 12,
+    "refinement": 22
+  },
+  "targetChanges": 64,
+  "targetChangesByDisposition": {
+    "correction": 42,
+    "refinement": 22
+  },
+  "targetChangesBySourceOrdinal": {
+    "146": 3,
+    "147": 3,
+    "148": 11,
+    "149": 2,
+    "150": 7,
+    "152": 3,
+    "153": 1,
+    "154": 2,
+    "155": 11,
+    "157": 4,
+    "158": 2,
+    "159": 2,
+    "161": 3,
+    "162": 3,
+    "163": 5,
+    "164": 1,
+    "165": 1
+  },
+  "placeholderChecksPassed": 240,
+  "protectedLiteralChecksPassed": 240,
+  "exactCallerReferenceRows": 228,
+  "holdContextCells": [
+    {
+      "id": "ui.integration-guide.6cfa2d0314",
+      "locale": "es",
+      "sourceOrdinal": 160
+    },
+    {
+      "id": "ui.integration-guide.6cfa2d0314",
+      "locale": "zh-Hans",
+      "sourceOrdinal": 160
+    },
+    {
+      "id": "ui.integration-guide.6cfa2d0314",
+      "locale": "hi",
+      "sourceOrdinal": 160
+    },
+    {
+      "id": "ui.integration-guide.6cfa2d0314",
+      "locale": "de",
+      "sourceOrdinal": 160
+    },
+    {
+      "id": "ui.integration-guide.6cfa2d0314",
+      "locale": "ja",
+      "sourceOrdinal": 160
+    },
+    {
+      "id": "ui.integration-guide.6cfa2d0314",
+      "locale": "fr",
+      "sourceOrdinal": 160
+    },
+    {
+      "id": "ui.integration-guide.6cfa2d0314",
+      "locale": "pt-BR",
+      "sourceOrdinal": 160
+    },
+    {
+      "id": "ui.integration-guide.6cfa2d0314",
+      "locale": "ar",
+      "sourceOrdinal": 160
+    },
+    {
+      "id": "ui.integration-guide.6cfa2d0314",
+      "locale": "ko",
+      "sourceOrdinal": 160
+    },
+    {
+      "id": "ui.integration-guide.6cfa2d0314",
+      "locale": "zh-Hant",
+      "sourceOrdinal": 160
+    },
+    {
+      "id": "ui.integration-guide.6cfa2d0314",
+      "locale": "vi",
+      "sourceOrdinal": 160
+    },
+    {
+      "id": "ui.integration-guide.6cfa2d0314",
+      "locale": "id",
+      "sourceOrdinal": 160
+    }
+  ],
+  "nativeSpeakerApproved": false,
+  "mutations": false,
+  "testsBuildsScansCiBrowser": false,
+  "workflowChanges": false,
+  "releaseOrTagChanges": false,
+  "createdAtUtc": "2026-11-03T04:43:10.046232+00:00"
+}

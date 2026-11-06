@@ -1,0 +1,841 @@
+diff --git a/docs/localization-roadmap.md b/docs/localization-roadmap.md
+index c8995e67..a6a8a74b 100644
+--- a/docs/localization-roadmap.md
++++ b/docs/localization-roadmap.md
+@@ -3,19 +3,19 @@
+ ## What is available
+ 
+ ROMarr's Python service renders the dashboard and public sign-in, invitation,
+-and connection pages. The catalog contains 1,835 app-owned messages under
+-stable IDs. All 22,020 direct target cells are populated across the twelve
+-locales. Of these, 16,188 remain `unverified` because their review provenance is
+-unknown, and 5,832 are marked `draft`. That draft group includes the 5,808 cells
+-from the frozen 484-message source bundle and 24 cells for two newly localized
+-integration messages. No target cells currently fall back to English because
+-they are missing. Latin American Spanish inherits from Spanish, and Canadian
+-French inherits from French.
++and connection pages. The catalog contains 1,836 app-owned messages under
++stable IDs. All 22,032 direct target cells are populated across the twelve
++locales. Of these, 16,176 remain `unverified` because their review provenance is
++unknown, and 5,856 are marked `draft`. That draft group includes the 5,808 cells
++from the frozen 484-message source bundle and 48 cells for four later messages.
++No target cells currently fall back to English because they are missing. Latin
++American Spanish inherits from Spanish, and Canadian French inherits from
++French.
+ 
+ | Locale state | Count | Behavior |
+ | --- | ---: | --- |
+ | English source | 1 | Always selectable |
+-| Direct translations | 12 | Selectable; all 1,835 messages have a target |
++| Direct translations | 12 | Selectable; all 1,836 messages have a target |
+ | Regional fallbacks | 2 | Selectable; inherit from `es` or `fr` |
+ | Draft locales | 0 currently | Hidden; must be complete and reviewed before selection |
+ | Planned translations | 22 | Registered for formatting and future work; not selectable |
+diff --git a/romarr/app.py b/romarr/app.py
+index 1a6067d9..cde31ad0 100644
+--- a/romarr/app.py
++++ b/romarr/app.py
+@@ -4790,7 +4790,11 @@ class ROMarr:
+         if peer is None:
+             return {"ok": False, "error": why}
+         if not str(title or "").strip():
+-            return {"ok": False, "error": "no title"}
++            return {"ok": False, "error": "no title",
++                    "error_template": {
++                        "key": "ui.no-title.8cb9a5c65b",
++                        "values": {},
++                    }}
+         self.store.want(title, platform)
+         self.store.record(Event(
+             kind="wanted", game=title, platform=platform,
+@@ -4854,6 +4858,16 @@ class ROMarr:
+                         "detail_template": err_template}
+ 
+         status = str(body.get("status") or "")
++        detail = str(body.get("detail") or "")
++        detail_template = None
++        if status == "missing":
++            # The status is a fixed protocol verdict. Render ROMarr's local
++            # copy; ignore any peer-authored detail or template for this case.
++            detail = ""
++            detail_template = {
++                "key": "ui.not-in-this-library-the-hash-identif.15bd6cace0",
++                "values": {},
++            }
+         answer = {
+             "ok": status in ("ready", "unverified"),
+             "status": status,
+@@ -4861,8 +4875,10 @@ class ROMarr:
+             "title": entry.name,
+             "platform": entry.platform,
+             "sha1": entry.sha1,
+-            "detail": str(body.get("detail") or ""),
++            "detail": detail,
+         }
++        if detail_template:
++            answer["detail_template"] = detail_template
+         if answer["ok"]:
+             answer["room"] = self.federation.netplay_room(peer.peer_id,
+                                                           entry.sha1)
+diff --git a/romarr/ui-labels.json b/romarr/ui-labels.json
+index fa5d406b..9e6bd2e8 100644
+--- a/romarr/ui-labels.json
++++ b/romarr/ui-labels.json
+@@ -481,7 +481,7 @@
+         "hi": ", ROM रूट के बाहर रखें और उस फ़ोल्डर को हर क्लाइंट पर माउंट करें। ROMarr यहां प्रति प्लेटफ़ॉर्म एक कैटलॉग और डुप्लिकेट हटाई गई गेम कलाकृति रखता है, इसलिए नाम या पथ बदलने पर प्रदाता से दोबारा खोज नहीं होगी।",
+         "de": ", außerhalb des ROM-Stammverzeichnisses, und binden Sie diesen Ordner in jedem Client ein. ROMarr führt hier pro Plattform einen Katalog und deduplizierte Spielegrafiken, sodass eine Umbenennung oder Pfadänderung keine erneute Anbietersuche auslöst.",
+         "ja": "ROMルートの外に配置し、そのフォルダーを各クライアントでマウントします。ROMarrはここにプラットフォームごとの単一カタログと重複を除いたアートワークを保持するため、名前やパスを変更してもプロバイダーへの再照会は発生しません。",
+-        "fr": ", en dehors de la racine ROM, et montez ce dossier sur chaque client. ROMarr maintient un catalogue par plate-forme et des œuvres d'art dédoublées ici, de sorte qu'un changement de nom ou de chemin ne provoque pas une autre recherche de fournisseur.",
++        "fr": ", en dehors de la racine ROM, et montez ce dossier sur chaque client. ROMarr conserve ici un catalogue par plateforme et des illustrations de jeux sans doublons, de sorte qu’un changement de nom ou de chemin ne déclenche pas une nouvelle recherche auprès du fournisseur.",
+         "pt-BR": ", fora da raiz de ROM, e monte essa pasta em cada cliente. ROMarr mantém aqui um catálogo por plataforma e artes de jogos sem duplicatas, então uma renomeação ou mudança de caminho não dispara outra consulta ao provedor.",
+         "ar": "، خارج جذر ROM، ثم صِل هذا المجلد على كل عميل. يحتفظ ROMarr هنا بكتالوج واحد لكل منصة وبصور ألعاب منزوعة التكرار، لذا لا يؤدي تغيير الاسم أو المسار إلى البحث عن مزود مرة أخرى.",
+         "ko": ", ROM 루트 바깥에 두고 각 클라이언트에 해당 폴더를 마운트하세요. ROMarr는 여기에 플랫폼별 카탈로그와 중복 제거된 게임 이미지를 보관하므로 이름이나 경로를 바꿔도 제공자를 다시 조회하지 않습니다.",
+@@ -495,7 +495,7 @@
+         "hi": "45c43e3447423ec12eb9b94836f725412705bbab546b0284b98c6b4755583e28",
+         "de": "fe00764886ee0559e521c8c3bfee272e01ed5cde9b42dfb1d533ed528eb821a8",
+         "ja": "a8bb025cb3a27a2cead7ff8f5a7cee8fd7618e6b0a430944ee7cfb90ac5cf2ea",
+-        "fr": "97baadcd6980f6f7d78ad746844c1aa4405f68652d7c528f24844f14c10d532b",
++        "fr": "e5f76845cbfc5c9f111b64238242c8110f77cfe796419bbe2d6b8f2209a5cbb5",
+         "pt-BR": "50752b7c3dc914009cef115c4bf2c06dd8b3e860465d2607a8134796ff71eef4",
+         "ar": "d2d335b7f4cab88a9ae0c23553fe92e86839ee38b930124ed8cf87dfb4dfaa1f",
+         "ko": "6a6c26c0a5f21b9e6df261933ce4cd98ebfdd5b794fa5a8071d313bfbd030391",
+@@ -19627,7 +19627,7 @@
+         "ar": "لا يوجد معرّف ID في TitleDB",
+         "ko": "TitleDB ID 없음",
+         "zh-Hant": "沒有 TitleDB ID",
+-        "vi": "Không TitleDB ID",
++        "vi": "Không có ID TitleDB",
+         "id": "Tidak ada TitleDB ID"
+       },
+       "translationHashes": {
+@@ -19641,7 +19641,7 @@
+         "ar": "97ae90d4a34ba6abd7cc34964ebcd8e1da11687ac2271fbf13e2a71ea1a2619c",
+         "ko": "d672b18168f4cfdb947ef51a9837b8ebf87de33e22048d5131e5d0f7cee3193d",
+         "zh-Hant": "66d615fd192cd3a1b8d695774139b0847ac2abe2208c3cbf42667d92803baeb0",
+-        "vi": "177127c840d87d5a755e9b21b303446d998cf2a06ca8bfcbad524c127b5d733e",
++        "vi": "1889e6d065d9c7372fce17cd655d7f9460e171d75c9cfd7f6c791ce06af6ea51",
+         "id": "d94bfa6faf50e209400a25c5a180792de06727c6abc0f9c7496ccb60dd7978a3"
+       },
+       "translationStatus": {
+@@ -20549,29 +20549,29 @@
+       "sourceHash": "a0f06fb7bb2c89040d798bd1f4218640adf4759b41a8b7d30059abea521afd39",
+       "translations": {
+         "es": "No hay títulos que coincidan con estos filtros.",
+-        "zh-Hans": "没有标题匹配这些过滤器。",
++        "zh-Hans": "没有符合这些筛选条件的标题。",
+         "hi": "इन फ़िल्टरों के अनुरूप कोई शीर्षक नहीं है।",
+         "de": "Keine Titel entsprechen diesen Filtern.",
+-        "ja": "タイトルはこれらのフィルターと一致しない。",
++        "ja": "これらのフィルターに一致するタイトルはありません。",
+         "fr": "Aucun titre ne correspond à ces filtres.",
+         "pt-BR": "Nenhum título se encaixa nesses filtros.",
+         "ar": "لا تتطابق العناوين مع هذه الفلاتر.",
+         "ko": "제목이 이 필터와 일치하지 않습니다.",
+-        "zh-Hant": "沒有標題匹配這些過濾器。",
++        "zh-Hant": "沒有符合這些篩選條件的標題。",
+         "vi": "Không có tiêu đề phù hợp với các bộ lọc này.",
+         "id": "Tidak ada judul yang sepadan dengan filter ini."
+       },
+       "translationHashes": {
+         "es": "981e787e26489b81a190fd3339a00c2e4b7e2081ebe21285582f9683e38e7609",
+-        "zh-Hans": "418a56da824a098ea3de2f79101aebb8778e04381418774dc4053efe75f867ad",
++        "zh-Hans": "49c83641173c460509d7e387d2d237061e3ea26ac67be7e50450e4502d41e794",
+         "hi": "336e356397a34213075c85be7d651b5e858764bf23fb68143c6bc4e4da2d35e9",
+         "de": "5e8f2191c9e71993d227f985ffd7c292168748f05a5304ff2e93d36a275bf3e0",
+-        "ja": "b6d3b88cdad6b0193da2c526e943885a2deb6fe44d8cb3e3197d325652897fba",
++        "ja": "4e8311756e551334ae95a91c9a8c1eae7174e91b8d1a815f3b526b4dd8528361",
+         "fr": "e36a3e774cd3ac6001f754674157a6527af1e32c000795772418015917966100",
+         "pt-BR": "7abaf8d1ba5fff71da50ee4045ae9f9e286266b2a7fcdc6a1f6c7270764d4355",
+         "ar": "4878279b1316c270e079490eee25141cf7dbe68b6b250d48a40ae250aadf11ec",
+         "ko": "a5c54007342a1b5aeddc86118f07efafb5b35e3147aa386e1f6be634482ebb43",
+-        "zh-Hant": "2046ff3c24682484d155ccfae46d87b0114ea0e7d16fbb188164f5c79ce7c782",
++        "zh-Hant": "cafe6321e79bbc7767cbf55c6a4d18f42591347814eb4a9370d95e2fa0741460",
+         "vi": "5445a6b3774efb72f1fcc95c431b80c32cdfe8278541c037dce8413026db547b",
+         "id": "0002901c7e967ede20dce0865401f867feffb20f6e8508687ea55107b2ac7785"
+       },
+@@ -20800,11 +20800,11 @@
+         "ja": "ライブラリにありません",
+         "fr": "Pas dans la bibliothèque",
+         "pt-BR": "Não na biblioteca",
+-        "ar": "لا في المكتبة",
++        "ar": "غير موجود في المكتبة",
+         "ko": "라이브러리에 없음",
+         "zh-Hant": "不在遊戲媒體庫中",
+-        "vi": "Không phải trong thư viện",
+-        "id": "Tidak di perpustakaan"
++        "vi": "Không có trong thư viện",
++        "id": "Tidak ada di pustaka"
+       },
+       "translationHashes": {
+         "es": "cc8d3b90487b0a3129b19df09e848984128a0bb5dfd9d6b899769a722e3add69",
+@@ -20814,11 +20814,11 @@
+         "ja": "b1c0d005b1a30899abba87d722dba8c139e3a678077e20add7267e74a3f85eaa",
+         "fr": "fbb78b9b9dbcfd4c73ba033deb72d2542fa7490656e8d4612e18a888da7918ec",
+         "pt-BR": "80fb605b60259efe6711377449ff38aa2f91b3801384ee8963e60d7fac9c2189",
+-        "ar": "89cb95c43a76453b3b02586f7f26d827d7f6192617180926d8512be1d92a2fd7",
++        "ar": "694fcdd8914559815eff7f6978ec2f8cd7aa51d2e17519de08e9b17424ab6853",
+         "ko": "7a0d9ccba274328bfbfd97c72f957ba0dbaf3c047a1a1c2ff8ab62ff636618f8",
+         "zh-Hant": "7287e89d1da9f04a6b1d30e77f1190cb06d466d3eb573cb9da8cc51d917d5ee1",
+-        "vi": "aeb6b0fd34f70b8e052e52b4a0e8e75b65271432482b6eb90349e48621c32c19",
+-        "id": "6f1bdabd5c5d88546c427ff90aad736fce5317d455c19564b22c2ad46bebcd42"
++        "vi": "31666be826947c8ad5e2ecf5abc5a35f95aa476bd48742e37ecb2dcb767c0d61",
++        "id": "89b97461360b02b343dd920d17d226397af35691117579a7b8247f1a9b2c176c"
+       },
+       "translationStatus": {
+         "es": "draft",
+@@ -21445,29 +21445,29 @@
+       "sourceHash": "d011904834fe28b25d7a9d9043c048b00e2b6f0ebf162498850f2105696195d6",
+       "translations": {
+         "es": "En este día",
+-        "zh-Hans": "这一天,",
++        "zh-Hans": "这一天",
+         "hi": "इस दिन",
+         "de": "an diesem Tag",
+-        "ja": "この日、",
++        "ja": "この日",
+         "fr": "En ce jour",
+         "pt-BR": "Neste dia",
+         "ar": "في هذا اليوم",
+         "ko": "이 날에",
+-        "zh-Hant": "這一天,",
++        "zh-Hant": "這一天",
+         "vi": "Trong ngày này",
+         "id": "Pada hari ini"
+       },
+       "translationHashes": {
+         "es": "643ee19f5c1e7492f2d156d64a2e301397223d4406d860b22d9e9e6c2edd7272",
+-        "zh-Hans": "9eff819e2d77fad7f1c31a521bdc6d0ebb7a84489ddafc18e0cbb5e430bf3c3f",
++        "zh-Hans": "923b74bc11f8908520991da46cf8e6e05065e87c0620bc43e64203b3bfa8ee55",
+         "hi": "8ede83044a0712770c92cc6788e631db33b0634f71962f459c8631affe520ee4",
+         "de": "90cc79501758cfd84a047230bed193820bddfac65af73ebb66845380f553cb06",
+-        "ja": "cde50125b9cabc18a3779c31824eb943aa3268349671f8580c0dc56b299599ca",
++        "ja": "c2658c1042df742a179a3a3b9672d4f0abd62f0ef11408ea0cb3b2f157b88601",
+         "fr": "c7c0aa2602233538304d08ef4b3109d45ae8029cf0407c39f10885478db4f03c",
+         "pt-BR": "cd3b08f742aa67ff06ce4d82382df3ac878ed52f823aafa1422152b62f22d805",
+         "ar": "5cf29a042f6e77f7dccc661766237774020194fb35f5575686a0ad863d9ff187",
+         "ko": "900c1684e439d668771f2b0f4a76b79baa7fabcf034e56fb95a9d3b4a06a8c8e",
+-        "zh-Hant": "588dd06858b6a321da534eab0a3f5832bf25f471caa4a3874bd6d80dad062cd0",
++        "zh-Hant": "90ff6ae754cb6762be2d3e436cfa06c77a77d64342108145bda06e594bb4af16",
+         "vi": "9f29536430ac68314506d3d2f4b5ee3cb7c56e4660babd866cc276593b3cd3e1",
+         "id": "4bda7c021c2ab538eafabe89044fb30e034e016269a804c493eab9991773d6d4"
+       },
+@@ -21809,7 +21809,7 @@
+       "sourceHash": "636208f8587950df7a309c063bdb973bc221aa53c810889a811ff06f7d9ea8ce",
+       "translations": {
+         "es": "Las conexiones con el resto de la infraestructura son opcionales. Las credenciales están en el archivo de entorno, no aquí: esta página nunca muestra ni guarda secretos. Los indexadores y clientes de descarga tienen sus propias páginas de Configuración; las notificaciones y conexiones de metadatos solo se añaden si decides usarlas.",
+-        "zh-Hans": "与其余服务组件的连接是可选的。凭据保存在环境文件中，而不在此处；此页面绝不会显示或存储任何密钥。索引器和下载客户端各有自己的“设置”页面；只有在您选择使用通知或元数据连接时，才能添加这些连接。",
++        "zh-Hans": "与其余服务组件的连接是可选的。凭据保存在环境文件中，而不在此处；此页面绝不会显示或存储任何机密信息。索引器和下载客户端各有自己的“设置”页面；只有在您选择使用通知或元数据连接时，才能添加这些连接。",
+         "hi": "बाकी सेवा-स्टैक से कनेक्शन वैकल्पिक हैं। क्रेडेंशियल यहां नहीं, बल्कि एनवायरनमेंट फ़ाइल में रहते हैं—यह पेज कभी कोई सीक्रेट दिखाता या संग्रहीत नहीं करता। इंडेक्सर और डाउनलोड क्लाइंट के अपने सेटिंग पेज हैं; नोटिफ़िकेशन और मेटाडेटा कनेक्शन केवल तभी जोड़े जा सकते हैं जब आप उनका उपयोग करना चुनें।",
+         "de": "Verbindungen zum restlichen Stack sind optional. Zugangsdaten stehen in der Umgebungsdatei, nicht hier – diese Seite zeigt oder speichert niemals Geheimnisse. Indexer und Download-Clients haben eigene Einstellungsseiten; Benachrichtigungen und Metadatenverbindungen können Sie nur hinzufügen, wenn Sie diese verwenden möchten.",
+         "ja": "ほかのスタックへの接続は任意です。認証情報はここではなく環境ファイルに保存されます。このページが秘密情報を表示したり保存したりすることはありません。インデクサーとダウンロードクライアントには個別の設定ページがあります。通知やメタデータ接続は、利用すると選択した場合にのみ追加できます。",
+@@ -21817,13 +21817,13 @@
+         "pt-BR": "As conexões com o restante da pilha são opcionais. As credenciais ficam no arquivo de ambiente, não aqui — esta página nunca exibe nem armazena segredos. Indexadores e clientes de download têm páginas próprias de Configurações; notificações e conexões de metadados só podem ser adicionadas se você optar por usá-las.",
+         "ar": "الاتصالات ببقية المنظومة اختيارية. تُحفظ بيانات الاعتماد في ملف البيئة، وليس هنا؛ ولا تعرض هذه الصفحة أي سر أو تخزّنه أبدًا. للمفهرسات وعملاء التنزيل صفحات إعدادات خاصة بهم؛ ولا تُضاف اتصالات الإشعارات والبيانات الوصفية إلا إذا اخترت استخدامها.",
+         "ko": "나머지 스택에 대한 연결은 선택 사항입니다. 자격 증명은 여기가 아니라 환경 파일에 저장되며, 이 페이지는 비밀 정보를 표시하거나 저장하지 않습니다. 인덱서와 다운로드 클라이언트에는 각각 별도의 설정 페이지가 있습니다. 알림 및 메타데이터 연결은 사용하기로 선택한 경우에만 추가할 수 있습니다.",
+-        "zh-Hant": "與堆疊其餘部分的連線為選用功能。憑證存放在環境檔案中，不在此處；此頁面絕不會顯示或儲存任何密鑰。索引器和下載用戶端各有自己的設定頁面；只有在您選擇使用通知或中繼資料連線時，才能新增這些連線。",
++        "zh-Hant": "與堆疊其餘部分的連線為選用功能。憑證存放在環境檔案中，不在此處；此頁面絕不會顯示或儲存任何機密資訊。索引器和下載用戶端各有自己的設定頁面；只有在您選擇使用通知或中繼資料連線時，才能新增這些連線。",
+         "vi": "Các kết nối với phần còn lại của hệ thống là tùy chọn. Thông tin xác thực nằm trong tệp môi trường, không ở đây — trang này không bao giờ hiển thị hoặc lưu bí mật. Bộ lập chỉ mục và client tải xuống có trang Cài đặt riêng; chỉ có thể thêm kết nối thông báo và siêu dữ liệu khi bạn chọn sử dụng chúng.",
+         "id": "Koneksi ke bagian lain dari tumpukan layanan bersifat opsional. Kredensial disimpan dalam file lingkungan, bukan di sini—halaman ini tidak pernah menampilkan atau menyimpan rahasia. Pengindeks dan klien unduhan memiliki halaman Pengaturan masing-masing; koneksi notifikasi dan metadata hanya ditambahkan jika Anda memilih untuk menggunakannya."
+       },
+       "translationHashes": {
+         "es": "aae7c7d427c3a7a041d75cea97f99e1b6907fd72ae4af10bac4934346d741523",
+-        "zh-Hans": "40db9972c12b7ef52da2d9961eceb8eb7eedb0a62c43b2c00dba02cc83859617",
++        "zh-Hans": "ee6912e5cda98f4193dee2ce9d713e9eb7482d290598cdd84cce05c24555dbbf",
+         "hi": "f732b2e0b44bc14feb2baf7dff3ed4284d37af2bfc9d2573813bcbd6590a70eb",
+         "de": "0dab3c5a6ec18e7782aafc6105970e700aa29a8a40ec02ef5c20034480172514",
+         "ja": "d6ac100396fc8568e0f6a1da31224f2b4e0aadbc0969c06a4c787942e33d3cd4",
+@@ -21831,7 +21831,7 @@
+         "pt-BR": "d74043fa4e6104bfa95f8fb48c92b4e16ede3747243f22c66f58d6dd77538972",
+         "ar": "dd0c690a51442e162a0a74f19cc10d6396f7ae50031a1b68a78a46b8163dae10",
+         "ko": "0085a2e35af17ace3c787fc26360d61c8992151d825ae469b15acd6bf324f097",
+-        "zh-Hant": "94b9a3174b6179a183483a6eb42d1ce689c8b03e9e72be2ae9b787ab84203c2a",
++        "zh-Hant": "e2e005cee7ab1dd3073eb58290febda13426998c3ae227eb602ba408eca6b70e",
+         "vi": "856f5260ed5273cc47ddaa8f9d952ac844ca6154151aed6c3cde96a949612a0d",
+         "id": "7a55611e207711b35c670cea856fdfe876c49740c03a7850296f389a9ab5d82f"
+       },
+@@ -44414,28 +44414,28 @@
+         "es": "No se terminó ninguna descarga",
+         "zh-Hans": "没有下载完成",
+         "hi": "कुछ भी खत्म नहीं हुआ",
+-        "de": "Nichts ist fertig",
++        "de": "Nichts wurde abgeschlossen",
+         "ja": "完了したダウンロードはありません",
+         "fr": "Rien n'est terminé",
+-        "pt-BR": "Nada acabou",
++        "pt-BR": "Nada foi concluído",
+         "ar": "لا شيء قد انتهى",
+         "ko": "아무것도 끝나지 않았다",
+-        "zh-Hant": "沒甚麼結束",
+-        "vi": "Không có gì kết thúc",
++        "zh-Hant": "沒有任何項目完成",
++        "vi": "Không có gì được hoàn tất",
+         "id": "Tidak ada yang selesai"
+       },
+       "translationHashes": {
+         "es": "f0f8d0d76ef9f008e27b16c2fd112cb4cd7a79816428ef4015e7150836e64e38",
+         "zh-Hans": "8721549e2f73503f4eb78382948e324c10a7debe4943047ca007c2b37c1d81e1",
+         "hi": "ebf94dda453162aba826f4927e2393348f1254e314859868547bc04ddba776d8",
+-        "de": "55cbdd39bf5219d8759e10afea2c59c8f70923831096b4a266de0008e0bf3ff5",
++        "de": "d78bcd13daae6bdc4906471deacd15f86e6341f39cc64e41d380d16dad17e471",
+         "ja": "c1ef9486d9af9016ea81c04835854bfc9b7e2200d1aa3db5d1c123f9dd81bb6c",
+         "fr": "67da55c4a6f84a7f27d688d7b0d0ec9f83ca1112bba72f43465663f05f54b6d2",
+-        "pt-BR": "ff833976147d7409cc53fede45d34c777ac8dacbef997a616ed4df7dc6c2f245",
++        "pt-BR": "665751719007659283cdb4222a4c5630e24b320e636dbacbb89bd853423cb8e4",
+         "ar": "ca54207531c0a33ac8dd12ae305d9c408b41250215caf8791331f3cbc391f5a4",
+         "ko": "e1e80c6c0d468a165cfe63daf09b0fd1fa7d8af584767bae8d4309df6a1e1fed",
+-        "zh-Hant": "c828611cfa5edf521dbd1f0c708d41a79de5df29c6d1a44f1580906ac97e40e1",
+-        "vi": "9a2acf58bd9f2e3e539b2bc126e05e4e1caa1245d0a53918215a54f067056999",
++        "zh-Hant": "d5a8469dbc363ef092db8073f515570c1e41f212eee1dec4a61c158d91d3e2d8",
++        "vi": "83eb3e1ce9a30ad6ed7575128cf70209b5846674ce08bf08ca8bedeb1c486d7f",
+         "id": "6fbecfc1037e1bd8c7434e5eb413db472017540c420fbdd657ea729373547778"
+       },
+       "translationStatus": {
+@@ -44482,31 +44482,31 @@
+       "sourceHash": "d281ab9dfe6ac1c469663d8afd94818021b006f6a5740d3320d45392c57223a1",
+       "translations": {
+         "es": "No hay juegos solicitados que comparar",
+-        "zh-Hans": "No hay juegos solicitados que comparar",
+-        "hi": "No hay juegos solicitados que comparar",
+-        "de": "No hay juegos solicitados que comparar",
+-        "ja": "No hay juegos solicitados que comparar",
+-        "fr": "No hay juegos solicitados que comparar",
+-        "pt-BR": "No hay juegos solicitados que comparar",
+-        "ar": "No hay juegos solicitados que comparar",
+-        "ko": "No hay juegos solicitados que comparar",
+-        "zh-Hant": "No hay juegos solicitados que comparar",
+-        "vi": "No hay juegos solicitados que comparar",
+-        "id": "No hay juegos solicitados que comparar"
++        "zh-Hans": "没有想要的游戏可供匹配。",
++        "hi": "कोई इच्छित गेम नहीं है, इसलिए मिलान करने के लिए कुछ नहीं है।",
++        "de": "Keine gewünschten Spiele zum Abgleichen.",
++        "ja": "希望するゲームがないため、照合するものがありません。",
++        "fr": "Aucun jeu souhaité à faire correspondre.",
++        "pt-BR": "Não há jogos desejados para comparar.",
++        "ar": "لا توجد ألعاب مطلوبة لمطابقتها.",
++        "ko": "원하는 게임이 없어 일치시킬 항목이 없습니다.",
++        "zh-Hant": "沒有想要的遊戲可供比對。",
++        "vi": "Không có trò chơi nào được yêu cầu để đối chiếu.",
++        "id": "Tidak ada game yang diinginkan untuk dicocokkan."
+       },
+       "translationHashes": {
+         "es": "a3e535b40e81edcddc99679add24e777509338c899c4f46956ca894063acc7ed",
+-        "zh-Hans": "a3e535b40e81edcddc99679add24e777509338c899c4f46956ca894063acc7ed",
+-        "hi": "a3e535b40e81edcddc99679add24e777509338c899c4f46956ca894063acc7ed",
+-        "de": "a3e535b40e81edcddc99679add24e777509338c899c4f46956ca894063acc7ed",
+-        "ja": "a3e535b40e81edcddc99679add24e777509338c899c4f46956ca894063acc7ed",
+-        "fr": "a3e535b40e81edcddc99679add24e777509338c899c4f46956ca894063acc7ed",
+-        "pt-BR": "a3e535b40e81edcddc99679add24e777509338c899c4f46956ca894063acc7ed",
+-        "ar": "a3e535b40e81edcddc99679add24e777509338c899c4f46956ca894063acc7ed",
+-        "ko": "a3e535b40e81edcddc99679add24e777509338c899c4f46956ca894063acc7ed",
+-        "zh-Hant": "a3e535b40e81edcddc99679add24e777509338c899c4f46956ca894063acc7ed",
+-        "vi": "a3e535b40e81edcddc99679add24e777509338c899c4f46956ca894063acc7ed",
+-        "id": "a3e535b40e81edcddc99679add24e777509338c899c4f46956ca894063acc7ed"
++        "zh-Hans": "13bd63d11cca1d6d2e3b41a9d8a896e5284731863061a9cebe38c2000f826b7d",
++        "hi": "adf0fb30bbbea6def9659e1378aa8791f65f47a8cd7fddae07586618007fddd7",
++        "de": "f197c60c6dd7b478911834790bf1cdc26d10853daa473bfb25c69f64e5cf1673",
++        "ja": "eefd67f57f3d5b27ea088f4681911b7c07e030156bebd7c0033f6e7e88c867ee",
++        "fr": "c1801e68a7284c933c8a77fab7466f756020e8bc19c4db288ecc036936565d35",
++        "pt-BR": "e29034e1f07260902f005ee53cb26fae10acf64805e316f621b92e47b5ed6c79",
++        "ar": "a3b6928390af8d743d0f76f1bf75f9ea620806e9960be1de4ac80e2db0797d01",
++        "ko": "d759eb9fd4c8fb6d2dd591da6370ff010fcccfbe6e18fa005644f44879610c8e",
++        "zh-Hant": "6e86de9cd9f7a2fb484e9d8638d2ba45014544f1dfefa75921d32e9742137383",
++        "vi": "56090441a3c0870936e33760541a475b97eab2ff8b7bf57ad05d3b22181d4bb4",
++        "id": "6fecf1b33a2943157aae6c85a199b72bbaacb96f5708974038e5e315c1354d2a"
+       },
+       "translationStatus": {
+         "es": "draft",
+@@ -44589,55 +44589,6 @@
+       "translationStatus": {},
+       "translationReview": {}
+     },
+-    "ui.or-load-no-intro-redump-dats-under.22540d7871": {
+-      "source": "or load No-Intro / Redump DATs under",
+-      "sourceHash": "22540d7871a7b8be53a7a9ec9c3092168915e4daac0be59de43b1e09dd3cbbba",
+-      "translations": {
+-        "es": "o carga los DAT de No-Intro / Redump en",
+-        "zh-Hans": "或将 No-Intro / Redump DAT 加载到",
+-        "hi": "या No-Intro / Redump DAT लोड करने के लिए संग्रह अनुभाग खोलें:",
+-        "de": "oder laden Sie No-Intro- / Redump-DATs unter",
+-        "ja": "または、No-Intro / Redump の DAT を読み込むには",
+-        "fr": "ou chargez les DAT No-Intro / Redump dans",
+-        "pt-BR": "ou carregue os DATs do No-Intro / Redump em",
+-        "ar": "أو حمّل ملفات DAT من No-Intro / Redump ضمن",
+-        "ko": "또는 No-Intro / Redump DAT를 관리하려면 다음을 여세요:",
+-        "zh-Hant": "或將 No-Intro / Redump DAT 載入至",
+-        "vi": "hoặc nạp DAT No-Intro / Redump tại",
+-        "id": "atau muat DAT No-Intro / Redump di"
+-      },
+-      "translationHashes": {
+-        "es": "8b8b0963dcb9d34878c18beb5f9dfe3c52277723f3f5c90d476d1e0cd8b6a871",
+-        "zh-Hans": "a3ca4dfc2fcfe0b98032e01ab026e21ae98477845ef80a99dc0c16e45a887b7c",
+-        "hi": "85c77b8abd3349e37228f49d3e03fab1bce2064b0f0a3f4abe828ff3f2adf755",
+-        "de": "89d8468e0ad85a5e17f656d1d9cd1edee3a942df8a134baf5bfbf1d81b6b4f15",
+-        "ja": "e4e4a252dd1cf3f46224d3dbd673c3f2fe821c2de39c22da1b08319d79be77cf",
+-        "fr": "de97e34233d5c0f93b57f74b4326efb131097f5b83bf51bd0b097c213027e7e2",
+-        "pt-BR": "eff68bdb512c5549e4df987c78177fee1d6b0654f1e491035e0d4bcdaf99d941",
+-        "ar": "60b664796f8649e2203cd705c59e87d1118edd84c43e96c78ef8f2b7c784d4a3",
+-        "ko": "45f0f57f2c602e204465d75d2cb9c2f57aeae11948abe6436aeed5ccbebeeddd",
+-        "zh-Hant": "85ebeb07e0a1902dc1aafddbc9423b37373f7c122703aa713eab916c22e6c917",
+-        "vi": "3e393d21ad39fbc6f63efb8683df14b34c7abcc839af66fb6e848befebad48ff",
+-        "id": "078e722e32ef1dd9d24df477a62fc541a7f938915197bc0c8ac2a35130032b11"
+-      },
+-      "translationStatus": {
+-        "es": "draft",
+-        "zh-Hans": "draft",
+-        "hi": "draft",
+-        "de": "draft",
+-        "ja": "draft",
+-        "fr": "draft",
+-        "pt-BR": "draft",
+-        "ar": "draft",
+-        "ko": "draft",
+-        "zh-Hant": "draft",
+-        "vi": "draft",
+-        "id": "draft"
+-      },
+-      "translationReview": {},
+-      "translationPending": [],
+-      "sourceKind": "ui"
+-    },
+     "ui.outside-regions.eb9121a9b2": {
+       "source": "outside regions",
+       "sourceHash": "eb9121a9b21e27c999528a3d0b9e7c83d5a104dc7a335d27fbd2202b676e835a",
+@@ -51374,12 +51325,12 @@
+         "de": "älter als die neueste aufgeführte Version",
+         "ja": "最新版より古い",
+         "fr": "Plus ancienne que la version la plus récente",
+-        "pt-BR": "Mais velho que a versão mais recente listada",
+-        "ar": "أقدم من أحدث الإصدار المذكور",
++        "pt-BR": "Mais antiga que a versão mais recente listada",
++        "ar": "أقدم من أحدث إصدار مُدرج",
+         "ko": "최신 버전보다 오래된 버전",
+         "zh-Hant": "早於最新列出的版本",
+         "vi": "Cũ hơn phiên bản mới nhất được liệt kê",
+-        "id": "Versi yang lebih tua dari versi terbaru"
++        "id": "Lebih lama dari versi terbaru yang tercantum"
+       },
+       "translationHashes": {
+         "es": "72846b4d5e5880efdf91a61d70df2e90d6bb5367e37f9b854d963553894ba7f6",
+@@ -51388,12 +51339,12 @@
+         "de": "5e6fae20206a97e8da9d021d6110ca278b98e266d022db52731d1f8bbd867552",
+         "ja": "eee23b49250d20b5d411a7d73af8136736358d5055ab39da3148276a0fd64de5",
+         "fr": "f7491294183cb88127d20136d98ae440328d30018ec613a5c46ff49bd331ca4e",
+-        "pt-BR": "d5b11409f5adce9f92b4c80d1232fd51246987f16f25ab3de3d64dc5ffd7baaa",
+-        "ar": "18460c20bd65e833dae3e821fa551d20db8f046faab99514025e41f35673a18b",
++        "pt-BR": "2ca1bd6b6a08068fe6c8bcde3937f60dfcd6807c207d1143f76b08cf48f9657d",
++        "ar": "1085d7044d645a28d0e9745741093e2ad3fef721e22d24ac2700056aa384b77c",
+         "ko": "c07c09e69243a8e8aae9580c2795706571825af7592054be07442ac29f722d7e",
+         "zh-Hant": "a8adb2f3538f04a4dd7cb0307b0f81ef4d0d4fcd04fdc21fc63d0803dbac681b",
+         "vi": "af588fe38e72717881acfb70036b83927ec2c8ec508abf30366f10b7040fd889",
+-        "id": "12493ab050b0137a0fe5c283fe33916c02200c8279ce8d46e2aac6d59ff544d0"
++        "id": "343fd413c4ae6ff57ed8f1747c574daedf21a6b180e97558bed9f6691c513a92"
+       },
+       "translationStatus": {
+         "es": "draft",
+diff --git a/romarr/ui-source-messages.json b/romarr/ui-source-messages.json
+index ea4ff095..a2a7203b 100644
+--- a/romarr/ui-source-messages.json
++++ b/romarr/ui-source-messages.json
+@@ -5,7 +5,7 @@
+       "source": ", or load No-Intro / Redump DATs under",
+       "category": "ui",
+       "locations": [
+-        "romarr/ui.py:2434"
++        "romarr/ui.py:2465"
+       ],
+       "id": "ui.or-load-no-intro-redump-dats-under.02eaa58bfa",
+       "sourceHash": "02eaa58bfa6c824f83791cb11b32f6eba88e517acaa2fe36dcd2333c7d3fe00c",
+@@ -53,7 +53,7 @@
+       "source": ", to browse a catalog here.",
+       "category": "ui",
+       "locations": [
+-        "romarr/ui.py:2434"
++        "romarr/ui.py:2465"
+       ],
+       "id": "ui.to-browse-a-catalog-here.8df4394282",
+       "sourceHash": "8df4394282e3d7bb88baf4330e2d256bcedbc21011c0c1b69d63e9b626af53f5",
+@@ -869,7 +869,7 @@
+       "source": "Browse games",
+       "category": "ui",
+       "locations": [
+-        "romarr/ui.py:2433"
++        "romarr/ui.py:2464"
+       ],
+       "id": "ui.browse-games.cf37299e27",
+       "sourceHash": "cf37299e27fb28ff23ba23bf3b2a143cb84d25b53db94f8e1efbe109fb12ef92",
+@@ -1303,7 +1303,7 @@
+       "source": "Connect an IGDB metadata provider under",
+       "category": "ui",
+       "locations": [
+-        "romarr/ui.py:2434"
++        "romarr/ui.py:2465"
+       ],
+       "id": "ui.connect-an-igdb-metadata-provider-un.94cf3e816e",
+       "sourceHash": "94cf3e816e6548a3bd391749cd1640557a07a7a25b2a2d10ed5c42428bc91cf5",
+@@ -5165,7 +5165,7 @@
+       "source": "ROMarr could not check this source. Check the connection and try again.",
+       "category": "ui-error",
+       "locations": [
+-        "romarr/ui.py:1672"
++        "romarr/ui.py:1901"
+       ],
+       "id": "ui.romarr-could-not-check-this-source-c.a348d0627e",
+       "sourceHash": "a348d0627e421ce9917f94b88b0b5802c960f5256ff4fc881d32f51f531496e0",
+@@ -9658,30 +9658,6 @@
+       ],
+       "dynamicPlaceholders": []
+     },
+-    {
+-      "source": "or load No-Intro / Redump DATs under",
+-      "category": "ui",
+-      "locations": [
+-        "romarr/ui.py:2227"
+-      ],
+-      "id": "ui.or-load-no-intro-redump-dats-under.22540d7871",
+-      "sourceHash": "22540d7871a7b8be53a7a9ec9c3092168915e4daac0be59de43b1e09dd3cbbba",
+-      "pendingLocales": [
+-        "ar",
+-        "de",
+-        "es",
+-        "fr",
+-        "hi",
+-        "id",
+-        "ja",
+-        "ko",
+-        "pt-BR",
+-        "vi",
+-        "zh-Hans",
+-        "zh-Hant"
+-      ],
+-      "dynamicPlaceholders": []
+-    },
+     {
+       "source": "plugin '{slug}' is disabled",
+       "category": "ui-error-template",
+@@ -11733,66 +11709,10 @@
+       "source": "Use {service} for game discovery, game covers, and a shared household request queue.",
+       "category": "ui",
+       "locations": [
+-        "romarr/ui.py:2435",
+-        "romarr/ui.py:4926",
+-        "romarr/ui.py:5332",
+-        "romarr/ui.py:5634"
+-      ],
+-      "id": "ui.use-service-for-game-discovery-game.f3465a1ec2",
+-      "sourceHash": "f3465a1ec21b9db801b49f626be31a2b24a5c2eb388fd779bf461292507f66a9",
+-      "pendingLocales": [
+-        "ar",
+-        "de",
+-        "es",
+-        "fr",
+-        "hi",
+-        "id",
+-        "ja",
+-        "ko",
+-        "pt-BR",
+-        "vi",
+-        "zh-Hans",
+-        "zh-Hant"
+-      ],
+-      "dynamicPlaceholders": [
+-        "service"
+-      ]
+-    },
+-    {
+-      "source": "The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.",
+-      "category": "ui",
+-      "locations": [
+-        "romarr/ui.py:2435",
+-        "romarr/ui.py:4926",
+-        "romarr/ui.py:5332",
+-        "romarr/ui.py:5634"
+-      ],
+-      "id": "ui.the-integration-guide-explains-how-t.59a854ef19",
+-      "sourceHash": "59a854ef194752b1bb429e4bc7f58119cc5e0c97283014ea4da3c7abcacce389",
+-      "pendingLocales": [
+-        "ar",
+-        "de",
+-        "es",
+-        "fr",
+-        "hi",
+-        "id",
+-        "ja",
+-        "ko",
+-        "pt-BR",
+-        "vi",
+-        "zh-Hans",
+-        "zh-Hant"
+-      ],
+-      "dynamicPlaceholders": []
+-    },
+-    {
+-      "source": "Use {service} for game discovery, game covers, and a shared household request queue.",
+-      "category": "ui",
+-      "locations": [
+-        "romarr/ui.py:2435",
+-        "romarr/ui.py:4926",
+-        "romarr/ui.py:5332",
+-        "romarr/ui.py:5634"
++        "romarr/ui.py:2466",
++        "romarr/ui.py:4958",
++        "romarr/ui.py:5364",
++        "romarr/ui.py:5666"
+       ],
+       "id": "ui.use-service-for-game-discovery-game.f3465a1ec2",
+       "sourceHash": "f3465a1ec21b9db801b49f626be31a2b24a5c2eb388fd779bf461292507f66a9",
+@@ -11818,10 +11738,10 @@
+       "source": "The integration guide explains how to connect the services and how ROMarr searches for releases, verifies them, and files games.",
+       "category": "ui",
+       "locations": [
+-        "romarr/ui.py:2435",
+-        "romarr/ui.py:4926",
+-        "romarr/ui.py:5332",
+-        "romarr/ui.py:5634"
++        "romarr/ui.py:2466",
++        "romarr/ui.py:4958",
++        "romarr/ui.py:5364",
++        "romarr/ui.py:5666"
+       ],
+       "id": "ui.the-integration-guide-explains-how-t.59a854ef19",
+       "sourceHash": "59a854ef194752b1bb429e4bc7f58119cc5e0c97283014ea4da3c7abcacce389",
+@@ -11846,7 +11766,7 @@
+       "category": "ui",
+       "locations": [
+         "romarr/lists.py:859-861",
+-        "romarr/ui.py:2754"
++        "romarr/ui.py:2784"
+       ],
+       "id": "ui.no-web-api-and-nothing-written-to-a.fefddf8698",
+       "sourceHash": "fefddf869833664222ac58789630ae2747f217842f1714d5746f1dcb5157980e",
+diff --git a/romarr/ui-source-snapshot.json b/romarr/ui-source-snapshot.json
+index c6e8f3f9..398ea2e1 100644
+--- a/romarr/ui-source-snapshot.json
++++ b/romarr/ui-source-snapshot.json
+@@ -1589,7 +1589,6 @@
+   "ui.on-a-desktop.8aecaac72b": "8aecaac72b0995e40fbfd33cefe8ff2704a057739e71bc514b280660f959ed44",
+   "ui.on-the-pc-you-play-on.b7c3ff4093": "b7c3ff40930602be7ccea61cd7be61edf255e5a87e7b2dac40435dc34c0a863a",
+   "ui.on-platform.351081c667": "351081c667769392372521bd9b3b5f51cbec5223d446627e1b0a8c80e2086714",
+-  "ui.or-load-no-intro-redump-dats-under.22540d7871": "22540d7871a7b8be53a7a9ec9c3092168915e4daac0be59de43b1e09dd3cbbba",
+   "ui.outside-regions.eb9121a9b2": "eb9121a9b21e27c999528a3d0b9e7c83d5a104dc7a335d27fbd2202b676e835a",
+   "ui.owned.f5e6d024c0": "f5e6d024c05c9cc2746a3e127408b91a8b7a7f2a30da0c259bc54265502ddef4",
+   "ui.paste-the-whole-thing-npsso-is-fine.bb8b2104aa": "bb8b2104aa6a28fc6f975dce9d5385eadcf9b72b598152f1f8992da36b7d55f6",
+diff --git a/romarr/ui.py b/romarr/ui.py
+index 0cf909e3..a99731cc 100644
+--- a/romarr/ui.py
++++ b/romarr/ui.py
+@@ -944,6 +944,8 @@ const LOCAL_API_TEMPLATE_KEYS=new Set([
+   'ui.no-indexer-could-be-read.ad531cd423',
+   'ui.no-library-configured.2f7f2b199a',
+   'ui.no-lists-configured.f0f61cd546',
++  'ui.no-title.8cb9a5c65b',
++  'ui.not-in-this-library-the-hash-identif.15bd6cace0',
+   'ui.nothing-finished.cd66a4ec32',
+   'ui.nothing-wanted-nothing-to-match.d281ab9dfe',
+   'ui.retired-blocklisted-dead-download-s.5e329a4393',
+@@ -1235,6 +1237,22 @@ const applyTranslatedLabels=(root,language)=>{
+   if(root.querySelectorAll)elements.push(...root.querySelectorAll('[data-i18n],[data-i18n-key]'));
+   for(const el of elements)applyTranslatedLabel(el,language);
+ };
++const applyTranslatedOptionLabels=(root,language)=>{
++  const elements=[];
++  if(root.nodeType===Node.ELEMENT_NODE&&root.matches?.('option[data-i18n-option-key]'))elements.push(root);
++  if(root.querySelectorAll)elements.push(...root.querySelectorAll('option[data-i18n-option-key]'));
++  for(const el of elements){
++    const source=UI_MESSAGES[el.dataset.i18nOptionKey]?.source;
++    if(typeof source!=='string')continue;
++    const rawCount=el.dataset.i18nOptionCount??'—';
++    const count=Number(rawCount);
++    const renderedCount=Number.isFinite(count)?fmt(count):rawCount;
++    const translated=isTranslated(source,language);
++    el.textContent=`${translateLabel(source,language)} (${renderedCount})`;
++    el.lang=translated?language:'en';
++    el.dir=translated&&ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';
++  }
++};
+ const applyTranslatedTemplates=(root,language)=>{
+   const elements=[];
+   if(root.nodeType===Node.ELEMENT_NODE&&root.matches?.('[data-i18n-template],[data-i18n-template-key]'))elements.push(root);
+@@ -1404,6 +1422,7 @@ const applyInterfaceLanguage=(language=readInterfaceLanguage())=>{
+   document.documentElement.lang=language;
+   document.documentElement.dir=ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';
+   applyTranslatedLabels(document,language);
++  applyTranslatedOptionLabels(document,language);
+   applyTranslatedTemplates(document,language);
+   document.querySelectorAll('[data-i18n-aria-label]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nAriaLabel,'aria-label',language));
+   document.querySelectorAll('[data-i18n-title]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nTitle,'title',language));
+@@ -1926,6 +1945,10 @@ const SOURCE_LABEL={
+   archive:'Archive.org (streams)',
+   flashpoint:'Flashpoint (streams)',
+   cloud:'Catalogued, source unknown'};
++const ownLabel=(labels,value)=>{
++  const key=String(value);
++  return Object.prototype.hasOwnProperty.call(labels,key)?labels[key]:null;
++};
+ let libraryRequest=0;
+ RENDER.library=async(renderEpoch=routeEpoch)=>{
+   if(renderEpoch!==routeEpoch||location.hash!=='#library')return;
+@@ -1992,13 +2015,20 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
+       ${mixed?`<span style="color:var(--dim);font-size:11px">${interfaceTemplateMarkup('ui.count-here.ad5e58f564',{count:fmt(disk)})}</span>`:''}</button>`;
+   }).join('');
+   const f=d.facets||{};
+-  const sel=(key,label,list,fmt)=>{
++  const sel=(key,label,list,optionSourceByValue=null)=>{
+     if(!list||!list.length) return '';
+     const filterName=({genre:'Genre',region:'Region',decade:'Decade',origin:'Origin',source:'Source',sort:'Sort by'})[key]||label;
+     return `<select data-lf="${key}" aria-label="${esc(translateLabel(filterName,readInterfaceLanguage()))}" data-i18n-aria-label="${esc(stableLocalizationKey(filterName)||filterName)}" style="padding:4px 8px;font-size:12px">
+       <option value="" data-i18n-key="${esc(stableLocalizationKey(label)||label)}">${esc(translateLabel(label,readInterfaceLanguage()))}</option>
+-      ${list.map(x=>`<option value="${esc(x.value)}"${LIB[key]===x.value?' selected':''}
+-        >${esc(fmt?fmt(x.value):x.value)} (${num(x.count)})</option>`).join('')}
++      ${list.map(x=>{
++        const optionSource=ownLabel(optionSourceByValue||{},x.value)||'';
++        const optionKey=optionSource?stableLocalizationKey(optionSource):'';
++        const rawCount=String(x.count??'—');
++        const marker=optionKey?` data-i18n-option-key="${esc(optionKey)}" data-i18n-option-count="${esc(rawCount)}"`:'';
++        const optionText=optionSource?translateLabel(optionSource,readInterfaceLanguage()):String(x.value);
++        return `<option value="${esc(x.value)}"${LIB[key]===x.value?' selected':''}${marker}
++          >${esc(optionText)} (${num(x.count)})</option>`;
++      }).join('')}
+     </select>`;
+   };
+   const coverage=f.identified&&d.grand_total
+@@ -2017,7 +2047,7 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
+     </div>
+     ${srcRows.length?`<p class="help" style="margin:8px 0 0">
+       Catalogued entries by source:
+-      ${srcRows.map(x=>`<b>${num(x.count)}</b> ${esc(SOURCE_LABEL[x.value]||x.value)}`)
++      ${srcRows.map(x=>`<b>${num(x.count)}</b> ${esc(ownLabel(SOURCE_LABEL,x.value)??x.value)}`)
+         .join(' · ')}. Source is read from the filename each indexer writes,
+       so anything ROMarr cannot place stays “source unknown” rather than
+       being filed under a guess.</p>`:''}
+@@ -2035,9 +2065,9 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
+       ${sel('region','Any region',f.regions)}
+       ${sel('decade','Any decade',f.decades)}
+       ${(f.origins||[]).length>1?sel('origin','On disk & catalogued',f.origins,
+-        v=>v==='local'?'On disk (plays now)':'Catalogued (needs fetching)'):''}
++        {local:'On disk (plays now)',cloud:'Catalogued (needs fetching)'}):''}
+       ${(f.sources||[]).length>1?sel('source','Any source',f.sources,
+-        v=>SOURCE_LABEL[v]||v):''}
++        SOURCE_LABEL):''}
+       <select data-lf="sort" aria-label="Sort by" data-i18n-aria-label="ui.sort-by.c9129025bd" style="padding:4px 8px;font-size:12px">
+         <option value="" data-i18n="ui.platform-then-name.bb91fdb134"${LIB.sort?'':' selected'}>Platform, then name</option>
+         <option value="name" data-i18n="ui.name-az.7ed9662907"${LIB.sort==='name'?' selected':''}>Name A–Z</option>
+@@ -2529,7 +2559,7 @@ async function renderGameCatalog(){
+         +'<td>'+(Number(game.rating)?'★ '+num(Number(game.rating)/20):'—')+'</td>'
+         +'<td><button data-c-request="'+index+'">Request</button></td></tr>').join('')+'</tbody></table></div>';
+   }else{
+-    resultsMarkup='<div class="empty">'+(data.error?apiMessageMarkup(data.error):'No titles match these filters.')+'</div>';
++    resultsMarkup='<div class="empty">'+(data.error?apiMessageMarkup(data.error):interfaceMarkup('No titles match these filters.'))+'</div>';
+   }
+   const sources='<div class="row" style="margin-bottom:10px">'
+     +(hasIgdb?'<button class="btn '+(source==='igdb'?'':'ghost')+'" data-c-source="igdb">IGDB · covers, genres and ratings</button>':'')
+@@ -2949,7 +2979,7 @@ RENDER.discover=async()=>{
+       <button class="btn ${mine?'ghost':''}" data-mode="web">New releases (web)</button>
+       <span style="flex:1"></span>
+       ${tabs.map(([k,l])=>`<button class="btn ${k===DISC.shelf?'':'ghost'}"
+-        data-shelf="${k}" style="padding:4px 10px;font-size:12px">${l}</button>`).join('')}
++        data-shelf="${k}" style="padding:4px 10px;font-size:12px">${interfaceMarkup(l)}</button>`).join('')}
+     </div>
+     <div id="d-genres" style="margin-bottom:10px"></div>
+     <div id="d-out"><div class="empty">Browsing…</div></div>`;
+@@ -3438,7 +3468,7 @@ async function friendShelf(peerId, opts){
+       body:JSON.stringify({peer_id:FSHELF.peer,title:b.dataset.fwant,
+         platform:b.dataset.fplat})});
+     if(r.ok)toastSourceMessage(r.detail||'added to Wanted -- your indexers will look for it');
+-    else if(r.error)toastAppMessage(r.error);else toastLabel('ui.could-not-add.4c45a2e67f');
++    else if(r.error)toastAppMessage(r.error,r.error_template);else toastLabel('ui.could-not-add.4c45a2e67f');
+   });
+   document.querySelectorAll('[data-fplay]').forEach(b=>b.onclick=async()=>{
+     $('#fs-out').innerHTML='<div class="empty">Comparing dumps…</div>';
+@@ -3477,7 +3507,7 @@ function netplayVerdict(r){
+       ${interfaceTemplateMarkup('ui.compared-on-sha1-sha1-not-the-title.5935055754',{sha1:r.sha1})}</div>`;
+   }
+   return `<div class="${cls}" style="margin-top:12px"><b>${headMarkup}</b>
+-    ${r.detail?`<div style="margin-top:6px">${apiMessageMarkup(r.detail,r.detail_template)}</div>`:''}
++    ${r.detail||r.detail_template?`<div style="margin-top:6px">${apiMessageMarkup(r.detail,r.detail_template)}</div>`:''}
+     ${extra}</div>`;
+ }
+ 
+@@ -3587,7 +3617,7 @@ RENDER.stats=async()=>{
+       <h3>Where the library comes from</h3>
+       ${bar(Object.fromEntries(Object.entries(s.library_sources)
+         .sort((a,b)=>b[1]-a[1])
+-        .map(([k,v])=>[SOURCE_LABEL[k]||k,v])))}
++        .map(([k,v])=>[ownLabel(SOURCE_LABEL,k)??k,v])))}
+       <p class="help">These counts come from rows ROMarr read. Each catalogue is identified by the filename written by its indexer. Rows that match neither are labeled “source unknown” instead of being assigned to the larger catalogue.</p></div>`:''}
+     <div class="card"><h3>Imports by platform</h3>${bar(s.imported_by_platform)}</div>
+     <div class="card"><h3>Grabs by indexer</h3>${bar(s.grabbed_by_indexer)}</div>
+@@ -3707,7 +3737,7 @@ RENDER.patches=async()=>{
+           <td>${esc(p.kind||'')}</td>
+           <td>${esc(v.label||v.version||'—')}</td>
+           <td>${esc(p.status||'')}${p.completeness?' · '+esc(p.completeness):''}</td>
+-          <td>${(v.base||{}).available?'In library':'<span style="color:var(--dim)">Not in library</span>'}</td></tr>`;
++          <td>${(v.base||{}).available?interfaceMarkup('In library'):'<span style="color:var(--dim)">'+interfaceMarkup('Not in library')+'</span>'}</td></tr>`;
+       }).join('')}</tbody></table>`
+       :'<div class="empty">No patch projects match. Add a catalogue in Media Management or drop JSON files into the patch-catalog.d folder.</div>';
+   };
+@@ -4153,7 +4183,7 @@ RENDER.media=()=>settingsPage('Media Management',
+   'Where imported ROMs and the shared metadata catalog live. The ROM path must be the path your library server scans. Completed-download paths are reported by the client per item; compare that exact path before import and add a remote path mapping below when ROMarr sees it somewhere else.',
+   fld('library_path','ROM library root',SETTINGS.library_path)
+   +fld('metadata_path','Shared metadata root',SETTINGS.metadata_path||'')
+-  +`<div class="help" style="margin:-6px 0 14px">Use one ROM root with one folder per platform, such as <code>Emulation/roms/ps2</code> and <code>Emulation/roms/snes</code>; you do not need a separate library entry for each system. With EmuDeck, point this at its <code>Emulation/roms</code> folder, not the wider <code>Emulation</code> directory. Keep shared metadata alongside it at <code>Emulation/metadata</code>, outside the ROM root, and mount that folder on each client. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another provider lookup.</div>`
++  +`<div class="help" style="margin:-6px 0 14px">Use one ROM root with one folder per platform, such as <code>Emulation/roms/ps2</code> and <code>Emulation/roms/snes</code>; you do not need a separate library entry for each system. With EmuDeck, point this at its <code>Emulation/roms</code> folder, not the wider <code>Emulation</code> directory. Keep shared metadata alongside it at <code>Emulation/metadata</code>${interfaceMarkup(', outside the ROM root, and mount that folder on each client. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another provider lookup.')}</div>`
+   +`<fieldset class="settings-group"><legend>Platform folder names</legend>
+     <p class="help" style="margin:4px 0 8px">ROMarr recognizes platform slugs and unambiguous ES-DE system names automatically. Add a mapping only when your existing folder uses another name, such as <code>PS2 Games</code>. Folder names are matched only at the library root.</p>
+     <div id="platform-folder-mappings">${platformFolderRows(SETTINGS.platform_folder_mappings)}</div>
+@@ -4181,7 +4211,7 @@ RENDER.media=()=>settingsPage('Media Management',
+   +`<div class="help" style="margin:-6px 0 12px">Switch IDs and version numbers come from the filename and TitleDB. They classify a likely base game, update or DLC; they do not verify the package bytes. When enabled, only TitleDB identified updates and DLC are routed to the folders below.</div>`
+   +fld('switch_updates_dir','Switch updates folder',SETTINGS.switch_updates_dir||'Updates')
+   +fld('switch_dlc_dir','Switch DLC folder',SETTINGS.switch_dlc_dir||'DLC')
+-  +chk('overwrite_existing','Overwrite an existing file',SETTINGS.overwrite_existing)
++  +chk('overwrite_existing',interfaceMarkup('Overwrite an existing file'),SETTINGS.overwrite_existing)
+   +chk('rescan_after_import','Tell your library server to rescan after an import',SETTINGS.rescan_after_import)
+   +sel('translation_policy','Fan translations in 1G1R sets',
+      [['exclude','Exclude — published dumps only'],
+@@ -4441,10 +4471,7 @@ RENDER.indexers=async()=>{
+ };
+ 
+ RENDER.general=()=>settingsPage('General',
+-  'Optional connections to the rest of the stack. Credentials live in the environment '
+-  +'file, not here — this page never shows or stores a secret. Indexers and download '
+-  +'clients have their own Settings pages; notifications and metadata connections '
+-  +'can be added only when you choose to use them.',
++  interfaceMarkup('Optional connections to the rest of the stack. Credentials live in the environment file, not here — this page never shows or stores a secret. Indexers and download clients have their own Settings pages; notifications and metadata connections can be added only when you choose to use them.'),
+   `<div class="field"><label>Prowlarr</label>
+      <input type="text" value="${esc(SETTINGS._prowlarr_url||'')}" disabled></div>
+    <div class="field"><label>qBittorrent</label>
+@@ -4544,7 +4571,7 @@ RENDER.general=()=>settingsPage('General',
+ RENDER.status=async()=>{
+   const h=await j('/api/v1/system/status');
+   const row=(l,ok,extra='')=>`<tr><td>${l}</td>
+-    <td><span class="dot ${ok?'up':'down'}"></span>${ok?'OK':'Not available'}</td>
++    <td><span class="dot ${ok?'up':'down'}"></span>${interfaceMarkup(ok?'OK':'Not available')}</td>
+     <td style="color:var(--dim)">${apiMessageMarkup(extra)}</td></tr>`;
+   const g=h.ggrequestz||{};
+   $('#page').innerHTML=`<div class="card"><h3>Health</h3><table><tbody>
+@@ -5330,7 +5357,7 @@ RENDER.getstarted=async()=>{
+     +'<div class="grid">'
+     +'<a class="tile" href="#platforms" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Choose a system or era</div><div class="pf">Browse supported platforms, see how they play, and open the matching catalog.</div></a>'
+     +'<a class="tile" href="#manualimport" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">I already have ROMs</div><div class="pf">Import a folder you own and let ROMarr identify and file what is there.</div></a>'
+-    +'<a class="tile" href="#organize" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Organize a library you already have</div><div class="pf">Match DATs, cache shared metadata and artwork, and preview safe renames.</div></a>'
++    +'<a class="tile" href="#organize" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">'+interfaceMarkup('Organize a library you already have')+'</div><div class="pf">Match DATs, cache shared metadata and artwork, and preview safe renames.</div></a>'
+     +'<a class="tile" href="#lists" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Build a request list</div><div class="pf">Browse catalog titles or connect an import list. Requests use your configured sources and client.</div></a>'
+     +'<a class="tile" href="#collections" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Work toward a complete set</div><div class="pf">Load a DAT and see verified titles and collection progress.</div></a>'
+     +'</div>'
+@@ -5352,7 +5379,7 @@ RENDER.getstarted=async()=>{
+        +interfaceMarkup('ui.can-tell-you-what-a-complete-set-is.3fe1fc5db0'))
+     +'</div>'
+ 
+-    +'<div class="card" style="margin-top:16px"><h3>Optional follow-ups</h3>'
++    +'<div class="card" style="margin-top:16px"><h3>'+interfaceMarkup('Optional follow-ups')+'</h3>'
+     +'<p class="help">'+interfaceMarkup('ui.core-search-grabbing-and-filing-do-n.d6115a1a9e')+'</p>'
+     +'<ul class="help">'
+     +'<li>'+interfaceMarkup('ui.dat-checks-and-complete-set-progress.73302e5ba1')+' <a href="#collections">'+interfaceMarkup('ui.collections.9f9feade76')+'</a></li>'
+@@ -5776,7 +5803,7 @@ const organizerApiMessageMarkup=(value,template=null)=>{
+               +(sw.base_title?'<div>'+esc(sw.base_title)+'</div>':'')
+               +'<div class="help" style="margin:3px 0">'+(versionDetails?versionDetails+' · ':'')
+                 +interfaceMarkup(versionStatusLabel[sw.version_status]||versionStatusLabel.unknown)+'</div>'
+-            :'<span class="help">No TitleDB ID</span>';
++            :'<span class="help">'+interfaceMarkup('No TitleDB ID')+'</span>';
+           const art=row.cover_path
+             ?'<img src="/api/v1/organizer/art?identity_id='+encodeURIComponent(row.identity_id||'')+'" alt="" loading="lazy" style="width:42px;height:58px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-inline-end:8px">'
+             :'';

@@ -1,0 +1,271 @@
+{
+  "activeUniqueSourceIds": 479,
+  "catalogInsertionPositionsOneBased": [
+    606,
+    625
+  ],
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogMessageCount": 1836,
+  "cellCount": 240,
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "method": "Select catalog message insertion indices 605 through 624 (zero-based) from exact pinned ui-labels.json message key order; this differs from active source registry sort.",
+  "positions": [
+    605,
+    624
+  ],
+  "selectedSources": [
+    {
+      "activeSourceRank": 172,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 606,
+      "catalogZeroBasedIndex": 605,
+      "position": 605,
+      "registryLocations": [
+        "romarr/ui.py:5502"
+      ],
+      "source": "Likely multi-disc set · review",
+      "sourceId": "ui.likely-multi-disc-set-review.f3a26e13cb",
+      "sourceSha256": "f3a26e13cbef714786db98c00e7bf3071530131e8058090d118ede3cd3ab6c02"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 607,
+      "catalogZeroBasedIndex": 606,
+      "position": 606,
+      "registryLocations": [],
+      "source": "Link copied",
+      "sourceId": "ui.link-copied.d12860c21e",
+      "sourceSha256": "d12860c21e78baa522ac743ecfbd77fb9cf4558e581e0e54afcace23b3ce1849"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 608,
+      "catalogZeroBasedIndex": 607,
+      "position": 607,
+      "registryLocations": [],
+      "source": "List at a URL",
+      "sourceId": "ui.list-at-a-url.68f171a9c9",
+      "sourceSha256": "68f171a9c98ffe11ec36d808fb35d0d3daeb0406555caadc46427c7c8e6ba2bc"
+    },
+    {
+      "activeSourceRank": 174,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 609,
+      "catalogZeroBasedIndex": 608,
+      "position": 608,
+      "registryLocations": [
+        "romarr/ui.py:4239"
+      ],
+      "source": "List sync (hours)",
+      "sourceId": "ui.list-sync-hours.8c392b5fd2",
+      "sourceSha256": "8c392b5fd2e1bb51de0b94b726c35780367af539e1fae48cca4c77b8aff16e58"
+    },
+    {
+      "activeSourceRank": 175,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 610,
+      "catalogZeroBasedIndex": 609,
+      "position": 609,
+      "registryLocations": [
+        "romarr/ui.py:2329"
+      ],
+      "source": "List view",
+      "sourceId": "ui.list-view.5d8c3e1b63",
+      "sourceSha256": "5d8c3e1b635eed6f3475260c63650062958ebd2f2e2cddd8abc59de76bea7f72"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 611,
+      "catalogZeroBasedIndex": 610,
+      "position": 610,
+      "registryLocations": [],
+      "source": "Lists",
+      "sourceId": "ui.lists.308d5a0903",
+      "sourceSha256": "308d5a0903f2c5714ec7774808fc9a67b92c602a01a69b2084b05bdb2f6ae699"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 612,
+      "catalogZeroBasedIndex": 611,
+      "position": 611,
+      "registryLocations": [],
+      "source": "Live log",
+      "sourceId": "ui.live-log.2cfbcb2b85",
+      "sourceSha256": "2cfbcb2b85a95d745d28c32ab393941cf4e1c28390115ffad97b0dde16a3fec1"
+    },
+    {
+      "activeSourceRank": 176,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 613,
+      "catalogZeroBasedIndex": 612,
+      "position": 612,
+      "registryLocations": [
+        "romarr/ui.py:5099"
+      ],
+      "source": "Load a DAT and see verified titles and collection progress.",
+      "sourceId": "ui.load-a-dat-and-see-verified-titles-a.6177c2b17c",
+      "sourceSha256": "6177c2b17c05151b2b5ebaa7f0782d66e3d746a458307fa6e3671c26a12a6a10"
+    },
+    {
+      "activeSourceRank": 177,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 614,
+      "catalogZeroBasedIndex": 613,
+      "position": 613,
+      "registryLocations": [
+        "romarr/ui.py:2328"
+      ],
+      "source": "Loaded DATs · verified dump names",
+      "sourceId": "ui.loaded-dats-verified-dump-names.b8c1ccfba0",
+      "sourceSha256": "b8c1ccfba0eedb01db6377904d88125a49219ad9ad49662937f25e73a24b85b2"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 615,
+      "catalogZeroBasedIndex": 614,
+      "position": 614,
+      "registryLocations": [],
+      "source": "Loaded {cached} of {total} so far",
+      "sourceId": "ui.loaded-cached-of-total-so-far.62330c9573",
+      "sourceSha256": "62330c95739575c364e1d11f5689a2d47d905d58dbd890e07f7694da9665139e"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 616,
+      "catalogZeroBasedIndex": 615,
+      "position": 615,
+      "registryLocations": [],
+      "source": "Loaded {cached} of {total} so far — on disk: {disk} · catalogued elsewhere: {catalogued}",
+      "sourceId": "ui.loaded-cached-of-total-so-far-on-dis.9d33678708",
+      "sourceSha256": "9d33678708c7624b7f6d0c4b899310b79b1aff9ac671ed377c733802c1e72193"
+    },
+    {
+      "activeSourceRank": 178,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 617,
+      "catalogZeroBasedIndex": 616,
+      "position": 616,
+      "registryLocations": [
+        "romarr/ui.py:5428"
+      ],
+      "source": "Loading inventory…",
+      "sourceId": "ui.loading-inventory.98a81c2073",
+      "sourceSha256": "98a81c20730e815ad0c1b184c4c81f0e10410eb022c6ddda70705a0f994b4964"
+    },
+    {
+      "activeSourceRank": 179,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 618,
+      "catalogZeroBasedIndex": 617,
+      "position": 617,
+      "registryLocations": [
+        "romarr/ui.py:5476"
+      ],
+      "source": "Local ES-DE records reused {count}",
+      "sourceId": "ui.local-es-de-records-reused-count.54d131e229",
+      "sourceSha256": "54d131e22995890c9603f7ea846fe7df3594af8b0de64890d3960bfde893dcc7"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 619,
+      "catalogZeroBasedIndex": 618,
+      "position": 618,
+      "registryLocations": [],
+      "source": "Local path",
+      "sourceId": "ui.local-path.e335847f88",
+      "sourceSha256": "e335847f885ededb491cd84ae6511aca468c9be1c6078836a0e6f9466936e556"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 620,
+      "catalogZeroBasedIndex": 619,
+      "position": 619,
+      "registryLocations": [],
+      "source": "Logs",
+      "sourceId": "ui.logs.ea2100dc89",
+      "sourceSha256": "ea2100dc89ae9fe21fa9b08ab1bf18662dca1e53a3eebd7d03afebcaf5d57515"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 621,
+      "catalogZeroBasedIndex": 620,
+      "position": 620,
+      "registryLocations": [],
+      "source": "Lost the password? Set ROMARR_API_KEY in the container’s environment and restart, then sign in with it.",
+      "sourceId": "ui.lost-the-password-set-romarr-api-key.1eb30ebc52",
+      "sourceSha256": "1eb30ebc525e62b8daaaa95a22d7d61fd38b4b9a61cd88a618e0db74e16870b9"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 622,
+      "catalogZeroBasedIndex": 621,
+      "position": 621,
+      "registryLocations": [],
+      "source": "Lower is preferred when two indexers both have a release",
+      "sourceId": "ui.lower-is-preferred-when-two-indexers.b3657d29b1",
+      "sourceSha256": "b3657d29b1a715415df96e9cf33bae13608cbed01c8fc6c6045cfbe34aac7f72"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 623,
+      "catalogZeroBasedIndex": 622,
+      "position": 622,
+      "registryLocations": [],
+      "source": "Magnet File Extension",
+      "sourceId": "ui.magnet-file-extension.375ebd2cea",
+      "sourceSha256": "375ebd2cea283408c65a16e028946f7c35c7ecd8432a1e82e41003a5eecb65c9"
+    },
+    {
+      "activeSourceRank": null,
+      "activeSourceRegistry": false,
+      "catalogOneBasedPosition": 624,
+      "catalogZeroBasedIndex": 623,
+      "position": 623,
+      "registryLocations": [],
+      "source": "Magnets only. Linksnappy adds a torrent stopped, so ROMarr starts it into the account's root folder before it will download anything.",
+      "sourceId": "ui.magnets-only-linksnappy-adds-a-torre.561b2dc8fe",
+      "sourceSha256": "561b2dc8fe5c658559c3c1c73d5317008fe10a4b7858744cd511a4a8937fe9e4"
+    },
+    {
+      "activeSourceRank": 182,
+      "activeSourceRegistry": true,
+      "catalogOneBasedPosition": 625,
+      "catalogZeroBasedIndex": 624,
+      "position": 624,
+      "registryLocations": [
+        "romarr/ui.py:5980"
+      ],
+      "source": "Main navigation",
+      "sourceId": "ui.main-navigation.eb355944b9",
+      "sourceSha256": "eb355944b92d10582856f8aea34b3e319ba465b8aa4c294973cf53f665399a2c"
+    }
+  ],
+  "sourceCount": 20,
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "window": "W605-W624"
+}

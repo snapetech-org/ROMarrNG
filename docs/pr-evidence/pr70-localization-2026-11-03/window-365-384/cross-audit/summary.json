@@ -1,0 +1,146 @@
+{
+  "blindSelectedOverrides": [
+    {
+      "locale": "ar",
+      "position": 367,
+      "reason": "Arabic blind wording explicitly distinguishes base game from generic/basic title types."
+    },
+    {
+      "locale": "pt-BR",
+      "position": 368,
+      "reason": "The one-word infinitive works both as the checkbox action and as the selection-column heading."
+    },
+    {
+      "locale": "ar",
+      "position": 374,
+      "reason": "The blind wording is a more idiomatic failed-save status while retaining the HTTP placeholder."
+    },
+    {
+      "locale": "ja",
+      "position": 374,
+      "reason": "The blind wording states that saving failed in past tense and retains the status placeholder."
+    },
+    {
+      "locale": "ko",
+      "position": 374,
+      "reason": "The blind wording states the failed save naturally and retains the status placeholder."
+    },
+    {
+      "locale": "ar",
+      "position": 375,
+      "reason": "The blind wording cleanly separates the failed-save status from the retry instruction."
+    },
+    {
+      "locale": "ja",
+      "position": 375,
+      "reason": "The blind wording reports a completed save failure, then gives a polite retry instruction."
+    },
+    {
+      "locale": "ko",
+      "position": 375,
+      "reason": "The blind wording reports the completed save failure rather than an ongoing inability."
+    },
+    {
+      "locale": "hi",
+      "position": 377,
+      "reason": "The source is a provider setup guide, not a software installation guide."
+    },
+    {
+      "locale": "vi",
+      "position": 377,
+      "reason": "The source is a provider setup guide; the blind wording avoids implying software installation."
+    },
+    {
+      "locale": "zh-Hans",
+      "position": 377,
+      "reason": "The provider name belongs before the setup-guide label in this natural Chinese title order."
+    },
+    {
+      "locale": "zh-Hant",
+      "position": 377,
+      "reason": "The provider name belongs before the setup-guide label in this natural Traditional Chinese title order."
+    }
+  ],
+  "blindVerifier": "PASS",
+  "cellCount": 240,
+  "head": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "headedBrowserAcceptancePerformed": false,
+  "inputVerifier": "PASS",
+  "liveBranchPullAndTreeAgree": true,
+  "liveHeadRequeried": true,
+  "localeCount": 12,
+  "markupMismatchCount": 0,
+  "nativeSpeakerReviewPerformed": false,
+  "nextBoundaryPosition": 385,
+  "numericTokenMismatchCount": 0,
+  "placeholderMismatchCount": 0,
+  "position368Cells": 12,
+  "position368Confidence": "moderate",
+  "positions": [
+    365,
+    384
+  ],
+  "previousBoundaryPosition": 364,
+  "primaryBlindTargetAgreements": 74,
+  "primaryBlindTargetDisagreements": 166,
+  "primaryVerifier": "PASS",
+  "priorHoldsPreserved": true,
+  "priorHoldsReattestedUnchanged": 288,
+  "protectedLiteralMismatchCount": 0,
+  "pullRequest": 70,
+  "pullRequestUrl": "https://github.com/snapetech-org/ROMarrNG/pull/70",
+  "repository": "snapetech-org/ROMarrNG",
+  "repositoryOrPullRequestMutated": false,
+  "resolutionCounts": {
+    "agreement": 74,
+    "blind_selected": 12,
+    "primary_selected": 154
+  },
+  "selectedDispositionCounts": {
+    "accept-current": 125,
+    "correction": 75,
+    "refinement": 40
+  },
+  "selectedWindowHolds": 0,
+  "sourceCount": 20,
+  "state": "OPEN",
+  "targetDisagreementsByLocale": {
+    "ar": 15,
+    "de": 10,
+    "es": 18,
+    "fr": 13,
+    "hi": 14,
+    "id": 14,
+    "ja": 17,
+    "ko": 15,
+    "pt-BR": 15,
+    "vi": 9,
+    "zh-Hans": 13,
+    "zh-Hant": 13
+  },
+  "targetDisagreementsByPosition": {
+    "365": 8,
+    "366": 7,
+    "367": 11,
+    "368": 1,
+    "369": 12,
+    "370": 10,
+    "371": 12,
+    "372": 10,
+    "373": 12,
+    "374": 6,
+    "375": 7,
+    "376": 3,
+    "377": 11,
+    "378": 10,
+    "379": 9,
+    "380": 9,
+    "381": 9,
+    "382": 8,
+    "383": 8,
+    "384": 3
+  },
+  "testsBuildsScansOrCIExecuted": false,
+  "tree": "3f42d41fe4bbb8edd921ff161e8298ca66038a91",
+  "window": "W365-W384"
+}

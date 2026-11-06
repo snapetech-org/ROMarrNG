@@ -1,0 +1,92 @@
+{
+  "artifact": "ROMarrNG PR #70 caller-follow-up primary runtime/source verification",
+  "head": "e0cb91389334fe534ff44ccfc72cbb2c152a93b4",
+  "tree": "3876dd57816aaf75bb8b1a56a75a5045d216c461",
+  "candidateFreeInputPath": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w226-followup-candidate-free-20261103/input",
+  "candidateFreeInputManifestSha256": "857ff470aac96220722ec2c2317bf7c8db3d0b91714a93cee9fed9c3292f915e",
+  "candidateFreeInputChecksumListSha256": "0de65e3297d73f4688a7582c1f5c9df261c669820e4013b39a506273c1465193",
+  "candidateFreeInputChecksumFiles": [
+    {
+      "path": "PR-attestation.json",
+      "expected": "edc38df8ffbac35f2256f804b65f2d19a222a031fbafde76d57c8a5602a3880b",
+      "actual": "edc38df8ffbac35f2256f804b65f2d19a222a031fbafde76d57c8a5602a3880b",
+      "matches": true
+    },
+    {
+      "path": "README.md",
+      "expected": "751ddd38dad7e588eae5b6226b0f1c3b9c59ec9ef26e6f3e906fcb07e6d7ec74",
+      "actual": "751ddd38dad7e588eae5b6226b0f1c3b9c59ec9ef26e6f3e906fcb07e6d7ec74",
+      "matches": true
+    },
+    {
+      "path": "catalog-file-pins.json",
+      "expected": "feabee21b18c48ad2180ecc2906e81159164b76d5052f63795ffa973021878b3",
+      "actual": "feabee21b18c48ad2180ecc2906e81159164b76d5052f63795ffa973021878b3",
+      "matches": true
+    },
+    {
+      "path": "current-target-cells.jsonl",
+      "expected": "24146e22d5577eda146e0347a3c2223a6b1ce274c018d727063a7d26cfe430a9",
+      "actual": "24146e22d5577eda146e0347a3c2223a6b1ce274c018d727063a7d26cfe430a9",
+      "matches": true
+    },
+    {
+      "path": "localization-runtime-context.json",
+      "expected": "b9c1c9c5fee6747f076dd55774935c3077e051ff0286554a7207710b77ff9f8a",
+      "actual": "b9c1c9c5fee6747f076dd55774935c3077e051ff0286554a7207710b77ff9f8a",
+      "matches": true
+    },
+    {
+      "path": "manifest.json",
+      "expected": "857ff470aac96220722ec2c2317bf7c8db3d0b91714a93cee9fed9c3292f915e",
+      "actual": "857ff470aac96220722ec2c2317bf7c8db3d0b91714a93cee9fed9c3292f915e",
+      "matches": true
+    },
+    {
+      "path": "selection-boundary.jsonl",
+      "expected": "c3600f15c17e1e9bfd790c2d9d684d0ff76ed9a0a971b3a4e14af1022c8843b3",
+      "actual": "c3600f15c17e1e9bfd790c2d9d684d0ff76ed9a0a971b3a4e14af1022c8843b3",
+      "matches": true
+    },
+    {
+      "path": "source-contexts.jsonl",
+      "expected": "3240b5b558a5e69f1ab748c40af4b03fcdf0767ae5c65e9d68867c41967fdeba",
+      "actual": "3240b5b558a5e69f1ab748c40af4b03fcdf0767ae5c65e9d68867c41967fdeba",
+      "matches": true
+    }
+  ],
+  "independentlyVerifiedSourceFiles": {
+    "romarr/app.py": {
+      "sha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+      "expectedSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+      "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+      "expectedGitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd",
+      "matches": true
+    },
+    "romarr/federation.py": {
+      "sha256": "7c27cc8b765bc2d3c9c4a8fe123a2eee5fa629592319aebf16ea542a204ca8a2",
+      "expectedSha256": "7c27cc8b765bc2d3c9c4a8fe123a2eee5fa629592319aebf16ea542a204ca8a2",
+      "gitBlob": "ec81b84cb9ca8f20f2ec0fcf6049fa87ea6bbc77",
+      "expectedGitBlob": "ec81b84cb9ca8f20f2ec0fcf6049fa87ea6bbc77",
+      "matches": true
+    },
+    "romarr/ui.py": {
+      "sha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+      "expectedSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "expectedGitBlob": "a99731cc16d32a6e7385108d07de057097bda722",
+      "matches": true
+    }
+  },
+  "sourceContextReferences": 10,
+  "runtimeContextBlocks": 7,
+  "sourceAndRuntimeContextVerification": "PASS",
+  "contextVerificationErrors": [],
+  "runtimeFindingsByPosition": {
+    "226": "romarr/app.py:4781–4797 returns the fixed “no title” error with the local template key. romarr/ui.py:943–957 allowlists that local message; the template renderer uses the app-owned catalog. The friend-want UI forwards the template to its toast path. This is a product-owned error, not peer text.",
+    "232": "romarr/federation.py:563–611 defines “missing” when the exact game hash is absent and describes the dump to acquire. romarr/app.py:4861–4881 discards peer detail for status “missing” and attaches the local template key; romarr/ui.py:1035–1054 renders untemplated external messages as escaped opaque text. The 12 targets cover the fixed local detail only.",
+    "237": "romarr/ui.py:2018–2030 maps the origin option values local/cloud only to app-owned labels; option values and counts remain separate. Lines 2067–2069 map local to “On disk (plays now)” and cloud to “Catalogued (needs fetching).” Lines 1240–1254 refresh the explicit localized option label and retain its count.",
+    "241": "romarr/ui.py:2464–2466 assembles three translated text fragments around a Metadata anchor and a Collections anchor. interfaceMarkup translates each fragment separately; interfacePhraseSpace inserts a space except for Japanese and Chinese. The Collections link is emitted after this source fragment, so languages that need a postposition or reordered link cannot form a natural complete phrase at this boundary."
+  },
+  "scopeBoundary": "Reviewed only candidate-free current target cells and exact-head source/caller/runtime context. No prior W226 primary, blind, cross-audit, root, application, or other translation recommendation was opened."
+}

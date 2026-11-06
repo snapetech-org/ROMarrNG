@@ -1,0 +1,138 @@
+{
+  "applyPlanScope": "correction/refinement cells only; accept-current and hold cells omitted; no release action",
+  "head": "6db0b917343fc9fb605f8a4ecfbf9b4c21cebd1b",
+  "nativeSpeakerApproval": false,
+  "primaryCrossComparison": {
+    "cellsWithAnyDifference": 224,
+    "differentTargets": 194,
+    "dispositionMatches": 1000,
+    "exactDispositionAndTargetMatches": 976,
+    "holdsAgreed": 408,
+    "sameTargetDifferentDisposition": 30,
+    "targetMatches": 1006
+  },
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "repositoryOrPullRequestEdited": false,
+  "rootChangeCount": 238,
+  "rootDispositionCounts": {
+    "accept-current": 554,
+    "correction": 181,
+    "hold": 408,
+    "refinement": 57
+  },
+  "rootDispositionCountsByLocale": {
+    "ar": {
+      "accept-current": 47,
+      "correction": 15,
+      "hold": 34,
+      "refinement": 4
+    },
+    "de": {
+      "accept-current": 46,
+      "correction": 15,
+      "hold": 34,
+      "refinement": 5
+    },
+    "es": {
+      "accept-current": 43,
+      "correction": 17,
+      "hold": 34,
+      "refinement": 6
+    },
+    "fr": {
+      "accept-current": 47,
+      "correction": 16,
+      "hold": 34,
+      "refinement": 3
+    },
+    "hi": {
+      "accept-current": 47,
+      "correction": 12,
+      "hold": 34,
+      "refinement": 7
+    },
+    "id": {
+      "accept-current": 49,
+      "correction": 11,
+      "hold": 34,
+      "refinement": 6
+    },
+    "ja": {
+      "accept-current": 48,
+      "correction": 16,
+      "hold": 34,
+      "refinement": 2
+    },
+    "ko": {
+      "accept-current": 36,
+      "correction": 23,
+      "hold": 34,
+      "refinement": 7
+    },
+    "pt-BR": {
+      "accept-current": 46,
+      "correction": 16,
+      "hold": 34,
+      "refinement": 4
+    },
+    "vi": {
+      "accept-current": 53,
+      "correction": 10,
+      "hold": 34,
+      "refinement": 3
+    },
+    "zh-Hans": {
+      "accept-current": 49,
+      "correction": 13,
+      "hold": 34,
+      "refinement": 4
+    },
+    "zh-Hant": {
+      "accept-current": 43,
+      "correction": 17,
+      "hold": 34,
+      "refinement": 6
+    }
+  },
+  "rootHoldSourceCount": 34,
+  "rootResolutionSources": {
+    "cross-review": 27,
+    "primary": 197
+  },
+  "selectedRange": {
+    "cellCount": 1200,
+    "localeCount": 12,
+    "localeOrder": [
+      "es",
+      "zh-Hans",
+      "hi",
+      "de",
+      "ja",
+      "fr",
+      "pt-BR",
+      "ar",
+      "ko",
+      "zh-Hant",
+      "vi",
+      "id"
+    ],
+    "positions": [
+      0,
+      99
+    ],
+    "sourceCount": 100,
+    "sourceOrdinals": [
+      1,
+      105
+    ]
+  },
+  "structuralMismatches": {
+    "markup": 0,
+    "placeholders": 0,
+    "protectedLiterals": 0,
+    "versionLiterals": 0
+  },
+  "testsBuildsScansBrowserCiOrWorkflowChanges": false,
+  "tree": "bfb778ba77849174a4670a70883c812183506b43"
+}

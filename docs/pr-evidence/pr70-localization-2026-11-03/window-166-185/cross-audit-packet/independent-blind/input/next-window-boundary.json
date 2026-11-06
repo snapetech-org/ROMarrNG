@@ -1,0 +1,443 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "livePrAtBuild": {
+    "state": "open",
+    "draft": true,
+    "branch": "task/localization-translation-review-20261030",
+    "head": "5e45ce90babf3cf385fbb9775e70d7e8fcc6a783",
+    "tree": "580de0b2db5030101c47a81fbd8a23489e993f75",
+    "base": "main",
+    "updatedAt": "2026-11-03T05:22:16Z",
+    "url": "https://github.com/snapetech-org/ROMarrNG/pull/70"
+  },
+  "sourceBundlePath": "localization/source-bundles/20261101-connect-instructions.json",
+  "sourceBundleSha256": "a6f047ba685db67ba51fe5fda0e20f6f83b84cdc94f303a68f648bc6540fe7a8",
+  "sourceBundleManifestHash": "4fa8c0401f646bbfa9049fade543c7ead2a97e645990a8d962d3ed7039343996",
+  "priorReviewedWindow": {
+    "inputSelectionPath": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w146-165-20261103/input/selection.json",
+    "inputSelectionSha256": "d997f97b5d4bf1acef55f3840c6ce730c3f3d4fe8aab9d37e0b756174fe9e40c",
+    "primaryLedgerSha256": "e6d04b143e06df5b0cf776281bb17d5fbe6e8b69ec13256d0ed903352215a3a4",
+    "primaryManifestSha256": "d1088966d8cc79c97414ef78169a7a635530c03b36d59bae25d0b335507ae915",
+    "head": "db895a97e9871952a0b952e1d119e32e06cf168d",
+    "tree": "f1edf8319eb3dbd29ac5fe1e279216c5b96ecc6a",
+    "firstOrdinal": 146,
+    "lastOrdinal": 165
+  },
+  "thisWindow": {
+    "firstSourceOrdinal": 166,
+    "lastSourceOrdinal": 185,
+    "sourceCount": 20,
+    "cellCount": 240
+  },
+  "nextWindow": {
+    "firstSourceOrdinal": 186,
+    "lastSourceOrdinal": 205,
+    "sourceCount": 20,
+    "cellCount": 240,
+    "sourceIdsAndPins": [
+      {
+        "sourceOrdinal": 186,
+        "id": "ui.main-navigation.eb355944b9",
+        "source": "Main navigation",
+        "sourceSha256": "eb355944b92d10582856f8aea34b3e319ba465b8aa4c294973cf53f665399a2c",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 187,
+        "id": "ui.manifest-path-count-linked-file.253c71a38f",
+        "source": "Manifest {path} · {count} linked file",
+        "sourceSha256": "253c71a38f896987e48b6f93ede548ccc016f97dffeb58ec23d26b5ec5bc1953",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 188,
+        "id": "ui.manual-mapping-confirmed.bc63310ebc",
+        "source": "manual mapping confirmed",
+        "sourceSha256": "bc63310ebc51e0edaadeaaaf1e4dc127713634a5a075a8d5e94f19242a820b3a",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 189,
+        "id": "ui.manually-confirmed-by-the-library-ow.5b75fab860",
+        "source": "Manually confirmed by the library owner.",
+        "sourceSha256": "5b75fab8606953804c43cbaccd24f6f2496a24aece688946994c7a74636d5483",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 190,
+        "id": "ui.manually-confirmed.9b66efab12",
+        "source": "Manually confirmed",
+        "sourceSha256": "9b66efab12024e48bf0614d34b730a43252b1354287573c34ef8e07b71eab45a",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 191,
+        "id": "ui.match-dats-cache-shared-metadata-and.1454c1af0c",
+        "source": "Match DATs, cache shared metadata and artwork, and preview safe renames.",
+        "sourceSha256": "1454c1af0caf22766a11c0b98d0c1483fbdccfa19c485164dadeb9059ff1f3d1",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 192,
+        "id": "ui.maximum-size-mb.02998adaa9",
+        "source": "Maximum size (MB)",
+        "sourceSha256": "02998adaa9f35753f72dbf661e2d0807feccc21b76ee19b7c03fe1c1fd4e5bef",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 193,
+        "id": "ui.media-files-follow-rom-names-and-fol.52c3259775",
+        "source": ". Media files follow ROM names and folders, so artwork remains matched when clients mount the same library at different paths.",
+        "sourceSha256": "52c3259775f1173bcffdbb64eb84371f51fa18f4268a5e22fcf7c1bf807507d5",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 194,
+        "id": "ui.metadata-provider-title-suggestion-c.f44517c58a",
+        "source": "Metadata provider title suggestion; confirm before renaming",
+        "sourceSha256": "f44517c58aec183e756d9236b9829c326ae70ec823bf00ead74c8687135c44d2",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 195,
+        "id": "ui.metadata-root-not-configured.d22feb8b9c",
+        "source": "metadata root not configured",
+        "sourceSha256": "d22feb8b9caa97136225b1c05046853fc5ccc08bf0b21e926c5f8aeb3de29a4d",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 196,
+        "id": "ui.minimum-seeders.a78f3d2116",
+        "source": "Minimum seeders",
+        "sourceSha256": "a78f3d21169ba99d3ca34fb9fed030e3d78261fd3758c4716f296c7d4a1b315e",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 197,
+        "id": "ui.missing-required-field-labels.cd47426c9f",
+        "source": "missing required field: {labels}",
+        "sourceSha256": "cd47426c9f1646583bdc04183bf5aab092d33897b3056b1792441868a8ae286b",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 198,
+        "id": "ui.moonlight-pairing-cannot-be-automate.e1a9d014f9",
+        "source": "Moonlight pairing cannot be automated. The PIN is created by your Moonlight client, on your device -- no host API can produce it or skip it. Start pairing in Moonlight, read the PIN it shows you, and type it here.",
+        "sourceSha256": "e1a9d014f9e91246a933e83539213339eb3167c2e061e968133d6b2ed41da063",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 199,
+        "id": "ui.mount-it-on-each-client-and-point-es.357a7ec8cd",
+        "source": ". Mount it on each client and point ES-DE at its shared gamelists and media folders.",
+        "sourceSha256": "357a7ec8cd02a1f6453fb2e41939c04c1dafa28cc4aed057e6335f3c6f896069",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 200,
+        "id": "ui.mount-it-on-each-client-and-point-es.a021b4cc73",
+        "source": "Mount it on each client and point ES-DE at its shared gamelists and media folders.",
+        "sourceSha256": "a021b4cc73a632dac21b1ca25ef6a1bea8fc45473de69376569501417b5e785b",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 201,
+        "id": "ui.multi-disc-set-is-grouped-for-metada.86db33ad47",
+        "source": "Multi-disc set is grouped for metadata; its disc files stay together",
+        "sourceSha256": "86db33ad47d9baa6436ee1e7c92eb0b1386c5423f8d30e2b22df2555a3f0dc05",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 202,
+        "id": "ui.multiplayer.563370a7b0",
+        "source": "Multiplayer",
+        "sourceSha256": "563370a7b0ef8fea32b1e01b441b507bcd6bae0b924205512c30c54ac1beca62",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 203,
+        "id": "ui.name-answered-http-status-code.2a5471f26b",
+        "source": "{name} answered HTTP {status_code}",
+        "sourceSha256": "2a5471f26b949094f9d39c0c8a1c8d2b10443df47e71bc876c4e198365c29536",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 204,
+        "id": "ui.name-refused-the-credential-they-may.dfa9c11bed",
+        "source": "{name} refused the credential -- they may have removed you, or not confirmed you yet",
+        "sourceSha256": "dfa9c11bed6a4adef2def54ad593587c9f2ea9b6371491c481a5d5a6e5dee7fa",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      },
+      {
+        "sourceOrdinal": 205,
+        "id": "ui.name-sent-something-that-was-not-jso.4b46f86ff4",
+        "source": "{name} sent something that was not JSON",
+        "sourceSha256": "4b46f86ff4cbb0ec40a502b910293e5406669ab2759747946e455e3d627c17ae",
+        "translationPendingLocales": [
+          "ar",
+          "de",
+          "es",
+          "fr",
+          "hi",
+          "id",
+          "ja",
+          "ko",
+          "pt-BR",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ]
+      }
+    ]
+  },
+  "selectionRule": "Continue the source-bundle queue contiguously after W146-W165; next window begins at ordinal 186.",
+  "candidateFree": true
+}

@@ -1,0 +1,16 @@
+{
+  "predecessorCandidateFreeHead": "c146189f29db8fbd77d68dff0c33a0ab59a6b601",
+  "currentHead": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+  "currentTree": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d",
+  "reattestedCellCount": 336,
+  "windowCounts": {
+    "W245-W264": 72,
+    "W265-W284": 168,
+    "W285-W304": 24,
+    "W325-W344": 24,
+    "W405-W424": 48
+  },
+  "allSourcesAndSelectionPositionsMatchCurrentSnapshot": true,
+  "allCurrentTargetHashesMatchPriorHoldEvidence": true,
+  "currentTargetChangedCells": 0
+}

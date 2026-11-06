@@ -1,0 +1,91 @@
+{
+  "artifact": "ROMarrNG PR #70 W685-W704 product application post-commit readback",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W685-W704",
+  "inputReviewHead": "43d2858744ef20cd58462643fed534ac61d2ffad",
+  "inputReviewTree": "73e8f50d65cb611def996b01bab0b00628b65860",
+  "productCommit": "a26feabfcae338207fae3d9c682425ab9c0d4226",
+  "productTree": "b0f61607d03924a6e4bff9acebfe9d1dd7af6e8a",
+  "commitParent": "43d2858744ef20cd58462643fed534ac61d2ffad",
+  "changedCatalogPath": "romarr/ui-labels.json",
+  "changedCellCount": 7,
+  "expectedChangedCellCount": 7,
+  "catalogKeyOrderPreserved": true,
+  "allOtherCatalogCellsUnchanged": true,
+  "all12DirectLocalesHave1836NonemptyMessages": true,
+  "localeCount": 12,
+  "messageCountPerLocale": 1836,
+  "catalogSha256After": "bd253a48c1708d7053f3777155eb9f5baa77dddb8f2851eb21ec3e9ea816e664",
+  "targetReadback": [
+    {
+      "sourceId": "ui.no-romarr-on-this-device-copy-the-li.2d22717ea8",
+      "position": 693,
+      "locale": "fr",
+      "beforeSha256": "c457c87d6ff6082b205a0a890616d17db451d2311d777d940e741eb54507dc01",
+      "after": "Pas de ROMarr sur cet appareil ? Copiez le lien et collez-le dans Amis → J’ai une invitation sur votre propre serveur.",
+      "afterSha256": "16f0e8e0a045f1eec10b0a2365a35d455afd955bd3043a6cf5315976f4bb22d2",
+      "rootDisposition": "correction"
+    },
+    {
+      "sourceId": "ui.no-answer.a000b95555",
+      "position": 697,
+      "locale": "vi",
+      "beforeSha256": "ff6a61267ae71965707db1b23b6a5faa7439c9dc077107cf33dc1d2a69f20c2c",
+      "after": "Không có câu trả lời.",
+      "afterSha256": "7255f5890f37bb528b7a2bb40b71f9faa46b2ff8c4f75ed2c35e79dd8f2f726c",
+      "rootDisposition": "refinement"
+    },
+    {
+      "sourceId": "ui.no-connections-yet.8697571e96",
+      "position": 701,
+      "locale": "ar",
+      "beforeSha256": "cb753749ce55d63277f764604285d268abaa19b844e86b793ac9641438bfa1dc",
+      "after": "لا توجد اتصالات بعد",
+      "afterSha256": "b6badf089c62d6feea109a7b592d14a5574ee3e557747cb004f201d01fcd5e4c",
+      "rootDisposition": "correction"
+    },
+    {
+      "sourceId": "ui.no-connections-yet.8697571e96",
+      "position": 701,
+      "locale": "vi",
+      "beforeSha256": "f3743a06ac9e0f38807f709862ad41ac036783cc2ac5f51ad1991642a3c45acf",
+      "after": "Chưa có kết nối nào",
+      "afterSha256": "41d14c2fe52341902655a6856171b67a93a7b11cca12aa191fb38d3b2b2adc1f",
+      "rootDisposition": "correction"
+    },
+    {
+      "sourceId": "ui.no-connections-yet.8697571e96",
+      "position": 701,
+      "locale": "zh-Hans",
+      "beforeSha256": "93ae902da0d34f7562370bb02768c9549c3d27b9ccbb753771891b8361af227e",
+      "after": "尚未添加任何连接",
+      "afterSha256": "0984f166d41fd84cd65cfaafac54a1ce3b2543578e2c90ce33bc4446c9d6897e",
+      "rootDisposition": "correction"
+    },
+    {
+      "sourceId": "ui.no-connections-yet.8697571e96",
+      "position": 701,
+      "locale": "zh-Hant",
+      "beforeSha256": "dc9b7b73299f53c02b8dc48f5f4227e839dc3cd2e4e99a8b1560872c0b43d7c3",
+      "after": "尚未新增任何連線",
+      "afterSha256": "c868f3dc9145184a2d9890b2190dcf10ed07aeb77456b3809de26ce1ca9124c3",
+      "rootDisposition": "correction"
+    },
+    {
+      "sourceId": "ui.no-direct-indexers-are-configured-en.2b1068cf98",
+      "position": 704,
+      "locale": "id",
+      "beforeSha256": "18d19c5191c3f3c5415bea4fd7a8e41ace60aa079c0e5d9d6351a7bfdd16fa35",
+      "after": "Tidak ada pengindeks langsung yang dikonfigurasi. Pengindeks Prowlarr yang aktif tercantum di bawah.",
+      "afterSha256": "4fdcc20fc779453474fcd79193701fa08e638eab084d396ca83d5fe549a5ac2a",
+      "rootDisposition": "refinement"
+    }
+  ],
+  "diffNames": [
+    "romarr/ui-labels.json"
+  ],
+  "worktreeClean": true,
+  "nativeSpeakerApproval": false,
+  "headedBrowserReviewPerformed": false
+}

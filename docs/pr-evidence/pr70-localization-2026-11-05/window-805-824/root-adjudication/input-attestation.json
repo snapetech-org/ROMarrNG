@@ -1,0 +1,23 @@
+{
+  "activeHashOnlyHolds": 1060,
+  "artifact": "ROMarrNG PR #70 W805-W824 root-adjudication input attestation",
+  "blindChecksumListSha256": "f911e2c6fd9b0f07c4924c04cf78d8de4e8c238f4398f05beb7aded69c2c921c",
+  "candidateFreeCellCount": 240,
+  "candidateFreeInputChecksumListSha256": "503fed84d5932f6daffc3eea87052b904729c11634bad4ce0d0f59a04ed32abb",
+  "candidateFreeOuterChecksumListSha256": "cf34d5b87ae6e06aa09152a09a87da51025c40e47ed2e18d2237c666e912b8ba",
+  "exactHead": "551cccd03e0acdce208ce11f571378c1dcdfb805",
+  "exactTree": "d77f32ac8ec0ab53200d04819869a2e99c6de73c",
+  "inputCatalogPath": "romarr/ui-labels.json",
+  "inputCatalogSha256": "4645d70334720e4f806242e567d39ab001ed3053a25d137b888bf99253431811",
+  "integratedCrossCellCount": 240,
+  "integratedCrossChecksumListSha256": "f54663a290e6554f39ef5b63616299be00f34d635ab664c101019cf1db1e0b12",
+  "integratedCrossInputPacketChecksumsSha256": "097391176cd5b083e2ad470f8334f986affe7af630ed910e31d155d72f05a961",
+  "lowConfidenceLanguageHoldCount": 10,
+  "nativeSpeakerApproval": false,
+  "primaryChecksumListSha256": "0a6326a038b3f45bc463dc9924887a6346ee90257c92cbdf198c208f4c7ad7fd",
+  "productApplicationPerformed": false,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "selectedTargetCount": 13,
+  "window": "W805-W824"
+}

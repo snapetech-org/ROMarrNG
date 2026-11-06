@@ -1,0 +1,26 @@
+{
+  "blindCandidateFreePinsMatch": true,
+  "blindChecksumIndexSha256": "daa7bfe85d1c14abbab87c1594aff107ed4d50dfc545baae230cf4d1f7d5def1",
+  "blindOwnChecksumsVerified": true,
+  "blindSummarySha256": "70fbede28c4da34dfce932ae890bbd67165bb933d3998086b9a9b95d0fe34d93",
+  "branch": "task/localization-translation-review-20261030",
+  "candidateFreeCellsSha256": "7e2a7297cfd31d0b46f1f572afb86e4a92d81bb32796025f62fbfc5c3076beeb",
+  "candidateFreeChecksumIndexSha256": "fe9dcefac9c03bb298fc9ce9f936c5646aca9262b8c2cea7610ddcd6cf04b35a",
+  "candidateFreeInputManifestSha256": "ae83ec62645b4105a3edb944842c3b1a74a5560c49ba70a2986642ef5dbfdd39",
+  "cellCount": 240,
+  "exactHead": "43d2858744ef20cd58462643fed534ac61d2ffad",
+  "exactTree": "73e8f50d65cb611def996b01bab0b00628b65860",
+  "primaryChecksumIndexSha256": "cf298a43b1bf67b10e9173d5721ca6b7c7515c2e2991c44af6e4be280bffdb5b",
+  "primaryReviewCacheEntryOmission": {
+    "committedEvidencePacket": "omitted as interpreter cache artifact",
+    "copiedChecksumIndex": "omits only this absent pyc entry",
+    "file": "primary-review/__pycache__/build_primary_review.cpython-314.pyc",
+    "sha256": "4f9375afaad4109799bb71e56a091578821c0ef8138c842bf21fce2a069492fe",
+    "sourceTaskScratchCache": "preserved unchanged"
+  },
+  "primarySummarySha256": "32e12dca47a53e5cd4e1544369eccb3996d37324bc277feb779047ff1c628b94",
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "sourceContextsSha256": "4b60aedba5cf5a87ad5ecb5060d846dccae3b7b19a790dab9a4477e329e61621",
+  "window": "W685-W704"
+}

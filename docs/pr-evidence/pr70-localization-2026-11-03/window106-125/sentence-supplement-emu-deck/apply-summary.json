@@ -1,0 +1,12 @@
+{
+  "reviewedCells": 36,
+  "acceptCurrent": 4,
+  "corrections": 32,
+  "refinements": 0,
+  "holds": 0,
+  "changedCells": 32,
+  "overlapWithWindow106125Cells": 12,
+  "netNewCatalogChangesOutsideWindow106125": 20,
+  "sourceIds": 3,
+  "nativeSpeakerApproval": false
+}

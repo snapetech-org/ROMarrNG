@@ -1,0 +1,27 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W126-W145",
+  "reviewStatus": "sealed strict-blind independent review; no other review packet opened and no repo or PR changes made",
+  "head": "5d999ff7667ae4c5642f1f11b63ad9880d19672c",
+  "tree": "93fcf748c46a4c1cef116c2a4ef06305137ecfe4",
+  "inputManifestSha256": "53f63b965589e3da176f035dca41310f696edd446fd3b6a43cb6c187b14c9f77",
+  "inputReviewSha256": "b070579c035d3e395b2922daa740c969b9780f70bcc360c1ae5862c4ab5952ff",
+  "cellCount": 240,
+  "sourceCount": 20,
+  "localeCount": 12,
+  "dispositionCounts": {
+    "accept-current": 188,
+    "refinement": 20,
+    "correction": 20,
+    "hold-context": 12
+  },
+  "targetChanges": 40,
+  "placeholderParity": true,
+  "nativeSpeakerReview": false,
+  "contextHold": {
+    "sourceOrdinal": 130,
+    "source": "games found.",
+    "why": "The only pinned caller uses a different template with a {count} placeholder absent from the frozen source. The 12 existing target strings were preserved."
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "baseHead": "c146189f29db8fbd77d68dff0c33a0ab59a6b601",
+  "baseTree": "3db10f8b87577edd1167e4489524e6afbb50d556",
+  "catalogPath": "romarr/ui-labels.json",
+  "baseCatalogSha256": "77e2ac045c73402be177bc194ab758b9f8d2df70c7c91829089cd99a5a07a985",
+  "appliedCatalogSha256": "d99f6636fefae13497849d8a88046d0bd6bb62c0d906fc030b2cc6946d6cd603",
+  "selectedCells": 240,
+  "replacements": 26,
+  "corrections": 20,
+  "refinements": 6,
+  "noOps": 166,
+  "holds": 48,
+  "carriedHoldsReattested": 288,
+  "catalogReadbackMatches": true,
+  "nonTargetValuesChanged": 0,
+  "catalogStructureChanged": false,
+  "workflowFilesChanged": 0
+}

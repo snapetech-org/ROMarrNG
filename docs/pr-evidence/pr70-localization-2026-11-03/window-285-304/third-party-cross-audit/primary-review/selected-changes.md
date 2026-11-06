@@ -1,0 +1,97 @@
+# W285–W304 primary proposed changes
+
+Pinned candidate-free input manifest JSON SHA256: `561d10943ebd3aa1f091942b7a83b408c0157e4bd2ae665d44397986d4d45610`.
+Pinned candidate-free input checksum-list SHA256: `1047511955ef60dc180a49bdaef7a86452c70e9196fd681174732e98d408f338`.
+
+45 proposed target changes; independent blind review and cross-audit are not included. Proposals are not applied.
+
+- Rank 285 `ui.published-entries-es-de-entries-and.ae49136d2f` / `es` (correction): Publicado {entries} ES-DE entradas y {covers} cubiertas compartidas. → Se publicaron {entries} entradas de ES-DE y {covers} carátulas compartidas.
+  - The current wording is grammatically awkward and cubiertas usually means coverings/blankets, not game cover art. Carátulas is the UI term; both named counts are preserved.
+- Rank 285 `ui.published-entries-es-de-entries-and.ae49136d2f` / `fr` (correction): Publié {entries} ES-DE entrées et {covers} couvertures partagées. → Publication terminée : {entries} entrées ES-DE et {covers} jaquettes partagées.
+  - Publié {entries} ES-DE entrées is not grammatical French. This uses a concise completed-publication status and the usual term jaquettes for game covers.
+- Rank 285 `ui.published-entries-es-de-entries-and.ae49136d2f` / `id` (refinement): {entries} entri ES-DE dan {covers} sampul bersama telah diterbitkan. → Berhasil menerbitkan {entries} entri ES-DE dan {covers} sampul bersama.
+  - The current wording is understandable but the passive ending is stiff. This active status reads naturally and preserves ES-DE and both counts.
+- Rank 285 `ui.published-entries-es-de-entries-and.ae49136d2f` / `ko` (correction): 출판 {entries} ES-DE 입력 및 {covers} 공유 커버. → ES-DE 항목 {entries}개와 공유 커버 {covers}개를 게시했습니다.
+  - The current target uses 출판 and 입력, which do not fit publishing ES-DE entries. The proposal uses natural UI wording and keeps both counts.
+- Rank 287 `ui.read-rom-hashes-from-the-library-for.16f925f2d1` / `ar` (refinement): اقرأ ROM hashes من المكتبة للشبكة → اقرأ تجزئات ROM من المكتبة لـ Netplay
+  - The current text leaves hashes untranslated and the feature relation awkward. This uses the Arabic cryptographic term while preserving ROM and the Netplay feature name.
+- Rank 287 `ui.read-rom-hashes-from-the-library-for.16f925f2d1` / `de` (correction): Lesen Sie ROM Hashes aus der Bibliothek für Netplay → ROM-Hashes für Netplay aus der Bibliothek lesen
+  - The current translation is a formal imperative and has a malformed compound. This infinitive reads as a task label and uses the standard ROM-Hashes compound.
+- Rank 287 `ui.read-rom-hashes-from-the-library-for.16f925f2d1` / `es` (refinement): Leer ROM hashes de la biblioteca para netplay → Leer los hashes de ROM de la biblioteca para Netplay
+  - The current target leaves the technical phrase as English ROM hashes. This is a more natural Spanish task label while retaining the established Netplay name.
+- Rank 287 `ui.read-rom-hashes-from-the-library-for.16f925f2d1` / `fr` (refinement): Lire les hashes ROM de la bibliothèque pour netplay → Lire les empreintes des ROM de la bibliothèque pour Netplay
+  - The current target uses the English loan hashes and an awkward word order. This uses the French term for cryptographic fingerprints while retaining Netplay.
+- Rank 287 `ui.read-rom-hashes-from-the-library-for.16f925f2d1` / `ko` (correction): 읽기 ROM 네트 플레이 라이브러리에서 해시 → 넷플레이에 사용할 ROM 해시를 라이브러리에서 읽기
+  - The current word order is not grammatical Korean. This states that the library hashes are read for Netplay and preserves ROM.
+- Rank 287 `ui.read-rom-hashes-from-the-library-for.16f925f2d1` / `pt-BR` (refinement): Leia ROM hashes da biblioteca para netplay → Ler os hashes das ROMs da biblioteca para Netplay
+  - The current wording mixes English “ROM hashes” with Portuguese syntax. This is a natural task label and keeps the feature name.
+- Rank 287 `ui.read-rom-hashes-from-the-library-for.16f925f2d1` / `vi` (refinement): Đọc ROM hashes từ thư viện cho netplay → Đọc mã băm ROM từ thư viện cho Netplay
+  - The current target leaves “ROM hashes” in English. This uses Vietnamese for hashes while preserving ROM and Netplay.
+- Rank 288 `ui.read-seen-entries-and-found-added-wi.9304d58175` / `ja` (correction): {seen}のエントリーを読み、ハッシュを持つ{added}を見つけました. Netplayはそれらと一致することができます. 他の{without}のエントリーはカタログされています あなたの図書館は決してディスクをスキャンしたことがありませんので、それらと一致するものはありません. {confirmed}はNo-IntroまたはRedumpのダンプと一致し、マークされた確認されています。 → {seen} 件の項目を読み込み、ハッシュが見つかったのは {added} 件でした。これらは Netplay で照合できます。残りの {without} 件はカタログに登録されていますが、ライブラリがディスクから読み取ったことがないため、照合に使えるデータがありません。{confirmed} 件は No-Intro または Redump のダンプと一致し、検証済みとしてマークされています。
+  - The current Japanese has incorrect sentence boundaries, unnatural grammar, and an incomplete verification phrase. This restores the count relationships, disk-scan distinction, and No-Intro/Redump verification meaning.
+- Rank 291 `ui.reading-your-library-in-the-backgrou.c77eb7ff59` / `ar` (correction): اقرأ مكتبتك في الخلفية.هذه الصفحة لا تحتاج إلى البقاء مفتوحة. → تُقرأ مكتبتك في الخلفية. لا يلزم إبقاء هذه الصفحة مفتوحة.
+  - The current target is an imperative (“read your library”) and joins two sentences without spacing. The proposal describes the background process and says the page may be closed.
+- Rank 291 `ui.reading-your-library-in-the-backgrou.c77eb7ff59` / `fr` (correction): Lire votre bibliothèque en arrière-plan. Cette page ne doit pas rester ouverte. → Votre bibliothèque est lue en arrière-plan. Vous n’avez pas besoin de laisser cette page ouverte.
+  - The current infinitive reads like an instruction rather than an active background status. This states that the library is being read and the page may be closed.
+- Rank 291 `ui.reading-your-library-in-the-backgrou.c77eb7ff59` / `ja` (correction): 図書館を背景に読む このページは開く必要はありません。 → ライブラリをバックグラウンドで読み込んでいます。このページを開いたままにする必要はありません。
+  - The current Japanese is a literal, fragmented translation. This gives a natural progress status and preserves the instruction that the page need not remain open.
+- Rank 291 `ui.reading-your-library-in-the-backgrou.c77eb7ff59` / `ko` (correction): 배경에 도서관을 읽으십시오.이 페이지는 열려있을 필요가 없습니다. → 라이브러리를 백그라운드에서 읽고 있습니다. 이 페이지를 계속 열어 둘 필요는 없습니다.
+  - The current target is phrased as an imperative and lacks natural sentence spacing. This is a clear background-progress status.
+- Rank 291 `ui.reading-your-library-in-the-backgrou.c77eb7ff59` / `vi` (correction): Đọc thư viện của bạn trong nền. trang này không cần phải mở. → Đang đọc thư viện của bạn ở chế độ nền. Bạn không cần giữ trang này luôn mở.
+  - The current target reads as an instruction and starts the second sentence with lowercase text after a period. The proposal clearly reports background progress.
+- Rank 291 `ui.reading-your-library-in-the-backgrou.c77eb7ff59` / `zh-Hans` (correction): 阅读您的图书馆在背景下. 此页面不需要保持开放。 → 正在后台读取您的媒体库。无需保持此页面打开。
+  - The current wording is a word-for-word rendering with unnatural Chinese syntax. This is a concise background-progress message.
+- Rank 291 `ui.reading-your-library-in-the-backgrou.c77eb7ff59` / `zh-Hant` (correction): 閱讀您的圖書館在背景下. 此頁面不需要保持開放。 → 正在背景讀取您的媒體庫。您不必讓此頁面保持開啟。
+  - The current wording is a word-for-word rendering with unnatural Traditional Chinese syntax. This is a concise background-progress message.
+- Rank 292 `ui.ready-to-scan.6b32c3b007` / `de` (refinement): Bereit zum Scan → Bereit zum Scannen
+  - The current “Scan” is an English noun used awkwardly in German. This uses the standard infinitive for a ready-to-scan status.
+- Rank 292 `ui.ready-to-scan.6b32c3b007` / `es` (correction): Preparado para escanear → Listo para escanear
+  - The current adjective is masculine and can be read as describing a person. This neutral status phrasing fits the scan state.
+- Rank 292 `ui.ready-to-scan.6b32c3b007` / `id` (refinement): Siap untuk scan → Siap memindai
+  - The current target uses the borrowed noun scan after siap. The proposal uses a concise Indonesian verb.
+- Rank 292 `ui.ready-to-scan.6b32c3b007` / `ja` (correction): スキャンする準備 → スキャン準備完了
+  - The current noun fragment means “preparation for scanning.” This is the conventional completed-ready status label.
+- Rank 292 `ui.ready-to-scan.6b32c3b007` / `ko` (correction): 스캔할 준비 → 스캔 준비 완료
+  - The current phrase is incomplete as a state label. This is the natural Korean ready status.
+- Rank 292 `ui.ready-to-scan.6b32c3b007` / `vi` (correction): Chuẩn bị để quét → Sẵn sàng quét
+  - The current wording means “prepare in order to scan,” not that the scanner is ready. This is the direct status translation.
+- Rank 293 `ui.recommended-igdb-popular.5eea53d8e1` / `ar` (refinement): الموصى بها · IGDB شعبية → موصى به · الشائع على IGDB
+  - The current Arabic adjective is awkward after the product name. This preserves “recommended” and expresses IGDB popularity naturally.
+- Rank 293 `ui.recommended-igdb-popular.5eea53d8e1` / `es` (refinement): Recomendado · IGDB popular → Recomendado · popular en IGDB
+  - The current phrase follows English word order. This makes the IGDB qualifier natural Spanish while preserving the recommendation label.
+- Rank 293 `ui.recommended-igdb-popular.5eea53d8e1` / `zh-Hans` (refinement): 推荐 · IGDB 受欢迎 → 推荐 · IGDB 热门
+  - The current 受欢迎 is understandable but less idiomatic as a compact popularity label. 热门 is the conventional UI term.
+- Rank 293 `ui.recommended-igdb-popular.5eea53d8e1` / `zh-Hant` (refinement): 推薦 · IGDB 受歡迎 → 推薦 · IGDB 熱門
+  - The current 受歡迎 is understandable but less idiomatic as a compact popularity label. 熱門 is the conventional UI term.
+- Rank 294 `ui.refresh-metadata.024000f113` / `fr` (refinement): Renouveler les métadonnées → Actualiser les métadonnées
+  - Renouveler usually means renew. Actualiser is the idiomatic action label for refreshing metadata.
+- Rank 294 `ui.refresh-metadata.024000f113` / `ko` (refinement): 메타데이터를 새롭게 → 메타데이터 새로 고침
+  - The current adverb 새롭게 makes the button label sound like “make metadata fresh.” This is the conventional Korean action label.
+- Rank 295 `ui.rejected-the-api-key.119a3d3e36` / `de` (correction): API Schlüssel abgelehnt → API-Schlüssel abgelehnt
+  - The German compound needs a hyphen. This fixes the spelling while retaining the concise error status.
+- Rank 295 `ui.rejected-the-api-key.119a3d3e36` / `es` (correction): Se rechaza la clave API → Se rechazó la clave de API
+  - The current present tense does not match the completed rejection result. This uses the natural past-tense status.
+- Rank 295 `ui.rejected-the-api-key.119a3d3e36` / `hi` (correction): API कुंजी को अस्वीकार कर दिया → API कुंजी अस्वीकार कर दी गई
+  - The current phrasing lacks a clear passive subject and reads as incomplete. This states that the API key was rejected.
+- Rank 295 `ui.rejected-the-api-key.119a3d3e36` / `ko` (refinement): API 키를 거부했습니다. → API 키가 거부되었습니다
+  - The current wording assigns the action to an unstated “we.” This passive status describes the API key rejection directly.
+- Rank 296 `ui.release-profile.787c727f17` / `es` (correction): Perfil de lanzamiento → Perfil de versiones
+  - In this settings page, the profile ranks region, revision and ROM version quality. “Lanzamiento” suggests a publication launch; versiones matches the caller context.
+- Rank 296 `ui.release-profile.787c727f17` / `fr` (refinement): Profil de sortie → Profil des versions
+  - The caller describes ranking ROM regions and revisions. This is clearer French for a profile of game versions than the current “profil de sortie.”
+- Rank 296 `ui.release-profile.787c727f17` / `id` (refinement): Profil rilis → Profil versi
+  - The caller describes preferences among ROM regions and revisions. This is more concise Indonesian than the borrowed rilis label.
+- Rank 296 `ui.release-profile.787c727f17` / `pt-BR` (correction): Perfil de lançamento → Perfil de versões
+  - The setting ranks regions and revisions of game releases. “Lançamento” can suggest a launch event; versões is precise in this context.
+- Rank 299 `ui.remove-path-mapping-for-path.c9d8c8aeff` / `hi` (correction): {path} के लिए मार्ग मैपिंग हटाएं → {path} के लिए पाथ मैपिंग हटाएँ
+  - The current मार्ग मैपिंग is an awkward literal phrase. This uses the familiar UI term and preserves the dynamic path.
+- Rank 300 `ui.remove-platform-folder-mapping-for-f.6573856e84` / `es` (refinement): Eliminar la asignación de carpetas de plataforma para {folder} → Eliminar el mapeo de carpeta de plataforma para {folder}
+  - The current plural carpetas does not agree with the single mapped folder value. This makes the mapping singular and preserves the placeholder.
+- Rank 300 `ui.remove-platform-folder-mapping-for-f.6573856e84` / `ja` (correction): {folder}のためのプラットフォームフォルダーマッピングの削除 → プラットフォームフォルダー {folder} のマッピングを削除
+  - The current Japanese construction is stiff and lacks a natural relationship between the folder and its mapping. This reads as a clear accessible action label.
+- Rank 301 `ui.remove-this-path-mapping.9cb94bc02b` / `hi` (correction): इस मार्ग को हटाने के लिए मैप → इस पथ मैपिंग को हटाएँ
+  - The current target is grammatically broken and says to remove a map rather than a path mapping. This is the direct action label.
+- Rank 301 `ui.remove-this-path-mapping.9cb94bc02b` / `ko` (correction): 이 경로를 삭제 하기 → 이 경로 매핑을 제거하세요
+  - The current translation says to delete the path itself and omits “mapping.” This preserves the object of the action.
+- Rank 301 `ui.remove-this-path-mapping.9cb94bc02b` / `pt-BR` (refinement): Remover este caminho de mapeamento → Remover este mapeamento de caminho
+  - The current word order can be read as a path belonging to a mapping. This makes the mapping itself the object of removal.

@@ -1,0 +1,130 @@
+{
+  "approvalCaveat": "Selected wording changes and retained low-confidence language holds are machine review results, not native-speaker-approved.",
+  "artifact": "ROMarrNG PR #70 W805-W824 integrated cross-review",
+  "blindOnlyProposalCells": 15,
+  "callerBackedCells": 240,
+  "callerlessHashOnlyCells": 0,
+  "cellCount": 240,
+  "confidence": "moderate",
+  "currentW785HashOnlyHoldsCopiedByteForByte": 48,
+  "divergentOverlapCellsResolvedByCrossReview": 4,
+  "head": "551cccd03e0acdce208ce11f571378c1dcdfb805",
+  "identicalOverlapCells": 4,
+  "independentBlindProposalCells": 23,
+  "inputPacketFileCounts": {
+    "candidate-free": 22,
+    "independent-blind": 10,
+    "primary": 9
+  },
+  "inputVerifierResults": {
+    "candidateFreeInputChecksums": "PASS",
+    "candidateFreeOuterChecksums": "PASS",
+    "candidateFreePredecessorChecksums": "PASS",
+    "independentBlindVerifier": "PASS (packet-only)",
+    "primaryReviewVerifier": "PASS (packet-only; no repo argument)"
+  },
+  "integratedActions": {
+    "adopt_proposal": 13,
+    "retain_current": 227
+  },
+  "integratedOrigins": {
+    "blind": 2,
+    "candidate-current": 227,
+    "consensus": 4,
+    "primary": 7
+  },
+  "localeCount": 12,
+  "nativeSpeakerApproval": false,
+  "newCallerlessHolds": 0,
+  "nextBoundary": {
+    "continuationIndex": 825,
+    "oneBasedPosition": 826,
+    "sourceId": "ui.platform-for-game-available-platform.afd580990f",
+    "sourceSha256": "afd580990fe9a12282ffeeeefa2d1a2c8b632f05bdd58b08e3c03a27ac91fb08"
+  },
+  "primaryOnlyProposalCells": 5,
+  "primaryProposalCells": 13,
+  "priorActiveHashOnlyHoldsCopiedByteForByte": 1012,
+  "proposalOutcomes": {
+    "adoptedCells": 13,
+    "lowConfidenceLanguageHolds": 10,
+    "unsupportedStyleProposalsRetainedCurrent": 5
+  },
+  "proposalOverlapCells": 8,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "resultingActiveHashOnlyHolds": 1060,
+  "reviewScope": "Candidate-free, primary, and independent blind packets only; no product worktree, repository, or PR modified; no native-speaker channels inspected.",
+  "testsBuildsScansCiRun": false,
+  "tokenMismatches": {
+    "markup": 0,
+    "numeric": 0,
+    "placeholders": 0,
+    "protectedLiterals": 0
+  },
+  "tree": "d77f32ac8ec0ab53200d04819869a2e99c6de73c",
+  "uniqueProposalCells": 28,
+  "unresolvedLanguageHolds": [
+    {
+      "catalogZeroBasedIndex": 805,
+      "locale": "ar",
+      "reason": "The proposed Arabic loanword for patch is low confidence. Current wording is consistent with the cross-reviewed modifications wording for the catalogue and page; retain it pending native terminology review.",
+      "sourceId": "ui.patch-catalogue-url-optional.da0d568bab"
+    },
+    {
+      "catalogZeroBasedIndex": 805,
+      "locale": "fr",
+      "reason": "The French choice between correctifs and the borrowed ROM-patch term patches is uncertain in this catalogue context; retain the current target pending native review.",
+      "sourceId": "ui.patch-catalogue-url-optional.da0d568bab"
+    },
+    {
+      "catalogZeroBasedIndex": 806,
+      "locale": "fr",
+      "reason": "The French choice between correctifs and Patchs for a ROM-patch navigation label is uncertain; retain the current target pending native review.",
+      "sourceId": "ui.patches.1c22815500"
+    },
+    {
+      "catalogZeroBasedIndex": 807,
+      "locale": "fr",
+      "reason": "The French choice between correctifs and Patchs for the ROM-patch page heading is uncertain; retain the current target pending native review.",
+      "sourceId": "ui.patches-translations-hacks-and-impro.b782f10dd3"
+    },
+    {
+      "catalogZeroBasedIndex": 807,
+      "locale": "ko",
+      "reason": "The Korean wording for ROM hacks (current 핵 versus proposed 개조) is uncertain in this product context; retain the current target pending native review.",
+      "sourceId": "ui.patches-translations-hacks-and-impro.b782f10dd3"
+    },
+    {
+      "catalogZeroBasedIndex": 820,
+      "locale": "de",
+      "reason": "The onboarding caller supports both Route and Weg for this setup path; the low-confidence alternative is held pending native review.",
+      "sourceId": "ui.pick-one-route-you-can-return-here-a.3424d84932"
+    },
+    {
+      "catalogZeroBasedIndex": 821,
+      "locale": "de",
+      "reason": "The caller indicates a planned DAT-backed set, but the low-confidence expansion to a game collection is not clearly preferable to the current concise Set.",
+      "sourceId": "ui.plan-a-set.9dd8a128e7"
+    },
+    {
+      "catalogZeroBasedIndex": 821,
+      "locale": "es",
+      "reason": "The caller indicates a planned DAT-backed set, but the low-confidence expansion to a game collection is not clearly preferable to the current concise conjunto.",
+      "sourceId": "ui.plan-a-set.9dd8a128e7"
+    },
+    {
+      "catalogZeroBasedIndex": 821,
+      "locale": "fr",
+      "reason": "The caller indicates a planned DAT-backed set, but the low-confidence expansion to a game collection is not clearly preferable to the current concise ensemble.",
+      "sourceId": "ui.plan-a-set.9dd8a128e7"
+    },
+    {
+      "catalogZeroBasedIndex": 821,
+      "locale": "pt-BR",
+      "reason": "The caller indicates a planned DAT-backed set, but the low-confidence expansion to a game collection is not clearly preferable to the current concise conjunto.",
+      "sourceId": "ui.plan-a-set.9dd8a128e7"
+    }
+  ],
+  "window": "W805-W824"
+}

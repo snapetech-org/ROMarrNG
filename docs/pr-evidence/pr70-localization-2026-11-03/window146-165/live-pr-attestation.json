@@ -1,0 +1,89 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "queriedVia": "GitHub PR API / gh pr view",
+  "state": "OPEN",
+  "draft": true,
+  "headRefName": "task/localization-translation-review-20261030",
+  "headSha": "db895a97e9871952a0b952e1d119e32e06cf168d",
+  "headTree": "f1edf8319eb3dbd29ac5fe1e279216c5b96ecc6a",
+  "baseRefName": "main",
+  "updatedAt": "2026-11-03T04:29:28Z",
+  "mergeStateStatus": "CLEAN",
+  "changedFilesAtInputHead": 262,
+  "changedWorkflowPaths": [],
+  "prePushStatusChecks": {
+    "state": "pending",
+    "totalCount": 0,
+    "sha": "db895a97e9871952a0b952e1d119e32e06cf168d"
+  },
+  "workflowInventoryAtInputHead": [
+    {
+      "path": ".github/workflows/dependency-review.yml",
+      "triggers": [
+        "workflow_dispatch"
+      ]
+    },
+    {
+      "path": ".github/workflows/docker.yml",
+      "triggers": [
+        "push tags v*",
+        "workflow_dispatch"
+      ]
+    },
+    {
+      "path": ".github/workflows/gvisor-runner-smoke.yml",
+      "triggers": [
+        "workflow_dispatch"
+      ]
+    },
+    {
+      "path": ".github/workflows/semgrep-community.yml",
+      "triggers": [
+        "push tags **",
+        "workflow_dispatch"
+      ]
+    },
+    {
+      "path": ".github/workflows/sync-unraid-legacy-ghcr.yml",
+      "triggers": [
+        "workflow_dispatch",
+        "workflow_run after docker"
+      ]
+    },
+    {
+      "path": ".github/workflows/trivy-filesystem.yml",
+      "triggers": [
+        "push tags **",
+        "workflow_dispatch"
+      ]
+    }
+  ],
+  "codeQlWorkflowPresent": false,
+  "ordinaryBranchPushWorkflowExpected": false,
+  "pullRequestSynchronizeWorkflowExpected": false,
+  "source": "Live PR queried and source branch fetched from GitHub immediately before application; PR exact head/tree match the frozen ratification pins.",
+  "baseSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "inputFilesListPath": "live-pr-files-at-input-head.txt",
+  "inputFilesListSha256": "f2aa2b7aad92c67f3befb3e9e76cf3484622f004b76a981a1f1675775aeea718",
+  "headShaAfterPush": "0cc68258eda9830bda93d8a1a877e57386069861",
+  "treeAfterPush": "4b89257075b889cfa5bddd9dca8481502e1b0d22",
+  "workflowPathsAtInputHead": [],
+  "workflowPathsAfterPush": [],
+  "postPushUpdatedAt": "2026-11-03T05:19:04Z",
+  "postPushStatusChecks": {
+    "state": "pending",
+    "totalCount": 0,
+    "sha": "0cc68258eda9830bda93d8a1a877e57386069861"
+  },
+  "prePushHook": {
+    "stableImageAliasPolicy": "passed",
+    "stableImageAliasVersions": "0.14.11 and 0.14.11-browser",
+    "releaseOrTagPushed": false
+  },
+  "changedFilesAfterInitialApplicationPush": 302,
+  "inputFilesCountMethod": "git diff --name-only --no-renames bcd1eb41b5cdf8202acb5cf8e365e14761b743b5 db895a97e9871952a0b952e1d119e32e06cf168d",
+  "initialPushFilesCountMethod": "Paginated GitHub pulls/70/files API, corroborated by git diff --name-only --no-renames bcd1eb41b5cdf8202acb5cf8e365e14761b743b5 0cc68258eda9830bda93d8a1a877e57386069861",
+  "evidenceCorrectionAddsPathCount": 1,
+  "expectedChangedFilesAfterEvidenceCorrection": 303
+}

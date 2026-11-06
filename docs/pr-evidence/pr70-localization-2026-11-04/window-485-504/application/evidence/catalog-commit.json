@@ -1,0 +1,13 @@
+{
+  "parent": "6eb494d362ae19503b9199cd2c05c0767cddbc0e",
+  "parentTree": "b9450b9c6d22c816551fc8d528e8f03413d04595",
+  "commit": "a662c3620e9b5df35092c9d302846b776638f462",
+  "tree": "a42bc330d836ccebea940366d3fd766dbd710e2d",
+  "changedPaths": [
+    "CHANGELOG.md",
+    "romarr/ui-labels.json"
+  ],
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogFileSha256": "874341c2951d5601ea9e653dbe05d4a4c0e42bf38bc52a485a012e32c283a156",
+  "commitMessage": "fix(i18n): apply ROMarrNG W485-W504 review"
+}

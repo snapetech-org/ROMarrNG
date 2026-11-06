@@ -1,0 +1,134 @@
+{
+  "position": 310,
+  "sourceId": "ui.request-searches-your-configured-sou.3f429c4868",
+  "source": "Request searches your configured sources and hands a usable release to your download client. If no usable release is found, ROMarr keeps the title on Wanted.",
+  "sourceSha256": "3f429c4868cc8f01a651a81185ac8a4b40fa0ac3a061c49a2173b9d9c13544bf",
+  "callerLocations": [
+    "romarr/ui.py:2349"
+  ],
+  "semantics": {
+    "confidence": "high",
+    "finding": "These 12 labels name the same Wanted status/list state. The UI maps status value wanted to the source label Wanted and translates that label; the export control uses the same ui.wanted key for value wanted, and the API export resolves wanted to store.missing(). The help sentence therefore refers to this exact UI state, not merely a similar concept.",
+    "targetRule": "Use each locale’s exact existing ui.wanted translation in the help sentence."
+  },
+  "localeLabelsAndTargets": {
+    "ar": {
+      "existingWantedLabel": "مطلوب",
+      "existingLabelSha256": "c2c05049aa06377f40be8bf5e9c26ddaa536401e651cdf985d3b7afca2fb74cc",
+      "proposedHelpText": "يبحث الطلب في المصادر التي أعددتها ويرسل إصدارًا صالحًا للاستخدام إلى عميل التنزيل. وإذا لم يُعثر على إصدار مناسب، يُبقي ROMarr العنوان في قائمة «مطلوب».",
+      "proposedHelpTextSha256": "6060749d9144f7a091afba21374c64aa79e540e3f9006a5136d91439a9ae2e9f",
+      "containsExactExistingLabel": true
+    },
+    "de": {
+      "existingWantedLabel": "Gesucht",
+      "existingLabelSha256": "fc414fe2374ff074f60f3adb43ccdcbdcf282f5c409b16384d6307eac74725e6",
+      "proposedHelpText": "Die Anfrage durchsucht deine konfigurierten Quellen und übergibt einen nutzbaren Release an deinen Download-Client. Wird kein nutzbarer Release gefunden, behält ROMarr den Titel in der Liste „Gesucht“.",
+      "proposedHelpTextSha256": "bb89cde6a32399310eeeda6848a9e21f9ffc0ff733b822793b9eb311a1302dbb",
+      "containsExactExistingLabel": true
+    },
+    "es": {
+      "existingWantedLabel": "Pendientes",
+      "existingLabelSha256": "bb6e430ce0a7eb8b64bdd8c8f17465eee24955679dedbaeec993ae217b48b341",
+      "proposedHelpText": "La solicitud busca en las fuentes configuradas y envía una versión utilizable al cliente de descargas. Si no encuentra ninguna, ROMarr mantiene el título en «Pendientes».",
+      "proposedHelpTextSha256": "57e1b6d7eabbf9cc9deb1a9611f720e26d683349f5a6246cd56ad3ef899e2321",
+      "containsExactExistingLabel": true
+    },
+    "fr": {
+      "existingWantedLabel": "À récupérer",
+      "existingLabelSha256": "1293b0fc48ff5c0fcc4bdc3faf79aa9660d43535f7fcf5ef54a485ed49c72a81",
+      "proposedHelpText": "La demande recherche dans les sources configurées et transmet une version utilisable au client de téléchargement. Si aucune version utilisable n’est trouvée, ROMarr conserve le titre dans « À récupérer ».",
+      "proposedHelpTextSha256": "b2f1d4d0164602c2563f6f8d7efd57f712e39cefe0dbdfbf295994c8c9be1374",
+      "containsExactExistingLabel": true
+    },
+    "hi": {
+      "existingWantedLabel": "वांछित",
+      "existingLabelSha256": "4baa2844cceef09b3883497389e745e2ab9b38068e4d1765f2203c2870ca9c3c",
+      "proposedHelpText": "यह अनुरोध आपके कॉन्फ़िगर किए गए स्रोतों को खोजता है और उपयोगी रिलीज़ आपके डाउनलोड क्लाइंट को भेजता है। उपयोगी रिलीज़ न मिलने पर ROMarr शीर्षक को वांछित सूची में बनाए रखता है।",
+      "proposedHelpTextSha256": "696da58180cd39842b4e387bd1085210b7dfa8183115b3adf8c992b020002d06",
+      "containsExactExistingLabel": true
+    },
+    "id": {
+      "existingWantedLabel": "Daftar incaran",
+      "existingLabelSha256": "50e367f8f84e1f5f5b13405644828da734552074fb025810d4502caecf400fe3",
+      "proposedHelpText": "Permintaan menelusuri sumber yang Anda konfigurasi dan mengirimkan rilis yang dapat digunakan ke klien unduhan. Jika tidak menemukan rilis yang sesuai, ROMarr mempertahankan judul dalam Daftar incaran.",
+      "proposedHelpTextSha256": "4c824f1c7f7d8c5c3a89d5d3c644835d6c5e2eaeee599a6fb15d6d193f73fa61",
+      "containsExactExistingLabel": true
+    },
+    "ja": {
+      "existingWantedLabel": "取得予定",
+      "existingLabelSha256": "e82c314b13ddfbdfa9794429e2893c4d50282703856b7598853ad27aee61706d",
+      "proposedHelpText": "リクエスト機能は設定済みのソースを検索し、利用できるリリースをダウンロードクライアントに渡します。利用できるリリースが見つからない場合、ROMarr はタイトルを「取得予定」リストに残します。",
+      "proposedHelpTextSha256": "6e264f14ed9bae9d2406e9c4124f7b373290b36f62689fb57faa60bd4e192144",
+      "containsExactExistingLabel": true
+    },
+    "ko": {
+      "existingWantedLabel": "원함",
+      "existingLabelSha256": "5d28f4a7397333e679146f205720a5ada5d8eb79237acb7a067695e9edc2006a",
+      "proposedHelpText": "요청 기능은 설정된 소스를 검색해 사용할 수 있는 릴리스를 다운로드 클라이언트로 전달합니다. 사용할 수 있는 릴리스를 찾지 못하면 ROMarr는 제목을 원함 목록에 유지합니다.",
+      "proposedHelpTextSha256": "d65d5a08d8043c8125bfe9b37dbce853ebb1a2faf19d6dcb39aa0bb3a96d5b70",
+      "containsExactExistingLabel": true
+    },
+    "pt-BR": {
+      "existingWantedLabel": "Procurados",
+      "existingLabelSha256": "ded061b82b33aed9dbe4f782f25cd273267152c4fb1a6cc282d28a783676313a",
+      "proposedHelpText": "A solicitação pesquisa as fontes configuradas e envia um lançamento utilizável ao cliente de download. Se não encontrar um, ROMarr mantém o título na lista Procurados.",
+      "proposedHelpTextSha256": "65aeebff26479db2e72634c3e2cab1219a63da005aef362c6e022bc87220ef8f",
+      "containsExactExistingLabel": true
+    },
+    "vi": {
+      "existingWantedLabel": "Mục cần tìm",
+      "existingLabelSha256": "da3fd9bb0fb5189d77e8f461c629732a7f924ffd8c76135b40218cf468ffc4ae",
+      "proposedHelpText": "Tác vụ yêu cầu tìm kiếm trong các nguồn đã cấu hình và chuyển bản phát hành phù hợp cho ứng dụng tải xuống. Nếu không tìm thấy bản phù hợp, ROMarr vẫn giữ tựa game trong Mục cần tìm.",
+      "proposedHelpTextSha256": "cc0099ac9a08426636e85696348a91a0df1045d1021939ce1c8033c3e981a4c1",
+      "containsExactExistingLabel": true
+    },
+    "zh-Hans": {
+      "existingWantedLabel": "待获取",
+      "existingLabelSha256": "6046415d13830128e864fd7b1ec8127434be87b4cda84582784926989205cb48",
+      "proposedHelpText": "请求会搜索你配置的来源，并将可用版本交给下载客户端。如果找不到可用版本，ROMarr 会将该标题保留在“待获取”列表中。",
+      "proposedHelpTextSha256": "b9a9acdcf16c3728d5d8fb53d821d1d9fdf0797a85a7b7c6fdc234c58d36988a",
+      "containsExactExistingLabel": true
+    },
+    "zh-Hant": {
+      "existingWantedLabel": "待取得",
+      "existingLabelSha256": "ccfaa370be8e6cbf2a4bc9229d38ec2b7eee948ad7797a10f413b37244ae4c1c",
+      "proposedHelpText": "請求會搜尋你設定的來源，並將可用版本交給下載用戶端。如果找不到可用版本，ROMarr 會將該標題保留在「待取得」清單中。",
+      "proposedHelpTextSha256": "84db65554e6b89d215d5540ee82f40a96e69145d721d0eb3bb391932df533b8a",
+      "containsExactExistingLabel": true
+    }
+  },
+  "callerAndStateFlowReferences": [
+    {
+      "path": "romarr/ui.py",
+      "anchor": "wanted:'Wanted'",
+      "lineStart": 880,
+      "lineEnd": 880,
+      "excerpt": "880:   wanted:'Wanted',decompress:'Decompress',playing:'Playing',completed:'Completed',",
+      "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+    },
+    {
+      "path": "romarr/ui.py",
+      "anchor": "const statusMarkup=",
+      "lineStart": 1222,
+      "lineEnd": 1225,
+      "excerpt": "1222: const statusMarkup=(value,explicitTemplate=null,explicitParts=null)=>{\n1223:   const raw=String(value??''),source=DOWNLOAD_STATE_LABELS[raw];\n1224:   if(source)return interfaceMarkup(source);\n1225:   if(Array.isArray(explicitParts))return messagePartsMarkup(explicitParts);",
+      "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+    },
+    {
+      "path": "romarr/ui.py",
+      "anchor": "data-i18n=\"ui.wanted.c296832656\"",
+      "lineStart": 4640,
+      "lineEnd": 4642,
+      "excerpt": "4640:         <option value=\"library\" data-i18n=\"ui.library.dc20b3d5d2\">Library</option>\n4641:         <option value=\"wanted\" data-i18n=\"ui.wanted.c296832656\">Wanted</option>\n4642:         <option value=\"blocklist\" data-i18n=\"ui.blocklist.f8019af406\">Blocklist</option>",
+      "fileSha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a"
+    },
+    {
+      "path": "romarr/app.py",
+      "anchor": "\"wanted\": service.store.missing()",
+      "lineStart": 6609,
+      "lineEnd": 6611,
+      "excerpt": "6609:                     \"library\": service.library_view().get(\"items\", []),\n6610:                     \"wanted\": service.store.missing(),\n6611:                     \"blocklist\": service.store.list_items(\"blocklist\"),",
+      "fileSha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510"
+    }
+  ]
+}

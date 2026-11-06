@@ -1,0 +1,30 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pull": 70,
+  "head": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+  "tree": "e8668e9c83afa533f8cd6e69e6a7ad96946ed40e",
+  "locales": [
+    "es",
+    "zh-Hans",
+    "hi",
+    "de",
+    "ja",
+    "fr",
+    "pt-BR",
+    "ar",
+    "ko",
+    "zh-Hant",
+    "vi",
+    "id"
+  ],
+  "sourceIds": [
+    "ui.you-do-not-need-a-separate-library-e.806dd21e52",
+    "ui.folder-not-the-wider.d61c242874",
+    "ui.directory-keep-shared-metadata-along.e2e13b466b"
+  ],
+  "cells": 36,
+  "catalogSourceFileSha256": "5377a4b6c76137e7a3a9da7096dfbecbb8c90558d92831085ba1fb37c80d1484",
+  "uiFileSha256": "810ccf901f4c7651aaf78602ae6eb69d471da65076cc6749c3a86367aa42d566",
+  "uiFileGitBlob": "2e114d53a518287bd940371ce83625bee002f402",
+  "reviewScope": "Composed sentence review across the three adjacent localized text nodes and two inline code literals. No previous primary proposal, decision, or cross-review is included."
+}

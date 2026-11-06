@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "baseRef": "main",
+  "reviewedBaseHead": "6eb40719ea270bb3cae024d771665e7006a85822",
+  "reviewedBaseTree": "55031e7e234a7035de7682d0b49f2f60882164f6",
+  "applicationCommit": "31c3ab295cdc800863f68deff518c38a380d84f4",
+  "applicationTree": "800954d5ecc27a3fd4975939ab14ac59081b84aa",
+  "livePullRequestHead": "31c3ab295cdc800863f68deff518c38a380d84f4",
+  "files": {
+    "romarr/ui.py": {
+      "bytes": 408113,
+      "sha256": "446cb661460d16c12e688b0797734ec63c94b03bddbb6433a7881350d6b55db0",
+      "gitBlob": "c5d09f410489e0498d0572d4884c2b9dc33b24f4"
+    },
+    "romarr/app.py": {
+      "bytes": 418446,
+      "sha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+      "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd"
+    },
+    "romarr/ui-labels.json": {
+      "bytes": 3010503,
+      "sha256": "c5e6e3f722cdafb9082e75f7e6253dbb0d1af3f032bbbef52c713dc73b281a1a",
+      "gitBlob": "0fa7a15a1db50bd24166516fefa1e2166274d04c"
+    },
+    "romarr/ui-source-snapshot.json": {
+      "bytes": 202767,
+      "sha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "gitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2"
+    }
+  },
+  "catalogsUnchanged": true,
+  "testsBuildsScansCi": "not run",
+  "mergeReleaseTag": "not performed"
+}

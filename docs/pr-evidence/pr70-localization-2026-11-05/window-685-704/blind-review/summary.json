@@ -1,0 +1,38 @@
+{
+  "artifact": "ROMarrNG W685-W704 independent blind translation review",
+  "schemaVersion": 1,
+  "reviewerMode": "independent blind review; candidate-free inputs only",
+  "exactPrHead": "43d2858744ef20cd58462643fed534ac61d2ffad",
+  "inputPacketDirectory": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w685-704-20261105/candidate-free/input",
+  "inputSha256": {
+    "candidate-free-cells.jsonl": "7e2a7297cfd31d0b46f1f572afb86e4a92d81bb32796025f62fbfc5c3076beeb",
+    "source-contexts.jsonl": "4b60aedba5cf5a87ad5ecb5060d846dccae3b7b19a790dab9a4477e329e61621"
+  },
+  "reviewFile": "review.jsonl",
+  "records": 240,
+  "sourceKeys": 20,
+  "locales": 12,
+  "visibleCellsReviewed": 228,
+  "callerlessHashOnlyHolds": 12,
+  "decisions": {
+    "accept": 221,
+    "correction": 5,
+    "refinement": 2,
+    "hold": 12
+  },
+  "proposedChanges": 7,
+  "integrityAudit": {
+    "visibleCurrentTargetsChecked": 228,
+    "visibleProposedReplacementsChecked": 7,
+    "placeholderMultisets": "all match",
+    "numericTokensIncludingHexOffsets": "all match",
+    "markupTagSequences": "all match",
+    "declaredProtectedAndKnownProductLiterals": "all match"
+  },
+  "qualifiedNativeSpeakerApprovalClaimed": false,
+  "notes": [
+    "Callerless W698 values are hash-only holds. No callerless source or target text is included in the review artifact.",
+    "Each visible review binds source, current target, locale, caller-context digest, and per-caller source hashes to the candidate-free packet.",
+    "Review decisions are not a claim of qualified native-speaker approval."
+  ]
+}

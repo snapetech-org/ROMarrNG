@@ -1,0 +1,28 @@
+{
+  "window": "W705-W724",
+  "inputHead": "50e3f8a48a800affff8bad367b5c493cc0fdfd62",
+  "inputTree": "22cd46ff4821fcbbe76b4760a15e22d688b3f548",
+  "catalogPath": "romarr/ui-labels.json",
+  "messageCount": 1836,
+  "localeCount": 12,
+  "reviewedCells": 240,
+  "callerBackedCells": 192,
+  "callerlessHashOnlyHolds": 48,
+  "rootAdjudicationCount": 3,
+  "selectedCorrections": 5,
+  "acceptedCurrent": 187,
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "catalog": "romarr/ui-labels.json",
+  "catalogSha256BeforeFollowup": "a5f26cbe41de62badc4ea6f4f4246aa8c87162b5e257d6422947cb70ba2a73a5",
+  "catalogSha256AfterFollowup": "1a204f6f4a5162daa9c9c0eda9d8bfc08636c393360a1cedc38459ced3a728ce",
+  "keys": 1836,
+  "keysPreserved": true,
+  "changedValuesThisFollowup": 20,
+  "totalChangedValuesFromReviewHead": 30,
+  "onlySelectedValuesChanged": true
+}

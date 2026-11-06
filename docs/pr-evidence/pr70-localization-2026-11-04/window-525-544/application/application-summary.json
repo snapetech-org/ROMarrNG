@@ -1,0 +1,23 @@
+{
+  "artifact": "ROMarrNG PR #70 W525-W544 catalog application readback",
+  "catalogPath": "romarr/ui-labels.json",
+  "inputHead": "eda48333438591ecc67f829c50ef2d521f1e7a5e",
+  "inputTree": "3db18e56d0c7ac08a564a6baff61eba25f0a01da",
+  "localeOrderChanged": false,
+  "messageKeyOrderChanged": false,
+  "newTextFreeHolds": 12,
+  "postCatalogGitBlob": "adf8be8a8d1134c663e065eae7b395280be391c4",
+  "postCatalogSha256": "60cc40cab09feb08769ea681effcbc7307087fcefa21ade3a79f8e0ed0b50e1d",
+  "priorAppliedCellsPreserved": 28,
+  "priorHashOnlyHoldsPreserved": 540,
+  "priorSelectedSourceRecordsPreserved": 140,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "retainedCurrent": 210,
+  "reviewedCells": 240,
+  "selectedUpdates": 18,
+  "tokenMismatches": 0,
+  "translationHashUpdates": 0,
+  "window": "W525-W544",
+  "workflowChanges": 0
+}

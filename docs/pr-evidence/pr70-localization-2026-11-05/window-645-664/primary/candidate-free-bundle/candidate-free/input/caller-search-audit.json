@@ -1,0 +1,149 @@
+{
+  "head": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+  "productionFilesSearched": 51,
+  "queryCount": 20,
+  "results": [
+    {
+      "callerless": false,
+      "contextSha256": "4cc41b6d77b3f46f10c39581d05aa00e5dc3de93105633e36bc69d83787da2b2",
+      "matchCount": 1,
+      "sourceId": "ui.minimum-seeders.a78f3d2116",
+      "sourceSha256": "a78f3d21169ba99d3ca34fb9fed030e3d78261fd3758c4716f296c7d4a1b315e"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "e00a6aa7273b0f0f1edcae65037fd61e129ab2e4905d78c8f4c41a6818631730",
+      "matchCount": 2,
+      "sourceId": "ui.missing.6be36ca49e",
+      "sourceSha256": "6be36ca49ee85210c5d1ad9c377d90a9859c66d889110a2a5b0dccd390d12e20"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "0febb9d220233b34401e06ad6533ebf73fd280bb8e9c39d38c56d112a27e4023",
+      "matchCount": 1,
+      "sourceId": "ui.mon.f40d7f51f6",
+      "sourceSha256": "f40d7f51f69edfaffa29c42910fbc6af6a822f1279162d486b4a7e11c3e0ae9b"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "09d93aa6b0ad639850ee9333659b1ee3f5bc7749aff6fb887d47b2b15722a8da",
+      "matchCount": 2,
+      "sourceId": "ui.moonlight-host.52839edd11",
+      "sourceSha256": "52839edd11674b9527cf4f3dc29d462400aca65a1bafcb492f9c5a781c1087a7"
+    },
+    {
+      "callerless": true,
+      "contextSha256": "3f0e8c8170453853064d0c80cc09907d4ad740981b3cd31c81e6e7e625d51207",
+      "matchCount": 0,
+      "sourceId": "ui.moonlight-pairing-cannot-be-automate.e1a9d014f9",
+      "sourceSha256": "e1a9d014f9e91246a933e83539213339eb3167c2e061e968133d6b2ed41da063"
+    },
+    {
+      "callerless": true,
+      "contextSha256": "2b333f720929fd75f8cfc3eab886ca11294aa427eb007f67448ec1768f1535da",
+      "matchCount": 0,
+      "sourceId": "ui.more.d47d7cb0e4",
+      "sourceSha256": "d47d7cb0e4f8fd2be5ee07826694c18917d83ca77d0a01698582d05f432db996"
+    },
+    {
+      "callerless": true,
+      "contextSha256": "9082c32b3547829553aa74202fe5984bb64d15f48507118d2aa2bb310080ac7f",
+      "matchCount": 0,
+      "sourceId": "ui.more-navigation-options.35329d50b4",
+      "sourceSha256": "35329d50b42eef12861b148c0181b812fb1a7da8b969284b916d08fc84dfefbe"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "ef42a9dd4fcbda08bb2cd8d71fc15df16110fd8ff5173285e70bbe66cb24231c",
+      "matchCount": 1,
+      "sourceId": "ui.more-player-options.20bb9a4a10",
+      "sourceSha256": "20bb9a4a10d39df9a0e4b6623cc620ec313ef3c06a1108f5b61a6e946e6caa94"
+    },
+    {
+      "callerless": true,
+      "contextSha256": "072a78fca049e48842e741a7c59cc5091bec56bfef710e2650013340a4d36ee1",
+      "matchCount": 0,
+      "sourceId": "ui.mount-it-on-each-client-and-point-es.a021b4cc73",
+      "sourceSha256": "a021b4cc73a632dac21b1ca25ef6a1bea8fc45473de69376569501417b5e785b"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "efa18d944c96a9e772d3c47685303f7b9012a8d6c977a150cacdd6e0457cdad7",
+      "matchCount": 1,
+      "sourceId": "ui.multi-disc-set-is-grouped-for-metada.86db33ad47",
+      "sourceSha256": "86db33ad47d9baa6436ee1e7c92eb0b1386c5423f8d30e2b22df2555a3f0dc05"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "c7e776e0f7f94c86e9f7b095259fae92aa2db1ec49b2742abb307506e201fcd6",
+      "matchCount": 1,
+      "sourceId": "ui.multiplayer.563370a7b0",
+      "sourceSha256": "563370a7b0ef8fea32b1e01b441b507bcd6bae0b924205512c30c54ac1beca62"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "546854909355e7933e2b3cfaa17e9ab5c1b889540a976f2eb587388386fc7ae6",
+      "matchCount": 1,
+      "sourceId": "ui.my-library.fbc3b89e6a",
+      "sourceSha256": "fbc3b89e6a661f7c5bec9c04eab3810a70357f5c80f041dd7520a614b289b1e8"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "5960a9f95478e4082035c8e9766c66596f366f641801d829ceb9c5b512a8dc0a",
+      "matchCount": 1,
+      "sourceId": "ui.npsso-token.11efa49e40",
+      "sourceSha256": "11efa49e40c9a0e17e037dea6feee272a142b5fb54a3020088811c969d44f259"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "bd760247b2fe27efcf82e8b698591d2f2fd4f49fe98ca9d57c86bb3eee5894cc",
+      "matchCount": 1,
+      "sourceId": "ui.nzb-folder.2135b64c1c",
+      "sourceSha256": "2135b64c1c048969172bd50b131abd809c1668a27c694bd7c44bf938bc979bf1"
+    },
+    {
+      "callerless": true,
+      "contextSha256": "de1aa53503a81b8409b528386c819d6d70f9a491e8c9a451dd7a366ff5c93e41",
+      "matchCount": 0,
+      "sourceId": "ui.nzbhydra2-s-newznab-endpoint-use-tor.e3a412a0fa",
+      "sourceSha256": "e3a412a0fa56251ec46eacd516049e7701e9d42587cd7a9f95c9a6338c15bc6a"
+    },
+    {
+      "callerless": true,
+      "contextSha256": "b99bb078eef492f5dbc6cee32fd00f5427c6b4af4c543f585c8d5d3f24982e3f",
+      "matchCount": 0,
+      "sourceId": "ui.nzbvortex-calls-categories-groups-th.b96c9738db",
+      "sourceSha256": "b96c9738db0df83d99cae1acd44e4f0ed178a2c30c5bbcbe7c9c8f532cc34e59"
+    },
+    {
+      "callerless": true,
+      "contextSha256": "45a85fbdcdf2a93b86e87a0f6c038e2a3a1ad4ea71340ca6b118607f067029d8",
+      "matchCount": 0,
+      "sourceId": "ui.nzbvortex-serves-https-with-a-certif.f26b57e15b",
+      "sourceSha256": "f26b57e15baf04fc23f97305225ae75379b5d828b7223fe656d0fe7f30b2b1e2"
+    },
+    {
+      "callerless": true,
+      "contextSha256": "ab0829e3a2006da2b27875ae757f68473419af5cb7b998486471fbd692482aae",
+      "matchCount": 0,
+      "sourceId": "ui.nzbvortex-preferences-api-it-is-neve.8dc5509444",
+      "sourceSha256": "8dc55094445f937ac1894d9ededbbf2c556e71100eb59eed413f9a4f987b6cdc"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "db0a8ed492419169e469e04d542cf5852d56bae28d3757142e8e466fa117a758",
+      "matchCount": 26,
+      "sourceId": "ui.name.dcd1d5223f",
+      "sourceSha256": "dcd1d5223f73b3a965c07e3ff5dbee3eedcfedb806686a05b9b3868a2c3d6d50"
+    },
+    {
+      "callerless": false,
+      "contextSha256": "b455428b2acc6d530c211ae8a4bf7b9e540df8d60b60f17e86b8e7a7afa30af1",
+      "matchCount": 2,
+      "sourceId": "ui.name-az.7ed9662907",
+      "sourceSha256": "7ed96629073e830595066fabbde534505207b7da69f935d0a8c6a9daa0ff14ed"
+    }
+  ],
+  "searchScope": "tracked production source files under romarr; tests, docs, and locale catalogs excluded",
+  "tree": "d6066baa3d03d3b4c6034e5af061fc4bc278b0f9"
+}

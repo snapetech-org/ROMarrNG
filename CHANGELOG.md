@@ -7,6 +7,13 @@
 #### Added
 
 - **Indexers:** Internet Archive can now be added from Settings → Indexers. Its public software search results use the existing Direct HTTP grab and import flow, including multi-file disc sets.
+- **Localization:** Account-connection instructions now use stable locale templates while keeping credential examples, URLs, and provider response examples unchanged.
+- **Localization:** Organizer publish errors and rename-plan reasons now translate exact app-owned catalog messages while unknown API values remain opaque; reviewed ES-DE, import-status, genre, and format labels were refined across the 12 locales.
+
+#### Changed
+
+- **Localization:** Corrected the twelve download-queue status labels and refined the Japanese and Brazilian Portuguese GitHub label plus the Vietnamese file-header diagnostic.
+- **Localization:** Corrected seven context-reviewed labels for empty search results, the empty Wanted state, and Archive.org origin across five locales.
 
 ## [0.14.12] - 2026-10-24
 

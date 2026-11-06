@@ -1,0 +1,105 @@
+{
+  "status": "sealed-blind-review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "6bef0c74632067906fd07279fa6bd3fd59159a48",
+  "tree": "4fd79e67f37e4c66d0253199418973d965a3fbd6",
+  "window": "W345-W364",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "candidateFreeManifestSha256": "9290f5add4353ae65e4431d09c85a040b1d3a79830bfbce310c7399dd861ad5d",
+  "candidateFreeChecksumsSha256": "588e185b10c8246eed10f46d457a149d46845d614805e714f4c2ac217a7836c3",
+  "dispositions": {
+    "accept-current": 120,
+    "refinement": 30,
+    "correction": 90
+  },
+  "changedCellCount": 120,
+  "changedSourceCount": 19,
+  "byLocale": {
+    "ar": {
+      "accept-current": 9,
+      "refinement": 3,
+      "correction": 8
+    },
+    "de": {
+      "accept-current": 10,
+      "correction": 7,
+      "refinement": 3
+    },
+    "es": {
+      "accept-current": 13,
+      "correction": 6,
+      "refinement": 1
+    },
+    "fr": {
+      "accept-current": 11,
+      "correction": 8,
+      "refinement": 1
+    },
+    "hi": {
+      "refinement": 5,
+      "accept-current": 11,
+      "correction": 4
+    },
+    "id": {
+      "correction": 13,
+      "refinement": 1,
+      "accept-current": 6
+    },
+    "ja": {
+      "accept-current": 11,
+      "correction": 7,
+      "refinement": 2
+    },
+    "ko": {
+      "accept-current": 6,
+      "refinement": 3,
+      "correction": 11
+    },
+    "pt-BR": {
+      "accept-current": 10,
+      "correction": 9,
+      "refinement": 1
+    },
+    "vi": {
+      "correction": 10,
+      "accept-current": 10
+    },
+    "zh-Hans": {
+      "correction": 3,
+      "refinement": 3,
+      "accept-current": 14
+    },
+    "zh-Hant": {
+      "correction": 4,
+      "refinement": 7,
+      "accept-current": 9
+    }
+  },
+  "callerlessCellsInWindow": 0,
+  "priorCallerlessHoldCellsReattested": 288,
+  "priorCallerlessHoldHashesPreserved": true,
+  "placeholderMismatches": 0,
+  "numericMismatches": 0,
+  "protectedLiteralMismatches": 0,
+  "runtimeFollowups": [
+    {
+      "position": 346,
+      "sourceId": "ui.scan-failed-error-type.e99ccb8157",
+      "issue": "Launcher scan error currently displays through opaque API message rendering."
+    },
+    {
+      "position": 350,
+      "sourceId": "ui.scan-the-uri-or-enter-the-secret-in.612ce1fd46",
+      "issue": "TOTP enrollment note currently displays through opaque API message rendering."
+    }
+  ],
+  "nativeSpeakerApproval": false,
+  "headedBrowserReviewed": false,
+  "repositoryOrPullRequestChanged": false,
+  "testsBuildsScansCI": false,
+  "mergeReleaseTag": false,
+  "interpretation": "Blind translation decisions only; apply nothing until independent cross-review and exact-head readback."
+}

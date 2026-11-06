@@ -1,0 +1,16 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "url": "https://github.com/snapetech-org/ROMarrNG/pull/70",
+  "state": "OPEN",
+  "isDraft": true,
+  "baseRefName": "main",
+  "headRefName": "task/localization-translation-review-20261030",
+  "headRefOid": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "headTree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc",
+  "remoteBranchHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "pullRefHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "verifiedAt": "2026-11-03",
+  "verification": "gh pr view, gh API commit tree, git ls-remote branch and refs/pull/70/head",
+  "matchesExpected": true
+}

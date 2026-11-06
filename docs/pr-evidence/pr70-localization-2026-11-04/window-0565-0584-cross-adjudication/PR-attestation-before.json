@@ -1,0 +1,87 @@
+{
+  "attestedAtUtc": "2026-11-04T17:04:25.100802+00:00",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": {
+    "number": 70,
+    "state": "OPEN",
+    "draft": true,
+    "mergeable": "MERGEABLE",
+    "headRef": "task/localization-translation-review-20261030",
+    "headSha": "726db9138af2fc716056c7c36a9e842de04265e0",
+    "headTree": "6669dc9117dbbbe6587d4183ec5bd0184c87e983",
+    "baseRef": "main",
+    "baseApiSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "baseApiTree": "9c471ca6392055839a12ba74a112e49c2cdf03d5"
+  },
+  "refs": {
+    "branch": {
+      "name": "task/localization-translation-review-20261030",
+      "sha": "726db9138af2fc716056c7c36a9e842de04265e0"
+    },
+    "pullHead": {
+      "ref": "refs/pull/70/head",
+      "sha": "726db9138af2fc716056c7c36a9e842de04265e0"
+    },
+    "liveMain": {
+      "ref": "refs/heads/main",
+      "sha": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+      "tree": "73a05379aa80fa629f69286338139247d2bfd849"
+    }
+  },
+  "sourceWorktree": {
+    "path": "/mnt/disks/scratch/task-worktrees/localization-20261104/romarrng-pr70-w565-584-source",
+    "head": "726db9138af2fc716056c7c36a9e842de04265e0",
+    "tree": "6669dc9117dbbbe6587d4183ec5bd0184c87e983",
+    "clean": true,
+    "statusPorcelain": ""
+  },
+  "baseDrift": {
+    "apiBaseSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+    "liveMainSha": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+    "apiBaseRefMismatch": true,
+    "compareStatus": "ahead",
+    "aheadBy": 5,
+    "behindBy": 0,
+    "totalCommits": 5,
+    "changedPaths": [
+      ".github/workflows/dependency-review.yml",
+      ".github/workflows/docker.yml",
+      ".github/workflows/gvisor-runner-smoke.yml",
+      ".github/workflows/semgrep-community.yml",
+      ".github/workflows/sync-unraid-legacy-ghcr.yml",
+      ".github/workflows/trivy-filesystem.yml",
+      "AGENTS.md"
+    ],
+    "onlyWorkflowAndAgentInstructionChanges": true
+  },
+  "result": "PASS",
+  "finalizationFreshRecheck": {
+    "performedBeforeCatalogWrite": true,
+    "pullRequest": {
+      "number": 70,
+      "state": "OPEN",
+      "draft": true,
+      "headSha": "726db9138af2fc716056c7c36a9e842de04265e0",
+      "baseApiSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5"
+    },
+    "branchRef": {
+      "name": "task/localization-translation-review-20261030",
+      "sha": "726db9138af2fc716056c7c36a9e842de04265e0"
+    },
+    "pullHeadRef": {
+      "ref": "refs/pull/70/head",
+      "sha": "726db9138af2fc716056c7c36a9e842de04265e0"
+    },
+    "liveMainRef": {
+      "ref": "refs/heads/main",
+      "sha": "65d8747e3a068473396227bae5e85ddc71c7d4d8"
+    },
+    "sourceWorktree": {
+      "head": "726db9138af2fc716056c7c36a9e842de04265e0",
+      "tree": "6669dc9117dbbbe6587d4183ec5bd0184c87e983",
+      "clean": true
+    },
+    "baseApiRefMismatch": true,
+    "matchesSealedCrossAttestation": true
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "artifact": "ROMarrNG PR #70 W725-W744 product application readback",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W725-W744",
+  "inputHead": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "inputTree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+  "changedCatalogPath": "romarr/ui-labels.json",
+  "changedCellCount": 5,
+  "expectedChangedCellCount": 5,
+  "catalogKeyOrderPreserved": true,
+  "allOtherCatalogCellsUnchanged": true,
+  "all12DirectLocalesHave1836NonemptyMessages": true,
+  "localeCount": 12,
+  "messageCountPerLocale": 1836,
+  "candidateFreeInputSha256": "c75953732d9dddc7990c225dd8d28a369340941fcb6e6eab641bb5504d86481c",
+  "targetReadback": [
+    {
+      "position": 728,
+      "locale": "de",
+      "sourceId": "ui.no-set-is-being-acquired.4f1fe28285",
+      "before": "Es wird kein Set erworben.",
+      "beforeSha256": "3d786a6c584a150203480739472a8a365c129a11bc4ce83eccfa9c81de88d265",
+      "after": "Derzeit wird kein Set beschafft.",
+      "afterSha256": "7aaa8ef9a47c1eba33683543951054c1e02b46ea0bef5cb0023e49986ed9ca73",
+      "rootDisposition": "refinement",
+      "callerContextSha256": "ad9f2457a9771cd156912cde343031448e1078b327c9e2a89b8190a3357f8349"
+    },
+    {
+      "position": 734,
+      "locale": "ko",
+      "sourceId": "ui.not-announced.b40572aafd",
+      "before": "미정",
+      "beforeSha256": "35a4785aef2042575c7190e352d0afeb8a2d76d98784917524732824edd56efd",
+      "after": "미발표",
+      "afterSha256": "0e2d1f6cd2a07c9759cf76bb941466bb69ffd330d5c4dd0fd6d042c7682179cb",
+      "rootDisposition": "refinement",
+      "callerContextSha256": "9b5eecd9faf21122fbfd67dfc5ba05a8791b422fcfe960e6836a1344007557a1"
+    },
+    {
+      "position": 735,
+      "locale": "de",
+      "sourceId": "ui.not-available.67a926f700",
+      "before": "nicht verfügbar",
+      "beforeSha256": "9a98b3d0d73754f5834aa8af878d925932d7b9a1c4696763a835179b49c778e7",
+      "after": "Nicht verfügbar",
+      "afterSha256": "5db96a2a9332950f534d76f2f5bcca55dd81afcfd73be8781f94f132e553b51d",
+      "rootDisposition": "correction",
+      "callerContextSha256": "2709ea1685b58bd4b2c52e2023469301b630ecead7e57eca1430356bfb9dbeb9"
+    },
+    {
+      "position": 740,
+      "locale": "ar",
+      "sourceId": "ui.notes.8a7525b149",
+      "before": "الحواشي",
+      "beforeSha256": "6d6329934b71baa6a1ab72162b26a0b47ede2c491b842c6c245c1c2b900acd51",
+      "after": "ملاحظات",
+      "afterSha256": "d446d2dc6b81b07a2da81ca1fc5c09151624ca9045d8804212d00d3e415b5ecb",
+      "rootDisposition": "correction",
+      "callerContextSha256": "e6601f860620c93403e6154ccb2f48db79befbcb9d8cd1c15260860ecc775a2e"
+    },
+    {
+      "position": 743,
+      "locale": "de",
+      "sourceId": "ui.nothing-dated-in-the-future.9647c5497c",
+      "before": "Keine zukünftigen Termine.",
+      "beforeSha256": "f939468fc7d3e477640df13014fe70b1f502a99bf7ba11a9b1333dc1c67cbb99",
+      "after": "Keine Spiele mit einem zukünftigen Erscheinungsdatum.",
+      "afterSha256": "987d336eaecfecec5ba49f481e0840e1aa164c26b19fdc9f0a11e61c39eb8319",
+      "rootDisposition": "refinement",
+      "callerContextSha256": "0298dcd206da4601ca6c3ee1e4701528a8648609fdda2a42cf730a74fc49e253"
+    }
+  ],
+  "catalogSha256After": "69ac7d9ad07967551104a97c1262d0ce94afb0d5a14c42a5202df30b23b06c55",
+  "productDiffNames": [
+    "romarr/ui-labels.json"
+  ],
+  "nativeSpeakerApproval": false,
+  "headedBrowserReviewPerformed": false,
+  "productCommitPending": true
+}

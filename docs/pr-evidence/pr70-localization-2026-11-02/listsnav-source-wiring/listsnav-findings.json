@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "head": "9c305e322aeccaa8b88102a6085165385636f585",
+  "tree": "e7d96cb8c61e29b64d813bf154153f6d39e4c9c6",
+  "path": "romarr/ui.py",
+  "function": "listsNav",
+  "sourceFileRawSha256": "c72b97c9ea7572037bd237aab23f9c273031e20d5ea1729746cf5e523035919d",
+  "catalogFileRawSha256": "0619a7597bad7b6602f94db3718c337d492ab200ae2dab41ad8dd0fa76f725aa",
+  "visibleRawTextNodes": [
+    {
+      "line": 2307,
+      "source": "Browse catalog",
+      "messageId": "ui.browse-catalog.4d05dc6da8",
+      "sourceSha256": "4d05dc6da83718c826d81f2b36bddc6f9fa3fab8706e5bdd57a2e35639dcaa59",
+      "translationLocaleCount": 12
+    },
+    {
+      "line": 2308,
+      "source": "Import lists",
+      "messageId": "ui.import-lists.cdf54991b2",
+      "sourceSha256": "cdf54991b296b33028b015ba3a8246ceff8f70bd063ba74122b30846eee80070",
+      "translationLocaleCount": 12,
+      "note": "A different case-exact sibling message `Import Lists` has another ID; this caller text matches the lowercase-lists ID."
+    },
+    {
+      "line": 2310,
+      "source": "SeerrNG discovery",
+      "messageId": "ui.seerrng-discovery.f140768191",
+      "sourceSha256": "f140768191c3906cad20b63ec4dab1f87e06db44c678a2ad2c9879fd92ebcf94",
+      "translationLocaleCount": 12
+    },
+    {
+      "line": 2311,
+      "source": "Integration guide",
+      "messageId": "ui.integration-guide.02a0a9e2c2",
+      "sourceSha256": "02a0a9e2c23ddca5fd31ec188143d7650492cc327743dfae8200bdc15c8385de",
+      "translationLocaleCount": 12,
+      "note": "Case-distinct from audited lower-case source `integration guide` and its ID `ui.integration-guide.6cfa2d0314`."
+    }
+  ],
+  "noOtherVisibleTextNodesFound": true,
+  "scopeNote": "Only raw visible labels inside listsNav were inventoried. This file does not make or recommend source edits."
+}

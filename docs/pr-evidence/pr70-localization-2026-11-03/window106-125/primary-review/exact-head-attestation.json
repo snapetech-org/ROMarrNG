@@ -1,0 +1,62 @@
+{
+  "attestedAtUtc": "2026-11-03T02:15:11.116337+00:00",
+  "callerFilesReattested": true,
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogSha256": "5377a4b6c76137e7a3a9da7096dfbecbb8c90558d92831085ba1fb37c80d1484",
+  "head": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+  "independentReviewerPacketContentsRead": false,
+  "livePullRequest": {
+    "baseRefName": "main",
+    "headRefName": "task/localization-translation-review-20261030",
+    "headRefOid": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+    "isDraft": true,
+    "state": "OPEN",
+    "url": "https://github.com/snapetech-org/ROMarrNG/pull/70"
+  },
+  "postPacketSealReattestation": {
+    "attestedAtUtc": "2026-11-03T02:16:03.861111+00:00",
+    "gitTree": "e8668e9c83afa533f8cd6e69e6a7ad96946ed40e",
+    "headMatchesPinned": true,
+    "livePullRequest": {
+      "baseRefName": "main",
+      "headRefName": "task/localization-translation-review-20261030",
+      "headRefOid": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+      "isDraft": true,
+      "state": "OPEN",
+      "url": "https://github.com/snapetech-org/ROMarrNG/pull/70"
+    },
+    "treeMatchesPinned": true
+  },
+  "pullRequest": 70,
+  "remoteHead": "5f0973fb211c24d9b408cdb85c572540a7ab17ff",
+  "repository": "snapetech-org/ROMarrNG",
+  "repositoryChangesMade": false,
+  "selectedCellCount": 240,
+  "selectedSourceCount": 20,
+  "selectedSourceIds": [
+    "ui.evidence.03867aea70",
+    "ui.exact-dat-checksum-match.91363b80af",
+    "ui.existing-es-de-gamelists-folder-opti.1659a3153e",
+    "ui.existing-es-de-media-folder-optional.dcc4281be8",
+    "ui.existing-gamelist-xml-is-invalid-it.6951c0112d",
+    "ui.explains-the-connection.9e80ba4652",
+    "ui.explore-more-games-in-this-genre.ca9764a30b",
+    "ui.failed-download-handling-is-off.ad2c9dba83",
+    "ui.filename-only-no-verified-catalog-ma.c5ef8667b2",
+    "ui.filename-only-review.7ff9deba1a",
+    "ui.folder-and-set-its-game-media-direct.6970455da7",
+    "ui.folder-name.14d34edf50",
+    "ui.folder-names-are-matched-only-at-the.a6064d8258",
+    "ui.folder-not-the-wider.d61c242874",
+    "ui.folder-packages-are-left-intact-to-p.e180bb56ad",
+    "ui.for-a-guided-discovery-and-user-requ.409fbe664a",
+    "ui.for-a-household-catalog-and-request.2ec86400a0",
+    "ui.for-a-shared-catalog-and-household-r.027b0accc2",
+    "ui.for-the-shared-household-request-que.d2ef0c1d6b",
+    "ui.format-and-schema.a697cd2d86"
+  ],
+  "sourceBundlePath": "localization/source-bundles/20261101-connect-instructions.json",
+  "sourceBundleSha256": "a6f047ba685db67ba51fe5fda0e20f6f83b84cdc94f303a68f648bc6540fe7a8",
+  "targetHashesReattested": true,
+  "tree": "e8668e9c83afa533f8cd6e69e6a7ad96946ed40e"
+}

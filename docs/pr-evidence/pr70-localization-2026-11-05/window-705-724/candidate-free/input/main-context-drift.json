@@ -1,0 +1,339 @@
+{
+  "baseApiRefMismatch": true,
+  "baseApiSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "comparison": "same stable source IDs and exact quoted source/source-ID/HTML text searches over tracked production files under romarr; tests, docs, catalogs, and workflows excluded",
+  "mainHead": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+  "mainTree": "73a05379aa80fa629f69286338139247d2bfd849",
+  "prHead": "50e3f8a48a800affff8bad367b5c493cc0fdfd62",
+  "prTree": "22cd46ff4821fcbbe76b4760a15e22d688b3f548",
+  "repository": "snapetech-org/ROMarrNG",
+  "results": [
+    {
+      "contextDrift": false,
+      "mainCallerCount": 0,
+      "mainCallerless": true,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "2ede5d691889baa6452f9253ba7ff20289c521909842c53388472068594711ac",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 0,
+      "prCallerless": true,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "2ede5d691889baa6452f9253ba7ff20289c521909842c53388472068594711ac",
+      "sourceId": "ui.no-download-clients-are-configured-y.2ede5d6918",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": true,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "36088bbb814048d625fdd81e9633b1bc9c6659ca7a02a2d5675a700f9c09b852",
+      "newMainCallerSignatures": [
+        {
+          "lineText": "+(t.outside_preference?' <span class=\"pill\" title=\"No dump in your preferred regions; kept so the game is not lost\">outside regions</span>':'')",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [
+        {
+          "lineText": "+interfaceTitleTemplate('No dump in your preferred regions; kept so the game is not lost',{})+'>'",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "prSourceSha256": "36088bbb814048d625fdd81e9633b1bc9c6659ca7a02a2d5675a700f9c09b852",
+      "sourceId": "ui.no-dump-in-your-preferred-regions-ke.36088bbb81",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "b68ad00dad0453cb71b7f32872743b2e9e2be597f2d0211d0c2b70cbb6395bb4",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "b68ad00dad0453cb71b7f32872743b2e9e2be597f2d0211d0c2b70cbb6395bb4",
+      "sourceId": "ui.no-enabled-torrent-or-usenet-indexer.b68ad00dad",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "c5a18233c2f74e80ee435d25f05c9fd5077593850c0cadd1326ec95a8949fc28",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "c5a18233c2f74e80ee435d25f05c9fd5077593850c0cadd1326ec95a8949fc28",
+      "sourceId": "ui.no-friends-yet-invite-someone-or-pas.c5a18233c2",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "c37e0e161c68d46c528e0186890b2f7fd69346a7a9968b9c7ea5d9450595e864",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "c37e0e161c68d46c528e0186890b2f7fd69346a7a9968b9c7ea5d9450595e864",
+      "sourceId": "ui.no-frontend-formats-available.c37e0e161c",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 2,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "0cda910221cb8ad46adadb731ad0c358a362df2e5a183dce0adcbe73a2e8fc85",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 2,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "0cda910221cb8ad46adadb731ad0c358a362df2e5a183dce0adcbe73a2e8fc85",
+      "sourceId": "ui.no-game-matches-that.0cda910221",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 2,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "342cfd2c2931bc53a466e3f43fd552823357507845cffed3f1c7ae0f13c844fc",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 2,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "342cfd2c2931bc53a466e3f43fd552823357507845cffed3f1c7ae0f13c844fc",
+      "sourceId": "ui.no-games-returned-by-the-library.342cfd2c29",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 0,
+      "mainCallerless": true,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "b758dfee929ce53181da9df6e90fd19ef5335018cb34cbb7438f517615cdac03",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 0,
+      "prCallerless": true,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "b758dfee929ce53181da9df6e90fd19ef5335018cb34cbb7438f517615cdac03",
+      "sourceId": "ui.no-hashes-are-recorded-yet-so-netpla.b758dfee92",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "d0e7d37e6c9f7aa0d8d8dbd5f80133e32095c40f4822216b25d12ba8a18d6a12",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "d0e7d37e6c9f7aa0d8d8dbd5f80133e32095c40f4822216b25d12ba8a18d6a12",
+      "sourceId": "ui.no-hashes-have-been-recorded-yet-so.d0e7d37e6c",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "15f6e9920d44475cdf8b7fd8145c25869c54d9b68d528d4dd0abda5e893329ee",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "15f6e9920d44475cdf8b7fd8145c25869c54d9b68d528d4dd0abda5e893329ee",
+      "sourceId": "ui.no-history-yet.15f6e9920d",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 0,
+      "mainCallerless": true,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "696e6e393fe1111f2ccb85d430b93072c3d2d388d5f0c0313b0e9d9264ef4beb",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 0,
+      "prCallerless": true,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "696e6e393fe1111f2ccb85d430b93072c3d2d388d5f0c0313b0e9d9264ef4beb",
+      "sourceId": "ui.no-indexers-configured.696e6e393f",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": true,
+      "mainCallerCount": 0,
+      "mainCallerless": true,
+      "mainSourcePresent": false,
+      "mainSourceSha256": null,
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [
+        {
+          "lineText": "target.innerHTML='<div class=\"empty\">No inventory entries yet. Scan a configured ROM library to begin.</div>';",
+          "matchKind": "exact HTML text node",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "prSourceSha256": "acb0dacd79a0138ef576c9abe95aa0c96bb41c86aa650bc70b6fca7ccb7b0f91",
+      "sourceId": "ui.no-inventory-entries-yet-scan-a-conf.acb0dacd79",
+      "sourceSame": false
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "60146a85ac028ed25232c81ceb51cf48b843172a5dad143b0f916851d44c9e85",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "60146a85ac028ed25232c81ceb51cf48b843172a5dad143b0f916851d44c9e85",
+      "sourceId": "ui.no-library-is-marked-default-so-anyt.60146a85ac",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "8c5e768c149c93a86d9f5e4cdeaf1bd25ac2e37858a86930dae1cbecf90d6aaa",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "8c5e768c149c93a86d9f5e4cdeaf1bd25ac2e37858a86930dae1cbecf90d6aaa",
+      "sourceId": "ui.no-library-yet-add-one-or-nothing-ca.8c5e768c14",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "9563affc022e1d8d5afed520bdfa2f7b17183575b08b25123827c190942f4842",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "9563affc022e1d8d5afed520bdfa2f7b17183575b08b25123827c190942f4842",
+      "sourceId": "ui.no-link.9563affc02",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 2,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "944f40a6074bdcb73c289b31801508be4d0f53b7589fc55c8ec085720f88bb81",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 2,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "944f40a6074bdcb73c289b31801508be4d0f53b7589fc55c8ec085720f88bb81",
+      "sourceId": "ui.no-lists-yet-paste-one-or-connect-an.944f40a607",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": true,
+      "mainCallerCount": 0,
+      "mainCallerless": true,
+      "mainSourcePresent": false,
+      "mainSourceSha256": null,
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [
+        {
+          "lineText": ":'<div class=\"empty\">No patch projects match. Add a catalogue in Media Management or drop JSON files into the patch-catalog.d folder.</div>';",
+          "matchKind": "exact HTML text node",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "prSourceSha256": "c81829dd8ff59f0602dfda4a130dd59078d9d01c05a17bcdc2ec158bdf1c380c",
+      "sourceId": "ui.no-patch-projects-match-add-a-catalo.c81829dd8f",
+      "sourceSame": false
+    },
+    {
+      "contextDrift": true,
+      "mainCallerCount": 0,
+      "mainCallerless": true,
+      "mainSourcePresent": false,
+      "mainSourceSha256": null,
+      "newMainCallerSignatures": [],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [
+        {
+          "lineText": "+(cards?'<div class=\"grid\">'+cards+'</div>':'<div class=\"empty\">No platforms match this filter.</div>')",
+          "matchKind": "exact HTML text node",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "prSourceSha256": "a9e7efc40fea05c6389c0e22ee10378b7208611a1dc836b495141184d97c3ca6",
+      "sourceId": "ui.no-platforms-match-this-filter.a9e7efc40f",
+      "sourceSame": false
+    },
+    {
+      "contextDrift": false,
+      "mainCallerCount": 0,
+      "mainCallerless": true,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "3a6e9e30fa458788c560fc5e700a073ccfc259d77e7e702e2697424322372105",
+      "newMainCallerSignatures": [],
+      "prCallerCount": 0,
+      "prCallerless": true,
+      "prOnlyCallerSignatures": [],
+      "prSourceSha256": "3a6e9e30fa458788c560fc5e700a073ccfc259d77e7e702e2697424322372105",
+      "sourceId": "ui.no-provider-configured-yet-covers-di.3a6e9e30fa",
+      "sourceSame": true
+    },
+    {
+      "contextDrift": true,
+      "mainCallerCount": 1,
+      "mainCallerless": false,
+      "mainSourcePresent": true,
+      "mainSourceSha256": "1f09accdb464240894485dc119911b5e72879123e249478dfc9f3e2049b60053",
+      "newMainCallerSignatures": [
+        {
+          "lineText": ":'<div class=\"empty\">'+appMessageMarkup(w.error||'No provider configured.')+'</div>';",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "prCallerCount": 1,
+      "prCallerless": false,
+      "prOnlyCallerSignatures": [
+        {
+          "lineText": ":'<div class=\"empty\">'+(w.error?apiMessageMarkup(w.error):appMessageMarkup('No provider configured.'))+'</div>';",
+          "matchKind": "exact quoted source literal",
+          "path": "romarr/ui.py"
+        }
+      ],
+      "prSourceSha256": "1f09accdb464240894485dc119911b5e72879123e249478dfc9f3e2049b60053",
+      "sourceId": "ui.no-provider-configured.1f09accdb4",
+      "sourceSame": true
+    }
+  ],
+  "selectedSourceCount": 20,
+  "sourceTextChanges": 3,
+  "sourcesMissingFromMain": 3,
+  "sourcesWithCallerContextDrift": 5,
+  "sourcesWithNewMainCallers": 2
+}

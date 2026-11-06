@@ -1,0 +1,5 @@
+{
+  "policy": "Preserve exact source casing for recognized product/acronym/file literals from the candidate-free glossary embedded in build_candidate_free.py.",
+  "mismatchCount": 0,
+  "mismatches": []
+}

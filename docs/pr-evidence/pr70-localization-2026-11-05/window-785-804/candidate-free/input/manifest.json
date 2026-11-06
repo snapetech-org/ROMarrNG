@@ -1,0 +1,52 @@
+{
+  "artifact": "ROMarrNG PR #70 W785-W804 candidate-free exact-head input",
+  "branch": "task/localization-translation-review-20261030",
+  "callerBackedCells": 192,
+  "callerlessHashOnlyCells": 48,
+  "callerlessSourceCount": 4,
+  "catalogSelectionOneBased": [
+    786,
+    805
+  ],
+  "catalogSelectionZeroBased": [
+    785,
+    804
+  ],
+  "cellCount": 240,
+  "currentTokenMismatchCounts": {
+    "markup": 0,
+    "numeric": 0,
+    "numericPresentationDifferences": 0,
+    "placeholder": 0,
+    "protectedLiteral": 0
+  },
+  "directCallerReferences": 34,
+  "head": "bbbf84d0d83138a23143f6aa6075415ebcb36d3e",
+  "localeCount": 12,
+  "newWindowHashOnlyHolds": 48,
+  "nextBoundary": {
+    "continuationIndex": 805,
+    "oneBasedPosition": 806,
+    "sourceId": "ui.patch-catalogue-url-optional.da0d568bab",
+    "sourceSha256": "da0d568babe7e4775cc6a65199aafa40bf37757e61bfec6bca1cbbea2df2455f"
+  },
+  "previousProductCommit": "7e101cc0ea5580443d1b3903af084c23fe2134e5",
+  "previousProductTree": "d4b2661cd5105d6a18505a7302a13d9295eff39c",
+  "priorActiveHoldsReattested": 1012,
+  "priorAppliedCellsReattested": 154,
+  "priorFullReadbackWindowCount": 11,
+  "priorProductCorrectionCellsReattested": 20,
+  "priorProductCorrectionCommit": "2e6fb1d9f5bf5a5dc54f7fb62e562cc2a88d3fae",
+  "priorSelectionsReattested": 400,
+  "productionCallerFilesSearched": 51,
+  "proposedTargetsIncluded": false,
+  "pullRequest": 70,
+  "repoEdited": false,
+  "repository": "snapetech-org/ROMarrNG",
+  "resultingActiveHashOnlyHolds": 1060,
+  "reviewDecisionsIncluded": false,
+  "sourceCount": 20,
+  "testsBuildsScansCiRun": false,
+  "tree": "fbf9ada4b4fd43a288ce498b24990312f0c32f22",
+  "window": "W785-W804"
+}

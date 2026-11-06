@@ -1,0 +1,30 @@
+{
+  "artifact": "ROMarrNG PR #70 W405-W424 primary localization review",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "c146189f29db8fbd77d68dff0c33a0ab59a6b601",
+  "tree": "3db10f8b87577edd1167e4489524e6afbb50d556",
+  "candidateFreeInput": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w405-424-candidate-free-20261103/input",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "dispositionCounts": {
+    "hold": 48,
+    "accept-current": 164,
+    "correction": 21,
+    "refinement": 7
+  },
+  "changeCount": 28,
+  "holdPositions": [
+    405,
+    407,
+    408,
+    416
+  ],
+  "holdCells": 48,
+  "carriedHoldsReattested": 288,
+  "createdUtc": "2026-11-03T18:40:07.359017+00:00",
+  "noRepoOrPrEdits": true,
+  "noTestsBuildCiBrowser": true
+}

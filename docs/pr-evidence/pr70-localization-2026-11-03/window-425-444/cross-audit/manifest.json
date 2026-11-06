@@ -1,0 +1,28 @@
+{
+  "artifact": "ROMarrNG PR #70 W425-W444 third-party exact-head cross-audit packet",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+  "tree": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d",
+  "sourceInputs": {
+    "candidateFree": "evidence/candidate-free-input",
+    "primary": "evidence/primary-review",
+    "blind": "evidence/blind-review",
+    "cellCount": 240,
+    "window": "W425-W444"
+  },
+  "livePRBefore": "live-pr-before.json",
+  "livePRAfter": "live-pr-after.json",
+  "sourceCatalogDriftCheck": "source-catalog-drift-check.json",
+  "supplementalCallerEvidence": "supplemental-caller-evidence.json",
+  "auditLedger": "audit-ledger.jsonl",
+  "summary": "summary.json",
+  "verifier": "verify_cross_audit.py",
+  "createdUtc": "2026-11-03T19:52:23.406774+00:00",
+  "noRepositoryOrPRMutation": true,
+  "noTestsBuildsScansOrCI": true,
+  "nativeSpeakerClaim": false,
+  "livePRAfterCapturedUtc": "2026-11-03T19:54:08.986462+00:00",
+  "sourceCatalogFinalRecheckUtc": "2026-11-03T19:54:08.986462+00:00"
+}

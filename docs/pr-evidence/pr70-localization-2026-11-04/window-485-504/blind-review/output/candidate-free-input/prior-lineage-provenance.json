@@ -1,0 +1,30 @@
+{
+  "sourceCandidateFreeInputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w465-484-candidate-free-20261103/input",
+  "sourceCandidateFreeChecksumListSha256": "12049222afa5f598eca8e0e03f6dda5dd477005a1a46077273173a85dcb749e8",
+  "sourceCandidateFreeManifestSha256": "202b78c2a2842c8c7d458ad2e411f3e81dfed5691b48f7661fa84d1525a6884c",
+  "sourceCandidateFreeVerifierOutput": "PASS candidate-free W465-W484: exact OPEN/DRAFT PR/branch/pull refs before and after; 20 catalog sources × 12 locales (240 cells); 479-source registry and 1,836-message catalog pins; 80 prior selected sources and 384 carried holds reattested unchanged; 0 placeholder, 2 numeric, 0 protected-literal mismatches recorded; no proposed targets or current-window decisions; checksums and portable evidence verifier pass.",
+  "priorEvidenceCommit": "6eb494d362ae19503b9199cd2c05c0767cddbc0e",
+  "priorEvidencePath": "docs/pr-evidence/pr70-localization-2026-11-03/window-465-484",
+  "priorEvidenceManifestSha256": "f54f5fbc4247c1223afb38b99e42efa57a5cdbe10bf77e9625b9311019847533",
+  "primaryLedgerSha256": "f3a38af2e75259089d48d9cc2e36fcc41a5f379a6795e7ceb06bf6187978c07f",
+  "hashOnlyEvidenceFiles": {
+    "cross-audit/primary-review/primary-ledger.jsonl": "f3a38af2e75259089d48d9cc2e36fcc41a5f379a6795e7ceb06bf6187978c07f",
+    "cross-audit/cross-audit-ledger.jsonl": "3f5b67dc7ff2eda276a1ef43257ce1defcfe5146217b30b2ee1e9874e777787d",
+    "application/evidence/apply-readback.jsonl": "b4ae4c3bfa0e18bdcf5f9e15fe8f04ca7222553ca9f32a106b442676be0e37b2",
+    "application/evidence/selected-change-ledger.jsonl": "b664b0f8203628e55ea48da33b195c39fa895479078489624edb413e74560832",
+    "application/evidence/prior-hold-reattestation.jsonl": "59d6bed639abe78c5f9fe972fcf92a051f2f3dfe7375bc0689a15ad0971383f4",
+    "application/evidence/prior-selection-reattestation.jsonl": "5e639d6308003296a9f39a146c613d85ea6cbd622596494dfa01065763433b96"
+  },
+  "primaryHoldCellCount": 60,
+  "priorSelectionRows": {
+    "W465-W484": 20,
+    "W445-W464": 20,
+    "W425-W444": 20,
+    "W405-W424": 20,
+    "W385-W404": 20
+  },
+  "priorHoldRows": {
+    "earlierWindows": 384,
+    "W465-W484": 60
+  }
+}

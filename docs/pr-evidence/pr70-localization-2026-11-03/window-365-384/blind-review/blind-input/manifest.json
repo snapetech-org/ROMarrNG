@@ -1,0 +1,58 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W365-W384",
+  "head": "d1698b94781c3c84e91faf03c75e8c308dc39c34",
+  "tree": "3f42d41fe4bbb8edd921ff161e8298ca66038a91",
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "sourceInventorySha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+  "sourceCount": 20,
+  "cellCount": 240,
+  "forbiddenFieldNames": [
+    "candidate",
+    "candidateText",
+    "catalogPath",
+    "catalogTranslationHash",
+    "currentTarget",
+    "currentTargetSha256",
+    "currentTranslation",
+    "disposition",
+    "proposal",
+    "proposedTarget",
+    "reviewDecision",
+    "selectedTarget",
+    "target",
+    "targetSha256",
+    "targetValue"
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 894,
+      "sha256": "755030d36ed9e1a2bb2cfc5a3db93f4893c399c78b3e72811fb40a42788da5e6"
+    },
+    {
+      "path": "translation-prompts.jsonl",
+      "bytes": 1490572,
+      "sha256": "6e199eb968556c2f777ba3a1fa994a0955183b3fa5360dc4d31b009a125bd6bb"
+    },
+    {
+      "path": "verify_blind_input.py",
+      "bytes": 1801,
+      "sha256": "212e4e8de1bf294f15a70e1f0286dde6ce9d808f9960933612831326cde30ad5"
+    }
+  ]
+}

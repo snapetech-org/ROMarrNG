@@ -1,0 +1,58 @@
+{
+  "artifact": "ROMarrNG PR #70 W425-W444 primary review",
+  "reviewerRole": "independent primary reviewer; candidate-free input only",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "7681ea470ee0f387cd3a1a5be0541979d9cd06f6",
+  "tree": "f8b34f29814233cb10dd9d608d5a69ce539b9f6d",
+  "candidateFreeInputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w425-444-candidate-free-20261103/input",
+  "candidateFreeInputManifestSha256": "03462891dbf9a5a173cb7800583c18c888a0bde28879a83659b46cbb886d69c2",
+  "candidateFreeInputChecksumsSha256": "0c4a48dc4766ccf845e703b7b8a3356210819c6c4e92ebc8a12f355711684746",
+  "candidateFreeInputVerified": true,
+  "primaryProposalsReadBeforeReview": false,
+  "blindReviewOutputInspected": false,
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "dispositions": {
+    "accept-current": 181,
+    "correction": 9,
+    "hold": 12,
+    "refinement": 38
+  },
+  "proposedCellCount": 47,
+  "numericScannerFindings": 2,
+  "chineseSemanticNumeralAccepted": 2,
+  "chineseNumeralAdjudications": [
+    {
+      "position": 439,
+      "locale": "zh-Hans",
+      "source": "100",
+      "target": "百",
+      "result": "semantically equivalent; accepted current"
+    },
+    {
+      "position": 439,
+      "locale": "zh-Hant",
+      "source": "100",
+      "target": "百",
+      "result": "semantically equivalent; accepted current"
+    }
+  ],
+  "newHolds": 12,
+  "holdPositions": [
+    440
+  ],
+  "priorLineageSelectionsReattested": 40,
+  "priorHoldCellsReattested": 336,
+  "sourceContextAvailable": 19,
+  "callerlessCellCount": 12,
+  "callerlessHoldFinding": "All 12 position-440 cells remain held because “Fern accent” has no exact active source registration or production caller context in this candidate-free packet.",
+  "placeholderMismatchesInSelectedTargets": 0,
+  "protectedLiteralMismatchesInSelectedTargets": 0,
+  "numericExactMismatchesAfterSemanticReview": 0,
+  "nativeSpeakerReview": "not performed; primary machine review does not establish native-speaker approval",
+  "browserReview": "not performed",
+  "createdUtc": "2026-11-03T19:30:56.345478+00:00"
+}

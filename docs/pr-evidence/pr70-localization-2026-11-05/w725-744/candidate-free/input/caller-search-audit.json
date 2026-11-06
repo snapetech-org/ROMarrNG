@@ -1,0 +1,171 @@
+{
+  "callerlessCellCount": 12,
+  "callerlessSourceCount": 1,
+  "head": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "productionFilesSearched": 51,
+  "queryCount": 20,
+  "results": [
+    {
+      "callerless": false,
+      "contextSha256": "3ce403c49a67763db5d01ca8617977de1e10603529158f82d1981f079aafffbe",
+      "matchCount": 1,
+      "sourceId": "ui.no-results-yet-your-library-server-f.6082732618",
+      "sourceSha256": "60827326188473a0e73e9dc89e46eb82106dc2e818686415ef8c0eba1ae357ef",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "cd9cb311a335d2e54179bb6dc5fd23865b87bafa696b185353320a6f2e4015d5",
+      "matchCount": 1,
+      "sourceId": "ui.no-safe-canonical-title.2968a7e7ba",
+      "sourceSha256": "2968a7e7bad39b710b63ba1af3927b4ceae6badd23e9bdf7e59b1a427628e07b",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "3b6b2a72a2acb48aff75cdfc077590ad26a7e5e2a5dd34dcf36478bd59b0cccd",
+      "matchCount": 1,
+      "sourceId": "ui.no-safe-renames-are-ready-in-this-ba.45fe5b5767",
+      "sourceSha256": "45fe5b5767b3acc6a30021a1ed6452d45a8ef81035bb9b9f202e6b5567005968",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "ad9f2457a9771cd156912cde343031448e1078b327c9e2a89b8190a3357f8349",
+      "matchCount": 1,
+      "sourceId": "ui.no-set-is-being-acquired.4f1fe28285",
+      "sourceSha256": "4f1fe282852803bd222d149d6bf06058d6019672e17147f8b47d242e8159b76d",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "1714b95838e2c53e0fb6c3d2808b154206f372aefffd31f9130bd3d7251ea0c5",
+      "matchCount": 1,
+      "sourceId": "ui.no-titles-match-these-filters.a0f06fb7bb",
+      "sourceSha256": "a0f06fb7bb2c89040d798bd1f4218640adf4759b41a8b7d30059abea521afd39",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "61c24997209d3838703ce8f2b8c53b692a6c19c3da89e551e5a5ee1a69942d61",
+      "matchCount": 2,
+      "sourceId": "ui.no-usable-release-was-found-checked.eef9a1aaab",
+      "sourceSha256": "eef9a1aaabf9f94828bef85cb21773500cb1281be5cef9414dd22c2bd4669bff",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "c0ccad337b6dec6056c269a6e86a92aab7c8cc81d34afb4ed0d086cb28f96950",
+      "matchCount": 1,
+      "sourceId": "ui.no-intro-and-redump-checksums-with-t.df6cd186de",
+      "sourceSha256": "df6cd186de8dfe9a59a03ce981d988a7de420dae497f6cacccf7a541a665bbe4",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": true,
+      "contextSha256": "b5a8507592a33bcb47d620e77fd6a65c6a59ff63d011f1e5d0e70d6037da0390",
+      "matchCount": 0,
+      "sourceId": "ui.nobody-has-claimed-this-romarr-yet-s.c9bb03c1de",
+      "sourceSha256": "c9bb03c1de2ab932c379da3508df5618089486aaa694e098de607ca3635739bf",
+      "sourceTextOmitted": true
+    },
+    {
+      "callerless": false,
+      "contextSha256": "185a7648bfe4af5e15ed6bf2577dcbe169eac2fbc59143a16b4025202c1f6010",
+      "matchCount": 2,
+      "sourceId": "ui.not-an-invitation.0ac3128cc5",
+      "sourceSha256": "0ac3128cc5d8cc6204f29e7694b8e13f5626b78bdea0a1d4e9aacb590a11f182",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "9b5eecd9faf21122fbfd67dfc5ba05a8791b422fcfe960e6836a1344007557a1",
+      "matchCount": 1,
+      "sourceId": "ui.not-announced.b40572aafd",
+      "sourceSha256": "b40572aafd1526f6291b1990c754849361b16ab27adecf4b36a6ce568e568740",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "2709ea1685b58bd4b2c52e2023469301b630ecead7e57eca1430356bfb9dbeb9",
+      "matchCount": 1,
+      "sourceId": "ui.not-available.67a926f700",
+      "sourceSha256": "67a926f7008e2b0e7f2b3f7a4b37597834830110be1d51138f425d6f3449bc09",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "c274bbc9e5e0206ed7022a8d9b52cb1bdd9e68d0adf8870e3a2cea984cee2dd0",
+      "matchCount": 2,
+      "sourceId": "ui.not-grabbed.c2d3260a1a",
+      "sourceSha256": "c2d3260a1a45a17f938918ebf03826aa38c6ed39f684d23bbe4de2a08c561ca3",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "f91b7badf0b4de68d095717d87c31913060a06a2305a8fb3740cd48b3e4e9ffb",
+      "matchCount": 1,
+      "sourceId": "ui.not-identified.2a12f76cae",
+      "sourceSha256": "2a12f76cae18f7d7c4537df0970ca5ceb25893263e324b6c413666d1cb4b5f51",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "8a71197ce65b44d92b890b3c4646ad894730fb2d438b94b65e26d8980751f12e",
+      "matchCount": 1,
+      "sourceId": "ui.not-in-library.c2f9e4fde9",
+      "sourceSha256": "c2f9e4fde96646a1969c0792c3f2688630247adaa25a18812240da6acfacc6ce",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "6b7f0a1eff1630b950f7f936f6101a81fa3e88d73664d4c763614808ae5d4cbf",
+      "matchCount": 2,
+      "sourceId": "ui.not-in-your-dat-often-perfectly-fine.d3400979d9",
+      "sourceSha256": "d3400979d9d0ce79429a015d4725bf9adddca634c03a436a0aa50da1d15116ab",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "e6601f860620c93403e6154ccb2f48db79befbcb9d8cd1c15260860ecc775a2e",
+      "matchCount": 5,
+      "sourceId": "ui.notes.8a7525b149",
+      "sourceSha256": "8a7525b1492fb84833f5c4a69b30f4bfbb134f9b666b61a2c1872d63d234c085",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "abb469a476d2f88da364c52bf5f31f65ec71381545c57113e1048433eb2e3f07",
+      "matchCount": 1,
+      "sourceId": "ui.nothing-peered-for-netplay-only.6024bd4d3b",
+      "sourceSha256": "6024bd4d3b40cba37eae9e09290b829b8540b59f6b24af3f65e0f49ca8924049",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "fa8133d65a5bf2b6d3b03f8e264772912caeba048d0a4eae63318937efee3fc9",
+      "matchCount": 1,
+      "sourceId": "ui.nothing-blocked.f73c4a5a85",
+      "sourceSha256": "f73c4a5a85c3d4e56cf2bda22efe9b017bd5014f0cf2f014f563c4599281bb50",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "0298dcd206da4601ca6c3ee1e4701528a8648609fdda2a42cf730a74fc49e253",
+      "matchCount": 1,
+      "sourceId": "ui.nothing-dated-in-the-future.9647c5497c",
+      "sourceSha256": "9647c5497c311168f5d10552b30a39aa29196467c6a004834dfce586952eb42c",
+      "sourceTextOmitted": false
+    },
+    {
+      "callerless": false,
+      "contextSha256": "28e6cd59d44157897375133b41408ca7cd551d4f5aeb597811a73f25e6053252",
+      "matchCount": 2,
+      "sourceId": "ui.nothing-found-a-search-where-every-i.cf40aad291",
+      "sourceSha256": "cf40aad291fce41c3e0045a02972a32643aed2f21d5cfa51bce49c96712d9097",
+      "sourceTextOmitted": false
+    }
+  ],
+  "searchScope": "tracked production source files under romarr; tests, docs, locale catalogs, and workflows excluded",
+  "tree": "3f835643e4f557999d533c3e832fc92036d4b01a"
+}

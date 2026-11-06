@@ -1,0 +1,81 @@
+{
+  "result": "PASS",
+  "head": "0afd1d8c150fb96d868394a8d9620371db612185",
+  "tree": "0ba717d05c49356d8b1f55ac4a6b8844c161a402",
+  "window": "W385-W404",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "effectiveDecisionCounts": {
+    "accept-current": 214,
+    "correction": 22,
+    "refinement": 4
+  },
+  "newSemanticReviewCounts": {
+    "cells": 48,
+    "positions": [
+      392,
+      396,
+      398,
+      399
+    ],
+    "acceptCurrent": 43,
+    "corrections": 5,
+    "holds": 0
+  },
+  "newCorrections": [
+    {
+      "position": 392,
+      "locale": "ko",
+      "target": "소스 파일이 없거나 심볼릭 링크입니다.",
+      "confidence": "moderate"
+    },
+    {
+      "position": 392,
+      "locale": "zh-Hans",
+      "target": "源文件不存在或是符号链接。",
+      "confidence": "moderate"
+    },
+    {
+      "position": 392,
+      "locale": "zh-Hant",
+      "target": "來源檔案不存在或是符號連結。",
+      "confidence": "moderate"
+    },
+    {
+      "position": 399,
+      "locale": "hi",
+      "target": "Sunshine ने इसे अस्वीकार कर दिया: कोई Moonlight क्लाइंट पेयरिंग का इंतज़ार नहीं कर रहा है। पहले अपने क्लाइंट पर पेयरिंग शुरू करें।",
+      "confidence": "moderate"
+    },
+    {
+      "position": 399,
+      "locale": "id",
+      "target": "Sunshine menolak: tidak ada klien Moonlight yang menunggu untuk dipasangkan. Mulai proses pemasangan di klien Anda terlebih dahulu.",
+      "confidence": "high"
+    }
+  ],
+  "reconciledPreviousCellsCarriedForward": 192,
+  "priorPrimaryRowsReattested": 240,
+  "priorCrossAuditRowsReattested": 240,
+  "priorSelectedWindowDispatchGapHolds": 48,
+  "newlyRenderableDispatchCells": 48,
+  "remainingDispatchGapCells": 0,
+  "predecessorHoldsReattestedUnchanged": 288,
+  "predecessorHoldSha256": "4fd52745ae79cae3873e97538dc28959e93eb00fe15c7d2d8a61d7f9ba642d36",
+  "placeholderMarkupNumericIcuProtectedLiteralMismatches": 0,
+  "surfaceLiteralMismatches": 0,
+  "decisionOrigins": {
+    "new-primary-semantic-review-after-dispatch-fix": 48,
+    "re-attested-prior-cross-audit-resolution": 192
+  },
+  "priorCrossAuditChangeSetPreserved": {
+    "plannedChangeCount": 21,
+    "additionalVietnameseSwitchFamilyRefinement": true,
+    "materialDifferencesAdjudicated": 3
+  },
+  "nativeSpeakerApproval": "not obtained",
+  "browserOrNativeReview": "not performed",
+  "repositoryOrPRFilesEdited": false,
+  "testsBuildsCiBrowserReleaseOrTagRun": false
+}

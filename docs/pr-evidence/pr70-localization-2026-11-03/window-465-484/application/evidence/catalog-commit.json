@@ -1,0 +1,18 @@
+{
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "parent": "7640720c5e3b1813725cca8d7aa46b5d968bff43",
+  "parentTree": "bdee162cc11115256df8756f192b19d4337ed1dc",
+  "commit": "53361f6c2ca8ad7d35cf844ab7901b91a2ecb06d",
+  "tree": "36d371b05d28fa75abd89ef34a6af447f501def5",
+  "commitMessage": "fix(i18n): apply ROMarrNG W465-W484 translations",
+  "changedPaths": [
+    "romarr/ui-labels.json"
+  ],
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogFileSha256": "7615df056775da77c2f559096cb23caa990231c475ce5955f50a732bf68633bb",
+  "catalogGitBlob": "03270030b779e7b3caec1a7c50028c16142410ec",
+  "localStatusCleanAfterCatalogCommit": false,
+  "verifiedAtUTC": "2026-11-04T00:09:16.463461+00:00"
+}

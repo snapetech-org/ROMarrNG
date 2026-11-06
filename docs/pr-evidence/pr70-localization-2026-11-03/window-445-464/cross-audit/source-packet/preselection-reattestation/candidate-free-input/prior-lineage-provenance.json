@@ -1,0 +1,19 @@
+{
+  "sourceCandidateFreeInputPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w425-444-candidate-free-20261103/input",
+  "sourceCandidateFreeChecksumListSha256": "0c4a48dc4766ccf845e703b7b8a3356210819c6c4e92ebc8a12f355711684746",
+  "sourceCandidateFreeManifestSha256": "03462891dbf9a5a173cb7800583c18c888a0bde28879a83659b46cbb886d69c2",
+  "sourceCandidateFreeVerifierOutput": "PASS candidate-free W425-W444: exact OPEN/DRAFT PR/branch/pull refs before and after; 20 catalog sources × 12 locales (240 cells); 479-source registry and 1,836-message catalog pins; 40 prior selected sources and 336 prior holds reattested unchanged; 0 placeholder, 2 numeric, 0 protected-literal mismatches recorded; no proposed targets or current-window decisions; checksums and portable evidence verifier pass.",
+  "previousPrimaryLedgerPath": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w425-444-primary-20261103/primary-ledger.jsonl",
+  "previousPrimaryLedgerSha256": "12740733c523e6b266c7ee812fedebfd3db5f600d4733679b801e38d5a649395",
+  "previousPrimaryVerifierOutput": "PASS primary W425-W444: 240 cells; 181 accept-current, 9 corrections, 38 refinements, 12 position-440 holds; 47 proposals; Chinese 100→百 semantic checks accepted twice; all selected placeholders/protected literals pass; numeric checks pass after semantic adjudication; prior 40 selections and 336 holds reattested; input verifier and packet checksums pass; PR remains OPEN/DRAFT at exact pinned head/tree.",
+  "previousPrimaryHoldCellCount": 12,
+  "priorSelectionRows": {
+    "W425-W444": 20,
+    "W405-W424": 20,
+    "W385-W404": 20
+  },
+  "priorHoldRows": {
+    "earlierWindows": 336,
+    "W425-W444": 12
+  }
+}

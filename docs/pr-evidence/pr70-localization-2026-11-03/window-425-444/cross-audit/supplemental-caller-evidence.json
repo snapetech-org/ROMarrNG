@@ -1,0 +1,282 @@
+{
+  "sourceId": "ui.fern-accent.fc8d0ac312",
+  "source": "Fern accent",
+  "candidateFreeExactLiteralSearch": {
+    "sourceIdMatches": 0,
+    "sourceTextMatches": 0,
+    "scope": "tracked romarr/*.py and romarr/*.js exact per-line substring scan at pinned head"
+  },
+  "runtimeCatalogRegistration": {
+    "path": "romarr/ui-labels.json",
+    "fileSha256": "d99f6636fefae13497849d8a88046d0bd6bb62c0d906fc030b2cc6946d6cd603",
+    "gitBlob": "d8b9a8fb9ab2f134132061a1740c41d572fb998b",
+    "messageKey": "ui.fern-accent.fc8d0ac312",
+    "messageSource": "Fern accent",
+    "sourceToIdLookupResult": "ui.fern-accent.fc8d0ac312",
+    "localeCount": 12,
+    "localeTargets": {
+      "ar": "تمييز أخضر سرخسي",
+      "de": "Farnfarbener Akzent",
+      "es": "Acento verde helecho",
+      "fr": "Accent vert fougère",
+      "hi": "फ़र्न हरा एक्सेंट",
+      "id": "Aksen hijau pakis",
+      "ja": "シダ色のアクセント",
+      "ko": "고사리색 강조색",
+      "pt-BR": "Destaque verde samambaia",
+      "vi": "Màu nhấn xanh lá dương xỉ",
+      "zh-Hans": "蕨绿色强调色",
+      "zh-Hant": "蕨綠色強調色"
+    }
+  },
+  "activeSourceMessageQueueContainsExactSource": false,
+  "interpretation": "The active source-message queue exact-literal scan misses this generated string, but the production UI loads ui-labels.json as UI_MESSAGES; _ui_key maps the ACCENTS name plus \" accent\" through that exact catalog source map. The generated key is therefore the exact registered W440 ID. _theme_control_html sets both data-i18n-title and data-i18n-aria-label, and applyInterfaceLanguage translates those attributes. The catalog locale targets match the 12 current targets exactly; this resolves the 12 W440 holds as accept-current.",
+  "sourceCodeEvidence": [
+    {
+      "path": "romarr/ui.py",
+      "lineStart": 26,
+      "lineEnd": 38,
+      "lines": [
+        {
+          "line": 26,
+          "text": "UI_CATALOG = json.loads(Path(__file__).with_name(\"ui-labels.json\").read_text(encoding=\"utf-8\"))"
+        },
+        {
+          "line": 27,
+          "text": "if UI_CATALOG.get(\"schemaVersion\") != 3:"
+        },
+        {
+          "line": 28,
+          "text": "    raise ValueError(\"ROMarr UI translation catalog must use stable-key schema v3\")"
+        },
+        {
+          "line": 29,
+          "text": "UI_CATALOG_JSON = (json.dumps(UI_CATALOG, ensure_ascii=False, separators=(\",\", \":\"))"
+        },
+        {
+          "line": 30,
+          "text": "                   .replace(\"<\", \"\\\\u003c\").replace(\">\", \"\\\\u003e\")"
+        },
+        {
+          "line": 31,
+          "text": "                   .replace(\"&\", \"\\\\u0026\").replace(\"\\u2028\", \"\\\\u2028\")"
+        },
+        {
+          "line": 32,
+          "text": "                   .replace(\"\\u2029\", \"\\\\u2029\"))"
+        },
+        {
+          "line": 33,
+          "text": "UI_MESSAGES = UI_CATALOG[\"messages\"]"
+        },
+        {
+          "line": 34,
+          "text": "UI_SOURCE_TO_ID = {message[\"source\"]: key for key, message in UI_MESSAGES.items()}"
+        },
+        {
+          "line": 35,
+          "text": ""
+        },
+        {
+          "line": 36,
+          "text": ""
+        },
+        {
+          "line": 37,
+          "text": "def _ui_key(source: str) -> str:"
+        },
+        {
+          "line": 38,
+          "text": "    return UI_SOURCE_TO_ID.get(source, source)"
+        }
+      ],
+      "contextSha256": "d9d03a9951f4f55087b18e3f1fd03c4a2b468a516714f6534e75235fdd2ac414",
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0"
+    },
+    {
+      "path": "romarr/ui.py",
+      "lineStart": 572,
+      "lineEnd": 579,
+      "lines": [
+        {
+          "line": 572,
+          "text": "ACCENTS = ["
+        },
+        {
+          "line": 573,
+          "text": "    (\"#f2a33c\", \"Amber\"),"
+        },
+        {
+          "line": 574,
+          "text": "    (\"#f2635f\", \"Coral\"),"
+        },
+        {
+          "line": 575,
+          "text": "    (\"#c084fc\", \"Violet\"),"
+        },
+        {
+          "line": 576,
+          "text": "    (\"#5aa2f0\", \"Azure\"),"
+        },
+        {
+          "line": 577,
+          "text": "    (\"#2dd4bf\", \"Teal\"),"
+        },
+        {
+          "line": 578,
+          "text": "    (\"#7bd88f\", \"Fern\"),"
+        },
+        {
+          "line": 579,
+          "text": "]"
+        }
+      ],
+      "contextSha256": "50ae1c548f8a296dea96c645c9859a9602958702c043dbb510a8c79ddc744b83",
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0"
+    },
+    {
+      "path": "romarr/ui.py",
+      "lineStart": 713,
+      "lineEnd": 720,
+      "lines": [
+        {
+          "line": 713,
+          "text": "def _theme_control_html() -> str:"
+        },
+        {
+          "line": 714,
+          "text": "    \"\"\"The mode switch and the accent swatches, for the rail's footer.\"\"\""
+        },
+        {
+          "line": 715,
+          "text": "    swatches = \"\".join("
+        },
+        {
+          "line": 716,
+          "text": "        f'<button class=\"sw\" type=\"button\" data-accent=\"{value}\" '"
+        },
+        {
+          "line": 717,
+          "text": "        f'style=\"--sw:{value}\" data-i18n-title=\"{_ui_key(name + \" accent\")}\" '"
+        },
+        {
+          "line": 718,
+          "text": "        f'data-i18n-aria-label=\"{_ui_key(name + \" accent\")}\" title=\"{html.escape(name + \" accent\", quote=True)}\" '"
+        },
+        {
+          "line": 719,
+          "text": "        f'aria-label=\"{html.escape(name + \" accent\", quote=True)}\" aria-pressed=\"false\"></button>'"
+        },
+        {
+          "line": 720,
+          "text": "        for value, name in ACCENTS"
+        }
+      ],
+      "contextSha256": "fbbcd1520633fcb7b5dea367e59a3ece12dbacd34436275c493322251b854b8e",
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0"
+    },
+    {
+      "path": "romarr/ui.py",
+      "lineStart": 1436,
+      "lineEnd": 1443,
+      "lines": [
+        {
+          "line": 1436,
+          "text": "const applyInterfaceLanguage=(language=readInterfaceLanguage())=>{"
+        },
+        {
+          "line": 1437,
+          "text": "  document.documentElement.lang=language;"
+        },
+        {
+          "line": 1438,
+          "text": "  document.documentElement.dir=ROMarrI18n.isRTL(language,UI_CATALOG)?'rtl':'ltr';"
+        },
+        {
+          "line": 1439,
+          "text": "  applyTranslatedLabels(document,language);"
+        },
+        {
+          "line": 1440,
+          "text": "  applyTranslatedOptionLabels(document,language);"
+        },
+        {
+          "line": 1441,
+          "text": "  applyTranslatedTemplates(document,language);"
+        },
+        {
+          "line": 1442,
+          "text": "  document.querySelectorAll('[data-i18n-aria-label]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nAriaLabel,'aria-label',language));"
+        },
+        {
+          "line": 1443,
+          "text": "  document.querySelectorAll('[data-i18n-title]').forEach(el=>applyTranslatedAttribute(el,el.dataset.i18nTitle,'title',language));"
+        }
+      ],
+      "contextSha256": "cdd429aa5cd41e4b37c24d10642ccde76994112c595e165516acea554cd094e2",
+      "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+      "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0"
+    }
+  ],
+  "exportParagraphEvidence": {
+    "path": "romarr/ui.py",
+    "lineStart": 4664,
+    "lineEnd": 4675,
+    "lines": [
+      {
+        "line": 4664,
+        "text": "    <p class=\"help\" style=\"margin-top:16px\">Export the library itself, for a"
+      },
+      {
+        "line": 4665,
+        "text": "    spreadsheet or another tool:</p>"
+      },
+      {
+        "line": 4666,
+        "text": "    <div class=\"row\" style=\"flex-wrap:wrap;gap:8px\">"
+      },
+      {
+        "line": 4667,
+        "text": "      <select id=\"ex-what\">"
+      },
+      {
+        "line": 4668,
+        "text": "        <option value=\"library\" data-i18n=\"ui.library.dc20b3d5d2\">Library</option>"
+      },
+      {
+        "line": 4669,
+        "text": "        <option value=\"wanted\" data-i18n=\"ui.wanted.c296832656\">Wanted</option>"
+      },
+      {
+        "line": 4670,
+        "text": "        <option value=\"blocklist\" data-i18n=\"ui.blocklist.f8019af406\">Blocklist</option>"
+      },
+      {
+        "line": 4671,
+        "text": "      </select>"
+      },
+      {
+        "line": 4672,
+        "text": "      <select id=\"ex-fmt\"><option value=\"json\">JSON</option>"
+      },
+      {
+        "line": 4673,
+        "text": "        <option value=\"csv\">CSV</option></select>"
+      },
+      {
+        "line": 4674,
+        "text": "      <button class=\"btn ghost\" id=\"ex-go\">Export</button>"
+      },
+      {
+        "line": 4675,
+        "text": "    </div>"
+      }
+    ],
+    "contextSha256": "53ee4d30a35adcff5444c91848acfa5282addfe0bb45b53fc98b036cd2adf18c",
+    "fileSha256": "4a3257389dd4c9ba3d2d473ad95511bc9fdf4b914a5b88216f9a4b698e65c40b",
+    "gitBlob": "97b1b1806695eed434ab9c814838dc10edf0f8c0"
+  }
+}

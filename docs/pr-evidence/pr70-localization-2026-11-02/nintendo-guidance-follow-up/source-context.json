@@ -1,0 +1,67 @@
+{
+  "catalogMessages": [
+    {
+      "directTargets": 12,
+      "id": "ui.import-lists.cdf54991b2",
+      "inheritedAliases": {
+        "es-419": "es",
+        "fr-CA": "fr"
+      },
+      "source": "Import lists",
+      "sourceHash": "cdf54991b296b33028b015ba3a8246ceff8f70bd063ba74122b30846eee80070"
+    },
+    {
+      "directTargets": 12,
+      "id": "ui.seerrng-discovery.f140768191",
+      "inheritedAliases": {
+        "es-419": "es",
+        "fr-CA": "fr"
+      },
+      "source": "SeerrNG discovery",
+      "sourceHash": "f140768191c3906cad20b63ec4dab1f87e06db44c678a2ad2c9879fd92ebcf94"
+    },
+    {
+      "directTargets": 12,
+      "dynamicPlaceholders": [],
+      "id": "ui.no-web-api-and-nothing-written-to-a.fefddf8698",
+      "source": "No web API, and nothing written to a PC to read either. Genuinely paste-only — and the one where DAT-verified acquisition matters most anyway.",
+      "sourceHash": "fefddf869833664222ac58789630ae2747f217842f1714d5746f1dcb5157980e",
+      "sourceKind": "ui"
+    }
+  ],
+  "crossReview": {
+    "file": "root-crossreview.jsonl",
+    "nativeSpeakerApprovedRows": 0,
+    "rows": 36,
+    "sha256": "a509e60ce0c3bdf218a945e99fa6c4191451fcb26254b4a23d7200a9de3ebfb6"
+  },
+  "followupReviewStatus": {
+    "nativeSpeakerReview": "pending",
+    "newHeadBrowserReview": "pending",
+    "priorScreenshotsReused": false,
+    "targetLocales": "draft"
+  },
+  "nintendoCopyOwnership": {
+    "behavior": "The label remains separate and escaped; only the fixed Nintendo explanation uses interfaceMarkup. Other reason values continue through esc(why).",
+    "definition": "romarr/lists.py:858-861",
+    "manifestLocations": [
+      "romarr/lists.py:859-861",
+      "romarr/ui.py:2754"
+    ],
+    "renderer": "romarr/ui.py:2749-2757",
+    "schemaApi": "romarr/app.py:6889-6892"
+  },
+  "pr": "https://github.com/snapetech-org/ROMarrNG/pull/70",
+  "reviewedBaseHead": "d259a92f89657b5c79be3653ed811e2bf8e01c58",
+  "reviewedBaseTree": "40d8b8d1dad55642774f5df2e646085f0fecf52b",
+  "schemaVersion": 1,
+  "validationScope": {
+    "catalogHashesAndSnapshot": "passed for 36 localized targets and all 1836 catalog source records",
+    "gitDiffCheck": "passed",
+    "sourceManifestAndSnapshot": "checked",
+    "sourceManifestLocations": "passed for both registered source locations",
+    "sourceTranslationHashes": "checked",
+    "testsBuildCi": "not run",
+    "uiRenderCall": "checked"
+  }
+}

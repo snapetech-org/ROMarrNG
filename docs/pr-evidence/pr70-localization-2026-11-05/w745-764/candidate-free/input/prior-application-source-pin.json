@@ -1,0 +1,14 @@
+{
+  "applicationCellCount": 5,
+  "applicationCellHashesReattested": true,
+  "applicationReadbackPath": "/home/keith/Documents/code/.task-worktrees/localization-20261105/romarrng-w685/docs/pr-evidence/pr70-localization-2026-11-05/w725-744/application/readback.json",
+  "applicationReadbackSha256": "ccc64cb6c0b03a68c5b1e3634dc0a9e789bcfcd27ac78f2a9a9c638ef0298bf3",
+  "currentCatalogSha256": "69ac7d9ad07967551104a97c1262d0ce94afb0d5a14c42a5202df30b23b06c55",
+  "currentHead": "68c5c9d4ad13ad5d02b9c455f429d8a5149d363d",
+  "currentTree": "524db27557a65d64343b15c9983f6ac2f92f90c4",
+  "productCommit": "19038831e63edd53e4aec62f072c6d2eda9245cd",
+  "productCommitAncestor": true,
+  "productTree": "34a5eb65caccaa79070895bbe0c49dc6bb4fec6f",
+  "sourceHead": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "sourceTree": "3f835643e4f557999d533c3e832fc92036d4b01a"
+}

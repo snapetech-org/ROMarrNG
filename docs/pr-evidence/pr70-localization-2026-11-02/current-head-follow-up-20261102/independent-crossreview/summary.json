@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "reviewHead": "65a3f8a8feee1b041c8c547250feeae6900337f5",
+  "reviewTree": "654f9065dcdd9c7f580df6909071f38278f44d61",
+  "inputPacket": "/mnt/disks/scratch/task-scratch/romarrng-pr70-current-head-3-message-review-20261102/root-current-review.jsonl",
+  "reviewedRows": 36,
+  "sourceIds": 3,
+  "localeCount": 12,
+  "decisions": {
+    "accept-current": 35,
+    "correction": 0,
+    "refine": 1,
+    "hold": 0
+  },
+  "refinedCells": [
+    {
+      "locale": "id",
+      "id": "ui.the-integration-guide-explains-how-t.59a854ef19",
+      "target": "Panduan integrasi menjelaskan cara menghubungkan layanan serta cara ROMarr mencari rilis game, memverifikasinya, dan mengatur game.",
+      "targetSha256": "e86cefd41a16379c1a3c24cf95b9e61c05cecb91a718364bb781e46cc2fa385b"
+    }
+  ],
+  "integrity": {
+    "currentCatalogTextsMatched": 36,
+    "sourceTextsAndRawSourceHashesMatched": 36,
+    "currentTargetRawUtf8HashesMatched": 36,
+    "catalogTranslationContentHashesMatched": 36,
+    "priorReviewTargetsAndHashesMatched": 36,
+    "currentSourceLineRecordsReattested": 144,
+    "callerFiles": 2,
+    "placeholdersAndProtectedLiteralsPreserved": true,
+    "historicalLocationPinsThatMoved": 8,
+    "currentLineEvidenceReverified": true,
+    "hashAlgorithms": {
+      "crossreviewTargetSha256": "SHA-256 of exact UTF-8 target text",
+      "crossreviewCatalogContentHash": "SHA-256 of JSON serialization using ensure_ascii=False, sort_keys=True, separators=(\",\", \":\"), matching ROMarr translationHashes",
+      "priorNintendoRootHash": "JSON serialized content hash",
+      "priorFullSentenceRootHash": "SHA-256 of exact UTF-8 target text"
+    }
+  },
+  "nativeSpeakerApproval": false,
+  "repositoryMutated": false,
+  "testsBuildsScansCiOrReleasesRun": false,
+  "blockers": []
+}

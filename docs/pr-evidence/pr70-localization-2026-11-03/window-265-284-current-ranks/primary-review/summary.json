@@ -1,0 +1,39 @@
+{
+  "candidateFreeInputManifestSha256": "d8c2d6ce7a0e4c146702cb25d4ba42bbb5eddb813790a4e27a49017f4fc9123d",
+  "cellCount": 240,
+  "dispositions": {
+    "accept-current": 41,
+    "correction": 24,
+    "hold": 168,
+    "refinement": 7
+  },
+  "head": "c135c4729582817273c946891186ab4ea87467b5",
+  "holdsByRank": {
+    "269": 12,
+    "270": 12,
+    "271": 12,
+    "272": 12,
+    "273": 12,
+    "274": 12,
+    "275": 12,
+    "276": 12,
+    "277": 12,
+    "278": 12,
+    "279": 12,
+    "280": 12,
+    "281": 12,
+    "282": 12
+  },
+  "holdsReason": "Raw API diagnostics have no safe explicit source-template path; retain the existing translations untouched until runtime wiring exists.",
+  "independentBlindReview": false,
+  "localeCount": 12,
+  "placeholderMismatches": 0,
+  "pullRequest": 70,
+  "qualifiedNativeSpeakerApproval": false,
+  "repository": "snapetech-org/ROMarrNG",
+  "schemaVersion": 1,
+  "selectedChanges": 31,
+  "sourceCount": 20,
+  "tree": "32c07150396335a5832b5664fc1e0225d7cebdc1",
+  "window": "W265-W284"
+}

@@ -1,0 +1,22 @@
+{
+  "artifact": "ROMarrNG PR #70 W785-W804 root adjudication input attestation",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W785-W804",
+  "exactHead": "bbbf84d0d83138a23143f6aa6075415ebcb36d3e",
+  "exactTree": "fbf9ada4b4fd43a288ce498b24990312f0c32f22",
+  "cellCount": 240,
+  "selectedTargetCount": 31,
+  "candidateFreeCellsSha256": "5446c3d311f1ea384d8007cf5a76f6a2835eb326d2c93240a3b6fa1b9e78ec2d",
+  "candidateFreeInputChecksumListSha256": "a6616fdac70085cdfa9964de1cefb4986371dad9330ee537ae678d7ac957dc62",
+  "primaryLedgerSha256": "34d8d9fe2ff7cbee57c62a9e7ef047579e4d43f2f2b59105116481f77293e9da",
+  "blindLedgerSha256": "25ba6181323a769f7e08af38a2b711a7aa6e9a26dabc387e52a5240f9acfc3cb",
+  "integratedCrossLedgerSha256": "be63ddc8b117bd07610084c55cb117f51b7dbb7eff4779914867adfe068ba5a6",
+  "integratedCrossChecksumListSha256": "ea7382d1c50abb7f8f44f7ea13cd64286afb570bdf7a90b32c9acbdeeeb46aa8",
+  "priorActiveHoldsCount": 1012,
+  "newCallerlessHashOnlyHolds": 48,
+  "resultingActiveHashOnlyHolds": 1060,
+  "nativeSpeakerApproval": false,
+  "headedApplicationReviewPerformed": false,
+  "catalogsEdited": false
+}

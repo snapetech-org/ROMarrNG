@@ -1,0 +1,46 @@
+{
+  "artifact": "ROMarrNG W725-W744 root adjudication input attestation",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "window": "W725-W744",
+  "exactHead": "c3f92c45b4b4f8d79a8caa99417f9970ebc42a26",
+  "exactTree": "3f835643e4f557999d533c3e832fc92036d4b01a",
+  "cellCount": 240,
+  "selectedTargetCount": 5,
+  "callerlessHashOnlyHolds": 12,
+  "blindCandidateFreePinsMatch": true,
+  "inputs": {
+    "candidateFreeCellsSha256": "c75953732d9dddc7990c225dd8d28a369340941fcb6e6eab641bb5504d86481c",
+    "candidateFreeManifestSha256": "d80b6524ea2e8d0ef065f5260a0df41572198639f12f2731e5553ddea56b6589",
+    "primaryLedgerSha256": "6981f6efec796789695e39c2060a16db8b957f395367b6d7dfbcf43c19db6e7c",
+    "blindRowsSha256": "1bb9e8f508c9330dee9cc49e776717e7527c369b9da51184db4ba6bd94c9b834",
+    "crossRowsSha256": "b4f0976b08edfc0162f87736863c13ffe0de72373a7ab94cb9ea475cabacc078",
+    "crossLineageFlagsSha256": "29d5eeac7d2bd195a7a2008068825aa84fc012898d4bc47e7a02ae114733b100",
+    "crossRootFlagsSha256": "b6267e2f14a9eed7d9f160f0cbb59f0f2719566d3797e78e18e974ec51bbeca1"
+  },
+  "blindSummaryPositionDiscrepancy": {
+    "summaryClaimsCatalogZeroBasedIndex": 731,
+    "candidateFreePrimaryBlindRowsAndCrossRowsAgreeOnIndex": 732,
+    "oneBasedPosition": 733,
+    "holdCells": 12,
+    "textRemainsRedacted": true
+  },
+  "inheritedLineageCaveatsPreserved": [
+    "W625 missing stage files: readback remains hash-bound; absent files are not claimed verified",
+    "W645 stale blind-summary checksum pointer: historical warning retained despite row checks",
+    "W665 evidence restoration: 77 indexed payloads attested present and hash-matching"
+  ],
+  "prVsMainContextDriftPositions": [
+    726,
+    727,
+    729,
+    733,
+    735,
+    738
+  ],
+  "rootAdjudicationPerformed": true,
+  "catalogsEdited": false,
+  "applicationPerformed": false,
+  "nativeSpeakerApproval": false,
+  "headedBrowserReviewPerformed": false
+}

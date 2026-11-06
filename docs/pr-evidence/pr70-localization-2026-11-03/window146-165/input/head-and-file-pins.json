@@ -1,0 +1,89 @@
+{
+  "baseRefName": "main",
+  "callerFiles": {
+    "romarr/app.py": {
+      "bytes": 417785,
+      "gitBlob": "1a6067d98a1e5c2c54c5af7c70a7f6cfeecedee5",
+      "sha256": "5d5f1a1dcdf601b8bb9c9d870b3cfebf387ea7e7f17fbbe2b7e9c98c828e0231"
+    },
+    "romarr/hub.py": {
+      "bytes": 28457,
+      "gitBlob": "6260dd6cfe469eed9a593ea3f7c9967b92b4656b",
+      "sha256": "4d8207aa01f7a7810dd26f60b105eac14927042b3f652ab3a461a5efdc9bc9a7"
+    },
+    "romarr/notify.py": {
+      "bytes": 14239,
+      "gitBlob": "ef207435d6dedce92e2fd7310898c1a55e95f94e",
+      "sha256": "106188db71e3a10dcbf736b4fe16af501c045a5128b5a56efb4c3de85ab83d69"
+    },
+    "romarr/organizer.py": {
+      "bytes": 121857,
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390",
+      "sha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64"
+    },
+    "romarr/ui.py": {
+      "bytes": 405689,
+      "gitBlob": "0cf909e3ef20a02ddc3e804666d32d2cfc67a4b7",
+      "sha256": "6876b529337ea468f2b2d8a4151d6c8cc1280f6a03d117a8b7afbd0f74bbdb71"
+    }
+  },
+  "catalogBlob": "b1fe28d7d692d00114110debe5f9392fb4840f4b",
+  "catalogPath": "romarr/ui-labels.json",
+  "catalogSha256": "2a22dbd87858d646541af1eabef7ef19234af3b5d1c2627378c8430caa8f3252",
+  "filePins": {
+    "localization/source-bundles/20261101-connect-instructions.json": {
+      "bytes": 246871,
+      "gitBlob": "0da16cf24d764dbf4b4156c2bc7db5c3ac8b11d5",
+      "sha256": "a6f047ba685db67ba51fe5fda0e20f6f83b84cdc94f303a68f648bc6540fe7a8"
+    },
+    "romarr/ui-source-messages.json": {
+      "bytes": 275911,
+      "gitBlob": "ea4ff095d4c9d60c175987926b852dddd1f6aa85",
+      "sha256": "612b3a664577c84e3fe60294929f2a97c8f103d2bfd58047aeecc6de348fd134"
+    },
+    "romarr/ui-source-snapshot.json": {
+      "bytes": 202889,
+      "gitBlob": "c6e8f3f93cb8784a25422526730b3c21f3f000a4",
+      "sha256": "b728cfb7d9e5b321b6ee4b99e315120b91fe4f7561b8b38d957189002d41d801"
+    },
+    "romarr/ui-labels.json": {
+      "bytes": 3006867,
+      "gitBlob": "b1fe28d7d692d00114110debe5f9392fb4840f4b",
+      "sha256": "2a22dbd87858d646541af1eabef7ef19234af3b5d1c2627378c8430caa8f3252"
+    },
+    "docs/localization-glossary.md": {
+      "bytes": 3031,
+      "gitBlob": "edfe311cb5a0fd66c49a0923a0b410d207fa315f",
+      "sha256": "08f2f2e2ddf722065993a454523e8c353db823c336a6f07e48f9bf215e37ad34"
+    },
+    "docs/pr-evidence/pr70-localization-2026-11-03/window126-145/input/selection.json": {
+      "bytes": 2813,
+      "gitBlob": "18b56699a6051d35684a6965cdde734827340f4b",
+      "sha256": "51105d48afd655c905ff7a3a971fc2cd2674c81c0f4c645544c56ddd639ce9dd"
+    }
+  },
+  "glossaryBlob": "edfe311cb5a0fd66c49a0923a0b410d207fa315f",
+  "glossaryPath": "docs/localization-glossary.md",
+  "glossarySha256": "08f2f2e2ddf722065993a454523e8c353db823c336a6f07e48f9bf215e37ad34",
+  "head": "db895a97e9871952a0b952e1d119e32e06cf168d",
+  "headRefName": "task/localization-translation-review-20261030",
+  "livePrUpdatedAt": "2026-11-03T04:29:28Z",
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "sourceBundleBlob": "0da16cf24d764dbf4b4156c2bc7db5c3ac8b11d5",
+  "sourceBundlePath": "localization/source-bundles/20261101-connect-instructions.json",
+  "sourceBundleSha256": "a6f047ba685db67ba51fe5fda0e20f6f83b84cdc94f303a68f648bc6540fe7a8",
+  "sourceMessageMapBlob": "ea4ff095d4c9d60c175987926b852dddd1f6aa85",
+  "sourceMessageMapPath": "romarr/ui-source-messages.json",
+  "sourceMessageMapSha256": "612b3a664577c84e3fe60294929f2a97c8f103d2bfd58047aeecc6de348fd134",
+  "sourceSnapshotBlob": "c6e8f3f93cb8784a25422526730b3c21f3f000a4",
+  "sourceSnapshotPath": "romarr/ui-source-snapshot.json",
+  "sourceSnapshotSha256": "b728cfb7d9e5b321b6ee4b99e315120b91fe4f7561b8b38d957189002d41d801",
+  "state": "OPEN",
+  "draft": true,
+  "tree": "f1edf8319eb3dbd29ac5fe1e279216c5b96ecc6a",
+  "url": "https://github.com/snapetech-org/ROMarrNG/pull/70",
+  "verification": "Live PR head was requeried before work. Fresh exact-head checkout, tree, catalog, source bundle, source map, snapshot, glossary, prior selection, and current callers are pinned. The W146-W165 source queue is contiguous; exact-head caller existence is true for 19 sources and false for ordinal 160.",
+  "worktree": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w146-165-20261103/checkout",
+  "worktreeStatus": "clean; detached HEAD"
+}

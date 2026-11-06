@@ -1,0 +1,92 @@
+{
+  "artifact": "ROMarrNG PR #70 W585-W604 sealed exact-head primary/blind cross-audit",
+  "callerlessHashOnlyHoldCount": 24,
+  "catalogFileSha256": "5fc391b529ea7553f5c133f38c7faca0f74a08a0c740ae03633383ae8d43fff3",
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "cellCount": 240,
+  "checks": {
+    "blindSealedManifestAndRows": "PASS (27 input files, 240 decisions)",
+    "candidateFreeBundleChecksums": "PASS",
+    "candidateFreeInputChecksums": "PASS (27 files)",
+    "candidateFreeVerifier": "PASS",
+    "primaryExactPinAndLiveRefs": "PASS",
+    "primaryOutputChecksums": "PASS (5 files)",
+    "sourceWorktree": "PASS (clean, exact HEAD/tree)",
+    "testsBuildsCiBrowserNativeSpeakerClaims": "NONE"
+  },
+  "createdUtc": "2026-11-04T18:30:16Z",
+  "inputAttestations": {
+    "blindReview": {
+      "blindDecisionsSha256": "97c384f094670e49d8c21d1e87b13a1bb43548def6158143952e3ab20f6ffe57",
+      "blindnessManifestSha256": "88ffcaaa0176e106fe29feb401df787fd5961bcb05a4f8da9b742e35413bb55a",
+      "pathAtReview": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w585-604-blind-review-20261104/sealed-blind-packet",
+      "sealedManifestSha256": "384d709375bc45b50f1ef7bae7b58f0e5e8c92b6daefb900befe272b214e0b9b",
+      "sealedManifestSidecarSha256": "9b7589aaa434baec61c3e23a88402580a026b56ea8627064f696fadad2ab4ff6",
+      "summarySha256": "bef558373f96f1f368561766ff4f54d895509d8ab7b1d0ce327e1ab334db7832",
+      "verification": "PASS"
+    },
+    "candidateFreeBundle": {
+      "bundleChecksumListSha256": "5cf33aef14eb8de492cb63098331522fe7aa0495ea112a4016144b35b4fbcea3",
+      "bundleManifestSha256": "3f4a0272b7c6cec1d486e9877304b38f791c941e12f4ad1c0e55da8fd7b75bed",
+      "candidateFree": true,
+      "inputChecksumListSha256": "3534dd5d1e8a4998045f398b93876afcb9f7ba05083d89b37f0fd50f832bf7c5",
+      "inputManifestSha256": "f06c35a2c66bdd29b5ea8e795d02c718f160ff57b81671beb3e270ab7a4fe7f6",
+      "pathAtReview": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w585-604-current-candidate-free-20261104",
+      "proposedTargetsIncluded": false,
+      "verification": "PASS"
+    },
+    "primaryReview": {
+      "dispositionsSha256": "a39da6f09853bf793ef76ccd59ccda8b3b3d942b0939e7f01b467913f440b8d5",
+      "nativeSpeakerApproval": false,
+      "pathAtReview": "/home/keith/Documents/code/task-scratch/romarrng-pr70-w585-604-primary-fresh-20261104",
+      "preReviewManifestSha256": "b00b2a168694e66def9cc05572b390965c33f3144393b9d84d2faff7a09d79c0",
+      "primaryManifestSha256": "8e281364b4dd472a896e3d741030a522b50e7e6070c010f9b10fc9735bb1691d",
+      "reviewerHadNotAccessedOtherW585Decisions": true,
+      "summarySha256": "ce8bfb5a496a68d002a669d83a86dc33f967334def27048a55b5530950ae1146",
+      "verification": "PASS"
+    }
+  },
+  "localeCount": 12,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "noOpLedgerCount": 218,
+  "pin": {
+    "branch": "task/localization-translation-review-20261030",
+    "catalogOneBasedPositions": [
+      586,
+      605
+    ],
+    "catalogPath": "romarr/ui-labels.json",
+    "head": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+    "positions": [
+      585,
+      604
+    ],
+    "pullRequest": 70,
+    "repository": "snapetech-org/ROMarrNG",
+    "tree": "dcb9c1766831e217ffca7fb77068b97c33b9524e",
+    "window": "W585-W604"
+  },
+  "reviewLimitations": [
+    "Semantic judgment is an AI-assisted cross-audit; no native-speaker approval is claimed.",
+    "The packet is a proposed apply plan only; no repository, PR, branch, or catalog was changed.",
+    "The 24 callerless cells remain hash-only holds with no source/current-target text in the no-op ledger.",
+    "The blind packet had no callerful hash-only holds; its 24 hash-only holds were callerless and all were preserved."
+  ],
+  "schemaVersion": 1,
+  "selectedProposalCount": 22,
+  "sourceCount": 20,
+  "unresolvedContextualHoldCount": 0
+}

@@ -1,0 +1,52 @@
+{
+  "artifact": "ROMarrNG PR #70 W585-W604 fresh candidate-free packet",
+  "attestedAfterAtUtc": "2026-11-04T17:46:16+00:00",
+  "attestedBeforeAtUtc": "2026-11-04T17:46:09+00:00",
+  "baseApiRefMismatch": true,
+  "baseApiSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "baseLiveRefOid": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+  "baseRefName": "main",
+  "branch": "task/localization-translation-review-20261030",
+  "callerlessCurrentTargetCellCount": 24,
+  "callerlessSourceCount": 2,
+  "candidateFree": true,
+  "catalogOneBasedPositions": [
+    586,
+    605
+  ],
+  "cellCount": 240,
+  "checksRerun": false,
+  "deploymentCount": 0,
+  "directCallerRefCount": 37,
+  "draft": true,
+  "head": "01da053f0e6a47e7184fb86da77f66b7b6719653",
+  "inputChecksumListSha256": "3534dd5d1e8a4998045f398b93876afcb9f7ba05083d89b37f0fd50f832bf7c5",
+  "inputManifestSha256": "f06c35a2c66bdd29b5ea8e795d02c718f160ff57b81671beb3e270ab7a4fe7f6",
+  "localeCount": 12,
+  "mergeable": "MERGEABLE",
+  "priorAppliedSelectedCellCount": 49,
+  "priorHoldCellCount": 604,
+  "priorSelectedSourceCount": 200,
+  "priorW565ChangedAppliedCells": 1,
+  "priorW565ReadbackCells": 240,
+  "priorW565TextFreeHolds": 40,
+  "proposedTargetsIncluded": false,
+  "pullRequest": 70,
+  "repository": "snapetech-org/ROMarrNG",
+  "reviewDecisionsIncluded": false,
+  "selectedOrdinals": [
+    585,
+    604
+  ],
+  "sourceCount": 20,
+  "state": "OPEN",
+  "tokenMismatches": {
+    "markup": 0,
+    "missingTarget": 0,
+    "numeric": 0,
+    "placeholder": 0,
+    "protectedLiteral": 0
+  },
+  "tree": "dcb9c1766831e217ffca7fb77068b97c33b9524e",
+  "window": "W585-W604"
+}

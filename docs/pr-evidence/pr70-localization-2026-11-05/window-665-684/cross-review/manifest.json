@@ -1,0 +1,85 @@
+{
+  "afterAttestation": "exact-head-after.json",
+  "artifact": "ROMarrNG PR #70 W665-W684 independent semantic cross-review",
+  "baseApiRefMismatch": true,
+  "beforeAttestation": "exact-head-before.json",
+  "blindInput": {
+    "checksumListSha256": "f81f9833c6eafaad63a9de25b8b7be7e24f6ba3b9f4d4f396a63d29702419044",
+    "holdsSha256": "911e9f66c9111cc725428f067e6e2d7e2ee3f8528201a0f92f2b29ab5fe7fa62",
+    "ledgerSha256": "d3c5231d8599cbb216475b828f2662b21fe90224d12036289e8e94830f202e20",
+    "manifestSha256": "f6d842889dd503aa3377b2d2ae29cc8d921e391463cb65603eed6d14da8082dc",
+    "path": "../blind-review/",
+    "proposalsSha256": "a1d504f796d3b7e1c00c93df854d986e8f870638dd2ea6b1cb0ccfa926934c09"
+  },
+  "branch": "task/localization-translation-review-20261030",
+  "callerBackedCellCount": 168,
+  "callerlessHashOnlyHoldCount": 72,
+  "callerlessPolicy": "All 72 callerless rows are text-free and hash-only in cross output; no source/current/proposal/final text is included.",
+  "candidateFreeInput": {
+    "cellsSha256": "4cfd4a53791ff4bc6f8c973982a4617bfd65b36fde56fc1661b59f0b752316d2",
+    "checksumListSha256": "fbaf67ba9221eff40c4d479b495338528511d5116f6ad3e02b1d337adeea0f16",
+    "contextsSha256": "4d8bb93405f5c6ce237ff469243b849df89061067a79b9706e44c9ac3151e828",
+    "manifestSha256": "e07d2305da384087d3751c2ee6e7892995f22532f1a41e8f0743cf31e2408454",
+    "path": "../candidate-free/input/"
+  },
+  "cellCount": 240,
+  "createdAtUtc": "2026-11-05T10:09:09+00:00",
+  "decisionCounts": {
+    "accept-blind": 20,
+    "accept-current": 139,
+    "accept-primary": 5,
+    "accept-primary-blind": 4,
+    "hold-hash-only": 72
+  },
+  "exactHead": "8b7589775c526866e474112b4f4168782b02f881",
+  "exactTree": "fb0ba93172f6832c687e001ce6c0fff08b5a33eb",
+  "isDraft": true,
+  "limitations": [
+    "No native-speaker second review or runtime visual review was performed.",
+    "The current PR base API ref is stale relative to live main; all decisions remain bound to the exact unchanged PR head/tree and the base/main mismatch is preserved explicitly."
+  ],
+  "liveMainOid": "65d8747e3a068473396227bae5e85ddc71c7d4d8",
+  "liveMainTree": "73a05379aa80fa629f69286338139247d2bfd849",
+  "localeCount": 12,
+  "primaryInput": {
+    "checksumListSha256": "242b8bf585864ed18c3932adf9b96bc54674814ffec78fa79a12f23e1298004e",
+    "holdsSha256": "7415f0bbeeb54e0949fe20dc29442beb8aed4226635608bd6b7e425c66621077",
+    "ledgerSha256": "171723967ed1be710be2c7fbe2b328a1c22bf79ad510e333e9cc17bc15cb1280",
+    "manifestSha256": "539f85a8f92e56cb4b90794a326b3c5f50619743d04df1393e58bbb267159c2d",
+    "path": "../primary-review/",
+    "proposalsSha256": "3655375350e459f050510a88b5098697394508cd2d717592e0a198a04b8fb818"
+  },
+  "proposalRecordCount": 39,
+  "pullRequest": 70,
+  "pullRequestApiBaseOid": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "pullRequestApiBaseTree": "9c471ca6392055839a12ba74a112e49c2cdf03d5",
+  "pullRequestState": "OPEN",
+  "rejectedOnlyProposalCellCount": 1,
+  "repository": "snapetech-org/ROMarrNG",
+  "schemaVersion": 1,
+  "selectedCandidateSourceCounts": {
+    "blind": 20,
+    "primary": 5,
+    "primary+blind": 4
+  },
+  "selectedProposalCellCount": 29,
+  "sourceCount": 20,
+  "sourceOrder": "Exact catalog zero-based positions 665..684 from candidate-free input; no ordinal shift.",
+  "tokenReview": {
+    "candidateFreeReportedCounts": {
+      "markup": 0,
+      "numeric": 1,
+      "numericPresentationDifferences": 0,
+      "placeholder": 0,
+      "protectedLiteral": 20
+    },
+    "numericAlertReviewed": true,
+    "numericFinding": "The sole numeric alert is in the long netplay paragraph: four possible ROMs and two incorrect matches are preserved in all locales; Japanese uses 4 as an equivalent digit presentation.",
+    "numericTokenLossesInReviewedTargets": 0,
+    "placeholderOrMarkupLossesInReviewedTargets": 0,
+    "proposalTokenChecksAllPass": true,
+    "protectedLiteralAlertReviewed": true,
+    "protectedLiteralFinding": "The 20 scanner flags concern English plural ROMs rendered as invariant ROM in some locales. ROMarr, SHA1, and Super Mario Kart remain; locale grammar and numeral context express plurality. Newznab remains unchanged and intact."
+  },
+  "uniqueProposedCellCount": 30
+}

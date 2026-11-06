@@ -1,0 +1,7 @@
+{
+  "carriedHoldCellCount": 384,
+  "carriedHoldRowsSha256": "59d6bed639abe78c5f9fe972fcf92a051f2f3dfe7375bc0689a15ad0971383f4",
+  "priorSelectionCount": 80,
+  "priorSelectionRowsSha256": "5e639d6308003296a9f39a146c613d85ea6cbd622596494dfa01065763433b96",
+  "representation": "hash-only; no prior target strings copied to review ledger or hold file"
+}

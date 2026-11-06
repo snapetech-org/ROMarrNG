@@ -1,0 +1,738 @@
+{
+  "artifact": "Independent blind semantic review — ROMarrNG PR #70 W226–W245",
+  "reviewMode": "Blind; used only the candidate-free input packet; no primary recommendations or review outputs were opened.",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "state": "OPEN",
+  "draft": true,
+  "branch": "task/localization-translation-review-20261030",
+  "baseRef": "main",
+  "baseSha": "bcd1eb41b5cdf8202acb5cf8e365e14761b743b5",
+  "head": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "tree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc",
+  "remoteBranchHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "remotePullRefHead": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "inputDirectory": "/mnt/disks/scratch/task-scratch/romarrng-pr70-w226-245-candidate-free-20261103/input",
+  "inputChecksumListSha256": "68f5f2d323b726d78ae5f949e84024ac9ae39dd592a63dab26637d57da945c36",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "callerReferenceCount": 25,
+  "localeOrder": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "positionRange": [
+    226,
+    245
+  ],
+  "dispositionCounts": {
+    "accept-current": 168,
+    "correction/refinement proposal": 24,
+    "hold": 48
+  },
+  "callerPathHolds": {
+    "positions": [
+      226,
+      232,
+      237,
+      242
+    ],
+    "cells": 48,
+    "reasons": {
+      "226": "The app API error is returned without an error_template and the pinned UI sends it to toastAppMessage, which routes raw API values through apiMessageMarkup as opaque text. The separate capture skip call is not a localized UI message. Hold pending explicit template wiring or confirmation that this key is not user-facing.",
+      "232": "The API detail is displayed via apiMessageMarkup without a detail_template; that renderer marks raw API values opaque and does not localize them. Caller meaning is pinned, but this key currently has no translation path.",
+      "237": "The source is returned as text for a <select> option. The pinned select helper emits no data-i18n key for formatter output, and the automatic text translator explicitly skips descendants of select elements. Caller exists, but this cell has no current localization path.",
+      "242": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete."
+    }
+  },
+  "staleSourceIndexLocations": [
+    {
+      "position": 229,
+      "sourceIndexLocations": [
+        "romarr/lists.py:859-861",
+        "romarr/ui.py:2754"
+      ],
+      "activeCurrentCallsites": [
+        {
+          "path": "romarr/ui.py",
+          "startLine": 2754,
+          "endLine": 2754
+        }
+      ]
+    },
+    {
+      "position": 239,
+      "sourceIndexLocations": [
+        "romarr/ui.py:4208"
+      ],
+      "activeCurrentCallsites": [
+        {
+          "path": "romarr/ui.py",
+          "startLine": 4444,
+          "endLine": 4447
+        }
+      ]
+    }
+  ],
+  "rank239ActiveCallsite": "romarr/ui.py:4444–4447",
+  "structuralChecks": {
+    "allPlaceholderChecksPass": true,
+    "allMarkupChecksPass": true,
+    "allNumericChecksPass": true,
+    "allProtectedLiteralsPass": true,
+    "placeholderBearingRows": [],
+    "markupBearingRows": [],
+    "numericBearingRows": [],
+    "protectedLiteralBearingRows": [
+      227,
+      229,
+      241,
+      242,
+      244
+    ]
+  },
+  "corrections": [
+    {
+      "reviewId": "W226-position-227-vi",
+      "source": "No TitleDB ID",
+      "locale": "vi",
+      "currentTarget": "Không TitleDB ID",
+      "recommendedTarget": "Không có ID TitleDB",
+      "recommendedTargetSha256": "c9130212d368d9a45cb35f576a289af3855ca7e07a15982f9950707b887d705f",
+      "rationale": "The current Vietnamese drops the linking “có” and reads as an incomplete noun string. This candidate gives a complete “No TitleDB ID” label while preserving TitleDB and ID.",
+      "confidence": "moderate"
+    },
+    {
+      "reviewId": "W226-position-233-es",
+      "source": "nothing finished",
+      "locale": "es",
+      "currentTarget": "No se terminó ninguna descarga",
+      "recommendedTarget": "No se completó nada.",
+      "recommendedTargetSha256": "62b58ce14a07b70613dca8b5929cf34941c1483500bf84f73d9a2fec5c4ed2d6",
+      "rationale": "The current target introduces “download,” which is absent from the source and the pinned context. The neutral wording preserves “nothing finished” without guessing what finished.",
+      "confidence": "high"
+    },
+    {
+      "reviewId": "W226-position-233-ja",
+      "source": "nothing finished",
+      "locale": "ja",
+      "currentTarget": "完了したダウンロードはありません",
+      "recommendedTarget": "完了したものはありません。",
+      "recommendedTargetSha256": "c894af50d9472e22abb3e7de2364445f6a4fe33ae918239bd148e43c07747656",
+      "rationale": "The current target specifies completed downloads, while the source and pinned API message say only that nothing finished. The candidate removes that unsupported object.",
+      "confidence": "high"
+    },
+    {
+      "reviewId": "W226-position-233-vi",
+      "source": "nothing finished",
+      "locale": "vi",
+      "currentTarget": "Không có gì kết thúc",
+      "recommendedTarget": "Không có gì được hoàn tất.",
+      "recommendedTargetSha256": "f7541f2a145a4844eaa9e8e630624e9d6ddc44deb9de326d46bab56fdedacaf2",
+      "rationale": "The current wording literally says that nothing ended and is awkward for a completion result. The candidate expresses that nothing was completed without adding an object.",
+      "confidence": "moderate"
+    },
+    {
+      "reviewId": "W226-position-233-zh-Hans",
+      "source": "nothing finished",
+      "locale": "zh-Hans",
+      "currentTarget": "没有下载完成",
+      "recommendedTarget": "没有任何事项完成。",
+      "recommendedTargetSha256": "c7210ca77cdb0af1a2c81f4a5ccd73c8f625dc9b0ee7cc5d1437ba1068c7baa9",
+      "rationale": "The current target says no download completed, an object not present in the source or pinned API message. The candidate keeps the result generic.",
+      "confidence": "high"
+    },
+    {
+      "reviewId": "W226-position-233-zh-Hant",
+      "source": "nothing finished",
+      "locale": "zh-Hant",
+      "currentTarget": "沒甚麼結束",
+      "recommendedTarget": "沒有任何事項完成。",
+      "recommendedTargetSha256": "c4b901fa2e718395b121327ba25d69200c491177b901fb2d943afb3552547531",
+      "rationale": "The current wording is an awkward literal “nothing much ended.” The candidate states that nothing was completed and avoids adding an unsupported download object.",
+      "confidence": "moderate"
+    },
+    {
+      "reviewId": "W226-position-234-ar",
+      "source": "nothing wanted, nothing to match",
+      "locale": "ar",
+      "currentTarget": "No hay juegos solicitados que comparar",
+      "recommendedTarget": "لا توجد ألعاب مطلوبة لمطابقتها.",
+      "recommendedTargetSha256": "ce929f1294a1a02ae5b58f9b8366c35aee315f04223406defde9a58ae3b24856",
+      "rationale": "The current value is Spanish in an Arabic catalog. The candidate conveys that there are no requested games to match.",
+      "confidence": "high"
+    },
+    {
+      "reviewId": "W226-position-234-de",
+      "source": "nothing wanted, nothing to match",
+      "locale": "de",
+      "currentTarget": "No hay juegos solicitados que comparar",
+      "recommendedTarget": "Keine gewünschten Spiele zum Abgleichen.",
+      "recommendedTargetSha256": "a54eb3a4c4db391bc04bd8a89855bf63c83579ef2565df435b0d29e6cfe86f76",
+      "rationale": "The current value is Spanish in a German catalog. The candidate conveys that no wanted games are available to match.",
+      "confidence": "high"
+    },
+    {
+      "reviewId": "W226-position-234-fr",
+      "source": "nothing wanted, nothing to match",
+      "locale": "fr",
+      "currentTarget": "No hay juegos solicitados que comparar",
+      "recommendedTarget": "Aucun jeu souhaité à faire correspondre.",
+      "recommendedTargetSha256": "fc4c2a70de6da4d46dcd57a47d50d776ede6847960dfe9b21f5539b0b44217af",
+      "rationale": "The current value is Spanish in a French catalog. The candidate conveys that there are no wanted games to match.",
+      "confidence": "high"
+    },
+    {
+      "reviewId": "W226-position-234-hi",
+      "source": "nothing wanted, nothing to match",
+      "locale": "hi",
+      "currentTarget": "No hay juegos solicitados que comparar",
+      "recommendedTarget": "कोई इच्छित गेम नहीं है, इसलिए मिलान करने के लिए कुछ नहीं है।",
+      "recommendedTargetSha256": "bc99bf468bed817bf79ab478c9e7c2272cb29f2b7d2bd6bb93085bd22afe49a1",
+      "rationale": "The current value is Spanish in a Hindi catalog. The candidate states that no games are wanted, so there is nothing to match.",
+      "confidence": "high"
+    },
+    {
+      "reviewId": "W226-position-234-id",
+      "source": "nothing wanted, nothing to match",
+      "locale": "id",
+      "currentTarget": "No hay juegos solicitados que comparar",
+      "recommendedTarget": "Tidak ada game yang diinginkan untuk dicocokkan.",
+      "recommendedTargetSha256": "307aaa8f4db5abca541c2d6c98da224b1b0b6cec8f32bf368d841b8b305b2322",
+      "rationale": "The current value is Spanish in an Indonesian catalog. The candidate conveys that no wanted games are available to match.",
+      "confidence": "high"
+    },
+    {
+      "reviewId": "W226-position-234-ja",
+      "source": "nothing wanted, nothing to match",
+      "locale": "ja",
+      "currentTarget": "No hay juegos solicitados que comparar",
+      "recommendedTarget": "希望するゲームがないため、照合するものがありません。",
+      "recommendedTargetSha256": "335f3bd0c85ae2d4b600699fa0e2bf6cabcbf8a5c6cce7d5a21f037714de7c03",
+      "rationale": "The current value is Spanish in a Japanese catalog. The candidate states that there are no wanted games and nothing to match.",
+      "confidence": "high"
+    },
+    {
+      "reviewId": "W226-position-234-ko",
+      "source": "nothing wanted, nothing to match",
+      "locale": "ko",
+      "currentTarget": "No hay juegos solicitados que comparar",
+      "recommendedTarget": "원하는 게임이 없어 일치시킬 항목이 없습니다.",
+      "recommendedTargetSha256": "1bed9b8b0c8ca20fa2466e596254d453ef717a9218ca90bc4f5a2edbb5b6a735",
+      "rationale": "The current value is Spanish in a Korean catalog. The candidate states that no games are wanted and there is nothing to match.",
+      "confidence": "high"
+    },
+    {
+      "reviewId": "W226-position-234-pt-BR",
+      "source": "nothing wanted, nothing to match",
+      "locale": "pt-BR",
+      "currentTarget": "No hay juegos solicitados que comparar",
+      "recommendedTarget": "Não há jogos desejados para comparar.",
+      "recommendedTargetSha256": "eb7518713f24aec14a0d9b2933a39e1b84e51f25a1a29c7f63a0a12ba12a11d3",
+      "rationale": "The current value is Spanish in a Brazilian Portuguese catalog. The candidate conveys that there are no wanted games to compare or match.",
+      "confidence": "high"
+    },
+    {
+      "reviewId": "W226-position-234-vi",
+      "source": "nothing wanted, nothing to match",
+      "locale": "vi",
+      "currentTarget": "No hay juegos solicitados que comparar",
+      "recommendedTarget": "Không có trò chơi nào được yêu cầu để đối chiếu.",
+      "recommendedTargetSha256": "ad32d916474efae68d7f42f1d78d5ac1172ba263bb944045bbeda106a76c153a",
+      "rationale": "The current value is Spanish in a Vietnamese catalog. The candidate conveys that there are no requested games to match.",
+      "confidence": "high"
+    },
+    {
+      "reviewId": "W226-position-234-zh-Hans",
+      "source": "nothing wanted, nothing to match",
+      "locale": "zh-Hans",
+      "currentTarget": "No hay juegos solicitados que comparar",
+      "recommendedTarget": "没有想要的游戏可供匹配。",
+      "recommendedTargetSha256": "5d66b20b9d0df98c423494e5ccd96a49787ffc0b30cce476bdb8ad9e99b68352",
+      "rationale": "The current value is Spanish in a Simplified Chinese catalog. The candidate conveys that there are no wanted games to match.",
+      "confidence": "high"
+    },
+    {
+      "reviewId": "W226-position-234-zh-Hant",
+      "source": "nothing wanted, nothing to match",
+      "locale": "zh-Hant",
+      "currentTarget": "No hay juegos solicitados que comparar",
+      "recommendedTarget": "沒有想要的遊戲可供比對。",
+      "recommendedTargetSha256": "5cd20cc3f4aae9fb36d8162e413443d43912584b510f1ad494b3fc5a9b9e9856",
+      "rationale": "The current value is Spanish in a Traditional Chinese catalog. The candidate conveys that there are no wanted games to match.",
+      "confidence": "high"
+    },
+    {
+      "reviewId": "W226-position-236-pt-BR",
+      "source": "Older than latest listed version",
+      "locale": "pt-BR",
+      "currentTarget": "Mais velho que a versão mais recente listada",
+      "recommendedTarget": "Mais antiga que a versão mais recente listada",
+      "recommendedTargetSha256": "e784bbb226fda1d92227f9c367dc6568d7e136b8d519dc0a88fe05b7d7cfb66c",
+      "rationale": "“Versão” is feminine in Portuguese, so the current masculine “velho” disagrees with the noun. The candidate keeps the version-status comparison and fixes agreement.",
+      "confidence": "moderate"
+    },
+    {
+      "reviewId": "W226-position-238-ja",
+      "source": "On this day",
+      "locale": "ja",
+      "currentTarget": "この日、",
+      "recommendedTarget": "この日",
+      "recommendedTargetSha256": "7f153648a122f635e26af36e8a8689d5e427792d66912fb1553213fb81de0eec",
+      "rationale": "The caller uses this as the “anniversary” filter label. The current trailing Japanese comma is dangling label punctuation; the candidate keeps the label without it.",
+      "confidence": "moderate"
+    },
+    {
+      "reviewId": "W226-position-238-zh-Hans",
+      "source": "On this day",
+      "locale": "zh-Hans",
+      "currentTarget": "这一天,",
+      "recommendedTarget": "这一天",
+      "recommendedTargetSha256": "c33bdde90595779de7587120f9ed2a29d51caa50c3f0f489ee96815d12c0a6bf",
+      "rationale": "The caller uses this as the “anniversary” filter label. The current trailing comma is dangling label punctuation; the candidate keeps the label without it.",
+      "confidence": "moderate"
+    },
+    {
+      "reviewId": "W226-position-238-zh-Hant",
+      "source": "On this day",
+      "locale": "zh-Hant",
+      "currentTarget": "這一天,",
+      "recommendedTarget": "這一天",
+      "recommendedTargetSha256": "4c54ab62164013027d36fde0e3a1968ee34c60ef4245bf7284f824572f4dc391",
+      "rationale": "The caller uses this as the “anniversary” filter label. The current trailing comma is dangling label punctuation; the candidate keeps the label without it.",
+      "confidence": "moderate"
+    },
+    {
+      "reviewId": "W226-position-239-zh-Hans",
+      "source": "Optional connections to the rest of the stack. Credentials live in the environment file, not here — this page never shows or stores a secret. Indexers and download clients have their own Settings pages; notifications and metadata connections can be added only when you choose to use them.",
+      "locale": "zh-Hans",
+      "currentTarget": "与其余服务组件的连接是可选的。凭据保存在环境文件中，而不在此处；此页面绝不会显示或存储任何密钥。索引器和下载客户端各有自己的“设置”页面；只有在您选择使用通知或元数据连接时，才能添加这些连接。",
+      "recommendedTarget": "此页面绝不会显示或存储任何机密信息。",
+      "recommendedTargetSha256": "4aa2874c5ac6ec1437428e130139484ef37dce887eab3b019cae465553ef66ba",
+      "rationale": "The source says the page never shows or stores a secret. “密钥” narrows this to keys; the candidate uses a broader term for confidential information while preserving the security claim.",
+      "confidence": "moderate"
+    },
+    {
+      "reviewId": "W226-position-239-zh-Hant",
+      "source": "Optional connections to the rest of the stack. Credentials live in the environment file, not here — this page never shows or stores a secret. Indexers and download clients have their own Settings pages; notifications and metadata connections can be added only when you choose to use them.",
+      "locale": "zh-Hant",
+      "currentTarget": "與堆疊其餘部分的連線為選用功能。憑證存放在環境檔案中，不在此處；此頁面絕不會顯示或儲存任何密鑰。索引器和下載用戶端各有自己的設定頁面；只有在您選擇使用通知或中繼資料連線時，才能新增這些連線。",
+      "recommendedTarget": "此頁面絕不會顯示或儲存任何機密資訊。",
+      "recommendedTargetSha256": "9abe999d9db6e395ace1e26d6345a5c1877c44b21cfd85a40c7971e18b2b0ea7",
+      "rationale": "The source says the page never shows or stores a secret. “密鑰” narrows this to keys; the candidate uses a broader term for confidential information while preserving the security claim.",
+      "confidence": "moderate"
+    },
+    {
+      "reviewId": "W226-position-244-fr",
+      "source": ", outside the ROM root, and mount that folder on each client. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another provider lookup.",
+      "locale": "fr",
+      "currentTarget": ", en dehors de la racine ROM, et montez ce dossier sur chaque client. ROMarr maintient un catalogue par plate-forme et des œuvres d'art dédoublées ici, de sorte qu'un changement de nom ou de chemin ne provoque pas une autre recherche de fournisseur.",
+      "recommendedTarget": ", en dehors de la racine ROM, et montez ce dossier sur chaque client. ROMarr conserve ici un catalogue par plateforme et des illustrations de jeux sans doublons, de sorte qu’un changement de nom ou de chemin ne déclenche pas une nouvelle recherche auprès du fournisseur.",
+      "recommendedTargetSha256": "3e2bf31df546aabf3d17a6da1da3525d66f2ea2001326bf7d61074f73b0428c6",
+      "rationale": "“Œuvres d’art dédoublées” is an awkward rendering and can read as artwork being doubled. “Illustrations de jeux sans doublons” clearly conveys deduplicated game artwork while preserving ROM and ROMarr.",
+      "confidence": "moderate"
+    }
+  ],
+  "holds": [
+    {
+      "reviewId": "W226-position-226-ar",
+      "position": 226,
+      "source": "no title",
+      "locale": "ar",
+      "currentTarget": "لا عنوان",
+      "rationale": "The app API error is returned without an error_template and the pinned UI sends it to toastAppMessage, which routes raw API values through apiMessageMarkup as opaque text. The separate capture skip call is not a localized UI message. Hold pending explicit template wiring or confirmation that this key is not user-facing."
+    },
+    {
+      "reviewId": "W226-position-226-de",
+      "position": 226,
+      "source": "no title",
+      "locale": "de",
+      "currentTarget": "Kein Titel",
+      "rationale": "The app API error is returned without an error_template and the pinned UI sends it to toastAppMessage, which routes raw API values through apiMessageMarkup as opaque text. The separate capture skip call is not a localized UI message. Hold pending explicit template wiring or confirmation that this key is not user-facing."
+    },
+    {
+      "reviewId": "W226-position-226-es",
+      "position": 226,
+      "source": "no title",
+      "locale": "es",
+      "currentTarget": "No hay título",
+      "rationale": "The app API error is returned without an error_template and the pinned UI sends it to toastAppMessage, which routes raw API values through apiMessageMarkup as opaque text. The separate capture skip call is not a localized UI message. Hold pending explicit template wiring or confirmation that this key is not user-facing."
+    },
+    {
+      "reviewId": "W226-position-226-fr",
+      "position": 226,
+      "source": "no title",
+      "locale": "fr",
+      "currentTarget": "Pas de titre",
+      "rationale": "The app API error is returned without an error_template and the pinned UI sends it to toastAppMessage, which routes raw API values through apiMessageMarkup as opaque text. The separate capture skip call is not a localized UI message. Hold pending explicit template wiring or confirmation that this key is not user-facing."
+    },
+    {
+      "reviewId": "W226-position-226-hi",
+      "position": 226,
+      "source": "no title",
+      "locale": "hi",
+      "currentTarget": "कोई शीर्षक नहीं",
+      "rationale": "The app API error is returned without an error_template and the pinned UI sends it to toastAppMessage, which routes raw API values through apiMessageMarkup as opaque text. The separate capture skip call is not a localized UI message. Hold pending explicit template wiring or confirmation that this key is not user-facing."
+    },
+    {
+      "reviewId": "W226-position-226-id",
+      "position": 226,
+      "source": "no title",
+      "locale": "id",
+      "currentTarget": "Tidak ada judul",
+      "rationale": "The app API error is returned without an error_template and the pinned UI sends it to toastAppMessage, which routes raw API values through apiMessageMarkup as opaque text. The separate capture skip call is not a localized UI message. Hold pending explicit template wiring or confirmation that this key is not user-facing."
+    },
+    {
+      "reviewId": "W226-position-226-ja",
+      "position": 226,
+      "source": "no title",
+      "locale": "ja",
+      "currentTarget": "タイトルなし",
+      "rationale": "The app API error is returned without an error_template and the pinned UI sends it to toastAppMessage, which routes raw API values through apiMessageMarkup as opaque text. The separate capture skip call is not a localized UI message. Hold pending explicit template wiring or confirmation that this key is not user-facing."
+    },
+    {
+      "reviewId": "W226-position-226-ko",
+      "position": 226,
+      "source": "no title",
+      "locale": "ko",
+      "currentTarget": "제목 없음",
+      "rationale": "The app API error is returned without an error_template and the pinned UI sends it to toastAppMessage, which routes raw API values through apiMessageMarkup as opaque text. The separate capture skip call is not a localized UI message. Hold pending explicit template wiring or confirmation that this key is not user-facing."
+    },
+    {
+      "reviewId": "W226-position-226-pt-BR",
+      "position": 226,
+      "source": "no title",
+      "locale": "pt-BR",
+      "currentTarget": "Sem título",
+      "rationale": "The app API error is returned without an error_template and the pinned UI sends it to toastAppMessage, which routes raw API values through apiMessageMarkup as opaque text. The separate capture skip call is not a localized UI message. Hold pending explicit template wiring or confirmation that this key is not user-facing."
+    },
+    {
+      "reviewId": "W226-position-226-vi",
+      "position": 226,
+      "source": "no title",
+      "locale": "vi",
+      "currentTarget": "Không có tiêu đề",
+      "rationale": "The app API error is returned without an error_template and the pinned UI sends it to toastAppMessage, which routes raw API values through apiMessageMarkup as opaque text. The separate capture skip call is not a localized UI message. Hold pending explicit template wiring or confirmation that this key is not user-facing."
+    },
+    {
+      "reviewId": "W226-position-226-zh-Hans",
+      "position": 226,
+      "source": "no title",
+      "locale": "zh-Hans",
+      "currentTarget": "没有标题",
+      "rationale": "The app API error is returned without an error_template and the pinned UI sends it to toastAppMessage, which routes raw API values through apiMessageMarkup as opaque text. The separate capture skip call is not a localized UI message. Hold pending explicit template wiring or confirmation that this key is not user-facing."
+    },
+    {
+      "reviewId": "W226-position-226-zh-Hant",
+      "position": 226,
+      "source": "no title",
+      "locale": "zh-Hant",
+      "currentTarget": "沒有標題",
+      "rationale": "The app API error is returned without an error_template and the pinned UI sends it to toastAppMessage, which routes raw API values through apiMessageMarkup as opaque text. The separate capture skip call is not a localized UI message. Hold pending explicit template wiring or confirmation that this key is not user-facing."
+    },
+    {
+      "reviewId": "W226-position-232-ar",
+      "position": 232,
+      "source": "not in this library; the hash identifies exactly which dump to acquire",
+      "locale": "ar",
+      "currentTarget": "غير موجود في هذه المكتبة؛ يحدد الهاش بدقة أي تفريغ يجب الحصول عليه",
+      "rationale": "The API detail is displayed via apiMessageMarkup without a detail_template; that renderer marks raw API values opaque and does not localize them. Caller meaning is pinned, but this key currently has no translation path."
+    },
+    {
+      "reviewId": "W226-position-232-de",
+      "position": 232,
+      "source": "not in this library; the hash identifies exactly which dump to acquire",
+      "locale": "de",
+      "currentTarget": "nicht in dieser Bibliothek; der Hash identifiziert genau, welches Dump zu erwerben ist",
+      "rationale": "The API detail is displayed via apiMessageMarkup without a detail_template; that renderer marks raw API values opaque and does not localize them. Caller meaning is pinned, but this key currently has no translation path."
+    },
+    {
+      "reviewId": "W226-position-232-es",
+      "position": 232,
+      "source": "not in this library; the hash identifies exactly which dump to acquire",
+      "locale": "es",
+      "currentTarget": "No está en esta biblioteca; el hash identifica exactamente qué dump hay que obtener",
+      "rationale": "The API detail is displayed via apiMessageMarkup without a detail_template; that renderer marks raw API values opaque and does not localize them. Caller meaning is pinned, but this key currently has no translation path."
+    },
+    {
+      "reviewId": "W226-position-232-fr",
+      "position": 232,
+      "source": "not in this library; the hash identifies exactly which dump to acquire",
+      "locale": "fr",
+      "currentTarget": "Absent de cette bibliothèque ; le hash indique exactement quel dump récupérer",
+      "rationale": "The API detail is displayed via apiMessageMarkup without a detail_template; that renderer marks raw API values opaque and does not localize them. Caller meaning is pinned, but this key currently has no translation path."
+    },
+    {
+      "reviewId": "W226-position-232-hi",
+      "position": 232,
+      "source": "not in this library; the hash identifies exactly which dump to acquire",
+      "locale": "hi",
+      "currentTarget": "यह इस गेम लाइब्रेरी में नहीं है; हैश से पता चलता है कि कौन-सा ROM डंप हासिल करना है",
+      "rationale": "The API detail is displayed via apiMessageMarkup without a detail_template; that renderer marks raw API values opaque and does not localize them. Caller meaning is pinned, but this key currently has no translation path."
+    },
+    {
+      "reviewId": "W226-position-232-id",
+      "position": 232,
+      "source": "not in this library; the hash identifies exactly which dump to acquire",
+      "locale": "id",
+      "currentTarget": "Tidak ada di pustaka game ini; hash mengidentifikasi dengan tepat dump ROM yang perlu diperoleh",
+      "rationale": "The API detail is displayed via apiMessageMarkup without a detail_template; that renderer marks raw API values opaque and does not localize them. Caller meaning is pinned, but this key currently has no translation path."
+    },
+    {
+      "reviewId": "W226-position-232-ja",
+      "position": 232,
+      "source": "not in this library; the hash identifies exactly which dump to acquire",
+      "locale": "ja",
+      "currentTarget": "このゲームライブラリにはありません。ハッシュ値で取得すべきROMダンプを正確に特定できます",
+      "rationale": "The API detail is displayed via apiMessageMarkup without a detail_template; that renderer marks raw API values opaque and does not localize them. Caller meaning is pinned, but this key currently has no translation path."
+    },
+    {
+      "reviewId": "W226-position-232-ko",
+      "position": 232,
+      "source": "not in this library; the hash identifies exactly which dump to acquire",
+      "locale": "ko",
+      "currentTarget": "이 게임 라이브러리에 없습니다. 해시가 확보해야 할 ROM 덤프를 정확히 식별합니다",
+      "rationale": "The API detail is displayed via apiMessageMarkup without a detail_template; that renderer marks raw API values opaque and does not localize them. Caller meaning is pinned, but this key currently has no translation path."
+    },
+    {
+      "reviewId": "W226-position-232-pt-BR",
+      "position": 232,
+      "source": "not in this library; the hash identifies exactly which dump to acquire",
+      "locale": "pt-BR",
+      "currentTarget": "Não está nesta biblioteca; o hash identifica exatamente qual dump deve ser obtido",
+      "rationale": "The API detail is displayed via apiMessageMarkup without a detail_template; that renderer marks raw API values opaque and does not localize them. Caller meaning is pinned, but this key currently has no translation path."
+    },
+    {
+      "reviewId": "W226-position-232-vi",
+      "position": 232,
+      "source": "not in this library; the hash identifies exactly which dump to acquire",
+      "locale": "vi",
+      "currentTarget": "Không có trong thư viện trò chơi này; hash xác định chính xác bản ROM dump cần lấy",
+      "rationale": "The API detail is displayed via apiMessageMarkup without a detail_template; that renderer marks raw API values opaque and does not localize them. Caller meaning is pinned, but this key currently has no translation path."
+    },
+    {
+      "reviewId": "W226-position-232-zh-Hans",
+      "position": 232,
+      "source": "not in this library; the hash identifies exactly which dump to acquire",
+      "locale": "zh-Hans",
+      "currentTarget": "不在此游戏库中；哈希值可准确识别需要获取的 ROM 转储",
+      "rationale": "The API detail is displayed via apiMessageMarkup without a detail_template; that renderer marks raw API values opaque and does not localize them. Caller meaning is pinned, but this key currently has no translation path."
+    },
+    {
+      "reviewId": "W226-position-232-zh-Hant",
+      "position": 232,
+      "source": "not in this library; the hash identifies exactly which dump to acquire",
+      "locale": "zh-Hant",
+      "currentTarget": "不在此遊戲庫中；雜湊值可準確指出要取得哪個 ROM 傾印",
+      "rationale": "The API detail is displayed via apiMessageMarkup without a detail_template; that renderer marks raw API values opaque and does not localize them. Caller meaning is pinned, but this key currently has no translation path."
+    },
+    {
+      "reviewId": "W226-position-237-ar",
+      "position": 237,
+      "source": "On disk (plays now)",
+      "locale": "ar",
+      "currentTarget": "على القرص (اللعب الآن)",
+      "rationale": "The source is returned as text for a <select> option. The pinned select helper emits no data-i18n key for formatter output, and the automatic text translator explicitly skips descendants of select elements. Caller exists, but this cell has no current localization path."
+    },
+    {
+      "reviewId": "W226-position-237-de",
+      "position": 237,
+      "source": "On disk (plays now)",
+      "locale": "de",
+      "currentTarget": "Auf dem Disk (Spielt jetzt)",
+      "rationale": "The source is returned as text for a <select> option. The pinned select helper emits no data-i18n key for formatter output, and the automatic text translator explicitly skips descendants of select elements. Caller exists, but this cell has no current localization path."
+    },
+    {
+      "reviewId": "W226-position-237-es",
+      "position": 237,
+      "source": "On disk (plays now)",
+      "locale": "es",
+      "currentTarget": "En el disco (jugar ahora)",
+      "rationale": "The source is returned as text for a <select> option. The pinned select helper emits no data-i18n key for formatter output, and the automatic text translator explicitly skips descendants of select elements. Caller exists, but this cell has no current localization path."
+    },
+    {
+      "reviewId": "W226-position-237-fr",
+      "position": 237,
+      "source": "On disk (plays now)",
+      "locale": "fr",
+      "currentTarget": "Sur le disque (jouable immédiatement)",
+      "rationale": "The source is returned as text for a <select> option. The pinned select helper emits no data-i18n key for formatter output, and the automatic text translator explicitly skips descendants of select elements. Caller exists, but this cell has no current localization path."
+    },
+    {
+      "reviewId": "W226-position-237-hi",
+      "position": 237,
+      "source": "On disk (plays now)",
+      "locale": "hi",
+      "currentTarget": "डिस्क पर (अब खेलते हैं)",
+      "rationale": "The source is returned as text for a <select> option. The pinned select helper emits no data-i18n key for formatter output, and the automatic text translator explicitly skips descendants of select elements. Caller exists, but this cell has no current localization path."
+    },
+    {
+      "reviewId": "W226-position-237-id",
+      "position": 237,
+      "source": "On disk (plays now)",
+      "locale": "id",
+      "currentTarget": "Pada cakera (bermain sekarang)",
+      "rationale": "The source is returned as text for a <select> option. The pinned select helper emits no data-i18n key for formatter output, and the automatic text translator explicitly skips descendants of select elements. Caller exists, but this cell has no current localization path."
+    },
+    {
+      "reviewId": "W226-position-237-ja",
+      "position": 237,
+      "source": "On disk (plays now)",
+      "locale": "ja",
+      "currentTarget": "ディスク(現在プレイする)",
+      "rationale": "The source is returned as text for a <select> option. The pinned select helper emits no data-i18n key for formatter output, and the automatic text translator explicitly skips descendants of select elements. Caller exists, but this cell has no current localization path."
+    },
+    {
+      "reviewId": "W226-position-237-ko",
+      "position": 237,
+      "source": "On disk (plays now)",
+      "locale": "ko",
+      "currentTarget": "디스크에 있음(지금 플레이 가능)",
+      "rationale": "The source is returned as text for a <select> option. The pinned select helper emits no data-i18n key for formatter output, and the automatic text translator explicitly skips descendants of select elements. Caller exists, but this cell has no current localization path."
+    },
+    {
+      "reviewId": "W226-position-237-pt-BR",
+      "position": 237,
+      "source": "On disk (plays now)",
+      "locale": "pt-BR",
+      "currentTarget": "No disco (joga agora)",
+      "rationale": "The source is returned as text for a <select> option. The pinned select helper emits no data-i18n key for formatter output, and the automatic text translator explicitly skips descendants of select elements. Caller exists, but this cell has no current localization path."
+    },
+    {
+      "reviewId": "W226-position-237-vi",
+      "position": 237,
+      "source": "On disk (plays now)",
+      "locale": "vi",
+      "currentTarget": "Trên ổ đĩa (chơi ngay)",
+      "rationale": "The source is returned as text for a <select> option. The pinned select helper emits no data-i18n key for formatter output, and the automatic text translator explicitly skips descendants of select elements. Caller exists, but this cell has no current localization path."
+    },
+    {
+      "reviewId": "W226-position-237-zh-Hans",
+      "position": 237,
+      "source": "On disk (plays now)",
+      "locale": "zh-Hans",
+      "currentTarget": "在磁盘上(现在播放)",
+      "rationale": "The source is returned as text for a <select> option. The pinned select helper emits no data-i18n key for formatter output, and the automatic text translator explicitly skips descendants of select elements. Caller exists, but this cell has no current localization path."
+    },
+    {
+      "reviewId": "W226-position-237-zh-Hant",
+      "position": 237,
+      "source": "On disk (plays now)",
+      "locale": "zh-Hant",
+      "currentTarget": "在磁盤上(現在播放)",
+      "rationale": "The source is returned as text for a <select> option. The pinned select helper emits no data-i18n key for formatter output, and the automatic text translator explicitly skips descendants of select elements. Caller exists, but this cell has no current localization path."
+    },
+    {
+      "reviewId": "W226-position-242-ar",
+      "position": 242,
+      "source": "or load No-Intro / Redump DATs under",
+      "locale": "ar",
+      "currentTarget": "أو حمّل ملفات DAT من No-Intro / Redump ضمن",
+      "rationale": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete."
+    },
+    {
+      "reviewId": "W226-position-242-de",
+      "position": 242,
+      "source": "or load No-Intro / Redump DATs under",
+      "locale": "de",
+      "currentTarget": "oder laden Sie No-Intro- / Redump-DATs unter",
+      "rationale": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete."
+    },
+    {
+      "reviewId": "W226-position-242-es",
+      "position": 242,
+      "source": "or load No-Intro / Redump DATs under",
+      "locale": "es",
+      "currentTarget": "o carga los DAT de No-Intro / Redump en",
+      "rationale": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete."
+    },
+    {
+      "reviewId": "W226-position-242-fr",
+      "position": 242,
+      "source": "or load No-Intro / Redump DATs under",
+      "locale": "fr",
+      "currentTarget": "ou chargez les DAT No-Intro / Redump dans",
+      "rationale": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete."
+    },
+    {
+      "reviewId": "W226-position-242-hi",
+      "position": 242,
+      "source": "or load No-Intro / Redump DATs under",
+      "locale": "hi",
+      "currentTarget": "या No-Intro / Redump DAT लोड करने के लिए संग्रह अनुभाग खोलें:",
+      "rationale": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete."
+    },
+    {
+      "reviewId": "W226-position-242-id",
+      "position": 242,
+      "source": "or load No-Intro / Redump DATs under",
+      "locale": "id",
+      "currentTarget": "atau muat DAT No-Intro / Redump di",
+      "rationale": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete."
+    },
+    {
+      "reviewId": "W226-position-242-ja",
+      "position": 242,
+      "source": "or load No-Intro / Redump DATs under",
+      "locale": "ja",
+      "currentTarget": "または、No-Intro / Redump の DAT を読み込むには",
+      "rationale": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete."
+    },
+    {
+      "reviewId": "W226-position-242-ko",
+      "position": 242,
+      "source": "or load No-Intro / Redump DATs under",
+      "locale": "ko",
+      "currentTarget": "또는 No-Intro / Redump DAT를 관리하려면 다음을 여세요:",
+      "rationale": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete."
+    },
+    {
+      "reviewId": "W226-position-242-pt-BR",
+      "position": 242,
+      "source": "or load No-Intro / Redump DATs under",
+      "locale": "pt-BR",
+      "currentTarget": "ou carregue os DATs do No-Intro / Redump em",
+      "rationale": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete."
+    },
+    {
+      "reviewId": "W226-position-242-vi",
+      "position": 242,
+      "source": "or load No-Intro / Redump DATs under",
+      "locale": "vi",
+      "currentTarget": "hoặc nạp DAT No-Intro / Redump tại",
+      "rationale": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete."
+    },
+    {
+      "reviewId": "W226-position-242-zh-Hans",
+      "position": 242,
+      "source": "or load No-Intro / Redump DATs under",
+      "locale": "zh-Hans",
+      "currentTarget": "或将 No-Intro / Redump DAT 加载到",
+      "rationale": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete."
+    },
+    {
+      "reviewId": "W226-position-242-zh-Hant",
+      "position": 242,
+      "source": "or load No-Intro / Redump DATs under",
+      "locale": "zh-Hant",
+      "currentTarget": "或將 No-Intro / Redump DAT 載入至",
+      "rationale": "No distinct production caller for this exact no-comma source was found. The only near match is the comma-prefixed rank-241 phrase in interfaceMarkup; hold pending a caller or confirmation that this key is obsolete."
+    }
+  ],
+  "limitations": [
+    "Machine review only; no native-speaker approval.",
+    "The four caller-path hold positions are held in every locale even though current target strings exist.",
+    "The review uses only caller contexts pinned in the input packet."
+  ]
+}

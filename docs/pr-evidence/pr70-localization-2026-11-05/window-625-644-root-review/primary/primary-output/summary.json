@@ -1,0 +1,57 @@
+{
+  "artifact": "ROMarrNG PR #70 W625-W644 primary semantic review summary",
+  "blindness": {
+    "blindOutputInspected": false,
+    "candidateFreeInputManifestSha256": "33ef906c078f2908dddbfc01b9cf6cb1b17e4a603354aa03576ead5c87e09078",
+    "otherW625ReviewDecisionsAccessed": false,
+    "priorW625PrimaryDecisionsReused": false
+  },
+  "callerCoverage": {
+    "callerlessCells": 60,
+    "callerlessSources": 5,
+    "proposedChangesWithCallerContext": 9,
+    "proposedChangesWithoutCallerContext": 15,
+    "sourcesWithCallers": 15
+  },
+  "cellCount": 240,
+  "dispositionCounts": {
+    "CHANGE": 24,
+    "KEEP": 216
+  },
+  "hashOnlyHoldCount": 0,
+  "hashOnlyHoldFile": "hash-only-holds.jsonl",
+  "head": "5860fce5d546a772b1df995f8f6321c083ed7d5d",
+  "limitations": [
+    "AI semantic review; no native-speaker approval.",
+    "Callerless entries were reviewed using the source and current target without exact runtime caller context.",
+    "Independent blind review and cross-adjudication remain pending."
+  ],
+  "localeCount": 12,
+  "proposedChangeCount": 24,
+  "proposedChangeCountsByLocale": {
+    "ar": 4,
+    "de": 1,
+    "es": 3,
+    "fr": 2,
+    "hi": 3,
+    "id": 1,
+    "ja": 2,
+    "ko": 1,
+    "pt-BR": 2,
+    "vi": 1,
+    "zh-Hans": 2,
+    "zh-Hant": 2
+  },
+  "proposedChangeCountsByPosition": {
+    "625": 3,
+    "626": 11,
+    "628": 1,
+    "629": 3,
+    "634": 4,
+    "638": 1,
+    "639": 1
+  },
+  "reviewedAtUtc": "2026-11-05T03:41:01+00:00",
+  "sourceCount": 20,
+  "tree": "561835895972a62e9d3b1f2bfe9bcba01187eb98"
+}

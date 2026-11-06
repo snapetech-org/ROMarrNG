@@ -1,0 +1,7 @@
+5552:       +'<div class="row"><button class="btn" id="cstart">'
+5553:       +interfaceTemplateMarkup('ui.request-count-missing.fbb85426ea',{count:fmt(c.missing)})+'</button>'
+5554:       +'<label class="help" style="margin:0">'+interfaceMarkup('Requests per pass:')+' <input id="cpp" type="number" '
+5555:       +'min="1" max="50" value="5" style="width:60px;padding:5px;background:var(--bg);'
+5556:       +'color:var(--fg);border:1px solid var(--line);border-radius:4px"> '
+5557:       +'</label></div>'
+5558:       +'<table style="margin-top:14px"><thead><tr><th>'+interfaceMarkup('Title')+'</th><th>'

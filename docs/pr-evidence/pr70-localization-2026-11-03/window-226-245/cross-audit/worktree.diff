@@ -1,0 +1,165 @@
+diff --git a/romarr/app.py b/romarr/app.py
+index 1a6067d9..59915383 100644
+--- a/romarr/app.py
++++ b/romarr/app.py
+@@ -4790,7 +4790,11 @@ class ROMarr:
+         if peer is None:
+             return {"ok": False, "error": why}
+         if not str(title or "").strip():
+-            return {"ok": False, "error": "no title"}
++            return {"ok": False, "error": "no title",
++                    "error_template": {
++                        "key": "ui.no-title.8cb9a5c65b",
++                        "values": {},
++                    }}
+         self.store.want(title, platform)
+         self.store.record(Event(
+             kind="wanted", game=title, platform=platform,
+diff --git a/romarr/federation.py b/romarr/federation.py
+index ec81b84c..d7460fa8 100644
+--- a/romarr/federation.py
++++ b/romarr/federation.py
+@@ -608,7 +608,11 @@ class Federation:
+             }
+         return {"status": "missing", "title": title,
+                 "detail": "not in this library; the hash identifies exactly "
+-                          "which dump to acquire"}
++                          "which dump to acquire",
++                "detail_template": {
++                    "key": "ui.not-in-this-library-the-hash-identif.15bd6cace0",
++                    "values": {},
++                }}
+ 
+     def status(self) -> list[dict]:
+         """The Peers page. Tokens never appear here."""
+diff --git a/romarr/ui.py b/romarr/ui.py
+index 0cf909e3..f071e940 100644
+--- a/romarr/ui.py
++++ b/romarr/ui.py
+@@ -944,6 +944,8 @@ const LOCAL_API_TEMPLATE_KEYS=new Set([
+   'ui.no-indexer-could-be-read.ad531cd423',
+   'ui.no-library-configured.2f7f2b199a',
+   'ui.no-lists-configured.f0f61cd546',
++  'ui.no-title.8cb9a5c65b',
++  'ui.not-in-this-library-the-hash-identif.15bd6cace0',
+   'ui.nothing-finished.cd66a4ec32',
+   'ui.nothing-wanted-nothing-to-match.d281ab9dfe',
+   'ui.retired-blocklisted-dead-download-s.5e329a4393',
+@@ -1997,8 +1999,13 @@ RENDER.library=async(renderEpoch=routeEpoch)=>{
+     const filterName=({genre:'Genre',region:'Region',decade:'Decade',origin:'Origin',source:'Source',sort:'Sort by'})[key]||label;
+     return `<select data-lf="${key}" aria-label="${esc(translateLabel(filterName,readInterfaceLanguage()))}" data-i18n-aria-label="${esc(stableLocalizationKey(filterName)||filterName)}" style="padding:4px 8px;font-size:12px">
+       <option value="" data-i18n-key="${esc(stableLocalizationKey(label)||label)}">${esc(translateLabel(label,readInterfaceLanguage()))}</option>
+-      ${list.map(x=>`<option value="${esc(x.value)}"${LIB[key]===x.value?' selected':''}
+-        >${esc(fmt?fmt(x.value):x.value)} (${num(x.count)})</option>`).join('')}
++      ${list.map(x=>{
++        const optionText=String(fmt?fmt(x.value):x.value);
++        const optionKey=stableLocalizationKey(optionText);
++        const marker=optionKey?` data-i18n-key="${esc(optionKey)}"`:'';
++        return `<option value="${esc(x.value)}"${LIB[key]===x.value?' selected':''}${marker}
++          >${esc(translateLabel(optionText,readInterfaceLanguage()))} (${num(x.count)})</option>`;
++      }).join('')}
+     </select>`;
+   };
+   const coverage=f.identified&&d.grand_total
+@@ -2529,7 +2536,7 @@ async function renderGameCatalog(){
+         +'<td>'+(Number(game.rating)?'★ '+num(Number(game.rating)/20):'—')+'</td>'
+         +'<td><button data-c-request="'+index+'">Request</button></td></tr>').join('')+'</tbody></table></div>';
+   }else{
+-    resultsMarkup='<div class="empty">'+(data.error?apiMessageMarkup(data.error):'No titles match these filters.')+'</div>';
++    resultsMarkup='<div class="empty">'+(data.error?apiMessageMarkup(data.error):interfaceMarkup('No titles match these filters.'))+'</div>';
+   }
+   const sources='<div class="row" style="margin-bottom:10px">'
+     +(hasIgdb?'<button class="btn '+(source==='igdb'?'':'ghost')+'" data-c-source="igdb">IGDB · covers, genres and ratings</button>':'')
+@@ -2949,7 +2956,7 @@ RENDER.discover=async()=>{
+       <button class="btn ${mine?'ghost':''}" data-mode="web">New releases (web)</button>
+       <span style="flex:1"></span>
+       ${tabs.map(([k,l])=>`<button class="btn ${k===DISC.shelf?'':'ghost'}"
+-        data-shelf="${k}" style="padding:4px 10px;font-size:12px">${l}</button>`).join('')}
++        data-shelf="${k}" style="padding:4px 10px;font-size:12px">${interfaceMarkup(l)}</button>`).join('')}
+     </div>
+     <div id="d-genres" style="margin-bottom:10px"></div>
+     <div id="d-out"><div class="empty">Browsing…</div></div>`;
+@@ -3438,7 +3445,7 @@ async function friendShelf(peerId, opts){
+       body:JSON.stringify({peer_id:FSHELF.peer,title:b.dataset.fwant,
+         platform:b.dataset.fplat})});
+     if(r.ok)toastSourceMessage(r.detail||'added to Wanted -- your indexers will look for it');
+-    else if(r.error)toastAppMessage(r.error);else toastLabel('ui.could-not-add.4c45a2e67f');
++    else if(r.error)toastAppMessage(r.error,r.error_template);else toastLabel('ui.could-not-add.4c45a2e67f');
+   });
+   document.querySelectorAll('[data-fplay]').forEach(b=>b.onclick=async()=>{
+     $('#fs-out').innerHTML='<div class="empty">Comparing dumps…</div>';
+@@ -3707,7 +3714,7 @@ RENDER.patches=async()=>{
+           <td>${esc(p.kind||'')}</td>
+           <td>${esc(v.label||v.version||'—')}</td>
+           <td>${esc(p.status||'')}${p.completeness?' · '+esc(p.completeness):''}</td>
+-          <td>${(v.base||{}).available?'In library':'<span style="color:var(--dim)">Not in library</span>'}</td></tr>`;
++          <td>${(v.base||{}).available?interfaceMarkup('In library'):'<span style="color:var(--dim)">'+interfaceMarkup('Not in library')+'</span>'}</td></tr>`;
+       }).join('')}</tbody></table>`
+       :'<div class="empty">No patch projects match. Add a catalogue in Media Management or drop JSON files into the patch-catalog.d folder.</div>';
+   };
+@@ -4153,7 +4160,7 @@ RENDER.media=()=>settingsPage('Media Management',
+   'Where imported ROMs and the shared metadata catalog live. The ROM path must be the path your library server scans. Completed-download paths are reported by the client per item; compare that exact path before import and add a remote path mapping below when ROMarr sees it somewhere else.',
+   fld('library_path','ROM library root',SETTINGS.library_path)
+   +fld('metadata_path','Shared metadata root',SETTINGS.metadata_path||'')
+-  +`<div class="help" style="margin:-6px 0 14px">Use one ROM root with one folder per platform, such as <code>Emulation/roms/ps2</code> and <code>Emulation/roms/snes</code>; you do not need a separate library entry for each system. With EmuDeck, point this at its <code>Emulation/roms</code> folder, not the wider <code>Emulation</code> directory. Keep shared metadata alongside it at <code>Emulation/metadata</code>, outside the ROM root, and mount that folder on each client. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another provider lookup.</div>`
++  +`<div class="help" style="margin:-6px 0 14px">Use one ROM root with one folder per platform, such as <code>Emulation/roms/ps2</code> and <code>Emulation/roms/snes</code>; you do not need a separate library entry for each system. With EmuDeck, point this at its <code>Emulation/roms</code> folder, not the wider <code>Emulation</code> directory. Keep shared metadata alongside it at <code>Emulation/metadata</code>${interfaceMarkup(', outside the ROM root, and mount that folder on each client. ROMarr keeps one catalog per platform and deduplicated artwork here, so a rename or path change does not trigger another provider lookup.')}</div>`
+   +`<fieldset class="settings-group"><legend>Platform folder names</legend>
+     <p class="help" style="margin:4px 0 8px">ROMarr recognizes platform slugs and unambiguous ES-DE system names automatically. Add a mapping only when your existing folder uses another name, such as <code>PS2 Games</code>. Folder names are matched only at the library root.</p>
+     <div id="platform-folder-mappings">${platformFolderRows(SETTINGS.platform_folder_mappings)}</div>
+@@ -4181,7 +4188,7 @@ RENDER.media=()=>settingsPage('Media Management',
+   +`<div class="help" style="margin:-6px 0 12px">Switch IDs and version numbers come from the filename and TitleDB. They classify a likely base game, update or DLC; they do not verify the package bytes. When enabled, only TitleDB identified updates and DLC are routed to the folders below.</div>`
+   +fld('switch_updates_dir','Switch updates folder',SETTINGS.switch_updates_dir||'Updates')
+   +fld('switch_dlc_dir','Switch DLC folder',SETTINGS.switch_dlc_dir||'DLC')
+-  +chk('overwrite_existing','Overwrite an existing file',SETTINGS.overwrite_existing)
++  +chk('overwrite_existing',interfaceMarkup('Overwrite an existing file'),SETTINGS.overwrite_existing)
+   +chk('rescan_after_import','Tell your library server to rescan after an import',SETTINGS.rescan_after_import)
+   +sel('translation_policy','Fan translations in 1G1R sets',
+      [['exclude','Exclude — published dumps only'],
+@@ -4441,10 +4448,7 @@ RENDER.indexers=async()=>{
+ };
+ 
+ RENDER.general=()=>settingsPage('General',
+-  'Optional connections to the rest of the stack. Credentials live in the environment '
+-  +'file, not here — this page never shows or stores a secret. Indexers and download '
+-  +'clients have their own Settings pages; notifications and metadata connections '
+-  +'can be added only when you choose to use them.',
++  interfaceMarkup('Optional connections to the rest of the stack. Credentials live in the environment file, not here — this page never shows or stores a secret. Indexers and download clients have their own Settings pages; notifications and metadata connections can be added only when you choose to use them.'),
+   `<div class="field"><label>Prowlarr</label>
+      <input type="text" value="${esc(SETTINGS._prowlarr_url||'')}" disabled></div>
+    <div class="field"><label>qBittorrent</label>
+@@ -4544,7 +4548,7 @@ RENDER.general=()=>settingsPage('General',
+ RENDER.status=async()=>{
+   const h=await j('/api/v1/system/status');
+   const row=(l,ok,extra='')=>`<tr><td>${l}</td>
+-    <td><span class="dot ${ok?'up':'down'}"></span>${ok?'OK':'Not available'}</td>
++    <td><span class="dot ${ok?'up':'down'}"></span>${interfaceMarkup(ok?'OK':'Not available')}</td>
+     <td style="color:var(--dim)">${apiMessageMarkup(extra)}</td></tr>`;
+   const g=h.ggrequestz||{};
+   $('#page').innerHTML=`<div class="card"><h3>Health</h3><table><tbody>
+@@ -5330,7 +5334,7 @@ RENDER.getstarted=async()=>{
+     +'<div class="grid">'
+     +'<a class="tile" href="#platforms" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Choose a system or era</div><div class="pf">Browse supported platforms, see how they play, and open the matching catalog.</div></a>'
+     +'<a class="tile" href="#manualimport" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">I already have ROMs</div><div class="pf">Import a folder you own and let ROMarr identify and file what is there.</div></a>'
+-    +'<a class="tile" href="#organize" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Organize a library you already have</div><div class="pf">Match DATs, cache shared metadata and artwork, and preview safe renames.</div></a>'
++    +'<a class="tile" href="#organize" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">'+interfaceMarkup('Organize a library you already have')+'</div><div class="pf">Match DATs, cache shared metadata and artwork, and preview safe renames.</div></a>'
+     +'<a class="tile" href="#lists" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Build a request list</div><div class="pf">Browse catalog titles or connect an import list. Requests use your configured sources and client.</div></a>'
+     +'<a class="tile" href="#collections" style="text-decoration:none;color:inherit;padding:12px"><div class="nm">Work toward a complete set</div><div class="pf">Load a DAT and see verified titles and collection progress.</div></a>'
+     +'</div>'
+@@ -5352,7 +5356,7 @@ RENDER.getstarted=async()=>{
+        +interfaceMarkup('ui.can-tell-you-what-a-complete-set-is.3fe1fc5db0'))
+     +'</div>'
+ 
+-    +'<div class="card" style="margin-top:16px"><h3>Optional follow-ups</h3>'
++    +'<div class="card" style="margin-top:16px"><h3>'+interfaceMarkup('Optional follow-ups')+'</h3>'
+     +'<p class="help">'+interfaceMarkup('ui.core-search-grabbing-and-filing-do-n.d6115a1a9e')+'</p>'
+     +'<ul class="help">'
+     +'<li>'+interfaceMarkup('ui.dat-checks-and-complete-set-progress.73302e5ba1')+' <a href="#collections">'+interfaceMarkup('ui.collections.9f9feade76')+'</a></li>'
+@@ -5776,7 +5780,7 @@ const organizerApiMessageMarkup=(value,template=null)=>{
+               +(sw.base_title?'<div>'+esc(sw.base_title)+'</div>':'')
+               +'<div class="help" style="margin:3px 0">'+(versionDetails?versionDetails+' · ':'')
+                 +interfaceMarkup(versionStatusLabel[sw.version_status]||versionStatusLabel.unknown)+'</div>'
+-            :'<span class="help">No TitleDB ID</span>';
++            :'<span class="help">'+interfaceMarkup('No TitleDB ID')+'</span>';
+           const art=row.cover_path
+             ?'<img src="/api/v1/organizer/art?identity_id='+encodeURIComponent(row.identity_id||'')+'" alt="" loading="lazy" style="width:42px;height:58px;object-fit:cover;border-radius:4px;vertical-align:middle;margin-inline-end:8px">'
+             :'';

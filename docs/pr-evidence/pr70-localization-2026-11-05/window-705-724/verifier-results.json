@@ -1,0 +1,19 @@
+{
+  "artifact": "ROMarrNG PR #70 W705-W724 root-adjudicated application",
+  "inputHead": "50e3f8a48a800affff8bad367b5c493cc0fdfd62",
+  "inputTree": "22cd46ff4821fcbbe76b4760a15e22d688b3f548",
+  "productHead": "453d9755dc442cde05ebbd4561c4b22d76d6906f",
+  "productTree": "4c51a1ab7d592feb75f250b831b5a6cd4225ccb1",
+  "candidateFree": {"result": "PASS", "cells": 240, "callerBacked": 192, "callerlessHashOnlyHolds": 48, "messagesPerLocale": 1836},
+  "primary": {"result": "PASS", "acceptCurrent": 188, "corrections": 3, "refinements": 1, "holds": 48},
+  "blind": {"result": "PASS", "accept": 188, "corrections": 4, "holds": 48, "proposalTokensPass": true},
+  "crossReview": {"result": "PASS", "acceptCurrent": 187, "corrections": 5, "holds": 48, "rootFlags": 3, "tokenMismatches": 0},
+  "rootAdjudication": {"result": "PASS", "rows": 3, "selection": {"blind": 2, "primary": 1}},
+  "application": {"result": "PASS", "edits": 5, "unchangedCallerBacked": 187, "unchangedHashOnlyHolds": 48},
+  "readback": {"result": "PASS", "cells": 240, "messagesPerLocale": 1836, "messageOrderPreserved": true, "allOtherCatalogValuesUnchanged": true},
+  "nativeSpeakerApproval": false,
+  "headedBrowserAcceptance": false,
+  "testsBuildsScansCiDeploymentsRun": false,
+  "workflowChanges": 0,
+  "mergeReleaseOrTag": false
+}

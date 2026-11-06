@@ -1,0 +1,39 @@
+{
+  "artifact": "ROMarrNG W645-W664 root/manual adjudication",
+  "repository": "snapetech-org/ROMarrNG",
+  "pullRequest": 70,
+  "branch": "task/localization-translation-review-20261030",
+  "head": "9f8832f67195323955172dd4c3c40e29cbabb5da",
+  "tree": "d6066baa3d03d3b4c6034e5af061fc4bc278b0f9",
+  "sourceCount": 20,
+  "localeCount": 12,
+  "cellCount": 240,
+  "callerBackedCells": 144,
+  "callerlessHashOnlyHolds": 96,
+  "rootDispositionCounts": {
+    "accept-current": 129,
+    "correction": 12,
+    "text-free-hold": 96,
+    "refinement": 3
+  },
+  "primaryProposalCount": 12,
+  "blindProposalCount": 6,
+  "proposalRecordsReconciled": 18,
+  "independentCrossReviewAdditionalRecommendations": 3,
+  "rootChangeCellCount": 15,
+  "applicationPerformed": false,
+  "nativeSpeakerApproval": false,
+  "browserReviewPerformed": false,
+  "blindInputPinWarning": {
+    "blindSummaryCandidateFreeChecksumListSha256": "1ca785d57863dac9f0bb52e60b5966c55f758282cac7f9099c9056b256359ddb",
+    "currentCandidateFreeChecksumListSha256": "15dd26e7614adb334b2c83ff9da791d56be8e9854a10f80d1200ee719422785c",
+    "mismatch": true,
+    "blindPacketOwnChecksums": "PASS",
+    "all240BlindRowsBindToCurrentCandidateFreeInputs": true,
+    "allSixBlindProposalTargetsHashVerified": true,
+    "blindVerifier": "FAIL at candidate-free checksum-list equality assertion",
+    "crossReviewVerifier": "PASS_WITH_RECORDED_BLIND_INPUT_PIN_WARNING",
+    "disposition": "Keep the sealed blind packet unchanged. Record the stale top-level checksum pointer; use verified row-level source, current-target and caller hashes as documented by the independent cross-review."
+  },
+  "result": "ROOT_ADJUDICATION_COMPLETE_APPLICATION_PENDING"
+}

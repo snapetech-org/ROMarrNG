@@ -1,0 +1,48 @@
+{
+  "artifact": "ROMarrNG PR #70 W226–W245 primary semantic localization review",
+  "head": "1ab8fd8b171afbfe43cd6998cde920f9f9b12b0c",
+  "tree": "c65a2206c95cd13b3eca5174aca2e4c812eff8bc",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1125,
+      "sha256": "9e5190f39f19049dd61a572952cbaa01007cae41d5848ac9a089448142da9b7a"
+    },
+    {
+      "path": "build_primary_review.py",
+      "bytes": 20788,
+      "sha256": "ef9cbc7423bd21fa5ad6d05984d4ad51423aff1181e06b492281c099ff5adf22"
+    },
+    {
+      "path": "holds.jsonl",
+      "bytes": 24145,
+      "sha256": "a015bc8a5cfb434a2f5c46c5b25877382b15ae4aae39cfdd8ba02b9032478677"
+    },
+    {
+      "path": "input-verification.json",
+      "bytes": 4854,
+      "sha256": "1d3bcdb34401d8bf3d9ac692686a20d09577eff0b7de78956bd7790c9ebc78f4"
+    },
+    {
+      "path": "live-pr-verification.json",
+      "bytes": 655,
+      "sha256": "ba08a6e9442b20a4f694f9fd9c824032f10a2ce0d1d3398bf5b00e01416ea9ca"
+    },
+    {
+      "path": "primary-decisions.jsonl",
+      "bytes": 565095,
+      "sha256": "7e6839ad907ba5ec86121b76bc53a6d88327582f0b64dad7d320b5749e4c35e5"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 2049,
+      "sha256": "87116df6fbde2289fc714dc214fbf217f25b99e2dc20935e369a9ef5bc9bc901"
+    }
+  ],
+  "decisionCounts": {
+    "hold": 48,
+    "refinement": 12,
+    "accept-current": 160,
+    "correction": 20
+  }
+}

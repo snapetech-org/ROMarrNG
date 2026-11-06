@@ -1,0 +1,11 @@
+{
+  "commit": "86f6161f3069bb3113f8f7a8a763193f15c4e2bc",
+  "parent": "5860fce5d546a772b1df995f8f6321c083ed7d5d",
+  "tree": "29b85a61d3ef20b73ec15c5aa08c5a23788d32f8",
+  "changedPaths": [
+    "romarr/ui-labels.json"
+  ],
+  "changedPathCount": 1,
+  "selectedCells": 3,
+  "readbackSha256": "8d11e4da3846c10047c2274c3b6e411c4e9f1a94b69d582be9e3d168970a6c07"
+}

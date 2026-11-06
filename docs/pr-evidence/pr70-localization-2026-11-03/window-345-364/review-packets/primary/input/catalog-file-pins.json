@@ -1,0 +1,155 @@
+{
+  "commit": "6bef0c74632067906fd07279fa6bd3fd59159a48",
+  "tree": "4fd79e67f37e4c66d0253199418973d965a3fbd6",
+  "activeUniqueSourceIds": 479,
+  "catalogMessageCount": 1836,
+  "baseLocale": "en",
+  "locales": [
+    "ar",
+    "de",
+    "es",
+    "fr",
+    "hi",
+    "id",
+    "ja",
+    "ko",
+    "pt-BR",
+    "vi",
+    "zh-Hans",
+    "zh-Hant"
+  ],
+  "localeMetadata": {
+    "ar": {
+      "englishName": "Arabic",
+      "nativeName": "العربية",
+      "direction": "rtl",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "de": {
+      "englishName": "German",
+      "nativeName": "Deutsch",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "es": {
+      "englishName": "Spanish",
+      "nativeName": "Español",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "fr": {
+      "englishName": "French",
+      "nativeName": "Français",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "hi": {
+      "englishName": "Hindi",
+      "nativeName": "हिन्दी",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "id": {
+      "englishName": "Indonesian",
+      "nativeName": "Bahasa Indonesia",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "ja": {
+      "englishName": "Japanese",
+      "nativeName": "日本語",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "ko": {
+      "englishName": "Korean",
+      "nativeName": "한국어",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "pt-BR": {
+      "englishName": "Brazilian Portuguese",
+      "nativeName": "Português (Brasil)",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "vi": {
+      "englishName": "Vietnamese",
+      "nativeName": "Tiếng Việt",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "zh-Hans": {
+      "englishName": "Simplified Chinese",
+      "nativeName": "简体中文",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    },
+    "zh-Hant": {
+      "englishName": "Traditional Chinese",
+      "nativeName": "繁體中文",
+      "direction": "ltr",
+      "status": "available",
+      "translationReview": "unverified"
+    }
+  },
+  "sourceIdOrderSha256": "96b4c95e6570f15c50053a918e58566481107444f38a64a79a46f8fff33b1b94",
+  "catalogKeyOrderSha256": "40c18afaf80695667f7022e59141a2793799fde35527d608eedb30f8ef4ad055",
+  "catalogMessageFieldSequenceSha256": "cacf96cb93cee45deed8ca23e36bda28e575aeab1ebc8545745eeb0294ad7ef8",
+  "translationLocaleKeySequenceSha256": "96d52f7db653ed3d18c581929136327b1be3c9c0687d0f13ee95b0fc0cec18fe",
+  "files": {
+    "romarr/ui-source-messages.json": {
+      "path": "romarr/ui-source-messages.json",
+      "bytes": 273919,
+      "sha256": "da42ba25b8d4d8f5db55ab041c8c8ff50cf8269a5a94dcd7fe03979b47826515",
+      "gitBlob": "f53666450da36ecf5b0f96ba32d3eeb2666ced80"
+    },
+    "romarr/ui-source-snapshot.json": {
+      "path": "romarr/ui-source-snapshot.json",
+      "bytes": 202767,
+      "sha256": "c91b6c00b23cb073ab4f9c85a3932ed92d9c3418ba3c6b1b12522bec6fa88fe3",
+      "gitBlob": "398ea2e11cca406eb7f108ac40a44a6c495badb2"
+    },
+    "romarr/ui-labels.json": {
+      "path": "romarr/ui-labels.json",
+      "bytes": 3008453,
+      "sha256": "292bf0ce42fda2de87a379d9efaae8fdc831e5c6d0fcab28318a7c85d933941d",
+      "gitBlob": "9a08fdfbf6a983d4660047bfaef45aae5c82b29b"
+    },
+    "docs/localization-glossary.md": {
+      "path": "docs/localization-glossary.md",
+      "bytes": 3031,
+      "sha256": "08f2f2e2ddf722065993a454523e8c353db823c336a6f07e48f9bf215e37ad34",
+      "gitBlob": "edfe311cb5a0fd66c49a0923a0b410d207fa315f"
+    },
+    "romarr/ui.py": {
+      "path": "romarr/ui.py",
+      "bytes": 407495,
+      "sha256": "732486b957967ecde0457be53f8f70bf6675df5c9d7d340bb2c2d963bb23661a",
+      "gitBlob": "a99731cc16d32a6e7385108d07de057097bda722"
+    },
+    "romarr/app.py": {
+      "path": "romarr/app.py",
+      "bytes": 418446,
+      "sha256": "74d72bae792a9b07db6336758f742ee1506bd9f34cebd22ee3dc3bdd3d6b8510",
+      "gitBlob": "cde31ad0d32ebc9c728eea7f4b4b37e26ebf53dd"
+    },
+    "romarr/organizer.py": {
+      "path": "romarr/organizer.py",
+      "bytes": 121857,
+      "sha256": "b6607d543c6b3017d5b6d1e365c3265905b36317ee5ed7f0d6e28b9c8e90ae64",
+      "gitBlob": "48692946c8b9ea9fbbcecec3e50b8523f991c390"
+    }
+  }
+}
