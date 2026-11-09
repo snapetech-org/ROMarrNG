@@ -1,13 +1,25 @@
+# packer-windows-jit-v1
+# ng-runner-policy: private-jit-only
 name: Desktop frontend contracts
+run-name: ${{ format('action:{0}:pool:{1}', inputs.action || 'ci', inputs.runner_pool || 'private') }}
 on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      action:
+        type: choice
+        options: [ci]
+        required: true
+      runner_pool:
+        type: choice
+        options: [private]
+        required: true
 permissions:
   contents: read
 jobs:
   windows:
-    runs-on: ${{ fromJSON(format('{{"group":"packer-windows","labels":["self-hosted","windows","x64","ng-main-run-{0}"]}}', github.run_id)) }}
+    runs-on: ${{ fromJSON(format('{{"group":"packer-windows","labels":["self-hosted","Windows","X64","on-demand","packer-windows","ROMarrNG","ng-main-run-{0}","gha-{0}-windows"]}}', github.run_id)) }}
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1

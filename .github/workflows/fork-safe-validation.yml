@@ -1,0 +1,30 @@
+name: ROMarrNG isolated fork syntax validation
+on:
+  workflow_call:
+permissions:
+  contents: read
+jobs:
+  validate:
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.fork == true &&
+      github.event.pull_request.base.repo.full_name == 'snapetech-org/ROMarrNG' &&
+      github.event.pull_request.base.ref == 'main'
+    runs-on:
+      group: public-fork-jit
+      labels: [self-hosted, linux, x64, public-pr-romarrng, ng-public-run-${{ github.run_id }}]
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Parse Python source without executing it
+        run: |
+          python3 -I - <<'PYCODE'
+          import ast
+          from pathlib import Path
+          for root in ('romarr', 'tests', 'scripts'):
+              for source in Path(root).rglob('*.py'):
+                  if not source.is_symlink():
+                      ast.parse(source.read_text(encoding='utf-8'), filename=str(source))
+          PYCODE
