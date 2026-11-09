@@ -1,10 +1,13 @@
-# packer-windows-jit-v1
-# ng-runner-policy: private-jit-only
+# ng-runner-policy: hosted-compatible-v1
 name: Desktop frontend contracts
-run-name: ${{ format('action:{0}:pool:{1}', inputs.action || 'ci', inputs.runner_pool || 'private') }}
+run-name: ${{ format('action:{0}:pool:{1}', inputs.action || 'ci', inputs.runner_pool || 'public') }}
 on:
-  push:
-    branches: [main]
+  workflow_call:
+    inputs:
+      release_ref:
+        type: string
+        required: false
+        default: ''
   workflow_dispatch:
     inputs:
       action:
@@ -13,17 +16,18 @@ on:
         required: true
       runner_pool:
         type: choice
-        options: [private]
+        options: [public]
         required: true
 permissions:
   contents: read
 jobs:
   windows:
-    runs-on: ${{ fromJSON(format('{{"group":"packer-windows","labels":["self-hosted","Windows","X64","on-demand","packer-windows","ROMarrNG","ng-main-run-{0}","gha-{0}-windows"]}}', github.run_id)) }}
+    runs-on: windows-2025
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
+          ref: ${{ inputs.release_ref || github.sha }}
           persist-credentials: false
       - uses: actions/setup-dotnet@26b0ec14cb23fa6904739307f278c14f94c95bf1 # v5
         with:
