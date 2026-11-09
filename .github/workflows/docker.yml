@@ -388,6 +388,14 @@ jobs:
         id: image
         run: echo "name=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
 
+      - name: Resolve release version
+        id: release
+        if: inputs.release_tag != ''
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: echo "version=${RELEASE_TAG#v}" >> "$GITHUB_OUTPUT"
+
       - id: meta
         uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
         with:
@@ -401,7 +409,7 @@ jobs:
             type=raw,value=main,enable=${{ (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
             type=raw,value=master,enable=${{ (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
             type=raw,value=stable,enable=${{ (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
-            type=raw,value=${{ inputs.release_tag }},enable=${{ inputs.release_tag != '' }}
+            type=raw,value=${{ steps.release.outputs.version }},enable=${{ inputs.release_tag != '' }}
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
@@ -531,6 +539,14 @@ jobs:
         id: image
         run: echo "name=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
 
+      - name: Resolve release version
+        id: release
+        if: inputs.release_tag != ''
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: echo "version=${RELEASE_TAG#v}" >> "$GITHUB_OUTPUT"
+
       - id: meta
         uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
         with:
@@ -545,7 +561,7 @@ jobs:
             type=raw,value=master-browser,enable=${{ (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
             type=raw,value=latest-browser,enable=${{ (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
             type=raw,value=stable-browser,enable=${{ (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
-            type=raw,value=${{ inputs.release_tag }}-browser,enable=${{ inputs.release_tag != '' }}
+            type=raw,value=${{ steps.release.outputs.version }}-browser,enable=${{ inputs.release_tag != '' }}
             type=semver,pattern={{version}}-browser
             type=semver,pattern={{major}}.{{minor}}-browser
             type=sha,format=short,suffix=-browser

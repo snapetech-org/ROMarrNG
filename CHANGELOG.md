@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.14.16] - 2026-11-09
+
+### Fixed
+
+- **Release pipeline:** Publish the versioned GHCR aliases without the Git tag's `v` prefix during manual hosted releases, matching the stable-alias verifier and existing container tag contract.
+
 ## [0.14.15] - 2026-11-09
 
 ### Fixed
