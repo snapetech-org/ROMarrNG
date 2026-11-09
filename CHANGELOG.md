@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.14.14] - 2026-11-09
+
+### Fixed
+
+- **Release pipeline:** Hosted Docker builds no longer inherit the private-LAN BuildKit proxy, allowing image dependencies to resolve on public GitHub runners.
+
 ## [0.14.13] - 2026-11-09
 
 ### User-facing changes

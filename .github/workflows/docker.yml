@@ -180,7 +180,7 @@ jobs:
       )
     runs-on: ubuntu-24.04
     env:
-      BUILDKIT_EGRESS_PROXY: ${{ (contains(fromJSON('["push","workflow_dispatch","schedule","release","repository_dispatch"]'), github.event_name) && (github.ref == 'refs/heads/main' || ((github.event_name == 'workflow_dispatch' && inputs.release_tag != '') && startsWith(inputs.release_tag, 'v')))) && 'http://10.0.2.100:3128' || '' }}
+      BUILDKIT_EGRESS_PROXY: ""
     permissions:
       contents: read
     steps:
