@@ -619,10 +619,12 @@ jobs:
 
       - name: Verify all aliases match the latest stable release image
         shell: bash
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
         run: |
           set -euo pipefail
-          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
-            python scripts/check_stable_image_tags.py --version "${GITHUB_REF_NAME#v}"
+          if [[ "$RELEASE_TAG" == v* ]]; then
+            python scripts/check_stable_image_tags.py --version "${RELEASE_TAG#v}"
           else
             python scripts/check_stable_image_tags.py
           fi

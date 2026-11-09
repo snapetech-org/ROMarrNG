@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.14.15] - 2026-11-09
+
+### Fixed
+
+- **Release pipeline:** Verify stable container aliases against the explicit workflow-dispatch release tag instead of the previously published release, removing a circular pre-publication gate.
+
 ## [0.14.14] - 2026-11-09
 
 ### Fixed
