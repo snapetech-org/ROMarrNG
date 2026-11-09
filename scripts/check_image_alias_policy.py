@@ -39,13 +39,13 @@ def main() -> int:
     workflow_path = ROOT / ".github/workflows/docker.yml"
     workflow = workflow_path.read_text()
 
-    if 'tags: ["v*"]' not in workflow:
-        problems.append("Docker workflow must publish version-tag builds for v* tags")
+    if "inputs.release_tag != ''" not in workflow:
+        problems.append("Docker workflow must require an explicit release tag")
     for alias in STANDARD_ALIASES + BROWSER_ALIASES:
         expected = (
             "type=raw,value="
             + alias
-            + ",enable=${{ github.ref_type == 'tag' }}"
+            + ",enable=${{ (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}"
         )
         configured = [
             line.strip()
@@ -59,8 +59,8 @@ def main() -> int:
             problems.append(f"Docker workflow still contains obsolete publisher reference: {obsolete}")
     if "name=ghcr.io/${GITHUB_REPOSITORY,,}" not in workflow:
         problems.append("Docker workflow must publish to the current repository's GHCR package")
-    if "group: docker-${{ startsWith(github.ref, 'refs/tags/v') && 'stable-releases' || github.run_id }}" not in workflow:
-        problems.append("Version-tag builds must share a serialized stable-release queue")
+    if "group: docker-${{ inputs.release_tag != '' && 'stable-releases' || github.run_id }}" not in workflow:
+        problems.append("Explicit release builds must share a serialized stable-release queue")
     if "queue: max" not in workflow:
         problems.append("Docker workflow must preserve queued builds instead of replacing them")
     if "cancel-in-progress: false" not in workflow:
