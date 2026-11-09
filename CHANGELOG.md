@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.14.19] - 2026-11-09
+
+### User-facing changes
+
+#### Changed
+
+- **Library:** Start with a local game library, map folders to systems, and refresh saved metadata and covers. Browse DAT or IGDB catalogs, save filters, and review selected missing games before adding them to Wanted. Adding to Wanted does not start a download.
+- **Documentation:** The audit remediation ledger now records observed regression, native acquisition, scanner, and desktop contract results with exact CI links and remaining verification limits. Source-install requirements consistently specify Python 3.12 or newer on Linux.
+- **Library:** Set acquisition continues in the background. Progress separates accepted downloads from completed imports. Interrupted handoffs require review before retry, helping avoid duplicate requests after a restart.
+- **Library:** Folder scans resume from durable checkpoints and retain the last complete inventory after interruption or access failure. CUE/M3U sets report missing members. Settings can download a consistent snapshot of the catalog database.
+- **Library:** Export complete scanned libraries to ROMarr JSON, LaunchBox, Playnite or ES-DE. Preview metadata imports, review conflicts, and preserve existing values before applying changes. Paths that cannot be exported are counted explicitly.
+- **Library:** The qBittorrent client on version 5.2 or newer can authenticate with an API key in the Authorization header. Username/password sessions remain available for older servers. A rejected key never falls back to a stored password.
+
+#### Fixed
+
+- **Library:** Folder backends without a durable catalog now reuse one scan across counts and shelf pages, avoiding repeated filesystem walks. Explicit rescans refresh the snapshot immediately. Adapted from GalballyJ’s contribution in PR #58, with synchronized cache access and durable scans preserved.
+- **Localization:** Corrected existing interface translations across supported languages using the localization review. Runtime behavior and authentication retain the current security fixes; new untranslated interface expansion remains outside this release.
+
+#### Security
+
+- **Validation:** Image validation now requires enforcing security scans and pull-request dependency review in the active build workflow, even when legacy standalone scan workflows are disabled. Native acquisition proofs also check that plugins cannot signal the host process or truncate protected state.
+- **Audit Remediation:** **Breaking:** ROMarrNG closes the audit's authentication, secret disclosure, unsafe file handling, download, plugin, and deployment gaps. Updates now preserve current state during rollback, imports publish atomically, and security checks run automatically. See docs/security-remediation-2026-11-09.md for all 44 items and upgrade requirements.
+  - **Action required:** Review the linked remediation ledger; sign in again, configure trusted proxies and transfer budgets, and migrate ARMv7 deployments to AMD64 or ARM64.
+- **Import Validation:** Verification and bulk downloads now share their byte and time allowance across members of a job. Large archives cannot evade limits by presenting many individually permitted files. Debrid queue updates also persist atomically and preserve concurrent additions.
+
 ## [0.14.18] - 2026-11-09
 
 ### User-facing changes
