@@ -193,6 +193,7 @@ class _ZipSource(_Source):
     def __init__(self, path: Path):
         self.path = path
         self.budget = Budget()
+        self.verification_budget = Budget()
         preflight_zip(path)
 
     def names(self):
@@ -207,7 +208,7 @@ class _ZipSource(_Source):
     def read(self, name):
         output = io.BytesIO()
         with zipfile.ZipFile(self.path) as archive, archive.open(name) as source:
-            Budget().copy(source, output, maximum=limit("ROMARR_MAX_METADATA_BYTES", 1 << 20))
+            self.verification_budget.copy(source, output, maximum=limit("ROMARR_MAX_METADATA_BYTES", 1 << 20))
         return output.getvalue()
 
     def copy(self, name, destination):
@@ -219,21 +220,23 @@ class _ZipSource(_Source):
             info = archive.getinfo(name)
             if info.file_size > self.budget.member:
                 raise ValueError("archive member exceeds its byte budget")
-            return hash_stream(_BoundedReader(source, self.budget.member),
+            return hash_stream(_BoundedReader(source, self.budget.member, budget=self.verification_budget),
                                suffix=Path(name).suffix, size=info.file_size)
 
 
 class _BoundedReader:
-    def __init__(self, source, maximum):
+    def __init__(self, source, maximum, *, budget=None):
         self.source, self.remaining = source, maximum
-        self.deadline = __import__("time").monotonic() + limit("ROMARR_TRANSFER_SECONDS", 600)
+        self.budget = budget or Budget()
+        self.deadline = self.budget.deadline
 
     def read(self, size=-1):
         if __import__("time").monotonic() > self.deadline:
             raise OSError("archive read exceeded its time budget")
         data = self.source.read(min(self.remaining + 1, size if size >= 0 else self.remaining + 1))
         self.remaining -= len(data)
-        if self.remaining < 0:
+        self.budget.remaining -= len(data)
+        if self.remaining < 0 or self.budget.remaining < 0:
             raise OSError("archive read exceeded its byte budget")
         return data
 
@@ -242,9 +245,10 @@ class _BsdtarSource(_Source):
     def __init__(self, path: Path, tool: str):
         self.path, self.tool = path, tool
         self.budget = Budget()
+        self.verification_budget = Budget()
 
     def _stream(self, args, output, *, maximum=None, budget=None):
-        budget = budget or Budget()
+        budget = budget or self.verification_budget
         with subprocess.Popen([self.tool, *args], stdout=subprocess.PIPE,
                               stderr=subprocess.DEVNULL) as process:
             timer = threading.Timer(max(.01, budget.deadline - __import__("time").monotonic()), process.kill)
@@ -293,6 +297,7 @@ class _PathSource(_Source):
     def __init__(self, path: Path):
         self.path = path
         self.budget = Budget()
+        self.verification_budget = Budget()
 
     def names(self):
         if self.path.is_symlink():
@@ -316,7 +321,7 @@ class _PathSource(_Source):
     def read(self, name):
         out = io.BytesIO()
         with source_file(self._path(name)) as source:
-            Budget().copy(source, out, maximum=limit("ROMARR_MAX_METADATA_BYTES", 1 << 20))
+            self.verification_budget.copy(source, out, maximum=limit("ROMARR_MAX_METADATA_BYTES", 1 << 20))
         return out.getvalue()
 
     def copy(self, name, destination):
@@ -326,7 +331,7 @@ class _PathSource(_Source):
     def hashes(self, name):
         with source_file(self._path(name)) as source:
             size = os.fstat(source.fileno()).st_size
-            return hash_stream(_BoundedReader(source, self.budget.member),
+            return hash_stream(_BoundedReader(source, self.budget.member, budget=self.verification_budget),
                                suffix=Path(name).suffix, size=size)
 
 

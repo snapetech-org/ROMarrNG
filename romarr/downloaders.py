@@ -1552,6 +1552,9 @@ class DebridClient:
     def __init__(self, config, session: requests.Session | None = None):
         self._config = config
         self._session = session or PublicSession()
+        with _SITE_LOCKS_LOCK:
+            self._ledger_lock = _SITE_LOCKS.setdefault(
+                str(self._ledger_path().absolute()), threading.RLock())
 
     @property
     def configured(self) -> bool:
@@ -1599,10 +1602,14 @@ class DebridClient:
         return Path(self._config.save_path) / self.LEDGER
 
     def _ours(self) -> list:
-        try:
-            return list(json.loads(self._ledger_path().read_text()))
-        except (OSError, ValueError):
-            return []
+        with self._ledger_lock:
+            try:
+                rows = json.loads(self._ledger_path().read_text())
+            except FileNotFoundError:
+                return []
+            if not isinstance(rows, list) or any(not isinstance(row, (str, dict)) for row in rows):
+                raise ValueError("invalid debrid ledger; preserve and repair it")
+            return rows
 
     @staticmethod
     def _entry_id(entry) -> str:
@@ -1618,15 +1625,12 @@ class DebridClient:
         return str(entry)
 
     def _remember(self, item_id, **extra) -> None:
-        entries = self._ours()
-        if any(self._entry_id(e) == str(item_id) for e in entries):
-            return
-        entries.append({"id": str(item_id), **extra} if extra else str(item_id))
-        try:
-            self._ledger_path().parent.mkdir(parents=True, exist_ok=True)
-            self._ledger_path().write_text(json.dumps(entries))
-        except OSError as err:
-            log.warning("could not record the %s item id: %s", self.name, err)
+        with self._ledger_lock:
+            entries = self._ours()
+            if any(self._entry_id(e) == str(item_id) for e in entries):
+                return
+            entries.append({"id": str(item_id), **extra} if extra else str(item_id))
+            write_json(self._ledger_path(), entries)
 
     # -- the client interface -----------------------------------------------
 
@@ -1675,8 +1679,13 @@ class DebridClient:
     def _fetch_links(self, links: list, target) -> bool:
         """Download every link into `target/`. True if all the files are
         present afterwards, counting ones a previous sweep already fetched."""
+        if len(links) > limit("ROMARR_MAX_ARCHIVE_FILES", 10000):
+            return False
+        budget = Budget()
         ok = True
         for link in links:
+            if time.monotonic() > budget.deadline or budget.remaining <= 0:
+                return False
             filename, url = self._resolve(link)
             if not url:
                 ok = False
@@ -1686,22 +1695,25 @@ class DebridClient:
                 destination = target.joinpath(*parts)
                 destination.absolute().relative_to(Path(self._config.save_path).absolute())
                 if destination.exists():
-                    with source_file(destination):
-                        pass
+                    with source_file(destination) as existing:
+                        size = os.fstat(existing.fileno()).st_size
+                    if size > budget.member or size > budget.remaining:
+                        return False
+                    budget.remaining -= size
                     continue
             except (ValueError, OSError):
                 ok = False
                 continue
-            if not self._download(url, destination):
+            if not self._download(url, destination, budget=budget):
                 ok = False
         return ok
 
-    def _download(self, url: str, destination) -> bool:
+    def _download(self, url: str, destination, *, budget=None) -> bool:
         try:
             with self._session.get(url, stream=True, timeout=self._config.timeout) as response:
                 response.raise_for_status()
                 atomic_file(Path(self._config.save_path), destination,
-                            lambda output: _copy_response(response, output))
+                            lambda output: _copy_response(response, output, budget=budget))
             return True
         except (requests.RequestException, OSError, ValueError) as err:
             log.warning("%s download failed: %s", self.name, err.__class__.__name__)
@@ -2950,6 +2962,7 @@ class SiteDownloader:
         from .internetarchive import archive_download_url, decode_bundle_url
 
         bundle = decode_bundle_url(url)
+        budget = Budget()
         identifier = bundle["identifier"]
         files = bundle["files"]
         with directory_fd(target, create=True):
@@ -2990,7 +3003,7 @@ class SiteDownloader:
                 host = SitePolicy._host(source)
                 if host in self._forbidden:
                     raise RuntimeError("Internet Archive answered 403 earlier in this session")
-                saved = self._direct_fetch(source, stage)
+                saved = self._direct_fetch(source, stage, budget=budget)
                 destination = stage.joinpath(*PurePosixPath(member["name"]).parts)
                 destination.parent.mkdir(parents=True, exist_ok=True)
                 if saved != destination:
@@ -3006,7 +3019,7 @@ class SiteDownloader:
             shutil.rmtree(stage, ignore_errors=True)
             raise
 
-    def _direct_fetch(self, url: str, target: Path) -> Path:
+    def _direct_fetch(self, url: str, target: Path, *, budget=None) -> Path:
         """A plain GET, streamed to disk, with the manners turned on.
 
         Retries only what a server asked to have retried -- 429 and 503 carry
@@ -3036,7 +3049,7 @@ class SiteDownloader:
                 self._policy._sleep(_retry_after(after, self._config.delay))
                 continue
             response.raise_for_status()
-            return _stream_to(response, target, url)
+            return _stream_to(response, target, url, budget=budget)
         raise RuntimeError("the site asked us to come back later, three times")
 
     def _browser_fetch(self, url: str, target: Path) -> Path:
@@ -3103,29 +3116,32 @@ def _filename_for(response, url: str) -> str:
     return name or "download.bin"
 
 
-def _copy_response(response, output):
+def _copy_response(response, output, *, budget=None):
     if response.headers.get("Content-Encoding", "identity").lower() not in {"", "identity"}:
         raise ValueError("compressed HTTP transfer encoding is not supported for ROM data")
     maximum = limit("ROMARR_MAX_DOWNLOAD_BYTES", 16 << 30)
     declared = response.headers.get("Content-Length", "")
+    budget = budget or Budget(maximum)
+    maximum = min(maximum, budget.member, budget.remaining)
     if declared and (not str(declared).isdigit() or int(declared) > maximum):
         raise ValueError("download exceeds its byte budget")
-    budget = Budget(maximum)
     total = 0
     for chunk in response.iter_content(chunk_size=1 << 20):
         if chunk:
+            if total + len(chunk) > maximum:
+                raise OSError("download exceeded its byte budget")
             total += budget.copy(io.BytesIO(chunk), output)
     if declared and total != int(declared):
         raise OSError("download ended before its declared length")
 
 
-def _stream_to(response, target: Path, url: str) -> Path:
+def _stream_to(response, target: Path, url: str, *, budget=None) -> Path:
     name = _filename_for(response, url)
     if len(relative_parts(name)) != 1:
         raise ValueError("invalid download filename")
     destination = target / name
     with response:
-        return atomic_file(target, destination, lambda output: _copy_response(response, output))
+        return atomic_file(target, destination, lambda output: _copy_response(response, output, budget=budget))
 
 
 @dataclass

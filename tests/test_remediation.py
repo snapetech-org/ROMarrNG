@@ -581,3 +581,52 @@ def test_native_tls_secure_cookie_and_health_certificate_pin(tmp_path):
             check({**env, "ROMARR_SSL_CERT": str(wrong_cert)})
     finally:
         httpd.shutdown(); httpd.server_close(); thread.join(2)
+
+
+@pytest.mark.parametrize("kind", ["directory", "zip", "archive-stream"])
+def test_verification_enforces_an_aggregate_budget_across_members(tmp_path, monkeypatch, kind):
+    from romarr.library import _BsdtarSource
+    monkeypatch.setenv("ROMARR_MAX_EXPANDED_BYTES", "6")
+    monkeypatch.setenv("ROMARR_MAX_MEMBER_BYTES", "64")
+    for name in ("a.bin", "b.bin"):
+        (tmp_path/name).write_bytes(b"abcd")
+    if kind == "zip":
+        path = tmp_path/"fixture.zip"
+        with zipfile.ZipFile(path, "w") as archive:
+            for name in ("a.bin", "b.bin"):
+                archive.writestr(name, b"abcd")
+        source = _ZipSource(path)
+    elif kind == "archive-stream":
+        tool = tmp_path/"archive-tool"
+        tool.write_text("#!" + sys.executable + "\nimport sys\nsys.stdout.buffer.write(b'abcd')\n")
+        tool.chmod(0o755)
+        source = _BsdtarSource(tmp_path/"synthetic.7z", str(tool))
+    else:
+        source = _PathSource(tmp_path)
+    assert source.hashes("a.bin")["size"] == 4
+    with pytest.raises(OSError, match="byte budget"):
+        source.hashes("b.bin")
+
+
+
+def test_bulk_downloads_share_actual_byte_budget(monkeypatch):
+    from io import BytesIO
+    from types import SimpleNamespace
+    from romarr.downloaders import _copy_response
+    from romarr.limits import Budget
+    response = SimpleNamespace(headers={}, iter_content=lambda **_: iter([b"abcd"]))
+    budget = Budget(6)
+    _copy_response(response, BytesIO(), budget=budget)
+    with pytest.raises(OSError, match="byte budget"):
+        _copy_response(response, BytesIO(), budget=budget)
+
+
+def test_debrid_ledger_concurrent_adds_and_corruption(tmp_path):
+    client = DebridClient(DebridConfig(api_token="synthetic", save_path=str(tmp_path)))
+    with ThreadPoolExecutor(8) as workers:
+        list(workers.map(client._remember, range(40)))
+    assert len(client._ours()) == 40
+    client._ledger_path().write_text("[broken")
+    with pytest.raises(ValueError):
+        client._remember("more")
+    assert client._ledger_path().read_text() == "[broken"

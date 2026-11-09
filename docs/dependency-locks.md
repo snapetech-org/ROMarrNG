@@ -26,8 +26,8 @@ Both Dockerfiles pin the Python manifest digest and copy
 `docker/debian.sources`, selecting signed Debian package indexes at a fixed
 snapshot timestamp. Update the digest and timestamp together deliberately,
 then rebuild and scan. Snapshot signature verification remains enabled; only
-index expiry checking is disabled for the historical snapshot. Browser binaries
-are selected by the exact Playwright package version.
+index expiry checking is disabled for the historical snapshot. The Playwright client
+version is pinned; Chromium is supplied separately by the browser host.
 
 Image validation exports the image it exercised as an artifact. Release
 publication loads that artifact and publishes the same platform image, then

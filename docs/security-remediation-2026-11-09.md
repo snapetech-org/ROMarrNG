@@ -13,7 +13,7 @@ ROM-031 was excluded from the original findings, so numbering skips it.
 
 ## Validation and scope
 
-- Clean hash-locked environment: **2,432 tests and 102 subtests passed**, six
+- Clean hash-locked environment: **2,437 tests and 102 subtests passed**, six
   capability-dependent skips and one external-network test deselected. Focused
   exploit regressions, TLS loopback checks, and updater rollback fault injection
   passed. The six local skips were three missing libarchive fixtures, unavailable
@@ -27,6 +27,8 @@ ROM-031 was excluded from the original findings, so numbering skips it.
   workflow validation, Python compilation, and whitespace checks are release gates.
 - Windows frontend contracts passed on windows-2025 (run 42664910034), covering
   actual plugin code with SDK stubs and blocked outbound networking.
+- All four standard/browser acquisition proofs passed natively on AMD64 and
+  ARM64 at 90d243d (run 42665393974), including signal/truncation denial.
 - Native AMD64/ARM64 Docker acquisition/startup and Windows frontend contract
   jobs run in CI. Their execution status is reported with the delivery commit;
   adding a job alone is not evidence that it passed.
@@ -54,7 +56,7 @@ production verification boundaries above remain applicable to every item.
 | ROM-006 | The masked configuration endpoint discloses TOTP and integration secrets | Share recursive credential redaction across configuration views; cover nested provider tokens, TOTP, URL credentials, and webhook URLs. Preserve masked edits. | romarr/settings_security.py; test_config_redacts_all_credentials |
 | ROM-007 | Backups labelled as excluding secrets still contain account credentials | Use the same credential classifier for redacted backups; encrypted export remains an intentional credential-bearing operation. | romarr/ops.py; test_portable_backup_is_secret_free |
 | ROM-008 | Restoring a redacted backup clears local authentication on the next restart | Preserve local password, keys, TOTP, session and peer identity on every restore. Reject invalid restore schema before committing. | romarr/ops.py; romarr/app.py; tests/test_remediation.py |
-| ROM-009 | Persistence failures are swallowed and some queues are not written atomically | Use private atomic writes with file/directory fsync and propagated errors. Serialize the site ledger; reject corrupt existing queues instead of resetting them. | romarr/durable.py; romarr/store.py; romarr/downloaders.py |
+| ROM-009 | Persistence failures are swallowed and some queues are not written atomically | Use private atomic writes with file/directory fsync and propagated errors. Serialize the site and Debrid ledgers; reject corrupt existing queues instead of resetting them. | romarr/durable.py; romarr/store.py; romarr/downloaders.py |
 | ROM-010 | Invalid settings are persisted before validation and can prevent startup | Validate types/ranges/enums and construct candidate integration/profile configuration before state publication. Preserve previous disk/live settings on failure. | romarr/settings_security.py; romarr/app.py; tests/test_remediation.py |
 | ROM-011 | One incomplete TLS handshake blocks the native HTTPS accept loop | Move TLS handshakes into bounded request workers with a short timeout; the accept loop can serve healthy clients concurrently. | romarr/app.py; test_stalled_tls_handshake_cannot_block_other_clients |
 | ROM-012 | Invalid TLS configuration silently falls back to plaintext HTTP | Load and validate TLS configuration before opening the listener; missing or invalid certificate/key pairs stop startup. | romarr/app.py; test_invalid_tls_configuration_never_opens_plaintext |
@@ -65,7 +67,7 @@ production verification boundaries above remain applicable to every item.
 | ROM-017 | Predictable .partial files follow pre-existing symlinks | Replace predictable partial files with private random staging directories and exclusive file creation. | romarr/safe_files.py; romarr/patches.py; tests/test_remediation.py |
 | ROM-018 | Direct downloads silently overwrite existing same-name downloads | Give each direct URL its own stable hashed job directory and publish exclusively without overwriting another download. | romarr/downloaders.py; tests/test_site_downloader.py |
 | ROM-019 | Interrupted single/flattened imports leave partial final files and poison retries | Stage complete files/game sets and atomically publish with no-replace or exchange operations; errors clean staging while retaining valid prior output. | romarr/safe_files.py; romarr/library.py; test_remediation.py fault-injection cases |
-| ROM-020 | Archive expansion and bulk downloads lack enforced resource budgets | Bound actual bytes, member count, ZIP directory allocation, free disk space, and transfer time. Stream archive extraction rather than bulk extraction; reject compressed direct HTTP bodies. | romarr/limits.py; romarr/library.py; romarr/downloaders.py |
+| ROM-020 | Archive expansion and bulk downloads lack enforced resource budgets | Bound actual bytes, member count, ZIP directory allocation, free disk space, and transfer time. Verification shares an aggregate budget across members, independently of the final copy budget; Debrid and Archive.org bulk downloads share an actual-byte budget. Stream archive extraction rather than bulk extraction; reject compressed direct HTTP bodies. | romarr/limits.py; romarr/library.py; romarr/downloaders.py |
 | ROM-021 | Reverse UPS patches bypass the output-size safety limit | Validate the effective forward or reverse UPS target size before allocation and bound integer decoding. | romarr/patches.py; test_ups_reverse_output_is_bounded |
 | ROM-022 | CRC fallback overrides conflicting SHA-1 and MD5 values | Match the strongest mutually available hash; a stronger hash conflict cannot fall back to CRC verification. | romarr/dat.py; tests/rom_fixtures.py generates real same-size CRC collisions |
 | ROM-023 | File size alone is treated as proof that an unknown ROM is a bad dump | Treat size-only matches as UNKNOWN; reserve BAD_DUMP for evidence tied to a known hash/name candidate. | romarr/dat.py; tests/test_dat.py; tests/test_audit.py |
