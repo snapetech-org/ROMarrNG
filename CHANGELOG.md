@@ -2,16 +2,14 @@
 
 ## [Unreleased]
 
+## [0.14.12] - 2026-11-09
+
 ### User-facing changes
 
 #### Added
 
 - **Indexers:** Internet Archive can now be added from Settings → Indexers. Its public software search results use the existing Direct HTTP grab and import flow, including multi-file disc sets.
 - **Upstream attribution:** Publicly credit all 48 audited ROMarr issues and pull requests whose upstream code, reports, or ideas are inherited, adapted, or verified in ROMarrNG. The [source ledger](UPSTREAM_ATTRIBUTION.md) links every originating record and upstream author while making clear that those people contributed to ROMarr, not directly to this fork.
-
-## [0.14.12] - 2026-10-24
-
-### User-facing changes
 
 #### Fixed
 
