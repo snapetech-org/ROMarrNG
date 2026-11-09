@@ -731,8 +731,16 @@ class FolderLibrary:
     MAX_DIRECTORY_ENTRIES = 100_000
     MAX_DIRECTORIES = 100_000
 
+    # The tree is walked at most once per interval; count() and every
+    # shelf page then read the same snapshot instead of re-walking the
+    # tree, which is quadratic in the number of pages on a hard drive.
+    SNAP_TTL = 600.0
+
     def __init__(self, config: FolderConfig):
         self._config = config
+        self._snap = None
+        self._snap_ts = 0.0
+        self._snapshot_lock = threading.RLock()
         self._catalog = None
         self._source_id = ""
         self._config_revision = ""
@@ -1138,11 +1146,34 @@ class FolderLibrary:
             log.warning("folder library unreachable: %s", err.__class__.__name__)
             return False
 
+    def _snapshot(self, force: bool = False) -> list:
+        """One complete walk, cached for SNAP_TTL seconds.
+
+        Without this, count() plus every shelf page each re-walk the
+        whole tree, and the walk is the expensive part -- a 20,000-file
+        library on a hard drive takes minutes per page. rescan() drops
+        the snapshot so freshly imported files are picked up next read.
+        """
+        with self._snapshot_lock:
+            now = time.monotonic()
+            if (self._snap is not None and not force
+                    and now - self._snap_ts < self.SNAP_TTL):
+                return self._snap
+            try:
+                self._snap = list(self._walk(self.MAX_SCAN))
+            except OSError as err:
+                log.warning("folder library snapshot failed: %s",
+                            err.__class__.__name__)
+                if self._snap is None:
+                    self._snap = []
+            self._snap_ts = time.monotonic()
+            return self._snap
+
     def count(self) -> int:
         if self.durable_scan:
             return int(self.scan_status().get("count") or 0)
         try:
-            return sum(1 for _ in self._walk(self.MAX_SCAN))
+            return len(self._snapshot())
         except OSError as err:
             log.warning("folder library count failed: %s", err.__class__.__name__)
             return 0
@@ -1163,9 +1194,7 @@ class FolderLibrary:
             from .platforms import resolve
             declared = resolve(self._config.scan_platform)
             root_platform = declared or resolve(self._root.name)
-            for n, path in enumerate(self._walk(offset + limit)):
-                if n < offset:
-                    continue
+            for path in self._snapshot()[offset:offset + limit]:
                 relative = path.relative_to(self._root)
                 inferred = (declared or root_platform
                             or (resolve(relative.parts[0]) if relative.parts else None))
@@ -1188,7 +1217,7 @@ class FolderLibrary:
         return out
 
     def rescan(self, platform_slug: str | None = None) -> bool:
-        """Nothing to tell. The file is on disk; the frontend finds it.
+        """Drop the snapshot so a just-imported file is in the next walk.
 
         True rather than False for the same reason as Gaseous: nothing failed,
         and reporting failure would mark every successful import as half-broken.
@@ -1196,6 +1225,9 @@ class FolderLibrary:
         if self.durable_scan:
             self._catalog.invalidate_scan(self._source_id)
             self._force_scan = True
+        with self._snapshot_lock:
+            self._snap = None
+            self._snap_ts = 0.0
         return True
 
 

@@ -159,3 +159,38 @@ def test_a_folder_library_needs_no_credentials_to_be_seeded(tmp_path):
     assert len(stored) == 1
     assert stored[0]["type"] == "folder"
     assert stored[0]["path"] == str(roms)
+
+
+def test_a_fresh_import_needs_no_full_rescan_to_show_up(tmp_path):
+    """Every read within the TTL serves one cached walk, so a refresh of count
+    plus a hundred shelf pages costs the tree exactly one traversal. A ROM
+    added to disk mid-cycle is not visible until the TTL lapses or a rescan
+    -- which is exactly what the importer's rescan does."""
+    lib = library(tmp_path, "snes/Chrono Trigger.sfc")
+    assert lib.count() == 1
+    assert [g.name for g in lib.games()] == ["Chrono Trigger"]
+    (tmp_path / "snes" / "Super Metroid.smc").write_bytes(b"\x00" * 2048)
+    assert lib.count() == 1
+    assert [g.name for g in lib.games()] == ["Chrono Trigger"]
+    lib.rescan("snes")
+    assert lib.count() == 2
+    assert {g.name for g in lib.games()} == {"Chrono Trigger", "Super Metroid"}
+
+
+def test_snapshot_reuses_one_walk_and_expires(tmp_path, monkeypatch):
+    lib = library(tmp_path, "snes/Chrono Trigger.sfc")
+    original = lib._walk
+    walks = []
+    def walk(limit):
+        walks.append(limit)
+        yield from original(limit)
+    monkeypatch.setattr(lib, "_walk", walk)
+    clock = [1000.0]
+    monkeypatch.setattr("romarr.libraries.time.monotonic", lambda: clock[0])
+    assert lib.count() == 1
+    lib.games(limit=1)
+    lib.games(limit=1, offset=1)
+    assert len(walks) == 1
+    clock[0] += lib.SNAP_TTL + 1
+    assert lib.count() == 1
+    assert len(walks) == 2
