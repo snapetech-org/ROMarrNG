@@ -3,7 +3,7 @@
 For any user-facing change, add one structured fragment under `release-notes/` describing it. A
 single fragment may cover related user-facing changes in the same pull request. Keep shipped fragments unchanged. Release preparation
 adds these fragments to `CHANGELOG.md`; the tag workflow includes them in the
-GitHub Release body and ROMarrNG announcement in the SeerrNG Discord channel.
+GitHub Release body and ROMarrNG announcement in the ROMarrNG Discord channel.
 
 Use a short, user-facing description rather than an implementation detail:
 
@@ -77,6 +77,6 @@ Use the actual next version, previous stable tag, and release date. Commit the
 version and changelog preparation before creating the matching `v$VERSION`
 tag. The tag workflow publishes the release and sends
 the same release notes to Discord. `DISCORD_RELEASE_WEBHOOK` in the ROMarrNG
-repository must point to the same webhook as SeerrNG. The release-preparation commit is internal-only and needs no fragment. Use the
+repository must point to the dedicated ROMarrNG release webhook. The release-preparation commit is internal-only and needs no fragment. Use the
 internal-only template option or the PR marker, and include the commit marker when
 the main-branch check reads the squash-merge commit body.

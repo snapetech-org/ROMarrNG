@@ -1,4 +1,4 @@
-# ng-runner-policy: hosted-compatible-v1
+# ng-runner-policy: private-jit-only
 name: Dependency review
 
 
@@ -6,9 +6,8 @@ run-name: >-
   ${{ github.event_name == 'workflow_dispatch' && startsWith(github.ref, 'refs/tags/') &&
       format('action:{0}:pool:{1}:tag:{2}', inputs.action || 'review', inputs.runner_pool || 'private', github.ref_name) ||
       github.event_name == 'workflow_dispatch' &&
-      format('action:{0}:pool:{1}', inputs.action || 'review', inputs.runner_pool || 'private') || 'action:ci:pool:public' }}
+      format('action:{0}:pool:{1}', inputs.action || 'review', inputs.runner_pool || 'private') || 'action:ci:pool:private' }}
 on:
-  pull_request:
   workflow_dispatch:
     inputs:
       action:
@@ -17,9 +16,9 @@ on:
         options: [ci]
         required: true
       runner_pool:
-        description: Compatible hosted runner pool
+        description: Private ephemeral JIT runner pool
         type: choice
-        options: [public]
+        options: [private]
         required: true
 concurrency:
   group: ${{ github.workflow }}-${{ github.run_id }}
@@ -36,13 +35,13 @@ jobs:
         (
           github.ref == 'refs/heads/main' &&
           inputs.action == 'ci' &&
-          inputs.runner_pool == 'public'
+          inputs.runner_pool == 'private'
         )
       ) &&
       (
         github.event_name == 'pull_request'
       )
-    runs-on: ubuntu-24.04
+    runs-on: ${{ fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}"]}}', github.run_id)) }}
     steps:
       - name: Review dependency changes
         uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0

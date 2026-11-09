@@ -7,44 +7,26 @@ ROOT = Path(__file__).resolve().parents[1]
 WORKFLOWS = ROOT / ".github" / "workflows"
 
 
-def test_release_pipeline_uses_hosted_runners():
-    workflow = yaml.safe_load((WORKFLOWS / "docker.yml").read_text(encoding="utf-8"))
-    for name in (
-        "release-notes",
-        "test",
-        "acquisition-proof",
-        "image",
-        "image_publish",
-        "image-browser",
-        "image_browser_publish",
-        "verify-stable-image-tags",
-        "release",
-    ):
-        job = workflow["jobs"][name]
-        if name in {"test", "image", "image-browser"}:
-            assert job["runs-on"] == "${{ matrix.runner }}"
-            assert {x["runner"] for x in job["strategy"]["matrix"]["include"]} == {"ubuntu-24.04", "ubuntu-24.04-arm"}
-        elif name == "acquisition-proof":
-            assert job["strategy"]["matrix"]["runner"] == ["ubuntu-24.04", "ubuntu-24.04-arm"]
-        else:
-            assert job["runs-on"] == "ubuntu-24.04"
-
-
-def test_manual_release_requires_public_pool_and_main():
-    source = (WORKFLOWS / "docker.yml").read_text(encoding="utf-8")
-    assert "options: [public]" in source
-    assert "inputs.runner_pool == 'public'" in source
-    assert "github.ref == 'refs/heads/main'" in source
-
-
-def test_ordinary_workflows_do_not_require_private_capacity():
+def test_all_jobs_require_private_capacity():
     for path in WORKFLOWS.glob("*.yml"):
-        if path.name == "gvisor-runner-smoke.yml":
-            continue
         source = path.read_text(encoding="utf-8")
-        assert "private-jit-only" not in source, path.name
-        assert "options: [private]" not in source, path.name
-        assert '"group":"ng-shared-main-jit"' not in source, path.name
+        assert "ubuntu-" not in source, path.name
+        assert "windows-2025" not in source, path.name
+        assert "NG_HOSTED_FIRST" not in source, path.name
+        workflow = yaml.safe_load(source)
+        for job in workflow["jobs"].values():
+            if "uses" in job:
+                continue
+            route = str(job["runs-on"])
+            assert any(group in route for group in
+                       ("ng-shared-main-jit", "packer-windows", "gvisor-sandbox", "public-fork-jit")), path.name
+
+
+def test_manual_release_requires_private_pool_and_main():
+    source = (WORKFLOWS / "docker.yml").read_text(encoding="utf-8")
+    assert "options: [private]" in source
+    assert "inputs.runner_pool == 'private'" in source
+    assert "github.ref == 'refs/heads/main'" in source
 
 
 def test_gvisor_smoke_keeps_special_capability_route():

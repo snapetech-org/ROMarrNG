@@ -1,4 +1,4 @@
-# ng-runner-policy: hosted-compatible-v1
+# ng-runner-policy: private-jit-only
 name: Sync Unraid GHCR compatibility aliases
 
 
@@ -6,7 +6,7 @@ run-name: >-
   ${{ github.event_name == 'workflow_dispatch' && startsWith(github.ref, 'refs/tags/') &&
       format('action:{0}:pool:{1}:tag:{2}', inputs.action || 'sync', inputs.runner_pool || 'private', github.ref_name) ||
       github.event_name == 'workflow_dispatch' &&
-      format('action:{0}:pool:{1}', inputs.action || 'sync', inputs.runner_pool || 'private') || 'action:publish:pool:public' }}
+      format('action:{0}:pool:{1}', inputs.action || 'sync', inputs.runner_pool || 'private') || 'action:publish:pool:private' }}
 on:
   workflow_dispatch:
     inputs:
@@ -16,9 +16,9 @@ on:
         options: [publish]
         required: true
       runner_pool:
-        description: Compatible hosted runner pool
+        description: Private ephemeral JIT runner pool
         type: choice
-        options: [public]
+        options: [private]
         required: true
   workflow_run:
     workflows:
@@ -41,13 +41,13 @@ jobs:
         (
           github.ref == 'refs/heads/main' &&
           inputs.action == 'publish' &&
-          inputs.runner_pool == 'public'
+          inputs.runner_pool == 'private'
         )
       ) &&
       (
         github.repository == 'snapetech-org/ROMarrNG' && ((github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_repository.full_name == github.repository && startsWith(github.event.workflow_run.head_branch, 'v')))
       )
-    runs-on: ubuntu-24.04
+    runs-on: ${{ fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}"]}}', github.run_id)) }}
     timeout-minutes: 10
     permissions:
       contents: read

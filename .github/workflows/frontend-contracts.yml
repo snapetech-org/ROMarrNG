@@ -2,13 +2,12 @@ name: Desktop frontend contracts
 on:
   push:
     branches: [main]
-  pull_request:
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   windows:
-    runs-on: windows-2025
+    runs-on: ${{ fromJSON(format('{{"group":"packer-windows","labels":["self-hosted","windows","x64","ng-main-run-{0}"]}}', github.run_id)) }}
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
