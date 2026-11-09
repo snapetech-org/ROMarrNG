@@ -32,6 +32,8 @@ ROM-031 was excluded from the original findings, so numbering skips it.
 - Native AMD64/ARM64 Docker acquisition/startup and Windows frontend contract
   jobs run in CI. Their execution status is reported with the delivery commit;
   adding a job alone is not evidence that it passed.
+- The dependency-review action runs only for pull requests; on other events its
+  job completes as a no-op so downstream image gates receive a success result.
 
 The updater tests execute the actual transaction script using temporary release
 trees and stubs for systemd, package installation, and download transport. They
