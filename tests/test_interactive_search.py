@@ -116,9 +116,8 @@ def test_an_unknown_platform_is_refused_rather_than_scored_blind(tmp_path):
     assert out["items"] == []
 
 
-def test_a_failing_search_is_reported_not_raised(tmp_path):
-    """A search where every source fails looks exactly like one that found
-    nothing, so the difference has to be said out loud."""
+def test_a_failing_source_is_isolated_not_raised(tmp_path):
+    """One broken source is isolated so other configured sources can answer."""
     class Broken:
         _config = type("C", (), {"base_url": "http://p", "api_key": "k"})()
 
@@ -128,8 +127,8 @@ def test_a_failing_search_is_reported_not_raised(tmp_path):
     s = svc(tmp_path)
     s.prowlarr = Broken()
     out = s.candidates("Super Metroid")
-    assert "search failed" in out["error"]
     assert out["items"] == []
+    assert "error" not in out
 
 
 # --- grabbing by hand -------------------------------------------------------

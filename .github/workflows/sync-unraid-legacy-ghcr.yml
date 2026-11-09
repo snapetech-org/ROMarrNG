@@ -1,4 +1,4 @@
-# ng-runner-policy: private-jit-only-v1
+# ng-runner-policy: hosted-compatible-v1
 name: Sync Unraid GHCR compatibility aliases
 
 
@@ -16,9 +16,9 @@ on:
         options: [publish]
         required: true
       runner_pool:
-        description: Required private JIT runner pool
+        description: Compatible hosted runner pool
         type: choice
-        options: [private]
+        options: [public]
         required: true
   workflow_run:
     workflows:
@@ -41,13 +41,13 @@ jobs:
         (
           github.ref == 'refs/heads/main' &&
           inputs.action == 'publish' &&
-          inputs.runner_pool == 'private'
+          inputs.runner_pool == 'public'
         )
       ) &&
       (
         github.repository == 'snapetech-org/ROMarrNG' && ((github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') || (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_repository.full_name == github.repository && startsWith(github.event.workflow_run.head_branch, 'v')))
       )
-    runs-on: ${{ fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}","gha-{0}-{1}-sync"]}}', github.run_id, strategy.job-index)) }}
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
       contents: read

@@ -2,6 +2,19 @@
 
 ## [Unreleased]
 
+## [0.14.13] - 2026-11-09
+
+### User-facing changes
+
+#### Changed
+
+- **Upstream attribution:** Publish the complete 48-record ROMarr source ledger with upstream author links and explicit inherited, adapted, verified, and manifest dispositions.
+- **Release pipeline:** Restore compatible GitHub-hosted build, test, scan, image, and release jobs; private JIT remains reserved for the dedicated gVisor capability check.
+
+#### Fixed
+
+- **Contracts:** Align first-run, Playnite, interactive-search, OpenAPI, and runner-policy regression contracts with the behavior shipped by the current source.
+
 ## [0.14.12] - 2026-11-09
 
 ### User-facing changes

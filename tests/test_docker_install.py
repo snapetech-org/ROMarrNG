@@ -200,7 +200,7 @@ def test_pull_request_image_validation_has_no_publish_permissions():
     for job in publish_jobs:
         assert "github.event_name != 'pull_request'" in job
         assert "refs/heads/main" in job
-        assert "refs/tags/v" in job
+        assert "inputs.release_tag != ''" in job
         assert "github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main'" in job
         assert "packages: write" in job
         assert "id-token: write" in job
@@ -286,22 +286,16 @@ def test_the_install_guide_exists_and_the_readme_sends_people_to_it():
     assert "docs/INSTALL.md" in README.read_text(encoding="utf-8"), (
         "the full install guide is unreachable from the README")
 
-def test_public_test_job_routes_trusted_refs_to_jit_with_hosted_fallback():
+def test_public_test_job_uses_hosted_runner_for_manual_release():
     workflow = (ROOT / ".github" / "workflows" / "docker.yml").read_text(
         encoding="utf-8"
     )
-    assert 'branches: ["main"]' in workflow
-    assert 'branches: ["**"]' not in workflow
-    assert 'tags: ["v*"]' in workflow
+    assert "options: [public]" in workflow
+    assert "inputs.runner_pool == 'public'" in workflow
 
     test_job = workflow.split("  test:\n", 1)[1].split(
         "\n  validation-environment-portability:", 1
     )[0]
-    # Trusted main and version-tag work may use the isolated JIT group. Public
-    # pull requests and all other refs must resolve to GitHub-hosted runners.
-    assert re.search(r"(?m)^    runs-on:.*ubuntu-latest.*$", test_job)
-    assert "ng-shared-main-jit" in test_job
-    assert "ng-main-run-{0}" in test_job
+    assert re.search(r"(?m)^    runs-on: ubuntu-24\.04$", test_job)
+    assert "ng-shared-main-jit" not in test_job
     assert "github.ref == 'refs/heads/main'" in test_job
-    assert "github.ref_type == 'tag'" in test_job
-    assert "startsWith(github.ref_name, 'v')" in test_job

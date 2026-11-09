@@ -136,8 +136,9 @@ def test_the_password_survives_a_restart(tmp_path):
     try:
         assert second.claimed is True
         status, page, _ = call(url + "/")
-        assert '<div class="sub" data-i18n="Sign in">Sign in</div>' in page
-        assert '<div class="sub" data-i18n="Set your password">' not in page
+        assert '<div class="sub" data-i18n-key="ui.sign-in.' in page
+        assert '>Sign in</div>' in page
+        assert '>Set your password</div>' not in page
         status, _, headers = call(url + "/api/v1/login", method="POST",
                                   body={"password": "correct-horse"})
         assert status == 200

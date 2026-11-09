@@ -168,6 +168,16 @@ DESCRIPTIONS: dict[str, tuple[str, str]] = {
     "/api/v1/metadata/schema": ("GET", "Metadata providers and their fields."),
     "/api/v1/metadata/lookup": ("GET", "Identify a file. Reports matched_by as "
                                        "'dat' or 'filename'."),
+    "/api/v1/organizer/status": ("GET", "Read the current organizer scan and rename status."),
+    "/api/v1/organizer/items": ("GET", "List grouped organizer records with bounded pagination."),
+    "/api/v1/organizer/rename-plan": ("GET", "Preview a bounded, reversible organizer rename plan."),
+    "/api/v1/organizer/art": ("GET", "Read cached artwork for an organizer identity."),
+    "/api/v1/organizer/scan": ("POST", "Start an organizer library scan."),
+    "/api/v1/organizer/map": ("POST", "Map an organizer identity to a title and platform."),
+    "/api/v1/organizer/rename/apply": ("POST", "Apply a previously generated organizer rename plan."),
+    "/api/v1/organizer/rename/undo": ("POST", "Undo the most recent organizer rename batch."),
+    "/api/v1/organizer/publish/esde": ("POST", "Publish organizer metadata for ES-DE."),
+    "/api/v1/catalog/ownership": ("POST", "Check local ownership for a bounded set of title/platform pairs."),
     "/api/v1/calendar": ("GET", "Games released recently or due soon, from "
                                 "the first configured metadata provider that "
                                 "can answer a date range (RAWG or IGDB). "

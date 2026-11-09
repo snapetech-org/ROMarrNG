@@ -124,7 +124,10 @@ def test_playnite_export_is_flat_json_a_script_can_read():
     assert payload["source"] == "ROMarr"
     assert len(payload["games"]) == 2
     game = payload["games"][0]
-    assert set(game) == {"name", "platform", "romPath", "id", "verified"}
+    assert set(game) == {
+        "name", "platform", "romPath", "id", "verified", "description",
+        "releaseDate", "genres", "rating", "coverPath", "matchedBy",
+    }
     assert game["platform"] == "Super Nintendo Entertainment System"
 
 
@@ -133,12 +136,16 @@ def test_playnite_export_omits_rows_with_no_file():
     assert payload["games"] == []
 
 
-def test_every_playnite_field_is_a_string_even_when_absent():
-    """A missing key and a null both break `$game.verified` in PowerShell in
-    ways that are hard to read in a log."""
+def test_every_playnite_field_has_a_stable_flat_type_when_absent():
+    """PowerShell receives stable scalar/list types without missing keys."""
     payload = json.loads(to_playnite(ROWS))
     for game in payload["games"]:
-        assert all(isinstance(v, str) for v in game.values())
+        assert all(isinstance(game[key], str) for key in (
+            "name", "platform", "romPath", "id", "verified", "description",
+            "releaseDate", "coverPath", "matchedBy",
+        ))
+        assert isinstance(game["genres"], list)
+        assert isinstance(game["rating"], float)
 
 
 # --- the registry ----------------------------------------------------------

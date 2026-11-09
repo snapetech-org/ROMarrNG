@@ -1,4 +1,4 @@
-# ng-runner-policy: private-jit-only-v1
+# ng-runner-policy: hosted-compatible-v1
 name: Dependency review
 
 
@@ -16,9 +16,9 @@ on:
         options: [ci]
         required: true
       runner_pool:
-        description: Required private JIT runner pool
+        description: Compatible hosted runner pool
         type: choice
-        options: [private]
+        options: [public]
         required: true
 concurrency:
   group: ${{ github.workflow }}-${{ github.run_id }}
@@ -35,13 +35,13 @@ jobs:
         (
           github.ref == 'refs/heads/main' &&
           inputs.action == 'ci' &&
-          inputs.runner_pool == 'private'
+          inputs.runner_pool == 'public'
         )
       ) &&
       (
         github.event_name == 'pull_request'
       )
-    runs-on: ${{ fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}","gha-{0}-dependency-review"]}}', github.run_id)) }}
+    runs-on: ubuntu-24.04
     steps:
       - name: Review dependency changes
         uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
