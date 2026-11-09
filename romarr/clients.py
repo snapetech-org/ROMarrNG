@@ -100,6 +100,10 @@ class QbitConfig:
     base_url: str
     username: str = ""
     password: str = ""
+    api_key: str = ""
+    # Empty preserves old configurations: use an API key when present, else
+    # the existing cookie login when a username is configured, else no auth.
+    auth_mode: str = ""
     category: str = "romarr"
     timeout: int = 30
 
@@ -121,15 +125,39 @@ class QBittorrent:
         self._session = session or requests.Session()
         self._authed = False
 
+    @property
+    def _auth_mode(self) -> str:
+        mode = str(self._config.auth_mode or "").strip().lower()
+        if mode in ("api_key", "username_password", "none"):
+            return mode
+        if self._config.api_key:
+            return "api_key"
+        return "username_password" if self._config.username else "none"
+
+    def _headers(self, headers: dict | None = None) -> dict:
+        out = dict(headers or {})
+        if self._auth_mode == "api_key" and self._config.api_key:
+            out["Authorization"] = f"Bearer {self._config.api_key}"
+        return out
+
     def _url(self, path: str) -> str:
         return f"{self._config.base_url.rstrip('/')}/api/v2/{path.lstrip('/')}"
 
     def login(self) -> bool:
+        if self._auth_mode == "api_key":
+            # qBittorrent API-key auth is stateless and does not use auth/login.
+            # An explicit but missing key is a hard failure; never fall back to
+            # a stored password or an anonymous connection.
+            self._authed = bool(self._config.api_key)
+            return self._authed
+        if self._auth_mode == "none":
+            self._authed = True
+            return True
         # A qBittorrent with WebUI auth disabled for localhost answers every
         # endpoint without a session cookie, so a failed login is not fatal.
         if not self._config.username:
-            self._authed = True
-            return True
+            self._authed = False
+            return False
         response = self._session.post(
             self._url("auth/login"),
             data={"username": self._config.username, "password": self._config.password},
@@ -148,22 +176,28 @@ class QBittorrent:
         expired SID turns every health check and import poll into a permanent
         401/403 until ROMarr is restarted.
         """
+        kwargs["headers"] = self._headers(kwargs.get("headers"))
         response = self._session.get(self._url(path), **kwargs)
-        if response.status_code not in (401, 403) or not self._config.username:
+        if (response.status_code not in (401, 403)
+                or self._auth_mode != "username_password"):
             return response
         self._authed = False
         if not self.login():
             return response
+        kwargs["headers"] = self._headers(kwargs.get("headers"))
         return self._session.get(self._url(path), **kwargs)
 
     def _post(self, path: str, **kwargs):
         """POST once more after refreshing an expired WebUI session."""
+        kwargs["headers"] = self._headers(kwargs.get("headers"))
         response = self._session.post(self._url(path), **kwargs)
-        if response.status_code not in (401, 403) or not self._config.username:
+        if (response.status_code not in (401, 403)
+                or self._auth_mode != "username_password"):
             return response
         self._authed = False
         if not self.login():
             return response
+        kwargs["headers"] = self._headers(kwargs.get("headers"))
         return self._session.post(self._url(path), **kwargs)
 
     def add(self, magnet_or_url: str, *, save_path: str | None = None) -> bool:

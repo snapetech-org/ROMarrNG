@@ -240,7 +240,7 @@ def test_standard_image_uses_glibc_and_keeps_seccomp_build_tools_out_of_runtime(
     assert "from rom_hub.sandbox import install; install()" in body, (
         "the image does not prove that its seccomp filter can actually load")
     assert '[ "$TARGETARCH" = "amd64" ]' not in body
-    assert "ubuntu-24.04-arm" in (ROOT / ".github/workflows/docker.yml").read_text()
+    assert "runner: arm64" in (ROOT / ".github/workflows/docker.yml").read_text()
 
 
 def test_the_image_proves_rom_hubs_catalogue_is_not_empty():
@@ -286,16 +286,15 @@ def test_the_install_guide_exists_and_the_readme_sends_people_to_it():
     assert "docs/INSTALL.md" in README.read_text(encoding="utf-8"), (
         "the full install guide is unreachable from the README")
 
-def test_public_test_job_uses_hosted_runner_for_manual_release():
+def test_test_job_uses_private_runner_for_manual_release():
     workflow = (ROOT / ".github" / "workflows" / "docker.yml").read_text(
         encoding="utf-8"
     )
-    assert "options: [public]" in workflow
-    assert "inputs.runner_pool == 'public'" in workflow
+    assert "options: [private]" in workflow
+    assert "inputs.runner_pool == 'private'" in workflow
 
     test_job = workflow.split("  test:\n", 1)[1].split(
         "\n  validation-environment-portability:", 1
     )[0]
-    assert re.search(r"(?m)^    runs-on: ubuntu-24\.04$", test_job)
-    assert "ng-shared-main-jit" not in test_job
+    assert "ng-shared-main-jit" in test_job
     assert "github.ref == 'refs/heads/main'" in test_job

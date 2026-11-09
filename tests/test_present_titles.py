@@ -1,110 +1,89 @@
-"""What a set plan counts as "already on the shelf".
-
-Collections asked the cached shelf. That shelf is a page kept for the Library
-grid, so on the install this was run against -- 166,578 games -- a 1,032-title
-GameCube plan was compared with the first few hundred rows and reported almost
-everything as missing. The number was not slightly wrong, it was meaningless,
-and nothing about it looked broken.
-
-A plan concerns one platform, and a platform is one directory.
-"""
-
-from __future__ import annotations
+"""Collections derives ownership from the complete shared library snapshot."""
 
 from romarr.app import ROMarr
-from romarr.collections import PRESENT_UNKNOWN, PRESENT_VERIFIED
+from romarr.collections import (PRESENT_UNKNOWN, PRESENT_VERIFIED,
+                               PRESENT_BAD)
 from romarr.libraries import Game
 
 
-def service_with(tmp_path, shelf=None):
-    library = tmp_path / "library"
-    library.mkdir(exist_ok=True)
+def service_with(tmp_path, games=None, *, partial=False, error=""):
     service = ROMarr({"ROMARR_DATA": str(tmp_path / "s.json")})
-    service.game_libraries = [({"name": "L", "type": "folder",
-                                "path": str(library)}, object())]
-    if shelf is not None:
-        service._library_cache = ([Game(id=str(i), name=n)
-                                   for i, n in enumerate(shelf)], 0.0, "")
-    return service, library
+    if games is not None:
+        service._publish_library(games, error, partial=partial)
+    return service
 
 
-def test_the_platform_directory_is_read_rather_than_the_shelf(tmp_path):
-    service, library = service_with(tmp_path, shelf=["Only Cached Game"])
-    platform = library / "ngc"
-    platform.mkdir()
-    for name in ("Luigi's Mansion (USA).iso", "1080 Avalanche (USA).iso"):
-        (platform / name).write_text("x")
+def test_ownership_uses_the_complete_snapshot_beyond_the_first_page(tmp_path):
+    games = [Game(id=str(n), name=f"Game {n:03d} (USA)",
+                  platform="psx", platform_slug="psx")
+             for n in range(180)]
+    service = service_with(tmp_path, games)
 
-    present = service._present_titles("ngc")
+    present = service._present_titles("psx")
 
-    assert set(present) == {"Luigi's Mansion (USA)", "1080 Avalanche (USA)"}
-    assert "Only Cached Game" not in present, (
-        "the paged shelf was used instead of the directory")
-
-
-def test_a_disc_set_stored_as_a_directory_counts_as_present(tmp_path):
-    """Multi-track rips land as a folder named for the game."""
-    service, library = service_with(tmp_path)
-    platform = library / "psx"
-    platform.mkdir()
-    (platform / "Final Fantasy VII (USA)").mkdir()
-    (platform / "Final Fantasy VII (USA)" / "disc1.bin").write_text("x")
-
-    assert "Final Fantasy VII (USA)" in service._present_titles("psx")
+    assert len(present) == 180
+    assert "Game 179 (USA)" in present
+    assert service._presence_complete is True
 
 
-def test_it_falls_back_to_the_shelf_when_there_is_no_directory(tmp_path):
-    """A server-backed library ROMarr cannot list on disk still gets an
-    answer, just a partial one."""
-    service, _ = service_with(tmp_path, shelf=["Some Game (USA)"])
-    assert "Some Game (USA)" in service._present_titles("nosuchplatform")
+def test_ownership_is_scoped_to_the_selected_platform(tmp_path):
+    service = service_with(tmp_path, [
+        Game(id="1", name="Final Fantasy VII (USA)",
+             platform="Sony PlayStation", platform_slug="psx"),
+        Game(id="2", name="Final Fantasy VII (USA)",
+             platform="Sony PlayStation 2", platform_slug="ps2"),
+    ])
+
+    assert set(service._present_titles("psx")) == {"Final Fantasy VII (USA)"}
+    assert set(service._present_titles("ps2")) == {"Final Fantasy VII (USA)"}
 
 
-def test_an_import_verdict_upgrades_a_plain_presence(tmp_path):
+def test_an_incomplete_inventory_is_unknown_not_everything_missing(tmp_path):
+    service = service_with(tmp_path, [
+        Game(id="1", name="Contra (USA)", platform="nes", platform_slug="nes")
+    ], partial=True)
+
+    assert service._present_titles("nes") == {}
+    assert service._presence_complete is False
+
+
+def test_a_failed_refresh_keeps_ownership_unknown(tmp_path):
+    service = service_with(tmp_path, [
+        Game(id="1", name="Contra (USA)", platform="nes", platform_slug="nes")
+    ], error="library read failed")
+
+    assert service._present_titles("nes") == {}
+    assert service._presence_complete is False
+
+
+def test_an_empty_complete_inventory_is_a_valid_empty_set(tmp_path):
+    service = service_with(tmp_path, [])
+
+    assert service._present_titles("nes") == {}
+    assert service._presence_complete is True
+
+
+def test_an_import_verdict_is_scoped_by_platform(tmp_path):
     from romarr.store import Event
 
-    service, library = service_with(tmp_path)
-    platform = library / "nes"
-    platform.mkdir()
-    (platform / "Contra (USA).nes").write_text("x")
+    service = service_with(tmp_path, [
+        Game(id="1", name="Contra (USA)", platform="nes", platform_slug="nes"),
+        Game(id="2", name="Contra (USA)", platform="snes", platform_slug="snes"),
+    ])
     service.store.record(Event(kind="imported", game="Contra (USA)",
                                platform="nes", detail="verified: /x/y"))
 
-    present = service._present_titles("nes")
-    assert present["Contra (USA)"] == PRESENT_VERIFIED
+    assert service._present_titles("nes")["Contra (USA)"] == PRESENT_VERIFIED
+    assert service._present_titles("snes")["Contra (USA)"] == PRESENT_UNKNOWN
 
 
-def test_a_file_with_no_recorded_verdict_is_present_not_verified(tmp_path):
-    """Being on disk says it is there. It does not say it is right."""
-    service, library = service_with(tmp_path)
-    platform = library / "nes"
-    platform.mkdir()
-    (platform / "Contra (USA).nes").write_text("x")
-    assert service._present_titles("nes")["Contra (USA)"] == PRESENT_UNKNOWN
+def test_bad_dump_verdict_is_preserved(tmp_path):
+    from romarr.store import Event
 
+    service = service_with(tmp_path, [
+        Game(id="1", name="Metroid (USA)", platform="nes", platform_slug="nes")
+    ])
+    service.store.record(Event(kind="imported", game="Metroid (USA)",
+                               platform="nes", detail="bad-dump: /x/y"))
 
-def test_an_empty_platform_directory_is_not_an_error(tmp_path):
-    service, library = service_with(tmp_path)
-    (library / "snes").mkdir()
-    assert service._present_titles("snes") == {}
-
-
-def test_a_nested_library_is_read_from_its_roms_folder(tmp_path):
-    service, library = service_with(tmp_path)
-    service.game_libraries = [({"name": "L", "type": "folder",
-                                "path": str(library), "layout": "nested"},
-                               object())]
-    nested = library / "ps2" / "roms"
-    nested.mkdir(parents=True)
-    (nested / "Dark Cloud (Europe) (En,Fr,De,Es,It).iso").write_text("x")
-
-    assert set(service._present_titles("ps2")) == {
-        "Dark Cloud (Europe) (En,Fr,De,Es,It)"}
-
-
-def test_a_flat_library_still_reads_the_platform_folder(tmp_path):
-    service, library = service_with(tmp_path)
-    (library / "ps2").mkdir()
-    (library / "ps2" / "Manhunt (Europe).iso").write_text("x")
-
-    assert set(service._present_titles("ps2")) == {"Manhunt (Europe)"}
+    assert service._present_titles("nes")["Metroid (USA)"] == PRESENT_BAD

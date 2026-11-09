@@ -23,6 +23,11 @@ fi
 if [[ -f "$ROOT/romarr.json" && ! -e "$DATA/romarr.json" ]]; then
   install -m 0600 -o romarr -g romarr "$ROOT/romarr.json" "$DATA/romarr.json"
 fi
+for state in "$ROOT/romarr-catalog.sqlite3" "$ROOT/romarr.library-metadata.sqlite3"; do
+  if [[ -f "$state" && ! -e "$DATA/$(basename "$state")" ]]; then
+    install -m 0600 -o romarr -g romarr "$state" "$DATA/$(basename "$state")"
+  fi
+done
 if [[ -d "$ROOT/backends" ]]; then cp -an "$ROOT/backends/." "$CONF/backends/"; fi
 if [[ -d "$ROOT/.rom-hub" && ! -e "$DATA/rom-hub" ]]; then
   cp -a "$ROOT/.rom-hub" "$DATA/rom-hub"

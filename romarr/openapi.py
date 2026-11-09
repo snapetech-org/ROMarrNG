@@ -49,6 +49,14 @@ DESCRIPTIONS: dict[str, tuple[str, str]] = {
                             "many rows are cached and browsable right now. "
                             "Filterable by platform, genre, region, decade, "
                             "origin and source."),
+    "/api/v1/frontend/sources": ("GET", "Read complete-inventory frontend export sources and scan status."),
+    "/api/v1/catalog/options": ("GET", "Available DAT and genre-tagged catalogs for the guided platform browser."),
+    "/api/v1/catalog/lists": ("POST", "Read or save named catalog source/platform/filter definitions. Saving a list does not create Wanted entries."),
+    "/api/v1/catalog/page": ("GET", "Browse one platform catalog with library and Wanted status."),
+    "/api/v1/wanted/bulk": ("POST", "Add up to 100 reviewed titles to Wanted without starting downloads; requires a complete inventory snapshot and rechecks ownership and existing Wanted entries at commit."),
+    "/api/v1/library/metadata/enrich": ("POST", "Start a bounded metadata identification pass for games missing saved artwork or details."),
+    "/api/v1/library/metadata/refresh": ("POST", "Identify one library item, persist its metadata and artwork, and report the match provenance."),
+    "/api/v1/library/metadata/correct": ("POST", "Save a manual system correction for one library item without moving its file."),
     "/api/v1/integration/ping": ("GET", "Authenticated version handshake for "
                                          "SeerrNG software requests."),
     "/api/v1/patches/search": ("GET", "Search patch projects for the Patches page."),
@@ -200,12 +208,13 @@ DESCRIPTIONS: dict[str, tuple[str, str]] = {
                                        "each dump won its group."),
     "/api/v1/collection/start": ("POST", "Queue every missing title from a "
                                          "plan as a resumable batch."),
-    "/api/v1/collection/step": ("POST", "Request the next slice of a batch."),
+    "/api/v1/collection/step": ("POST", "Request the next bounded slice of a batch. In-flight requests are saved before dispatch; uncertain outcomes require explicit review."),
     "/api/v1/collection/control": ("POST", "pause, resume, retry or cancel a "
                                            "batch."),
     "/api/v1/manualimport": ("GET", "Scan a directory for files ROMarr could adopt."),
     "/api/v1/backup": ("GET", "A restorable snapshot. Credentials are stripped "
                               "unless ?secrets=1."),
+    "/api/v1/backup/catalog": ("GET", "A consistent SQLite snapshot of inventory generations, durable jobs, previews and the acquisition outbox."),
     "/api/v1/backup/encrypted": ("GET", "A credential-inclusive encrypted backup. "
                                           "Supply X-ROMarr-Backup-Passphrase as a header."),
     "/api/v1/restore": ("POST", "Restore a credential-free, plain full, or encrypted backup. "
@@ -214,6 +223,12 @@ DESCRIPTIONS: dict[str, tuple[str, str]] = {
     "/api/v1/frontend/formats": ("GET", "Available frontend export formats."),
     "/api/v1/frontend/export": ("GET", "LaunchBox XML, ES-DE gamelist.xml or "
                                        "Playnite JSON."),
+    "/api/v1/frontend/import/preview": ("POST", "Validate a bounded frontend sidecar and preview exact matches against a complete local folder scan."),
+    "/api/v1/frontend/import/commit": ("POST", "Apply a reviewed frontend sidecar preview while preserving conflict and generation checks."),
+    "/api/v1/library/rescan": ("POST", "Queue bounded library scans and preserve last-good generations until a new scan completes."),
+    "/api/v1/jobs": ("GET", "List durable local jobs with bounded pagination and optional state filter."),
+    "/api/v1/jobs/{jobId}": ("GET", "Read one durable job and its current state."),
+    "/api/v1/jobs/{jobId}/cancel": ("POST", "Cancel a queued durable job and any unapplied local outbox operation."),
     "/api/v1/hub/catalogue": ("GET", "Search the plugin catalogue."),
     "/api/v1/hub/plugins": ("GET", "The plugin catalogue, unfiltered."),
     "/api/v1/hub/plugin": ("POST", "Install, enable or disable a plugin."),
@@ -424,6 +439,8 @@ def served_routes(source: str | None = None) -> set[str]:
     # exactly that with /api/v1/webhook.
     for group in re.findall(r'route\.path in \(([^)]*)\)', source):
         found.update(re.findall(r'"(/[^"]*)"', group))
+    if 'route.path.startswith("/api/v1/jobs/")' in source:
+        found.update({"/api/v1/jobs/{jobId}", "/api/v1/jobs/{jobId}/cancel"})
     # The SeerrNG request routes split a validated path suffix rather than
     # comparing each concrete URL against route.path.
     if ('seerr_prefix = "/api/v1/integration/requests/"' in source
@@ -480,7 +497,7 @@ def spec(version: str = "0.0.0", *, base_url: str = "") -> dict:
     paths: dict[str, dict] = {}
     for path in sorted(DESCRIPTIONS):
         method, summary = DESCRIPTIONS[path]
-        if path == "/api/v1/integration/requests":
+        if path in {"/api/v1/integration/requests", "/api/v1/catalog/lists"}:
             paths[path] = {
                 **_operation(path, "GET", "List tracked external-platform requests."),
                 **_operation(path, method, summary),

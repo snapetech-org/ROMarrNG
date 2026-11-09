@@ -29,23 +29,25 @@ works, it was run. Where it has never been run, it says so.
 
 ## What ROMarr needs
 
-ROMarr does not store a library, run an emulator or index anything itself. It
-sits between three things you already run:
+ROMarr organizes and enriches games you already own, and can help you discover
+titles missing from a collection. It can also automate acquiring and filing a
+release. Indexers and download clients are optional unless you want that
+acquisition workflow:
 
 | | What it does | Required? |
 |---|---|---|
-| **An indexer** — Prowlarr, or a Torznab/Newznab URL, or a torrent RSS feed | Finds releases | To search for anything. Without it ROMarr runs and finds nothing. |
-| **A download client** — any of the [26 below](#download-clients), plus a plain-HTTP and a headless-browser lane for ROM sites | Fetches the release | To grab anything. A release found with no client that speaks its protocol is ranked and then refused. |
-| **A game library** — RomM, Gaseous, Retrom, or just a directory | Receives the ROM | `folder` needs nothing but a path, so effectively no. |
+| **An indexer** — Prowlarr, a Torznab/Newznab URL, or a torrent RSS feed | Finds releases | Only to search for releases. |
+| **A download client** — any of the [26 below](#download-clients), plus a plain-HTTP and a headless-browser lane for ROM sites | Fetches the release | Only to grab releases. A result without a compatible client cannot be downloaded. |
+| **A game library** — RomM, Gaseous, Retrom, or a directory | Lists and organizes existing games; receives imports | Optional for local collection browsing. A plain folder needs only a path. |
 
 Everything else — DAT verification, import lists, streaming hosts, the browser
 players, plugins — is optional and off until configured.
 
-Start with the capability you want: an enabled indexer is needed to search
-releases, a compatible download client is needed to grab them, and a plain
-folder is enough to file ROMs. Browsing local libraries remains available when
-search or acquisition is not configured. The existing **System → Get Started**
-page links to those settings and offers optional follow-ups for DAT checks
+Start with the capability you want: a local folder is enough to browse a
+collection, an enabled indexer is needed to search releases, and a compatible
+download client is needed to grab them. The existing **System → Get Started**
+page asks which task and systems to focus on, then links to the relevant next
+step. It offers optional follow-ups for DAT checks
 (**Collections**), import lists (**Wanted → Lists**), plugins (**ROM Hub →
 Plugins**), and player/streaming status (**System → Platforms / Status**). Their
 configuration is covered under [optional integrations](#optional-integrations).
@@ -360,6 +362,12 @@ python -m romarr
 State goes to `/opt/romarr/romarr.json` unless you set `ROMARR_DATA`. On a
 laptop you almost certainly want to.
 
+Folder-library scan generations, resumable checkpoints, durable jobs,
+selection previews and the acquisition outbox live in `romarr-catalog.sqlite3`
+beside that state file. Set `ROMARR_CATALOG_DATA` to move it. Keep it on local
+storage with reliable SQLite locking; the database uses rollback journaling
+and full synchronous commits.
+
 Install `bsdtar` (`libarchive-tools` on Debian/Ubuntu, `libarchive` on Alpine
 and Arch, `brew install libarchive` on macOS) or every disc-platform import
 fails on a format it cannot open — the PlayStation, PS2 and Wii sets ship
@@ -497,6 +505,7 @@ Every variable ROMarr reads. "Seeded" means first-run only — see
 | `ROMARR_PORT` | `6868` | Nothing listens where you expect. Change the published port to match. |
 | `ROMARR_HOST` | `0.0.0.0` | The address ROMarr listens on. Use `127.0.0.1` only when the proxy shares the host network namespace. |
 | `ROMARR_DATA` | `/opt/romarr/romarr.json` (`/config/romarr.json` in Docker) | Points at a new file → a fresh, unclaimed install with a new API key. Points at an unreadable file → **ROMarr refuses to start** and says so, rather than overwriting it. |
+| `ROMARR_CATALOG_DATA` | `romarr-catalog.sqlite3` beside `ROMARR_DATA` | Path for durable scan generations, jobs, previews and acquisition outbox. Keep SQLite on storage with reliable locking. |
 | `LOG_LEVEL` | `INFO` | `DEBUG` for the full request trace. |
 | `PUID` / `PGID` | `1000` / `1000` | Imported ROMs are owned by the wrong user; your library server may not be able to read them. Docker only. |
 | `UMASK` | `002` | New files are not group-writable. Three or four octal digits; Docker only. Existing downloads are never rewritten. |
@@ -533,6 +542,7 @@ At least one is required to grab anything. All *seeded*.
 | Variable | Default |
 |---|---|
 | `QBITTORRENT_URL` / `_USER` / `_PASS` | unset |
+| `QBITTORRENT_API_KEY` / `QBITTORRENT_AUTH_MODE` | unset; API-key auth requires qBittorrent 5.2.0 or WebAPI 2.14.1+ |
 | `SABNZBD_URL` / `SABNZBD_API_KEY` | unset |
 | `NZBGET_URL` / `NZBGET_USER` / `NZBGET_PASS` | unset |
 | `QBITTORRENT_CATEGORY` / `SABNZBD_CATEGORY` / `NZBGET_CATEGORY` | `romarr` |
@@ -642,15 +652,21 @@ these requirements is unavailable, plugin operations stop unless
 | | Docker | Proxmox LXC / source |
 |---|---|---|
 | Settings, history, API key, password hash | `/config/romarr.json` | `/opt/romarr/romarr.json` |
+| Saved per-game metadata and system corrections | `/config/romarr.library-metadata.sqlite3` | `/opt/romarr/romarr.library-metadata.sqlite3` |
 | Installed plugins | `/config/rom-hub/` | `/opt/romarr/.rom-hub/` |
 | Credentials for other services | in the environment | `/opt/romarr/.env` (mode 600) |
 | Drop-in backends | `ROMARR_BACKENDS_DIR` | `/opt/romarr/backends/` |
 | ROMs | your library volume | your `ROM_PATH` |
 
-**`romarr.json` is the whole install.** Everything else is either replaceable
-(the code) or yours already (the ROMs). It is a single JSON file written
-atomically — to a sibling temp file and renamed — so a crash mid-write cannot
-leave truncated JSON that will not start.
+The paths above use the default `ROMARR_DATA`. If you set a custom state-file
+path, the SQLite sidecar lives beside it and is named
+`<state-file stem>.library-metadata.sqlite3`.
+
+`romarr.json` stores settings, acquisition state and history. ROMarr also keeps
+per-game metadata overrides in the adjacent SQLite file so a large collection
+does not inflate every settings response. Stop ROMarr and back up both files
+for a complete file-level restore. The JSON file is written atomically; SQLite
+commits metadata changes transactionally.
 
 ### The ownership trap
 
@@ -682,20 +698,27 @@ because there is nothing left in it to preserve.
 
 ## Backing up
 
-Two things, and only one of them is subtle.
+Two ways to make a backup.
 
-**1. The state file.** Copy it while ROMarr is stopped, or accept that a copy
-taken mid-write is a copy of the previous version (writes are atomic, so it is
-never a torn file).
+**1. The local state files.** Copy both while ROMarr is stopped. This preserves
+history from the JSON file and saved per-game metadata from SQLite.
 
 ```bash
 docker compose stop
 cp /srv/romarr/config/romarr.json /somewhere/safe/romarr-$(date +%F).json
+cp /srv/romarr/config/romarr.library-metadata.sqlite3 /somewhere/safe/romarr-$(date +%F).library-metadata.sqlite3
+cp /srv/romarr/config/romarr-catalog.sqlite3 /somewhere/safe/romarr-$(date +%F).catalog.sqlite3
 docker compose start
 ```
 
-**2. Or use the API**, which produces a portable snapshot rather than a file
-you have to find:
+The catalog database can also be downloaded as a consistent SQLite online
+snapshot from **Settings → Backup and export → Download inventory and jobs
+database**, or from `GET /api/v1/backup/catalog`. Store it beside the JSON
+backup and metadata sidecar when you need resumable generations and jobs after
+a restore. A custom `ROMARR_CATALOG_DATA` location must be backed up explicitly.
+
+**2. Or use the API**, which produces a portable settings and metadata snapshot
+rather than files you have to find:
 
 ```bash
 # Credentials stripped -- review paths and other private metadata before sharing
@@ -720,7 +743,9 @@ curl -X POST -H "X-Api-Key: $KEY" -H "Content-Type: application/json" \
      --data-binary @romarr-full.json http://localhost:6868/api/v1/restore
 ```
 
-Verified round trip: back up, change a setting, restore, setting is back.
+Verified round trip: back up, change a setting, restore, setting is back. The
+API backup includes saved per-game metadata, but not event history. Copy both
+local files when history must be preserved too.
 
 Two things the restore does that are worth knowing before you need them:
 
@@ -733,7 +758,8 @@ Two things the restore does that are worth knowing before you need them:
   but outside the backup payload — copy `romarr.json` if you want the events.
 
 What you do **not** need to back up: the ROMs (that is your library server's
-problem), the container, or `/opt/romarr` beyond `.env` and `romarr.json`.
+problem), the container, or `/opt/romarr` beyond `.env`, `romarr.json` and
+`romarr.library-metadata.sqlite3`.
 
 ---
 
@@ -808,7 +834,8 @@ curl -s -H "Authorization: Bearer $TOKEN" \
 
 **A rollback is code-only.** If the version you are leaving wrote a setting the
 older one does not understand, the older one drops it — unknown keys are not
-stored — so roll back with a copy of `romarr.json` in hand.
+stored — so roll back with copies of `romarr.json`,
+`romarr.library-metadata.sqlite3` and `romarr-catalog.sqlite3` in hand.
 
 ### Proxmox LXC
 

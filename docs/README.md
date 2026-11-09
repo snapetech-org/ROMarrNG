@@ -25,6 +25,10 @@ maintained operator and contributor guides.
 - [Federation protocol](FEDERATION-PROTOCOL.md): current federation behavior
   and boundaries.
 
+## Implementation plans
+
+- [Usable first run and universal compatibility](plans/2026-10-27-universal-compatibility/README.md): Luna handoff covering platform recognition, persistent metadata and artwork, game details, search consistency, Collections, curated catalogs/lists, qBittorrent authentication, and compatibility qualification. This is a plan, not a shipped-feature guide.
+
 ## Shared OIDC references
 
 - [Provider catalog](https://github.com/snapetech-org/seerrng/blob/main/docs/maintainers/oidc-provider-catalog.md): supported IDs, official provider setup pages, issuer examples, and claim caveats.

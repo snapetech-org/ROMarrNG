@@ -162,6 +162,7 @@ def test_collection_plan_service_honours_strict_and_languages(tmp_path):
                                        cloneof="Digimon (Japan)",
                                        roms=(Rom(name="b.smc", crc="2"),)),
     })
+    svc._publish_library([], "", partial=False)
     idx = DatIndex()
     idx.dats = [dat]
     svc.dats = idx

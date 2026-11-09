@@ -68,6 +68,15 @@ install -d -m 0700 "$BACKUP"
 for state in "$ROOT/romarr.json" "$DATA/romarr.json" "$CONF/romarr.env" "$ROOT/.env"; do
   if [[ -f "$state" ]]; then cp -a --parents "$state" "$BACKUP/"; fi
 done
+for base in "$ROOT" "$DATA"; do
+  for state in "$base/romarr-catalog.sqlite3" "$base/"*.library-metadata.sqlite3; do
+    [[ -f "$state" ]] || continue
+    cp -a --parents "$state" "$BACKUP/"
+    for suffix in -journal -wal -shm; do
+      [[ ! -f "$state$suffix" ]] || cp -a --parents "$state$suffix" "$BACKUP/"
+    done
+  done
+done
 ln -s "$STAGE" "$ROOT/.next-current"
 mv -Tf "$ROOT/.next-current" "$ROOT/current"
 SWITCHED=1

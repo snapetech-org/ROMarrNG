@@ -1346,5 +1346,15 @@
   "ui.expired.843a037ea1": "843a037ea1155239d69b855a06d1745d828bdd4a8b6dccbae7c4220de5d2302d",
   "ui.you-choose-what-each-friend-sees-and.8096835be4": "8096835be48d04f5a4f40c757d025e5908215c64e268e5a5bcceb5e3db595f91",
   "ui.total-known-is-the-sum-of-the-other.42057cf5fe": "42057cf5fe6cb736cca179775aa3b1813e966bc6cd1020ee4db091632448eb83",
-  "ui.romarr-does-the-first-four-you-choos.88f6a36ef9": "88f6a36ef9c18f3f19ad8fd4fad5f754a4d4339912c8226c65688eba8b5ac89d"
+  "ui.romarr-does-the-first-four-you-choos.88f6a36ef9": "88f6a36ef9c18f3f19ad8fd4fad5f754a4d4339912c8226c65688eba8b5ac89d",
+  "ui.skipped-count-already-present-or-wan.211b34a18b": "211b34a18b7129ecf982c9f2f650fd4731846617c700d7f89b89f61826eb7976",
+  "ui.check-activity-and-your-download-cli.b397e58eba": "b397e58ebacb20911674546e5e3076fec71bb0417348ebdd5afe03de3fbd68df",
+  "ui.add-count-selected-games-to-wanted-n.70193ad87f": "70193ad87f6b89e2878baf4dda8c3bbd30bb72a1e04d04b1fbade0837fa7a28e",
+  "ui.added-count-to-wanted.579ab698a5": "579ab698a58affea61b7ab6ae4e98f126ea8b91c5c114d3893ae35f62fcc6c04",
+  "ui.select-up-to-100-missing-titles.41f0798b8f": "41f0798b8fcd5dc4d464fa8ca7a6e015ecdb7499b43190ee16cdd967cc9e8e38",
+  "ui.romarr-organizes-games-you-own-adds.5a5edd6e4b": "5a5edd6e4b060f344b295befdfad44730f9c7ad6e5c4be3ea7919136b4b758a5",
+  "ui.choose-a-platform.b71eafb4ef": "b71eafb4ef58ec25aee1d09dbe4b130404b9a086f487ca066af18eff6e64b470",
+  "ui.show-all-options.2392546856": "23925468567830039d789578bb3b8696e2bfaae810d7625d4da792dd9c2279d2",
+  "ui.show-fewer-options.01fdcdc734": "01fdcdc734c0a0e3c3dcab31e1e4f615e08d4b6483723899858971233b223d3e",
+  "ui.apply-imported-metadata-to-the-match.b9b5915c9e": "b9b5915c9e3aa56621057a7c003cd77ab0452b9ac76ad84c405082954f2575fa"
 }

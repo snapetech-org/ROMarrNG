@@ -563,19 +563,29 @@ class Batch:
     done: list[str] = field(default_factory=list)
     #: name -> why it failed. Kept so a retry can target only these.
     failed: dict[str, str] = field(default_factory=dict)
+    #: Titles whose request was durably admitted but whose result has not yet
+    #: been recorded. These are written before the external request begins.
+    in_flight: list[str] = field(default_factory=list)
+    #: A process can stop after a downloader accepted a request and before the
+    #: batch result was saved. Such an outcome cannot safely be called failed
+    #: or retried automatically; the operator must reconcile it with Activity.
+    uncertain: dict[str, str] = field(default_factory=dict)
     #: Requests to make per pass. Indexers and download clients are shared with
     #: whatever else the operator runs, and a set is not more important than
     #: their other traffic.
     per_pass: int = 5
 
     def progress(self) -> dict:
-        total = len(self.queue) + len(self.done) + len(self.failed)
+        total = (len(self.queue) + len(self.in_flight) + len(self.done)
+                 + len(self.failed) + len(self.uncertain))
         return {
             "id": self.id, "platform": self.platform, "dat": self.dat,
             "status": self.status, "total": total,
             "done": len(self.done), "failed": len(self.failed),
-            "remaining": len(self.queue),
-            "percent": round(100 * (len(self.done) + len(self.failed))
+            "accepted": len(self.done), "uncertain": len(self.uncertain),
+            "processing": len(self.in_flight), "remaining": len(self.queue),
+            "percent": round(100 * (len(self.done) + len(self.failed)
+                                    + len(self.uncertain))
                              / total, 1) if total else 0.0,
         }
 
@@ -585,13 +595,29 @@ class Batch:
         slice_, self.queue = self.queue[:size], self.queue[size:]
         return slice_
 
-    def record(self, name: str, ok: bool, reason: str = "") -> None:
+    def claim(self, count: int = 1) -> list[str]:
+        """Move queued titles to durable in-flight state before dispatch."""
+        size = max(1, int(count))
+        claimed, self.queue = self.queue[:size], self.queue[size:]
+        self.in_flight.extend(claimed)
+        if claimed:
+            self.status = BATCH_RUNNING
+        return claimed
+
+    def record(self, name: str, ok: bool, reason: str = "", *,
+               outcome_uncertain: bool = False) -> None:
+        self.in_flight = [item for item in self.in_flight if item != name]
         if ok:
             self.done.append(name)
             self.failed.pop(name, None)
+            self.uncertain.pop(name, None)
+        elif outcome_uncertain:
+            self.uncertain[name] = reason or "request outcome needs review"
+            self.failed.pop(name, None)
         else:
             self.failed[name] = reason or "no release found"
-        if not self.queue:
+            self.uncertain.pop(name, None)
+        if not self.queue and not self.in_flight:
             self.status = BATCH_DONE
 
     def retry_failed(self) -> int:
@@ -603,10 +629,21 @@ class Batch:
             self.status = BATCH_PENDING
         return len(names)
 
+    def retry_uncertain(self) -> int:
+        """Explicitly requeue dispatches the operator has reconciled."""
+        names = list(self.uncertain)
+        self.queue.extend(names)
+        self.uncertain.clear()
+        if names:
+            self.status = BATCH_PENDING
+        return len(names)
+
     def to_dict(self) -> dict:
         return {"id": self.id, "platform": self.platform, "dat": self.dat,
                 "status": self.status, "queue": list(self.queue),
                 "done": list(self.done), "failed": dict(self.failed),
+                "in_flight": list(self.in_flight),
+                "uncertain": dict(self.uncertain),
                 "per_pass": self.per_pass}
 
     @classmethod
@@ -619,5 +656,7 @@ class Batch:
             queue=list(raw.get("queue") or []),
             done=list(raw.get("done") or []),
             failed=dict(raw.get("failed") or {}),
-            per_pass=int(raw.get("per_pass") or 5),
+            in_flight=list(raw.get("in_flight") or []),
+            uncertain=dict(raw.get("uncertain") or {}),
+            per_pass=max(1, min(int(raw.get("per_pass") or 5), 50)),
         )

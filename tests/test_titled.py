@@ -225,6 +225,7 @@ def test_switch_collection_start_queues_only_the_filtered_missing_versions(tmp_p
     from romarr.app import ROMarr
     from romarr.titled import SWITCH_COLLECTION
     service = ROMarr({"ROMARR_DATA": str(tmp_path / "state.json")})
+    service._publish_library([], "", partial=False)
     service.titled = _index()
     assert SWITCH_COLLECTION in service.dat_names()
     assert service.collection_plan(SWITCH_COLLECTION).get("error")

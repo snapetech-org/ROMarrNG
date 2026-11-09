@@ -206,6 +206,7 @@ def test_collection_plan_over_http_honours_translation_policy(tmp_path, monkeypa
                                        cloneof="Digimon (Japan)",
                                        roms=(Rom(name="b.smc", crc="2"),)),
     })
+    svc._publish_library([], "", partial=False)
     idx = DatIndex()
     idx.dats = [dat]
     svc.dats = idx

@@ -49,6 +49,13 @@ def server(tmp_path):
     httpd.server_close()
 
 
+def _loopback_open(request, timeout=10):
+    parsed = urlsplit(request.full_url)
+    if parsed.scheme != "http" or parsed.hostname != "127.0.0.1":
+        raise ValueError("Test HTTP requests must target the loopback fixture")
+    return urllib.request.build_opener().open(request, timeout=timeout)
+
+
 def get(url, key=None, cookie=None, method="GET", body=None, byte_range=None, headers=None):
     request = urllib.request.Request(url, method=method)
     for name, value in (headers or {}).items():
@@ -63,7 +70,7 @@ def get(url, key=None, cookie=None, method="GET", body=None, byte_range=None, he
         request.add_header("Content-Type", "application/json")
         request.data = json.dumps(body).encode()
     try:
-        with urllib.request.urlopen(request, timeout=10) as response:
+        with _loopback_open(request, timeout=10) as response:
             return response.status, response.read(), response.headers
     except urllib.error.HTTPError as exc:
         return exc.code, exc.read(), exc.headers
@@ -255,6 +262,94 @@ def test_seerrng_can_browse_and_request_a_dat_catalog_title(server, monkeypatch)
     )[0] == 409
 
 
+def test_first_party_catalog_marks_presence_and_bulk_adds_reviewed_wanted(server):
+    base, service = server
+    service.dats.add(parse_dat(
+        '''<datafile><header><name>Sony - PlayStation</name><version>2025</version></header>
+        <game name="Final Fantasy VII (USA)"/><game name="Chrono Cross (USA)"/>
+        <game name="Vagrant Story (USA)"/></datafile>'''
+    ))
+    service._publish_library([
+        Game(id="owned", name="Final Fantasy VII (USA)",
+             platform="Sony PlayStation", platform_slug="psx")
+    ], "", partial=False)
+
+    code, body, _ = get(base + "/api/v1/catalog/options", key="testkey")
+    assert code == 200
+    options = json.loads(body)
+    assert options["dat"]["results"][0]["slug"] == "psx"
+
+    # Curated catalog lists persist their filters and membership intent only;
+    # they do not populate Wanted when saved or refreshed.
+    code, body, _ = get(
+        base + "/api/v1/catalog/lists", key="testkey", method="POST",
+        body={"name": "PS1 RPGs", "source": "igdb", "platform": "psx",
+              "genre": "Role-Playing", "query": ""})
+    assert code == 200
+    saved_list = json.loads(body)["item"]
+    assert saved_list["platform"] == "psx"
+    assert service.store.missing() == []
+    code, body, _ = get(base + "/api/v1/catalog/lists", key="testkey")
+    assert code == 200
+    assert json.loads(body)["items"] == [saved_list]
+    code, body, _ = get(
+        base + "/api/v1/catalog/lists", key="testkey", method="POST",
+        body={"name": "DAT with genre", "source": "dat", "platform": "psx",
+              "genre": "RPG"})
+    assert code == 400
+
+    code, body, _ = get(
+        base + "/api/v1/catalog/page?source=dat&platform=psx&limit=10",
+        key="testkey")
+    assert code == 200
+    page = json.loads(body)
+    statuses = {row["title"]: row["presence"] for row in page["results"]}
+    assert statuses == {
+        "Chrono Cross": "missing",
+        "Final Fantasy VII": "present",
+        "Vagrant Story": "missing",
+    }
+
+    code, body, _ = get(
+        base + "/api/v1/wanted/bulk", key="testkey", method="POST",
+        body={"items": [{"game": "Chrono Cross", "platform": "psx"},
+                         {"game": "Vagrant Story", "platform": "Sony PlayStation"}]})
+    assert code == 200
+    assert json.loads(body) == {"ok": True, "added": 2, "already_wanted": 0,
+                                "total": 2}
+
+    code, body, _ = get(
+        base + "/api/v1/wanted/bulk", key="testkey", method="POST",
+        body={"items": [{"game": "Chrono Cross", "platform": "psx"}]})
+    assert code == 200
+    assert json.loads(body)["already_wanted"] == 1
+
+    # The browser's preview may be stale by the time a multi-page selection
+    # is committed. Ownership is checked again at the server boundary.
+    code, body, _ = get(
+        base + "/api/v1/wanted/bulk", key="testkey", method="POST",
+        body={"items": [{"game": "Final Fantasy VII", "platform": "psx"}]})
+    assert code == 200
+    stale = json.loads(body)
+    assert stale["added"] == 0
+    assert stale["skipped"] == [{"game": "Final Fantasy VII",
+                                 "platform": "psx",
+                                 "reason": "already present"}]
+
+    service._publish_library([], "", partial=True)
+    code, body, _ = get(
+        base + "/api/v1/catalog/page?source=dat&platform=psx&limit=10",
+        key="testkey")
+    assert code == 200
+    assert {row["presence"] for row in json.loads(body)["results"]} == {"unknown"}
+    code, body, _ = get(
+        base + "/api/v1/wanted/bulk", key="testkey", method="POST",
+        body={"items": [{"game": "Chrono Cross", "platform": "psx"}]})
+    assert code == 400
+    assert json.loads(body)["ok"] is False
+    assert "incomplete" in json.loads(body)["error"].lower()
+
+
 def test_seerrng_scoped_key_cannot_read_the_admin_api(server):
     base, service = server
     key = service.auth.integration_key
@@ -335,7 +430,10 @@ def test_dat_seerr_request_matches_region_alias_without_scoring_dat_suffix(
                 "torrent", "fixture"),
     ]
     monkeypatch.setattr(service, "_search_releases",
-                        lambda game, platform: (queried.append(game) or releases))
+                        lambda game, platform, **kwargs:
+                        ((queried.append(game) or releases), [])
+                        if kwargs.get("with_errors") else
+                        (queried.append(game) or releases))
     selected = []
     monkeypatch.setattr(service, "grab",
                         lambda pick, *args, **kwargs:
@@ -716,7 +814,7 @@ def test_sso_accepts_an_identity_from_a_trusted_proxy(tmp_path):
     try:
         request = urllib.request.Request(base + "/api/v1/game")
         request.add_header("X-authentik-username", "wade")
-        with urllib.request.urlopen(request, timeout=10) as response:
+        with _loopback_open(request, timeout=10) as response:
             assert response.status == 200
     finally:
         httpd.shutdown(); httpd.server_close()
@@ -738,7 +836,7 @@ def test_the_identity_header_alone_is_not_a_login(tmp_path):
         request = urllib.request.Request(base + "/api/v1/game")
         request.add_header("X-authentik-username", "admin")
         try:
-            with urllib.request.urlopen(request, timeout=10) as response:
+            with _loopback_open(request, timeout=10) as response:
                 assert False, f"header alone was accepted: {response.status}"
         except urllib.error.HTTPError as exc:
             assert exc.code == 401
@@ -773,7 +871,7 @@ def test_a_required_group_is_enforced_over_http(tmp_path):
             request.add_header("X-authentik-username", "wade")
             request.add_header("X-authentik-groups", groups)
             try:
-                with urllib.request.urlopen(request, timeout=10) as response:
+                with _loopback_open(request, timeout=10) as response:
                     assert response.status == expected, groups
             except urllib.error.HTTPError as exc:
                 assert exc.code == expected, groups
@@ -837,6 +935,22 @@ def test_backup_can_include_credentials_when_asked(server):
         {"name": "q", "type": "qbittorrent", "password": "hunter2"}]
     _, body, _ = get(base + "/api/v1/backup?secrets=1", key="testkey")
     assert b"hunter2" in body
+
+
+def test_catalog_backup_download_is_a_valid_sqlite_snapshot(server, tmp_path):
+    import sqlite3
+
+    base, service = server
+    service.catalog_store.register_source("library-a", "folder", "/roms", "rev-1")
+    code, body, headers = get(base + "/api/v1/backup/catalog", key="testkey")
+    assert code == 200
+    assert "application/vnd.sqlite3" in headers.get("Content-Type", "")
+    assert "romarr-catalog.sqlite3" in headers.get("Content-Disposition", "")
+    backup = tmp_path / "download.sqlite3"
+    backup.write_bytes(body)
+    with sqlite3.connect(backup) as db:
+        assert db.execute("PRAGMA integrity_check").fetchone()[0] == "ok"
+        assert db.execute("SELECT source_id FROM library_sources").fetchone()[0] == "library-a"
 
 
 def test_encrypted_backup_endpoint_exports_and_restores_credentials(server):
