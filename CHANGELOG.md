@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.14.17] - 2026-11-09
+
+### Fixed
+
+- **Release pipeline:** Include a structured release-note fragment for the hosted publication fixes so the final GitHub release can assemble a non-empty, attributable release body.
+
 ## [0.14.16] - 2026-11-09
 
 ### Fixed
