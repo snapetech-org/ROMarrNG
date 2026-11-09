@@ -88,6 +88,8 @@ def test_the_documented_docker_run_comes_back_after_a_reboot():
     for doc in (README, INSTALL):
         text = doc.read_text(encoding="utf-8")
         for block in re.findall(r"docker run[^`]+", text):
+            if "--rm" in block:
+                continue  # Disposable diagnostic commands do not run a service.
             assert "--restart" in block, (
                 f"{doc.name} documents a `docker run` with no restart policy; "
                 "it will not survive a host reboot")
