@@ -1,8 +1,38 @@
 # ROMarrNG 0.14.19 release qualification
 
-Prepared on 2026-11-09. Publication is now proceeding on GitHub-hosted runners. The application and
-Home Assistant versions are 0.14.19, and CHANGELOG.md contains the 11 validated
-fragments since v0.14.18. Do not mistake preparation or a draft for image delivery.
+[ROMarrNG v0.14.19](https://github.com/snapetech-org/ROMarrNG/releases/tag/v0.14.19)
+was published on 2026-11-09 at 20:03:25 UTC from
+`0233888da3528f05a8b713ecb0438fcf96584911`. The standard and browser images
+support AMD64 and ARM64. Both release-note messages were accepted through the
+new ROMarrNG Discord webhook.
+
+## Hosted delivery evidence
+
+The [hosted release run](https://github.com/snapetech-org/ROMarrNG/actions/runs/42684261392)
+completed all **18 build and validation jobs successfully**, including:
+
+- Native AMD64: 2,489 tests and 102 subtests passed, five capability skips,
+  one external-network case deselected.
+- Native ARM64: 2,489 tests and 102 subtests passed, five capability skips,
+  one external-network case deselected.
+- Windows frontend contracts, enforcing Semgrep and Trivy scans, release-note
+  coverage, all four native packaged-acquisition proofs, standard/browser image
+  boot checks, publication with SBOM/provenance, and stable alias verification.
+
+After those jobs passed, the publication-only job remained in the hosted queue.
+It was cancelled to prevent duplicate publication/announcement, and the same
+prepared changelog and live alias checks were used to finalize the GitHub Release
+and Discord delivery directly. The run's overall cancellation status describes
+that stopped finalizer; no native build or validation gate was waived.
+
+The [legacy Unraid alias sync](https://github.com/snapetech-org/ROMarrNG/actions/runs/42688088893)
+also passed both jobs. Organization and legacy rolling aliases point to:
+
+- Standard: `sha256:9ad187c55989917d8b415aacf516d787bca4e1724b49a7cd8ef606b4ee1b6f1d`
+- Browser: `sha256:c13f049e0922b2f14f84a1c0491ead69b496a400718280d9a73b4adbb99e4b39`
+
+Pull `ghcr.io/snapetech-org/romarrng:0.14.19` or
+`ghcr.io/snapetech-org/romarrng:0.14.19-browser`.
 
 ## Source review and validation
 
@@ -15,7 +45,7 @@ fragments since v0.14.18. Do not mistake preparation or a draft for image delive
   closed as fixed in source. No claim was made that new images are available.
 - Local Python 3.13 hash-locked application suite: **2,482 passed, 102 subtests
   passed, seven capability skips, one external-network case deselected**.
-  Runner-policy tests were reserved for private JIT rather than counted as local qualification.
+  The initial local run excluded runner-policy tests; the final hosted suites include them.
 - Focused collection/security suite: 180 passed; follow-up API/UI/export suite:
   226 passed; localization suite: 101 passed; folder/catalog suite: 45 passed.
 - Localization checker, JavaScript syntax, all workflow YAML parsing and
@@ -45,10 +75,10 @@ scans, packaged acquisition proofs, image startup checks and alias verification,
 then publishes the GitHub Release and sends the Discord announcement.
 
 `DISCORD_RELEASE_WEBHOOK` was changed to the user-provided ROMarrNG channel.
-The credential is stored only as a repository secret. Send the release
-announcement through the release workflow after publication succeeds.
+The credential is stored as a repository secret and is absent from repository
+files and logs. The two-part release announcement was delivered after publication.
 
-Local evidence is retained under `/tmp/romarrng-maint-20261109` on kspld0.
+Local evidence is retained under `/tmp/romarrng-maint-20261109` and
+`/tmp/romarrng-hosted-release-20261109` on kspld0.
 Temporary test environments are removed after their consumers exit; logs and
-the prepared release body are retained. All application qualification above
-is local evidence and does not replace missing private native image validation.
+the prepared release body are retained. The hosted delivery evidence above records the final native image qualification.
