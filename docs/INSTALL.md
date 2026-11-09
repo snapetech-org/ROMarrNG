@@ -964,3 +964,32 @@ an unavailable atomic operation fails without publishing a partial game.
 Native TLS requires both valid certificate and key files; errors stop startup.
 Container and Proxmox health checks authenticate the configured local leaf
 certificate, including self-signed certificates.
+
+
+## Unraid browser server and version matching
+
+The ROMarrNG Browser image contains the Playwright client; a separate browser
+server is required for remote browser downloads. The [Unraid instructions in
+README](../README.md#downloading-from-a-rom-site) include the server container
+command, Browser Host/Port/Protocol fields, download-path mapping and connection
+test. Ordinary direct downloads do not need this service.
+
+Pin both components when upgrading. Read the client version from the exact
+ROMarrNG Browser image you plan to deploy:
+
+```bash
+docker run --rm --entrypoint python ghcr.io/snapetech-org/romarrng:0.14.19-browser   -c 'from importlib.metadata import version; print(version("playwright"))'
+```
+
+Use that version for both `mcr.microsoft.com/playwright:v<version>-noble` and
+`npx -y playwright@<version> run-server` in the README command. The current
+locked client is 1.62.0. Update the client and server together, keep the server
+on a private container network or trusted LAN, and use the download client's
+Test button after the upgrade. The browser-control port has no built-in
+application authentication. See the [Playwright Docker guide](https://playwright.dev/docs/docker)
+for the separate server's non-root sandbox and resource configuration.
+
+For qBittorrent API-key authentication, use qBittorrent 5.2+ and set API key in
+the download-client form. Leave it empty for username/password sessions on
+older versions. The key is sent as `Authorization: Bearer`, as described by
+[qBittorrent](https://github.com/qbittorrent/qBittorrent/wiki/API-Key-Authentication-%28%E2%89%A5v5.2.0%29).
