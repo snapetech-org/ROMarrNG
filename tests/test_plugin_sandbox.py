@@ -87,6 +87,8 @@ def test_a_probe_error_says_what_runtime_piece_is_missing(monkeypatch):
 
     package = types.ModuleType("rom_hub")
     package.__path__ = []
+    monkeypatch.setattr("romarr.plugin_runtime.landlock.probe", lambda: (True, "supported"))
+    monkeypatch.setattr("romarr.plugin_runtime.scratch.probe", lambda: (True, "supported"))
     sandbox = types.ModuleType("rom_hub.sandbox")
     sandbox.probe = lambda: (_ for _ in ()).throw(
         RuntimeError("Unable to find libseccomp"))

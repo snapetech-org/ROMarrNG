@@ -4,28 +4,28 @@
 
 ARG PLAYWRIGHT_VERSION=1.62.0
 
-FROM python:3.14-slim AS builder
+FROM python:3.14-slim@sha256:9aaa474097d094040649f2162a627c0049b408f52138d980916788d80f04802f AS builder
 ARG PLAYWRIGHT_VERSION
 
 # pyseccomp links against libseccomp; CFFI also needs libffi headers when pip
 # builds from source. Build tools and headers stay out of the runtime image.
+COPY docker/debian.sources /etc/apt/sources.list.d/debian.sources
 RUN apt-get update \
  && apt-get install -y --no-install-recommends build-essential libseccomp-dev libffi-dev \
  && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt /tmp/requirements.txt
-RUN pip install --no-cache-dir --prefix=/install -r /tmp/requirements.txt \
- && pip install --no-cache-dir --prefix=/install \
-      "playwright==${PLAYWRIGHT_VERSION}" \
- && pip install --no-cache-dir --prefix=/install \
-      "rom-hub @ https://github.com/BlizzHacker/rom-hub/archive/8e46348783546ee03b00e2c933155ba60d29619d.tar.gz"
+COPY requirements-browser.lock requirements-build.lock /tmp/
+RUN pip install --no-cache-dir --require-hashes -r /tmp/requirements-build.lock \
+ && pip install --no-cache-dir --no-build-isolation --require-hashes --prefix=/install -r /tmp/requirements-browser.lock
 
-FROM python:3.14-slim
+
+FROM python:3.14-slim@sha256:9aaa474097d094040649f2162a627c0049b408f52138d980916788d80f04802f
 
 ARG PLAYWRIGHT_VERSION
 
 # gosu is su-exec's Debian twin; the shared entrypoint uses the same uid:gid
 # command form on both images. Chromium is intentionally not installed here.
+COPY docker/debian.sources /etc/apt/sources.list.d/debian.sources
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
       gosu tzdata libarchive-tools libseccomp2 git ca-certificates \
@@ -54,7 +54,8 @@ VOLUME /config
 EXPOSE 6868
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
-    CMD python -c "import os,urllib.request;urllib.request.urlopen('http://127.0.0.1:'+os.environ.get('ROMARR_PORT','6868')+'/api/health',timeout=4)"
+    CMD python -m romarr.healthcheck
+# The probe reads ROMARR_PORT and ROMARR_SSL_CERT/ROMARR_SSL_KEY.
 
 LABEL org.opencontainers.image.title="ROMarrNG (browser edition)" \
       org.opencontainers.image.description="ROMarrNG on Debian with the Playwright client for the Headless Browser download client" \

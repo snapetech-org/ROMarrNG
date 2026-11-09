@@ -280,25 +280,38 @@ def _assert_public_host(host: str) -> None:
 
 
 def fetch_public_https(url: str, limit: int, accept: str = "*/*", timeout: int = 20) -> bytes:
-    parsed = urllib.parse.urlparse(url)
-    if parsed.scheme != "https" or not parsed.hostname:
-        raise PatchError("Patches are only downloaded over https.", "PATCH_UNREACHABLE")
-    _assert_public_host(parsed.hostname)
-    opener = urllib.request.build_opener(_PublicHttpsRedirects())
-    request = urllib.request.Request(url, headers={"Accept": accept, "User-Agent": "ROMarrNG-Patches/1"})
+    from .public_http import PublicSession
+    from .limits import Budget
+    import io
+    import requests
     try:
-        with opener.open(request, timeout=timeout) as response:
-            declared = int(response.headers.get("Content-Length") or 0)
-            if declared > limit:
-                raise PatchError("The patch file is larger than allowed.", "PATCH_UNREACHABLE")
-            body = response.read(limit + 1)
+        with PublicSession() as session:
+            for redirect in range(6):
+                parsed = urllib.parse.urlparse(url)
+                if parsed.scheme != "https" or not parsed.hostname:
+                    raise PatchError("Patches are only downloaded over https.", "PATCH_UNREACHABLE")
+                _assert_public_host(parsed.hostname)
+                with session.get(url, headers={"Accept": accept, "User-Agent": "ROMarrNG-Patches/1"},
+                                 stream=True, allow_redirects=False, timeout=timeout) as response:
+                    if response.is_redirect:
+                        url = urllib.parse.urljoin(url, response.headers["Location"])
+                        continue
+                    response.raise_for_status()
+                    if response.headers.get("Content-Encoding", "identity").lower() not in {"", "identity"}:
+                        raise ValueError("encoded patch response")
+                    declared = int(response.headers.get("Content-Length") or 0)
+                    if declared > limit or declared < 0:
+                        raise ValueError("patch exceeds byte limit")
+                    output = io.BytesIO()
+                    Budget(limit).copy(response.raw, output, maximum=limit)
+                    if declared and output.tell() != declared:
+                        raise ValueError("truncated patch response")
+                    return output.getvalue()
+            raise ValueError("too many patch redirects")
     except PatchError:
         raise
-    except (urllib.error.URLError, OSError, ValueError) as err:
-        raise PatchError("The patch could not be downloaded.", "PATCH_UNREACHABLE") from err
-    if len(body) > limit:
-        raise PatchError("The patch file is larger than allowed.", "PATCH_UNREACHABLE")
-    return body
+    except (requests.RequestException, OSError, ValueError) as err:
+        raise PatchError("The patch could not be downloaded within its safety limits.", "PATCH_UNREACHABLE") from err
 
 
 def fetch_patch(version: dict) -> bytes:
@@ -375,6 +388,8 @@ def _vlq(data: bytes, pos: int) -> tuple[int, int]:
         if byte & 0x80:
             return value, pos
         shift <<= 7
+        if shift > (1 << 63):
+            raise PatchError("The patch integer is too large.", "PATCH_CORRUPT")
         value += shift
 
 
@@ -397,6 +412,8 @@ def apply_ups(rom: bytes, patch: bytes) -> bytes:
     elif len(rom) != in_size or _crc(rom) != source_crc:
         raise PatchError("This is not the game dump the patch was made for.", "BASE_MISMATCH")
     size = out_size if not swapped else in_size
+    if size > MAX_ROM_BYTES:
+        raise PatchError("The patch would make the file too large.", "PATCH_CORRUPT")
     out = bytearray(rom[:size] + b"\x00" * max(0, size - len(rom)))
     cursor = 0
     end = len(patch) - 12
@@ -529,9 +546,8 @@ def prepare_patched_file(
     target = destination / _filename(resolved.name, project, version, resolved.suffix)
     if target.resolve(strict=False).parent != destination.resolve(strict=False):
         raise PatchError("The patched file name is not allowed.", "PATCH_FAILED")
-    temporary = target.with_suffix(target.suffix + ".part")
-    temporary.write_bytes(patched)
-    temporary.replace(target)
+    from .safe_files import atomic_file
+    atomic_file(library_root, target, lambda output: output.write(patched), overwrite=False)
     # nosemgrep: python.lang.security.insecure-hash-algorithms.insecure-hash-algorithm-sha1 -- The returned value is a legacy ROM identity checksum, not an authentication or security decision.
     legacy_sha1 = hashlib.sha1(patched, usedforsecurity=False).hexdigest()
     return Prepared(target, fmt, verified=fmt != "ips" or bool(

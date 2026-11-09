@@ -1,4 +1,6 @@
 """The library audit: fxfire's question, answered with hashes."""
+from rom_fixtures import crc_collision
+import hashlib
 
 import time
 
@@ -51,8 +53,8 @@ def test_the_audit_finds_verified_bad_and_duplicate_files(tmp_path):
     shelf = tmp_path / "lib" / "snes"
     shelf.mkdir(parents=True)
     (shelf / "Good Game (USA).smc").write_bytes(good)
-    # Same size as the known ROM, different bytes: the case worth finding.
-    (shelf / "Bad Copy (USA).smc").write_bytes(b"BADBYTES")
+    # Same CRC but a conflicting strong digest: a proven mismatch.
+    (shelf / "Bad Copy (USA).smc").write_bytes(crc_collision(good))
     # Byte-identical duplicate under another name.
     (shelf / "Good Game (copy).smc").write_bytes(good)
     # Something the DAT has never heard of, at a different size.

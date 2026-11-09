@@ -88,10 +88,10 @@ def abi_version() -> int:
     libc = _libc()
     create, _, _ = _syscall_numbers()
     version = libc.syscall(create, None, 0, _CREATE_RULESET_VERSION)
-    if version < 1:
+    if version < 3:
         error = ctypes.get_errno()
         raise LandlockUnavailable(
-            f"Landlock is unavailable (errno {error})"
+            f"Landlock ABI 3 or later is required to restrict truncation (reported {version}, errno {error})"
         )
     return int(version)
 
@@ -159,6 +159,8 @@ def _runtime_paths() -> set[Path]:
 
 
 def _rights_for_abi(abi: int) -> int:
+    if abi < 3:
+        raise LandlockUnavailable("Landlock ABI 3 is required to restrict truncation")
     rights = _WRITABLE
     if abi < 2:
         rights &= ~_REFER

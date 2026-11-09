@@ -245,12 +245,10 @@ service that reaches out to your indexers, a rolling stable alias is the
 recommended default; use a `sha-` tag when you need to sit on a known-good
 build, and see [Rolling back](#rolling-back).
 
-The image is published for `linux/amd64`, `linux/arm64` and `linux/arm/v7`.
-**The armv7 leg has never been booted by the maintainer** — it is built in CI
-and the published image does contain the right things (32-bit ARM `python3.14`
-and `bsdtar`, with `rom_hub` deliberately absent, which is why the Hub tab
-reports plugins as unavailable there). A field report from a real 32-bit ARM
-board is worth more than another CI build.
+Images support `linux/amd64` and `linux/arm64`, with native build, startup,
+and sandboxed acquisition checks for both. ARMv7 is unsupported: its plugin
+confinement could not meet the required security contract. Plugin operations
+require Landlock ABI 3 or newer and libseccomp, or fail closed.
 
 ---
 
@@ -295,36 +293,29 @@ broke it once already. It now answers to nobody but this repo.
 
 ### What it refuses to do
 
-It installs the latest GitHub *release*, falling back to `main`. Before it
-declares success it checks the tree it unpacked actually contains
-`romarr/auth.py`, and re-fetches from `main` if not.
-
-That check is not theoretical: **v0.7.0 was tagged before authentication
-existed**, so a release-tracking installer would have left an install whose API
-answered anyone who could reach the port, on a service that queues downloads
-and writes to the filesystem. See [SECURITY.md](../SECURITY.md#supported-versions).
-
-If you see `no published release; using main`, that is normal and safe. It can
-also mean GitHub rate-limited the lookup (60 requests/hour per IP,
-unauthenticated) — the fallback is the same either way, and the auth check
-still runs.
+The installer selects the latest published release and fails on API/network
+errors. It never silently changes to `main`. The selected tree must contain
+authentication, dependency locks, and the service isolation helper. Before a
+release containing these changes exists, explicitly set `ROMARR_INSTALL_REF=main`
+to install this development revision; use `ROMARR_UPDATE_REF=main` for the updater.
+An explicit version tag can also be supplied through either variable.
 
 ### Configuring it
 
-Settings live in `/opt/romarr/.env`, mode 600. Edit it, then:
+Settings live in `/etc/romarr/romarr.env` (root-owned, readable by the service
+group). Edit it, then run `systemctl restart romarr`. State is
+`/var/lib/romarr/romarr.json`; logs are `journalctl -u romarr -f`.
 
-```bash
-systemctl restart romarr
-```
+The service runs as the unprivileged `romarr` account. Code and virtualenvs
+under `/opt/romarr` and backend configuration under `/etc/romarr/backends` are
+owned by root. Only `/var/lib/romarr` and the configured ROM directory are
+writable through the systemd sandbox. Grant that account access to existing
+library mounts; root-owned or NFS-squashed mounts are not made writable
+implicitly. Additional download/library paths need explicit ownership and
+`ReadWritePaths` entries in a systemd override.
 
-State is `/opt/romarr/romarr.json`. Logs are `journalctl -u romarr -f`.
-
-**ROMarr runs as root inside that container.** The unit confines it —
-`NoNewPrivileges`, `PrivateTmp`, `ProtectSystem=strict`, `ProtectHome`, and
-`ReadWritePaths` limited to `/opt/romarr` and your ROM path — but there is no
-unprivileged service user, so imported ROMs are written root-owned (mode 644,
-so still world-readable). If your library server reads them over an NFS export
-with `root_squash`, that is the thing to know.
+The updater migrates legacy `/opt/romarr/.env`, state, custom backends, and
+Hub data while stopped, preserving credentials and current state.
 
 ---
 
@@ -350,15 +341,17 @@ them.
 
 ## From source
 
-Python 3.11 or newer. Dependencies are `requests` plus, on Linux, `pyseccomp`.
-The host kernel must support Landlock and provide a finite tmpfs for the ROM Hub
+Python 3.12 or newer for the locked runtime, including ROM Hub.
+Linux is required for confined plugins and transactional filesystem imports.
+The host kernel must support Landlock ABI 3 or newer and provide a finite tmpfs for the ROM Hub
 plugin scratch directory. The supplied Docker Compose file mounts `/tmp` as a
 256 MiB tmpfs; elsewhere ROMarr can use a tmpfs such as `/dev/shm`.
 
 ```bash
 git clone https://github.com/snapetech-org/ROMarrNG.git && cd ROMarrNG
 python -m venv .venv && . .venv/bin/activate
-pip install -r requirements.txt
+pip install --require-hashes -r requirements-build.lock
+pip install --no-build-isolation --require-hashes -r requirements.lock
 cp .env.example .env          # edit it
 set -a; . ./.env; set +a      # nothing loads .env for you -- no dotenv dependency
 python -m romarr
@@ -705,7 +698,7 @@ docker compose start
 you have to find:
 
 ```bash
-# Credentials stripped -- safe to email to somebody helping you debug
+# Credentials stripped -- review paths and other private metadata before sharing
 curl -H "X-Api-Key: $KEY" http://localhost:6868/api/v1/backup > romarr-backup.json
 
 # With credentials -- treat this as a secret
@@ -731,10 +724,11 @@ Verified round trip: back up, change a setting, restore, setting is back.
 
 Two things the restore does that are worth knowing before you need them:
 
-- Restoring a **credential-free** backup answers with a warning saying download
-  clients, indexers and libraries will need their passwords again — and it
-  blanks the API key. Your password still works; sign in and set a new key
-  under *Settings → General*.
+- Restoring either backup preserves this installation's password, API keys,
+  TOTP state, session identity, peer credentials, and organizer signing key.
+  A backup cannot reset or replace local authentication. Redacted placeholders
+  preserve existing provider credentials where entries retain the same ID;
+  new connections need their own credentials.
 - A backup carries **settings**, not history. History lives in the same file
   but outside the backup payload — copy `romarr.json` if you want the events.
 
@@ -772,15 +766,16 @@ pct exec <ctid> -- bash -c "$(curl -fsSL https://raw.githubusercontent.com/snape
 
 or the same `bash -c "$(curl ...)"` from inside the container.
 
-It reports the version it is moving you from and to, copies `romarr.json`,
-`.env`, `backends/` **and the running build** to `/opt/romarr-backup-<stamp>`,
-refuses to install a tree without `romarr/auth.py`, replaces the `romarr/`
-package rather than merging over it — a merge leaves modules that upstream
-deleted sitting in an importable package, which is how a version reports itself
-as new while still running old code — and if the new build does not answer
-`/api/health`, **puts the old one back and restarts it** before telling you.
+The updater builds a complete release and locked virtualenv under
+`/opt/romarr/releases` before stopping the service. After stopping it, the
+updater snapshots current state under `/opt/romarr/backups`, atomically changes
+`/opt/romarr/current`, and starts the new version. A failed health check restores
+the previous code and virtualenv together. Rollback preserves the latest state;
+it does not overwrite it with a pre-update snapshot. API or installation
+failures before the switch leave the running release alone.
 
-Delete the backup directory once you are happy.
+Keep the previous release and stopped-state snapshot until the update is
+verified. Use `ROMARR_UPDATE_REF=vX.Y.Z` to select a specific compatible release.
 
 ### Home Assistant
 
@@ -817,16 +812,21 @@ stored — so roll back with a copy of `romarr.json` in hand.
 
 ### Proxmox LXC
 
-`update.sh` rolls itself back if the new build will not answer. To go back
-later, by hand:
+`update.sh` restores the previous release automatically after failed startup.
+For a later code-only rollback, select the previous directory printed by the
+updater (it must contain its matching `.venv`), stop the service, and change
+`current` atomically:
 
 ```bash
 systemctl stop romarr
-rm -rf /opt/romarr/romarr
-cp -a /opt/romarr-backup-<stamp>/romarr /opt/romarr/
-cp -a /opt/romarr-backup-<stamp>/romarr.json /opt/romarr/
+ln -s /opt/romarr/releases/<previous-release> /opt/romarr/.rollback-current
+mv -Tf /opt/romarr/.rollback-current /opt/romarr/current
 systemctl start romarr
 ```
+
+Do not restore an old state snapshot merely to roll back code. Older versions
+may not understand new state formats; keep a stopped-state backup and review
+compatibility before selecting an older version.
 
 ---
 
@@ -856,7 +856,7 @@ somebody running it.
 | Results found, then refused | No download client speaks that release's protocol. | Add a torrent and/or usenet client — the Download Clients page names the gap. |
 | Imported ROM never appears in the library | The rescan was refused. | RomM: grant the account task permission. Or the ROM landed outside the tree your library scans. |
 | Every PlayStation / PS2 / Wii import fails on the archive | `bsdtar` is missing. Those sets ship as `.7z`, and busybox/GNU `tar` is not a substitute — ROMarr will not pretend otherwise. | Docker and the Proxmox installer include it. From source: install `libarchive-tools`. |
-| Hub tab says plugins are unavailable | `rom-hub` is not installed. Expected on armv7, where its `pydantic` dependency has no musl wheel. | Elsewhere: `pip install "rom-hub @ git+https://github.com/BlizzHacker/rom-hub@master"` |
+| Hub tab says plugins are unavailable | Missing locked dependencies or unavailable confinement. ARMv7 is unsupported. | Use the supported AMD64/ARM64 image; inspect Landlock ABI 3+, libseccomp, and tmpfs availability. Reinstall dependencies from the lock files for source deployments. |
 | ROM imports but will not play in the browser | The platform has no emulator core in your library's web player. | Expected. The ROM is catalogued, not playable in-browser. |
 | Scheduled jobs never run on a freshly rebooted host | Fixed in `5cb6a75`. "Never run" was recorded as time `0.0`, and `time.monotonic()` counts from boot on Linux, so on a machine with less uptime than the job's interval every job looked "not due". | Update. |
 
@@ -904,3 +904,36 @@ ROMs survive; if it was inside the container's disk, they do not. Check with
 
 ROMarr never edits your library server's database and never deletes ROMs it
 did not import, so removing it leaves the library exactly as it was.
+
+## Security update operating notes
+
+See the [2026-11-09 remediation ledger](security-remediation-2026-11-09.md) for
+all audit findings, regression evidence, and deployment verification limits.
+Local sessions last eight hours; OIDC sessions are capped at one hour. Use
+Settings → Security to revoke sessions. TOTP enrollment must be confirmed with
+a current code. Sensitive security changes require the current password and
+second factor, or the actual administrator API key. Credential-bearing backup
+exports use the same fresh-authentication requirement; enter the security
+password/factor fields before exporting them in the UI.
+
+Public acquisition URLs reject private, loopback, link-local, and other
+non-public addresses on every connection and redirect. Explicitly trusted
+private download providers can be listed as exact origins (scheme, host, port)
+in `ROMARR_ACQUISITION_PRIVATE_ORIGINS`, comma separated. This exception applies
+only to listed origins, including redirect destinations. Normal configured
+LAN indexers and library servers retain their existing connection behavior.
+
+Transfer budgets default to 16 GiB per member, 64 GiB expanded per operation,
+10,000 archive entries, 600 seconds, and 64 MiB minimum remaining disk space.
+Override with positive integer `ROMARR_MAX_MEMBER_BYTES`,
+`ROMARR_MAX_EXPANDED_BYTES`, `ROMARR_MAX_ARCHIVE_FILES`,
+`ROMARR_TRANSFER_SECONDS`, and `ROMARR_MIN_FREE_BYTES`. Raise budgets explicitly
+for larger legitimate discs. Set download/container filesystem quotas too:
+Playwright's own browser download happens before ROMarr copies and verifies it.
+
+Use real directories or bind mounts for import roots and parents. Symlink
+parents are rejected. Multi-file import publication requires Linux renameat2;
+an unavailable atomic operation fails without publishing a partial game.
+Native TLS requires both valid certificate and key files; errors stop startup.
+Container and Proxmox health checks authenticate the configured local leaf
+certificate, including self-signed certificates.

@@ -11,6 +11,8 @@ that ROMarr's decisions do not change when the service misbehaves.
 """
 
 from __future__ import annotations
+from rom_fixtures import crc_collision
+import hashlib
 
 from pathlib import Path
 
@@ -225,7 +227,7 @@ def test_unknown_output_keeps_the_original(library, monkeypatch):
 def test_bad_dump_keeps_the_original_and_fails_loudly(library, monkeypatch):
     """Right size, wrong bytes: corrupt or tampered. Kept, and reported."""
     # Same length as the DAT entry, different content -> BAD_DUMP verdict.
-    library["output"].write_bytes(bytes(reversed(library["content"])))
+    library["output"].write_bytes(crc_collision(library["content"]))
     client = FakeClient({str(library["source"]): library["output"]})
     _patch_client(monkeypatch, client)
 

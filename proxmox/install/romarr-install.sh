@@ -17,7 +17,7 @@ msg_info "Installing Dependencies"
 # libarchive-tools provides bsdtar, which reads the .7z and .rar archives the
 # disc platforms ship as. Without it every PlayStation, PS2 and Wii import
 # fails on a format it cannot open. Debian's GNU tar is not a substitute.
-$STD apt-get install -y python3-venv libarchive-tools
+$STD apt-get install -y python3-venv libarchive-tools libseccomp2 git
 msg_ok "Installed Dependencies"
 
 fetch_and_deploy_gh_release "romarr" "snapetech-org/ROMarrNG" "tarball" "latest" "/opt/romarr"
@@ -30,16 +30,16 @@ fetch_and_deploy_gh_release "romarr" "snapetech-org/ROMarrNG" "tarball" "latest"
 # port, on a service that queues downloads and writes to the filesystem. This
 # script cannot fall back to main the way ct/romarr.sh does -- the framework
 # owns the fetch -- so it stops instead of finishing quietly.
-if [[ ! -f /opt/romarr/romarr/auth.py ]]; then
-  msg_error "The published release has no romarr/auth.py -- it predates authentication. Install from https://github.com/snapetech-org/ROMarrNG/blob/main/proxmox/ct/romarr.sh instead, which falls back to main."
+if [[ ! -f /opt/romarr/romarr/auth.py || ! -f /opt/romarr/requirements.lock || ! -f /opt/romarr/proxmox/install/configure-service.sh ]]; then
+  msg_error "The published release lacks the current security contract. Select a supported release; the standalone installer accepts an explicit ROMARR_INSTALL_REF=main opt-in."
   exit 1
 fi
 
 msg_info "Setting up ROMarrNG"
 cd /opt/romarr
 $STD python3 -m venv .venv
-$STD /opt/romarr/.venv/bin/pip install --upgrade pip
-$STD /opt/romarr/.venv/bin/pip install -r requirements.txt
+$STD /opt/romarr/.venv/bin/pip install --require-hashes -r requirements-build.lock
+$STD /opt/romarr/.venv/bin/pip install --no-build-isolation --require-hashes -r requirements.lock
 
 # ROMarrNG talks to three services and stores nothing else. Every value here is
 # blank on purpose: it starts and serves its UI with none of them reachable,
@@ -79,31 +79,8 @@ mkdir -p /mnt/roms /opt/romarr/backends
 msg_ok "Set up ROMarrNG"
 
 msg_info "Creating Service"
-cat <<EOF >/etc/systemd/system/romarr.service
-[Unit]
-Description=ROMarrNG - the *arr for games
-After=network-online.target
-Wants=network-online.target
-
-[Service]
-Type=simple
-WorkingDirectory=/opt/romarr
-EnvironmentFile=/opt/romarr/.env
-ExecStart=/opt/romarr/.venv/bin/python -m romarr
-Restart=on-failure
-RestartSec=10
-
-# It reads indexers and writes ROMs into one directory; nothing else on the
-# filesystem is any of its business.
-NoNewPrivileges=true
-PrivateTmp=true
-ProtectSystem=strict
-ProtectHome=true
-ReadWritePaths=/opt/romarr /mnt/roms
-
-[Install]
-WantedBy=multi-user.target
-EOF
+ln -s /opt/romarr /opt/romarr/current
+bash /opt/romarr/proxmox/install/configure-service.sh
 systemctl enable -q --now romarr
 msg_ok "Created Service"
 

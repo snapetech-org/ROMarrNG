@@ -1,0 +1,11 @@
+# These images run only the short ownership bootstrap as root. entrypoint.sh
+# then execs the service as PUID:PGID. Native image jobs assert the process UID
+# and inherited umask; source scans cannot infer that transition.
+# This exception does not suppress package vulnerabilities or other image rules.
+misconfigurations:
+  - id: DS-0002
+    paths:
+      - Dockerfile
+      - Dockerfile.browser
+    expired_at: 2027-02-09
+    statement: Root ownership bootstrap is followed by mandatory su-exec; native image tests verify the non-root service process.

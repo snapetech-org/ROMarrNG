@@ -24,6 +24,7 @@ ROOT = pathlib.Path(__file__).resolve().parents[1] / "romarr"
 #: arriving by a slower route.
 STANDALONE = {
     "__init__",
+    "healthcheck",  # invoked by container and Proxmox health probes
     "__main__",   # the entry point; it imports app, not the other way round
     "app",        # the root of the graph, so it cannot import itself
 }

@@ -41,12 +41,12 @@ An acquisition and automation service. It searches indexers, hands releases to
 a download client, verifies finished files against No-Intro and Redump DATs,
 and files them into a library server.
 
-That means it is **administrator-facing software**. It deliberately reaches
-arbitrary operator-supplied addresses — your Prowlarr, your qBittorrent, your
-RomM — and most of them are on RFC1918 addresses. ROMarr does not and will not
-block private-range destinations, because doing so would break its entire
-purpose. The boundary that matters is not "which addresses may be reached" but
-"who may ask ROMarr to reach them", which is authentication.
+This is administrator-facing software. Explicitly configured integrations
+may connect to private LAN services. Untrusted public acquisition URLs use a
+separate transport that validates every DNS answer at connection time, pins the
+actual connection to the validated address, and rechecks redirects. Private
+acquisition origins require an exact operator allowlist entry. Disabling
+implicit proxy use prevents proxy routing from bypassing this boundary.
 
 ## Authentication
 
@@ -61,11 +61,19 @@ install; the only way off is explicit.
   before it serves a request, leaving no unclaimed window. This is what a
   container template should do.
 - Passwords are hashed with scrypt (N=2^14, r=8, p=1), never stored plaintext.
-- Browsers hold an HMAC-signed session cookie: `HttpOnly`, `SameSite=Strict`,
-  `Path=/`. `SameSite=Strict` is what stands in for CSRF tokens — another site
-  cannot make an authenticated request even if it knows the URL. Set
-  `ROMARR_COOKIE_SECURE=1` when every browser session uses HTTPS; leave it
-  unset only for direct plain-HTTP LAN access.
+- Browsers hold a signed `HttpOnly`, `SameSite=Strict`, `Path=/` cookie.
+  Signing uses an independent persisted key and revocation epoch. Sessions
+  expire after eight hours (OIDC at most one hour), and password or identity
+  policy changes invalidate them. Settings supports explicit session revocation.
+  Native TLS or trusted HTTPS proxy headers set `Secure` automatically;
+  `ROMARR_COOKIE_SECURE=1` can require it explicitly.
+- Mutation requests enforce origin/fetch-site checks for cookie and forward
+  authentication. Browser requests without Origin must provide `X-ROMarr-CSRF: 1`.
+  Nonempty JSON bodies require `application/json`; valid administrator API
+  credentials in headers support machine clients independently of cookies.
+- TOTP enrollment activates only after confirming a current code. Consumed
+  counters/recovery hashes are persisted before login succeeds. Changing or
+  disabling security settings requires fresh factors or the administrator key.
 - API clients present `X-Api-Key`, `Authorization: Bearer` or `?apikey=`. The
   query form exists for senders that cannot set headers; it will appear in
   proxy logs, so prefer a header.
@@ -78,19 +86,11 @@ install; the only way off is explicit.
 - Login, search, download, SeerrNG integration, and general API calls have
   separate per-address rate limits. Wrong login credentials return `401`
   without revealing which of password or key was wrong.
-- A state file ROMarr cannot **read** stops it starting. This is an
-  authentication property, not a housekeeping one, and it was got wrong: an
-  unreadable `romarr.json` — the normal result of a root-owned file under a
-  container running as `PUID` — used to be treated the same as a corrupt one,
-  so ROMarr started from defaults and saved over it. The API key was
-  regenerated, the history emptied, and **the install came back unclaimed**, so
-  the next person to reach the port set the password. That was a configuration
-  mistake that produced an open install, and the paragraph above was therefore
-  not true. It is now two guards: the Docker entrypoint owns `/config`
-  recursively and refuses to start if the state file is still unreadable, and
-  the application refuses to start on an unreadable state file however it was
-  launched. A file that is merely *unparseable* still falls back to defaults,
-  because nothing in it can be handed back.
+- An unreadable, malformed, or schema-invalid existing state file stops
+  startup without changing the original bytes or reopening setup. Writes use
+  private atomic staging and fsync; persistence failures propagate to callers.
+- Forward-auth deployments are already claimed. First-run claims are serialized
+  so exactly one contender obtains the administrator session.
 
 Exactly thirteen routes answer without a credential, and no others (this count is
 asserted against the code, not maintained by hand):
@@ -288,7 +288,7 @@ boundaries and bounded scratch. An operator who accepts that risk can explicitly
 `ROMARR_ALLOW_UNSANDBOXED_PLUGINS=1`; ROMarr then logs the choice and sets the
 Hub's `ROM_HUB_ALLOW_UNSANDBOXED=1` only for the plugin subprocess. The normal
 Docker images include the runtime dependencies needed for seccomp; the host
-kernel must support Landlock and provide a finite tmpfs for plugin scratch.
+kernel must support Landlock ABI 3 or newer and provide a finite tmpfs for plugin scratch.
 
 What *is* enforced:
 
@@ -305,8 +305,12 @@ server, because that is what it is.
 
 ## Dependencies
 
-ROMarr's own code is Python standard library plus `requests`. The small
-surface is deliberate: fewer dependencies is fewer supply-chain paths.
+Runtime, browser, test, and build dependencies have separate hash-locked
+closures. ROM Hub is pinned to an immutable source archive and digest. Container
+bases use immutable image digests; Debian packages use signed snapshot indexes.
+See [dependency maintenance](docs/dependency-locks.md) for updates. The package
+advisory scanner cannot resolve the ROM Hub direct URL; source review and the
+sandbox/acquisition contract tests cover that dependency separately.
 
 ## What is not protected
 
@@ -326,7 +330,8 @@ Stated so nobody assumes otherwise:
 - **No audit log of who did what**, because there is no "who".
 - **Rate limits are local to one ROMarr process.** Login is limited to 5/min,
   search to 30/min, download actions to 60/min, SeerrNG integration to 120/min,
-  and general API calls to 300/min per socket peer address. They are not a
+  and general API calls to 300/min per client address. Trusted proxy CIDRs may
+  supply a forwarded client chain; untrusted peers cannot spoof that identity. They are not a
   distributed quota or a defense against a large network-level flood.
 - **Request workers and bodies are bounded.** The server accepts at most 64
   concurrent HTTP workers and times out idle socket reads after 30 seconds.
@@ -362,3 +367,16 @@ Stated so nobody assumes otherwise:
 - **DAT verification is an integrity check, not a security control.** It tells
   you a file matches a known-good dump. It is not malware scanning, and an
   UNKNOWN verdict means "not in your DAT", not "dangerous".
+
+## Audit remediation
+
+The [2026-11-09 ledger](docs/security-remediation-2026-11-09.md) records the
+44 audit items and validation boundaries. Plugin seccomp denies process signal
+syscalls; Landlock ABI 1/2 fails closed. Local Chromium runs with its sandbox
+enabled and has no automatic unsandboxed fallback. Browser environments still
+need their own resource quotas and separation from application secrets.
+
+Credential-free configuration and backups share recursive redaction, including
+URL credentials and webhook URLs. Restores preserve local identity state, even
+when restoring an encrypted backup. Paths and other noncredential metadata can
+still be private and should be reviewed before sharing a redacted export.

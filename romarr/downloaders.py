@@ -44,6 +44,12 @@ from urllib.parse import unquote, urlsplit
 from urllib.robotparser import RobotFileParser
 
 import requests
+import io
+from functools import wraps
+from .safe_files import atomic_file, relative_parts, directory_fd, source_file
+from .limits import Budget, limit
+from .durable import write_json
+from .public_http import PublicSession
 from defusedxml.xmlrpc import (
     monkey_patch as _harden_xmlrpc,
     xmlrpc_client as _safe_xmlrpc_client,
@@ -1545,7 +1551,7 @@ class DebridClient:
 
     def __init__(self, config, session: requests.Session | None = None):
         self._config = config
-        self._session = session or requests.Session()
+        self._session = session or PublicSession()
 
     @property
     def configured(self) -> bool:
@@ -1650,6 +1656,12 @@ class DebridClient:
         out = []
         for entry in self._finished():
             name, links, *rest = entry
+            try:
+                if len(relative_parts(name)) != 1:
+                    raise ValueError("invalid torrent directory")
+            except ValueError:
+                log.warning("%s refused an unsafe torrent name", self.name)
+                continue
             target = Path(self._config.save_path) / name
             if self._fetch_links(links, target):
                 row = {"name": name, "content_path": str(target),
@@ -1669,8 +1681,16 @@ class DebridClient:
             if not url:
                 ok = False
                 continue
-            destination = target / (filename or "download.bin")
-            if destination.exists():
+            try:
+                parts = relative_parts(filename or "download.bin")
+                destination = target.joinpath(*parts)
+                destination.absolute().relative_to(Path(self._config.save_path).absolute())
+                if destination.exists():
+                    with source_file(destination):
+                        pass
+                    continue
+            except (ValueError, OSError):
+                ok = False
                 continue
             if not self._download(url, destination):
                 ok = False
@@ -1678,18 +1698,13 @@ class DebridClient:
 
     def _download(self, url: str, destination) -> bool:
         try:
-            destination.parent.mkdir(parents=True, exist_ok=True)
-            partial = destination.with_suffix(destination.suffix + ".partial")
             with self._session.get(url, stream=True, timeout=self._config.timeout) as response:
                 response.raise_for_status()
-                with open(partial, "wb") as fh:
-                    for chunk in response.iter_content(chunk_size=1 << 20):
-                        fh.write(chunk)
-            partial.replace(destination)
+                atomic_file(Path(self._config.save_path), destination,
+                            lambda output: _copy_response(response, output))
             return True
-        except (requests.RequestException, OSError) as err:
-            log.warning("%s download failed: %s", self.name,
-                        err.__class__.__name__)
+        except (requests.RequestException, OSError, ValueError) as err:
+            log.warning("%s download failed: %s", self.name, err.__class__.__name__)
             return False
 
 
@@ -2595,7 +2610,7 @@ class SitePolicy:
                  session: requests.Session | None = None, sleeper=None):
         self.user_agent = user_agent
         self.delay = float(delay)
-        self._session = session or requests.Session()
+        self._session = session or PublicSession()
         self._sleep = sleeper or time.sleep
         self._robots: dict[str, object] = {}
         self._last: dict[str, float] = {}
@@ -2694,6 +2709,18 @@ class SiteConfig:
     max_active: int = 1
 
 
+_SITE_LOCKS = {}
+_SITE_LOCKS_LOCK = threading.Lock()
+
+
+def _ledger_serialized(method):
+    @wraps(method)
+    def run(self, *args, **kwargs):
+        with self._ledger_lock:
+            return method(self, *args, **kwargs)
+    return run
+
+
 class SiteDownloader:
     """A ROM site as a download client.
 
@@ -2722,7 +2749,9 @@ class SiteDownloader:
     def __init__(self, config: SiteConfig, session: requests.Session | None = None,
                  policy: SitePolicy | None = None, driver=None):
         self._config = config
-        self._session = session or requests.Session()
+        with _SITE_LOCKS_LOCK:
+            self._ledger_lock = _SITE_LOCKS.setdefault(str(Path(config.save_path).absolute()), threading.RLock())
+        self._session = session or PublicSession()
         self._policy = policy or SitePolicy(
             user_agent=config.user_agent, delay=config.delay,
             session=self._session)
@@ -2797,20 +2826,18 @@ class SiteDownloader:
     def _read(self) -> list[dict]:
         try:
             rows = json.loads(self._ledger_path().read_text(encoding="utf-8"))
-        except (OSError, ValueError):
+        except FileNotFoundError:
             return []
-        return [r for r in rows if isinstance(r, dict)]
+        if not isinstance(rows, list) or any(not isinstance(r, dict) for r in rows):
+            raise ValueError("invalid site-download ledger; preserve and repair it")
+        return rows
 
     def _write(self, rows: list[dict]) -> None:
-        try:
-            path = self._ledger_path()
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(json.dumps(rows, indent=1), encoding="utf-8")
-        except OSError as err:
-            log.warning("could not record the site download queue: %s", err)
+        write_json(self._ledger_path(), rows)
 
     # -- the client interface ----------------------------------------------
 
+    @_ledger_serialized
     def add(self, url: str, *, save_path: str | None = None, name: str = "") -> bool:
         """Record a job. The bytes are fetched by the next `completed` sweep.
 
@@ -2852,6 +2879,7 @@ class SiteDownloader:
         self._write(rows)
         return True
 
+    @_ledger_serialized
     def completed(self) -> list[dict]:
         """Fetch what is pending, then report everything already here.
 
@@ -2890,7 +2918,7 @@ class SiteDownloader:
     def _run(self, row: dict) -> None:
         """Fetch one job, in place, recording why if it did not work."""
         url = row.get("url", "")
-        target = Path(row.get("save_path") or self._config.save_path)
+        target = Path(row.get("save_path") or self._config.save_path) / hashlib.sha256(str(url).encode()).hexdigest()[:24]
         try:
             if self.protocol == "direct" and str(url).startswith("romarr-ia://"):
                 saved = self._archive_bundle_fetch(url, target, row.get("name") or "")
@@ -2924,7 +2952,8 @@ class SiteDownloader:
         bundle = decode_bundle_url(url)
         identifier = bundle["identifier"]
         files = bundle["files"]
-        target.mkdir(parents=True, exist_ok=True)
+        with directory_fd(target, create=True):
+            pass
         digest = hashlib.sha256(url.encode("utf-8")).hexdigest()[:12]
         label = re.sub(r"[^A-Za-z0-9._-]+", "_", str(name or "ROM")).strip("._-")[:48]
         label = label or "ROM"
@@ -2986,7 +3015,8 @@ class SiteDownloader:
         rest of the session rather than being tried again with a different
         hat on.
         """
-        target.mkdir(parents=True, exist_ok=True)
+        with directory_fd(target, create=True):
+            pass
         attempts = 3
         for attempt in range(attempts):
             self._policy.wait(url)
@@ -3073,17 +3103,29 @@ def _filename_for(response, url: str) -> str:
     return name or "download.bin"
 
 
+def _copy_response(response, output):
+    if response.headers.get("Content-Encoding", "identity").lower() not in {"", "identity"}:
+        raise ValueError("compressed HTTP transfer encoding is not supported for ROM data")
+    maximum = limit("ROMARR_MAX_DOWNLOAD_BYTES", 16 << 30)
+    declared = response.headers.get("Content-Length", "")
+    if declared and (not str(declared).isdigit() or int(declared) > maximum):
+        raise ValueError("download exceeds its byte budget")
+    budget = Budget(maximum)
+    total = 0
+    for chunk in response.iter_content(chunk_size=1 << 20):
+        if chunk:
+            total += budget.copy(io.BytesIO(chunk), output)
+    if declared and total != int(declared):
+        raise OSError("download ended before its declared length")
+
+
 def _stream_to(response, target: Path, url: str) -> Path:
-    """Write the body to `target`, via a .partial so a half file never imports."""
-    destination = target / _filename_for(response, url)
-    partial = destination.with_suffix(destination.suffix + ".partial")
+    name = _filename_for(response, url)
+    if len(relative_parts(name)) != 1:
+        raise ValueError("invalid download filename")
+    destination = target / name
     with response:
-        with open(partial, "wb") as fh:
-            for chunk in response.iter_content(chunk_size=1 << 20):
-                if chunk:
-                    fh.write(chunk)
-    partial.replace(destination)
-    return destination
+        return atomic_file(target, destination, lambda output: _copy_response(response, output))
 
 
 @dataclass

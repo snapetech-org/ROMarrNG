@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import errno
+import platform
 
 
 _CLONE_THREAD = 0x00010000
@@ -30,6 +31,23 @@ def install() -> None:
 
     denied = pyseccomp.ERRNO(errno.EPERM)
     filter_ = pyseccomp.SyscallFilter(defaction=pyseccomp.ALLOW)
+    # Landlock does not restrict signals. A plugin shares the service UID,
+    # so the ordinary Unix credential check would let it kill the parent.
+    machine = platform.machine().lower()
+    numbers = {"x86_64": (62, 200, 234, 129, 297),
+               "aarch64": (129, 130, 131, 138, 240)}
+    machine = {"amd64": "x86_64", "arm64": "aarch64"}.get(machine, machine)
+    if machine not in numbers:
+        raise RuntimeError("unsupported plugin syscall architecture")
+    for name, number in zip(("kill", "tkill", "tgkill", "rt_sigqueueinfo", "rt_tgsigqueueinfo"), numbers[machine]):
+        try:
+            filter_.add_rule(denied, name)
+        except (ValueError, RuntimeError):
+            filter_.add_rule(denied, number)
+    try:
+        filter_.add_rule(denied, "pidfd_send_signal")
+    except (ValueError, RuntimeError):
+        filter_.add_rule(denied, 424)
     added = set()
     for name in _RESTRICTED_METADATA_SYSCALLS:
         try:
@@ -46,7 +64,10 @@ def install() -> None:
             added.add("fchmodat2")
         except Exception as exc:  # noqa: BLE001 - mode changes must fail closed
             raise RuntimeError("seccomp cannot deny fchmodat2") from exc
-    if not {"chmod", "fchmod", "fchmodat", "fchmodat2"}.issubset(added):
+    required = {"fchmod", "fchmodat", "fchmodat2"}
+    if machine == "x86_64":
+        required.add("chmod")
+    if not required.issubset(added):
         raise RuntimeError("seccomp cannot deny all chmod syscall variants")
 
     # glibc's fork() wrapper may use clone(2), and newer runtimes may try

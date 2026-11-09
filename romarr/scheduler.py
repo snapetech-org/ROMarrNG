@@ -89,6 +89,8 @@ class Scheduler:
 
     def stop(self) -> None:
         self._stop.set()
+        if self._thread and self._thread is not threading.current_thread():
+            self._thread.join(timeout=5)
 
     # -- the loop ------------------------------------------------------------
 
@@ -116,18 +118,19 @@ class Scheduler:
         return (time.monotonic() - job._last_started) >= seconds
 
     def _run(self, job: Job) -> None:
-        job._last_started = time.monotonic()
-        job.last_run = _now_iso()
-        try:
-            job.last_result = str(job.run() or "done")
-            job.last_error = ""
-        except Exception as exc:
-            # The job failed; the scheduler must not. Recorded where the
-            # Tasks page can show it, because a job that fails silently on a
-            # timer is a feature that "sometimes doesn't work".
-            job.last_error = f"{exc.__class__.__name__}: {exc}"
-            job.last_result = ""
-            log.warning("scheduled %s failed: %s", job.name, job.last_error)
+        with self._lock:
+            job._last_started = time.monotonic()
+            job.last_run = _now_iso()
+            try:
+                job.last_result = str(job.run() or "done")
+                job.last_error = ""
+            except Exception as exc:
+                # The job failed; the scheduler must not. Recorded where the
+                # Tasks page can show it, because a job that fails silently on a
+                # timer is a feature that "sometimes doesn't work".
+                job.last_error = f"{exc.__class__.__name__}: {exc}"
+                job.last_result = ""
+                log.warning("scheduled %s failed: %s", job.name, job.last_error)
 
     # -- surface -------------------------------------------------------------
 
@@ -135,8 +138,7 @@ class Scheduler:
         """Run one job immediately, for the Tasks page's Run button."""
         for job in self._jobs:
             if job.name == name:
-                with self._lock:
-                    self._run(job)
+                self._run(job)
                 return self.describe(job)
         return None
 

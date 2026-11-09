@@ -216,7 +216,7 @@ DESCRIPTIONS: dict[str, tuple[str, str]] = {
                                        "Playnite JSON."),
     "/api/v1/hub/catalogue": ("GET", "Search the plugin catalogue."),
     "/api/v1/hub/plugins": ("GET", "The plugin catalogue, unfiltered."),
-    "/api/v1/hub/plugin": ("POST", "Install, enable, disable or uninstall a plugin."),
+    "/api/v1/hub/plugin": ("POST", "Install, enable or disable a plugin."),
     "/api/v1/hub/source/check": ("POST", "Whether a repository URL may be "
                                          "installed from."),
     "/api/v1/hub/submit": ("POST", "Validate a catalogue submission and return "
@@ -324,13 +324,15 @@ DESCRIPTIONS: dict[str, tuple[str, str]] = {
                              "GET polls — verified / bad-dump / unknown "
                              "counts plus byte-identical duplicates."),
     "/api/v1/system/apikey": ("GET", "The API key, for the Settings page. "
-                                     "Authenticated, unlike safe_settings "
+                                     "Requires a valid administrator API key or fresh X-ROMarr-Password and X-ROMarr-TOTP headers, unlike safe_settings "
                                      "which exists to strip credentials."),
     "/api/v1/system/seerrng-key": ("GET", "Reveal the SeerrNG integration-only key to the authenticated operator."),
     "/api/v1/system/seerrng-key/rotate": ("POST", "Rotate the SeerrNG integration-only key. Unavailable when ROMARR_SEERRNG_API_KEY is set in the environment."),
     "/api/v1/totp/enroll": ("POST", "Generate a TOTP secret and backup "
-                                    "codes; two-factor gates sign-in from "
-                                    "then on."),
+                                    "codes; activation requires a separate confirmation code."),
+    "/api/v1/totp/confirm": ("POST", "Confirm pending enrollment with an authenticator code."),
+    "/api/v1/password": ("POST", "Change password after fresh authentication and revoke old sessions."),
+    "/api/v1/sessions/revoke": ("POST", "Revoke previous sessions after fresh authentication."),
     "/api/v1/totp/disable": ("POST", "Turn two-factor off."),
     "/api/v1/metadataprovider": ("GET", "Configured metadata providers, "
                                         "credentials masked."),

@@ -30,6 +30,7 @@ $dialogs = [pscustomobject]@{}
 $dialogs | Add-Member ScriptMethod ShowMessage { param($m, $t) [void]$script:messages.Add("MSG: $m") }
 $dialogs | Add-Member ScriptMethod ShowErrorMessage { param($m, $t) [void]$script:messages.Add("ERR: $m") }
 $database = [pscustomobject]@{ Games = New-Object System.Collections.ArrayList }
+$database.Games | Add-Member ScriptMethod Update { param($game) } -Force
 $PlayniteApi = [pscustomobject]@{ Dialogs = $dialogs; Database = $database }
 
 # Evaluate the module body in THIS scope so its functions resolve our

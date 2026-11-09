@@ -198,10 +198,10 @@ def test_pull_request_image_validation_has_no_publish_permissions():
             assert permission not in job
 
     for job in publish_jobs:
-        assert "github.event_name != 'pull_request'" in job
+        assert "github.event_name == 'workflow_dispatch'" in job
         assert "refs/heads/main" in job
         assert "inputs.release_tag != ''" in job
-        assert "github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main'" in job
+        assert "github.ref == 'refs/heads/main'" in job
         assert "packages: write" in job
         assert "id-token: write" in job
         assert "attestations: write" in job
@@ -235,12 +235,12 @@ def test_standard_image_uses_glibc_and_keeps_seccomp_build_tools_out_of_runtime(
     runtime = body.rsplit("\nFROM ", 1)[-1]
     assert "libseccomp2" in runtime
     assert "libseccomp-dev" not in runtime
-    assert "rom-hub @ https://github.com/BlizzHacker/rom-hub/archive/" in body
+    assert "rom-hub @ https://github.com/BlizzHacker/rom-hub/archive/" in (ROOT / "requirements.lock").read_text()
     assert 'if [ "$TARGETARCH" != "arm" ]' not in body
     assert "from rom_hub.sandbox import install; install()" in body, (
         "the image does not prove that its seccomp filter can actually load")
-    assert '[ "$TARGETARCH" = "amd64" ]' in body, (
-        "the filter-load proof must run on the native smoke leg, not QEMU")
+    assert '[ "$TARGETARCH" = "amd64" ]' not in body
+    assert "ubuntu-24.04-arm" in (ROOT / ".github/workflows/docker.yml").read_text()
 
 
 def test_the_image_proves_rom_hubs_catalogue_is_not_empty():
@@ -264,8 +264,8 @@ def test_the_runtime_image_can_clone_a_bundled_plugin():
         encoding="utf-8"
     )
     assert "command -v git" in workflow
-    assert "rom-hub plugin install archive-org" in workflow, (
-        "the image proves the catalogue exists but never proves a pinned plugin installs")
+    assert "prove_upstream_acquisition.py" in workflow
+    assert "--network none" in workflow
 
 
 def test_cffi_headers_are_available_only_during_image_builds():

@@ -233,7 +233,7 @@ def test_content_disposition_names_the_file_and_cannot_choose_a_path(tmp_path):
     client.add("https://example.invalid/get?id=7")
     saved = pathlib.Path(client.completed()[0]["content_path"])
     assert saved.name == "Super Metroid (JU).sfc"
-    assert saved.parent == tmp_path / "dl"
+    assert saved.parent.parent == tmp_path / "dl"
 
 
 def test_nothing_half_written_is_ever_reported_as_finished(tmp_path):
@@ -603,7 +603,7 @@ def test_the_user_agent_is_declared_rather_than_disguised():
 
 
 def test_the_launch_flags_are_container_survival_not_fingerprinting():
-    assert set(browser.LAUNCH_ARGS) == {"--no-sandbox", "--disable-dev-shm-usage"}
+    assert set(browser.LAUNCH_ARGS) == {"--disable-dev-shm-usage"}
 
 
 # --- wiring -----------------------------------------------------------------

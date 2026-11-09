@@ -85,6 +85,7 @@ def _stable_file_hash(path: Path) -> tuple[dict, str]:
         skip = header_size(path.suffix, before.st_size)
         crc = 0
         md5 = hashlib.md5(usedforsecurity=False)
+        # nosemgrep: python.lang.security.insecure-hash-algorithms.insecure-hash-algorithm-sha1 -- DAT compatibility checksum; file integrity uses the separate SHA256 below.
         sha1 = hashlib.sha1(usedforsecurity=False)
         sha256 = hashlib.sha256()
         content_size = 0

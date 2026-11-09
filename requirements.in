@@ -1,0 +1,16 @@
+requests>=2.34.2
+Authlib>=1.9.1,<2
+pycryptodomex>=3.24.1
+defusedxml>=0.7.1,<0.8
+
+# Lets ROM Hub confine plugin subprocesses with a seccomp filter. Without it
+# the Hub refuses to run plugins at all unless ROMarr opts out of confinement
+# entirely, which is what it used to do -- so this is the difference between
+# plugins having a network boundary and having none.
+#
+# Linux-only, and optional by design: an install without it still runs, logs a
+# warning, and says so on the status page.
+pyseccomp>=0.1.2; sys_platform == "linux"
+
+
+rom-hub @ https://github.com/BlizzHacker/rom-hub/archive/8e46348783546ee03b00e2c933155ba60d29619d.tar.gz#sha256=b5f927ebba7a47391c03d2f8e2d62bf294c92cfe98fd9a1c23ffe790891bd864

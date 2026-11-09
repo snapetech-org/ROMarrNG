@@ -53,18 +53,9 @@ from urllib.parse import urlsplit
 
 log = logging.getLogger(__name__)
 
-#: Chromium flags. Both are container survival, not evasion, and it is worth
-#: being precise about that because "--no-sandbox" reads like cheating:
-#:
-#:   * `--no-sandbox` turns off Chromium's own *process* sandbox, which
-#:     refuses to start as root inside an unprivileged LXC. It has nothing to
-#:     do with what a site can detect.
-#:   * `--disable-dev-shm-usage` moves shared memory off /dev/shm, which a
-#:     container gives 64MB of and which Chromium exhausts on the first big
-#:     page -- the symptom is a tab that dies mid-navigation.
-#:
-#: Nothing here alters the fingerprint the site sees, and nothing here may.
-LAUNCH_ARGS = ("--no-sandbox", "--disable-dev-shm-usage")
+# Chromium's process sandbox is mandatory for untrusted pages. Local launches
+# need a non-root account and a kernel/container that permits its sandbox.
+LAUNCH_ARGS = ("--disable-dev-shm-usage",)
 
 #: Text that means the page in front of us is a challenge rather than the
 #: page we asked for. Finding any of these ends the fetch: the answer to a
@@ -180,7 +171,7 @@ def _open(pw, endpoint: str):
         operator enables ROMARR_ALLOW_INSECURE_BROWSER_ENDPOINTS.
     """
     if not endpoint:
-        return pw.chromium.launch(headless=True, args=list(LAUNCH_ARGS))
+        return pw.chromium.launch(headless=True, chromium_sandbox=True, args=list(LAUNCH_ARGS))
     parsed = urlsplit(endpoint)
     if parsed.scheme not in {"ws", "wss", "http", "https"}:
         raise ValueError("Browser endpoint must use WebSocket or HTTP transport")
@@ -345,7 +336,9 @@ def fetch(page_url: str, destination: Path, *, control: str = "",
     url, fragment_control = split_control(page_url)
     control = control or fragment_control
     destination = Path(destination)
-    destination.mkdir(parents=True, exist_ok=True)
+    from .safe_files import directory_fd
+    with directory_fd(destination, create=True):
+        pass
 
     with sync_playwright() as pw:
         browser = _open(pw, endpoint)
@@ -396,35 +389,31 @@ def _keep(download, destination: Path, remote_dir: str, path_mappings, *,
     Without one there is no way to move the bytes, and saying so beats a
     FileNotFoundError raised from inside somebody else's driver.
     """
+    from .safe_files import atomic_file, relative_parts, source_file
+    from .limits import Budget, limit
+    import tempfile
     name = download.suggested_filename or "download.bin"
+    if len(relative_parts(name)) != 1:
+        raise Refused("browser supplied an unsafe download filename")
     target = destination / name
-    try:
-        download.save_as(str(target))
-        return target
-    except Exception as err:
-        if not remote_dir:
-            raise Unavailable(
-                "the browser downloaded the file onto its own host and this "
-                "one cannot read it -- give the browser a download directory "
-                f"both containers can see ({type(err).__name__})"
-            ) from err
-    # The browser wrote it somewhere we were told we can also read.
-    from .library import map_remote_path
-
-    try:
-        reported = download.path()
-    except Exception:
-        reported = os.path.join(remote_dir, name)
-    local = map_remote_path(str(reported), path_mappings,
-                            client_id=client_id)
-    if not Path(local).exists():
-        raise Unavailable(
-            f"the browser reported {reported}, which does not exist here -- "
-            "check the remote path mapping for the browser's download "
-            "directory"
-        )
-    # Do not propagate a remote browser container's private permission bits
-    # into ROMarr's shared downloads directory.  The destination follows
-    # ROMarr's umask; the browser-owned source is never modified.
-    shutil.copyfile(str(local), str(target))
-    return target
+    # The browser writes only into an exclusively owned temporary directory.
+    # A bounded, descriptor-relative copy publishes the complete artifact.
+    with tempfile.TemporaryDirectory(prefix="romarr-browser-") as temporary:
+        staged = Path(temporary) / "download"
+        try:
+            download.save_as(str(staged))
+            local = staged
+        except Exception as err:
+            if not remote_dir:
+                raise Unavailable("browser artifact is unavailable; configure a shared remote download directory") from err
+            from .library import map_remote_path
+            try:
+                reported = download.path()
+            except Exception:
+                reported = os.path.join(remote_dir, name)
+            local = Path(map_remote_path(str(reported), path_mappings, client_id=client_id))
+        maximum = limit("ROMARR_MAX_DOWNLOAD_BYTES", 16 * 1024**3)
+        with source_file(local) as source:
+            if os.fstat(source.fileno()).st_size > maximum:
+                raise Refused("browser download exceeds size limit")
+            return atomic_file(destination, target, lambda output: Budget(maximum).copy(source, output))

@@ -1172,7 +1172,7 @@ const applyInterfaceLanguage=(language=readInterfaceLanguage())=>{
   const heading=$('#page-title');
   if(heading)document.title=heading.textContent.trim()+' · ROMarr';
 };
-const j=(u,o)=>fetch(u,o).then(r=>r.json());
+const j=(u,o={})=>{const headers=new Headers(o.headers||{});if(!['GET','HEAD'].includes((o.method||'GET').toUpperCase()))headers.set('X-ROMarr-CSRF','1');return fetch(u,{...o,headers}).then(r=>r.json());};
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>
   ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 // Library counts here run to six figures; grouped, they are readable at a
@@ -4192,6 +4192,12 @@ RENDER.general=()=>settingsPage('General',
       <button class="btn ghost" id="g-totp" type="button">Enable two-factor (TOTP)</button>
       <button class="btn ghost" id="g-totpoff" type="button">Disable</button>
       <span class="help" style="margin:0">Two-factor authentication protects sign-in only. The API key is already a high-entropy secret, so it does not require two-factor authentication.</span></div>
+    <div class="field"><label>Current password (for security changes)</label><input id="g-security-password" type="password" autocomplete="current-password"></div>
+    <div class="field"><label>Current authenticator or recovery code, if enabled</label><input id="g-security-totp" type="text" autocomplete="one-time-code"></div>
+    <div class="field"><label>New password</label><input id="g-new-password" type="password" autocomplete="new-password"></div>
+    <button class="btn ghost" id="g-password-change" type="button">Change password</button>
+    <button class="btn ghost" id="g-revoke" type="button">Revoke other sessions</button>
+    <button class="btn ghost" id="g-totpconfirm" type="button" hidden>Confirm authenticator code</button>
     <pre id="g-totpout" style="display:none;font:12px/1.6 ui-monospace,Menlo,monospace;color:var(--dim);white-space:pre-wrap;background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:10px"></pre>`,
   ()=>{
     const regionalFormat=$('#g-regional-format');
@@ -4199,7 +4205,8 @@ RENDER.general=()=>settingsPage('General',
       applyRegionalFormat(regionalFormat.value,regionalFormat);
     };
     $('#g-key').onclick=async()=>{
-      const d=await j('/api/v1/system/apikey').catch(()=>({}));
+      const d=await j('/api/v1/system/apikey',{headers:{'X-ROMarr-Password':$('#g-security-password').value,'X-ROMarr-TOTP':$('#g-security-totp').value}}).catch(()=>({}));
+      clearSecurity();
       $('#g-keyout').innerHTML=d.api_key
         ?'<span lang="und" dir="auto">'+esc(d.api_key)+'</span>'
         :interfaceMarkup('ui.could-not-read-it.baf6cf1a0d');
@@ -4220,22 +4227,35 @@ RENDER.general=()=>settingsPage('General',
         toastLabel('ui.provider-key-rotated.f34467b1b5');
       }else if(d.error)toastAppMessage(d.error);else toastLabel('ui.could-not-rotate-provider-key.02c09c9a71');
     };
+    const securityBody=()=>({password:$('#g-security-password').value,totp:$('#g-security-totp').value});
+    const securityCall=(path,body)=>j(path,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body)});
+    const clearSecurity=()=>{$('#g-security-password').value='';$('#g-security-totp').value='';};
     $('#g-totp').onclick=async()=>{
-      if(!confirmMessage('ui.enable-two-factor-sign-in-you-will-n.5fa605c62e')) return;
-      const d=await j('/api/v1/totp/enroll',{method:'POST',
-        headers:{'content-type':'application/json'},body:'{}'}).catch(()=>({}));
-      const out=$('#g-totpout'); out.style.display='block';
-      out.textContent='Secret:  '+(d.secret||'?')
-        +'\nURI:     '+(d.uri||'?')
-        +'\n\nBackup codes (single use, save them now):\n  '
-        +((d.backup_codes||[]).join('\n  '))
-        +'\n\n'+(d.note||'');
+      const d=await securityCall('/api/v1/totp/enroll',securityBody()).catch(()=>({error:'Enrollment failed'}));
+      clearSecurity();
+      if(d.error){toastAppMessage(d.error);return;}
+      const out=$('#g-totpout');out.style.display='block';
+      out.textContent='Secret: '+d.secret+'\nURI: '+d.uri+'\n\nSave these recovery codes:\n'+d.backup_codes.join('\n')+'\n\n'+d.note;
+      $('#g-totpconfirm').hidden=false;
+    };
+    $('#g-totpconfirm').onclick=async()=>{
+      const d=await securityCall('/api/v1/totp/confirm',{totp:$('#g-security-totp').value});
+      $('#g-security-totp').value='';
+      if(d.ok){$('#g-totpconfirm').hidden=true;$('#g-totpout').style.display='none';toastAppMessage('Two-factor enabled');}
+      else toastAppMessage(d.error||'Confirmation failed');
     };
     $('#g-totpoff').onclick=async()=>{
-      const d=await j('/api/v1/totp/disable',{method:'POST',
-        headers:{'content-type':'application/json'},body:'{}'}).catch(()=>({}));
-      toastLabel(d.ok?'Two-factor disabled':'Failed');
-      $('#g-totpout').style.display='none';
+      const d=await securityCall('/api/v1/totp/disable',securityBody());clearSecurity();
+      toastAppMessage(d.ok?'Two-factor disabled':d.error||'Failed');
+      if(d.ok)$('#g-totpout').style.display='none';
+    };
+    $('#g-revoke').onclick=async()=>{
+      const d=await securityCall('/api/v1/sessions/revoke',securityBody());clearSecurity();
+      toastAppMessage(d.ok?'Other sessions revoked':d.error||'Failed');
+    };
+    $('#g-password-change').onclick=async()=>{
+      const d=await securityCall('/api/v1/password',{...securityBody(),new_password:$('#g-new-password').value});
+      clearSecurity();$('#g-new-password').value='';toastAppMessage(d.ok?'Password changed':d.error||'Failed');
     };
   });
 
@@ -4339,16 +4359,21 @@ RENDER.status=async()=>{
     if([...pass].filter(c=>!(/\\s/.test(c))).length<16){ msg(false,interfaceMarkup('ui.use-at-least-16-non-whitespace-chara.bc53cad408')); return; }
     msg(true,interfaceMarkup('ui.encrypting-backup.8fc8833aba'));
     try{
-      const encrypted=await j('/api/v1/backup/encrypted',{headers:{'X-ROMarr-Backup-Passphrase':pass}});
+      const encrypted=await j('/api/v1/backup/encrypted',{headers:{'X-ROMarr-Backup-Passphrase':pass,'X-ROMarr-Password':$('#g-security-password').value,'X-ROMarr-TOTP':$('#g-security-totp').value}});
       if(encrypted.error) throw new Error(encrypted.error);
       const blob=new Blob([JSON.stringify(encrypted,null,2)],{type:'application/json'});
       const url=URL.createObjectURL(blob); save(url,'romarr-backup-encrypted.json');
       setTimeout(()=>URL.revokeObjectURL(url),1000); msg(true,interfaceMarkup('ui.encrypted-backup-downloaded.d15118586e'));
     }catch(err){ msg(false,appMessageMarkup(err.message||'Could not encrypt backup.')); }
   };
-  $('#bk-dls').onclick=()=>{
-    if(confirmMessage('ui.this-file-will-contain-your-api-key.bfeea73fc6'))
-      save('/api/v1/backup?secrets=1','romarr-backup-with-credentials.json');
+  $('#bk-dls').onclick=async()=>{
+    if(!confirmMessage('ui.this-file-will-contain-your-api-key.bfeea73fc6')) return;
+    try {
+      const backup=await j('/api/v1/backup?secrets=1',{headers:{'X-ROMarr-Password':$('#g-security-password').value,'X-ROMarr-TOTP':$('#g-security-totp').value}});
+      if(backup.error) throw new Error(backup.error);
+      const url=URL.createObjectURL(new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}));
+      save(url,'romarr-backup-with-credentials.json'); setTimeout(()=>URL.revokeObjectURL(url),1000);
+    } catch(err) { msg(false,appMessageMarkup(err.message)); }
   };
   $('#bk-rs').onclick=()=>$('#bk-file').click();
   $('#bk-file').onchange=async e=>{

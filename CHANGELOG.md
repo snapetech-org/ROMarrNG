@@ -10,6 +10,22 @@
 
 ## [Unreleased]
 
+### Security
+
+- Close authentication, TOTP, session revocation, configuration disclosure, restore, CSRF, TLS, and proxy identity gaps found in the 2026-11-09 audit.
+- Publish imports and downloads through confined atomic staging; enforce archive/transfer budgets, DNS-pinned public acquisition, stronger DAT matching, and complete game-set verification.
+- Deny plugin process signals, require Landlock ABI 3+, and enable local Chromium confinement. Remove unsupported ARMv7 and unimplemented plugin uninstall advertising.
+- Run enforcing scans and native validation automatically. Lock dependency/base/package inputs and publish the exact images tested.
+
+### Fixed
+
+- Run Proxmox under a dedicated service account with read-only code; stage dependencies and roll back code coherently while preserving current state.
+- Update Playnite/LaunchBox records by stable identity and deduplicate batches; synchronize Home Assistant metadata and native-TLS health checks.
+- Isolate unit tests from live services and unattended background work.
+
+**Upgrade notes and evidence:** [All 44 audit findings](docs/security-remediation-2026-11-09.md). Existing sessions expire on upgrade. Confirm TOTP enrollment, review transfer limits and trusted proxy/private acquisition settings, and migrate ARMv7 installations to AMD64/ARM64.
+
+
 ## [0.14.17] - 2026-11-09
 
 ### Fixed

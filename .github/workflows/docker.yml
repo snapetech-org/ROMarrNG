@@ -7,6 +7,9 @@ name: docker
 
 run-name: ${{ format('action:{0}:pool:{1}:tag:{2}', inputs.action, inputs.runner_pool, inputs.release_tag) }}
 on:
+  push:
+    branches: [main]
+  pull_request:
 
   workflow_dispatch:
     inputs:
@@ -100,7 +103,15 @@ jobs:
       (
         true
       )
-    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -126,10 +137,14 @@ jobs:
           python-version: "3.13"
 
       - name: Install test dependencies
-        run: python -m pip install --disable-pip-version-check -r requirements.txt pytest PyYAML
+        run: |
+          python -m pip install --disable-pip-version-check --require-hashes -r requirements-build.lock
+          python -m pip install --disable-pip-version-check --no-build-isolation --require-hashes -r requirements-test.lock
 
       - name: Run pytest suite
-        run: python -m pytest tests/ -q
+        run: |
+          python_path="$(command -v python)"
+          sudo unshare --net -- sh -c 'ip link set lo up; exec "$@"' sh "$python_path" -m pytest tests/ -q
 
   acquisition-proof:
     name: Packaged acquisition (${{ matrix.dockerfile }})
@@ -145,11 +160,12 @@ jobs:
       (
         github.event_name != 'push' || github.ref == 'refs/heads/main' || inputs.release_tag != ''
       )
-    runs-on: ubuntu-24.04
+    runs-on: ${{ matrix.runner }}
     strategy:
       fail-fast: false
       matrix:
         dockerfile: [Dockerfile, Dockerfile.browser]
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -157,10 +173,12 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Build native test image
-        run: docker build --build-arg TARGETARCH=amd64 -f "${{ matrix.dockerfile }}" -t romarrng:acquisition-proof .
+        env:
+          DOCKERFILE: ${{ matrix.dockerfile }}
+        run: docker build -f "$DOCKERFILE" -t romarrng:acquisition-proof .
       - name: Prove sandboxed acquisition and SeerrNG delivery
         run: >-
-          docker run --rm -e PYTHONPATH=/app --entrypoint python
+          docker run --rm --network none -e PYTHONPATH=/app --entrypoint python
           -v "$PWD/scripts:/proof:ro" romarrng:acquisition-proof
           /proof/prove_upstream_acquisition.py
 
@@ -178,9 +196,15 @@ jobs:
       (
         always() && needs.test.result == 'success' && needs.acquisition-proof.result == 'success' && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped') && (github.event_name != 'push' || github.ref == 'refs/heads/main' || inputs.release_tag != '') && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')
       )
-    runs-on: ubuntu-24.04
-    env:
-      BUILDKIT_EGRESS_PROXY: ""
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
     permissions:
       contents: read
     steps:
@@ -214,7 +238,7 @@ jobs:
             exit 1
           fi
           git fetch origin main:refs/remotes/origin/main
-          git merge-base --is-ancestor "$GITHUB_SHA" origin/main || {
+          git merge-base --is-ancestor "$(git rev-parse HEAD)" origin/main || {
             echo "Release tag $TAG is not on main."
             exit 1
           }
@@ -224,42 +248,20 @@ jobs:
             exit 1
           fi
 
-      # armv7 has no musl wheel for charset-normalizer, so that leg compiles
-      # under emulation. It is the slow one; the others are native-speed.
-      - uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1 # v4.4.0
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
-        with:
-          # The isolated BuildKit daemon needs the runner's trust roots too.
-          buildkitd-config-inline: |
-            [registry."docker.io"]
-              ca = ["/etc/ssl/certs/ca-certificates.crt"]
-          driver-opts: |
-            env.HTTP_PROXY=${{ env.BUILDKIT_EGRESS_PROXY }}
-            env.HTTPS_PROXY=${{ env.BUILDKIT_EGRESS_PROXY }}
-            env.http_proxy=${{ env.BUILDKIT_EGRESS_PROXY }}
-            env.https_proxy=${{ env.BUILDKIT_EGRESS_PROXY }}
-            env.SSL_CERT_FILE=/etc/buildkit/certs/docker.io/ca-certificates.crt
-
       # The suite gates the code; nothing gated the image. A broken entrypoint,
       # a dependency that failed to install, or a missing bsdtar would all pass
       # every test and publish anyway -- and the first person to find out would
       # be somebody who pulled it. So one leg is built, booted and questioned
-      # before anything is pushed. The multi-arch build below reuses this
-      # build's cache, so the cost is close to nothing.
-      - name: Build the amd64 leg for a smoke test
+      # before anything is pushed. Publication loads the saved validated
+      # artifact for each native architecture without rebuilding it.
+      - name: Build the native image once
         uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
         with:
           context: .
-          platforms: linux/amd64
+          platforms: linux/${{ matrix.arch }}
           load: true
           tags: romarr:smoke
-          build-args: |
-            HTTP_PROXY=${{ env.BUILDKIT_EGRESS_PROXY }}
-            HTTPS_PROXY=${{ env.BUILDKIT_EGRESS_PROXY }}
-            http_proxy=${{ env.BUILDKIT_EGRESS_PROXY }}
-            https_proxy=${{ env.BUILDKIT_EGRESS_PROXY }}
-            NO_PROXY=localhost,127.0.0.1
-            no_proxy=localhost,127.0.0.1
           cache-from: type=gha
           cache-to: type=gha,mode=max
           provenance: false
@@ -272,7 +274,7 @@ jobs:
           printf 'download fixture' > "$RUNNER_TEMP/romarr-downloads/source.rar"
           chmod 0775 "$RUNNER_TEMP/romarr-downloads/source.rar"
           before=$(stat -c '%u:%g:%a' "$RUNNER_TEMP/romarr-downloads/source.rar")
-          docker run -d --name smoke -p 6868:6868 \
+          docker run -d --name smoke --network none \
             --read-only --cap-drop ALL --cap-add CHOWN --cap-add SETGID \
             --cap-add SETUID --security-opt no-new-privileges \
             --tmpfs /tmp:rw,noexec,nosuid,nodev,size=256m \
@@ -282,19 +284,18 @@ jobs:
             -v "$RUNNER_TEMP/romarr-downloads:/downloads" \
             romarr:smoke
           for _ in $(seq 1 30); do
-            curl -fsS -o /dev/null http://127.0.0.1:6868/api/health && break
+            docker exec smoke python -m romarr.healthcheck && break
             sleep 2
           done
 
           echo "--- liveness ---"
-          curl -fsS http://127.0.0.1:6868/api/health
+          docker exec smoke python -m romarr.healthcheck
 
           # No credential is set anywhere in this job, deliberately. An open
           # install is the failure mode that matters most for an image people
           # put on their LAN, and it is checkable without one.
           echo "--- the gate is on ---"
-          code=$(curl -s -o /dev/null -w '%{http_code}' \
-                 http://127.0.0.1:6868/api/v1/system/status)
+          code=$(docker exec smoke python -c "import http.client;c=http.client.HTTPConnection('127.0.0.1',6868);c.request('GET','/api/v1/system/status');print(c.getresponse().status)")
           test "$code" = "401" || { echo "status answered $code, not 401"; exit 1; }
 
           # bsdtar is not optional: without it every disc-platform import fails
@@ -309,10 +310,10 @@ jobs:
             || { echo "a dependency did not install"; exit 1; }
           docker exec smoke python -c "from pathlib import Path; from rom_hub.catalog_sources import load_all; c=load_all(Path('/tmp/hub-smoke')); print(f'{len(c.entries)} bundled plugins'); assert c.entries" \
             || { echo "ROM Hub installed without its plugin catalogue"; exit 1; }
-          docker exec smoke sh -c 'ROM_HUB_HOME=/tmp/hub-install rom-hub plugin install archive-org' \
-            || { echo "bundled Archive.org plugin did not install"; exit 1; }
 
           echo "--- privileges were dropped ---"
+          test "$(awk '/^Uid:/ {print $2}' /proc/$(docker inspect -f '{{.State.Pid}}' smoke)/status)" = "1000" \
+            || { echo "service still runs as root"; exit 1; }
           docker logs smoke 2>&1 | grep -q "starting as 1000:1000 with umask 002" \
             || { echo "entrypoint did not drop to PUID:PGID"; exit 1; }
 
@@ -325,38 +326,17 @@ jobs:
 
           docker rm -f smoke
 
-      - name: Build all supported platforms without publishing
-        if: github.event_name == 'pull_request'
-        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+      - name: Save the exact validated image
+        run: docker save romarr:smoke -o "$RUNNER_TEMP/image.tar"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
-          context: .
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
-          push: false
-          build-args: |
-            HTTP_PROXY=${{ env.BUILDKIT_EGRESS_PROXY }}
-            HTTPS_PROXY=${{ env.BUILDKIT_EGRESS_PROXY }}
-            http_proxy=${{ env.BUILDKIT_EGRESS_PROXY }}
-            https_proxy=${{ env.BUILDKIT_EGRESS_PROXY }}
-            NO_PROXY=localhost,127.0.0.1
-            no_proxy=localhost,127.0.0.1
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          provenance: false
+          name: image-${{ matrix.arch }}
+          path: ${{ runner.temp }}/image.tar
+          retention-days: 1
 
   image_publish:
     needs: [image]
-    if: >-
-      (
-        github.event_name != 'workflow_dispatch' ||
-        (
-          github.ref == 'refs/heads/main' &&
-          inputs.action == 'publish' &&
-          inputs.runner_pool == 'public'
-        )
-      ) &&
-      (
-        always() && needs.image.result == 'success' && github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || inputs.release_tag != '') && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')
-      )
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.action == 'publish' && inputs.runner_pool == 'public' && inputs.release_tag != ''
     runs-on: ubuntu-24.04
     permissions:
       contents: read
@@ -415,18 +395,36 @@ jobs:
             type=semver,pattern={{major}}
             type=sha,format=short
 
-      - name: Build and push
-        id: push
-        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         with:
-          context: .
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          provenance: false
+          pattern: image-*
+          path: ${{ runner.temp }}/validated
+      - name: Push validated images and assemble their manifest
+        id: push
+        env:
+          IMAGE: ${{ steps.image.outputs.name }}
+          TAGS: ${{ steps.meta.outputs.tags }}
+          BUILD_ID: ${{ github.run_id }}-${{ github.run_attempt }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          refs=()
+          for arch in amd64 arm64; do
+            docker load -i "$RUNNER_TEMP/validated/image-$arch/image.tar"
+            ref="$IMAGE:validated-$BUILD_ID-$arch"
+            docker tag romarr:smoke "$ref"
+            docker push "$ref"
+            digest=$(docker buildx imagetools inspect "$ref" | awk '$1 == "Digest:" {print $2; exit}')
+            test -n "$digest"
+            refs+=("$IMAGE@$digest")
+          done
+          tags=()
+          while IFS= read -r tag; do [[ -z "$tag" ]] || tags+=(-t "$tag"); done <<< "$TAGS"
+          docker buildx imagetools create "${tags[@]}" "${refs[@]}"
+          first=$(head -n 1 <<< "$TAGS")
+          digest=$(docker buildx imagetools inspect "$first" | awk '$1 == "Digest:" {print $2; exit}')
+          test -n "$digest"
+          echo "digest=$digest" >> "$GITHUB_OUTPUT"
 
       - name: Generate image SBOM
         uses: anchore/sbom-action@66cbf4bc1f1c0d2edc94016e65bc221b6bb0ad6c # v0.24.3
@@ -453,23 +451,20 @@ jobs:
           push-to-registry: true
 
   # Debian variant for the optional Playwright download client. Its aliases
-  # follow the same release tag while remaining separate from the Alpine image.
+  # follow the same release tag while remaining separate from the standard image.
   image-browser:
     name: Browser image validation
     needs: [image, release-notes]
-    if: >-
-      (
-        github.event_name != 'workflow_dispatch' ||
-        (
-          github.ref == 'refs/heads/main' &&
-          inputs.action == 'publish' &&
-          inputs.runner_pool == 'public'
-        )
-      ) &&
-      (
-        always() && needs.image.result == 'success' && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped') && github.event_name == 'pull_request'
-      )
-    runs-on: ubuntu-24.04
+    if: always() && needs.image.result == 'success' && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped')
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
     permissions:
       contents: read
     steps:
@@ -479,7 +474,6 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1 # v4.4.0
       - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
 
       - name: Build browser image for all supported platforms without publishing
@@ -487,27 +481,27 @@ jobs:
         with:
           context: .
           file: Dockerfile.browser
-          platforms: linux/amd64,linux/arm64
-          push: false
+          platforms: linux/${{ matrix.arch }}
+          load: true
           tags: romarrng:browser-validation
           cache-from: type=gha,scope=browser
           cache-to: type=gha,scope=browser,mode=max
           provenance: false
 
+      - name: Prove the packaged browser edition with loopback fixtures
+        run: |
+          docker run --rm --network none --entrypoint python -e PYTHONPATH=/app -v "$PWD/scripts:/proof:ro" romarrng:browser-validation /proof/prove_upstream_acquisition.py
+          docker run --rm --network none --cap-drop ALL --cap-add CHOWN --cap-add SETGID --cap-add SETUID --security-opt no-new-privileges romarrng:browser-validation python -c 'import os; from playwright.sync_api import sync_playwright; import rom_hub; assert os.geteuid() == 1000'
+          docker save romarrng:browser-validation -o "$RUNNER_TEMP/image.tar"
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: browser-${{ matrix.arch }}
+          path: ${{ runner.temp }}/image.tar
+          retention-days: 1
+
   image_browser_publish:
-    needs: [image, release-notes]
-    if: >-
-      (
-        github.event_name != 'workflow_dispatch' ||
-        (
-          github.ref == 'refs/heads/main' &&
-          inputs.action == 'publish' &&
-          inputs.runner_pool == 'public'
-        )
-      ) &&
-      (
-        always() && github.event_name != 'pull_request' && needs.image.result == 'success' && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped') && (github.ref == 'refs/heads/main' || inputs.release_tag != '') && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')
-      )
+    needs: [image-browser, release-notes]
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.action == 'publish' && inputs.runner_pool == 'public' && inputs.release_tag != ''
     runs-on: ubuntu-24.04
     permissions:
       contents: read
@@ -566,19 +560,36 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}-browser
             type=sha,format=short,suffix=-browser
 
-      - name: Build and push browser edition
-        id: push
-        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
         with:
-          context: .
-          file: Dockerfile.browser
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha,scope=browser
-          cache-to: type=gha,scope=browser,mode=max
-          provenance: false
+          pattern: browser-*
+          path: ${{ runner.temp }}/validated
+      - name: Push validated images and assemble their manifest
+        id: push
+        env:
+          IMAGE: ${{ steps.image.outputs.name }}
+          TAGS: ${{ steps.meta.outputs.tags }}
+          BUILD_ID: ${{ github.run_id }}-${{ github.run_attempt }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          refs=()
+          for arch in amd64 arm64; do
+            docker load -i "$RUNNER_TEMP/validated/browser-$arch/image.tar"
+            ref="$IMAGE:validated-$BUILD_ID-$arch-browser"
+            docker tag romarrng:browser-validation "$ref"
+            docker push "$ref"
+            digest=$(docker buildx imagetools inspect "$ref" | awk '$1 == "Digest:" {print $2; exit}')
+            test -n "$digest"
+            refs+=("$IMAGE@$digest")
+          done
+          tags=()
+          while IFS= read -r tag; do [[ -z "$tag" ]] || tags+=(-t "$tag"); done <<< "$TAGS"
+          docker buildx imagetools create "${tags[@]}" "${refs[@]}"
+          first=$(head -n 1 <<< "$TAGS")
+          digest=$(docker buildx imagetools inspect "$first" | awk '$1 == "Digest:" {print $2; exit}')
+          test -n "$digest"
+          echo "digest=$digest" >> "$GITHUB_OUTPUT"
 
       - name: Generate browser image SBOM
         uses: anchore/sbom-action@66cbf4bc1f1c0d2edc94016e65bc221b6bb0ad6c # v0.24.3
@@ -607,18 +618,7 @@ jobs:
   verify-stable-image-tags:
     name: Verify stable image aliases
     needs: [image_publish, image_browser_publish]
-    if: >-
-      (
-        github.event_name != 'workflow_dispatch' ||
-        (
-          github.ref == 'refs/heads/main' &&
-          inputs.action == 'publish' &&
-          inputs.runner_pool == 'public'
-        )
-      ) &&
-      (
-        always() && github.event_name != 'pull_request' && (inputs.release_tag != '' || (needs.image_publish.result == 'success' && needs.image_browser_publish.result == 'success'))
-      )
+    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.action == 'publish' && inputs.runner_pool == 'public' && inputs.release_tag != ''
     runs-on: ubuntu-24.04
     permissions:
       contents: read
@@ -656,7 +656,7 @@ jobs:
         )
       ) &&
       (
-        always() && inputs.release_tag != '' && needs.image_publish.result == 'success' && needs.image_browser_publish.result == 'success' && needs.verify-stable-image-tags.result == 'success'
+        always() && github.event_name == 'workflow_dispatch' && inputs.release_tag != '' && needs.image_publish.result == 'success' && needs.image_browser_publish.result == 'success' && needs.verify-stable-image-tags.result == 'success'
       )
     needs: [image_publish, image_browser_publish, verify-stable-image-tags]
     runs-on: ubuntu-24.04
@@ -698,7 +698,7 @@ jobs:
             echo ""
             echo "**Container image**: \`${IMAGE}:${VERSION}\`"
             echo "- Browser edition: \`${IMAGE}:${VERSION}-browser\` (AMD64/ARM64; Playwright client only)"
-            echo "- [GitHub Container Registry](https://github.com/${{ github.repository }}/pkgs/container/romarrng)"
+            echo "- [GitHub Container Registry](https://github.com/${GITHUB_REPOSITORY}/pkgs/container/romarrng)"
             echo ""
             echo "Pull with: \`docker pull ${IMAGE}:${VERSION}\`."
           } >> release-notes.md

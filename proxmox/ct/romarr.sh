@@ -144,52 +144,34 @@ pct exec "$CTID" -- bash -c "
   # disc platforms ship as. Without it every PlayStation, PS2 and Wii import
   # fails on a format it cannot open. Debian's GNU tar is not a substitute.
   apt-get install -y -qq python3-venv python3-pip curl ca-certificates \
-    libarchive-tools >/dev/null
+    libarchive-tools libseccomp2 git >/dev/null
 " || die "Dependency install failed inside container $CTID."
 msg "Dependencies installed"
 
-# Latest release, falling back to main. A repo with no published release is a
-# normal state for a fork or a fresh clone, and 'no releases' should not read
-# as 'install is broken'.
+# Install a published release, or an explicitly selected ref. API errors never
+# silently substitute development code for the release the operator requested.
 info "Fetching $APP"
-pct exec "$CTID" -- bash -c "
-  set -e
-  mkdir -p /opt/romarr
-  answer=\$(curl -fsSL https://api.github.com/repos/${REPO}/releases/latest 2>/dev/null || true)
-  url=\$(echo \"\$answer\" | grep -o '\"tarball_url\": *\"[^\"]*\"' | head -1 | cut -d'\"' -f4 || true)
-  if [ -z \"\$url\" ]; then
-    # Say which of the two it was. The release API is unauthenticated here and
-    # GitHub rate-limits it at 60/hour per IP, so a host that has been busy
-    # gets an answer indistinguishable from 'this repo has no releases' -- and
-    # 'no published release' would then be a lie printed with confidence.
-    if echo \"\$answer\" | grep -qi 'rate limit'; then
-      echo 'GitHub rate-limited the release lookup; using main'
-    else
-      echo 'no published release; using main'
-    fi
-    url=https://github.com/${REPO}/archive/refs/heads/main.tar.gz
-  fi
-  curl -fsSL \"\$url\" -o /tmp/romarr.tar.gz
-  tar -xzf /tmp/romarr.tar.gz -C /opt/romarr --strip-components=1
-  rm -f /tmp/romarr.tar.gz
-
-  # Refuse to leave an unauthenticated ROMarrNG on somebody's network.
-  #
-  # The published release can lag main by a long way -- v0.7.0 was tagged
-  # before authentication existed at all, so installing 'latest' produced an
-  # install whose API was open to anyone who could reach the port, on a service
-  # that queues downloads and writes to the filesystem. An installer that
-  # quietly does that is worse than one that fails.
-  if [ ! -f /opt/romarr/romarr/auth.py ]; then
-    echo 'release predates authentication; using main instead'
-    rm -rf /opt/romarr/romarr
-    curl -fsSL https://github.com/${REPO}/archive/refs/heads/main.tar.gz \
-      -o /tmp/romarr.tar.gz
-    tar -xzf /tmp/romarr.tar.gz -C /opt/romarr --strip-components=1
-    rm -f /tmp/romarr.tar.gz
-  fi
-  test -f /opt/romarr/romarr/auth.py
-" || die "Could not download an authenticated build of $APP from ${REPO}."
+pct exec "$CTID" -- bash -s -- "$REPO" "${ROMARR_INSTALL_REF:-}" <<'FETCH'
+set -euo pipefail
+repo="$1"
+ref="$2"
+[[ "$repo" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]]
+work=$(mktemp -d)
+trap 'rm -rf "$work"' EXIT
+if [[ -z "$ref" ]]; then
+  curl -fsSL --proto '=https' --max-time 60 "https://api.github.com/repos/${repo}/releases/latest" > "$work/release.json"
+  ref=$(python3 -c 'import json,sys;print(json.load(open(sys.argv[1]))["tag_name"])' "$work/release.json")
+fi
+[[ "$ref" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]]
+curl -fsSL --proto '=https' --proto-redir '=https' --max-time 300 "https://github.com/${repo}/archive/$ref.tar.gz" -o "$work/source.tar.gz"
+mkdir -p /opt/romarr
+tar -xzf "$work/source.tar.gz" -C /opt/romarr --strip-components=1 --no-same-owner
+if [[ ! -f /opt/romarr/romarr/auth.py || ! -f /opt/romarr/requirements.lock || ! -f /opt/romarr/proxmox/install/configure-service.sh ]]; then
+  echo 'The selected release lacks the current installation security contract. Select a supported release, or explicitly opt into main with ROMARR_INSTALL_REF=main.' >&2
+  exit 1
+fi
+test -f /opt/romarr/romarr/auth.py
+FETCH
 msg "Fetched $APP"
 
 info "Creating virtualenv"
@@ -197,8 +179,8 @@ pct exec "$CTID" -- bash -c "
   set -e
   cd /opt/romarr
   python3 -m venv .venv
-  ./.venv/bin/pip install --quiet --upgrade pip
-  ./.venv/bin/pip install --quiet -r requirements.txt
+  ./.venv/bin/pip install --quiet --require-hashes -r requirements-build.lock
+  ./.venv/bin/pip install --quiet --no-build-isolation --require-hashes -r requirements.lock
 " || die "Python environment setup failed."
 msg "Virtualenv ready"
 
@@ -234,33 +216,9 @@ mkdir -p ${ROM_PATH} /opt/romarr/backends
 
 info "Creating service"
 pct exec "$CTID" -- bash -c "
-cat >/etc/systemd/system/romarr.service <<'SVCEOF'
-[Unit]
-Description=ROMarrNG - the *arr for games
-After=network-online.target
-Wants=network-online.target
-
-[Service]
-Type=simple
-WorkingDirectory=/opt/romarr
-EnvironmentFile=/opt/romarr/.env
-ExecStart=/opt/romarr/.venv/bin/python -m romarr
-Restart=on-failure
-RestartSec=10
-
-# It reads indexers and writes ROMs into one directory; nothing else on the
-# filesystem is any of its business.
-NoNewPrivileges=true
-PrivateTmp=true
-ProtectSystem=strict
-ProtectHome=true
-ReadWritePaths=/opt/romarr ${ROM_PATH}
-
-[Install]
-WantedBy=multi-user.target
-SVCEOF
-systemctl daemon-reload
-systemctl enable -q --now romarr
+  ln -s /opt/romarr /opt/romarr/current
+  ROM_PATH='${ROM_PATH}' bash /opt/romarr/proxmox/install/configure-service.sh
+  systemctl enable -q --now romarr
 "
 msg "Service created"
 
@@ -296,8 +254,8 @@ msg "${APP} ${VERSION:-(version unreadable)} is up"
 echo -e " ${GN}➜${CL} http://${IP}:${APP_PORT}"
 echo -e " ${YW}The first visit asks you to set a password.${CL}"
 echo
-echo -e " Installed at:  /opt/romarr        Settings:  /opt/romarr/.env"
-echo -e " State:         /opt/romarr/romarr.json   ${YW}(back this up -- it holds the API key and password)${CL}"
+echo -e " Installed at:  /opt/romarr        Settings:  /etc/romarr/romarr.env"
+echo -e " State:         /var/lib/romarr/romarr.json   ${YW}(back this up -- it holds the API key and password)${CL}"
 echo -e " ROMs:          ${ROM_PATH}"
 echo -e " Logs:          pct exec ${CTID} -- journalctl -u romarr -f"
 echo

@@ -20,7 +20,14 @@ def test_release_pipeline_uses_hosted_runners():
         "verify-stable-image-tags",
         "release",
     ):
-        assert workflow["jobs"][name]["runs-on"] == "ubuntu-24.04"
+        job = workflow["jobs"][name]
+        if name in {"test", "image", "image-browser"}:
+            assert job["runs-on"] == "${{ matrix.runner }}"
+            assert {x["runner"] for x in job["strategy"]["matrix"]["include"]} == {"ubuntu-24.04", "ubuntu-24.04-arm"}
+        elif name == "acquisition-proof":
+            assert job["strategy"]["matrix"]["runner"] == ["ubuntu-24.04", "ubuntu-24.04-arm"]
+        else:
+            assert job["runs-on"] == "ubuntu-24.04"
 
 
 def test_manual_release_requires_public_pool_and_main():

@@ -28,6 +28,7 @@ import hmac
 import secrets
 import struct
 import time
+import threading
 from urllib.parse import quote
 
 #: RFC 6238 defaults, and what every authenticator app assumes.
@@ -74,8 +75,8 @@ def backup_codes(count: int = 10) -> list[str]:
     """
     out = set()
     while len(out) < count:
-        raw = secrets.token_hex(5).upper()
-        out.add(f"{raw[:5]}-{raw[5:]}")
+        raw = secrets.token_hex(10).upper()
+        out.add("-".join(raw[i:i+5] for i in range(0, len(raw), 5)))
     return sorted(out)
 
 
@@ -89,18 +90,24 @@ def _normalise(code) -> str:
     return "".join(str(code or "").split()).replace("-", "").upper()
 
 
+def backup_hash(code) -> str:
+    if str(code).startswith("sha256:"):
+        return str(code)
+    return "sha256:" + hashlib.sha256(_normalise(code).encode()).hexdigest()
+
+
 class Totp:
     """One user's second factor."""
 
     def __init__(self, secret: str = "", backup=None,
                  step: int = STEP_SECONDS, drift: int = DRIFT_STEPS):
         self.secret = str(secret or "")
-        self.backup = list(backup or [])
+        self.backup = [backup_hash(code) for code in (backup or [])]
+        self._lock = threading.RLock()
         self.step = step
         self.drift = drift
         #: The last counter accepted, so a code cannot be used twice. Held in
-        #: memory: a restart is a far smaller window than the 30 seconds this
-        #: closes, and persisting it would mean a write on every login.
+        #: the service persists this counter before issuing a session.
         self._used: int | None = None
 
     @property
@@ -109,31 +116,32 @@ class Totp:
         return bool(self.secret)
 
     def verify(self, code) -> bool:
-        if not self.enabled:
-            return False
-        candidate = _normalise(code)
-        if not candidate:
-            return False
+        with self._lock:
+            if not self.enabled:
+                return False
+            candidate = _normalise(code)
+            if not candidate:
+                return False
 
-        # Backup codes first: they are not six digits, so they can never
-        # collide with a real one, and checking them here means a spent code
-        # is rejected rather than falling through to the TOTP comparison.
-        for index, stored in enumerate(self.backup):
-            if hmac.compare_digest(_normalise(stored), candidate):
-                self.backup.pop(index)
-                return True
+            # Backup codes first: they are not six digits, so they can never
+            # collide with a real one, and checking them here means a spent code
+            # is rejected rather than falling through to the TOTP comparison.
+            for index, stored in enumerate(self.backup):
+                if hmac.compare_digest(stored, backup_hash(candidate)):
+                    self.backup.pop(index)
+                    return True
 
-        now = int(time.time())
-        for offset in range(-self.drift, self.drift + 1):
-            moment = now + offset * self.step
-            counter = moment // self.step
-            expected = code_at(self.secret, moment, step=self.step)
-            if hmac.compare_digest(expected, candidate):
-                if self._used is not None and counter <= self._used:
-                    # Already spent. A code stays valid for its whole step
-                    # plus the drift window, which is long enough for anyone
-                    # who saw it to reuse it.
-                    return False
-                self._used = counter
-                return True
-        return False
+            now = int(time.time())
+            for offset in range(-self.drift, self.drift + 1):
+                moment = now + offset * self.step
+                counter = moment // self.step
+                expected = code_at(self.secret, moment, step=self.step)
+                if hmac.compare_digest(expected, candidate):
+                    if self._used is not None and counter <= self._used:
+                        # Already spent. A code stays valid for its whole step
+                        # plus the drift window, which is long enough for anyone
+                        # who saw it to reuse it.
+                        return False
+                    self._used = counter
+                    return True
+            return False

@@ -52,7 +52,7 @@ If you run Radarr for films and Sonarr for TV, this is the missing one.
 [![licence MIT](https://img.shields.io/badge/licence-MIT-blue)](LICENSE)
 [![Release](https://img.shields.io/github/v/release/snapetech-org/ROMarrNG)](https://github.com/snapetech-org/ROMarrNG/releases)
 [![Docker](https://img.shields.io/badge/docker-ghcr.io-2496ed)](https://github.com/snapetech-org/ROMarrNG/pkgs/container/romarrng)
-[![platforms](https://img.shields.io/badge/arch-amd64%20%7C%20arm64%20%7C%20armv7-lightgrey)](#docker)
+[![platforms](https://img.shields.io/badge/arch-amd64%20%7C%20arm64-lightgrey)](#docker)
 
 ![Interactive search on a live install: 51 releases scored, the verified dump on top, every rejection explained](docs/img/interactive-search-live.png)
 
@@ -449,8 +449,7 @@ To actually import anything, use compose.
 > update your port mapping to `6868:6868`, or set `ROMARR_PORT=7878` to keep
 > the old one.
 
-Images are published for `linux/amd64`, `linux/arm64` and `linux/arm/v7`. The
-armv7 leg is built in CI and has never been booted by the maintainer — see
+Images are published for `linux/amd64` and `linux/arm64`. Native checks cover both architectures — see
 [INSTALL.md](docs/INSTALL.md#which-tag-to-use).
 
 ### Docker Compose
@@ -496,7 +495,8 @@ the add-on page become ROMarr's environment — see
 
 ```bash
 git clone https://github.com/snapetech-org/ROMarrNG.git && cd ROMarrNG
-pip install -r requirements.txt
+pip install --require-hashes -r requirements-build.lock
+pip install --no-build-isolation --require-hashes -r requirements.lock
 cp .env.example .env          # edit it
 set -a; . ./.env; set +a
 python -m romarr
@@ -904,7 +904,7 @@ ROMarr disables plugin operations unless
 you trust.
 
 **API:** `GET /api/v1/hub/plugins`, `POST /api/v1/hub/plugin` (`install`, `enable`,
-`disable`, `uninstall`).
+`disable`). Uninstall is not advertised or accepted by the API.
 
 ### Downloading from a ROM site
 
@@ -1048,6 +1048,8 @@ both the reported path and the resolved path.
 
 ## Security
 
+The [2026-11-09 audit remediation ledger](docs/security-remediation-2026-11-09.md) maps all 44 findings to fixes, regression checks, and upgrade notes.
+
 - Prowlarr API keys are never returned to a browser or written to a log.
 - Give SeerrNG the dedicated integration key from *Settings → General*.
   Integration calls are limited to 64 KiB request bodies, 120 requests per
@@ -1151,7 +1153,7 @@ conversation is asserted but no live server was in the loop.
 | `contrib/` Playnite extension | **High** — runtime-proven | `scripts/playnite_proof.ps1`: runs against the real Playnite SDK 6.11 and a live export — 200 games imported as real SDK objects, dedupe verified |
 | `contrib/` LaunchBox plugin | **Medium-high** — compiled + logic executed | `scripts/launchbox_proof/`: .NET 10 harness compiles the plugin source against API stubs; `Import()` runs against a live export with dedupe and platform auto-creation. The remaining gap is verification against the nonredistributable LaunchBox API DLL |
 | Home Assistant add-on | **New, lightly tested** | The options→environment bridge is tested; the add-on lifecycle needs HA users |
-| armv7 Docker | **Degraded by design** | ROM Hub plugins unavailable there (no pydantic musl wheel); core works |
+| armv7 Docker | **Unsupported** | Use AMD64 or ARM64; plugin confinement requires a supported ABI |
 
 **Where help lands hardest:** field reports for the medium-confidence
 download clients and library backends; a .NET owner for the contrib
@@ -1253,4 +1255,4 @@ Unofficial. Not affiliated with or endorsed by the RomM, Gaseous or Retrom proje
 
 ## Local security scanning
 
-Run `./scripts/security-scan-local.sh` for local Semgrep CE and the Trivy scanners that fit this repository. The installed pre-commit hook runs Semgrep on staged source/config files only; Trivy runs on demand or in CI. This public repository also runs Semgrep CE in GitHub Actions on changes and weekly. See [security-scanning.md](docs/security-scanning.md). Use `./scripts/update-security-tools.sh` to refresh local scanner data and the Trivy database.
+Run `./scripts/security-scan-local.sh` for local Semgrep CE and the Trivy scanners that fit this repository. The installed pre-commit hook runs Semgrep on staged source/config files only; Trivy runs on demand or in CI. This public repository also runs Semgrep CE in GitHub Actions on pushes and pull requests. See [security-scanning.md](docs/security-scanning.md). Use `./scripts/update-security-tools.sh` to refresh local scanner data and the Trivy database.

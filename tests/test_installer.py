@@ -69,6 +69,7 @@ def test_every_url_the_installer_uses_is_one_we_control():
                 "github.com/snapetech-org/ROMarrNG",
                 "api.github.com/repos/${REPO}",
                 "github.com/${REPO}",
+                "api.github.com/repos/${repo}", "github.com/${repo}",
                 "raw.githubusercontent.com/${REPO}",
                 "raw.githubusercontent.com/snapetech-org/ROMarrNG",
             )), f"{script.name} reaches {url}, which we do not control"
@@ -170,8 +171,9 @@ def test_the_update_replaces_the_package_rather_than_merging_over_it():
     itself as new while some of it is old.
     """
     body = UPDATE.read_text(encoding="utf-8")
-    assert 'rm -rf "${ROOT}/romarr"' in body, (
-        "the package directory is merged into, not replaced")
+    assert 'mktemp -d "$ROOT/releases/release-XXXXXXXX"' in body
+    assert 'mv -Tf "$ROOT/.next-current" "$ROOT/current"' in body
+    assert 'cp -a "$STAGE"/. "$ROOT"/' not in body
 
 
 def test_the_update_says_what_it_changed():
@@ -186,9 +188,8 @@ def test_the_update_can_go_backwards():
     """An update that can only go forwards is a gamble, not an update."""
     body = UPDATE.read_text(encoding="utf-8")
     assert "rolling back" in body.lower(), "update.sh has no rollback path"
-    assert 'cp -a "${BACKUP}/romarr"' in body, (
-        "nothing puts the previous build back, so the backup is a directory "
-        "the operator has to reassemble by hand")
+    assert 'mv -Tf "$ROOT/.rollback-current" "$ROOT/current"' in body
+    assert 'trap cleanup EXIT' in body
 
 
 def test_both_proxmox_scripts_agree_on_the_variable_names():

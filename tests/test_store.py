@@ -1,3 +1,4 @@
+import pytest
 import json
 import os
 import threading
@@ -40,12 +41,14 @@ def test_unknown_settings_are_dropped_rather_than_stored(tmp_path):
     assert "totally_made_up" not in s.settings
 
 
-def test_a_corrupt_file_does_not_stop_the_service_starting(tmp_path):
+def test_a_corrupt_file_fails_closed_without_changing_bytes(tmp_path):
+    from romarr.store import StateUnreadable
     path = tmp_path / "r.json"
-    path.write_text("{ this is not json", encoding="utf-8")
-    s = Store(path)
-    assert s.settings == DEFAULT_SETTINGS
-    assert s.events == []
+    original = b"{ this is not json"
+    path.write_bytes(original)
+    with pytest.raises(StateUnreadable):
+        Store(path)
+    assert path.read_bytes() == original
 
 
 def test_requesting_the_same_game_twice_is_a_retry_not_a_duplicate(tmp_path):
@@ -458,17 +461,13 @@ def test_a_state_file_that_cannot_be_read_stops_the_service(tmp_path,
         == "must-survive", "the file we refused to read was written over anyway"
 
 
-def test_a_state_file_that_cannot_be_parsed_still_starts(tmp_path):
-    """The opposite case, kept as it was.
-
-    Truncated JSON has nothing left to preserve -- no version of that file can
-    be handed back -- so defaults are the only usable answer and refusing to
-    start would just be an outage.
-    """
+def test_invalid_utf8_state_fails_closed(tmp_path):
+    from romarr.store import StateUnreadable
     path = tmp_path / "romarr.json"
-    path.write_text("{ this is not json", encoding="utf-8")
-    s = Store(path)
-    assert s.settings["min_seeders"] == DEFAULT_SETTINGS["min_seeders"]
+    path.write_bytes(bytes([255, 254, 253]))
+    with pytest.raises(StateUnreadable):
+        Store(path)
+    assert path.read_bytes() == bytes([255, 254, 253])
 
 
 def test_upstream_integration_requests_migrate_without_losing_status_or_assets(tmp_path):

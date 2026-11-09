@@ -14,8 +14,8 @@ release named badly can be byte-for-byte correct.
 Three distinctions this module refuses to blur:
 
   * **Verified** -- the hash is in a DAT. The file is the published dump.
-  * **Bad dump** -- a file the exact size of a known ROM whose hash does not
-    match. Corrupt, patched, or tampered with. This is the case worth catching.
+  * **Bad dump** -- a checksum-linked candidate with a conflicting stronger
+    checksum. Size alone never establishes identity. This is the case worth catching.
   * **Unknown** -- no hash matched anything. NOT a bad dump: homebrew,
     translations, new releases and an out-of-date DAT all land here, and
     treating absence as proof of badness would reject good files with total
@@ -219,6 +219,16 @@ def base_title(name: str) -> str:
     return " ".join([stripped] + [f"({k})" for k in kept]).strip()
 
 
+def rom_matches(rom: Rom, hashes: dict) -> bool:
+    if rom.size and hashes.get("size") and rom.size != hashes["size"]:
+        return False
+    for key in ("sha1", "md5", "crc"):
+        expected, actual = getattr(rom, key), hashes.get(key)
+        if expected and actual:
+            return expected.lower() == str(actual).lower()
+    return False
+
+
 @dataclass
 class Dat:
     """One parsed DAT -- normally one system."""
@@ -241,28 +251,25 @@ class Dat:
         theoretical -- so where the DAT published a SHA1 and the caller
         computed one, that is the answer and CRC is not consulted.
         """
+        hashes = {"crc": str(crc or "").lower(), "md5": str(md5 or "").lower(),
+                  "sha1": str(sha1 or "").lower(), "size": int(size or 0)}
         for key, table in ((sha1, self._by_sha1), (md5, self._by_md5)):
             hit = table.get(str(key or "").lower())
             if hit:
+                if rom_matches(hit[1], hashes):
+                    return Match(VERIFIED, hit[0], hit[1], self.name)
+                return Match(BAD_DUMP, hit[0], hit[1], self.name,
+                             "a stronger checksum or file size conflicts with this candidate")
+        hit = self._by_crc.get((hashes["crc"], hashes["size"])) if crc else None
+        if crc and not size:
+            hit = next((v for (c, _), v in self._by_crc.items() if c == hashes["crc"]), None)
+        if hit:
+            if rom_matches(hit[1], hashes):
                 return Match(VERIFIED, hit[0], hit[1], self.name)
-
-        crc = str(crc or "").lower()
-        if crc:
-            hit = self._by_crc.get((crc, int(size or 0)))
-            if hit is None and not size:
-                hit = next((v for (c, _), v in self._by_crc.items() if c == crc),
-                           None)
-            if hit:
-                return Match(VERIFIED, hit[0], hit[1], self.name)
-
-        # Nothing matched. A file the exact size of a known ROM is the case
-        # worth separating out: that is a corrupt or altered copy of something
-        # this DAT knows, not an unrecognised file.
-        if size and int(size) in self._sizes:
-            known = self._sizes[int(size)]
-            return Match(BAD_DUMP, dat=self.name,
-                         detail=f"{size} bytes matches {known!r} but the "
-                                f"checksum does not -- corrupt or altered")
+            return Match(BAD_DUMP, hit[0], hit[1], self.name,
+                         "CRC matches but a stronger checksum conflicts")
+        # Size alone says nothing about identity. Homebrew and unrelated ROMs
+        # routinely share cartridge sizes with known games.
         return Match(UNKNOWN, dat=self.name)
 
     def parent_of(self, game: str) -> str:

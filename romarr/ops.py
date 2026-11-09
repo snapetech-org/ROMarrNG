@@ -239,19 +239,11 @@ class RateLimiter:
 #: is a place a plaintext qBittorrent password should not be, and a backup
 #: that silently carries credentials is worse than no backup because it is
 #: handled as though it were harmless.
-SECRET_KEYS = ("_api_key", "_seerrng_api_key", "_password_hash",
-               "_totp_secret", "_totp_backup")
-SECRET_FIELDS = ("password", "api_key", "passkey", "token", "secret")
+from .settings_security import IDENTITY_KEYS as SECRET_KEYS, SECRET_FIELDS, redact_settings
 
 
 def _strip_secrets(value):
-    if isinstance(value, dict):
-        return {k: ("" if k in SECRET_FIELDS or k in SECRET_KEYS
-                    else _strip_secrets(v))
-                for k, v in value.items()}
-    if isinstance(value, list):
-        return [_strip_secrets(v) for v in value]
-    return value
+    return redact_settings(value, mask="")
 
 
 def make_backup(settings: dict, *, include_secrets: bool = False) -> dict:
@@ -280,6 +272,8 @@ def read_backup(payload) -> tuple[dict, str]:
         payload = json.loads(payload)
     if not isinstance(payload, dict) or payload.get("kind") != "romarr-backup":
         raise ValueError("not a ROMarr backup")
+    if payload.get("version", 1) != 1:
+        raise ValueError("unsupported backup version")
     settings = payload.get("settings")
     if not isinstance(settings, dict):
         raise ValueError("backup contains no settings")

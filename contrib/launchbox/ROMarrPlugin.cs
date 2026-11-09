@@ -82,6 +82,10 @@ namespace ROMarr
             }
         }
 
+        private static string Identity(string notes) => notes?.Split('\n')
+            .FirstOrDefault(line => line.StartsWith("ROMarr ID: ", StringComparison.Ordinal))?
+            .Substring("ROMarr ID: ".Length).Trim();
+
         private static int Import(string xml)
         {
             var document = XDocument.Parse(xml);
@@ -92,12 +96,15 @@ namespace ROMarr
             // must update rather than duplicate -- an importer that doubles
             // the library on every run is the most common complaint about
             // tools in this shape.
-            var known = new HashSet<string>(
-                PluginHelper.DataManager.GetAllGames()
-                    .Where(g => !string.IsNullOrWhiteSpace(g.ApplicationPath))
-                    .Select(g => g.ApplicationPath),
-                StringComparer.OrdinalIgnoreCase);
-
+            var known = PluginHelper.DataManager.GetAllGames()
+                .Where(g => !string.IsNullOrWhiteSpace(g.ApplicationPath))
+                .GroupBy(g => g.ApplicationPath, StringComparer.OrdinalIgnoreCase)
+                .ToDictionary(g => g.Key, g => g.First(), StringComparer.OrdinalIgnoreCase);
+            var byId = PluginHelper.DataManager.GetAllGames()
+                .Where(g => Identity(g.Notes) != null)
+                .GroupBy(g => Identity(g.Notes))
+                .ToDictionary(g => g.Key, g => g.First());
+            var changed = false;
             var added = 0;
             foreach (var element in document.Descendants("Game"))
             {
@@ -107,7 +114,7 @@ namespace ROMarr
 
                 if (string.IsNullOrWhiteSpace(path) ||
                     string.IsNullOrWhiteSpace(title) ||
-                    known.Contains(path))
+                    string.IsNullOrWhiteSpace(platformName))
                 {
                     continue;
                 }
@@ -121,14 +128,23 @@ namespace ROMarr
                     platforms[platformName] = created;
                 }
 
-                var game = PluginHelper.DataManager.AddNewGame(title);
+                var id = (string)element.Element("ID");
+                IGame game = null;
+                if (id != null) byId.TryGetValue(id, out game);
+                if (game == null) known.TryGetValue(path, out game);
+                if (game == null) { game = PluginHelper.DataManager.AddNewGame(title); added++; }
+                else if (!string.IsNullOrWhiteSpace(game.ApplicationPath)) known.Remove(game.ApplicationPath);
+                game.Title = title;
                 game.ApplicationPath = path;
                 game.Platform = platformName;
-                game.Notes = (string)element.Element("Notes") ?? string.Empty;
-                added++;
+                game.Notes = ((string)element.Element("Notes") ?? string.Empty)
+                    + (id == null ? "" : "\nROMarr ID: " + id);
+                known[path] = game;
+                if (id != null) byId[id] = game;
+                changed = true;
             }
 
-            if (added > 0)
+            if (changed)
             {
                 PluginHelper.DataManager.Save(true);
             }

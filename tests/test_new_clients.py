@@ -164,6 +164,7 @@ def test_synology_completed_reports_finished_only():
 # -- Real-Debrid -------------------------------------------------------------
 
 class FakeRdResponse:
+    headers = {}
     def __init__(self, body=None, text="x"):
         self._body = body
         self.text = text if body is None else json.dumps(body)

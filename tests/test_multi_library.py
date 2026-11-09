@@ -146,7 +146,9 @@ def test_the_default_library_still_drives_the_legacy_attributes(tmp_path):
     assert s.game_library is s.game_libraries[0][1]
 
 
-def test_libraries_status_reports_every_server_and_its_path(tmp_path):
+def test_libraries_status_reports_every_server_and_its_path(tmp_path, monkeypatch):
+    monkeypatch.setattr("romarr.clients.Romm.reachable", lambda self: True)
+    monkeypatch.setattr("romarr.libraries.RetromLibrary.reachable", lambda self: False)
     (tmp_path / "romm").mkdir()
     s = svc(tmp_path, LIBRARY_URL="http://romm.example",
             LIBRARY_PATH=str(tmp_path / "romm"))
@@ -264,7 +266,9 @@ def test_a_stored_path_that_lost_to_the_environment_says_to_use_settings(tmp_pat
     assert "stored path" in hint and "Settings page" in hint
 
 
-def test_a_path_that_exists_has_no_hint(tmp_path):
+def test_a_path_that_exists_has_no_hint(tmp_path, monkeypatch):
+    monkeypatch.setattr("romarr.clients.Romm.reachable", lambda self: True)
+    monkeypatch.setattr("romarr.libraries.RetromLibrary.reachable", lambda self: False)
     (tmp_path / "roms").mkdir()
     s = svc(tmp_path, LIBRARY_URL="http://romm.example",
             LIBRARY_PATH=str(tmp_path / "roms"))
@@ -272,7 +276,9 @@ def test_a_path_that_exists_has_no_hint(tmp_path):
     assert s.health()["library_path_hint"] == ""
 
 
-def test_the_hint_reaches_every_surface_that_reports_the_path(tmp_path):
+def test_the_hint_reaches_every_surface_that_reports_the_path(tmp_path, monkeypatch):
+    monkeypatch.setattr("romarr.clients.Romm.reachable", lambda self: True)
+    monkeypatch.setattr("romarr.libraries.RetromLibrary.reachable", lambda self: False)
     s = svc(tmp_path, LIBRARY_URL="http://romm.example",
             LIBRARY_PATH=str(tmp_path / "gone"))
     assert s.health()["library_path_hint"]

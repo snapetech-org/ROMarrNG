@@ -44,7 +44,7 @@ log = logging.getLogger(__name__)
 SESSION_COOKIE = "romarr_session"
 
 #: How long a browser session lasts before the operator logs in again.
-SESSION_SECONDS = 14 * 24 * 3600
+SESSION_SECONDS = 8 * 3600
 
 #: `ROMARR_AUTH` set to this, and only this, turns the gate off.
 DISABLED = "disabled"
@@ -71,12 +71,16 @@ class Auth:
     def __init__(self, api_key: str = "", password_hash: str = "",
                  integration_key: str = "",
                  enabled: bool = True,
-                 session_seconds: int = SESSION_SECONDS):
+                 session_seconds: int = SESSION_SECONDS,
+                 session_key: str = "", session_epoch: str = "", policy: str = ""):
         self.api_key = api_key or ""
         self.integration_key = integration_key or ""
         self.password_hash = password_hash or ""
         self.enabled = enabled
         self.session_seconds = session_seconds
+        self.session_key = session_key
+        self.session_epoch = session_epoch
+        self.policy = policy
 
     # -- credentials --------------------------------------------------------
 
@@ -139,12 +143,13 @@ class Auth:
     def issue_session(self, oidc_identity: dict[str, str] | None = None) -> str:
         """A signed `<expiry>.<signature>` token.
 
-        Signed with the API key, so a session cannot be carried to another
-        install and a rotated key invalidates every outstanding session --
-        which is what rotating a key is for.
+        Signed with an independent installation key, bound to the administrator
+        key and current security epoch/policy. Revocation does not require
+        changing integration credentials.
         """
-        expires = int(time.time()) + self.session_seconds
-        claims = {"exp": expires}
+        expires = int(time.time()) + min(self.session_seconds, 3600 if oidc_identity else self.session_seconds)
+        claims = {"exp": expires, "iat": int(time.time()),
+                  "security": self.security_version()}
         if oidc_identity:
             issuer = str(oidc_identity.get("iss") or "")
             subject = str(oidc_identity.get("sub") or "")
@@ -163,13 +168,22 @@ class Auth:
         try:
             padding = "=" * (-len(body) % 4)
             claims = json.loads(base64.urlsafe_b64decode(body + padding))
-            return int(claims["exp"]) > time.time()
+            return (int(claims["exp"]) > time.time()
+                    and hmac.compare_digest(str(claims.get("security", "")),
+                                            self.security_version()))
         except Exception:
             return False
 
     def _sign(self, body: str) -> str:
-        return hmac.new(self.api_key.encode(), body.encode(),
+        key = hmac.new((self.session_key or self.api_key).encode(),
+                       self.api_key.encode(), hashlib.sha256).digest()
+        return hmac.new(key, body.encode(),
                         hashlib.sha256).hexdigest()
+
+    def security_version(self) -> str:
+        return hashlib.sha256(json.dumps(
+            [self.password_hash, self.session_epoch, self.policy],
+            separators=(",", ":")).encode()).hexdigest()
 
     # -- the actual question a request asks ---------------------------------
 

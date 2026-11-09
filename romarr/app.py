@@ -104,6 +104,8 @@ from .ops import (ENCRYPTED_BACKUP_KIND, LogRing, RateLimiter, encrypt_backup,
 from .platforms import PLATFORMS, resolve
 from .sso import ForwardAuth
 from .totp import Totp
+from .settings_security import IDENTITY_KEYS, redact_settings
+from .http_security import browser_mutation_allowed, is_secure, rate_identity
 from .playability import (
     DOWNLOAD, MOONLIGHT_KINDS, PAIRING_IS_MANUAL, PLAYERS, WOLF, MoonlightHost,
     PlayerPolicy, StreamServer, StreamSources, routes_for, routes_for_file)
@@ -116,7 +118,7 @@ LIST_SECRETS = ("api_key", "openxbl_key", "npsso", "itchio_key",
                 "battlenet_cookie", "humble_cookie")
 from .scheduler import Scheduler, next_search_due
 from .selection import best_release, judge, score
-from .store import Event, QueueItem, SeerrRequest, Store
+from .store import DEFAULT_SETTINGS, Event, QueueItem, SeerrRequest, Store
 from .ui import page as ui_page
 from .ui import link_page as ui_link_page
 from .ui import login_page as ui_login_page
@@ -134,6 +136,7 @@ class BoundedThreadingHTTPServer(ThreadingHTTPServer):
     socket_timeout = 30
 
     def __init__(self, *args, max_workers: int = 64, **kwargs):
+        self.tls_context = None
         self._worker_slots = threading.BoundedSemaphore(max_workers)
         super().__init__(*args, **kwargs)
 
@@ -154,7 +157,15 @@ class BoundedThreadingHTTPServer(ThreadingHTTPServer):
 
     def process_request_thread(self, request, client_address):
         try:
+            if self.tls_context is not None:
+                request = self.tls_context.wrap_socket(request, server_side=True,
+                                                       do_handshake_on_connect=False)
+                request.settimeout(min(self.socket_timeout, 5))
+                request.do_handshake()
+                request.settimeout(self.socket_timeout)
             super().process_request_thread(request, client_address)
+        except OSError:
+            self.shutdown_request(request)
         finally:
             self._worker_slots.release()
 
@@ -970,7 +981,7 @@ def _archive_tool_path() -> str:
 class ROMarr:
     """The service. Holds config, clients, and the in-flight queue."""
 
-    def __init__(self, env: dict[str, str] | None = None):
+    def __init__(self, env: dict[str, str] | None = None, *, start_background: bool = True):
         e = env if env is not None else os.environ
         # Kept so reload_libraries can seed from the environment on first run
         # without the caller having to hand it back in.
@@ -1031,6 +1042,9 @@ class ROMarr:
         # carrying Prowlarr's API key.
         self._candidates: dict[str, dict] = {}
         self._lock = threading.Lock()
+        self.security_lock = threading.RLock()
+        self._stop = threading.Event()
+        self._totp_pending = None
         self._seerr_request_lock = threading.Lock()
         self._seerr_dispatch_pool = SeerrDispatchPool(max_workers=4)
         # Lets a configuration change wake the background refresh instead of
@@ -1185,11 +1199,17 @@ class ROMarr:
                 self.store.save()
         self.seerrng_key_env_supplied = bool(supplied_integration_key)
         mode = e.get("ROMARR_AUTH", "").strip().lower()
+        self.store.settings.setdefault("_session_key", new_api_key() + new_api_key())
+        self.store.settings.setdefault("_session_epoch", new_api_key())
         self.auth = Auth(
             api_key=api_key,
             integration_key=integration_key,
             password_hash=self.store.settings.get("_password_hash", ""),
             enabled=mode != AUTH_DISABLED,
+            session_key=self.store.settings["_session_key"],
+            session_epoch=self.store.settings["_session_epoch"],
+            policy=json.dumps({k: v for k, v in e.items() if k.startswith(
+                ("ROMARR_OIDC_", "ROMARR_SSO_", "ROMARR_AUTH", "ROMARR_TRUSTED_PROXIES"))}, sort_keys=True),
         )
         self.oidc = OIDCAuth(OIDCSettings.from_env(e))
 
@@ -1213,7 +1233,7 @@ class ROMarr:
         # every request, while the log pointed at a Settings page that was
         # itself behind the gate.
         self.claimed = bool(self.store.settings.get("_password_hash")
-                            or supplied_key or self.oidc.enabled)
+                            or supplied_key or self.oidc.enabled or mode == "forward")
         if self.auth.enabled and not self.claimed:
             log.warning(
                 "ROMarr is unclaimed: the first visitor to the web UI sets the "
@@ -1223,6 +1243,10 @@ class ROMarr:
             secret=self.store.settings.get("_totp_secret", ""),
             backup=self.store.settings.get("_totp_backup", []) or [],
         )
+
+        self.auth.totp._used = self.store.settings.get("_totp_used")
+        self.store.settings["_totp_backup"] = list(self.auth.totp.backup)
+        self.store.save()
 
         # Single sign-on, when a proxy in front is the authority.
         #
@@ -1284,7 +1308,8 @@ class ROMarr:
         # retried until it lands, then served from memory.
         self._library_cache: tuple[list | None, float, str] = (None, 0.0, "")
         self._count_thread = threading.Thread(target=self._refresh_counts, daemon=True)
-        self._count_thread.start()
+        if start_background:
+            self._count_thread.start()
 
         # The live log: a ring buffer behind the Logs page. Attached to the
         # root logger so every module's lines land in it, exactly as they go
@@ -1326,7 +1351,8 @@ class ROMarr:
         self._friend_shelves: dict[str, tuple[list, float]] = {}
 
         self.logring = LogRing()
-        logging.getLogger().addHandler(self.logring.handler())
+        self._log_handler = self.logring.handler()
+        logging.getLogger().addHandler(self._log_handler)
 
         # The clock. Until this existed, "Import completed downloads
         # automatically" was a checkbox nothing read, and the Wanted list was
@@ -1380,7 +1406,8 @@ class ROMarr:
             "HashIndex", "Read ROM hashes from the library for netplay",
             lambda: 86400 if self.store.settings.get("hash_index", True) else 0,
             lambda: self.start_hash_seed(quiet=True).get("detail", ""))
-        self.scheduler.start()
+        if start_background:
+            self.scheduler.start()
 
         # The scheduler does not fire a daily job until a day has passed, so
         # a fresh install would have no hashes for 24 hours and every netplay
@@ -1388,7 +1415,7 @@ class ROMarr:
         # it once here instead.
         try:
             client = getattr(self, "game_library", None)
-            if (self.store.settings.get("hash_index", True)
+            if (start_background and self.store.settings.get("hash_index", True)
                     and hasattr(client, "hashes")):
                 self.start_hash_seed(quiet=True)
         except Exception:                          # noqa: BLE001 - never fatal
@@ -1402,7 +1429,7 @@ class ROMarr:
         client becomes the reason nothing else can read either.
         """
         delay = 15
-        while True:
+        while not self._stop.is_set():
             if not self.game_libraries:
                 # Nothing configured. The shelf stays unknown rather than
                 # becoming an empty list, because "no library is set up" and
@@ -1893,31 +1920,76 @@ class ROMarr:
             if hasattr(client, "path_mappings"):
                 client.path_mappings = mappings
 
-    def safe_settings(self) -> dict:
-        """Settings with every stored credential masked.
+    def close(self):
+        self._stop.set()
+        self._refresh_now.set()
+        self.scheduler.stop()
+        if self._count_thread.is_alive():
+            self._count_thread.join(timeout=5)
+        logging.getLogger().removeHandler(self._log_handler)
+        self._log_handler.close()
 
-        The raw settings hold download client passwords and indexer API keys in
-        plaintext, and this endpoint feeds a browser. Returning them verbatim
-        put real credentials in a page anyone who reached the UI could read --
-        including the qBittorrent password. Masking here rather than at each
-        call site means a new secret field is covered the moment it is declared.
-        """
-        out = dict(self.store.settings)
-        out["download_clients"] = [redact(c) for c in out.get("download_clients", [])]
-        out["indexers"] = [redact_indexer(i) for i in out.get("indexers", [])]
-        out["libraries"] = [redact_library(lib) for lib in out.get("libraries", [])]
-        # The two settings that ARE the credential. Removed by name rather
-        # than by a leading-underscore rule, because the other underscore keys
-        # (`_prowlarr_url`, `_romm_url`, `_stream_url`) are deliberately shown
-        # -- a rule would have hidden the wrong half of them.
-        # `_peers` carries one bearer token per relationship. It is removed
-        # here by name for the same reason as the two above: the underscore
-        # is a naming convention, not a boundary, and `_romm_url` proves the
-        # convention is not a reliable one to filter on.
-        for secret in ("_api_key", "_seerrng_api_key", "_password_hash", "_peers",
-                       "_organizer_journal_key"):
-            out.pop(secret, None)
-        return out
+    def safe_settings(self) -> dict:
+        return redact_settings(self.store.settings, public=True)
+
+    def verify_second_factor(self, code) -> bool:
+        with self.security_lock:
+            totp = self.auth.totp
+            before = (list(totp.backup), totp._used)
+            if not totp.verify(code):
+                return False
+            candidate = dict(self.store.settings)
+            candidate.update(_totp_backup=list(totp.backup), _totp_used=totp._used)
+            try:
+                self.store.replace_settings(candidate)
+            except Exception as exc:
+                if not getattr(exc, "committed", False):
+                    totp.backup, totp._used = before
+                raise
+            return True
+
+    def apply_settings(self, candidate):
+        # Config and restore never replace authentication identity, including
+        # a recovery code consumed while the request body was being prepared.
+        with self.security_lock, self.store._lock:
+            candidate = dict(candidate)
+            for key in IDENTITY_KEYS:
+                if key in self.store.settings:
+                    candidate[key] = self.store.settings[key]
+                else:
+                    candidate.pop(key, None)
+            from .settings_security import validate_settings
+            validate_settings(candidate, DEFAULT_SETTINGS)
+            # Constructors validate their client-specific configuration before
+            # any candidate is durable. They do not call remote services.
+            for group, build in (("download_clients", build_client),
+                                 ("indexers", build_indexer),
+                                 ("libraries", build_library_from_config)):
+                for cfg in candidate.get(group, []):
+                    if cfg.get("enable", True):
+                        build(cfg)
+            ReleaseProfile.from_settings(candidate)
+            Metadata(candidate.get("metadata_providers", []))
+            previous = dict(self.store.settings)
+            self.store.replace_settings(candidate)
+            try:
+                self.reload_clients()
+                self.reload_libraries()
+                self.reload_metadata()
+                self.reload_policy()
+                self.reload_dats(str(candidate.get("dat_path") or ""))
+                if candidate.get("library_path"):
+                    self.library = Path(candidate["library_path"])
+                self._apply_remote_path_mappings()
+            except Exception:
+                self.store.replace_settings(previous)
+                self.reload_clients()
+                self.reload_libraries()
+                self.reload_metadata()
+                self.reload_policy()
+                self.reload_dats(str(previous.get("dat_path") or ""))
+                self.library = Path(previous["library_path"])
+                raise
 
     # --- inbound webhooks -------------------------------------------------
 
@@ -5428,6 +5500,9 @@ def make_handler(service: ROMarr):
         def _send(self, code: int, body: bytes, content_type: str):
             self.send_response(code)
             self.send_header("Content-Type", content_type)
+            self.send_header("Cache-Control", "no-store")
+            self.send_header("X-Content-Type-Options", "nosniff")
+            self.send_header("Content-Security-Policy", "frame-ancestors 'self'")
             self.send_header("Content-Length", str(len(body)))
             self.end_headers()
             self.wfile.write(body)
@@ -5500,6 +5575,8 @@ def make_handler(service: ROMarr):
             """
             try:
                 return handler()
+            except ValueError as exc:
+                return self._json(400, {"error": "invalid request"})
             except Exception as exc:
                 # Exception strings often contain full downstream URLs, which
                 # can carry a client's API key. Keep the path redaction and
@@ -5543,6 +5620,16 @@ def make_handler(service: ROMarr):
                       "/api/v1/peer/accept", "/api/v1/peer/shelf",
                       "/api/v1/peer/netplay")
 
+        def _fresh_security_auth(self, body):
+            key = self.headers.get("X-Api-Key")
+            bearer = self.headers.get("Authorization", "").split(None, 1)
+            if len(bearer) == 2 and bearer[0].lower() == "bearer":
+                key = key or bearer[1]
+            if service.auth.check_key(key):
+                return True
+            return (service.auth.check_password(str(body.get("password") or ""))
+                    and (not service.auth.totp.enabled or service.verify_second_factor(body.get("totp"))))
+
         def _send_session(self, token: str, payload: dict, *,
                           redirect_to: str | None = None,
                           force_secure: bool = False,
@@ -5557,6 +5644,7 @@ def make_handler(service: ROMarr):
             cookie would simply never be stored there.
             """
             self.send_response(303 if redirect_to else 200)
+            self.send_header("Cache-Control", "no-store")
             if redirect_to:
                 self.send_header("Location", redirect_to)
                 self.send_header("Cache-Control", "no-store")
@@ -5567,7 +5655,7 @@ def make_handler(service: ROMarr):
                 self._clear_oidc_state_cookie(oidc_state)
             secure_cookie = str(service._env.get(
                 "ROMARR_COOKIE_SECURE", "")).strip().lower() in ("1", "true", "yes")
-            secure_cookie = secure_cookie or force_secure
+            secure_cookie = secure_cookie or force_secure or is_secure(self, service)
             secure_flag = "; Secure" if secure_cookie else ""
             same_site = "Lax" if redirect_to else "Strict"
             self.send_header(
@@ -5659,6 +5747,10 @@ def make_handler(service: ROMarr):
                 self.close_connection = True
                 return fail(400, {"error": "invalid content length"})
 
+            if length and self.headers.get("Content-Type", "").split(";", 1)[0].lower() != "application/json":
+                self.close_connection = True
+                return fail(415, {"error": "application/json required"})
+
             limit = 2 << 20
             error = "request body too large"
             if path == "/api/v1/integration/library/lookup":
@@ -5730,7 +5822,7 @@ def make_handler(service: ROMarr):
             # -- which is all of them, at that point.
             category = RateLimiter.category_for(path)
             allowed, retry = service.limiter.check(
-                category, self.client_address[0])
+                category, rate_identity(self, service))
             if not allowed:
                 # Drain first, for the same reason the 401 does: a POST has
                 # already sent its body, and replying without reading it
@@ -5746,6 +5838,9 @@ def make_handler(service: ROMarr):
                 self.send_header("Content-Length", str(len(body)))
                 self.end_headers()
                 return self.wfile.write(body)
+            if not browser_mutation_allowed(self, service):
+                self._drain()
+                return self._json(403, {"error": "cross-origin mutation refused"})
             if (path in self.OPEN_PATHS or self._authorised()
                     or (_is_seerr_integration_path(path)
                         and service.auth.check_integration_key(self.headers))):
@@ -6295,9 +6390,19 @@ def make_handler(service: ROMarr):
                                   "text/plain; version=0.0.4; charset=utf-8")
             if route.path == "/api/v1/backup":
                 include = query.get("secrets", ["0"])[0] in ("1", "true", "yes")
-                return self._json(200, make_backup(service.store.settings,
-                                                   include_secrets=include))
+                with service.security_lock:
+                    if include and not self._fresh_security_auth({
+                            "password": self.headers.get("X-ROMarr-Password"),
+                            "totp": self.headers.get("X-ROMarr-TOTP")}):
+                        return self._json(401, {"error": "current password and second factor required, or administrator API key"})
+                    return self._json(200, make_backup(service.store.settings,
+                                                       include_secrets=include))
             if route.path == "/api/v1/backup/encrypted":
+                with service.security_lock:
+                    if not self._fresh_security_auth({
+                            "password": self.headers.get("X-ROMarr-Password"),
+                            "totp": self.headers.get("X-ROMarr-TOTP")}):
+                        return self._json(401, {"error": "current password and second factor required, or administrator API key"})
                 try:
                     passphrase = self.headers.get("X-ROMarr-Backup-Passphrase", "")
                     return self._json(200, encrypt_backup(service.store.settings, passphrase))
@@ -6520,9 +6625,11 @@ def make_handler(service: ROMarr):
             if route.path == "/api/v1/system/counts":
                 return self._json(200, service.counts())
             if route.path == "/api/v1/system/apikey":
-                # Deliberately its own authenticated route rather than part
-                # of safe_settings, which exists to strip credentials.
-                return self._json(200, {"api_key": service.auth.api_key})
+                with service.security_lock:
+                    if not self._fresh_security_auth({"password": self.headers.get("X-ROMarr-Password"),
+                                                      "totp": self.headers.get("X-ROMarr-TOTP")}):
+                        return self._json(401, {"error": "current password and second factor required, or administrator API key"})
+                    return self._json(200, {"api_key": service.auth.api_key})
             if route.path == "/api/v1/system/seerrng-key":
                 return self._json(200, {
                     "api_key": service.auth.integration_key,
@@ -7146,10 +7253,9 @@ def make_handler(service: ROMarr):
                         settings, warning = read_backup(body)
                 except ValueError as exc:
                     return self._json(400, {"error": str(exc)})
-                service.store.settings.update(settings)
-                service.store.save()
-                service.reload_clients()
-                service.reload_libraries()
+                candidate = dict(service.store.settings)
+                candidate.update({k: v for k, v in settings.items() if k not in IDENTITY_KEYS})
+                service.apply_settings(candidate)
                 return self._json(200, {"ok": True, "warning": warning})
             if route.path == "/api/v1/collection/start":
                 return self._json(200, service.collection_start(
@@ -7200,29 +7306,57 @@ def make_handler(service: ROMarr):
                 return self._json(200, {k: ("********" if k in secrets and v
                                             else v)
                                         for k, v in saved.items()})
-            if route.path == "/api/v1/totp/enroll":
-                from .totp import backup_codes, new_secret, provisioning_uri
-                secret = new_secret()
-                codes = backup_codes()
-                service.store.settings["_totp_secret"] = secret
-                service.store.settings["_totp_backup"] = codes
-                service.store.save()
-                from .totp import Totp as _Totp
-                service.auth.totp = _Totp(secret=secret, backup=codes)
-                return self._json(200, {
-                    "secret": secret,
-                    "uri": provisioning_uri(secret, account="romarr"),
-                    "backup_codes": codes,
-                    "note": "Scan the URI or enter the secret in any TOTP "
-                            "app. Codes are asked for at sign-in from now "
-                            "on; the backup codes are single-use."})
-            if route.path == "/api/v1/totp/disable":
-                service.store.settings["_totp_secret"] = ""
-                service.store.settings["_totp_backup"] = []
-                service.store.save()
-                from .totp import Totp as _Totp
-                service.auth.totp = _Totp(secret="", backup=[])
-                return self._json(200, {"ok": True, "enabled": False})
+            if route.path in ("/api/v1/totp/enroll", "/api/v1/totp/confirm",
+                               "/api/v1/totp/disable", "/api/v1/sessions/revoke",
+                               "/api/v1/password"):
+                with service.security_lock:
+                    if route.path == "/api/v1/totp/confirm":
+                        pending = service._totp_pending
+                        if (not pending or pending["expires"] < time.monotonic()
+                                or pending["security"] != service.auth.security_version()):
+                            return self._json(409, {"error": "enrollment expired; start again"})
+                        factor = Totp(pending["secret"])
+                        if not factor.verify(body.get("totp")):
+                            return self._json(401, {"error": "authenticator code required"})
+                        candidate = dict(service.store.settings)
+                        candidate.update(_totp_secret=pending["secret"],
+                                         _totp_backup=Totp(backup=pending["codes"]).backup,
+                                         _totp_used=factor._used, _session_epoch=new_api_key())
+                        service.store.replace_settings(candidate)
+                        factor.backup = list(candidate["_totp_backup"])
+                        service.auth.totp = factor
+                        service.auth.session_epoch = candidate["_session_epoch"]
+                        service._totp_pending = None
+                        return self._send_session(service.auth.issue_session(), {"ok": True, "enabled": True})
+                    if not self._fresh_security_auth(body):
+                        return self._json(401, {"error": "current password and second factor required, or administrator API key"})
+                    if route.path == "/api/v1/totp/enroll":
+                        from .totp import backup_codes, new_secret, provisioning_uri
+                        secret, codes = new_secret(), backup_codes()
+                        service._totp_pending = {"secret": secret, "codes": codes,
+                            "expires": time.monotonic() + 600,
+                            "security": service.auth.security_version()}
+                        return self._json(200, {"secret": secret,
+                            "uri": provisioning_uri(secret, account="romarr"),
+                            "backup_codes": codes, "pending": True,
+                            "note": "Save the recovery codes, then confirm a code from your authenticator. Your current sign-in remains unchanged until confirmation."})
+                    candidate = dict(service.store.settings)
+                    candidate["_session_epoch"] = new_api_key()
+                    if route.path == "/api/v1/totp/disable":
+                        candidate.update(_totp_secret="", _totp_backup=[], _totp_used=None)
+                    if route.path == "/api/v1/password":
+                        password = str(body.get("new_password") or "")
+                        if len(password) < MIN_PASSWORD or len(password) > 4096:
+                            return self._json(400, {"error": "new password must contain 8 to 4096 characters"})
+                        candidate["_password_hash"] = service.auth.hash_password(password)
+                    service.store.replace_settings(candidate)
+                    service.auth.session_epoch = candidate["_session_epoch"]
+                    service.auth.password_hash = candidate.get("_password_hash", "")
+                    service._totp_pending = None
+                    if route.path == "/api/v1/totp/disable":
+                        service.auth.totp = Totp()
+                    return self._send_session(service.auth.issue_session(), {"ok": True,
+                        "enabled": service.auth.totp.enabled, "sessions_revoked": True})
             if route.path == "/api/v1/connection":
                 secrets = {"url", "token", "password", "key"}
                 cfg = dict(body or {})
@@ -7530,57 +7664,36 @@ def make_handler(service: ROMarr):
                                 "unresolved": platform is None})
                 return self._json(200, {"items": out, "total": len(entries)})
             if route.path == "/api/v1/setup":
-                # First-run claim. Open only while unclaimed, and it closes the
-                # moment it succeeds -- so this is a one-shot, not a standing
-                # unauthenticated way to reset the password.
-                if service.claimed:
-                    return self._json(409, {
-                        "error": "already set up",
-                        "detail": "This ROMarr already has a password. Sign in "
-                                  "instead.",
-                    })
-                password = str(body.get("password") or "")
-                if len(password) < MIN_PASSWORD:
-                    return self._json(400, {
-                        "error": "weak password",
-                        "detail": f"Use at least {MIN_PASSWORD} characters.",
-                    })
-                service.store.settings["_password_hash"] = \
-                    service.auth.hash_password(password)
-                service.auth.password_hash = \
-                    service.store.settings["_password_hash"]
-                service.claimed = True
-                service.store.save()
-                log.info("this install has been claimed; setup is now closed")
-                token = service.auth.issue_session()
-                return self._send_session(token, {"ok": True})
+                with service.security_lock:
+                    if service.claimed:
+                        return self._json(409, {"error": "already set up", "detail": "This install is already claimed."})
+                    password = str(body.get("password") or "")
+                    if len(password) < MIN_PASSWORD or len(password) > 4096:
+                        return self._json(400, {"error": "invalid password", "detail": "Password must contain 8 to 4096 characters."})
+                    candidate = dict(service.store.settings)
+                    candidate["_password_hash"] = service.auth.hash_password(password)
+                    service.store.replace_settings(candidate)
+                    service.auth.password_hash = candidate["_password_hash"]
+                    service.claimed = True
+                    return self._send_session(service.auth.issue_session(), {"ok": True})
             if route.path == "/api/v1/login":
-                # Exchange a credential for a session, so a browser presents
-                # the key once instead of carrying it in every request and
-                # holding it in the page where any script can read it.
                 supplied = str(body.get("apikey") or "")
                 password = str(body.get("password") or "")
-                if not (service.auth.check_key(supplied)
-                        or service.auth.check_password(password)):
-                    return self._json(401, {"error": "unauthorised"})
-                # The second factor gates the session, not the API key: a key
-                # is already a high-entropy secret and a script cannot be
-                # prompted. What 2FA protects is the interactive login.
-                if service.auth.totp.enabled and not supplied:
-                    if not service.auth.totp.verify(body.get("totp")):
-                        return self._json(401, {"error": "unauthorised",
-                                                "detail": "two-factor code "
-                                                          "required or wrong"})
-                token = service.auth.issue_session()
-                return self._send_session(token, {"ok": True})
+                with service.security_lock:
+                    key_ok = service.auth.check_key(supplied)
+                    if not key_ok and not service.auth.check_password(password):
+                        return self._json(401, {"error": "unauthorised"})
+                    if service.auth.totp.enabled and not key_ok:
+                        if not service.verify_second_factor(body.get("totp")):
+                            return self._json(401, {"error": "unauthorised", "detail": "two-factor code required or wrong"})
+                    return self._send_session(service.auth.issue_session(), {"ok": True})
             if route.path == "/api/v1/system/seerrng-key/rotate":
                 if service.seerrng_key_env_supplied:
                     return self._json(409, {
                         "error": "ROMARR_SEERRNG_API_KEY is set; rotate it in the environment"})
                 integration_key = new_api_key()
-                service.store.settings["_seerrng_api_key"] = integration_key
+                service.store.replace_settings({**service.store.settings, "_seerrng_api_key": integration_key})
                 service.auth.integration_key = integration_key
-                service.store.save()
                 return self._json(200, {"api_key": integration_key,
                                         "rotated": True})
             if route.path == "/api/v1/connection/test" and body.get("type"):
@@ -7642,10 +7755,10 @@ def make_handler(service: ROMarr):
             if route.path == "/api/v1/hub/plugin":
                 slug = (body.get("slug") or "").strip()
                 action = (body.get("action") or "").strip()
-                if not slug or action not in ("install", "enable", "disable", "uninstall"):
+                if not slug or action not in ("install", "enable", "disable"):
                     return self._json(400, {"error": "slug and a valid action are required"})
                 fn = {"install": hub.install, "enable": hub.enable,
-                      "disable": hub.disable, "uninstall": hub.uninstall}[action]
+                      "disable": hub.disable}[action]
                 result = fn(slug)
                 return self._json(200 if result.get("ok") else 500, result)
             if route.path == "/api/request":
@@ -7807,19 +7920,13 @@ def make_handler(service: ROMarr):
                 return body_error
 
             if route.path == "/api/v1/config":
-                updated = service.store.update_settings(body)
-                if "remote_path_mappings" in body:
-                    service._apply_remote_path_mappings()
-                if "dat_path" in body:
-                    # A stored path nothing re-reads is a setting that lies;
-                    # reload_dats both stores and applies it.
-                    service.reload_dats(str(body.get("dat_path") or ""))
+                from .store import DEFAULT_SETTINGS
+                from .settings_security import preserve_masked
+                candidate = dict(service.store.settings)
+                candidate.update(preserve_masked({k: v for k, v in body.items()
+                    if k in DEFAULT_SETTINGS and not k.startswith("_")}, candidate))
+                service.apply_settings(candidate)
                 updated = service.safe_settings()
-                # A library path is only really changed once the running
-                # service files ROMs there, not once it is stored.
-                path = updated.get("library_path")
-                if path:
-                    service.library = Path(path)
                 return self._json(200, updated)
             return self._json(404, {"error": "not found"})
 
@@ -7837,28 +7944,22 @@ def make_handler(service: ROMarr):
 def serve(port: int = 6868, env: dict[str, str] | None = None):
     e = env if env is not None else os.environ
     host = e.get("ROMARR_HOST", "0.0.0.0")
-    service = ROMarr(env)
-    httpd = BoundedThreadingHTTPServer(
-        (host, port), make_handler(service), max_workers=64)
-
-    # Native HTTPS, for installs with no reverse proxy in front. Both
-    # variables or neither: half a cert is a typo, and refusing to boot over
-    # a typo would take the whole service down -- so it logs, serves HTTP,
-    # and the operator reads why.
-    cert = e.get("ROMARR_SSL_CERT", "")
-    key = e.get("ROMARR_SSL_KEY", "")
-    scheme = "http"
+    # A configured TLS endpoint must never silently become plaintext.
+    context = None
+    cert, key = e.get("ROMARR_SSL_CERT", ""), e.get("ROMARR_SSL_KEY", "")
     if cert or key:
         import ssl
-        try:
-            context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-            context.load_cert_chain(certfile=cert, keyfile=key or None)
-            httpd.socket = context.wrap_socket(httpd.socket, server_side=True)
-            scheme = "https"
-        except (OSError, ssl.SSLError) as err:
-            log.error("could not load ROMARR_SSL_CERT/ROMARR_SSL_KEY (%s); "
-                      "serving plain HTTP", err)
-
+        if not cert or not key:
+            raise ValueError("ROMARR_SSL_CERT and ROMARR_SSL_KEY must both be configured")
+        context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        context.load_cert_chain(cert, key)
+    service = ROMarr(env)
+    httpd = BoundedThreadingHTTPServer((host, port), make_handler(service), max_workers=64)
+    httpd.tls_context = context
     log.info("ROMarr listening on %s://%s:%d, library=%s",
-             scheme, host, port, service.library)
-    httpd.serve_forever()
+             "https" if context else "http", host, port, service.library)
+    try:
+        httpd.serve_forever()
+    finally:
+        httpd.server_close()
+        service.close()

@@ -4,6 +4,9 @@ name: Semgrep Community Edition
 run-name: ${{ format('action:{0}:pool:{1}', inputs.action, inputs.runner_pool) }}
 
 on:
+  push:
+    branches: [main]
+  pull_request:
   workflow_dispatch:
 
     inputs:
@@ -29,7 +32,7 @@ jobs:
   semgrep:
     name: Semgrep CE (community rules)
     if: >-
-      github.event_name == 'workflow_dispatch' && inputs.action == 'scan' && inputs.runner_pool == 'public' && github.ref == 'refs/heads/main'
+      github.event_name != 'workflow_dispatch' || (inputs.action == 'scan' && inputs.runner_pool == 'public' && github.ref == 'refs/heads/main')
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
@@ -51,8 +54,8 @@ jobs:
             -e CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
             -e SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
             -v /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro \
-            -v "$GITHUB_WORKSPACE:/src" -w /src semgrep/semgrep:latest \
-            semgrep scan --config p/default --metrics=off --jobs 2 \
+            -v "$GITHUB_WORKSPACE:/src" -w /src semgrep/semgrep:1.184.0 \
+            semgrep scan --error --config p/default --metrics=off --jobs 2 --timeout 30 --timeout-threshold 0 \
               --json-output semgrep.json --sarif-output semgrep.sarif .
 
       - name: Report finding count

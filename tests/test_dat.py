@@ -13,6 +13,7 @@ answer, and these tests are that answer.
 from __future__ import annotations
 
 import zlib
+import hashlib
 
 import pytest
 
@@ -124,13 +125,13 @@ def test_an_unknown_crc_is_unknown_not_bad(snes):
     assert got.game == ""
 
 
-def test_a_right_size_wrong_hash_is_a_bad_dump(snes):
+def test_a_right_size_wrong_hash_is_unknown(snes):
     """This is the case worth catching. A file the exact size of a known ROM
     whose contents do not match is a corrupt or tampered dump -- not something
     unknown, something wrong."""
     got = snes.lookup(crc="deadbeef", size=3145728)
-    assert got.status == BAD_DUMP
-    assert "Super Metroid" in got.detail or "3145728" in got.detail
+    assert got.status == UNKNOWN
+    assert got.game == "", "size alone cannot identify a game"
 
 
 def test_sha1_wins_over_crc_when_both_are_available(snes):
@@ -179,7 +180,7 @@ def test_a_headered_rom_still_verifies(snes):
     body = b"\xA5" * 3145728
     headered = b"\x00" * 512 + body
     crc = f"{zlib.crc32(body) & 0xFFFFFFFF:08x}"
-    dat = parse_dat(NOINTRO.replace("D63ED5F8", crc.upper()))
+    dat = parse_dat(NOINTRO.replace("D63ED5F8", crc.upper()).replace("21f3e98df4780ee1c667b84e57d88675", hashlib.md5(body).hexdigest()).replace("da957f0d63d14cb441d215462904d982ec45a7ca", hashlib.sha1(body).hexdigest()))
 
     computed = hash_bytes(headered, suffix=".smc")
     assert computed["size"] == 3145728, "the header is excluded from the size too"

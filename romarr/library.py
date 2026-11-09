@@ -14,6 +14,8 @@ details it does handle are the ones that silently corrupt a library:
 from __future__ import annotations
 
 import logging
+import io
+from contextlib import nullcontext
 import os
 import re
 import shutil
@@ -25,7 +27,9 @@ from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
 
-from .dat import BAD_DUMP, UNKNOWN, VERIFIED, Match, hash_bytes, hash_file, hash_stream
+from .dat import BAD_DUMP, UNKNOWN, VERIFIED, Match, hash_bytes, hash_file, hash_stream, rom_matches
+from .safe_files import atomic_file, atomic_directory, parent_fd, source_file
+from .limits import Budget, limit, preflight_zip
 from .platforms import Platform
 from .selection import pick_all_rom_sets, pick_rom_set
 
@@ -181,149 +185,149 @@ class _Source:
             self.copy(member, target)
 
 
+def _output(destination):
+    return nullcontext(destination) if hasattr(destination, "write") else open(destination, "wb")
+
+
 class _ZipSource(_Source):
     def __init__(self, path: Path):
         self.path = path
+        self.budget = Budget()
+        preflight_zip(path)
 
     def names(self):
         with zipfile.ZipFile(self.path) as archive:
-            return safe_members(archive, self.path.parent)
+            names = safe_members(archive, self.path.parent)
+            if any(info.file_size > self.budget.member for info in archive.infolist()):
+                raise ValueError("archive member exceeds its byte budget")
+            if sum(info.file_size for info in archive.infolist()) > self.budget.maximum:
+                raise ValueError("archive expansion exceeds its byte budget")
+            return names
 
     def read(self, name):
-        with zipfile.ZipFile(self.path) as archive:
-            return archive.read(name)
+        output = io.BytesIO()
+        with zipfile.ZipFile(self.path) as archive, archive.open(name) as source:
+            Budget().copy(source, output, maximum=limit("ROMARR_MAX_METADATA_BYTES", 1 << 20))
+        return output.getvalue()
 
     def copy(self, name, destination):
-        with zipfile.ZipFile(self.path) as archive, \
-                archive.open(name) as src, open(destination, "wb") as dst:
-            shutil.copyfileobj(src, dst)
+        with zipfile.ZipFile(self.path) as archive, archive.open(name) as source, _output(destination) as output:
+            self.budget.copy(source, output)
 
     def hashes(self, name):
-        with zipfile.ZipFile(self.path) as archive, archive.open(name) as handle:
-            return hash_stream(handle, suffix=Path(name).suffix,
-                               size=archive.getinfo(name).file_size)
+        with zipfile.ZipFile(self.path) as archive, archive.open(name) as source:
+            info = archive.getinfo(name)
+            if info.file_size > self.budget.member:
+                raise ValueError("archive member exceeds its byte budget")
+            return hash_stream(_BoundedReader(source, self.budget.member),
+                               suffix=Path(name).suffix, size=info.file_size)
 
-    def copy_set(self, members, stage):
-        # One central-directory read for the whole game, rather than reopening
-        # a potentially large ZIP once for every asset.
-        with zipfile.ZipFile(self.path) as archive:
-            for member, name in members:
-                target = stage / name
-                target.parent.mkdir(parents=True, exist_ok=True)
-                with archive.open(member) as source, open(target, "wb") as output:
-                    shutil.copyfileobj(source, output)
+
+class _BoundedReader:
+    def __init__(self, source, maximum):
+        self.source, self.remaining = source, maximum
+        self.deadline = __import__("time").monotonic() + limit("ROMARR_TRANSFER_SECONDS", 600)
+
+    def read(self, size=-1):
+        if __import__("time").monotonic() > self.deadline:
+            raise OSError("archive read exceeded its time budget")
+        data = self.source.read(min(self.remaining + 1, size if size >= 0 else self.remaining + 1))
+        self.remaining -= len(data)
+        if self.remaining < 0:
+            raise OSError("archive read exceeded its byte budget")
+        return data
 
 
 class _BsdtarSource(_Source):
-    """7z and rar, via libarchive.
-
-    Every member is read by re-invoking `bsdtar` rather than unpacking the
-    archive once. A disc release is a handful of files and the sheet is a few
-    hundred bytes, so the cost is small -- and unpacking the whole thing means
-    materialising up to twelve gigabytes to keep four of them.
-    """
-
     def __init__(self, path: Path, tool: str):
-        self.path = path
-        self.tool = tool
+        self.path, self.tool = path, tool
+        self.budget = Budget()
 
-    def _run(self, args: list[str], **kw):
-        return subprocess.run([self.tool, *args], capture_output=True,
-                              check=True, timeout=600, **kw)
+    def _stream(self, args, output, *, maximum=None, budget=None):
+        budget = budget or Budget()
+        with subprocess.Popen([self.tool, *args], stdout=subprocess.PIPE,
+                              stderr=subprocess.DEVNULL) as process:
+            timer = threading.Timer(max(.01, budget.deadline - __import__("time").monotonic()), process.kill)
+            timer.daemon = True
+            timer.start()
+            try:
+                size = budget.copy(process.stdout, output, maximum=maximum)
+                if process.wait() != 0:
+                    raise OSError("archive extraction failed or timed out")
+                return size
+            finally:
+                timer.cancel()
+                if process.poll() is None:
+                    process.kill()
+                    process.wait()
 
     def names(self):
-        out = self._run(["-tf", str(self.path)], text=True)
-        return [n for n in (line.strip() for line in out.stdout.splitlines())
-                if n and not n.endswith("/") and is_safe_name(n, self.path.parent)]
+        out = io.BytesIO()
+        self._stream(["-tf", str(self.path)], out, maximum=16 << 20)
+        names = [n.strip() for n in out.getvalue().decode("utf-8", "replace").splitlines()
+                 if n.strip() and not n.endswith("/")]
+        if len(names) > limit("ROMARR_MAX_ARCHIVE_FILES", 10000):
+            raise ValueError("archive has too many members")
+        return [n for n in names if is_safe_name(n, self.path.parent)]
 
     def read(self, name):
-        return self._run(["-xOf", str(self.path), name]).stdout
+        out = io.BytesIO()
+        self._stream(["-xOf", str(self.path), "--", name], out,
+                     maximum=limit("ROMARR_MAX_METADATA_BYTES", 1 << 20))
+        return out.getvalue()
 
     def copy(self, name, destination):
-        with open(destination, "wb") as dst:
-            subprocess.run([self.tool, "-xOf", str(self.path), name],
-                           stdout=dst, check=True, timeout=600)
+        with _output(destination) as out:
+            self._stream(["-xOf", str(self.path), "--", name], out, budget=self.budget)
 
     def hashes(self, name):
-        # Copier-header detection needs a member length for these small ROMs.
-        if Path(name).suffix.lower() in (".smc", ".sfc", ".nes"):
-            return super().hashes(name)
-        with subprocess.Popen([self.tool, "-xOf", str(self.path), name],
-                              stdout=subprocess.PIPE, stderr=subprocess.DEVNULL) as process:
-            deadline = threading.Timer(600, process.kill)
-            deadline.daemon = True
-            deadline.start()
-            try:
-                result = hash_stream(process.stdout, suffix=Path(name).suffix)
-                if process.wait() != 0:
-                    raise OSError("could not read archive member")
-                return result
-            except BaseException:
-                process.kill()
-                raise
-            finally:
-                deadline.cancel()
-
-    def copy_set(self, members, stage):
-        # Solid 7z archives must be decoded once, rather than once per file.
-        # libarchive's default traversal and symlink protections stay enabled.
-        with tempfile.TemporaryDirectory(prefix=".romarr-import-", dir=stage.parent) as temp:
-            extracted = Path(temp) / "files"
-            extracted.mkdir()
-            manifest = Path(temp) / "members"
-            manifest.write_bytes(b"".join(member.encode("utf-8") + b"\0"
-                                          for member, _ in members))
-            subprocess.run([self.tool, "-xf", str(self.path), "-C", str(extracted),
-                            "--no-same-owner", "--no-same-permissions",
-                            "--null", "-T", str(manifest)],
-                           check=True, timeout=600, capture_output=True)
-            for member, name in members:
-                source = extracted / member.replace("\\", "/")
-                if (source.is_symlink() or not source.is_file()
-                        or not source.resolve().is_relative_to(extracted.resolve())):
-                    raise OSError("archive member is not a safe regular file")
-                # Reject symlink directories too, even when their target stays
-                # inside extraction: bundles preserve data, never link tricks.
-                if any(parent.is_symlink() for parent in source.parents
-                       if parent != extracted and parent.is_relative_to(extracted)):
-                    raise OSError("archive member traverses a symlink")
-                target = stage / name
-                target.parent.mkdir(parents=True, exist_ok=True)
-                source.replace(target)
+        # Spool with a byte budget to learn copier-header size without buffering
+        # an entire ROM in RAM or trusting a platform-specific listing format.
+        with tempfile.TemporaryFile() as out:
+            size = self._stream(["-xOf", str(self.path), "--", name], out)
+            out.seek(0)
+            return hash_stream(out, suffix=Path(name).suffix, size=size)
 
 
 class _PathSource(_Source):
-    """A bare ROM file, or a directory the download client already unpacked."""
-
     def __init__(self, path: Path):
         self.path = path
+        self.budget = Budget()
 
     def names(self):
+        if self.path.is_symlink():
+            raise OSError("source cannot be a symlink")
         if self.path.is_file():
             return [self.path.name]
-        return [str(p.relative_to(self.path)).replace("\\", "/")
-                for p in self.path.rglob("*") if p.is_file()
-                and not p.is_symlink()
-                and p.resolve().is_relative_to(self.path.resolve())]
+        names = []
+        for current, dirs, files in os.walk(self.path, followlinks=False):
+            dirs[:] = [d for d in dirs if not (Path(current)/d).is_symlink()]
+            for name in files:
+                path = Path(current)/name
+                if not path.is_symlink() and path.is_file():
+                    names.append(path.relative_to(self.path).as_posix())
+                    if len(names) > limit("ROMARR_MAX_ARCHIVE_FILES", 10000):
+                        raise ValueError("source has too many members")
+        return names
+
+    def _path(self, name):
+        return self.path if self.path.is_file() else self.path / name
 
     def read(self, name):
-        target = self.path if self.path.is_file() else self.path / name
-        try:
-            return target.read_bytes()
-        except OSError:
-            return None
+        out = io.BytesIO()
+        with source_file(self._path(name)) as source:
+            Budget().copy(source, out, maximum=limit("ROMARR_MAX_METADATA_BYTES", 1 << 20))
+        return out.getvalue()
 
     def copy(self, name, destination):
-        source = self.path if self.path.is_file() else self.path / name
-        # The source belongs to the download client.  Copy its bytes, not its
-        # permission bits: propagating a client's private 0700/0600 mode made
-        # the imported library file unreadable to the shared media group.
-        # A new destination therefore follows the process umask, while the
-        # source inode, owner, group and mode remain untouched.
-        shutil.copyfile(source, destination)
+        with source_file(self._path(name)) as source, _output(destination) as output:
+            self.budget.copy(source, output)
 
     def hashes(self, name):
-        return hash_file(self.path if self.path.is_file() else self.path / name)
+        with source_file(self._path(name)) as source:
+            size = os.fstat(source.fileno()).st_size
+            return hash_stream(_BoundedReader(source, self.budget.member),
+                               suffix=Path(name).suffix, size=size)
 
 
 class MissingArchiveTool(Exception):
@@ -374,6 +378,7 @@ def verify_set(source, members, dats) -> Match:
     if dats is None:
         return Match(UNKNOWN)
     verdicts = []
+    computed = []
     for member in members:
         try:
             hashes = source.hashes(member) if hasattr(source, "hashes") else None
@@ -384,6 +389,7 @@ def verify_set(source, members, dats) -> Match:
                 hashes = hash_bytes(data, suffix=Path(member).suffix)
         except Exception:
             return Match(UNKNOWN, detail=f"could not read {member!r} to verify")
+        computed.append(hashes)
         verdicts.append(dats.lookup(**hashes))
 
     if not verdicts:
@@ -392,8 +398,21 @@ def verify_set(source, members, dats) -> Match:
     if bad is not None:
         return bad
     if all(v.status == VERIFIED for v in verdicts):
-        # Every member matched; name the game they all belong to.
-        return verdicts[0]
+        candidates = {v.game for v in verdicts}
+        for dat in getattr(dats, "dats", [dats]):
+            for game in candidates:
+                entry = dat.games.get(game)
+                if entry is None or len(entry.roms) != len(computed):
+                    continue
+                remaining = list(entry.roms)
+                for hashes in computed:
+                    match = next((r for r in remaining if rom_matches(r, hashes)), None)
+                    if match is None:
+                        break
+                    remaining.remove(match)
+                else:
+                    return Match(VERIFIED, game, verdicts[0].rom, dat.name)
+        return Match(UNKNOWN, detail="members do not form a complete game in one DAT")
     return Match(UNKNOWN)
 
 
@@ -458,10 +477,13 @@ def import_rom(download: Path, platform: Platform, library_root: Path, *,
     try:
         source = _source_for(download, platform)
         candidates = source.names()
-    except MissingArchiveTool as exc:
+    except (MissingArchiveTool, OSError, ValueError, zipfile.BadZipFile) as exc:
         return [ImportResult(False, None, str(exc))]
 
-    chosen_sets = pick_all_rom_sets(candidates, platform, read=source.read)
+    try:
+        chosen_sets = pick_all_rom_sets(candidates, platform, read=source.read)
+    except (OSError, ValueError, zipfile.BadZipFile) as exc:
+        return [ImportResult(False, None, str(exc))]
     if not chosen_sets:
         return [ImportResult(
             False, None,
@@ -502,6 +524,13 @@ def import_rom(download: Path, platform: Platform, library_root: Path, *,
             except Exception as exc:
                 log.debug("Switch content routing skipped (%s)", type(exc).__name__)
 
+        try:
+            with parent_fd(library_root, target_dir / ".check"):
+                pass
+        except (OSError, ValueError):
+            results.append(ImportResult(False, None, "unsafe library directory"))
+            continue
+
         if chosen.preserve_paths:
             results.append(_import_directory_set(
                 source, chosen, download, target_dir, library_root,
@@ -509,7 +538,6 @@ def import_rom(download: Path, platform: Platform, library_root: Path, *,
             continue
 
         if not chosen.is_multi_file:
-            target_dir.mkdir(parents=True, exist_ok=True)
             original_name = Path(chosen.primary).name
             destination_name = original_name
             if rename and verdict.status == VERIFIED and verdict.game:
@@ -534,7 +562,13 @@ def import_rom(download: Path, platform: Platform, library_root: Path, *,
                 results.append(
                     ImportResult(False, destination, "already in the library"))
                 continue
-            source.copy(chosen.primary, destination)
+            try:
+                atomic_file(library_root, destination,
+                            lambda output: source.copy(chosen.primary, output),
+                            overwrite=overwrite)
+            except (OSError, ValueError, zipfile.BadZipFile) as exc:
+                results.append(ImportResult(False, destination, f"import failed: {exc}"))
+                continue
             log.info("imported %s -> %s", chosen.primary, destination)
             results.append(ImportResult(True, destination,
                                         verification=verdict))
@@ -546,32 +580,23 @@ def import_rom(download: Path, platform: Platform, library_root: Path, *,
         set_name = (download.stem if platform.media == "digital"
                     else _set_name(chosen.primary))
         destination = target_dir / set_name
-        if destination.exists() and any(destination.iterdir()) and not overwrite:
-            results.append(
-                ImportResult(False, destination, "already in the library"))
-            continue
-        destination.mkdir(parents=True, exist_ok=True)
-
-        written: dict[str, str] = {}
+        members, seen = [], set()
         for member in chosen.members:
             name = Path(member.replace("\\", "/")).name
-            if not is_safe_name(name, destination):
-                log.warning("refusing set member with an unusable name: %r",
-                            member)
-                continue
-            if name in written:
-                results.append(ImportResult(
-                    False, destination,
-                    f"two files in this download are both called {name!r} "
-                    f"({written[name]} and {member}); refusing to guess which "
-                    "one the game needs"))
+            if not is_safe_name(name, destination) or name.casefold() in seen:
+                results.append(ImportResult(False, destination, f"two files in this download are both called {name!r}, or the name is unsafe"))
                 break
-            source.copy(member, destination / name)
-            written[name] = member
+            seen.add(name.casefold())
+            members.append((member, name))
         else:
-            log.info("imported %d files -> %s", len(written), destination)
-            results.append(ImportResult(True, destination,
-                                        verification=verdict))
+            try:
+                atomic_directory(library_root, destination,
+                    lambda stage: source.copy_set(members, stage), overwrite=overwrite)
+                results.append(ImportResult(True, destination, verification=verdict))
+            except FileExistsError:
+                results.append(ImportResult(False, destination, "already in the library"))
+            except (OSError, ValueError, zipfile.BadZipFile) as exc:
+                results.append(ImportResult(False, destination, f"game import failed: {exc}"))
 
     return results
 
@@ -598,23 +623,11 @@ def _import_directory_set(source, chosen, download, target_dir, library_root,
             return ImportResult(False, destination, "unsafe or duplicate game file")
         seen.add(name.casefold())
         members.append((member, name))
-    target_dir.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix=".romarr-import-", dir=target_dir) as temp:
-        stage = Path(temp) / "game"
-        stage.mkdir()
-        try:
-            source.copy_set(members, stage)
-            backup = Path(temp) / "previous"
-            if destination.exists():
-                destination.rename(backup)
-            try:
-                stage.rename(destination)
-            except OSError:
-                if backup.exists():
-                    backup.rename(destination)
-                raise
-        except (OSError, subprocess.SubprocessError, zipfile.BadZipFile) as exc:
-            return ImportResult(False, destination, f"game import failed: {exc}")
+    try:
+        atomic_directory(library_root, destination,
+            lambda stage: source.copy_set(members, stage), overwrite=overwrite)
+    except (OSError, ValueError, zipfile.BadZipFile) as exc:
+        return ImportResult(False, destination, f"game import failed: {exc}")
     return ImportResult(True, destination, verification=verdict)
 
 

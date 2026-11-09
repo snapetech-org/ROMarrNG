@@ -7,6 +7,8 @@ never been able to make.
 """
 
 from __future__ import annotations
+from rom_fixtures import crc_collision
+import hashlib
 
 import zlib
 import zipfile
@@ -42,7 +44,7 @@ CRC = f"{zlib.crc32(ROM) & 0xFFFFFFFF:08x}"
 DAT = f"""<?xml version="1.0"?><datafile>
   <header><name>Nintendo - SNES</name></header>
   <game name="Super Metroid (USA)">
-    <rom name="Super Metroid (USA).sfc" size="{len(ROM)}" crc="{CRC.upper()}"/>
+    <rom name="Super Metroid (USA).sfc" size="{len(ROM)}" crc="{CRC.upper()}" sha1="{hashlib.sha1(ROM).hexdigest()}"/>
   </game>
 </datafile>"""
 
@@ -80,7 +82,7 @@ def test_a_corrupt_rom_is_reported_as_a_bad_dump(tmp_path, dats):
     it succeeded, because filename scoring cannot see inside a file."""
     downloads, lib = tmp_path / "dl", tmp_path / "lib"
     downloads.mkdir()
-    corrupt = b"\x00" + ROM[1:]
+    corrupt = crc_collision(ROM)
     make_zip(downloads / "g.zip", {"Super Metroid (USA).sfc": corrupt})
 
     result = import_rom(downloads / "g.zip", SNES, lib, dats=dats)
@@ -108,7 +110,7 @@ def test_a_bad_dump_still_imports_by_default(tmp_path, dats):
     them -- the verdict is on the result either way."""
     downloads, lib = tmp_path / "dl", tmp_path / "lib"
     downloads.mkdir()
-    make_zip(downloads / "g.zip", {"Super Metroid (USA).sfc": b"\x00" + ROM[1:]})
+    make_zip(downloads / "g.zip", {"Super Metroid (USA).sfc": crc_collision(ROM)})
 
     result = import_rom(downloads / "g.zip", SNES, lib, dats=dats)
 
@@ -119,7 +121,7 @@ def test_a_bad_dump_still_imports_by_default(tmp_path, dats):
 def test_a_bad_dump_can_be_refused_when_asked(tmp_path, dats):
     downloads, lib = tmp_path / "dl", tmp_path / "lib"
     downloads.mkdir()
-    make_zip(downloads / "g.zip", {"Super Metroid (USA).sfc": b"\x00" + ROM[1:]})
+    make_zip(downloads / "g.zip", {"Super Metroid (USA).sfc": crc_collision(ROM)})
 
     result = import_rom(downloads / "g.zip", SNES, lib, dats=dats,
                         require_verified=True)

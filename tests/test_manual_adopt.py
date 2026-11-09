@@ -10,13 +10,14 @@ The rule the rest of this file exists to protect:
 UNKNOWN means "not in the DAT you loaded". That is the normal state for
 homebrew, for translations, for a hack, and for anything released after your
 DAT was published. Treating it as a problem would make ROMarr refuse most of
-what people actually own. BAD_DUMP is different and specific: a file the size
-of a known ROM whose hash does not match. That one is worth stopping for -- and
+what people actually own. BAD_DUMP is different and specific: a file with a matching legacy CRC but a conflicting stronger checksum. That one is worth stopping for -- and
 still worth letting the operator override, because they may well know exactly
 why their Pokemon ROM does not match No-Intro.
 """
 
 from __future__ import annotations
+from rom_fixtures import crc_collision
+import hashlib
 
 import zlib
 from pathlib import Path
@@ -44,7 +45,7 @@ def dat_for(name: str, blob: bytes) -> DatIndex:
     index = DatIndex()
     index.add(parse_dat(f"""<?xml version="1.0"?>
 <datafile><header><name>Test</name></header>
-<game name="{name}"><rom name="{name}.nes" size="{len(payload)}" crc="{crc}"/></game>
+<game name="{name}"><rom name="{name}.nes" size="{len(payload)}" crc="{crc}" sha1="{hashlib.sha1(payload).hexdigest()}"/></game>
 </datafile>"""))
     return index
 
@@ -94,7 +95,7 @@ def test_a_bad_dump_is_refused_until_the_operator_says_otherwise(service, tmp_pa
     # Same size as the known ROM, different contents: a hash mismatch, which
     # is the only thing that earns a refusal.
     svc.dats = dat_for("Real Game", NES_ROM)
-    path = drop(tmp_path, "Real Game.nes", b"\x4e\x45\x53\x1a" + b"\x5a" * 4096)
+    path = drop(tmp_path, "Real Game.nes", NES_ROM[:16] + crc_collision(NES_ROM[16:]))
 
     got = svc.adopt(str(path), "nes")
 
@@ -108,7 +109,7 @@ def test_a_bad_dump_is_refused_until_the_operator_says_otherwise(service, tmp_pa
 def test_a_bad_dump_imports_when_forced_and_is_recorded_as_forced(service, tmp_path):
     svc, lib = service
     svc.dats = dat_for("Real Game", NES_ROM)
-    path = drop(tmp_path, "Real Game.nes", b"\x4e\x45\x53\x1a" + b"\x5a" * 4096)
+    path = drop(tmp_path, "Real Game.nes", NES_ROM[:16] + crc_collision(NES_ROM[16:]))
 
     got = svc.adopt(str(path), "nes", force=True)
 

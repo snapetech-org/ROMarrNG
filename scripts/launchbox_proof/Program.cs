@@ -51,6 +51,17 @@ internal static class Program
         Check("a second import adds nothing (the dedupe the README promises)",
               again == 0, $"library still {manager.Games.Count}");
 
+        manager.Games.Clear(); manager.Platforms.Clear(); manager.Saves = 0;
+        var duplicates = "<LaunchBox><Game><ID>fixture-id</ID><Title>Old</Title><Platform>SNES</Platform><ApplicationPath>/old.sfc</ApplicationPath><Notes>old</Notes></Game>"
+            + "<Game><ID>fixture-id</ID><Title>Updated</Title><Platform>SNES</Platform><ApplicationPath>/new.sfc</ApplicationPath><Notes>new metadata</Notes></Game></LaunchBox>";
+        import.Invoke(null, new object[] { duplicates });
+        Check("duplicates within one batch update one identity", manager.Games.Count == 1);
+        Check("stable identity refreshes launch path and metadata",
+              manager.Games[0].ApplicationPath == "/new.sfc" && manager.Games[0].Title == "Updated"
+              && manager.Games[0].Notes.Contains("new metadata"));
+        import.Invoke(null, new object[] { duplicates });
+        Check("updates survive repeated synchronization", manager.Games.Count == 1 && manager.Saves == 2);
+
         Console.WriteLine(_failures == 0
             ? "All LaunchBox proofs passed."
             : $"{_failures} proof(s) FAILED.");

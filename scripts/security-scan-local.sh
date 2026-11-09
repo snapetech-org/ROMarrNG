@@ -23,9 +23,8 @@ Usage: scripts/security-scan-local.sh [--staged] [--semgrep-only|--trivy-only] [
 
 Semgrep uses the local Community Edition engine with p/default and metrics off.
 Trivy selects secret, dependency, and IaC scanners from files in this repository.
-Findings are report-only by default. Set SEMGREP_FAIL_ON_FINDINGS=1 or
-TRIVY_EXIT_CODE=1 to make findings fail the command. --ci disables repository-
-controlled Trivy config and ignore files. --staged scans only staged Semgrep files.
+Findings fail by default, including unfixed HIGH/CRITICAL vulnerabilities. --ci disables implicit scanner configuration and loads only the documented,
+path-scoped bootstrap exception in .trivyignore.yaml. --staged scans only staged Semgrep files.
 HELP
       exit 0 ;;
     *) echo "Unknown option: $1" >&2; exit 2 ;;
@@ -44,12 +43,12 @@ has_semgrep_input() {
 }
 
 semgrep_run() {
-  local args=(scan --config "${SEMGREP_CONFIG:-p/default}" --metrics=off --jobs "${SEMGREP_JOBS:-2}")
+  local args=(scan --config "${SEMGREP_CONFIG:-p/default}" --metrics=off --jobs "${SEMGREP_JOBS:-2}" --timeout 30 --timeout-threshold 0)
   local targets=()
   if [[ "${SEMGREP_OFFLINE:-0}" == 1 ]]; then
     args+=(--disable-version-check)
   fi
-  if [[ "${SEMGREP_FAIL_ON_FINDINGS:-0}" == 1 ]]; then
+  if [[ "${SEMGREP_FAIL_ON_FINDINGS:-1}" == 1 ]]; then
     args+=(--error)
   fi
   if (( staged )); then
@@ -78,11 +77,11 @@ semgrep_run() {
   elif command -v uvx >/dev/null 2>&1; then
     local uv_args=()
     [[ "${SEMGREP_OFFLINE:-0}" == 1 ]] && uv_args+=(--offline)
-    uvx "${uv_args[@]}" --from semgrep semgrep "${args[@]}" "${targets[@]}"
+    uvx "${uv_args[@]}" --from semgrep==1.184.0 semgrep "${args[@]}" "${targets[@]}"
   elif command -v semgrep >/dev/null 2>&1; then
     semgrep "${args[@]}" "${targets[@]}"
   elif command -v docker >/dev/null 2>&1; then
-    local image="semgrep/semgrep:latest"
+    local image="semgrep/semgrep:1.184.0"
     if ! docker image inspect "$image" >/dev/null 2>&1; then
       [[ "${SEMGREP_OFFLINE:-0}" == 0 ]] || { echo "Semgrep image is not cached for offline mode." >&2; return 127; }
       docker pull "$image"
@@ -118,16 +117,16 @@ trivy_run() {
   local scanner_list
   printf -v scanner_list '%s,' "${scanners[@]}"
   scanner_list="${scanner_list%,}"
-  args+=(fs --scanners "$scanner_list" --timeout "${TRIVY_TIMEOUT:-20m}" --severity HIGH,CRITICAL --ignore-unfixed --exit-code "${TRIVY_EXIT_CODE:-0}")
+  args+=(fs --scanners "$scanner_list" --timeout "${TRIVY_TIMEOUT:-20m}" --severity HIGH,CRITICAL --exit-code "${TRIVY_EXIT_CODE:-1}")
   for dir in .git node_modules vendor target dist build coverage .venv; do args+=(--skip-dirs "$dir"); done
-  if (( ci_mode )); then args+=(--config= --ignorefile= --secret-config=); fi
+  if (( ci_mode )); then args+=(--config= --ignorefile=.trivyignore.yaml --secret-config=); fi
   if [[ "${TRIVY_OFFLINE:-0}" == 1 ]]; then args+=(--skip-db-update --skip-java-db-update --skip-check-update); fi
 
   echo "Trivy filesystem scan: scanners=$scanner_list"
   if command -v trivy >/dev/null 2>&1; then
     trivy "${args[@]}" .
   elif command -v docker >/dev/null 2>&1; then
-    local image="aquasec/trivy:latest"
+    local image="aquasec/trivy:0.76.2"
     local cache_dir="${TRIVY_CACHE_DIR:-${XDG_CACHE_HOME:-$HOME/.cache}/trivy}"
     mkdir -p "$cache_dir"
     if ! docker image inspect "$image" >/dev/null 2>&1; then

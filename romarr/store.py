@@ -25,6 +25,9 @@ import logging
 import os
 import tempfile
 import threading
+
+from .durable import write_json
+from .settings_security import validate_settings, preserve_masked
 from dataclasses import asdict, dataclass, field, fields as dataclass_fields, is_dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -324,6 +327,7 @@ class Store:
         self.queue: list[QueueItem] = []
         self.seerr_requests: list[SeerrRequest] = []
         self.load()
+        self._durable = self._snapshot()
 
     # -- persistence -------------------------------------------------------
 
@@ -332,7 +336,7 @@ class Store:
             return
         try:
             text = self.path.read_text(encoding="utf-8")
-        except OSError as err:
+        except (OSError, UnicodeError) as err:
             # Unreadable and unparseable used to share this handler, and they
             # are not the same failure. A file we cannot read is one that is
             # intact and belongs to somebody else -- typically a root-owned
@@ -352,13 +356,14 @@ class Store:
             ) from err
         try:
             raw = json.loads(text)
-        except json.JSONDecodeError as err:
-            # A corrupt file must not stop the service from starting; the
-            # defaults are always a usable configuration. Unlike the case
-            # above there is nothing here to preserve -- the bytes no longer
-            # parse, so no version of this file can be handed back.
-            log.warning("could not read %s (%s); starting from defaults", self.path, err)
-            return
+        except (json.JSONDecodeError, UnicodeError) as err:
+            raise StateUnreadable(f"{self.path} contains invalid state; preserve it and restore a valid backup") from err
+        if not isinstance(raw, dict) or not isinstance(raw.get("settings", {}), dict):
+            raise StateUnreadable(f"{self.path} has an invalid state schema")
+        try:
+            validate_settings(raw.get("settings", {}), DEFAULT_SETTINGS)
+        except ValueError as err:
+            raise StateUnreadable(f"{self.path} has invalid settings: {err}") from err
         migrated_integration_requests = False
         with self._lock:
             # Merged rather than replaced, so a setting added in a later
@@ -428,6 +433,11 @@ class Store:
             # longer depend on the legacy settings representation.
             self.save()
 
+    def _snapshot(self):
+        return copy.deepcopy({"settings": self.settings, "events": self.events,
+                              "wanted": self.wanted, "queue": self.queue,
+                              "seerr_requests": self.seerr_requests})
+
     def save(self) -> None:
         with self._lock:
             payload = {
@@ -437,23 +447,29 @@ class Store:
                 "queue": [asdict(q) for q in self.queue[-self.MAX_QUEUE:]],
                 "seerr_requests": [asdict(row) for row in self.seerr_requests],
             }
-            # Keep the lock through replace as well as snapshotting. Two
-            # concurrent saves used to be able to write snapshots in order A,
-            # B and replace in order B, A, leaving the state file older than
-            # the in-memory state even though both writes were atomic.
-            self.path.parent.mkdir(parents=True, exist_ok=True)
-            fd, tmp = tempfile.mkstemp(
-                dir=str(self.path.parent), prefix=".romarr-", suffix=".tmp")
             try:
-                with os.fdopen(fd, "w", encoding="utf-8") as fh:
-                    json.dump(payload, fh, indent=1)
-                os.replace(tmp, self.path)
-            except OSError as err:
-                log.warning("could not write %s: %s", self.path, err)
-                try:
-                    os.unlink(tmp)
-                except OSError:
-                    pass
+                write_json(self.path, payload)
+            except Exception as exc:
+                if getattr(exc, "committed", False):
+                    self._durable = self._snapshot()
+                else:
+                    for key, value in getattr(self, "_durable", {}).items():
+                        setattr(self, key, copy.deepcopy(value))
+                raise
+            self._durable = self._snapshot()
+
+    def replace_settings(self, settings: dict) -> dict:
+        validate_settings(settings, DEFAULT_SETTINGS)
+        with self._lock:
+            previous = self.settings
+            self.settings = copy.deepcopy(settings)
+            try:
+                self.save()
+            except Exception as exc:
+                if not getattr(exc, "committed", False):
+                    self.settings = previous
+                raise
+            return copy.deepcopy(self.settings)
 
     # -- history -----------------------------------------------------------
 
@@ -879,12 +895,12 @@ class Store:
         silently become permanent state that nothing ever reads.
         """
         with self._lock:
-            for key, value in patch.items():
-                if key in DEFAULT_SETTINGS and key != "_organizer_journal_key":
-                    self.settings[key] = value
-            out = dict(self.settings)
-        self.save()
-        return out
+            candidate = copy.deepcopy(self.settings)
+            filtered = {k: v for k, v in patch.items() if k in DEFAULT_SETTINGS
+                        and not k.startswith("_")}
+            candidate.update(preserve_masked(filtered, candidate))
+            return self.replace_settings(candidate)
+
 
 
 def to_jsonable(value: Any) -> Any:

@@ -1,161 +1,89 @@
 #!/usr/bin/env bash
-#
-# Update an existing ROMarrNG install, in place.
-#
-# Run inside the container:
-#   bash -c "$(curl -fsSL https://raw.githubusercontent.com/snapetech-org/ROMarrNG/main/proxmox/ct/update.sh)"
-#
-# Or from the Proxmox host:
-#   pct exec <ctid> -- bash -c "$(curl -fsSL .../update.sh)"
-#
-# It reports the version it moved you from and to, refuses to install a build
-# that cannot authenticate, and puts the old one back if the new one does not
-# answer. Nothing here touches your settings, credentials or history.
-
+# Stage code AND dependencies while the old process runs. Stop only to migrate
+# state and switch a single symlink. Every post-stop failure restores the old unit.
 set -euo pipefail
-
 REPO="${REPO:-snapetech-org/ROMarrNG}"
 ROOT="${ROOT:-/opt/romarr}"
-
-RD=$'\033[01;31m'; GN=$'\033[1;92m'; YW=$'\033[33m'; CL=$'\033[m'
-msg() { echo -e " ${GN}✔${CL} $1"; }
-info() { echo -e " ${YW}➜${CL} $1"; }
-die() { echo -e " ${RD}✘ $1${CL}" >&2; exit 1; }
-
-version_at() {
-  sed -n 's/^VERSION = "\(.*\)"/\1/p' "$1/romarr/app.py" 2>/dev/null | head -1
-}
-
-[[ $EUID -eq 0 ]] || die "Run as root."
-[[ -d "$ROOT" ]] || die "No ROMarrNG installation at ${ROOT}."
-
-BEFORE=$(version_at "$ROOT")
-info "Currently installed: ${BEFORE:-unknown}"
-
-# romarr.json holds the request history, the release profile, the API key and
-# the password hash. .env holds every credential. Losing either turns an update
-# into a reinstall, so they are copied out before anything is unpacked over the
-# top and put back afterwards.
-#
-# The romarr/ package is copied too, and that copy is not redundant with the
-# archive: it is what gets put back when the new build does not come up. An
-# update that can only go forwards is not an update, it is a gamble.
-STAMP=$(date +%s)
-BACKUP="/opt/romarr-backup-${STAMP}"
-mkdir -p "$BACKUP"
-for keep in romarr.json .env requirements.txt; do
-  [[ -f "${ROOT}/${keep}" ]] && cp -a "${ROOT}/${keep}" "${BACKUP}/"
-done
-# The drop-in backends directory is operator-owned; it is not ours to replace.
-[[ -d "${ROOT}/backends" ]] && cp -a "${ROOT}/backends" "${BACKUP}/"
-[[ -d "${ROOT}/romarr" ]] && cp -a "${ROOT}/romarr" "${BACKUP}/"
-msg "Backed up state and the running build to ${BACKUP}"
-
-info "Fetching latest"
-answer=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" 2>/dev/null || true)
-# `|| true` because `pipefail` is on and no releases means grep exits 1, which
-# would take the whole script with it -- silently, right after "Fetching latest".
-url=$(echo "$answer" | grep -o '"tarball_url": *"[^"]*"' | head -1 | cut -d'"' -f4 || true)
-SOURCE="latest release"
-if [[ -z "$url" ]]; then
-  # The release API is unauthenticated and rate-limited at 60/hour per IP, so a
-  # throttled answer looks exactly like 'no releases exist'. Saying which it was
-  # is the difference between a note and a wrong statement.
-  if echo "$answer" | grep -qi 'rate limit'; then
-    info "GitHub rate-limited the release lookup; using main"
-  else
-    info "no published release; using main"
+UNIT="${UNIT:-/etc/systemd/system/romarr.service}"
+DATA="${DATA:-/var/lib/romarr}"
+CONF="${CONF:-/etc/romarr}"
+die() { echo "$*" >&2; exit 1; }
+version_at() { sed -n 's/^VERSION = "\(.*\)"/\1/p' "$1/romarr/app.py" | head -1; }
+[[ $EUID -eq 0 && -d "$ROOT" ]] || { echo 'Run as root on an installed container.' >&2; exit 1; }
+[[ "$REPO" =~ ^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$ ]]
+exec 9>"$ROOT/.update.lock"
+flock -n 9 || { echo 'Another update is running.' >&2; exit 1; }
+install -d -m 0755 "$ROOT/releases"
+STAGE=$(mktemp -d "$ROOT/releases/release-XXXXXXXX")
+WORK=$(mktemp -d)
+CONFIGURED=0
+STOPPED=0
+SWITCHED=0
+OLD=$(readlink -f "$ROOT/current" 2>/dev/null || true)
+[[ -d "$OLD" ]] || OLD="$ROOT"
+BEFORE=$(version_at "$OLD")
+cp -a "$UNIT" "$WORK/romarr.service"
+cleanup() {
+  result=$?
+  trap - EXIT
+  if (( result != 0 && STOPPED )); then
+    systemctl stop romarr || true
+    if (( SWITCHED )); then ln -s "$OLD" "$ROOT/.rollback-current"; mv -Tf "$ROOT/.rollback-current" "$ROOT/current"; fi
+    # A migrated install keeps the new unprivileged unit and live state path;
+    # only the code/venv symlink rolls back. Before migration completes use
+    # the untouched previous unit.
+    if (( ! CONFIGURED )); then cp -a "$WORK/romarr.service" "$UNIT"; fi
+    systemctl daemon-reload
+    systemctl start romarr || true
+    echo 'Update failed; rolling back code and dependencies. Current state was preserved.' >&2
   fi
-  SOURCE="main"
-  url="https://github.com/${REPO}/archive/refs/heads/main.tar.gz"
-fi
-curl -fsSL "$url" -o /tmp/romarr-update.tar.gz \
-  || die "Download failed from ${REPO}."
-
-# Unpack into a staging directory first. Extracting straight over a running
-# install leaves a half-updated tree if the archive is truncated, and there is
-# then nothing to roll back to.
-STAGE=$(mktemp -d)
-tar -xzf /tmp/romarr-update.tar.gz -C "$STAGE" --strip-components=1 \
-  || die "Archive did not unpack; the old install is untouched."
-rm -f /tmp/romarr-update.tar.gz
-
-# The same refusal the installer makes, for the same reason. The published
-# release can lag main by a long way -- v0.7.0 was tagged before authentication
-# existed -- and an *update* that silently replaces an authenticated build with
-# an open one is worse than an install that does, because the operator has
-# already decided this thing is safe to leave running.
-if [[ ! -f "${STAGE}/romarr/auth.py" ]]; then
-  rm -rf "$STAGE"
-  die "The ${SOURCE} of ${REPO} has no romarr/auth.py -- it predates
-   authentication, and installing it would leave this ROMarrNG answering
-   anyone who reaches the port. Nothing was changed."
-fi
-
-AFTER=$(version_at "$STAGE")
-if [[ -n "$BEFORE" && "$BEFORE" == "$AFTER" ]]; then
-  info "Already on ${BEFORE} (from ${SOURCE}); reinstalling it anyway"
+  rm -rf "$WORK"
+  if (( ! SWITCHED )); then rm -rf "$STAGE"; fi
+  exit "$result"
+}
+trap cleanup EXIT
+# Any API/rate-limit/network error fails closed. Main is never an implicit fallback.
+if [[ -n "${ROMARR_UPDATE_REF:-}" ]]; then
+  [[ "$ROMARR_UPDATE_REF" =~ ^[A-Za-z0-9][A-Za-z0-9._-]*$ ]]
+  REF="$ROMARR_UPDATE_REF"
 else
-  info "Updating ${BEFORE:-unknown} -> ${AFTER:-unknown} (from ${SOURCE})"
+  curl --fail --silent --show-error --proto '=https' --max-time 60 "https://api.github.com/repos/${REPO}/releases/latest" > "$WORK/release.json"
+  REF=$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["tag_name"])' "$WORK/release.json")
+  [[ "$REF" =~ ^v[0-9][A-Za-z0-9._-]*$ ]]
 fi
-
-# Only now. Every check above can fail, and each one used to happen after the
-# service had already been stopped -- so a download that 404'd or an archive
-# that would not unpack left ROMarrNG down for a reason that had nothing to do
-# with ROMarrNG.
-systemctl stop romarr 2>/dev/null || true
-
-# The package directory is replaced, not merged. `cp -a` over the top leaves
-# any module that upstream deleted sitting in an importable package forever,
-# which is how a version reports itself as new while still running old code.
-rm -rf "${ROOT}/romarr"
-cp -a "$STAGE"/. "$ROOT"/
-rm -rf "$STAGE"
-
-for keep in romarr.json .env; do
-  [[ -f "${BACKUP}/${keep}" ]] && cp -a "${BACKUP}/${keep}" "${ROOT}/"
+curl --fail --silent --show-error --location --proto '=https' --proto-redir '=https' --max-time 300 "https://github.com/${REPO}/archive/$REF.tar.gz" -o "$WORK/release.tar.gz"
+tar -xzf "$WORK/release.tar.gz" -C "$STAGE" --strip-components=1 --no-same-owner
+[[ -f "$STAGE/romarr/auth.py" && -f "$STAGE/requirements.lock" && -f "$STAGE/proxmox/install/configure-service.sh" ]]
+python3 -m venv "$STAGE/.venv"
+"$STAGE/.venv/bin/pip" install --require-hashes -r "$STAGE/requirements-build.lock"
+"$STAGE/.venv/bin/pip" install --no-build-isolation --require-hashes -r "$STAGE/requirements.lock"
+(cd "$STAGE" && .venv/bin/python -c 'import romarr.app, rom_hub')
+AFTER=$(version_at "$STAGE")
+# Custom backends are preserved by configure-service.sh, outside the release tree.
+# Backup happens AFTER the service stops; never restore stale live-state copies.
+systemctl stop romarr
+STOPPED=1
+BACKUP="$ROOT/backups/$(date +%s)-$$"
+install -d -m 0700 "$BACKUP"
+for state in "$ROOT/romarr.json" "$DATA/romarr.json" "$CONF/romarr.env" "$ROOT/.env"; do
+  if [[ -f "$state" ]]; then cp -a --parents "$state" "$BACKUP/"; fi
 done
-[[ -d "${BACKUP}/backends" ]] && cp -a "${BACKUP}/backends" "${ROOT}/"
-msg "Unpacked"
-
-info "Updating dependencies"
-"${ROOT}/.venv/bin/pip" install --quiet --upgrade -r "${ROOT}/requirements.txt" \
-  || die "Dependency update failed. State is in ${BACKUP}."
-msg "Dependencies updated"
-
+ln -s "$STAGE" "$ROOT/.next-current"
+mv -Tf "$ROOT/.next-current" "$ROOT/current"
+SWITCHED=1
+ROOT="$ROOT" DATA="$DATA" CONF="$CONF" UNIT="$UNIT" bash "$STAGE/proxmox/install/configure-service.sh"
+CONFIGURED=1
 systemctl start romarr
-
-PORT=$(grep -oP '(?<=^ROMARR_PORT=)\d+' "${ROOT}/.env" 2>/dev/null || echo 6868)
 for _ in $(seq 1 20); do
-  if curl -fsS -o /dev/null "http://127.0.0.1:${PORT}/api/health" 2>/dev/null; then
-    msg "ROMarrNG ${AFTER:-unknown} is up on port ${PORT} (was ${BEFORE:-unknown})"
-    echo
-    echo " Rolled forward. The previous build is in ${BACKUP} if you want it"
-    echo " back; delete that directory once you are happy."
+  if (cd "$ROOT/current" && ROMARR_ENV_FILE="$CONF/romarr.env" .venv/bin/python -c 'import os, shlex; from pathlib import Path; from romarr.healthcheck import check
+for line in Path(os.environ["ROMARR_ENV_FILE"]).read_text().splitlines():
+ if line.strip() and not line.lstrip().startswith("#") and "=" in line:
+  k,v=line.split("=",1); parts=shlex.split(v); os.environ[k]=parts[0] if parts else ""
+check()') 2>/dev/null; then
+    echo "ROMarrNG $AFTER (was $BEFORE; ref $REF) is healthy. Previous build: $OLD; stopped-state backup: $BACKUP"
     exit 0
   fi
   sleep 2
 done
-
-# It did not answer. Put back what was working rather than leaving a container
-# that is down and a directory of files the operator has to reassemble by hand.
-info "New build did not answer -- rolling back to ${BEFORE:-the previous build}"
-systemctl stop romarr 2>/dev/null || true
-if [[ -d "${BACKUP}/romarr" ]]; then
-  rm -rf "${ROOT}/romarr"
-  cp -a "${BACKUP}/romarr" "${ROOT}/"
-  systemctl start romarr
-  for _ in $(seq 1 20); do
-    if curl -fsS -o /dev/null "http://127.0.0.1:${PORT}/api/health" 2>/dev/null; then
-      die "Update failed and was rolled back. ROMarrNG ${BEFORE:-unknown} is
-   running again. The build that would not start is not kept -- fetch it
-   again once the cause is known.
-   Look at:  journalctl -u romarr -n 50 --no-pager"
-    fi
-    sleep 2
-  done
-fi
-
-die "ROMarrNG did not come back up, and the rollback did not either. State is
-   in ${BACKUP} -- romarr.json and .env there are intact.
-   Look at:  journalctl -u romarr -n 50 --no-pager"
+echo 'New service did not pass its health check.' >&2
+exit 1
