@@ -107,10 +107,10 @@ jobs:
         run: ./scripts/security-scan-local.sh --trivy-only --ci
 
   dependency-review:
-    if: github.event_name == 'pull_request'
     runs-on: ubuntu-24.04
     steps:
       - name: Review dependency changes
+        if: github.event_name == 'pull_request'
         uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
         with:
           fail-on-severity: moderate
@@ -270,7 +270,7 @@ jobs:
         )
       ) &&
       (
-        always() && needs.test.result == 'success' && needs.acquisition-proof.result == 'success' && needs.security-semgrep.result == 'success' && needs.security-trivy.result == 'success' && (github.event_name != 'pull_request' || needs.dependency-review.result == 'success') && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped') && (github.event_name != 'push' || github.ref == 'refs/heads/main' || inputs.release_tag != '') && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')
+        always() && needs.test.result == 'success' && needs.acquisition-proof.result == 'success' && needs.security-semgrep.result == 'success' && needs.security-trivy.result == 'success' && needs.dependency-review.result == 'success' && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped') && (github.event_name != 'push' || github.ref == 'refs/heads/main' || inputs.release_tag != '') && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')
       )
     strategy:
       fail-fast: false
