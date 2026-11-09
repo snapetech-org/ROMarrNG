@@ -1,4 +1,4 @@
-# ng-runner-policy: private-jit-only-v1
+# ng-runner-policy: hosted-compatible-v1
 name: docker
 
 # Tests gate the image. A published `latest` that fails its own suite is worse
@@ -16,9 +16,9 @@ on:
         options: [publish]
         required: true
       runner_pool:
-        description: Required private JIT runner pool
+        description: Compatible hosted runner pool
         type: choice
-        options: [private]
+        options: [public]
         required: true
       release_tag:
         description: Existing v* release tag on the default branch
@@ -44,13 +44,13 @@ jobs:
         (
           github.ref == 'refs/heads/main' &&
           inputs.action == 'publish' &&
-          inputs.runner_pool == 'private'
+          inputs.runner_pool == 'public'
         )
       ) &&
       (
         (github.event_name == 'push' && github.ref == 'refs/heads/main') || (github.event_name == 'pull_request' && github.event.pull_request.user.type != 'Bot')
       )
-    runs-on: ${{ fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}","gha-{0}-release-notes"]}}', github.run_id)) }}
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -87,20 +87,20 @@ jobs:
           python scripts/release_notes.py check-changelog-tags
 
   test:
-    # Pull requests stay hosted; trusted main validation uses the isolated shared pool.
+    # Compatible Linux validation uses a hosted runner.
     if: >-
       (
         github.event_name != 'workflow_dispatch' ||
         (
           github.ref == 'refs/heads/main' &&
           inputs.action == 'publish' &&
-          inputs.runner_pool == 'private'
+          inputs.runner_pool == 'public'
         )
       ) &&
       (
         true
       )
-    runs-on: ${{ fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}","gha-{0}-test"]}}', github.run_id)) }}
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -139,13 +139,13 @@ jobs:
         (
           github.ref == 'refs/heads/main' &&
           inputs.action == 'publish' &&
-          inputs.runner_pool == 'private'
+          inputs.runner_pool == 'public'
         )
       ) &&
       (
         github.event_name != 'push' || github.ref == 'refs/heads/main' || inputs.release_tag != ''
       )
-    runs-on: ${{ fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}","gha-{0}-{1}-acquisition-proof"]}}', github.run_id, strategy.job-index)) }}
+    runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
       matrix:
@@ -172,13 +172,13 @@ jobs:
         (
           github.ref == 'refs/heads/main' &&
           inputs.action == 'publish' &&
-          inputs.runner_pool == 'private'
+          inputs.runner_pool == 'public'
         )
       ) &&
       (
         always() && needs.test.result == 'success' && needs.acquisition-proof.result == 'success' && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped') && (github.event_name != 'push' || github.ref == 'refs/heads/main' || inputs.release_tag != '') && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')
       )
-    runs-on: ${{ fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}","gha-{0}-image"]}}', github.run_id)) }}
+    runs-on: ubuntu-24.04
     env:
       BUILDKIT_EGRESS_PROXY: ${{ (contains(fromJSON('["push","workflow_dispatch","schedule","release","repository_dispatch"]'), github.event_name) && (github.ref == 'refs/heads/main' || ((github.event_name == 'workflow_dispatch' && inputs.release_tag != '') && startsWith(inputs.release_tag, 'v')))) && 'http://10.0.2.100:3128' || '' }}
     permissions:
@@ -351,13 +351,13 @@ jobs:
         (
           github.ref == 'refs/heads/main' &&
           inputs.action == 'publish' &&
-          inputs.runner_pool == 'private'
+          inputs.runner_pool == 'public'
         )
       ) &&
       (
         always() && needs.image.result == 'success' && github.event_name != 'pull_request' && (github.ref == 'refs/heads/main' || inputs.release_tag != '') && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')
       )
-    runs-on: ${{ fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}","gha-{0}-image_publish"]}}', github.run_id)) }}
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -455,13 +455,13 @@ jobs:
         (
           github.ref == 'refs/heads/main' &&
           inputs.action == 'publish' &&
-          inputs.runner_pool == 'private'
+          inputs.runner_pool == 'public'
         )
       ) &&
       (
         always() && needs.image.result == 'success' && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped') && github.event_name == 'pull_request'
       )
-    runs-on: ${{ fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}","gha-{0}-image-browser"]}}', github.run_id)) }}
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
     steps:
@@ -494,13 +494,13 @@ jobs:
         (
           github.ref == 'refs/heads/main' &&
           inputs.action == 'publish' &&
-          inputs.runner_pool == 'private'
+          inputs.runner_pool == 'public'
         )
       ) &&
       (
         always() && github.event_name != 'pull_request' && needs.image.result == 'success' && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped') && (github.ref == 'refs/heads/main' || inputs.release_tag != '') && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')
       )
-    runs-on: ${{ fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}","gha-{0}-image_browser_publish"]}}', github.run_id)) }}
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
       packages: write
@@ -597,13 +597,13 @@ jobs:
         (
           github.ref == 'refs/heads/main' &&
           inputs.action == 'publish' &&
-          inputs.runner_pool == 'private'
+          inputs.runner_pool == 'public'
         )
       ) &&
       (
         always() && github.event_name != 'pull_request' && (inputs.release_tag != '' || (needs.image_publish.result == 'success' && needs.image_browser_publish.result == 'success'))
       )
-    runs-on: ${{ fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}","gha-{0}-verify-stable-image-tags"]}}', github.run_id)) }}
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
     steps:
@@ -634,14 +634,14 @@ jobs:
         (
           github.ref == 'refs/heads/main' &&
           inputs.action == 'publish' &&
-          inputs.runner_pool == 'private'
+          inputs.runner_pool == 'public'
         )
       ) &&
       (
         always() && inputs.release_tag != '' && needs.image_publish.result == 'success' && needs.image_browser_publish.result == 'success' && needs.verify-stable-image-tags.result == 'success'
       )
     needs: [image_publish, image_browser_publish, verify-stable-image-tags]
-    runs-on: ${{ fromJSON(format('{{"group":"ng-shared-main-jit","labels":["self-hosted","linux","x64","ng-shared-main-romarrng","ng-main-run-{0}","gha-{0}-release"]}}', github.run_id)) }}
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
 
