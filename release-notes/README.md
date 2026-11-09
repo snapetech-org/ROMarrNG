@@ -3,7 +3,7 @@
 For any user-facing change, add one structured fragment under `release-notes/` describing it. A
 single fragment may cover related user-facing changes in the same pull request. Keep shipped fragments unchanged. Release preparation
 adds these fragments to `CHANGELOG.md`; the tag workflow includes them in the
-GitHub Release body and ROMarrNG announcement in the ROMarrNG Discord channel.
+GitHub Release body and full announcement in the #changelogs Discord channel, followed by a link in #romarrng.
 
 Use a short, user-facing description rather than an implementation detail:
 
@@ -75,8 +75,22 @@ repository tags predate the published release history.
 
 Use the actual next version, previous stable tag, and release date. Commit the
 version and changelog preparation before creating the matching `v$VERSION`
-tag. The tag workflow publishes the release and sends
-the same release notes to Discord. `DISCORD_RELEASE_WEBHOOK` in the ROMarrNG
-repository must point to the dedicated ROMarrNG release webhook. The release-preparation commit is internal-only and needs no fragment. Use the
+tag. The publication workflow publishes the release and sends the full notes
+to #changelogs, then posts a direct link to that announcement in #romarrng.
+`DISCORD_RELEASE_WEBHOOK` in the ROMarrNG repository must point to the
+#changelogs webhook. The release-preparation commit is internal-only and needs
+no fragment. Use the
 internal-only template option or the PR marker, and include the commit marker when
 the main-branch check reads the squash-merge commit body.
+
+`DISCORD_ROMARRNG_WEBHOOK` stores the separate #romarrng webhook. The workflow
+waits for all changelog messages to be accepted before posting the short link
+message in #romarrng. It links to the first changelog message and disables
+mentions. Both webhook URLs belong only in repository secrets.
+
+Discord receipts are retained as a 14-day workflow artifact, including accepted
+message IDs if a later step fails. Reusing the same receipt file resumes a local
+retry without reposting accepted messages. A fresh workflow attempt needs the
+previous receipts restored before replaying delivery; do not blindly rerun a
+completed announcement. Discord trims outer whitespace, so confirmation accepts
+that normalization while still checking message text and destination channel.

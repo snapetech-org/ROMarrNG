@@ -798,9 +798,10 @@ jobs:
           body_path: release-notes.md
           draft: false
 
-      - name: Announce release to Discord
+      - name: Announce release and link it from ROMarrNG
         env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
+          DISCORD_RELEASE_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
+          DISCORD_ROMARRNG_WEBHOOK: ${{ secrets.DISCORD_ROMARRNG_WEBHOOK }}
           TAG: ${{ inputs.release_tag }}
           IMAGE: ghcr.io/${{ github.repository_owner }}/romarrng
           RELEASE_URL: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ inputs.release_tag }}
@@ -808,61 +809,19 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test -n "$DISCORD_WEBHOOK" || {
-            echo 'DISCORD_RELEASE_WEBHOOK is required to complete a release.' >&2
-            exit 1
-          }
-          version="${TAG#v}"
-          image_ref="${IMAGE}:${version}"
-          python scripts/release_notes.py split-discord --input release-notes.md > chunks.json
-          chunk_count="$(jq 'length' chunks.json)"
-          (( chunk_count > 0 )) || {
-            echo 'The generated release notes are empty.' >&2
-            exit 1
-          }
+          python scripts/announce_release.py \
+            --notes release-notes.md \
+            --tag "$TAG" \
+            --image "${IMAGE}:${TAG#v}" \
+            --release-url "$RELEASE_URL" \
+            --workflow-url "$WORKFLOW_URL" \
+            --receipt-file "$RUNNER_TEMP/discord-release-receipts.json"
 
-          webhook_url="$DISCORD_WEBHOOK"
-          if [[ "$webhook_url" == *'?'* ]]; then
-            webhook_url+='&wait=true'
-          else
-            webhook_url+='?wait=true'
-          fi
-
-          for ((index = 0; index < chunk_count; index++)); do
-            description="$(jq -r --argjson index "$index" '.[$index]' chunks.json)"
-            number=$((index + 1))
-            title="ROMarrNG ${TAG} release notes (${number}/${chunk_count})"
-            jq -n \
-              --arg username "ROMarrNG Releases" \
-              --arg title "$title" \
-              --arg url "$RELEASE_URL" \
-              --arg description "$description" \
-              --arg image "$image_ref" \
-              --arg workflow "$WORKFLOW_URL" \
-              --argjson first "$index" \
-              '{
-                username: $username,
-                embeds: [{
-                  title: $title,
-                  url: $url,
-                  description: $description,
-                  color: 5814783,
-                  fields: (if $first == 0 then [
-                    { name: "Image", value: $image, inline: false },
-                    { name: "Workflow", value: $workflow, inline: false }
-                  ] else [] end)
-                }]
-              }' > payload.json
-
-            response="$(curl --fail --silent --show-error \
-              -H "Content-Type: application/json" \
-              -X POST \
-              --data @payload.json \
-              "$webhook_url")"
-            jq -e --arg description "$description" \
-              '.id != null and .embeds[0].description == $description' \
-              <<< "$response" > /dev/null
-            if (( number < chunk_count )); then
-              sleep 1
-            fi
-          done
+      - name: Retain Discord announcement receipts
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: discord-release-receipts-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/discord-release-receipts.json
+          if-no-files-found: ignore
+          retention-days: 14
