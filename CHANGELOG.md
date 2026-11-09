@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.14.18] - 2026-11-09
+
+### User-facing changes
+
+#### Fixed
+
+- **Release Pipeline:** Release preparation now renders the public changelog directly from its structured fragment, preserving the hosted publication fixes and complete upstream attribution in the final GitHub release body.
+
 ## [Unreleased]
 
 ## [0.14.17] - 2026-11-09
