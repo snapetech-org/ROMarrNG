@@ -25,6 +25,8 @@ ROM-031 was excluded from the original findings, so numbering skips it.
   and is not covered by package-name advisory matching.
 - Semgrep community rules, Trivy dependency/secret/configuration scanning,
   workflow validation, Python compilation, and whitespace checks are release gates.
+- Windows frontend contracts passed on windows-2025 (run 42664910034), covering
+  actual plugin code with SDK stubs and blocked outbound networking.
 - Native AMD64/ARM64 Docker acquisition/startup and Windows frontend contract
   jobs run in CI. Their execution status is reported with the delivery commit;
   adding a job alone is not evidence that it passed.
@@ -74,7 +76,7 @@ production verification boundaries above remain applicable to every item.
 | ROM-028 | Accepted Landlock ABI 1/2 leaves truncation outside the sandbox unrestricted | Require Landlock ABI 3 or newer; reject ABI 1/2 rather than accepting missing truncation protection. | romarr/plugin_runtime/landlock.py; test_old_landlock_abis_fail_closed |
 | ROM-029 | Advertised ARMv7 images cannot initialize the required Landlock sandbox | Remove unsupported ARMv7 from image/add-on support. Validate AMD64 and ARM64 on native runners, including packaged sandbox/acquisition proofs. | Dockerfiles; .github/workflows/docker.yml; homeassistant/romarr/config.yaml |
 | ROM-030 | Locally launched Chromium explicitly disables its process sandbox | Enable Chromium sandboxing and remove --no-sandbox. There is no automatic unsandboxed browser fallback. | romarr/browser.py; tests/test_new_clients.py |
-| ROM-032 | Validation is manual-only and release/dependency review jobs are unreachable | Run tests, acquisition proofs, image validation, scanners, and Windows frontend contracts on push/PR. Enable dependency review for real PR events; retain explicit release publication. | .github/workflows; tests/test_workflow_runner_policy.py |
+| ROM-032 | Validation is manual-only and release/dependency review jobs are unreachable | Run tests, acquisition proofs, image validation, scanners, and Windows frontend contracts on push/PR. Put enforcing scanner/dependency gates in the active Docker workflow because legacy scanner workflows are disabled in repository settings. Enable dependency review for real PR events; retain explicit release publication. | .github/workflows; tests/test_workflow_runner_policy.py |
 | ROM-033 | Security scans report findings without failing, and omit unfixed vulnerabilities | Make Semgrep findings and Trivy HIGH/CRITICAL findings fail, including unfixed advisories. Keep only documented, narrowly scoped exceptions. | scripts/security-scan-local.sh; .trivyignore.yaml; docs/security-scanning.md |
 | ROM-034 | Hosted image builds still require a hardcoded private-network proxy | Retain the hosted-network fix already landed in 0.14.14; no private BuildKit proxy is required. | Upstream repository baseline b98fe93; Docker build workflow |
 | ROM-035 | Published builds are not reproducible from the audited source revision alone | Hash-lock all dependency closures and immutable ROM Hub source; pin base image and Debian indexes. Publish saved validated image artifacts rather than rebuilding after checks. | requirements*.lock; Dockerfiles; docker/debian.sources; .github/workflows/docker.yml |

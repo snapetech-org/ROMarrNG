@@ -6,6 +6,8 @@ Semgrep runs on supported source and security configuration. It defaults to two 
 
 The installed pre-commit hook runs Semgrep on staged source/config files; Trivy runs during full local scans and any configured CI workflow.
 
+The active Docker validation workflow gates images on scanners and PR dependency
+review; legacy standalone workflows are disabled in repository settings.
 Pushes to `main` and pull requests run Semgrep CE 1.184.0 with current
 `p/default` rules and Trivy 0.76.2 with current advisory data. Scanner versions
 are reviewed explicitly rather than following mutable `latest` tags. Findings

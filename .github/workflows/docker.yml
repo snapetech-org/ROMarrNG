@@ -39,6 +39,82 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Repository-level switches had disabled the legacy scanner workflows.
+  # Keep publication gates in this active workflow so push/PR cannot skip them.
+  security-semgrep:
+    name: Enforcing Semgrep scan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Verify the isolated Docker daemon
+        run: docker info
+
+      - name: Scan with the current Semgrep CE image and p/default rules
+        run: |
+          docker run --rm --network host --user "$(id -u):$(id -g)" \
+            -e HOME=/tmp -e EIO_BACKEND=posix \
+            -e HTTP_PROXY -e HTTPS_PROXY -e http_proxy -e https_proxy \
+            -e NO_PROXY -e no_proxy \
+            -e REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
+            -e CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt \
+            -e SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
+            -v /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro \
+            -v "$GITHUB_WORKSPACE:/src" -w /src semgrep/semgrep:1.184.0 \
+            semgrep scan --error --config p/default --metrics=off --jobs 2 --timeout 30 --timeout-threshold 0 \
+              --json-output semgrep.json --sarif-output semgrep.sarif .
+
+      - name: Report finding count
+        if: always() && hashFiles('semgrep.json') != ''
+        run: |
+          jq -r '"Semgrep CE reported \(.results | length) finding(s). Review semgrep.sarif and the scan log."' semgrep.json
+
+      - name: Retain scan report (semgrep)
+        if: >-
+          always() && hashFiles('semgrep.sarif') != '' &&
+          (github.event_name != 'pull_request' ||
+          github.event.pull_request.head.repo.full_name == github.repository)
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: scan-report-semgrep-${{ github.job }}-${{ strategy.job-index }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            semgrep.sarif
+            semgrep.json
+          if-no-files-found: warn
+          retention-days: 14
+
+  security-trivy:
+    name: Enforcing Trivy scan
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Install the latest Trivy release
+        uses: aquasecurity/setup-trivy@81e514348e19b6112ce2a7e3ecbafe19c1e1f567 # latest
+        with:
+          version: v0.76.2
+          token: ${{ github.token }}
+
+      - name: Scan applicable repository files
+        run: ./scripts/security-scan-local.sh --trivy-only --ci
+
+  dependency-review:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Review dependency changes
+        uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
+        with:
+          fail-on-severity: moderate
+
   release-notes:
     name: Release-note contract
     if: >-
@@ -183,7 +259,7 @@ jobs:
           /proof/prove_upstream_acquisition.py
 
   image:
-    needs: [test, release-notes, acquisition-proof]
+    needs: [test, release-notes, acquisition-proof, security-semgrep, security-trivy, dependency-review]
     if: >-
       (
         github.event_name != 'workflow_dispatch' ||
@@ -194,7 +270,7 @@ jobs:
         )
       ) &&
       (
-        always() && needs.test.result == 'success' && needs.acquisition-proof.result == 'success' && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped') && (github.event_name != 'push' || github.ref == 'refs/heads/main' || inputs.release_tag != '') && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')
+        always() && needs.test.result == 'success' && needs.acquisition-proof.result == 'success' && needs.security-semgrep.result == 'success' && needs.security-trivy.result == 'success' && (github.event_name != 'pull_request' || needs.dependency-review.result == 'success') && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped') && (github.event_name != 'push' || github.ref == 'refs/heads/main' || inputs.release_tag != '') && (github.event_name != 'workflow_dispatch' || github.ref == 'refs/heads/main')
       )
     strategy:
       fail-fast: false

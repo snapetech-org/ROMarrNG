@@ -40,7 +40,7 @@ def main():
         app_state = root / "romarr.json"
         service = ROMarr({"ROMARR_DATA": str(app_state),
                           "ROMARR_API_KEY": "proof-api-key", "LIBRARY_KIND": "folder",
-                          "LIBRARY_PATH": str(root / "library")})
+                          "LIBRARY_PATH": str(root / "library")}, start_background=False)
         service.store.settings["_host_only_proof"] = "host-only-proof-key"
         service.store.save()
         protected_state_mode = stat.S_IMODE(app_state.stat().st_mode)
@@ -152,6 +152,22 @@ class Provider:
                 pass
             else:
                 raise AssertionError("plugin read host state: " + key)
+        try:
+            os.kill(os.getppid(), 0)
+        except PermissionError:
+            pass
+        else:
+            raise AssertionError("plugin can signal its parent")
+        for operation in (
+            lambda: os.truncate(ctx.config["state_path"], 0),
+            lambda: os.open(ctx.config["state_path"], os.O_RDONLY | os.O_TRUNC),
+        ):
+            try:
+                operation()
+            except PermissionError:
+                pass
+            else:
+                raise AssertionError("plugin can truncate protected host state")
         for path in (ctx.config["state_path"], os.environ["TMPDIR"]):
             try:
                 os.chmod(path, 0)
@@ -328,6 +344,7 @@ urllib.request.urlopen(
                 assert call(f"/requests/proof-{number}/assets/{asset['id']}", raw=True) == payload
             print("PASS: sandbox sockets, io_uring, metadata changes and process forks blocked; bounded tmpfs scratch; host credentials isolated; plugin secret and verified asset resolved; broker HTTPS; shared Hub download; strict DAT catalog; two SeerrNG requests imported and streamed exact bytes")
         finally:
+            service.close()
             api.shutdown()
             api.server_close()
             source.shutdown()
