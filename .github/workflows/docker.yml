@@ -114,6 +114,9 @@ jobs:
         uses: actions/dependency-review-action@a1d282b36b6f3519aa1f3fc636f609c47dddb294 # v5.0.0
         with:
           fail-on-severity: moderate
+      - name: Dependency review is not applicable
+        if: github.event_name != 'pull_request'
+        run: echo "Dependency review runs on pull requests only."
 
   release-notes:
     name: Release-note contract
