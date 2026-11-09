@@ -313,7 +313,7 @@ bundles for translation contributors, with shared terminology in the
 | **Indexer** | Prowlarr, or any Torznab / Newznab indexer, or a plain torrent RSS feed |
 | **Download client** | 26 of them — qBittorrent, Transmission, Deluge, rTorrent, Synology DS, aria2, Flood, Freebox, Hadouken, uTorrent, porla, Vuze, BiglyBT; Real-Debrid, AllDebrid, Premiumize, TorBox, Debrid-Link, Offcloud, put.io, Linksnappy; SABnzbd, NZBGet, NZBVortex; or a torrent/usenet blackhole folder for anything not on the list. ROM-site plugins need none of them — see [Downloading from a ROM site](#downloading-from-a-rom-site) |
 | **Game library** | RomM, Gaseous, Retrom, or a directory on disk |
-| **Runtime** | Docker, Home Assistant, or Python 3.11+ |
+| **Runtime** | Docker, Home Assistant, or Python 3.12+ on Linux |
 
 ---
 

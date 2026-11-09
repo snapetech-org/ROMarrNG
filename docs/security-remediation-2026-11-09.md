@@ -134,3 +134,36 @@ before 2027-02-09. That exception covers only DS-0002 for the two Dockerfiles;
 there is no waived package vulnerability. Branch protection remains an accepted
 operator decision. Runtime secrets continue to rely on filesystem permissions;
 this change does not claim encryption of active state or multi-user authorization.
+
+## Delivery verification record
+
+Code revision: [`40bf6ff`](https://github.com/snapetech-org/ROMarrNG/commit/40bf6ff4dfa166cc21a14896dd6087d268e5a0ab).
+Status observed on 2026-11-09 at 17:52 UTC; later documentation-only commits do
+not change the tested application or workflow implementation.
+
+| Check | Observed result |
+|---|---|
+| Final local full suite | 2,437 passed, 102 subtests passed; six capability skips, one external-network test deselected |
+| Final native ARM64 full suite | 2,438 passed, 102 subtests passed; five capability skips, one external-network test deselected |
+| Standard image acquisition, AMD64 and ARM64 | Both passed on the final code |
+| Browser image acquisition, AMD64 and ARM64 | Both passed on the final code |
+| Windows frontend contracts | Passed on the final code |
+| Semgrep | Passed on final code; local changed-file scans also had zero findings and zero engine errors |
+| Local Trivy filesystem scan | Zero HIGH/CRITICAL dependency, secret, or unsuppressed configuration findings |
+| Enforcing negative fixtures | Semgrep and Trivy each returned exit status 1 for deliberately unsafe scratch fixtures |
+| Final AMD64 suite, Trivy CI, release-note CI | Queued at this observation; not represented as passed |
+| Final image boot/export jobs | Waiting for their prerequisite jobs at this observation |
+
+Track the exact code revision's [Linux checks](https://github.com/snapetech-org/ROMarrNG/actions/runs/42667278471)
+and [Windows contracts](https://github.com/snapetech-org/ROMarrNG/actions/runs/42667278944).
+The preceding revision's [Linux run](https://github.com/snapetech-org/ROMarrNG/actions/runs/42665393974)
+already passed both native full suites, all four acquisition proofs, both
+security scans, and both standard-image boot/export jobs. These earlier results
+are supplementary evidence, not substitutes for pending checks on the final code.
+
+The remaining local skips concern real libarchive extraction (three fixtures),
+Landlock support in this host (covered by native CI), an optional health-report
+hook, and a local Chromium installation. The native suite can exercise Landlock.
+Desktop SDK stubs and simulated Proxmox system commands remain the limits stated
+above. Production upgrades, live accounts, and an actual Chromium hostile-page
+exercise were not performed.
