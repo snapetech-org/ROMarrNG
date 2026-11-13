@@ -18,7 +18,7 @@ def _block_playwright_import(monkeypatch):
     monkeypatch.setattr(builtins, "__import__", importing)
 
 
-def test_musl_install_points_to_the_romarrng_browser_image(monkeypatch):
+def test_musl_install_points_to_the_main_romarrng_image(monkeypatch):
     _block_playwright_import(monkeypatch)
     monkeypatch.setattr(browser, "_is_musl", lambda: True)
 
@@ -27,8 +27,8 @@ def test_musl_install_points_to_the_romarrng_browser_image(monkeypatch):
 
     message = str(error.value)
     assert "musl" in message
-    assert "ghcr.io/snapetech-org/romarrng:browser" in message
-    assert "playwright run-server" in message
+    assert "ghcr.io/snapetech-org/romarrng:latest" in message
+    assert "Chromium" in message
 
 
 def test_glibc_install_keeps_the_local_playwright_instruction(monkeypatch):
@@ -39,4 +39,5 @@ def test_glibc_install_keeps_the_local_playwright_instruction(monkeypatch):
         browser._playwright()
 
     assert "musl" not in str(error.value)
-    assert "pip install playwright" in str(error.value)
+    assert "install the project requirements" in str(error.value)
+    assert "playwright install --with-deps chromium" in str(error.value)

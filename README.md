@@ -40,9 +40,9 @@ the standalone `ghcr.io/snapetech-org/romarrng:latest` image. Map persistent
 appdata to `/config`, your game library to `/roms`, and completed downloads to
 `/downloads`. Open the web interface on port 6868 to set your password and
 configure indexers and a download client. Connect SeerrNG if you want its
-request and catalog integration. Headless Browser downloads use the
-[ROMarrNG Browser template](packaging/unraid/romarrng-browser.xml) and a
-separate Playwright server; ordinary direct downloads need no extra container.
+request and catalog integration. Headless Browser downloads use the same
+ROMarrNG image; leave **Browser Host** blank to launch its bundled Chromium.
+No second ROMarrNG container or browser-server service is needed.
 For package or integration support, use the
 [SeerrNG issue tracker](https://github.com/snapetech-org/seerrng/issues).
 
@@ -433,9 +433,8 @@ docker run -d --name romarr \
 Open `http://localhost:6868` and set a password.
 
 The rolling tags `latest`, `main`, `master`, and `stable` all point to the
-latest versioned release. The browser image uses matching `browser`,
-`main-browser`, `master-browser`, `latest-browser`, and `stable-browser` tags.
-Main-branch builds use `sha-*` tags so they do not move the stable aliases.
+latest versioned release. Main-branch builds use `sha-*` tags so they do not
+move the stable aliases.
 
 `--restart unless-stopped` is not decoration: without it ROMarr does not come
 back after a host reboot, and the first sign is a week of missed scheduled
@@ -946,43 +945,23 @@ the finished answer for such a site. `tests/test_site_downloader.py` asserts
 the absence of the evasion machinery, so the promise fails the build rather
 than eroding quietly.
 
-**Installing the browser mode.** The default Docker image stays small and does
-not include Playwright. Direct downloads work without it. The browser image
-adds the Playwright Python client on Debian but deliberately contains no
-Chromium; it connects to a separate browser server. Keep the client and server
-on the same Playwright version (the current image uses `1.62.0`). It is
-published as `ghcr.io/snapetech-org/romarrng:browser` for AMD64 and ARM64.
+**Browser downloads.** The main ROMarrNG image includes the pinned Playwright
+client and its matching Chromium build for AMD64 and ARM64. Select the
+**Headless Browser** download client and leave **Browser Host** blank. The
+browser runs inside ROMarrNG and saves files to the configured **Save Path**;
+direct HTTP downloads continue to work as before. Unraid uses the same
+ROMarrNG template and image.
 
-On Unraid, use the [ROMarrNG Browser template](packaging/unraid/romarrng-browser.xml)
-instead of the standard template. It uses the same `/config` appdata and port,
-so stop the standard container before switching. Start the matching browser
-server on Unraid:
+For a source install, install the project dependencies and matching Chromium:
 
 ```bash
-docker run -d --name romarrng-playwright --restart unless-stopped \
-  -p 3000:3000 --init --ipc=host \
-  mcr.microsoft.com/playwright:v1.62.0-noble \
-  npx -y playwright@1.62.0 run-server --port 3000 --host 0.0.0.0
+pip install -r requirements.txt
+python -m playwright install --with-deps chromium
 ```
 
-Set **Browser Host** to `<unraid-ip>`, **Browser Port** to `3000`, and
-**Scheme** to `ws`. The browser server can also run on another host; use that
-host's address instead. The driver streams the finished download back over
-the same socket, so the two containers need no shared download directory.
-Keep the browser server port on a trusted network and do not forward it from
-the internet.
-
-For a source or non-container install, install the client and a local Chromium:
-
-```bash
-pip install playwright==1.62.0
-playwright install --with-deps chromium
-```
-
-With a local browser installed, leave **Browser Host** blank. An `http://`
-endpoint for a bare `chromium --remote-debugging-port` also works, but that
-Chromium saves onto its own disk, so it needs a directory both can see plus a
-remote path mapping.
+Remote Playwright servers remain available for custom deployments. Keep a
+remote client and server on matching Playwright versions, and keep the browser
+control endpoint on a trusted network.
 
 **API:** `GET /api/v1/downloadclient/browser` reports whether the lane can run
 here and why not when it cannot.

@@ -159,58 +159,54 @@ def test_the_live_image_proves_a_download_bind_mount_is_unchanged():
     assert "server process did not inherit UMASK=002" in workflow
 
 
-def test_browser_image_has_a_commit_tag_for_manual_nondefault_builds():
-    workflow = (ROOT / ".github" / "workflows" / "docker.yml").read_text(
-        encoding="utf-8"
-    )
-    browser_publish_job = workflow.split(
-        "  image_browser_publish:", 1
-    )[1].split("\n  release:", 1)[0]
-    assert "workflow_dispatch:" in workflow
-    assert "type=sha,format=short,suffix=-browser" in browser_publish_job
-
-
 def test_pull_request_image_validation_has_no_publish_permissions():
     workflow = (ROOT / ".github" / "workflows" / "docker.yml").read_text(
         encoding="utf-8"
     )
+    assert "image_browser_publish" not in workflow
+    assert "image-browser:" not in workflow
+    assert "Dockerfile.browser" not in workflow
     image_validation = workflow.split("  image:\n", 1)[1].split(
         "\n  image_publish:", 1
     )[0]
-    browser_validation = workflow.split("  image-browser:\n", 1)[1].split(
-        "\n  image_browser_publish:", 1
+    publish_job = workflow.split("  image_publish:", 1)[1].split(
+        "\n  verify-stable-image-tags:", 1
     )[0]
-    publish_jobs = (
-        workflow.split("  image_publish:", 1)[1].split(
-            "\n  # Debian variant", 1
-        )[0],
-        workflow.split("  image_browser_publish:", 1)[1].split(
-            "\n  release:", 1
-        )[0],
-    )
 
-    for job in (image_validation, browser_validation):
-        assert "contents: read" in job
-        for permission in (
-            "packages: write",
-            "id-token: write",
-            "attestations: write",
-            "artifact-metadata: write",
-        ):
-            assert permission not in job
+    assert "contents: read" in image_validation
+    for permission in (
+        "packages: write",
+        "id-token: write",
+        "attestations: write",
+        "artifact-metadata: write",
+    ):
+        assert permission not in image_validation
 
-    for job in publish_jobs:
-        assert "github.event_name == 'workflow_dispatch'" in job
-        assert "refs/heads/main" in job
-        assert "inputs.release_tag != ''" in job
-        assert "github.ref == 'refs/heads/main'" in job
-        assert "packages: write" in job
-        assert "id-token: write" in job
-        assert "attestations: write" in job
-        assert "artifact-metadata: write" in job
+    for condition in (
+        "github.event_name == 'workflow_dispatch'",
+        "refs/heads/main",
+        "inputs.release_tag != ''",
+        "packages: write",
+        "id-token: write",
+        "attestations: write",
+        "artifact-metadata: write",
+    ):
+        assert condition in publish_job
 
     release_job = workflow.split("\n  release:\n", 1)[1]
-    assert "needs: [image_publish, image_browser_publish, verify-stable-image-tags]" in release_job
+    assert "needs: [image_publish, verify-stable-image-tags]" in release_job
+
+
+def test_cffi_headers_are_available_only_during_image_builds():
+    """CFFI falls back to a source build on platforms without a matching wheel."""
+    body = DOCKERFILE.read_text(encoding="utf-8")
+    stages = re.split(r"(?m)^FROM .+$", body)
+    assert len(stages) == 3, "Dockerfile should have builder and runtime stages"
+    builder, runtime = stages[1], stages[2]
+    assert "libffi-dev" in builder, (
+        "Dockerfile builder cannot compile CFFI when pip has no wheel")
+    assert "libffi-dev" not in runtime, (
+        "Dockerfile runtime should not contain build-only headers")
 
 
 def test_the_entrypoint_refuses_rather_than_letting_state_be_overwritten():
@@ -268,19 +264,6 @@ def test_the_runtime_image_can_clone_a_bundled_plugin():
     assert "command -v git" in workflow
     assert "prove_upstream_acquisition.py" in workflow
     assert "--network none" in workflow
-
-
-def test_cffi_headers_are_available_only_during_image_builds():
-    """CFFI falls back to a source build on platforms without a matching wheel."""
-    for filename in ("Dockerfile", "Dockerfile.browser"):
-        body = (ROOT / filename).read_text(encoding="utf-8")
-        stages = re.split(r"(?m)^FROM .+$", body)
-        assert len(stages) == 3, f"{filename} should have builder and runtime stages"
-        builder, runtime = stages[1], stages[2]
-        assert "libffi-dev" in builder, (
-            f"{filename} builder cannot compile CFFI when pip has no wheel")
-        assert "libffi-dev" not in runtime, (
-            f"{filename} runtime should not contain build-only headers")
 
 
 def test_the_install_guide_exists_and_the_readme_sends_people_to_it():

@@ -1935,6 +1935,28 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.add-count-selected-games-to-wanted-n.70193ad87f": {
+      "source": "Add {count} selected games to Wanted? No downloads start until you search or run the Wanted task.",
+      "sourceHash": "70193ad87f6b89e2878baf4dda8c3bbd30bb72a1e04d04b1fbade0837fa7a28e",
+      "translations": {
+        "en": "Add {count} selected games to Wanted? No downloads start until you search or run the Wanted task.",
+        "es": "¿Añadir {count} juegos seleccionados a Pendientes? No se descargarán hasta que los busques o ejecutes la tarea de Pendientes.",
+        "zh-Hans": "将选中的 {count} 款游戏加入待获取列表？只有在搜索或运行待获取任务后才会开始下载。",
+        "hi": "चुने गए {count} गेम को Wanted में जोड़ें? खोजने या Wanted कार्य चलाने तक डाउनलोड शुरू नहीं होंगे।",
+        "de": "{count} ausgewählte Spiele zu Wanted hinzufügen? Downloads starten erst, wenn du suchst oder den Wanted-Auftrag ausführst.",
+        "ja": "選択した{count}本をWantedに追加しますか？検索するかWantedタスクを実行するまでダウンロードは始まりません。",
+        "fr": "Ajouter {count} jeux sélectionnés à la liste Wanted ? Aucun téléchargement ne démarre avant une recherche ou l’exécution de la tâche Wanted.",
+        "pt-BR": "Adicionar {count} jogos selecionados a Wanted? Os downloads só começam quando você pesquisar ou executar a tarefa Wanted.",
+        "ar": "هل تريد إضافة {count} ألعاب محددة إلى قائمة Wanted؟ لن تبدأ التنزيلات حتى تبحث أو تشغّل مهمة Wanted.",
+        "ko": "선택한 게임 {count}개를 Wanted에 추가할까요? 검색하거나 Wanted 작업을 실행하기 전에는 다운로드가 시작되지 않습니다.",
+        "zh-Hant": "要將選取的 {count} 款遊戲加入 Wanted 嗎？搜尋或執行 Wanted 工作前不會開始下載。",
+        "vi": "Thêm {count} trò chơi đã chọn vào Wanted? Tải xuống chỉ bắt đầu khi bạn tìm kiếm hoặc chạy tác vụ Wanted.",
+        "id": "Tambahkan {count} game terpilih ke Wanted? Unduhan baru dimulai setelah Anda mencari atau menjalankan tugas Wanted."
+      },
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {}
+    },
     "ui.add-host-in-moonlight-or-run-command.a3ea2277be": {
       "source": "Add {host} in Moonlight, or run {command} on a desktop.",
       "sourceHash": "a3ea2277be4fc7973b4e1d6cd76ec87317721b87283bd4de67a69d0fc67660fa",
@@ -2014,6 +2036,28 @@
         "zh-Hant": "已加入待取得清單",
         "vi": "Đã thêm vào danh sách cần tìm",
         "id": "Ditambahkan ke daftar incaran"
+      },
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {}
+    },
+    "ui.added-count-to-wanted.579ab698a5": {
+      "source": "Added {count} to Wanted",
+      "sourceHash": "579ab698a58affea61b7ab6ae4e98f126ea8b91c5c114d3893ae35f62fcc6c04",
+      "translations": {
+        "en": "Added {count} to Wanted",
+        "es": "Se añadieron {count} a Pendientes",
+        "zh-Hans": "已将 {count} 款游戏加入待获取列表",
+        "hi": "{count} गेम Wanted में जोड़े गए",
+        "de": "{count} zu Wanted hinzugefügt",
+        "ja": "{count}本をWantedに追加しました",
+        "fr": "{count} ajoutés à Wanted",
+        "pt-BR": "{count} adicionados a Wanted",
+        "ar": "تمت إضافة {count} إلى Wanted",
+        "ko": "{count}개를 Wanted에 추가했습니다",
+        "zh-Hant": "已將 {count} 款遊戲加入 Wanted",
+        "vi": "Đã thêm {count} trò chơi vào Wanted",
+        "id": "{count} game ditambahkan ke Wanted"
       },
       "translationHashes": {},
       "translationStatus": {},
@@ -2733,6 +2777,28 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.apply-imported-metadata-to-the-match.b9b5915c9e": {
+      "source": "Apply imported metadata to the matched games? ROM files will not be changed.",
+      "sourceHash": "b9b5915c9e3aa56621057a7c003cd77ab0452b9ac76ad84c405082954f2575fa",
+      "translations": {
+        "en": "Apply imported metadata to the matched games? ROM files will not be changed.",
+        "ar": "Apply imported metadata to the matched games? ROM files will not be changed.",
+        "de": "Apply imported metadata to the matched games? ROM files will not be changed.",
+        "es": "Apply imported metadata to the matched games? ROM files will not be changed.",
+        "fr": "Apply imported metadata to the matched games? ROM files will not be changed.",
+        "hi": "Apply imported metadata to the matched games? ROM files will not be changed.",
+        "id": "Apply imported metadata to the matched games? ROM files will not be changed.",
+        "ja": "Apply imported metadata to the matched games? ROM files will not be changed.",
+        "ko": "Apply imported metadata to the matched games? ROM files will not be changed.",
+        "pt-BR": "Apply imported metadata to the matched games? ROM files will not be changed.",
+        "vi": "Apply imported metadata to the matched games? ROM files will not be changed.",
+        "zh-Hans": "Apply imported metadata to the matched games? ROM files will not be changed.",
+        "zh-Hant": "Apply imported metadata to the matched games? ROM files will not be changed."
+      },
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {}
+    },
     "ui.apply-count-safe-file-renames.0f6a5be597": {
       "source": "Apply {count} safe file renames?",
       "sourceHash": "0f6a5be59706bd796492b81a3c133e88a9dfdec9679db9123010681594c17993",
@@ -3253,27 +3319,6 @@
         "zh-Hant": "Bitmagnet 的 Torznab 端點。",
         "vi": "Endpoint Torznab của Bitmagnet.",
         "id": "Endpoint Torznab Bitmagnet."
-      },
-      "translationHashes": {},
-      "translationStatus": {},
-      "translationReview": {}
-    },
-    "ui.blank-launches-chromium-here-when-in.b06a3e0ae9": {
-      "source": "Blank launches Chromium here when installed. In Docker or Unraid, use the ROMarrNG browser image and a matching Playwright run-server; enter that server's address, set Browser Port to 3000 and Scheme to ws. The driver streams the finished file back, so the containers need no shared download directory.",
-      "sourceHash": "b06a3e0ae9dd7eef297220ece5aefca0957b4172f8f6688cc814104617f35fa8",
-      "translations": {
-        "es": "Si se deja vacío, inicia Chromium aquí cuando está instalado. En Docker o Unraid, usa la imagen de navegador ROMarrNG y un servidor Playwright run-server compatible; introduce la dirección del servidor, configura Browser Port en 3000 y Scheme en ws. El controlador transmite el archivo terminado de vuelta, así que los contenedores no necesitan un directorio de descargas compartido.",
-        "zh-Hans": "留空时会在本机已安装 Chromium 的情况下启动它。在 Docker 或 Unraid 中，使用 ROMarrNG 浏览器镜像及匹配的 Playwright run-server；填写该服务器地址，将 Browser Port 设为 3000、Scheme 设为 ws。驱动会将完成的文件传回，因此容器无需共享下载目录。",
-        "hi": "खाली होने पर Chromium इंस्टॉल हो तो यहीं लॉन्च होता है। Docker या Unraid में ROMarrNG browser image और मेल खाता Playwright run-server उपयोग करें; उसका पता दें, Browser Port को 3000 और Scheme को ws रखें। ड्राइवर पूरी फ़ाइल वापस भेजता है, इसलिए कंटेनरों को साझा डाउनलोड निर्देशिका की ज़रूरत नहीं।",
-        "de": "Leer starten, wenn Chromium hier installiert ist. In Docker oder Unraid das ROMarrNG-Browser-Image mit passendem Playwright-run-server verwenden; dessen Adresse eintragen, Browser Port auf 3000 und Scheme auf ws setzen. Der Treiber streamt die fertige Datei zurück, daher benötigen die Container kein gemeinsames Download-Verzeichnis.",
-        "ja": "空欄の場合、Chromiumがインストールされていればここで起動します。DockerまたはUnraidではROMarrNG browserイメージと対応するPlaywright run-serverを使い、そのサーバーのアドレスを入力し、Browser Portを3000、Schemeをwsにします。ドライバーは完了したファイルをストリーミングで返すため、コンテナ間でダウンロードディレクトリを共有する必要はありません。",
-        "fr": "Vide, Chromium est lancé ici s’il est installé. Sous Docker ou Unraid, utilisez l’image de navigateur ROMarrNG et un serveur Playwright run-server compatible ; saisissez son adresse, réglez Browser Port sur 3000 et Scheme sur ws. Le pilote renvoie le fichier terminé en flux, donc les conteneurs n’ont pas besoin d’un répertoire de téléchargement partagé.",
-        "pt-BR": "Em branco, inicia o Chromium aqui se estiver instalado. No Docker ou Unraid, use a imagem de navegador ROMarrNG e um Playwright run-server compatível; informe o endereço desse servidor, defina Browser Port como 3000 e Scheme como ws. O driver transmite o arquivo concluído de volta, então os contêineres não precisam compartilhar uma pasta de downloads.",
-        "ar": "عند تركه فارغًا، يشغّل Chromium هنا إن كان مثبّتًا. في Docker أو Unraid، استخدم صورة متصفح ROMarrNG وخادم Playwright run-server متوافقًا؛ أدخل عنوانه واضبط Browser Port على 3000 وScheme على ws. يعيد المشغّل الملف المكتمل عبر التدفق، لذلك لا تحتاج الحاويات إلى مجلد تنزيل مشترك.",
-        "ko": "비워 두면 Chromium이 설치된 경우 여기서 실행합니다. Docker나 Unraid에서는 ROMarrNG 브라우저 이미지와 호환되는 Playwright run-server를 사용하고 서버 주소를 입력한 뒤 Browser Port를 3000, Scheme을 ws로 설정하세요. 드라이버가 완료된 파일을 스트리밍해 돌려보내므로 컨테이너 간 다운로드 폴더를 공유할 필요가 없습니다.",
-        "zh-Hant": "留白時若此處已安裝 Chromium，便會在此啟動。在 Docker 或 Unraid 中，請使用 ROMarrNG 瀏覽器映像與相符的 Playwright run-server；輸入伺服器位址，將 Browser Port 設為 3000、Scheme 設為 ws。驅動程式會串流傳回完成的檔案，因此容器不需共用下載目錄。",
-        "vi": "Để trống thì Chromium sẽ được chạy tại đây nếu đã cài. Trong Docker hoặc Unraid, dùng image trình duyệt ROMarrNG và Playwright run-server tương ứng; nhập địa chỉ máy chủ đó, đặt Browser Port thành 3000 và Scheme thành ws. Trình điều khiển truyền tệp hoàn tất trở lại nên các container không cần dùng chung thư mục tải xuống.",
-        "id": "Kosongkan untuk menjalankan Chromium di sini jika terpasang. Di Docker atau Unraid, gunakan image browser ROMarrNG dan Playwright run-server yang cocok; masukkan alamat server tersebut, atur Browser Port ke 3000 dan Scheme ke ws. Driver mengalirkan kembali file yang selesai sehingga container tidak perlu berbagi direktori unduhan."
       },
       "translationHashes": {},
       "translationStatus": {},
@@ -3951,6 +3996,28 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.check-activity-and-your-download-cli.b397e58eba": {
+      "source": "Check Activity and your download client first. Retrying an uncertain request may queue a duplicate. Retry these titles now?",
+      "sourceHash": "b397e58ebacb20911674546e5e3076fec71bb0417348ebdd5afe03de3fbd68df",
+      "translations": {
+        "en": "Check Activity and your download client first. Retrying an uncertain request may queue a duplicate. Retry these titles now?",
+        "es": "Primero revisa Actividad y tu cliente de descargas. Reintentar una solicitud incierta puede añadir un duplicado a la cola. ¿Reintentar estos títulos ahora?",
+        "zh-Hans": "请先检查活动记录和下载客户端。重试结果不确定的请求可能会重复排队。现在重试这些游戏吗？",
+        "hi": "पहले Activity और अपना डाउनलोड क्लाइंट जाँचें। अनिश्चित अनुरोध को दोबारा भेजने से डुप्लिकेट कतार में आ सकता है। क्या अब इन शीर्षकों को फिर से आज़माएँ?",
+        "de": "Prüfe zuerst Aktivität und Download-Client. Beim erneuten Versuch kann eine unklare Anfrage doppelt eingereiht werden. Diese Titel jetzt erneut versuchen?",
+        "ja": "まずアクティビティとダウンロードクライアントを確認してください。結果が不明なリクエストを再試行すると重複して登録される可能性があります。これらのタイトルを再試行しますか？",
+        "fr": "Vérifiez d’abord l’activité et votre client de téléchargement. Réessayer une demande au résultat incertain peut créer un doublon dans la file. Réessayer ces titres maintenant ?",
+        "pt-BR": "Confira primeiro a Atividade e o cliente de downloads. Repetir uma solicitação incerta pode criar um pedido duplicado. Tentar esses títulos novamente agora?",
+        "ar": "تحقق أولاً من النشاط وعميل التنزيل. قد تؤدي إعادة محاولة طلب غير مؤكد إلى إدراج نسخة مكررة. هل تريد إعادة محاولة هذه العناوين الآن؟",
+        "ko": "먼저 활동 내역과 다운로드 클라이언트를 확인하세요. 결과가 불확실한 요청을 다시 시도하면 중복으로 대기열에 추가될 수 있습니다. 지금 이 타이틀을 다시 시도할까요?",
+        "zh-Hant": "請先檢查活動記錄和下載用戶端。重試結果不明的要求可能會重複排入佇列。現在重試這些遊戲嗎？",
+        "vi": "Trước tiên hãy kiểm tra Hoạt động và ứng dụng tải xuống. Thử lại một yêu cầu chưa rõ kết quả có thể tạo yêu cầu trùng lặp. Thử lại các tựa game này ngay bây giờ?",
+        "id": "Periksa Aktivitas dan klien unduhan terlebih dahulu. Mencoba ulang permintaan yang hasilnya belum pasti dapat membuat antrean duplikat. Coba ulang judul ini sekarang?"
+      },
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {}
+    },
     "ui.check-and-install.d41d5f4166": {
       "source": "Check and install",
       "sourceHash": "d41d5f41661e2f5162726118ebf41d212259b89a608176aa11835d7f37fab1db",
@@ -4051,6 +4118,28 @@
         "zh-Hant": "請選擇至少包含 16 個非空白字元的密碼片語。請另行妥善保存；ROMarr 無法復原。",
         "vi": "Chọn cụm mật khẩu có ít nhất 16 ký tự không phải khoảng trắng. Hãy lưu riêng cụm mật khẩu này; ROMarr không thể khôi phục.",
         "id": "Pilih frasa sandi dengan sedikitnya 16 karakter nonspasi. Simpan secara terpisah; ROMarr tidak dapat memulihkannya."
+      },
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {}
+    },
+    "ui.choose-a-platform.b71eafb4ef": {
+      "source": "Choose a platform",
+      "sourceHash": "b71eafb4ef58ec25aee1d09dbe4b130404b9a086f487ca066af18eff6e64b470",
+      "translations": {
+        "en": "Choose a platform",
+        "es": "Elegir una plataforma",
+        "zh-Hans": "选择平台",
+        "hi": "एक प्लेटफॉर्म चुनें",
+        "de": "Wählen Sie eine Plattform",
+        "ja": "プラットフォームを選択",
+        "fr": "Choisir une plateforme",
+        "pt-BR": "Escolha uma plataforma",
+        "ar": "اختيار منصة",
+        "ko": "플랫폼 선택",
+        "zh-Hant": "選擇平台",
+        "vi": "Chọn một nền tảng",
+        "id": "Pilih platform"
       },
       "translationHashes": {},
       "translationStatus": {},
@@ -9999,6 +10088,27 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.leave-browser-host-blank-to-use-the.0ecc289d50": {
+      "source": "Leave Browser Host blank to use the Playwright and Chromium included in the main ROMarrNG image. For a remote browser server, enter its address and matching port and scheme. The downloaded file is saved to the configured Save Path.",
+      "sourceHash": "0ecc289d509cef02e5e829928b4a87ba52cdc1ae8960b5884cca1edacd147be6",
+      "translations": {
+        "es": "Deja Browser Host vacío para usar Playwright y Chromium incluidos en la imagen principal de ROMarrNG. Si usas un servidor de navegador remoto, introduce su dirección y el puerto y protocolo correspondientes. El archivo descargado se guarda en la ruta configurada.",
+        "zh-Hans": "将 Browser Host 留空即可使用 ROMarrNG 主镜像中包含的 Playwright 和 Chromium。若使用远程浏览器服务器，请填写其地址以及匹配的端口和协议。下载的文件会保存到已配置的保存路径。",
+        "hi": "मुख्य ROMarrNG इमेज में शामिल Playwright और Chromium उपयोग करने के लिए Browser Host खाली छोड़ें। रिमोट ब्राउज़र सर्वर के लिए उसका पता और मेल खाता पोर्ट व स्कीम दर्ज करें। डाउनलोड की गई फ़ाइल कॉन्फ़िगर किए गए Save Path में सहेजी जाएगी।",
+        "de": "Lasse Browser Host leer, um Playwright und Chromium aus dem ROMarrNG-Hauptimage zu verwenden. Für einen entfernten Browser-Server gib seine Adresse sowie den passenden Port und das Protokoll ein. Die heruntergeladene Datei wird im konfigurierten Speicherpfad abgelegt.",
+        "ja": "ROMarrNGのメインイメージに含まれるPlaywrightとChromiumを使うには、Browser Hostを空欄にします。リモートのブラウザーサーバーを使う場合は、そのアドレスと対応するポートおよび方式を入力してください。ダウンロードしたファイルは設定済みの保存先に保存されます。",
+        "fr": "Laissez Browser Host vide pour utiliser Playwright et Chromium inclus dans l’image principale de ROMarrNG. Pour un serveur de navigateur distant, indiquez son adresse, son port et son protocole correspondants. Le fichier téléchargé est enregistré dans le chemin de sauvegarde configuré.",
+        "pt-BR": "Deixe Browser Host vazio para usar o Playwright e o Chromium incluídos na imagem principal do ROMarrNG. Para um servidor de navegador remoto, informe o endereço, a porta e o protocolo correspondentes. O arquivo baixado será salvo no caminho configurado.",
+        "ar": "اترك Browser Host فارغًا لاستخدام Playwright وChromium المضمّنين في الصورة الرئيسية لـ ROMarrNG. لاستخدام خادم متصفح بعيد، أدخل عنوانه والمنفذ والبروتوكول المطابقين. يُحفظ الملف الذي تم تنزيله في مسار الحفظ المُعدّ.",
+        "ko": "ROMarrNG 기본 이미지에 포함된 Playwright와 Chromium을 사용하려면 Browser Host를 비워 두세요. 원격 브라우저 서버를 사용한다면 해당 주소와 일치하는 포트 및 방식을 입력하세요. 다운로드한 파일은 설정된 저장 경로에 저장됩니다.",
+        "zh-Hant": "將 Browser Host 留白即可使用 ROMarrNG 主映像中內含的 Playwright 和 Chromium。若使用遠端瀏覽器伺服器，請輸入其位址及相符的連接埠與協定。下載的檔案會儲存至已設定的儲存路徑。",
+        "vi": "Để trống Browser Host để dùng Playwright và Chromium có sẵn trong image ROMarrNG chính. Nếu dùng máy chủ trình duyệt từ xa, hãy nhập địa chỉ cùng cổng và giao thức tương ứng. Tệp tải xuống được lưu vào đường dẫn đã cấu hình.",
+        "id": "Kosongkan Browser Host untuk memakai Playwright dan Chromium yang disertakan dalam image utama ROMarrNG. Untuk server browser jarak jauh, masukkan alamat serta port dan skema yang sesuai. File yang diunduh disimpan di jalur penyimpanan yang dikonfigurasi."
+      },
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {}
+    },
     "ui.left.58eb9032e3": {
       "source": "Left",
       "sourceHash": "58eb9032e3bb83f0e39d644ebc87ca254117b95bf458483bec7379bea0b419d0",
@@ -15249,6 +15359,28 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.romarr-organizes-games-you-own-adds.5a5edd6e4b": {
+      "source": "ROMarr organizes games you own, adds metadata and covers, and helps you discover missing titles. If you choose to acquire a game, it can search configured sources, verify a release against a DAT, and file it into your library.",
+      "sourceHash": "5a5edd6e4b060f344b295befdfad44730f9c7ad6e5c4be3ea7919136b4b758a5",
+      "translations": {
+        "en": "ROMarr organizes games you own, adds metadata and covers, and helps you discover missing titles. If you choose to acquire a game, it can search configured sources, verify a release against a DAT, and file it into your library.",
+        "es": "ROMarr organiza los juegos que tienes, añade metadatos y carátulas, y te ayuda a descubrir títulos que te faltan. Si decides conseguir un juego, puede buscar en las fuentes configuradas, verificar el lanzamiento con un DAT y guardarlo en tu biblioteca.",
+        "zh-Hans": "ROMarr 会整理你已有的游戏、添加元数据和封面，并帮助你发现缺少的游戏。如果你决定获取某款游戏，它可以搜索已配置的来源、用 DAT 验证版本，并将其归档到游戏库。",
+        "hi": "ROMarr आपके मौजूदा गेम व्यवस्थित करता है, मेटाडेटा और कवर जोड़ता है, और छूटे हुए गेम खोजने में मदद करता है। गेम पाने का निर्णय लेने पर यह कॉन्फ़िगर किए गए स्रोतों में खोज सकता है, DAT से रिलीज़ सत्यापित कर सकता है और उसे आपकी लाइब्रेरी में रख सकता है।",
+        "de": "ROMarr organisiert vorhandene Spiele, ergänzt Metadaten und Cover und hilft, fehlende Titel zu entdecken. Wenn du ein Spiel beziehen möchtest, kann es konfigurierte Quellen durchsuchen, eine Veröffentlichung mit einem DAT prüfen und sie in deine Bibliothek übernehmen.",
+        "ja": "ROMarrは、所有するゲームを整理し、メタデータやカバーを追加して、コレクションにないタイトルを見つけるのに役立ちます。ゲームを入手する場合は、設定済みのソースを検索し、DATでリリースを検証して、ライブラリに保存できます。",
+        "fr": "ROMarr organise vos jeux, ajoute des métadonnées et des jaquettes, et vous aide à découvrir les titres manquants. Si vous choisissez d’acquérir un jeu, il peut rechercher dans les sources configurées, vérifier la version avec un DAT et l’ajouter à votre bibliothèque.",
+        "pt-BR": "O ROMarr organiza os jogos que você já tem, adiciona metadados e capas e ajuda a descobrir títulos ausentes. Se você decidir adquirir um jogo, ele pode pesquisar nas fontes configuradas, verificar o lançamento com um DAT e arquivá-lo na sua biblioteca.",
+        "ar": "ينظم ROMarr الألعاب التي تملكها، ويضيف البيانات الوصفية والأغلفة، ويساعدك في اكتشاف الألعاب الناقصة. إذا اخترت الحصول على لعبة، يمكنه البحث في المصادر المُعَدّة والتحقق من الإصدار عبر DAT وإضافته إلى مكتبتك.",
+        "ko": "ROMarr는 보유한 게임을 정리하고 메타데이터와 커버를 추가하며, 컬렉션에서 빠진 게임을 찾도록 돕습니다. 게임을 받기로 하면 설정된 소스를 검색하고 DAT로 릴리스를 확인한 뒤 라이브러리에 보관할 수 있습니다.",
+        "zh-Hant": "ROMarr 會整理你已有的遊戲、加入中繼資料和封面，並協助你找出缺少的遊戲。如果你決定取得某款遊戲，它可以搜尋已設定的來源、用 DAT 驗證版本，並將其存入遊戲庫。",
+        "vi": "ROMarr sắp xếp các trò chơi bạn đang có, bổ sung siêu dữ liệu và ảnh bìa, đồng thời giúp tìm các tựa còn thiếu. Nếu bạn chọn tải một trò chơi, ứng dụng có thể tìm trong nguồn đã cấu hình, xác minh bản phát hành bằng DAT và lưu vào thư viện.",
+        "id": "ROMarr mengatur game yang Anda miliki, menambahkan metadata dan sampul, serta membantu menemukan judul yang belum ada. Jika Anda memilih untuk memperoleh game, ROMarr dapat mencari sumber yang dikonfigurasi, memverifikasi rilis dengan DAT, lalu menyimpannya ke pustaka."
+      },
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {}
+    },
     "ui.romarr-probes.b526701fc1": {
       "source": "ROMarr probes",
       "sourceHash": "b526701fc10c72b129308c5c0fda29e65b976ee5cde65e49197f626948b611d6",
@@ -17916,6 +18048,28 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.select-up-to-100-missing-titles.41f0798b8f": {
+      "source": "Select up to 100 missing titles",
+      "sourceHash": "41f0798b8fcd5dc4d464fa8ca7a6e015ecdb7499b43190ee16cdd967cc9e8e38",
+      "translations": {
+        "en": "Select up to 100 missing titles",
+        "es": "Selecciona hasta 100 títulos que falten",
+        "zh-Hans": "最多选择 100 个缺少的游戏",
+        "hi": "अधिकतम 100 अनुपलब्ध शीर्षक चुनें",
+        "de": "Wähle bis zu 100 fehlende Titel aus",
+        "ja": "不足しているタイトルを最大100件選択してください",
+        "fr": "Sélectionnez jusqu’à 100 titres manquants",
+        "pt-BR": "Selecione até 100 títulos ausentes",
+        "ar": "حدّد ما يصل إلى 100 عنوان مفقود",
+        "ko": "누락된 게임을 최대 100개 선택하세요",
+        "zh-Hant": "最多選取 100 個缺少的遊戲",
+        "vi": "Chọn tối đa 100 tựa game còn thiếu",
+        "id": "Pilih hingga 100 judul yang belum dimiliki"
+      },
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {}
+    },
     "ui.self-hosted-dht-crawler-indexes-the.fcfb9e2855": {
       "source": "Self-hosted DHT crawler. Indexes the network directly, so it depends on no third-party tracker at all.",
       "sourceHash": "fcfb9e28553c046eec787fb1eb197f4a7d9237e12bce800227f6d1d401101f9e",
@@ -18357,6 +18511,50 @@
       "translationStatus": {},
       "translationReview": {}
     },
+    "ui.show-all-options.2392546856": {
+      "source": "Show all options",
+      "sourceHash": "23925468567830039d789578bb3b8696e2bfaae810d7625d4da792dd9c2279d2",
+      "translations": {
+        "en": "Show all options",
+        "es": "Mostrar todas las opciones",
+        "zh-Hans": "显示全部选项",
+        "hi": "सभी विकल्प दिखाएँ",
+        "de": "Alle Optionen anzeigen",
+        "ja": "すべてのオプションを表示",
+        "fr": "Afficher toutes les options",
+        "pt-BR": "Mostrar todas as opções",
+        "ar": "عرض كل الخيارات",
+        "ko": "모든 옵션 표시",
+        "zh-Hant": "顯示所有選項",
+        "vi": "Hiện tất cả tùy chọn",
+        "id": "Tampilkan semua opsi"
+      },
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {}
+    },
+    "ui.show-fewer-options.01fdcdc734": {
+      "source": "Show fewer options",
+      "sourceHash": "01fdcdc734c0a0e3c3dcab31e1e4f615e08d4b6483723899858971233b223d3e",
+      "translations": {
+        "en": "Show fewer options",
+        "es": "Mostrar menos opciones",
+        "zh-Hans": "显示较少选项",
+        "hi": "कम विकल्प दिखाएँ",
+        "de": "Weniger Optionen anzeigen",
+        "ja": "表示するオプションを減らす",
+        "fr": "Afficher moins d’options",
+        "pt-BR": "Mostrar menos opções",
+        "ar": "عرض خيارات أقل",
+        "ko": "더 적은 옵션 표시",
+        "zh-Hant": "顯示較少選項",
+        "vi": "Hiện ít tùy chọn hơn",
+        "id": "Tampilkan lebih sedikit opsi"
+      },
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {}
+    },
     "ui.show-more.f5c9bd1314": {
       "source": "Show more",
       "sourceHash": "f5c9bd131486e793ee105bd81f001fc25cdc2dac9c1d9f636ac7d43a10efc7e6",
@@ -18583,6 +18781,28 @@
         "zh-Hant": "跳至內容",
         "vi": "Chuyển đến nội dung",
         "id": "Lewati ke konten"
+      },
+      "translationHashes": {},
+      "translationStatus": {},
+      "translationReview": {}
+    },
+    "ui.skipped-count-already-present-or-wan.211b34a18b": {
+      "source": "Skipped {count} already present or wanted",
+      "sourceHash": "211b34a18b7129ecf982c9f2f650fd4731846617c700d7f89b89f61826eb7976",
+      "translations": {
+        "en": "Skipped {count} already present or wanted",
+        "es": "Se omitieron {count}: ya están en tu biblioteca o en Wanted",
+        "zh-Hans": "已跳过 {count} 个：已拥有或已加入 Wanted",
+        "hi": "{count} शीर्षक छोड़े गए: वे पहले से मौजूद हैं या Wanted में हैं",
+        "de": "{count} übersprungen: bereits vorhanden oder in Wanted",
+        "ja": "{count} 件をスキップしました。所持済みまたは Wanted に追加済みです",
+        "fr": "{count} ignorés : déjà présents ou déjà dans Wanted",
+        "pt-BR": "{count} ignorados: já estão na biblioteca ou em Wanted",
+        "ar": "تم تخطي {count}: موجودة بالفعل أو في Wanted",
+        "ko": "{count}개 건너뜀: 이미 보유했거나 Wanted에 있습니다",
+        "zh-Hant": "已略過 {count} 個：已擁有或已加入 Wanted",
+        "vi": "Đã bỏ qua {count}: đã có trong thư viện hoặc trong Wanted",
+        "id": "{count} dilewati: sudah ada atau sudah masuk Wanted"
       },
       "translationHashes": {},
       "translationStatus": {},
@@ -28737,226 +28957,6 @@
         "zh-Hant": "└─ 前四項由 ROMarr 處理 ─┘ └ 這一項由你選擇 ┘",
         "vi": "└─ ROMarr làm bốn bước đầu ─┘ └ bạn tự chọn bước này ┘",
         "id": "└─ ROMarr menangani empat langkah pertama ─┘ └ yang ini Anda pilih ┘"
-      },
-      "translationHashes": {},
-      "translationStatus": {},
-      "translationReview": {}
-    },
-    "ui.skipped-count-already-present-or-wan.211b34a18b": {
-      "source": "Skipped {count} already present or wanted",
-      "sourceHash": "211b34a18b7129ecf982c9f2f650fd4731846617c700d7f89b89f61826eb7976",
-      "translations": {
-        "en": "Skipped {count} already present or wanted",
-        "es": "Se omitieron {count}: ya están en tu biblioteca o en Wanted",
-        "zh-Hans": "已跳过 {count} 个：已拥有或已加入 Wanted",
-        "hi": "{count} शीर्षक छोड़े गए: वे पहले से मौजूद हैं या Wanted में हैं",
-        "de": "{count} übersprungen: bereits vorhanden oder in Wanted",
-        "ja": "{count} 件をスキップしました。所持済みまたは Wanted に追加済みです",
-        "fr": "{count} ignorés : déjà présents ou déjà dans Wanted",
-        "pt-BR": "{count} ignorados: já estão na biblioteca ou em Wanted",
-        "ar": "تم تخطي {count}: موجودة بالفعل أو في Wanted",
-        "ko": "{count}개 건너뜀: 이미 보유했거나 Wanted에 있습니다",
-        "zh-Hant": "已略過 {count} 個：已擁有或已加入 Wanted",
-        "vi": "Đã bỏ qua {count}: đã có trong thư viện hoặc trong Wanted",
-        "id": "{count} dilewati: sudah ada atau sudah masuk Wanted"
-      },
-      "translationHashes": {},
-      "translationStatus": {},
-      "translationReview": {}
-    },
-    "ui.check-activity-and-your-download-cli.b397e58eba": {
-      "source": "Check Activity and your download client first. Retrying an uncertain request may queue a duplicate. Retry these titles now?",
-      "sourceHash": "b397e58ebacb20911674546e5e3076fec71bb0417348ebdd5afe03de3fbd68df",
-      "translations": {
-        "en": "Check Activity and your download client first. Retrying an uncertain request may queue a duplicate. Retry these titles now?",
-        "es": "Primero revisa Actividad y tu cliente de descargas. Reintentar una solicitud incierta puede añadir un duplicado a la cola. ¿Reintentar estos títulos ahora?",
-        "zh-Hans": "请先检查活动记录和下载客户端。重试结果不确定的请求可能会重复排队。现在重试这些游戏吗？",
-        "hi": "पहले Activity और अपना डाउनलोड क्लाइंट जाँचें। अनिश्चित अनुरोध को दोबारा भेजने से डुप्लिकेट कतार में आ सकता है। क्या अब इन शीर्षकों को फिर से आज़माएँ?",
-        "de": "Prüfe zuerst Aktivität und Download-Client. Beim erneuten Versuch kann eine unklare Anfrage doppelt eingereiht werden. Diese Titel jetzt erneut versuchen?",
-        "ja": "まずアクティビティとダウンロードクライアントを確認してください。結果が不明なリクエストを再試行すると重複して登録される可能性があります。これらのタイトルを再試行しますか？",
-        "fr": "Vérifiez d’abord l’activité et votre client de téléchargement. Réessayer une demande au résultat incertain peut créer un doublon dans la file. Réessayer ces titres maintenant ?",
-        "pt-BR": "Confira primeiro a Atividade e o cliente de downloads. Repetir uma solicitação incerta pode criar um pedido duplicado. Tentar esses títulos novamente agora?",
-        "ar": "تحقق أولاً من النشاط وعميل التنزيل. قد تؤدي إعادة محاولة طلب غير مؤكد إلى إدراج نسخة مكررة. هل تريد إعادة محاولة هذه العناوين الآن؟",
-        "ko": "먼저 활동 내역과 다운로드 클라이언트를 확인하세요. 결과가 불확실한 요청을 다시 시도하면 중복으로 대기열에 추가될 수 있습니다. 지금 이 타이틀을 다시 시도할까요?",
-        "zh-Hant": "請先檢查活動記錄和下載用戶端。重試結果不明的要求可能會重複排入佇列。現在重試這些遊戲嗎？",
-        "vi": "Trước tiên hãy kiểm tra Hoạt động và ứng dụng tải xuống. Thử lại một yêu cầu chưa rõ kết quả có thể tạo yêu cầu trùng lặp. Thử lại các tựa game này ngay bây giờ?",
-        "id": "Periksa Aktivitas dan klien unduhan terlebih dahulu. Mencoba ulang permintaan yang hasilnya belum pasti dapat membuat antrean duplikat. Coba ulang judul ini sekarang?"
-      },
-      "translationHashes": {},
-      "translationStatus": {},
-      "translationReview": {}
-    },
-    "ui.add-count-selected-games-to-wanted-n.70193ad87f": {
-      "source": "Add {count} selected games to Wanted? No downloads start until you search or run the Wanted task.",
-      "sourceHash": "70193ad87f6b89e2878baf4dda8c3bbd30bb72a1e04d04b1fbade0837fa7a28e",
-      "translations": {
-        "en": "Add {count} selected games to Wanted? No downloads start until you search or run the Wanted task.",
-        "es": "¿Añadir {count} juegos seleccionados a Pendientes? No se descargarán hasta que los busques o ejecutes la tarea de Pendientes.",
-        "zh-Hans": "将选中的 {count} 款游戏加入待获取列表？只有在搜索或运行待获取任务后才会开始下载。",
-        "hi": "चुने गए {count} गेम को Wanted में जोड़ें? खोजने या Wanted कार्य चलाने तक डाउनलोड शुरू नहीं होंगे।",
-        "de": "{count} ausgewählte Spiele zu Wanted hinzufügen? Downloads starten erst, wenn du suchst oder den Wanted-Auftrag ausführst.",
-        "ja": "選択した{count}本をWantedに追加しますか？検索するかWantedタスクを実行するまでダウンロードは始まりません。",
-        "fr": "Ajouter {count} jeux sélectionnés à la liste Wanted ? Aucun téléchargement ne démarre avant une recherche ou l’exécution de la tâche Wanted.",
-        "pt-BR": "Adicionar {count} jogos selecionados a Wanted? Os downloads só começam quando você pesquisar ou executar a tarefa Wanted.",
-        "ar": "هل تريد إضافة {count} ألعاب محددة إلى قائمة Wanted؟ لن تبدأ التنزيلات حتى تبحث أو تشغّل مهمة Wanted.",
-        "ko": "선택한 게임 {count}개를 Wanted에 추가할까요? 검색하거나 Wanted 작업을 실행하기 전에는 다운로드가 시작되지 않습니다.",
-        "zh-Hant": "要將選取的 {count} 款遊戲加入 Wanted 嗎？搜尋或執行 Wanted 工作前不會開始下載。",
-        "vi": "Thêm {count} trò chơi đã chọn vào Wanted? Tải xuống chỉ bắt đầu khi bạn tìm kiếm hoặc chạy tác vụ Wanted.",
-        "id": "Tambahkan {count} game terpilih ke Wanted? Unduhan baru dimulai setelah Anda mencari atau menjalankan tugas Wanted."
-      },
-      "translationHashes": {},
-      "translationStatus": {},
-      "translationReview": {}
-    },
-    "ui.added-count-to-wanted.579ab698a5": {
-      "source": "Added {count} to Wanted",
-      "sourceHash": "579ab698a58affea61b7ab6ae4e98f126ea8b91c5c114d3893ae35f62fcc6c04",
-      "translations": {
-        "en": "Added {count} to Wanted",
-        "es": "Se añadieron {count} a Pendientes",
-        "zh-Hans": "已将 {count} 款游戏加入待获取列表",
-        "hi": "{count} गेम Wanted में जोड़े गए",
-        "de": "{count} zu Wanted hinzugefügt",
-        "ja": "{count}本をWantedに追加しました",
-        "fr": "{count} ajoutés à Wanted",
-        "pt-BR": "{count} adicionados a Wanted",
-        "ar": "تمت إضافة {count} إلى Wanted",
-        "ko": "{count}개를 Wanted에 추가했습니다",
-        "zh-Hant": "已將 {count} 款遊戲加入 Wanted",
-        "vi": "Đã thêm {count} trò chơi vào Wanted",
-        "id": "{count} game ditambahkan ke Wanted"
-      },
-      "translationHashes": {},
-      "translationStatus": {},
-      "translationReview": {}
-    },
-    "ui.select-up-to-100-missing-titles.41f0798b8f": {
-      "source": "Select up to 100 missing titles",
-      "sourceHash": "41f0798b8fcd5dc4d464fa8ca7a6e015ecdb7499b43190ee16cdd967cc9e8e38",
-      "translations": {
-        "en": "Select up to 100 missing titles",
-        "es": "Selecciona hasta 100 títulos que falten",
-        "zh-Hans": "最多选择 100 个缺少的游戏",
-        "hi": "अधिकतम 100 अनुपलब्ध शीर्षक चुनें",
-        "de": "Wähle bis zu 100 fehlende Titel aus",
-        "ja": "不足しているタイトルを最大100件選択してください",
-        "fr": "Sélectionnez jusqu’à 100 titres manquants",
-        "pt-BR": "Selecione até 100 títulos ausentes",
-        "ar": "حدّد ما يصل إلى 100 عنوان مفقود",
-        "ko": "누락된 게임을 최대 100개 선택하세요",
-        "zh-Hant": "最多選取 100 個缺少的遊戲",
-        "vi": "Chọn tối đa 100 tựa game còn thiếu",
-        "id": "Pilih hingga 100 judul yang belum dimiliki"
-      },
-      "translationHashes": {},
-      "translationStatus": {},
-      "translationReview": {}
-    },
-    "ui.romarr-organizes-games-you-own-adds.5a5edd6e4b": {
-      "source": "ROMarr organizes games you own, adds metadata and covers, and helps you discover missing titles. If you choose to acquire a game, it can search configured sources, verify a release against a DAT, and file it into your library.",
-      "sourceHash": "5a5edd6e4b060f344b295befdfad44730f9c7ad6e5c4be3ea7919136b4b758a5",
-      "translations": {
-        "en": "ROMarr organizes games you own, adds metadata and covers, and helps you discover missing titles. If you choose to acquire a game, it can search configured sources, verify a release against a DAT, and file it into your library.",
-        "es": "ROMarr organiza los juegos que tienes, añade metadatos y carátulas, y te ayuda a descubrir títulos que te faltan. Si decides conseguir un juego, puede buscar en las fuentes configuradas, verificar el lanzamiento con un DAT y guardarlo en tu biblioteca.",
-        "zh-Hans": "ROMarr 会整理你已有的游戏、添加元数据和封面，并帮助你发现缺少的游戏。如果你决定获取某款游戏，它可以搜索已配置的来源、用 DAT 验证版本，并将其归档到游戏库。",
-        "hi": "ROMarr आपके मौजूदा गेम व्यवस्थित करता है, मेटाडेटा और कवर जोड़ता है, और छूटे हुए गेम खोजने में मदद करता है। गेम पाने का निर्णय लेने पर यह कॉन्फ़िगर किए गए स्रोतों में खोज सकता है, DAT से रिलीज़ सत्यापित कर सकता है और उसे आपकी लाइब्रेरी में रख सकता है।",
-        "de": "ROMarr organisiert vorhandene Spiele, ergänzt Metadaten und Cover und hilft, fehlende Titel zu entdecken. Wenn du ein Spiel beziehen möchtest, kann es konfigurierte Quellen durchsuchen, eine Veröffentlichung mit einem DAT prüfen und sie in deine Bibliothek übernehmen.",
-        "ja": "ROMarrは、所有するゲームを整理し、メタデータやカバーを追加して、コレクションにないタイトルを見つけるのに役立ちます。ゲームを入手する場合は、設定済みのソースを検索し、DATでリリースを検証して、ライブラリに保存できます。",
-        "fr": "ROMarr organise vos jeux, ajoute des métadonnées et des jaquettes, et vous aide à découvrir les titres manquants. Si vous choisissez d’acquérir un jeu, il peut rechercher dans les sources configurées, vérifier la version avec un DAT et l’ajouter à votre bibliothèque.",
-        "pt-BR": "O ROMarr organiza os jogos que você já tem, adiciona metadados e capas e ajuda a descobrir títulos ausentes. Se você decidir adquirir um jogo, ele pode pesquisar nas fontes configuradas, verificar o lançamento com um DAT e arquivá-lo na sua biblioteca.",
-        "ar": "ينظم ROMarr الألعاب التي تملكها، ويضيف البيانات الوصفية والأغلفة، ويساعدك في اكتشاف الألعاب الناقصة. إذا اخترت الحصول على لعبة، يمكنه البحث في المصادر المُعَدّة والتحقق من الإصدار عبر DAT وإضافته إلى مكتبتك.",
-        "ko": "ROMarr는 보유한 게임을 정리하고 메타데이터와 커버를 추가하며, 컬렉션에서 빠진 게임을 찾도록 돕습니다. 게임을 받기로 하면 설정된 소스를 검색하고 DAT로 릴리스를 확인한 뒤 라이브러리에 보관할 수 있습니다.",
-        "zh-Hant": "ROMarr 會整理你已有的遊戲、加入中繼資料和封面，並協助你找出缺少的遊戲。如果你決定取得某款遊戲，它可以搜尋已設定的來源、用 DAT 驗證版本，並將其存入遊戲庫。",
-        "vi": "ROMarr sắp xếp các trò chơi bạn đang có, bổ sung siêu dữ liệu và ảnh bìa, đồng thời giúp tìm các tựa còn thiếu. Nếu bạn chọn tải một trò chơi, ứng dụng có thể tìm trong nguồn đã cấu hình, xác minh bản phát hành bằng DAT và lưu vào thư viện.",
-        "id": "ROMarr mengatur game yang Anda miliki, menambahkan metadata dan sampul, serta membantu menemukan judul yang belum ada. Jika Anda memilih untuk memperoleh game, ROMarr dapat mencari sumber yang dikonfigurasi, memverifikasi rilis dengan DAT, lalu menyimpannya ke pustaka."
-      },
-      "translationHashes": {},
-      "translationStatus": {},
-      "translationReview": {}
-    },
-    "ui.choose-a-platform.b71eafb4ef": {
-      "source": "Choose a platform",
-      "sourceHash": "b71eafb4ef58ec25aee1d09dbe4b130404b9a086f487ca066af18eff6e64b470",
-      "translations": {
-        "en": "Choose a platform",
-        "es": "Elegir una plataforma",
-        "zh-Hans": "选择平台",
-        "hi": "एक प्लेटफॉर्म चुनें",
-        "de": "Wählen Sie eine Plattform",
-        "ja": "プラットフォームを選択",
-        "fr": "Choisir une plateforme",
-        "pt-BR": "Escolha uma plataforma",
-        "ar": "اختيار منصة",
-        "ko": "플랫폼 선택",
-        "zh-Hant": "選擇平台",
-        "vi": "Chọn một nền tảng",
-        "id": "Pilih platform"
-      },
-      "translationHashes": {},
-      "translationStatus": {},
-      "translationReview": {}
-    },
-    "ui.show-all-options.2392546856": {
-      "source": "Show all options",
-      "sourceHash": "23925468567830039d789578bb3b8696e2bfaae810d7625d4da792dd9c2279d2",
-      "translations": {
-        "en": "Show all options",
-        "es": "Mostrar todas las opciones",
-        "zh-Hans": "显示全部选项",
-        "hi": "सभी विकल्प दिखाएँ",
-        "de": "Alle Optionen anzeigen",
-        "ja": "すべてのオプションを表示",
-        "fr": "Afficher toutes les options",
-        "pt-BR": "Mostrar todas as opções",
-        "ar": "عرض كل الخيارات",
-        "ko": "모든 옵션 표시",
-        "zh-Hant": "顯示所有選項",
-        "vi": "Hiện tất cả tùy chọn",
-        "id": "Tampilkan semua opsi"
-      },
-      "translationHashes": {},
-      "translationStatus": {},
-      "translationReview": {}
-    },
-    "ui.show-fewer-options.01fdcdc734": {
-      "source": "Show fewer options",
-      "sourceHash": "01fdcdc734c0a0e3c3dcab31e1e4f615e08d4b6483723899858971233b223d3e",
-      "translations": {
-        "en": "Show fewer options",
-        "es": "Mostrar menos opciones",
-        "zh-Hans": "显示较少选项",
-        "hi": "कम विकल्प दिखाएँ",
-        "de": "Weniger Optionen anzeigen",
-        "ja": "表示するオプションを減らす",
-        "fr": "Afficher moins d’options",
-        "pt-BR": "Mostrar menos opções",
-        "ar": "عرض خيارات أقل",
-        "ko": "더 적은 옵션 표시",
-        "zh-Hant": "顯示較少選項",
-        "vi": "Hiện ít tùy chọn hơn",
-        "id": "Tampilkan lebih sedikit opsi"
-      },
-      "translationHashes": {},
-      "translationStatus": {},
-      "translationReview": {}
-    },
-    "ui.apply-imported-metadata-to-the-match.b9b5915c9e": {
-      "source": "Apply imported metadata to the matched games? ROM files will not be changed.",
-      "sourceHash": "b9b5915c9e3aa56621057a7c003cd77ab0452b9ac76ad84c405082954f2575fa",
-      "translations": {
-        "en": "Apply imported metadata to the matched games? ROM files will not be changed.",
-        "ar": "Apply imported metadata to the matched games? ROM files will not be changed.",
-        "de": "Apply imported metadata to the matched games? ROM files will not be changed.",
-        "es": "Apply imported metadata to the matched games? ROM files will not be changed.",
-        "fr": "Apply imported metadata to the matched games? ROM files will not be changed.",
-        "hi": "Apply imported metadata to the matched games? ROM files will not be changed.",
-        "id": "Apply imported metadata to the matched games? ROM files will not be changed.",
-        "ja": "Apply imported metadata to the matched games? ROM files will not be changed.",
-        "ko": "Apply imported metadata to the matched games? ROM files will not be changed.",
-        "pt-BR": "Apply imported metadata to the matched games? ROM files will not be changed.",
-        "vi": "Apply imported metadata to the matched games? ROM files will not be changed.",
-        "zh-Hans": "Apply imported metadata to the matched games? ROM files will not be changed.",
-        "zh-Hant": "Apply imported metadata to the matched games? ROM files will not be changed."
       },
       "translationHashes": {},
       "translationStatus": {},

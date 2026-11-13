@@ -12,5 +12,9 @@ defusedxml>=0.7.1,<0.8
 # warning, and says so on the status page.
 pyseccomp>=0.1.2; sys_platform == "linux"
 
+# The main container can provide the real browser lane without a separate
+# Playwright image or browser-server container.
+playwright==1.62.0
+
 
 rom-hub @ https://github.com/BlizzHacker/rom-hub/archive/8e46348783546ee03b00e2c933155ba60d29619d.tar.gz#sha256=b5f927ebba7a47391c03d2f8e2d62bf294c92cfe98fd9a1c23ffe790891bd864

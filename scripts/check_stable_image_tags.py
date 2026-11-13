@@ -24,13 +24,6 @@ ACCEPT = ", ".join(
     )
 )
 STANDARD_ALIASES = ("latest", "main", "master", "stable")
-BROWSER_ALIASES = (
-    "browser",
-    "main-browser",
-    "master-browser",
-    "latest-browser",
-    "stable-browser",
-)
 
 
 def https_request(
@@ -147,25 +140,20 @@ def main() -> int:
         return 2
 
     pairs = [(tag, version) for tag in STANDARD_ALIASES]
-    pairs.extend((tag, f"{version}-browser") for tag in BROWSER_ALIASES)
     problems: list[str] = []
-    expected_tags = (version, f"{version}-browser")
-    expected: dict[str, str | None] = {}
-    for tag in expected_tags:
-        digest, error = manifest_digest(tag, token)
-        expected[tag] = digest
-        if error:
-            problems.append(f"{tag}: {error}")
-        else:
-            print(f"{tag}: {digest} (stable release)")
+    expected, error = manifest_digest(version, token)
+    if error:
+        problems.append(f"{version}: {error}")
+    else:
+        print(f"{version}: {expected} (stable release)")
 
     for alias, release_tag in pairs:
         digest, error = manifest_digest(alias, token)
         if error:
             print(f"{alias}: MISMATCH ({error})")
             problems.append(f"{alias}: {error}")
-        elif digest != expected[release_tag]:
-            print(f"{alias}: {digest} != {release_tag} ({expected[release_tag] or 'missing'})")
+        elif digest != expected:
+            print(f"{alias}: {digest} != {release_tag} ({expected or 'missing'})")
             problems.append(f"{alias}: manifest differs from {release_tag}")
         else:
             print(f"{alias}: {digest} (matches {release_tag})")

@@ -41,6 +41,20 @@ RUN apt-get update \
 
 COPY --from=builder /install /usr/local
 
+# Ship the matching Chromium build with the main image. Browser downloads run
+# as the same unprivileged account as ROMarr; install-time dependencies and
+# binaries stay in the image so runtime does not need package-manager access.
+ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+RUN python -m playwright install --with-deps chromium \
+ && chmod -R a+rX /ms-playwright \
+ && rm -rf /var/lib/apt/lists/*
+COPY requirements-runtime-base.lock /tmp/requirements-runtime-base.lock
+
+# The pinned Python base image ships older pip and setuptools copies. Upgrade
+# those copies in the final layer so the runtime tooling does not retain the
+# base image's vulnerable vendored dependencies.
+RUN python -m pip install --no-cache-dir --require-hashes -r /tmp/requirements-runtime-base.lock
+
 # Every published architecture is built and exercised on a native CI runner.
 RUN python -c "import rom_hub, pyseccomp; from rom_hub.sandbox import install; install()"
 
@@ -79,7 +93,7 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
 # The probe reads ROMARR_PORT and ROMARR_SSL_CERT/ROMARR_SSL_KEY.
 
 LABEL org.opencontainers.image.title="ROMarrNG" \
-      org.opencontainers.image.description="ROMarrNG adds a SeerrNG request and library contract to ROMarr" \
+      org.opencontainers.image.description="ROMarrNG adds the SeerrNG request and library contract, with Playwright and Chromium for browser downloads" \
       org.opencontainers.image.source="https://github.com/snapetech-org/ROMarrNG" \
       org.opencontainers.image.licenses="MIT"
 

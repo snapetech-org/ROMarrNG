@@ -60,10 +60,6 @@ jobs:
             target_image: ghcr.io/snapetech/romarrng
             source_tag: latest
             aliases: latest main master stable
-          - source_image: ghcr.io/snapetech-org/romarrng
-            target_image: ghcr.io/snapetech/romarrng
-            source_tag: latest-browser
-            aliases: browser main-browser master-browser latest-browser stable-browser
     steps:
       - name: Set up Buildx
         uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1

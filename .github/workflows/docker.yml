@@ -234,7 +234,7 @@ jobs:
           sudo unshare --net -- sh -c 'ip link set lo up; exec "$@"' sh "$python_path" -m pytest tests/ -q
 
   acquisition-proof:
-    name: Packaged acquisition (${{ matrix.dockerfile }})
+    name: Packaged acquisition (all-in-one image)
     if: >-
       (
         github.event_name != 'workflow_dispatch' ||
@@ -251,7 +251,6 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        dockerfile: [Dockerfile, Dockerfile.browser]
         runner: [ubuntu-24.04, ubuntu-24.04-arm]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -259,10 +258,8 @@ jobs:
           ref: ${{ inputs.release_tag || github.sha }}
           fetch-depth: 0
           persist-credentials: false
-      - name: Build native test image
-        env:
-          DOCKERFILE: ${{ matrix.dockerfile }}
-        run: docker build -f "$DOCKERFILE" -t romarrng:acquisition-proof .
+      - name: Build the all-in-one native image
+        run: docker build -f Dockerfile -t romarrng:acquisition-proof .
       - name: Prove sandboxed acquisition and SeerrNG delivery
         run: >-
           docker run --rm --network none -e PYTHONPATH=/app --entrypoint python
@@ -397,6 +394,11 @@ jobs:
             || { echo "a dependency did not install"; exit 1; }
           docker exec smoke python -c "from pathlib import Path; from rom_hub.catalog_sources import load_all; c=load_all(Path('/tmp/hub-smoke')); print(f'{len(c.entries)} bundled plugins'); assert c.entries" \
             || { echo "ROM Hub installed without its plugin catalogue"; exit 1; }
+          docker exec --user 1000:1000 smoke python -c "from importlib.metadata import version; import os, playwright; assert os.geteuid() == 1000; print('Playwright', version('playwright'))" \
+            || { echo "Playwright is unavailable to the service user"; exit 1; }
+          docker exec smoke python -m playwright install --list | tee "$RUNNER_TEMP/playwright-browsers.txt"
+          grep -qi chromium "$RUNNER_TEMP/playwright-browsers.txt" \
+            || { echo "the all-in-one image has no Chromium binary"; exit 1; }
 
           echo "--- privileges were dropped ---"
           test "$(awk '/^Uid:/ {print $2}' /proc/$(docker inspect -f '{{.State.Pid}}' smoke)/status)" = "1000" \
@@ -470,7 +472,7 @@ jobs:
           flavor: latest=false
           labels: |
             org.opencontainers.image.title=ROMarrNG
-            org.opencontainers.image.description=ROMarrNG adds a SeerrNG request and library contract to ROMarr
+            org.opencontainers.image.description=ROMarrNG adds the SeerrNG request and library contract, with Playwright and Chromium for browser downloads
           tags: |
             type=raw,value=latest,enable=${{ (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
             type=raw,value=main,enable=${{ (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
@@ -537,174 +539,9 @@ jobs:
           sbom-path: ${{ runner.temp }}/romarrng-image.spdx.json
           push-to-registry: true
 
-  # Debian variant for the optional Playwright download client. Its aliases
-  # follow the same release tag while remaining separate from the standard image.
-  image-browser:
-    name: Browser image validation
-    needs: [image, release-notes]
-    if: always() && needs.image.result == 'success' && (needs.release-notes.result == 'success' || needs.release-notes.result == 'skipped')
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - arch: amd64
-            runner: ubuntu-24.04
-          - arch: arm64
-            runner: ubuntu-24.04-arm
-    runs-on: ${{ matrix.runner }}
-    permissions:
-      contents: read
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: ${{ inputs.release_tag || github.sha }}
-          fetch-depth: 0
-          persist-credentials: false
-
-      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
-
-      - name: Build browser image for all supported platforms without publishing
-        uses: docker/build-push-action@c3c9e263c25d99ce0380d002d59b67737d91b0dc # v7.4.0
-        with:
-          context: .
-          file: Dockerfile.browser
-          platforms: linux/${{ matrix.arch }}
-          load: true
-          tags: romarrng:browser-validation
-          cache-from: type=gha,scope=browser
-          cache-to: type=gha,scope=browser,mode=max
-          provenance: false
-
-      - name: Prove the packaged browser edition with loopback fixtures
-        run: |
-          docker run --rm --network none --entrypoint python -e PYTHONPATH=/app -v "$PWD/scripts:/proof:ro" romarrng:browser-validation /proof/prove_upstream_acquisition.py
-          docker run --rm --network none --cap-drop ALL --cap-add CHOWN --cap-add SETGID --cap-add SETUID --security-opt no-new-privileges romarrng:browser-validation python -c 'import os; from playwright.sync_api import sync_playwright; import rom_hub; assert os.geteuid() == 1000'
-          docker save romarrng:browser-validation -o "$RUNNER_TEMP/image.tar"
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
-        with:
-          name: browser-${{ matrix.arch }}
-          path: ${{ runner.temp }}/image.tar
-          retention-days: 1
-
-  image_browser_publish:
-    needs: [image-browser, release-notes]
-    if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.action == 'publish' && inputs.runner_pool == 'public' && inputs.release_tag != ''
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: read
-      packages: write
-      id-token: write
-      attestations: write
-      artifact-metadata: write
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          ref: ${{ inputs.release_tag || github.sha }}
-          fetch-depth: 0
-          persist-credentials: false
-
-      - name: Verify the isolated Docker daemon
-        run: docker info
-
-      - uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1 # v4.4.0
-      - uses: docker/setup-buildx-action@f87e5991a6d7451dcb8d9637bfbc97413f497069 # v4.4.1
-
-      - name: Log in to GHCR
-        uses: docker/login-action@81c6f93d4bc991e510b342a00b419b3bb4efc5c6 # v4.7.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Resolve this fork's image name
-        id: image
-        run: echo "name=ghcr.io/${GITHUB_REPOSITORY,,}" >> "$GITHUB_OUTPUT"
-
-      - name: Resolve release version
-        id: release
-        if: inputs.release_tag != ''
-        shell: bash
-        env:
-          RELEASE_TAG: ${{ inputs.release_tag }}
-        run: echo "version=${RELEASE_TAG#v}" >> "$GITHUB_OUTPUT"
-
-      - id: meta
-        uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
-        with:
-          images: ${{ steps.image.outputs.name }}
-          flavor: latest=false
-          labels: |
-            org.opencontainers.image.title=ROMarrNG (browser edition)
-            org.opencontainers.image.description=ROMarrNG on Debian with the Playwright client for the Headless Browser download client
-          tags: |
-            type=raw,value=browser,enable=${{ (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
-            type=raw,value=main-browser,enable=${{ (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
-            type=raw,value=master-browser,enable=${{ (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
-            type=raw,value=latest-browser,enable=${{ (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
-            type=raw,value=stable-browser,enable=${{ (github.event_name == 'workflow_dispatch' && inputs.release_tag != '') }}
-            type=raw,value=${{ steps.release.outputs.version }}-browser,enable=${{ inputs.release_tag != '' }}
-            type=semver,pattern={{version}}-browser
-            type=semver,pattern={{major}}.{{minor}}-browser
-            type=sha,format=short,suffix=-browser
-
-      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333
-        with:
-          pattern: browser-*
-          path: ${{ runner.temp }}/validated
-      - name: Push validated images and assemble their manifest
-        id: push
-        env:
-          IMAGE: ${{ steps.image.outputs.name }}
-          TAGS: ${{ steps.meta.outputs.tags }}
-          BUILD_ID: ${{ github.run_id }}-${{ github.run_attempt }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          refs=()
-          for arch in amd64 arm64; do
-            docker load -i "$RUNNER_TEMP/validated/browser-$arch/image.tar"
-            ref="$IMAGE:validated-$BUILD_ID-$arch-browser"
-            docker tag romarrng:browser-validation "$ref"
-            docker push "$ref"
-            digest=$(docker buildx imagetools inspect "$ref" | awk '$1 == "Digest:" {print $2; exit}')
-            test -n "$digest"
-            refs+=("$IMAGE@$digest")
-          done
-          tags=()
-          while IFS= read -r tag; do [[ -z "$tag" ]] || tags+=(-t "$tag"); done <<< "$TAGS"
-          docker buildx imagetools create "${tags[@]}" "${refs[@]}"
-          first=$(head -n 1 <<< "$TAGS")
-          digest=$(docker buildx imagetools inspect "$first" | awk '$1 == "Digest:" {print $2; exit}')
-          test -n "$digest"
-          echo "digest=$digest" >> "$GITHUB_OUTPUT"
-
-      - name: Generate browser image SBOM
-        uses: anchore/sbom-action@66cbf4bc1f1c0d2edc94016e65bc221b6bb0ad6c # v0.24.3
-        with:
-          image: ${{ steps.image.outputs.name }}@${{ steps.push.outputs.digest }}
-          format: spdx-json
-          output-file: ${{ runner.temp }}/romarrng-browser-image.spdx.json
-          upload-artifact: false
-          upload-release-assets: false
-
-      - name: Attest browser image provenance
-        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
-        with:
-          subject-name: ${{ steps.image.outputs.name }}
-          subject-digest: ${{ steps.push.outputs.digest }}
-          push-to-registry: true
-
-      - name: Attest browser image SBOM
-        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
-        with:
-          subject-name: ${{ steps.image.outputs.name }}
-          subject-digest: ${{ steps.push.outputs.digest }}
-          sbom-path: ${{ runner.temp }}/romarrng-browser-image.spdx.json
-          push-to-registry: true
-
   verify-stable-image-tags:
     name: Verify stable image aliases
-    needs: [image_publish, image_browser_publish]
+    needs: [image_publish]
     if: github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main' && inputs.action == 'publish' && inputs.runner_pool == 'public' && inputs.release_tag != ''
     runs-on: ubuntu-24.04
     permissions:
@@ -743,9 +580,9 @@ jobs:
         )
       ) &&
       (
-        always() && github.event_name == 'workflow_dispatch' && inputs.release_tag != '' && needs.image_publish.result == 'success' && needs.image_browser_publish.result == 'success' && needs.verify-stable-image-tags.result == 'success'
+        always() && github.event_name == 'workflow_dispatch' && inputs.release_tag != '' && needs.image_publish.result == 'success' && needs.verify-stable-image-tags.result == 'success'
       )
-    needs: [image_publish, image_browser_publish, verify-stable-image-tags]
+    needs: [image_publish, verify-stable-image-tags]
     runs-on: ubuntu-24.04
     permissions:
       contents: write
@@ -784,7 +621,6 @@ jobs:
           {
             echo ""
             echo "**Container image**: \`${IMAGE}:${VERSION}\`"
-            echo "- Browser edition: \`${IMAGE}:${VERSION}-browser\` (AMD64/ARM64; Playwright client only)"
             echo "- [GitHub Container Registry](https://github.com/${GITHUB_REPOSITORY}/pkgs/container/romarrng)"
             echo ""
             echo "Pull with: \`docker pull ${IMAGE}:${VERSION}\`."

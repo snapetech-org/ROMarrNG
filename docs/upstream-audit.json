@@ -399,8 +399,8 @@
       "html_url": "https://github.com/BlizzHacker/romarr/issues/35",
       "updated_at": "2026-10-03T09:02:37Z",
       "kind": "Issue",
-      "disposition": "Existing coverage",
-      "evidence": "Dockerfile.browser; tests/test_browser_musl.py"
+      "disposition": "Implemented/adapted",
+      "evidence": "Dockerfile; tests/test_browser_musl.py"
     },
     {
       "number": 36,

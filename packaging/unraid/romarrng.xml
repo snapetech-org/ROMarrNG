@@ -9,16 +9,16 @@
   <Icon>https://raw.githubusercontent.com/snapetech-org/ROMarrNG/main/packaging/unraid/icon.png?version=0.11.1-ng-badge</Icon>
   <WebUI>http://[IP]:[PORT:6868]/</WebUI>
   <Overview>Standalone NG fork of ROMarr for retro and recent-console discovery and acquisition, with optional SeerrNG integration.</Overview>
-  <Description>ROMarrNG is a complete standalone ROM manager; SeerrNG is optional. This Snapetech NG fork includes SeerrNG request and library APIs. The default folder library uses the mapped /roms path and needs no separate library server. Open ROMarrNG to set its password, indexers, and download client, then configure its API key in SeerrNG if desired. For Playwright-backed Headless Browser downloads, use the separate ROMarrNG-Browser template instead.</Description>
+  <Description>ROMarrNG is a complete standalone ROM manager; SeerrNG is optional. This Snapetech NG fork includes SeerrNG request and library APIs. The default folder library uses the mapped /roms path and needs no separate library server. The main image includes Playwright and Chromium for Headless Browser downloads; leave Browser Host blank. Open ROMarrNG to set its password, indexers, and download client, then configure its API key in SeerrNG if desired.</Description>
   <Support>https://github.com/snapetech-org/seerrng/issues</Support>
   <Project>https://github.com/snapetech-org/ROMarrNG</Project>
   <TemplateURL>https://raw.githubusercontent.com/snapetech-org/ROMarrNG/main/packaging/unraid/romarrng.xml</TemplateURL>
   <ReadMe>https://github.com/snapetech-org/ROMarrNG/blob/main/README.md</ReadMe>
   <Category>MediaApp:Other</Category>
   <ExtraSearchTerms>romarrng romarr rom emulation game seerrng ps4 ps5 vita xbox</ExtraSearchTerms>
-  <Changes>Recent-console packages and complete folder dumps, with streamed archive downloads and optional SeerrNG integration. Use the ROMarrNG-Browser template for the optional Playwright download client. The Community Apps template refreshes its ROMarrNG icon. Acquisition support does not establish emulator compatibility.</Changes>
+  <Changes>Recent-console packages and complete folder dumps, with streamed archive downloads, built-in Headless Browser support, and optional SeerrNG integration. The Community Apps template refreshes its ROMarrNG icon. Acquisition support does not establish emulator compatibility.</Changes>
   <Requires>Docker and persistent appdata. Configure this app independently before connecting it to SeerrNG.</Requires>
-  <ExtraParams>--restart=unless-stopped</ExtraParams>
+  <ExtraParams>--init --restart=unless-stopped</ExtraParams>
 
   <Config Name="Web UI Port" Target="6868" Default="6868" Mode="tcp" Description="Web UI Port for the standalone web interface." Type="Port" Display="always" Required="false" Mask="false">6868</Config>
   <Config Name="Appdata" Target="/config" Default="/mnt/user/appdata/romarrng" Mode="rw" Description="Persistent ROMarrNG settings and database." Type="Path" Display="always" Required="false" Mask="false">/mnt/user/appdata/romarrng</Config>

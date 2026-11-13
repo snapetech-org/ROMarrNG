@@ -17,7 +17,6 @@ INSTALL_SURFACES = (
     "docs/PROOF.md",
     "homeassistant/romarr/config.yaml",
     "packaging/unraid/romarrng.xml",
-    "packaging/unraid/romarrng-browser.xml",
     "romarr/browser.py",
     "romarr/ecosystem.py",
     "tests/test_fork_image.py",
@@ -25,13 +24,6 @@ INSTALL_SURFACES = (
     "tests/test_brand.py",
 )
 STANDARD_ALIASES = ("latest", "main", "master", "stable")
-BROWSER_ALIASES = (
-    "browser",
-    "main-browser",
-    "master-browser",
-    "latest-browser",
-    "stable-browser",
-)
 
 
 def main() -> int:
@@ -41,7 +33,7 @@ def main() -> int:
 
     if "inputs.release_tag != ''" not in workflow:
         problems.append("Docker workflow must require an explicit release tag")
-    for alias in STANDARD_ALIASES + BROWSER_ALIASES:
+    for alias in STANDARD_ALIASES:
         expected = (
             "type=raw,value="
             + alias

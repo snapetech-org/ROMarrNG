@@ -24,7 +24,9 @@ services:
     container_name: romarr
     restart: unless-stopped
     # ROMarr writes state only to /config, ROMs to /roms, downloads to the
-    # mounted download path, and temporary extraction files to /tmp.
+    # mounted download path, and temporary extraction files to /tmp. Browser
+    # downloads are staged on their configured download path.
+    init: true
     read_only: true
     cap_drop:
       - ALL

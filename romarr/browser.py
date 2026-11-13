@@ -36,10 +36,9 @@ so the guarantee fails the build rather than eroding quietly.
 THE DRIVER IS OPTIONAL
 ----------------------
 `playwright` is imported lazily and never at module import, the same way ROM
-Hub treats `pyseccomp`: ROMarr starts, runs and downloads over plain HTTP on
-an install that has never heard of a browser, and the browser lane reports
-itself as not configured rather than raising an ImportError somewhere far
-from the cause.
+Hub treats `pyseccomp`: the application starts without importing browser
+runtime code, and a missing browser dependency is reported by the browser lane
+instead of raising an ImportError somewhere far from the cause.
 """
 
 from __future__ import annotations
@@ -107,10 +106,8 @@ class Refused(RuntimeError):
 def _playwright():
     """Import the driver, or say precisely what is missing.
 
-    Deferred rather than top-level so `import romarr.app` costs nothing on an
-    install without it -- the import is worth about a second and a hundred
-    megabytes of node, and an install that only ever fetches plain URLs should
-    pay neither.
+    Deferred rather than top-level so `import romarr.app` does not pay the
+    driver's import cost unless browser acquisition is used.
     """
     try:
         from playwright.sync_api import sync_playwright
@@ -118,14 +115,13 @@ def _playwright():
         if _is_musl():
             raise Unavailable(
                 "Playwright cannot be installed in this Alpine (musl) image; "
-                "its Python wheels need glibc. Use the ROMarrNG browser image "
-                "ghcr.io/snapetech-org/romarrng:browser and point Browser Host at "
-                "a matching `playwright run-server`."
+                "its Python wheels need glibc. Use "
+                "ghcr.io/snapetech-org/romarrng:latest, which includes "
+                "Playwright and Chromium."
             ) from err
         raise Unavailable(
-            "the playwright driver is not installed -- `pip install "
-            "playwright` and, for a browser on this host, `playwright "
-            "install chromium`"
+            "the Playwright driver is not installed -- install the project "
+            "requirements and run `python -m playwright install --with-deps chromium`"
         ) from err
     return sync_playwright
 
@@ -151,7 +147,7 @@ def split_control(url: str) -> tuple[str, str]:
     return url, ""
 
 
-def _open(pw, endpoint: str):
+def _open(pw, endpoint: str, *, downloads_path: str = ""):
     """Get hold of a browser, from whichever of the three places it lives.
 
     The endpoint's scheme picks the shape, and the difference is not cosmetic
@@ -171,7 +167,14 @@ def _open(pw, endpoint: str):
         operator enables ROMARR_ALLOW_INSECURE_BROWSER_ENDPOINTS.
     """
     if not endpoint:
-        return pw.chromium.launch(headless=True, chromium_sandbox=True, args=list(LAUNCH_ARGS))
+        options = {
+            "headless": True,
+            "chromium_sandbox": True,
+            "args": list(LAUNCH_ARGS),
+        }
+        if downloads_path:
+            options["downloads_path"] = downloads_path
+        return pw.chromium.launch(**options)
     parsed = urlsplit(endpoint)
     if parsed.scheme not in {"ws", "wss", "http", "https"}:
         raise ValueError("Browser endpoint must use WebSocket or HTTP transport")
@@ -340,46 +343,50 @@ def fetch(page_url: str, destination: Path, *, control: str = "",
     with directory_fd(destination, create=True):
         pass
 
-    with sync_playwright() as pw:
-        browser = _open(pw, endpoint)
-        try:
-            context = browser.new_context(
-                accept_downloads=True,
-                # Declared, not disguised: see declared_user_agent.
-                user_agent=declared_user_agent(browser, ua_token),
-            )
-            page = context.new_page()
-            response = page.goto(url, wait_until="domcontentloaded",
-                                 timeout=timeout * 1000)
-            _refuse_if_challenged(page, response)
+    import tempfile
+    with tempfile.TemporaryDirectory(prefix=".romarr-browser-", dir=destination) as temporary:
+        with sync_playwright() as pw:
+            browser = _open(pw, endpoint, downloads_path=temporary)
+            try:
+                context = browser.new_context(
+                    accept_downloads=True,
+                    # Declared, not disguised: see declared_user_agent.
+                    user_agent=declared_user_agent(browser, ua_token),
+                )
+                page = context.new_page()
+                response = page.goto(url, wait_until="domcontentloaded",
+                                     timeout=timeout * 1000)
+                _refuse_if_challenged(page, response)
 
-            target = _click_target(page, control)
-            with page.expect_download(timeout=timeout * 1000) as pending:
-                target.click()
-            download = pending.value
-            if allowed is not None:
-                landed = getattr(download, "url", "") or ""
-                ok, why = allowed(landed) if landed else (True, "")
-                if not ok:
-                    download.cancel()
-                    raise Refused(
-                        f"the page was ours to open but the download comes "
-                        f"from {landed or 'another host'}, which is not: {why}")
-            saved = _keep(download, destination, remote_dir, path_mappings,
-                          client_id=client_id)
-            context.close()
-            return saved
-        finally:
-            browser.close()
+                target = _click_target(page, control)
+                with page.expect_download(timeout=timeout * 1000) as pending:
+                    target.click()
+                download = pending.value
+                if allowed is not None:
+                    landed = getattr(download, "url", "") or ""
+                    ok, why = allowed(landed) if landed else (True, "")
+                    if not ok:
+                        download.cancel()
+                        raise Refused(
+                            f"the page was ours to open but the download comes "
+                            f"from {landed or 'another host'}, which is not: {why}")
+                saved = _keep(download, destination, Path(temporary), remote_dir,
+                              path_mappings, local_browser=not endpoint,
+                              client_id=client_id)
+                context.close()
+                return saved
+            finally:
+                browser.close()
 
 
-def _keep(download, destination: Path, remote_dir: str, path_mappings, *,
+def _keep(download, destination: Path, staging_directory: Path,
+          remote_dir: str, path_mappings, *, local_browser: bool = False,
           client_id: str = "") -> Path:
     """Put the downloaded file where ROMarr can import it.
 
-    `save_as` covers two of the three shapes in _open: a local launch, where
-    everything is on one disk, and a secure Playwright server, which streams
-    the finished artifact back over its own socket.
+    A local launch exposes its downloaded path directly. `save_as` covers the
+    secure Playwright server, which streams the finished artifact back over
+    its own socket.
 
     It cannot cover the third. A bare `--remote-debugging-port` Chromium on
     another host was told to save into a path on THIS machine, so it made
@@ -391,15 +398,20 @@ def _keep(download, destination: Path, remote_dir: str, path_mappings, *,
     """
     from .safe_files import atomic_file, relative_parts, source_file
     from .limits import Budget, limit
-    import tempfile
     name = download.suggested_filename or "download.bin"
     if len(relative_parts(name)) != 1:
         raise Refused("browser supplied an unsafe download filename")
     target = destination / name
-    # The browser writes only into an exclusively owned temporary directory.
-    # A bounded, descriptor-relative copy publishes the complete artifact.
-    with tempfile.TemporaryDirectory(prefix="romarr-browser-") as temporary:
-        staged = Path(temporary) / "download"
+    # Keep browser downloads on the configured download volume. They can be
+    # much larger than a container's bounded /tmp, and this private directory
+    # is removed after the bounded, descriptor-relative publication completes.
+    staged = staging_directory / "download"
+    if local_browser:
+        try:
+            local = Path(download.path())
+        except Exception as err:
+            raise Unavailable("local browser artifact is unavailable") from err
+    else:
         try:
             download.save_as(str(staged))
             local = staged
@@ -412,8 +424,8 @@ def _keep(download, destination: Path, remote_dir: str, path_mappings, *,
             except Exception:
                 reported = os.path.join(remote_dir, name)
             local = Path(map_remote_path(str(reported), path_mappings, client_id=client_id))
-        maximum = limit("ROMARR_MAX_DOWNLOAD_BYTES", 16 * 1024**3)
-        with source_file(local) as source:
-            if os.fstat(source.fileno()).st_size > maximum:
-                raise Refused("browser download exceeds size limit")
-            return atomic_file(destination, target, lambda output: Budget(maximum).copy(source, output))
+    maximum = limit("ROMARR_MAX_DOWNLOAD_BYTES", 16 * 1024**3)
+    with source_file(local) as source:
+        if os.fstat(source.fileno()).st_size > maximum:
+            raise Refused("browser download exceeds size limit")
+        return atomic_file(destination, target, lambda output: Budget(maximum).copy(source, output))

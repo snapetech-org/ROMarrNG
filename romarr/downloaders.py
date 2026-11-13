@@ -3894,14 +3894,11 @@ CLIENT_TYPES = {
             FIELD("enable", "Enable", "bool", True),
             FIELD("save_path", "Save Path", default="/downloads/sites"),
             FIELD("host", "Browser Host",
-                  help="Blank launches Chromium here when installed. In "
-                       "Docker or Unraid, use the ROMarrNG browser image and "
-                       "a matching Playwright run-server; enter its TLS "
-                       "address, set Browser Port to 3000 and Scheme to wss. "
-                       "For an isolated trusted LAN without TLS, set "
-                       "ROMARR_ALLOW_INSECURE_BROWSER_ENDPOINTS=true. "
-                       "The driver streams the finished file back, so the "
-                       "containers need no shared download directory."),
+                  help="Leave Browser Host blank to use the Playwright and "
+                       "Chromium included in the main ROMarrNG image. For a "
+                       "remote browser server, enter its address and matching "
+                       "port and scheme. The downloaded file is saved to the "
+                       "configured Save Path."),
             FIELD("port", "Browser Port", "int", 3000),
             FIELD("scheme", "Scheme", default="wss",
                   help="wss for a TLS-protected playwright run-server; https "

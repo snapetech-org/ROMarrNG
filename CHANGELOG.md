@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.14.20] - 2026-11-12
+
+### User-facing changes
+
+#### Changed
+
+- **Downloads:** The main ROMarrNG image now includes Playwright and Chromium; select Headless Browser and leave Browser Host blank, with no second ROMarrNG image or browser-server container needed. [@Ant1695](https://github.com/Ant1695) suggested the install issue in upstream ROMarr [issue #35](https://github.com/BlizzHacker/romarr/issues/35); ROMarrNG independently adapted the packaging.
+
+#### Security
+
+- **Containers:** The standard image refreshes its pinned Debian package snapshot and updates bundled Python installer and packaging tools to patched releases. The separate browser image is retired because Playwright and Chromium now ship in the standard image.
+  - **Action required:** Update to ROMarrNG 0.14.20.
+
 ## [0.14.19] - 2026-11-09
 
 ### User-facing changes

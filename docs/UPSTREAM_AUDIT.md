@@ -85,7 +85,7 @@ comments posted, or upstream PRs created. The completed work is submitted in the
 | [PR #32](https://github.com/BlizzHacker/romarr/pull/32) | Changed repo name in docker-compose.yml | Public manifests verified; fork references correct | docker-compose.yml; tests/test_fork_image.py |
 | [Issue #33](https://github.com/BlizzHacker/romarr/issues/33) | webhooks seem to be broken | Implemented/adapted | romarr/notify.py; tests/test_notify.py |
 | [Issue #34](https://github.com/BlizzHacker/romarr/issues/34) | 1G1R collection planner ignores nested library layout (Structure B) | Existing coverage | tests/test_present_titles.py |
-| [Issue #35](https://github.com/BlizzHacker/romarr/issues/35) | pip install playwright doesn't work in the unraid docker container | Existing coverage | Dockerfile.browser; tests/test_browser_musl.py |
+| [Issue #35](https://github.com/BlizzHacker/romarr/issues/35) | pip install playwright doesn't work in the unraid docker container | Implemented/adapted | Dockerfile; tests/test_browser_musl.py |
 | [PR #36](https://github.com/BlizzHacker/romarr/pull/36) | fix: Unraid browser edition, working connection tests, nested-library planner | Existing coverage | tests/test_present_titles.py, test_browser_musl.py, test_notify.py |
 | [Issue #37](https://github.com/BlizzHacker/romarr/issues/37) | Collections: strict region filtering and configurable fan-translation languages | Implemented/adapted | tests/test_strict_regions.py |
 | [Issue #38](https://github.com/BlizzHacker/romarr/issues/38) | Completed downloads never import when the torrent name differs from the indexer title (queue matches by name, not hash) | Implemented/adapted | tests/test_import_queue_identity.py |

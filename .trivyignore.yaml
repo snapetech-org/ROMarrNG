@@ -6,6 +6,5 @@ misconfigurations:
   - id: DS-0002
     paths:
       - Dockerfile
-      - Dockerfile.browser
     expired_at: 2027-02-09
     statement: Root ownership bootstrap is followed by mandatory su-exec; native image tests verify the non-root service process.
