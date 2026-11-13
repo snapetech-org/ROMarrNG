@@ -1,7 +1,7 @@
 # ROMarr -- the *arr for games.
 #
-# Keep compiler headers in the builder, and use Debian in both stages so
-# the supported AMD64 and ARM64 targets use compatible manylinux wheels.
+# Keep compiler headers in the builder. The runtime starts from clean Debian
+# so replacing Python tooling cannot leave vulnerable base-image layers behind.
 
 FROM python:3.14-slim@sha256:9aaa474097d094040649f2162a627c0049b408f52138d980916788d80f04802f AS builder
 
@@ -10,17 +10,21 @@ FROM python:3.14-slim@sha256:9aaa474097d094040649f2162a627c0049b408f52138d980916
 # libffi-dev lets CFFI compile when pip has no wheel for the target Python/arch.
 COPY docker/debian.sources /etc/apt/sources.list.d/debian.sources
 RUN apt-get update \
+ && apt-get upgrade -y --no-install-recommends \
  && apt-get install -y --no-install-recommends build-essential libseccomp-dev libffi-dev \
  && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.lock requirements-build.lock /tmp/
+COPY requirements.lock requirements-build.lock requirements-runtime-base.lock /tmp/
 RUN pip install --no-cache-dir --require-hashes -r /tmp/requirements-build.lock \
+ && pip install --no-cache-dir --require-hashes -r /tmp/requirements-runtime-base.lock \
  && pip install --no-cache-dir --no-build-isolation --require-hashes --prefix=/install -r /tmp/requirements.lock
 
 
-FROM python:3.14-slim@sha256:9aaa474097d094040649f2162a627c0049b408f52138d980916788d80f04802f
+FROM debian:trixie-slim@sha256:a72b4433de1cf7d6bae0c4cee74d0547f58601a643b3375f070c51600d63b6b2
 
 ARG TARGETARCH
+
+ENV PATH="/usr/local/bin:${PATH}"
 
 # gosu is su-exec's Debian twin; the shared entrypoint uses the same uid:gid
 # command form on both images. tzdata makes TZ work.
@@ -33,12 +37,40 @@ ARG TARGETARCH
 # libseccomp is the runtime half of the sandbox pyseccomp was built against.
 # ROM Hub installs catalogue plugins from pinned repository refs, so git is a
 # runtime dependency rather than builder cargo.
-COPY docker/debian.sources /etc/apt/sources.list.d/debian.sources
-RUN apt-get update \
- && apt-get install -y --no-install-recommends gosu tzdata libarchive-tools libseccomp2 git ca-certificates \
+# Bootstrap the CA store from signed Debian metadata, then return to HTTPS for
+# the package refresh and installation.
+COPY docker/debian.sources /tmp/debian.sources
+RUN sed 's|https://|http://|g' /tmp/debian.sources > /etc/apt/sources.list.d/debian.sources \
+ && apt-get update \
+ && apt-get install -y --no-install-recommends ca-certificates \
+ && cp /tmp/debian.sources /etc/apt/sources.list.d/debian.sources \
+ && apt-get update \
+ && apt-get upgrade -y --no-install-recommends \
+ && apt-get install -y --no-install-recommends \
+    git \
+    gosu \
+    libarchive-tools \
+    libbz2-1.0 \
+    libdb5.3t64 \
+    libffi8 \
+    libgdbm6t64 \
+    liblzma5 \
+    libncursesw6 \
+    libreadline8t64 \
+    libseccomp2 \
+    libsqlite3-0 \
+    libssl3t64 \
+    libtcl8.6 \
+    libtk8.6 \
+    libuuid1 \
+    libzstd1 \
+    tzdata \
+    zlib1g \
+ && mkdir -p /usr/local/bin \
  && ln -s "$(command -v gosu)" /usr/local/bin/su-exec \
  && rm -rf /var/lib/apt/lists/*
 
+COPY --from=builder /usr/local /usr/local
 COPY --from=builder /install /usr/local
 
 # Ship the matching Chromium build with the main image. Browser downloads run
@@ -48,12 +80,6 @@ ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
 RUN python -m playwright install --with-deps chromium \
  && chmod -R a+rX /ms-playwright \
  && rm -rf /var/lib/apt/lists/*
-COPY requirements-runtime-base.lock /tmp/requirements-runtime-base.lock
-
-# The pinned Python base image ships older pip and setuptools copies. Upgrade
-# those copies in the final layer so the runtime tooling does not retain the
-# base image's vulnerable vendored dependencies.
-RUN python -m pip install --no-cache-dir --require-hashes -r /tmp/requirements-runtime-base.lock
 
 # Every published architecture is built and exercised on a native CI runner.
 RUN python -c "import rom_hub, pyseccomp; from rom_hub.sandbox import install; install()"
