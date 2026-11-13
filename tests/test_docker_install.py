@@ -256,7 +256,7 @@ def test_the_runtime_image_can_clone_a_bundled_plugin():
     """The registry installer shells out to git; importing ROM Hub is not enough."""
     body = DOCKERFILE.read_text(encoding="utf-8")
     runtime = body.rsplit("\nFROM ", 1)[-1]
-    install = runtime.split("apt-get install", 1)[1].split("&&", 1)[0]
+    install = runtime.rsplit("apt-get install", 1)[1].split("&&", 1)[0]
     assert any(line.strip().rstrip("\\").strip() == "git" for line in install.splitlines()), (
         "git is missing from the runtime image, so every registry install fails")
 
