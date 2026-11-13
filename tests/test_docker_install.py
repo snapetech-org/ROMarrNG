@@ -227,7 +227,8 @@ def test_the_healthcheck_asks_the_port_romarr_was_told_to_use():
 def test_standard_image_uses_glibc_and_keeps_seccomp_build_tools_out_of_runtime():
     """glibc provides a cryptography wheel on ARMv7; headers stay build-only."""
     body = DOCKERFILE.read_text(encoding="utf-8")
-    assert body.count("FROM python:3.14-slim") == 2
+    assert body.count("FROM python:3.14-slim") == 1
+    assert "FROM debian:trixie-slim@sha256:" in body
     assert "apk add" not in body
     assert "libseccomp-dev" in body.split("FROM ", 2)[1]
     runtime = body.rsplit("\nFROM ", 1)[-1]
@@ -255,7 +256,8 @@ def test_the_runtime_image_can_clone_a_bundled_plugin():
     """The registry installer shells out to git; importing ROM Hub is not enough."""
     body = DOCKERFILE.read_text(encoding="utf-8")
     runtime = body.rsplit("\nFROM ", 1)[-1]
-    assert re.search(r"apt-get install[^\n]*\bgit\b", runtime), (
+    install = runtime.split("apt-get install", 1)[1].split("&&", 1)[0]
+    assert any(line.strip().rstrip("\\").strip() == "git" for line in install.splitlines()), (
         "git is missing from the runtime image, so every registry install fails")
 
     workflow = (ROOT / ".github" / "workflows" / "docker.yml").read_text(
